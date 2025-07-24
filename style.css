@@ -391,6 +391,22 @@ a:hover {
     color: var(--color-primary);
 }
 
+.site-branding {
+    flex: 0 0 auto;
+    max-width: 150px; /* Logo-Bereich begrenzen */
+}
+
+.site-branding .custom-logo-link {
+    display: block;
+}
+
+.site-branding .custom-logo {
+    max-height: 40px; /* Logo-Höhe begrenzen */
+    width: auto;
+    display: block;
+}
+
+
 .header-cta-button {
     background: var(--color-primary);
     color: var(--color-white);
