@@ -360,6 +360,54 @@ a:hover {
     color: var(--color-primary);
 }
 
+/* Header System */
+.site-header {
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    z-index: 1000;
+}
+
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.header-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+}
+
+.site-branding .luvex-logo-text {
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.header-cta-button {
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: 12px 24px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    transition: var(--transition-normal);
+}
+
+.header-cta-button:hover {
+    background: #0056b3;
+    color: var(--color-white);
+}
+
+
 /* 5. UTILITIES ===================================================== */
 
 /* Text Utilities */
