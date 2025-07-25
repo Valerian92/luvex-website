@@ -423,6 +423,33 @@ a:hover {
     color: var(--color-white);
 }
 
+/* Navigation System */
+.main-navigation {
+    display: flex;
+    align-items: center;
+}
+
+.main-navigation ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: var(--space-md);
+}
+
+.main-navigation a {
+    color: var(--color-dark);
+    font-weight: 500;
+    font-size: var(--text-base);
+    transition: var(--transition-normal);
+    text-decoration: none;
+}
+
+.main-navigation a:hover {
+    color: var(--color-primary);
+}
+
+
 
 /* 5. UTILITIES ===================================================== */
 
