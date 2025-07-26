@@ -53,7 +53,7 @@
 
         <!-- CTA Button -->
         <div class="header-cta">
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>" class="header-cta-button">
+            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="header-cta-button">
                 <i class="fa-solid fa-comments"></i>
                 <span>Get Consultation</span>
             </a>
