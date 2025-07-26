@@ -653,8 +653,10 @@ a:hover {
 
 /* Header System */
 .site-header {
-    background: var(--luvex-dark-blue);
-    box-shadow: var(--shadow-sm);
+    background: rgba(27, 42, 73, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(109, 213, 237, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     position: relative;
     z-index: 1000;
 }
@@ -739,7 +741,7 @@ a:hover {
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: var(--space-md);
+    gap: 2.5rem;
 }
 
 .main-navigation a {
@@ -750,8 +752,30 @@ a:hover {
     text-decoration: none;
 }
 
+.main-navigation a {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.main-navigation a::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--luvex-bright-cyan);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
 .main-navigation a:hover {
-    color: var(--color-primary);
+    color: var(--luvex-bright-cyan);
+    transform: translateY(-2px);
+}
+
+.main-navigation a:hover::after {
+    width: 100%;
 }
 
 /* --- 4.7 RESPONSIVE für UI Components --- */
