@@ -135,17 +135,19 @@ a:hover {
 /* 3. LAYOUT SYSTEM ================================================= */
 
 /*
- * Astra Theme Full-Width Override v3 (Final Fix)
- * Zielt auf die spezifischen Body-Klassen von Astra ab, um die Sidebar
- * zu entfernen und den Inhalt auf 100% Breite zu setzen.
+ * Astra Theme Full-Width Override v4 (Final & Most Specific Fix)
+ * This targets the #secondary sidebar within the context of the page template
+ * and the specific body class Astra uses, ensuring our rule wins.
  */
-body.page.ast-left-sidebar .site-content #primary {
-    width: 100% !important;
-    padding: 0 !important;
+.ast-separate-container.ast-left-sidebar #primary,
+.ast-plain-container.ast-left-sidebar #primary {
+    width: 100%;
+    padding: 0;
 }
 
-body.page.ast-left-sidebar .site-content #secondary {
-    display: none !important;
+.ast-separate-container.ast-left-sidebar #secondary,
+.ast-plain-container.ast-left-sidebar #secondary {
+    display: none;
 }
 
 /* Container System */
