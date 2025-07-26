@@ -134,6 +134,14 @@ a:hover {
 
 /* 3. LAYOUT SYSTEM ================================================= */
 
+/* Astra Theme Full-Width Override */
+/* Stellt sicher, dass der Hauptinhalt die volle Breite einnimmt und keine Sidebar angezeigt wird. */
+.ast-container #primary {
+    width: 100%;
+    padding: 0;
+}
+
+
 /* Container System */
 .container {
     max-width: var(--container-max);
