@@ -42,10 +42,12 @@
         <!-- Desktop Navigation - NUR WORDPRESS MENÜ -->
         <nav id="desktop-navigation" class="main-navigation">
             <?php
-            if ( has_nav_menu( 'primary' ) ) {
-                // Verwende die Action Hooks
-                do_action('luvex_header_navigation');
-            }
+           wp_nav_menu( array(
+             'theme_location' => 'primary',
+                'menu_id'        => 'primary-menu',
+             'container'      => false,
+               'fallback_cb'    => false,
+             ) );
             ?>
         </nav>
 
@@ -73,11 +75,14 @@
     <!-- Mobile Navigation Menu - NUR WORDPRESS MENÜ -->
     <nav id="mobile-menu" class="mobile-navigation" aria-hidden="true">
         <div class="mobile-menu-content">
-            <?php
-            if ( has_nav_menu( 'primary' ) ) {
-                do_action('luvex_mobile_navigation');
-            }
-            ?>
+        <?php
+        wp_nav_menu( array(
+            'theme_location' => 'primary',
+            'menu_id'        => 'mobile-menu',
+            'container'      => false,
+         'fallback_cb'    => false,
+        ) );
+        ?>
         </div>
     </nav>
 </header>
