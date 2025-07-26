@@ -630,136 +630,113 @@ a:hover {
     color: var(--luvex-white);
 }
 
-/* ============================================================================ */
-/* 4.6 HEADER & NAVIGATION SYSTEM                                             */
-/* ============================================================================ */
+/* --- 4.6 NAVIGATION SYSTEM --- */
 
-/* --- HEADER GRUNDGERÜST --- */
+/* Standard Navigation */
+.nav {
+    display: flex;
+    gap: var(--space-md);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav__link {
+    color: var(--color-dark);
+    font-weight: 500;
+    transition: var(--transition-normal);
+}
+
+.nav__link:hover {
+    color: var(--color-primary);
+}
+
+/* Header System */
 .site-header {
-    position: fixed; /* Sorgt dafür, dass der Header beim Scrollen oben bleibt */
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    z-index: 1000;
+}
+
+.fixed-header {
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    z-index: 1000;
-    background-color: var(--luvex-dark-blue); /* Dunkler Hintergrund aus deiner Vorlage */
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    right: 0;
 }
 
 .header-container {
-    max-width: 1600px; /* Breiteres Layout für den Header-Inhalt */
+    max-width: var(--container-max);
     margin: 0 auto;
-    padding: 0 3rem; 
-    height: 75px; /* Höhe des Headers */
+    padding: 0 var(--space-md);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 72px;
 }
 
-/* --- LOGO --- */
-.site-branding .custom-logo-link img { 
-    max-height: 40px; 
-}
-.luvex-logo-text { 
-    font-size: 1.5rem;
-    font-weight: bold; 
-    color: #fff; 
-    text-decoration: none; 
-    display: flex; 
-    align-items: center; 
-}
-.luvex-logo-text .logo-l { color: var(--luvex-bright-cyan); }
-.luvex-logo-text .logo-u { color: var(--luvex-accent-blue); }
-.luvex-logo-text .logo-dot { 
-    width: 7px;
-    height: 7px; 
-    background: var(--luvex-bright-cyan); 
-    border-radius: 50%; 
-    margin-left: 4px;
+.site-branding .luvex-logo-text {
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    color: var(--color-primary);
 }
 
-
-/* --- DESKTOP NAVIGATION --- */
-.main-navigation { 
-    display: none; /* Auf Mobilgeräten standardmäßig ausblenden */
-}
-@media (min-width: 1200px) {
-    .main-navigation { 
-        display: flex; /* Auf Desktops anzeigen */
-    }
-}
-.main-navigation ul {
-    list-style: none; 
-    margin: 0; 
-    padding: 0; 
-    display: flex; 
-    align-items: center; 
-    gap: 2rem; /* Abstand zwischen den Menüpunkten */
-}
-.main-navigation a {
-    color: #fff !important; 
-    font-weight: 500; 
-    text-decoration: none !important; 
-    padding: 0.5rem 1rem !important;
-    border-radius: 8px;
-    transition: all 0.3s ease !important;
-}
-.main-navigation a:hover {
-    color: var(--luvex-bright-cyan) !important;
-    background-color: rgba(109, 213, 237, 0.1) !important;
-}
-.main-navigation .current-menu-item > a {
-    color: var(--luvex-bright-cyan) !important;
+.site-branding {
+    flex: 0 0 auto;
+    max-width: 150px;
 }
 
-/* --- CTA BUTTON RECHTS --- */
-.header-cta { 
-    display: none; /* Auf Mobilgeräten ausblenden */
-}
-@media (min-width: 1200px) {
-    .header-cta { 
-        display: block; /* Auf Desktops anzeigen */
-    }
-}
-.header-cta-button {
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.75rem !important;
-    padding: 0.75rem 1.5rem !important;
-    background: linear-gradient(135deg, var(--luvex-accent-blue), var(--luvex-bright-cyan)) !important;
-    color: #ffffff !important;
-    text-decoration: none !important;
-    border-radius: 25px !important;
-    font-weight: 600 !important;
-    transition: all 0.3s ease !important;
-}
-.header-cta-button:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 4px 12px rgba(109, 213, 237, 0.4) !important;
-}
-
-/* --- MOBILE HAMBURGER MENU --- */
-.mobile-menu-toggle { 
-    display: block; 
-}
-@media (min-width: 1200px) {
-    .mobile-menu-toggle { 
-        display: none; 
-    }
-}
-.hamburger-button {
-    background: none;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-}
-.hamburger-lines span {
+.site-branding .custom-logo-link {
     display: block;
-    height: 2px;
-    width: 24px;
-    background-color: #fff;
-    margin: 5px 0;
-    transition: all 0.3s ease;
+}
+
+.site-branding .custom-logo {
+    max-height: 40px;
+    width: auto;
+    display: block;
+}
+
+.header-cta-button {
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: 12px 24px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    transition: var(--transition-normal);
+}
+
+.header-cta-button:hover {
+    background: #0056b3;
+    color: var(--color-white);
+}
+
+/* Main Navigation */
+.main-navigation {
+    display: flex;
+    align-items: center;
+}
+
+.main-navigation ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: var(--space-md);
+}
+
+.main-navigation a {
+    color: var(--color-dark);
+    font-weight: 500;
+    font-size: var(--text-base);
+    transition: var(--transition-normal);
+    text-decoration: none;
+}
+
+.main-navigation a:hover {
+    color: var(--color-primary);
 }
 
 /* --- 4.7 RESPONSIVE für UI Components --- */
