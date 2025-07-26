@@ -134,6 +134,20 @@ a:hover {
 
 /* 3. LAYOUT SYSTEM ================================================= */
 
+/*
+ * Astra Theme Full-Width Override v3 (Final Fix)
+ * Zielt auf die spezifischen Body-Klassen von Astra ab, um die Sidebar
+ * zu entfernen und den Inhalt auf 100% Breite zu setzen.
+ */
+body.page.ast-left-sidebar .site-content #primary {
+    width: 100% !important;
+    padding: 0 !important;
+}
+
+body.page.ast-left-sidebar .site-content #secondary {
+    display: none !important;
+}
+
 /* Container System */
 .container {
     max-width: var(--container-max);
