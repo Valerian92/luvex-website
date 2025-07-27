@@ -105,7 +105,8 @@
 
 		<!-- Footer Bottom -->
 		<div class="footer-bottom">
-			<div class="footer-bottom-left">
+    		<div class="footer-bottom-content">
+        		<div class="footer-bottom-left">
 				<p class="footer-copyright">
 					&copy; <?php echo esc_html( date( 'Y' ) ); ?> LUVEX. All rights reserved.
 				</p>
@@ -135,6 +136,7 @@
 				<p class="footer-location">
 					Made with precision in Germany 🇩🇪
 				</p>
+				</div>
 			</div>
 		</div>
 
