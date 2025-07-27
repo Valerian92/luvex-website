@@ -17,7 +17,7 @@ get_header(); ?>
                 Precision through <span class="text-highlight">Light</span>. Excellence through Engineering.
             </h1>
             <h2 class="luvex-hero__subtitle">
-                Independent UV technology experts advancing global knowledge and delivering cutting-edge solutions
+                Independent UV technology experts advancing global knowledge
             </h2>
             <p class="luvex-hero__description">
                 From water disinfection to precision curing - master UV technology with the world's leading specialists. 
