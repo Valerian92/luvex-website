@@ -3155,6 +3155,60 @@ a:hover {
 .google-calendar-iframe[src=""] + .google-calendar-wrapper::after {
     opacity: 1;
 }
+
+/* --- BOOKING OPTIMIZATIONS --- */
+
+/* Hero Title Optimization */
+.booking-hero__title br {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .booking-hero__title br {
+        display: none;
+    }
+}
+
+/* Benefits Horizontal Grid */
+.booking-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .booking-benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+/* Optimized Calendar Container */
+.booking-calendar__container--wide {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.google-calendar-wrapper--optimized {
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+}
+
+.google-calendar-wrapper--optimized .google-calendar-iframe {
+    height: 850px;
+    border-radius: var(--radius-md);
+}
+
+@media (max-width: 768px) {
+    .google-calendar-wrapper--optimized .google-calendar-iframe {
+        height: 600px;
+    }
+}
+
+
 /* 6.3 END ===================================================== */
 
 /* --- 6.4 HOMEPAGE SPECIFIC --- */
