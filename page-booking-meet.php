@@ -16,14 +16,13 @@ get_header(); ?>
         <div class="booking-hero__container container--wide">
             <div class="booking-hero__content">
                 <h1 class="booking-hero__title">
-                    Schedule Your UV Technology<br><span class="text-highlight">Consultation</span>
+                    Schedule Your <span class="text-highlight">UV Technology</span><br>Consultation
                 </h1>
                 <h2 class="booking-hero__subtitle">
                     Expert guidance, independent advice, proven results
                 </h2>
                 <p class="booking-hero__description">
-                    Ready to optimize your UV processes? Book a free 30-minute consultation with our UV technology experts. 
-                    No sales pitch – just honest, practical guidance tailored to your specific challenges.
+                    Ready to optimize your UV processes? Book a free 30-minute consultation with our UV technology experts. No sales pitch – just honest, practical guidance tailored <span class="text-highlight">to your specific challenges</span>.
                 </p>
             </div>
         </div>
@@ -73,7 +72,7 @@ get_header(); ?>
             <div class="booking-calendar__header">
                 <h2 class="booking-calendar__title">Choose Your Preferred Time</h2>
                 <p class="booking-calendar__subtitle">
-                    Select a convenient time slot below. All consultations are conducted via video call and typically last 30-45 minutes.
+                    Select a convenient time slot below. All consultations are conducted via video call and typically last <span class="text-highlight">30-45 minutes</span>.
                 </p>
             </div>
             

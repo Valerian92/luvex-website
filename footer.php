@@ -16,7 +16,7 @@
 </div><!-- #content -->
 
 <footer id="colophon" class="site-footer modern-footer">
-	<div class="container">
+	<div class="footer-container">
 
 		<!-- Footer Content Grid -->
 		<div class="footer-content-grid">

@@ -817,7 +817,7 @@ a:hover {
 /* --- 4.7 END --- */
 
 /* --- 4.8 FOOTER SYSTEM --- */
-/* --- MODERN FOOTER --- */
+
 .modern-footer {
     background: var(--luvex-dark-blue);
     color: var(--luvex-white);
@@ -840,6 +840,13 @@ a:hover {
         repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(109, 213, 237, 0.02) 40px, rgba(109, 213, 237, 0.02) 41px),
         repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(109, 213, 237, 0.02) 40px, rgba(109, 213, 237, 0.02) 41px);
     pointer-events: none;
+}
+
+/* Footer Container - Full Width System */
+.footer-container {
+    max-width: none;
+    width: 100%;
+    padding: 0;
 }
 
 .footer-content-grid {
@@ -979,7 +986,7 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--luvex-text-muted-dark);
+    color: #cbd5e1;
     text-decoration: none;
     transition: all 0.3s ease;
     font-size: 1.1rem;
@@ -1011,6 +1018,7 @@ a:hover {
     margin: 0 auto;
     padding: 0 2rem;
 }
+
 .footer-copyright,
 .footer-location {
     color: rgba(255, 255, 255, 0.6);
@@ -1081,7 +1089,7 @@ a:hover {
         justify-content: center;
     }
     
-    .footer-bottom {
+    .footer-bottom-content {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 1rem;
@@ -1117,28 +1125,6 @@ a:hover {
         font-size: 1rem;
     }
 }
-
-
-/* Footer Container Override für Vollbreite */
-.site-footer .container {
-    max-width: 1600px; /* Breiter */
-    margin: 0 auto;
-    padding: 0 1rem; /* Weniger Padding */
-    width: 100%;
-}
-
-@media (max-width: 1440px) {
-    .site-footer .container {
-        max-width: 1200px;
-    }
-}
-
-@media (max-width: 768px) {
-    .site-footer .container {
-        padding: 0 1rem;
-    }
-}
-
 
 /* --- 4.8 END --- */
 
@@ -2917,6 +2903,10 @@ a:hover {
     color: var(--luvex-bright-cyan);
 }
 
+.booking-hero__title br {
+    display: block;
+}
+
 .booking-hero__subtitle {
     font-size: clamp(1.1rem, 2.2vw, 1.4rem);
     font-weight: 500;
@@ -2935,16 +2925,28 @@ a:hover {
     margin-right: auto;
 }
 
+.booking-hero__description .text-highlight {
+    color: var(--luvex-bright-cyan);
+}
+
 /* --- BOOKING BENEFITS SECTION --- */
 .booking-benefits {
     padding: var(--space-xl) 0;
-    background: var(--luvex-white);
+    background: var(--luvex-gray-100);
+}
+
+.booking-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* --- BOOKING CALENDAR SECTION --- */
 .booking-calendar {
     padding: var(--space-xl) 0;
-    background: var(--luvex-gray-100);
+    background: var(--luvex-white);
 }
 
 .booking-calendar__header {
@@ -2969,10 +2971,20 @@ a:hover {
     line-height: 1.7;
 }
 
+.booking-calendar__subtitle .text-highlight {
+    color: var(--luvex-bright-cyan);
+}
+
 .booking-calendar__container {
     max-width: 1000px;
     margin: 0 auto;
     padding: 0 var(--space-md);
+}
+
+.booking-calendar__container--wide {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
 /* --- GOOGLE CALENDAR IFRAME STYLING --- */
@@ -2997,6 +3009,12 @@ a:hover {
     border-radius: var(--radius-xl) var(--radius-xl) 0 0;
 }
 
+.google-calendar-wrapper--optimized {
+    padding: 2rem;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
 .google-calendar-iframe {
     width: 100%;
     height: 750px;
@@ -3004,6 +3022,10 @@ a:hover {
     border-radius: var(--radius-md);
     background: var(--luvex-white);
     display: block;
+}
+
+.google-calendar-wrapper--optimized .google-calendar-iframe {
+    height: 850px;
 }
 
 /* --- FAQ SECTION --- */
@@ -3080,11 +3102,38 @@ a:hover {
     align-items: center;
 }
 
+/* --- LOADING STATE FOR IFRAME --- */
+.google-calendar-wrapper::after {
+    content: 'Loading calendar...';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--luvex-gray-700);
+    font-size: var(--text-lg);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.google-calendar-iframe[src=""] + .google-calendar-wrapper::after {
+    opacity: 1;
+}
+
 /* --- RESPONSIVE DESIGN --- */
 @media (max-width: 768px) {
     .booking-hero {
         padding: calc(72px + 2rem) 0 2rem;
         min-height: 350px;
+    }
+    
+    .booking-hero__title br {
+        display: none;
+    }
+    
+    .booking-benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
     
     .google-calendar-wrapper {
@@ -3093,8 +3142,16 @@ a:hover {
         border-radius: var(--radius-lg);
     }
     
+    .google-calendar-wrapper--optimized {
+        padding: 1rem;
+    }
+    
     .google-calendar-iframe {
         height: 500px;
+    }
+    
+    .google-calendar-wrapper--optimized .google-calendar-iframe {
+        height: 600px;
     }
     
     .faq-grid {
@@ -3122,6 +3179,10 @@ a:hover {
         height: 450px;
     }
     
+    .google-calendar-wrapper--optimized .google-calendar-iframe {
+        height: 500px;
+    }
+    
     .faq-item {
         padding: 1rem;
     }
@@ -3134,82 +3195,8 @@ a:hover {
     }
 }
 
-/* --- LOADING STATE FOR IFRAME --- */
-.google-calendar-wrapper {
-    position: relative;
-}
-
-.google-calendar-wrapper::after {
-    content: 'Loading calendar...';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--luvex-gray-700);
-    font-size: var(--text-lg);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.google-calendar-iframe[src=""] + .google-calendar-wrapper::after {
-    opacity: 1;
-}
-
-/* --- BOOKING OPTIMIZATIONS --- */
-
-/* Hero Title Optimization */
-.booking-hero__title br {
-    display: block;
-}
-
-@media (max-width: 768px) {
-    .booking-hero__title br {
-        display: none;
-    }
-}
-
-/* Benefits Horizontal Grid */
-.booking-benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-    .booking-benefits-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-}
-
-/* Optimized Calendar Container */
-.booking-calendar__container--wide {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
-.google-calendar-wrapper--optimized {
-    padding: 1.5rem;
-    border-radius: var(--radius-lg);
-}
-
-.google-calendar-wrapper--optimized .google-calendar-iframe {
-    height: 850px;
-    border-radius: var(--radius-md);
-}
-
-@media (max-width: 768px) {
-    .google-calendar-wrapper--optimized .google-calendar-iframe {
-        height: 600px;
-    }
-}
-
-
 /* 6.3 END ===================================================== */
+
 
 /* --- 6.4 HOMEPAGE SPECIFIC --- */
 
