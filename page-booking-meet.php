@@ -22,7 +22,7 @@ get_header(); ?>
                     Expert guidance, independent advice, proven results
                 </h2>
                 <p class="booking-hero__description">
-                    Ready to optimize your UV processes? Book a free 30-minute consultation with our UV technology experts. No sales pitch – just honest, practical guidance tailored <span class="text-highlight">to your specific challenges</span>.
+                    Ready to optimize your UV processes? Book a free 30-minute consultation with our UV technology experts. No sales pitch – just honest, practical guidance tailored to your<br><span class="text-highlight">specific challenges</span>.
                 </p>
             </div>
         </div>
