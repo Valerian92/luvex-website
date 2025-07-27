@@ -49,7 +49,7 @@ Creator: Claude + Human Collaboration
     --text-4xl: 2.5rem;    /* 40px */
     
     /* Layout */
-    --container-max: 1400px;
+    --container-max: 1800px;
     --gap-default: var(--space-md);
     --gap-large: var(--space-lg);
     
@@ -741,7 +741,7 @@ a:hover {
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 2.5rem;
+    gap: 4rem;
 }
 
 .main-navigation a {
