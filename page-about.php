@@ -112,7 +112,7 @@ get_header(); ?>
             <div class="team-member">
                 <div class="team-member__layout">
                     <div class="team-member__photo">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team-founder.jpg" alt="UV Technology Specialist & Founder" />
+                        <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Bewerbungsbild_Valerian-Huber.jpg" alt="Valerian Huber - UV Technology Specialist & Founder" />
                     </div>
                     <div class="team-member__content">
                         <h3>UV Technology Specialist & Founder</h3>
