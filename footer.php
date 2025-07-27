@@ -16,7 +16,7 @@
 </div><!-- #content -->
 
 <footer id="colophon" class="site-footer modern-footer">
-	<div class="container">
+	<div class="footer-container">
 
 		<!-- Footer Content Grid -->
 		<div class="footer-content-grid">
@@ -40,8 +40,8 @@
 					<a href="#" aria-label="LinkedIn" class="social-link">
 						<i class="fab fa-linkedin"></i>
 					</a>
-					<a href="#" aria-label="Twitter" class="social-link">
-						<i class="fab fa-twitter"></i>
+					<a href="/booking/" aria-label="Book Consultation" class="social-link">
+    					<i class="fa-solid fa-calendar-days"></i>
 					</a>
 					<a href="mailto:contact@luvex.tech" aria-label="Email" class="social-link">
 						<i class="fas fa-envelope"></i>

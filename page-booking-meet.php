@@ -13,17 +13,16 @@ get_header(); ?>
     
     <!-- Hero Section -->
     <section class="booking-hero">
-        <div class="booking-hero__container">
+        <div class="booking-hero__container container--wide">
             <div class="booking-hero__content">
                 <h1 class="booking-hero__title">
-                    Schedule Your <span class="text-highlight">UV Technology</span> Consultation
+                    Schedule Your <span class="text-highlight">UV Technology</span><br>Consultation
                 </h1>
                 <h2 class="booking-hero__subtitle">
                     Expert guidance, independent advice, proven results
                 </h2>
                 <p class="booking-hero__description">
-                    Ready to optimize your UV processes? Book a free 30-minute consultation with our UV technology experts. 
-                    No sales pitch – just honest, practical guidance tailored to your specific challenges.
+                    Ready to optimize your UV processes? Book a free 30-minute consultation with our UV technology experts. No sales pitch – just honest, practical guidance tailored to your<br><span class="text-highlight">specific challenges</span>.
                 </p>
             </div>
         </div>
@@ -31,9 +30,9 @@ get_header(); ?>
 
     <!-- What You Get Section -->
     <section class="booking-benefits">
-        <div class="container">
+        <div class="container--medium">
             <h2 class="text-center mb-2">What You'll Get in Your Consultation</h2>
-            <div class="grid-3">
+            <div class="booking-benefits-grid">
                 <div class="value-card">
                     <div class="value-card__icon">
                         <i class="fa-solid fa-lightbulb"></i>
@@ -69,16 +68,16 @@ get_header(); ?>
 
     <!-- Calendar Section -->
     <section class="booking-calendar">
-        <div class="container">
+        <div class="container--wide">
             <div class="booking-calendar__header">
                 <h2 class="booking-calendar__title">Choose Your Preferred Time</h2>
                 <p class="booking-calendar__subtitle">
-                    Select a convenient time slot below. All consultations are conducted via video call and typically last 30-45 minutes.
+                    Select a convenient time slot below. All consultations are conducted via video call and typically last <span class="text-highlight">30-45 minutes</span>.
                 </p>
             </div>
             
-            <div class="booking-calendar__container">
-                <div class="google-calendar-wrapper">
+            <div class="booking-calendar__container booking-calendar__container--wide">
+             <div class="google-calendar-wrapper google-calendar-wrapper--optimized">
                     <!-- Google Calendar Appointment Scheduling begin -->
                     <iframe 
                         src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0Z1Zckgop66eOjfq4HHhTFRGf6buFbZuP5LJj2M6Yqke3PFCQcG2pMDaORu6ZJb_F5nHCyGe7T?gv=true" 
@@ -94,7 +93,7 @@ get_header(); ?>
 
     <!-- FAQ Section -->
     <section class="booking-faq section bg-light">
-        <div class="container">
+        <div class="container--medium">
             <h2 class="text-center mb-2">Frequently Asked Questions</h2>
             <div class="faq-grid">
                 <div class="faq-item">

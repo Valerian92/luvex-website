@@ -53,6 +53,71 @@ get_header(); ?>
     </div>
 </section>
 
+<!-- Why We Do Things Differently Section -->
+<section class="why-different">
+    <div class="why-different__container">
+        <div class="why-different__header">
+            <h2 class="why-different__title">Why We Do Things Differently</h2>
+            <div class="why-different__accent-line"></div>
+        </div>
+        
+        <div class="why-different__grid">
+            <!-- Card 1 -->
+            <div class="why-different__card">
+                <div class="why-different__card-icon">
+                    <i class="fa-solid fa-handshake"></i>
+                </div>
+                <h3 class="why-different__card-title">Independent & Honest Guidance</h3>
+                <ul class="why-different__card-list">
+                    <li><i class="fa-solid fa-check"></i>No product sales pressure - our focus is finding the right solution for YOUR needs</li>
+                    <li><i class="fa-solid fa-check"></i>Unbiased evaluation of different UV technologies and manufacturers</li>
+                    <li><i class="fa-solid fa-check"></i>Transparent advice that puts your process success first</li>
+                </ul>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="why-different__card">
+                <div class="why-different__card-icon">
+                    <i class="fa-solid fa-flask"></i>
+                </div>
+                <h3 class="why-different__card-title">Real-World Experience</h3>
+                <ul class="why-different__card-list">
+                    <li><i class="fa-solid fa-check"></i>Hands-on experience from manufacturer side, customer side, and process integration</li>
+                    <li><i class="fa-solid fa-check"></i>Understanding of both technical possibilities and practical constraints</li>
+                    <li><i class="fa-solid fa-check"></i>Proven track record in automotive, electronics, and diverse UV applications</li>
+                </ul>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="why-different__card">
+                <div class="why-different__card-icon">
+                    <i class="fa-solid fa-users-gear"></i>
+                </div>
+                <h3 class="why-different__card-title">Collaborative Learning</h3>
+                <ul class="why-different__card-list">
+                    <li><i class="fa-solid fa-check"></i>We grow our expertise through every customer challenge we solve together</li>
+                    <li><i class="fa-solid fa-check"></i>Continuous knowledge exchange that benefits all our clients</li>
+                    <li><i class="fa-solid fa-check"></i>Honest approach - if we don't know something, we'll research it together</li>
+                </ul>
+            </div>
+            
+            <!-- Card 4 -->
+            <div class="why-different__card">
+                <div class="why-different__card-icon">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <h3 class="why-different__card-title">Free Tools & Knowledge Sharing</h3>
+                <ul class="why-different__card-list">
+                    <li><i class="fa-solid fa-check"></i>Our UV dose calculation simulator is free for everyone to use</li>
+                    <li><i class="fa-solid fa-check"></i>Process validation tools available regardless of whether you work with us</li>
+                    <li><i class="fa-solid fa-check"></i>Commitment to advancing UV technology knowledge across the industry</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 <!-- Core Values Section -->
 <section class="core-values">
     <div class="core-values__container">
@@ -214,6 +279,80 @@ get_header(); ?>
         </div>
     </div>
 </section>
+
+<!-- More Than Consulting Section -->
+<section class="mission-section">
+    <div class="mission-section__container">
+        <div class="mission-section__header">
+            <h2 class="mission-section__title">More Than Consulting - Building the UV Knowledge Community</h2>
+            <p class="mission-section__description">We believe the UV technology market is too important and too diverse for any single company to dominate. Our mission is spreading UV knowledge and helping every application succeed.</p>
+        </div>
+        
+        <div class="mission-section__layout">
+            <div class="mission-section__image">
+                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/6a28689c01-733f06399a723ca96467.png" alt="High tech laboratory with UV technology equipment and engineers collaborating" />
+            </div>
+            <div class="mission-section__content">
+                <div class="mission-section__points">
+                    <div class="mission-point">
+                        <div class="mission-point__icon">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+                        <div class="mission-point__content">
+                            <h3>Knowledge First</h3>
+                            <p>We share information freely because educated customers make better decisions</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mission-point">
+                        <div class="mission-point__icon">
+                            <i class="fa-solid fa-shield-alt"></i>
+                        </div>
+                        <div class="mission-point__content">
+                            <h3>Process Security</h3>
+                            <p>Your process reliability is our top priority - we recommend solutions that actually work</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mission-point">
+                        <div class="mission-point__icon">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <div class="mission-point__content">
+                            <h3>Industry Growth</h3>
+                            <p>By helping more companies succeed with UV technology, we grow the entire market</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mission-point">
+                        <div class="mission-point__icon">
+                            <i class="fa-solid fa-rocket"></i>
+                        </div>
+                        <div class="mission-point__content">
+                            <h3>Continuous Innovation</h3>
+                            <p>Every project teaches us something new that we can share with future customers</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mission-section__simulator">
+                    <div class="simulator-callout">
+                        <div class="simulator-callout__header">
+                            <i class="fa-solid fa-calculator"></i>
+                            <h3>Free UV Simulator</h3>
+                        </div>
+                        <p>Our UV dose calculation simulator is available free to everyone - use it to validate processes before implementation, completely independent of any consultation with us.</p>
+                        <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="simulator-callout__cta">
+                            Try Our Free Simulator
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 
 <!-- CTA Section -->
 <section class="about-cta">

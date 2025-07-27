@@ -23,6 +23,7 @@ function luvex_enqueue_assets() {
     wp_enqueue_style('fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 
     wp_enqueue_script('luvex-modal', get_template_directory_uri() . '/assets/js/modal.js', array('jquery'), '1.0.0', true);
+    wp_enqueue_script( 'luvex-footer-effect', get_stylesheet_directory_uri() . '/assets/js/footer-light-effect.js', array(), '1.0.0', true );
 }
 
 // === NAVIGATION WALKER (Ihre Icons) ===
@@ -45,6 +46,8 @@ function luvex_ensure_jquery() {
         wp_enqueue_script('jquery');
     }
 }
+
+
 
 
 ?>
