@@ -1100,6 +1100,28 @@ a:hover {
     }
 }
 
+
+/* Footer Container Override für Vollbreite */
+.site-footer .container {
+    max-width: 1400px; /* Erweitert Standard-Container */
+    margin: 0 auto;
+    padding: 0 2rem;
+    width: 100%;
+}
+
+@media (max-width: 1440px) {
+    .site-footer .container {
+        max-width: 1200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .site-footer .container {
+        padding: 0 1rem;
+    }
+}
+
+
 /* --- 4.8 END --- */
 
 /* --- 4.9 FORM SYSTEM --- */
