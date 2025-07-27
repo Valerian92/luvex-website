@@ -136,17 +136,22 @@ a:hover {
 
 /* Container System */
 .container {
-    max-width: var(--container-max);
+    max-width: none; /* Volle Breite als Standard */
     margin: 0 auto;
-    padding: 0 var(--space-md);
-}
-
-.container--wide {
-    max-width: 1400px;
+    padding: 0 2rem;
+    width: 100%;
 }
 
 .container--narrow {
-    max-width: 800px;
+    max-width: 1200px;
+}
+
+.container--medium {
+    max-width: 1400px;
+}
+
+.container--wide {
+    max-width: 1600px;
 }
 
 /* Section Spacing */
