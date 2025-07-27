@@ -1,14 +1,19 @@
 <?php
 // === THEME SETUP - NUR DAS NÖTIGE ===
-add_action('after_setup_theme', 'luvex_theme_setup');
+add_action('after_setup_theme', 'luvex_theme_setup', 20); // Priorität 20!
 function luvex_theme_setup() {
     register_nav_menus(array(
         'primary' => 'Hauptmenü',
+        'footer-services' => 'Footer Services Menu',
+        'footer-technologies' => 'Footer Technologies Menu', 
+        'footer-resources' => 'Footer Resources Menu',
+        'footer-company' => 'Footer Company Menu',
         'footer-legal' => 'Footer Legal Menu'
     ));
     add_theme_support('post-thumbnails');
     add_theme_support('custom-logo');
 }
+
 
 // === CSS/JS EINBINDEN ===
 add_action('wp_enqueue_scripts', 'luvex_enqueue_assets');
