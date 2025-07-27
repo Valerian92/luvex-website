@@ -21,7 +21,7 @@ get_header(); ?>
             <p class="about-hero__description">
                 Our mission is simple: help you optimize your UV processes through honest guidance, proven expertise, and innovative tools. We believe the best solutions come from understanding your specific challenges and working together to solve them.
             </p>
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>" class="about-hero__cta">
+            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="about-hero__cta">
                 <i class="fa-solid fa-arrow-right"></i>
                 <span>Start a Conversation</span>
             </a>
@@ -112,7 +112,7 @@ get_header(); ?>
             <div class="team-member">
                 <div class="team-member__layout">
                     <div class="team-member__photo">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team-founder.jpg" alt="UV Technology Specialist & Founder" />
+                        <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Bewerbungsbild_Valerian-Huber.jpg" alt="Valerian Huber - UV Technology Specialist & Founder" />
                     </div>
                     <div class="team-member__content">
                         <h3>UV Technology Specialist & Founder</h3>
@@ -223,7 +223,7 @@ get_header(); ?>
             Whether you're facing specific challenges or looking to improve overall efficiency, our team is here to help with honest, independent expertise.
         </p>
         <div class="about-cta__buttons">
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>" class="about-cta__primary">
+            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="about-cta__primary">
                 <span>Schedule a Consultation</span>
                 <i class="fa-solid fa-arrow-right"></i>
             </a>

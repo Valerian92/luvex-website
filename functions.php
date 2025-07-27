@@ -30,4 +30,14 @@ function luvex_admin_bar_fix() {
         echo '<style>body.admin-bar .site-header { top: 32px; }</style>';
     }
 }
+
+// jQuery sicherstellen
+add_action('wp_enqueue_scripts', 'luvex_ensure_jquery');
+function luvex_ensure_jquery() {
+    if (!is_admin()) {
+        wp_enqueue_script('jquery');
+    }
+}
+
+
 ?>
