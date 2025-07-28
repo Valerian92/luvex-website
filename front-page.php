@@ -96,13 +96,13 @@ get_header(); ?>
 
 <!-- UV Knowledge Navigator - TÜRKIS -->
 <section class="section section--turquoise-light">
-    <div class="container" style="max-width: 1200px; margin: 0 auto;">
+    <div class="container" style="max-width: 1400px;">  <!-- ← BREITER -->
         <h2 class="text-center mb-2">UV Knowledge Navigator</h2>
         <p class="text-center text-muted mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto;">
             Your pathway to UV expertise - from fundamentals to advanced applications
         </p>
         
-        <div class="grid-3 knowledge-navigator" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+        <div class="grid-3 knowledge-navigator">
             <div class="value-card">
                 <div class="value-card__icon">
                     <i class="fas fa-atom"></i>
@@ -159,7 +159,7 @@ get_header(); ?>
 
 <!-- Global UV Expert Community -->
 <section class="section">
-    <div class="container--narrow">
+    <div class="container" style="max-width: 1200px; text-align: center;">  <!-- ← ZENTRIERT -->
         <h2 class="text-center mb-2">Global UV Expert Community</h2>
         <p class="text-center text-muted mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto;">
             Connect with UV professionals worldwide and access cutting-edge knowledge resources
@@ -202,7 +202,7 @@ get_header(); ?>
 
 <!-- Scientific Excellence -->
 <section class="section bg-light">
-    <div class="container--narrow">
+    <div class="container" style="max-width: 1200px; text-align: center;">  <!-- ← ZENTRIERT -->
         <h2 class="text-center mb-2">Scientific Excellence</h2>
         <p class="text-center text-muted mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto;">
             Independent expertise backed by decades of research and real-world application

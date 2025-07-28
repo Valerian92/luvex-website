@@ -154,20 +154,7 @@ a:hover {
     max-width: 1600px;
 }
 
-/* Globale Container-Zentrierung */
-.container,
-.container--narrow,
-.container--medium,
-.container--wide {
-    text-align: center;
-}
 
-/* Text-Inhalte wieder links ausrichten */
-.container p,
-.container li,
-.container .text-left-content {
-    text-align: left;
-}
 
 /* Section-specific container usage */
 .section .container {
