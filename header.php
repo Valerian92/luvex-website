@@ -51,13 +51,21 @@
             ?>
         </nav>
 
-        <!-- CTA Button -->
-        <div class="header-cta">
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="header-cta-button">
-                <i class="fa-solid fa-comments"></i>
-                <span>Get Consultation</span>
-            </a>
-        </div>
+            <!-- CTA Button -->
+            <div class="header-cta">
+                <?php if (is_user_logged_in()) : 
+                    $current_user = wp_get_current_user(); ?>
+                    <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'profile' ) ) ); ?>" class="header-cta-button">
+                        <i class="fa-solid fa-user"></i>
+                        <span><?php echo esc_html($current_user->first_name ?: 'Profile'); ?></span>
+                    </a>
+                <?php else : ?>
+                    <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="header-cta-button">
+                        <i class="fa-solid fa-comments"></i>
+                        <span>Get Consultation</span>
+                    </a>
+                <?php endif; ?>
+            </div>
 
         <!-- Mobile Menu Button -->
         <div class="mobile-menu-toggle">

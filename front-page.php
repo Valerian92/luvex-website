@@ -39,7 +39,7 @@ get_header(); ?>
 
 <!-- Interactive UV Simulator Showcase -->
 <section class="section">
-    <div class="container">
+    <div class="container" style="max-width: 1200px; margin: 0 auto;">
         <h2 class="text-center mb-2">Interactive UV Knowledge Hub</h2>
         <p class="text-center text-muted mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto;">
             Experience UV technology through interactive simulations and professional-grade calculators
@@ -52,26 +52,36 @@ get_header(); ?>
                     Visualize UV light distribution, calculate optimal doses, and design systems with our cutting-edge simulation tools.
                 </p>
                 
-                <div class="simulator-features grid-4">
+                <div class="simulator-features grid-3">
                     <div class="simulator-feature">
-                        <i class="fas fa-lightbulb"></i>
-                        <h4>Ray Tracing</h4>
-                        <p>Real-time light path simulation</p>
+                        <i class="fas fa-virus-slash"></i>
+                        <h4>UV Disinfection</h4>
+                        <p>Pathogen inactivation modeling</p>
                     </div>
                     <div class="simulator-feature">
-                        <i class="fas fa-map"></i>
-                        <h4>Dose Mapping</h4>
-                        <p>3D dose distribution analysis</p>
+                        <i class="fas fa-layer-group"></i>
+                        <h4>Substrate Curing</h4>
+                        <p>UV polymerization simulation</p>
                     </div>
                     <div class="simulator-feature">
-                        <i class="fas fa-cogs"></i>
-                        <h4>System Design</h4>
-                        <p>Optimal lamp configuration</p>
+                        <i class="fas fa-database"></i>
+                        <h4>Real Templates</h4>
+                        <p>Industry-based configurations</p>
                     </div>
                     <div class="simulator-feature">
-                        <i class="fas fa-chart-line"></i>
-                        <h4>Performance</h4>
-                        <p>Efficiency optimization</p>
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h4>Smart Warnings</h4>
+                        <p>Unrealistic parameter alerts</p>
+                    </div>
+                    <div class="simulator-feature">
+                        <i class="fas fa-chart-area"></i>
+                        <h4>Precise Distribution</h4>
+                        <p>Exact intensity mapping</p>
+                    </div>
+                    <div class="simulator-feature">
+                        <i class="fas fa-mouse-pointer"></i>
+                        <h4>Intuitive Control</h4>
+                        <p>User-friendly interface</p>
                     </div>
                 </div>
                 
@@ -84,9 +94,9 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- Knowledge Navigator -->
-<section class="section bg-light">
-    <div class="container">
+<!-- UV Knowledge Navigator - TÜRKIS -->
+<section class="section section--turquoise-light">
+    <div class="container" style="max-width: 1400px;">  <!-- ← BREITER -->
         <h2 class="text-center mb-2">UV Knowledge Navigator</h2>
         <p class="text-center text-muted mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto;">
             Your pathway to UV expertise - from fundamentals to advanced applications
@@ -149,7 +159,7 @@ get_header(); ?>
 
 <!-- Global UV Expert Community -->
 <section class="section">
-    <div class="container--narrow">
+    <div class="container" style="max-width: 1200px; text-align: center;">  <!-- ← ZENTRIERT -->
         <h2 class="text-center mb-2">Global UV Expert Community</h2>
         <p class="text-center text-muted mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto;">
             Connect with UV professionals worldwide and access cutting-edge knowledge resources
@@ -192,7 +202,7 @@ get_header(); ?>
 
 <!-- Scientific Excellence -->
 <section class="section bg-light">
-    <div class="container--narrow">
+    <div class="container" style="max-width: 1200px; text-align: center;">  <!-- ← ZENTRIERT -->
         <h2 class="text-center mb-2">Scientific Excellence</h2>
         <p class="text-center text-muted mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto;">
             Independent expertise backed by decades of research and real-world application

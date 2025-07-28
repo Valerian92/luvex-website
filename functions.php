@@ -72,4 +72,113 @@ function luvex_handle_contact_form() {
 }
 
 
+// === USER MANAGEMENT SYSTEM ===
+add_action('init', 'luvex_handle_user_actions');
+function luvex_handle_user_actions() {
+    // Handle Login
+    if (isset($_POST['luvex_login_submit'])) {
+        if (!wp_verify_nonce($_POST['_wpnonce'], 'luvex_login_form')) {
+            wp_redirect(add_query_arg('error', 'nonce', wp_get_referer()));
+            exit;
+        }
+        
+        $email = sanitize_email($_POST['user_email']);
+        $password = $_POST['user_password'];
+        $remember = isset($_POST['remember_me']);
+        
+        $user = wp_authenticate($email, $password);
+        
+        if (is_wp_error($user)) {
+            wp_redirect(add_query_arg('error', 'credentials', wp_get_referer()));
+            exit;
+        }
+        
+        wp_set_current_user($user->ID);
+        wp_set_auth_cookie($user->ID, $remember);
+        
+        $redirect_to = isset($_GET['redirect_to']) ? $_GET['redirect_to'] : get_permalink(get_page_by_path('profile'));
+        wp_redirect($redirect_to);
+        exit;
+    }
+    
+    // Handle Registration
+    if (isset($_POST['luvex_register_submit'])) {
+        if (!wp_verify_nonce($_POST['_wpnonce'], 'luvex_register_form')) {
+            wp_redirect(add_query_arg('error', 'nonce', wp_get_referer()));
+            exit;
+        }
+        
+        $first_name = sanitize_text_field($_POST['first_name']);
+        $last_name = sanitize_text_field($_POST['last_name']);
+        $email = sanitize_email($_POST['user_email']);
+        $password = $_POST['user_password'];
+        $confirm_password = $_POST['confirm_password'];
+        $company = sanitize_text_field($_POST['company']);
+        $interest_area = sanitize_text_field($_POST['interest_area']);
+        
+        // Validation
+        if ($password !== $confirm_password) {
+            wp_redirect(add_query_arg('error', 'password_mismatch', wp_get_referer()));
+            exit;
+        }
+        
+        if (email_exists($email)) {
+            wp_redirect(add_query_arg('error', 'email_exists', wp_get_referer()));
+            exit;
+        }
+        
+        // Create user
+        $user_id = wp_create_user($email, $password, $email);
+        
+        if (is_wp_error($user_id)) {
+            wp_redirect(add_query_arg('error', 'creation_failed', wp_get_referer()));
+            exit;
+        }
+        
+        // Update user meta
+        wp_update_user(array(
+            'ID' => $user_id,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'display_name' => $first_name . ' ' . $last_name
+        ));
+        
+        update_user_meta($user_id, 'company', $company);
+        update_user_meta($user_id, 'interest_area', $interest_area);
+        update_user_meta($user_id, 'newsletter_consent', isset($_POST['newsletter_consent']));
+        
+        wp_redirect(add_query_arg('registered', 'success', get_permalink(get_page_by_path('login'))));
+        exit;
+    }
+    
+    // Handle Profile Update
+    if (isset($_POST['luvex_profile_update_submit']) && is_user_logged_in()) {
+        if (!wp_verify_nonce($_POST['_wpnonce'], 'luvex_profile_update')) {
+            return;
+        }
+        
+        $user_id = get_current_user_id();
+        $first_name = sanitize_text_field($_POST['first_name']);
+        $last_name = sanitize_text_field($_POST['last_name']);
+        $email = sanitize_email($_POST['user_email']);
+        $company = sanitize_text_field($_POST['company']);
+        $interest_area = sanitize_text_field($_POST['interest_area']);
+        
+        wp_update_user(array(
+            'ID' => $user_id,
+            'user_email' => $email,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'display_name' => $first_name . ' ' . $last_name
+        ));
+        
+        update_user_meta($user_id, 'company', $company);
+        update_user_meta($user_id, 'interest_area', $interest_area);
+        
+        wp_redirect(add_query_arg('updated', 'success', wp_get_referer()));
+        exit;
+    }
+}
+
+
 ?>

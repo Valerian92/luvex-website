@@ -55,7 +55,6 @@ get_header(); ?>
                 <p class="contact-method__description">
                     Send detailed questions or documentation for review.
                 </p>
-                // Zeile mit Email-Link ändern:
                 <a href="mailto:support@luvex.tech" class="contact-method__link">
                     support@luvex.tech
                 </a>

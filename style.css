@@ -154,6 +154,17 @@ a:hover {
     max-width: 1600px;
 }
 
+
+
+/* Section-specific container usage */
+.section .container {
+    max-width: 1400px; /* Begrenzt für bessere Lesbarkeit */
+}
+
+.section .container--narrow {
+    max-width: 1200px;
+}
+
 /* Section Spacing */
 .section {
     padding: var(--space-lg) 0;
@@ -165,6 +176,16 @@ a:hover {
 
 .section--large {
     padding: var(--space-xl) 0;
+}
+
+
+/* Türkise Section-Varianten */
+.section--turquoise {
+    background: linear-gradient(135deg, #a8e6f1 0%, #e8f9fc 100%);
+}
+
+.section--turquoise-light {
+    background: rgba(109, 213, 237, 0.08);
 }
 
 /* Grid System */
@@ -422,6 +443,23 @@ a:hover {
     margin: 0;
     line-height: 1.6;
 }
+
+/* LUVEX Türkis Card Varianten */
+.value-card--turquoise {
+    background: linear-gradient(135deg, #e8f9fc 0%, #f0fcff 100%);
+    border-top: 4px solid var(--luvex-bright-cyan);
+}
+
+.value-card--turquoise:hover {
+    background: linear-gradient(135deg, #ddf6fb 0%, #e8f9fc 100%);
+}
+
+.value-card--turquoise .value-card__icon {
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+}
+
+
 
 /* --- 4.4 TEAM MEMBER CARD (wiederverwendbar) --- */
 .team-member {
@@ -749,7 +787,7 @@ a:hover {
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 4rem;
+    gap: 6rem; /* von 4rem auf 6rem */
 }
 
 .main-navigation a {
@@ -827,8 +865,13 @@ a:hover {
     padding: 4rem 0 2rem;
     position: relative;
     overflow: hidden;
+    /* ← NEUE Full-Width Technik: */
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
     width: 100vw;
-    margin-left: calc(-50vw + 50%);
 }
 
 /* Subtle background pattern */
@@ -3156,6 +3199,37 @@ a:hover {
     }
 }
 
+/* --- RESPONSIVE für Page-Specific --- */
+@media (max-width: 768px) {
+    .our-story__layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .our-story__image {
+        order: -1;
+        height: 300px;
+    }
+    
+    .core-values__grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .about-cta__buttons {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 769px) {
+    .about-cta__buttons {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
 
 
 /* --- 6.3 BOOKING PAGE SPECIFIC --- */
@@ -3522,6 +3596,13 @@ a:hover {
     pointer-events: none;
 }
 
+.uv-simulator-showcase {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 4rem 3rem;
+}
+
+
 .simulator-content {
     position: relative;
     z-index: 2;
@@ -3817,6 +3898,12 @@ a:hover {
 /* Simulator Features - ensure grid display */
 .simulator-features.grid-4 {
     display: grid;
+}
+
+/* UV Simulator Showcase - better width */
+.uv-simulator-showcase {
+    max-width: 1200px;
+    margin: 3rem auto;
 }
 
 @media (max-width: 1024px) {
@@ -4118,10 +4205,16 @@ a:hover {
 
 .contact-info__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(3, 1fr); /* Ändern zu 1x3 */
     gap: 2rem;
     max-width: 800px;
     margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .contact-info__grid {
+        grid-template-columns: 1fr; /* Mobil: Spalten */
+    }
 }
 
 .contact-info__item {
@@ -4240,41 +4333,374 @@ a:hover {
 /* 6.5 END ===================================================== */
 
 
+/* --- 6.6 AUTH SYSTEM SPECIFIC --- */
 
+/* Auth Hero (extends .luvex-hero) */
+.auth-hero {
+    background: var(--luvex-dark-blue);
+    position: relative;
+    overflow: hidden;
+    padding: calc(72px + 3rem) 0 3rem;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+}
 
+.auth-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="auth-grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(109, 213, 237, 0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23auth-grid)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+}
 
+.auth-hero__container {
+    position: relative;
+    z-index: 2;
+}
 
-/* --- RESPONSIVE für Page-Specific --- */
+.auth-hero__content {
+    max-width: 600px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.auth-hero__title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--luvex-white);
+    margin: 0 0 1rem 0;
+    line-height: 1.1;
+}
+
+.auth-hero__title .text-highlight {
+    color: var(--luvex-bright-cyan);
+}
+
+.auth-hero__description {
+    font-size: var(--text-lg);
+    color: #ced4da;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Auth Form Section */
+.auth-form-section {
+    padding: var(--space-xl) 0;
+    background: var(--luvex-gray-100);
+}
+
+.auth-form-container {
+    background: var(--luvex-dark-blue);
+    border-radius: var(--radius-xl);
+    padding: 3rem;
+    max-width: 500px;
+    margin: 0 auto;
+    border: 1px solid rgba(109, 213, 237, 0.3);
+}
+
+.luvex-auth-form .floating-label-input {
+    margin-bottom: 2rem;
+}
+
+.auth-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.auth-link {
+    color: var(--luvex-bright-cyan);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition: var(--transition-normal);
+}
+
+.auth-link:hover {
+    color: var(--luvex-white);
+}
+
+.auth-consent {
+    margin-bottom: 2rem;
+}
+
+.auth-consent .form-checkbox {
+    margin-bottom: 1rem;
+}
+
+.auth-alternative {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(109, 213, 237, 0.3);
+}
+
+.auth-alternative p {
+    color: #e9ecef;
+    margin: 0 0 1rem 0;
+}
+
+.auth-cta-link {
+    color: var(--luvex-bright-cyan);
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition-normal);
+}
+
+.auth-cta-link:hover {
+    color: var(--luvex-white);
+}
+
+/* Auth Messages */
+.auth-success-message,
+.auth-error-message {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 2rem;
+}
+
+.auth-success-message {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid #10b981;
+    color: #10b981;
+}
+
+.auth-error-message {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid #ef4444;
+    color: #ef4444;
+}
+
+.auth-success-message p,
+.auth-error-message p {
+    margin: 0;
+    font-size: var(--text-sm);
+}
+
+/* Profile System */
+.profile-hero {
+    background: var(--luvex-dark-blue);
+    position: relative;
+    overflow: hidden;
+    padding: calc(72px + 3rem) 0 3rem;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+}
+
+.profile-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="profile-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23profile-grid)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.profile-hero__container {
+    position: relative;
+    z-index: 2;
+}
+
+.profile-hero__content {
+    max-width: 600px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.profile-hero__title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--luvex-white);
+    margin: 0 0 1rem 0;
+    line-height: 1.1;
+}
+
+.profile-hero__title .text-highlight {
+    color: var(--luvex-bright-cyan);
+}
+
+.profile-hero__description {
+    font-size: var(--text-lg);
+    color: #ced4da;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.profile-dashboard {
+    padding: var(--space-xl) 0;
+    background: var(--luvex-gray-100);
+}
+
+.profile-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 3rem;
+}
+
+.profile-nav__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: var(--luvex-white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.profile-nav__link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    color: var(--luvex-gray-700);
+    text-decoration: none;
+    transition: var(--transition-normal);
+    border-bottom: 1px solid var(--luvex-gray-200);
+}
+
+.profile-nav__item--active .profile-nav__link,
+.profile-nav__link:hover {
+    background: var(--luvex-dark-blue);
+    color: var(--luvex-white);
+}
+
+.profile-nav__item--active .profile-nav__link i,
+.profile-nav__link:hover i {
+    color: var(--luvex-bright-cyan);
+}
+
+.profile-content {
+    background: var(--luvex-white);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.profile-section__header {
+    margin-bottom: 2rem;
+}
+
+.profile-section__header h2 {
+    color: var(--luvex-dark-blue);
+    margin: 0 0 0.5rem 0;
+}
+
+.profile-section__header p {
+    color: var(--luvex-gray-700);
+    margin: 0;
+}
+
+.profile-quick-actions {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--luvex-gray-200);
+}
+
+.profile-quick-actions h3 {
+    color: var(--luvex-dark-blue);
+    margin: 0 0 1.5rem 0;
+}
+
+.quick-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.quick-action-card {
+    background: var(--luvex-gray-100);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    text-align: center;
+    text-decoration: none;
+    transition: var(--transition-normal);
+    border: 1px solid var(--luvex-gray-300);
+}
+
+.quick-action-card:hover {
+    background: var(--luvex-dark-blue);
+    color: var(--luvex-white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.quick-action-card--secondary:hover {
+    background: #ef4444;
+}
+
+.quick-action-card i {
+    font-size: 1.5rem;
+    color: var(--luvex-bright-cyan);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.quick-action-card:hover i {
+    color: var(--luvex-white);
+}
+
+.quick-action-card h4 {
+    margin: 0 0 0.25rem 0;
+    font-size: var(--text-base);
+    font-weight: 600;
+}
+
+.quick-action-card p {
+    margin: 0;
+    font-size: var(--text-sm);
+    opacity: 0.8;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-    .our-story__layout {
+    .auth-form-container {
+        padding: 2rem;
+        margin: 0 -1rem;
+    }
+    
+    .auth-options {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+    
+    .profile-layout {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
     
-    .our-story__image {
-        order: -1;
-        height: 300px;
+    .profile-nav__list {
+        display: flex;
+        overflow-x: auto;
     }
     
-    .core-values__grid {
+    .profile-nav__link {
+        white-space: nowrap;
+        border-bottom: none;
+        border-right: 1px solid var(--luvex-gray-200);
+    }
+    
+    .quick-actions-grid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .about-cta__buttons {
-        flex-direction: column;
-        align-items: stretch;
-        max-width: 300px;
-        margin: 0 auto;
     }
 }
 
-@media (min-width: 769px) {
-    .about-cta__buttons {
-        flex-direction: row;
-        justify-content: center;
-    }
-}
+/* 6.6 END ===================================================== */
+
+
+
 
 
 
