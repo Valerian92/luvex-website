@@ -178,21 +178,7 @@ a:hover {
 }
 
 .grid-3 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--gap-default);
-}
-
-@media (max-width: 1024px) {
-    .grid-3 {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    }
-}
-
-@media (max-width: 768px) {
-    .grid-3 {
-        grid-template-columns: 1fr;
-    }
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
 .grid-4 {
@@ -3561,7 +3547,6 @@ a:hover {
 
 .simulator-features {
     margin: 3rem 0;
-    display: grid;
 }
 
 .simulator-feature {
@@ -3868,6 +3853,31 @@ a:hover {
         font-size: var(--text-xs);
     }
 }
+
+/* --- 6.4 HOMEPAGE GRID FIXES --- */
+
+/* UV Knowledge Navigator - force horizontal layout */
+.grid-3.knowledge-navigator {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* Simulator Features - ensure grid display */
+.simulator-features.grid-4 {
+    display: grid;
+}
+
+@media (max-width: 1024px) {
+    .grid-3.knowledge-navigator {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .grid-3.knowledge-navigator {
+        grid-template-columns: 1fr;
+    }
+}
+
 
 /* 6.4 END ===================================================== */
 

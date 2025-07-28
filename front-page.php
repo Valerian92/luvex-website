@@ -92,7 +92,7 @@ get_header(); ?>
             Your pathway to UV expertise - from fundamentals to advanced applications
         </p>
         
-        <div class="grid-3">
+        <div class="grid-3 knowledge-navigator">
             <div class="value-card">
                 <div class="value-card__icon">
                     <i class="fas fa-atom"></i>
