@@ -3597,11 +3597,27 @@ a:hover {
     color: var(--luvex-dark-blue);
 }
 
-/* Knowledge List */
 .knowledge-list {
     list-style: none;
     padding: 0;
-    margin: 1.5rem 0;
+    margin: 1.5rem 0 2rem 0;
+}
+
+.knowledge-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    color: var(--luvex-gray-700);
+    font-size: var(--text-sm);
+    line-height: 1.5;
+}
+
+.knowledge-list li i {
+    color: var(--luvex-bright-cyan);
+    font-size: 0.9rem;
+    min-width: 16px;
+    margin-top: 0.125rem;
 }
 
 .knowledge-list li {
