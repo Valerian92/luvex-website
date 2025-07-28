@@ -84,8 +84,8 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- Knowledge Navigator -->
-<section class="section bg-light">
+<!-- UV Knowledge Navigator - TÜRKIS -->
+<section class="section section--turquoise-light">
     <div class="container" style="max-width: 1200px; margin: 0 auto;">
         <h2 class="text-center mb-2">UV Knowledge Navigator</h2>
         <p class="text-center text-muted mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto;">

@@ -176,6 +176,16 @@ a:hover {
     padding: var(--space-xl) 0;
 }
 
+
+/* Türkise Section-Varianten */
+.section--turquoise {
+    background: linear-gradient(135deg, #a8e6f1 0%, #e8f9fc 100%);
+}
+
+.section--turquoise-light {
+    background: rgba(109, 213, 237, 0.08);
+}
+
 /* Grid System */
 .grid {
     display: grid;
@@ -431,6 +441,23 @@ a:hover {
     margin: 0;
     line-height: 1.6;
 }
+
+/* LUVEX Türkis Card Varianten */
+.value-card--turquoise {
+    background: linear-gradient(135deg, #e8f9fc 0%, #f0fcff 100%);
+    border-top: 4px solid var(--luvex-bright-cyan);
+}
+
+.value-card--turquoise:hover {
+    background: linear-gradient(135deg, #ddf6fb 0%, #e8f9fc 100%);
+}
+
+.value-card--turquoise .value-card__icon {
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+}
+
+
 
 /* --- 4.4 TEAM MEMBER CARD (wiederverwendbar) --- */
 .team-member {
@@ -3857,26 +3884,6 @@ a:hover {
 /* --- 6.4 HOMEPAGE GRID FIXES --- */
 
 /* UV Knowledge Navigator - force horizontal layout */
-/* Force horizontal layout for knowledge navigator */
-.knowledge-navigator {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 2rem;
-}
-
-@media (max-width: 1024px) {
-    .knowledge-navigator {
-        grid-template-columns: repeat(2, 1fr) !important;
-    }
-}
-
-@media (max-width: 768px) {
-    .knowledge-navigator {
-        grid-template-columns: 1fr !important;
-    }
-}
-
-
 .grid-3.knowledge-navigator {
     grid-template-columns: repeat(3, 1fr);
 }
@@ -3884,6 +3891,12 @@ a:hover {
 /* Simulator Features - ensure grid display */
 .simulator-features.grid-4 {
     display: grid;
+}
+
+/* UV Simulator Showcase - better width */
+.uv-simulator-showcase {
+    max-width: 1200px;
+    margin: 3rem auto;
 }
 
 @media (max-width: 1024px) {
