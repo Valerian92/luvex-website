@@ -92,6 +92,7 @@ get_header(); ?>
             
             <div class="contact-form-container">
                 <form class="luvex-contact-form" method="post" action="">
+                    <?php wp_nonce_field('luvex_contact_form'); ?>
                     
                     <div class="form-grid form-grid--2-cols">
                         <div class="floating-label-input">
@@ -148,7 +149,7 @@ get_header(); ?>
                         </label>
                     </div>
                     
-                    <button type="submit" class="form-submit form-submit--accent">
+                    <button type="submit" name="luvex_contact_submit" class="form-submit form-submit--accent">
                         <span>Send Message</span>
                         <i class="fa-solid fa-paper-plane"></i>
                     </button>
