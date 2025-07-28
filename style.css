@@ -154,6 +154,15 @@ a:hover {
     max-width: 1600px;
 }
 
+/* Section-specific container usage */
+.section .container {
+    max-width: 1400px; /* Begrenzt für bessere Lesbarkeit */
+}
+
+.section .container--narrow {
+    max-width: 1200px;
+}
+
 /* Section Spacing */
 .section {
     padding: var(--space-lg) 0;
@@ -749,7 +758,7 @@ a:hover {
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 4rem;
+    gap: 6rem; /* von 4rem auf 6rem */
 }
 
 .main-navigation a {
@@ -3553,6 +3562,13 @@ a:hover {
     pointer-events: none;
 }
 
+.uv-simulator-showcase {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 4rem 3rem;
+}
+
+
 .simulator-content {
     position: relative;
     z-index: 2;
@@ -3841,6 +3857,26 @@ a:hover {
 /* --- 6.4 HOMEPAGE GRID FIXES --- */
 
 /* UV Knowledge Navigator - force horizontal layout */
+/* Force horizontal layout for knowledge navigator */
+.knowledge-navigator {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+    .knowledge-navigator {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .knowledge-navigator {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+
 .grid-3.knowledge-navigator {
     grid-template-columns: repeat(3, 1fr);
 }

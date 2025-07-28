@@ -39,7 +39,7 @@ get_header(); ?>
 
 <!-- Interactive UV Simulator Showcase -->
 <section class="section">
-    <div class="container">
+    <div class="container" style="max-width: 1200px; margin: 0 auto;">
         <h2 class="text-center mb-2">Interactive UV Knowledge Hub</h2>
         <p class="text-center text-muted mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto;">
             Experience UV technology through interactive simulations and professional-grade calculators
@@ -86,13 +86,13 @@ get_header(); ?>
 
 <!-- Knowledge Navigator -->
 <section class="section bg-light">
-    <div class="container">
+    <div class="container" style="max-width: 1200px; margin: 0 auto;">
         <h2 class="text-center mb-2">UV Knowledge Navigator</h2>
         <p class="text-center text-muted mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto;">
             Your pathway to UV expertise - from fundamentals to advanced applications
         </p>
         
-        <div class="grid-3 knowledge-navigator">
+        <div class="grid-3 knowledge-navigator" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
             <div class="value-card">
                 <div class="value-card__icon">
                     <i class="fas fa-atom"></i>
