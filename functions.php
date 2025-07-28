@@ -60,7 +60,7 @@ function luvex_handle_contact_form() {
         $message = sanitize_textarea_field($_POST['message']);
         
         // Send simple email
-        $to = 'contact@luvex.tech';
+        $to = 'support@luvex.tech';
         $subject = 'LUVEX Contact Form Submission';
         $body = "Name: $name\nEmail: $email\n\nMessage:\n$message";
         
