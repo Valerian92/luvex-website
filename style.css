@@ -154,6 +154,21 @@ a:hover {
     max-width: 1600px;
 }
 
+/* Globale Container-Zentrierung */
+.container,
+.container--narrow,
+.container--medium,
+.container--wide {
+    text-align: center;
+}
+
+/* Text-Inhalte wieder links ausrichten */
+.container p,
+.container li,
+.container .text-left-content {
+    text-align: left;
+}
+
 /* Section-specific container usage */
 .section .container {
     max-width: 1400px; /* Begrenzt für bessere Lesbarkeit */
@@ -863,8 +878,13 @@ a:hover {
     padding: 4rem 0 2rem;
     position: relative;
     overflow: hidden;
+    /* ← NEUE Full-Width Technik: */
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
     width: 100vw;
-    margin-left: calc(-50vw + 50%);
 }
 
 /* Subtle background pattern */
