@@ -3758,70 +3758,59 @@ a:hover {
 
 /* Global Network Visual */
 .global-network-visual {
-    background: linear-gradient(135deg, var(--luvex-dark-blue), var(--luvex-accent-blue));
-    height: 350px;
+    height: 500px;
     border-radius: var(--radius-lg);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: var(--luvex-white);
     position: relative;
     overflow: hidden;
+    cursor: grab;
+    background: linear-gradient(135deg, var(--luvex-dark-blue), var(--luvex-accent-blue));
 }
 
-.global-network-visual i {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    color: var(--luvex-bright-cyan);
+.global-network-visual canvas {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: var(--radius-lg);
 }
 
-.network-text {
-    font-size: 1.2rem;
+.globe-title {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.3rem;
     font-weight: 600;
+    color: var(--luvex-white);
+    text-shadow: 0 0 20px rgba(109, 213, 237, 0.8);
+    z-index: 100;
+    text-align: center;
 }
 
-.network-dots {
+.globe-subtitle {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1rem;
+    color: var(--luvex-bright-cyan);
+    z-index: 100;
+    text-align: center;
 }
 
-.network-dot {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: var(--luvex-bright-cyan);
-    border-radius: 50%;
-    animation: pulse-dot 2s infinite;
+@media (max-width: 768px) {
+    .global-network-visual {
+        height: 350px;
+    }
+    
+    .globe-title {
+        font-size: 1.1rem;
+        top: 15px;
+    }
+    
+    .globe-subtitle {
+        font-size: 0.9rem;
+        bottom: 15px;
+    }
 }
-
-.network-dot:nth-child(1) {
-    top: 20%;
-    left: 20%;
-    animation-delay: 0s;
-}
-
-.network-dot:nth-child(2) {
-    top: 30%;
-    right: 25%;
-    animation-delay: 0.5s;
-}
-
-.network-dot:nth-child(3) {
-    bottom: 25%;
-    left: 30%;
-    animation-delay: 1s;
-}
-
-.network-dot:nth-child(4) {
-    bottom: 20%;
-    right: 20%;
-    animation-delay: 1.5s;
-}
-
 /* Feature Section Enhancement (extends existing) */
 .feature-section {
     display: flex;

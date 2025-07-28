@@ -1,60 +1,3 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUVEX Global UV Network</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            background: linear-gradient(135deg, #1B2A49 0%, #0f1729 100%);
-            color: white;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-        }
-        #globe-container {
-            width: 100%;
-            max-width: 600px;
-            height: 500px;
-            cursor: grab;
-            border-radius: 16px;
-            overflow: hidden;
-            position: relative;
-        }
-        #title {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.8rem;
-            font-weight: 600;
-            text-shadow: 0 0 20px #6dd5ed;
-            z-index: 100;
-        }
-        #subtitle {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1rem;
-            color: #6dd5ed;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <h1 id="title">Global UV Community Network</h1>
-    <div id="globe-container">
-        <div id="subtitle">Connecting UV Experts Worldwide</div>
-    </div>
-
-    <script>
         document.addEventListener('DOMContentLoaded', () => {
             const container = document.getElementById('globe-container');
             if (!container) return;
@@ -334,6 +277,3 @@
                 renderer.setSize(container.clientWidth, container.clientHeight);
             });
         });
-    </script>
-</body>
-</html>

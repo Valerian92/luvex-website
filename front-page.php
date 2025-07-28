@@ -185,15 +185,9 @@ get_header(); ?>
                 </div>
             </div>
             <div class="feature-image-content">
-                <div class="global-network-visual">
-                    <i class="fas fa-globe"></i>
-                    <div class="network-dots">
-                        <span class="network-dot"></span>
-                        <span class="network-dot"></span>
-                        <span class="network-dot"></span>
-                        <span class="network-dot"></span>
-                    </div>
-                    <div class="network-text">Global UV Network</div>
+                <div class="global-network-visual" id="globe-container">
+                    <div class="globe-title">Global UV Community Network</div>
+                    <div class="globe-subtitle">Connecting UV Experts Worldwide</div>
                 </div>
             </div>
         </div>
