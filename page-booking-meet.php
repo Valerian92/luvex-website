@@ -136,7 +136,7 @@ get_header(); ?>
                     If the calendar doesn't work for you or you have specific questions, feel free to reach out directly.
                 </p>
                 <div class="booking-alternative__actions">
-                    <a href="mailto:contact@luvex.tech" class="luvex-cta-secondary">
+                    <a href="mailto:support@luvex.tech" class="luvex-cta-secondary">
                         <i class="fa-solid fa-envelope"></i>
                         <span>Send Email</span>
                     </a>

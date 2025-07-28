@@ -4118,10 +4118,16 @@ a:hover {
 
 .contact-info__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(3, 1fr); /* Ändern zu 1x3 */
     gap: 2rem;
     max-width: 800px;
     margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .contact-info__grid {
+        grid-template-columns: 1fr; /* Mobil: Spalten */
+    }
 }
 
 .contact-info__item {
