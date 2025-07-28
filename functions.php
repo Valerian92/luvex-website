@@ -50,4 +50,26 @@ function luvex_ensure_jquery() {
 
 
 
+// === BASIC CONTACT FORM (WordPress Standard) ===
+add_action('init', 'luvex_handle_contact_form');
+function luvex_handle_contact_form() {
+    if (isset($_POST['luvex_contact_submit'])) {
+        // Basic sanitization
+        $name = sanitize_text_field($_POST['first_name'] . ' ' . $_POST['last_name']);
+        $email = sanitize_email($_POST['email']);
+        $message = sanitize_textarea_field($_POST['message']);
+        
+        // Send simple email
+        $to = 'support@luvex.tech';
+        $subject = 'LUVEX Contact Form Submission';
+        $body = "Name: $name\nEmail: $email\n\nMessage:\n$message";
+        
+        if (wp_mail($to, $subject, $body)) {
+            wp_redirect(add_query_arg('contact', 'success', wp_get_referer()));
+            exit;
+        }
+    }
+}
+
+
 ?>
