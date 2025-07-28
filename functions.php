@@ -50,4 +50,29 @@ function luvex_ensure_jquery() {
 
 
 
+// === CONTACT FORM HANDLING ===
+add_action('wp_head', 'luvex_handle_contact_form');
+function luvex_handle_contact_form() {
+    if (isset($_POST['first_name']) && wp_verify_nonce($_POST['_wpnonce'], 'contact_form')) {
+        // Basic form processing
+        $first_name = sanitize_text_field($_POST['first_name']);
+        $last_name = sanitize_text_field($_POST['last_name']);
+        $email = sanitize_email($_POST['email']);
+        $company = sanitize_text_field($_POST['company']);
+        $inquiry_type = sanitize_text_field($_POST['inquiry_type']);
+        $message = sanitize_textarea_field($_POST['message']);
+        
+        // Send email notification
+        $to = 'contact@luvex.tech';
+        $subject = 'LUVEX Contact Form: ' . $inquiry_type;
+        $body = "Name: $first_name $last_name\nEmail: $email\nCompany: $company\nInquiry: $inquiry_type\n\nMessage:\n$message";
+        
+        wp_mail($to, $subject, $body);
+        
+        // Success message (you can enhance this)
+        echo '<script>alert("Thank you! We\'ll respond within 24 hours.");</script>';
+    }
+}
+
+
 ?>
