@@ -1,22 +1,29 @@
 /*
-Theme Name: Luvex Theme
-Template: astra  
-Version: 2.0.0
-*/
-/*
-LUVEX THEME v2.0 - SYSTEMATIC CSS ARCHITECTURE
+LUVEX THEME v2.1 - REFACTORED CSS ARCHITECTURE
 ==============================================================================
 
 Quick Navigation (Ctrl+F):
 1. DESIGN TOKENS
 2. BASE STYLES
-3. LAYOUT SYSTEM  
+3. LAYOUT SYSTEM
 4. UI COMPONENTS
+   4.1 LUVEX BRAND TOKENS
+   4.2 BUTTON SYSTEM
+   4.3 CARD SYSTEM
+   4.4 TEAM MEMBER CARD
+   4.5 HERO SYSTEM (Refactored)
+   4.6 NAVIGATION SYSTEM
+   4.7 FOOTER SYSTEM
+   4.8 FORM SYSTEM
+   4.9 MODAL SYSTEM
+   4.10 LOADING SYSTEM
 5. UTILITIES
 6. PAGE-SPECIFIC
+7. RESPONSIVE
+8. ANIMATIONS
 
-Last Update: 2025-01-23
-Creator: Claude + Human Collaboration
+Last Update: 2025-07-29
+Creator: Gemini + Human Collaboration
 ==============================================================================
 */
 
@@ -677,17 +684,27 @@ a:hover {
 }
 
 /* LUVEX Hero (wiederverwendbar für dark heroes) */
+/* .luvex-hero ist jetzt unsere zentrale Basis-Klasse */
 .luvex-hero {
     background: var(--luvex-dark-blue);
     position: relative;
     overflow: hidden;
-    padding: calc(72px + 4rem) 0 4rem;
+    padding: calc(72px + 4rem) 2rem 4rem; /* 72px für den fixierten Header */
     min-height: 500px;
     display: flex;
     align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--luvex-white);
 }
 
-.luvex-hero::before {
+/* Das Grid-Muster, das alle dunklen Heroes teilen könnten */
+.luvex-hero::before,
+.booking-hero::before,
+.about-hero::before,
+.contact-hero::before,
+.auth-hero::before,
+.profile-hero::before {
     content: '';
     position: absolute;
     top: 0;
@@ -697,25 +714,19 @@ a:hover {
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
     opacity: 0.3;
     pointer-events: none;
+    z-index: 1;
 }
 
-.luvex-hero__container {
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0 var(--space-md);
+.luvex-hero__container { /* Wiederverwendbarer Container für den Inhalt */
     position: relative;
     z-index: 2;
-}
-
-.luvex-hero__content {
     max-width: 900px;
-    text-align: center;
 }
 
-.luvex-hero__title {
+.luvex-hero__title { /* Wiederverwendbarer Titel */
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 600;
-    color: var(--luvex-white);
+    color: inherit;
     margin: 0 0 1.5rem 0;
     line-height: 1.1;
 }
@@ -724,7 +735,7 @@ a:hover {
     color: var(--luvex-bright-cyan);
 }
 
-.luvex-hero__subtitle {
+.luvex-hero__subtitle { /* Wiederverwendbarer Untertitel */
     font-size: clamp(1.2rem, 2.5vw, 1.5rem);
     font-weight: 500;
     color: #e9ecef;
@@ -732,35 +743,37 @@ a:hover {
     line-height: 1.4;
 }
 
-.luvex-hero__description {
+.luvex-hero__description { /* Wiederverwendbare Beschreibung */
     font-size: var(--text-lg);
     color: #ced4da;
-    margin: 0 0 2rem 0;
+    margin: 0 auto 2rem auto;
     line-height: 1.6;
     max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-.luvex-hero__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-xs);
-    padding: 12px 24px;
-    background: var(--luvex-vibrant-blue);
-    color: var(--luvex-white);
-    border-radius: var(--radius-md);
-    text-decoration: none;
-    font-weight: 500;
-    transition: var(--transition-normal);
+/* Jetzt die kleinen Modifikatoren.
+   Die erben alles von .luvex-hero und überschreiben nur die Höhe.
+   Wir fügen sie direkt unter dem .luvex-hero ein.
+*/
+.booking-hero,
+.about-hero,
+.contact-hero,
+.auth-hero,
+.profile-hero {
+    /* Erbt alles von .luvex-hero, wir müssen es nur referenzieren, falls wir spezifische Dinge wollen */
 }
 
-.luvex-hero__cta:hover {
-    background: #0056b3;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
-    color: var(--luvex-white);
+/* Spezifische Höhenanpassungen */
+.booking-hero,
+.contact-hero,
+.auth-hero {
+    min-height: 400px;
 }
+
+.profile-hero {
+    min-height: 350px;
+}
+
 
 /* --- 4.6 NAVIGATION SYSTEM --- */
 
@@ -2785,9 +2798,14 @@ a:hover {
 .inline-block { display: inline-block; }
 .flex-utility { display: flex; }
 
-/* 6. PAGE-SPECIFIC ================================================= */
 
-/* Homepage Specific */
+/* ============================================================================ */
+/* 6. PAGE-SPECIFIC COMPONENTS                                                 */
+/* ============================================================================ */
+
+/* 6.1 /* Homepage Specific */
+
+
 .home-hero {
     background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
     color: var(--color-white);
@@ -2812,9 +2830,8 @@ a:hover {
     box-shadow: var(--shadow-md);
 }
 
-/* ============================================================================ */
-/* 6. PAGE-SPECIFIC COMPONENTS                                                 */
-/* ============================================================================ */
+
+
 
 /* --- 6.2 ABOUT PAGE SPECIFIC --- */
 
