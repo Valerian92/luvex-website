@@ -3679,6 +3679,19 @@ a:hover {
     transition: var(--transition-normal);
 }
 
+.simulator-cta-container {
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
+.simulator-connection-text {
+    color: var(--luvex-bright-cyan);
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin: 1rem 0 0 0;
+    opacity: 0.9;
+}
+
 .simulator-cta:hover {
     background: #5ac7e0;
     transform: translateY(-2px);
@@ -3693,35 +3706,16 @@ a:hover {
 }
 
 .knowledge-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    padding: 0.5rem 0;
+    font-size: 1.05rem;
+    padding: 0.75rem 0;
     color: var(--luvex-gray-700);
-    font-size: var(--text-sm);
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 .knowledge-list li i {
+    font-size: 1rem;
     color: var(--luvex-bright-cyan);
-    font-size: 0.9rem;
-    min-width: 16px;
-    margin-top: 0.125rem;
-}
-
-.knowledge-list li {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.5rem 0;
-    color: var(--luvex-gray-700);
-    font-size: var(--text-sm);
-}
-
-.knowledge-list li i {
-    color: var(--luvex-bright-cyan);
-    font-size: 0.9rem;
-    min-width: 16px;
+    min-width: 18px;
 }
 
 /* Excellence Stats */
@@ -3817,11 +3811,23 @@ a:hover {
     background: var(--luvex-white);
     border: 2px solid var(--luvex-bright-cyan);
     border-radius: var(--radius-lg);
-    padding: 2rem;
+    padding: 2.5rem;
     box-shadow: var(--shadow-md);
+    max-width: 650px; /* Breiter machen */
 }
 
-.feature-text-content,
+.feature-section {
+    display: flex;
+    align-items: center;
+    gap: 3rem; /* Weniger Gap für mehr Platz */
+    flex-wrap: wrap;
+}
+
+.feature-text-content {
+    flex: 1;
+    min-width: 400px; /* Mindestbreite erhöhen */
+}
+
 .feature-image-content {
     flex: 1;
     min-width: 350px;

@@ -41,7 +41,7 @@ get_header(); ?>
 <section class="section">
     <div class="container" style="max-width: 1200px; margin: 0 auto;">
         <h2 class="text-center mb-2">Professional UV Simulation Tools</h2>
-        <p class="text-center text-muted mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto;">
+        <p class="text-center mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto; color: var(--luvex-bright-cyan); font-weight: 500;">
             Advanced 3D modeling and dose calculation for precision UV system design
         </p>
         
@@ -52,9 +52,9 @@ get_header(); ?>
                     Professional-grade simulation tools for UV system optimization and validation.
                 </p>
                 
-                <div class="simulator-features grid-3">
+                <div class="simulator-features grid-4">
                     <div class="simulator-feature">
-                        <i class="fas fa-virus-slash"></i>
+                        <i class="fas fa-shield-virus"></i>
                         <h4>UV Disinfection</h4>
                         <p>Pathogen inactivation modeling</p>
                     </div>
@@ -64,6 +64,11 @@ get_header(); ?>
                         <p>UV polymerization simulation</p>
                     </div>
                     <div class="simulator-feature">
+                        <i class="fas fa-database"></i>
+                        <h4>Real Templates</h4>
+                        <p>Industry-based configurations</p>
+                    </div>
+                    <div class="simulator-feature">
                         <i class="fas fa-chart-area"></i>
                         <h4>Precise Distribution</h4>
                         <p>Exact intensity mapping</p>
@@ -71,16 +76,17 @@ get_header(); ?>
                 </div>
                 
                 <div class="simulator-cta-container">
-                    <p class="simulator-connection-text">Connecting UV Experts Worldwide</p>
                     <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="simulator-cta">
                         <i class="fas fa-play-circle"></i>
                         <span>Launch Interactive Simulator</span>
                     </a>
+                    <p class="simulator-connection-text">Connecting UV Experts Worldwide</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 
 <!-- UV Knowledge Navigator - TÜRKIS -->
 <section class="section section--turquoise-light">
