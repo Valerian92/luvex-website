@@ -38,10 +38,10 @@ get_header(); ?>
 </section>
 
 <!-- Interactive UV Simulator Showcase -->
-<section class="section">
+<section class="section" style="background: #f8fafc;">
     <div class="container" style="max-width: 1200px; margin: 0 auto;">
         <h2 class="text-center mb-2">Professional UV Simulation Tools</h2>
-        <p class="text-center mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto; color: var(--luvex-bright-cyan); font-weight: 500;">
+        <p class="text-center mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto; color: var(--luvex-dark-blue); font-weight: 600; font-size: 1.1rem;">
             Advanced 3D modeling and dose calculation for precision UV system design
         </p>
         
@@ -52,7 +52,7 @@ get_header(); ?>
                     Professional-grade simulation tools for UV system optimization and validation.
                 </p>
                 
-                <div class="simulator-features grid-4">
+                <div class="simulator-features grid-3">
                     <div class="simulator-feature">
                         <i class="fas fa-shield-virus"></i>
                         <h4>UV Disinfection</h4>
@@ -69,9 +69,19 @@ get_header(); ?>
                         <p>Industry-based configurations</p>
                     </div>
                     <div class="simulator-feature">
-                        <i class="fas fa-chart-area"></i>
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h4>Smart Warnings</h4>
+                        <p>Unrealistic parameter alerts</p>
+                    </div>
+                    <div class="simulator-feature">
+                        <i class="fas fa-chart-line"></i>
                         <h4>Precise Distribution</h4>
                         <p>Exact intensity mapping</p>
+                    </div>
+                    <div class="simulator-feature">
+                        <i class="fas fa-mouse-pointer"></i>
+                        <h4>Intuitive Control</h4>
+                        <p>User-friendly interface</p>
                     </div>
                 </div>
                 
@@ -80,7 +90,6 @@ get_header(); ?>
                         <i class="fas fa-play-circle"></i>
                         <span>Launch Interactive Simulator</span>
                     </a>
-                    <p class="simulator-connection-text">Connecting UV Experts Worldwide</p>
                 </div>
             </div>
         </div>
@@ -90,13 +99,13 @@ get_header(); ?>
 
 <!-- UV Knowledge Navigator - TÜRKIS -->
 <section class="section section--turquoise-light">
-    <div class="container" style="max-width: 1400px;">  <!-- ← BREITER -->
+    <div class="container" style="max-width: 1400px;">
         <h2 class="text-center mb-2">UV Knowledge Navigator</h2>
-        <p class="text-center text-muted mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto;">
+        <p class="text-center mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto; color: var(--luvex-dark-blue); font-weight: 600; font-size: 1.1rem;">
             Your pathway to UV expertise - from fundamentals to advanced applications
         </p>
         
-        <div class="grid-3 knowledge-navigator">
+        <div class="grid-3 knowledge-navigator" style="gap: 3rem;">
             <div class="value-card">
                 <div class="value-card__icon">
                     <i class="fas fa-atom"></i>

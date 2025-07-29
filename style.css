@@ -439,9 +439,14 @@ a:hover {
 }
 
 .btn--small {
-    padding: 12px 24px;
+    padding: 14px 32px;
     font-size: 1rem;
     font-weight: 600;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
 }
 
 /* LUVEX Türkis Card Varianten */
@@ -454,9 +459,10 @@ a:hover {
     background: linear-gradient(135deg, #ddf6fb 0%, #e8f9fc 100%);
 }
 
-.value-card--turquoise .value-card__icon {
-    background: var(--luvex-bright-cyan);
+.value-card__icon {
     color: var(--luvex-dark-blue);
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
 }
 
 
@@ -3792,6 +3798,7 @@ a:hover {
 .knowledge-list li {
     font-size: 1.05rem;
     padding: 0.75rem 0;
+    margin-left: 1.5rem;
     color: var(--luvex-gray-700);
     line-height: 1.6;
 }
@@ -3993,6 +4000,25 @@ a:hover {
 /* Simulator Features - ensure grid display */
 .simulator-features.grid-4 {
     display: grid;
+}
+
+/* Simulator Features - 6er Grid */
+.simulator-features.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .simulator-features.grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .simulator-features.grid-3 {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* UV Simulator Showcase - better width */
