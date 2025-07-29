@@ -38,23 +38,23 @@ get_header(); ?>
 </section>
 
 <!-- Interactive UV Simulator Showcase -->
-<section class="section">
+<section class="section" style="background: #f8fafc;">
     <div class="container" style="max-width: 1200px; margin: 0 auto;">
-        <h2 class="text-center mb-2">Interactive UV Knowledge Hub</h2>
-        <p class="text-center text-muted mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto;">
-            Experience UV technology through interactive simulations and professional-grade calculators
+        <h2 class="text-center mb-2">Professional UV Simulation Tools</h2>
+        <p class="text-center mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto; color: var(--luvex-dark-blue); font-weight: 600; font-size: 1.1rem;">
+            Advanced 3D modeling and dose calculation for precision UV system design
         </p>
         
         <div class="uv-simulator-showcase">
             <div class="simulator-content">
-                <h3>3D UV Simulator</h3>
+                <h3>3D UV System Designer</h3>
                 <p class="simulator-description">
-                    Visualize UV light distribution, calculate optimal doses, and design systems with our cutting-edge simulation tools.
+                    Professional-grade simulation tools for UV system optimization and validation.
                 </p>
                 
                 <div class="simulator-features grid-3">
                     <div class="simulator-feature">
-                        <i class="fas fa-virus-slash"></i>
+                        <i class="fas fa-shield-virus"></i>
                         <h4>UV Disinfection</h4>
                         <p>Pathogen inactivation modeling</p>
                     </div>
@@ -74,7 +74,7 @@ get_header(); ?>
                         <p>Unrealistic parameter alerts</p>
                     </div>
                     <div class="simulator-feature">
-                        <i class="fas fa-chart-area"></i>
+                        <i class="fas fa-chart-line"></i>
                         <h4>Precise Distribution</h4>
                         <p>Exact intensity mapping</p>
                     </div>
@@ -85,24 +85,27 @@ get_header(); ?>
                     </div>
                 </div>
                 
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="simulator-cta">
-                    <i class="fas fa-play-circle"></i>
-                    <span>Launch Interactive Simulator</span>
-                </a>
+                <div class="simulator-cta-container">
+                    <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="simulator-cta">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Launch Interactive Simulator</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
+
 <!-- UV Knowledge Navigator - TÜRKIS -->
 <section class="section section--turquoise-light">
-    <div class="container" style="max-width: 1400px;">  <!-- ← BREITER -->
+    <div class="container" style="max-width: 1400px;">
         <h2 class="text-center mb-2">UV Knowledge Navigator</h2>
-        <p class="text-center text-muted mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto;">
+        <p class="text-center mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto; color: var(--luvex-dark-blue); font-weight: 600; font-size: 1.1rem;">
             Your pathway to UV expertise - from fundamentals to advanced applications
         </p>
         
-        <div class="grid-3 knowledge-navigator">
+        <div class="grid-3 knowledge-navigator" style="gap: 3rem;">
             <div class="value-card">
                 <div class="value-card__icon">
                     <i class="fas fa-atom"></i>
@@ -112,10 +115,10 @@ get_header(); ?>
                     Master the physics and engineering principles behind UV technology. From wavelength spectrum to dose calculations.
                 </p>
                 <ul class="knowledge-list">
-                    <li><i class="fas fa-wave-square"></i>Wavelength spectrum and applications</li>
-                    <li><i class="fas fa-calculator"></i>Dose calculations and Beer-Lambert law</li>
-                    <li><i class="fas fa-eye"></i>UV measurement and validation</li>
-                    <li><i class="fas fa-shield-alt"></i>Safety standards and protocols</li>
+                    <li><i class="fas fa-wave-square"></i> Wavelength spectrum and applications</li>
+                    <li><i class="fas fa-calculator"></i> Dose calculations and Beer-Lambert law</li>
+                    <li><i class="fas fa-eye"></i> UV measurement and validation</li>
+                    <li><i class="fas fa-shield-alt"></i> Safety standards and protocols</li>
                 </ul>
                 <a href="#" class="btn btn--primary btn--small">Explore UV Science</a>
             </div>
@@ -129,10 +132,10 @@ get_header(); ?>
                     Compare conventional mercury and cutting-edge LED UV systems with objective analysis.
                 </p>
                 <ul class="knowledge-list">
-                    <li><i class="fas fa-balance-scale"></i>Objective technology comparison</li>
-                    <li><i class="fas fa-chart-line"></i>Performance and efficiency analysis</li>
-                    <li><i class="fas fa-dollar-sign"></i>Total cost of ownership models</li>
-                    <li><i class="fas fa-route"></i>Technology selection guidance</li>
+                    <li><i class="fas fa-balance-scale"></i> Objective technology comparison</li>
+                    <li><i class="fas fa-chart-line"></i> Performance and efficiency analysis</li>
+                    <li><i class="fas fa-dollar-sign"></i> Total cost of ownership models</li>
+                    <li><i class="fas fa-route"></i> Technology selection guidance</li>
                 </ul>
                 <a href="#" class="btn btn--primary btn--small">Compare Technologies</a>
             </div>
@@ -146,10 +149,10 @@ get_header(); ?>
                     Discover UV solutions across industries and applications from water to air treatment.
                 </p>
                 <ul class="knowledge-list">
-                    <li><i class="fas fa-water"></i>Water disinfection systems</li>
-                    <li><i class="fas fa-wind"></i>Air treatment and HVAC integration</li>
-                    <li><i class="fas fa-hand-sparkles"></i>Surface sterilization solutions</li>
-                    <li><i class="fas fa-bolt"></i>UV curing and polymerization</li>
+                    <li><i class="fas fa-water"></i> Water disinfection systems</li>
+                    <li><i class="fas fa-wind"></i> Air treatment and HVAC integration</li>
+                    <li><i class="fas fa-hand-sparkles"></i> Surface sterilization solutions</li>
+                    <li><i class="fas fa-bolt"></i> UV curing and polymerization</li>
                 </ul>
                 <a href="#" class="btn btn--primary btn--small">Explore Applications</a>
             </div>
@@ -166,34 +169,30 @@ get_header(); ?>
         </p>
         
         <div class="feature-section">
-            <div class="feature-text-content">
-                <h2>Building the Global UV Network</h2>
-                <p>Join thousands of UV professionals from around the world in advancing technology, sharing knowledge, and solving complex engineering challenges together.</p>
-                <ul class="feature-list">
-                    <li><i class="fas fa-check-circle"></i><strong>Expert Sessions:</strong> Monthly webinars with industry leaders</li>
-                    <li><i class="fas fa-check-circle"></i><strong>Knowledge Exchange:</strong> Technical forums and case study sharing</li>
-                    <li><i class="fas fa-check-circle"></i><strong>Resource Library:</strong> Free access to calculation tools and guides</li>
-                    <li><i class="fas fa-check-circle"></i><strong>Global Network:</strong> Connect with experts across 6 continents</li>
-                </ul>
-                <div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
-                    <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-cta-primary">
-                        Join Community
-                    </a>
-                    <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="luvex-cta-secondary">
-                        Learn About Us
-                    </a>
+           <div class="feature-text-content">
+                <div class="community-text-container">
+                    <h2>Building the Global UV Network</h2>
+                    <p>Join thousands of UV professionals from around the world in advancing technology, sharing knowledge, and solving complex engineering challenges together.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i><strong>Expert Sessions:</strong> Monthly webinars with industry leaders</li>
+                        <li><i class="fas fa-check-circle"></i><strong>Knowledge Exchange:</strong> Technical forums and case study sharing</li>
+                        <li><i class="fas fa-check-circle"></i><strong>Resource Library:</strong> Free access to calculation tools and guides</li>
+                        <li><i class="fas fa-check-circle"></i><strong>Global Network:</strong> Connect with experts across 6 continents</li>
+                    </ul>
+                    <div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
+                        <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-cta-primary">
+                            Join Community
+                        </a>
+                        <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="luvex-cta-secondary">
+                            Learn About Us
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="feature-image-content">
-                <div class="global-network-visual">
-                    <i class="fas fa-globe"></i>
-                    <div class="network-dots">
-                        <span class="network-dot"></span>
-                        <span class="network-dot"></span>
-                        <span class="network-dot"></span>
-                        <span class="network-dot"></span>
-                    </div>
-                    <div class="network-text">Global UV Network</div>
+                <div class="global-network-visual" id="globe-container">
+                    <div class="globe-title">Global UV Community Network</div>
+                    <div class="globe-subtitle">Connecting UV Experts Worldwide</div>
                 </div>
             </div>
         </div>
@@ -201,36 +200,20 @@ get_header(); ?>
 </section>
 
 <!-- Scientific Excellence -->
-<section class="section bg-light">
-    <div class="container" style="max-width: 1200px; text-align: center;">  <!-- ← ZENTRIERT -->
-        <h2 class="text-center mb-2">Scientific Excellence</h2>
+<section class="section section--turquoise-light">
+    <div class="container" style="max-width: 1400px; text-align: center;">
+        <h2 class="text-center mb-2">Evidence-Based UV Expertise</h2>
         <p class="text-center text-muted mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto;">
-            Independent expertise backed by decades of research and real-world application
+            Independent expertise backed by scientific research and real-world validation
         </p>
         
         <div class="grid-4">
             <div class="excellence-stat">
                 <div class="excellence-stat__icon">
-                    <i class="fas fa-university"></i>
+                    <i class="fas fa-microscope"></i>
                 </div>
-                <h4>50+ Publications</h4>
-                <p>Peer-reviewed research in leading journals</p>
-            </div>
-            
-            <div class="excellence-stat">
-                <div class="excellence-stat__icon">
-                    <i class="fas fa-award"></i>
-                </div>
-                <h4>IUVA Recognition</h4>
-                <p>International UV Association awards and leadership</p>
-            </div>
-            
-            <div class="excellence-stat">
-                <div class="excellence-stat__icon">
-                    <i class="fas fa-globe-americas"></i>
-                </div>
-                <h4>Global Projects</h4>
-                <p>Successful implementations across 6 continents</p>
+                <h4>Scientific Validation</h4>
+                <p>Every recommendation backed by peer-reviewed research and testing data</p>
             </div>
             
             <div class="excellence-stat">
@@ -238,7 +221,23 @@ get_header(); ?>
                     <i class="fas fa-balance-scale"></i>
                 </div>
                 <h4>Vendor Neutral</h4>
-                <p>Independent recommendations based on engineering merit</p>
+                <p>Independent analysis free from manufacturer bias or sales pressure</p>
+            </div>
+            
+            <div class="excellence-stat">
+                <div class="excellence-stat__icon">
+                    <i class="fas fa-globe-americas"></i>
+                </div>
+                <h4>Global Network</h4>
+                <p>Collaborative partnerships with UV research institutions worldwide</p>
+            </div>
+            
+            <div class="excellence-stat">
+                <div class="excellence-stat__icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h4>Continuous Learning</h4>
+                <p>Regular UV technology updates and industry knowledge sharing</p>
             </div>
         </div>
     </div>
