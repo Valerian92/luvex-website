@@ -4139,180 +4139,243 @@ a:hover {
     }
 }
 
-/* --- 6.4 HOMEPAGE SPECIFIC - COMMUNITY SECTION UNIFIED --- */
 
-.community-section {
-    background: var(--luvex-dark-blue);
-    padding: var(--space-xl) 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.community-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="community-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23community-grid)"/></svg>');
-    opacity: 0.3;
-    pointer-events: none;
-}
-
-.community-section .container {
-    position: relative;
-    z-index: 2;
-}
-
-.community-section h2 {
-    color: var(--luvex-white);
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-.community-section p {
-    color: #e9ecef;
-    text-align: center;
-    margin-bottom: 3rem;
-}
+/* --- 6.4 HOMEPAGE SPECIFIC - COMMUNITY SECTION REFINEMENT V2 --- */
 
 .feature-section {
     display: grid;
-    grid-template-columns: 1fr 400px;
-    gap: 4rem;
+    /* Linke Spalte breiter machen (1.5 Anteile vs. 1 Anteil) */
+    grid-template-columns: 1.5fr 1fr;
+    /* Stellt sicher, dass beide Container exakt die gleiche Höhe haben */
     align-items: stretch;
+    gap: 2rem; /* Etwas weniger Abstand für einen kompakteren Look */
 }
 
-.feature-text-content {
+.feature-section .feature-text-content,
+.feature-section .feature-image-content {
+    min-width: 0;
+}
+
+/* Linker Text-Container */
+.community-text-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    text-align: center;
+    height: 100%;
+    padding: 2.5rem 3rem;
+    text-align: left; /* Alles standardmäßig linksbündig */
 }
 
-.feature-text-content h2 {
-    color: var(--luvex-white);
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-
-.feature-text-content p {
-    color: #cbd5e1;
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.feature-list {
-    list-style: none;
-    padding: 0;
-    margin: 2rem 0;
+.community-text-container h2,
+.community-text-container p {
     text-align: left;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-.feature-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    margin-bottom: 1.25rem;
-    color: #e9ecef;
-    line-height: 1.7;
-    font-size: 1.05rem;
+/* Verbesserte Liste, linksbündig & ohne Zeilenumbruch */
+.feature-list--structured {
+    margin: 2rem 0;
+    padding-left: 0; /* Setzt eventuelle Einrückungen zurück */
+    position: relative;
 }
 
-.feature-list li i {
-    color: var(--luvex-accent-blue);
-    margin-top: 0.125rem;
-    transition: var(--transition-normal);
-    flex-shrink: 0;
+/* Inspiration: Eine feine Linie, die die Punkte verbindet */
+.feature-list--structured::before {
+    content: '';
+    position: absolute;
+    left: 11px; /* Exakt auf die Mitte der Icons ausgerichtet */
+    top: 10px;
+    bottom: 10px;
+    width: 2px;
+    background: var(--luvex-gray-200);
+    border-radius: 1px;
 }
 
-.feature-list li strong {
-    color: var(--luvex-white);
+.feature-list--structured li {
+    position: relative;
+    padding-left: 0; /* Stellt sicher, dass der Text am Icon klebt */
 }
 
-.feature-text-content > div:last-child {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: auto;
+.feature-list--structured .feature-list__text {
+    flex: 1;
 }
+
+.feature-list--structured .feature-list__text strong {
+    display: inline; /* <-- Verhindert den Zeilenumbruch */
+    margin-right: 0.5rem; /* Fügt Abstand nach dem Titel hinzu */
+    color: var(--luvex-dark-blue);
+    font-weight: 600;
+}
+
+/* Button-Container bleibt unten und zentriert */
+.community-cta-container {
+    margin-top: auto; /* Schiebt die Buttons nach unten */
+    padding-top: 1.5rem;
+    justify-content: center; /* Zentriert die Buttons */
+}
+
+/* Responsivität für die neue Struktur */
+@media (max-width: 992px) {
+    .feature-section {
+        grid-template-columns: 1fr; /* Untereinander auf Tablets */
+    }
+    
+    .community-text-container {
+        text-align: center;
+    }
+    
+    .community-text-container h2,
+    .community-text-container p {
+        text-align: center;
+    }
+
+    .feature-list--structured::before {
+        left: 50%; /* Linie auf Mobilgeräten zentrieren */
+        transform: translateX(-50%);
+    }
+}
+/* --- 6.4 HOMEPAGE SPECIFIC - GLOBE ANIMATION FIX --- */
 
 .global-network-visual {
-    height: 400px;
-    background: linear-gradient(135deg, rgba(109, 213, 237, 0.15), rgba(0, 123, 255, 0.15));
+    position: relative; /* Wichtig für die Titel-Overlays */
+    width: 100%;
+    height: 500px; /* <-- Die fehlende Höhe für Desktop */
+    min-height: 350px;
     border-radius: var(--radius-lg);
+    overflow: hidden; /* Stellt sicher, dass die Animation in den abgerundeten Ecken bleibt */
+    background-color: var(--luvex-dark-blue); /* Hintergrund, falls JS deaktiviert ist */
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(109, 213, 237, 0.3);
 }
 
-.global-network-visual i {
-    font-size: 4rem;
-    color: var(--luvex-bright-cyan);
-    margin-bottom: 1rem;
-    animation: pulse-glow 3s ease-in-out infinite;
-}
-
-.network-text {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--luvex-white);
-    margin: 0.5rem 0 0 0;
-}
-
-.network-dots {
+/* Stellt sicher, dass die erstellte Leinwand den Container ausfüllt */
+#globe-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
 }
 
-.network-dot {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: var(--luvex-bright-cyan);
-    border-radius: 50%;
-    animation: pulse-dot 2s infinite;
+/* --- 6.4 HOMEPAGE SPECIFIC - COMMUNITY SECTION REFINEMENT --- */
+
+.feature-section {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr; /* Gibt dem linken Container mehr Breite */
+    align-items: stretch; /* <-- Sorgt für gleiche Höhe */
+    gap: 3rem;
 }
 
-.network-dot:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
-.network-dot:nth-child(2) { top: 30%; right: 25%; animation-delay: 0.5s; }
-.network-dot:nth-child(3) { bottom: 25%; left: 30%; animation-delay: 1s; }
-.network-dot:nth-child(4) { bottom: 20%; right: 20%; animation-delay: 1.5s; }
+.feature-section .feature-text-content,
+.feature-section .feature-image-content {
+    min-width: 0; /* Setzt alte min-width zurück */
+}
+
+/* Linker Text-Container */
+.community-text-container {
+    display: flex;
+    flex-direction: column; /* Richtet Inhalt vertikal aus */
+    justify-content: center; /* Zentriert den gesamten Inhalt vertikal */
+    height: 100%; /* Wichtig für flex-direction: column */
+    padding: 2.5rem 3rem; /* Mehr seitlicher Abstand */
+}
+
+.community-text-container h2 {
+    text-align: left;
+}
+.community-text-container p {
+    text-align: left;
+}
+
+/* Verbesserte Liste, linksbündig */
+.feature-list--structured {
+    margin: 2rem 0;
+}
+
+.feature-list--structured .feature-list__text strong {
+    margin-bottom: 0.1rem; /* Reduziert Abstand für kompaktere Optik */
+    color: var(--luvex-dark-blue);
+}
+
+/* Button-Container & Buttons */
+.community-cta-container {
+    justify-content: center; /* Zentriert die Buttons im Container */
+    margin-top: auto; /* Schiebt die Buttons nach unten */
+    padding-top: 1.5rem; /* Abstand nach oben */
+}
+
+.community-cta-container .luvex-cta-secondary {
+    border-width: 2px;
+    background-color: transparent;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.community-cta-container .luvex-cta-secondary:hover {
+    background-color: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    border-color: var(--luvex-bright-cyan);
+}
+
+/* Responsivität für die neue Struktur */
+@media (max-width: 992px) {
+    .feature-section {
+        grid-template-columns: 1fr; /* Untereinander auf Tablets */
+    }
+    
+    .community-text-container h2,
+    .community-text-container p {
+        text-align: center; /* Text zentrieren auf Tablets/Mobil */
+    }
+}
+
+
 
 /* Responsive */
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
+    .uv-simulator-showcase {
+        padding: 2.5rem 1.5rem;
+        margin: 2rem -1rem;
+    }
+    
+    .simulator-content h3 {
+        font-size: 2rem;
+    }
+    
+    .simulator-features {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
     .feature-section {
-        grid-template-columns: 1fr;
-        gap: 3rem;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .excellence-stat {
+        padding: 1.5rem 0.5rem;
+    }
+    
+    .excellence-stat__icon {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .excellence-stat__icon i {
+        font-size: 2rem;
     }
     
     .global-network-visual {
-        height: 300px;
-        max-width: 500px;
-        margin: 0 auto;
+        height: 250px;
     }
 }
 
-@media (max-width: 768px) {
-    .feature-text-content > div:last-child {
-        flex-direction: column;
-        align-items: center;
-        max-width: 280px;
-        margin-left: auto;
-        margin-right: auto;
+@media (max-width: 480px) {
+    .simulator-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .knowledge-list li {
+        font-size: var(--text-xs);
     }
 }
 
