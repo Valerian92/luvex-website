@@ -29,8 +29,8 @@ get_header(); ?>
     </section>
 
     <!-- What You Get Section -->
-    <section class="booking-benefits">
-        <div class="container--medium">
+   <section class="booking-benefits">
+        <div class="container container--medium">
             <h2 class="text-center mb-2">What You'll Get in Your Consultation</h2>
             <div class="booking-benefits-grid">
                 <div class="value-card">
@@ -68,7 +68,7 @@ get_header(); ?>
 
     <!-- Calendar Section -->
     <section class="booking-calendar">
-        <div class="container--wide">
+        <div class="container container--wide">
             <div class="booking-calendar__header">
                 <h2 class="booking-calendar__title">Choose Your Preferred Time</h2>
                 <p class="booking-calendar__subtitle">
@@ -91,9 +91,72 @@ get_header(); ?>
         </div>
     </section>
 
+    <!-- Team Section -->
+    <section class="team-section section--small">
+        <div class="container container--narrow">
+            <div class="team-section__header">
+                <h2 class="team-section__title">Meet Your Consultation Experts</h2>
+                <p class="team-section__description">Learn more about the specialists who will guide you.</p>
+            </div>
+            <div class="team-section__grid grid grid-2">
+                
+                <div class="team-member">
+                    <div class="team-member__layout">
+                        <div class="team-member__photo">
+                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/valerian-huber.jpg" alt="Valerian Huber">
+                        </div>
+                        <div class="team-member__content">
+                            <h3>Valerian Huber</h3>
+                            <p class="team-member__role">CEO & UV Technology Lead</p>
+                            <div class="team-member__details">
+                                <div class="team-member__detail">
+                                    <i class="team-member__detail-icon fa-solid fa-flask"></i>
+                                    <p class="team-member__detail-text">Expert in UV-C systems, LEDs, and process validation.</p>
+                                </div>
+                                <div class="team-member__detail">
+                                    <i class="team-member__detail-icon fa-solid fa-lightbulb"></i>
+                                    <p class="team-member__detail-text">Focus on innovative solutions and independent technology analysis.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-member__quote">
+                        <p>"Our goal is to bring clarity and precision into every UV application, empowering our clients with knowledge."</p>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="team-member__layout">
+                        <div class="team-member__photo">
+                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/matthias-slapka.jpg" alt="Matthias Slapka">
+                        </div>
+                        <div class="team-member__content">
+                            <h3>Matthias Slapka</h3>
+                            <p class="team-member__role">Automation & Integration Expert</p>
+                            <div class="team-member__details">
+                                <div class="team-member__detail">
+                                    <i class="team-member__detail-icon fa-solid fa-robot"></i>
+                                    <p class="team-member__detail-text">Specialist for system integration in the automotive sector.</p>
+                                </div>
+                                <div class="team-member__detail">
+                                    <i class="team-member__detail-icon fa-solid fa-file-code"></i>
+                                    <p class="team-member__detail-text">Profound knowledge in E-PLAN and automation documentation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-member__quote">
+                        <p>"A perfectly integrated and documented system is the foundation for reliable and efficient industrial processes."</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <!-- FAQ Section -->
     <section class="booking-faq section bg-light">
-        <div class="container--medium">
+        <div class="container container--medium">
             <h2 class="text-center mb-2">Frequently Asked Questions</h2>
             <div class="faq-grid">
                 <div class="faq-item">

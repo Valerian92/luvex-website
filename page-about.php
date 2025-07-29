@@ -165,14 +165,14 @@ get_header(); ?>
 <!-- Team Section -->
 <section class="team-section">
     <div class="team-section__container">
-        <div class="team-section__header">
+            <div class="team-section__header">
             <h2 class="team-section__title">Meet Your UV Technology Team</h2>
             <p class="team-section__description">
                 Meet the experts behind LUVEX - real experience, genuine passion for UV technology advancement
             </p>
-        </div>
+            </div>
         
-        <div class="team-section__grid">
+        <div class="team-section__grid grid grid-2">
             <!-- Team Member 1 -->
             <div class="team-member">
                 <div class="team-member__layout">

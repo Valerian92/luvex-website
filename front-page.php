@@ -170,16 +170,36 @@ get_header(); ?>
         
         <div class="feature-section">
            <div class="feature-text-content">
-                <div class="community-text-container">
+          <div class="community-text-container">
                     <h2>Building the Global UV Network</h2>
                     <p>Join thousands of UV professionals from around the world in advancing technology, sharing knowledge, and solving complex engineering challenges together.</p>
-                    <ul class="feature-list">
-                        <li><i class="fas fa-check-circle"></i><strong>Expert Sessions:</strong> Monthly webinars with industry leaders</li>
-                        <li><i class="fas fa-check-circle"></i><strong>Knowledge Exchange:</strong> Technical forums and case study sharing</li>
-                        <li><i class="fas fa-check-circle"></i><strong>Resource Library:</strong> Free access to calculation tools and guides</li>
-                        <li><i class="fas fa-check-circle"></i><strong>Global Network:</strong> Connect with experts across 6 continents</li>
+                    <ul class="feature-list feature-list--structured">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <div class="feature-list__text">
+                                <strong>Expert Sessions:</strong> Monthly webinars with industry leaders
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <div class="feature-list__text">
+                                <strong>Knowledge Exchange:</strong> Technical forums and case study sharing
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <div class="feature-list__text">
+                                <strong>Resource Library:</strong> Free access to calculation tools and guides
+                            </div>
+                        </li>
+                         <li>
+                            <i class="fas fa-check-circle"></i>
+                            <div class="feature-list__text">
+                                <strong>Global Network:</strong> Connect with experts across 6 continents
+                            </div>
+                        </li>
                     </ul>
-                    <div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
+                    <div class="community-cta-container">
                         <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-cta-primary">
                             Join Community
                         </a>
