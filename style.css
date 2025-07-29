@@ -4141,19 +4141,58 @@ a:hover {
 
 /* --- 6.4 HOMEPAGE SPECIFIC - COMMUNITY SECTION FIX --- */
 
-.feature-section .feature-text-content {
-    flex: 1.5; /* Gibt dem Text-Container mehr Platz */
-    min-width: 450px;
+/* --- 6.4 HOMEPAGE SPECIFIC - COMMUNITY SECTION REFINEMENT V2 --- */
+
+.feature-section {
+    display: grid;
+    /* Linke Spalte breiter machen (1.5 Anteile vs. 1 Anteil) */
+    grid-template-columns: 1.5fr 1fr;
+    /* Stellt sicher, dass beide Container exakt die gleiche Höhe haben */
+    align-items: stretch;
+    gap: 2rem; /* Etwas weniger Abstand für einen kompakteren Look */
 }
 
+.feature-section .feature-text-content,
 .feature-section .feature-image-content {
-    flex: 1; /* Gibt dem Globus-Container relativ weniger Platz */
-    min-width: 350px;
+    min-width: 0;
 }
 
-/* Verbesserte Liste für sauberen Umbruch */
+/* Linker Text-Container */
+.community-text-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 2.5rem 3rem;
+    text-align: left; /* Alles standardmäßig linksbündig */
+}
+
+.community-text-container h2,
+.community-text-container p {
+    text-align: left;
+}
+
+/* Verbesserte Liste, linksbündig & ohne Zeilenumbruch */
+.feature-list--structured {
+    margin: 2rem 0;
+    padding-left: 0; /* Setzt eventuelle Einrückungen zurück */
+    position: relative;
+}
+
+/* Inspiration: Eine feine Linie, die die Punkte verbindet */
+.feature-list--structured::before {
+    content: '';
+    position: absolute;
+    left: 11px; /* Exakt auf die Mitte der Icons ausgerichtet */
+    top: 10px;
+    bottom: 10px;
+    width: 2px;
+    background: var(--luvex-gray-200);
+    border-radius: 1px;
+}
+
 .feature-list--structured li {
-    align-items: flex-start;
+    position: relative;
+    padding-left: 0; /* Stellt sicher, dass der Text am Icon klebt */
 }
 
 .feature-list--structured .feature-list__text {
@@ -4161,24 +4200,39 @@ a:hover {
 }
 
 .feature-list--structured .feature-list__text strong {
-    display: block; /* Sorgt dafür, dass der nachfolgende Text immer in einer neuen Zeile beginnt */
-    margin-bottom: 0.25rem;
+    display: inline; /* <-- Verhindert den Zeilenumbruch */
+    margin-right: 0.5rem; /* Fügt Abstand nach dem Titel hinzu */
+    color: var(--luvex-dark-blue);
+    font-weight: 600;
 }
 
-/* Zentrierter Button-Container */
+/* Button-Container bleibt unten und zentriert */
 .community-cta-container {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 2.5rem;
-    justify-content: flex-start; /* Buttons linksbündig in der Box */
+    margin-top: auto; /* Schiebt die Buttons nach unten */
+    padding-top: 1.5rem;
+    justify-content: center; /* Zentriert die Buttons */
 }
 
-@media (max-width: 768px) {
-    .community-cta-container {
-        justify-content: center; /* Buttons auf Mobilgeräten zentrieren */
+/* Responsivität für die neue Struktur */
+@media (max-width: 992px) {
+    .feature-section {
+        grid-template-columns: 1fr; /* Untereinander auf Tablets */
+    }
+    
+    .community-text-container {
+        text-align: center;
+    }
+    
+    .community-text-container h2,
+    .community-text-container p {
+        text-align: center;
+    }
+
+    .feature-list--structured::before {
+        left: 50%; /* Linie auf Mobilgeräten zentrieren */
+        transform: translateX(-50%);
     }
 }
-
 /* --- 6.4 HOMEPAGE SPECIFIC - GLOBE ANIMATION FIX --- */
 
 .global-network-visual {
