@@ -3765,21 +3765,6 @@ a:hover {
     margin: 0;
 }
 
-/* Global Network Visual */
-.global-network-visual {
-    height: 500px;
-    border-radius: var(--radius-lg);
-    position: relative;
-    overflow: hidden;
-    cursor: grab;
-    background: linear-gradient(135deg, var(--luvex-dark-blue), var(--luvex-accent-blue));
-}
-
-.global-network-visual canvas {
-    width: 100% !important;
-    height: 100% !important;
-    border-radius: var(--radius-lg);
-}
 
 .globe-title {
     position: absolute;
@@ -3826,6 +3811,14 @@ a:hover {
     align-items: center;
     gap: 4rem;
     flex-wrap: wrap;
+}
+
+.community-text-container {
+    background: var(--luvex-white);
+    border: 2px solid var(--luvex-bright-cyan);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
 }
 
 .feature-text-content,
