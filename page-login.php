@@ -8,16 +8,14 @@
 
 get_header(); ?>
 
-<section class="auth-hero">
-    <div class="auth-hero__container container--narrow">
-        <div class="auth-hero__content">
-            <h1 class="auth-hero__title">
-                Welcome Back to <span class="text-highlight">LUVEX</span>
-            </h1>
-            <p class="auth-hero__description">
-                Access your UV simulator settings, saved projects, and community features.
-            </p>
-        </div>
+<section class="luvex-hero">
+    <div class="luvex-hero__container">
+        <h1 class="luvex-hero__title">
+            Welcome Back to <span class="text-highlight">LUVEX</span>
+        </h1>
+        <p class="luvex-hero__description">
+            Access your UV simulator settings, saved projects, and community features.
+        </p>
     </div>
 </section>
 

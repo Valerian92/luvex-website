@@ -10,25 +10,23 @@
 get_header(); ?>
 
 <!-- Contact Hero Section -->
-<section class="contact-hero">
-    <div class="contact-hero__container container--medium">
-        <div class="contact-hero__content">
-            <h1 class="contact-hero__title">
-                Get in Touch with <span class="text-highlight">LUVEX</span>
-            </h1>
-            <h2 class="contact-hero__subtitle">
-                Professional UV technology support when you need it
-            </h2>
-            <p class="contact-hero__description">
-                Questions about UV processes? Need technical guidance? Our experts are here to help with honest, practical advice tailored to your specific challenges.
-            </p>
-        </div>
+<section class="luvex-hero">
+    <div class="luvex-hero__container">
+        <h1 class="luvex-hero__title">
+            Get in Touch with <span class="text-highlight">LUVEX</span>
+        </h1>
+        <h2 class="luvex-hero__subtitle">
+            Professional UV technology support when you need it
+        </h2>
+        <p class="luvex-hero__description">
+            Our experts are here to help with honest, practical advice tailored to your specific challenges.
+        </p>
     </div>
 </section>
 
 <!-- Contact Methods Section -->
 <section class="contact-methods">
-    <div class="container--medium">
+    <div class="container container--medium">
         <div class="contact-methods__grid">
             
             <!-- Primary CTA: Book Consultation -->
@@ -80,7 +78,7 @@ get_header(); ?>
 
 <!-- Contact Form Section -->
 <section class="contact-form-section" id="contact-form">
-    <div class="container--narrow">
+    <div class="container container--narrow">
         <div class="contact-form-layout">
             
             <div class="contact-form-intro">
@@ -163,7 +161,7 @@ get_header(); ?>
 
 <!-- Contact Info Section -->
 <section class="contact-info">
-    <div class="container--medium">
+    <div class="container container--medium">
         <div class="contact-info__content">
             <h2 class="contact-info__title">Response Time & Support</h2>
             <div class="contact-info__grid">
