@@ -9,19 +9,19 @@
 get_header(); ?>
 
 <!-- About Hero Section -->
-<section class="about-hero">
-    <div class="about-hero__container">
-        <div class="about-hero__content">
-            <h1 class="about-hero__title">
-                About <span class="text-highlight">LUVEX</span> - Your Independent UV Technology Partners
-            </h1>
-            <h2 class="about-hero__subtitle">
-                Advancing UV technology through knowledge sharing, independent consultation, and customer success
-            </h2>
-            <p class="about-hero__description">
-                Our mission is simple: help you optimize your UV processes through honest guidance, proven expertise, and innovative tools. We believe the best solutions come from understanding your specific challenges and working together to solve them.
-            </p>
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="about-hero__cta">
+<section class="luvex-hero">
+    <div class="luvex-hero__container">
+        <h1 class="luvex-hero__title">
+            About <span class="text-highlight">LUVEX</span> - Your Independent UV Technology Partners
+        </h1>
+        <h2 class="luvex-hero__subtitle">
+            Advancing UV technology through knowledge sharing, independent consultation, and customer success.
+        </h2>
+        <p class="luvex-hero__description">
+            Our mission is simple: help you optimize your UV processes through honest guidance, proven expertise, and innovative tools. We believe the best solutions come from understanding your specific challenges and working together to solve them.
+        </p>
+        <div class="header-cta" style="justify-content: center; margin-top: 2rem;">
+             <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-cta-primary">
                 <i class="fa-solid fa-arrow-right"></i>
                 <span>Start a Conversation</span>
             </a>
