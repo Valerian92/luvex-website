@@ -412,36 +412,36 @@ a:hover {
 /* LUVEX Value Card (wiederverwendbar für Services, Features, etc.) */
 .value-card {
     background: var(--luvex-white);
-    padding: 2rem;
+    padding: 2.5rem 2rem;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
     border-top: 4px solid var(--luvex-bright-cyan);
     transition: var(--transition-normal);
 }
 
-.value-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-}
-
-.value-card__icon {
-    color: var(--luvex-bright-cyan);
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
 .value-card__title {
-    font-size: var(--text-xl);
+    font-size: 1.4rem;
     font-weight: 600;
     color: var(--luvex-dark-blue);
-    margin: 0 0 0.75rem 0;
+    margin: 0 0 1rem 0;
 }
 
 .value-card__description {
-    font-size: var(--text-base);
+    font-size: 1.1rem;
     color: var(--luvex-gray-700);
-    margin: 0;
+    margin: 0 0 1.5rem 0;
     line-height: 1.6;
+}
+
+.knowledge-list li {
+    font-size: 1rem;
+    padding: 0.75rem 0;
+}
+
+.btn--small {
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
 }
 
 /* LUVEX Türkis Card Varianten */

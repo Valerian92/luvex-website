@@ -40,16 +40,16 @@ get_header(); ?>
 <!-- Interactive UV Simulator Showcase -->
 <section class="section">
     <div class="container" style="max-width: 1200px; margin: 0 auto;">
-        <h2 class="text-center mb-2">Interactive UV Knowledge Hub</h2>
+        <h2 class="text-center mb-2">Professional UV Simulation Tools</h2>
         <p class="text-center text-muted mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto;">
-            Experience UV technology through interactive simulations and professional-grade calculators
+            Advanced 3D modeling and dose calculation for precision UV system design
         </p>
         
         <div class="uv-simulator-showcase">
             <div class="simulator-content">
-                <h3>3D UV Simulator</h3>
+                <h3>3D UV System Designer</h3>
                 <p class="simulator-description">
-                    Visualize UV light distribution, calculate optimal doses, and design systems with our cutting-edge simulation tools.
+                    Professional-grade simulation tools for UV system optimization and validation.
                 </p>
                 
                 <div class="simulator-features grid-3">
@@ -64,31 +64,19 @@ get_header(); ?>
                         <p>UV polymerization simulation</p>
                     </div>
                     <div class="simulator-feature">
-                        <i class="fas fa-database"></i>
-                        <h4>Real Templates</h4>
-                        <p>Industry-based configurations</p>
-                    </div>
-                    <div class="simulator-feature">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <h4>Smart Warnings</h4>
-                        <p>Unrealistic parameter alerts</p>
-                    </div>
-                    <div class="simulator-feature">
                         <i class="fas fa-chart-area"></i>
                         <h4>Precise Distribution</h4>
                         <p>Exact intensity mapping</p>
                     </div>
-                    <div class="simulator-feature">
-                        <i class="fas fa-mouse-pointer"></i>
-                        <h4>Intuitive Control</h4>
-                        <p>User-friendly interface</p>
-                    </div>
                 </div>
                 
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="simulator-cta">
-                    <i class="fas fa-play-circle"></i>
-                    <span>Launch Interactive Simulator</span>
-                </a>
+                <div class="simulator-cta-container">
+                    <p class="simulator-connection-text">Connecting UV Experts Worldwide</p>
+                    <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="simulator-cta">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Launch Interactive Simulator</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -197,36 +185,20 @@ get_header(); ?>
 </section>
 
 <!-- Scientific Excellence -->
-<section class="section bg-light">
-    <div class="container" style="max-width: 1200px; text-align: center;">  <!-- ← ZENTRIERT -->
-        <h2 class="text-center mb-2">Scientific Excellence</h2>
+<section class="section section--turquoise-light">
+    <div class="container" style="max-width: 1400px; text-align: center;">
+        <h2 class="text-center mb-2">Evidence-Based UV Expertise</h2>
         <p class="text-center text-muted mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto;">
-            Independent expertise backed by decades of research and real-world application
+            Independent expertise backed by scientific research and real-world validation
         </p>
         
         <div class="grid-4">
             <div class="excellence-stat">
                 <div class="excellence-stat__icon">
-                    <i class="fas fa-university"></i>
+                    <i class="fas fa-microscope"></i>
                 </div>
-                <h4>50+ Publications</h4>
-                <p>Peer-reviewed research in leading journals</p>
-            </div>
-            
-            <div class="excellence-stat">
-                <div class="excellence-stat__icon">
-                    <i class="fas fa-award"></i>
-                </div>
-                <h4>IUVA Recognition</h4>
-                <p>International UV Association awards and leadership</p>
-            </div>
-            
-            <div class="excellence-stat">
-                <div class="excellence-stat__icon">
-                    <i class="fas fa-globe-americas"></i>
-                </div>
-                <h4>Global Projects</h4>
-                <p>Successful implementations across 6 continents</p>
+                <h4>Scientific Validation</h4>
+                <p>Every recommendation backed by peer-reviewed research and testing data</p>
             </div>
             
             <div class="excellence-stat">
@@ -234,7 +206,23 @@ get_header(); ?>
                     <i class="fas fa-balance-scale"></i>
                 </div>
                 <h4>Vendor Neutral</h4>
-                <p>Independent recommendations based on engineering merit</p>
+                <p>Independent analysis free from manufacturer bias or sales pressure</p>
+            </div>
+            
+            <div class="excellence-stat">
+                <div class="excellence-stat__icon">
+                    <i class="fas fa-globe-americas"></i>
+                </div>
+                <h4>Global Network</h4>
+                <p>Collaborative partnerships with UV research institutions worldwide</p>
+            </div>
+            
+            <div class="excellence-stat">
+                <div class="excellence-stat__icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h4>Continuous Learning</h4>
+                <p>Regular UV technology updates and industry knowledge sharing</p>
             </div>
         </div>
     </div>

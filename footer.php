@@ -43,7 +43,7 @@
 					<a href="/booking/" aria-label="Book Consultation" class="social-link">
     					<i class="fa-solid fa-calendar-days"></i>
 					</a>
-					<a href="mailto:contact@luvex.tech" aria-label="Email" class="social-link">
+					<a href="mailto:support@luvex.tech" aria-label="Email" class="social-link">
 						<i class="fas fa-envelope"></i>
 					</a>
 				</div>

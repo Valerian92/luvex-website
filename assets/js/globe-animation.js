@@ -1,4 +1,5 @@
-        document.addEventListener('DOMContentLoaded', () => {
+       
+       document.addEventListener('DOMContentLoaded', () => {
             const container = document.getElementById('globe-container');
             if (!container) return;
 
