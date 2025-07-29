@@ -755,13 +755,6 @@ a:hover {
    Die erben alles von .luvex-hero und überschreiben nur die Höhe.
    Wir fügen sie direkt unter dem .luvex-hero ein.
 */
-.booking-hero,
-.about-hero,
-.contact-hero,
-.auth-hero,
-.profile-hero {
-    /* Erbt alles von .luvex-hero, wir müssen es nur referenzieren, falls wir spezifische Dinge wollen */
-}
 
 /* Spezifische Höhenanpassungen */
 .booking-hero,

@@ -229,7 +229,7 @@ get_header(); ?>
             <div class="team-member">
                 <div class="team-member__layout">
                     <div class="team-member__photo">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team-matthias.jpg" alt="Matthias Slapka - Automation Expert" />
+                        <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Matthias.jpg" alt="Matthias Slaoka - Automation Technology Specialist & CO-Founder" />
                     </div>
                     <div class="team-member__content">
                         <h3>Matthias Slapka</h3>
