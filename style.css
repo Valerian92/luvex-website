@@ -4194,6 +4194,78 @@ a:hover {
     left: 0;
 }
 
+/* --- 6.4 HOMEPAGE SPECIFIC - COMMUNITY SECTION REFINEMENT --- */
+
+.feature-section {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr; /* Gibt dem linken Container mehr Breite */
+    align-items: stretch; /* <-- Sorgt für gleiche Höhe */
+    gap: 3rem;
+}
+
+.feature-section .feature-text-content,
+.feature-section .feature-image-content {
+    min-width: 0; /* Setzt alte min-width zurück */
+}
+
+/* Linker Text-Container */
+.community-text-container {
+    display: flex;
+    flex-direction: column; /* Richtet Inhalt vertikal aus */
+    justify-content: center; /* Zentriert den gesamten Inhalt vertikal */
+    height: 100%; /* Wichtig für flex-direction: column */
+    padding: 2.5rem 3rem; /* Mehr seitlicher Abstand */
+}
+
+.community-text-container h2 {
+    text-align: left;
+}
+.community-text-container p {
+    text-align: left;
+}
+
+/* Verbesserte Liste, linksbündig */
+.feature-list--structured {
+    margin: 2rem 0;
+}
+
+.feature-list--structured .feature-list__text strong {
+    margin-bottom: 0.1rem; /* Reduziert Abstand für kompaktere Optik */
+    color: var(--luvex-dark-blue);
+}
+
+/* Button-Container & Buttons */
+.community-cta-container {
+    justify-content: center; /* Zentriert die Buttons im Container */
+    margin-top: auto; /* Schiebt die Buttons nach unten */
+    padding-top: 1.5rem; /* Abstand nach oben */
+}
+
+.community-cta-container .luvex-cta-secondary {
+    border-width: 2px;
+    background-color: transparent;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.community-cta-container .luvex-cta-secondary:hover {
+    background-color: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    border-color: var(--luvex-bright-cyan);
+}
+
+/* Responsivität für die neue Struktur */
+@media (max-width: 992px) {
+    .feature-section {
+        grid-template-columns: 1fr; /* Untereinander auf Tablets */
+    }
+    
+    .community-text-container h2,
+    .community-text-container p {
+        text-align: center; /* Text zentrieren auf Tablets/Mobil */
+    }
+}
+
+
 
 /* Responsive */
 @media (max-width: 768px) {
