@@ -115,10 +115,10 @@ get_header(); ?>
                     Master the physics and engineering principles behind UV technology. From wavelength spectrum to dose calculations.
                 </p>
                 <ul class="knowledge-list">
-                    <li><i class="fas fa-wave-square"></i>Wavelength spectrum and applications</li>
-                    <li><i class="fas fa-calculator"></i>Dose calculations and Beer-Lambert law</li>
-                    <li><i class="fas fa-eye"></i>UV measurement and validation</li>
-                    <li><i class="fas fa-shield-alt"></i>Safety standards and protocols</li>
+                    <li><i class="fas fa-wave-square"></i> Wavelength spectrum and applications</li>
+                    <li><i class="fas fa-calculator"></i> Dose calculations and Beer-Lambert law</li>
+                    <li><i class="fas fa-eye"></i> UV measurement and validation</li>
+                    <li><i class="fas fa-shield-alt"></i> Safety standards and protocols</li>
                 </ul>
                 <a href="#" class="btn btn--primary btn--small">Explore UV Science</a>
             </div>
@@ -132,10 +132,10 @@ get_header(); ?>
                     Compare conventional mercury and cutting-edge LED UV systems with objective analysis.
                 </p>
                 <ul class="knowledge-list">
-                    <li><i class="fas fa-balance-scale"></i>Objective technology comparison</li>
-                    <li><i class="fas fa-chart-line"></i>Performance and efficiency analysis</li>
-                    <li><i class="fas fa-dollar-sign"></i>Total cost of ownership models</li>
-                    <li><i class="fas fa-route"></i>Technology selection guidance</li>
+                    <li><i class="fas fa-balance-scale"></i> Objective technology comparison</li>
+                    <li><i class="fas fa-chart-line"></i> Performance and efficiency analysis</li>
+                    <li><i class="fas fa-dollar-sign"></i> Total cost of ownership models</li>
+                    <li><i class="fas fa-route"></i> Technology selection guidance</li>
                 </ul>
                 <a href="#" class="btn btn--primary btn--small">Compare Technologies</a>
             </div>
@@ -149,10 +149,10 @@ get_header(); ?>
                     Discover UV solutions across industries and applications from water to air treatment.
                 </p>
                 <ul class="knowledge-list">
-                    <li><i class="fas fa-water"></i>Water disinfection systems</li>
-                    <li><i class="fas fa-wind"></i>Air treatment and HVAC integration</li>
-                    <li><i class="fas fa-hand-sparkles"></i>Surface sterilization solutions</li>
-                    <li><i class="fas fa-bolt"></i>UV curing and polymerization</li>
+                    <li><i class="fas fa-water"></i> Water disinfection systems</li>
+                    <li><i class="fas fa-wind"></i> Air treatment and HVAC integration</li>
+                    <li><i class="fas fa-hand-sparkles"></i> Surface sterilization solutions</li>
+                    <li><i class="fas fa-bolt"></i> UV curing and polymerization</li>
                 </ul>
                 <a href="#" class="btn btn--primary btn--small">Explore Applications</a>
             </div>
