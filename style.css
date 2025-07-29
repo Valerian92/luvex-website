@@ -776,6 +776,7 @@ a:hover {
     }
 }
 
+
 /* Main Navigation */
 .main-navigation {
     display: flex;
@@ -787,7 +788,66 @@ a:hover {
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 6rem; /* von 4rem auf 6rem */
+    gap: 3rem;
+    position: relative;
+}
+
+/* Dropdown Container */
+.main-navigation .sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--luvex-dark-blue);
+    min-width: 220px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: 1rem 0;
+    flex-direction: column;
+    gap: 0;
+}
+
+.main-navigation .menu-item:hover .sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.main-navigation .sub-menu li {
+    width: 100%;
+}
+
+.main-navigation .sub-menu a {
+    padding: 0.75rem 1.5rem;
+    display: block;
+    font-size: var(--text-sm);
+    border-bottom: 1px solid rgba(109, 213, 237, 0.1);
+    transition: all 0.3s ease;
+}
+
+.main-navigation .sub-menu a:hover {
+    background: rgba(109, 213, 237, 0.1);
+    padding-left: 2rem;
+}
+
+.main-navigation .sub-menu li:last-child a {
+    border-bottom: none;
+}
+
+/* Dropdown Arrow */
+.main-navigation .menu-item-has-children > a::after {
+    content: '▼';
+    font-size: 0.7rem;
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.main-navigation .menu-item-has-children:hover > a::after {
+    transform: rotate(180deg);
 }
 
 .main-navigation a {
@@ -823,6 +883,30 @@ a:hover {
 .main-navigation a:hover::after {
     width: 100%;
 }
+
+
+/* Mobile Dropdown Support */
+@media (max-width: 768px) {
+    .main-navigation .sub-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        background: rgba(255, 255, 255, 0.1);
+        margin-top: 0.5rem;
+        padding: 0.5rem 0;
+        display: none;
+    }
+    
+    .main-navigation .menu-item-has-children.mobile-open .sub-menu {
+        display: flex;
+    }
+    
+    .main-navigation .menu-item-has-children > a {
+        cursor: pointer;
+    }
+}
+
 
 /* --- 4.7 RESPONSIVE für UI Components --- */
 @media (max-width: 768px) {

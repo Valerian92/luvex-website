@@ -26,6 +26,7 @@ function luvex_enqueue_assets() {
     wp_enqueue_script( 'luvex-footer-effect', get_stylesheet_directory_uri() . '/assets/js/footer-light-effect.js', array(), '1.0.0', true );
     wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), '128', false);
     wp_enqueue_script('luvex-globe', get_template_directory_uri() . '/assets/js/globe-animation.js', array('three-js'), '1.0.0', true);
+    wp_enqueue_script('luvex-mobile-menu', get_template_directory_uri() . '/assets/js/mobile-menu.js', array('jquery'), '1.0.0', true);
 }
 
 // === NAVIGATION WALKER (Ihre Icons) ===
