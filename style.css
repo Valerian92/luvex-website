@@ -136,22 +136,22 @@ a:hover {
 
 /* Container System */
 .container {
-    max-width: none; /* Volle Breite als Standard */
+    max-width: none;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 3rem;
     width: 100%;
 }
 
 .container--narrow {
-    max-width: 1200px;
-}
-
-.container--medium {
     max-width: 1400px;
 }
 
-.container--wide {
+.container--medium {
     max-width: 1600px;
+}
+
+.container--wide {
+    max-width: 1800px;
 }
 
 
@@ -865,13 +865,9 @@ a:hover {
     padding: 4rem 0 2rem;
     position: relative;
     overflow: hidden;
-    /* ← NEUE Full-Width Technik: */
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
     width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
 }
 
 /* Subtle background pattern */
@@ -898,13 +894,13 @@ a:hover {
 .footer-content-grid {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-    gap: 4rem;
+    gap: 6rem;
     margin-bottom: 3rem;
     position: relative;
     z-index: 2;
-    max-width: 1600px;
+    max-width: 1800px;
     margin: 0 auto 3rem auto;
-    padding: 0 2rem;
+    padding: 0 3rem;
 }
 
 /* Company Section */
@@ -3628,11 +3624,24 @@ a:hover {
 
 .simulator-features {
     margin: 3rem 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 900px;
+    margin: 3rem auto;
 }
 
 .simulator-feature {
     text-align: center;
-    padding: 1rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+    transition: var(--transition-normal);
+}
+
+.simulator-feature:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
 }
 
 .simulator-feature i {
@@ -3880,9 +3889,23 @@ a:hover {
 /* --- 6.4 HOMEPAGE GRID FIXES --- */
 
 /* UV Knowledge Navigator - force horizontal layout */
-.grid-3.knowledge-navigator {
+.section--turquoise-light .grid-3.knowledge-navigator {
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    align-items: stretch;
 }
+
+.knowledge-navigator .value-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.knowledge-navigator .value-card__description {
+    flex-grow: 1;
+}
+
 
 /* Simulator Features - ensure grid display */
 .simulator-features.grid-4 {
