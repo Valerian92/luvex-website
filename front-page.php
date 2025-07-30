@@ -160,64 +160,68 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- Global UV Expert Community -->
-<section class="section">
-    <div class="container" style="max-width: 1200px; text-align: center;">  <!-- ← ZENTRIERT -->
-        <h2 class="text-center mb-2">Global UV Expert Community</h2>
-        <p class="text-center text-muted mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto;">
-            Connect with UV professionals worldwide and access cutting-edge knowledge resources
-        </p>
+<!-- ========================================================================= -->
+<!-- NEUE GLOBAL UV EXPERT COMMUNITY SEKTION (START)                           -->
+<!-- Dieses Snippet ersetzt die alte Community-Sektion auf der Startseite.     -->
+<!-- ========================================================================= -->
+<section class="homepage-community-section">
+    <div class="homepage-community-container">
         
-        <div class="feature-section">
-           <div class="feature-text-content">
-          <div class="community-text-container">
-                    <h2>Building the Global UV Network</h2>
-                    <p>Join thousands of UV professionals from around the world in advancing technology, sharing knowledge, and solving complex engineering challenges together.</p>
-                    <ul class="feature-list feature-list--structured">
-                        <li>
-                            <i class="fas fa-check-circle"></i>
-                            <div class="feature-list__text">
-                                <strong>Expert Sessions:</strong> Monthly webinars with industry leaders
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fas fa-check-circle"></i>
-                            <div class="feature-list__text">
-                                <strong>Knowledge Exchange:</strong> Technical forums and case study sharing
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fas fa-check-circle"></i>
-                            <div class="feature-list__text">
-                                <strong>Resource Library:</strong> Free access to calculation tools and guides
-                            </div>
-                        </li>
-                         <li>
-                            <i class="fas fa-check-circle"></i>
-                            <div class="feature-list__text">
-                                <strong>Global Network:</strong> Connect with experts across 6 continents
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="community-cta-container">
-                        <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-cta-primary">
-                            Join Community
-                        </a>
-                        <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="luvex-cta-secondary">
-                            Learn About Us
-                        </a>
+        <!-- Linke Spalte: Textinhalte -->
+        <div class="homepage-community-content">
+            <h2 class="homepage-community-title">Building the Global UV Network</h2>
+            <p class="homepage-community-description">
+                Join thousands of UV professionals from around the world in advancing technology, sharing knowledge, and solving complex engineering challenges together.
+            </p>
+
+            <ul class="homepage-community-features">
+                <li>
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    <div>
+                        <strong>Expert Sessions:</strong> Monthly webinars with industry leaders
                     </div>
-                </div>
-            </div>
-            <div class="feature-image-content">
-                <div class="global-network-visual" id="globe-container">
-                    <div class="globe-title">Global UV Community Network</div>
-                    <div class="globe-subtitle">Connecting UV Experts Worldwide</div>
-                </div>
+                </li>
+                <li>
+                    <i class="fa-solid fa-comments"></i>
+                    <div>
+                        <strong>Knowledge Exchange:</strong> Technical forums and case study sharing
+                    </div>
+                </li>
+                <li>
+                    <i class="fa-solid fa-people-group"></i>
+                    <div>
+                        <strong>Global Network:</strong> Connect with experts across 6 continents
+                    </div>
+                </li>
+                <li>
+                    <i class="fa-solid fa-book-open"></i>
+                    <div>
+                        <strong>Resource Library:</strong> Free access to calculation tools and guides
+                    </div>
+                </li>
+            </ul>
+
+            <div class="homepage-community-actions">
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'login' ) ) ); ?>" class="luvex-cta-primary">Join Community</a>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="luvex-cta-secondary">Learn About Us</a>
             </div>
         </div>
+
+        <!-- Rechte Spalte: Globus Animation -->
+        <div class="homepage-community-visual">
+            <div id="globe-container" class="homepage-community-globe-wrapper">
+                <!-- Die Three.js Animation wird hier von globe-animation.js geladen -->
+            </div>
+            <div class="homepage-community-glow"></div>
+        </div>
+
     </div>
 </section>
+<!-- ========================================================================= -->
+<!-- NEUE GLOBAL UV EXPERT COMMUNITY SEKTION (ENDE)                            -->
+<!-- ========================================================================= -->
+
+
 
 <!-- Scientific Excellence -->
 <section class="section section--turquoise-light">
