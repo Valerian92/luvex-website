@@ -9,19 +9,19 @@
 get_header(); ?>
 
 <!-- About Hero Section -->
-<section class="about-hero">
-    <div class="about-hero__container">
-        <div class="about-hero__content">
-            <h1 class="about-hero__title">
-                About <span class="text-highlight">LUVEX</span> - Your Independent UV Technology Partners
-            </h1>
-            <h2 class="about-hero__subtitle">
-                Advancing UV technology through knowledge sharing, independent consultation, and customer success
-            </h2>
-            <p class="about-hero__description">
-                Our mission is simple: help you optimize your UV processes through honest guidance, proven expertise, and innovative tools. We believe the best solutions come from understanding your specific challenges and working together to solve them.
-            </p>
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="about-hero__cta">
+<section class="luvex-hero">
+    <div class="luvex-hero__container">
+        <h1 class="luvex-hero__title">
+            About <span class="text-highlight">LUVEX</span> - Your Independent UV Technology Partners
+        </h1>
+        <h2 class="luvex-hero__subtitle">
+            Advancing UV technology through knowledge sharing, independent consultation, and customer success.
+        </h2>
+        <p class="luvex-hero__description">
+            Our mission is simple: help you optimize your UV processes through honest guidance, proven expertise, and innovative tools. We believe the best solutions come from understanding your specific challenges and working together to solve them.
+        </p>
+        <div class="header-cta" style="justify-content: center; margin-top: 2rem;">
+             <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-cta-primary">
                 <i class="fa-solid fa-arrow-right"></i>
                 <span>Start a Conversation</span>
             </a>
@@ -165,14 +165,14 @@ get_header(); ?>
 <!-- Team Section -->
 <section class="team-section">
     <div class="team-section__container">
-        <div class="team-section__header">
+            <div class="team-section__header">
             <h2 class="team-section__title">Meet Your UV Technology Team</h2>
             <p class="team-section__description">
                 Meet the experts behind LUVEX - real experience, genuine passion for UV technology advancement
             </p>
-        </div>
+            </div>
         
-        <div class="team-section__grid">
+        <div class="team-section__grid grid grid-2">
             <!-- Team Member 1 -->
             <div class="team-member">
                 <div class="team-member__layout">
@@ -229,7 +229,7 @@ get_header(); ?>
             <div class="team-member">
                 <div class="team-member__layout">
                     <div class="team-member__photo">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team-matthias.jpg" alt="Matthias Slapka - Automation Expert" />
+                        <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Matthias.jpg" alt="Matthias Slaoka - Automation Technology Specialist & CO-Founder" />
                     </div>
                     <div class="team-member__content">
                         <h3>Matthias Slapka</h3>

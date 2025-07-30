@@ -1,22 +1,29 @@
 /*
-Theme Name: Luvex Theme
-Template: astra  
-Version: 2.0.0
-*/
-/*
-LUVEX THEME v2.0 - SYSTEMATIC CSS ARCHITECTURE
+LUVEX THEME v2.1 - REFACTORED CSS ARCHITECTURE
 ==============================================================================
 
 Quick Navigation (Ctrl+F):
 1. DESIGN TOKENS
 2. BASE STYLES
-3. LAYOUT SYSTEM  
+3. LAYOUT SYSTEM
 4. UI COMPONENTS
+   4.1 LUVEX BRAND TOKENS
+   4.2 BUTTON SYSTEM
+   4.3 CARD SYSTEM
+   4.4 TEAM MEMBER CARD
+   4.5 HERO SYSTEM (Refactored)
+   4.6 NAVIGATION SYSTEM
+   4.7 FOOTER SYSTEM
+   4.8 FORM SYSTEM
+   4.9 MODAL SYSTEM
+   4.10 LOADING SYSTEM
 5. UTILITIES
 6. PAGE-SPECIFIC
+7. RESPONSIVE
+8. ANIMATIONS
 
-Last Update: 2025-01-23
-Creator: Claude + Human Collaboration
+Last Update: 2025-07-29
+Creator: Gemini + Human Collaboration
 ==============================================================================
 */
 
@@ -343,87 +350,6 @@ a:hover {
 }
 
 
-/* CTA Section Styling */
-.cta-section {
-    text-align: center;
-    background: var(--luvex-white);
-    padding: 4rem 2rem;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    margin: 0 auto;
-    max-width: 800px;
-}
-
-.cta-section h3 {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    font-weight: 600;
-    color: var(--luvex-dark-blue);
-    margin: 0 0 1rem 0;
-    line-height: 1.2;
-}
-
-.cta-section p {
-    font-size: var(--text-lg);
-    color: var(--luvex-gray-700);
-    margin: 0 0 2.5rem 0;
-    line-height: 1.6;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.cta-section .cta-button {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-xs);
-    padding: 14px 28px;
-    margin: 0 0.75rem;
-    border-radius: var(--radius-md);
-    text-decoration: none;
-    font-weight: 600;
-    transition: var(--transition-normal);
-    font-size: var(--text-base);
-}
-
-.cta-section .cta-button:first-of-type {
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
-}
-
-.cta-section .cta-button:first-of-type:hover {
-    background: #5ac7e0;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(109, 213, 237, 0.4);
-    color: var(--luvex-dark-blue);
-}
-
-.cta-section .cta-button:last-of-type {
-    background: transparent;
-    color: var(--luvex-bright-cyan);
-    border: 2px solid var(--luvex-bright-cyan);
-}
-
-.cta-section .cta-button:last-of-type:hover {
-    background: rgba(109, 213, 237, 0.1);
-    color: var(--luvex-bright-cyan);
-}
-
-@media (max-width: 768px) {
-    .cta-section {
-        padding: 3rem 1.5rem;
-    }
-    
-    .cta-section .cta-button {
-        display: block;
-        margin: 0 0 1rem 0;
-        width: 100%;
-        max-width: 280px;
-        margin-left: auto;
-        margin-right: auto;
-        justify-content: center;
-    }
-}
-
 
 /* --- 4.3 CARD SYSTEM --- */
 
@@ -677,17 +603,27 @@ a:hover {
 }
 
 /* LUVEX Hero (wiederverwendbar für dark heroes) */
+/* .luvex-hero ist jetzt unsere zentrale Basis-Klasse */
 .luvex-hero {
     background: var(--luvex-dark-blue);
     position: relative;
     overflow: hidden;
-    padding: calc(72px + 4rem) 0 4rem;
+    padding: calc(72px + 4rem) 2rem 4rem; /* 72px für den fixierten Header */
     min-height: 500px;
     display: flex;
     align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--luvex-white);
 }
 
-.luvex-hero::before {
+/* Das Grid-Muster, das alle dunklen Heroes teilen könnten */
+.luvex-hero::before,
+.booking-hero::before,
+.about-hero::before,
+.contact-hero::before,
+.auth-hero::before,
+.profile-hero::before {
     content: '';
     position: absolute;
     top: 0;
@@ -697,25 +633,19 @@ a:hover {
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
     opacity: 0.3;
     pointer-events: none;
+    z-index: 1;
 }
 
-.luvex-hero__container {
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0 var(--space-md);
+.luvex-hero__container { /* Wiederverwendbarer Container für den Inhalt */
     position: relative;
     z-index: 2;
-}
-
-.luvex-hero__content {
     max-width: 900px;
-    text-align: center;
 }
 
-.luvex-hero__title {
+.luvex-hero__title { /* Wiederverwendbarer Titel */
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 600;
-    color: var(--luvex-white);
+    color: inherit;
     margin: 0 0 1.5rem 0;
     line-height: 1.1;
 }
@@ -724,7 +654,7 @@ a:hover {
     color: var(--luvex-bright-cyan);
 }
 
-.luvex-hero__subtitle {
+.luvex-hero__subtitle { /* Wiederverwendbarer Untertitel */
     font-size: clamp(1.2rem, 2.5vw, 1.5rem);
     font-weight: 500;
     color: #e9ecef;
@@ -732,35 +662,30 @@ a:hover {
     line-height: 1.4;
 }
 
-.luvex-hero__description {
+.luvex-hero__description { /* Wiederverwendbare Beschreibung */
     font-size: var(--text-lg);
     color: #ced4da;
-    margin: 0 0 2rem 0;
+    margin: 0 auto 2rem auto;
     line-height: 1.6;
     max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-.luvex-hero__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-xs);
-    padding: 12px 24px;
-    background: var(--luvex-vibrant-blue);
-    color: var(--luvex-white);
-    border-radius: var(--radius-md);
-    text-decoration: none;
-    font-weight: 500;
-    transition: var(--transition-normal);
+/* Jetzt die kleinen Modifikatoren.
+   Die erben alles von .luvex-hero und überschreiben nur die Höhe.
+   Wir fügen sie direkt unter dem .luvex-hero ein.
+*/
+
+/* Spezifische Höhenanpassungen */
+.booking-hero,
+.contact-hero,
+.auth-hero {
+    min-height: 400px;
 }
 
-.luvex-hero__cta:hover {
-    background: #0056b3;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
-    color: var(--luvex-white);
+.profile-hero {
+    min-height: 350px;
 }
+
 
 /* --- 4.6 NAVIGATION SYSTEM --- */
 
@@ -2741,6 +2666,95 @@ a:hover {
 
 /* --- 4.15 END --- */
 
+
+/* --- 4.16 CTA SYSTEM --- */
+/* Call-to-Action sections for landing pages and conversion points */
+/* Components: .cta-section, .cta-button, .cta-section__title */
+
+/* CTA Section Styling */
+.cta-section {
+    text-align: center;
+    background: var(--luvex-white);
+    padding: 4rem 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.cta-section h3 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--luvex-dark-blue);
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+}
+
+.cta-section p {
+    font-size: var(--text-lg);
+    color: var(--luvex-gray-700);
+    margin: 0 0 2.5rem 0;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-section .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 14px 28px;
+    margin: 0 0.75rem;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-normal);
+    font-size: var(--text-base);
+}
+
+.cta-section .cta-button:first-of-type {
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+}
+
+.cta-section .cta-button:first-of-type:hover {
+    background: #5ac7e0;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(109, 213, 237, 0.4);
+    color: var(--luvex-dark-blue);
+}
+
+.cta-section .cta-button:last-of-type {
+    background: transparent;
+    color: var(--luvex-bright-cyan);
+    border: 2px solid var(--luvex-bright-cyan);
+}
+
+.cta-section .cta-button:last-of-type:hover {
+    background: rgba(109, 213, 237, 0.1);
+    color: var(--luvex-bright-cyan);
+}
+
+@media (max-width: 768px) {
+    .cta-section {
+        padding: 3rem 1.5rem;
+    }
+    
+    .cta-section .cta-button {
+        display: block;
+        margin: 0 0 1rem 0;
+        width: 100%;
+        max-width: 280px;
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center;
+    }
+}
+
+/* --- 4.16 END --- */
+
+
 /* 4. END UI COMPONENTS ===================================================== */
 
 /* 5. UTILITIES ===================================================== */
@@ -2785,9 +2799,14 @@ a:hover {
 .inline-block { display: inline-block; }
 .flex-utility { display: flex; }
 
-/* 6. PAGE-SPECIFIC ================================================= */
 
-/* Homepage Specific */
+/* ============================================================================ */
+/* 6. PAGE-SPECIFIC COMPONENTS                                                 */
+/* ============================================================================ */
+
+/* 6.1 /* Homepage Specific */
+
+
 .home-hero {
     background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
     color: var(--color-white);
@@ -2812,9 +2831,8 @@ a:hover {
     box-shadow: var(--shadow-md);
 }
 
-/* ============================================================================ */
-/* 6. PAGE-SPECIFIC COMPONENTS                                                 */
-/* ============================================================================ */
+
+
 
 /* --- 6.2 ABOUT PAGE SPECIFIC --- */
 
@@ -4129,54 +4147,209 @@ a:hover {
     }
 }
 
+/* --- 6.4 HOMEPAGE SPECIFIC - COMMUNITY SECTION UNIFIED --- */
 
+.community-section {
+    padding: var(--space-xl) 0;
+    background: var(--luvex-gray-100);
+}
+
+.community-section h2 {
+    color: var(--luvex-dark-blue);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.community-section p {
+    color: var(--luvex-gray-700);
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+/* Der große einheitliche Container */
+.feature-section {
+    background: var(--luvex-dark-blue);
+    border-radius: var(--radius-xl);
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 4rem;
+    align-items: stretch;
+    min-height: 450px;
+}
+
+/* Subtiles Grid-Pattern */
+.feature-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="community-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23community-grid)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* Linker Text-Bereich */
+.feature-text-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+.feature-text-content h2 {
+    color: var(--luvex-white);
+    text-align: left;
+    margin-bottom: 1.5rem;
+    font-size: clamp(1.8rem, 3vw, 2.2rem);
+}
+
+.feature-text-content p {
+    color: #cbd5e1;
+    text-align: left;
+    margin-bottom: 2rem;
+    font-size: var(--text-lg);
+    line-height: 1.6;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+}
+
+.feature-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    color: #e9ecef;
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+.feature-list li i {
+    color: var(--luvex-bright-cyan);
+    margin-top: 0.125rem;
+    flex-shrink: 0;
+    font-size: 1.1rem;
+}
+
+.feature-list li strong {
+    color: var(--luvex-white);
+}
+
+/* Button Container */
+.feature-text-content > div:last-child {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-top: auto;
+    padding-top: 1.5rem;
+}
+
+/* Rechter Animation-Bereich */
+.feature-image-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.global-network-visual {
+    width: 100%;
+    height: 100%;
+    min-height: 350px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: rgba(109, 213, 237, 0.1);
+    border: 1px solid rgba(109, 213, 237, 0.2);
+}
+
+.global-network-visual i {
+    font-size: 4rem;
+    color: var(--luvex-bright-cyan);
+    margin-bottom: 1rem;
+    animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.network-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--luvex-white);
+    margin: 0.5rem 0 0 0;
+    text-align: center;
+}
+
+.network-dots {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.network-dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: var(--luvex-bright-cyan);
+    border-radius: 50%;
+    animation: pulse-dot 2s infinite;
+}
+
+.network-dot:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
+.network-dot:nth-child(2) { top: 30%; right: 25%; animation-delay: 0.5s; }
+.network-dot:nth-child(3) { bottom: 25%; left: 30%; animation-delay: 1s; }
+.network-dot:nth-child(4) { bottom: 20%; right: 20%; animation-delay: 1.5s; }
 
 /* Responsive */
-@media (max-width: 768px) {
-    .uv-simulator-showcase {
-        padding: 2.5rem 1.5rem;
-        margin: 2rem -1rem;
-    }
-    
-    .simulator-content h3 {
-        font-size: 2rem;
-    }
-    
-    .simulator-features {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
-    
+@media (max-width: 1024px) {
     .feature-section {
-        flex-direction: column;
-        gap: 2rem;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 2.5rem;
     }
     
-    .excellence-stat {
-        padding: 1.5rem 0.5rem;
+    .feature-text-content h2,
+    .feature-text-content p {
+        text-align: center;
     }
     
-    .excellence-stat__icon {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .excellence-stat__icon i {
-        font-size: 2rem;
+    .feature-text-content > div:last-child {
+        justify-content: center;
     }
     
     .global-network-visual {
-        height: 250px;
+        max-width: 500px;
+        margin: 0 auto;
     }
 }
 
-@media (max-width: 480px) {
-    .simulator-features {
-        grid-template-columns: 1fr;
+@media (max-width: 768px) {
+    .feature-section {
+        padding: 2rem;
     }
     
-    .knowledge-list li {
-        font-size: var(--text-xs);
+    .feature-text-content > div:last-child {
+        flex-direction: column;
+        align-items: center;
+        max-width: 280px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
@@ -4537,6 +4710,19 @@ a:hover {
     
     .contact-info__grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* --- Kontaktformular Layout-Anpassung --- */
+.contact-form-container {
+    max-width: 800px; /* Breite erhöhen */
+    margin: 0 auto; /* Sicherstellen, dass der Container selbst zentriert ist */
+    padding: 3rem; /* Etwas mehr Innenabstand */
+}
+
+@media (max-width: 768px) {
+    .contact-form-container {
+        padding: 2rem 1.5rem; /* Padding für Mobilgeräte anpassen */
     }
 }
 
@@ -4906,6 +5092,28 @@ a:hover {
     .quick-actions-grid {
         grid-template-columns: 1fr;
     }
+}
+
+
+/* ============================================================= */
+/* FIX: Profile Page Layout & Proportion Correction              */
+/* ============================================================= */
+
+/* Begrenzt die Gesamtbreite des Dashboards für eine bessere Optik */
+.profile-dashboard .container {
+    max-width: 1200px; 
+}
+
+/* Passt das Spaltenverhältnis für eine bessere Balance an */
+.profile-layout {
+    grid-template-columns: 280px 1fr; /* Gibt der Navi links etwas mehr Luft */
+    gap: 2.5rem; /* Verringert den Abstand leicht */
+}
+
+/* Bonus: Macht die linke Navigation "sticky", sodass sie beim Scrollen mitläuft */
+.profile-nav {
+    position: sticky;
+    top: 100px; /* Höhe des Headers (72px) + etwas Abstand */
 }
 
 /* 6.6 END ===================================================== */

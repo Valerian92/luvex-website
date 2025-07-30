@@ -16,21 +16,19 @@ $current_user = wp_get_current_user();
 
 get_header(); ?>
 
-<section class="profile-hero">
-    <div class="profile-hero__container container--narrow">
-        <div class="profile-hero__content">
-            <h1 class="profile-hero__title">
-                Welcome, <span class="text-highlight"><?php echo esc_html($current_user->first_name ?: $current_user->display_name); ?></span>
-            </h1>
-            <p class="profile-hero__description">
-                Manage your LUVEX account, simulator settings, and community preferences.
-            </p>
-        </div>
+<<section class="luvex-hero">
+    <div class="luvex-hero__container">
+        <h1 class="luvex-hero__title">
+            Welcome, <span class="text-highlight"><?php echo esc_html($current_user->first_name ?: $current_user->display_name); ?></span>
+        </h1>
+        <p class="luvex-hero__description">
+            Manage your LUVEX account, simulator settings, and community preferences.
+        </p>
     </div>
 </section>
 
 <section class="profile-dashboard">
-    <div class="container--narrow">
+    <div class="container container--narrow">
         <div class="profile-layout">
             
             <!-- Profile Navigation -->

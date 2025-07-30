@@ -18,17 +18,18 @@ function luvex_theme_setup() {
 // === CSS/JS EINBINDEN ===
 add_action('wp_enqueue_scripts', 'luvex_enqueue_assets');
 function luvex_enqueue_assets() {
-    wp_enqueue_style('luvex-style', get_stylesheet_uri(), array(), '1.0.0');
+    wp_enqueue_style('luvex-style', get_stylesheet_uri(), array(), '2.0.2'); // Version erhöht
     wp_enqueue_style('luvex-fonts', 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
     wp_enqueue_style('fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
-    wp_enqueue_script( 'luvex-footer-effect', get_stylesheet_directory_uri() . '/assets/js/footer-light-effect.js', array(), '1.0.0', true );
-    wp_enqueue_script('luvex-mobile-menu', get_template_directory_uri() . '/assets/js/mobile-menu.js', array('jquery'), '1.0.0', true);
-
-
-    wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), '128', false);
-    wp_enqueue_script('luvex-globe', get_template_directory_uri() . '/assets/js/globe-animation.js', array('three-js'), '1.0.0', true);
-    wp_enqueue_script('luvex-modal', get_template_directory_uri() . '/assets/js/modal.js', array('jquery'), '1.0.0', true);
-   
+    
+    // Alle lokalen Skripte müssen get_stylesheet_directory_uri() verwenden
+    wp_enqueue_script( 'luvex-footer-effect', get_stylesheet_directory_uri() . '/assets/js/footer-light-effect.js', array(), '1.0.1', true );
+    wp_enqueue_script('luvex-mobile-menu', get_stylesheet_directory_uri() . '/assets/js/mobile-menu.js', array('jquery'), '1.0.2', true);
+    wp_enqueue_script('luvex-modal', get_stylesheet_directory_uri() . '/assets/js/modal.js', array('jquery'), '1.0.2', true);
+    
+    // Globus-Animation
+    wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), '128', true);
+    wp_enqueue_script('luvex-globe', get_stylesheet_directory_uri() . '/assets/js/globe-animation.js', array('three-js'), '1.0.2', true);
 }
 
 // === NAVIGATION WALKER (Ihre Icons) ===
