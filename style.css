@@ -799,7 +799,7 @@ a:hover {
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 4rem;
+    gap: 2rem; /* ← REDUZIERT von 4rem */
     position: relative;
 }
 
@@ -905,70 +905,6 @@ a:hover {
 
 
 
-/* ============================================================================ */
-/* 4.7 FOOTER SYSTEM (MODIFIZIERT)                                            */
-/* ============================================================================ */
-
-.modern-footer {
-    background: var(--luvex-dark-blue);
-    color: var(--luvex-white);
-    padding: 4rem 0 2rem;
-    position: relative;
-    overflow: hidden;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-}
-
-/* Hinzugefügtes/ausgetauschtes Hintergrundmuster für den Footer */
-.modern-footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="footer-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.08)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23footer-grid)"/></svg>');
-    opacity: 0.2; /* Etwas dezenter für den Footer */
-    pointer-events: none;
-    z-index: 1; /* Stellt sicher, dass es hinter dem Inhalt liegt */
-}
-
-
-
-/* --- 4.7 RESPONSIVE für UI Components --- */
-@media (max-width: 768px) {
-    .team-member__layout {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 1rem;
-    }
-    
-    .team-member__photo {
-        margin: 0 auto;
-    }
-    
-    .team-member__tags {
-        justify-content: center;
-    }
-    
-    .btn {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .card {
-        padding: var(--space-sm);
-    }
-    
-    .card__icon {
-        width: 50px;
-        height: 50px;
-        font-size: var(--text-xl);
-    }
-}
-/* --- 4.7 END --- */
-
 
 
 /* --- 4.8 FOOTER SYSTEM --- */
@@ -992,10 +928,10 @@ a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: 
-        repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(109, 213, 237, 0.02) 40px, rgba(109, 213, 237, 0.02) 41px),
-        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(109, 213, 237, 0.02) 40px, rgba(109, 213, 237, 0.02) 41px);
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="footer-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.08)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23footer-grid)"/></svg>');
+    opacity: 0.2;
     pointer-events: none;
+    z-index: 1;
 }
 
 /* Footer Container - Full Width System */
@@ -4271,12 +4207,13 @@ a:hover {
 /* Wrapper für den Globus - MIT DEBUG-HINTERGRUND */
 #globe-container.homepage-community-globe-wrapper {
     width: 100%;
-    height: 100%;
+    height: 450px;
     max-width: 450px;
-    max-height: 450px;
     position: relative;
     z-index: 3;
-    /* background: rgba(255, 0, 0, 0.2); */ /* <-- DEBUG: Entfernen Sie diese Zeile, wenn die Animation funktioniert */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* "Glow"-Effekt um die Kugel */
@@ -4289,6 +4226,11 @@ a:hover {
     z-index: 1;
     pointer-events: none;
     animation: pulse-glow 5s ease-in-out infinite;
+}
+
+.homepage-community-visual canvas {
+    max-width: 100% !important;
+    height: auto !important;
 }
 
 /* Responsive Anpassungen */
@@ -5115,7 +5057,9 @@ a:hover {
 .legal-content {
     max-width: 800px;
     margin: 0 auto;
+    padding: 0 var(--space-md); /* ← FEHLTE */
 }
+
 
 .legal-section {
     margin-bottom: 3rem;
