@@ -818,25 +818,6 @@ a:hover {
     position: relative;
 }
 
-.main-navigation .sub-menu {
-    position: absolute;
-    top: calc(100% + 10px);
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--luvex-dark-blue);
-    min-width: 220px;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 1000;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-lg);
-    padding: 1rem 0;
-    flex-direction: column;
-    gap: 0;
-    border: 1px solid rgba(109, 213, 237, 0.3);
-}
-
 .main-navigation .menu-item:hover .sub-menu {
     opacity: 1;
     visibility: visible;
@@ -864,19 +845,6 @@ a:hover {
     border-bottom: none;
 }
 
-/* Dropdown Arrow - Single Arrow Fix */
-.main-navigation .menu-item-has-children > a::after {
-    content: '▼';
-    font-size: 0.6rem;
-    margin-left: 0.5rem;
-    transition: transform 0.3s ease;
-    opacity: 0.7;
-}
-
-.main-navigation .menu-item-has-children:hover > a::after {
-    transform: rotate(180deg);
-    opacity: 1;
-}
 
 .main-navigation a {
     color: var(--luvex-white);
@@ -936,6 +904,38 @@ a:hover {
 }
 
 
+
+/* ============================================================================ */
+/* 4.7 FOOTER SYSTEM (MODIFIZIERT)                                            */
+/* ============================================================================ */
+
+.modern-footer {
+    background: var(--luvex-dark-blue);
+    color: var(--luvex-white);
+    padding: 4rem 0 2rem;
+    position: relative;
+    overflow: hidden;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+}
+
+/* Hinzugefügtes/ausgetauschtes Hintergrundmuster für den Footer */
+.modern-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="footer-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.08)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23footer-grid)"/></svg>');
+    opacity: 0.2; /* Etwas dezenter für den Footer */
+    pointer-events: none;
+    z-index: 1; /* Stellt sicher, dass es hinter dem Inhalt liegt */
+}
+
+
+
 /* --- 4.7 RESPONSIVE für UI Components --- */
 @media (max-width: 768px) {
     .team-member__layout {
@@ -968,6 +968,8 @@ a:hover {
     }
 }
 /* --- 4.7 END --- */
+
+
 
 /* --- 4.8 FOOTER SYSTEM --- */
 
@@ -4147,211 +4149,182 @@ a:hover {
     }
 }
 
-/* --- 6.4 HOMEPAGE SPECIFIC - COMMUNITY SECTION UNIFIED --- */
 
-.community-section {
+
+/* ============================================================================ */
+/* 6.8 HOMEPAGE - GLOBAL UV EXPERT COMMUNITY (AKTUALISIERT)                   */
+/* ============================================================================ */
+
+/* Haupt-Container für die gesamte Sektion auf der Startseite */
+.homepage-community-section {
     padding: var(--space-xl) 0;
-    background: var(--luvex-gray-100);
-}
-
-.community-section h2 {
-    color: var(--luvex-dark-blue);
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-.community-section p {
-    color: var(--luvex-gray-700);
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-/* Der große einheitliche Container */
-.feature-section {
-    background: var(--luvex-dark-blue);
-    border-radius: var(--radius-xl);
-    padding: 3rem;
+    background-color: var(--luvex-dark-blue); /* Einheitlicher dunkelblauer Hintergrund */
     position: relative;
     overflow: hidden;
-    display: grid;
-    grid-template-columns: 1fr 400px;
-    gap: 4rem;
-    align-items: stretch;
-    min-height: 450px;
 }
 
-/* Subtiles Grid-Pattern */
-.feature-section::before {
+/* Subtiles Hintergrund-Grid-Muster */
+.homepage-community-section::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="community-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23community-grid)"/></svg>');
-    opacity: 0.3;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="community-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.08)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23community-grid)"/></svg>');
+    opacity: 0.5;
     pointer-events: none;
 }
 
-/* Linker Text-Bereich */
-.feature-text-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+/* Layout-Container für den Inhalt - Breiter gemacht */
+.homepage-community-container {
+    max-width: 1400px; /* <<<< GEÄNDERT: Breiter gemacht */
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Zweispaltiges Layout */
+    gap: var(--space-lg);
+    align-items: center;
     position: relative;
     z-index: 2;
 }
 
-.feature-text-content h2 {
+/* Linke Spalte mit Text */
+.homepage-community-content {
     color: var(--luvex-white);
-    text-align: left;
-    margin-bottom: 1.5rem;
-    font-size: clamp(1.8rem, 3vw, 2.2rem);
 }
 
-.feature-text-content p {
-    color: #cbd5e1;
-    text-align: left;
-    margin-bottom: 2rem;
+.homepage-community-title {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 600;
+    color: var(--luvex-white);
+    margin: 0 0 1.5rem 0;
+    line-height: 1.2;
+}
+
+/* Die Klasse .text-highlight wird bereits in Ihrem CSS für die türkise Farbe verwendet */
+.homepage-community-title .text-highlight {
+    color: var(--luvex-bright-cyan);
+}
+
+.homepage-community-description {
     font-size: var(--text-lg);
-    line-height: 1.6;
+    color: var(--luvex-gray-300);
+    margin: 0 0 2.5rem 0;
+    line-height: 1.7;
+    max-width: 550px;
 }
 
-.feature-list {
+/* Feature-Liste mit Icons */
+.homepage-community-features {
     list-style: none;
     padding: 0;
-    margin: 2rem 0;
+    margin: 0 0 2.5rem 0;
 }
 
-.feature-list li {
+.homepage-community-features li {
     display: flex;
     align-items: flex-start;
     gap: 1rem;
-    margin-bottom: 1.25rem;
-    color: #e9ecef;
-    line-height: 1.7;
-    font-size: 1.05rem;
+    font-size: var(--text-base);
+    color: var(--luvex-gray-200);
+    margin-bottom: 1.5rem;
 }
 
-.feature-list li i {
+.homepage-community-features li:last-child {
+    margin-bottom: 0;
+}
+
+.homepage-community-features li i {
     color: var(--luvex-bright-cyan);
-    margin-top: 0.125rem;
+    font-size: 1.25rem;
+    margin-top: 0.2rem;
     flex-shrink: 0;
-    font-size: 1.1rem;
-}
-
-.feature-list li strong {
-    color: var(--luvex-white);
-}
-
-/* Button Container */
-.feature-text-content > div:last-child {
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    margin-top: auto;
-    padding-top: 1.5rem;
-}
-
-/* Rechter Animation-Bereich */
-.feature-image-content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.global-network-visual {
-    width: 100%;
-    height: 100%;
-    min-height: 350px;
-    border-radius: var(--radius-lg);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    background: rgba(109, 213, 237, 0.1);
-    border: 1px solid rgba(109, 213, 237, 0.2);
-}
-
-.global-network-visual i {
-    font-size: 4rem;
-    color: var(--luvex-bright-cyan);
-    margin-bottom: 1rem;
-    animation: pulse-glow 3s ease-in-out infinite;
-}
-
-.network-text {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--luvex-white);
-    margin: 0.5rem 0 0 0;
+    width: 24px;
     text-align: center;
 }
 
-.network-dots {
-    position: absolute;
-    top: 0;
-    left: 0;
+.homepage-community-features li strong {
+    color: var(--luvex-white);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+/* Button-Container */
+.homepage-community-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2.5rem;
+}
+
+/* Rechte Spalte mit der Animation */
+.homepage-community-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 450px;
+}
+
+/* Wrapper für den Globus - MIT DEBUG-HINTERGRUND */
+#globe-container.homepage-community-globe-wrapper {
     width: 100%;
     height: 100%;
-    pointer-events: none;
+    max-width: 450px;
+    max-height: 450px;
+    position: relative;
+    z-index: 3;
+    /* background: rgba(255, 0, 0, 0.2); */ /* <-- DEBUG: Entfernen Sie diese Zeile, wenn die Animation funktioniert */
 }
 
-.network-dot {
+/* "Glow"-Effekt um die Kugel */
+.homepage-community-glow {
     position: absolute;
-    width: 6px;
-    height: 6px;
-    background: var(--luvex-bright-cyan);
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(circle, rgba(79, 157, 255, 0.2) 30%, transparent 70%);
     border-radius: 50%;
-    animation: pulse-dot 2s infinite;
+    z-index: 1;
+    pointer-events: none;
+    animation: pulse-glow 5s ease-in-out infinite;
 }
 
-.network-dot:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
-.network-dot:nth-child(2) { top: 30%; right: 25%; animation-delay: 0.5s; }
-.network-dot:nth-child(3) { bottom: 25%; left: 30%; animation-delay: 1s; }
-.network-dot:nth-child(4) { bottom: 20%; right: 20%; animation-delay: 1.5s; }
-
-/* Responsive */
-@media (max-width: 1024px) {
-    .feature-section {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-        padding: 2.5rem;
-    }
-    
-    .feature-text-content h2,
-    .feature-text-content p {
+/* Responsive Anpassungen */
+@media (max-width: 992px) {
+    .homepage-community-container {
+        grid-template-columns: 1fr; /* Auf eine Spalte wechseln */
         text-align: center;
     }
-    
-    .feature-text-content > div:last-child {
-        justify-content: center;
-    }
-    
-    .global-network-visual {
-        max-width: 500px;
-        margin: 0 auto;
-    }
-}
 
-@media (max-width: 768px) {
-    .feature-section {
-        padding: 2rem;
+    .homepage-community-content {
+        order: 2; /* Text unter die Animation schieben */
+    }
+
+    .homepage-community-visual {
+        order: 1;
+        min-height: 400px;
     }
     
-    .feature-text-content > div:last-child {
-        flex-direction: column;
-        align-items: center;
-        max-width: 280px;
+    .homepage-community-description {
         margin-left: auto;
         margin-right: auto;
     }
+
+    .homepage-community-features {
+        text-align: left;
+    }
+
+    .homepage-community-actions {
+        justify-content: center;
+    }
 }
+
+
+
+
+
 
 /* 6.4 END ===================================================== */
 
@@ -5118,9 +5091,116 @@ a:hover {
 
 /* 6.6 END ===================================================== */
 
+/* --- 6.7 LEGAL PAGES SPECIFIC --- */
 
+.legal-hero {
+    background: var(--luvex-dark-blue);
+    position: relative;
+    overflow: hidden;
+    padding: calc(72px + 3rem) 0 3rem;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+}
 
+.legal-hero__container {
+    position: relative;
+    z-index: 2;
+}
 
+.legal-content-section {
+    padding: var(--space-xl) 0;
+}
+
+.legal-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.legal-section {
+    margin-bottom: 3rem;
+}
+
+.legal-section h2 {
+    color: var(--luvex-dark-blue);
+    border-bottom: 2px solid var(--luvex-bright-cyan);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.legal-section h3 {
+    color: var(--luvex-dark-blue);
+    margin-top: 2rem;
+}
+
+.privacy-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.privacy-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.privacy-contact-box {
+    background: var(--luvex-gray-100);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    margin: 1.5rem 0;
+}
+
+/* Privacy Policy Special Elements */
+.disclaimer-box {
+    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+    border-left: 4px solid #f39c12;
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    margin: 2rem 0;
+}
+
+.privacy-rights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.privacy-right {
+    background: var(--luvex-white);
+    border: 1px solid var(--luvex-bright-cyan);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.privacy-right h4 {
+    color: var(--luvex-dark-blue);
+    margin-bottom: 0.5rem;
+}
+
+.legal-basis-table,
+.retention-table {
+    background: var(--luvex-gray-100);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin: 1.5rem 0;
+}
+
+/* Plugin Cookie Policy Fix */
+.complianz-cookie-policy,
+body.complianz-page {
+    padding-top: calc(72px + 2rem) !important;
+}
+
+.complianz-cookie-policy .content,
+body.complianz-page .content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* 6.7 END ===================================================== */
 
 
 /* 6. END PAGE-SPECIFIC===================================================== */
