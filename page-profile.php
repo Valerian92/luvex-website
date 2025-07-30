@@ -28,7 +28,7 @@ get_header(); ?>
 </section>
 
 <section class="profile-dashboard">
-    <div class="container--narrow">
+    <div class="container container--narrow">
         <div class="profile-layout">
             
             <!-- Profile Navigation -->

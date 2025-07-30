@@ -4142,13 +4142,38 @@ a:hover {
 /* --- 6.4 HOMEPAGE SPECIFIC - COMMUNITY SECTION UNIFIED --- */
 
 .community-section {
-    background: var(--luvex-dark-blue);
     padding: var(--space-xl) 0;
-    position: relative;
-    overflow: hidden;
+    background: var(--luvex-gray-100);
 }
 
-.community-section::before {
+.community-section h2 {
+    color: var(--luvex-dark-blue);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.community-section p {
+    color: var(--luvex-gray-700);
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+/* Der große einheitliche Container */
+.feature-section {
+    background: var(--luvex-dark-blue);
+    border-radius: var(--radius-xl);
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 4rem;
+    align-items: stretch;
+    min-height: 450px;
+}
+
+/* Subtiles Grid-Pattern */
+.feature-section::before {
     content: '';
     position: absolute;
     top: 0;
@@ -4160,57 +4185,34 @@ a:hover {
     pointer-events: none;
 }
 
-.community-section .container {
-    position: relative;
-    z-index: 2;
-}
-
-.community-section h2 {
-    color: var(--luvex-white);
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-.community-section p {
-    color: #e9ecef;
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.feature-section {
-    display: grid;
-    grid-template-columns: 1fr 400px;
-    gap: 4rem;
-    align-items: stretch;
-}
-
+/* Linker Text-Bereich */
 .feature-text-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-align: center;
+    position: relative;
+    z-index: 2;
 }
 
 .feature-text-content h2 {
     color: var(--luvex-white);
-    text-align: center;
+    text-align: left;
     margin-bottom: 1.5rem;
+    font-size: clamp(1.8rem, 3vw, 2.2rem);
 }
 
 .feature-text-content p {
     color: #cbd5e1;
-    text-align: center;
+    text-align: left;
     margin-bottom: 2rem;
+    font-size: var(--text-lg);
+    line-height: 1.6;
 }
 
 .feature-list {
     list-style: none;
     padding: 0;
     margin: 2rem 0;
-    text-align: left;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .feature-list li {
@@ -4224,27 +4226,39 @@ a:hover {
 }
 
 .feature-list li i {
-    color: var(--luvex-accent-blue);
+    color: var(--luvex-bright-cyan);
     margin-top: 0.125rem;
-    transition: var(--transition-normal);
     flex-shrink: 0;
+    font-size: 1.1rem;
 }
 
 .feature-list li strong {
     color: var(--luvex-white);
 }
 
+/* Button Container */
 .feature-text-content > div:last-child {
     display: flex;
     gap: 1rem;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
     margin-top: auto;
+    padding-top: 1.5rem;
+}
+
+/* Rechter Animation-Bereich */
+.feature-image-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .global-network-visual {
-    height: 400px;
-    background: linear-gradient(135deg, rgba(109, 213, 237, 0.15), rgba(0, 123, 255, 0.15));
+    width: 100%;
+    height: 100%;
+    min-height: 350px;
     border-radius: var(--radius-lg);
     display: flex;
     flex-direction: column;
@@ -4252,7 +4266,8 @@ a:hover {
     justify-content: center;
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(109, 213, 237, 0.3);
+    background: rgba(109, 213, 237, 0.1);
+    border: 1px solid rgba(109, 213, 237, 0.2);
 }
 
 .global-network-visual i {
@@ -4267,6 +4282,7 @@ a:hover {
     font-weight: 600;
     color: var(--luvex-white);
     margin: 0.5rem 0 0 0;
+    text-align: center;
 }
 
 .network-dots {
@@ -4297,16 +4313,29 @@ a:hover {
     .feature-section {
         grid-template-columns: 1fr;
         gap: 3rem;
+        padding: 2.5rem;
+    }
+    
+    .feature-text-content h2,
+    .feature-text-content p {
+        text-align: center;
+    }
+    
+    .feature-text-content > div:last-child {
+        justify-content: center;
     }
     
     .global-network-visual {
-        height: 300px;
         max-width: 500px;
         margin: 0 auto;
     }
 }
 
 @media (max-width: 768px) {
+    .feature-section {
+        padding: 2rem;
+    }
+    
     .feature-text-content > div:last-child {
         flex-direction: column;
         align-items: center;
@@ -5055,6 +5084,28 @@ a:hover {
     .quick-actions-grid {
         grid-template-columns: 1fr;
     }
+}
+
+
+/* ============================================================= */
+/* FIX: Profile Page Layout & Proportion Correction              */
+/* ============================================================= */
+
+/* Begrenzt die Gesamtbreite des Dashboards für eine bessere Optik */
+.profile-dashboard .container {
+    max-width: 1200px; 
+}
+
+/* Passt das Spaltenverhältnis für eine bessere Balance an */
+.profile-layout {
+    grid-template-columns: 280px 1fr; /* Gibt der Navi links etwas mehr Luft */
+    gap: 2.5rem; /* Verringert den Abstand leicht */
+}
+
+/* Bonus: Macht die linke Navigation "sticky", sodass sie beim Scrollen mitläuft */
+.profile-nav {
+    position: sticky;
+    top: 100px; /* Höhe des Headers (72px) + etwas Abstand */
 }
 
 /* 6.6 END ===================================================== */
