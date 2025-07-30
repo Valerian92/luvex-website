@@ -169,7 +169,7 @@ get_header(); ?>
         
         <!-- Linke Spalte: Textinhalte -->
         <div class="homepage-community-content">
-            <h2 class="homepage-community-title">Building the Global UV Network</h2>
+            <h2 class="homepage-community-title">Building the Global <span class="text-highlight">UV Network</span></h2>
             <p class="homepage-community-description">
                 Join thousands of UV professionals from around the world in advancing technology, sharing knowledge, and solving complex engineering challenges together.
             </p>

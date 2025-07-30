@@ -904,6 +904,38 @@ a:hover {
 }
 
 
+
+/* ============================================================================ */
+/* 4.7 FOOTER SYSTEM (MODIFIZIERT)                                            */
+/* ============================================================================ */
+
+.modern-footer {
+    background: var(--luvex-dark-blue);
+    color: var(--luvex-white);
+    padding: 4rem 0 2rem;
+    position: relative;
+    overflow: hidden;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+}
+
+/* Hinzugefügtes/ausgetauschtes Hintergrundmuster für den Footer */
+.modern-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="footer-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.08)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23footer-grid)"/></svg>');
+    opacity: 0.2; /* Etwas dezenter für den Footer */
+    pointer-events: none;
+    z-index: 1; /* Stellt sicher, dass es hinter dem Inhalt liegt */
+}
+
+
+
 /* --- 4.7 RESPONSIVE für UI Components --- */
 @media (max-width: 768px) {
     .team-member__layout {
@@ -936,6 +968,8 @@ a:hover {
     }
 }
 /* --- 4.7 END --- */
+
+
 
 /* --- 4.8 FOOTER SYSTEM --- */
 
@@ -4118,7 +4152,7 @@ a:hover {
 
 
 /* ============================================================================ */
-/*  HOMEPAGE - GLOBAL UV EXPERT COMMUNITY                                  */
+/* 6.8 HOMEPAGE - GLOBAL UV EXPERT COMMUNITY (AKTUALISIERT)                   */
 /* ============================================================================ */
 
 /* Haupt-Container für die gesamte Sektion auf der Startseite */
@@ -4142,9 +4176,9 @@ a:hover {
     pointer-events: none;
 }
 
-/* Layout-Container für den Inhalt */
+/* Layout-Container für den Inhalt - Breiter gemacht */
 .homepage-community-container {
-    max-width: 1200px;
+    max-width: 1400px; /* <<<< GEÄNDERT: Breiter gemacht */
     margin: 0 auto;
     padding: 0 var(--space-md);
     display: grid;
@@ -4166,6 +4200,11 @@ a:hover {
     color: var(--luvex-white);
     margin: 0 0 1.5rem 0;
     line-height: 1.2;
+}
+
+/* Die Klasse .text-highlight wird bereits in Ihrem CSS für die türkise Farbe verwendet */
+.homepage-community-title .text-highlight {
+    color: var(--luvex-bright-cyan);
 }
 
 .homepage-community-description {
@@ -4229,7 +4268,7 @@ a:hover {
     min-height: 450px;
 }
 
-/* Wrapper für den Globus */
+/* Wrapper für den Globus - MIT DEBUG-HINTERGRUND */
 #globe-container.homepage-community-globe-wrapper {
     width: 100%;
     height: 100%;
@@ -4237,6 +4276,7 @@ a:hover {
     max-height: 450px;
     position: relative;
     z-index: 3;
+    /* background: rgba(255, 0, 0, 0.2); */ /* <-- DEBUG: Entfernen Sie diese Zeile, wenn die Animation funktioniert */
 }
 
 /* "Glow"-Effekt um die Kugel */
@@ -4280,6 +4320,7 @@ a:hover {
         justify-content: center;
     }
 }
+
 
 
 
@@ -5051,15 +5092,112 @@ a:hover {
 /* 6.6 END ===================================================== */
 
 /* --- 6.7 LEGAL PAGES SPECIFIC --- */
+
 .legal-hero {
     background: var(--luvex-dark-blue);
+    position: relative;
+    overflow: hidden;
     padding: calc(72px + 3rem) 0 3rem;
-    text-align: center;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+}
+
+.legal-hero__container {
+    position: relative;
+    z-index: 2;
 }
 
 .legal-content-section {
     padding: var(--space-xl) 0;
+}
+
+.legal-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.legal-section {
+    margin-bottom: 3rem;
+}
+
+.legal-section h2 {
+    color: var(--luvex-dark-blue);
+    border-bottom: 2px solid var(--luvex-bright-cyan);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.legal-section h3 {
+    color: var(--luvex-dark-blue);
+    margin-top: 2rem;
+}
+
+.privacy-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.privacy-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.privacy-contact-box {
+    background: var(--luvex-gray-100);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    margin: 1.5rem 0;
+}
+
+/* Privacy Policy Special Elements */
+.disclaimer-box {
+    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+    border-left: 4px solid #f39c12;
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    margin: 2rem 0;
+}
+
+.privacy-rights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.privacy-right {
     background: var(--luvex-white);
+    border: 1px solid var(--luvex-bright-cyan);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.privacy-right h4 {
+    color: var(--luvex-dark-blue);
+    margin-bottom: 0.5rem;
+}
+
+.legal-basis-table,
+.retention-table {
+    background: var(--luvex-gray-100);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin: 1.5rem 0;
+}
+
+/* Plugin Cookie Policy Fix */
+.complianz-cookie-policy,
+body.complianz-page {
+    padding-top: calc(72px + 2rem) !important;
+}
+
+.complianz-cookie-policy .content,
+body.complianz-page .content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
 }
 
 /* 6.7 END ===================================================== */
