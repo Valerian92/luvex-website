@@ -1,0 +1,111 @@
+/*
+==============================================================================
+LUVEX THEME v2.1 - [DATEINAME]
+==============================================================================
+
+Description: [Kurze Beschreibung der Komponente]
+Dependencies: _variables.css
+Last Update: 2025-07-31
+
+==============================================================================
+*/
+
+/* ===== LAYOUT SYSTEM (.container, .grid, .flex)] ===== */
+/* 3. LAYOUT SYSTEM ================================================= */
+
+/* Container System */
+.container {
+    max-width: none;
+    margin: 0 auto;
+    padding: 0 3rem;
+    width: 100%;
+}
+
+.container--narrow {
+    max-width: 1400px;
+}
+
+.container--medium {
+    max-width: 1600px;
+}
+
+.container--wide {
+    max-width: 1800px;
+}
+
+
+
+/* Section-specific container usage */
+.section .container {
+    max-width: 1400px; /* Begrenzt für bessere Lesbarkeit */
+}
+
+.section .container--narrow {
+    max-width: 1200px;
+}
+
+/* Section Spacing */
+.section {
+    padding: var(--space-lg) 0;
+}
+
+.section--small {
+    padding: var(--space-md) 0;
+}
+
+.section--large {
+    padding: var(--space-xl) 0;
+}
+
+
+/* Türkise Section-Varianten */
+.section--turquoise {
+    background: linear-gradient(135deg, #a8e6f1 0%, #e8f9fc 100%);
+}
+
+.section--turquoise-light {
+    background: rgba(109, 213, 237, 0.08);
+}
+
+/* Grid System */
+.grid {
+    display: grid;
+    gap: var(--gap-default);
+}
+
+.grid-2 {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.grid-3 {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--gap-default);
+}
+
+/* Flex System */
+.flex {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.flex--center {
+    align-items: center;
+    justify-content: center;
+}
+
+.flex--between {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex--column {
+    flex-direction: column;
+}
+
+
+/* ===== END [LAYOUT SYSTEM (.container, .grid, .flex)] ===== */

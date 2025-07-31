@@ -1,0 +1,47 @@
+/*
+==============================================================================
+LUVEX THEME v2.1 - MAIN CSS
+==============================================================================
+
+Main CSS file that imports all component styles
+Import order is critical for cascade
+
+Last Update: 2025-07-31
+==============================================================================
+*/
+
+/* 1. DESIGN TOKENS (Variables first!) */
+@import '_variables.css';
+
+/* 2. BASE STYLES */
+@import '_base.css';
+
+/* 3. LAYOUT SYSTEM */
+@import '_layout.css';
+
+/* 4. UI COMPONENTS */
+@import '_buttons.css';
+@import '_cards.css';
+@import '_header.css';
+@import '_footer.css';
+@import '_forms.css';
+
+/* 5. PAGE-SPECIFIC */
+@import '_homepage.css';
+@import '_about.css';
+@import '_contact.css';
+
+/* 6. RESPONSIVE (Last!) */
+@import '_responsive.css';
+
+@import '_heroes.css';
+@import '_modals.css';
+
+@import '_loading.css';
+@import '_timeline.css';
+
+@import '_cta.css';
+@import '_booking.css';
+
+@import '_auth.css';
+@import '_legal.css';

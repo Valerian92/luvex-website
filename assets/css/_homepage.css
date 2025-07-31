@@ -1,0 +1,609 @@
+/*
+==============================================================================
+LUVEX THEME v2.1 - [DATEINAME]
+==============================================================================
+
+Description: [Kurze Beschreibung der Komponente]
+Dependencies: _variables.css
+Last Update: 2025-07-31
+
+==============================================================================
+*/
+
+/* ===== [Section 6.4: Homepage Specific (.uv-simulator-showcase)] ===== */
+
+/* --- 6.4 HOMEPAGE SPECIFIC --- */
+
+/* UV Simulator Showcase */
+.uv-simulator-showcase {
+    background: linear-gradient(135deg, var(--luvex-dark-blue), var(--luvex-accent-blue));
+    border-radius: var(--radius-xl);
+    padding: 4rem 3rem;
+    margin: 3rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.uv-simulator-showcase::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(109, 213, 237, 0.2) 0%, transparent 70%);
+    animation: pulse-glow 6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.uv-simulator-showcase {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 4rem 3rem;
+}
+
+
+.simulator-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: var(--luvex-white);
+}
+
+.simulator-content h3 {
+    color: var(--luvex-white);
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.simulator-description {
+    color: var(--luvex-text-muted-dark);
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.simulator-features {
+    margin: 3rem 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 900px;
+    margin: 3rem auto;
+}
+
+.simulator-feature {
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+    transition: var(--transition-normal);
+}
+
+.simulator-feature:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.simulator-feature i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--luvex-bright-cyan);
+    display: block;
+}
+
+.simulator-feature h4 {
+    color: var(--luvex-white);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.simulator-feature p {
+    color: var(--luvex-text-muted-dark);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.simulator-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 1rem 3rem;
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 2rem;
+    transition: var(--transition-normal);
+}
+
+.simulator-cta-container {
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
+.simulator-connection-text {
+    color: var(--luvex-bright-cyan);
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin: 1rem 0 0 0;
+    opacity: 0.9;
+}
+
+.simulator-cta:hover {
+    background: #5ac7e0;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(109, 213, 237, 0.4);
+    color: var(--luvex-dark-blue);
+}
+
+.knowledge-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 2rem 0;
+}
+
+
+.knowledge-list li i {
+    font-size: 1rem;
+    color: var(--luvex-bright-cyan);
+    min-width: 18px;
+}
+
+/* Excellence Stats */
+.excellence-stat {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.excellence-stat__icon {
+    width: 100px;
+    height: 100px;
+    background: var(--luvex-dark-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem auto;
+    transition: var(--transition-normal);
+}
+
+.excellence-stat__icon i {
+    font-size: 2.5rem;
+    color: var(--luvex-bright-cyan);
+}
+
+.excellence-stat:hover .excellence-stat__icon {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(27, 42, 73, 0.3);
+}
+
+.excellence-stat h4 {
+    color: var(--luvex-dark-blue);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.excellence-stat p {
+    color: var(--luvex-gray-700);
+    font-size: 1rem;
+    margin: 0;
+}
+
+
+.globe-title {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--luvex-white);
+    text-shadow: 0 0 20px rgba(109, 213, 237, 0.8);
+    z-index: 100;
+    text-align: center;
+}
+
+.globe-subtitle {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1rem;
+    color: var(--luvex-bright-cyan);
+    z-index: 100;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .global-network-visual {
+        height: 350px;
+    }
+    
+    .globe-title {
+        font-size: 1.1rem;
+        top: 15px;
+    }
+    
+    .globe-subtitle {
+        font-size: 0.9rem;
+        bottom: 15px;
+    }
+}
+/* Feature Section Enhancement (extends existing) */
+.feature-section {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+}
+
+.community-text-container {
+    background: var(--luvex-white);
+    border: 2px solid var(--luvex-bright-cyan);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-md);
+    max-width: 650px; /* Breiter machen */
+}
+
+.feature-section {
+    display: flex;
+    align-items: center;
+    gap: 3rem; /* Weniger Gap für mehr Platz */
+    flex-wrap: wrap;
+}
+
+.feature-text-content {
+    flex: 1;
+    min-width: 400px; /* Mindestbreite erhöhen */
+}
+
+.feature-image-content {
+    flex: 1;
+    min-width: 350px;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+}
+
+.feature-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    color: var(--luvex-gray-700);
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+.feature-list li i {
+    color: var(--luvex-accent-blue);
+    margin-top: 0.125rem;
+    transition: var(--transition-normal);
+}
+
+.feature-list li:hover i {
+    transform: scale(1.2);
+    color: var(--luvex-bright-cyan);
+}
+
+/* Animations */
+@keyframes pulse-glow {
+    0%, 100% { 
+        opacity: 0.3; 
+        transform: scale(1); 
+    }
+    50% { 
+        opacity: 0.6; 
+        transform: scale(1.05); 
+    }
+}
+
+@keyframes pulse-dot {
+    0%, 100% { 
+        opacity: 0.4; 
+        transform: scale(1); 
+    }
+    50% { 
+        opacity: 1; 
+        transform: scale(1.2); 
+    }
+}
+
+
+
+/* --- 6.4 HOMEPAGE GRID FIXES --- */
+
+/* UV Knowledge Navigator - force horizontal layout */
+.section--turquoise-light .grid-3.knowledge-navigator {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    align-items: stretch;
+}
+
+.knowledge-navigator .value-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.knowledge-navigator .value-card__description {
+    flex-grow: 1;
+}
+
+
+/* Simulator Features - ensure grid display */
+.simulator-features.grid-4 {
+    display: grid;
+}
+
+/* Simulator Features - 6er Grid */
+.simulator-features.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .simulator-features.grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .simulator-features.grid-3 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* UV Simulator Showcase - better width */
+.uv-simulator-showcase {
+    max-width: 1200px;
+    margin: 3rem auto;
+}
+
+@media (max-width: 1024px) {
+    .grid-3.knowledge-navigator {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .grid-3.knowledge-navigator {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+/* ============================================================================ */
+/* 6.8 HOMEPAGE - GLOBAL UV EXPERT COMMUNITY (AKTUALISIERT)                   */
+/* ============================================================================ */
+
+/* Haupt-Container für die gesamte Sektion auf der Startseite */
+.homepage-community-section {
+    padding: var(--space-xl) 0;
+    background-color: var(--luvex-dark-blue); /* Einheitlicher dunkelblauer Hintergrund */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtiles Hintergrund-Grid-Muster */
+.homepage-community-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="community-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.08)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23community-grid)"/></svg>');
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Layout-Container für den Inhalt - Breiter gemacht */
+.homepage-community-container {
+    max-width: 1400px; /* <<<< GEÄNDERT: Breiter gemacht */
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Zweispaltiges Layout */
+    gap: var(--space-lg);
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* Linke Spalte mit Text */
+.homepage-community-content {
+    color: var(--luvex-white);
+}
+
+.homepage-community-title {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 600;
+    color: var(--luvex-white);
+    margin: 0 0 1.5rem 0;
+    line-height: 1.2;
+}
+
+/* Die Klasse .text-highlight wird bereits in Ihrem CSS für die türkise Farbe verwendet */
+.homepage-community-title .text-highlight {
+    color: var(--luvex-bright-cyan);
+}
+
+.homepage-community-description {
+    font-size: var(--text-lg);
+    color: var(--luvex-gray-300);
+    margin: 0 0 2.5rem 0;
+    line-height: 1.7;
+    max-width: 550px;
+}
+
+/* Feature-Liste mit Icons */
+.homepage-community-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2.5rem 0;
+}
+
+.homepage-community-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    font-size: var(--text-base);
+    color: var(--luvex-gray-200);
+    margin-bottom: 1.5rem;
+}
+
+.homepage-community-features li:last-child {
+    margin-bottom: 0;
+}
+
+.homepage-community-features li i {
+    color: var(--luvex-bright-cyan);
+    font-size: 1.25rem;
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+    width: 24px;
+    text-align: center;
+}
+
+.homepage-community-features li strong {
+    color: var(--luvex-white);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+/* Button-Container */
+.homepage-community-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2.5rem;
+}
+
+/* Rechte Spalte mit der Animation */
+.homepage-community-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 450px;
+}
+
+#globe-container.homepage-community-globe-wrapper {
+    width: 100%;
+    height: 600px;      /* Von 450px auf 600px */
+    max-width: 600px;   /* Von 450px auf 600px */
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;   /* Für Overflow-Effekt */
+}
+
+.homepage-community-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 600px;  /* Von 450px auf 600px */
+}
+
+/* "Glow"-Effekt um die Kugel */
+.homepage-community-glow {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(circle, rgba(79, 157, 255, 0.2) 30%, transparent 70%);
+    border-radius: 50%;
+    z-index: 1;
+    pointer-events: none;
+    animation: pulse-glow 5s ease-in-out infinite;
+}
+
+.homepage-community-visual canvas {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+/* Responsive Anpassungen */
+@media (max-width: 992px) {
+    .homepage-community-container {
+        grid-template-columns: 1fr; /* Auf eine Spalte wechseln */
+        text-align: center;
+    }
+
+    .homepage-community-content {
+        order: 2; /* Text unter die Animation schieben */
+    }
+
+    .homepage-community-visual {
+        order: 1;
+        min-height: 400px;
+    }
+    
+    .homepage-community-description {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .homepage-community-features {
+        text-align: left;
+    }
+
+    .homepage-community-actions {
+        justify-content: center;
+    }
+}
+
+
+/* 6.1 /* Homepage Specific */
+
+
+.home-hero {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: var(--color-white);
+}
+
+.home-hero .hero__title {
+    color: var(--color-white);
+    background: none;
+    -webkit-text-fill-color: unset;
+}
+
+/* About Page */
+.about-section {
+    background: var(--color-light);
+}
+
+/* Contact Page */
+.contact-form {
+    background: var(--color-white);
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+
+
+
+/* 6.4 END ===================================================== */
+
+
+/* ===== END [SECTION NAME] ===== */

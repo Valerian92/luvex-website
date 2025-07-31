@@ -1,0 +1,232 @@
+/*
+==============================================================================
+LUVEX THEME v2.1 - [DATEINAME]
+==============================================================================
+
+Description: [Kurze Beschreibung der Komponente]
+Dependencies: _variables.css
+Last Update: 2025-07-31
+
+==============================================================================
+*/
+
+/* ===== [Section 4.6: Navigation System (.site-header, .main-navigation)] ===== */
+
+/* --- 4.6 NAVIGATION SYSTEM --- */
+
+/* Standard Navigation */
+.nav {
+    display: flex;
+    gap: var(--space-md);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav__link {
+    color: var(--color-dark);
+    font-weight: 500;
+    transition: var(--transition-normal);
+}
+
+.nav__link:hover {
+    color: var(--color-primary);
+}
+
+/* Header System */
+.site-header {
+    background: rgba(27, 42, 73, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(109, 213, 237, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1000;
+}
+
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.header-container {
+    max-width: 1400px;  /* Container begrenzen */
+    margin: 0 auto;     /* Zentrieren */
+    padding: 0 3rem;    /* Mehr Padding */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+}
+.site-branding .luvex-logo-text {
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.site-branding {
+    flex: 0 0 auto;
+    max-width: 150px;
+}
+
+.site-branding .custom-logo-link {
+    display: block;
+}
+
+.site-branding .custom-logo {
+    max-height: 40px;
+    width: auto;
+    display: block;
+}
+
+.header-cta-button {
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: 12px 24px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    transition: var(--transition-normal);
+}
+
+.header-cta-button:hover {
+    background: #0056b3;
+    color: var(--color-white);
+}
+
+/* Mobile Menu Button - nur auf Mobile */
+.mobile-menu-toggle {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    .main-navigation {
+        display: none;
+    }
+}
+
+
+/* Main Navigation */
+.main-navigation {
+    display: flex;
+    align-items: center;
+}
+
+.main-navigation ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 2rem;
+    position: relative;
+    max-width: 100%;  /* ← HINZUFÜGEN falls nicht vorhanden */
+}
+
+.header-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px; /* von 72px auf 80px */
+}
+
+/* Dropdown Container Fix */
+.main-navigation li {
+    position: relative;
+}
+
+.main-navigation .menu-item:hover .sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.main-navigation .sub-menu li {
+    width: 100%;
+}
+
+.main-navigation .sub-menu a {
+    padding: 0.75rem 1.5rem;
+    display: block;
+    font-size: var(--text-sm);
+    border-bottom: 1px solid rgba(109, 213, 237, 0.1);
+    transition: all 0.3s ease;
+}
+
+.main-navigation .sub-menu a:hover {
+    background: rgba(109, 213, 237, 0.1);
+    padding-left: 2rem;
+}
+
+.main-navigation .sub-menu li:last-child a {
+    border-bottom: none;
+}
+
+
+.main-navigation a {
+    color: var(--luvex-white);
+    font-weight: 500;
+    font-size: var(--text-base);
+    transition: var(--transition-normal);
+    text-decoration: none;
+}
+
+.main-navigation a {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.main-navigation a::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--luvex-bright-cyan);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.main-navigation a:hover {
+    color: var(--luvex-bright-cyan);
+    transform: translateY(-2px);
+}
+
+.main-navigation a:hover::after {
+    width: 100%;
+}
+
+
+/* Mobile Dropdown Support */
+@media (max-width: 768px) {
+    .main-navigation .sub-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        background: rgba(255, 255, 255, 0.1);
+        margin-top: 0.5rem;
+        padding: 0.5rem 0;
+        display: none;
+    }
+    
+    .main-navigation .menu-item-has-children.mobile-open .sub-menu {
+        display: flex;
+    }
+    
+    .main-navigation .menu-item-has-children > a {
+        cursor: pointer;
+    }
+}
+
+
+/* ===== END [Section 4.6: Navigation System (.site-header, .main-navigation)] ===== */

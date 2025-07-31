@@ -1,0 +1,353 @@
+/*
+==============================================================================
+LUVEX THEME v2.1 - [DATEINAME]
+==============================================================================
+
+Description: [Kurze Beschreibung der Komponente]
+Dependencies: _variables.css
+Last Update: 2025-07-31
+
+==============================================================================
+*/
+
+/* ===== [] ===== */
+/* --- 6.3 BOOKING PAGE SPECIFIC --- */
+
+/* --- BOOKING HERO SECTION --- */
+.booking-hero {
+    background: var(--luvex-dark-blue);
+    position: relative;
+    overflow: hidden;
+    padding: calc(72px + 3rem) 0 3rem;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+}
+
+.booking-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="calendar-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23calendar-grid)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.booking-hero__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+    position: relative;
+    z-index: 2;
+}
+
+.booking-hero__content {
+    max-width: 900px;
+    text-align: center;
+}
+
+.booking-hero__title {
+    font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+    font-weight: 600;
+    color: var(--luvex-white);
+    margin: 0 0 1rem 0;
+    line-height: 1.1;
+}
+
+.booking-hero__title .text-highlight {
+    color: var(--luvex-bright-cyan);
+}
+
+.booking-hero__title br {
+    display: block;
+}
+
+.booking-hero__subtitle {
+    font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+    font-weight: 500;
+    color: #e9ecef;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.4;
+}
+
+.booking-hero__description br {
+    display: block;
+}
+
+.booking-hero__description .text-highlight {
+    color: var(--luvex-bright-cyan);
+}
+
+/* --- BOOKING BENEFITS SECTION --- */
+.booking-benefits {
+    padding: var(--space-xl) 0;
+    background: var(--luvex-gray-100);
+}
+
+.booking-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* --- BOOKING CALENDAR SECTION --- */
+.booking-calendar {
+    padding: var(--space-xl) 0;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.booking-calendar__header {
+    text-align: center;
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.booking-calendar__title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--luvex-dark-blue);
+    margin: 0 0 1rem 0;
+}
+
+.booking-calendar__subtitle {
+    font-size: var(--text-lg);
+    color: var(--luvex-gray-700);
+    margin: 0;
+    line-height: 1.7;
+}
+
+.booking-calendar__subtitle .text-highlight {
+    color: var(--luvex-bright-cyan);
+}
+
+.booking-calendar__container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+}
+
+.booking-calendar__container--wide {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* --- GOOGLE CALENDAR IFRAME STYLING --- */
+.google-calendar-wrapper {
+    background: var(--luvex-white);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--luvex-gray-300);
+    overflow: hidden;
+    position: relative;
+}
+
+.google-calendar-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--luvex-vibrant-blue), var(--luvex-bright-cyan));
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+.google-calendar-wrapper--optimized {
+    padding: 2rem;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.google-calendar-iframe {
+    width: 100%;
+    height: 750px;
+    border: none;
+    border-radius: var(--radius-md);
+    background: var(--luvex-white);
+    display: block;
+}
+
+.google-calendar-wrapper--optimized .google-calendar-iframe {
+    height: 850px;
+}
+
+/* --- FAQ SECTION --- */
+.booking-faq {
+    padding: var(--space-xl) 0;
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: var(--luvex-white);
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--luvex-bright-cyan);
+    transition: var(--transition-normal);
+}
+
+.faq-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.faq-question {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--luvex-dark-blue);
+    margin: 0 0 0.75rem 0;
+}
+
+.faq-answer {
+    font-size: var(--text-base);
+    color: var(--luvex-gray-700);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* --- ALTERNATIVE CONTACT SECTION --- */
+.booking-alternative {
+    padding: var(--space-xl) 0;
+    background: var(--luvex-dark-blue);
+    text-align: center;
+}
+
+.booking-alternative__content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.booking-alternative__title {
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 600;
+    color: var(--luvex-white);
+    margin: 0 0 1rem 0;
+}
+
+.booking-alternative__description {
+    font-size: var(--text-lg);
+    color: #e9ecef;
+    margin: 0 0 2rem 0;
+    line-height: 1.7;
+}
+
+.booking-alternative__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* --- LOADING STATE FOR IFRAME --- */
+.google-calendar-wrapper::after {
+    content: 'Loading calendar...';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--luvex-gray-700);
+    font-size: var(--text-lg);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.google-calendar-iframe[src=""] + .google-calendar-wrapper::after {
+    opacity: 1;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+    .booking-hero {
+        padding: calc(72px + 2rem) 0 2rem;
+        min-height: 350px;
+    }
+    
+    .booking-hero__title br {
+        display: none;
+    }
+    
+    .booking-benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .google-calendar-wrapper {
+        padding: 1rem;
+        margin: 0 -1rem;
+        border-radius: var(--radius-lg);
+    }
+    
+    .google-calendar-wrapper--optimized {
+        padding: 1rem;
+    }
+    
+    .google-calendar-iframe {
+        height: 500px;
+    }
+    
+    .google-calendar-wrapper--optimized .google-calendar-iframe {
+        height: 600px;
+    }
+    
+    .faq-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .booking-alternative__actions {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 769px) {
+    .booking-alternative__actions {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .google-calendar-iframe {
+        height: 450px;
+    }
+    
+    .google-calendar-wrapper--optimized .google-calendar-iframe {
+        height: 500px;
+    }
+    
+    .faq-item {
+        padding: 1rem;
+    }
+}
+
+/* --- ACCESSIBILITY IMPROVEMENTS --- */
+@media (prefers-reduced-motion: reduce) {
+    .faq-item:hover {
+        transform: none;
+    }
+}
+
+/* 6.3 END ===================================================== */
+
+/* ===== END [SECTION NAME] ===== */
