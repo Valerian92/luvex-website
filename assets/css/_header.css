@@ -113,6 +113,50 @@ Last Update: 2025-07-31
 
 
 /* Main Navigation */
+
+/* 1. Grundlegendes Aussehen der Menü-Links */
+.main-navigation a {
+    /* Schrift & Farbe */
+    color: var(--luvex-white);
+    font-size: 1.05rem; /* Etwas größer für einen "mächtigeren" Look */
+    font-weight: 500;
+    text-decoration: none; /* Entfernt den Standard-Unterstrich */
+
+    /* Positionierung & Übergänge */
+    position: relative; /* Notwendig für die animierte Linie unten */
+    transition: all 0.3s ease;
+    padding: 1rem; /* Innenabstand für eine größere Klickfläche */
+}
+
+/* 2. Hover-Effekt: Was passiert, wenn man mit der Maus darüberfährt */
+.main-navigation a:hover {
+    color: var(--luvex-bright-cyan); /* Ändert die Textfarbe zu Türkis */
+    transform: translateY(-2px); /* Hebt den Text leicht an */
+}
+
+/* 3. Animierte Linie unter den Links */
+.main-navigation a::after {
+    content: '';
+    position: absolute;
+    bottom: -8px; /* Abstand der Linie zum Text */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Aussehen der Linie */
+    width: 0; /* Standardmäßig unsichtbar */
+    height: 2px;
+    background: var(--luvex-bright-cyan);
+    
+    /* Animation */
+    transition: all 0.3s ease;
+}
+
+/* 4. Animation der Linie beim Hovern */
+.main-navigation a:hover::after {
+    width: 100%; /* Macht die Linie sichtbar */
+}
+
+
 .main-navigation {
     display: flex;
     align-items: center;
@@ -123,7 +167,7 @@ Last Update: 2025-07-31
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 2rem;
+    gap: 3rem;
     position: relative;
     max-width: 100%;  /* ← HINZUFÜGEN falls nicht vorhanden */
 }
@@ -144,31 +188,37 @@ Last Update: 2025-07-31
 }
 
 
-/* In _header.css */
-
 .main-navigation .sub-menu {
     position: absolute;
-    top: 100%;
-    left: 0;
+    /* Positioniert das Submenü oben bündig und rechts neben dem Elternelement */
+    top: 0;
+    left: 100%; 
+    
     background: var(--luvex-dark-blue);
-    width: max-content !important; /* Wichtig, um Astra-Stile zu überschreiben */
+    width: max-content !important; /* Behält die automatische Breite bei */
     min-width: 220px;
+    z-index: 999;
+    
+    /* Leichter Abstand zum Hauptmenüpunkt */
+    margin-left: 10px;
+
+    /* Versteckt das Menü standardmäßig */
     opacity: 0;
     visibility: hidden;
     
-    /* Übergänge und Aussehen */
+    /* Animation und Aussehen */
     border-radius: var(--radius-md);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-lg);
     border: 1px solid rgba(109, 213, 237, 0.2);
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    transform: translateX(-10px); /* Bewegt das Menü für die Animation leicht nach links */
+    transition: all 0.3s ease;
 }
 
-/* Stellt sicher, dass das Dropdown beim Hovern erscheint */
+/* Passt die Hover-Animation an die neue Richtung an */
 .main-navigation .menu-item-has-children:hover > .sub-menu {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translateX(0); /* Bewegt das Menü an seine finale Position */
 }
 
 /* Styling für die einzelnen Links im Dropdown */
