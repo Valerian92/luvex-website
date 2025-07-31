@@ -273,7 +273,10 @@ Last Update: 2025-07-31
     display: none !important;
 }
 
-
+/* Remove Astra Scroll-to-Top Button */
+#ast-scroll-top {
+    display: none !important;
+}
 
 
 
