@@ -1,0 +1,76 @@
+/*
+==============================================================================
+LUVEX THEME v2.1 - [DATEINAME]
+==============================================================================
+
+Description: [Kurze Beschreibung der Komponente]
+Dependencies: _variables.css
+Last Update: 2025-07-31
+
+==============================================================================
+*/
+
+/* ===== [Section 7: RESPONSIVE (alle @media queries)] ===== */
+/* 7. RESPONSIVE ===================================================== */
+
+/*
+ * LUVEX Custom Fix: Mobile Menu auf Desktop ausblenden
+ * Verhindert, dass das mobile Menü auf Bildschirmen, die breiter
+ * als 768px sind, angezeigt wird.
+ */
+@media (min-width: 769px) {
+    .mobile-menu-content {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-lg: 3rem;
+        --space-xl: 4rem;
+    }
+    
+    .container {
+        padding: 0 var(--space-sm);
+    }
+    
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+    
+    .flex {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: var(--space-sm);
+    }
+    
+    .card__icon {
+        width: 50px;
+        height: 50px;
+        font-size: var(--text-xl);
+    }
+}
+
+/* 8. ANIMATIONS ==================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+/* ===== END [SECTION NAME] ===== */

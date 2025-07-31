@@ -18,7 +18,7 @@ function luvex_theme_setup() {
 // === CSS/JS EINBINDEN ===
 add_action('wp_enqueue_scripts', 'luvex_enqueue_assets');
 function luvex_enqueue_assets() {
-    wp_enqueue_style('luvex-style', get_stylesheet_uri(), array(), '2.0.2'); // Version erhöht
+    wp_enqueue_style('luvex-main', get_stylesheet_directory_uri() . '/assets/css/main.css', array(), '2.1.0');
     wp_enqueue_style('luvex-fonts', 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
     wp_enqueue_style('fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
     

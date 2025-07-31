@@ -1,0 +1,124 @@
+/*
+==============================================================================
+LUVEX THEME v2.1 - [DATEINAME]
+==============================================================================
+
+Description: [Kurze Beschreibung der Komponente]
+Dependencies: _variables.css
+Last Update: 2025-07-31
+
+==============================================================================
+*/
+
+/* ===== [HERO SYSTEM ] ===== */
+
+/* --- 4.5 HERO SYSTEM --- */
+
+/* Standard Hero */
+.hero {
+    text-align: center;
+    padding: calc(72px + var(--space-lg)) 0 var(--space-lg);
+    background: linear-gradient(135deg, var(--color-light) 0%, #e8f4fd 100%);
+}
+
+.hero__title {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: var(--space-md);
+}
+
+.hero__subtitle {
+    font-size: var(--text-xl);
+    color: var(--color-gray);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto var(--space-lg) auto;
+}
+
+/* LUVEX Hero (wiederverwendbar für dark heroes) */
+/* .luvex-hero ist jetzt unsere zentrale Basis-Klasse */
+.luvex-hero {
+    background: var(--luvex-dark-blue);
+    position: relative;
+    overflow: hidden;
+    padding: calc(72px + 4rem) 2rem 4rem; /* 72px für den fixierten Header */
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--luvex-white);
+}
+
+/* Das Grid-Muster, das alle dunklen Heroes teilen könnten */
+.luvex-hero::before,
+.booking-hero::before,
+.about-hero::before,
+.contact-hero::before,
+.auth-hero::before,
+.profile-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.luvex-hero__container { /* Wiederverwendbarer Container für den Inhalt */
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+}
+
+.luvex-hero__title { /* Wiederverwendbarer Titel */
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 600;
+    color: inherit;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.1;
+}
+
+.luvex-hero__title .text-highlight {
+    color: var(--luvex-bright-cyan);
+}
+
+.luvex-hero__subtitle { /* Wiederverwendbarer Untertitel */
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    font-weight: 500;
+    color: #e9ecef;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.4;
+}
+
+.luvex-hero__description { /* Wiederverwendbare Beschreibung */
+    font-size: var(--text-lg);
+    color: #ced4da;
+    margin: 0 auto 2rem auto;
+    line-height: 1.6;
+    max-width: 700px;
+}
+
+/* Jetzt die kleinen Modifikatoren.
+   Die erben alles von .luvex-hero und überschreiben nur die Höhe.
+   Wir fügen sie direkt unter dem .luvex-hero ein.
+*/
+
+/* Spezifische Höhenanpassungen */
+.booking-hero,
+.contact-hero,
+.auth-hero {
+    min-height: 400px;
+}
+
+.profile-hero {
+    min-height: 350px;
+}
+
+/* ===== END [SECTION NAME] ===== */
