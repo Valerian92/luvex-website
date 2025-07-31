@@ -217,7 +217,10 @@ Last Update: 2025-07-31
 }
 
 
-
+/* Unerwünschten Astra-Pfeil-Button entfernen */
+.main-navigation .ast-menu-toggle {
+    display: none !important;
+}
 
 
 /* ===== END [Section 4.6: Navigation System (.site-header, .main-navigation)] ===== */

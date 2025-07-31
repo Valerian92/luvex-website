@@ -1,23 +1,29 @@
 <?php
+/**
+ * LUVEX Theme Functions and Definitions
+ *
+ * @package Luvex
+ * @since 2.1.0
+ */
+
 // === ASTRA THEME DEAKTIVIERUNG UND LUVEX ÜBERNAHME ===
 
-// 1. Astra Header/Footer komplett deaktivieren
-add_action('after_setup_theme', 'luvex_disable_astra_navigation', 30); // Hohe Priorität!
-function luvex_disable_astra_navigation() {
-    // Astra Header/Footer Hooks entfernen
+/**
+ * Deaktiviert die Standard-Header/Footer-Komponenten von Astra,
+ * um sie durch die eigenen des LUVEX Themes zu ersetzen.
+ */
+add_action('after_setup_theme', 'luvex_disable_astra_components', 30);
+function luvex_disable_astra_components() {
     remove_all_actions('astra_header');
     remove_all_actions('astra_footer');
-    
-    // Astra Navigation Hooks entfernen
     remove_all_actions('astra_primary_navigation');
     remove_all_actions('astra_masthead_content');
-    
-    // Astra CSS deaktivieren (optional)
-    add_filter('astra_enqueue_theme_css', '__return_false');
 }
 
-// 2. LUVEX Navigation Menüs registrieren - KORRIGIERT
-add_action('after_setup_theme', 'luvex_theme_setup', 20);
+/**
+ * Richtet grundlegende Theme-Funktionen und Menüs ein.
+ */
+add_action('after_setup_theme', 'luvex_theme_setup');
 function luvex_theme_setup() {
     // Navigation Menüs registrieren
     register_nav_menus(array(
@@ -34,37 +40,21 @@ function luvex_theme_setup() {
     add_theme_support('custom-logo');
     add_theme_support('html5', array('search-form', 'comment-form', 'comment-list'));
     add_theme_support('title-tag');
-
-
-    
 }
 
 // === PROFESSIONAL NAVIGATION WALKER ===
+
+/**
+ * Custom Navigation Walker, um dem Menü einen Dropdown-Pfeil hinzuzufügen.
+ * Dies gibt uns volle Kontrolle über das Menü-HTML.
+ */
 class Luvex_Nav_Walker extends Walker_Nav_Menu {
-    
-    // Start Level - <ul>
-    public function start_lvl( &$output, $depth = 0, $args = null ) {
-        $indent = str_repeat("\t", $depth);
-        $output .= "\n$indent<ul class=\"sub-menu\">\n";
-    }
-
-    // End Level - </ul>
-    public function end_lvl( &$output, $depth = 0, $args = null ) {
-        $indent = str_repeat("\t", $depth);
-        $output .= "$indent</ul>\n";
-    }
-
     // Start Element - <li>
     public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
         $indent = ($depth) ? str_repeat("\t", $depth) : '';
         
         $classes = empty($item->classes) ? array() : (array) $item->classes;
         $classes[] = 'menu-item-' . $item->ID;
-        
-        // Add has-children class for parent items
-        if (in_array('menu-item-has-children', $classes)) {
-            $classes[] = 'has-dropdown';
-        }
         
         $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
         $class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
@@ -83,7 +73,7 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
         $item_output .= '<a' . $attributes . '>';
         $item_output .= (isset($args->link_before) ? $args->link_before : '') . apply_filters('the_title', $item->title, $item->ID) . (isset($args->link_after) ? $args->link_after : '');
         
-        // Add dropdown arrow for parent items
+        // Fügt den Dropdown-Pfeil nur bei Elternelementen hinzu.
         if (in_array('menu-item-has-children', $classes)) {
             $item_output .= ' <i class="fa-solid fa-chevron-down dropdown-arrow"></i>';
         }
@@ -91,29 +81,41 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
         $item_output .= '</a>';
         $item_output .= isset($args->after) ? $args->after : '';
 
+        // Wichtig: Wir müssen das Filter hier anwenden, sonst wird das Menü nicht korrekt ausgegeben
         $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
     }
+}
 
-    // End Element - </li>
-    public function end_el( &$output, $item, $depth = 0, $args = null ) {
-        $output .= "</li>\n";
+// === CSS & JAVASCRIPT LADEN ===
+
+/**
+ * Lädt alle Stylesheets und JavaScript-Dateien für das LUVEX Theme.
+ * Deaktiviert gleichzeitig die Standard-Styles von Astra.
+ */
+add_action('wp_enqueue_scripts', 'luvex_enqueue_assets', 999);
+function luvex_enqueue_assets() {
+    // === STYLES ===
+    // Deaktiviert das Haupt-Stylesheet von Astra
+    wp_dequeue_style('astra-theme-css');
+    
+    // Lädt unser neues, modulares Haupt-Stylesheet
+    wp_enqueue_style('luvex-main', get_stylesheet_directory_uri() . '/assets/css/main.css', array(), '2.1.2');
+
+    // === SCRIPTS ===
+    // WordPress wird jQuery automatisch laden, da es als Abhängigkeit definiert ist.
+    $dependencies = array('jquery');
+
+    // Eigene JS-Dateien einbinden. Das 'true' am Ende lädt sie im Footer.
+    wp_enqueue_script('luvex-modal', get_stylesheet_directory_uri() . '/assets/js/modal.js', $dependencies, null, true);
+    wp_enqueue_script('luvex-mobile-menu', get_stylesheet_directory_uri() . '/assets/js/mobile-menu.js', $dependencies, null, true);
+    wp_enqueue_script('luvex-footer-light', get_stylesheet_directory_uri() . '/assets/js/footer-light-effect.js', array(), null, true);
+    
+    // Three.js für die Globus-Animation (wird nur auf der Startseite geladen)
+    if (is_front_page() || is_home()) {
+        // Lädt die Three.js-Bibliothek von einem CDN
+        wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), null, true);
+        // Lädt unser Globus-Animationsskript und definiert three-js als Abhängigkeit
+        wp_enqueue_script('luvex-globe', get_stylesheet_directory_uri() . '/assets/js/globe-animation.js', array('three-js'), null, true);
     }
 }
-
-
-
-
-// 4. Astra Styles komplett überschreiben
-add_action('wp_enqueue_scripts', 'luvex_override_astra_styles', 999);
-function luvex_override_astra_styles() {
-    // Astra Styles dequeue
-    wp_dequeue_style('astra-theme-css');
-    wp_dequeue_style('astra-navigation');
-    
-    // LUVEX Styles mit höchster Priorität
-    wp_enqueue_style('luvex-main', get_stylesheet_directory_uri() . '/assets/css/main.css', array(), '2.1.1');
-}
-
-// === BESTEHENDER CODE BLEIBT ===
-// ... (dein restlicher functions.php Code)
 ?>
