@@ -126,6 +126,14 @@ a:hover {
 
 
 
+/* Versteckt die Standard-Scrollbar, während Scrollen möglich bleibt */
+body::-webkit-scrollbar {
+    display: none; /* Für Chrome, Safari und Edge */
+}
 
+body {
+    -ms-overflow-style: none;  /* Für IE und Edge */
+    scrollbar-width: none;  /* Für Firefox */
+}
 
 /* ===== END [SECTION NAME] ===== */

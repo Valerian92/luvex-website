@@ -105,4 +105,44 @@ Last Update: 2025-07-31
     color: var(--luvex-bright-cyan);
 }
 
+
+/* Styling für den Scroll-to-Top Button */
+#scrollToTopBtn {
+    display: none; /* Standardmäßig versteckt */
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    
+    /* Aussehen */
+    background-color: var(--luvex-vibrant-blue);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    
+    /* Schöner Effekt */
+    box-shadow: var(--shadow-md);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+#scrollToTopBtn.visible {
+    display: flex; /* Oder block */
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#scrollToTopBtn:hover {
+    background-color: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+}
+
+
 /* ===== END [Section 4.2: Button System (.btn, .luvex-cta-primary)] ===== */

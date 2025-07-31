@@ -172,10 +172,11 @@ Last Update: 2025-07-31
 /* Styling für die einzelnen Links im Dropdown */
 .main-navigation .sub-menu a {
     padding: 0.75rem 1.5rem;
-    display: block; /* Wichtig für korrekte Darstellung */
+    display: block;
     font-size: var(--text-sm);
     border-bottom: 1px solid rgba(109, 213, 237, 0.1);
     transition: all 0.3s ease;
+    white-space: nowrap; /* Verhindert den Textumbruch */
 }
 
 .main-navigation .sub-menu a:hover {

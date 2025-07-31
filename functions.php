@@ -109,6 +109,8 @@ function luvex_enqueue_assets() {
     wp_enqueue_script('luvex-modal', get_stylesheet_directory_uri() . '/assets/js/modal.js', $dependencies, null, true);
     wp_enqueue_script('luvex-mobile-menu', get_stylesheet_directory_uri() . '/assets/js/mobile-menu.js', $dependencies, null, true);
     wp_enqueue_script('luvex-footer-light', get_stylesheet_directory_uri() . '/assets/js/footer-light-effect.js', array(), null, true);
+    wp_enqueue_script('luvex-scroll-to-top', get_stylesheet_directory_uri() . '/assets/js/scroll-to-top.js', array(), null, true);
+
     
     // Three.js für die Globus-Animation (wird nur auf der Startseite geladen)
     if (is_front_page() || is_home()) {
