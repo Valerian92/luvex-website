@@ -23,8 +23,6 @@ Last Update: 2025-07-31
     width: 100%; /* <-- KORRIGIERT */
     /* Die margin-left/right Regeln sind bei width: 100% oft nicht mehr nötig,
        aber lasse sie vorerst drin, um das Layout nicht zu verändern. */
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
 }
 
 .modern-footer::before {

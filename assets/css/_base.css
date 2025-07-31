@@ -124,7 +124,10 @@ a:hover {
 /* Hier den style.css Inhalt einfügen */
 
 
-
+/* Astra Scroll-to-Top-Button komplett entfernen */
+#ast-scroll-top {
+    display: none !important;
+}
 
 /* Versteckt die Standard-Scrollbar, während Scrollen möglich bleibt */
 body::-webkit-scrollbar {
