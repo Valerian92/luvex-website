@@ -1,10 +1,6 @@
 <?php
 /**
- * The template for displaying the footer
- *
- * Contains the closing of the #content div and all content after.
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ * The template for displaying the footer - WORDPRESS MENÜS VERSION
  *
  * @package Luvex
  * @since 1.7.0
@@ -49,56 +45,60 @@
 				</div>
 			</div>
 
-			<!-- Services -->
+			<!-- Services Menu -->
 			<div class="footer-section">
 				<h4 class="footer-section-title">Services</h4>
-				<ul class="footer-menu footer-services">
-					<li><a href="/uv-consulting/">UV Consulting</a></li>
-					<li><a href="/system-design/">System Design</a></li>
-					<li><a href="/process-optimization/">Process Optimization</a></li>
-					<li><a href="/training-education/">Training & Education</a></li>
-					<li><a href="/technology-assessment/">Technology Assessment</a></li>
-					<li><a href="/independent-analysis/">Independent Analysis</a></li>
-				</ul>
+				<?php
+				wp_nav_menu(array(
+					'theme_location' => 'footer-services',
+					'menu_class'     => 'footer-menu',
+					'container'      => false,
+					'depth'          => 1,
+					'fallback_cb'    => 'luvex_footer_services_fallback'
+				));
+				?>
 			</div>
 
-			<!-- Technologies -->
+			<!-- Technologies Menu -->
 			<div class="footer-section">
 				<h4 class="footer-section-title">Technologies</h4>
-				<ul class="footer-menu footer-technologies">
-					<li><a href="/uv-c-disinfection/">UV-C Disinfection</a></li>
-					<li><a href="/led-uv-systems/">LED UV Systems</a></li>
-					<li><a href="/mercury-uv-lamps/">Mercury UV Lamps</a></li>
-					<li><a href="/uv-curing/">UV Curing</a></li>
-					<li><a href="/water-treatment/">Water Treatment</a></li>
-					<li><a href="/air-purification/">Air Purification</a></li>
-				</ul>
+				<?php
+				wp_nav_menu(array(
+					'theme_location' => 'footer-technologies',
+					'menu_class'     => 'footer-menu',
+					'container'      => false,
+					'depth'          => 1,
+					'fallback_cb'    => 'luvex_footer_technologies_fallback'
+				));
+				?>
 			</div>
 
-			<!-- Resources -->
+			<!-- Resources Menu -->
 			<div class="footer-section">
 				<h4 class="footer-section-title">Resources</h4>
-				<ul class="footer-menu footer-resources">
-					<li><a href="/uv-simulator/">UV Simulator</a></li>
-					<li><a href="/knowledge-base/">Knowledge Base</a></li>
-					<li><a href="/case-studies/">Case Studies</a></li>
-					<li><a href="/technical-papers/">Technical Papers</a></li>
-					<li><a href="/webinars/">Webinars</a></li>
-					<li><a href="/uv-calculator/">UV Calculator</a></li>
-				</ul>
+				<?php
+				wp_nav_menu(array(
+					'theme_location' => 'footer-resources',
+					'menu_class'     => 'footer-menu',
+					'container'      => false,
+					'depth'          => 1,
+					'fallback_cb'    => 'luvex_footer_resources_fallback'
+				));
+				?>
 			</div>
 
-			<!-- Company -->
+			<!-- Company Menu -->
 			<div class="footer-section">
 				<h4 class="footer-section-title">Company</h4>
-				<ul class="footer-menu footer-company">
-					<li><a href="/about/">About LUVEX</a></li>
-					<li><a href="/our-team/">Our Team</a></li>
-					<li><a href="/careers/">Careers</a></li>
-					<li><a href="/news-events/">News & Events</a></li>
-					<li><a href="/contact/">Contact</a></li>
-					<li><a href="/partnerships/">Partnerships</a></li>
-				</ul>
+				<?php
+				wp_nav_menu(array(
+					'theme_location' => 'footer-company',
+					'menu_class'     => 'footer-menu',
+					'container'      => false,
+					'depth'          => 1,
+					'fallback_cb'    => 'luvex_footer_company_fallback'
+				));
+				?>
 			</div>
 
 		</div>
@@ -107,41 +107,106 @@
 		<div class="footer-bottom">
     		<div class="footer-bottom-content">
         		<div class="footer-bottom-left">
-				<p class="footer-copyright">
-					&copy; <?php echo esc_html( date( 'Y' ) ); ?> LUVEX. All rights reserved.
-				</p>
-			</div>
-			<div class="footer-bottom-center">
-				<nav class="footer-legal-nav">
-					<?php
-						wp_nav_menu(
-							array(
-								'theme_location' => 'footer-legal',
-								'menu_id'        => 'footer-legal-menu',
-								'container'      => false,
-								'depth'          => 1,
-								'fallback_cb'    => function() {
-									echo '<ul>';
-									echo '<li><a href="#">Privacy Policy</a></li>';
-									echo '<li><a href="#">Terms of Service</a></li>';
-									echo '<li><a href="#">Cookie Policy</a></li>';
-									echo '</ul>';
-								},
-							)
-						);
-					?>
-				</nav>
-			</div>
-			<div class="footer-bottom-right">
-				<p class="footer-location">
-					Made with precision in Germany 🇩🇪
-				</p>
+					<p class="footer-copyright">
+						&copy; <?php echo esc_html( date( 'Y' ) ); ?> LUVEX. All rights reserved.
+					</p>
+				</div>
+				<div class="footer-bottom-center">
+					<nav class="footer-legal-nav">
+						<?php
+						wp_nav_menu(array(
+							'theme_location' => 'footer-legal',
+							'menu_id'        => 'footer-legal-menu',
+							'container'      => false,
+							'depth'          => 1,
+							'fallback_cb'    => 'luvex_footer_legal_fallback'
+						));
+						?>
+					</nav>
+				</div>
+				<div class="footer-bottom-right">
+					<p class="footer-location">
+						Made with precision in Germany 🇩🇪
+					</p>
 				</div>
 			</div>
 		</div>
 
 	</div>
 </footer>
+
+<?php
+// Footer Fallback-Funktionen - nur für Admins sichtbar
+function luvex_footer_services_fallback() {
+	if (current_user_can('edit_theme_options')) {
+		echo '<ul class="footer-menu">';
+		echo '<li><a href="' . admin_url('nav-menus.php') . '" style="color: red;">Services Menü einrichten →</a></li>';
+		echo '</ul>';
+	} else {
+		echo '<ul class="footer-menu">';
+		echo '<li><a href="/uv-consulting/">UV Consulting</a></li>';
+		echo '<li><a href="/system-design/">System Design</a></li>';
+		echo '<li><a href="/process-optimization/">Process Optimization</a></li>';
+		echo '</ul>';
+	}
+}
+
+function luvex_footer_technologies_fallback() {
+	if (current_user_can('edit_theme_options')) {
+		echo '<ul class="footer-menu">';
+		echo '<li><a href="' . admin_url('nav-menus.php') . '" style="color: red;">Technologies Menü einrichten →</a></li>';
+		echo '</ul>';
+	} else {
+		echo '<ul class="footer-menu">';
+		echo '<li><a href="/uv-c-disinfection/">UV-C Disinfection</a></li>';
+		echo '<li><a href="/led-uv-systems/">LED UV Systems</a></li>';
+		echo '<li><a href="/mercury-uv-lamps/">Mercury UV Lamps</a></li>';
+		echo '</ul>';
+	}
+}
+
+function luvex_footer_resources_fallback() {
+	if (current_user_can('edit_theme_options')) {
+		echo '<ul class="footer-menu">';
+		echo '<li><a href="' . admin_url('nav-menus.php') . '" style="color: red;">Resources Menü einrichten →</a></li>';
+		echo '</ul>';
+	} else {
+		echo '<ul class="footer-menu">';
+		echo '<li><a href="/uv-simulator/">UV Simulator</a></li>';
+		echo '<li><a href="/knowledge-base/">Knowledge Base</a></li>';
+		echo '<li><a href="/case-studies/">Case Studies</a></li>';
+		echo '</ul>';
+	}
+}
+
+function luvex_footer_company_fallback() {
+	if (current_user_can('edit_theme_options')) {
+		echo '<ul class="footer-menu">';
+		echo '<li><a href="' . admin_url('nav-menus.php') . '" style="color: red;">Company Menü einrichten →</a></li>';
+		echo '</ul>';
+	} else {
+		echo '<ul class="footer-menu">';
+		echo '<li><a href="/about/">About LUVEX</a></li>';
+		echo '<li><a href="/our-team/">Our Team</a></li>';
+		echo '<li><a href="/contact/">Contact</a></li>';
+		echo '</ul>';
+	}
+}
+
+function luvex_footer_legal_fallback() {
+	if (current_user_can('edit_theme_options')) {
+		echo '<ul>';
+		echo '<li><a href="' . admin_url('nav-menus.php') . '" style="color: red;">Legal Menü einrichten →</a></li>';
+		echo '</ul>';
+	} else {
+		echo '<ul>';
+		echo '<li><a href="/privacy-policy/">Privacy Policy</a></li>';
+		echo '<li><a href="/terms-of-service/">Terms of Service</a></li>';
+		echo '<li><a href="/impressum/">Impressum</a></li>';
+		echo '</ul>';
+	}
+}
+?>
 
 <?php wp_footer(); ?>
 

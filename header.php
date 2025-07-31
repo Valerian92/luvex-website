@@ -1,6 +1,6 @@
 <?php
 /**
- * The header for our theme - CLEAN VERSION ohne Fallback-Menüs
+ * The header for our theme - NAVIGATION DEBUG VERSION
  * 
  * @package Luvex
  * @since 2.0.0
@@ -39,33 +39,49 @@
             ?>
         </div>
 
-        <!-- Desktop Navigation - NUR WORDPRESS MENÜ -->
+        <!-- Desktop Navigation - MIT DEBUG -->
         <nav id="desktop-navigation" class="main-navigation">
             <?php
-           wp_nav_menu( array(
-             'theme_location' => 'primary',
-                'menu_id'        => 'primary-menu',
-             'container'      => false,
-               'fallback_cb'    => false,
-             ) );
+            // Debug: Prüfen ob Menü existiert
+            if (current_user_can('administrator') && isset($_GET['debug_nav'])) {
+                echo '<!-- DEBUG: Navigation wird geladen -->';
+                $locations = get_theme_mod('nav_menu_locations');
+                echo '<!-- DEBUG: Primary Menu ID: ' . (isset($locations['primary']) ? $locations['primary'] : 'NICHT_ZUGEWIESEN') . ' -->';
+            }
+            
+            // Menü mit erweiterten Parametern
+            $menu_output = wp_nav_menu(array(
+                            'theme_location' => 'primary',
+                            'menu_id'        => 'primary-menu',
+                            'container'      => false,
+                            'depth'          => 2,
+                            'walker'         => new Luvex_Nav_Walker(),
+                            'fallback_cb'    => 'luvex_primary_menu_fallback'
+                        ));
+            if (!empty($menu_output)) {
+                echo $menu_output;
+            } else {
+                // Fallback wenn kein Menü
+                luvex_primary_menu_fallback();
+            }
             ?>
         </nav>
 
-            <!-- CTA Button -->
-            <div class="header-cta">
-                <?php if (is_user_logged_in()) : 
-                    $current_user = wp_get_current_user(); ?>
-                    <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'profile' ) ) ); ?>" class="header-cta-button">
-                        <i class="fa-solid fa-user"></i>
-                        <span><?php echo esc_html($current_user->first_name ?: 'Profile'); ?></span>
-                    </a>
-                <?php else : ?>
-                    <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="header-cta-button">
-                        <i class="fa-solid fa-comments"></i>
-                        <span>Get Consultation</span>
-                    </a>
-                <?php endif; ?>
-            </div>
+        <!-- CTA Button -->
+        <div class="header-cta">
+            <?php if (is_user_logged_in()) : 
+                $current_user = wp_get_current_user(); ?>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'profile' ) ) ); ?>" class="header-cta-button">
+                    <i class="fa-solid fa-user"></i>
+                    <span><?php echo esc_html($current_user->first_name ?: 'Profile'); ?></span>
+                </a>
+            <?php else : ?>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="header-cta-button">
+                    <i class="fa-solid fa-comments"></i>
+                    <span>Get Consultation</span>
+                </a>
+            <?php endif; ?>
+        </div>
 
         <!-- Mobile Menu Button -->
         <div class="mobile-menu-toggle">
@@ -80,17 +96,17 @@
         </div>
     </div>
 
-    <!-- Mobile Navigation Menu - NUR WORDPRESS MENÜ -->
+    <!-- Mobile Navigation Menu -->
     <nav id="mobile-menu" class="mobile-navigation" aria-hidden="true">
         <div class="mobile-menu-content">
-        <?php
-        wp_nav_menu( array(
-            'theme_location' => 'primary',
-            'menu_id'        => 'mobile-menu',
-            'container'      => false,
-         'fallback_cb'    => false,
-        ) );
-        ?>
+            <?php
+            wp_nav_menu(array(
+                'theme_location' => 'primary',
+                'menu_id'        => 'mobile-menu-list',
+                'container'      => false,
+                'fallback_cb'    => 'luvex_primary_menu_fallback',
+            ));
+            ?>
         </div>
     </nav>
 </header>
@@ -98,3 +114,21 @@
 <div id="content" class="site-content">
     <div id="primary" class="content-area">
         <main id="main" class="site-main">
+
+<?php
+// Fallback-Funktion für Navigation
+function luvex_primary_menu_fallback() {
+    if (current_user_can('edit_theme_options')) {
+        echo '<ul id="primary-menu">';
+        echo '<li><a href="' . admin_url('nav-menus.php') . '" style="color: red;">Menü einrichten →</a></li>';
+        echo '</ul>';
+    } else {
+        // Standard-Fallback für normale Besucher
+        echo '<ul id="primary-menu">';
+        echo '<li><a href="' . home_url('/about/') . '">About</a></li>';
+        echo '<li><a href="' . home_url('/uv-technology/') . '">UV Technology</a></li>';
+        echo '<li><a href="' . home_url('/contact/') . '">Contact</a></li>';
+        echo '</ul>';
+    }
+}
+?>
