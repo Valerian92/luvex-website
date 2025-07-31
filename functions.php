@@ -102,35 +102,6 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
 
 
 
-// 3. Debug-Funktion für Navigation
-add_action('wp_footer', 'luvex_debug_navigation');
-function luvex_debug_navigation() {
-    if (current_user_can('administrator') && isset($_GET['debug_nav'])) {
-        echo '<div style="position:fixed;bottom:0;left:0;background:#000;color:#fff;padding:10px;z-index:9999;">';
-        echo '<h4>Navigation Debug:</h4>';
-        
-        // Registrierte Menü-Locations anzeigen
-        $locations = get_theme_mod('nav_menu_locations');
-        echo '<p><strong>Registrierte Locations:</strong></p>';
-        $nav_menus = get_registered_nav_menus();
-        foreach($nav_menus as $location => $name) {
-            $menu_id = isset($locations[$location]) ? $locations[$location] : 'Nicht zugewiesen';
-            echo "<p>$location: $name (Menu ID: $menu_id)</p>";
-        }
-        
-        // Alle verfügbaren Menüs anzeigen
-        echo '<p><strong>Verfügbare Menüs:</strong></p>';
-        $menus = wp_get_nav_menus();
-        foreach($menus as $menu) {
-            echo "<p>ID: {$menu->term_id} - Name: {$menu->name}</p>";
-        }
-        echo '</div>';
-    }
-}
-
-
-
-
 
 // 4. Astra Styles komplett überschreiben
 add_action('wp_enqueue_scripts', 'luvex_override_astra_styles', 999);

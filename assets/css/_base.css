@@ -123,4 +123,12 @@ a:hover {
 
 /* Hier den style.css Inhalt einfügen */
 
+
+
+
+/* Remove Astra Scroll-to-Top Button */
+#ast-scroll-top {
+    display: none !important;
+}
+
 /* ===== END [SECTION NAME] ===== */
