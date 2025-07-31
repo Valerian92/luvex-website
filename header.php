@@ -51,13 +51,13 @@
             
             // Menü mit erweiterten Parametern
             $menu_output = wp_nav_menu(array(
-                'theme_location' => 'primary',
-                'menu_id'        => 'primary-menu',
-                'container'      => false,
-                'fallback_cb'    => 'luvex_primary_menu_fallback',
-                'echo'           => false
-            ));
-            
+                            'theme_location' => 'primary',
+                            'menu_id'        => 'primary-menu',
+                            'container'      => false,
+                            'depth'          => 2,
+                            'walker'         => new Luvex_Nav_Walker(),
+                            'fallback_cb'    => 'luvex_primary_menu_fallback'
+                        ));
             if (!empty($menu_output)) {
                 echo $menu_output;
             } else {
