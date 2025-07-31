@@ -20,9 +20,9 @@ Last Update: 2025-07-31
     padding: 4rem 0 2rem;
     position: relative;
     overflow: hidden;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+    width: 100%; /* <-- KORRIGIERT */
+    /* Die margin-left/right Regeln sind bei width: 100% oft nicht mehr nötig,
+       aber lasse sie vorerst drin, um das Layout nicht zu verändern. */
 }
 
 .modern-footer::before {
@@ -32,11 +32,12 @@ Last Update: 2025-07-31
     left: 0;
     width: 100%;
     height: 100%;
+    /* Dies ist der Code, der das Grid erzeugt */
     background: 
         linear-gradient(90deg, rgba(109, 213, 237, 0.08) 1px, transparent 1px),
         linear-gradient(0deg, rgba(109, 213, 237, 0.08) 1px, transparent 1px);
     background-size: 50px 50px;
-    opacity: 0.3;
+    opacity: 0.4; /* <-- TIPP: Erhöhe diesen Wert (z.B. auf 0.5), wenn das Gitter zu blass ist. */
     pointer-events: none;
     z-index: 1;
 }

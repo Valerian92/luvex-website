@@ -124,11 +124,21 @@ a:hover {
 /* Hier den style.css Inhalt einfügen */
 
 
-
-
-/* Remove Astra Scroll-to-Top Button */
+/* Astra Scroll-to-Top-Button komplett entfernen */
 #ast-scroll-top {
     display: none !important;
 }
+
+/* Versteckt die Standard-Scrollbar, während Scrollen möglich bleibt */
+html, body {
+    -ms-overflow-style: none;  /* Für IE und Edge */
+    scrollbar-width: none;  /* Für Firefox */
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none; /* Für Chrome, Safari */
+}
+
+
 
 /* ===== END [SECTION NAME] ===== */

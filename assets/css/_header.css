@@ -143,139 +143,58 @@ Last Update: 2025-07-31
     position: relative;
 }
 
-.main-navigation .menu-item:hover .sub-menu {
+
+/* In _header.css */
+
+.main-navigation .sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--luvex-dark-blue);
+    width: max-content !important; /* Wichtig, um Astra-Stile zu überschreiben */
+    min-width: 220px;
+    opacity: 0;
+    visibility: hidden;
+    
+    /* Übergänge und Aussehen */
+    border-radius: var(--radius-md);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(109, 213, 237, 0.2);
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+}
+
+/* Stellt sicher, dass das Dropdown beim Hovern erscheint */
+.main-navigation .menu-item-has-children:hover > .sub-menu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
 
-.main-navigation .sub-menu li {
-    width: 100%;
-}
-
+/* Styling für die einzelnen Links im Dropdown */
 .main-navigation .sub-menu a {
     padding: 0.75rem 1.5rem;
     display: block;
     font-size: var(--text-sm);
     border-bottom: 1px solid rgba(109, 213, 237, 0.1);
     transition: all 0.3s ease;
+    white-space: nowrap; /* Verhindert den Textumbruch */
 }
 
 .main-navigation .sub-menu a:hover {
     background: rgba(109, 213, 237, 0.1);
-    padding-left: 2rem;
+    padding-left: 2rem; /* Schöner Einrück-Effekt */
 }
 
-/* Dropdown Styling - nach .main-navigation a:hover */
-.main-navigation .sub-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: var(--luvex-dark-blue);
-    min-width: 200px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    z-index: 999;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-lg);
-}
-
-
+/* Entfernt die untere Linie beim letzten Element */
 .main-navigation .sub-menu li:last-child a {
     border-bottom: none;
 }
 
-
-.main-navigation a {
-    color: var(--luvex-white);
-    font-weight: 500;
-    font-size: var(--text-base);
-    transition: var(--transition-normal);
-    text-decoration: none;
-}
-
-.main-navigation a {
-    position: relative;
-    transition: all 0.3s ease;
-}
-
-.main-navigation a::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: var(--luvex-bright-cyan);
-    transition: all 0.3s ease;
-    transform: translateX(-50%);
-}
-
-.main-navigation a:hover {
-    color: var(--luvex-bright-cyan);
-    transform: translateY(-2px);
-}
-
-.main-navigation a:hover::after {
-    width: 100%;
-}
-
-/* Professional Dropdown System */
-.main-navigation .menu-item-has-children {
-    position: relative;
-}
-
-.main-navigation .sub-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: var(--luvex-dark-blue);
-    min-width: 220px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    z-index: 999;
-    border-radius: var(--radius-md);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(109, 213, 237, 0.2);
-}
-
-.main-navigation .menu-item-has-children:hover .sub-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.main-navigation .dropdown-arrow {
-    font-size: 0.8rem;
-    margin-left: 0.5rem;
-    transition: transform 0.3s ease;
-}
-
-.main-navigation .menu-item-has-children:hover .dropdown-arrow {
-    transform: rotate(180deg);
-}
-
-.main-navigation .sub-menu a {
-    padding: 0.75rem 1.5rem;
-    border-bottom: 1px solid rgba(109, 213, 237, 0.1);
-}
-
-.main-navigation .sub-menu a::after {
-    display: none; /* Remove underline effect for sub-menu items */
-}
-
-/* Hide WordPress default dropdown arrow */
+/* Versteckt den WordPress-Standardpfeil zuverlässig */
 .main-navigation .menu-item-has-children > a::after {
     display: none !important;
 }
-
-
-
-
 
 
 /* Mobile Dropdown Support */
@@ -301,7 +220,10 @@ Last Update: 2025-07-31
 }
 
 
-
+/* Unerwünschten Astra-Pfeil-Button entfernen */
+.main-navigation .ast-menu-toggle {
+    display: none !important;
+}
 
 
 /* ===== END [Section 4.6: Navigation System (.site-header, .main-navigation)] ===== */

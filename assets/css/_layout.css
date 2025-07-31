@@ -108,4 +108,20 @@ Last Update: 2025-07-31
 }
 
 
+/* Fuer Produkte mit FAQs daneben*/
+.grid-2-faq {
+  display: grid;
+  grid-template-columns: 1fr; /* Default to 1 column on mobile */
+  gap: 2.5rem; /* 40px */
+}
+
+/* On medium screens and up, switch to 2 columns */
+@media (min-width: 768px) {
+  .grid-2-faq {
+    grid-template-columns: repeat(2, 1fr);
+    align-items: flex-start;
+  }
+}
+
+
 /* ===== END [LAYOUT SYSTEM (.container, .grid, .flex)] ===== */
