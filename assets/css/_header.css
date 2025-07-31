@@ -151,7 +151,7 @@ Last Update: 2025-07-31
     top: 100%;
     left: 0;
     background: var(--luvex-dark-blue);
-    width: max-content; /* <-- DIESE ZEILE HINZUFÜGEN */
+    width: max-content !important; /* Wichtig, um Astra-Stile zu überschreiben */
     min-width: 220px;
     opacity: 0;
     visibility: hidden;
