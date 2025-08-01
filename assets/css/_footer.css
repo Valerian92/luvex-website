@@ -37,7 +37,7 @@ Last Update: 2025-07-31
         linear-gradient(90deg, rgba(109, 213, 237, 0.08) 1px, transparent 1px),
         linear-gradient(0deg, rgba(109, 213, 237, 0.08) 1px, transparent 1px);
     background-size: 50px 50px;
-    opacity: 0.4; /* <-- TIPP: Erhöhe diesen Wert (z.B. auf 0.5), wenn das Gitter zu blass ist. */
+    opacity: 0.7; /* <-- TIPP: Erhöhe diesen Wert (z.B. auf 0.5), wenn das Gitter zu blass ist. */
     pointer-events: none;
     z-index: 1;
 }
