@@ -157,30 +157,7 @@ Last Update: 2025-07-31
 }
 
 
-.main-navigation {
-    display: flex;
-    align-items: center;
-}
 
-.main-navigation ul {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap: 3rem;
-    position: relative;
-    max-width: 100%;  /* ← HINZUFÜGEN falls nicht vorhanden */
-}
-
-.header-container {
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0 var(--space-md);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 80px; /* von 72px auf 80px */
-}
 
 /* Dropdown Container Fix */
 .main-navigation li {
@@ -190,27 +167,28 @@ Last Update: 2025-07-31
 
 .main-navigation .sub-menu {
     position: absolute;
-    /* Positioniert das Submenü oben bündig und rechts neben dem Elternelement */
-    top: 0;
-    left: 100%; 
+    /* KORRIGIERT: Dropdown nach unten */
+    top: 100%;
+    left: 0;
     
     background: var(--luvex-dark-blue);
-    width: max-content !important; /* Behält die automatische Breite bei */
-    min-width: 220px;
-    z-index: 999;
+    width: auto;
+    min-width: 250px;
+    max-width: 400px;
+    z-index: 9999;
     
-    /* Leichter Abstand zum Hauptmenüpunkt */
-    margin-left: 10px;
+    /* KORRIGIERT: Margin nach unten */
+    margin-top: 8px;
+    margin-left: 0;
 
-    /* Versteckt das Menü standardmäßig */
     opacity: 0;
     visibility: hidden;
     
-    /* Animation und Aussehen */
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(109, 213, 237, 0.2);
-    transform: translateX(-10px); /* Bewegt das Menü für die Animation leicht nach links */
+    /* KORRIGIERT: Animation nach unten */
+    transform: translateY(-10px);
     transition: all 0.3s ease;
 }
 
@@ -218,7 +196,7 @@ Last Update: 2025-07-31
 .main-navigation .menu-item-has-children:hover > .sub-menu {
     opacity: 1;
     visibility: visible;
-    transform: translateX(0); /* Bewegt das Menü an seine finale Position */
+    transform: translateY(0); /* KORRIGIERT */
 }
 
 /* Styling für die einzelnen Links im Dropdown */
