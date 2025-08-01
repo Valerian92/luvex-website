@@ -182,34 +182,33 @@ Last Update: 2025-07-31
     position: relative;
 }
 
-
 .main-navigation .sub-menu {
     position: absolute;
-    /* HORIZONTAL: nach rechts */
-    top: 0;
-    left: 100%;
+    /* VERTIKAL: direkt unter dem Menüpunkt */
+    top: calc(100% + 8px); /* Header-Höhe + kleiner Abstand */
+    left: 0;
     
     background: var(--luvex-dark-blue);
     width: auto;
-    min-width: 280px; /* Größer für mehr Inhalt */
-    max-width: 450px;
+    min-width: 220px;
+    max-width: 350px;
     z-index: 9999;
     
-    margin-left: 10px;
     opacity: 0;
     visibility: hidden;
     
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(109, 213, 237, 0.2);
-    transform: translateX(-10px);
+    /* Animation von oben nach unten */
+    transform: translateY(-10px);
     transition: all 0.3s ease;
 }
 
 .main-navigation .menu-item-has-children:hover > .sub-menu {
     opacity: 1;
     visibility: visible;
-    transform: translateX(0);
+    transform: translateY(0);
 }
 
 /* Styling für die einzelnen Links im Dropdown */
