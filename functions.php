@@ -120,4 +120,19 @@ function luvex_enqueue_assets() {
         wp_enqueue_script('luvex-globe', get_stylesheet_directory_uri() . '/assets/js/globe-animation.js', array('three-js'), null, true);
     }
 }
+
+
+    
+// UV-News werden eigener Blog-Typ
+register_post_type('uv_news', [
+    'public' => true,
+    'show_in_rest' => true, // Wichtig für API!
+    'labels' => ['name' => 'UV News'],
+    'rewrite' => ['slug' => 'uv-news'],
+    'supports' => ['title', 'editor', 'excerpt', 'thumbnail']
+]);
+
+
+
+
 ?>
