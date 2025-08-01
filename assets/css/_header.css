@@ -241,6 +241,28 @@ Last Update: 2025-07-31
     display: none !important;
 }
 
+/* NEU: Styling für die zweite Dropdown-Ebene (Sub-Sub-Menu) */
+.main-navigation .sub-menu .menu-item-has-children {
+    position: relative;
+}
+.main-navigation .sub-menu .sub-menu {
+    position: absolute;
+    left: 100%;
+    top: -1px;
+    display: block; 
+    margin-top: 0;
+    margin-left: 1px;
+    min-width: 220px;
+    transform: translateY(-10px);
+}
+.main-navigation .sub-menu .menu-item-has-children:hover > .sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+
+
 
 /* Mobile Dropdown Support */
 @media (max-width: 768px) {
