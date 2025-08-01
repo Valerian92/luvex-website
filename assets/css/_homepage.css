@@ -415,15 +415,45 @@ Last Update: 2025-07-31
 
 /* Layout-Container für den Inhalt - Breiter gemacht */
 .homepage-community-container {
-    max-width: 1400px; /* <<<< GEÄNDERT: Breiter gemacht */
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 var(--space-md);
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Zweispaltiges Layout */
-    gap: var(--space-lg);
-    align-items: center;
     position: relative;
     z-index: 2;
+    text-align: center; /* Alles zentriert */
+}
+
+/* Titel-Bereich über volle Breite */
+.homepage-community-header {
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Globus-Container zentriert */
+.homepage-community-visual {
+    margin: 2rem auto 3rem;
+    max-width: 500px; /* Globus kleiner */
+    min-height: 400px; /* Reduziert von 600px */
+}
+
+/* Features in 2x2 Grid */
+.homepage-community-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    text-align: left; /* Features links ausgerichtet */
+}
+
+/* Button-Container */
+.homepage-community-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
 }
 
 /* Linke Spalte mit Text */
