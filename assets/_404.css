@@ -1,0 +1,248 @@
+/*
+==============================================================================
+LUVEX THEME - 404 Error Page Styling
+==============================================================================
+*/
+
+/* --- 1.0 404 Hero Section --- */
+.error404-hero {
+    position: relative;
+    background-color: var(--luvex-dark-blue);
+    color: white;
+    padding: 6rem 1.5rem;
+    text-align: center;
+    overflow: hidden;
+}
+
+.error404-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="footer-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23footer-grid)"/></svg>');
+    opacity: 0.7;
+    z-index: 1;
+}
+
+.error404-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.error404-visual {
+    margin-bottom: 2.5rem;
+    display: inline-block;
+    position: relative;
+}
+
+.error404-visual .background-text {
+    font-size: 8rem;
+    font-weight: 800;
+    color: var(--luvex-cyan);
+    line-height: 1;
+    opacity: 0.1;
+}
+
+.error404-visual .icon-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    background: var(--luvex-dark-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(109, 213, 237, 0.3);
+}
+
+.error404-visual .icon-wrapper i {
+    font-size: 2.5rem;
+    color: var(--luvex-cyan);
+}
+
+.error404-hero .entry-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.error404-hero .intro-text {
+    font-size: 1.25rem;
+    color: #e0e6f1;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+}
+
+/* --- 2.0 Search & Navigation Sections --- */
+.error404-section {
+    padding: 4rem 1.5rem;
+}
+
+.error404-section.bg-light {
+    background-color: #f8fafc;
+}
+
+.error404-section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.error404-section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--luvex-dark-blue);
+    margin-bottom: 0.5rem;
+}
+
+.error404-section-subtitle {
+    color: #475569;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- Search Form --- */
+.error404-search-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem;
+    border-radius: 9999px;
+}
+
+.error404-search-form input[type="search"] {
+    flex-grow: 1;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 9999px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.error404-search-form input[type="search"]:focus {
+    outline: none;
+    border-color: var(--luvex-accent-blue);
+    box-shadow: 0 0 0 2px var(--luvex-accent-blue);
+}
+
+.error404-search-form button {
+    padding: 0.75rem 2rem;
+    background: var(--luvex-cyan);
+    color: var(--luvex-dark-blue);
+    border: none;
+    border-radius: 9999px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.error404-search-form button:hover {
+    background-color: var(--luvex-bright-cyan);
+}
+
+/* --- Quick Nav Grid --- */
+.quick-nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    text-align: left;
+}
+
+.quick-nav-card {
+    display: block;
+    background: white;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quick-nav-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+.quick-nav-card .icon-container {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.quick-nav-card .icon-container i {
+    font-size: 1.5rem;
+}
+
+.quick-nav-card .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--luvex-dark-blue);
+    margin-bottom: 0.5rem;
+}
+
+.quick-nav-card .card-description {
+    font-size: 0.95rem;
+    color: #475569;
+    line-height: 1.6;
+}
+
+/* --- Help Section --- */
+.help-box {
+    background: var(--luvex-dark-blue);
+    border-radius: 1rem;
+    padding: 3rem;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.help-box .buttons-container {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.help-box .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.help-box .btn-primary {
+    background: var(--luvex-cyan);
+    color: var(--luvex-dark-blue);
+}
+.help-box .btn-primary:hover {
+    background: white;
+}
+
+.help-box .btn-secondary {
+    border: 2px solid var(--luvex-cyan);
+    color: var(--luvex-cyan);
+}
+.help-box .btn-secondary:hover {
+    background: var(--luvex-cyan);
+    color: var(--luvex-dark-blue);
+}
