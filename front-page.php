@@ -1,8 +1,7 @@
 <?php
 /**
  * Template Name: Homepage
- * 
- * Main homepage for Luvex UV Technology
+ * * Main homepage for Luvex UV Technology
  *
  * @package Luvex
  */
@@ -162,61 +161,65 @@ get_header(); ?>
 
 <!-- ========================================================================= -->
 <!-- NEUE GLOBAL UV EXPERT COMMUNITY SEKTION (START)                           -->
-<!-- Dieses Snippet ersetzt die alte Community-Sektion auf der Startseite.     -->
+<!-- Version 2.0: Animation im Hintergrund, Inhalt überlagert, helles Design  -->
 <!-- ========================================================================= -->
-<section class="homepage-community-section">
-    <div class="homepage-community-container">
-        
-        <!-- Header mit Titel und Beschreibung -->
-        <div class="homepage-community-header">
-            <h2 class="homepage-community-title">Building the Global <span class="text-highlight">UV Network</span></h2>
-            <p class="homepage-community-description">
-                Join thousands of UV professionals from around the world in advancing technology, sharing knowledge, and solving complex engineering challenges together.
-            </p>
+<section class="homepage-community-section theme-light">
+    
+    <!-- Hintergrund: Globus Animation -->
+    <div class="homepage-community-visual">
+        <div id="globe-container" class="homepage-community-globe-wrapper">
+            <!-- Die Three.js Animation wird hier von globe-animation.js geladen -->
         </div>
+        <div class="homepage-community-glow"></div>
+    </div>
 
-        <!-- Globus Animation -->
-        <div class="homepage-community-visual">
-            <div id="globe-container" class="homepage-community-globe-wrapper">
-                <!-- Die Three.js Animation wird hier von globe-animation.js geladen -->
+    <!-- Vordergrund: Inhalt der Sektion -->
+    <div class="homepage-community-content">
+        <div class="homepage-community-container">
+            
+            <!-- Header mit Titel und Beschreibung -->
+            <div class="homepage-community-header">
+                <h2 class="homepage-community-title">Building the Global <span class="text-highlight">UV Network</span></h2>
+                <p class="homepage-community-description">
+                    Join thousands of UV professionals from around the world in advancing technology, sharing knowledge, and solving complex engineering challenges together.
+                </p>
             </div>
-            <div class="homepage-community-glow"></div>
+
+            <!-- Features 2x2 Grid -->
+            <ul class="homepage-community-features">
+                <li>
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    <div>
+                        <strong>Expert Sessions:</strong> Monthly webinars with industry leaders
+                    </div>
+                </li>
+                <li>
+                    <i class="fa-solid fa-comments"></i>
+                    <div>
+                        <strong>Knowledge Exchange:</strong> Technical forums and case study sharing
+                    </div>
+                </li>
+                <li>
+                    <i class="fa-solid fa-people-group"></i>
+                    <div>
+                        <strong>Global Network:</strong> Connect with experts across 6 continents
+                    </div>
+                </li>
+                <li>
+                    <i class="fa-solid fa-book-open"></i>
+                    <div>
+                        <strong>Resource Library:</strong> Free access to calculation tools and guides
+                    </div>
+                </li>
+            </ul>
+
+            <!-- Buttons -->
+            <div class="homepage-community-actions">
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'login' ) ) ); ?>" class="luvex-cta-primary">Join Community</a>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="luvex-cta-secondary">Learn About Us</a>
+            </div>
+
         </div>
-
-        <!-- Features 2x2 Grid -->
-        <ul class="homepage-community-features">
-            <li>
-                <i class="fa-solid fa-chalkboard-user"></i>
-                <div>
-                    <strong>Expert Sessions:</strong> Monthly webinars with industry leaders
-                </div>
-            </li>
-            <li>
-                <i class="fa-solid fa-comments"></i>
-                <div>
-                    <strong>Knowledge Exchange:</strong> Technical forums and case study sharing
-                </div>
-            </li>
-            <li>
-                <i class="fa-solid fa-people-group"></i>
-                <div>
-                    <strong>Global Network:</strong> Connect with experts across 6 continents
-                </div>
-            </li>
-            <li>
-                <i class="fa-solid fa-book-open"></i>
-                <div>
-                    <strong>Resource Library:</strong> Free access to calculation tools and guides
-                </div>
-            </li>
-        </ul>
-
-        <!-- Buttons -->
-        <div class="homepage-community-actions">
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'login' ) ) ); ?>" class="luvex-cta-primary">Join Community</a>
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="luvex-cta-secondary">Learn About Us</a>
-        </div>
-
     </div>
 </section>
 <!-- ========================================================================= -->
