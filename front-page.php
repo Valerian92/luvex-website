@@ -161,31 +161,16 @@ get_header(); ?>
 
 <!-- ========================================================================= -->
 <!-- NEUE GLOBAL UV EXPERT COMMUNITY SEKTION (START)                           -->
-<!-- Version 2.0: Animation im Hintergrund, Inhalt überlagert, helles Design  -->
+<!-- Version 3.0: Asymmetrisches Layout für beste Lesbarkeit und Optik         -->
 <!-- ========================================================================= -->
-<section class="homepage-community-section theme-dark">
-    
-    <!-- Hintergrund: Globus Animation -->
-    <div class="homepage-community-visual">
-        <div id="globe-container" class="homepage-community-globe-wrapper">
-            <!-- Die Three.js Animation wird hier von globe-animation.js geladen -->
-        </div>
-        <div class="homepage-community-glow"></div>
-    </div>
-
-    <!-- Vordergrund: Inhalt der Sektion -->
-    <div class="homepage-community-content">
-        <div class="homepage-community-container">
-            
-            <!-- Header mit Titel und Beschreibung -->
-            <div class="homepage-community-header">
-                <h2 class="homepage-community-title">Building the Global <span class="text-highlight">UV Network</span></h2>
-                <p class="homepage-community-description">
-                    Join thousands of UV professionals from around the world in advancing technology, sharing knowledge, and solving complex engineering challenges together.
-                </p>
-            </div>
-
-            <!-- Features 2x2 Grid -->
+<section class="homepage-community-section">
+    <div class="homepage-community-container">
+        <!-- Spalte 1: Text-Inhalt -->
+        <div class="homepage-community-content">
+            <h2 class="homepage-community-title">Building the Global <span class="text-highlight">UV Network</span></h2>
+            <p class="homepage-community-description">
+                Join thousands of UV professionals from around the world in advancing technology, sharing knowledge, and solving complex engineering challenges together.
+            </p>
             <ul class="homepage-community-features">
                 <li>
                     <i class="fa-solid fa-chalkboard-user"></i>
@@ -212,13 +197,18 @@ get_header(); ?>
                     </div>
                 </li>
             </ul>
-
-            <!-- Buttons -->
             <div class="homepage-community-actions">
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'login' ) ) ); ?>" class="luvex-cta-primary">Join Community</a>
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="luvex-cta-secondary">Learn About Us</a>
             </div>
+        </div>
 
+        <!-- Spalte 2: Globus-Animation -->
+        <div class="homepage-community-visual">
+            <div id="globe-container" class="homepage-community-globe-wrapper">
+                <!-- Die Three.js Animation wird hier geladen -->
+            </div>
+            <div class="homepage-community-glow"></div>
         </div>
     </div>
 </section>
@@ -293,3 +283,4 @@ get_header(); ?>
 </section>
 
 <?php get_footer(); ?>
+
