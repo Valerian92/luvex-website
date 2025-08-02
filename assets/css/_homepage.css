@@ -387,14 +387,14 @@ Last Update: 2025-07-31
 }
 
 
-
 /* ============================================================================ */
-/* 6.8 HOMEPAGE - GLOBAL UV EXPERT COMMUNITY v3.1 (Oversized Globe)           */
+/* 6.8 HOMEPAGE - GLOBAL UV EXPERT COMMUNITY v3.2 (Final Polish)              */
 /* ============================================================================ */
 
 .homepage-community-section {
     background-color: var(--luvex-dark-blue);
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="c" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(109, 213, 237, 0.07)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23c)"/></svg>');
+    /* *** NEU: Grid-Größe auf 10x10 für ein extrem feines Muster *** */
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="c" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(109, 213, 237, 0.07)" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(%23c)"/></svg>');
     padding: 6rem 0;
     overflow: hidden; /* Wichtig: Schneidet den übergroßen Globus ab */
     position: relative;
@@ -480,22 +480,22 @@ Last Update: 2025-07-31
 .homepage-community-visual {
     flex: 1;
     min-width: 50%;
-    position: absolute; /* *** NEU: Absolut positioniert, um über den Rand zu gehen *** */
+    position: absolute;
     top: 0;
     right: 0;
-    width: 60%; /* Nimmt 60% der Sektionsbreite ein */
+    width: 60%;
     height: 100%;
     z-index: 1;
 }
 
 #globe-container.homepage-community-globe-wrapper {
     position: absolute;
-    /* *** NEU: Massiv vergrößert und neu positioniert für den Anschnitt-Effekt *** */
     width: 240%; 
     height: 240%;
     top: 50%;
     left: 50%;
-    transform: translate(-25%, -50%); /* Weiter nach links verschoben */
+    /* *** NEU: Globus weiter nach links verschoben, um näher am Text zu sein *** */
+    transform: translate(-35%, -50%); 
 }
 
 .homepage-community-glow {
@@ -505,7 +505,7 @@ Last Update: 2025-07-31
     border-radius: 50%;
     background: radial-gradient(circle, rgba(79, 157, 255, 0.15) 30%, transparent 65%);
     transform: scale(1.2);
-    z-index: -1; /* Hinter dem Globus */
+    z-index: -1;
 }
 
 
@@ -529,7 +529,7 @@ Last Update: 2025-07-31
         justify-content: center;
     }
     .homepage-community-visual {
-        position: relative; /* Im mobilen Layout wieder normal im Fluss */
+        position: relative;
         width: 100%;
         height: 400px;
         min-width: auto;
@@ -537,7 +537,7 @@ Last Update: 2025-07-31
     #globe-container.homepage-community-globe-wrapper {
         width: 120%;
         height: 120%;
-        transform: translate(-50%, -50%); /* Wieder zentrieren für mobile Ansicht */
+        transform: translate(-50%, -50%);
     }
 }
 
@@ -546,6 +546,7 @@ Last Update: 2025-07-31
         grid-template-columns: 1fr;
     }
 }
+
 
 
 /* 6.1 /* Homepage Specific */
