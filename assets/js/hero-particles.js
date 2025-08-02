@@ -1,4 +1,4 @@
-// --- "PRECISION PARTICLES" JAVASCRIPT (v4 - Fehlerbehebung) ---
+// --- "PRECISION PARTICLES" JAVASCRIPT (v5 - Sichtbarkeit der Linien korrigiert) ---
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         radius: 120
     };
 
-    // *** FIX: Variable in den globalen Geltungsbereich des Skripts verschoben ***
+    // Globale Variable für den Abstand, damit alle Funktionen darauf zugreifen können
     const hexSpacing = 50;
 
     window.addEventListener('mousemove', (event) => {
@@ -84,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function init() {
         particles = [];
-        // const hexSpacing = 50; // <-- Alte, fehlerhafte Position
         const particleSize = 1.5;
         const color = 'rgba(109, 213, 237, 0.7)';
 
@@ -124,7 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (distance < hexSpacing * 1.1) {
                     opacityValue = 1 - (distance / (hexSpacing * 1.1));
-                    ctx.strokeStyle = `rgba(109, 213, 237, ${opacityValue * 0.2})`;
+                    // *** FIX: Die Sichtbarkeit der Linien wurde hier erhöht (von 0.2 auf 0.4) ***
+                    ctx.strokeStyle = `rgba(109, 213, 237, ${opacityValue * 0.4})`;
                     ctx.lineWidth = 0.5;
                     ctx.beginPath();
                     ctx.moveTo(particles[a].x, particles[a].y);
