@@ -1,9 +1,9 @@
-// --- "PRECISION PARTICLES" JAVASCRIPT (v3 - Optimiert) ---
+// --- "PRECISION PARTICLES" JAVASCRIPT (v4 - Fehlerbehebung) ---
 
 document.addEventListener('DOMContentLoaded', () => {
 
     const canvas = document.getElementById('particle-canvas');
-    if (!canvas) return; // Stellt sicher, dass das Skript nicht fehlschlägt, wenn das Canvas nicht da ist
+    if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
     let width = canvas.width = canvas.offsetWidth;
@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
         y: null,
         radius: 120
     };
+
+    // *** FIX: Variable in den globalen Geltungsbereich des Skripts verschoben ***
+    const hexSpacing = 50;
 
     window.addEventListener('mousemove', (event) => {
         const rect = canvas.getBoundingClientRect();
@@ -79,18 +82,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // *** OPTIMIERT: Funktion zur Initialisierung eines lückenlosen Hexagon-Gitters ***
     function init() {
         particles = [];
-        const hexSpacing = 50;
+        // const hexSpacing = 50; // <-- Alte, fehlerhafte Position
         const particleSize = 1.5;
         const color = 'rgba(109, 213, 237, 0.7)';
 
         const vertSpacing = hexSpacing * Math.sqrt(3) / 2;
 
         let row = 0;
-        // Die Schleifen starten jetzt außerhalb des sichtbaren Bereichs (-vertSpacing, -hexSpacing),
-        // um die Kanten vollständig zu füllen.
         for (let y = -vertSpacing; y < height + vertSpacing; y += vertSpacing) {
             row++;
             for (let x = -hexSpacing; x < width + hexSpacing; x += hexSpacing) {
@@ -113,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
         connect();
     }
 
-    // *** OPTIMIERT: Verbindungslinien subtiler gestaltet ***
     function connect() {
         let opacityValue = 1;
         for (let a = 0; a < particles.length; a++) {
@@ -123,11 +122,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     ((particles[a].y - particles[b].y) * (particles[a].y - particles[b].y))
                 );
 
-                // Distanz für Linien reduziert, um nur direkte Nachbarn zu verbinden.
-                // Opazität stark reduziert für einen subtileren Effekt.
-                if (distance < hexSpacing * 1.1) { // Nur bis ca. eine Hex-Einheit verbinden
+                if (distance < hexSpacing * 1.1) {
                     opacityValue = 1 - (distance / (hexSpacing * 1.1));
-                    ctx.strokeStyle = `rgba(109, 213, 237, ${opacityValue * 0.2})`; // Viel transparenter
+                    ctx.strokeStyle = `rgba(109, 213, 237, ${opacityValue * 0.2})`;
                     ctx.lineWidth = 0.5;
                     ctx.beginPath();
                     ctx.moveTo(particles[a].x, particles[a].y);
@@ -138,7 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Debounce-Funktion, um zu häufiges Neurendern bei Größenänderung zu verhindern
     let resizeTimer;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
