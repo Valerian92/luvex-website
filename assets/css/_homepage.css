@@ -389,15 +389,14 @@ Last Update: 2025-07-31
 
 
 /* ============================================================================ */
-/* 6.8 HOMEPAGE - GLOBAL UV EXPERT COMMUNITY v3.0 (Asymmetrisches Layout)     */
+/* 6.8 HOMEPAGE - GLOBAL UV EXPERT COMMUNITY v3.1 (Oversized Globe)           */
 /* ============================================================================ */
 
 .homepage-community-section {
     background-color: var(--luvex-dark-blue);
-    /* *** NEU: Sehr feines Grid-Muster *** */
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="c" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(109, 213, 237, 0.07)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23c)"/></svg>');
     padding: 6rem 0;
-    overflow: hidden;
+    overflow: hidden; /* Wichtig: Schneidet den übergroßen Globus ab */
     position: relative;
 }
 
@@ -405,16 +404,16 @@ Last Update: 2025-07-31
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 var(--space-lg);
-    display: flex; /* *** NEU: Layout mit Flexbox für 2 Spalten *** */
+    display: flex;
     align-items: center;
     gap: var(--space-lg);
 }
 
 /* Spalte 1: Text-Inhalt */
 .homepage-community-content {
-    flex: 1; /* Nimmt verfügbaren Platz ein */
-    min-width: 50%; /* Stellt sicher, dass der Text genug Platz hat */
-    text-align: left; /* Wichtig für die Lesbarkeit von Fließtext */
+    flex: 1;
+    min-width: 50%;
+    text-align: left;
     position: relative;
     z-index: 2;
 }
@@ -434,7 +433,7 @@ Last Update: 2025-07-31
 .homepage-community-description {
     font-size: var(--text-lg);
     color: var(--luvex-gray-300);
-    max-width: 600px; /* Begrenzt die Zeilenlänge für bessere Lesbarkeit */
+    max-width: 600px;
     line-height: 1.7;
     margin-bottom: 2.5rem;
 }
@@ -481,22 +480,22 @@ Last Update: 2025-07-31
 .homepage-community-visual {
     flex: 1;
     min-width: 50%;
-    position: relative;
-    height: 500px; /* Feste Höhe für die Animation */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: absolute; /* *** NEU: Absolut positioniert, um über den Rand zu gehen *** */
+    top: 0;
+    right: 0;
+    width: 60%; /* Nimmt 60% der Sektionsbreite ein */
+    height: 100%;
+    z-index: 1;
 }
 
 #globe-container.homepage-community-globe-wrapper {
     position: absolute;
-    /* *** NEU: Überdimensional und seitlich positioniert *** */
-    width: 180%; 
-    height: 180%;
+    /* *** NEU: Massiv vergrößert und neu positioniert für den Anschnitt-Effekt *** */
+    width: 240%; 
+    height: 240%;
     top: 50%;
     left: 50%;
-    transform: translate(-40%, -50%); /* Leicht nach links verschoben */
-    z-index: 1;
+    transform: translate(-25%, -50%); /* Weiter nach links verschoben */
 }
 
 .homepage-community-glow {
@@ -506,19 +505,20 @@ Last Update: 2025-07-31
     border-radius: 50%;
     background: radial-gradient(circle, rgba(79, 157, 255, 0.15) 30%, transparent 65%);
     transform: scale(1.2);
-    z-index: 0;
+    z-index: -1; /* Hinter dem Globus */
 }
 
 
 /* Responsive Anpassungen */
 @media (max-width: 1024px) {
     .homepage-community-container {
-        flex-direction: column; /* Spalten untereinander anordnen */
+        flex-direction: column;
         text-align: center;
     }
     .homepage-community-content {
         text-align: center;
         margin-bottom: 3rem;
+        min-width: 100%;
     }
     .homepage-community-description,
     .homepage-community-features {
@@ -529,8 +529,10 @@ Last Update: 2025-07-31
         justify-content: center;
     }
     .homepage-community-visual {
+        position: relative; /* Im mobilen Layout wieder normal im Fluss */
         width: 100%;
         height: 400px;
+        min-width: auto;
     }
     #globe-container.homepage-community-globe-wrapper {
         width: 120%;
