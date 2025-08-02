@@ -1,4 +1,4 @@
-// --- "PRECISION PARTICLES" JAVASCRIPT (v6 - Stärkere Linien & Lücken-Fix) ---
+// --- "PRECISION PARTICLES" JAVASCRIPT (v7 - Echte Hexagone & Finaler Lücken-Fix) ---
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
         radius: 120
     };
 
-    // Globale Variable für den Abstand, damit alle Funktionen darauf zugreifen können
     const hexSpacing = 50;
 
     window.addEventListener('mousemove', (event) => {
@@ -86,14 +85,13 @@ document.addEventListener('DOMContentLoaded', () => {
         particles = [];
         const particleSize = 1.5;
         const color = 'rgba(109, 213, 237, 0.7)';
-
         const vertSpacing = hexSpacing * Math.sqrt(3) / 2;
 
         let row = 0;
-        // *** FIX: Startpunkte der Schleifen angepasst, um die Lücke oben links zu füllen ***
-        for (let y = -vertSpacing * 2; y < height + vertSpacing * 2; y += vertSpacing) {
+        // *** FIX: Puffer nochmals vergrößert für absolute Sicherheit an den Rändern ***
+        for (let y = -vertSpacing * 3; y < height + vertSpacing * 3; y += vertSpacing) {
             row++;
-            for (let x = -hexSpacing * 2; x < width + hexSpacing * 2; x += hexSpacing) {
+            for (let x = -hexSpacing * 3; x < width + hexSpacing * 3; x += hexSpacing) {
                 let finalX = x;
                 if (row % 2 === 0) {
                     finalX += hexSpacing / 2;
@@ -113,25 +111,36 @@ document.addEventListener('DOMContentLoaded', () => {
         connect();
     }
 
+    // *** FIX: Überarbeitete Logik, um echte Hexagone zu zeichnen ***
     function connect() {
-        let opacityValue = 1;
-        for (let a = 0; a < particles.length; a++) {
-            for (let b = a; b < particles.length; b++) {
-                let distance = Math.sqrt(
-                    ((particles[a].x - particles[b].x) * (particles[a].x - particles[b].x)) +
-                    ((particles[a].y - particles[b].y) * (particles[a].y - particles[b].y))
+        for (let i = 0; i < particles.length; i++) {
+            // Findet die 6 nächsten Nachbarn für jeden Punkt
+            let neighbors = [];
+            for (let j = 0; j < particles.length; j++) {
+                if (i === j) continue;
+                const distance = Math.sqrt(
+                    ((particles[i].x - particles[j].x) * (particles[i].x - particles[j].x)) +
+                    ((particles[i].y - particles[j].y) * (particles[i].y - particles[j].y))
                 );
-
-                if (distance < hexSpacing * 1.1) {
-                    opacityValue = 1 - (distance / (hexSpacing * 1.1));
-                    // *** FIX: Die Sichtbarkeit der Linien wurde hier weiter erhöht (von 0.4 auf 0.6) ***
-                    ctx.strokeStyle = `rgba(109, 213, 237, ${opacityValue * 0.6})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.beginPath();
-                    ctx.moveTo(particles[a].x, particles[a].y);
-                    ctx.lineTo(particles[b].x, particles[b].y);
-                    ctx.stroke();
+                // Nur Punkte in Betracht ziehen, die potentielle Nachbarn sind
+                if (distance < hexSpacing * 1.5) {
+                    neighbors.push({ index: j, distance: distance });
                 }
+            }
+
+            // Sortiert die Nachbarn nach Distanz und nimmt nur die nächsten 6
+            neighbors.sort((a, b) => a.distance - b.distance);
+            const closestNeighbors = neighbors.slice(0, 6);
+
+            // Zeichnet Linien nur zu diesen 6 Nachbarn
+            for (const neighbor of closestNeighbors) {
+                const opacityValue = 1 - (neighbor.distance / (hexSpacing * 1.1));
+                ctx.strokeStyle = `rgba(109, 213, 237, ${opacityValue * 0.7})`;
+                ctx.lineWidth = 0.5;
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[neighbor.index].x, particles[neighbor.index].y);
+                ctx.stroke();
             }
         }
     }
