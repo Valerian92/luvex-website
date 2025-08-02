@@ -123,3 +123,74 @@ Last Update: 2025-08-02
     transform: translateY(-8px) scale(1.02); /* scale(1) wird durch den Hover-Effekt überschrieben */
     box-shadow: 0 15px 30px rgba(27, 42, 73, 0.15);
 }
+
+/* ==============================================================================
+  5. HERO ANIMATION: DISINFECTION PULSE (NEU)
+==============================================================================
+*/
+.luvex-hero .animation-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* Partikel, die die Pathogene darstellen */
+.pathogen-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--color-primary); /* Deine Akzentfarbe */
+    border-radius: 50%;
+    opacity: 0.5;
+    transition: all 0.5s ease-out;
+    /* Die 'float' Animation sorgt für eine sanfte Schwebebewegung */
+    animation: float 20s ease-in-out infinite; 
+}
+
+/* Zustand für inaktivierte Partikel */
+.pathogen-particle.inactive {
+    background: var(--color-gray-light); /* Eine unauffällige Farbe */
+    opacity: 0.1;
+    animation-play-state: paused; /* Stoppt die Schwebebewegung */
+}
+
+/* Der UV-C Impuls */
+.luvex-hero .pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(100, 255, 218, 0.2) 0%, rgba(100, 255, 218, 0) 60%);
+    animation: expand-pulse 8s ease-out infinite;
+}
+
+/* Keyframes für den sich ausbreitenden Impuls */
+@keyframes expand-pulse {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        width: 250vmax; /* Größer als der Bildschirm */
+        height: 250vmax;
+        opacity: 0;
+    }
+}
+
+/* Keyframes für die Schwebebewegung der Partikel */
+@keyframes float {
+    0% { transform: translateY(0px) translateX(0px); }
+    25% { transform: translateY(-10px) translateX(5px); }
+    50% { transform: translateY(0px) translateX(10px); }
+    75% { transform: translateY(10px) translateX(5px); }
+    100% { transform: translateY(0px) translateX(0px); }
+}

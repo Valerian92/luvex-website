@@ -113,6 +113,19 @@ function luvex_enqueue_assets() {
             $hexagon_js_version = filemtime($hexagon_js_path);
             wp_enqueue_script('luvex-hero-hexagon', get_stylesheet_directory_uri() . '/assets/js/hero-hexagon.js', array(), $hexagon_js_version, true);
         }
+    } elseif ( is_page('uv-consulting') ) { 
+        // Lade Blaupausen-Animation für die UV Consulting Seite
+        $blueprint_js_path = get_stylesheet_directory() . '/assets/js/hero-blueprint.js';
+        if (file_exists($blueprint_js_path)) {
+            $blueprint_js_version = filemtime($blueprint_js_path);
+            wp_enqueue_script('luvex-hero-blueprint', get_stylesheet_directory_uri() . '/assets/js/hero-blueprint.js', array(), $blueprint_js_version, true);
+        }
+    } elseif ( is_page('uv-c-disinfection') ) { // NEUER BLOCK FÜR DIE DESINFEKTIONS-SEITE
+        $disinfection_js_path = get_stylesheet_directory() . '/assets/js/hero-disinfection.js';
+        if (file_exists($disinfection_js_path)) {
+            $disinfection_js_version = filemtime($disinfection_js_path);
+            wp_enqueue_script('luvex-hero-disinfection', get_stylesheet_directory_uri() . '/assets/js/hero-disinfection.js', array(), $disinfection_js_version, true);
+        }
     }
 
     // Lade Scroll-Animationen auf allen Seiten

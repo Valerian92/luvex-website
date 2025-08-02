@@ -5,7 +5,18 @@
  */
 get_header(); ?>
 
+<!-- ==========================================================================
+     START: Neuer Hero-Bereich mit Animations-Container
+     ========================================================================== -->
 <section class="luvex-hero">
+    
+    <!-- Dieser Container ist für die CSS/JS-Animation im Hintergrund -->
+    <div class="animation-background" id="disinfection-animation-container">
+        <div class="pulse"></div>
+        <!-- Die Partikel (Pathogene) werden hier per JavaScript eingefügt -->
+    </div>
+
+    <!-- Der bisherige Inhalt wird zum Overlay über der Animation -->
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
             <h1 class="luvex-hero__title">
@@ -24,6 +35,10 @@ get_header(); ?>
         </div>
     </div>
 </section>
+<!-- ==========================================================================
+     ENDE: Neuer Hero-Bereich
+     ========================================================================== -->
+
 
 <section class="section">
     <div class="container">
