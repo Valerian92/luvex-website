@@ -5,7 +5,7 @@
  * It now targets the specific canvas ID 'homepage-hero-canvas'.
  *
  * @package Luvex
- * @since 2.2.2
+ * @since 2.2.3
  */
 document.addEventListener('DOMContentLoaded', function() {
     // Target the new, unique canvas ID for the homepage
@@ -96,3 +96,4 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial setup
     setTimeout(setup, 100);
 });
+// FIX: Removed extra closing curly brace that was causing a syntax error.
