@@ -11,14 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
     container.appendChild(renderer.domElement);
 
     // Main Globe
-    const globeGeometry = new THREE.SphereGeometry(4, 64, 64);
+    const globeGeometry = new THREE.SphereGeometry(6, 64, 64);
     const globeMaterial = new THREE.MeshLambertMaterial({
         color: new THREE.Color('#1B2A49')
     });
     const globe = new THREE.Mesh(globeGeometry, globeMaterial);
 
     // Wireframe Grid
-    const wireGeometry = new THREE.SphereGeometry(4.02, 32, 16);
+    const wireGeometry = new THREE.SphereGeometry(6.02, 64, 32);
     const wireMaterial = new THREE.MeshBasicMaterial({
         color: '#6dd5ed',
         wireframe: true,
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const wireGlobe = new THREE.Mesh(wireGeometry, wireMaterial);
 
     // Feineres Gitter durch Erhöhung der Segmente
-    const fineGeometry = new THREE.SphereGeometry(4.01, 128, 64); 
+    const fineGeometry = new THREE.SphereGeometry(6.01, 128, 64);
     const fineMaterial = new THREE.MeshBasicMaterial({
         color: '#6dd5ed',
         wireframe: true,

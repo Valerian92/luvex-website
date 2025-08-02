@@ -51,32 +51,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         update() {
-            // Wenn Maus in der Nähe ist, bewege Partikel zur Maus
+            // Wenn Maus vorhanden ist, fliege direkt zur Maus
             if (mouse.x != null && mouse.y != null) {
                 let dx = mouse.x - this.x;
                 let dy = mouse.y - this.y;
                 let distance = Math.sqrt(dx * dx + dy * dy);
                 
-                if (distance < mouse.radius) {
-                    // Partikel bewegt sich zur Maus
-                    let forceDirectionX = dx / distance;
-                    let forceDirectionY = dy / distance;
-                    let maxDistance = mouse.radius;
-                    let force = (maxDistance - distance) / maxDistance;
-                    let directionX = forceDirectionX * force * this.density * 0.8;
-                    let directionY = forceDirectionY * force * this.density * 0.8;
-                    
-                    this.speedX = directionX;
-                    this.speedY = directionY;
-                } else {
-                    // Zurück zur ursprünglichen Position
-                    this.speedX = (this.baseX - this.x) * 0.05;
-                    this.speedY = (this.baseY - this.y) * 0.05;
+                if (distance > 5) { // Verhindert "Flackern" wenn sehr nah
+                    // Alle Partikel fliegen zur Maus (starker Effekt)
+                    this.speedX = dx * 0.05; // 0.05 = Geschwindigkeit
+                    this.speedY = dy * 0.05;
                 }
             } else {
-                // Sanfte Rückkehr zur Ausgangsposition
-                this.speedX = (this.baseX - this.x) * 0.05;
-                this.speedY = (this.baseY - this.y) * 0.05;
+                // Ohne Maus: Zurück zur ursprünglichen Position
+                this.speedX = (this.baseX - this.x) * 0.02;
+                this.speedY = (this.baseY - this.y) * 0.02;
             }
 
             this.x += this.speedX;
