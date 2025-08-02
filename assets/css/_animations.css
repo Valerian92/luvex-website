@@ -1,103 +1,106 @@
 /*
 ==============================================================================
-LUVEX THEME v2.2 - ANIMATIONEN
+LUVEX THEME v2.2 - SCROLL ANIMATIONS
 ==============================================================================
-Description: Globale und komponenten-spezifische Animationen.
-Dependencies: -
+
+Description: Enthält alle Keyframes und Klassen für Scroll-Triggered Animationen.
+Dependencies: Wird via functions.php geladen.
 Last Update: 2025-08-02
+
 ==============================================================================
 */
 
-/* ===== [1. HERO PARTIKEL ANIMATION] ===== */
+/* ==============================================================================
+  1. BASE STYLES & HELPER CLASSES
+==============================================================================
+*/
 
-#particle-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0; /* Liegt hinter dem Grid-Muster, aber vor dem Hintergrund */
-}
-
-/* ===== [2. HOMEPAGE GLOBUS-SEKTION ANIMATION] ===== */
-
-.homepage-community-visual {
-    flex: 1;
-    min-width: 50%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 60%;
-    height: 100%;
-    z-index: 1;
-}
-
-/* *** FIX: Aura-Effekt hinter den Globus verschoben und weicher gemacht *** */
-.homepage-community-visual::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: radial-gradient(circle at center, rgba(79, 157, 255, 0.25) 0%, transparent 50%);
-    z-index: 1; /* Liegt hinter dem Globus-Container */
-    pointer-events: none;
-    transform: scale(1.5); /* Macht die Aura größer und weicher */
-    opacity: 0.7;
-}
-
-#globe-container.homepage-community-globe-wrapper {
-    position: absolute;
-    width: 260%;
-    height: 260%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-40%, -50%);
-    z-index: 2; /* Liegt jetzt VOR der Aura */
-}
-
-@media (max-width: 1024px) {
-    .homepage-community-visual {
-        position: relative;
-        width: 100%;
-        height: 400px;
-        min-width: auto;
-    }
-    .homepage-community-visual::before {
-        display: none;
-    }
-    #globe-container.homepage-community-globe-wrapper {
-        width: 120%;
-        height: 120%;
-        transform: translate(-50%, -50%);
-    }
-}
-
-
-/* ===== [3. FOOTER LICHT-EFFEKT] ===== */
-
-.site-footer {
-    position: relative;
-    overflow: hidden; /* Verhindert, dass der Effekt über den Footer hinausragt */
-}
-
-#footer-light-effect {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100px; /* Breite des Lichtscheins */
-    height: 100%;
-    background: radial-gradient(ellipse 80% 50% at 50% 50%, rgba(109, 213, 237, 0.15), transparent 80%);
-    border-radius: 50%;
-    pointer-events: none; /* Stellt sicher, dass der Effekt nicht klickbar ist */
-    transition: transform 0.1s ease-out, opacity 0.3s ease-out;
-    z-index: 0;
+/* Elemente vor der Animation verstecken */
+.animate-on-scroll {
     opacity: 0;
-    transform: translate(-50%, -50%);
+    transition: opacity 0.5s ease-out, transform 0.6s ease-out;
 }
 
-/* Klasse, die per JS hinzugefügt wird, um den Effekt zu aktivieren */
-.site-footer.animation-triggered #footer-light-effect {
+/*
+==============================================================================
+  2. HOMEPAGE - KNOWLEDGE NAVIGATOR
+==============================================================================
+*/
+.knowledge-navigator .value-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.knowledge-navigator.is-visible .value-card {
     opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered Delays */
+.knowledge-navigator.is-visible .value-card:nth-child(1) { transition-delay: 0.2s; }
+.knowledge-navigator.is-visible .value-card:nth-child(2) { transition-delay: 0.4s; }
+.knowledge-navigator.is-visible .value-card:nth-child(3) { transition-delay: 0.6s; }
+
+
+/* ==============================================================================
+  3. UV CONSULTING - TIMELINE
+==============================================================================
+*/
+
+/* Timeline Step Animation */
+.timeline-step {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.timeline-step.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Progress Line Animation */
+.timeline-progress-bar {
+    height: 0;
+    transition: height 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.timeline-container.is-visible .timeline-progress-bar {
+    height: 100%;
+}
+
+/* ==============================================================================
+  4. ABOUT PAGE - TEAM CARDS
+==============================================================================
+*/
+
+/* Team Card Entrance Animation */
+.team-member {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.team-section.is-visible .team-member {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Staggered Delays */
+.team-section.is-visible .team-member:nth-child(1) { transition-delay: 0.15s; }
+.team-section.is-visible .team-member:nth-child(2) { transition-delay: 0.30s; }
+/* Fügen Sie bei Bedarf weitere hinzu */
+.team-section.is-visible .team-member:nth-child(3) { transition-delay: 0.45s; }
+.team-section.is-visible .team-member:nth-child(4) { transition-delay: 0.60s; }
+
+
+/* Team Card Hover Effect */
+.team-member {
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.team-member:hover {
+    transform: translateY(-8px) scale(1.02); /* scale(1) wird durch den Hover-Effekt überschrieben */
+    box-shadow: 0 15px 30px rgba(27, 42, 73, 0.15);
 }

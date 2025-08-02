@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     const wireGlobe = new THREE.Mesh(wireGeometry, wireMaterial);
 
-    // *** FIX: Feineres Gitter durch Erhöhung der Segmente (von 64x32 auf 128x64) ***
-    const fineGeometry = new THREE.SphereGeometry(4.01, 128, 64);
+    // Feineres Gitter durch Erhöhung der Segmente
+    const fineGeometry = new THREE.SphereGeometry(4.01, 128, 64); 
     const fineMaterial = new THREE.MeshBasicMaterial({
         color: '#6dd5ed',
         wireframe: true,
