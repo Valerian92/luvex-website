@@ -1,8 +1,7 @@
 <?php
 /**
  * Template Name: Homepage
- * 
- * Main homepage for Luvex UV Technology
+ * * Main homepage for Luvex UV Technology
  *
  * @package Luvex
  */
@@ -11,6 +10,9 @@ get_header(); ?>
 
 <!-- Hero Section -->
 <section class="luvex-hero">
+    <!-- Canvas Element für die Partikel-Animation -->
+    <canvas id="particle-canvas"></canvas>
+
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
             <h1 class="luvex-hero__title">
@@ -20,7 +22,7 @@ get_header(); ?>
                 Independent UV technology experts advancing global knowledge
             </h2>
             <p class="luvex-hero__description">
-                From water disinfection to precision curing - master UV technology with the world's leading specialists. 
+                From water disinfection to precision curing - master UV technology with the world's leading specialists.
                 Independent consulting, advanced simulations, and proven results.
             </p>
             <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-top: 2.5rem;">
@@ -44,14 +46,14 @@ get_header(); ?>
         <p class="text-center mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto; color: var(--luvex-dark-blue); font-weight: 600; font-size: 1.1rem;">
             Advanced 3D modeling and dose calculation for precision UV system design
         </p>
-        
+
         <div class="uv-simulator-showcase">
             <div class="simulator-content">
                 <h3>3D UV System Designer</h3>
                 <p class="simulator-description">
                     Professional-grade simulation tools for UV system optimization and validation.
                 </p>
-                
+
                 <div class="simulator-features grid-3">
                     <div class="simulator-feature">
                         <i class="fas fa-shield-virus"></i>
@@ -84,7 +86,7 @@ get_header(); ?>
                         <p>User-friendly interface</p>
                     </div>
                 </div>
-                
+
                 <div class="simulator-cta-container">
                     <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="simulator-cta">
                         <i class="fas fa-play-circle"></i>
@@ -104,7 +106,7 @@ get_header(); ?>
         <p class="text-center mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto; color: var(--luvex-dark-blue); font-weight: 600; font-size: 1.1rem;">
             Your pathway to UV expertise - from fundamentals to advanced applications
         </p>
-        
+
         <div class="grid-3 knowledge-navigator" style="gap: 3rem;">
             <div class="value-card">
                 <div class="value-card__icon">
@@ -122,7 +124,7 @@ get_header(); ?>
                 </ul>
                 <a href="#" class="btn btn--primary btn--small">Explore UV Science</a>
             </div>
-            
+
             <div class="value-card">
                 <div class="value-card__icon">
                     <i class="fas fa-lightbulb"></i>
@@ -139,7 +141,7 @@ get_header(); ?>
                 </ul>
                 <a href="#" class="btn btn--primary btn--small">Compare Technologies</a>
             </div>
-            
+
             <div class="value-card">
                 <div class="value-card__icon">
                     <i class="fas fa-industry"></i>
@@ -161,66 +163,58 @@ get_header(); ?>
 </section>
 
 <!-- ========================================================================= -->
-<!-- NEUE GLOBAL UV EXPERT COMMUNITY SEKTION (START)                           -->
-<!-- Dieses Snippet ersetzt die alte Community-Sektion auf der Startseite.     -->
+<!-- GLOBAL UV EXPERT COMMUNITY SEKTION                                      -->
 <!-- ========================================================================= -->
 <section class="homepage-community-section">
     <div class="homepage-community-container">
-        
-        <!-- Header mit Titel und Beschreibung -->
-        <div class="homepage-community-header">
+        <!-- Spalte 1: Text-Inhalt -->
+        <div class="homepage-community-content">
             <h2 class="homepage-community-title">Building the Global <span class="text-highlight">UV Network</span></h2>
             <p class="homepage-community-description">
                 Join thousands of UV professionals from around the world in advancing technology, sharing knowledge, and solving complex engineering challenges together.
             </p>
+            <ul class="homepage-community-features">
+                <li>
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    <div>
+                        <strong>Expert Sessions:</strong> Monthly webinars with industry leaders
+                    </div>
+                </li>
+                <li>
+                    <i class="fa-solid fa-comments"></i>
+                    <div>
+                        <strong>Knowledge Exchange:</strong> Technical forums and case study sharing
+                    </div>
+                </li>
+                <li>
+                    <i class="fa-solid fa-people-group"></i>
+                    <div>
+                        <strong>Global Network:</strong> Connect with experts across 6 continents
+                    </div>
+                </li>
+                <li>
+                    <i class="fa-solid fa-book-open"></i>
+                    <div>
+                        <strong>Resource Library:</strong> Free access to calculation tools and guides
+                    </div>
+                </li>
+            </ul>
+            <div class="homepage-community-actions">
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'login' ) ) ); ?>" class="luvex-cta-primary">Join Community</a>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="luvex-cta-secondary">Learn About Us</a>
+            </div>
         </div>
 
-        <!-- Globus Animation -->
+        <!-- Spalte 2: Globus-Animation -->
         <div class="homepage-community-visual">
             <div id="globe-container" class="homepage-community-globe-wrapper">
-                <!-- Die Three.js Animation wird hier von globe-animation.js geladen -->
+                <!-- Die Three.js Animation wird hier geladen -->
             </div>
-            <div class="homepage-community-glow"></div>
         </div>
-
-        <!-- Features 2x2 Grid -->
-        <ul class="homepage-community-features">
-            <li>
-                <i class="fa-solid fa-chalkboard-user"></i>
-                <div>
-                    <strong>Expert Sessions:</strong> Monthly webinars with industry leaders
-                </div>
-            </li>
-            <li>
-                <i class="fa-solid fa-comments"></i>
-                <div>
-                    <strong>Knowledge Exchange:</strong> Technical forums and case study sharing
-                </div>
-            </li>
-            <li>
-                <i class="fa-solid fa-people-group"></i>
-                <div>
-                    <strong>Global Network:</strong> Connect with experts across 6 continents
-                </div>
-            </li>
-            <li>
-                <i class="fa-solid fa-book-open"></i>
-                <div>
-                    <strong>Resource Library:</strong> Free access to calculation tools and guides
-                </div>
-            </li>
-        </ul>
-
-        <!-- Buttons -->
-        <div class="homepage-community-actions">
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'login' ) ) ); ?>" class="luvex-cta-primary">Join Community</a>
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="luvex-cta-secondary">Learn About Us</a>
-        </div>
-
     </div>
 </section>
 <!-- ========================================================================= -->
-<!-- NEUE GLOBAL UV EXPERT COMMUNITY SEKTION (ENDE)                            -->
+<!-- ENDE GLOBAL UV EXPERT COMMUNITY SEKTION                                   -->
 <!-- ========================================================================= -->
 
 
@@ -232,7 +226,7 @@ get_header(); ?>
         <p class="text-center text-muted mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto;">
             Independent expertise backed by scientific research and real-world validation
         </p>
-        
+
         <div class="grid-4">
             <div class="excellence-stat">
                 <div class="excellence-stat__icon">
@@ -241,7 +235,7 @@ get_header(); ?>
                 <h4>Scientific Validation</h4>
                 <p>Every recommendation backed by peer-reviewed research and testing data</p>
             </div>
-            
+
             <div class="excellence-stat">
                 <div class="excellence-stat__icon">
                     <i class="fas fa-balance-scale"></i>
@@ -249,7 +243,7 @@ get_header(); ?>
                 <h4>Vendor Neutral</h4>
                 <p>Independent analysis free from manufacturer bias or sales pressure</p>
             </div>
-            
+
             <div class="excellence-stat">
                 <div class="excellence-stat__icon">
                     <i class="fas fa-globe-americas"></i>
@@ -257,7 +251,7 @@ get_header(); ?>
                 <h4>Global Network</h4>
                 <p>Collaborative partnerships with UV research institutions worldwide</p>
             </div>
-            
+
             <div class="excellence-stat">
                 <div class="excellence-stat__icon">
                     <i class="fas fa-chart-line"></i>
