@@ -1,126 +1,62 @@
 <?php
 /**
- * LUVEX Theme Functions and Definitions
- *
+ * UV Curing Page
  * @package Luvex
- * @since 2.2.0
  */
+get_header(); ?>
 
-// === ASTRA THEME DEAKTIVIERUNG UND LUVEX ÜBERNAHME ===
+<!-- 
+  ==============================================================================
+  FIX: Hero-Sektion für die neue Curing-Animation angepasst.
+  - Klasse ".hero-curing" für spezifisches Targeting hinzugefügt.
+  - Canvas-ID zu "curing-hero-canvas" geändert.
+  ==============================================================================
+-->
+<section class="luvex-hero hero-curing">
+    <!-- Canvas Element für die neue interaktive Animation -->
+    <canvas id="curing-hero-canvas"></canvas>
+    
+    <div class="luvex-hero__container">
+        <div class="luvex-hero__content">
+            <h1 class="luvex-hero__title">
+                UV <span class="text-highlight">Curing</span> Technology
+            </h1>
+            <h2 class="luvex-hero__subtitle">
+                Industrial UV curing for coatings, inks, and adhesives
+            </h2>
+            <p class="luvex-hero__description">
+                Optimize your UV curing processes for maximum efficiency and quality.
+            </p>
+            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-cta-primary">
+                <i class="fa-solid fa-industry"></i>
+                <span>Optimize UV Curing</span>
+            </a>
+        </div>
+    </div>
+</section>
 
-add_action('after_setup_theme', 'luvex_disable_astra_components', 30);
-function luvex_disable_astra_components() {
-    remove_all_actions('astra_header');
-    remove_all_actions('astra_footer');
-    remove_all_actions('astra_primary_navigation');
-    remove_all_actions('astra_masthead_content');
-}
+<section class="section">
+    <div class="container">
+        <h2 class="text-center">UV Curing Solutions</h2>
+        <div class="grid-3">
+            <!-- Hier kannst du deine Inhalte für die Curing-Lösungen einfügen -->
+            <div class="value-card">
+                <div class="value-card__icon"><i class="fas fa-paint-roller"></i></div>
+                <h3 class="value-card__title">Coatings & Varnishes</h3>
+                <p class="value-card__description">High-speed, durable surface finishing for wood, plastic, and metal.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-card__icon"><i class="fas fa-pen-nib"></i></div>
+                <h3 class="value-card__title">Inks & Printing</h3>
+                <p class="value-card__description">Instant drying for high-resolution graphics on a variety of substrates.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-card__icon"><i class="fas fa-tape"></i></div>
+                <h3 class="value-card__title">Adhesives & Bonding</h3>
+                <p class="value-card__description">Precision bonding for medical devices, electronics, and automotive components.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
-add_action('after_setup_theme', 'luvex_theme_setup');
-function luvex_theme_setup() {
-    register_nav_menus(array(
-        'primary' => __('Primary Navigation', 'luvex'),
-        'footer-services' => __('Footer Services Menu', 'luvex'),
-        'footer-technologies' => __('Footer Technologies Menu', 'luvex'),
-        'footer-resources' => __('Footer Resources Menu', 'luvex'),
-        'footer-company' => __('Footer Company Menu', 'luvex'),
-        'footer-legal' => __('Footer Legal Menu', 'luvex')
-    ));
-
-    add_theme_support('post-thumbnails');
-    add_theme_support('custom-logo');
-    add_theme_support('html5', array('search-form', 'comment-form', 'comment-list'));
-    add_theme_support('title-tag');
-}
-
-// === PROFESSIONAL NAVIGATION WALKER ===
-
-class Luvex_Nav_Walker extends Walker_Nav_Menu {
-    public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
-        $indent = ($depth) ? str_repeat("\t", $depth) : '';
-
-        $classes = empty($item->classes) ? array() : (array) $item->classes;
-        $classes[] = 'menu-item-' . $item->ID;
-
-        $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
-        $class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
-
-        $id = apply_filters('nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args);
-        $id = $id ? ' id="' . esc_attr($id) . '"' : '';
-
-        $output .= $indent . '<li' . $id . $class_names .'>';
-
-        $attributes = ! empty($item->attr_title) ? ' title="'  . esc_attr($item->attr_title) .'"' : '';
-        $attributes .= ! empty($item->target)     ? ' target="' . esc_attr($item->target     ) .'"' : '';
-        $attributes .= ! empty($item->xfn)        ? ' rel="'    . esc_attr($item->xfn        ) .'"' : '';
-        $attributes .= ! empty($item->url)        ? ' href="'   . esc_attr($item->url        ) .'"' : '';
-
-        $item_output = isset($args->before) ? $args->before : '';
-        $item_output .= '<a' . $attributes . '>';
-        $item_output .= (isset($args->link_before) ? $args->link_before : '') . apply_filters('the_title', $item->title, $item->ID) . (isset($args->link_after) ? $args->link_after : '');
-
-        if (in_array('menu-item-has-children', $classes)) {
-            $item_output .= ' <i class="fa-solid fa-chevron-down dropdown-arrow"></i>';
-        }
-
-        $item_output .= '</a>';
-        $item_output .= isset($args->after) ? $args->after : '';
-
-        $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
-    }
-}
-
-// === CSS & JAVASCRIPT LADEN (MIT CACHE BUSTING) ===
-
-add_action('wp_enqueue_scripts', 'luvex_enqueue_assets', 999);
-function luvex_enqueue_assets() {
-    wp_dequeue_style('astra-theme-css');
-
-    // KORREKTES CACHE BUSTING für CSS
-    $main_css_path = get_stylesheet_directory() . '/assets/css/main.css';
-    $main_css_version = file_exists($main_css_path) ? filemtime($main_css_path) : '1.0.0';
-    wp_enqueue_style('luvex-main', get_stylesheet_directory_uri() . '/assets/css/main.css', array(), $main_css_version);
-
-    $animations_css_path = get_stylesheet_directory() . '/assets/css/_animations.css';
-    $animations_css_version = file_exists($animations_css_path) ? filemtime($animations_css_path) : '1.0.0';
-    wp_enqueue_style('luvex-animations', get_stylesheet_directory_uri() . '/assets/css/_animations.css', array('luvex-main'), $animations_css_version);
-
-    $dependencies = array('jquery');
-
-    // KORREKTES CACHE BUSTING für JS
-    $scripts_to_enqueue = [
-        'luvex-modal' => '/assets/js/modal.js',
-        'luvex-mobile-menu' => '/assets/js/mobile-menu.js',
-        'luvex-footer-light' => '/assets/js/footer-light-effect.js',
-        'luvex-scroll-to-top' => '/assets/js/scroll-to-top.js'
-    ];
-
-    foreach ($scripts_to_enqueue as $handle => $path) {
-        $full_path = get_stylesheet_directory() . $path;
-        $version = file_exists($full_path) ? filemtime($full_path) : '1.0.0';
-        $script_dependencies = ($handle === 'luvex-modal' || $handle === 'luvex-mobile-menu') ? $dependencies : array();
-        wp_enqueue_script($handle, get_stylesheet_directory_uri() . $path, $script_dependencies, $version, true);
-    }
-
-    if (is_front_page() || is_home()) {
-        wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), null, true);
-
-        $globe_js_path = get_stylesheet_directory() . '/assets/js/globe-animation.js';
-        $globe_js_version = file_exists($globe_js_path) ? filemtime($globe_js_path) : '1.0.0';
-        wp_enqueue_script('luvex-globe', get_stylesheet_directory_uri() . '/assets/js/globe-animation.js', array('three-js'), $globe_js_version, true);
-
-        $particles_js_path = get_stylesheet_directory() . '/assets/js/hero-particles.js';
-        $particles_js_version = file_exists($particles_js_path) ? filemtime($particles_js_path) : '1.0.0';
-        wp_enqueue_script('luvex-hero-particles', get_stylesheet_directory_uri() . '/assets/js/hero-particles.js', array(), $particles_js_version, true);
-    }
-}
-
-// UV-News werden eigener Blog-Typ
-register_post_type('uv_news', [
-    'public' => true,
-    'show_in_rest' => true,
-    'labels' => ['name' => 'UV News'],
-    'rewrite' => ['slug' => 'uv-news'],
-    'supports' => ['title', 'editor', 'excerpt', 'thumbnail']
-]);
-?>
+<?php get_footer(); ?>

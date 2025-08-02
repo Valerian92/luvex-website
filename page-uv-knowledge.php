@@ -5,23 +5,18 @@
  */
 get_header(); ?>
 
-<section class="luvex-hero">
-    <div class="luvex-hero__container">
-        <div class="luvex-hero__content">
-            <h1 class="luvex-hero__title">
-                <span class="text-highlight">UV Technology</span> Knowledge Hub
-            </h1>
-            <h2 class="luvex-hero__subtitle">
-                Master every UV technology from fundamentals to advanced applications
-            </h2>
-            <p class="luvex-hero__description">
-                Independent expertise across all UV technologies. From conventional mercury systems to cutting-edge LED UV - get the knowledge you need to make informed decisions.
-            </p>
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-hero__cta">
-                <i class="fa-solid fa-graduation-cap"></i>
-                <span>Get Expert Guidance</span>
-            </a>
-        </div>
+<section class="hero-spectrum-engine">
+    <canvas id="spectrum-canvas"></canvas>
+    <div class="hero-content">
+        <h1 class="luvex-hero__title">
+            Mastering the <span class="text-highlight">UV Spectrum</span>
+        </h1>
+        <p class="luvex-hero__description">
+            Precision analysis and solutions with advanced UVC and UVA technology.
+        </p>
+        <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="button button--primary">
+            Explore Applications
+        </a>
     </div>
 </section>
 
