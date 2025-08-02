@@ -166,13 +166,14 @@ css.homepage-community-visual {
 /* Die max-width wurde von 600px auf 750px erhöht.                    */
 /* ================================================================== */
 .homepage-community-globe-wrapper {
-    width: 100%;
-    max-width: 900px; /* Noch größer */
-    aspect-ratio: 1 / 1;
-    position: relative;
-    overflow: visible; /* Erlaubt Rausragen */
+    width: 900px;
+    height: 900px;
+    position: absolute;
+    right: -450px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
 }
-
 .homepage-community-title {
     color: var(--luvex-white);
     font-size: clamp(2.4rem, 4.5vw, 3.2rem);
@@ -184,6 +185,18 @@ css.homepage-community-visual {
 .homepage-community-title .text-highlight {
     color: var(--luvex-bright-cyan);
 }
+/* Text-Container über Globe legen */
+.homepage-community-content {
+    position: relative;
+    z-index: 10;
+}
+
+/* Section kann Globe oben/unten abschneiden */
+.homepage-community-section {
+    overflow-x: visible; /* Globe darf rechts rausragen */
+    overflow-y: hidden;  /* Globe wird oben/unten abgeschnitten */
+}
+
 
 .homepage-community-description {
     font-size: var(--text-lg);
