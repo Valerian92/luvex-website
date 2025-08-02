@@ -1,4 +1,4 @@
-       
+         
        document.addEventListener('DOMContentLoaded', () => {
             const container = document.getElementById('globe-container');
             if (!container) return;
@@ -13,10 +13,9 @@
 
             // Main Globe
             const globeGeometry = new THREE.SphereGeometry(4, 64, 64);
-            const globeMaterial = new THREE.MeshPhongMaterial({
-                color: new THREE.Color('#1B2A49'),
-                shininess: 10,
-                specular: new THREE.Color('#6dd5ed')
+            // *** NEU: Material geändert, um die helle Spiegelung zu entfernen ***
+            const globeMaterial = new THREE.MeshLambertMaterial({
+                color: new THREE.Color('#1B2A49')
             });
             const globe = new THREE.Mesh(globeGeometry, globeMaterial);
 
@@ -41,7 +40,7 @@
             const fineGlobe = new THREE.Mesh(fineGeometry, fineMaterial);
 
             // Lighting
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Etwas heller für das neue Material
             const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
             directionalLight.position.set(5, 3, 5);
 

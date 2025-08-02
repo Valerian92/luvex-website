@@ -387,12 +387,12 @@ Last Update: 2025-07-31
 }
 
 /* ============================================================================ */
-/* 6.8 HOMEPAGE - GLOBAL UV EXPERT COMMUNITY v3.5 (Final Polish & Fix)        */
+/* 6.8 HOMEPAGE - GLOBAL UV EXPERT COMMUNITY v4.0 (Final Design)              */
 /* ============================================================================ */
 
 .homepage-community-section {
     background-color: var(--luvex-dark-blue);
-    /* *** NEU: Grid noch feiner und subtiler gemacht, um Cache-Problem zu umgehen *** */
+    /* *** NEU: Extrem feines Grid-Muster, um Cache-Problem zu umgehen *** */
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="c" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M 8 0 L 0 0 0 8" fill="none" stroke="rgba(109, 213, 237, 0.05)" stroke-width="0.4"/></pattern></defs><rect width="100%" height="100%" fill="url(%23c)"/></svg>');
     padding: 6rem 0;
     overflow: hidden;
@@ -473,7 +473,7 @@ Last Update: 2025-07-31
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
-    /* *** NEU: Zentriert die Buttons unter dem Grid *** */
+    /* Zentriert die Buttons unter dem Grid */
     max-width: 650px;
 }
 
@@ -489,17 +489,16 @@ Last Update: 2025-07-31
     z-index: 1;
 }
 
-/* Atmosphäre-Effekt */
+/* *** NEU: Aura-Effekt für den Globus *** */
 .homepage-community-visual::before {
     content: '';
     position: absolute;
-    width: 150%;
-    height: 150%;
-    top: -25%;
-    left: -25%;
-    /* *** NEU: Glow noch weicher und subtiler gemacht *** */
-    background: radial-gradient(ellipse 50% 50% at 70% 50%, rgba(80, 160, 255, 0.1) 0%, transparent 45%);
-    z-index: 0;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(circle at center, rgba(80, 160, 255, 0.15) 0%, transparent 60%);
+    z-index: 2; /* Liegt über dem Globus, aber hinter dem Text */
     pointer-events: none;
 }
 
@@ -511,7 +510,7 @@ Last Update: 2025-07-31
     top: 50%;
     left: 50%;
     transform: translate(-40%, -50%); 
-    z-index: 1;
+    z-index: 1; /* Liegt hinter der Aura */
 }
 
 .homepage-community-glow {
@@ -532,7 +531,7 @@ Last Update: 2025-07-31
     }
     .homepage-community-description,
     .homepage-community-features,
-    .homepage-community-actions { /* Buttons auch auf mobil zentrieren */
+    .homepage-community-actions {
         margin-left: auto;
         margin-right: auto;
     }
@@ -560,6 +559,7 @@ Last Update: 2025-07-31
         grid-template-columns: 1fr;
     }
 }
+
 
 
 
