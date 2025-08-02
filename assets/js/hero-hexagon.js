@@ -32,6 +32,15 @@ document.addEventListener('DOMContentLoaded', function() {
         y: undefined,
         radius: 180 // Interaction radius
     };
+    
+    // --- UTILITY ---
+    function resizeCanvas() {
+        const heroSection = document.querySelector('.luvex-hero');
+        if (heroSection) {
+            canvas.width = heroSection.offsetWidth;
+            canvas.height = heroSection.offsetHeight;
+        }
+    }
 
     // --- PARTICLE/VERTEX CLASS ---
     // Represents a corner point of a hexagon

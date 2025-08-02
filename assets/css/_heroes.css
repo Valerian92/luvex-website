@@ -121,4 +121,57 @@ Last Update: 2025-07-31
     min-height: 350px;
 }
 
-/* ===== END [SECTION NAME] ===== */
+/*
+==============================================================================
+HERO: DYNAMIC SPECTRUM ENGINE (NEU)
+==============================================================================
+*/
+
+.hero-spectrum-engine {
+    position: relative;
+    overflow: hidden;
+    padding: calc(72px + 4rem) 2rem 4rem;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #121828; 
+    color: var(--luvex-white);
+}
+
+#spectrum-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    cursor: none;
+}
+
+.hero-spectrum-engine .hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 900px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: spectrumFadeInUp 1.2s 0.5s ease-out forwards;
+    cursor: none;
+}
+
+.hero-spectrum-engine .hero-content > * {
+    cursor: pointer;
+}
+
+.hero-spectrum-engine .hero-content h1, 
+.hero-spectrum-engine .hero-content p {
+    cursor: none;
+}
+
+@keyframes spectrumFadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

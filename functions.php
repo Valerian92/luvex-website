@@ -120,11 +120,17 @@ function luvex_enqueue_assets() {
             $blueprint_js_version = filemtime($blueprint_js_path);
             wp_enqueue_script('luvex-hero-blueprint', get_stylesheet_directory_uri() . '/assets/js/hero-blueprint.js', array(), $blueprint_js_version, true);
         }
-    } elseif ( is_page('uv-c-disinfection') ) { // NEUER BLOCK FÜR DIE DESINFEKTIONS-SEITE
+    } elseif ( is_page('uv-c-disinfection') ) { 
         $disinfection_js_path = get_stylesheet_directory() . '/assets/js/hero-disinfection.js';
         if (file_exists($disinfection_js_path)) {
             $disinfection_js_version = filemtime($disinfection_js_path);
             wp_enqueue_script('luvex-hero-disinfection', get_stylesheet_directory_uri() . '/assets/js/hero-disinfection.js', array(), $disinfection_js_version, true);
+        }
+    } elseif ( is_page('uv-knowledge') ) { // NEUER BLOCK FÜR DIE KNOWLEDGE-SEITE
+        $spectrum_js_path = get_stylesheet_directory() . '/assets/js/hero-spectrum.js';
+        if (file_exists($spectrum_js_path)) {
+            $spectrum_js_version = filemtime($spectrum_js_path);
+            wp_enqueue_script('luvex-hero-spectrum', get_stylesheet_directory_uri() . '/assets/js/hero-spectrum.js', array(), $spectrum_js_version, true);
         }
     }
 
