@@ -1,4 +1,4 @@
-// --- "PRECISION PARTICLES" JAVASCRIPT (v5 - Sichtbarkeit der Linien korrigiert) ---
+// --- "PRECISION PARTICLES" JAVASCRIPT (v6 - Stärkere Linien & Lücken-Fix) ---
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -90,9 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const vertSpacing = hexSpacing * Math.sqrt(3) / 2;
 
         let row = 0;
-        for (let y = -vertSpacing; y < height + vertSpacing; y += vertSpacing) {
+        // *** FIX: Startpunkte der Schleifen angepasst, um die Lücke oben links zu füllen ***
+        for (let y = -vertSpacing * 2; y < height + vertSpacing * 2; y += vertSpacing) {
             row++;
-            for (let x = -hexSpacing; x < width + hexSpacing; x += hexSpacing) {
+            for (let x = -hexSpacing * 2; x < width + hexSpacing * 2; x += hexSpacing) {
                 let finalX = x;
                 if (row % 2 === 0) {
                     finalX += hexSpacing / 2;
@@ -123,8 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (distance < hexSpacing * 1.1) {
                     opacityValue = 1 - (distance / (hexSpacing * 1.1));
-                    // *** FIX: Die Sichtbarkeit der Linien wurde hier erhöht (von 0.2 auf 0.4) ***
-                    ctx.strokeStyle = `rgba(109, 213, 237, ${opacityValue * 0.4})`;
+                    // *** FIX: Die Sichtbarkeit der Linien wurde hier weiter erhöht (von 0.4 auf 0.6) ***
+                    ctx.strokeStyle = `rgba(109, 213, 237, ${opacityValue * 0.6})`;
                     ctx.lineWidth = 0.5;
                     ctx.beginPath();
                     ctx.moveTo(particles[a].x, particles[a].y);
