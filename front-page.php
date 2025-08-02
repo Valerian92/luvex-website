@@ -99,15 +99,15 @@ get_header(); ?>
 </section>
 
 
-<!-- UV Knowledge Navigator - TÜRKIS -->
+<!-- UV Knowledge Navigator - Section 2 (Türkis) -->
 <section class="section section--turquoise-light">
-    <div class="container" style="max-width: 1400px;">
+    <div class="container container--narrow">
         <h2 class="text-center mb-2">UV Knowledge Navigator</h2>
-        <p class="text-center mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto; color: var(--luvex-dark-blue); font-weight: 600; font-size: 1.1rem;">
+        <p class="text-center text-muted mb-3" style="max-width: 800px; margin: 0 auto 3rem auto; color: var(--luvex-gray-700); font-size: 1.125rem;">
             Your pathway to UV expertise - from fundamentals to advanced applications
         </p>
 
-        <div class="grid-3 knowledge-navigator" style="gap: 3rem;">
+        <div class="grid-3 knowledge-navigator">
             <div class="value-card">
                 <div class="value-card__icon">
                     <i class="fas fa-atom"></i>
@@ -117,12 +117,11 @@ get_header(); ?>
                     Master the physics and engineering principles behind UV technology. From wavelength spectrum to dose calculations.
                 </p>
                 <ul class="knowledge-list">
-                    <li><i class="fas fa-wave-square"></i> Wavelength spectrum and applications</li>
-                    <li><i class="fas fa-calculator"></i> Dose calculations and Beer-Lambert law</li>
-                    <li><i class="fas fa-eye"></i> UV measurement and validation</li>
-                    <li><i class="fas fa-shield-alt"></i> Safety standards and protocols</li>
+                    <li><i class="fas fa-wave-square"></i> Wavelength spectrum & applications</li>
+                    <li><i class="fas fa-calculator"></i> Dose calculations & Beer-Lambert law</li>
+                    <li><i class="fas fa-shield-alt"></i> Safety standards & protocols</li>
                 </ul>
-                <a href="#" class="btn btn--primary btn--small">Explore UV Science</a>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--primary btn--small">Explore UV Science</a>
             </div>
 
             <div class="value-card">
@@ -135,11 +134,10 @@ get_header(); ?>
                 </p>
                 <ul class="knowledge-list">
                     <li><i class="fas fa-balance-scale"></i> Objective technology comparison</li>
-                    <li><i class="fas fa-chart-line"></i> Performance and efficiency analysis</li>
-                    <li><i class="fas fa-dollar-sign"></i> Total cost of ownership models</li>
+                    <li><i class="fas fa-chart-line"></i> Performance & efficiency analysis</li>
                     <li><i class="fas fa-route"></i> Technology selection guidance</li>
                 </ul>
-                <a href="#" class="btn btn--primary btn--small">Compare Technologies</a>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--primary btn--small">Compare Technologies</a>
             </div>
 
             <div class="value-card">
@@ -148,19 +146,20 @@ get_header(); ?>
                 </div>
                 <h3 class="value-card__title">Applications Hub</h3>
                 <p class="value-card__description">
-                    Discover UV solutions across industries and applications from water to air treatment.
+                    Discover UV solutions across industries from water treatment to advanced curing applications.
                 </p>
                 <ul class="knowledge-list">
                     <li><i class="fas fa-water"></i> Water disinfection systems</li>
-                    <li><i class="fas fa-wind"></i> Air treatment and HVAC integration</li>
+                    <li><i class="fas fa-wind"></i> Air treatment & HVAC integration</li>
                     <li><i class="fas fa-hand-sparkles"></i> Surface sterilization solutions</li>
-                    <li><i class="fas fa-bolt"></i> UV curing and polymerization</li>
                 </ul>
-                <a href="#" class="btn btn--primary btn--small">Explore Applications</a>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--primary btn--small">Explore Applications</a>
             </div>
         </div>
     </div>
 </section>
+
+
 
 <!-- ========================================================================= -->
 <!-- GLOBAL UV EXPERT COMMUNITY SEKTION                                      -->
