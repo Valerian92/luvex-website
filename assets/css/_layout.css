@@ -1,11 +1,11 @@
 /*
 ==============================================================================
-LUVEX THEME v2.1 - [DATEINAME]
+LUVEX THEME v2.1 - LAYOUT SYSTEM
 ==============================================================================
 
-Description: [Kurze Beschreibung der Komponente]
+Description: Definiert das Layout-System (.container, .grid, .flex, .section).
 Dependencies: _variables.css
-Last Update: 2025-07-31
+Last Update: 2025-08-02
 
 ==============================================================================
 */
@@ -63,11 +63,15 @@ Last Update: 2025-07-31
     background: linear-gradient(135deg, #a8e6f1 0%, #e8f9fc 100%);
 }
 
+/* ================================================================== */
+/* FIX 3: Abstand unter "Knowledge Navigator" vergrößert.             */
+/* Der untere Padding-Wert wurde von 6rem auf 8rem erhöht.            */
+/* ================================================================== */
 .section--turquoise-light {
     background: linear-gradient(180deg, rgba(109, 213, 237, 0.12) 0%, rgba(109, 213, 237, 0.06) 50%, rgba(109, 213, 237, 0.02) 100%);
-    padding: 5rem 0 6rem 0;
+    padding: 5rem 0 8rem 0; /* Mehr Abstand nach unten */
 }
-/* ::after Element entfernt - überlagert Animationen */
+
 /* Grid System */
 .grid {
     display: grid;

@@ -160,9 +160,13 @@ Last Update: 2025-08-02
     min-height: 500px;
 }
 
+/* ================================================================== */
+/* FIX 2: Globus-Größe angepasst.                                     */
+/* Die max-width wurde von 600px auf 750px erhöht.                    */
+/* ================================================================== */
 .homepage-community-globe-wrapper {
     width: 100%;
-    max-width: 600px;
+    max-width: 750px; /* Globus vergrößert */
     aspect-ratio: 1 / 1;
     position: relative;
 }
@@ -228,7 +232,7 @@ Last Update: 2025-08-02
 
 
 /* ============================================================================ */
-/* FIX 3: STYLING FÜR NEUE "EVIDENCE-BASED EXPERTISE" SEKTION                 */
+/* "EVIDENCE-BASED EXPERTISE" SEKTION STYLING                                 */
 /* ============================================================================ */
 .evidence-section {
     background: var(--luvex-white);
@@ -323,10 +327,11 @@ Last Update: 2025-08-02
 
 
 /* ============================================================================ */
-/* FIX 4: STYLING FÜR "READY TO MASTER" (FINAL CTA) SEKTION                   */
+/* FIX 5: STYLING FÜR "READY TO MASTER" (FINAL CTA) SEKTION                   */
 /* ============================================================================ */
 .section--final-cta {
-    background: linear-gradient(135deg, var(--luvex-bright-cyan) 0%, var(--luvex-vibrant-blue) 100%);
+    /* Sanfterer, markenkonformerer Farbverlauf */
+    background: linear-gradient(135deg, var(--luvex-accent-blue) 0%, var(--luvex-dark-blue) 100%);
     padding: 6rem 0;
     color: var(--luvex-white);
 }
@@ -356,6 +361,17 @@ Last Update: 2025-08-02
     gap: 1.5rem;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+/* Spezifische Anpassung für den sekundären Button für besseren Kontrast */
+.section--final-cta .luvex-cta-secondary {
+    background-color: var(--luvex-white);
+    color: var(--luvex-dark-blue);
+}
+
+.section--final-cta .luvex-cta-secondary:hover {
+    background-color: var(--luvex-gray-200);
+    color: var(--luvex-dark-blue);
 }
 
 

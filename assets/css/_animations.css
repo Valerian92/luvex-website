@@ -14,19 +14,24 @@ Last Update: 2025-08-02
   0. ANIMATION FIXES & OVERRIDES
 ==============================================================================
 */
-/* Stellt sicher, dass der Hero-Canvas immer die volle Größe hat */
-.luvex-hero #particle-canvas {
+
+/* ============================================================================== */
+/* FIX 1: Hero Photons Animation repariert.                                     */
+/* Der Selektor wurde von #particle-canvas auf #homepage-hero-canvas korrigiert, */
+/* um auf die korrekte ID im HTML zu zielen.                                     */
+/* ============================================================================== */
+.luvex-hero #homepage-hero-canvas {
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;
     width: 100% !important;
     height: 100% !important;
-    z-index: 1 !important;
+    z-index: 0 !important; /* Unter den Inhalt legen */
 }
 
 .luvex-hero .luvex-hero__container {
     position: relative;
-    z-index: 2;
+    z-index: 2; /* Über die Animation legen */
 }
 
 /* ==============================================================================
@@ -148,7 +153,7 @@ Last Update: 2025-08-02
     opacity: 0.5;
     transition: all 0.5s ease-out;
     /* Die 'float' Animation sorgt für eine sanfte Schwebebewegung */
-    animation: float 20s ease-in-out infinite; 
+    animation: float 20s ease-in-out infinite;
 }
 
 /* Zustand für inaktivierte Partikel */

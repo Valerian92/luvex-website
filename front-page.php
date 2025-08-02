@@ -42,10 +42,6 @@ get_header(); ?>
 <!-- Interactive UV Simulator Showcase -->
 <section class="section" style="background: #f8fafc;">
     <div class="container" style="max-width: 1200px; margin: 0 auto;">
-        <!-- ================================================================== -->
-        <!-- FIX 2: Redundante Headline "Professional UV..." entfernt.          -->
-        <!-- Die H2 und der P-Tag wurden hier gelöscht.                         -->
-        <!-- ================================================================== -->
         <div class="uv-simulator-showcase">
             <div class="simulator-content">
                 <h3>3D UV System Designer</h3>
@@ -161,9 +157,7 @@ get_header(); ?>
 
 
 
-<!-- ========================================================================= -->
-<!-- GLOBAL UV EXPERT COMMUNITY SEKTION                                      -->
-<!-- ========================================================================= -->
+<!-- GLOBAL UV EXPERT COMMUNITY SEKTION -->
 <section class="homepage-community-section">
     <div class="homepage-community-container">
         <!-- Spalte 1: Text-Inhalt -->
@@ -212,15 +206,11 @@ get_header(); ?>
         </div>
     </div>
 </section>
-<!-- ========================================================================= -->
-<!-- ENDE GLOBAL UV EXPERT COMMUNITY SEKTION                                   -->
-<!-- ========================================================================= -->
-
 
 
 <!-- ========================================================================= -->
-<!-- FIX 3: "Evidence-Based Expertise" Section neu gestaltet.                 -->
-<!-- Die alte Sektion wurde komplett durch diesen neuen Code ersetzt.         -->
+<!-- FIX 4: "Evidence-Based Expertise" Section personalisiert.               -->
+<!-- Die Box wurde mit Platzhaltern für deine persönlichen Daten versehen.     -->
 <!-- ========================================================================= -->
 <section class="section evidence-section">
     <div class="container container--narrow">
@@ -262,29 +252,28 @@ get_header(); ?>
             <div class="evidence-visual">
                 <div class="featured-expert-card">
                     <div class="team-member__photo">
-                        <img src="https://placehold.co/120x120/1B2A49/6dd5ed?text=LUVEX" alt="Dr. Eva Rostova">
+                        <!-- ERSETZE DIESEN LINK mit der URL zu deinem Foto -->
+                        <img src="https://placehold.co/120x120/e9ecef/1B2A49?text=Ihr+Foto" alt="Foto von [Dein Name]">
                     </div>
                     <div class="team-member__content">
-                        <h3>Dr. Eva Rostova</h3>
-                        <p class="team-member__role">Head of Scientific Research</p>
+                        <!-- ERSETZE DIESEN NAMEN -->
+                        <h3>Dein Name</h3>
+                        <!-- ERSETZE DIESE ROLLE -->
+                        <p class="team-member__role">Founder & UV Technology Expert</p>
                     </div>
                     <div class="team-member__quote">
-                        <p>"True innovation isn't about choosing a technology; it's about understanding the fundamental science to predict its real-world performance. That's where we excel."</p>
+                        <!-- ERSETZE DIESES ZITAT mit einem persönlichen Statement -->
+                        <p>"Mein Ziel ist es, die Komplexität der UV-Technologie für jeden zugänglich zu machen. Echte Innovation entsteht durch fundiertes Wissen, nicht durch Raten."</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- ========================================================================= -->
-<!-- ENDE "Evidence-Based Expertise" Sektion                                   -->
-<!-- ========================================================================= -->
+<!-- ENDE "Evidence-Based Expertise" Sektion -->
 
 
-<!-- ========================================================================= -->
-<!-- FIX 4: "Ready to Master" - Klasse für Hintergrundfarbe hinzugefügt.     -->
-<!-- Die Klasse "section--final-cta" wurde der Sektion hinzugefügt.          -->
-<!-- ========================================================================= -->
+<!-- FINAL CTA SEKTION -->
 <section class="section section--final-cta">
     <div class="container">
         <div class="cta-content">

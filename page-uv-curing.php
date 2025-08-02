@@ -5,9 +5,16 @@
  */
 get_header(); ?>
 
-<section class="luvex-hero">
-    <!-- Canvas Element für die Hexagon-Animation -->
-    <canvas id="particle-canvas"></canvas>
+<!-- 
+  ==============================================================================
+  FIX: Hero-Sektion für die neue Curing-Animation angepasst.
+  - Klasse ".hero-curing" für spezifisches Targeting hinzugefügt.
+  - Canvas-ID zu "curing-hero-canvas" geändert.
+  ==============================================================================
+-->
+<section class="luvex-hero hero-curing">
+    <!-- Canvas Element für die neue interaktive Animation -->
+    <canvas id="curing-hero-canvas"></canvas>
     
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
@@ -20,7 +27,7 @@ get_header(); ?>
             <p class="luvex-hero__description">
                 Optimize your UV curing processes for maximum efficiency and quality.
             </p>
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-hero__cta">
+            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-cta-primary">
                 <i class="fa-solid fa-industry"></i>
                 <span>Optimize UV Curing</span>
             </a>
