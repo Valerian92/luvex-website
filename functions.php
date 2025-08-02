@@ -81,7 +81,7 @@ function luvex_enqueue_assets() {
     $main_css_version = file_exists($main_css_path) ? filemtime($main_css_path) : '1.0.0';
     wp_enqueue_style('luvex-main', get_stylesheet_directory_uri() . '/assets/css/main.css', array(), $main_css_version);
 
-    // NEU: Animations-CSS laden
+    // Animations-CSS laden
     $animations_css_path = get_stylesheet_directory() . '/assets/css/_animations.css';
     if (file_exists($animations_css_path)) {
         $animations_css_version = filemtime($animations_css_path);
@@ -105,14 +105,7 @@ function luvex_enqueue_assets() {
         wp_enqueue_script($handle, get_stylesheet_directory_uri() . $path, $script_dependencies, $version, true);
     }
     
-    // NEU: Scroll-Animations-JS laden
-    $scroll_animations_js_path = get_stylesheet_directory() . '/assets/js/scroll-animations.js';
-    if(file_exists($scroll_animations_js_path)) {
-        $scroll_animations_js_version = filemtime($scroll_animations_js_path);
-        wp_enqueue_script('luvex-scroll-animations', get_stylesheet_directory_uri() . '/assets/js/scroll-animations.js', array(), $scroll_animations_js_version, true);
-    }
-
-
+    // Homepage-spezifische Skripte
     if (is_front_page() || is_home()) {
         wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), null, true);
 
@@ -123,6 +116,13 @@ function luvex_enqueue_assets() {
         $particles_js_path = get_stylesheet_directory() . '/assets/js/hero-particles.js';
         $particles_js_version = file_exists($particles_js_path) ? filemtime($particles_js_path) : '1.0.0';
         wp_enqueue_script('luvex-hero-particles', get_stylesheet_directory_uri() . '/assets/js/hero-particles.js', array(), $particles_js_version, true);
+    }
+
+    // Scroll-Animations-JS (wird am Ende geladen, um Konflikte zu vermeiden)
+    $scroll_animations_js_path = get_stylesheet_directory() . '/assets/js/scroll-animations.js';
+    if(file_exists($scroll_animations_js_path)) {
+        $scroll_animations_js_version = filemtime($scroll_animations_js_path);
+        wp_enqueue_script('luvex-scroll-animations', get_stylesheet_directory_uri() . '/assets/js/scroll-animations.js', array(), $scroll_animations_js_version, true);
     }
 }
 

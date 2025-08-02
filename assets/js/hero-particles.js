@@ -1,4 +1,4 @@
-// --- "PRECISION PARTICLES" JAVASCRIPT (v7 - Echte Hexagone & Finaler Lücken-Fix) ---
+// --- "PRECISION PARTICLES" JAVASCRIPT (v4 - Size Fix) ---
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -6,8 +6,23 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
-    let width = canvas.width = canvas.offsetWidth;
-    let height = canvas.height = canvas.offsetHeight;
+    // ** FIX: Explizite Größenberechnung vom Hero-Container **
+    function updateCanvasSize() {
+        const heroContainer = canvas.closest('.luvex-hero');
+        if (heroContainer) {
+            const rect = heroContainer.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            return { width: rect.width, height: rect.height };
+        } else {
+            // Fallback für andere Container
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            return { width: window.innerWidth, height: window.innerHeight };
+        }
+    }
+
+    let { width, height } = updateCanvasSize();
 
     let particles = [];
     let mouse = {
@@ -15,8 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
         y: null,
         radius: 120
     };
-
-    const hexSpacing = 50;
 
     window.addEventListener('mousemove', (event) => {
         const rect = canvas.getBoundingClientRect();
@@ -83,15 +96,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function init() {
         particles = [];
+        const hexSpacing = 50;
         const particleSize = 1.5;
         const color = 'rgba(109, 213, 237, 0.7)';
+
         const vertSpacing = hexSpacing * Math.sqrt(3) / 2;
 
         let row = 0;
-        // *** FIX: Puffer nochmals vergrößert für absolute Sicherheit an den Rändern ***
-        for (let y = -vertSpacing * 3; y < height + vertSpacing * 3; y += vertSpacing) {
+        for (let y = -vertSpacing; y < height + vertSpacing; y += vertSpacing) {
             row++;
-            for (let x = -hexSpacing * 3; x < width + hexSpacing * 3; x += hexSpacing) {
+            for (let x = -hexSpacing; x < width + hexSpacing; x += hexSpacing) {
                 let finalX = x;
                 if (row % 2 === 0) {
                     finalX += hexSpacing / 2;
@@ -111,50 +125,43 @@ document.addEventListener('DOMContentLoaded', () => {
         connect();
     }
 
-    // *** FIX: Überarbeitete Logik, um echte Hexagone zu zeichnen ***
     function connect() {
-        for (let i = 0; i < particles.length; i++) {
-            // Findet die 6 nächsten Nachbarn für jeden Punkt
-            let neighbors = [];
-            for (let j = 0; j < particles.length; j++) {
-                if (i === j) continue;
-                const distance = Math.sqrt(
-                    ((particles[i].x - particles[j].x) * (particles[i].x - particles[j].x)) +
-                    ((particles[i].y - particles[j].y) * (particles[i].y - particles[j].y))
+        let opacityValue = 1;
+        for (let a = 0; a < particles.length; a++) {
+            for (let b = a; b < particles.length; b++) {
+                let distance = Math.sqrt(
+                    ((particles[a].x - particles[b].x) * (particles[a].x - particles[b].x)) +
+                    ((particles[a].y - particles[b].y) * (particles[a].y - particles[b].y))
                 );
-                // Nur Punkte in Betracht ziehen, die potentielle Nachbarn sind
-                if (distance < hexSpacing * 1.5) {
-                    neighbors.push({ index: j, distance: distance });
+
+                if (distance < hexSpacing * 1.1) {
+                    opacityValue = 1 - (distance / (hexSpacing * 1.1));
+                    ctx.strokeStyle = `rgba(109, 213, 237, ${opacityValue * 0.2})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[a].x, particles[a].y);
+                    ctx.lineTo(particles[b].x, particles[b].y);
+                    ctx.stroke();
                 }
-            }
-
-            // Sortiert die Nachbarn nach Distanz und nimmt nur die nächsten 6
-            neighbors.sort((a, b) => a.distance - b.distance);
-            const closestNeighbors = neighbors.slice(0, 6);
-
-            // Zeichnet Linien nur zu diesen 6 Nachbarn
-            for (const neighbor of closestNeighbors) {
-                const opacityValue = 1 - (neighbor.distance / (hexSpacing * 1.1));
-                ctx.strokeStyle = `rgba(109, 213, 237, ${opacityValue * 0.7})`;
-                ctx.lineWidth = 0.5;
-                ctx.beginPath();
-                ctx.moveTo(particles[i].x, particles[i].y);
-                ctx.lineTo(particles[neighbor.index].x, particles[neighbor.index].y);
-                ctx.stroke();
             }
         }
     }
 
+    // ** FIX: Verbesserte Resize-Behandlung **
     let resizeTimer;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
-            width = canvas.width = canvas.offsetWidth;
-            height = canvas.height = canvas.offsetHeight;
+            const newSize = updateCanvasSize();
+            width = newSize.width;
+            height = newSize.height;
             init();
         }, 250);
     });
 
-    init();
-    animate();
+    // ** FIX: Starte Initialisierung nach kurzer Verzögerung **
+    setTimeout(() => {
+        init();
+        animate();
+    }, 100);
 });
