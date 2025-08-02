@@ -387,15 +387,15 @@ Last Update: 2025-07-31
 }
 
 /* ============================================================================ */
-/* 6.8 HOMEPAGE - GLOBAL UV EXPERT COMMUNITY v3.3 (Final Polish)              */
+/* 6.8 HOMEPAGE - GLOBAL UV EXPERT COMMUNITY v3.4 (Atmosphere)                */
 /* ============================================================================ */
 
 .homepage-community-section {
     background-color: var(--luvex-dark-blue);
-    /* *** NEU: Grid-Größe auf 5x5 für ein extrem feines Muster *** */
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="c" width="5" height="5" patternUnits="userSpaceOnUse"><path d="M 5 0 L 0 0 0 5" fill="none" stroke="rgba(109, 213, 237, 0.09)" stroke-width="0.4"/></pattern></defs><rect width="100%" height="100%" fill="url(%23c)"/></svg>');
+    /* *** NEU: Grid noch subtiler gemacht *** */
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="c" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(109, 213, 237, 0.06)" stroke-width="0.3"/></pattern></defs><rect width="100%" height="100%" fill="url(%23c)"/></svg>');
     padding: 6rem 0;
-    overflow: hidden; /* Wichtig: Schneidet den übergroßen Globus ab */
+    overflow: hidden;
     position: relative;
 }
 
@@ -487,24 +487,34 @@ Last Update: 2025-07-31
     z-index: 1;
 }
 
+/* *** NEU: Der Glow-Effekt wird jetzt als Atmosphäre genutzt *** */
+.homepage-community-visual::before {
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    top: -25%;
+    left: -25%;
+    /* Erzeugt einen großen, weichen, nach links versetzten Lichtschein */
+    background: radial-gradient(ellipse 50% 50% at 70% 50%, rgba(79, 157, 255, 0.12) 0%, transparent 50%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+
 #globe-container.homepage-community-globe-wrapper {
     position: absolute;
-    /* *** NEU: Globus größer und weiter links *** */
     width: 260%; 
     height: 260%;
     top: 50%;
     left: 50%;
     transform: translate(-40%, -50%); 
+    z-index: 1; /* Stellt sicher, dass der Globus über dem neuen Glow liegt */
 }
 
+/* Alten, direkten Glow entfernt, wird nicht mehr gebraucht */
 .homepage-community-glow {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(79, 157, 255, 0.15) 30%, transparent 65%);
-    transform: scale(1.2);
-    z-index: -1;
+   display: none;
 }
 
 
@@ -532,6 +542,9 @@ Last Update: 2025-07-31
         width: 100%;
         height: 400px;
         min-width: auto;
+    }
+    .homepage-community-visual::before {
+        display: none; /* Atmosphäre auf Mobilgeräten ausblenden */
     }
     #globe-container.homepage-community-globe-wrapper {
         width: 120%;
