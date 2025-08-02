@@ -387,13 +387,13 @@ Last Update: 2025-07-31
 }
 
 /* ============================================================================ */
-/* 6.8 HOMEPAGE - GLOBAL UV EXPERT COMMUNITY v3.4 (Atmosphere)                */
+/* 6.8 HOMEPAGE - GLOBAL UV EXPERT COMMUNITY v3.5 (Final Polish & Fix)        */
 /* ============================================================================ */
 
 .homepage-community-section {
     background-color: var(--luvex-dark-blue);
-    /* *** NEU: Grid noch subtiler gemacht *** */
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="c" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(109, 213, 237, 0.06)" stroke-width="0.3"/></pattern></defs><rect width="100%" height="100%" fill="url(%23c)"/></svg>');
+    /* *** NEU: Grid noch feiner und subtiler gemacht, um Cache-Problem zu umgehen *** */
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="c" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M 8 0 L 0 0 0 8" fill="none" stroke="rgba(109, 213, 237, 0.05)" stroke-width="0.4"/></pattern></defs><rect width="100%" height="100%" fill="url(%23c)"/></svg>');
     padding: 6rem 0;
     overflow: hidden;
     position: relative;
@@ -473,6 +473,8 @@ Last Update: 2025-07-31
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    /* *** NEU: Zentriert die Buttons unter dem Grid *** */
+    max-width: 650px;
 }
 
 /* Spalte 2: Globus-Animation */
@@ -487,7 +489,7 @@ Last Update: 2025-07-31
     z-index: 1;
 }
 
-/* *** NEU: Der Glow-Effekt wird jetzt als Atmosphäre genutzt *** */
+/* Atmosphäre-Effekt */
 .homepage-community-visual::before {
     content: '';
     position: absolute;
@@ -495,8 +497,8 @@ Last Update: 2025-07-31
     height: 150%;
     top: -25%;
     left: -25%;
-    /* Erzeugt einen großen, weichen, nach links versetzten Lichtschein */
-    background: radial-gradient(ellipse 50% 50% at 70% 50%, rgba(79, 157, 255, 0.12) 0%, transparent 50%);
+    /* *** NEU: Glow noch weicher und subtiler gemacht *** */
+    background: radial-gradient(ellipse 50% 50% at 70% 50%, rgba(80, 160, 255, 0.1) 0%, transparent 45%);
     z-index: 0;
     pointer-events: none;
 }
@@ -509,10 +511,9 @@ Last Update: 2025-07-31
     top: 50%;
     left: 50%;
     transform: translate(-40%, -50%); 
-    z-index: 1; /* Stellt sicher, dass der Globus über dem neuen Glow liegt */
+    z-index: 1;
 }
 
-/* Alten, direkten Glow entfernt, wird nicht mehr gebraucht */
 .homepage-community-glow {
    display: none;
 }
@@ -530,7 +531,8 @@ Last Update: 2025-07-31
         min-width: 100%;
     }
     .homepage-community-description,
-    .homepage-community-features {
+    .homepage-community-features,
+    .homepage-community-actions { /* Buttons auch auf mobil zentrieren */
         margin-left: auto;
         margin-right: auto;
     }
@@ -544,7 +546,7 @@ Last Update: 2025-07-31
         min-width: auto;
     }
     .homepage-community-visual::before {
-        display: none; /* Atmosphäre auf Mobilgeräten ausblenden */
+        display: none;
     }
     #globe-container.homepage-community-globe-wrapper {
         width: 120%;
@@ -558,6 +560,7 @@ Last Update: 2025-07-31
         grid-template-columns: 1fr;
     }
 }
+
 
 
 /* 6.1 /* Homepage Specific */
