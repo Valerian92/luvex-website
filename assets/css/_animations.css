@@ -1,14 +1,14 @@
 /*
 ==============================================================================
-LUVEX THEME v2.1 - ANIMATIONEN
+LUVEX THEME v2.2 - ANIMATIONEN
 ==============================================================================
-Description: Globale und komponenten-spezifische Animationen
+Description: Globale und komponenten-spezifische Animationen.
 Dependencies: -
 Last Update: 2025-08-02
 ==============================================================================
 */
 
-/* ===== [HERO PARTIKEL ANIMATION] ===== */
+/* ===== [1. HERO PARTIKEL ANIMATION] ===== */
 
 #particle-canvas {
     position: absolute;
@@ -16,5 +16,86 @@ Last Update: 2025-08-02
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0; /* Stellt sicher, dass es hinter dem Grid-Muster liegt */
+    z-index: 0; /* Liegt hinter dem Grid-Muster, aber vor dem Hintergrund */
+}
+
+/* ===== [2. HOMEPAGE GLOBUS-SEKTION ANIMATION] ===== */
+/* Diese Stile wurden aus _homepage.css hierher verschoben. */
+
+.homepage-community-visual {
+    flex: 1;
+    min-width: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    z-index: 1;
+}
+
+.homepage-community-visual::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(circle at center, rgba(80, 160, 255, 0.15) 0%, transparent 60%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+#globe-container.homepage-community-globe-wrapper {
+    position: absolute;
+    width: 260%;
+    height: 260%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-40%, -50%);
+    z-index: 1;
+}
+
+@media (max-width: 1024px) {
+    .homepage-community-visual {
+        position: relative;
+        width: 100%;
+        height: 400px;
+        min-width: auto;
+    }
+    .homepage-community-visual::before {
+        display: none;
+    }
+    #globe-container.homepage-community-globe-wrapper {
+        width: 120%;
+        height: 120%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+
+/* ===== [3. FOOTER LICHT-EFFEKT] ===== */
+
+.site-footer {
+    position: relative;
+    overflow: hidden; /* Verhindert, dass der Effekt über den Footer hinausragt */
+}
+
+#footer-light-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px; /* Breite des Lichtscheins */
+    height: 100%;
+    background: radial-gradient(ellipse 80% 50% at 50% 50%, rgba(109, 213, 237, 0.15), transparent 80%);
+    border-radius: 50%;
+    pointer-events: none; /* Stellt sicher, dass der Effekt nicht klickbar ist */
+    transition: transform 0.1s ease-out, opacity 0.3s ease-out;
+    z-index: 0;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+}
+
+/* Klasse, die per JS hinzugefügt wird, um den Effekt zu aktivieren */
+.site-footer.animation-triggered #footer-light-effect {
+    opacity: 1;
 }

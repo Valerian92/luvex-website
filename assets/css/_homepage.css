@@ -1,47 +1,24 @@
 /*
 ==============================================================================
-LUVEX THEME v2.1 - [DATEINAME]
+LUVEX THEME v2.2 - HOMEPAGE LAYOUT
 ==============================================================================
-
-Description: [Kurze Beschreibung der Komponente]
+Description: Layout-spezifische Stile für die Homepage-Sektionen.
 Dependencies: _variables.css
-Last Update: 2025-07-31
-
+Last Update: 2025-08-02
 ==============================================================================
 */
 
 /* ===== [Section 6.4: Homepage Specific (.uv-simulator-showcase)] ===== */
 
-/* --- 6.4 HOMEPAGE SPECIFIC --- */
-
-/* UV Simulator Showcase */
 .uv-simulator-showcase {
     background: linear-gradient(135deg, var(--luvex-dark-blue), var(--luvex-accent-blue));
     border-radius: var(--radius-xl);
     padding: 4rem 3rem;
-    margin: 3rem 0;
+    margin: 3rem auto;
     position: relative;
     overflow: hidden;
-}
-
-.uv-simulator-showcase::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(109, 213, 237, 0.2) 0%, transparent 70%);
-    animation: pulse-glow 6s ease-in-out infinite;
-    pointer-events: none;
-}
-
-.uv-simulator-showcase {
     max-width: 1200px;
-    margin: 3rem auto;
-    padding: 4rem 3rem;
 }
-
 
 .simulator-content {
     position: relative;
@@ -67,12 +44,11 @@ Last Update: 2025-07-31
 }
 
 .simulator-features {
-    margin: 3rem 0;
+    margin: 3rem auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     max-width: 900px;
-    margin: 3rem auto;
 }
 
 .simulator-feature {
@@ -108,6 +84,11 @@ Last Update: 2025-07-31
     margin: 0;
 }
 
+.simulator-cta-container {
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
 .simulator-cta {
     display: inline-flex;
     align-items: center;
@@ -123,19 +104,6 @@ Last Update: 2025-07-31
     transition: var(--transition-normal);
 }
 
-.simulator-cta-container {
-    text-align: center;
-    margin-top: 2.5rem;
-}
-
-.simulator-connection-text {
-    color: var(--luvex-bright-cyan);
-    font-size: 0.95rem;
-    font-weight: 500;
-    margin: 1rem 0 0 0;
-    opacity: 0.9;
-}
-
 .simulator-cta:hover {
     background: #5ac7e0;
     transform: translateY(-2px);
@@ -148,7 +116,6 @@ Last Update: 2025-07-31
     padding: 0;
     margin: 1.5rem 0 2rem 0;
 }
-
 
 .knowledge-list li i {
     font-size: 1rem;
@@ -197,202 +164,12 @@ Last Update: 2025-07-31
     margin: 0;
 }
 
-
-.globe-title {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--luvex-white);
-    text-shadow: 0 0 20px rgba(109, 213, 237, 0.8);
-    z-index: 100;
-    text-align: center;
-}
-
-.globe-subtitle {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 1rem;
-    color: var(--luvex-bright-cyan);
-    z-index: 100;
-    text-align: center;
-}
-
-@media (max-width: 768px) {
-    .global-network-visual {
-        height: 350px;
-    }
-    
-    .globe-title {
-        font-size: 1.1rem;
-        top: 15px;
-    }
-    
-    .globe-subtitle {
-        font-size: 0.9rem;
-        bottom: 15px;
-    }
-}
-/* Feature Section Enhancement (extends existing) */
-.feature-section {
-    display: flex;
-    align-items: center;
-    gap: 4rem;
-    flex-wrap: wrap;
-}
-
-.community-text-container {
-    background: var(--luvex-white);
-    border: 2px solid var(--luvex-bright-cyan);
-    border-radius: var(--radius-lg);
-    padding: 2.5rem;
-    box-shadow: var(--shadow-md);
-    max-width: 650px; /* Breiter machen */
-}
-
-.feature-section {
-    display: flex;
-    align-items: center;
-    gap: 3rem; /* Weniger Gap für mehr Platz */
-    flex-wrap: wrap;
-}
-
-.feature-text-content {
-    flex: 1;
-    min-width: 400px; /* Mindestbreite erhöhen */
-}
-
-.feature-image-content {
-    flex: 1;
-    min-width: 350px;
-}
-
-.feature-list {
-    list-style: none;
-    padding: 0;
-    margin: 2rem 0;
-}
-
-.feature-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    margin-bottom: 1.25rem;
-    color: var(--luvex-gray-700);
-    line-height: 1.7;
-    font-size: 1.05rem;
-}
-
-.feature-list li i {
-    color: var(--luvex-accent-blue);
-    margin-top: 0.125rem;
-    transition: var(--transition-normal);
-}
-
-.feature-list li:hover i {
-    transform: scale(1.2);
-    color: var(--luvex-bright-cyan);
-}
-
-/* Animations */
-@keyframes pulse-glow {
-    0%, 100% { 
-        opacity: 0.3; 
-        transform: scale(1); 
-    }
-    50% { 
-        opacity: 0.6; 
-        transform: scale(1.05); 
-    }
-}
-
-@keyframes pulse-dot {
-    0%, 100% { 
-        opacity: 0.4; 
-        transform: scale(1); 
-    }
-    50% { 
-        opacity: 1; 
-        transform: scale(1.2); 
-    }
-}
-
-
-
-/* --- 6.4 HOMEPAGE GRID FIXES --- */
-
-/* UV Knowledge Navigator - force horizontal layout */
-.section--turquoise-light .grid-3.knowledge-navigator {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    align-items: stretch;
-}
-
-.knowledge-navigator .value-card {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.knowledge-navigator .value-card__description {
-    flex-grow: 1;
-}
-
-
-/* Simulator Features - ensure grid display */
-.simulator-features.grid-4 {
-    display: grid;
-}
-
-/* Simulator Features - 6er Grid */
-.simulator-features.grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-}
-
-@media (max-width: 768px) {
-    .simulator-features.grid-3 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 480px) {
-    .simulator-features.grid-3 {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* UV Simulator Showcase - better width */
-.uv-simulator-showcase {
-    max-width: 1200px;
-    margin: 3rem auto;
-}
-
-@media (max-width: 1024px) {
-    .grid-3.knowledge-navigator {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .grid-3.knowledge-navigator {
-        grid-template-columns: 1fr;
-    }
-}
-
 /* ============================================================================ */
-/* 6.8 HOMEPAGE - GLOBAL UV EXPERT COMMUNITY v5.0 (Final & Cache-Busted)      */
+/* 6.8 HOMEPAGE - GLOBAL UV EXPERT COMMUNITY LAYOUT                           */
 /* ============================================================================ */
 
 .homepage-community-section {
     background-color: var(--luvex-dark-blue);
-    /* *** NEU: Extrem feines Grid-Muster, um Cache-Problem zu umgehen *** */
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="c" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M 8 0 L 0 0 0 8" fill="none" stroke="rgba(109, 213, 237, 0.05)" stroke-width="0.4"/></pattern></defs><rect width="100%" height="100%" fill="url(%23c)"/></svg>');
     padding: 6rem 0;
     overflow: hidden;
@@ -408,7 +185,6 @@ Last Update: 2025-07-31
     gap: var(--space-lg);
 }
 
-/* Spalte 1: Text-Inhalt */
 .homepage-community-content {
     flex: 1;
     min-width: 50%;
@@ -473,50 +249,8 @@ Last Update: 2025-07-31
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
-    /* Zentriert die Buttons unter dem Grid */
     max-width: 650px;
 }
-
-/* Spalte 2: Globus-Animation */
-.homepage-community-visual {
-    flex: 1;
-    min-width: 50%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 60%;
-    height: 100%;
-    z-index: 1;
-}
-
-/* *** NEU: Aura-Effekt für den Globus *** */
-.homepage-community-visual::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: radial-gradient(circle at center, rgba(80, 160, 255, 0.15) 0%, transparent 60%);
-    z-index: 2; /* Liegt über dem Globus, aber hinter dem Text */
-    pointer-events: none;
-}
-
-
-#globe-container.homepage-community-globe-wrapper {
-    position: absolute;
-    width: 260%; 
-    height: 260%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-40%, -50%); 
-    z-index: 1; /* Liegt hinter der Aura */
-}
-
-.homepage-community-glow {
-   display: none;
-}
-
 
 /* Responsive Anpassungen */
 @media (max-width: 1024px) {
@@ -538,60 +272,19 @@ Last Update: 2025-07-31
     .homepage-community-actions {
         justify-content: center;
     }
-    .homepage-community-visual {
-        position: relative;
-        width: 100%;
-        height: 400px;
-        min-width: auto;
-    }
-    .homepage-community-visual::before {
-        display: none;
-    }
-    #globe-container.homepage-community-globe-wrapper {
-        width: 120%;
-        height: 120%;
-        transform: translate(-50%, -50%);
-    }
 }
 
 @media (max-width: 768px) {
     .homepage-community-features {
         grid-template-columns: 1fr;
     }
+    .simulator-features {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-
-/* 6.1 /* Homepage Specific */
-
-
-.home-hero {
-    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-    color: var(--color-white);
+@media (max-width: 480px) {
+    .simulator-features {
+        grid-template-columns: 1fr;
+    }
 }
-
-.home-hero .hero__title {
-    color: var(--color-white);
-    background: none;
-    -webkit-text-fill-color: unset;
-}
-
-/* About Page */
-.about-section {
-    background: var(--color-light);
-}
-
-/* Contact Page */
-.contact-form {
-    background: var(--color-white);
-    padding: var(--space-lg);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-}
-
-
-
-
-/* 6.4 END ===================================================== */
-
-
-/* ===== END [SECTION NAME] ===== */

@@ -10,7 +10,7 @@ get_header(); ?>
 
 <!-- Hero Section -->
 <section class="luvex-hero">
-    <!-- NEU HINZUGEFÜGT: Canvas Element für die Partikel-Animation -->
+    <!-- Canvas Element für die Partikel-Animation -->
     <canvas id="particle-canvas"></canvas>
 
     <div class="luvex-hero__container">
@@ -163,8 +163,7 @@ get_header(); ?>
 </section>
 
 <!-- ========================================================================= -->
-<!-- NEUE GLOBAL UV EXPERT COMMUNITY SEKTION (START)                           -->
-<!-- Version 3.0: Asymmetrisches Layout für beste Lesbarkeit und Optik         -->
+<!-- GLOBAL UV EXPERT COMMUNITY SEKTION                                      -->
 <!-- ========================================================================= -->
 <section class="homepage-community-section">
     <div class="homepage-community-container">
@@ -211,12 +210,11 @@ get_header(); ?>
             <div id="globe-container" class="homepage-community-globe-wrapper">
                 <!-- Die Three.js Animation wird hier geladen -->
             </div>
-            <div class="homepage-community-glow"></div>
         </div>
     </div>
 </section>
 <!-- ========================================================================= -->
-<!-- NEUE GLOBAL UV EXPERT COMMUNITY SEKTION (ENDE)                            -->
+<!-- ENDE GLOBAL UV EXPERT COMMUNITY SEKTION                                   -->
 <!-- ========================================================================= -->
 
 
