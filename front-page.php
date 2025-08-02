@@ -163,7 +163,7 @@ get_header(); ?>
 <!-- NEUE GLOBAL UV EXPERT COMMUNITY SEKTION (START)                           -->
 <!-- Version 2.0: Animation im Hintergrund, Inhalt überlagert, helles Design  -->
 <!-- ========================================================================= -->
-<section class="homepage-community-section theme-light">
+<section class="homepage-community-section theme-dark">
     
     <!-- Hintergrund: Globus Animation -->
     <div class="homepage-community-visual">

@@ -388,36 +388,27 @@ Last Update: 2025-07-31
 
 
 
-/* ============================================================================ */
-/* 6.8 HOMEPAGE - GLOBAL UV EXPERT COMMUNITY (KOMPLETT NEU)                   */
-/* ============================================================================ */
-/*
-==============================================================================
-LUVEX THEME v2.1 - HOMEPAGE STYLES
-==============================================================================
-*/
-
-/* ... (vorheriger CSS-Code bleibt unverändert) ... */
-
 
 /* ============================================================================ */
-/* 6.8 HOMEPAGE - GLOBAL UV EXPERT COMMUNITY v2.0 (Overlay Layout)            */
+/* 6.8 HOMEPAGE - GLOBAL UV EXPERT COMMUNITY v2.1 (Dark Mode & Grid)          */
 /* ============================================================================ */
 
 /* Haupt-Container für die gesamte Sektion */
 .homepage-community-section {
-    position: relative; /* Wichtig für die Positionierung der Kind-Elemente */
+    position: relative;
     overflow: hidden;
-    display: flex; /* Zentriert den Inhalts-Container */
+    display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 80vh; /* Mindesthöhe für einen guten visuellen Effekt */
+    min-height: 90vh;
     padding: var(--space-xl) 0;
 }
 
-/* Helles Theme (Standard) */
-.homepage-community-section.theme-light {
-    background-color: #ffffff; /* Weißer Hintergrund */
+/* Dunkles Theme (Standard) */
+.homepage-community-section.theme-dark {
+    background-color: var(--luvex-dark-blue); /* Dunkelblauer Hintergrund */
+    /* Fügt das dezente Grid-Muster hinzu */
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="c" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.08)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23c)"/></svg>');
 }
 
 /* Hintergrund-Element: Globus-Visualisierung */
@@ -428,8 +419,9 @@ LUVEX THEME v2.1 - HOMEPAGE STYLES
     transform: translate(-50%, -50%);
     width: 100%;
     height: 100%;
-    z-index: 1; /* Liegt im Hintergrund */
-    pointer-events: none; /* Klicks gehen durch die Animation durch */
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.8; /* Macht den Globus etwas dezenter */
 }
 
 #globe-container.homepage-community-globe-wrapper {
@@ -441,19 +433,19 @@ LUVEX THEME v2.1 - HOMEPAGE STYLES
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 60%;
-    padding-bottom: 60%; /* Sorgt für ein quadratisches Seitenverhältnis */
+    width: 50%;
+    padding-bottom: 50%;
     height: 0;
     transform: translate(-50%, -50%);
-    background: radial-gradient(circle, rgba(79, 157, 255, 0.15) 30%, transparent 70%);
+    background: radial-gradient(circle, rgba(79, 157, 255, 0.25) 30%, transparent 70%);
     border-radius: 50%;
-    animation: pulse-glow 6s ease-in-out infinite;
+    animation: pulse-glow 5s ease-in-out infinite;
 }
 
 /* Vordergrund-Element: Der gesamte Text-Inhalt */
 .homepage-community-content {
     position: relative;
-    z-index: 2; /* Liegt über der Animation */
+    z-index: 2;
     width: 100%;
     text-align: center;
 }
@@ -465,22 +457,22 @@ LUVEX THEME v2.1 - HOMEPAGE STYLES
     padding: 0 var(--space-md);
 }
 
-/* Header-Styling für helles Theme */
-.theme-light .homepage-community-title {
-    color: var(--luvex-dark-blue); /* Dunkle Schrift auf hellem Grund */
+/* Header-Styling für dunkles Theme */
+.theme-dark .homepage-community-title {
+    color: var(--luvex-white);
     font-size: clamp(2.2rem, 4vw, 3rem);
     font-weight: 600;
     margin: 0 0 1.5rem 0;
     line-height: 1.2;
 }
 
-.theme-light .homepage-community-title .text-highlight {
-    color: var(--luvex-accent-blue); /* Akzentfarbe für Hervorhebung */
+.theme-dark .homepage-community-title .text-highlight {
+    color: var(--luvex-bright-cyan);
 }
 
-.theme-light .homepage-community-description {
+.theme-dark .homepage-community-description {
     font-size: var(--text-lg);
-    color: var(--luvex-gray-700); /* Gut lesbares Grau */
+    color: var(--luvex-gray-300);
     margin: 0 auto;
     max-width: 750px;
     line-height: 1.7;
@@ -498,16 +490,16 @@ LUVEX THEME v2.1 - HOMEPAGE STYLES
     text-align: left;
 }
 
-.theme-light .homepage-community-features li {
+.theme-dark .homepage-community-features li {
     display: flex;
     align-items: flex-start;
     gap: 1rem;
     font-size: var(--text-base);
-    color: var(--luvex-gray-600);
+    color: var(--luvex-gray-200);
 }
 
-.theme-light .homepage-community-features li i {
-    color: var(--luvex-accent-blue);
+.theme-dark .homepage-community-features li i {
+    color: var(--luvex-bright-cyan);
     font-size: 1.25rem;
     margin-top: 0.2rem;
     flex-shrink: 0;
@@ -515,8 +507,8 @@ LUVEX THEME v2.1 - HOMEPAGE STYLES
     text-align: center;
 }
 
-.theme-light .homepage-community-features li strong {
-    color: var(--luvex-dark-blue);
+.theme-dark .homepage-community-features li strong {
+    color: var(--luvex-white);
     font-weight: 600;
     display: block;
     margin-bottom: 0.25rem;
@@ -542,19 +534,15 @@ LUVEX THEME v2.1 - HOMEPAGE STYLES
 
 @media (max-width: 768px) {
     .homepage-community-section {
-        min-height: auto; /* Auf mobilen Geräten Höhe an Inhalt anpassen */
+        min-height: auto;
         padding: 5rem 0;
     }
     .homepage-community-features {
         grid-template-columns: 1fr;
         gap: 1.5rem;
-        text-align: center;
-    }
-    .theme-light .homepage-community-features li {
-        text-align: left; /* Text linksbündig halten für bessere Lesbarkeit */
-        justify-content: flex-start;
     }
 }
+
 
 /* Community Section End */
 
