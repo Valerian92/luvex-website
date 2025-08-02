@@ -1,143 +1,130 @@
-// --- "PRECISION PARTICLES" JAVASCRIPT (v4 - Size Fix) ---
-
-document.addEventListener('DOMContentLoaded', () => {
-
+/**
+ * LUVEX Theme - Hero Hexagon Grid Animation
+ *
+ * This script creates a network of animated particles arranged in a hexagonal grid.
+ *
+ * REVISION: This version replaces the random particle distribution with a
+ * structured hexagonal grid for a more technical and clean aesthetic. It also
+ * fixes initialization bugs that caused particles to clump in the top-left corner.
+ *
+ * @package Luvex
+ * @since 2.2.1
+ */
+document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.getElementById('particle-canvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
 
-    // ** FIX: Explizite Größenberechnung vom Hero-Container **
-    function updateCanvasSize() {
-        const heroContainer = canvas.closest('.luvex-hero');
-        if (heroContainer) {
-            const rect = heroContainer.getBoundingClientRect();
-            canvas.width = rect.width;
-            canvas.height = rect.height;
-            return { width: rect.width, height: rect.height };
-        } else {
-            // Fallback für andere Container
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            return { width: window.innerWidth, height: window.innerHeight };
+    // Stop if canvas element doesn't exist on the page
+    if (!canvas) {
+        return;
+    }
+
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animationFrameId;
+
+    // --- CONFIGURATION ---
+    const hexSpacing = 60; // Abstand zwischen den Hexagon-Mittelpunkten
+    const particleColor = 'rgba(109, 213, 237, 0.7)';
+    const lineColor = 'rgba(109, 213, 237, 0.15)';
+    const connectDistance = 90; // Maximale Distanz für eine Verbindungslinie
+    const wobbleAmount = 0.1; // Wie stark die Partikel "wobbeln"
+
+    let mouse = {
+        x: undefined,
+        y: undefined,
+        radius: 150 // Interaktionsradius der Maus
+    };
+
+    // --- UTILITY FUNCTIONS ---
+
+    function resizeCanvas() {
+        const heroSection = document.querySelector('.luvex-hero');
+        if (heroSection) {
+            canvas.width = heroSection.offsetWidth;
+            canvas.height = heroSection.offsetHeight;
         }
     }
 
-    let { width, height } = updateCanvasSize();
-
-    let particles = [];
-    let mouse = {
-        x: null,
-        y: null,
-        radius: 120
-    };
-
-    window.addEventListener('mousemove', (event) => {
-        const rect = canvas.getBoundingClientRect();
-        mouse.x = event.clientX - rect.left;
-        mouse.y = event.clientY - rect.top;
-    });
-
-    window.addEventListener('mouseout', () => {
-        mouse.x = null;
-        mouse.y = null;
-    });
-
+    // --- PARTICLE CLASS ---
     class Particle {
-        constructor(x, y, size, color) {
+        constructor(x, y) {
+            this.baseX = x; // Ursprungsposition im Gitter
+            this.baseY = y;
             this.x = x;
             this.y = y;
-            this.size = size;
-            this.color = color;
-            this.baseX = this.x;
-            this.baseY = this.y;
-            this.density = (Math.random() * 20) + 10;
-            this.vx = 0;
-            this.vy = 0;
+            this.radius = Math.random() * 1.5 + 1;
+            this.density = Math.random() * 20 + 10;
+            // Winkel für die "Schwebe"-Bewegung
+            this.angle = Math.random() * Math.PI * 2;
         }
 
         draw() {
+            ctx.fillStyle = particleColor;
             ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-            ctx.fillStyle = this.color;
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.closePath();
             ctx.fill();
         }
 
         update() {
-            let dx = mouse.x - this.x;
-            let dy = mouse.y - this.y;
-            let distance = Math.sqrt(dx * dx + dy * dy);
+            // Mausinteraktion: Partikel wegschieben
+            if (mouse.x !== undefined && mouse.y !== undefined) {
+                let dx_mouse = mouse.x - this.x;
+                let dy_mouse = mouse.y - this.y;
+                let distance_mouse = Math.sqrt(dx_mouse * dx_mouse + dy_mouse * dy_mouse);
 
-            if (distance < mouse.radius) {
-                let forceDirectionX = dx / distance;
-                let forceDirectionY = dy / distance;
-                let maxDistance = mouse.radius;
-                let force = (maxDistance - distance) / maxDistance;
-                let directionX = forceDirectionX * force * this.density * 0.6;
-                let directionY = forceDirectionY * force * this.density * 0.6;
-
-                this.vx = -directionX;
-                this.vy = -directionY;
-            } else {
-                this.vx *= 0.95;
-                this.vy *= 0.95;
-
-                let springDx = this.baseX - this.x;
-                let springDy = this.baseY - this.y;
-                this.vx += springDx * 0.01;
-                this.vy += springDy * 0.01;
+                if (distance_mouse < mouse.radius) {
+                    let force = (mouse.radius - distance_mouse) / mouse.radius;
+                    this.x -= (dx_mouse / distance_mouse) * force * this.density * 0.5;
+                    this.y -= (dy_mouse / distance_mouse) * force * this.density * 0.5;
+                }
             }
+            
+            // Partikel langsam zum Ursprung zurückkehren lassen
+            this.x += (this.baseX - this.x) * 0.02;
+            this.y += (this.baseY - this.y) * 0.02;
 
-            this.x += this.vx;
-            this.y += this.vy;
-
-            this.draw();
+            // Sanfte "Schwebe"- oder "Wobble"-Bewegung
+            this.angle += 0.02;
+            this.x += Math.cos(this.angle) * wobbleAmount;
+            this.y += Math.sin(this.angle) * wobbleAmount;
         }
     }
+
+    // --- ANIMATION LOGIC ---
 
     function init() {
         particles = [];
-        const hexSpacing = 50;
-        const particleSize = 1.5;
-        const color = 'rgba(109, 213, 237, 0.7)';
+        // Berechne die Geometrie des Hex-Gitters
+        const hexHeight = hexSpacing * Math.sqrt(3);
+        const rowHeight = hexHeight / 2;
+        const colWidth = hexSpacing * 0.75;
 
-        const vertSpacing = hexSpacing * Math.sqrt(3) / 2;
-
-        let row = 0;
-        for (let y = -vertSpacing; y < height + vertSpacing; y += vertSpacing) {
-            row++;
-            for (let x = -hexSpacing; x < width + hexSpacing; x += hexSpacing) {
-                let finalX = x;
-                if (row % 2 === 0) {
-                    finalX += hexSpacing / 2;
+        // Erzeuge das Gitter
+        for (let row = -1; row < canvas.height / rowHeight + 1; row++) {
+            for (let col = -1; col < canvas.width / colWidth + 1; col++) {
+                let x = col * colWidth;
+                let y = row * rowHeight;
+                // Jede zweite Reihe versetzen für das Hex-Muster
+                if (row % 2 !== 0) {
+                    x += colWidth / 2;
                 }
-                particles.push(new Particle(finalX, y, particleSize, color));
+                particles.push(new Particle(x, y));
             }
         }
     }
 
-    function animate() {
-        requestAnimationFrame(animate);
-        ctx.clearRect(0, 0, width, height);
-
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].update();
-        }
-        connect();
-    }
-
     function connect() {
-        let opacityValue = 1;
         for (let a = 0; a < particles.length; a++) {
             for (let b = a; b < particles.length; b++) {
-                let distance = Math.sqrt(
-                    ((particles[a].x - particles[b].x) * (particles[a].x - particles[b].x)) +
-                    ((particles[a].y - particles[b].y) * (particles[a].y - particles[b].y))
-                );
+                let dx = particles[a].x - particles[b].x;
+                let dy = particles[a].y - particles[b].y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
 
-                if (distance < hexSpacing * 1.1) {
-                    opacityValue = 1 - (distance / (hexSpacing * 1.1));
-                    ctx.strokeStyle = `rgba(109, 213, 237, ${opacityValue * 0.2})`;
-                    ctx.lineWidth = 0.5;
+                if (distance < connectDistance) {
+                    const opacity = 1 - (distance / connectDistance);
+                    ctx.strokeStyle = `rgba(109, 213, 237, ${opacity * 0.2})`;
+                    ctx.lineWidth = 1;
                     ctx.beginPath();
                     ctx.moveTo(particles[a].x, particles[a].y);
                     ctx.lineTo(particles[b].x, particles[b].y);
@@ -147,21 +134,44 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // ** FIX: Verbesserte Resize-Behandlung **
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-            const newSize = updateCanvasSize();
-            width = newSize.width;
-            height = newSize.height;
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (const particle of particles) {
+            particle.update();
+            particle.draw();
+        }
+        connect();
+        animationFrameId = requestAnimationFrame(animate);
+    }
+
+    function setup() {
+        // Stoppe die alte Animation, falls vorhanden
+        if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+        }
+        resizeCanvas();
+        // Nur initialisieren, wenn der Canvas eine Größe hat, um den "oben-links" Bug zu vermeiden
+        if (canvas.width > 0 && canvas.height > 0) {
             init();
-        }, 250);
+            animate();
+        }
+    }
+
+    // --- EVENT LISTENERS ---
+
+    window.addEventListener('resize', setup);
+
+    window.addEventListener('mousemove', function(event) {
+        mouse.x = event.clientX;
+        mouse.y = event.clientY;
     });
 
-    // ** FIX: Starte Initialisierung nach kurzer Verzögerung **
-    setTimeout(() => {
-        init();
-        animate();
-    }, 100);
+    window.addEventListener('mouseout', function() {
+        mouse.x = undefined;
+        mouse.y = undefined;
+    });
+
+    // Initialer Start
+    // Wir warten einen kurzen Moment, um sicherzustellen, dass das CSS-Layout berechnet ist
+    setTimeout(setup, 100);
 });
