@@ -193,7 +193,7 @@ css.homepage-community-visual {
 
 /* Section kann Globe oben/unten abschneiden */
 .homepage-community-section {
-    overflow-x: visible; /* Globe darf rechts rausragen */
+    overflow-x:hidden; /*obe darf rechts rausragen */
     overflow-y: hidden;  /* Globe wird oben/unten abgeschnitten */
 }
 
