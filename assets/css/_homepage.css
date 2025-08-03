@@ -133,7 +133,9 @@ Last Update: 2025-08-02
     padding: 6rem 0;
     overflow: hidden;
     position: relative;
+    overflow-x: hidden; /* Verhindert horizontale Scrollleiste */
 }
+
 
 .homepage-community-container {
     max-width: 1400px;
