@@ -12,7 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Scene Setup
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    const renderer = new THREE.WebGLRenderer({ 
+    antialias: true, 
+    alpha: true,
+    preserveDrawingBuffer: true,
+    powerPreference: "high-performance"
+});
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
@@ -92,11 +97,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const position = latLonToVector3(point.lat, point.lon, 4.05);
 
         // Point marker
-        const pointGeometry = new THREE.SphereGeometry(0.3, 8, 8); // Mega groß
+        const pointGeometry = new THREE.SphereGeometry(0.05, 8, 8);
         const pointMaterial = new THREE.MeshBasicMaterial({
-            color: '#ff0000', // Knallrot statt cyan
-            transparent: false, // Keine Transparenz
-            opacity: 1.0 // Voll sichtbar
+            color: '#6dd5ed',
+            transparent: true,
+            opacity: 0.9
         });
         const pointMesh = new THREE.Mesh(pointGeometry, pointMaterial);
         pointMesh.position.copy(position);
