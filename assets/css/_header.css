@@ -102,10 +102,7 @@ Last Update: 2025-07-31
     color: var(--color-white);
 }
 
-/* Extended Header Positioning */
-.header-cta {
-    margin-right: -160px;
-}
+
 
 
 /* Mobile Menu Button - nur auf Mobile */
