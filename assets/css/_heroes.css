@@ -175,3 +175,27 @@ HERO: DYNAMIC SPECTRUM ENGINE (NEU)
         transform: translateY(0);
     }
 }
+
+
+
+
+.luvex-hero__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 16px 32px;
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-normal);
+    font-size: var(--text-base);
+}
+
+.luvex-hero__cta:hover {
+    background: #5ac7e0;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(109, 213, 237, 0.4);
+    color: var(--luvex-dark-blue);
+}
