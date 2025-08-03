@@ -94,7 +94,7 @@ Last Update: 2025-07-31
 
 /* Header CTA Positioning */
 .header-cta {
-    margin-right: -360px; /* CTA Button weiter nach rechts */
+    margin-right: -290px; /* CTA Button weiter nach rechts */
 }
 
 .header-cta-button:hover {
