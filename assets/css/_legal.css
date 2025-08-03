@@ -41,6 +41,9 @@ Last Update: 2025-08-03
 .legal-hero__container {
     position: relative;
     z-index: 2;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .legal-hero__content {
@@ -84,10 +87,10 @@ Last Update: 2025-08-03
 }
 
 .legal-content {
-    max-width: 900px; /* von 800px auf 900px */
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 var(--space-lg); /* mehr Padding */
-    text-align: left; /* explizit links ausrichten */
+    padding: 0 var(--space-lg);
+    text-align: left;
 }
 
 .legal-section {
@@ -146,22 +149,30 @@ Last Update: 2025-08-03
     border-bottom: none;
 }
 
+/* === LUVEX BRANDED BOXES === */
+
+/* Privacy Contact Box - Dunkelblau */
 .privacy-contact-box {
-    background: var(--luvex-gray-100);
+    background: linear-gradient(135deg, var(--luvex-dark-blue), #243a5e);
     padding: 2rem;
     border-radius: var(--radius-md);
-    margin: 2rem auto; /* auto für Zentrierung */
+    margin: 2rem auto;
     border-left: 4px solid var(--luvex-bright-cyan);
-    max-width: 600px; /* begrenzte Breite */
+    max-width: 600px;
+    color: var(--luvex-white);
 }
 
 .privacy-contact-box h3 {
-    color: var(--luvex-dark-blue);
+    color: var(--luvex-bright-cyan);
     margin-top: 0;
     margin-bottom: 1rem;
 }
 
-/* Privacy Rights Grid */
+.privacy-contact-box p {
+    color: #e9ecef;
+}
+
+/* Privacy Rights Grid - Türkis */
 .privacy-rights-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -170,7 +181,7 @@ Last Update: 2025-08-03
 }
 
 .privacy-right {
-    background: var(--luvex-white);
+    background: linear-gradient(135deg, #e8f9fc, #d1f2fa);
     border: 2px solid var(--luvex-bright-cyan);
     padding: 1.5rem;
     border-radius: var(--radius-md);
@@ -239,7 +250,7 @@ Last Update: 2025-08-03
     font-size: var(--text-sm);
 }
 
-/* Privacy Contact Sections */
+/* Privacy Contact Sections - Dunkelblau */
 .privacy-contact-final {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -248,22 +259,23 @@ Last Update: 2025-08-03
 }
 
 .contact-method {
-    background: var(--luvex-white);
-    border: 1px solid #e9ecef;
+    background: linear-gradient(135deg, var(--luvex-dark-blue), #243a5e);
+    border: 2px solid var(--luvex-bright-cyan);
     padding: 1.5rem;
     border-radius: var(--radius-md);
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 15px rgba(27, 42, 73, 0.2);
     transition: transform 0.2s;
+    color: var(--luvex-white);
 }
 
 .contact-method:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 6px 20px rgba(109, 213, 237, 0.3);
 }
 
 .contact-method h4 {
-    color: var(--luvex-dark-blue);
+    color: var(--luvex-bright-cyan);
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
@@ -275,25 +287,30 @@ Last Update: 2025-08-03
     color: var(--luvex-bright-cyan);
 }
 
-/* Disclaimer Boxes */
+.contact-method p {
+    color: #e9ecef;
+    margin: 0;
+}
+
+/* Disclaimer Boxes - Dunkelblau */
 .disclaimer-box {
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-    border-left: 4px solid var(--luvex-dark-blue);
+    background: linear-gradient(135deg, var(--luvex-dark-blue), #243a5e);
+    border-left: 4px solid var(--luvex-bright-cyan);
     padding: 1.5rem;
     border-radius: var(--radius-md);
     margin: 2rem 0;
-    border: 1px solid rgba(27, 42, 73, 0.2);
+    color: var(--luvex-white);
 }
 
 .disclaimer-box h3,
 .disclaimer-box h4 {
-    color: var(--luvex-dark-blue);
-    margin-top: 0; /* ← FIX: Kein Abstand nach oben */
+    color: var(--luvex-bright-cyan);
+    margin-top: 0;
     margin-bottom: 1rem;
 }
 
 .disclaimer-box p {
-    color: #2c3e50;
+    color: #e9ecef;
     margin: 0;
 }
 
@@ -305,18 +322,19 @@ Last Update: 2025-08-03
     margin: 2rem 0;
 }
 
+/* Legal Info Items (Impressum) - Türkis */
 .legal-info-item {
-    background: var(--luvex-white);
-    border: 1px solid #e9ecef;
+    background: linear-gradient(135deg, #e8f9fc, #d1f2fa);
+    border: 2px solid var(--luvex-bright-cyan);
     padding: 1.5rem;
     border-radius: var(--radius-md);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(109, 213, 237, 0.1);
     transition: transform 0.2s;
 }
 
 .legal-info-item:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 6px 20px rgba(109, 213, 237, 0.2);
 }
 
 .legal-info-item h3 {
@@ -327,12 +345,15 @@ Last Update: 2025-08-03
 }
 
 /* === TERMS OF SERVICE SPECIFIC STYLES === */
+
+/* Terms Highlight Box - Türkis */
 .terms-highlight-box {
-    background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+    background: linear-gradient(135deg, #e8f9fc, #d1f2fa);
     border-left: 4px solid var(--luvex-bright-cyan);
     padding: 1.5rem;
     border-radius: var(--radius-md);
     margin: 1.5rem 0;
+    border: 1px solid rgba(109, 213, 237, 0.3);
 }
 
 .terms-highlight-box h3 {
@@ -357,6 +378,7 @@ Last Update: 2025-08-03
     margin: 2rem 0;
 }
 
+/* Prohibited Items - bleiben ROT (nicht ändern) */
 .prohibited-item {
     background: var(--luvex-white);
     border: 2px solid #ffebee;
@@ -392,20 +414,23 @@ Last Update: 2025-08-03
     margin: 0;
 }
 
+/* Liability Notice - Dunkelblau */
 .liability-notice {
-    background: linear-gradient(135deg, #fff8e1, #f3e5ab);
-    border: 1px solid #ffc107;
+    background: linear-gradient(135deg, var(--luvex-dark-blue), #243a5e);
+    border: 1px solid var(--luvex-bright-cyan);
     padding: 1.5rem;
     border-radius: var(--radius-md);
     margin: 1.5rem 0;
+    color: var(--luvex-white);
 }
 
 .liability-notice h3 {
-    color: #f57c00;
+    color: var(--luvex-bright-cyan);
     margin-bottom: 1rem;
     margin-top: 0;
 }
 
+/* Terms Final Note - neutral grau (bleibt) */
 .terms-final-note {
     background: var(--luvex-gray-100);
     padding: 1.5rem;
@@ -438,6 +463,7 @@ body.complianz-page .content {
 .cmplz-cookiebanner {
     z-index: 9999 !important;
 }
+
 /* === RESPONSIVE STYLES === */
 @media (max-width: 992px) {
     .privacy-rights-grid {
