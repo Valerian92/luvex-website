@@ -158,4 +158,22 @@ register_post_type('uv_news', [
     'rewrite' => ['slug' => 'uv-news'],
     'supports' => ['title', 'editor', 'excerpt', 'thumbnail']
 ]);
+
+
+// LUVEX Terms Import - NACH IMPORT WIEDER ENTFERNEN!
+add_action('admin_menu', 'luvex_import_menu');
+function luvex_import_menu() {
+    add_management_page('LUVEX Import', 'LUVEX Import', 'manage_options', 'luvex-import', 'luvex_import_page');
+}
+
+function luvex_import_page() {
+    if (isset($_POST['import_terms'])) {
+        // Hier würde der Import-Code stehen
+        echo "<h2>Import läuft...</h2>";
+        // [REST DES CODES]
+    }
+    echo '<form method="post"><input type="submit" name="import_terms" value="Terms Importieren" class="button-primary"></form>';
+}
+
+
 ?>
