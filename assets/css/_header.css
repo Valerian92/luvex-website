@@ -108,7 +108,7 @@ Last Update: 2025-07-31
 }
 
 .site-branding .custom-logo {
-    margin-left: -300px; /* Überschreibt bestehende Regel */
+    margin-left: -250px; /* Überschreibt bestehende Regel */
 }
 /* Mobile Menu Button - nur auf Mobile */
 .mobile-menu-toggle {
