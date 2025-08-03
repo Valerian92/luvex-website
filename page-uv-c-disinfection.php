@@ -8,7 +8,7 @@ get_header(); ?>
 <!-- ==========================================================================
      START: UV-C Disinfection Hero Section
      ========================================================================== -->
-<section class="luvex-hero">
+<section class="luvex-hero uvc-hero">
     
     <div class="animation-background" id="disinfection-animation-container">
         <div class="pulse"></div>
@@ -47,14 +47,51 @@ get_header(); ?>
      ========================================================================== -->
 
 <!-- ==========================================================================
-     START: How It Works Section (Placeholder)
+     START: How It Works Section with DNA Animation
      ========================================================================== -->
 <section class="section science-section">
     <div class="container">
         <h2 class="text-center">How UV-C Inactivates Pathogens</h2>
         <div class="grid-2">
-            <div class="science-animation-placeholder">
-                [Animation: DNA Helix &amp; Counter]
+            <div class="dna-animation-container">
+                <!-- DNA Helix Animation -->
+                <div class="dna-helix-wrapper">
+                    <div class="dna-strand">
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                    </div>
+                    
+                    <!-- UV-C Wave -->
+                    <div class="uvc-wave"></div>
+                    
+                    <!-- Damage Indicator -->
+                    <div class="dna-damage-indicator">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                </div>
+                
+                <!-- Pathogen Counter -->
+                <div class="pathogen-counter">
+                    <div class="counter-label">Pathogens Inactivated</div>
+                    <div class="counter-number" id="pathogen-count">0</div>
+                </div>
             </div>
             <div>
                 <ul class="science-steps">
@@ -243,5 +280,26 @@ get_header(); ?>
         </a>
     </div>
 </section>
+
+<script>
+// Pathogen Counter Animation
+document.addEventListener('DOMContentLoaded', function() {
+    let count = 0;
+    const counter = document.getElementById('pathogen-count');
+    const targetCount = 99.9;
+    
+    // Start counter after animation begins
+    setTimeout(() => {
+        const interval = setInterval(() => {
+            count += 2.3;
+            if (count >= targetCount) {
+                count = targetCount;
+                clearInterval(interval);
+            }
+            counter.textContent = count.toFixed(1) + '%';
+        }, 50);
+    }, 2000);
+});
+</script>
 
 <?php get_footer(); ?>

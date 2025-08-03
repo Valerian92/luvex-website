@@ -23,14 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
     container.appendChild(renderer.domElement);
 
     // Main Globe
-    const globeGeometry = new THREE.SphereGeometry(6, 64, 64);
+   const globeGeometry = new THREE.SphereGeometry(6.6, 64, 64); // 6 → 6.6
     const globeMaterial = new THREE.MeshLambertMaterial({
         color: new THREE.Color('#1B2A49')
     });
     const globe = new THREE.Mesh(globeGeometry, globeMaterial);
 
     // Wireframe Grid
-    const wireGeometry = new THREE.SphereGeometry(6.02, 64, 32);
+    const wireGeometry = new THREE.SphereGeometry(6.62, 64, 32); // 6.02 → 6.62  
     const wireMaterial = new THREE.MeshBasicMaterial({
         color: '#6dd5ed',
         wireframe: true,
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const wireGlobe = new THREE.Mesh(wireGeometry, wireMaterial);
 
     // Feineres Gitter durch Erhöhung der Segmente
-   const fineGeometry = new THREE.SphereGeometry(6.01, 128, 64);
+   const fineGeometry = new THREE.SphereGeometry(6.61, 128, 64); // 6.01 → 6.61
     const fineMaterial = new THREE.MeshBasicMaterial({
         color: '#6dd5ed',
         wireframe: true,
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pointGroup = new THREE.Group();
 
     uvPoints.forEach(point => {
-        const position = latLonToVector3(point.lat, point.lon, 6.05);
+        const position = latLonToVector3(point.lat, point.lon, 6.65);
 
         // Point marker
         const pointGeometry = new THREE.SphereGeometry(0.03, 8, 8);
@@ -183,8 +183,9 @@ console.log('📊 Point Group Kinder:', pointGroup.children.length);
             endIdx = Math.floor(Math.random() * uvPoints.length);
         }
 
-        const startPos = latLonToVector3(uvPoints[startIdx].lat, uvPoints[startIdx].lon, 6.05);
-        const endPos = latLonToVector3(uvPoints[endIdx].lat, uvPoints[endIdx].lon, 6.05);
+        const startPos = latLonToVector3(uvPoints[startIdx].lat, uvPoints[startIdx].lon, 6.65); // 6.05 → 6.65
+        const endPos = latLonToVector3(uvPoints[endIdx].lat, uvPoints[endIdx].lon, 6.65); // 6.05 → 6.65
+
 
         const midPoint = new THREE.Vector3().addVectors(startPos, endPos).multiplyScalar(0.5);
         const distance = startPos.distanceTo(endPos);
