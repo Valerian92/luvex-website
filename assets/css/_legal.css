@@ -277,16 +277,25 @@ Last Update: 2025-08-03
 
 /* Disclaimer Boxes */
 .disclaimer-box {
-    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
-    border-left: 4px solid #f39c12;
+    background: linear-gradient(135deg, #e8f9fc, #d1f2fa);
+    border-left: 4px solid var(--luvex-bright-cyan);
     padding: 1.5rem;
     border-radius: var(--radius-md);
     margin: 2rem 0;
+    border: 1px solid rgba(109, 213, 237, 0.2);
 }
 
 .disclaimer-box h4 {
-    color: #e67e22;
+    color: var(--luvex-dark-blue);
     margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.disclaimer-box p {
+    color: #2c3e50;
+    margin: 0;
 }
 
 /* === IMPRESSUM SPECIFIC STYLES === */

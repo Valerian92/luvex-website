@@ -21,14 +21,17 @@ Last Update: 2025-08-03
 
 .container--narrow {
     max-width: 1400px;
+    margin: 0 auto; /* ← DAS FEHLTE! */
 }
 
 .container--medium {
     max-width: 1600px;
+    margin: 0 auto; /* ← DAS FEHLTE! */
 }
 
 .container--wide {
     max-width: 1800px;
+    margin: 0 auto; /* ← DAS FEHLTE! */
 }
 
 /* Section-specific container usage */
