@@ -92,11 +92,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const position = latLonToVector3(point.lat, point.lon, 4.05);
 
         // Point marker
-        const pointGeometry = new THREE.SphereGeometry(0.05, 8, 8);
+        const pointGeometry = new THREE.SphereGeometry(0.3, 8, 8); // Mega groß
         const pointMaterial = new THREE.MeshBasicMaterial({
-            color: '#6dd5ed',
-            transparent: true,
-            opacity: 0.9
+            color: '#ff0000', // Knallrot statt cyan
+            transparent: false, // Keine Transparenz
+            opacity: 1.0 // Voll sichtbar
         });
         const pointMesh = new THREE.Mesh(pointGeometry, pointMaterial);
         pointMesh.position.copy(position);
