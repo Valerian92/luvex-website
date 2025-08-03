@@ -78,7 +78,7 @@ Last Update: 2025-07-31
     max-height: 40px;
     width: auto;
     display: block;
-    margin-left: -300px; /* Logo weiter nach links */
+    margin-left: -250px; /* Logo weiter nach links */
 }
 
 .header-cta-button {
@@ -137,8 +137,9 @@ Last Update: 2025-07-31
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 2rem;
+    gap: 3.7rem;
     position: relative;
+    margin-left: -150px;
 }
 
 
