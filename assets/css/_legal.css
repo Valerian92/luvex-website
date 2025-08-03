@@ -373,11 +373,22 @@ Last Update: 2025-08-03
 
 .prohibited-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(3, 1fr); /* 3 Spalten statt auto-fit */
     gap: 1.5rem;
     margin: 2rem 0;
 }
 
+@media (max-width: 992px) {
+    .prohibited-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 Spalten auf Tablet */
+    }
+}
+
+@media (max-width: 768px) {
+    .prohibited-grid {
+        grid-template-columns: 1fr; /* 1 Spalte auf Mobile */
+    }
+}
 /* Prohibited Items - bleiben ROT (nicht ändern) */
 .prohibited-item {
     background: var(--luvex-white);
@@ -428,6 +439,12 @@ Last Update: 2025-08-03
     color: var(--luvex-bright-cyan);
     margin-bottom: 1rem;
     margin-top: 0;
+}
+
+.liability-notice p {
+    color: var(--luvex-white); /* Explizit weiß */
+    margin: 0;
+    line-height: 1.6;
 }
 
 /* Terms Final Note - neutral grau (bleibt) */

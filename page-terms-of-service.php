@@ -240,7 +240,8 @@ get_header(); ?>
                 <div class="liability-notice">
                     <h3>⚖️ German Law Notice</h3>
                     <p>
-                        Under German law, liability limitations are subject to statutory restrictions. The following limitations apply to the extent permitted by German law:
+                        Under German law, liability limitations are subject to statutory restrictions.<br>
+                        The following limitations apply to the extent permitted by German law:
                     </p>
                 </div>
                 

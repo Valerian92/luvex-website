@@ -50,7 +50,7 @@ get_header(); ?>
                     <div class="legal-info-item">
                         <h3>Contact Information</h3>
                         <p>
-                            <strong>Email:</strong> contact@luvex.tech<br>
+                            <strong>Email:</strong> support@luvex.tech<br>
                             <strong>Phone:</strong> 0174 3122 674<br>
                             <strong>Privacy Issues:</strong> privacy@luvex.tech
                         </p>
@@ -82,8 +82,8 @@ get_header(); ?>
                 <h2>Responsible for Content (§55 Abs. 2 RStV)</h2>
                 <p>
                     Valerian Huber<br>
-                    [Geschäftsadresse]<br>
-                    [PLZ] [Stadt], Germany
+                    Dahlienweg 11<br>
+                    83109 Großkarolinenfeld, Germany
                 </p>
             </div>
             
