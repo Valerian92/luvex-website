@@ -28,98 +28,36 @@ get_header(); ?>
                 </a>
             </div>
         </div>
+        <!-- Wave Divider pointing down to the next section -->
+        <div class="section-divider section-divider--bottom">
+            <svg data-name="Layer 1" xmlns="http://www.w.3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill" style="fill: #F8FAFC;"></path>
+            </svg>
+        </div>
     </section>
 
-    <!-- LUVEX Orbit Section -->
-    <section class="section section--turquoise-light">
+    <!-- Partnership Model Section -->
+    <section class="section" style="background-color: #F8FAFC;">
         <div class="container container--narrow">
             <div class="text-center mb-3">
                 <h2 class="section__title">Our Partnership Model</h2>
                 <p class="section__subtitle">Our collaboration is a dynamic cycle focused on a central goal: your success.</p>
             </div>
-
-            <!-- Visual Orbit for Desktop -->
-            <div class="orbit-container">
-                <div class="orbit">
-                    <div class="orbit-path"></div>
-                    <div class="orbit-satellite">
-                        <div class="satellite-card">
-                            <i class="fa-solid fa-comments"></i>
-                            <h4>Discovery</h4>
-                        </div>
-                    </div>
-                    <div class="orbit-satellite">
-                        <div class="satellite-card">
-                            <i class="fa-solid fa-magnifying-glass-chart"></i>
-                            <h4>Analysis</h4>
-                        </div>
-                    </div>
-                    <div class="orbit-satellite">
-                        <div class="satellite-card">
-                            <i class="fa-solid fa-file-signature"></i>
-                            <h4>Solution</h4>
-                        </div>
-                    </div>
-                    <div class="orbit-satellite">
-                        <div class="satellite-card">
-                            <i class="fa-solid fa-gears"></i>
-                            <h4>Implementation</h4>
-                        </div>
-                    </div>
-                    <div class="orbit-satellite">
-                        <div class="satellite-card">
-                            <i class="fa-solid fa-handshake-angle"></i>
-                            <h4>After-Care</h4>
-                        </div>
-                    </div>
-                    <div class="orbit-satellite">
-                        <div class="satellite-card">
-                            <i class="fa-solid fa-chart-line"></i>
-                            <h4>Optimization</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="orbit-core">
-                    <i class="fa-solid fa-seedling"></i>
-                    <h3>Advancing Knowledge Through Partnership</h3>
-                </div>
-            </div>
-            
-            <!-- Fallback: Linear Timeline for Mobile -->
-            <div class="linear-timeline-mobile">
-                <div class="timeline-container">
-                    <div class="timeline-line"></div>
-                    <div class="timeline-step">
-                        <div class="timeline-step__icon"><i class="fa-solid fa-comments"></i></div>
-                        <div class="timeline-step__content"><h3 class="timeline-step__title">1. Discovery</h3><p>We analyze your goals & challenges.</p></div>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="timeline-step__icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
-                        <div class="timeline-step__content"><h3 class="timeline-step__title">2. Analysis</h3><p>We review your specific requirements.</p></div>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="timeline-step__icon"><i class="fa-solid fa-file-signature"></i></div>
-                        <div class="timeline-step__content"><h3 class="timeline-step__title">3. Solution</h3><p>We provide a vendor-neutral proposal.</p></div>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="timeline-step__icon"><i class="fa-solid fa-gears"></i></div>
-                        <div class="timeline-step__content"><h3 class="timeline-step__title">4. Implementation</h3><p>We ensure seamless integration & support.</p></div>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="timeline-step__icon"><i class="fa-solid fa-handshake-angle"></i></div>
-                        <div class="timeline-step__content"><h3 class="timeline-step__title">5. After-Care</h3><p>We offer ongoing support & gather valuable feedback.</p></div>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="timeline-step__icon"><i class="fa-solid fa-chart-line"></i></div>
-                        <div class="timeline-step__content"><h3 class="timeline-step__title">6. Optimization</h3><p>Insights are used to drive process optimization.</p></div>
-                    </div>
-                </div>
+            <!-- Placeholder for the animation, currently static -->
+            <div class="orbit-container" style="display: flex; justify-content: center; align-items: center; min-height: 500px; border: 2px dashed var(--luvex-gray-300); border-radius: var(--radius-lg);">
+                 <p style="text-align: center; font-style: italic; color: var(--luvex-gray-700);">[Animation Concept Area]</p>
             </div>
         </div>
     </section>
 
     <!-- Core Competencies Section -->
     <section class="section">
+         <!-- Wave Divider pointing up from the previous section -->
+        <div class="section-divider section-divider--top">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill" style="fill: #F8FAFC;"></path>
+            </svg>
+        </div>
         <div class="container container--narrow">
             <div class="text-center mb-3">
                 <h2 class="section__title">Core Competencies</h2>

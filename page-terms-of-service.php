@@ -351,7 +351,7 @@ get_header(); ?>
                 </p>
             </div>
             
-            <!-- Contact Information -->
+                <!-- Contact Information -->
             <div class="legal-section">
                 <h2>14. Contact Information</h2>
                 <p>
@@ -361,11 +361,11 @@ get_header(); ?>
                 <div class="privacy-contact-final">
                     <div class="contact-method">
                         <h4><i class="fa-solid fa-envelope"></i> General Inquiries</h4>
-                        <p>contact@luvex.tech</p>
+                        <p>support@luvex.tech</p> <!-- ← GEÄNDERT -->
                     </div>
                     <div class="contact-method">
                         <h4><i class="fa-solid fa-gavel"></i> Legal Matters</h4>
-                        <p>legal@luvex.tech</p>
+                        <p>legal@luvex.tech</p> <!-- ← GEÄNDERT -->
                     </div>
                     <div class="contact-method">
                         <h4><i class="fa-solid fa-map-marker-alt"></i> Business Address</h4>
@@ -377,7 +377,6 @@ get_header(); ?>
                         </p>
                     </div>
                 </div>
-                
                 <div class="terms-final-note">
                     <p>
                         <strong>Last Updated:</strong> <?php echo date('F j, Y'); ?><br>
