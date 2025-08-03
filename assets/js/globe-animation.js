@@ -1,6 +1,13 @@
+console.log('🌍 Globe Animation Script lädt...');
 document.addEventListener('DOMContentLoaded', () => {
+     console.log('🔍 Globe: DOM Content Loaded');
     const container = document.getElementById('globe-container');
-    if (!container) return;
+    if (!container) {
+        console.error('❌ Globe Container nicht gefunden!');
+        return;
+    }
+    console.log('✅ Globe Container gefunden');
+    console.log('📐 Container Größe:', container.clientWidth, 'x', container.clientHeight);
 
     // Scene Setup
     const scene = new THREE.Scene();
@@ -78,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Create Points
     const uvPoints = generatePoints(40);
+    console.log('🔴 UV Points generiert:', uvPoints.length, 'Punkte');
     const pointGroup = new THREE.Group();
 
     uvPoints.forEach(point => {
@@ -110,6 +118,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     scene.add(pointGroup);
+    console.log('✅ Point Group zur Scene hinzugefügt');
+console.log('📊 Point Group Kinder:', pointGroup.children.length);
 
     // Create Connections
     const connectionGroup = new THREE.Group();
