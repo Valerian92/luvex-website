@@ -100,6 +100,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         const pointMesh = new THREE.Mesh(pointGeometry, pointMaterial);
         pointMesh.position.copy(position);
+        // Debug: Erste 3 Punkte detailliert loggen
+if (pointGroup.children.length < 6) {
+    console.log('🔍 Punkt #' + pointGroup.children.length + ':', {
+        position: position.clone(),
+        radius: 0.05,
+        opacity: 0.9,
+        color: '#6dd5ed'
+    });
+}
         pointGroup.add(pointMesh);
 
         // Pulse ring
@@ -115,6 +124,13 @@ document.addEventListener('DOMContentLoaded', () => {
         ring.lookAt(new THREE.Vector3(0, 0, 0));
         ring.userData = { pulseSpeed: 0.5 + Math.random() * 1.5 };
         pointGroup.add(ring);
+        // Debug: Ring-Details
+if (pointGroup.children.length < 12) {
+    console.log('🔍 Ring #' + Math.floor(pointGroup.children.length/2) + ':', {
+        ringSize: '0.08-0.12',
+        opacity: 0.5
+    });
+}
     });
 
     scene.add(pointGroup);
