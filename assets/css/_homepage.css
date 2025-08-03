@@ -168,10 +168,10 @@ Last Update: 2025-08-02
 /* Die max-width wurde von 600px auf 750px erhöht.                    */
 /* ================================================================== */
 .homepage-community-globe-wrapper {
-    width: 120%;
+    width: 150%; /* Breiter für ganze Sektion */
     height: 120%;
     position: absolute;
-    left: 20%;
+    left: 30%; /* Weiter rechts */
     top: -10%;
     z-index: 0;
 }

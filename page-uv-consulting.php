@@ -146,7 +146,7 @@ get_header(); ?>
     </section>
 
     <!-- FAQ Section -->
-    <section class="section section--turquoise-light" style="padding-top: 2rem;">
+    <section class="section section--turquoise-light">
         <div class="container container--narrow" style="max-width: 900px;">
             <div class="text-center">
                 <h2 class="section__title">Frequently Asked Questions</h2>
