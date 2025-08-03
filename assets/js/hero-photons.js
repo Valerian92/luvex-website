@@ -190,19 +190,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Fügt Event-Listener für das Pausieren der Animation über bestimmten Elementen hinzu
     function addHoverListeners() {
-        // Pausiert die Animation über dem gesamten Text-Container
-        const textContainer = document.querySelector('.luvex-hero__content');
+        // Pausiert die Animation nur über Buttons
+        const buttons = document.querySelectorAll('.luvex-hero .luvex-cta-primary, .luvex-hero .luvex-cta-secondary, .luvex-hero button, .luvex-hero .btn');
 
-        if (textContainer) {
-            textContainer.addEventListener('mouseover', () => {
-                mouse.isPaused = true;
-            });
-            textContainer.addEventListener('mouseleave', () => {
-                mouse.isPaused = false;
-            });
-        }
+        buttons.forEach(button => {
+            if (button) {
+                button.addEventListener('mouseenter', () => {
+                    mouse.isPaused = true;
+                    button.classList.add('hero-button-active'); // Für CSS-Animation
+                });
+                button.addEventListener('mouseleave', () => {
+                    mouse.isPaused = false;
+                    button.classList.remove('hero-button-active'); // CSS-Animation entfernen
+                });
+            }
+        });
     }
-    
     // --- EVENT LISTENERS ---
     window.addEventListener('resize', () => {
         setup();
