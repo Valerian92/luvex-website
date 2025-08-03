@@ -1,13 +1,15 @@
 /**
- * LUVEX Theme - Homepage Hero Photon Animation 
- * Sterne mit Schweif fliegen zur Maus und verschwinden
+ * LUVEX Theme - Homepage Hero Photon Animation
+ * Sterne fliegen auf den "Launch UV Simulator" Button zu, wenn die Maus außerhalb ist.
+ * Im Hero-Bereich folgen sie der Maus und stoppen über bestimmten UI-Elementen.
  */
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🌟 Hero Sterne Script lädt...');
-    
+
     const canvas = document.getElementById('homepage-hero-canvas');
-    if (!canvas) {
-        console.error('❌ Canvas nicht gefunden!');
+    const heroSection = document.querySelector('.luvex-hero');
+    if (!canvas || !heroSection) {
+        console.error('❌ Canvas oder Hero-Sektion nicht gefunden!');
         return;
     }
 
@@ -15,20 +17,34 @@ document.addEventListener('DOMContentLoaded', function() {
     let particles = [];
     let animationFrameId;
 
-    // MAUS-TRACKING
+    // MAUS-TRACKING und Animations-Status
     let mouse = {
         x: null,
-        y: null
+        y: null,
+        isHoveringCanvas: false, // Ist die Maus im Hero-Bereich?
+        isPaused: false // Sollen die Partikel stehenbleiben?
     };
 
+    // KOORDINATEN DES ZIELBUTTONS
+    let targetButtonPosition = { x: null, y: null };
+    const targetButton = document.querySelector('.luvex-cta-primary');
+
     // --- CONFIGURATION ---
-    const maxParticles = 150;
-    const spawnRate = 3; // Neue Partikel pro Frame
+    const maxParticles = 300; // Erhöht auf 300 Partikel
+    const spawnRate = 5; // Erhöht die Spawning-Rate
     const particleColor = 'rgba(109, 213, 237, ';
 
     // --- UTILITY ---
+    function updateTargetButtonPosition() {
+        if (targetButton) {
+            const rect = targetButton.getBoundingClientRect();
+            const heroRect = heroSection.getBoundingClientRect();
+            targetButtonPosition.x = rect.left + rect.width / 2 - heroRect.left;
+            targetButtonPosition.y = rect.top + rect.height / 2 - heroRect.top;
+        }
+    }
+
     function resizeCanvas() {
-        const heroSection = document.querySelector('.luvex-hero');
         if (heroSection) {
             canvas.width = heroSection.offsetWidth;
             canvas.height = heroSection.offsetHeight;
@@ -42,65 +58,69 @@ document.addEventListener('DOMContentLoaded', function() {
             this.x = x || Math.random() * canvas.width;
             this.y = y || Math.random() * canvas.height;
             this.size = Math.random() * 2 + 1;
-            this.life = 1.0; // Lebensdauer 1.0 = vollständig sichtbar, 0 = verschwunden
-            this.speed = Math.random() * 2 + 1;
-            this.trail = []; // Schweif-Punkte
+            this.life = 1.0;
+            this.speed = Math.random() * 1.5 + 0.5;
+            this.dx = (Math.random() - 0.5) * 0.5;
+            this.dy = (Math.random() - 0.5) * 0.5;
+            this.trail = [];
             this.maxTrailLength = 8;
         }
 
         update() {
-            // Füge aktuelle Position zum Schweif hinzu
+            if (mouse.isPaused) {
+                this.trail.push({ x: this.x, y: this.y, life: this.life });
+                if (this.trail.length > this.maxTrailLength) {
+                    this.trail.shift();
+                }
+                return true;
+            }
+
             this.trail.push({ x: this.x, y: this.y, life: this.life });
-            
-            // Begrenze Schweif-Länge
             if (this.trail.length > this.maxTrailLength) {
                 this.trail.shift();
             }
 
-            if (mouse.x != null && mouse.y != null) {
-                // Berechne Richtung zur Maus
-                let dx = mouse.x - this.x;
-                let dy = mouse.y - this.y;
-                let distance = Math.sqrt(dx * dx + dy * dy);
-                
-                if (distance > 5) {
-                    // Bewege zur Maus
-                    let angle = Math.atan2(dy, dx);
-                    this.x += Math.cos(angle) * this.speed;
-                    this.y += Math.sin(angle) * this.speed;
-                } else {
-                    // Bei Maus angekommen - verblassen
-                    this.life -= 0.05;
-                }
+            let targetX, targetY;
+            if (mouse.isHoveringCanvas && mouse.x != null && mouse.y != null) {
+                targetX = mouse.x;
+                targetY = mouse.y;
             } else {
-                // Ohne Maus - langsam verblassen
-                this.life -= 0.01;
+                targetX = targetButtonPosition.x;
+                targetY = targetButtonPosition.y;
             }
 
-            // Entferne wenn unsichtbar
+            let dx = targetX - this.x;
+            let dy = targetY - this.y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance > 5) {
+                let angle = Math.atan2(dy, dx);
+                this.x += Math.cos(angle) * this.speed;
+                this.y += Math.sin(angle) * this.speed;
+            } else {
+                this.life -= 0.05;
+            }
+
             return this.life > 0;
         }
 
         draw() {
-            // Zeichne Schweif
             for (let i = 0; i < this.trail.length; i++) {
                 const point = this.trail[i];
                 const alpha = (i / this.trail.length) * point.life * 0.3;
                 const size = this.size * (i / this.trail.length) * 0.5;
-                
+
                 ctx.fillStyle = particleColor + alpha + ')';
                 ctx.beginPath();
                 ctx.arc(point.x, point.y, size, 0, Math.PI * 2);
                 ctx.fill();
             }
 
-            // Zeichne Hauptpartikel
             ctx.fillStyle = particleColor + this.life + ')';
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fill();
-            
-            // Glüh-Effekt
+
             ctx.shadowColor = '#6dd5ed';
             ctx.shadowBlur = 10 * this.life;
             ctx.beginPath();
@@ -114,9 +134,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function spawnParticles() {
         for (let i = 0; i < spawnRate; i++) {
             if (particles.length < maxParticles) {
-                // Spawne am Rand der Canvas
                 let x, y;
-                const side = Math.floor(Math.random() * 4);
+                const side = Math.floor(Math.random() * 4); // Zufällige Seite
+                // Gleichmäßigere Verteilung der Startpunkte
                 switch(side) {
                     case 0: // top
                         x = Math.random() * canvas.width;
@@ -142,16 +162,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- ANIMATION LOGIC ---
     function animate() {
-        // Halbtransparente Löschung für Schweif-Effekt
         ctx.fillStyle = 'rgba(27, 42, 73, 0.1)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // Spawne neue Partikel wenn Maus vorhanden
-        if (mouse.x != null && mouse.y != null) {
-            spawnParticles();
-        }
-        
-        // Update und zeichne alle Partikel
+        spawnParticles();
         particles = particles.filter(particle => {
             const alive = particle.update();
             if (alive) {
@@ -159,16 +172,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             return alive;
         });
-        
         animationFrameId = requestAnimationFrame(animate);
     }
 
     function setup() {
-        console.log('🚀 Setup startet...');
         if (animationFrameId) {
             cancelAnimationFrame(animationFrameId);
         }
         resizeCanvas();
+        updateTargetButtonPosition(); // Aktualisiert die Button-Position
         if (canvas.width > 0 && canvas.height > 0) {
             particles = [];
             animate();
@@ -176,20 +188,41 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // --- EVENT LISTENERS ---
-    window.addEventListener('resize', setup);
+    // Fügt Event-Listener für das Pausieren der Animation über bestimmten Elementen hinzu
+    function addHoverListeners() {
+        // Pausiert die Animation über dem gesamten Text-Container
+        const textContainer = document.querySelector('.luvex-hero__content');
+
+        if (textContainer) {
+            textContainer.addEventListener('mouseover', () => {
+                mouse.isPaused = true;
+            });
+            textContainer.addEventListener('mouseleave', () => {
+                mouse.isPaused = false;
+            });
+        }
+    }
     
-    canvas.addEventListener('mousemove', (event) => {
-        const rect = canvas.getBoundingClientRect();
-        mouse.x = event.clientX - rect.left;
-        mouse.y = event.clientY - rect.top;
+    // --- EVENT LISTENERS ---
+    window.addEventListener('resize', () => {
+        setup();
+        updateTargetButtonPosition(); // Aktualisiert die Button-Position
     });
 
-    canvas.addEventListener('mouseleave', () => {
+    heroSection.addEventListener('mousemove', (event) => {
+        const rect = heroSection.getBoundingClientRect();
+        mouse.x = event.clientX - rect.left;
+        mouse.y = event.clientY - rect.top;
+        mouse.isHoveringCanvas = true;
+    });
+
+    heroSection.addEventListener('mouseleave', () => {
         mouse.x = null;
         mouse.y = null;
+        mouse.isHoveringCanvas = false;
     });
 
     // Initial setup
-    setTimeout(setup, 500);
+    setup();
+    addHoverListeners();
 });
