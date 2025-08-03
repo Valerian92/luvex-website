@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pointGroup = new THREE.Group();
 
     uvPoints.forEach(point => {
-        const position = latLonToVector3(point.lat, point.lon, 8.0); // Weit außerhalb
+        const position = latLonToVector3(point.lat, point.lon, 6.05); // Auf Globe-Oberfläche
 
         // Point marker
         const pointGeometry = new THREE.SphereGeometry(0.05, 8, 8);
@@ -183,8 +183,8 @@ console.log('📊 Point Group Kinder:', pointGroup.children.length);
             endIdx = Math.floor(Math.random() * uvPoints.length);
         }
 
-        const startPos = latLonToVector3(uvPoints[startIdx].lat, uvPoints[startIdx].lon, 4.08);
-        const endPos = latLonToVector3(uvPoints[endIdx].lat, uvPoints[endIdx].lon, 4.08);
+        const startPos = latLonToVector3(uvPoints[startIdx].lat, uvPoints[startIdx].lon, 6.05);
+        const endPos = latLonToVector3(uvPoints[endIdx].lat, uvPoints[endIdx].lon, 6.05);
 
         const midPoint = new THREE.Vector3().addVectors(startPos, endPos).multiplyScalar(0.5);
         const distance = startPos.distanceTo(endPos);
