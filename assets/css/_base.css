@@ -131,8 +131,9 @@ a:hover {
 
 /* Versteckt die Standard-Scrollbar, während Scrollen möglich bleibt */
 html, body {
-    -ms-overflow-style: none;  /* Für IE und Edge */
-    scrollbar-width: none;  /* Für Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-x: hidden; /* Verhindert horizontale Scrollbar global */
 }
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {

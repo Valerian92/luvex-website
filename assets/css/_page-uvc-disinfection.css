@@ -1,0 +1,125 @@
+/*
+==============================================================================
+LUVEX THEME - PAGE: UV-C DISINFECTION
+==============================================================================
+
+Description: Page-specific styles for the UV-C Disinfection page.
+Dependencies: _variables.css, _cards.css
+Last Update: 2025-08-03
+
+==============================================================================
+*/
+
+/* ===== APPLICATIONS SECTION ===== */
+.applications-section {
+    background: #f8f9fa; /* --luvex-gray-100 */
+}
+
+/* Section headline styling (e.g., "Air Disinfection") */
+.applications-section h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+    color: var(--luvex-dark-blue);
+}
+
+.applications-section h2 i {
+    color: var(--luvex-vibrant-blue);
+}
+
+/* Grid layout for the cards */
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+}
+
+@media (max-width: 768px) {
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== VALUE CARD MODIFICATIONS ===== */
+
+/* Ensure description has space before the benefits */
+.value-card__description {
+    margin-bottom: 1.5rem;
+}
+
+/* ===== CARD BENEFITS SECTION ===== */
+.card-benefits {
+    margin-top: auto; /* Pushes this block to the bottom of the card flex container */
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--luvex-gray-200);
+}
+
+.card-benefits__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+}
+
+.card-benefits__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--luvex-gray-900);
+}
+
+.card-benefits__item:not(:last-child) {
+    margin-bottom: 0.75rem;
+}
+
+.card-benefits__item i {
+    color: var(--luvex-vibrant-blue);
+    margin-top: 4px; /* Aligns the icon nicely with the text */
+}
+
+/* ===== ACCORDION FOR TECHNICAL DETAILS ===== */
+.details-accordion {
+    margin-top: 1rem;
+}
+
+.details-accordion__item {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+}
+
+.details-accordion__summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0;
+    font-weight: 600;
+    color: var(--luvex-vibrant-blue);
+    cursor: pointer;
+    list-style: none;
+    font-size: 0.9rem;
+}
+
+/* Remove default arrow */
+.details-accordion__summary::-webkit-details-marker {
+    display: none;
+}
+
+.details-accordion__summary .icon {
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Rotate icon when accordion is open */
+.details-accordion__item[open] .details-accordion__summary .icon {
+    transform: rotate(90deg);
+}
+
+.details-accordion__content {
+    padding: 1rem 0 0 0;
+    color: var(--luvex-gray-700);
+    line-height: 1.6;
+    font-size: 0.9rem;
+}
