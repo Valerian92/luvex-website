@@ -146,7 +146,7 @@ get_header(); ?>
     </section>
 
     <!-- FAQ Section -->
-    <section class="section section--turquoise-light">
+    <section class="section section--turquoise-light" style="padding-top: 2rem;">
         <div class="container container--narrow" style="max-width: 900px;">
             <div class="text-center">
                 <h2 class="section__title">Frequently Asked Questions</h2>
@@ -173,7 +173,7 @@ get_header(); ?>
     <!-- CTA Section -->
     <section class="section">
         <div class="container container--narrow">
-            <div class="cta-section">
+            <div class="cta-section cta-section--dark">
                 <h3>Ready to Optimize Your UV Process?</h3>
                 <p>Let's talk about your challenges. Schedule a free, no-obligation discovery call to find out how LUVEX can help you achieve your goals.</p>
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="cta-button"><i class="fa-solid fa-calendar-check"></i><span>Book Your Free Consultation</span></a>
