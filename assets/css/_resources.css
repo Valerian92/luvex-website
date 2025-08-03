@@ -1,0 +1,22 @@
+/*
+==============================================================================
+LUVEX THEME - Resources Styling
+==============================================================================
+Description: Styles for Case Studies, Technical Papers, and White Papers archives and single posts.
+Dependencies: _variables.css (for color variables)
+Note: Uses the same design system as UV News for consistency
+Last Update: 2025-08-01
+==============================================================================
+*/
+
+/* Reuse all UV News styles - same class names for consistent design */
+/* This file imports the existing _news.css styles */
+
+@import '_news.css';
+
+/* 
+Additional specific customizations for resources if needed 
+All resources (case_studies, tech_papers, white_papers) use the same
+news-card, news-hero-section, news-filter-section class structure
+for design consistency across the platform.
+*/
