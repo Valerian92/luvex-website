@@ -93,14 +93,6 @@ Last Update: 2025-08-03
     color: var(--luvex-bright-cyan);
 }
 
-.luvex-hero__subtitle {
-    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-    font-weight: 500;
-    color: #e9ecef;
-    margin: 0 0 1.5rem 0;
-    line-height: 1.4;
-}
-
 .luvex-hero__description {
     font-size: var(--text-lg);
     color: #ced4da;
@@ -183,12 +175,14 @@ HERO: DYNAMIC SPECTRUM ENGINE (wird auf anderen Seiten noch gebraucht)
 .hero-spectrum-engine {
     position: relative;
     overflow: hidden;
-    padding: calc(72px + 4rem) 2rem 4rem;
-    min-height: 500px;
+    padding: 0;
+    min-height: 600px;
+    height: 100vh;
+    max-height: 800px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #121828; 
+    background-color: #0B1A3D; 
     color: var(--luvex-white);
 }
 
@@ -210,15 +204,10 @@ HERO: DYNAMIC SPECTRUM ENGINE (wird auf anderen Seiten noch gebraucht)
     opacity: 0;
     transform: translateY(20px);
     animation: spectrumFadeInUp 1.2s 0.5s ease-out forwards;
-    cursor: none;
+    padding: 2rem;
 }
 
 .hero-spectrum-engine .hero-content > * {
-    cursor: pointer;
-}
-
-.hero-spectrum-engine .hero-content h1, 
-.hero-spectrum-engine .hero-content p {
     cursor: none;
 }
 
@@ -227,4 +216,19 @@ HERO: DYNAMIC SPECTRUM ENGINE (wird auf anderen Seiten noch gebraucht)
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* NEW: Style for the wavelength indicator text on the canvas */
+.wavelength-indicator {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    z-index: 12;
+    font-family: 'Courier New', monospace;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    pointer-events: none;
+    background: rgba(11, 26, 61, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
 }
