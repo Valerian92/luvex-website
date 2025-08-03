@@ -1,19 +1,17 @@
 /*
 ==============================================================================
-LUVEX THEME v2.1 - LAYOUT SYSTEM
+LUVEX THEME v2.2 - LAYOUT SYSTEM
 ==============================================================================
 
-Description: Definiert das Layout-System (.container, .grid, .flex, .section).
+Description: Definiert das Layout-System (.container, .grid, .flex, .section)
+             und die neuen Section-Divider.
 Dependencies: _variables.css
-Last Update: 2025-08-02
+Last Update: 2025-08-03
 
 ==============================================================================
 */
 
-/* ===== LAYOUT SYSTEM (.container, .grid, .flex)] ===== */
-/* 3. LAYOUT SYSTEM ================================================= */
-
-/* Container System */
+/* --- 3.1 CONTAINER SYSTEM --- */
 .container {
     max-width: none;
     margin: 0 auto;
@@ -33,8 +31,6 @@ Last Update: 2025-08-02
     max-width: 1800px;
 }
 
-
-
 /* Section-specific container usage */
 .section .container {
     max-width: 1400px; /* Begrenzt für bessere Lesbarkeit */
@@ -44,35 +40,32 @@ Last Update: 2025-08-02
     max-width: 1200px;
 }
 
-/* Section Spacing */
+/* --- 3.2 SECTION SPACING (REVISED) --- */
 .section {
-    padding: var(--space-lg) 0;
+    padding: 6rem 0; /* Consistent default padding */
+    position: relative;
+    overflow: hidden; /* Prevents horizontal scroll from dividers */
 }
 
 .section--small {
-    padding: var(--space-md) 0;
+    padding: 4rem 0;
 }
 
 .section--large {
-    padding: var(--space-xl) 0;
+    padding: 8rem 0;
 }
 
-
-/* Türkise Section-Varianten */
+/* --- 3.3 SECTION BACKGROUNDS --- */
 .section--turquoise {
     background: linear-gradient(135deg, #a8e6f1 0%, #e8f9fc 100%);
 }
 
-/* ================================================================== */
-/* FIX 3: Abstand unter "Knowledge Navigator" vergrößert.             */
-/* Der untere Padding-Wert wurde von 6rem auf 8rem erhöht.            */
-/* ================================================================== */
 .section--turquoise-light {
-    background: linear-gradient(180deg, rgba(109, 213, 237, 0.12) 0%, rgba(109, 213, 237, 0.06) 50%, rgba(109, 213, 237, 0.02) 100%);
-    padding: 5rem 0 8rem 0; /* Mehr Abstand nach unten */
+    background: #F8FAFC; /* Fallback color */
+    background: linear-gradient(180deg, rgba(109, 213, 237, 0.08) 0%, rgba(248, 250, 252, 0) 100%);
 }
 
-/* Grid System */
+/* --- 3.4 GRID SYSTEM (RESTORED) --- */
 .grid {
     display: grid;
     gap: var(--gap-default);
@@ -85,13 +78,12 @@ Last Update: 2025-08-02
 .grid-3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: 2.5rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .grid-3 {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
     }
 }
 
@@ -101,7 +93,7 @@ Last Update: 2025-08-02
     gap: var(--gap-default);
 }
 
-/* Flex System */
+/* --- 3.5 FLEX SYSTEM (RESTORED) --- */
 .flex {
     display: flex;
     gap: var(--space-md);
@@ -121,15 +113,13 @@ Last Update: 2025-08-02
     flex-direction: column;
 }
 
-
-/* Fuer Produkte mit FAQs daneben*/
+/* --- 3.6 SPECIAL GRIDS (RESTORED) --- */
 .grid-2-faq {
   display: grid;
-  grid-template-columns: 1fr; /* Default to 1 column on mobile */
-  gap: 2.5rem; /* 40px */
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
 }
 
-/* On medium screens and up, switch to 2 columns */
 @media (min-width: 768px) {
   .grid-2-faq {
     grid-template-columns: repeat(2, 1fr);
@@ -137,5 +127,32 @@ Last Update: 2025-08-02
   }
 }
 
+/* --- 3.7 SECTION DIVIDERS (NEU) --- */
+.section-divider {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    z-index: 5;
+}
 
-/* ===== END [LAYOUT SYSTEM (.container, .grid, .flex)] ===== */
+.section-divider--bottom {
+    bottom: -1px;
+}
+
+.section-divider--top {
+    top: -1px;
+    transform: rotate(180deg);
+}
+
+.section-divider svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 90px;
+}
+
+.section-divider .shape-fill {
+    fill: var(--luvex-white, #FFFFFF);
+}

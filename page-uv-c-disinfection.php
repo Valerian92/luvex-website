@@ -10,13 +10,10 @@ get_header(); ?>
      ========================================================================== -->
 <section class="luvex-hero">
     
-    <!-- Background animation container -->
     <div class="animation-background" id="disinfection-animation-container">
         <div class="pulse"></div>
-        <!-- Pathogen particles will be injected here by hero-disinfection.js -->
     </div>
 
-    <!-- Hero content container -->
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
             <h1 class="luvex-hero__title">
@@ -28,7 +25,6 @@ get_header(); ?>
             <p class="luvex-hero__description">
                 Navigate through our core applications to find the perfect UV-C solution for your specific needs.
             </p>
-            <!-- In-page navigation to application sections -->
             <nav class="hero-navigation">
                 <a href="#applications-air" class="hero-navigation__link">
                     <i class="fa-solid fa-wind"></i>
@@ -50,10 +46,56 @@ get_header(); ?>
      END: Hero Section
      ========================================================================== -->
 
-
 <!-- ==========================================================================
-     START: Main Content Wrapper
+     START: How It Works Section (Placeholder)
      ========================================================================== -->
+<section class="section science-section">
+    <div class="container">
+        <h2 class="text-center">How UV-C Inactivates Pathogens</h2>
+        <div class="grid-2">
+            <div class="science-animation-placeholder">
+                [Animation: DNA Helix &amp; Counter]
+            </div>
+            <div>
+                <ul class="science-steps">
+                    <li class="science-step">
+                        <div class="science-step__number">1</div>
+                        <div class="science-step__content">
+                            <h3>Energy Absorption</h3>
+                            <p>UV-C light at 254nm is emitted. The DNA and RNA of microorganisms absorb this high-energy light.</p>
+                        </div>
+                    </li>
+                    <li class="science-step">
+                        <div class="science-step__number">2</div>
+                        <div class="science-step__content">
+                            <h3>Thymine Dimerization</h3>
+                            <p>The absorbed energy causes adjacent thymine bases in the DNA strand to fuse, forming "thymine dimers".</p>
+                        </div>
+                    </li>
+                    <li class="science-step">
+                        <div class="science-step__number">3</div>
+                        <div class="science-step__content">
+                            <h3>Code Becomes Unreadable</h3>
+                            <p>These dimers create kinks in the DNA structure, making the genetic code unreadable for the cell's replication machinery.</p>
+                        </div>
+                    </li>
+                    <li class="science-step">
+                        <div class="science-step__number">4</div>
+                        <div class="science-step__content">
+                            <h3>Inactivation</h3>
+                            <p>Unable to replicate, the microorganism is rendered harmless and effectively "inactivated" or killed.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==========================================================================
+     END: How It Works Section
+     ========================================================================== -->
+
+
 <main>
     <!-- Air Disinfection Section -->
     <section id="applications-air" class="section applications-section">
@@ -190,14 +232,7 @@ get_header(); ?>
         </div>
     </section>
 </main>
-<!-- ==========================================================================
-     END: Main Content Wrapper
-     ========================================================================== -->
 
-
-<!-- ==========================================================================
-     START: Final Call-to-Action Section
-     ========================================================================== -->
 <section class="section cta-section">
     <div class="container">
         <h3>Have a specific requirement?</h3>
@@ -208,8 +243,5 @@ get_header(); ?>
         </a>
     </div>
 </section>
-<!-- ==========================================================================
-     END: Final Call-to-Action Section
-     ========================================================================== -->
 
 <?php get_footer(); ?>

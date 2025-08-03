@@ -10,13 +10,81 @@ Last Update: 2025-08-03
 ==============================================================================
 */
 
-/* ===== APPLICATIONS SECTION ===== */
-.applications-section {
-    background: #f8f9fa; /* --luvex-gray-100 */
+/* ===== HOW IT WORKS SECTION ===== */
+.science-section {
+    /* Uses the default white background */
+    border-bottom: 1px solid var(--luvex-gray-200);
 }
 
-/* Section headline styling (e.g., "Air Disinfection") */
-.applications-section h2 {
+.science-section h2 {
+    color: var(--luvex-dark-blue);
+    margin-bottom: 3rem;
+}
+
+.science-animation-placeholder {
+    background-color: var(--luvex-gray-200);
+    border-radius: var(--radius-lg);
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--luvex-gray-700);
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 2rem;
+    border: 2px dashed var(--luvex-bright-cyan);
+}
+
+.science-steps {
+    list-style: none;
+    padding: 0;
+}
+
+.science-step {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+.science-step:not(:last-child) {
+    margin-bottom: 2rem;
+}
+
+.science-step__number {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.science-step__content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--luvex-dark-blue);
+    margin-bottom: 0.5rem;
+}
+
+.science-step__content p {
+    font-size: 1rem;
+    color: var(--luvex-gray-700);
+    line-height: 1.6;
+}
+
+
+/* ===== APPLICATIONS SECTIONS ===== */
+.applications-section {
+    background: var(--luvex-gray-100); /* Light gray background for alternating sections */
+}
+
+.applications-section h2,
+#applications-surface h2 /* Target the white section headline as well */
+{
     font-size: clamp(1.5rem, 3vw, 2rem);
     display: flex;
     align-items: center;
@@ -26,15 +94,16 @@ Last Update: 2025-08-03
     color: var(--luvex-dark-blue);
 }
 
-.applications-section h2 i {
+.applications-section h2 i,
+#applications-surface h2 i {
     color: var(--luvex-vibrant-blue);
 }
 
-/* Grid layout for the cards */
 .grid-2 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2.5rem;
+    align-items: start; /* Align items to the top */
 }
 
 @media (max-width: 768px) {
@@ -43,16 +112,12 @@ Last Update: 2025-08-03
     }
 }
 
-/* ===== VALUE CARD MODIFICATIONS ===== */
-
-/* Ensure description has space before the benefits */
 .value-card__description {
     margin-bottom: 1.5rem;
 }
 
-/* ===== CARD BENEFITS SECTION ===== */
 .card-benefits {
-    margin-top: auto; /* Pushes this block to the bottom of the card flex container */
+    margin-top: auto;
     padding-top: 1.5rem;
     border-top: 1px solid var(--luvex-gray-200);
 }
@@ -77,10 +142,9 @@ Last Update: 2025-08-03
 
 .card-benefits__item i {
     color: var(--luvex-vibrant-blue);
-    margin-top: 4px; /* Aligns the icon nicely with the text */
+    margin-top: 4px;
 }
 
-/* ===== ACCORDION FOR TECHNICAL DETAILS ===== */
 .details-accordion {
     margin-top: 1rem;
 }
@@ -103,7 +167,6 @@ Last Update: 2025-08-03
     font-size: 0.9rem;
 }
 
-/* Remove default arrow */
 .details-accordion__summary::-webkit-details-marker {
     display: none;
 }
@@ -112,7 +175,6 @@ Last Update: 2025-08-03
     transition: transform 0.2s ease-in-out;
 }
 
-/* Rotate icon when accordion is open */
 .details-accordion__item[open] .details-accordion__summary .icon {
     transform: rotate(90deg);
 }
