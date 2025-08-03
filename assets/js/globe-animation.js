@@ -109,6 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
         pointGroup.add(ring);
     });
 
+    scene.add(pointGroup);
+
     // Create Connections
     const connectionGroup = new THREE.Group();
 
@@ -131,11 +133,11 @@ document.addEventListener('DOMContentLoaded', () => {
             float current_pos = mod(time, duration) / duration;
             float trail_length = 0.15;
             float opacity = 0.0;
-
+            
             if (v_percent > current_pos - trail_length && v_percent < current_pos) {
                 opacity = (v_percent - (current_pos - trail_length)) / trail_length;
             }
-
+            
             if (opacity <= 0.0) discard;
             gl_FragColor = vec4(color, opacity);
         }
@@ -183,11 +185,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const line = new THREE.Line(geometry, material);
         connectionGroup.add(line);
     }
-    
+
+    scene.add(connectionGroup);
+
     // Group everything for rotation
     const rotationGroup = new THREE.Group();
     rotationGroup.add(globe, wireGlobe, fineGlobe, pointGroup, connectionGroup);
     scene.add(rotationGroup);
+
 
     // Animation loop
     const clock = new THREE.Clock();
