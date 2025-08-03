@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pointGroup = new THREE.Group();
 
     uvPoints.forEach(point => {
-        const position = latLonToVector3(point.lat, point.lon, 4.05);
+        const position = latLonToVector3(point.lat, point.lon, 8.0); // Weit außerhalb
 
         // Point marker
         const pointGeometry = new THREE.SphereGeometry(0.05, 8, 8);
