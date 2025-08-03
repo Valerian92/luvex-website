@@ -52,7 +52,7 @@ Last Update: 2025-07-31
 @import '_resources.css';
 
 @import '_404.css';
-@import '_page-uvc-disinfection';
+@import '_page-uvc-disinfection.css';
 
 /* Besser Weg ist das Laden über functions --> schneller für Animations:
 @import '_animations.css'; */
