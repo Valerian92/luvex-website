@@ -84,9 +84,10 @@ Last Update: 2025-08-03
 }
 
 .legal-content {
-    max-width: 800px;
+    max-width: 900px; /* von 800px auf 900px */
     margin: 0 auto;
-    padding: 0 var(--space-md);
+    padding: 0 var(--space-lg); /* mehr Padding */
+    text-align: left; /* explizit links ausrichten */
 }
 
 .legal-section {
@@ -147,10 +148,11 @@ Last Update: 2025-08-03
 
 .privacy-contact-box {
     background: var(--luvex-gray-100);
-    padding: 1.5rem;
+    padding: 2rem;
     border-radius: var(--radius-md);
-    margin: 1.5rem 0;
+    margin: 2rem auto; /* auto für Zentrierung */
     border-left: 4px solid var(--luvex-bright-cyan);
+    max-width: 600px; /* begrenzte Breite */
 }
 
 .privacy-contact-box h3 {
@@ -413,14 +415,12 @@ Last Update: 2025-08-03
 
 /* === COOKIE POLICY PLUGIN FIXES === */
 .complianz-cookie-policy,
-body.complianz-page,
-.cmplz-cookie-policy {
+body.complianz-page {
     padding-top: calc(72px + 2rem) !important;
 }
 
 .complianz-cookie-policy .content,
-body.complianz-page .content,
-.cmplz-content {
+body.complianz-page .content {
     max-width: 800px;
     margin: 0 auto;
     padding: 0 2rem;
@@ -430,16 +430,6 @@ body.complianz-page .content,
 .cmplz-cookiebanner {
     z-index: 9999 !important;
 }
-
-.cmplz-cookiebanner .cmplz-header {
-    background: var(--luvex-dark-blue) !important;
-}
-
-.cmplz-cookiebanner .cmplz-accept {
-    background: var(--luvex-bright-cyan) !important;
-    color: var(--luvex-dark-blue) !important;
-}
-
 /* === RESPONSIVE STYLES === */
 @media (max-width: 992px) {
     .privacy-rights-grid {

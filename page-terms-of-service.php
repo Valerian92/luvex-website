@@ -322,7 +322,7 @@ get_header(); ?>
                 
                 <h3>12.2 Jurisdiction</h3>
                 <p>
-                    Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the German courts. For business-to-business transactions, the courts of [Your City], Germany shall have jurisdiction.
+                    Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the German courts. For business-to-business transactions, the courts of Rosenheim, Germany shall have jurisdiction.
                 </p>
                 
                 <h3>12.3 EU Consumer Rights</h3>
@@ -371,8 +371,8 @@ get_header(); ?>
                         <h4><i class="fa-solid fa-map-marker-alt"></i> Business Address</h4>
                         <p>
                             Valerian Huber<br>
-                            [Your Business Address]<br>
-                            [City, Postal Code]<br>
+                            Dahlienweg 11<br>
+                            Großkarolinenfeld, 83109<br>
                             Germany
                         </p>
                     </div>
