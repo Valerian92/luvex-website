@@ -33,7 +33,7 @@ get_header(); ?>
     <!-- LUVEX Orbit Section -->
     <section class="section section--turquoise-light">
         <div class="container container--narrow">
-            <div class="text-center">
+            <div class="text-center mb-3">
                 <h2 class="section__title">Our Partnership Model</h2>
                 <p class="section__subtitle">Our collaboration is a dynamic cycle focused on a central goal: your success.</p>
             </div>
@@ -87,7 +87,7 @@ get_header(); ?>
             
             <!-- Fallback: Linear Timeline for Mobile -->
             <div class="linear-timeline-mobile">
-                <div class="timeline-container" style="max-width: 800px; margin: 0 auto;">
+                <div class="timeline-container">
                     <div class="timeline-line"></div>
                     <div class="timeline-step">
                         <div class="timeline-step__icon"><i class="fa-solid fa-comments"></i></div>
@@ -121,7 +121,7 @@ get_header(); ?>
     <!-- Core Competencies Section -->
     <section class="section">
         <div class="container container--narrow">
-            <div class="text-center">
+            <div class="text-center mb-3">
                 <h2 class="section__title">Core Competencies</h2>
                 <p class="section__subtitle">We provide end-to-end expertise for your UV applications, ensuring efficiency, safety, and compliance.</p>
             </div>
@@ -148,7 +148,7 @@ get_header(); ?>
     <!-- FAQ Section -->
     <section class="section section--turquoise-light">
         <div class="container container--narrow" style="max-width: 900px;">
-            <div class="text-center">
+            <div class="text-center mb-3">
                 <h2 class="section__title">Frequently Asked Questions</h2>
             </div>
             <div class="faq-accordion">
