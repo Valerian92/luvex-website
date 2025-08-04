@@ -5,7 +5,7 @@ LUVEX THEME v2.1 - HEROES
 
 Description: Styling for all Hero components.
 Dependencies: _variables.css
-Last Update: 2025-08-03
+Last Update: 2025-08-04
 
 ==============================================================================
 */
@@ -70,7 +70,6 @@ Last Update: 2025-08-03
     z-index: 1;
 }
 
-/* KORREKTUR: Flex-Eigenschaften hinzugefügt, um Inhalt sicher zu zentrieren */
 .luvex-hero__container {
     position: relative;
     z-index: 2;
@@ -99,6 +98,39 @@ Last Update: 2025-08-03
     margin: 0 auto 2.5rem auto; /* Increased bottom margin */
     line-height: 1.6;
     max-width: 700px;
+}
+
+/* Hero CTA Container - Buttons untereinander */
+.luvex-hero__cta-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+}
+
+/* Secondary CTA (Explore UV Science) - oben */
+.luvex-hero__cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 16px 32px;
+    background: transparent;
+    color: var(--luvex-white);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-normal);
+    font-size: var(--text-base);
+    order: 1;
+}
+
+.luvex-hero__cta-secondary:hover {
+    background: var(--luvex-white);
+    color: var(--luvex-dark-blue);
+    border-color: var(--luvex-white);
+    transform: translateY(-2px);
 }
 
 /*
@@ -134,7 +166,7 @@ NEU: Hero Navigation (für UV-C Disinfection Seite)
     transform: translateY(-2px);
 }
 
-/* Original CTA button (wird auf anderen Seiten noch gebraucht) */
+/* Primary CTA (Launch UV Simulator) - unten + TÜRKIS HOVER TEXT */
 .luvex-hero__cta {
     display: inline-flex;
     align-items: center;
@@ -147,13 +179,14 @@ NEU: Hero Navigation (für UV-C Disinfection Seite)
     font-weight: 600;
     transition: var(--transition-normal);
     font-size: var(--text-base);
+    order: 2; /* unten */
 }
 
 .luvex-hero__cta:hover {
     background: #5ac7e0;
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(109, 213, 237, 0.4);
-    color: var(--luvex-dark-blue);
+    color: var(--luvex-bright-cyan); /* ← TÜRKIS TEXT! */
 }
 
 /* Spezifische Höhenanpassungen (wird auf anderen Seiten noch gebraucht) */
@@ -169,21 +202,14 @@ NEU: Hero Navigation (für UV-C Disinfection Seite)
 
 /*
 ==============================================================================
-HERO: DYNAMIC SPECTRUM ENGINE (wird auf anderen Seiten noch gebraucht)
+HERO: DYNAMIC SPECTRUM ENGINE (FINAL VERSION)
 ==============================================================================
 */
 .hero-spectrum-engine {
     position: relative;
     overflow: hidden;
-    padding: 0;
-    min-height: 600px;
-    height: 100vh;
-    max-height: 800px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 600px; /* Or use vh, e.g., 80vh */
     background-color: #0B1A3D; 
-    color: var(--luvex-white);
 }
 
 #spectrum-canvas {
@@ -196,37 +222,11 @@ HERO: DYNAMIC SPECTRUM ENGINE (wird auf anderen Seiten noch gebraucht)
     cursor: none;
 }
 
-.hero-spectrum-engine .hero-content {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    max-width: 900px;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: spectrumFadeInUp 1.2s 0.5s ease-out forwards;
-    padding: 2rem;
+/* Hide the fallback content when JS is active */
+.hero-spectrum-engine .hero-content-fallback {
+   display: none;
 }
 
-/* UPDATE: Specific cursor handling */
-.hero-spectrum-engine .hero-content h1,
-.hero-spectrum-engine .hero-content p {
-    cursor: none; /* Hide system cursor over text */
-}
-
-.hero-spectrum-engine .hero-content .luvex-cta-primary {
-    /* A soft outer circle and a sharp inner dot for a modern feel. */
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><circle cx="16" cy="16" r="8" fill="%236DD5ED" fill-opacity="0.5"/><circle cx="16" cy="16" r="4" fill="%236DD5ED"/></svg>') 16 16, pointer;
-}
-
-
-@keyframes spectrumFadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* NEW: Style for the wavelength indicator text on the canvas */
 .wavelength-indicator {
     position: absolute;
     top: 20px;
@@ -239,4 +239,31 @@ HERO: DYNAMIC SPECTRUM ENGINE (wird auf anderen Seiten noch gebraucht)
     background: rgba(11, 26, 61, 0.5);
     padding: 5px 10px;
     border-radius: 5px;
+}
+
+/*
+==============================================================================
+FIX: UV Curing Hero Layout
+==============================================================================
+*/
+
+/* The main hero container becomes the positioning context */
+.hero-curing {
+    position: relative;
+}
+
+/* The canvas is positioned absolutely to fill the container, in the background */
+.hero-curing #curing-hero-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Lower z-index */
+}
+
+/* The text container is positioned relatively on top of the canvas */
+.hero-curing .luvex-hero__container {
+    position: relative;
+    z-index: 2; /* Higher z-index */
 }

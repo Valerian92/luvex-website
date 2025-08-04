@@ -25,14 +25,14 @@ get_header(); ?>
                 From water disinfection to precision curing - master UV technology with the world's leading specialists.
                 Independent consulting, advanced simulations, and proven results.
             </p>
-            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-top: 2.5rem;">
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="luvex-cta-primary">
-                    <i class="fas fa-cube"></i>
-                    <span>Launch UV Simulator</span>
-                </a>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="luvex-cta-secondary">
+            <div class="luvex-hero__cta-container">
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="luvex-hero__cta-secondary">
                     <i class="fas fa-atom"></i>
                     <span>Explore UV Science</span>
+                </a>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="luvex-hero__cta luvex-cta-primary">
+                    <i class="fas fa-cube"></i>
+                    <span>Launch UV Simulator</span>
                 </a>
             </div>
         </div>
