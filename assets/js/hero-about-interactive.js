@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function bindEventListeners() {
-        const parallaxIntensity = 15; // Reduziert für subtileren Effekt
+        const parallaxIntensity = 40; // Erhöht für stärkeren Effekt
 
         function handleMouseMove(event) {
             if (!isAnimationActive) return;
@@ -246,21 +246,34 @@ document.addEventListener('DOMContentLoaded', () => {
             const moveX = (event.clientX / window.innerWidth - 0.5) * 2;
             const moveY = (event.clientY / window.innerHeight - 0.5) * 2;
 
-            // Parallax Container bewegen
+            // Parallax Container stärker bewegen
             if (parallaxContainer) {
                 parallaxContainer.style.transform = `
-                    rotateY(${-moveX * (parallaxIntensity / 20)}deg) 
-                    rotateX(${moveY * (parallaxIntensity / 20)}deg)
+                    rotateY(${-moveX * (parallaxIntensity / 10)}deg) 
+                    rotateX(${moveY * (parallaxIntensity / 10)}deg)
+                    translateZ(${moveX * 20}px)
                 `;
             }
 
-            // Spotlight bewegen
+            // Spotlight intensiver und größer
             if (spotlight) {
+                const spotlightSize = Math.max(window.innerWidth, window.innerHeight) * 0.6;
                 spotlight.style.background = `
-                    radial-gradient(circle at ${event.clientX}px ${event.clientY}px, 
-                    rgba(109, 213, 237, 0.15), transparent 40%)
+                    radial-gradient(circle ${spotlightSize}px at ${event.clientX}px ${event.clientY}px, 
+                    rgba(109, 213, 237, 0.25), 
+                    rgba(109, 213, 237, 0.1) 40%,
+                    transparent 70%)
                 `;
             }
+
+            // Elemente individuell bewegen
+            animationElements.forEach((item, index) => {
+                const intensity = (index % 3 + 1) * 0.5; // Verschiedene Intensitäten
+                const offsetX = moveX * intensity * 10;
+                const offsetY = moveY * intensity * 8;
+                
+                item.element.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+            });
         }
 
         // Performance-optimized event listener

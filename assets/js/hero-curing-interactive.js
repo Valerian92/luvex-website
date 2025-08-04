@@ -105,6 +105,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function drawLightBeam() {
         if (mouse.x === undefined) return;
+        
+        // 1. Draw the main soft glow
         const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, mouse.radius);
         gradient.addColorStop(0, 'rgba(200, 220, 255, 0.15)');
         gradient.addColorStop(1, 'rgba(200, 220, 255, 0)');
@@ -113,6 +115,20 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.beginPath();
         ctx.arc(mouse.x, mouse.y, mouse.radius, 0, Math.PI * 2);
         ctx.fill();
+
+        // 2. Draw the focus point as a circle with an aura
+        // Inner Aura
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, 4, 0, Math.PI * 2); 
+        ctx.fillStyle = 'rgba(109, 213, 237, 0.5)'; 
+        ctx.fill();
+        
+        // Outer Circle
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, 4, 0, Math.PI * 2); 
+        ctx.strokeStyle = 'rgba(109, 213, 237, 1)'; 
+        ctx.lineWidth = 1;
+        ctx.stroke();
     }
 
     let lastTime = 0;

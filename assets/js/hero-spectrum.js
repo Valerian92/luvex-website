@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function drawContent() {
         ctx.save();
-        ctx.globalAlpha = 0; // Start with content invisible
+       
         // Fade in logic can be added here if needed
         
         // Title

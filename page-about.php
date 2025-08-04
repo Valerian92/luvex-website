@@ -21,8 +21,8 @@ get_header(); ?>
         <p class="luvex-hero__description">
             Our mission is simple: help you optimize your UV processes through honest guidance, proven expertise, and innovative tools. We believe the best solutions come from understanding your specific challenges and working together to solve them.
         </p>
-        <div class="header-cta" style="justify-content: center; margin-top: 2rem;">
-             <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-cta-primary">
+        <div class="luvex-hero__cta-container">
+             <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-hero__cta">
                 <i class="fa-solid fa-arrow-right"></i>
                 <span>Start a Conversation</span>
             </a>
@@ -49,6 +49,50 @@ get_header(); ?>
             </div>
             <div class="our-story__image">
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/uv-laboratory-team.jpg" alt="Professional UV technology engineers working in a laboratory with UV equipment" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Core Values Section -->
+<section class="core-values">
+    <div class="core-values__container">
+        <div class="core-values__header">
+            <h2 class="core-values__title">Our Core Values</h2>
+            <p class="core-values__description">
+                These principles guide everything we do at LUVEX, from how we approach client relationships to how we develop our tools and services.
+            </p>
+        </div>
+        
+        <div class="core-values__grid">
+            <div class="value-card">
+                <div class="value-card__icon">
+                    <i class="fa-solid fa-handshake"></i>
+                </div>
+                <h3 class="value-card__title">Independence</h3>
+                <p class="value-card__description">
+                    We provide unbiased advice because we're not tied to any equipment manufacturer. Our only goal is finding the right solution for your specific needs.
+                </p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-card__icon">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <h3 class="value-card__title">Knowledge Sharing</h3>
+                <p class="value-card__description">
+                    We believe in democratizing UV technology expertise through education, free tools, and open collaboration that elevates the entire industry.
+                </p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-card__icon">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <h3 class="value-card__title">Results-Focused</h3>
+                <p class="value-card__description">
+                    We measure our success by your outcomes. Our practical, solution-oriented approach focuses on delivering tangible improvements to your UV processes.
+                </p>
             </div>
         </div>
     </div>
@@ -113,50 +157,6 @@ get_header(); ?>
                     <li><i class="fa-solid fa-check"></i>Process validation tools available regardless of whether you work with us</li>
                     <li><i class="fa-solid fa-check"></i>Commitment to advancing UV technology knowledge across the industry</li>
                 </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Core Values Section -->
-<section class="core-values">
-    <div class="core-values__container">
-        <div class="core-values__header">
-            <h2 class="core-values__title">Our Core Values</h2>
-            <p class="core-values__description">
-                These principles guide everything we do at LUVEX, from how we approach client relationships to how we develop our tools and services.
-            </p>
-        </div>
-        
-        <div class="core-values__grid">
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fa-solid fa-handshake"></i>
-                </div>
-                <h3 class="value-card__title">Independence</h3>
-                <p class="value-card__description">
-                    We provide unbiased advice because we're not tied to any equipment manufacturer. Our only goal is finding the right solution for your specific needs.
-                </p>
-            </div>
-            
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fa-solid fa-lightbulb"></i>
-                </div>
-                <h3 class="value-card__title">Knowledge Sharing</h3>
-                <p class="value-card__description">
-                    We believe in democratizing UV technology expertise through education, free tools, and open collaboration that elevates the entire industry.
-                </p>
-            </div>
-            
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fa-solid fa-chart-line"></i>
-                </div>
-                <h3 class="value-card__title">Results-Focused</h3>
-                <p class="value-card__description">
-                    We measure our success by your outcomes. Our practical, solution-oriented approach focuses on delivering tangible improvements to your UV processes.
-                </p>
             </div>
         </div>
     </div>
