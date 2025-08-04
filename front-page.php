@@ -41,20 +41,25 @@ get_header(); ?>
 
 <!-- UV Knowledge Navigator - Section 2 (Jetzt direkt nach Hero) -->
 <section class="section section--turquoise-light knowledge-navigator-section">
-    <div class="container container--narrow">
+    
+    <div class="container"> 
+        
         <div class="knowledge-navigator-header">
-            <h2 class="text-center mb-2">UV Knowledge Navigator</h2>
+            <h2 class="text-center">UV Knowledge Navigator</h2>
             <p class="knowledge-navigator-intro">
                 Your pathway to UV expertise - from fundamentals to advanced applications
             </p>
         </div>
 
-        <div class="grid-3 knowledge-navigator" style="gap: 2.5rem; margin-top: 3rem;">
+        <div class="grid-3 knowledge-navigator">
+            
             <div class="value-card knowledge-card">
-                <div class="value-card__icon">
-                    <i class="fas fa-atom"></i>
+                <div class="knowledge-card__header">
+                    <div class="value-card__icon">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <h3 class="value-card__title">UV Fundamentals</h3>
                 </div>
-                <h3 class="value-card__title">UV Fundamentals</h3>
                 <p class="value-card__description">
                     Master the physics and engineering principles behind UV technology. From wavelength spectrum to dose calculations.
                 </p>
@@ -67,10 +72,12 @@ get_header(); ?>
             </div>
 
             <div class="value-card knowledge-card">
-                <div class="value-card__icon">
-                    <i class="fas fa-lightbulb"></i>
+                 <div class="knowledge-card__header">
+                    <div class="value-card__icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="value-card__title">Technology Platforms</h3>
                 </div>
-                <h3 class="value-card__title">Technology Platforms</h3>
                 <p class="value-card__description">
                     Compare conventional mercury and cutting-edge LED UV systems with objective analysis.
                 </p>
@@ -83,10 +90,12 @@ get_header(); ?>
             </div>
 
             <div class="value-card knowledge-card">
-                <div class="value-card__icon">
-                    <i class="fas fa-industry"></i>
+                 <div class="knowledge-card__header">
+                    <div class="value-card__icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3 class="value-card__title">Applications Hub</h3>
                 </div>
-                <h3 class="value-card__title">Applications Hub</h3>
                 <p class="value-card__description">
                     Discover UV solutions across industries from water treatment to advanced curing applications.
                 </p>
@@ -100,7 +109,6 @@ get_header(); ?>
         </div>
     </div>
 </section>
-
 
 <!-- Interactive UV Simulator Showcase -->
 <section class="section" style="background: #f8fafc;">

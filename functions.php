@@ -71,10 +71,7 @@ function luvex_enqueue_assets() {
     global $post;
     $current_page_slug = isset($post->post_name) ? $post->post_name : 'no-slug';
     $current_page_id = get_the_ID();
-    error_log('LUVEX DEBUG: Current page slug: ' . $current_page_slug);
-    error_log('LUVEX DEBUG: Current page ID: ' . $current_page_id);
-    error_log('LUVEX DEBUG: URL: ' . $_SERVER['REQUEST_URI']);
-
+    
     // CSS-Dateien
     $main_css_path = get_stylesheet_directory() . '/assets/css/main.css';
     $main_css_version = file_exists($main_css_path) ? filemtime($main_css_path) : '1.0.0';
@@ -102,13 +99,11 @@ function luvex_enqueue_assets() {
     
     // Bedingtes Laden der Hero-Animationen
     if (is_front_page() || is_home()) {
-        // Lade Photonen-Animation für die Homepage
         $photons_js_path = get_stylesheet_directory() . '/assets/js/hero-photons.js';
         if (file_exists($photons_js_path)) {
             $photons_js_version = filemtime($photons_js_path);
             wp_enqueue_script('luvex-hero-photons', get_stylesheet_directory_uri() . '/assets/js/hero-photons.js', array(), $photons_js_version, true);
         }
-        // Lade Three.js für die Globus-Animation
         wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), null, true);
         $globe_js_path = get_stylesheet_directory() . '/assets/js/globe-animation.js';
         $globe_js_version = file_exists($globe_js_path) ? filemtime($globe_js_path) : '1.0.0';
@@ -116,7 +111,6 @@ function luvex_enqueue_assets() {
 
     } 
     elseif ( is_page('about') ) {
-        // Lade About Hero Parallax Animation
         $about_hero_js_path = get_stylesheet_directory() . '/assets/js/hero-about-interactive.js';
         if (file_exists($about_hero_js_path)) {
             $about_hero_js_version = filemtime($about_hero_js_path);
@@ -124,7 +118,6 @@ function luvex_enqueue_assets() {
         }
     }
     elseif ( is_page('uv-curing') ) {
-        // Lade interaktive Partikel-Animation für die UV Curing Seite
         $curing_js_path = get_stylesheet_directory() . '/assets/js/hero-curing-interactive.js';
         if (file_exists($curing_js_path)) {
             $curing_js_version = filemtime($curing_js_path);
@@ -132,18 +125,22 @@ function luvex_enqueue_assets() {
         }
     } 
     elseif ( is_page('uv-consulting') ) { 
-        // Lade Hexagon-Animation für die UV Consulting Seite
         $hexagon_js_path = get_stylesheet_directory() . '/assets/js/hero-hexagon.js';
         if (file_exists($hexagon_js_path)) {
             $hexagon_js_version = filemtime($hexagon_js_path);
             wp_enqueue_script('luvex-hero-hexagon', get_stylesheet_directory_uri() . '/assets/js/hero-hexagon.js', array(), $hexagon_js_version, true);
         }
     } 
+    // KORRIGIERTER BLOCK für die UV-C Disinfection Seite
     elseif ( is_page('uv-c-disinfection') ) { 
-        $disinfection_js_path = get_stylesheet_directory() . '/assets/js/hero-disinfection.js';
-        if (file_exists($disinfection_js_path)) {
-            $disinfection_js_version = filemtime($disinfection_js_path);
-            wp_enqueue_script('luvex-hero-disinfection', get_stylesheet_directory_uri() . '/assets/js/hero-disinfection.js', array(), $disinfection_js_version, true);
+        // Lade Three.js als Abhängigkeit
+        wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), null, true);
+        
+        // Lade das neue DNA-Animations-Skript
+        $dna_animation_js_path = get_stylesheet_directory() . '/assets/js/dna-animation.js';
+        if (file_exists($dna_animation_js_path)) {
+            $dna_animation_js_version = filemtime($dna_animation_js_path);
+            wp_enqueue_script('luvex-dna-animation', get_stylesheet_directory_uri() . '/assets/js/dna-animation.js', array('three-js'), $dna_animation_js_version, true);
         }
     } 
     elseif ( is_page('uv-knowledge') ) {
@@ -154,27 +151,16 @@ function luvex_enqueue_assets() {
         }
     } 
     elseif ( is_page('led-uv-systems') || is_page('uv-led') || $current_page_slug === 'led-uv-systems' || strpos($_SERVER['REQUEST_URI'], 'led-uv-systems') !== false ) {
-        // DEBUG: UV LED Page Detection
-        error_log('LUVEX DEBUG: UV LED page detected - loading assets');
-        error_log('LUVEX DEBUG: Page slug: ' . $current_page_slug);
-        
-        // Lade UV LED Convergence Animation + CSS
         $uv_led_css_path = get_stylesheet_directory() . '/assets/css/_page-uv-led.css';
         if (file_exists($uv_led_css_path)) {
             $uv_led_css_version = filemtime($uv_led_css_path);
             wp_enqueue_style('luvex-page-uv-led', get_stylesheet_directory_uri() . '/assets/css/_page-uv-led.css', array('luvex-main'), $uv_led_css_version);
-            error_log('LUVEX DEBUG: UV LED CSS loaded - version: ' . $uv_led_css_version);
-        } else {
-            error_log('LUVEX DEBUG: UV LED CSS file not found at: ' . $uv_led_css_path);
         }
         
         $uv_led_js_path = get_stylesheet_directory() . '/assets/js/hero-uv-led.js';
         if (file_exists($uv_led_js_path)) {
             $uv_led_js_version = filemtime($uv_led_js_path);
             wp_enqueue_script('luvex-hero-uv-led', get_stylesheet_directory_uri() . '/assets/js/hero-uv-led.js', array(), $uv_led_js_version, true);
-            error_log('LUVEX DEBUG: UV LED JS loaded - version: ' . $uv_led_js_version);
-        } else {
-            error_log('LUVEX DEBUG: UV LED JS file not found at: ' . $uv_led_js_path);
         }
     }
 

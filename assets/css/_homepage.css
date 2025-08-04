@@ -558,3 +558,108 @@ Last Update: 2025-08-02
         grid-template-columns: 1fr;
     }
 }
+
+
+/* ============================================================================ */
+/* OPTIMIERUNG: UV Knowledge Navigator (Anpassung vom 04.08.2025)               */
+/* ============================================================================ */
+
+/* Behebt das Abstandsproblem zur nächsten Sektion und verbessert den Hintergrund */
+.knowledge-navigator-section {
+    padding: 6rem 0; /* Erhöht das Padding für mehr vertikalen Abstand */
+    background: linear-gradient(180deg, #F0F5F9 0%, #FFFFFF 100%); /* Sanfterer Hintergrund */
+    overflow: visible; /* Verhindert, dass Schatten abgeschnitten werden */
+}
+
+/* Zentriert den Header und gibt ihm mehr Raum */
+.knowledge-navigator-header {
+    text-align: center;
+    margin-bottom: 4rem; /* Mehr Abstand zu den Karten */
+}
+
+.knowledge-navigator-header h2 {
+    color: var(--luvex-dark-blue);
+}
+
+.knowledge-navigator-intro {
+    max-width: 650px; /* Macht den Text etwas schmaler für bessere Lesbarkeit */
+    margin: 1rem auto 0 auto;
+    color: var(--luvex-gray-700);
+    font-size: 1.125rem;
+}
+
+/* Optimiert das Grid-Layout */
+.knowledge-navigator.grid-3 {
+    gap: 2.5rem; /* Stellt einen guten Abstand zwischen den Karten sicher */
+}
+
+/* Haupt-Styling für die aufgewerteten Karten */
+.knowledge-card {
+    background: var(--luvex-white);
+    border: 1px solid #EAF0F6; /* Subtilerer Rand */
+    border-radius: var(--radius-lg); /* Abgerundete Ecken übernehmen */
+    box-shadow: 0 4px 15px rgba(27, 42, 73, 0.05); /* Standard-Schatten für mehr Tiefe */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex; /* Stellt sicher, dass der Button unten bleibt */
+    flex-direction: column;
+    padding: 2.5rem 2rem;
+    text-align: left; /* Stellt Linksbündigkeit sicher */
+    border-top: none; /* Entfernt die alte border-top-Regel */
+}
+
+.knowledge-card:hover {
+    transform: translateY(-10px); /* Stärkerer Hover-Effekt */
+    box-shadow: 0 20px 40px rgba(27, 42, 73, 0.1);
+}
+
+/* Neuer Header innerhalb der Karte für Icon + Titel */
+.knowledge-card__header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Icon-Styling in der Karte */
+.knowledge-card .value-card__icon {
+    font-size: 2.5rem; /* Etwas kleineres Icon */
+    margin: 0; /* Entfernt alten Abstand */
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #e7f1ff, #f0f8ff);
+    color: var(--luvex-vibrant-blue);
+    border-radius: 12px;
+}
+
+.knowledge-card:hover .value-card__icon {
+    background: var(--luvex-vibrant-blue);
+    color: var(--luvex-white);
+}
+
+.knowledge-card .value-card__title {
+    margin-bottom: 0; /* Entfernt Abstand, da der Wrapper ihn hat */
+    font-size: 1.5rem;
+}
+
+/* Beschreibungstext */
+.knowledge-card .value-card__description {
+    flex-grow: 1; /* Wichtig, damit die Karten gleiche Höhe haben */
+    margin-bottom: 2rem; /* Mehr Platz zur Liste */
+}
+
+/* Liste innerhalb der Karte */
+.knowledge-list {
+    margin: 0 0 2rem 0; /* Standardisierter Abstand */
+    padding: 0;
+    list-style: none;
+}
+
+.knowledge-list li {
+    gap: 1rem; /* Mehr Platz zwischen Icon und Text */
+    font-size: 1rem;
+}
+
+/* Sorgt dafür, dass der Button am unteren Rand der Karte ausgerichtet ist */
+.knowledge-card .btn {
+    margin-top: auto;
+}
