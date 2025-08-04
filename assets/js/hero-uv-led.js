@@ -1,9 +1,9 @@
 /**
- * UV LED Convergence Animation
+ * UV LED Convergence Animation - Enhanced Version
  * Professional LED beam convergence with UV wavelength colors
  * 
  * @package Luvex
- * @version 2.2
+ * @version 2.3
  */
 
 console.log('🔥 LUVEX DEBUG: UV LED Animation script loaded!');
@@ -19,6 +19,7 @@ class UVLEDConvergence {
             console.error('❌ LUVEX ERROR: Canvas element #uv-led-canvas not found!');
             return;
         }
+
         console.log('✅ LUVEX DEBUG: Canvas found, initializing animation...');
         
         this.ctx = this.canvas.getContext('2d');
@@ -26,14 +27,14 @@ class UVLEDConvergence {
         this.leds = [];
         this.animationId = null;
         
-        // Configuration
+        // Enhanced Configuration
         this.config = {
-            ledCount: 180,
-            intensity: 0.8,
-            speed: 1,
+            ledCount: 220,
+            intensity: 0.9,
+            speed: 1.2,
             mouseFollow: true,
-            beamWidth: 1.2,
-            focusRadius: 25
+            beamWidth: 1.4,
+            focusRadius: 30
         };
 
         // UV Wavelength Colors (precise UV spectrum)
@@ -87,101 +88,129 @@ class UVLEDConvergence {
         const { ledCount } = this.config;
         const centerX = this.canvas.width / 2;
         const centerY = this.canvas.height / 2;
-        const radius = Math.min(this.canvas.width, this.canvas.height) * 0.35;
         
-        // Get text bounds for avoidance
-        const textBounds = this.getTextBounds();
+        // MUCH LARGER radius - fills entire hero
+        const maxRadius = Math.max(this.canvas.width, this.canvas.height) * 0.65;
+        const minRadius = Math.min(this.canvas.width, this.canvas.height) * 0.25;
+        
+        console.log('🎯 LED Distribution: minRadius =', minRadius, 'maxRadius =', maxRadius);
         
         for (let i = 0; i < ledCount; i++) {
-            // Distribute LEDs around the perimeter
-            const angle = (i / ledCount) * Math.PI * 2;
-            let ledRadius = radius;
+            // Distribute LEDs in multiple concentric rings
+            const ringCount = 5;
+            const ringIndex = Math.floor(i / (ledCount / ringCount));
+            const ledsInRing = Math.floor(ledCount / ringCount);
+            const indexInRing = i % ledsInRing;
             
-            // Vary radius slightly for organic feel
-            ledRadius += (Math.sin(i * 0.7) * 30 + Math.cos(i * 1.1) * 20);
+            // Calculate radius for this ring
+            const baseRadius = minRadius + (ringIndex * (maxRadius - minRadius) / (ringCount - 1));
             
-            const x = centerX + Math.cos(angle) * ledRadius;
-            const y = centerY + Math.sin(angle) * ledRadius;
+            // Add significant variation for organic feel
+            const radiusVariation = (Math.random() - 0.5) * 120;
+            const finalRadius = Math.max(minRadius * 0.8, baseRadius + radiusVariation);
             
-            // Skip LEDs that would interfere with text
-            if (this.isInTextArea(x, y, textBounds)) {
-                continue;
-            }
+            // Calculate angle with some randomization
+            const baseAngle = (indexInRing / ledsInRing) * Math.PI * 2;
+            const angleVariation = (Math.random() - 0.5) * 0.8;
+            const finalAngle = baseAngle + angleVariation;
+            
+            const x = centerX + Math.cos(finalAngle) * finalRadius;
+            const y = centerY + Math.sin(finalAngle) * finalRadius;
+            
+            // NO TEXT AVOIDANCE - LEDs everywhere!
             
             // Assign wavelength (weighted towards UV-C for LED applications)
             const wavelengthKeys = Object.keys(this.uvWavelengths);
             let wavelengthKey;
             const rand = Math.random();
-            if (rand < 0.4) wavelengthKey = 'uvc254'; // 40% UV-C 254nm
-            else if (rand < 0.7) wavelengthKey = 'uva365'; // 30% UV-A 365nm
-            else if (rand < 0.9) wavelengthKey = 'uvc280'; // 20% UV-C 280nm
-            else wavelengthKey = 'uvb310'; // 10% UV-B 310nm
+            if (rand < 0.35) wavelengthKey = 'uvc254'; // 35% UV-C 254nm
+            else if (rand < 0.65) wavelengthKey = 'uva365'; // 30% UV-A 365nm
+            else if (rand < 0.85) wavelengthKey = 'uvc280'; // 20% UV-C 280nm
+            else wavelengthKey = 'uvb310'; // 15% UV-B 310nm
             
             const wavelength = this.uvWavelengths[wavelengthKey];
             
             this.leds.push({
                 x: x,
                 y: y,
-                angle: angle,
+                angle: finalAngle,
                 color: wavelength.color,
                 wavelength: wavelength.wavelength,
                 intensity: Math.random() * 0.4 + 0.6, // 0.6-1.0 range
                 phase: Math.random() * Math.PI * 2,
-                baseRadius: ledRadius,
-                pulseOffset: Math.random() * 1000
+                baseRadius: finalRadius,
+                pulseOffset: Math.random() * 1000,
+                ringIndex: ringIndex
             });
         }
-    }
-
-    getTextBounds() {
-        const centerX = this.canvas.width / 2;
-        const centerY = this.canvas.height / 2;
         
-        return {
-            x: centerX - 300,
-            y: centerY - 120,
-            width: 600,
-            height: 240
-        };
-    }
-
-    isInTextArea(x, y, bounds) {
-        return x >= bounds.x && x <= bounds.x + bounds.width &&
-               y >= bounds.y && y <= bounds.y + bounds.height;
+        console.log('✅ LEDs created:', this.leds.length);
     }
 
     createControls() {
-        // Create controls panel
+        // Create control panel with live values
         const controlsHTML = `
             <div class="led-controls">
-                <h4>⚙️ LED Controls</h4>
-                <label>LED Count: <input type="range" id="ledCount" min="100" max="300" step="20" value="${this.config.ledCount}"></label>
-                <label>Intensity: <input type="range" id="ledIntensity" min="0.3" max="1.5" step="0.1" value="${this.config.intensity}"></label>
-                <label>Speed: <input type="range" id="ledSpeed" min="0.5" max="2.5" step="0.1" value="${this.config.speed}"></label>
-                <label>Beam Width: <input type="range" id="beamWidth" min="0.5" max="3" step="0.1" value="${this.config.beamWidth}"></label>
-                <label><input type="checkbox" id="mouseFollow" ${this.config.mouseFollow ? 'checked' : ''}> Mouse Focus</label>
+                <h4>⚙️ LED Control System</h4>
+                
+                <div class="control-group">
+                    <label>
+                        <span class="control-label">LED Count</span>
+                        <span class="control-value" id="ledCountValue">${this.config.ledCount}</span>
+                    </label>
+                    <input type="range" id="ledCount" min="100" max="400" step="20" value="${this.config.ledCount}">
+                </div>
+                
+                <div class="control-group">
+                    <label>
+                        <span class="control-label">Beam Intensity</span>
+                        <span class="control-value" id="intensityValue">${this.config.intensity}</span>
+                    </label>
+                    <input type="range" id="ledIntensity" min="0.3" max="2.0" step="0.1" value="${this.config.intensity}">
+                </div>
+                
+                <div class="control-group">
+                    <label>
+                        <span class="control-label">Animation Speed</span>
+                        <span class="control-value" id="speedValue">${this.config.speed}</span>
+                    </label>
+                    <input type="range" id="ledSpeed" min="0.2" max="3.0" step="0.1" value="${this.config.speed}">
+                </div>
+                
+                <div class="control-group">
+                    <label>
+                        <span class="control-label">Beam Width</span>
+                        <span class="control-value" id="beamWidthValue">${this.config.beamWidth}</span>
+                    </label>
+                    <input type="range" id="beamWidth" min="0.5" max="4.0" step="0.1" value="${this.config.beamWidth}">
+                </div>
+                
+                <div class="checkbox-control">
+                    <input type="checkbox" id="mouseFollow" ${this.config.mouseFollow ? 'checked' : ''}>
+                    <label for="mouseFollow">Mouse Focus Control</label>
+                </div>
             </div>
         `;
         
         // Create wavelength info panel
         const infoHTML = `
             <div class="wavelength-info-panel">
-                <h4>🔬 UV Wavelengths</h4>
+                <h4>🔬 UV Spectrum</h4>
                 <div class="wavelength-item">
                     <div class="wavelength-color" style="background: #8B00FF;"></div>
-                    <span>UV-A 365nm</span>
+                    <span>UV-A 365nm (30%)</span>
                 </div>
                 <div class="wavelength-item">
                     <div class="wavelength-color" style="background: #4169E1;"></div>
-                    <span>UV-B 310nm</span>
+                    <span>UV-B 310nm (15%)</span>
                 </div>
                 <div class="wavelength-item">
                     <div class="wavelength-color" style="background: #6dd5ed;"></div>
-                    <span>UV-C 254nm</span>
+                    <span>UV-C 254nm (35%)</span>
                 </div>
                 <div class="wavelength-item">
                     <div class="wavelength-color" style="background: #00CED1;"></div>
-                    <span>UV-C 280nm</span>
+                    <span>UV-C 280nm (20%)</span>
                 </div>
             </div>
         `;
@@ -203,42 +232,63 @@ class UVLEDConvergence {
 
         this.leds.forEach((led, i) => {
             const phase = time * 0.001 * this.config.speed + led.phase;
-            const pulsePhase = time * 0.003 + led.pulseOffset;
-            const alpha = (Math.sin(phase) * 0.2 + 0.8) * intensity * led.intensity;
-            const pulseIntensity = Math.sin(pulsePhase) * 0.3 + 0.7;
+            const pulsePhase = time * 0.002 + led.pulseOffset;
+            const alpha = (Math.sin(phase) * 0.15 + 0.85) * intensity * led.intensity;
+            const pulseIntensity = Math.sin(pulsePhase) * 0.2 + 0.8;
             
-            // Draw LED source point
-            const ledSize = 2 + pulseIntensity * 1.5;
+            // Enhanced LED source point
+            const ledSize = 2 + pulseIntensity * 2;
+            const glowSize = ledSize * 3;
+            
+            // LED glow
+            const ledGradient = this.ctx.createRadialGradient(led.x, led.y, 0, led.x, led.y, glowSize);
+            ledGradient.addColorStop(0, led.color + Math.floor(alpha * pulseIntensity * 255).toString(16).padStart(2, '0'));
+            ledGradient.addColorStop(0.5, led.color + Math.floor(alpha * pulseIntensity * 128).toString(16).padStart(2, '0'));
+            ledGradient.addColorStop(1, led.color + '00');
+            
+            this.ctx.fillStyle = ledGradient;
+            this.ctx.globalAlpha = 1;
+            this.ctx.fillRect(led.x - glowSize, led.y - glowSize, glowSize * 2, glowSize * 2);
+            
+            // LED core
             this.ctx.fillStyle = led.color;
             this.ctx.globalAlpha = alpha * pulseIntensity;
             this.ctx.fillRect(led.x - ledSize/2, led.y - ledSize/2, ledSize, ledSize);
             
-            // Draw convergence beam
+            // Calculate distance for beam intensity
             const distance = Math.sqrt(
                 Math.pow(centerX - led.x, 2) + Math.pow(centerY - led.y, 2)
             );
+            const distanceFactor = Math.max(0.3, 1 - distance / (Math.max(this.canvas.width, this.canvas.height) * 0.8));
             
-            // Create precise beam gradient
-            const gradient = this.ctx.createLinearGradient(led.x, led.y, centerX, centerY);
-            const beamAlpha = Math.floor((alpha * pulseIntensity * 0.7) * 255).toString(16).padStart(2, '0');
-            gradient.addColorStop(0, led.color + beamAlpha);
-            gradient.addColorStop(0.7, led.color + Math.floor(parseInt(beamAlpha, 16) * 0.3).toString(16).padStart(2, '0'));
-            gradient.addColorStop(1, led.color + '00');
+            // Enhanced beam with multiple layers
+            const beamAlpha = alpha * pulseIntensity * distanceFactor * 0.8;
             
-            this.ctx.strokeStyle = gradient;
-            this.ctx.lineWidth = beamWidth * (0.5 + pulseIntensity * 0.5);
-            this.ctx.globalAlpha = alpha * 0.8;
+            // Outer beam
+            const outerGradient = this.ctx.createLinearGradient(led.x, led.y, centerX, centerY);
+            outerGradient.addColorStop(0, led.color + Math.floor(beamAlpha * 255).toString(16).padStart(2, '0'));
+            outerGradient.addColorStop(0.6, led.color + Math.floor(beamAlpha * 180).toString(16).padStart(2, '0'));
+            outerGradient.addColorStop(1, led.color + '00');
+            
+            this.ctx.strokeStyle = outerGradient;
+            this.ctx.lineWidth = beamWidth * (0.8 + pulseIntensity * 0.4);
+            this.ctx.globalAlpha = 1;
             
             this.ctx.beginPath();
             this.ctx.moveTo(led.x, led.y);
             this.ctx.lineTo(centerX, centerY);
             this.ctx.stroke();
             
-            // Add beam core (sharper inner beam)
-            if (alpha > 0.5) {
-                this.ctx.strokeStyle = '#ffffff';
-                this.ctx.lineWidth = 0.5;
-                this.ctx.globalAlpha = (alpha - 0.5) * 0.6;
+            // Inner beam core (brighter)
+            if (beamAlpha > 0.4) {
+                const coreGradient = this.ctx.createLinearGradient(led.x, led.y, centerX, centerY);
+                coreGradient.addColorStop(0, '#ffffff' + Math.floor((beamAlpha - 0.4) * 400).toString(16).padStart(2, '0'));
+                coreGradient.addColorStop(0.8, led.color + Math.floor((beamAlpha - 0.4) * 300).toString(16).padStart(2, '0'));
+                coreGradient.addColorStop(1, led.color + '00');
+                
+                this.ctx.strokeStyle = coreGradient;
+                this.ctx.lineWidth = beamWidth * 0.3;
+                this.ctx.globalAlpha = 1;
                 this.ctx.beginPath();
                 this.ctx.moveTo(led.x, led.y);
                 this.ctx.lineTo(centerX, centerY);
@@ -246,41 +296,41 @@ class UVLEDConvergence {
             }
         });
 
-        // Draw convergence focus point
+        // Enhanced convergence focus point
         this.drawFocusPoint(centerX, centerY, time);
     }
 
     drawFocusPoint(x, y, time) {
-        const pulsePhase = time * 0.005;
-        const focusIntensity = this.leds.length * this.config.intensity * 0.002;
-        const pulseSize = Math.sin(pulsePhase) * 8 + 20;
+        const pulsePhase = time * 0.003;
+        const focusIntensity = this.leds.length * this.config.intensity * 0.0015;
+        const pulseSize = Math.sin(pulsePhase) * 12 + 25;
         
-        // Outer glow
-        const outerGradient = this.ctx.createRadialGradient(x, y, 0, x, y, pulseSize * 2);
-        outerGradient.addColorStop(0, `rgba(255, 255, 255, ${focusIntensity * 0.8})`);
-        outerGradient.addColorStop(0.3, `rgba(109, 213, 237, ${focusIntensity * 0.6})`);
-        outerGradient.addColorStop(0.6, `rgba(138, 43, 226, ${focusIntensity * 0.4})`);
-        outerGradient.addColorStop(1, 'rgba(109, 213, 237, 0)');
+        // Multiple glow layers
+        const layers = [
+            { size: pulseSize * 3, alpha: focusIntensity * 0.3, color: 'rgba(255, 255, 255, ' },
+            { size: pulseSize * 2, alpha: focusIntensity * 0.5, color: 'rgba(109, 213, 237, ' },
+            { size: pulseSize * 1.5, alpha: focusIntensity * 0.7, color: 'rgba(138, 43, 226, ' },
+            { size: pulseSize, alpha: focusIntensity * 0.9, color: 'rgba(255, 255, 255, ' }
+        ];
         
-        this.ctx.fillStyle = outerGradient;
-        this.ctx.globalAlpha = 1;
-        this.ctx.fillRect(x - pulseSize * 2, y - pulseSize * 2, pulseSize * 4, pulseSize * 4);
-        
-        // Inner core
-        const coreGradient = this.ctx.createRadialGradient(x, y, 0, x, y, pulseSize * 0.5);
-        coreGradient.addColorStop(0, `rgba(255, 255, 255, ${focusIntensity * 1.2})`);
-        coreGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-        
-        this.ctx.fillStyle = coreGradient;
-        this.ctx.fillRect(x - pulseSize * 0.5, y - pulseSize * 0.5, pulseSize, pulseSize);
+        layers.forEach(layer => {
+            const gradient = this.ctx.createRadialGradient(x, y, 0, x, y, layer.size);
+            gradient.addColorStop(0, layer.color + layer.alpha + ')');
+            gradient.addColorStop(0.4, layer.color + (layer.alpha * 0.6) + ')');
+            gradient.addColorStop(1, layer.color + '0)');
+            
+            this.ctx.fillStyle = gradient;
+            this.ctx.globalAlpha = 1;
+            this.ctx.fillRect(x - layer.size, y - layer.size, layer.size * 2, layer.size * 2);
+        });
     }
 
     animate() {
         const time = performance.now();
         
-        // Clear canvas with slight fade for smoother trails
+        // Clear canvas with subtle fade for smooth trails
         this.ctx.globalCompositeOperation = 'source-over';
-        this.ctx.fillStyle = 'rgba(27, 42, 73, 0.08)';
+        this.ctx.fillStyle = 'rgba(27, 42, 73, 0.05)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         
         this.drawConvergenceBeams(time);
@@ -300,48 +350,58 @@ class UVLEDConvergence {
             this.mouse.y = (e.clientY - rect.top) / rect.height;
         });
 
-        // Control handlers
+        // Control handlers with live value updates
         setTimeout(() => {
-            const ledCountSlider = document.getElementById('ledCount');
-            const ledIntensitySlider = document.getElementById('ledIntensity');
-            const ledSpeedSlider = document.getElementById('ledSpeed');
-            const beamWidthSlider = document.getElementById('beamWidth');
-            const mouseFollowCheckbox = document.getElementById('mouseFollow');
-
-            if (ledCountSlider) {
-                ledCountSlider.addEventListener('input', (e) => {
-                    this.config.ledCount = parseInt(e.target.value);
-                    this.createLEDs();
-                });
-            }
-
-            if (ledIntensitySlider) {
-                ledIntensitySlider.addEventListener('input', (e) => {
-                    this.config.intensity = parseFloat(e.target.value);
-                });
-            }
-
-            if (ledSpeedSlider) {
-                ledSpeedSlider.addEventListener('input', (e) => {
-                    this.config.speed = parseFloat(e.target.value);
-                });
-            }
-
-            if (beamWidthSlider) {
-                beamWidthSlider.addEventListener('input', (e) => {
-                    this.config.beamWidth = parseFloat(e.target.value);
-                });
-            }
-
-            if (mouseFollowCheckbox) {
-                mouseFollowCheckbox.addEventListener('change', (e) => {
-                    this.config.mouseFollow = e.target.checked;
-                });
-            }
+            this.bindControlHandlers();
         }, 100);
 
         // Button interaction effects
         this.setupButtonEffects();
+    }
+
+    bindControlHandlers() {
+        const controls = {
+            ledCount: { element: document.getElementById('ledCount'), value: document.getElementById('ledCountValue') },
+            ledIntensity: { element: document.getElementById('ledIntensity'), value: document.getElementById('intensityValue') },
+            ledSpeed: { element: document.getElementById('ledSpeed'), value: document.getElementById('speedValue') },
+            beamWidth: { element: document.getElementById('beamWidth'), value: document.getElementById('beamWidthValue') },
+            mouseFollow: { element: document.getElementById('mouseFollow'), value: null }
+        };
+
+        if (controls.ledCount.element) {
+            controls.ledCount.element.addEventListener('input', (e) => {
+                this.config.ledCount = parseInt(e.target.value);
+                controls.ledCount.value.textContent = this.config.ledCount;
+                this.createLEDs();
+            });
+        }
+
+        if (controls.ledIntensity.element) {
+            controls.ledIntensity.element.addEventListener('input', (e) => {
+                this.config.intensity = parseFloat(e.target.value);
+                controls.ledIntensity.value.textContent = this.config.intensity;
+            });
+        }
+
+        if (controls.ledSpeed.element) {
+            controls.ledSpeed.element.addEventListener('input', (e) => {
+                this.config.speed = parseFloat(e.target.value);
+                controls.ledSpeed.value.textContent = this.config.speed;
+            });
+        }
+
+        if (controls.beamWidth.element) {
+            controls.beamWidth.element.addEventListener('input', (e) => {
+                this.config.beamWidth = parseFloat(e.target.value);
+                controls.beamWidth.value.textContent = this.config.beamWidth;
+            });
+        }
+
+        if (controls.mouseFollow.element) {
+            controls.mouseFollow.element.addEventListener('change', (e) => {
+                this.config.mouseFollow = e.target.checked;
+            });
+        }
     }
 
     setupButtonEffects() {
@@ -362,7 +422,7 @@ class UVLEDConvergence {
             };
             
             // Trigger effect periodically
-            setInterval(activateEffect, 8000);
+            setInterval(activateEffect, 10000);
             
             // Trigger on hover
             heroButton.addEventListener('mouseenter', activateEffect);
@@ -384,6 +444,8 @@ class UVLEDConvergence {
             
             const fpsCounter = document.getElementById('fpsCounter');
             if (fpsCounter) {
+                const color = this.performance.fps >= 50 ? '#6dd5ed' : this.performance.fps >= 30 ? '#ffa500' : '#ff4444';
+                fpsCounter.style.color = color;
                 fpsCounter.textContent = `FPS: ${this.performance.fps}`;
             }
             
