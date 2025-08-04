@@ -284,4 +284,6 @@ LUVEX THEME - PAGE: UV-C DISINFECTION
     color: var(--luvex-gray-700);
     line-height: 1.6;
     margin: 0;
+    flex-grow: 1;
+    margin-bottom: 1rem;
 }

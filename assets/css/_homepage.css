@@ -671,3 +671,118 @@ Last Update: 2025-08-02
     /* Die Füllfarbe muss dem Hintergrund der NÄCHSTEN Sektion entsprechen */
     fill: #f8fafc; 
 }
+
+
+/* ============================================================================ */
+/* OPTIMIERUNG: Homepage Sections & Dividers (Finale Version vom 04.08.2025)   */
+/* ============================================================================ */
+
+/* Basis-Styling für Sektionen, die einen Divider bekommen */
+.knowledge-navigator-section,
+.uv-simulator-wrapper-section,
+.homepage-community-section,
+.evidence-section {
+    position: relative;
+    padding-bottom: 10rem; /* Platz für den Divider schaffen */
+}
+
+/* Spezifische Hintergrund- und Abstandsanpassungen */
+.knowledge-navigator-section {
+    background: #F8FAFC;
+    padding-top: 6rem;
+}
+
+.uv-simulator-wrapper-section {
+    background: #f8fafc; /* Muss mit der Füllfarbe des vorherigen Dividers übereinstimmen */
+    padding-top: 0; /* Kein extra Abstand oben, da der Divider den Übergang macht */
+}
+
+.homepage-community-section {
+    padding-top: 6rem;
+    /* padding-bottom ist bereits durch die Basis-Regel gesetzt */
+}
+
+.evidence-section {
+    background: var(--luvex-white);
+    padding-top: 6rem;
+}
+
+/* Header-Styling für Knowledge Navigator */
+.knowledge-navigator-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+.knowledge-navigator-header h2 { color: var(--luvex-dark-blue); }
+.knowledge-navigator-intro {
+    max-width: 650px;
+    margin: 1rem auto 0 auto;
+    color: var(--luvex-gray-700);
+    font-size: 1.125rem;
+}
+
+/* Karten-Styling (unverändert) */
+.knowledge-card {
+    background: var(--luvex-white);
+    border: 1px solid #EAF0F6;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 15px rgba(27, 42, 73, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem 2rem;
+    text-align: left;
+}
+.knowledge-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(27, 42, 73, 0.1);
+}
+.knowledge-card__header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.knowledge-card .value-card__icon {
+    font-size: 2.2rem;
+    margin: 0;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #e7f1ff, #f0f8ff);
+    color: var(--luvex-vibrant-blue);
+    border-radius: 12px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.knowledge-card:hover .value-card__icon {
+    background: var(--luvex-vibrant-blue);
+    color: var(--luvex-white);
+}
+.knowledge-card .value-card__title { margin-bottom: 0; font-size: 1.5rem; }
+.knowledge-card .value-card__description { flex-grow: 1; margin-bottom: 2rem; }
+.knowledge-list { margin: 0 0 2rem 0; padding: 0; list-style: none; }
+.knowledge-list li { gap: 1rem; font-size: 1rem; }
+.knowledge-card .btn { margin-top: auto; }
+
+/* NEU: Generelles Styling und Farbdefinitionen für die Divider */
+
+/* Divider vom Knowledge Navigator zum hellgrauen Simulator-Wrapper */
+.section-divider[data-divider-target-background="light-gray"] .shape-fill {
+    fill: #f8fafc; 
+}
+
+/* Divider vom Simulator-Wrapper zur dunklen Community Section */
+.section-divider[data-divider-target-background="dark-blue"] .shape-fill {
+    fill: var(--luvex-dark-blue); 
+}
+
+/* Divider von der dunklen Community Section zur weißen Evidence Section */
+.section-divider[data-divider-target-background="white"] .shape-fill {
+    fill: var(--luvex-white);
+}
+
+/* Divider von der weißen Evidence Section zum dunklen Final CTA */
+.section-divider[data-divider-target-background="dark-blue-gradient"] .shape-fill {
+    fill: var(--luvex-accent-blue);
+}

@@ -1,9 +1,8 @@
 /*
 ==============================================================================
-LUVEX THEME v2.2.6 - ABOUT PAGE (Optimized)
+LUVEX THEME v2.2.7 - ABOUT PAGE (Final Polish)
 ==============================================================================
-Description: Complete restyling of the Team Section for better readability 
-             and premium look. Added new hero button hover effect.
+Description: Final refinements for the team section layout and hero button.
 Dependencies: _variables.css, _heroes.css, _cards.css, _layout.css
 Last Update: 2025-08-05
 ==============================================================================
@@ -16,7 +15,7 @@ Last Update: 2025-08-05
     text-shadow: 0 1px 3px rgba(10, 15, 25, 0.5);
 }
 
-/* NEU: Premium Hover-Effekt für den Hero-Button */
+/* Premium Hover-Effekt für den Hero-Button */
 .about-hero .luvex-hero__cta {
     border: 2px solid var(--luvex-bright-cyan);
     background: transparent;
@@ -38,7 +37,6 @@ Last Update: 2025-08-05
     transition: transform 0.3s ease;
 }
 
-
 /* ==============================================================================
 TEAM SECTION: KOMPLETTES REDESIGN
 ==============================================================================
@@ -46,13 +44,11 @@ TEAM SECTION: KOMPLETTES REDESIGN
 
 .team-section {
     padding: calc(var(--space-xl) * 1.5) 0;
-    /* NEU: Dunkler Hintergrund für besseren Kontrast */
     background: var(--luvex-dark-blue); 
     position: relative;
     overflow: hidden;
 }
 
-/* NEU: Hintergrund-Grid für den LUVEX-Look */
 .team-section::before {
     content: '';
     position: absolute;
@@ -65,37 +61,40 @@ TEAM SECTION: KOMPLETTES REDESIGN
     z-index: 1;
 }
 
-/* NEU: Breiterer Container für die Team-Sektion */
 .team-section .container--narrow {
     max-width: 1600px;
     position: relative;
     z-index: 2;
 }
 
-/* NEU: Helle Schrift für bessere Lesbarkeit auf dunklem Grund */
+/* NEU: Zentrierter Header mit hellen Farben */
+.team-section__header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
 .team-section__header .team-section__title {
     color: var(--luvex-text-primary);
 }
-
 .team-section__header .team-section__description {
     color: var(--luvex-text-muted);
 }
 
-/* NEU: Vergrößerter Abstand zwischen den Karten */
 .team-section__grid {
     display: grid;
-    gap: 4rem; /* Mehr Abstand */
+    gap: 4rem;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     justify-items: center;
 }
 
-/* NEU: Redesign der Team-Mitglieder-Karten */
+/* NEU: Vertikales Layout für Team-Karten */
 .team-member {
     background: var(--luvex-accent-blue);
     border: 1px solid rgba(109, 213, 237, 0.2);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     border-radius: var(--radius-lg);
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    padding: 2.5rem;
+    text-align: center; /* Zentriert den Inhalt */
 }
 
 .team-member:hover {
@@ -104,90 +103,66 @@ TEAM SECTION: KOMPLETTES REDESIGN
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
+.team-member__photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid var(--luvex-bright-cyan);
+    margin: 0 auto 1.5rem auto; /* Zentriert und schafft Abstand */
+    overflow: hidden;
+}
+.team-member__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .team-member__content h3 {
-    color: var(--luvex-text-primary); /* Helle Schrift */
+    color: var(--luvex-text-primary);
     font-size: 1.6rem;
 }
 
 .team-member__role {
     color: var(--luvex-bright-cyan);
     font-weight: 600;
+    margin-bottom: 1.5rem;
 }
 
-.team-member__photo {
-    border: 4px solid var(--luvex-bright-cyan);
+.team-member__tags {
+    justify-content: center; /* Zentriert die Tags */
+    margin-bottom: 2rem;
 }
-
 .team-member__tags .team-member__tag {
     background-color: rgba(109, 213, 237, 0.1);
     color: var(--luvex-bright-cyan);
     border: 1px solid rgba(109, 213, 237, 0.2);
 }
 
+.team-member__details {
+    text-align: left; /* Details bleiben linksbündig für Lesbarkeit */
+    margin-bottom: 2rem;
+}
 .team-member__detail-icon i {
     color: var(--luvex-bright-cyan);
 }
-
 .team-member__detail-text {
-    color: var(--luvex-text-muted); /* Helleres Grau */
+    color: var(--luvex-text-muted);
 }
 
 .team-member__quote {
+    text-align: left; /* Zitat bleibt linksbündig */
     border-left-color: var(--luvex-bright-cyan);
 }
-
 .team-member__quote p {
-    color: var(--luvex-text-primary); /* Helle Schrift */
+    color: var(--luvex-text-primary);
 }
 
-
-/* ===== BESTEHENDE STILE (gekürzt zur Übersicht) ===== */
-
-.about-hero {
-    perspective: 2000px;
-}
-
-.about-spotlight {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
-    transition: background 0.05s ease-out;
-}
-
-.about-parallax-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: transform 0.05s ease-out;
-    z-index: 1;
-}
-
-.about-parallax-layer {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-.about-layer-grid {
-    transform: translateZ(-1000px) scale(5);
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="about-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.12)" stroke-width="1.5"/></pattern></defs><rect width="100%" height="100%" fill="url(%23about-grid)"/></svg>');
-    opacity: 0.8;
-    animation: about-grid-pulse 4s ease-in-out infinite;
-}
-
-.about-layer-elements {
-    transform: translateZ(-300px) scale(2);
-}
-
-.about-elements-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
+/* ===== BESTEHENDE HERO-STILE (gekürzt) ===== */
+.about-hero { perspective: 2000px; }
+.about-spotlight, .about-parallax-container, .about-parallax-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.about-spotlight { z-index: 1; pointer-events: none; transition: background 0.05s ease-out; }
+.about-parallax-container { transform-style: preserve-3d; transition: transform 0.05s ease-out; z-index: 1; }
+.about-layer-grid { transform: translateZ(-1000px) scale(5); background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="about-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.12)" stroke-width="1.5"/></pattern></defs><rect width="100%" height="100%" fill="url(%23about-grid)"/></svg>'); opacity: 0.8; animation: about-grid-pulse 4s ease-in-out infinite; }
+.about-layer-elements { transform: translateZ(-300px) scale(2); }
+.about-elements-container { position: relative; width: 100%; height: 100%; }
+@keyframes about-grid-pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 0.9; } }
