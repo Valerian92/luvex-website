@@ -137,18 +137,27 @@ function luvex_enqueue_assets() {
             wp_enqueue_script('luvex-hero-spectrum', get_stylesheet_directory_uri() . '/assets/js/hero-spectrum.js', array(), $spectrum_js_version, true);
         }
     } 
-    elseif ( is_page('led-uv-systems') ) {
+    elseif ( is_page('led-uv-systems') || is_page('uv-led') || is_page(array('led-uv-systems', 'uv-led', 'led-uv')) ) {
+        // DEBUG: UV LED Page Detection
+        error_log('LUVEX DEBUG: UV LED page detected - loading assets');
+        
         // Lade UV LED Convergence Animation + CSS
         $uv_led_css_path = get_stylesheet_directory() . '/assets/css/_page-uv-led.css';
         if (file_exists($uv_led_css_path)) {
             $uv_led_css_version = filemtime($uv_led_css_path);
             wp_enqueue_style('luvex-page-uv-led', get_stylesheet_directory_uri() . '/assets/css/_page-uv-led.css', array('luvex-main'), $uv_led_css_version);
+            error_log('LUVEX DEBUG: UV LED CSS loaded');
+        } else {
+            error_log('LUVEX DEBUG: UV LED CSS file not found at: ' . $uv_led_css_path);
         }
         
         $uv_led_js_path = get_stylesheet_directory() . '/assets/js/hero-uv-led.js';
         if (file_exists($uv_led_js_path)) {
             $uv_led_js_version = filemtime($uv_led_js_path);
             wp_enqueue_script('luvex-hero-uv-led', get_stylesheet_directory_uri() . '/assets/js/hero-uv-led.js', array(), $uv_led_js_version, true);
+            error_log('LUVEX DEBUG: UV LED JS loaded');
+        } else {
+            error_log('LUVEX DEBUG: UV LED JS file not found at: ' . $uv_led_js_path);
         }
     }
 
