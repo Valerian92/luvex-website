@@ -1,8 +1,9 @@
 /*
 ==============================================================================
-LUVEX THEME v2.2.5 - ABOUT PAGE (Optimized)
+LUVEX THEME v2.2.6 - ABOUT PAGE (Optimized)
 ==============================================================================
-Description: About Page specific styles - includes optimizations for text color and contrast.
+Description: Complete restyling of the Team Section for better readability 
+             and premium look. Added new hero button hover effect.
 Dependencies: _variables.css, _heroes.css, _cards.css, _layout.css
 Last Update: 2025-08-05
 ==============================================================================
@@ -10,42 +11,138 @@ Last Update: 2025-08-05
 
 /* ===== ABOUT HERO: OPTIMIERUNGEN ===== */
 
-/* NEU: Hero-Beschreibungstext in Türkis mit Textschatten für bessere Lesbarkeit */
 .about-hero .luvex-hero__description {
     color: var(--luvex-bright-cyan);
     text-shadow: 0 1px 3px rgba(10, 15, 25, 0.5);
 }
 
+/* NEU: Premium Hover-Effekt für den Hero-Button */
+.about-hero .luvex-hero__cta {
+    border: 2px solid var(--luvex-bright-cyan);
+    background: transparent;
+    color: var(--luvex-bright-cyan);
+    transition: all 0.3s ease;
+}
 
-/* ===== TEAM SECTION: OPTIMIERUNGEN ===== */
+.about-hero .luvex-hero__cta:hover {
+    background: linear-gradient(135deg, var(--luvex-vibrant-purple), var(--luvex-bright-cyan));
+    color: var(--luvex-white);
+    border-color: transparent;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(109, 213, 237, 0.3);
+}
+.about-hero .luvex-hero__cta:hover i {
+    transform: translateX(5px);
+}
+.about-hero .luvex-hero__cta i {
+    transition: transform 0.3s ease;
+}
 
-/* NEU: Besser lesbare Überschriften in der Team-Sektion */
+
+/* ==============================================================================
+TEAM SECTION: KOMPLETTES REDESIGN
+==============================================================================
+*/
+
+.team-section {
+    padding: calc(var(--space-xl) * 1.5) 0;
+    /* NEU: Dunkler Hintergrund für besseren Kontrast */
+    background: var(--luvex-dark-blue); 
+    position: relative;
+    overflow: hidden;
+}
+
+/* NEU: Hintergrund-Grid für den LUVEX-Look */
+.team-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+    opacity: 0.5;
+    z-index: 1;
+}
+
+/* NEU: Breiterer Container für die Team-Sektion */
+.team-section .container--narrow {
+    max-width: 1600px;
+    position: relative;
+    z-index: 2;
+}
+
+/* NEU: Helle Schrift für bessere Lesbarkeit auf dunklem Grund */
 .team-section__header .team-section__title {
-    color: var(--luvex-dark-blue); /* Sorgt für maximalen Kontrast auf hellem Hintergrund */
+    color: var(--luvex-text-primary);
 }
 
 .team-section__header .team-section__description {
-    color: var(--luvex-gray-800); /* Dunkleres Grau für bessere Lesbarkeit */
+    color: var(--luvex-text-muted);
+}
+
+/* NEU: Vergrößerter Abstand zwischen den Karten */
+.team-section__grid {
+    display: grid;
+    gap: 4rem; /* Mehr Abstand */
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    justify-items: center;
+}
+
+/* NEU: Redesign der Team-Mitglieder-Karten */
+.team-member {
+    background: var(--luvex-accent-blue);
+    border: 1px solid rgba(109, 213, 237, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-lg);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+    border-color: rgba(109, 213, 237, 0.5);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.team-member__content h3 {
+    color: var(--luvex-text-primary); /* Helle Schrift */
+    font-size: 1.6rem;
+}
+
+.team-member__role {
+    color: var(--luvex-bright-cyan);
+    font-weight: 600;
+}
+
+.team-member__photo {
+    border: 4px solid var(--luvex-bright-cyan);
+}
+
+.team-member__tags .team-member__tag {
+    background-color: rgba(109, 213, 237, 0.1);
+    color: var(--luvex-bright-cyan);
+    border: 1px solid rgba(109, 213, 237, 0.2);
+}
+
+.team-member__detail-icon i {
+    color: var(--luvex-bright-cyan);
+}
+
+.team-member__detail-text {
+    color: var(--luvex-text-muted); /* Helleres Grau */
+}
+
+.team-member__quote {
+    border-left-color: var(--luvex-bright-cyan);
+}
+
+.team-member__quote p {
+    color: var(--luvex-text-primary); /* Helle Schrift */
 }
 
 
 /* ===== BESTEHENDE STILE (gekürzt zur Übersicht) ===== */
 
-/* Enhanced Hero Container */
-.about-hero .luvex-hero__container {
-    max-width: 1200px;
-}
-
-.about-hero .luvex-hero__title {
-    font-size: clamp(2.8rem, 6vw, 4.5rem);
-    line-height: 1.05;
-}
-
-.about-hero .luvex-hero__subtitle {
-    font-size: clamp(1.3rem, 2.8vw, 1.6rem);
-}
-
-/* Parallax Animation Layers */
 .about-hero {
     perspective: 2000px;
 }
@@ -93,263 +190,4 @@ Last Update: 2025-08-05
     position: relative;
     width: 100%;
     height: 100%;
-}
-
-/* Scientific Elements */
-.about-sci-element {
-    position: absolute;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    cursor: pointer;
-    opacity: 0;
-    transform: translateY(30px) scale(0.8);
-    animation: about-breathe 6s infinite ease-in-out;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    filter: contrast(1.2) brightness(1.1);
-}
-
-.about-sci-element.about-element-visible {
-    opacity: 0.7;
-    transform: translateY(0) scale(1);
-}
-
-.about-sci-element.about-element-highlight {
-    opacity: 1;
-    transform: translateY(-5px) scale(1.1);
-    z-index: 10;
-}
-
-.about-sci-text {
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
-    font-weight: 600;
-    color: var(--luvex-text-muted);
-    white-space: nowrap;
-}
-
-.about-sci-text.about-element-highlight {
-    color: var(--luvex-bright-cyan);
-    text-shadow: 0 0 15px rgba(109, 213, 237, 0.6);
-}
-
-.about-sci-formula {
-    font-family: 'Georgia', 'Times New Roman', serif;
-    font-size: clamp(1.2rem, 2.2vw, 1.6rem);
-    font-weight: 400;
-    font-style: italic;
-    color: var(--luvex-text-muted);
-}
-
-.about-sci-formula.about-element-highlight {
-    color: var(--luvex-text-primary);
-    text-shadow: 0 0 12px rgba(229, 231, 235, 0.5);
-}
-
-.about-sci-icon {
-    width: clamp(60px, 8vw, 100px);
-    height: clamp(60px, 8vw, 100px);
-}
-
-.about-sci-icon svg {
-    width: 100%;
-    height: 100%;
-    stroke: var(--luvex-text-muted);
-    stroke-width: 1;
-    fill: none;
-    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
-}
-
-.about-sci-icon.about-element-highlight svg {
-    stroke: var(--luvex-bright-cyan);
-    filter: drop-shadow(0 0 12px rgba(109, 213, 237, 0.6));
-}
-
-/* Connection Lines */
-#about-connection-lines {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 5;
-}
-
-.about-connection-line {
-    stroke: var(--luvex-bright-cyan);
-    stroke-width: 1.5;
-    opacity: 0;
-    stroke-dasharray: 5, 3;
-    animation: about-line-draw 0.6s ease-out forwards;
-}
-
-#about-connection-lines.about-connections-active .about-connection-line {
-    opacity: 0.8;
-}
-
-/* ===== TEAM SECTION: FLEXIBLE GRID ===== */
-
-.team-section {
-    padding: calc(var(--space-xl) * 1.5) 0;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    margin-top: var(--space-lg);
-}
-
-.team-section__grid {
-    display: grid;
-    gap: 3rem;
-    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-    justify-items: center;
-}
-
-/* Ungerade Anzahl: Letzter Member mittig */
-.team-section__grid[data-members="3"] .team-member:last-child {
-    grid-column: 1 / -1;
-    max-width: 450px;
-}
-
-/* Enhanced Team Member Cards - extends existing .team-member */
-.team-member {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(109, 213, 237, 0.1);
-    box-shadow: 0 8px 32px rgba(11, 26, 61, 0.1);
-}
-
-.team-member:hover {
-    border-color: rgba(109, 213, 237, 0.3);
-    box-shadow: 0 20px 40px rgba(11, 26, 61, 0.15);
-}
-
-.team-member__content h3 {
-    color: var(--luvex-dark-blue);
-    font-weight: 700;
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
-}
-
-.team-member__role {
-    color: var(--luvex-bright-cyan);
-    font-weight: 600;
-}
-
-/* ===== MISSION SECTION: ENHANCED STYLING ===== */
-
-.mission-section {
-    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-    position: relative;
-}
-
-.mission-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.05"><defs><pattern id="mission-dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgb(109, 213, 237)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23mission-dots)"/></svg>');
-    opacity: 0.3;
-    pointer-events: none;
-}
-
-.mission-section__title {
-    background: linear-gradient(135deg, var(--luvex-dark-blue), var(--luvex-bright-cyan));
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.simulator-callout {
-    background: linear-gradient(135deg, var(--luvex-dark-blue) 0%, #1e293b 100%);
-    border: 2px solid rgba(109, 213, 237, 0.3);
-    box-shadow: 0 10px 30px rgba(11, 26, 61, 0.3);
-}
-
-/* ===== ANIMATIONS ===== */
-
-@keyframes about-grid-pulse {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 0.9; }
-}
-
-@keyframes about-breathe {
-    0%, 100% { 
-        transform: translateY(0) scale(1); 
-        opacity: 0.7; 
-    }
-    50% { 
-        transform: translateY(-2px) scale(1.02); 
-        opacity: 0.85; 
-    }
-}
-
-@keyframes about-line-draw {
-    from {
-        stroke-dashoffset: 100;
-        opacity: 0;
-    }
-    to {
-        stroke-dashoffset: 0;
-        opacity: 0.8;
-    }
-}
-
-/* ===== RESPONSIVE ===== */
-
-@media (max-width: 768px) {
-    .about-hero {
-        perspective: none;
-        min-height: 80vh;
-    }
-    
-    .about-parallax-container {
-        transform-style: initial;
-        position: relative;
-    }
-    
-    .about-layer-grid,
-    .about-layer-elements {
-        transform: none;
-        position: relative;
-    }
-    
-    .about-sci-element {
-        position: relative;
-        display: inline-block;
-        margin: 0.5rem;
-        opacity: 0.8 !important;
-        transform: none !important;
-        animation: none;
-    }
-    
-    .about-elements-container {
-        text-align: center;
-        padding: 2rem 1rem;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-    }
-    
-    #about-connection-lines {
-        display: none;
-    }
-}
-
-/* ===== PERFORMANCE ===== */
-
-@media (prefers-reduced-motion: reduce) {
-    .about-parallax-container,
-    .about-sci-element {
-        animation: none !important;
-        transition: opacity 0.3s ease !important;
-    }
-}
-
-.about-parallax-container,
-.about-sci-element,
-.about-spotlight {
-    will-change: transform;
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
 }

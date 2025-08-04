@@ -1,9 +1,9 @@
 <?php
 /**
  * About Page Template - Optimized
- * * @package Luvex
- * @since 2.2.5
- * @description Updated mission text and reordered sections for better narrative flow.
+ * @package Luvex
+ * @since 2.2.6
+ * @description Updated image for team member Claire Chen.
  */
 
 get_header(); ?>
@@ -17,7 +17,6 @@ get_header(); ?>
         <h2 class="luvex-hero__subtitle">
             Advancing UV technology through knowledge sharing, independent consultation, and customer success.
         </h2>
-        <!-- NEUER TEXT HIER -->
         <p class="luvex-hero__description">
             Our mission is simple: help you optimize your UV processes through honest guidance, proven expertise, and innovative tools. We believe the best solutions come from understanding your specific challenges and working together to solve them.
         </p>
@@ -30,7 +29,7 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- NEUE REIHENFOLGE: 1. Our Story Section -->
+<!-- Our Story Section -->
 <section class="section our-story">
     <div class="container container--narrow">
         <div class="our-story__layout">
@@ -54,7 +53,7 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- NEUE REIHENFOLGE: 2. Team Section -->
+<!-- Team Section -->
 <section class="section team-section">
     <div class="container container--narrow">
         <div class="team-section__header">
@@ -173,7 +172,8 @@ get_header(); ?>
             <div class="team-member">
                 <div class="team-member__layout">
                     <div class="team-member__photo">
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/team/claire-singapore.jpg" alt="Claire Chen - Asia-Pacific Liaison & Strategic Partnerships" />
+                        <!-- NEUES BILD FÜR CLAIRE -->
+                        <img src="https://www.luvex.tech/wp-content/uploads/2025/08/claire_athen.jpeg" alt="Claire Chen - Asia-Pacific Liaison & Strategic Partnerships" />
                     </div>
                     <div class="team-member__content">
                         <h3>Claire Chen</h3>
@@ -224,7 +224,7 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- NEUE REIHENFOLGE: 3. Core Values Section -->
+<!-- Core Values Section -->
 <section class="section core-values">
     <div class="container container--narrow">
         <div class="core-values__header">
@@ -268,9 +268,7 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- ENTFERNT: "Why We Do Things Differently" Section -->
-
-<!-- NEUE REIHENFOLGE: 4. More Than Consulting - Building the UV Knowledge Community (Final Section) -->
+<!-- More Than Consulting - Building the UV Knowledge Community (Final Section) -->
 <section class="section mission-section">
     <div class="container container--narrow">
         <div class="mission-section__header">
