@@ -259,4 +259,29 @@ LUVEX THEME - PAGE: UV-C DISINFECTION
     height: 100%;
     display: flex;
     flex-direction: column;
+    background: var(--luvex-white);
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--luvex-gray-200);
+    transition: all 0.3s ease;
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--luvex-bright-cyan);
+}
+
+.value-card__title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--luvex-dark-blue);
+    margin-bottom: 0.75rem;
+}
+
+.value-card__description {
+    font-size: 0.95rem;
+    color: var(--luvex-gray-700);
+    line-height: 1.6;
+    margin: 0;
 }

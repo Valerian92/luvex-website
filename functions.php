@@ -133,7 +133,14 @@ function luvex_enqueue_assets() {
     } 
     // KORRIGIERTER BLOCK für die UV-C Disinfection Seite
     elseif ( is_page('uv-c-disinfection') ) { 
-        // Lade Three.js als Abhängigkeit
+        // Lade die Hero Partikel Animation
+        $disinfection_js_path = get_stylesheet_directory() . '/assets/js/hero-disinfection.js';
+        if (file_exists($disinfection_js_path)) {
+            $disinfection_js_version = filemtime($disinfection_js_path);
+            wp_enqueue_script('luvex-hero-disinfection', get_stylesheet_directory_uri() . '/assets/js/hero-disinfection.js', array(), $disinfection_js_version, true);
+        }
+        
+        // Lade Three.js als Abhängigkeit für die DNA Animation
         wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), null, true);
         
         // Lade das neue DNA-Animations-Skript
