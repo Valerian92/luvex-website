@@ -5,16 +5,23 @@
  */
 get_header(); ?>
 
-<section class="hero-spectrum-engine">
+<section 
+    class="hero-spectrum-engine" 
+    data-button-link="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>"
+    data-button-text="Explore Applications"
+>
     <canvas id="spectrum-canvas"></canvas>
-    <div class="hero-content">
+    <div class="wavelength-indicator">400 nm</div>
+    
+    <!-- This content is now a hidden fallback for SEO/No-JS. It will be drawn on the canvas by JavaScript. -->
+    <div class="hero-content-fallback">
         <h1 class="luvex-hero__title">
             Mastering the <span class="text-highlight">UV Spectrum</span>
         </h1>
         <p class="luvex-hero__description">
             Precision analysis and solutions with advanced UVC and UVA technology.
         </p>
-        <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="button button--primary">
+        <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-cta-primary">
             Explore Applications
         </a>
     </div>

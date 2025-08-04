@@ -1,18 +1,19 @@
 /*
 ==============================================================================
-LUVEX THEME v2.1 - [DATEINAME]
+LUVEX THEME v2.1 - LEGAL PAGES
 ==============================================================================
 
-Description: [Kurze Beschreibung der Komponente]
+Description: Complete styling for all Legal pages (Privacy Policy, Impressum, Terms of Service)
 Dependencies: _variables.css
-Last Update: 2025-07-31
+Last Update: 2025-08-03
 
 ==============================================================================
 */
 
-/* ===== [] ===== */
+/* ===== [LEGAL PAGES SYSTEM] ===== */
 /* --- 6.7 LEGAL PAGES SPECIFIC --- */
 
+/* === LEGAL HERO SECTION === */
 .legal-hero {
     background: var(--luvex-dark-blue);
     position: relative;
@@ -23,21 +24,74 @@ Last Update: 2025-07-31
     align-items: center;
 }
 
+/* Grid pattern overlay for legal heroes */
+.legal-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 1;
+}
+
 .legal-hero__container {
     position: relative;
     z-index: 2;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
 }
 
+.legal-hero__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: var(--luvex-white);
+}
+
+.legal-hero__title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: inherit;
+}
+
+.legal-hero__title .text-highlight {
+    color: var(--luvex-bright-cyan);
+}
+
+.legal-hero__description {
+    font-size: var(--text-xl);
+    color: #e9ecef;
+    margin-bottom: 1.5rem;
+}
+
+.privacy-last-updated {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-full);
+    color: var(--luvex-white);
+    font-size: var(--text-sm);
+}
+
+/* === LEGAL CONTENT SECTION === */
 .legal-content-section {
     padding: var(--space-xl) 0;
 }
 
 .legal-content {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 var(--space-md); /* ← FEHLTE */
+    padding: 0 var(--space-lg);
+    text-align: left;
 }
-
 
 .legal-section {
     margin-bottom: 3rem;
@@ -48,68 +102,368 @@ Last Update: 2025-07-31
     border-bottom: 2px solid var(--luvex-bright-cyan);
     padding-bottom: 0.5rem;
     margin-bottom: 1.5rem;
+    font-size: clamp(1.5rem, 3vw, 2rem);
 }
 
 .legal-section h3 {
     color: var(--luvex-dark-blue);
     margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: var(--text-xl);
 }
 
+.legal-section h4 {
+    color: var(--luvex-dark-blue);
+    margin-bottom: 0.75rem;
+    font-size: var(--text-lg);
+}
+
+.legal-section p {
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+/* === PRIVACY POLICY SPECIFIC STYLES === */
 .privacy-list {
     list-style: none;
     padding-left: 0;
-}
-
-.privacy-list li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.privacy-contact-box {
-    background: var(--luvex-gray-100);
-    padding: 1.5rem;
-    border-radius: var(--radius-md);
     margin: 1.5rem 0;
 }
 
-/* Privacy Policy Special Elements */
-.disclaimer-box {
-    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
-    border-left: 4px solid #f39c12;
-    padding: 1.5rem;
-    border-radius: var(--radius-md);
-    margin: 2rem 0;
+.privacy-list li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+    padding-left: 1.5rem;
 }
 
+.privacy-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--luvex-bright-cyan);
+    font-weight: bold;
+}
+
+.privacy-list li:last-child {
+    border-bottom: none;
+}
+
+/* === LUVEX BRANDED BOXES === */
+
+/* Privacy Contact Box - Dunkelblau */
+.privacy-contact-box {
+    background: linear-gradient(135deg, var(--luvex-dark-blue), #243a5e);
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    margin: 2rem auto;
+    border-left: 4px solid var(--luvex-bright-cyan);
+    max-width: 600px;
+    color: var(--luvex-white);
+}
+
+.privacy-contact-box h3 {
+    color: var(--luvex-bright-cyan);
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.privacy-contact-box p {
+    color: #e9ecef;
+}
+
+/* Privacy Rights Grid - Türkis */
 .privacy-rights-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
     margin: 2rem 0;
 }
 
 .privacy-right {
-    background: var(--luvex-white);
-    border: 1px solid var(--luvex-bright-cyan);
+    background: linear-gradient(135deg, #e8f9fc, #d1f2fa);
+    border: 2px solid var(--luvex-bright-cyan);
     padding: 1.5rem;
     border-radius: var(--radius-md);
     text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.privacy-right:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(109, 213, 237, 0.2);
 }
 
 .privacy-right h4 {
     color: var(--luvex-dark-blue);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
+.privacy-right i {
+    color: var(--luvex-bright-cyan);
+}
+
+/* Legal Basis & Retention Tables */
 .legal-basis-table,
 .retention-table {
-    background: var(--luvex-gray-100);
+    background: var(--luvex-white);
     border-radius: var(--radius-md);
     overflow: hidden;
     margin: 1.5rem 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e9ecef;
 }
 
-/* Plugin Cookie Policy Fix */
+.legal-basis-row,
+.retention-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 1rem 1.5rem;
+    transition: background-color 0.2s;
+}
+
+.legal-basis-row:hover,
+.retention-row:hover {
+    background-color: #f8f9fa;
+}
+
+.legal-basis-row:last-child,
+.retention-row:last-child {
+    border-bottom: none;
+}
+
+.legal-basis-purpose,
+.retention-type {
+    font-weight: 500;
+    color: var(--luvex-dark-blue);
+}
+
+.legal-basis-reason,
+.retention-period {
+    color: var(--color-gray);
+    text-align: right;
+    font-size: var(--text-sm);
+}
+
+/* Privacy Contact Sections - Dunkelblau */
+.privacy-contact-final {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.contact-method {
+    background: linear-gradient(135deg, var(--luvex-dark-blue), #243a5e);
+    border: 2px solid var(--luvex-bright-cyan);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(27, 42, 73, 0.2);
+    transition: transform 0.2s;
+    color: var(--luvex-white);
+}
+
+.contact-method:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(109, 213, 237, 0.3);
+}
+
+.contact-method h4 {
+    color: var(--luvex-bright-cyan);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.contact-method i {
+    color: var(--luvex-bright-cyan);
+}
+
+.contact-method p {
+    color: #e9ecef;
+    margin: 0;
+}
+
+/* Disclaimer Boxes - Dunkelblau */
+.disclaimer-box {
+    background: linear-gradient(135deg, var(--luvex-dark-blue), #243a5e);
+    border-left: 4px solid var(--luvex-bright-cyan);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    margin: 2rem 0;
+    color: var(--luvex-white);
+}
+
+.disclaimer-box h3,
+.disclaimer-box h4 {
+    color: var(--luvex-bright-cyan);
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.disclaimer-box p {
+    color: #e9ecef;
+    margin: 0;
+}
+
+/* === IMPRESSUM SPECIFIC STYLES === */
+.legal-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+/* Legal Info Items (Impressum) - Türkis */
+.legal-info-item {
+    background: linear-gradient(135deg, #e8f9fc, #d1f2fa);
+    border: 2px solid var(--luvex-bright-cyan);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    box-shadow: 0 2px 8px rgba(109, 213, 237, 0.1);
+    transition: transform 0.2s;
+}
+
+.legal-info-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(109, 213, 237, 0.2);
+}
+
+.legal-info-item h3 {
+    color: var(--luvex-dark-blue);
+    margin-bottom: 1rem;
+    font-size: var(--text-lg);
+    margin-top: 0;
+}
+
+/* === TERMS OF SERVICE SPECIFIC STYLES === */
+
+/* Terms Highlight Box - Türkis */
+.terms-highlight-box {
+    background: linear-gradient(135deg, #e8f9fc, #d1f2fa);
+    border-left: 4px solid var(--luvex-bright-cyan);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    margin: 1.5rem 0;
+    border: 1px solid rgba(109, 213, 237, 0.3);
+}
+
+.terms-highlight-box h3 {
+    color: var(--luvex-dark-blue);
+    margin-bottom: 1rem;
+    margin-top: 0;
+}
+
+.terms-highlight-box ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.terms-highlight-box li {
+    margin-bottom: 0.5rem;
+}
+
+.prohibited-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 Spalten statt auto-fit */
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+@media (max-width: 992px) {
+    .prohibited-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 Spalten auf Tablet */
+    }
+}
+
+@media (max-width: 768px) {
+    .prohibited-grid {
+        grid-template-columns: 1fr; /* 1 Spalte auf Mobile */
+    }
+}
+/* Prohibited Items - bleiben ROT (nicht ändern) */
+.prohibited-item {
+    background: var(--luvex-white);
+    border: 2px solid #ffebee;
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.prohibited-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.1);
+    border-color: #ffcdd2;
+}
+
+.prohibited-item h4 {
+    color: #d32f2f;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0;
+}
+
+.prohibited-item i {
+    color: #f44336;
+}
+
+.prohibited-item p {
+    color: var(--color-gray);
+    font-size: var(--text-sm);
+    margin: 0;
+}
+
+/* Liability Notice - Dunkelblau */
+.liability-notice {
+    background: linear-gradient(135deg, var(--luvex-dark-blue), #243a5e);
+    border: 1px solid var(--luvex-bright-cyan);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    margin: 1.5rem 0;
+    color: var(--luvex-white);
+}
+
+.liability-notice h3 {
+    color: var(--luvex-bright-cyan);
+    margin-bottom: 1rem;
+    margin-top: 0;
+}
+
+.liability-notice p {
+    color: var(--luvex-white); /* Explizit weiß */
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Terms Final Note - neutral grau (bleibt) */
+.terms-final-note {
+    background: var(--luvex-gray-100);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    margin-top: 2rem;
+    text-align: center;
+    border-top: 3px solid var(--luvex-bright-cyan);
+}
+
+.terms-final-note p {
+    margin: 0;
+    color: var(--color-gray);
+    font-size: var(--text-sm);
+}
+
+/* === COOKIE POLICY PLUGIN FIXES === */
 .complianz-cookie-policy,
 body.complianz-page {
     padding-top: calc(72px + 2rem) !important;
@@ -122,6 +476,106 @@ body.complianz-page .content {
     padding: 0 2rem;
 }
 
-/* 6.7 END ===================================================== */
+/* Cookie Banner Fixes */
+.cmplz-cookiebanner {
+    z-index: 9999 !important;
+}
 
-/* ===== END [SECTION NAME] ===== */
+/* === RESPONSIVE STYLES === */
+@media (max-width: 992px) {
+    .privacy-rights-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+    
+    .legal-info-grid,
+    .prohibited-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .legal-hero {
+        padding: calc(72px + 2rem) 0 2rem;
+        min-height: 350px;
+    }
+    
+    .legal-content {
+        padding: 0 var(--space-sm);
+    }
+    
+    .legal-section {
+        margin-bottom: 2rem;
+    }
+    
+    .legal-basis-row,
+    .retention-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        padding: 1rem;
+    }
+    
+    .legal-basis-reason,
+    .retention-period {
+        text-align: left;
+        font-size: var(--text-sm);
+    }
+    
+    .privacy-contact-final {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .legal-info-grid,
+    .prohibited-grid,
+    .privacy-rights-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .prohibited-item h4 {
+        font-size: var(--text-base);
+    }
+    
+    .terms-highlight-box,
+    .liability-notice,
+    .disclaimer-box,
+    .privacy-contact-box {
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .privacy-list li {
+        padding: 0.5rem 0;
+        padding-left: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .legal-hero__title {
+        font-size: 2rem;
+    }
+    
+    .legal-hero__description {
+        font-size: var(--text-base);
+    }
+    
+    .privacy-last-updated {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+    
+    .legal-section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .contact-method,
+    .privacy-right,
+    .prohibited-item,
+    .legal-info-item {
+        padding: 1rem;
+    }
+}
+
+/* ===== END [LEGAL PAGES SYSTEM] ===== */

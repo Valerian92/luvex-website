@@ -3,9 +3,9 @@
 LUVEX THEME v2.1 - HEROES
 ==============================================================================
 
-Description: [Kurze Beschreibung der Komponente]
+Description: Styling for all Hero components.
 Dependencies: _variables.css
-Last Update: 2025-07-31
+Last Update: 2025-08-04
 
 ==============================================================================
 */
@@ -37,14 +37,13 @@ Last Update: 2025-07-31
     margin: 0 auto var(--space-lg) auto;
 }
 
-/* LUVEX Hero (wiederverwendbar für dark heroes) */
-/* .luvex-hero ist jetzt unsere zentrale Basis-Klasse */
+/* LUVEX Hero (reusable base for dark heroes) */
 .luvex-hero {
     background: var(--luvex-dark-blue);
     position: relative;
     overflow: hidden;
-    padding: calc(72px + 4rem) 2rem 4rem; /* 72px für den fixierten Header */
-    min-height: 500px;
+    padding: 8rem 2rem 6rem; /* Adjusted padding for more space */
+    min-height: 600px; /* Adjusted min-height for new navigation */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -52,7 +51,7 @@ Last Update: 2025-07-31
     color: var(--luvex-white);
 }
 
-/* Das Grid-Muster, das alle dunklen Heroes teilen könnten */
+/* Grid pattern overlay for all dark heroes */
 .luvex-hero::before,
 .booking-hero::before,
 .about-hero::before,
@@ -71,13 +70,17 @@ Last Update: 2025-07-31
     z-index: 1;
 }
 
-.luvex-hero__container { /* Wiederverwendbarer Container für den Inhalt */
+.luvex-hero__container {
     position: relative;
     z-index: 2;
     max-width: 900px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.luvex-hero__title { /* Wiederverwendbarer Titel */
+.luvex-hero__title {
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 600;
     color: inherit;
@@ -89,28 +92,104 @@ Last Update: 2025-07-31
     color: var(--luvex-bright-cyan);
 }
 
-.luvex-hero__subtitle { /* Wiederverwendbarer Untertitel */
-    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-    font-weight: 500;
-    color: #e9ecef;
-    margin: 0 0 1.5rem 0;
-    line-height: 1.4;
-}
-
-.luvex-hero__description { /* Wiederverwendbare Beschreibung */
+.luvex-hero__description {
     font-size: var(--text-lg);
     color: #ced4da;
-    margin: 0 auto 2rem auto;
+    margin: 0 auto 2.5rem auto; /* Increased bottom margin */
     line-height: 1.6;
     max-width: 700px;
 }
 
-/* Jetzt die kleinen Modifikatoren.
-   Die erben alles von .luvex-hero und überschreiben nur die Höhe.
-   Wir fügen sie direkt unter dem .luvex-hero ein.
-*/
+/* Hero CTA Container - Buttons untereinander */
+.luvex-hero__cta-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+}
 
-/* Spezifische Höhenanpassungen */
+/* Secondary CTA (Explore UV Science) - oben */
+.luvex-hero__cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 16px 32px;
+    background: transparent;
+    color: var(--luvex-white);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-normal);
+    font-size: var(--text-base);
+    order: 1;
+}
+
+.luvex-hero__cta-secondary:hover {
+    background: var(--luvex-white);
+    color: var(--luvex-dark-blue);
+    border-color: var(--luvex-white);
+    transform: translateY(-2px);
+}
+
+/*
+==============================================================================
+NEU: Hero Navigation (für UV-C Disinfection Seite)
+==============================================================================
+*/
+.hero-navigation {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.hero-navigation__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--luvex-white);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition-normal);
+}
+
+.hero-navigation__link:hover {
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    border-color: var(--luvex-bright-cyan);
+    transform: translateY(-2px);
+}
+
+/* Primary CTA (Launch UV Simulator) - unten + TÜRKIS HOVER TEXT */
+.luvex-hero__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 16px 32px;
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-normal);
+    font-size: var(--text-base);
+    order: 2; /* unten */
+}
+
+.luvex-hero__cta:hover {
+    background: #5ac7e0;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(109, 213, 237, 0.4);
+    color: var(--luvex-bright-cyan); /* ← TÜRKIS TEXT! */
+}
+
+/* Spezifische Höhenanpassungen (wird auf anderen Seiten noch gebraucht) */
 .booking-hero,
 .contact-hero,
 .auth-hero {
@@ -123,20 +202,14 @@ Last Update: 2025-07-31
 
 /*
 ==============================================================================
-HERO: DYNAMIC SPECTRUM ENGINE (NEU)
+HERO: DYNAMIC SPECTRUM ENGINE (FINAL VERSION)
 ==============================================================================
 */
-
 .hero-spectrum-engine {
     position: relative;
     overflow: hidden;
-    padding: calc(72px + 4rem) 2rem 4rem;
-    min-height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #121828; 
-    color: var(--luvex-white);
+    height: 600px; /* Or use vh, e.g., 80vh */
+    background-color: #0B1A3D; 
 }
 
 #spectrum-canvas {
@@ -149,29 +222,48 @@ HERO: DYNAMIC SPECTRUM ENGINE (NEU)
     cursor: none;
 }
 
-.hero-spectrum-engine .hero-content {
+/* Hide the fallback content when JS is active */
+.hero-spectrum-engine .hero-content-fallback {
+   display: none;
+}
+
+.wavelength-indicator {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    z-index: 12;
+    font-family: 'Courier New', monospace;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    pointer-events: none;
+    background: rgba(11, 26, 61, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/*
+==============================================================================
+FIX: UV Curing Hero Layout
+==============================================================================
+*/
+
+/* The main hero container becomes the positioning context */
+.hero-curing {
     position: relative;
-    z-index: 10;
-    text-align: center;
-    max-width: 900px;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: spectrumFadeInUp 1.2s 0.5s ease-out forwards;
-    cursor: none;
 }
 
-.hero-spectrum-engine .hero-content > * {
-    cursor: pointer;
+/* The canvas is positioned absolutely to fill the container, in the background */
+.hero-curing #curing-hero-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Lower z-index */
 }
 
-.hero-spectrum-engine .hero-content h1, 
-.hero-spectrum-engine .hero-content p {
-    cursor: none;
-}
-
-@keyframes spectrumFadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* The text container is positioned relatively on top of the canvas */
+.hero-curing .luvex-hero__container {
+    position: relative;
+    z-index: 2; /* Higher z-index */
 }

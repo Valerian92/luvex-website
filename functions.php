@@ -158,4 +158,6 @@ register_post_type('uv_news', [
     'rewrite' => ['slug' => 'uv-news'],
     'supports' => ['title', 'editor', 'excerpt', 'thumbnail']
 ]);
+
+
 ?>

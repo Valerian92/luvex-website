@@ -8,14 +8,19 @@
  * "glow" effect on mouseover for a high-tech feel.
  *
  * @package Luvex
- * @since 2.2.2
+ * @since 2.2.3
  */
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('LUVEX HERO DEBUG: DOMContentLoaded - Initializing Hexagon Animation.');
+
     const canvas = document.getElementById('particle-canvas');
 
     if (!canvas) {
+        console.error('LUVEX HERO DEBUG: Canvas element with ID "particle-canvas" not found. Animation aborted.');
         return;
     }
+    console.log('LUVEX HERO DEBUG: Canvas element found.', canvas);
+
 
     const ctx = canvas.getContext('2d');
     let vertices = []; // We now call them vertices, as they are corners of the hexagons
@@ -39,6 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (heroSection) {
             canvas.width = heroSection.offsetWidth;
             canvas.height = heroSection.offsetHeight;
+            console.log(`LUVEX HERO DEBUG: Canvas resized to ${canvas.width}x${canvas.height}`);
+        } else {
+            console.warn('LUVEX HERO DEBUG: Hero section ".luvex-hero" not found for resizing.');
         }
     }
 
@@ -101,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 vertices.push(new Vertex(x, y));
             }
         }
+        console.log(`LUVEX HERO DEBUG: Initialized ${vertices.length} vertices for the grid.`);
     }
 
     // Draws the hexagon lines based on vertex positions
@@ -158,14 +167,18 @@ document.addEventListener('DOMContentLoaded', function() {
         if (canvas.width > 0 && canvas.height > 0) {
             init();
             animate();
+            console.log('LUVEX HERO DEBUG: Setup complete. Animation loop started.');
+        } else {
+            console.warn('LUVEX HERO DEBUG: Canvas has zero width or height. Animation not started.');
         }
     }
 
     // --- EVENT LISTENERS ---
     window.addEventListener('resize', setup);
     window.addEventListener('mousemove', (event) => {
-        mouse.x = event.clientX;
-        mouse.y = event.clientY;
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = event.clientX - rect.left;
+        mouse.y = event.clientY - rect.top;
     });
     window.addEventListener('mouseout', () => {
         mouse.x = undefined;

@@ -240,7 +240,8 @@ get_header(); ?>
                 <div class="liability-notice">
                     <h3>⚖️ German Law Notice</h3>
                     <p>
-                        Under German law, liability limitations are subject to statutory restrictions. The following limitations apply to the extent permitted by German law:
+                        Under German law, liability limitations are subject to statutory restrictions.<br>
+                        The following limitations apply to the extent permitted by German law:
                     </p>
                 </div>
                 
@@ -322,7 +323,7 @@ get_header(); ?>
                 
                 <h3>12.2 Jurisdiction</h3>
                 <p>
-                    Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the German courts. For business-to-business transactions, the courts of [Your City], Germany shall have jurisdiction.
+                    Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the German courts. For business-to-business transactions, the courts of Rosenheim, Germany shall have jurisdiction.
                 </p>
                 
                 <h3>12.3 EU Consumer Rights</h3>
@@ -351,7 +352,7 @@ get_header(); ?>
                 </p>
             </div>
             
-            <!-- Contact Information -->
+                <!-- Contact Information -->
             <div class="legal-section">
                 <h2>14. Contact Information</h2>
                 <p>
@@ -361,23 +362,22 @@ get_header(); ?>
                 <div class="privacy-contact-final">
                     <div class="contact-method">
                         <h4><i class="fa-solid fa-envelope"></i> General Inquiries</h4>
-                        <p>contact@luvex.tech</p>
+                        <p>support@luvex.tech</p> <!-- ← GEÄNDERT -->
                     </div>
                     <div class="contact-method">
                         <h4><i class="fa-solid fa-gavel"></i> Legal Matters</h4>
-                        <p>legal@luvex.tech</p>
+                        <p>legal@luvex.tech</p> <!-- ← GEÄNDERT -->
                     </div>
                     <div class="contact-method">
                         <h4><i class="fa-solid fa-map-marker-alt"></i> Business Address</h4>
                         <p>
                             Valerian Huber<br>
-                            [Your Business Address]<br>
-                            [City, Postal Code]<br>
+                            Dahlienweg 11<br>
+                            Großkarolinenfeld, 83109<br>
                             Germany
                         </p>
                     </div>
                 </div>
-                
                 <div class="terms-final-note">
                     <p>
                         <strong>Last Updated:</strong> <?php echo date('F j, Y'); ?><br>

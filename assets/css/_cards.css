@@ -5,7 +5,7 @@ LUVEX THEME v2.1 - CARDS
 
 Description: Styling for all card components.
 Dependencies: _variables.css
-Last Update: 2025-08-02
+Last Update: 2025-08-03
 
 ==============================================================================
 */
@@ -77,11 +77,6 @@ Last Update: 2025-08-02
 }
 
 /* LUVEX Value Card (wiederverwendbar für Services, Features, etc.) */
-/* ================================================================== */
-/* FIX 1: UV Knowledge Navigator - Button-Höhen angleichen.           */
-/* Die Karte wird zum Flex-Container, damit der Button nach unten     */
-/* rücken kann.                                                       */
-/* ================================================================== */
 .value-card {
     background: var(--luvex-white);
     padding: 2.5rem 2rem;
@@ -89,14 +84,18 @@ Last Update: 2025-08-02
     box-shadow: var(--shadow-sm);
     border-top: 4px solid var(--luvex-bright-cyan);
     transition: var(--transition-normal);
-    display: flex; /* Macht die Karte zu einem Flex-Container */
-    flex-direction: column; /* Ordnet die Elemente untereinander an */
-    height: 100%; /* Stellt sicher, dass die Karte die volle Höhe der Grid-Zelle einnimmt */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
-/* Der Button (<a>-Tag) in der Value-Card */
+.value-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
 .value-card .btn {
-    margin-top: auto; /* Magischer Schritt: Schiebt den Button an den unteren Rand */
+    margin-top: auto;
 }
 
 
@@ -112,6 +111,7 @@ Last Update: 2025-08-02
     color: var(--luvex-gray-700);
     margin: 0 0 1.5rem 0;
     line-height: 1.6;
+    flex-grow: 1; /* KORREKTUR: This makes the description area expand, forcing equal card heights. */
 }
 
 .knowledge-list li {
@@ -124,7 +124,7 @@ Last Update: 2025-08-02
     font-size: 1rem;
     font-weight: 600;
     text-align: center;
-    display: inline-flex; /* inline-flex statt flex für korrekte Darstellung */
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     min-height: 48px;

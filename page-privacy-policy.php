@@ -41,7 +41,7 @@ get_header(); ?>
                     <p>
                         <strong>Data Controller:</strong> Valerian Huber<br>
                         <strong>Email:</strong> privacy@luvex.tech<br>
-                        <strong>Address:</strong> [Your Business Address], Germany
+                        <strong>Address:</strong> Dahlienweg 11, 83109 Großkarolinenfeld, Germany
                     </p>
                 </div>
             </div>
@@ -302,8 +302,8 @@ get_header(); ?>
                         <h4><i class="fa-solid fa-map-marker-alt"></i> Address</h4>
                         <p>
                             Valerian Huber<br>
-                            [Your Business Address]<br>
-                            [City, Postal Code]<br>
+                            Dahlienweg 11<br>
+                            Großkarolinenfeld, 83109<br>
                             Germany
                         </p>
                     </div>

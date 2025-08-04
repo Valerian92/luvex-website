@@ -1,22 +1,18 @@
 /*
 ==============================================================================
-LUVEX THEME v2.1 - [DATEINAME]
+LUVEX THEME v2.1 - CTA
 ==============================================================================
 
-Description: [Kurze Beschreibung der Komponente]
+Description: Call-to-Action sections for landing pages and conversion points.
 Dependencies: _variables.css
-Last Update: 2025-07-31
+Last Update: 2025-08-03
 
 ==============================================================================
 */
 
-/* ===== [] ===== */
-
 /* --- 4.16 CTA SYSTEM --- */
-/* Call-to-Action sections for landing pages and conversion points */
-/* Components: .cta-section, .cta-button, .cta-section__title */
 
-/* CTA Section Styling */
+/* Default CTA Section Styling */
 .cta-section {
     text-align: center;
     background: var(--luvex-white);
@@ -43,6 +39,20 @@ Last Update: 2025-07-31
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+}
+
+/* Dark CTA Section Modifier */
+.cta-section--dark {
+    background: var(--luvex-dark-blue);
+    color: var(--luvex-white);
+}
+
+.cta-section--dark h3 {
+    color: var(--luvex-white);
+}
+
+.cta-section--dark p {
+    color: var(--luvex-gray-300);
 }
 
 .cta-section .cta-button {
@@ -96,8 +106,3 @@ Last Update: 2025-07-31
         justify-content: center;
     }
 }
-
-/* --- 4.16 END --- */
-
-
-/* ===== END [SECTION NAME] ===== */

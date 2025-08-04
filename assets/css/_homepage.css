@@ -131,9 +131,11 @@ Last Update: 2025-08-02
     background-color: var(--luvex-dark-blue);
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="c" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M 8 0 L 0 0 0 8" fill="none" stroke="rgba(109, 213, 237, 0.05)" stroke-width="0.2"/></pattern></defs><rect width="100%" height="100%" fill="url(%23c)"/></svg>');
     padding: 6rem 0;
-    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: hidden; /* Verhindert horizontale Scrollbar */
     position: relative;
 }
+
 
 .homepage-community-container {
     max-width: 1400px;
@@ -152,7 +154,7 @@ Last Update: 2025-08-02
     z-index: 2;
 }
 
-css.homepage-community-visual {
+.homepage-community-visual {
     flex: 1.3; /* Mehr Platz für Globe */
     display: flex;
     align-items: center;
@@ -166,14 +168,14 @@ css.homepage-community-visual {
 /* Die max-width wurde von 600px auf 750px erhöht.                    */
 /* ================================================================== */
 .homepage-community-globe-wrapper {
-    width: 900px;
-    height: 900px;
+    width: 120%;
+    height: 120%;
     position: absolute;
-    right: -450px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
+    left: 25%; /* Weiter links: 35% → 25% */
+    top: -10%;
+    z-index: 0;
 }
+
 .homepage-community-title {
     color: var(--luvex-white);
     font-size: clamp(2.4rem, 4.5vw, 3.2rem);
@@ -185,16 +187,14 @@ css.homepage-community-visual {
 .homepage-community-title .text-highlight {
     color: var(--luvex-bright-cyan);
 }
-/* Text-Container über Globe legen */
+
+
 .homepage-community-content {
+    flex: 1;
+    min-width: 50%;
+    text-align: left;
     position: relative;
     z-index: 10;
-}
-
-/* Section kann Globe oben/unten abschneiden */
-.homepage-community-section {
-    overflow-x: visible; /* Globe darf rechts rausragen */
-    overflow-y: hidden;  /* Globe wird oben/unten abgeschnitten */
 }
 
 
@@ -328,18 +328,67 @@ css.homepage-community-visual {
     padding: 2.5rem;
     color: var(--luvex-white);
     text-align: center;
+    box-shadow: var(--shadow-lg); /* Fügt einen subtilen Schatten für mehr Tiefe hinzu */
+    transition: var(--transition-normal);
 }
 
+.featured-expert-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl); /* Verstärkter Effekt beim Hover */
+}
+
+/* Stellt sicher, dass das Foto perfekt rund und positioniert ist */
 .featured-expert-card .team-member__photo {
-    margin: 0 auto 1rem auto;
-    width: 100px;
-    height: 100px;
+    margin: 0 auto 1.5rem auto; /* Mehr Abstand nach unten */
+    width: 120px; /* Etwas größer für mehr Präsenz */
+    height: 120px;
+    border-radius: 50%; /* Stellt die runde Form sicher */
+    border: 4px solid var(--luvex-bright-cyan); /* Markenkonformer Rand */
+    overflow: hidden; /* Verhindert, dass das Bild über den Rand hinausragt */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.featured-expert-card .team-member__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Stellt sicher, dass das Bild den Kreis ausfüllt */
 }
 
 .featured-expert-card .team-member__content h3 {
     color: var(--luvex-white);
+    font-size: 1.5rem; /* Größere Schrift für den Namen */
+    margin-bottom: 0.25rem;
 }
 
+.featured-expert-card .team-member__content .team-member__role {
+    color: var(--luvex-bright-cyan); /* Hebt die Rolle farblich hervor */
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+/* Styling für das Zitat für bessere Lesbarkeit */
+.featured-expert-card .team-member__quote p {
+    font-style: italic;
+    color: var(--luvex-gray-300);
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 300px; /* Begrenzt die Breite für eine angenehme Zeilenlänge */
+    margin: 0 auto;
+    position: relative;
+    padding: 0 1rem;
+}
+
+/* Dekorative Anführungszeichen für das Zitat */
+.featured-expert-card .team-member__quote p::before {
+    content: '“';
+    position: absolute;
+    left: -5px;
+    top: -10px;
+    font-size: 2.5rem;
+    color: var(--luvex-bright-cyan);
+    opacity: 0.4;
+}
 
 /* ============================================================================ */
 /* FIX 5: STYLING FÜR "READY TO MASTER" (FINAL CTA) SEKTION                   */

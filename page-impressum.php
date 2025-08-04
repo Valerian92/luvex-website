@@ -41,8 +41,8 @@ get_header(); ?>
                     <div class="legal-info-item">
                         <h3>Business Address</h3>
                         <p>
-                            [Ihre Geschäftsadresse]<br>
-                            [PLZ] [Stadt]<br>
+                            Dahlienweg 11<br>
+                            83109 Großkarolinenfeld<br>
                             Germany
                         </p>
                     </div>
@@ -50,8 +50,8 @@ get_header(); ?>
                     <div class="legal-info-item">
                         <h3>Contact Information</h3>
                         <p>
-                            <strong>Email:</strong> contact@luvex.tech<br>
-                            <strong>Phone:</strong> [Ihre Telefonnummer]<br>
+                            <strong>Email:</strong> support@luvex.tech<br>
+                            <strong>Phone:</strong> 0174 3122 674<br>
                             <strong>Privacy Issues:</strong> privacy@luvex.tech
                         </p>
                     </div>
@@ -62,8 +62,8 @@ get_header(); ?>
             <div class="legal-section">
                 <h2>Tax Information</h2>
                 <p>
-                    <strong>VAT ID:</strong> [Ihre USt-IdNr. falls vorhanden]<br>
-                    <strong>Tax Number:</strong> [Ihre Steuernummer]
+                    <strong>VAT ID:</strong> DE453549559<br>
+                    <strong>Tax Number:</strong> 156/231/54367
                 </p>
             </div>
             
@@ -73,7 +73,7 @@ get_header(); ?>
                 <p>
                     <strong>Business Activity:</strong> UV Technology Consulting & Engineering Services<br>
                     <strong>Professional Title:</strong> Mechanical Engineer (Germany)<br>
-                    <strong>Regulatory Authority:</strong> Gewerbeamt [Ihre Stadt]
+                    <strong>Regulatory Authority:</strong> Gewerbeamt Großkarolinenfeld
                 </p>
             </div>
             
@@ -82,8 +82,8 @@ get_header(); ?>
                 <h2>Responsible for Content (§55 Abs. 2 RStV)</h2>
                 <p>
                     Valerian Huber<br>
-                    [Geschäftsadresse]<br>
-                    [PLZ] [Stadt], Germany
+                    Dahlienweg 11<br>
+                    83109 Großkarolinenfeld, Germany
                 </p>
             </div>
             

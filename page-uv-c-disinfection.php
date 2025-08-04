@@ -1,22 +1,19 @@
 <?php
 /**
- * UV-C Disinfection Page
+ * Template Name: UV-C Disinfection
  * @package Luvex
  */
 get_header(); ?>
 
 <!-- ==========================================================================
-     START: Neuer Hero-Bereich mit Animations-Container
+     START: UV-C Disinfection Hero Section
      ========================================================================== -->
-<section class="luvex-hero">
+<section class="luvex-hero uvc-hero">
     
-    <!-- Dieser Container ist für die CSS/JS-Animation im Hintergrund -->
     <div class="animation-background" id="disinfection-animation-container">
         <div class="pulse"></div>
-        <!-- Die Partikel (Pathogene) werden hier per JavaScript eingefügt -->
     </div>
 
-    <!-- Der bisherige Inhalt wird zum Overlay über der Animation -->
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
             <h1 class="luvex-hero__title">
@@ -26,27 +23,283 @@ get_header(); ?>
                 Advanced germicidal solutions for water, air, and surface treatment
             </h2>
             <p class="luvex-hero__description">
-                Master UV-C technology for effective pathogen inactivation across all applications.
+                Navigate through our core applications to find the perfect UV-C solution for your specific needs.
             </p>
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-hero__cta">
-                <i class="fa-solid fa-virus-slash"></i>
-                <span>Explore UV-C Solutions</span>
-            </a>
+            <nav class="hero-navigation">
+                <a href="#applications-air" class="hero-navigation__link">
+                    <i class="fa-solid fa-wind"></i>
+                    <span>Air Disinfection</span>
+                </a>
+                <a href="#applications-surface" class="hero-navigation__link">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span>Surface Treatment</span>
+                </a>
+                <a href="#applications-water" class="hero-navigation__link">
+                    <i class="fa-solid fa-droplet"></i>
+                    <span>Water Purification</span>
+                </a>
+            </nav>
         </div>
     </div>
 </section>
 <!-- ==========================================================================
-     ENDE: Neuer Hero-Bereich
+     END: Hero Section
      ========================================================================== -->
 
-
-<section class="section">
+<!-- ==========================================================================
+     START: How It Works Section with DNA Animation
+     ========================================================================== -->
+<section class="section science-section">
     <div class="container">
-        <h2 class="text-center">UV-C Applications</h2>
-        <div class="grid-3">
-            <!-- Content to be added -->
+        <h2 class="text-center">How UV-C Inactivates Pathogens</h2>
+        <div class="grid-2">
+            <div class="dna-animation-container">
+                <!-- DNA Helix Animation -->
+                <div class="dna-helix-wrapper">
+                    <div class="dna-strand">
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                        <div class="dna-base-pair"></div>
+                    </div>
+                    
+                    <!-- UV-C Wave -->
+                    <div class="uvc-wave"></div>
+                    
+                    <!-- Damage Indicator -->
+                    <div class="dna-damage-indicator">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                </div>
+                
+                <!-- Pathogen Counter -->
+                <div class="pathogen-counter">
+                    <div class="counter-label">Pathogens Inactivated</div>
+                    <div class="counter-number" id="pathogen-count">0</div>
+                </div>
+            </div>
+            <div>
+                <ul class="science-steps">
+                    <li class="science-step">
+                        <div class="science-step__number">1</div>
+                        <div class="science-step__content">
+                            <h3>Energy Absorption</h3>
+                            <p>UV-C light at 254nm is emitted. The DNA and RNA of microorganisms absorb this high-energy light.</p>
+                        </div>
+                    </li>
+                    <li class="science-step">
+                        <div class="science-step__number">2</div>
+                        <div class="science-step__content">
+                            <h3>Thymine Dimerization</h3>
+                            <p>The absorbed energy causes adjacent thymine bases in the DNA strand to fuse, forming "thymine dimers".</p>
+                        </div>
+                    </li>
+                    <li class="science-step">
+                        <div class="science-step__number">3</div>
+                        <div class="science-step__content">
+                            <h3>Code Becomes Unreadable</h3>
+                            <p>These dimers create kinks in the DNA structure, making the genetic code unreadable for the cell's replication machinery.</p>
+                        </div>
+                    </li>
+                    <li class="science-step">
+                        <div class="science-step__number">4</div>
+                        <div class="science-step__content">
+                            <h3>Inactivation</h3>
+                            <p>Unable to replicate, the microorganism is rendered harmless and effectively "inactivated" or killed.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
+<!-- ==========================================================================
+     END: How It Works Section
+     ========================================================================== -->
+
+
+<main>
+    <!-- Air Disinfection Section -->
+    <section id="applications-air" class="section applications-section">
+        <div class="container">
+            <h2 class="text-center"><i class="fa-solid fa-wind"></i>Air Disinfection</h2>
+            <div class="grid-2">
+                <div class="value-card">
+                    <h3 class="value-card__title">In-Duct Systems</h3>
+                    <p class="value-card__description">Integration of UV-C lamps directly into HVAC systems for continuous disinfection of circulating air and prevention of biofilm on cooling coils.</p>
+                    <div class="card-benefits">
+                        <ul class="card-benefits__list">
+                            <li class="card-benefits__item"><i class="fa-solid fa-check"></i>Reduces airborne viruses and bacteria.</li>
+                            <li class="card-benefits__item"><i class="fa-solid fa-check"></i>Improves overall Indoor Air Quality (IAQ).</li>
+                            <li class="card-benefits__item"><i class="fa-solid fa-check"></i>No direct exposure to occupants.</li>
+                        </ul>
+                        <details class="details-accordion__item">
+                            <summary class="details-accordion__summary">
+                                <span>Read technical details</span>
+                                <i class="fa-solid fa-chevron-right icon"></i>
+                            </summary>
+                            <div class="details-accordion__content">This method is highly effective for reducing the microbial load in the entire building's air supply, contributing to a healthier environment in offices and public spaces.</div>
+                        </details>
+                    </div>
+                </div>
+                <div class="value-card">
+                    <h3 class="value-card__title">Upper-Room GUV</h3>
+                    <p class="value-card__description">Specially shielded UV-C fixtures are installed high in a room. Natural air convection circulates air into the upper disinfection zone.</p>
+                    <div class="card-benefits">
+                        <ul class="card-benefits__list">
+                            <li class="card-benefits__item"><i class="fa-solid fa-check"></i>Safe for use in occupied spaces.</li>
+                            <li class="card-benefits__item"><i class="fa-solid fa-check"></i>Highly effective in rooms with high ceilings.</li>
+                            <li class="card-benefits__item"><i class="fa-solid fa-check"></i>Ideal for hospitals and waiting rooms.</li>
+                        </ul>
+                        <details class="details-accordion__item">
+                            <summary class="details-accordion__summary">
+                                <span>Read technical details</span>
+                                <i class="fa-solid fa-chevron-right icon"></i>
+                            </summary>
+                            <div class="details-accordion__content">Upper-Room Germicidal Ultraviolet (GUV) creates a constantly disinfected air zone, significantly lowering the risk of person-to-person transmission in crowded areas.</div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Surface Treatment Section -->
+    <section id="applications-surface" class="section">
+        <div class="container">
+            <h2 class="text-center"><i class="fa-solid fa-layer-group"></i>Surface Treatment</h2>
+            <div class="grid-2">
+                <div class="value-card">
+                    <h3 class="value-card__title">Mobile Disinfection Robots</h3>
+                    <p class="value-card__description">Autonomous or manually controlled devices used for high-intensity disinfection of all directly irradiated surfaces after a room has been vacated.</p>
+                     <div class="card-benefits">
+                        <ul class="card-benefits__list">
+                            <li class="card-benefits__item"><i class="fa-solid fa-check"></i>High UV-C dose for rapid inactivation.</li>
+                            <li class="card-benefits__item"><i class="fa-solid fa-check"></i>Loggable cycles for quality management.</li>
+                            <li class="card-benefits__item"><i class="fa-solid fa-check"></i>Reduces the use of chemical disinfectants.</li>
+                        </ul>
+                        <details class="details-accordion__item">
+                            <summary class="details-accordion__summary">
+                                <span>Read technical details</span>
+                                <i class="fa-solid fa-chevron-right icon"></i>
+                            </summary>
+                            <div class="details-accordion__content">Ideal for terminal cleaning in patient rooms, operating theaters, and labs, ensuring a thoroughly disinfected environment and preventing cross-contamination.</div>
+                        </details>
+                    </div>
+                </div>
+                <div class="value-card">
+                    <h3 class="value-card__title">Conveyor Belt Disinfection</h3>
+                    <p class="value-card__description">UV-C modules installed over conveyor belts in the food industry or logistics to disinfect products and packaging materials as they pass through.</p>
+                    <div class="card-benefits">
+                        <ul class="card-benefits__list">
+                            <li class="card-benefits__item"><i class="fa-solid fa-check"></i>Extends the shelf life of food products.</li>
+                            <li class="card-benefits__item"><i class="fa-solid fa-check"></i>Prevents cross-contamination in production.</li>
+                            <li class="card-benefits__item"><i class="fa-solid fa-check"></i>Dry, chemical-free process with no residue.</li>
+                        </ul>
+                        <details class="details-accordion__item">
+                            <summary class="details-accordion__summary">
+                                <span>Read technical details</span>
+                                <i class="fa-solid fa-chevron-right icon"></i>
+                            </summary>
+                            <div class="details-accordion__content">A critical control point in food safety, this application helps maintain the quality and safety of products from production to packaging without altering their properties.</div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Water Purification Section -->
+    <section id="applications-water" class="section applications-section">
+        <div class="container">
+            <h2 class="text-center"><i class="fa-solid fa-droplet"></i>Water Purification</h2>
+            <div class="grid-2">
+                <div class="value-card">
+                    <h3 class="value-card__title">Drinking Water (PoE/PoU)</h3>
+                    <p class="value-card__description">Point-of-Entry (central) or Point-of-Use (e.g., at the tap) systems to ensure microbiologically safe drinking water, often as a final barrier.</p>
+                    <div class="card-benefits">
+                        <ul class="card-benefits__list">
+                            <li class="card-benefits__item"><i class="fa-solid fa-check"></i>Inactivates chlorine-resistant pathogens.</li>
+                            <li class="card-benefits__item"><i class="fa-solid fa-check"></i>Does not alter water taste or odor.</li>
+                            <li class="card-benefits__item"><i class="fa-solid fa-check"></i>Low operating costs and maintenance.</li>
+                        </ul>
+                        <details class="details-accordion__item">
+                            <summary class="details-accordion__summary">
+                                <span>Read technical details</span>
+                                <i class="fa-solid fa-chevron-right icon"></i>
+                            </summary>
+                            <div class="details-accordion__content">UV-C is effective against protozoa like Cryptosporidium and Giardia, which are highly resistant to chemical disinfectants, providing robust protection.</div>
+                        </details>
+                    </div>
+                </div>
+                <div class="value-card">
+                    <h3 class="value-card__title">Process Water Disinfection</h3>
+                    <p class="value-card__description">Used in industries (pharma, cosmetics, beverages) requiring high-purity water. UV-C is used for disinfection and TOC reduction.</p>
+                    <div class="card-benefits">
+                        <ul class="card-benefits__list">
+                            <li class="card-benefits__item"><i class="fa-solid fa-check"></i>Ensures consistent microbial quality.</li>
+                            <li class="card-benefits__item"><i class="fa-solid fa-check"></i>Prevents biofilm formation in pipes.</li>
+                            <li class="card-benefits__item"><i class="fa-solid fa-check"></i>Effective for de-ozonation.</li>
+                        </ul>
+                         <details class="details-accordion__item">
+                            <summary class="details-accordion__summary">
+                                <span>Read technical details</span>
+                                <i class="fa-solid fa-chevron-right icon"></i>
+                            </summary>
+                            <div class="details-accordion__content">In high-purity applications, UV-C at 185nm wavelength is also used to break down Total Organic Carbon (TOC), a critical parameter in pharmaceutical water systems.</div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<section class="section cta-section">
+    <div class="container">
+        <h3>Have a specific requirement?</h3>
+        <p>Every application is unique. Our team of experts analyzes your processes and develops a custom UV-C solution tailored precisely to your needs.</p>
+        <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-cta-primary">
+            <i class="fa-solid fa-flask-vial"></i>
+            <span>Discuss Your Project</span>
+        </a>
+    </div>
+</section>
+
+<script>
+// Pathogen Counter Animation
+document.addEventListener('DOMContentLoaded', function() {
+    let count = 0;
+    const counter = document.getElementById('pathogen-count');
+    const targetCount = 99.9;
+    
+    // Start counter after animation begins
+    setTimeout(() => {
+        const interval = setInterval(() => {
+            count += 2.3;
+            if (count >= targetCount) {
+                count = targetCount;
+                clearInterval(interval);
+            }
+            counter.textContent = count.toFixed(1) + '%';
+        }, 50);
+    }, 2000);
+});
+</script>
 
 <?php get_footer(); ?>

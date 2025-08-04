@@ -25,14 +25,14 @@ get_header(); ?>
                 From water disinfection to precision curing - master UV technology with the world's leading specialists.
                 Independent consulting, advanced simulations, and proven results.
             </p>
-            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-top: 2.5rem;">
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="luvex-cta-primary">
-                    <i class="fas fa-cube"></i>
-                    <span>Launch UV Simulator</span>
-                </a>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="luvex-cta-secondary">
+            <div class="luvex-hero__cta-container">
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="luvex-hero__cta-secondary">
                     <i class="fas fa-atom"></i>
                     <span>Explore UV Science</span>
+                </a>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="luvex-hero__cta luvex-cta-primary">
+                    <i class="fas fa-cube"></i>
+                    <span>Launch UV Simulator</span>
                 </a>
             </div>
         </div>
@@ -245,25 +245,21 @@ get_header(); ?>
                         </div>
                     </li>
                 </ul>
-                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="btn btn--primary" style="margin-top: 1.5rem;">
+                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="btn btn--primary" style="margin-top: 2rem;">
                     Our Scientific Approach
                 </a>
             </div>
             <div class="evidence-visual">
                 <div class="featured-expert-card">
                     <div class="team-member__photo">
-                        <!-- ERSETZE DIESEN LINK mit der URL zu deinem Foto -->
-                        <img src="https://placehold.co/120x120/e9ecef/1B2A49?text=Ihr+Foto" alt="Foto von [Dein Name]">
+                        <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Bewerbungsbild_Valerian-Huber.jpg" alt="Photo of Valerian Huber">
                     </div>
                     <div class="team-member__content">
-                        <!-- ERSETZE DIESEN NAMEN -->
-                        <h3>Dein Name</h3>
-                        <!-- ERSETZE DIESE ROLLE -->
+                        <h3>Valerian Huber</h3>
                         <p class="team-member__role">Founder & UV Technology Expert</p>
                     </div>
                     <div class="team-member__quote">
-                        <!-- ERSETZE DIESES ZITAT mit einem persönlichen Statement -->
-                        <p>"Mein Ziel ist es, die Komplexität der UV-Technologie für jeden zugänglich zu machen. Echte Innovation entsteht durch fundiertes Wissen, nicht durch Raten."</p>
+                        <p>"My goal is to make the complexity of UV technology accessible to everyone. True innovation comes from substantiated knowledge, not from guesswork."</p>
                     </div>
                 </div>
             </div>

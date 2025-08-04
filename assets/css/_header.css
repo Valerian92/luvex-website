@@ -78,7 +78,7 @@ Last Update: 2025-07-31
     max-height: 40px;
     width: auto;
     display: block;
-    margin-left: -300px; /* Logo weiter nach links */
+    margin-left: -245px; /* Überschreibt bestehende Regel *//* Logo weiter nach links */
 }
 
 .header-cta-button {
@@ -94,7 +94,7 @@ Last Update: 2025-07-31
 
 /* Header CTA Positioning */
 .header-cta {
-    margin-right: -160px; /* CTA Button weiter nach rechts */
+    margin-right: -290px; /* CTA Button weiter nach rechts */
 }
 
 .header-cta-button:hover {
@@ -102,14 +102,9 @@ Last Update: 2025-07-31
     color: var(--color-white);
 }
 
-/* Extended Header Positioning */
-.header-cta {
-    margin-right: -160px;
-}
 
-.site-branding .custom-logo {
-    margin-left: -300px; /* Überschreibt bestehende Regel */
-}
+
+
 /* Mobile Menu Button - nur auf Mobile */
 .mobile-menu-toggle {
     display: none;
@@ -137,8 +132,9 @@ Last Update: 2025-07-31
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 2rem;
+    gap: 3.7rem;
     position: relative;
+    margin-left: -150px;
 }
 
 
