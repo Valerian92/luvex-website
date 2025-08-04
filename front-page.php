@@ -10,9 +10,7 @@ get_header(); ?>
 
 <!-- Hero Section -->
 <section class="luvex-hero">
-    <!-- Canvas Element für die Partikel-Animation mit neuer, eindeutiger ID -->
     <canvas id="homepage-hero-canvas"></canvas>
-
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
             <h1 class="luvex-hero__title">
@@ -39,22 +37,16 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- UV Knowledge Navigator - Section 2 (Jetzt direkt nach Hero) -->
-<!-- Übergang von Hell (Hero) zu Türkis -->
+<!-- UV Knowledge Navigator -->
 <section class="section section--turquoise-light knowledge-navigator-section diagonal-transition">
-    
     <div class="container container--medium"> 
-        
         <div class="knowledge-navigator-header">
             <h2 class="text-center">UV Knowledge Navigator</h2>
             <p class="knowledge-navigator-intro">
                 Your pathway to UV expertise - from fundamentals to advanced applications
             </p>
         </div>
-
         <div class="grid-3 knowledge-navigator">
-            
-            <!-- Karten bleiben unverändert -->
             <div class="value-card knowledge-card">
                 <div class="knowledge-card__header">
                     <div class="value-card__icon"><i class="fas fa-atom"></i></div>
@@ -99,7 +91,6 @@ get_header(); ?>
 </section>
 
 <!-- Interactive UV Simulator Showcase -->
-<!-- Übergang von Türkis zu Dunkelblau -->
 <section class="section precision-transition">
     <div class="container" style="max-width: 1200px; margin: 0 auto;">
         <div class="uv-simulator-showcase">
@@ -123,8 +114,8 @@ get_header(); ?>
 </section>
 
 <!-- GLOBAL UV EXPERT COMMUNITY SEKTION -->
-<!-- Übergang von Dunkelblau zu Weiß -->
-<section class="section homepage-community-section curved-transition">
+<!-- ÄNDERUNG: Die Klasse 'curved-transition' wurde entfernt -->
+<section class="section homepage-community-section">
     <div class="homepage-community-container">
         <div class="homepage-community-content">
             <h2 class="homepage-community-title">Building the Global <span class="text-highlight">UV Network</span></h2>
@@ -147,7 +138,6 @@ get_header(); ?>
 </section>
 
 <!-- Evidence-Based Expertise Section -->
-<!-- Übergang von Weiß zu Dunkelblau -->
 <section class="section evidence-section layered-transition">
     <div class="container container--narrow">
         <div class="evidence-grid">
