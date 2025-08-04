@@ -6,10 +6,20 @@
  * @version 2.2
  */
 
+console.log('🔥 LUVEX DEBUG: UV LED Animation script loaded!');
+
 class UVLEDConvergence {
     constructor() {
+        console.log('🎯 LUVEX DEBUG: UVLEDConvergence constructor called');
+        
         this.canvas = document.getElementById('uv-led-canvas');
-        if (!this.canvas) return;
+        console.log('🖼️ LUVEX DEBUG: Canvas element:', this.canvas);
+        
+        if (!this.canvas) {
+            console.error('❌ LUVEX ERROR: Canvas element #uv-led-canvas not found!');
+            return;
+        }
+        console.log('✅ LUVEX DEBUG: Canvas found, initializing animation...');
         
         this.ctx = this.canvas.getContext('2d');
         this.mouse = { x: 0.5, y: 0.5 };
@@ -44,11 +54,21 @@ class UVLEDConvergence {
     }
 
     init() {
+        console.log('🔧 LUVEX DEBUG: Starting initialization...');
         this.resize();
+        console.log('📏 LUVEX DEBUG: Canvas resized to:', this.canvas.width, 'x', this.canvas.height);
+        
         this.createLEDs();
+        console.log('💡 LUVEX DEBUG: Created', this.leds.length, 'LEDs');
+        
         this.createControls();
+        console.log('🎛️ LUVEX DEBUG: Controls created');
+        
         this.bindEvents();
+        console.log('🔗 LUVEX DEBUG: Events bound');
+        
         this.animate();
+        console.log('🎬 LUVEX DEBUG: Animation started');
     }
 
     resize() {
@@ -388,8 +408,29 @@ class UVLEDConvergence {
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('🚀 LUVEX DEBUG: DOM loaded, checking for UV LED canvas...');
+    
+    // Check if we're on the right page
+    const canvas = document.getElementById('uv-led-canvas');
+    console.log('🎯 LUVEX DEBUG: Canvas check result:', canvas);
+    
+    // Check page URL
+    console.log('📍 LUVEX DEBUG: Current page URL:', window.location.href);
+    console.log('📍 LUVEX DEBUG: Page pathname:', window.location.pathname);
+    
     // Only initialize on UV LED page
-    if (document.getElementById('uv-led-canvas')) {
-        new UVLEDConvergence();
+    if (canvas) {
+        console.log('✅ LUVEX DEBUG: Initializing UV LED Animation...');
+        const animation = new UVLEDConvergence();
+        console.log('🎬 LUVEX DEBUG: Animation instance created:', animation);
+    } else {
+        console.log('❌ LUVEX DEBUG: Canvas not found - animation not initialized');
+        
+        // Let's check what elements we do have
+        const heroSection = document.querySelector('.luvex-hero');
+        console.log('🔍 LUVEX DEBUG: Hero section found:', heroSection);
+        
+        const allCanvases = document.querySelectorAll('canvas');
+        console.log('🔍 LUVEX DEBUG: All canvas elements on page:', allCanvases);
     }
 });

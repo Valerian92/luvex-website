@@ -433,4 +433,34 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+
+<!-- DEBUG: UV LED Animation Test -->
+<script>
+console.log('🔥 LUVEX DEBUG: Inline script loaded!');
+console.log('📍 Current URL:', window.location.href);
+console.log('🎯 Canvas element:', document.getElementById('uv-led-canvas'));
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 DOM loaded - checking canvas...');
+    const canvas = document.getElementById('uv-led-canvas');
+    console.log('Canvas found:', canvas);
+    
+    if (canvas) {
+        console.log('✅ Canvas dimensions:', canvas.width, 'x', canvas.height);
+        const ctx = canvas.getContext('2d');
+        
+        // Simple test animation
+        ctx.fillStyle = '#6dd5ed';
+        ctx.fillRect(10, 10, 100, 50);
+        ctx.fillStyle = 'white';
+        ctx.font = '16px Arial';
+        ctx.fillText('LED Animation Loaded!', 20, 35);
+        
+        console.log('✅ Test animation drawn!');
+    } else {
+        console.error('❌ Canvas not found!');
+    }
+});
+</script>
+
 <?php get_footer(); ?>
