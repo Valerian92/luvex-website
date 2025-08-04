@@ -3,13 +3,14 @@
  * About Page Template
  * 
  * @package Luvex
- * @since 2.0.0
+ * @since 2.2.4
  */
 
 get_header(); ?>
 
-<!-- About Hero Section -->
-<section class="luvex-hero">
+<!-- About Hero Section with Interactive Parallax Animation -->
+<section class="luvex-hero about-hero">
+    <!-- Animation wird via JavaScript hinzugefügt -->
     <div class="luvex-hero__container">
         <h1 class="luvex-hero__title">
             About <span class="text-highlight">LUVEX</span> - Your Independent UV Technology Partners
@@ -117,7 +118,6 @@ get_header(); ?>
     </div>
 </section>
 
-
 <!-- Core Values Section -->
 <section class="core-values">
     <div class="core-values__container">
@@ -165,12 +165,12 @@ get_header(); ?>
 <!-- Team Section -->
 <section class="team-section">
     <div class="team-section__container">
-            <div class="team-section__header">
+        <div class="team-section__header">
             <h2 class="team-section__title">Meet Your UV Technology Team</h2>
             <p class="team-section__description">
                 Meet the experts behind LUVEX - real experience, genuine passion for UV technology advancement
             </p>
-            </div>
+        </div>
         
         <div class="team-section__grid grid grid-2">
             <!-- Team Member 1 -->
@@ -351,8 +351,6 @@ get_header(); ?>
         </div>
     </div>
 </section>
-
-
 
 <!-- CTA Section -->
 <section class="about-cta">

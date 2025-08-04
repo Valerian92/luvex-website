@@ -115,6 +115,14 @@ function luvex_enqueue_assets() {
         wp_enqueue_script('luvex-globe', get_stylesheet_directory_uri() . '/assets/js/globe-animation.js', array('three-js'), $globe_js_version, true);
 
     } 
+    elseif ( is_page('about') ) {
+        // Lade About Hero Parallax Animation
+        $about_hero_js_path = get_stylesheet_directory() . '/assets/js/hero-about-interactive.js';
+        if (file_exists($about_hero_js_path)) {
+            $about_hero_js_version = filemtime($about_hero_js_path);
+            wp_enqueue_script('luvex-hero-about', get_stylesheet_directory_uri() . '/assets/js/hero-about-interactive.js', array(), $about_hero_js_version, true);
+        }
+    }
     elseif ( is_page('uv-curing') ) {
         // Lade interaktive Partikel-Animation für die UV Curing Seite
         $curing_js_path = get_stylesheet_directory() . '/assets/js/hero-curing-interactive.js';

@@ -1,161 +1,175 @@
-/**
- * LUVEX Theme - Interactive Curing Grid Animation
- *
- * This script creates a grid of particles that warp and bend in response
- * to mouse movement, creating a "lens" or "gravity" effect. It replaces
- * the static hexagon grid for the UV Curing page hero.
- *
- * @package Luvex
- * @since 2.2.3
- */
 document.addEventListener('DOMContentLoaded', function() {
-    // Target the specific canvas for the curing page hero
     const canvas = document.getElementById('curing-hero-canvas');
-
-    if (!canvas) {
-        return;
-    }
+    if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
-    let particles = [];
-    let animationFrameId;
+    const heroSection = document.querySelector('.hero-curing');
+    const ctaButton = document.querySelector('.hero-curing .luvex-cta-primary');
+    if (!heroSection || !ctaButton) return;
 
-    // --- CONFIGURATION ---
-    const gridSpacing = 35; // Distance between particles
-    const particleRadius = 2;
-    const particleColor = 'rgba(109, 213, 237, 0.8)'; // Luvex Bright Cyan
-    const lineColor = 'rgba(109, 213, 237, 0.15)';
+    let width, height, hexagons = [];
+    let isHoveringButton = false;
 
-    let mouse = {
+    const mouse = {
         x: undefined,
         y: undefined,
-        radius: 150 // The radius of the distortion effect
+        radius: 80 // Radius of the curing light effect
     };
 
-    // --- UTILITY ---
-    function resizeCanvas() {
-        const heroSection = document.querySelector('.hero-curing');
-        if (heroSection) {
-            canvas.width = heroSection.offsetWidth;
-            canvas.height = heroSection.offsetHeight;
-        }
-    }
+    const hexSize = 20; // Smaller hexagons for a finer grid
+    const lerp = (start, end, amt) => (1 - amt) * start + amt * end;
 
-    // --- PARTICLE CLASS ---
-    class Particle {
+    class Hexagon {
         constructor(x, y) {
             this.x = x;
             this.y = y;
-            this.originX = x; // Store original position
+            this.originX = x;
             this.originY = y;
-            this.size = particleRadius;
-            this.dx = 0; // displacement x
-            this.dy = 0; // displacement y
+            this.curedAmount = 0; // 0 = liquid, 1 = fully cured
+            this.noiseSeed = Math.random() * 1000;
         }
 
-        update() {
-            // Calculate distance to the mouse
-            const dx_mouse = this.x - mouse.x;
-            const dy_mouse = this.y - mouse.y;
-            const distance = Math.sqrt(dx_mouse * dx_mouse + dy_mouse * dy_mouse);
+        update(increment) {
+            const dx = this.originX - mouse.x;
+            const dy = this.originY - mouse.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
 
-            if (distance < mouse.radius) {
-                // The mouse is close, create the "bending" effect
-                const force = (mouse.radius - distance) / mouse.radius;
-                const angle = Math.atan2(dy_mouse, dx_mouse);
-                // Push the particle away from the mouse
-                this.dx = Math.cos(angle) * force * 25; // 25 is the max displacement
-                this.dy = Math.sin(angle) * force * 25;
-            } else {
-                // Mouse is far, return to origin
-                this.dx = 0;
-                this.dy = 0;
+            if (distance < mouse.radius && mouse.x !== undefined) {
+                // Increase cured amount when mouse is near, it's permanent
+                this.curedAmount = Math.min(1, this.curedAmount + 0.05);
             }
-
-            // Apply displacement smoothly
-            this.x = this.originX + this.dx;
-            this.y = this.originY + this.dy;
+            
+            // The "swimming" effect only happens if the hexagon is not fully cured
+            if (this.curedAmount < 1) {
+                const wobbleFactor = (1 - this.curedAmount) * 2;
+                this.x = this.originX + Math.sin(increment * 0.5 + this.noiseSeed) * wobbleFactor;
+                this.y = this.originY + Math.cos(increment * 0.5 + this.noiseSeed) * wobbleFactor;
+            } else {
+                // If cured, lock to origin position
+                this.x = this.originX;
+                this.y = this.originY;
+            }
         }
 
         draw() {
-            ctx.fillStyle = particleColor;
             ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            const firstVertexX = this.x + hexSize * Math.cos(0);
+            const firstVertexY = this.y + hexSize * Math.sin(0);
+            ctx.moveTo(firstVertexX, firstVertexY);
+
+            for (let i = 1; i < 6; i++) {
+                const angle = (Math.PI / 3) * i;
+                ctx.lineTo(this.x + hexSize * Math.cos(angle), this.y + hexSize * Math.sin(angle));
+            }
             ctx.closePath();
-            ctx.fill();
-        }
-    }
 
-    // --- ANIMATION LOGIC ---
-    function init() {
-        particles = [];
-        const cols = Math.ceil(canvas.width / gridSpacing);
-        const rows = Math.ceil(canvas.height / gridSpacing);
+            // Interpolate color and line width based on cured amount
+            const r = lerp(109, 173, this.curedAmount);
+            const g = lerp(213, 216, this.curedAmount);
+            const b = lerp(237, 230, this.curedAmount);
+            const a = lerp(0.15, 0.8, this.curedAmount);
+            ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
+            ctx.lineWidth = lerp(0.5, 1.5, this.curedAmount);
+            ctx.stroke();
 
-        for (let i = 0; i < cols; i++) {
-            for (let j = 0; j < rows; j++) {
-                const x = i * gridSpacing;
-                const y = j * gridSpacing;
-                particles.push(new Particle(x, y));
-            }
-        }
-    }
-
-    function connect() {
-        ctx.strokeStyle = lineColor;
-        ctx.lineWidth = 1;
-        for (let a = 0; a < particles.length; a++) {
-            for (let b = a; b < particles.length; b++) {
-                const dx = particles[a].x - particles[b].x;
-                const dy = particles[a].y - particles[b].y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < gridSpacing * 1.5) { // Connect if they are neighbors
-                    ctx.beginPath();
-                    ctx.moveTo(particles[a].x, particles[a].y);
-                    ctx.lineTo(particles[b].x, particles[b].y);
-                    ctx.stroke();
+            // Draw crystalline structures inside if cured
+            if (this.curedAmount > 0.1) {
+                ctx.beginPath();
+                for (let i = 0; i < 6; i++) {
+                    const angle = (Math.PI / 3) * i;
+                    ctx.moveTo(this.x, this.y);
+                    ctx.lineTo(this.x + hexSize * Math.cos(angle), this.y + hexSize * Math.sin(angle));
                 }
+                ctx.strokeStyle = `rgba(255, 255, 255, ${this.curedAmount * 0.3})`;
+                ctx.lineWidth = 0.3;
+                ctx.stroke();
             }
         }
     }
 
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    function init() {
+        hexagons = [];
+        const hexHeight = hexSize * 2;
+        const hexWidth = Math.sqrt(3) * hexSize;
+        const rows = Math.ceil(height / (hexHeight * 0.75)) + 2;
+        const cols = Math.ceil(width / hexWidth) + 2;
 
-        for (const particle of particles) {
-            particle.update();
-            particle.draw();
+        for (let row = -1; row < rows; row++) {
+            for (let col = -1; col < cols; col++) {
+                const x = col * hexWidth + (row % 2) * (hexWidth / 2);
+                const y = row * hexHeight * 0.75;
+                hexagons.push(new Hexagon(x, y));
+            }
         }
+    }
 
-        connect(); // Draw the connecting lines
+    function drawLightBeam() {
+        if (mouse.x === undefined) return;
+        const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, mouse.radius);
+        gradient.addColorStop(0, 'rgba(200, 220, 255, 0.15)');
+        gradient.addColorStop(1, 'rgba(200, 220, 255, 0)');
+        
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, mouse.radius, 0, Math.PI * 2);
+        ctx.fill();
+    }
 
-        animationFrameId = requestAnimationFrame(animate);
+    let lastTime = 0;
+    let incrementer = 0;
+    function animate(timestamp) {
+        const deltaTime = (timestamp - lastTime) || 0;
+        lastTime = timestamp;
+        incrementer += deltaTime * 0.001;
+
+        ctx.clearRect(0, 0, width, height);
+
+        const buttonRect = ctaButton.getBoundingClientRect();
+        const canvasRect = canvas.getBoundingClientRect();
+        isHoveringButton = 
+            mouse.x > buttonRect.left - canvasRect.left &&
+            mouse.x < buttonRect.right - canvasRect.left &&
+            mouse.y > buttonRect.top - canvasRect.top &&
+            mouse.y < buttonRect.bottom - canvasRect.top;
+        
+        ctaButton.classList.toggle('is-hovered', isHoveringButton);
+
+        hexagons.forEach(hex => {
+            hex.update(incrementer);
+            hex.draw();
+        });
+        
+        drawLightBeam();
+
+        requestAnimationFrame(animate);
     }
 
     function setup() {
-        if (animationFrameId) {
-            cancelAnimationFrame(animationFrameId);
-        }
-        resizeCanvas();
-        if (canvas.width > 0 && canvas.height > 0) {
-            init();
-            animate();
-        }
+        width = canvas.width = heroSection.offsetWidth;
+        height = canvas.height = heroSection.offsetHeight;
+        init();
     }
 
-    // --- EVENT LISTENERS ---
-    window.addEventListener('resize', setup);
-    canvas.addEventListener('mousemove', (event) => {
+    canvas.addEventListener('mousemove', e => {
         const rect = canvas.getBoundingClientRect();
-        mouse.x = event.clientX - rect.left;
-        mouse.y = event.clientY - rect.top;
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
     });
-    canvas.addEventListener('mouseout', () => {
+
+    canvas.addEventListener('mouseleave', () => {
         mouse.x = undefined;
         mouse.y = undefined;
     });
 
-    // Initial setup
+    canvas.addEventListener('click', () => {
+        if (isHoveringButton) {
+            window.location.href = ctaButton.href;
+        }
+    });
+
+    window.addEventListener('resize', setup);
+    
+    // A small delay to ensure the hero section has its final dimensions
     setTimeout(setup, 100);
+    requestAnimationFrame(animate);
 });

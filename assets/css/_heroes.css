@@ -243,27 +243,37 @@ HERO: DYNAMIC SPECTRUM ENGINE (FINAL VERSION)
 
 /*
 ==============================================================================
-FIX: UV Curing Hero Layout
+HERO: UV CURING (FINAL VERSION)
 ==============================================================================
 */
 
-/* The main hero container becomes the positioning context */
-.hero-curing {
-    position: relative;
-}
-
-/* The canvas is positioned absolutely to fill the container, in the background */
 .hero-curing #curing-hero-canvas {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Lower z-index */
+    z-index: 1;
+    cursor: none;
 }
 
-/* The text container is positioned relatively on top of the canvas */
 .hero-curing .luvex-hero__container {
-    position: relative;
-    z-index: 2; /* Higher z-index */
+    pointer-events: none; /* Let mouse events pass through to the canvas */
+}
+
+.hero-curing .luvex-cta-primary {
+    pointer-events: auto; /* Re-enable pointer events for the button */
+}
+
+/* Improve subtitle readability */
+.hero-curing .luvex-hero__subtitle {
+    color: var(--luvex-bright-cyan);
+    text-shadow: 0 0 8px rgba(109, 213, 237, 0.6);
+}
+
+/* Class for JS-driven hover state */
+.hero-curing .luvex-cta-primary.is-hovered {
+    background: #87e0f5;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(109, 213, 237, 0.2);
 }

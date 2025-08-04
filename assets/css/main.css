@@ -28,7 +28,7 @@ Last Update: 2025-07-31
 
 /* 5. PAGE-SPECIFIC */
 @import '_homepage.css';
-@import '_about.css';
+@import '_page-about.css';
 @import '_contact.css';
 
 /* 6. RESPONSIVE (Last!) */

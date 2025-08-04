@@ -1,11 +1,11 @@
 /*
 ==============================================================================
-LUVEX THEME v2.1 - [DATEINAME]
+LUVEX THEME v2.2.4 - ABOUT PAGE (Updated with Hero Parallax Animation)
 ==============================================================================
 
-Description: [Kurze Beschreibung der Komponente]
-Dependencies: _variables.css
-Last Update: 2025-07-31
+Description: Complete About Page Styles including interactive Hero animation
+Dependencies: _variables.css, _heroes.css
+Last Update: 2025-08-04
 
 ==============================================================================
 */
@@ -91,13 +91,6 @@ Last Update: 2025-07-31
     text-decoration: none;
     font-weight: 500;
     transition: var(--transition-normal);
-}
-
-.about-hero__cta:hover {
-    background: #0056b3;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
-    color: var(--luvex-white);
 }
 
 /* Our Story Section (About Page only) */
@@ -552,63 +545,320 @@ Last Update: 2025-07-31
     color: var(--luvex-white);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .why-different__grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+/* ===== ABOUT HERO: INTERACTIVE PARALLAX ANIMATION ===== */
+
+/* Enhanced Hero Container für Parallax */
+.about-hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    perspective: 1500px;
+}
+
+/* Spotlight Effect */
+.about-spotlight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    transition: background 0.1s ease-out;
+}
+
+/* Parallax Container */
+.about-parallax-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+    z-index: 1;
+}
+
+/* Parallax Layers */
+.about-parallax-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/* Background Grid Layer */
+.about-layer-grid {
+    transform: translateZ(-800px) scale(4.5);
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="about-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.08)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23about-grid)"/></svg>');
+    opacity: 0.6;
+}
+
+/* Elements Layer */
+.about-layer-elements {
+    transform: translateZ(-300px) scale(2);
+}
+
+.about-elements-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* ===== SCIENTIFIC ELEMENTS ===== */
+
+.about-sci-element {
+    position: absolute;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(30px) scale(0.8);
+    animation: about-breathe 6s infinite ease-in-out;
+}
+
+.about-sci-element.about-element-visible {
+    opacity: 0.7;
+    transform: translateY(0) scale(1);
+}
+
+.about-sci-element.about-element-highlight {
+    opacity: 1;
+    transform: translateY(-5px) scale(1.1);
+    z-index: 10;
+}
+
+/* Text Elements */
+.about-sci-text {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-weight: 600;
+    color: var(--luvex-text-muted);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+}
+
+.about-sci-text.about-element-highlight {
+    color: var(--luvex-bright-cyan);
+    text-shadow: 0 0 15px rgba(109, 213, 237, 0.6);
+}
+
+/* Formula Elements */
+.about-sci-formula {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--luvex-text-muted);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.about-sci-formula.about-element-highlight {
+    color: var(--luvex-text-primary);
+    text-shadow: 0 0 12px rgba(229, 231, 235, 0.5);
+}
+
+/* Icon Elements */
+.about-sci-icon {
+    width: clamp(60px, 8vw, 100px);
+    height: clamp(60px, 8vw, 100px);
+}
+
+.about-sci-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--luvex-text-muted);
+    stroke-width: 1;
+    fill: none;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+.about-sci-icon.about-element-highlight svg {
+    stroke: var(--luvex-bright-cyan);
+    filter: drop-shadow(0 0 12px rgba(109, 213, 237, 0.6));
+}
+
+/* ===== CONNECTION LINES ===== */
+
+#about-connection-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.about-connection-line {
+    stroke: var(--luvex-bright-cyan);
+    stroke-width: 1.5;
+    opacity: 0;
+    stroke-dasharray: 5, 3;
+    animation: about-line-draw 0.6s ease-out forwards;
+}
+
+#about-connection-lines.about-connections-active .about-connection-line {
+    opacity: 0.8;
+}
+
+/* ===== BLUEPRINT DRAWING ANIMATION ===== */
+
+.about-blueprint-path {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    animation: about-draw-blueprint 3s ease-out forwards;
+}
+
+/* ===== KEYFRAME ANIMATIONS ===== */
+
+@keyframes about-breathe {
+    0%, 100% { 
+        transform: translateY(0) scale(1); 
+        opacity: 0.7; 
     }
-    
-    .mission-section__layout {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    
-    .mission-section__image {
-        order: -1;
-    }
-    
-    .mission-point {
-        gap: 0.75rem;
-    }
-    
-    .mission-point__icon {
-        width: 36px;
-        height: 36px;
+    50% { 
+        transform: translateY(-2px) scale(1.02); 
+        opacity: 0.85; 
     }
 }
 
-/* --- RESPONSIVE für Page-Specific --- */
-@media (max-width: 768px) {
-    .our-story__layout {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    
-    .our-story__image {
-        order: -1;
-        height: 300px;
-    }
-    
-    .core-values__grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .about-cta__buttons {
-        flex-direction: column;
-        align-items: stretch;
-        max-width: 300px;
-        margin: 0 auto;
+@keyframes about-draw-blueprint {
+    to { 
+        stroke-dashoffset: 0; 
     }
 }
 
-@media (min-width: 769px) {
-    .about-cta__buttons {
-        flex-direction: row;
+@keyframes about-line-draw {
+    from {
+        stroke-dashoffset: 100;
+        opacity: 0;
+    }
+    to {
+        stroke-dashoffset: 0;
+        opacity: 0.8;
+    }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 1200px) {
+    .about-layer-grid {
+        transform: translateZ(-600px) scale(3.5);
+    }
+    
+    .about-layer-elements {
+        transform: translateZ(-200px) scale(1.8);
+    }
+}
+
+@media (max-width: 768px) {
+    /* Deaktiviere Parallax auf Mobile für Performance */
+    .about-hero {
+        perspective: none;
+        min-height: 80vh;
+    }
+    
+    .about-parallax-container {
+        transform-style: initial;
+        position: relative;
+    }
+    
+    .about-layer-grid,
+    .about-layer-elements {
+        transform: none;
+        position: relative;
+    }
+    
+    .about-layer-grid {
+        opacity: 0.3;
+    }
+    
+    .about-sci-element {
+        position: relative;
+        display: inline-block;
+        margin: 0.5rem;
+        opacity: 0.8 !important;
+        transform: none !important;
+        animation: none;
+    }
+    
+    .about-elements-container {
+        text-align: center;
+        padding: 2rem 1rem;
+        display: flex;
+        flex-wrap: wrap;
         justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    #about-connection-lines {
+        display: none;
     }
 }
 
+@media (max-width: 480px) {
+    .about-sci-text {
+        font-size: 1rem;
+    }
+    
+    .about-sci-formula {
+        font-size: 1.1rem;
+    }
+    
+    .about-sci-icon {
+        width: 50px;
+        height: 50px;
+    }
+}
 
-/* ===== END [Section 6.2: About Page (.our-story, .core-values)] ===== */
+/* ===== ACCESSIBILITY & PERFORMANCE ===== */
+
+@media (prefers-reduced-motion: reduce) {
+    .about-parallax-container {
+        transform: none !important;
+        transition: none !important;
+    }
+    
+    .about-sci-element {
+        animation: none !important;
+        transition: opacity 0.3s ease !important;
+    }
+    
+    .about-blueprint-path {
+        animation: none !important;
+        stroke-dasharray: none !important;
+        stroke-dashoffset: 0 !important;
+    }
+    
+    .about-connection-line {
+        animation: none !important;
+        stroke-dasharray: none !important;
+    }
+}
+
+/* Performance: GPU-Beschleunigung für kritische Elemente */
+.about-parallax-container,
+.about-sci-element,
+.about-spotlight {
+    will-change: transform;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .about-sci-element {
+        opacity: 1 !important;
+    }
+    
+    .about-sci-text,
+    .about-sci-formula {
+        color: #ffffff !important;
+        text-shadow: 2px 2px 4px #000000 !important;
+    }
+    
+    .about-sci-icon svg {
+        stroke: #ffffff !important;
+        stroke-width: 2 !important;
+    }
+}
