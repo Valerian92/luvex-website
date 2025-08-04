@@ -42,7 +42,8 @@ get_header(); ?>
 <!-- UV Knowledge Navigator - Section 2 (Jetzt direkt nach Hero) -->
 <section class="section section--turquoise-light knowledge-navigator-section">
     
-    <div class="container"> 
+    <!-- ÄNDERUNG: 'container--medium' für ein breiteres Layout (1600px) und weniger Leerraum -->
+    <div class="container container--medium"> 
         
         <div class="knowledge-navigator-header">
             <h2 class="text-center">UV Knowledge Navigator</h2>
@@ -53,6 +54,7 @@ get_header(); ?>
 
         <div class="grid-3 knowledge-navigator">
             
+            <!-- Karte 1: Fundamentals -->
             <div class="value-card knowledge-card">
                 <div class="knowledge-card__header">
                     <div class="value-card__icon">
@@ -71,8 +73,9 @@ get_header(); ?>
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--primary btn--small">Explore UV Science</a>
             </div>
 
+            <!-- Karte 2: Technology -->
             <div class="value-card knowledge-card">
-                 <div class="knowledge-card__header">
+                <div class="knowledge-card__header">
                     <div class="value-card__icon">
                         <i class="fas fa-lightbulb"></i>
                     </div>
@@ -89,8 +92,9 @@ get_header(); ?>
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--primary btn--small">Compare Technologies</a>
             </div>
 
+            <!-- Karte 3: Applications -->
             <div class="value-card knowledge-card">
-                 <div class="knowledge-card__header">
+                <div class="knowledge-card__header">
                     <div class="value-card__icon">
                         <i class="fas fa-industry"></i>
                     </div>
@@ -108,7 +112,15 @@ get_header(); ?>
             </div>
         </div>
     </div>
+
+    <!-- NEU: Wellenförmiger Sektions-Trenner für einen weichen Übergang -->
+    <div class="section-divider section-divider--bottom">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+        </svg>
+    </div>
 </section>
+
 
 <!-- Interactive UV Simulator Showcase -->
 <section class="section" style="background: #f8fafc;">
