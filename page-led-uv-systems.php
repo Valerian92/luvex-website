@@ -5,7 +5,9 @@
  */
 get_header(); ?>
 
-<section class="luvex-hero">
+<section class="luvex-hero uv-led-hero">
+    <canvas id="uv-led-canvas"></canvas>
+    
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
             <h1 class="luvex-hero__title">

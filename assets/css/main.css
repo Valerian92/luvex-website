@@ -54,5 +54,7 @@ Last Update: 2025-07-31
 @import '_404.css';
 @import '_page-uvc-disinfection.css';
 
+@import '_page_uv_led.css';
+
 /* Besser Weg ist das Laden über functions --> schneller für Animations:
 @import '_animations.css'; */

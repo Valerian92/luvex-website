@@ -116,11 +116,6 @@ function luvex_enqueue_assets() {
         }
     } 
     elseif ( is_page('uv-consulting') ) { 
-        /* ==============================================================================
-        FIX: Kommentar an die korrekte Position *innerhalb* des Code-Blocks verschoben,
-             um den fatalen PHP-Fehler zu beheben.
-        ==============================================================================
-        */
         // Lade Hexagon-Animation für die UV Consulting Seite
         $hexagon_js_path = get_stylesheet_directory() . '/assets/js/hero-hexagon.js';
         if (file_exists($hexagon_js_path)) {
@@ -134,11 +129,26 @@ function luvex_enqueue_assets() {
             $disinfection_js_version = filemtime($disinfection_js_path);
             wp_enqueue_script('luvex-hero-disinfection', get_stylesheet_directory_uri() . '/assets/js/hero-disinfection.js', array(), $disinfection_js_version, true);
         }
-    } elseif ( is_page('uv-knowledge') ) {
+    } 
+    elseif ( is_page('uv-knowledge') ) {
         $spectrum_js_path = get_stylesheet_directory() . '/assets/js/hero-spectrum.js';
         if (file_exists($spectrum_js_path)) {
             $spectrum_js_version = filemtime($spectrum_js_path);
             wp_enqueue_script('luvex-hero-spectrum', get_stylesheet_directory_uri() . '/assets/js/hero-spectrum.js', array(), $spectrum_js_version, true);
+        }
+    } 
+    elseif ( is_page('led-uv-systems') ) {
+        // Lade UV LED Convergence Animation + CSS
+        $uv_led_css_path = get_stylesheet_directory() . '/assets/css/_page-uv-led.css';
+        if (file_exists($uv_led_css_path)) {
+            $uv_led_css_version = filemtime($uv_led_css_path);
+            wp_enqueue_style('luvex-page-uv-led', get_stylesheet_directory_uri() . '/assets/css/_page-uv-led.css', array('luvex-main'), $uv_led_css_version);
+        }
+        
+        $uv_led_js_path = get_stylesheet_directory() . '/assets/js/hero-uv-led.js';
+        if (file_exists($uv_led_js_path)) {
+            $uv_led_js_version = filemtime($uv_led_js_path);
+            wp_enqueue_script('luvex-hero-uv-led', get_stylesheet_directory_uri() . '/assets/js/hero-uv-led.js', array(), $uv_led_js_version, true);
         }
     }
 
@@ -158,6 +168,5 @@ register_post_type('uv_news', [
     'rewrite' => ['slug' => 'uv-news'],
     'supports' => ['title', 'editor', 'excerpt', 'thumbnail']
 ]);
-
 
 ?>
