@@ -39,6 +39,69 @@ get_header(); ?>
     </div>
 </section>
 
+<!-- UV Knowledge Navigator - Section 2 (Jetzt direkt nach Hero) -->
+<section class="section section--turquoise-light knowledge-navigator-section">
+    <div class="container container--narrow">
+        <div class="knowledge-navigator-header">
+            <h2 class="text-center mb-2">UV Knowledge Navigator</h2>
+            <p class="knowledge-navigator-intro">
+                Your pathway to UV expertise - from fundamentals to advanced applications
+            </p>
+        </div>
+
+        <div class="grid-3 knowledge-navigator" style="gap: 2.5rem; margin-top: 3rem;">
+            <div class="value-card knowledge-card">
+                <div class="value-card__icon">
+                    <i class="fas fa-atom"></i>
+                </div>
+                <h3 class="value-card__title">UV Fundamentals</h3>
+                <p class="value-card__description">
+                    Master the physics and engineering principles behind UV technology. From wavelength spectrum to dose calculations.
+                </p>
+                <ul class="knowledge-list">
+                    <li><i class="fas fa-wave-square"></i> Wavelength spectrum & applications</li>
+                    <li><i class="fas fa-calculator"></i> Dose calculations & Beer-Lambert law</li>
+                    <li><i class="fas fa-shield-alt"></i> Safety standards & protocols</li>
+                </ul>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--primary btn--small">Explore UV Science</a>
+            </div>
+
+            <div class="value-card knowledge-card">
+                <div class="value-card__icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3 class="value-card__title">Technology Platforms</h3>
+                <p class="value-card__description">
+                    Compare conventional mercury and cutting-edge LED UV systems with objective analysis.
+                </p>
+                <ul class="knowledge-list">
+                    <li><i class="fas fa-balance-scale"></i> Objective technology comparison</li>
+                    <li><i class="fas fa-chart-line"></i> Performance & efficiency analysis</li>
+                    <li><i class="fas fa-route"></i> Technology selection guidance</li>
+                </ul>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--primary btn--small">Compare Technologies</a>
+            </div>
+
+            <div class="value-card knowledge-card">
+                <div class="value-card__icon">
+                    <i class="fas fa-industry"></i>
+                </div>
+                <h3 class="value-card__title">Applications Hub</h3>
+                <p class="value-card__description">
+                    Discover UV solutions across industries from water treatment to advanced curing applications.
+                </p>
+                <ul class="knowledge-list">
+                    <li><i class="fas fa-water"></i> Water disinfection systems</li>
+                    <li><i class="fas fa-wind"></i> Air treatment & HVAC integration</li>
+                    <li><i class="fas fa-hand-sparkles"></i> Surface sterilization solutions</li>
+                </ul>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--primary btn--small">Explore Applications</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 <!-- Interactive UV Simulator Showcase -->
 <section class="section" style="background: #f8fafc;">
     <div class="container" style="max-width: 1200px; margin: 0 auto;">
@@ -93,67 +156,6 @@ get_header(); ?>
     </div>
 </section>
 
-
-<!-- UV Knowledge Navigator - Section 2 (Türkis) -->
-<section class="section section--turquoise-light">
-    <div class="container container--narrow">
-        <h2 class="text-center mb-2">UV Knowledge Navigator</h2>
-        <p class="text-center text-muted mb-3" style="max-width: 800px; margin: 0 auto 3rem auto; color: var(--luvex-gray-700); font-size: 1.125rem;">
-            Your pathway to UV expertise - from fundamentals to advanced applications
-        </p>
-
-        <div class="grid-3 knowledge-navigator" style="gap: 2.5rem; margin-top: 3rem;">
-            <!-- Die Karten hier bleiben unverändert, der CSS-Fix regelt die Höhe -->
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fas fa-atom"></i>
-                </div>
-                <h3 class="value-card__title">UV Fundamentals</h3>
-                <p class="value-card__description">
-                    Master the physics and engineering principles behind UV technology. From wavelength spectrum to dose calculations.
-                </p>
-                <ul class="knowledge-list">
-                    <li><i class="fas fa-wave-square"></i> Wavelength spectrum & applications</li>
-                    <li><i class="fas fa-calculator"></i> Dose calculations & Beer-Lambert law</li>
-                    <li><i class="fas fa-shield-alt"></i> Safety standards & protocols</li>
-                </ul>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--primary btn--small">Explore UV Science</a>
-            </div>
-
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fas fa-lightbulb"></i>
-                </div>
-                <h3 class="value-card__title">Technology Platforms</h3>
-                <p class="value-card__description">
-                    Compare conventional mercury and cutting-edge LED UV systems with objective analysis.
-                </p>
-                <ul class="knowledge-list">
-                    <li><i class="fas fa-balance-scale"></i> Objective technology comparison</li>
-                    <li><i class="fas fa-chart-line"></i> Performance & efficiency analysis</li>
-                    <li><i class="fas fa-route"></i> Technology selection guidance</li>
-                </ul>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--primary btn--small">Compare Technologies</a>
-            </div>
-
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fas fa-industry"></i>
-                </div>
-                <h3 class="value-card__title">Applications Hub</h3>
-                <p class="value-card__description">
-                    Discover UV solutions across industries from water treatment to advanced curing applications.
-                </p>
-                <ul class="knowledge-list">
-                    <li><i class="fas fa-water"></i> Water disinfection systems</li>
-                    <li><i class="fas fa-wind"></i> Air treatment & HVAC integration</li>
-                    <li><i class="fas fa-hand-sparkles"></i> Surface sterilization solutions</li>
-                </ul>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--primary btn--small">Explore Applications</a>
-            </div>
-        </div>
-    </div>
-</section>
 
 
 
