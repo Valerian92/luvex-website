@@ -15,9 +15,9 @@ LUVEX THEME - PAGE: UV-C DISINFECTION (Gallery Version)
 }
 
 .science-section {
-    background: var(--luvex-white);
+    background: rgba(109, 213, 237, 0.03);
     position: relative;
-    padding: var(--space-lg) 0;
+    padding: var(--space-md) 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -324,7 +324,7 @@ LUVEX THEME - PAGE: UV-C DISINFECTION (Gallery Version)
 .applications-section,
 #applications-surface,
 #applications-water {
-    padding: var(--space-lg) 0;
+    padding: var(--space-xl) 0;
 }
 
 #applications-air { 
@@ -332,7 +332,7 @@ LUVEX THEME - PAGE: UV-C DISINFECTION (Gallery Version)
 } 
 
 #applications-surface { 
-    background-color: var(--luvex-white); 
+    background-color: rgba(240, 248, 255, 0.8);
 }
 
 #applications-water { 
