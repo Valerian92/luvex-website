@@ -10,7 +10,6 @@ get_header(); ?>
 
 <!-- About Hero Section with Interactive Parallax Animation -->
 <section class="luvex-hero about-hero">
-    <!-- Animation wird via JavaScript hinzugefügt -->
     <div class="luvex-hero__container">
         <h1 class="luvex-hero__title">
             About <span class="text-highlight">LUVEX</span> - Your Independent UV Technology Partners
@@ -31,8 +30,8 @@ get_header(); ?>
 </section>
 
 <!-- Our Story Section -->
-<section class="our-story">
-    <div class="our-story__container">
+<section class="section our-story">
+    <div class="container container--narrow">
         <div class="our-story__layout">
             <div class="our-story__content">
                 <h2>Our Story</h2>
@@ -48,15 +47,15 @@ get_header(); ?>
                 </div>
             </div>
             <div class="our-story__image">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/uv-laboratory-team.jpg" alt="Professional UV technology engineers working in a laboratory with UV equipment" />
+                <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/uv-laboratory-team.jpg" alt="Professional UV technology engineers working in a laboratory with UV equipment" />
             </div>
         </div>
     </div>
 </section>
 
 <!-- Core Values Section -->
-<section class="core-values">
-    <div class="core-values__container">
+<section class="section core-values">
+    <div class="container container--narrow">
         <div class="core-values__header">
             <h2 class="core-values__title">Our Core Values</h2>
             <p class="core-values__description">
@@ -64,7 +63,7 @@ get_header(); ?>
             </p>
         </div>
         
-        <div class="core-values__grid">
+        <div class="grid grid-3">
             <div class="value-card">
                 <div class="value-card__icon">
                     <i class="fa-solid fa-handshake"></i>
@@ -99,8 +98,8 @@ get_header(); ?>
 </section>
 
 <!-- Why We Do Things Differently Section -->
-<section class="why-different">
-    <div class="why-different__container">
+<section class="section why-different">
+    <div class="container container--narrow">
         <div class="why-different__header">
             <h2 class="why-different__title">Why We Do Things Differently</h2>
             <div class="why-different__accent-line"></div>
@@ -163,8 +162,8 @@ get_header(); ?>
 </section>
 
 <!-- Team Section -->
-<section class="team-section">
-    <div class="team-section__container">
+<section class="section team-section">
+    <div class="container container--narrow">
         <div class="team-section__header">
             <h2 class="team-section__title">Meet Your UV Technology Team</h2>
             <p class="team-section__description">
@@ -172,16 +171,16 @@ get_header(); ?>
             </p>
         </div>
         
-        <div class="team-section__grid grid grid-2">
-            <!-- Team Member 1 -->
+        <div class="team-section__grid" data-members="3">
+            <!-- Team Member 1: Valerian -->
             <div class="team-member">
                 <div class="team-member__layout">
                     <div class="team-member__photo">
                         <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Bewerbungsbild_Valerian-Huber.jpg" alt="Valerian Huber - UV Technology Specialist & Founder" />
                     </div>
                     <div class="team-member__content">
-                        <h3>UV Technology Specialist & Founder</h3>
-                        <p class="team-member__role">Lead UV Process Engineer</p>
+                        <h3>Valerian Huber</h3>
+                        <p class="team-member__role">Lead UV Process Engineer & Founder</p>
                         
                         <div class="team-member__tags">
                             <span class="team-member__tag">Mechanical Engineering</span>
@@ -211,7 +210,7 @@ get_header(); ?>
                                     <i class="fa-solid fa-users"></i>
                                 </div>
                                 <p class="team-member__detail-text">
-                                    Professional sales and process experience at Keyence (coordinate measuring technology) - learned the importance of understanding customer needs
+                                    Professional sales and process experience at Keyence (coordinate measuring technology)
                                 </p>
                             </div>
                         </div>
@@ -225,11 +224,11 @@ get_header(); ?>
                 </div>
             </div>
             
-            <!-- Team Member 2 -->
+            <!-- Team Member 2: Matthias -->
             <div class="team-member">
                 <div class="team-member__layout">
                     <div class="team-member__photo">
-                        <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Matthias.jpg" alt="Matthias Slaoka - Automation Technology Specialist & CO-Founder" />
+                        <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Matthias.jpg" alt="Matthias Slapka - Automation Technology Specialist & CO-Founder" />
                     </div>
                     <div class="team-member__content">
                         <h3>Matthias Slapka</h3>
@@ -276,13 +275,65 @@ get_header(); ?>
                     </div>
                 </div>
             </div>
+            
+            <!-- Team Member 3: Claire (Singapore) -->
+            <div class="team-member">
+                <div class="team-member__layout">
+                    <div class="team-member__photo">
+                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/team/claire-singapore.jpg" alt="Claire Chen - Asia-Pacific Liaison & Strategic Partnerships" />
+                    </div>
+                    <div class="team-member__content">
+                        <h3>Claire Chen</h3>
+                        <p class="team-member__role">Asia-Pacific Liaison & Strategic Partnerships</p>
+                        
+                        <div class="team-member__tags">
+                            <span class="team-member__tag">International Business</span>
+                            <span class="team-member__tag">Strategic Partnerships</span>
+                            <span class="team-member__tag">Market Development</span>
+                        </div>
+                        
+                        <div class="team-member__details">
+                            <div class="team-member__detail">
+                                <div class="team-member__detail-icon">
+                                    <i class="fa-solid fa-globe-asia"></i>
+                                </div>
+                                <p class="team-member__detail-text">
+                                    Based in Singapore, facilitating seamless communication between Asian markets and European expertise
+                                </p>
+                            </div>
+                            <div class="team-member__detail">
+                                <div class="team-member__detail-icon">
+                                    <i class="fa-solid fa-handshake"></i>
+                                </div>
+                                <p class="team-member__detail-text">
+                                    Specialized in building strategic partnerships and understanding regional UV technology needs
+                                </p>
+                            </div>
+                            <div class="team-member__detail">
+                                <div class="team-member__detail-icon">
+                                    <i class="fa-solid fa-comments"></i>
+                                </div>
+                                <p class="team-member__detail-text">
+                                    Multilingual communication specialist ensuring clear technical exchanges across cultural boundaries
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="team-member__quote">
+                            <p>
+                                "Every region has unique UV challenges. My role is ensuring global expertise meets local innovation needs."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- More Than Consulting Section -->
-<section class="mission-section">
-    <div class="mission-section__container">
+<!-- More Than Consulting - Building the UV Knowledge Community (Final Section) -->
+<section class="section mission-section">
+    <div class="container container--narrow">
         <div class="mission-section__header">
             <h2 class="mission-section__title">More Than Consulting - Building the UV Knowledge Community</h2>
             <p class="mission-section__description">We believe the UV technology market is too important and too diverse for any single company to dominate. Our mission is spreading UV knowledge and helping every application succeed.</p>
@@ -353,18 +404,18 @@ get_header(); ?>
 </section>
 
 <!-- CTA Section -->
-<section class="about-cta">
-    <div class="about-cta__container">
+<section class="section about-cta">
+    <div class="container container--narrow">
         <h2 class="about-cta__title">Ready to Optimize Your UV Processes?</h2>
         <p class="about-cta__description">
             Whether you're facing specific challenges or looking to improve overall efficiency, our team is here to help with honest, independent expertise.
         </p>
         <div class="about-cta__buttons">
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="about-cta__primary">
+            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-cta-primary">
                 <span>Schedule a Consultation</span>
                 <i class="fa-solid fa-arrow-right"></i>
             </a>
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="about-cta__secondary">
+            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="luvex-cta-secondary">
                 <span>Try Our Free Tools</span>
                 <i class="fa-solid fa-calculator"></i>
             </a>

@@ -1,11 +1,10 @@
 /*
 ==============================================================================
-LUVEX THEME v4.0 - UV LED PAGE STYLES (FINAL)
+LUVEX THEME v5.0 - UV LED PAGE STYLES (FINAL V2)
 ==============================================================================
 Description: Final styles for the LED UV Systems page hero.
-- Text now floats directly over the animation.
-- Pointer-events are managed for seamless interaction.
-- Controls are finalized with new icons and functionality.
+- FPS counter removed.
+- HUD controls are finalized.
 Dependencies: _variables.css, _heroes.css
 Last Update: 2025-08-04
 ==============================================================================
@@ -32,35 +31,23 @@ Last Update: 2025-08-04
     background-color: #0B1A3D;
 }
 
-/*
- * FINAL: Hero content container is fully transparent.
- * It acts only as a layout wrapper.
- * `pointer-events: none` allows mouse interaction with the canvas below.
- */
 .uv-led-hero .luvex-hero__container {
     position: relative;
     z-index: 2;
-    background: transparent; /* No more background */
+    background: transparent;
     padding: 2.5rem 3rem;
     text-align: center;
-    pointer-events: none; /* Let mouse events pass through */
+    pointer-events: none;
 }
 
-/*
- * FINAL: Add text-shadow for readability on any background.
- */
 .uv-led-hero .luvex-hero__title,
 .uv-led-hero .luvex-hero__subtitle,
 .uv-led-hero .luvex-hero__description {
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
 }
 
-/*
- * FINAL: The CTA button must be clickable.
- * We re-enable pointer events specifically for it.
- */
 .uv-led-hero .luvex-hero__cta {
-    pointer-events: auto; /* Make the button clickable again */
+    pointer-events: auto;
 }
 
 
@@ -110,7 +97,7 @@ Last Update: 2025-08-04
     font-size: 0.9rem;
     color: #FFF;
     font-weight: 600;
-    min-width: 40px; /* Adjusted width for degrees symbol */
+    min-width: 50px; /* Adjusted width for "nm" and "%" */
     text-align: left;
 }
 
@@ -167,16 +154,7 @@ Last Update: 2025-08-04
     opacity: 0.7;
 }
 
-.fps-counter {
-    background: rgba(11, 26, 61, 0.7);
-    backdrop-filter: blur(10px);
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    font-size: 0.8rem;
-    color: var(--luvex-bright-cyan);
-    font-family: 'Courier New', monospace;
-    border: 1px solid rgba(109, 213, 237, 0.2);
-}
+/* FPS Counter has been removed */
 
 @media (max-width: 768px) {
     .uv-led-hero .luvex-hero__container {
@@ -191,6 +169,7 @@ Last Update: 2025-08-04
         transform: none;
         margin-top: 2rem;
         width: 100%;
+        flex-direction: column;
     }
 
     .hud-controls {

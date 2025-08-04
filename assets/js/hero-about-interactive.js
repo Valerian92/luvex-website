@@ -1,9 +1,9 @@
 /**
- * LUVEX About Page - Interactive Parallax Hero Animation
+ * LUVEX About Page - Enhanced Interactive Parallax Hero Animation
  * 
  * @package Luvex
  * @since 2.2.4
- * @description Interaktive Parallax-Animation mit wissenschaftlichen Elementen
+ * @description Interaktive Parallax-Animation mit mehr wissenschaftlichen Elementen
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -87,14 +87,26 @@ document.addEventListener('DOMContentLoaded', () => {
             <ellipse class="about-blueprint-path" cx="50" cy="50" rx="35" ry="15" fill="none" transform="rotate(120 50 50)"/>
         </svg>`;
 
-        // Wissenschaftliche Elemente definieren
+        const networkSVG = `<svg viewBox="0 0 100 100">
+            <circle class="about-blueprint-path" cx="20" cy="20" r="4" fill="none"/>
+            <circle class="about-blueprint-path" cx="80" cy="20" r="4" fill="none"/>
+            <circle class="about-blueprint-path" cx="50" cy="50" r="6" fill="none"/>
+            <circle class="about-blueprint-path" cx="20" cy="80" r="4" fill="none"/>
+            <circle class="about-blueprint-path" cx="80" cy="80" r="4" fill="none"/>
+            <line class="about-blueprint-path" x1="20" y1="20" x2="50" y2="50"/>
+            <line class="about-blueprint-path" x1="80" y1="20" x2="50" y2="50"/>
+            <line class="about-blueprint-path" x1="20" y1="80" x2="50" y2="50"/>
+            <line class="about-blueprint-path" x1="80" y1="80" x2="50" y2="50"/>
+        </svg>`;
+
+        // Erweiterte wissenschaftliche Elemente
         const elements = [
-            // Hauptkategorien (text)
+            // Hauptkategorien (text) - About-spezifisch
             { 
                 id: 'knowledge', 
                 content: 'Knowledge', 
                 type: 'text', 
-                pos: { x: 15, y: 15 }, 
+                pos: { x: 12, y: 18 }, 
                 connections: ['einstein', 'planck'],
                 delay: 0
             },
@@ -102,70 +114,131 @@ document.addEventListener('DOMContentLoaded', () => {
                 id: 'independence', 
                 content: 'Independence', 
                 type: 'text', 
-                pos: { x: 20, y: 80 }, 
+                pos: { x: 18, y: 75 }, 
                 connections: ['gears'],
                 delay: 0.2
+            },
+            { 
+                id: 'partnership', 
+                content: 'Partnership', 
+                type: 'text', 
+                pos: { x: 25, y: 50 }, 
+                connections: ['network'],
+                delay: 0.4
             },
             { 
                 id: 'innovation', 
                 content: 'Innovation', 
                 type: 'text', 
-                pos: { x: 85, y: 50 }, 
+                pos: { x: 88, y: 45 }, 
                 connections: ['dna', 'atom'],
-                delay: 0.4
+                delay: 0.6
+            },
+            { 
+                id: 'consulting', 
+                content: 'Consulting', 
+                type: 'text', 
+                pos: { x: 75, y: 25 }, 
+                connections: ['wavelength'],
+                delay: 0.8
+            },
+            { 
+                id: 'trust', 
+                content: 'Trust', 
+                type: 'text', 
+                pos: { x: 65, y: 12 }, 
+                connections: [],
+                delay: 1.0
+            },
+            { 
+                id: 'expertise', 
+                content: 'Expertise', 
+                type: 'text', 
+                pos: { x: 82, y: 78 }, 
+                connections: [],
+                delay: 1.2
+            },
+            { 
+                id: 'results', 
+                content: 'Results', 
+                type: 'text', 
+                pos: { x: 15, y: 92 }, 
+                connections: [],
+                delay: 1.4
             },
 
-            // Wissenschaftliche Formeln
+            // Wissenschaftliche Formeln - mehr Details
             { 
                 id: 'einstein', 
                 content: 'E=mc²', 
                 type: 'formula', 
-                pos: { x: 30, y: 30 },
-                delay: 0.6
+                pos: { x: 35, y: 28 },
+                delay: 1.6
             },
             { 
                 id: 'planck', 
                 content: 'E = hν', 
                 type: 'formula', 
-                pos: { x: 40, y: 10 },
-                delay: 0.8
+                pos: { x: 42, y: 8 },
+                delay: 1.8
             },
             { 
                 id: 'wavelength', 
                 content: 'λ = c/f', 
                 type: 'formula', 
-                pos: { x: 60, y: 85 },
-                delay: 1.0
+                pos: { x: 58, y: 88 },
+                delay: 2.0
             },
             { 
                 id: 'water', 
                 content: 'H₂O', 
                 type: 'formula', 
-                pos: { x: 70, y: 65 },
-                delay: 1.2
+                pos: { x: 92, y: 65 },
+                delay: 2.2
+            },
+            { 
+                id: 'photon', 
+                content: 'E = hc/λ', 
+                type: 'formula', 
+                pos: { x: 8, y: 35 },
+                delay: 2.4
+            },
+            { 
+                id: 'power', 
+                content: 'P = I × A', 
+                type: 'formula', 
+                pos: { x: 68, y: 62 },
+                delay: 2.6
             },
 
-            // Icons
+            // Icons - mehr Vielfalt
             { 
                 id: 'gears', 
                 content: gearSVG, 
                 type: 'icon', 
-                pos: { x: 35, y: 60 },
-                delay: 1.4
+                pos: { x: 38, y: 65 },
+                delay: 2.8
             },
             { 
                 id: 'dna', 
                 content: dnaSVG, 
                 type: 'icon', 
-                pos: { x: 55, y: 30 },
-                delay: 1.6
+                pos: { x: 55, y: 35 },
+                delay: 3.0
             },
             { 
                 id: 'atom', 
                 content: atomSVG, 
                 type: 'icon', 
-                pos: { x: 75, y: 20 },
-                delay: 1.8
+                pos: { x: 78, y: 15 },
+                delay: 3.2
+            },
+            { 
+                id: 'network', 
+                content: networkSVG, 
+                type: 'icon', 
+                pos: { x: 48, y: 72 },
+                delay: 3.4
             }
         ];
 
@@ -238,7 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function bindEventListeners() {
-        const parallaxIntensity = 40; // Erhöht für stärkeren Effekt
+        const parallaxIntensity = 50; // Verstärkt für besseren Effekt
 
         function handleMouseMove(event) {
             if (!isAnimationActive) return;
@@ -249,28 +322,29 @@ document.addEventListener('DOMContentLoaded', () => {
             // Parallax Container stärker bewegen
             if (parallaxContainer) {
                 parallaxContainer.style.transform = `
-                    rotateY(${-moveX * (parallaxIntensity / 10)}deg) 
-                    rotateX(${moveY * (parallaxIntensity / 10)}deg)
-                    translateZ(${moveX * 20}px)
+                    rotateY(${-moveX * (parallaxIntensity / 8)}deg) 
+                    rotateX(${moveY * (parallaxIntensity / 8)}deg)
+                    translateZ(${moveX * 30}px)
                 `;
             }
 
             // Spotlight intensiver und größer
             if (spotlight) {
-                const spotlightSize = Math.max(window.innerWidth, window.innerHeight) * 0.6;
+                const spotlightSize = Math.max(window.innerWidth, window.innerHeight) * 0.8;
                 spotlight.style.background = `
                     radial-gradient(circle ${spotlightSize}px at ${event.clientX}px ${event.clientY}px, 
-                    rgba(109, 213, 237, 0.25), 
-                    rgba(109, 213, 237, 0.1) 40%,
-                    transparent 70%)
+                    rgba(109, 213, 237, 0.3), 
+                    rgba(109, 213, 237, 0.15) 30%,
+                    rgba(109, 213, 237, 0.05) 60%,
+                    transparent 80%)
                 `;
             }
 
-            // Elemente individuell bewegen
+            // Elemente individuell bewegen - stärkerer Effekt
             animationElements.forEach((item, index) => {
-                const intensity = (index % 3 + 1) * 0.5; // Verschiedene Intensitäten
-                const offsetX = moveX * intensity * 10;
-                const offsetY = moveY * intensity * 8;
+                const intensity = (index % 4 + 1) * 0.8; // Verschiedene Intensitäten
+                const offsetX = moveX * intensity * 15;
+                const offsetY = moveY * intensity * 12;
                 
                 item.element.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
             });
@@ -288,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Pause animation on mouse leave
+        // Reset on mouse leave
         heroContainer.addEventListener('mouseleave', () => {
             if (parallaxContainer) {
                 parallaxContainer.style.transform = '';
@@ -296,6 +370,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (spotlight) {
                 spotlight.style.background = '';
             }
+            animationElements.forEach(item => {
+                item.element.style.transform = '';
+            });
         });
     }
 
@@ -304,17 +381,8 @@ document.addEventListener('DOMContentLoaded', () => {
         animationElements.forEach((item, index) => {
             setTimeout(() => {
                 item.element.classList.add('about-element-visible');
-            }, index * 150);
+            }, index * 100); // Schnellere Erscheinung
         });
-    }
-
-    // Performance Monitoring
-    function toggleAnimation() {
-        isAnimationActive = !isAnimationActive;
-        if (!isAnimationActive) {
-            parallaxContainer.style.transform = '';
-            spotlight.style.background = '';
-        }
     }
 
     // Intersection Observer für Performance
@@ -326,6 +394,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 isAnimationActive = false;
                 if (parallaxContainer) parallaxContainer.style.transform = '';
                 if (spotlight) spotlight.style.background = '';
+                animationElements.forEach(item => {
+                    item.element.style.transform = '';
+                });
             }
         });
     });

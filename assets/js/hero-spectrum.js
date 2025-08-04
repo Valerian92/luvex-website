@@ -44,12 +44,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const mapRange = (value, inMin, inMax, outMin, outMax) => (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
     const lerp = (start, end, amt) => (1 - amt) * start + amt * end;
     
-    function onResize() {
-        const rect = heroSection.getBoundingClientRect();
-        width = canvas.width = rect.width;
-        height = canvas.height = rect.height;
-        init();
-    }
+ function onResize() {
+    const rect = heroSection.getBoundingClientRect();
+    
+    // 1. Geräte-Pixel-Ratio holen (z.B. 2 für Retina-Displays)
+    const dpr = window.devicePixelRatio || 1;
+
+    // Alte Variablen für die interne Logik beibehalten (CSS-Pixel)
+    width = rect.width;
+    height = rect.height;
+
+    // 2. Die tatsächliche Pixel-Anzahl des Canvas an die des Bildschirms anpassen
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+
+    // 3. Sicherstellen, dass das Canvas via CSS die korrekte Größe beibehält
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+
+    // 4. Den Zeichen-Kontext skalieren, damit unsere Koordinaten wieder stimmen
+    ctx.scale(dpr, dpr);
+
+    // Partikel neu initialisieren, da sich die Dimensionen geändert haben
+    init();
+}
 
     window.addEventListener('resize', onResize);
     
