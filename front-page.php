@@ -39,16 +39,21 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- UV Knowledge Navigator -->
-<section class="section section--turquoise-light knowledge-navigator-section">
+<!-- UV Knowledge Navigator - Section 2 (Jetzt direkt nach Hero) -->
+<!-- Übergang von Hell (Hero) zu Türkis -->
+<section class="section section--turquoise-light knowledge-navigator-section diagonal-transition">
+    
     <div class="container container--medium"> 
+        
         <div class="knowledge-navigator-header">
             <h2 class="text-center">UV Knowledge Navigator</h2>
             <p class="knowledge-navigator-intro">
                 Your pathway to UV expertise - from fundamentals to advanced applications
             </p>
         </div>
+
         <div class="grid-3 knowledge-navigator">
+            
             <!-- Karten bleiben unverändert -->
             <div class="value-card knowledge-card">
                 <div class="knowledge-card__header">
@@ -91,14 +96,11 @@ get_header(); ?>
             </div>
         </div>
     </div>
-    <!-- Divider zum Simulator Showcase -->
-    <div class="section-divider section-divider--bottom" data-divider-target-background="light-gray">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path></svg>
-    </div>
 </section>
 
 <!-- Interactive UV Simulator Showcase -->
-<section class="section uv-simulator-wrapper-section">
+<!-- Übergang von Türkis zu Dunkelblau -->
+<section class="section precision-transition">
     <div class="container" style="max-width: 1200px; margin: 0 auto;">
         <div class="uv-simulator-showcase">
             <div class="simulator-content">
@@ -118,14 +120,11 @@ get_header(); ?>
             </div>
         </div>
     </div>
-    <!-- Divider zur Community Section -->
-    <div class="section-divider section-divider--bottom" data-divider-target-background="dark-blue">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path></svg>
-    </div>
 </section>
 
 <!-- GLOBAL UV EXPERT COMMUNITY SEKTION -->
-<section class="section homepage-community-section">
+<!-- Übergang von Dunkelblau zu Weiß -->
+<section class="section homepage-community-section curved-transition">
     <div class="homepage-community-container">
         <div class="homepage-community-content">
             <h2 class="homepage-community-title">Building the Global <span class="text-highlight">UV Network</span></h2>
@@ -145,14 +144,11 @@ get_header(); ?>
             <div id="globe-container" class="homepage-community-globe-wrapper"></div>
         </div>
     </div>
-    <!-- Divider zur Evidence Section -->
-    <div class="section-divider section-divider--bottom" data-divider-target-background="white">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path></svg>
-    </div>
 </section>
 
 <!-- Evidence-Based Expertise Section -->
-<section class="section evidence-section">
+<!-- Übergang von Weiß zu Dunkelblau -->
+<section class="section evidence-section layered-transition">
     <div class="container container--narrow">
         <div class="evidence-grid">
             <div class="evidence-content">
@@ -173,10 +169,6 @@ get_header(); ?>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Divider zur Final CTA Section -->
-    <div class="section-divider section-divider--bottom" data-divider-target-background="dark-blue-gradient">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path></svg>
     </div>
 </section>
 

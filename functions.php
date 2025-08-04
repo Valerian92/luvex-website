@@ -131,7 +131,7 @@ function luvex_enqueue_assets() {
             wp_enqueue_script('luvex-hero-hexagon', get_stylesheet_directory_uri() . '/assets/js/hero-hexagon.js', array(), $hexagon_js_version, true);
         }
     } 
-    // KORRIGIERTER BLOCK für die UV-C Disinfection Seite
+    // UV-C DISINFECTION SEITE - Gallery System
     elseif ( is_page('uv-c-disinfection') ) { 
         // Lade die Hero Partikel Animation
         $disinfection_js_path = get_stylesheet_directory() . '/assets/js/hero-disinfection.js';
@@ -143,11 +143,18 @@ function luvex_enqueue_assets() {
         // Lade Three.js als Abhängigkeit für die DNA Animation
         wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), null, true);
         
-        // Lade das neue DNA-Animations-Skript
+        // Lade das DNA-Animations-Skript
         $dna_animation_js_path = get_stylesheet_directory() . '/assets/js/dna-animation.js';
         if (file_exists($dna_animation_js_path)) {
             $dna_animation_js_version = filemtime($dna_animation_js_path);
             wp_enqueue_script('luvex-dna-animation', get_stylesheet_directory_uri() . '/assets/js/dna-animation.js', array('three-js'), $dna_animation_js_version, true);
+        }
+        
+        // Lade Gallery-Steuerung (WICHTIG: Nach DNA Animation laden)
+        $gallery_js_path = get_stylesheet_directory() . '/assets/js/science-gallery.js';
+        if (file_exists($gallery_js_path)) {
+            $gallery_js_version = filemtime($gallery_js_path);
+            wp_enqueue_script('luvex-science-gallery', get_stylesheet_directory_uri() . '/assets/js/science-gallery.js', array('luvex-dna-animation'), $gallery_js_version, true);
         }
     } 
     elseif ( is_page('uv-knowledge') ) {

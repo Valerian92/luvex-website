@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: UV-C Disinfection
+ * Template Name: UV-C Disinfection (Gallery Version)
  * @package Luvex
  */
 get_header(); ?>
@@ -36,7 +36,7 @@ get_header(); ?>
      ========================================================================== -->
 
 <!-- ==========================================================================
-     START: How It Works Section with DNA Animation
+     START: Interactive Gallery - How UV-C Works
      ========================================================================== -->
 <section class="section science-section">
     <div class="container">
@@ -50,7 +50,7 @@ get_header(); ?>
             <div class="science-steps-column">
                 <ul class="science-steps" id="steps-list">
                     <div id="timeline-progress"></div>
-                    <li class="science-step" data-step="1">
+                    <li class="science-step is-active" data-step="1">
                         <h3>1. Contamination</h3>
                         <p>Active microorganisms populate the environment. They continuously replicate, increasing the contamination.</p>
                     </li>
@@ -74,7 +74,7 @@ get_header(); ?>
                         <h3>6. Permanent Protection</h3>
                         <p>Continuous UV-C exposure maintains a disinfected state, preventing the formation of new colonies and biofilm.</p>
                         <div class="final-cta">
-                            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'applications' ) ) ); ?>">
+                            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-consulting' ) ) ); ?>">
                                 Explore beneficial applications
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                             </a>
@@ -83,29 +83,29 @@ get_header(); ?>
                 </ul>
             </div>
         </div>
+        <div class="scroll-hint">Scroll to navigate</div>
     </div>
 </section>
 <!-- ==========================================================================
-     END: How It Works Section
+     END: Interactive Gallery Section
      ========================================================================== -->
 
-
 <main>
-    <section id="applications-air" class="section applications-section">
+    <!-- ==========================================================================
+         START: Air Disinfection Applications
+         ========================================================================== -->
+    <section id="applications-air" class="section applications-section precision-transition">
         <div class="container">
             <h2 class="text-center"><i class="fa-solid fa-wind"></i>Air Disinfection</h2>
             <div class="grid-3">
-                <!-- Card 1 -->
                 <div class="value-card">
                     <h3 class="value-card__title">In-Duct Systems</h3>
                     <p class="value-card__description">Integration into HVAC systems for continuous disinfection of circulating air.</p>
                 </div>
-                <!-- Card 2 -->
                 <div class="value-card">
                     <h3 class="value-card__title">Upper-Room GUV</h3>
                     <p class="value-card__description">Fixtures installed high in a room to safely disinfect upper air layers.</p>
                 </div>
-                <!-- Card 3 -->
                 <div class="value-card">
                     <h3 class="value-card__title">Mobile Air Purifiers</h3>
                     <p class="value-card__description">Standalone units for flexible and targeted air cleaning in any room.</p>
@@ -114,21 +114,21 @@ get_header(); ?>
         </div>
     </section>
 
-    <section id="applications-surface" class="section">
+    <!-- ==========================================================================
+         START: Surface Treatment Applications
+         ========================================================================== -->
+    <section id="applications-surface" class="section diagonal-transition">
         <div class="container">
             <h2 class="text-center"><i class="fa-solid fa-layer-group"></i>Surface Treatment</h2>
             <div class="grid-3">
-                 <!-- Card 1 -->
                 <div class="value-card">
                     <h3 class="value-card__title">Mobile Robots</h3>
                     <p class="value-card__description">Autonomous devices for high-intensity disinfection of unoccupied rooms.</p>
                 </div>
-                <!-- Card 2 -->
                 <div class="value-card">
                     <h3 class="value-card__title">Conveyor Belts</h3>
                     <p class="value-card__description">UV-C modules for disinfecting products and packaging in food processing.</p>
                 </div>
-                <!-- Card 3 -->
                 <div class="value-card">
                     <h3 class="value-card__title">Handheld Devices</h3>
                     <p class="value-card__description">Portable units for targeted disinfection of high-touch surfaces and equipment.</p>
@@ -137,21 +137,21 @@ get_header(); ?>
         </div>
     </section>
 
-    <section id="applications-water" class="section applications-section">
+    <!-- ==========================================================================
+         START: Water Purification Applications
+         ========================================================================== -->
+    <section id="applications-water" class="section applications-section precision-transition">
         <div class="container">
             <h2 class="text-center"><i class="fa-solid fa-droplet"></i>Water Purification</h2>
             <div class="grid-3">
-                <!-- Card 1 -->
                 <div class="value-card">
                     <h3 class="value-card__title">Drinking Water</h3>
                     <p class="value-card__description">Point-of-Entry or Point-of-Use systems for safe, chemical-free water.</p>
                 </div>
-                <!-- Card 2 -->
                 <div class="value-card">
                     <h3 class="value-card__title">Process Water</h3>
                     <p class="value-card__description">Ensuring high-purity, sterile water for industrial and pharma applications.</p>
                 </div>
-                <!-- Card 3 -->
                 <div class="value-card">
                     <h3 class="value-card__title">Wastewater Treatment</h3>
                     <p class="value-card__description">An effective final disinfection step before water is discharged.</p>
@@ -161,6 +161,9 @@ get_header(); ?>
     </section>
 </main>
 
+<!-- ==========================================================================
+     START: Call-to-Action Section
+     ========================================================================== -->
 <section class="section cta-section">
     <div class="container">
         <h3>Have a specific requirement?</h3>

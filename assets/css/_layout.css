@@ -159,3 +159,160 @@ Last Update: 2025-08-03
 .section-divider .shape-fill {
     fill: var(--luvex-white, #FFFFFF);
 }
+
+
+
+/* SECTION TRANSITIONS */
+.diagonal-transition {
+    position: relative;
+}
+
+.diagonal-transition::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(135deg, 
+        var(--luvex-bright-cyan) 0%, 
+        rgba(109, 213, 237, 0.6) 30%,
+        rgba(109, 213, 237, 0.2) 60%,
+        white 100%);
+    transform: skewY(-1deg);
+    transform-origin: bottom left;
+}
+
+.precision-transition {
+    position: relative;
+}
+
+.precision-transition::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--luvex-bright-cyan) 20%,
+        #4fb3d9 50%,
+        var(--luvex-bright-cyan) 80%,
+        transparent 100%);
+}
+
+.precision-transition::before {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(109, 213, 237, 0.5) 50%,
+        transparent 100%);
+}
+
+
+/* ============================================================================ */
+/* SECTION TRANSITIONS (Erweitert am 05.08.2025)                                */
+/* ============================================================================ */
+
+/* --- Vorhandener diagonaler Übergang --- */
+.diagonal-transition {
+    position: relative;
+}
+
+.diagonal-transition::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px; /* Etwas höher für bessere Sichtbarkeit */
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.4) 0%, 
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0) 100%);
+    transform: skewY(-1.5deg); /* Etwas steiler */
+    transform-origin: bottom left;
+    z-index: 10;
+}
+
+/* --- Vorhandener Präzisions-Übergang --- */
+.precision-transition {
+    position: relative;
+}
+
+.precision-transition::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--luvex-bright-cyan) 20%,
+        #4fb3d9 50%,
+        var(--luvex-bright-cyan) 80%,
+        transparent 100%);
+    z-index: 10;
+}
+
+.precision-transition::before {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(109, 213, 237, 0.5) 50%,
+        transparent 100%);
+    z-index: 10;
+}
+
+
+/* --- NEU: Geschwungener Übergang (Ideal für dunkle Sektionen) --- */
+.curved-transition {
+    position: relative;
+}
+
+.curved-transition::before {
+    content: '';
+    position: absolute;
+    top: -1px; /* Überlappt leicht, um Lücken zu vermeiden */
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: var(--luvex-dark-blue); /* Muss die Farbe der Sektion selbst sein */
+    border-bottom-left-radius: 50% 40px;
+    border-bottom-right-radius: 50% 40px;
+    z-index: 5;
+}
+
+/* --- NEU: Gestufter Übergang (Layered) --- */
+.layered-transition {
+    position: relative;
+    z-index: 1; /* Stellt sicher, dass die Sektion über der vorherigen liegt */
+}
+
+.layered-transition::before {
+    content: '';
+    position: absolute;
+    top: -40px; /* Höhe der Überlappung */
+    left: 5%;
+    right: 5%;
+    height: 80px;
+    background: var(--luvex-white); /* Muss die Farbe der Sektion selbst sein */
+    border-radius: var(--radius-lg);
+    transform: skewY(-1deg);
+    z-index: -1; /* Liegt hinter dem Inhalt der Sektion */
+    box-shadow: 0 -10px 30px rgba(27, 42, 73, 0.07);
+}
