@@ -1,13 +1,10 @@
 /**
- * UV LED Convergence Animation - Final Version 2.0
- * Description: Bug fixes and feature enhancements based on user feedback.
- * - JS error fixed by removing the FPS counter.
- * - Added a turquoise mouse focus point.
- * - Wavelength control now uses nanometers (nm) and maps to the visible spectrum.
- * - Intensity control now uses percentages (%).
+ * UV LED Convergence Animation - Perfected Version
+ * Description: Final implementation with scientifically-aligned color mapping,
+ * improved particle distribution, and a dynamic mouse focus point.
  *
  * @package Luvex
- * @version 5.0
+ * @version 6.0
  * @date 2025-08-04
  */
 
@@ -26,18 +23,16 @@ class UVLEDConvergence {
         this.leds = [];
         this.animationFrameId = null;
 
-        // --- FINALIZED CONFIGURATION 2.0 ---
         this.config = {
             ledCount: 250,
-            intensity: 0.7, // Start at 70%
+            intensity: 0.7,
             speed: 1.0,
             mouseFollow: true,
             beamWidth: 1.5,
             mouseRepulsionRadius: 80,
-            wavelength: 400, // Start at 400nm
+            wavelength: 380, // Start in the visible violet range
         };
 
-        // Base colors stored in HSL format for easy hue manipulation
         this.baseWavelengths = {
             deepViolet: { h: 257, s: 92, l: 34 },
             techBlue: { h: 229, s: 84, l: 59 },
@@ -54,7 +49,7 @@ class UVLEDConvergence {
         this.createLEDs();
         this.bindEvents();
         this.startAnimation();
-        console.log('🎬 LUVEX DEBUG: Final animation v2 running.');
+        console.log('🎬 LUVEX DEBUG: Perfected animation running.');
     }
 
     resizeCanvas() {
@@ -72,10 +67,13 @@ class UVLEDConvergence {
         const centerX = this.canvas.width / 2;
         const centerY = this.canvas.height / 2;
         const maxRadius = Math.sqrt(centerX * centerX + centerY * centerY);
+        // NEW: Minimum radius to create the "spread" effect
+        const minRadius = maxRadius * 0.2;
 
         for (let i = 0; i < ledCount; i++) {
             const angle = Math.random() * Math.PI * 2;
-            const radius = Math.random() * maxRadius;
+            // NEW: Distribute particles between min and max radius
+            const radius = minRadius + Math.random() * (maxRadius - minRadius);
             const x = centerX + Math.cos(angle) * radius;
             const y = centerY + Math.sin(angle) * radius;
 
@@ -97,19 +95,16 @@ class UVLEDConvergence {
 
         const controlsHTML = `
             <div class="hud-controls">
-                <!-- Wavelength Control in nm -->
                 <div class="hud-control-group">
                     <i class="fas fa-wave-square hud-icon"></i>
-                    <input type="range" id="wavelength" min="380" max="780" step="1" value="${this.config.wavelength}" title="Wavelength">
+                    <input type="range" id="wavelength" min="220" max="780" step="1" value="${this.config.wavelength}" title="Wavelength">
                     <span class="hud-value" id="wavelengthValue">${this.config.wavelength}nm</span>
                 </div>
-                <!-- Intensity Control in % -->
                 <div class="hud-control-group">
                     <i class="fas fa-microchip hud-icon"></i>
                     <input type="range" id="ledIntensity" min="0" max="100" step="1" value="${this.config.intensity * 100}" title="Intensity">
                     <span class="hud-value" id="intensityValue">${this.config.intensity * 100}%</span>
                 </div>
-                <!-- Mouse Follow Toggle -->
                 <div class="hud-control-group hud-toggle">
                      <input type="checkbox" id="mouseFollow" ${this.config.mouseFollow ? 'checked' : ''}>
                      <label for="mouseFollow" title="Toggle Mouse Focus"><i class="fas fa-mouse-pointer hud-icon"></i></label>
@@ -125,12 +120,10 @@ class UVLEDConvergence {
             this.config.wavelength = parseInt(e.target.value, 10);
             document.getElementById('wavelengthValue').textContent = `${this.config.wavelength}nm`;
         });
-
         document.getElementById('ledIntensity')?.addEventListener('input', (e) => {
             this.config.intensity = parseInt(e.target.value, 10) / 100;
             document.getElementById('intensityValue').textContent = `${e.target.value}%`;
         });
-
         document.getElementById('mouseFollow')?.addEventListener('change', (e) => {
             this.config.mouseFollow = e.target.checked;
         });
@@ -139,13 +132,12 @@ class UVLEDConvergence {
     bindEvents() {
         const resizeObserver = new ResizeObserver(() => this.resizeCanvas());
         resizeObserver.observe(this.canvas.parentElement);
-
-        this.canvas.addEventListener('mousemove', (e) => {
+        // Listen on window to keep tracking mouse even over controls
+        window.addEventListener('mousemove', (e) => {
             const rect = this.canvas.getBoundingClientRect();
             this.mouse.x = e.clientX - rect.left;
             this.mouse.y = e.clientY - rect.top;
         });
-
         this.canvas.addEventListener('mouseleave', () => {
             this.mouse.x = this.canvas.width / 2;
             this.mouse.y = this.canvas.height / 2;
@@ -163,24 +155,43 @@ class UVLEDConvergence {
         this.animationFrameId = requestAnimationFrame(animate);
     }
 
-    wavelengthToHue(nm) {
-        // Simple mapping from visible spectrum (380nm-780nm) to hue (240-0)
-        // 380nm -> violet/blue (hue 240)
-        // 780nm -> red (hue 0)
-        const range = 780 - 380;
-        const normalized = (nm - 380) / range;
-        return 240 - (normalized * 240);
+    wavelengthToHSL(nm) {
+        // More accurate mapping from UV to Red
+        let hue, saturation = 95, lightness = 55;
+
+        if (nm >= 220 && nm < 380) { // UV-C to UV-A (Violet)
+            hue = 270 - ((nm - 220) / (380 - 220)) * 30;
+            saturation = 90;
+            lightness = 50;
+        } else if (nm >= 380 && nm < 440) { // Violet
+            hue = 270 - ((nm - 380) / (440 - 380)) * 30;
+        } else if (nm >= 440 && nm < 490) { // Blue
+            hue = 240 - ((nm - 440) / (490 - 440)) * 60;
+        } else if (nm >= 490 && nm < 510) { // Cyan
+            hue = 180 - ((nm - 490) / (510 - 490)) * 20;
+        } else if (nm >= 510 && nm < 570) { // Green
+            hue = 160 - ((nm - 510) / (570 - 510)) * 100;
+        } else if (nm >= 570 && nm < 590) { // Yellow
+            hue = 60 - ((nm - 570) / (590 - 570)) * 10;
+        } else if (nm >= 590 && nm < 620) { // Orange
+            hue = 50 - ((nm - 590) / (620 - 590)) * 20;
+        } else if (nm >= 620 && nm <= 780) { // Red
+            hue = 30 - ((nm - 620) / (780 - 620)) * 30;
+        } else {
+            hue = 0; saturation = 0; // Out of range
+        }
+        return { h: hue < 0 ? hue + 360 : hue, s: saturation, l: lightness };
     }
 
-    drawMouseFocus(x, y, time) {
-        const pulse = (Math.sin(time * 0.002) + 1) / 2; // 0-1 pulse
+    drawMouseFocus(x, y, time, color) {
+        const pulse = (Math.sin(time * 0.002) + 1) / 2;
         const radius = 15 + pulse * 5;
-        const glowRadius = radius * 2.5;
+        const glowRadius = radius * 3;
 
         const gradient = this.ctx.createRadialGradient(x, y, 0, x, y, glowRadius);
-        gradient.addColorStop(0, 'rgba(109, 213, 237, 0.4)'); // Inner color
-        gradient.addColorStop(0.5, 'rgba(109, 213, 237, 0.2)');
-        gradient.addColorStop(1, 'rgba(109, 213, 237, 0)'); // Outer transparent
+        gradient.addColorStop(0, `hsla(${color.h}, ${color.s}%, ${color.l}%, 0.4)`);
+        gradient.addColorStop(0.5, `hsla(${color.h}, ${color.s}%, ${color.l}%, 0.2)`);
+        gradient.addColorStop(1, `hsla(${color.h}, ${color.s}%, ${color.l}%, 0)`);
 
         this.ctx.fillStyle = gradient;
         this.ctx.beginPath();
@@ -193,14 +204,13 @@ class UVLEDConvergence {
         const targetX = mouseFollow ? this.mouse.x : this.canvas.width / 2;
         const targetY = mouseFollow ? this.mouse.y : this.canvas.height / 2;
 
-        // Draw mouse focus point first, so it's behind the beams
+        const dynamicColor = this.wavelengthToHSL(wavelength);
+
         if (mouseFollow) {
-            this.drawMouseFocus(targetX, targetY, time);
+            this.drawMouseFocus(targetX, targetY, time, dynamicColor);
         }
         
         this.ctx.globalCompositeOperation = 'screen';
-
-        const hueFromWavelength = this.wavelengthToHue(wavelength);
 
         this.leds.forEach(led => {
             const dxMouse = led.originX - targetX;
@@ -221,7 +231,7 @@ class UVLEDConvergence {
             const pulse = (Math.sin(phase) + 1) / 2;
             const alpha = pulse * intensity * led.intensity;
 
-            const currentHue = (led.baseColor.h + hueFromWavelength) % 360;
+            const currentHue = (led.baseColor.h + dynamicColor.h) % 360;
             const currentColor = `hsl(${currentHue}, ${led.baseColor.s}%, ${led.baseColor.l}%)`;
 
             this.ctx.beginPath();

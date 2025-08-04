@@ -1,16 +1,35 @@
 /*
 ==============================================================================
-LUVEX THEME v2.2.4 - ABOUT PAGE (Optimized)
+LUVEX THEME v2.2.5 - ABOUT PAGE (Optimized)
 ==============================================================================
-
-Description: About Page specific styles - uses existing components from other CSS files
+Description: About Page specific styles - includes optimizations for text color and contrast.
 Dependencies: _variables.css, _heroes.css, _cards.css, _layout.css
-Last Update: 2025-08-04
-
+Last Update: 2025-08-05
 ==============================================================================
 */
 
-/* ===== ABOUT HERO: ENHANCED PARALLAX ===== */
+/* ===== ABOUT HERO: OPTIMIERUNGEN ===== */
+
+/* NEU: Hero-Beschreibungstext in Türkis mit Textschatten für bessere Lesbarkeit */
+.about-hero .luvex-hero__description {
+    color: var(--luvex-bright-cyan);
+    text-shadow: 0 1px 3px rgba(10, 15, 25, 0.5);
+}
+
+
+/* ===== TEAM SECTION: OPTIMIERUNGEN ===== */
+
+/* NEU: Besser lesbare Überschriften in der Team-Sektion */
+.team-section__header .team-section__title {
+    color: var(--luvex-dark-blue); /* Sorgt für maximalen Kontrast auf hellem Hintergrund */
+}
+
+.team-section__header .team-section__description {
+    color: var(--luvex-gray-800); /* Dunkleres Grau für bessere Lesbarkeit */
+}
+
+
+/* ===== BESTEHENDE STILE (gekürzt zur Übersicht) ===== */
 
 /* Enhanced Hero Container */
 .about-hero .luvex-hero__container {
@@ -24,16 +43,6 @@ Last Update: 2025-08-04
 
 .about-hero .luvex-hero__subtitle {
     font-size: clamp(1.3rem, 2.8vw, 1.6rem);
-}
-
-.about-hero .luvex-hero__description {
-    max-width: 950px;
-    font-size: clamp(1.1rem, 2vw, 1.3rem);
-    background: rgba(255, 255, 255, 0.05);
-    padding: 1.5rem 2rem;
-    border-radius: var(--radius-lg);
-    border: 1px solid rgba(109, 213, 237, 0.2);
-    backdrop-filter: blur(10px);
 }
 
 /* Parallax Animation Layers */

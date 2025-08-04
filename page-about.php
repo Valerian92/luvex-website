@@ -1,9 +1,9 @@
 <?php
 /**
- * About Page Template
- * 
- * @package Luvex
- * @since 2.2.4
+ * About Page Template - Optimized
+ * * @package Luvex
+ * @since 2.2.5
+ * @description Updated mission text and reordered sections for better narrative flow.
  */
 
 get_header(); ?>
@@ -17,6 +17,7 @@ get_header(); ?>
         <h2 class="luvex-hero__subtitle">
             Advancing UV technology through knowledge sharing, independent consultation, and customer success.
         </h2>
+        <!-- NEUER TEXT HIER -->
         <p class="luvex-hero__description">
             Our mission is simple: help you optimize your UV processes through honest guidance, proven expertise, and innovative tools. We believe the best solutions come from understanding your specific challenges and working together to solve them.
         </p>
@@ -29,7 +30,7 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- Our Story Section -->
+<!-- NEUE REIHENFOLGE: 1. Our Story Section -->
 <section class="section our-story">
     <div class="container container--narrow">
         <div class="our-story__layout">
@@ -53,115 +54,7 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- Core Values Section -->
-<section class="section core-values">
-    <div class="container container--narrow">
-        <div class="core-values__header">
-            <h2 class="core-values__title">Our Core Values</h2>
-            <p class="core-values__description">
-                These principles guide everything we do at LUVEX, from how we approach client relationships to how we develop our tools and services.
-            </p>
-        </div>
-        
-        <div class="grid grid-3">
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fa-solid fa-handshake"></i>
-                </div>
-                <h3 class="value-card__title">Independence</h3>
-                <p class="value-card__description">
-                    We provide unbiased advice because we're not tied to any equipment manufacturer. Our only goal is finding the right solution for your specific needs.
-                </p>
-            </div>
-            
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fa-solid fa-lightbulb"></i>
-                </div>
-                <h3 class="value-card__title">Knowledge Sharing</h3>
-                <p class="value-card__description">
-                    We believe in democratizing UV technology expertise through education, free tools, and open collaboration that elevates the entire industry.
-                </p>
-            </div>
-            
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fa-solid fa-chart-line"></i>
-                </div>
-                <h3 class="value-card__title">Results-Focused</h3>
-                <p class="value-card__description">
-                    We measure our success by your outcomes. Our practical, solution-oriented approach focuses on delivering tangible improvements to your UV processes.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Why We Do Things Differently Section -->
-<section class="section why-different">
-    <div class="container container--narrow">
-        <div class="why-different__header">
-            <h2 class="why-different__title">Why We Do Things Differently</h2>
-            <div class="why-different__accent-line"></div>
-        </div>
-        
-        <div class="why-different__grid">
-            <!-- Card 1 -->
-            <div class="why-different__card">
-                <div class="why-different__card-icon">
-                    <i class="fa-solid fa-handshake"></i>
-                </div>
-                <h3 class="why-different__card-title">Independent & Honest Guidance</h3>
-                <ul class="why-different__card-list">
-                    <li><i class="fa-solid fa-check"></i>No product sales pressure - our focus is finding the right solution for YOUR needs</li>
-                    <li><i class="fa-solid fa-check"></i>Unbiased evaluation of different UV technologies and manufacturers</li>
-                    <li><i class="fa-solid fa-check"></i>Transparent advice that puts your process success first</li>
-                </ul>
-            </div>
-            
-            <!-- Card 2 -->
-            <div class="why-different__card">
-                <div class="why-different__card-icon">
-                    <i class="fa-solid fa-flask"></i>
-                </div>
-                <h3 class="why-different__card-title">Real-World Experience</h3>
-                <ul class="why-different__card-list">
-                    <li><i class="fa-solid fa-check"></i>Hands-on experience from manufacturer side, customer side, and process integration</li>
-                    <li><i class="fa-solid fa-check"></i>Understanding of both technical possibilities and practical constraints</li>
-                    <li><i class="fa-solid fa-check"></i>Proven track record in automotive, electronics, and diverse UV applications</li>
-                </ul>
-            </div>
-            
-            <!-- Card 3 -->
-            <div class="why-different__card">
-                <div class="why-different__card-icon">
-                    <i class="fa-solid fa-users-gear"></i>
-                </div>
-                <h3 class="why-different__card-title">Collaborative Learning</h3>
-                <ul class="why-different__card-list">
-                    <li><i class="fa-solid fa-check"></i>We grow our expertise through every customer challenge we solve together</li>
-                    <li><i class="fa-solid fa-check"></i>Continuous knowledge exchange that benefits all our clients</li>
-                    <li><i class="fa-solid fa-check"></i>Honest approach - if we don't know something, we'll research it together</li>
-                </ul>
-            </div>
-            
-            <!-- Card 4 -->
-            <div class="why-different__card">
-                <div class="why-different__card-icon">
-                    <i class="fa-solid fa-lightbulb"></i>
-                </div>
-                <h3 class="why-different__card-title">Free Tools & Knowledge Sharing</h3>
-                <ul class="why-different__card-list">
-                    <li><i class="fa-solid fa-check"></i>Our UV dose calculation simulator is free for everyone to use</li>
-                    <li><i class="fa-solid fa-check"></i>Process validation tools available regardless of whether you work with us</li>
-                    <li><i class="fa-solid fa-check"></i>Commitment to advancing UV technology knowledge across the industry</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Team Section -->
+<!-- NEUE REIHENFOLGE: 2. Team Section -->
 <section class="section team-section">
     <div class="container container--narrow">
         <div class="team-section__header">
@@ -331,7 +224,53 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- More Than Consulting - Building the UV Knowledge Community (Final Section) -->
+<!-- NEUE REIHENFOLGE: 3. Core Values Section -->
+<section class="section core-values">
+    <div class="container container--narrow">
+        <div class="core-values__header">
+            <h2 class="core-values__title">Our Core Values</h2>
+            <p class="core-values__description">
+                These principles guide everything we do at LUVEX, from how we approach client relationships to how we develop our tools and services.
+            </p>
+        </div>
+        
+        <div class="grid grid-3">
+            <div class="value-card">
+                <div class="value-card__icon">
+                    <i class="fa-solid fa-handshake"></i>
+                </div>
+                <h3 class="value-card__title">Independence</h3>
+                <p class="value-card__description">
+                    We provide unbiased advice because we're not tied to any equipment manufacturer. Our only goal is finding the right solution for your specific needs.
+                </p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-card__icon">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <h3 class="value-card__title">Knowledge Sharing</h3>
+                <p class="value-card__description">
+                    We believe in democratizing UV technology expertise through education, free tools, and open collaboration that elevates the entire industry.
+                </p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-card__icon">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <h3 class="value-card__title">Results-Focused</h3>
+                <p class="value-card__description">
+                    We measure our success by your outcomes. Our practical, solution-oriented approach focuses on delivering tangible improvements to your UV processes.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ENTFERNT: "Why We Do Things Differently" Section -->
+
+<!-- NEUE REIHENFOLGE: 4. More Than Consulting - Building the UV Knowledge Community (Final Section) -->
 <section class="section mission-section">
     <div class="container container--narrow">
         <div class="mission-section__header">
