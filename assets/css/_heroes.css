@@ -219,34 +219,34 @@ Last Update: 2025-08-05
     cursor: none;
 }
 
-/* KORREKTUR: Versteckt den HTML-Fallback-Text, sobald das JS aktiv ist und ihn auf das Canvas zeichnet. */
 .hero-spectrum-engine .hero-content-fallback {
     display: none;
 }
 
-/* KORREKTUR: Wellenlängen-Anzeige in der Mitte positioniert */
+/* KORREKTUR: Wellenlängen-Anzeige wieder in der Mitte positioniert */
 .wavelength-indicator {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    margin-top: 20px; /* Verschiebt es leicht nach unten, zwischen Titel und Button */
+    margin-top: 30px; /* Positioniert es genau zwischen Beschreibung und Button */
     z-index: 12;
     font-family: 'Courier New', monospace;
     color: rgba(255, 255, 255, 0.7);
-    font-size: 1.2rem; /* Etwas größer für mehr Präsenz */
+    font-size: 1.2rem;
     pointer-events: none;
     background: rgba(11, 26, 61, 0.5);
     padding: 8px 16px;
     border-radius: 8px;
     border: 1px solid rgba(109, 213, 237, 0.2);
+    transition: all 0.3s ease;
 }
 
 
 .hero-curing .luvex-hero__container {
-    pointer-events: none; /* Let mouse events pass through to the canvas */
+    pointer-events: none;
 }
 
 .hero-curing .luvex-cta-primary {
-    pointer-events: auto; /* Re-enable pointer events for the button */
+    pointer-events: auto;
 }

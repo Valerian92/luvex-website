@@ -44,30 +44,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const mapRange = (value, inMin, inMax, outMin, outMax) => (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
     const lerp = (start, end, amt) => (1 - amt) * start + amt * end;
     
- function onResize() {
-    const rect = heroSection.getBoundingClientRect();
-    
-    // 1. Geräte-Pixel-Ratio holen (z.B. 2 für Retina-Displays)
-    const dpr = window.devicePixelRatio || 1;
-
-    // Alte Variablen für die interne Logik beibehalten (CSS-Pixel)
-    width = rect.width;
-    height = rect.height;
-
-    // 2. Die tatsächliche Pixel-Anzahl des Canvas an die des Bildschirms anpassen
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
-
-    // 3. Sicherstellen, dass das Canvas via CSS die korrekte Größe beibehält
-    canvas.style.width = `${width}px`;
-    canvas.style.height = `${height}px`;
-
-    // 4. Den Zeichen-Kontext skalieren, damit unsere Koordinaten wieder stimmen
-    ctx.scale(dpr, dpr);
-
-    // Partikel neu initialisieren, da sich die Dimensionen geändert haben
-    init();
-}
+    function onResize() {
+        const rect = heroSection.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+        width = rect.width;
+        height = rect.height;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        ctx.scale(dpr, dpr);
+        init();
+    }
 
     window.addEventListener('resize', onResize);
     
@@ -170,22 +158,23 @@ document.addEventListener('DOMContentLoaded', function() {
     function drawContent() {
         ctx.save();
        
-        // Fade in logic can be added here if needed
-        
         // Title
         ctx.font = "bold clamp(2.5rem, 5vw, 4rem) -apple-system, sans-serif";
         ctx.fillStyle = "white";
         ctx.textAlign = "center";
-        ctx.fillText("Mastering the UV Spectrum", width / 2, height / 2 - 60);
+        // KORREKTUR: Y-Position angepasst für mehr Abstand
+        ctx.fillText("Mastering the UV Spectrum", width / 2, height / 2 - 80); 
         
         // Description
         ctx.font = "1.125rem -apple-system, sans-serif";
         ctx.fillStyle = "rgba(206, 212, 218, 0.9)";
-        ctx.fillText("Precision analysis and solutions with advanced UVC and UVA technology.", width / 2, height / 2);
+        // KORREKTUR: Y-Position angepasst für mehr Abstand
+        ctx.fillText("Precision analysis and solutions with advanced UVC and UVA technology.", width / 2, height / 2 - 20);
         
         // Button
+        // KORREKTUR: Y-Position angepasst für mehr Abstand
         button.x = width / 2 - button.width / 2;
-        button.y = height / 2 + 50;
+        button.y = height / 2 + 80; 
         
         ctx.beginPath();
         ctx.moveTo(button.x + button.radius, button.y);
@@ -214,7 +203,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Button Text
         ctx.font = "bold 1rem -apple-system, sans-serif";
-        ctx.fillText(button.text, width / 2, height / 2 + 82);
+        // KORREKTUR: Y-Position angepasst für mehr Abstand
+        ctx.fillText(button.text, width / 2, height / 2 + 112); 
         ctx.restore();
     }
 
@@ -296,14 +286,12 @@ document.addEventListener('DOMContentLoaded', function() {
             wave.draw(increment, dynamicAmplitude, dynamicLength, dynamicColor);
         });
         
-        // Fade in content
         if(contentFadeIn < 1) contentFadeIn += 0.01;
         ctx.save();
         ctx.globalAlpha = contentFadeIn;
         drawContent();
         ctx.restore();
 
-        // Handle sparks
         for (let i = sparks.length - 1; i >= 0; i--) {
             sparks[i].update();
             sparks[i].draw();
