@@ -9,14 +9,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const ctx = canvas.getContext('2d');
     const indicator = document.querySelector('.wavelength-indicator');
     
-    // Get button data from PHP
     const buttonLink = heroSection.dataset.buttonLink || '#';
     const buttonText = heroSection.dataset.buttonText || 'Explore';
 
     let width, height;
     let particlesArray = [];
     let waves = [];
-    let sparks = []; // For the new cursor effect
+    let sparks = [];
     let increment = 0;
     let isHoveringButton = false;
 
@@ -46,14 +45,23 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function onResize() {
         const rect = heroSection.getBoundingClientRect();
+        // KORREKTUR FÜR TEXTSCHÄRFE: Geräte-Pixel-Ratio holen
         const dpr = window.devicePixelRatio || 1;
+
         width = rect.width;
         height = rect.height;
+
+        // Canvas an die tatsächliche Pixel-Anzahl des Bildschirms anpassen
         canvas.width = width * dpr;
         canvas.height = height * dpr;
+
+        // Sicherstellen, dass das Canvas via CSS die korrekte Größe beibehält
         canvas.style.width = `${width}px`;
         canvas.style.height = `${height}px`;
+
+        // Den Zeichen-Kontext skalieren, damit unsere Koordinaten wieder stimmen
         ctx.scale(dpr, dpr);
+
         init();
     }
 
@@ -117,30 +125,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    class Spark {
-        constructor(x, y) {
-            this.x = x;
-            this.y = y;
-            const angle = Math.random() * Math.PI * 2;
-            const speed = Math.random() * 2 + 1;
-            this.vx = Math.cos(angle) * speed;
-            this.vy = Math.sin(angle) * speed;
-            this.lifespan = 100; // in frames
-            this.size = Math.random() * 2 + 1;
-        }
-        update() {
-            this.x += this.vx;
-            this.y += this.vy;
-            this.lifespan--;
-        }
-        draw() {
-            ctx.fillStyle = `rgba(190, 100, 255, ${this.lifespan / 100})`;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
-
     function init() {
         particlesArray = [];
         let num = (width * height) / 9000;
@@ -163,18 +147,18 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.fillStyle = "white";
         ctx.textAlign = "center";
         // KORREKTUR: Y-Position angepasst für mehr Abstand
-        ctx.fillText("Mastering the UV Spectrum", width / 2, height / 2 - 80); 
+        ctx.fillText("Mastering the UV Spectrum", width / 2, height / 2 - 90);
         
         // Description
         ctx.font = "1.125rem -apple-system, sans-serif";
         ctx.fillStyle = "rgba(206, 212, 218, 0.9)";
         // KORREKTUR: Y-Position angepasst für mehr Abstand
-        ctx.fillText("Precision analysis and solutions with advanced UVC and UVA technology.", width / 2, height / 2 - 20);
+        ctx.fillText("Precision analysis and solutions with advanced UVC and UVA technology.", width / 2, height / 2 - 30);
         
         // Button
-        // KORREKTUR: Y-Position angepasst für mehr Abstand
         button.x = width / 2 - button.width / 2;
-        button.y = height / 2 + 80; 
+        // KORREKTUR: Y-Position angepasst für mehr Abstand
+        button.y = height / 2 + 80;
         
         ctx.beginPath();
         ctx.moveTo(button.x + button.radius, button.y);
@@ -189,12 +173,9 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.closePath();
         
         if (isHoveringButton) {
-            ctx.strokeStyle = `rgb(109, 213, 237)`;
-            ctx.lineWidth = 2;
-            ctx.stroke();
-            ctx.fillStyle = "rgba(109, 213, 237, 0.1)";
+            ctx.fillStyle = "rgba(255, 255, 255, 1)";
             ctx.fill();
-            ctx.fillStyle = `rgb(109, 213, 237)`;
+            ctx.fillStyle = "#0B1A3D";
         } else {
             ctx.fillStyle = `rgb(109, 213, 237)`;
             ctx.fill();
@@ -203,43 +184,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Button Text
         ctx.font = "bold 1rem -apple-system, sans-serif";
-        // KORREKTUR: Y-Position angepasst für mehr Abstand
-        ctx.fillText(button.text, width / 2, height / 2 + 112); 
+        // KORREKTUR: Y-Position für vertikale Zentrierung im Button
+        ctx.textBaseline = 'middle';
+        ctx.fillText(button.text, width / 2, button.y + button.height / 2);
         ctx.restore();
-    }
-
-    function drawAnimatedCursor() {
-        if (mouse.currentX === undefined) return;
-        
-        if (isHoveringButton) {
-            animatedCursor.targetRadius = 6 + Math.sin(increment * 15) * 2;
-            animatedCursor.targetColor = { r: 190, g: 100, b: 255 };
-            if (Math.random() > 0.8) {
-                sparks.push(new Spark(mouse.currentX, mouse.currentY));
-            }
-        } else {
-            animatedCursor.targetRadius = 20;
-            animatedCursor.targetColor = { r: 109, g: 213, b: 237 };
-        }
-
-        animatedCursor.currentRadius = lerp(animatedCursor.currentRadius, animatedCursor.targetRadius, 0.2);
-        animatedCursor.color.r = lerp(animatedCursor.color.r, animatedCursor.targetColor.r, 0.2);
-        animatedCursor.color.g = lerp(animatedCursor.color.g, animatedCursor.targetColor.g, 0.2);
-        animatedCursor.color.b = lerp(animatedCursor.color.b, animatedCursor.targetColor.b, 0.2);
-
-        let fillOpacity = isHoveringButton ? 0.8 + Math.sin(increment * 15) * 0.2 : 0.15;
-
-        const color = animatedCursor.color;
-        ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${fillOpacity})`;
-        ctx.strokeStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${Math.min(1, fillOpacity + 0.5)})`;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.arc(mouse.currentX, mouse.currentY, animatedCursor.currentRadius, 0, Math.PI * 2);
-        ctx.fill();
-        
-        if (animatedCursor.currentRadius > 10) {
-             ctx.stroke();
-        }
     }
 
     function updateWavelengthIndicator(wavelength) {
@@ -276,31 +224,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const mouseXNormalized = mouse.currentX / width;
         const currentWavelength = mapRange(mouseXNormalized, 0, 1, 100, 780);
-        const energyFactor = 1 - mouseXNormalized;
-        const dynamicColor = wavelengthToRgb(currentWavelength);
         
         particlesArray.forEach(p => p.update());
+        
+        const energyFactor = 1 - mouseXNormalized;
+        const dynamicColor = wavelengthToRgb(currentWavelength);
         waves.forEach(wave => {
             const dynamicAmplitude = wave.baseAmplitude * (0.5 + energyFactor * 1.5);
             const dynamicLength = mapRange(mouseXNormalized, 0, 1, 0.02, 0.005);
             wave.draw(increment, dynamicAmplitude, dynamicLength, dynamicColor);
         });
         
-        if(contentFadeIn < 1) contentFadeIn += 0.01;
+        if(contentFadeIn < 1) contentFadeIn += 0.02;
         ctx.save();
         ctx.globalAlpha = contentFadeIn;
         drawContent();
         ctx.restore();
-
-        for (let i = sparks.length - 1; i >= 0; i--) {
-            sparks[i].update();
-            sparks[i].draw();
-            if (sparks[i].lifespan <= 0) {
-                sparks.splice(i, 1);
-            }
-        }
-        
-        drawAnimatedCursor();
         
         updateWavelengthIndicator(currentWavelength);
         increment += 0.02;
