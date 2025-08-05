@@ -36,7 +36,10 @@ Last Update: 2025-07-31
 
 @import '_header.css';
 @import '_footer.css';
-
+@import '_loading.css';
+@import '_timeline.css';
+@import '_heroes.css';
+@import '_section-patterns.css';
 
 /* 5. PAGE-SPECIFIC */
 @import '_homepage.css';
@@ -47,33 +50,18 @@ Last Update: 2025-07-31
 @import '_page-uv-led.css';
 @import '_page-uv-consulting.css';
 
-/* 6. RESPONSIVE (Last!) */
-@import '_responsive.css';
-
-@import '_heroes.css';
-@import '_modals.css';
-
-@import '_loading.css';
-@import '_timeline.css';
-
-
-
-
-@import '_auth.css';
-@import '_legal.css';
-
-
-
-@import '_news.css';
-@import '_resources.css';
+/* 6. Multiple-PAGE-SPECIFIC */
 
 @import '_404.css';
+@import '_auth.css';
+@import '_legal.css';
+@import '_news.css';
+@import '_resources.css';
+/* 7. RESPONSIVE (Last!) */
+@import '_responsive.css';
 
 
-@import '_section-patterns.css';
-
-
-
+@import '_modals.css';
 
 
 /* Besser Weg ist das Laden über functions --> schneller für Animations:
