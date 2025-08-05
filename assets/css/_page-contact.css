@@ -1,192 +1,33 @@
 /*
 ==============================================================================
-LUVEX THEME v2.1 - [DATEINAME]
+LUVEX THEME v2.2 - CONTACT PAGE (Refactored)
 ==============================================================================
 
-Description: [Kurze Beschreibung der Komponente]
-Dependencies: _variables.css
-Last Update: 2025-07-31
+Description: Page-specific styles for the contact page. Cleaned up to rely
+             on global styles.
+Last Update: 2025-08-05
 
 ==============================================================================
 */
 
-/* ===== [Section 6.5: Contact Page] ===== */
+/* Hero styles are now inherited from .luvex-hero in _heroes.css.
+   Contact method card styles are now inherited from .card in _components.css.
+   Only page-specific layout and component styles remain.
+*/
 
-/* --- 6.5 CONTACT PAGE SPECIFIC --- */
-
-/* Contact Hero */
-.contact-hero {
-    background: var(--luvex-dark-blue);
-    position: relative;
-    overflow: hidden;
-    padding: calc(72px + 3rem) 0 3rem;
-    min-height: 400px;
-    display: flex;
-    align-items: center;
-}
-
-.contact-hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="contact-grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(109, 213, 237, 0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23contact-grid)"/></svg>');
-    opacity: 0.3;
-    pointer-events: none;
-}
-
-.contact-hero__container {
-    position: relative;
-    z-index: 2;
-}
-
-.contact-hero__content {
-    max-width: 800px;
-    text-align: center;
-    margin: 0 auto;
-}
-
-.contact-hero__title {
-    font-size: clamp(2.2rem, 4.5vw, 3.5rem);
-    font-weight: 600;
-    color: var(--luvex-white);
-    margin: 0 0 1rem 0;
-    line-height: 1.1;
-}
-
-.contact-hero__title .text-highlight {
-    color: var(--luvex-bright-cyan);
-}
-
-.contact-hero__subtitle {
-    font-size: clamp(1.1rem, 2.2vw, 1.4rem);
-    font-weight: 500;
-    color: #e9ecef;
-    margin: 0 0 1.5rem 0;
-    line-height: 1.4;
-}
-
-.contact-hero__description {
-    font-size: var(--text-lg);
-    color: #ced4da;
-    margin: 0;
-    line-height: 1.6;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-/* Contact Methods Grid */
-.contact-methods {
-    padding: var(--space-xl) 0;
-    background: var(--luvex-gray-100);
-}
-
-.contact-methods__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.contact-method {
-    background: var(--luvex-white);
-    padding: 2rem;
-    border-radius: var(--radius-lg);
-    text-align: center;
-    transition: var(--transition-normal);
-    border: 1px solid var(--luvex-gray-300);
-}
-
-.contact-method--primary {
-    border-color: var(--luvex-bright-cyan);
-    background: linear-gradient(135deg, var(--luvex-white) 0%, #f0fcff 100%);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-}
-
-.contact-method:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-}
-
-.contact-method__icon {
-    width: 64px;
-    height: 64px;
-    background: var(--luvex-dark-blue);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-    font-size: 1.5rem;
-    color: var(--luvex-bright-cyan);
-}
-
-.contact-method--primary .contact-method__icon {
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
-    box-shadow: 0 4px 20px rgba(109, 213, 237, 0.3);
-}
-
-.contact-method__title {
-    font-size: var(--text-xl);
-    font-weight: 600;
-    color: var(--luvex-dark-blue);
-    margin: 0 0 1rem 0;
-}
-
-.contact-method__description {
-    color: var(--luvex-gray-700);
-    margin: 0 0 1.5rem 0;
-    line-height: 1.6;
-}
-
-.contact-method__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-xs);
-    padding: 12px 24px;
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
-    border-radius: var(--radius-md);
-    text-decoration: none;
-    font-weight: 600;
-    transition: var(--transition-normal);
-}
-
-.contact-method__cta:hover {
-    background: #5ac7e0;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.4);
-    color: var(--luvex-dark-blue);
-}
-
-.contact-method__link {
-    color: var(--luvex-vibrant-blue);
-    text-decoration: none;
-    font-weight: 500;
-    transition: var(--transition-normal);
-}
-
-.contact-method__link:hover {
-    color: var(--luvex-bright-cyan);
-}
-
-/* Contact Form Section */
+/* --- 1. Contact Form Section --- */
 .contact-form-section {
     padding: var(--space-xl) 0;
-    background: var(--luvex-white);
 }
 
 .contact-form-layout {
     display: grid;
-    gap: 2rem;
+    gap: 3rem; /* Increased gap */
 }
 
 .contact-form-intro {
     text-align: center;
-    max-width: 600px;
+    max-width: 700px; /* Wider for better text flow */
     margin: 0 auto;
 }
 
@@ -205,10 +46,12 @@ Last Update: 2025-07-31
 }
 
 .contact-form-container {
-    background: var(--luvex-gray-100);
+    background: #F8FAFC; /* Lighter background */
     border-radius: var(--radius-xl);
     padding: 3rem;
-    border: 1px solid var(--luvex-gray-300);
+    border: 1px solid var(--luvex-gray-200);
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .luvex-contact-form .floating-label-input {
@@ -225,10 +68,10 @@ Last Update: 2025-07-31
     line-height: 1.5;
 }
 
-/* Contact Info */
+/* --- 2. Contact Info Section --- */
 .contact-info {
     padding: var(--space-xl) 0;
-    background: var(--luvex-gray-100);
+    background: #F8FAFC;
 }
 
 .contact-info__content {
@@ -244,16 +87,10 @@ Last Update: 2025-07-31
 
 .contact-info__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Ändern zu 1x3 */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-    .contact-info__grid {
-        grid-template-columns: 1fr; /* Mobil: Spalten */
-    }
 }
 
 .contact-info__item {
@@ -286,103 +123,9 @@ Last Update: 2025-07-31
     line-height: 1.6;
 }
 
-/* Alternative CTA */
-.contact-alternative-cta {
-    padding: var(--space-xl) 0;
-    background: var(--luvex-dark-blue);
-    text-align: center;
-}
-
-.contact-alternative-cta__content {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.contact-alternative-cta__title {
-    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-    font-weight: 600;
-    color: var(--luvex-white);
-    margin: 0 0 1rem 0;
-}
-
-.contact-alternative-cta__description {
-    font-size: var(--text-lg);
-    color: #e9ecef;
-    margin: 0 0 2rem 0;
-    line-height: 1.7;
-}
-
-.contact-alternative-cta__button {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-xs);
-    padding: 14px 32px;
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
-    border-radius: var(--radius-md);
-    text-decoration: none;
-    font-weight: 600;
-    transition: var(--transition-normal);
-}
-
-.contact-alternative-cta__button:hover {
-    background: #5ac7e0;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(109, 213, 237, 0.4);
-    color: var(--luvex-dark-blue);
-}
-
-/* Global Network Section - better spacing */
-.feature-section {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-    .feature-section {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .feature-text-content,
-    .feature-image-content {
-        min-width: 100%;
-    }
-}
-
-
-
-/* Responsive */
+/* --- 3. Responsive Adjustments --- */
 @media (max-width: 768px) {
     .contact-form-container {
-        padding: 2rem;
-    }
-    
-    .contact-methods__grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .contact-info__grid {
-        grid-template-columns: 1fr;
+        padding: 2rem 1.5rem;
     }
 }
-
-/* --- Kontaktformular Layout-Anpassung --- */
-.contact-form-container {
-    max-width: 800px; /* Breite erhöhen */
-    margin: 0 auto; /* Sicherstellen, dass der Container selbst zentriert ist */
-    padding: 3rem; /* Etwas mehr Innenabstand */
-}
-
-@media (max-width: 768px) {
-    .contact-form-container {
-        padding: 2rem 1.5rem; /* Padding für Mobilgeräte anpassen */
-    }
-}
-
-
-/* 6.5 END ===================================================== */
-
-
-/* ===== END [SECTION NAME] ===== */
