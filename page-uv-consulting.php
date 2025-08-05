@@ -28,17 +28,11 @@ get_header(); ?>
                 </a>
             </div>
         </div>
-        <!-- Wave Divider pointing down to the next section -->
-        <div class="section-divider section-divider--bottom">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill" style="fill: #F8FAFC;"></path>
-            </svg>
-        </div>
     </section>
 
     <!-- Partnership Foundation Section -->
     <section class="section partnership-foundation">
-        <div class="container container--narrow">
+        <div class="container container--wide">
             <div class="text-center mb-3">
                 <h2 class="section__title">Our Partnership Foundation</h2>
                 <p class="section__subtitle">
@@ -110,14 +104,8 @@ get_header(); ?>
     </section>
 
     <!-- Core Competencies Section -->
-    <section class="section">
-         <!-- Wave Divider pointing up from the previous section -->
-        <div class="section-divider section-divider--top">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill" style="fill: #F8FAFC;"></path>
-            </svg>
-        </div>
-        <div class="container container--narrow">
+    <section class="section core-competencies">
+        <div class="container container--wide">
             <div class="text-center mb-3">
                 <h2 class="section__title">Core Competencies</h2>
                 <p class="section__subtitle">We provide end-to-end expertise for your UV applications, ensuring efficiency, safety, and compliance.</p>
@@ -143,8 +131,8 @@ get_header(); ?>
     </section>
 
     <!-- FAQ Section -->
-    <section class="section section--turquoise-light">
-        <div class="container container--narrow" style="max-width: 900px;">
+    <section class="section faq-section">
+        <div class="container container--medium">
             <div class="text-center mb-3">
                 <h2 class="section__title">Frequently Asked Questions</h2>
             </div>
@@ -168,7 +156,7 @@ get_header(); ?>
     </section>
 
     <!-- CTA Section -->
-    <section class="section">
+    <section class="section cta-final">
         <div class="container container--narrow">
             <div class="cta-section cta-section--dark">
                 <h3>Ready to Optimize Your UV Process?</h3>

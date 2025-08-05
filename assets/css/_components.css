@@ -64,6 +64,11 @@ Last Update: 2025-08-05
     border: 1px solid var(--color-primary);
 }
 
+.btn--outline:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
 /* --- 1.2 Button Size Modifiers --- */
 .btn--large {
     padding: 16px 32px;
@@ -234,9 +239,10 @@ Last Update: 2025-08-05
 }
 
 .card .btn {
-    margin-top: auto;
-    padding-top: var(--space-sm); /* Fügt etwas expliziten Abstand hinzu */
+    margin-top: auto; /* Stellt sicher, dass der Button am Ende ist, wenn die Inhalte wachsen */
+    align-self: center; /* Verhindert, dass der Button die volle Breite einnimmt */
 }
+
 
 /* --- 2.2 LUVEX Value Card --- */
 .value-card {
