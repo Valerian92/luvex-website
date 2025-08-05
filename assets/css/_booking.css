@@ -452,3 +452,125 @@ Last Update: 2025-08-05
     justify-content: center;
     gap: 1rem;
 }
+
+
+/*
+==============================================================================
+LUVEX THEME v2.2 - BOOKING PAGE
+==============================================================================
+*/
+
+/* --- Booking Calendar Section --- */
+.booking-calendar {
+    /* NEU: Dezenter Farbverlauf für mehr Tiefe */
+    background: linear-gradient(180deg, rgba(109, 213, 237, 0.05) 0%, rgba(255, 255, 255, 0) 50%);
+}
+
+.booking-calendar__header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.google-calendar-wrapper--optimized {
+    border-radius: var(--radius-lg, 12px);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(27, 42, 73, 0.08), 0 4px 10px rgba(27, 42, 73, 0.05);
+    margin: 0 auto;
+    max-width: 1000px;
+    /* NEU: Visueller Anker mit Markenfarbe */
+    border: 1px solid var(--luvex-bright-cyan); 
+}
+
+/* --- Team Section --- */
+.team-section {
+    background-color: var(--luvex-white);
+}
+
+.team-section__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem; /* Abstand zwischen den Team-Mitgliedern */
+}
+
+.team-member .team-member__layout {
+    display: grid;
+    grid-template-columns: 200px 1fr; /* Spalte für Foto und Inhalt */
+    gap: 2.5rem;
+    align-items: flex-start;
+}
+
+/* NEU: Abwechselndes Layout für das zweite Team-Mitglied */
+.team-member--reverse .team-member__layout {
+    grid-template-columns: 1fr 200px;
+}
+
+.team-member--reverse .team-member__photo {
+    order: 2; /* Foto nach rechts verschieben */
+}
+
+.team-member--reverse .team-member__content {
+    order: 1; /* Inhalt nach links verschieben */
+}
+
+.team-member__photo img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.team-member__role {
+    font-weight: 600;
+    color: var(--luvex-bright-cyan);
+    margin-bottom: 1rem;
+}
+
+.team-member__details {
+    margin: 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.team-member__detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.team-member__detail-icon {
+    color: var(--luvex-bright-cyan);
+    margin-top: 4px;
+}
+
+/* NEU: Styling für die Zitate */
+.team-member__quote {
+    margin-top: 1.5rem;
+    padding-left: 2rem;
+    border-left: 3px solid var(--luvex-bright-cyan);
+    position: relative;
+    font-style: italic;
+    color: var(--luvex-gray-600);
+}
+
+.team-member__quote i {
+    position: absolute;
+    left: -12px;
+    top: -10px;
+    font-size: 2.5rem;
+    color: var(--luvex-bright-cyan);
+    opacity: 0.2;
+}
+
+@media (max-width: 768px) {
+    .team-member .team-member__layout,
+    .team-member--reverse .team-member__layout {
+        grid-template-columns: 1fr; /* Untereinander auf Mobilgeräten */
+    }
+    .team-member--reverse .team-member__photo {
+        order: 1; /* Reihenfolge zurücksetzen */
+    }
+    .team-member--reverse .team-member__content {
+        order: 2; /* Reihenfolge zurücksetzen */
+    }
+}
