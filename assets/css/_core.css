@@ -3,9 +3,9 @@
 LUVEX THEME v2.2 - CORE STYLES
 ==============================================================================
 
-Description: Core file combining base styles (resets, typography) and the
-             main layout system (containers, sections, grid, flex).
-             This file replaces _base.css and _layout.css.
+Description: Core file combining base styles (typography), layout system 
+             (containers, sections, grid), and section background patterns.
+             This file replaces _base.css, _layout.css, and _section-patterns.css.
 Dependencies: _variables.css
 Last Update: 2025-08-05
 
@@ -402,3 +402,124 @@ a:hover {
 .block { display: block; }
 .inline-block { display: inline-block; }
 .flex-utility { display: flex; }
+
+
+/*
+==============================================================================
+7. SECTION PATTERNS
+==============================================================================
+*/
+
+/* --- 7.1 Basic Section Patterns --- */
+.section-pattern-1 { background: var(--color-white); color: var(--color-dark); }
+.section-pattern-2 { background: var(--luvex-dark-blue-light); color: var(--luvex-white); }
+.section-pattern-3 { background: var(--color-white); color: var(--color-dark); }
+.section-pattern-4 { background: var(--luvex-dark-blue-medium); color: var(--luvex-white); }
+.section-pattern-5 { background: var(--luvex-dark-blue-dark); color: var(--luvex-white); }
+
+/* --- 7.2 Hero Patterns --- */
+.hero-pattern-primary { background: var(--luvex-dark-blue); color: var(--luvex-white); }
+.hero-pattern-gradient { background: linear-gradient(135deg, var(--luvex-dark-blue) 0%, var(--luvex-dark-blue-medium) 100%); color: var(--luvex-white); }
+
+.hero-pattern-primary,
+.hero-pattern-gradient {
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- 7.3 Glassmorphism Patterns --- */
+.section-pattern-2 .glassmorphism,
+.section-pattern-4 .glassmorphism,
+.section-pattern-5 .glassmorphism,
+.hero-pattern-primary .glassmorphism,
+.hero-pattern-gradient .glassmorphism {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.section-pattern-1 .glassmorphism,
+.section-pattern-3 .glassmorphism {
+    background: rgba(27, 42, 73, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(27, 42, 73, 0.1);
+    box-shadow: 0 8px 32px rgba(27, 42, 73, 0.1);
+}
+
+/* --- 7.4 Text Highlight Patterns --- */
+.section-pattern-2 .text-highlight,
+.section-pattern-4 .text-highlight,
+.section-pattern-5 .text-highlight,
+.hero-pattern-primary .text-highlight,
+.hero-pattern-gradient .text-highlight {
+    color: var(--luvex-bright-cyan);
+}
+
+.section-pattern-1 .text-highlight,
+.section-pattern-3 .text-highlight {
+    color: var(--luvex-dark-blue);
+}
+
+/* --- 7.5 Background Grid Effects --- */
+.hero-pattern-primary::before,
+.hero-pattern-gradient::before,
+.section-pattern-2::before,
+.section-pattern-4::before,
+.section-pattern-5::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero-pattern-primary::before,
+.hero-pattern-gradient::before {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="hero-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23hero-grid)"/></svg>');
+    opacity: 0.4;
+}
+
+.section-pattern-2::before,
+.section-pattern-4::before,
+.section-pattern-5::before {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="section-grid" width="80" height="80" patternUnits="userSpaceOnUse"><path d="M 80 0 L 0 0 0 80" fill="none" stroke="rgba(109, 213, 237, 0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23section-grid)"/></svg>');
+    opacity: 0.6;
+}
+
+.section-pattern-2,
+.section-pattern-4,
+.section-pattern-5 {
+    position: relative;
+}
+
+.section-pattern-2 > *,
+.section-pattern-4 > *,
+.section-pattern-5 > *,
+.hero-pattern-primary > *,
+.hero-pattern-gradient > *:not(::before) {
+    position: relative;
+    z-index: 2;
+}
+
+/* --- 7.6 Utility Patterns --- */
+.section-pattern-1,
+.section-pattern-2,
+.section-pattern-3,
+.section-pattern-4,
+.section-pattern-5 {
+    padding: var(--space-xl) 0;
+}
+
+@media (max-width: 768px) {
+    .section-pattern-1,
+    .section-pattern-2,
+    .section-pattern-3,
+    .section-pattern-4,
+    .section-pattern-5 {
+        padding: var(--space-lg) 0;
+    }
+}
