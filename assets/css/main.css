@@ -29,7 +29,7 @@ Last Update: 2025-07-31
 /*@import '_forms.css';*/
 /*@import '_cta.css';
 /*@import '_faq-accordion.css';*/
-
+/*@import '_timeline.css';*/
 @import '_components.css';
 
 /*-------------merged------------*/
@@ -37,7 +37,7 @@ Last Update: 2025-07-31
 @import '_header.css';
 @import '_footer.css';
 @import '_loading.css';
-@import '_timeline.css';
+
 @import '_heroes.css';
 @import '_section-patterns.css';
 
