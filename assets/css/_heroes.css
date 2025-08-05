@@ -1,49 +1,28 @@
 /*
 ==============================================================================
-LUVEX THEME v2.1 - HEROES
+LUVEX THEME v2.2 - HERO SECTIONS
 ==============================================================================
 
 Description: Styling for all Hero components.
-Dependencies: _variables.css
-Last Update: 2025-08-04
+             Refactored for clarity and corrected button hover states.
+Dependencies: _variables.css, _core.css
+Last Update: 2025-08-05
 
 ==============================================================================
 */
 
-/* ===== [HERO SYSTEM ] ===== */
+/*
+==============================================================================
+1. LUVEX HERO (BASE SYSTEM)
+==============================================================================
+*/
 
-/* --- 4.5 HERO SYSTEM --- */
-
-/* Standard Hero */
-.hero {
-    text-align: center;
-    padding: calc(72px + var(--space-lg)) 0 var(--space-lg);
-    background: linear-gradient(135deg, var(--color-light) 0%, #e8f4fd 100%);
-}
-
-.hero__title {
-    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: var(--space-md);
-}
-
-.hero__subtitle {
-    font-size: var(--text-xl);
-    color: var(--color-gray);
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto var(--space-lg) auto;
-}
-
-/* LUVEX Hero (reusable base for dark heroes) */
 .luvex-hero {
     background: var(--luvex-dark-blue);
     position: relative;
     overflow: hidden;
-    padding: 8rem 2rem 6rem; /* Adjusted padding for more space */
-    min-height: 600px; /* Adjusted min-height for new navigation */
+    padding: 8rem 2rem 6rem;
+    min-height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,13 +30,8 @@ Last Update: 2025-08-04
     color: var(--luvex-white);
 }
 
-/* Grid pattern overlay for all dark heroes */
-.luvex-hero::before,
-.booking-hero::before,
-.about-hero::before,
-.contact-hero::before,
-.auth-hero::before,
-.profile-hero::before {
+/* --- 1.1 Background Grid Pattern for all dark heroes --- */
+.luvex-hero::before {
     content: '';
     position: absolute;
     top: 0;
@@ -70,6 +44,7 @@ Last Update: 2025-08-04
     z-index: 1;
 }
 
+/* --- 1.2 Hero Content Container --- */
 .luvex-hero__container {
     position: relative;
     z-index: 2;
@@ -95,24 +70,55 @@ Last Update: 2025-08-04
 .luvex-hero__description {
     font-size: var(--text-lg);
     color: #ced4da;
-    margin: 0 auto 2.5rem auto; /* Increased bottom margin */
+    margin: 0 auto 2.5rem auto;
     line-height: 1.6;
     max-width: 700px;
 }
 
-/* Hero CTA Container - Buttons untereinander */
+/*
+==============================================================================
+2. HERO CALL-TO-ACTION BUTTONS
+==============================================================================
+*/
+
 .luvex-hero__cta-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+    justify-content: center;
     gap: 1.5rem;
     margin-top: 2.5rem;
 }
 
-/* Secondary CTA (Explore UV Science) - oben */
+/* --- 2.1 Primary Hero CTA (Base Style) --- */
+.luvex-hero__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    padding: 16px 32px;
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-normal);
+    font-size: var(--text-base);
+    border: 2px solid transparent;
+}
+
+/* KORREKTUR: High-contrast default hover for all hero CTAs */
+.luvex-hero__cta:hover {
+    background: var(--luvex-white);
+    color: var(--luvex-dark-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+}
+
+/* --- 2.2 Secondary Hero CTA (e.g., "Explore") --- */
 .luvex-hero__cta-secondary {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: var(--space-xs);
     padding: 16px 32px;
     background: transparent;
@@ -123,7 +129,6 @@ Last Update: 2025-08-04
     font-weight: 600;
     transition: var(--transition-normal);
     font-size: var(--text-base);
-    order: 1;
 }
 
 .luvex-hero__cta-secondary:hover {
@@ -133,11 +138,40 @@ Last Update: 2025-08-04
     transform: translateY(-2px);
 }
 
+/* KORREKTUR: This ensures the special purple animation from _animations.css overrides the default hover.
+   The .hero-button-active class is added by JS for the main homepage button. */
+.luvex-hero__cta.hero-button-active:hover {
+    /* Let the keyframe animation from _animations.css handle the background and shadow */
+    background: linear-gradient(135deg, 
+        var(--luvex-bright-cyan) 0%, 
+        #8a2be2 50%, 
+        var(--luvex-bright-cyan) 100%);
+    background-size: 200% 200%;
+    animation: gradient-shift 2s ease-in-out infinite;
+    box-shadow: 
+        0 8px 25px rgba(109, 213, 237, 0.4),
+        0 0 20px rgba(138, 43, 226, 0.3);
+}
+
+
 /*
 ==============================================================================
-NEU: Hero Navigation (für UV-C Disinfection Seite)
+3. HERO VARIATIONS & SPECIFIC STYLES
 ==============================================================================
 */
+
+/* --- 3.1 Sizing Adjustments --- */
+.booking-hero,
+.contact-hero,
+.auth-hero {
+    min-height: 400px;
+}
+
+.profile-hero {
+    min-height: 350px;
+}
+
+/* --- 3.2 Hero Navigation (for specific pages) --- */
 .hero-navigation {
     display: flex;
     gap: 1rem;
@@ -166,87 +200,13 @@ NEU: Hero Navigation (für UV-C Disinfection Seite)
     transform: translateY(-2px);
 }
 
-/* Primary CTA (Launch UV Simulator) - unten + TÜRKIS HOVER TEXT */
-.luvex-hero__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-xs);
-    padding: 16px 32px;
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
-    border-radius: var(--radius-full);
-    text-decoration: none;
-    font-weight: 600;
-    transition: var(--transition-normal);
-    font-size: var(--text-base);
-    order: 2; /* unten */
-}
-
-.luvex-hero__cta:hover {
-    background: #5ac7e0;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(109, 213, 237, 0.4);
-    color: var(--luvex-bright-cyan); /* ← TÜRKIS TEXT! */
-}
-
-/* Spezifische Höhenanpassungen (wird auf anderen Seiten noch gebraucht) */
-.booking-hero,
-.contact-hero,
-.auth-hero {
-    min-height: 400px;
-}
-
-.profile-hero {
-    min-height: 350px;
-}
-
-/*
-==============================================================================
-HERO: DYNAMIC SPECTRUM ENGINE (FINAL VERSION)
-==============================================================================
-*/
-.hero-spectrum-engine {
-    position: relative;
-    overflow: hidden;
+/* --- 3.3 Interactive Canvas Heroes --- */
+.hero-spectrum-engine,
+.hero-curing {
     height: 600px; /* Or use vh, e.g., 80vh */
-    background-color: #0B1A3D; 
 }
 
-#spectrum-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    cursor: none;
-}
-
-/* Hide the fallback content when JS is active */
-.hero-spectrum-engine .hero-content-fallback {
-   display: none;
-}
-
-.wavelength-indicator {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    z-index: 12;
-    font-family: 'Courier New', monospace;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 1rem;
-    pointer-events: none;
-    background: rgba(11, 26, 61, 0.5);
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-
-/*
-==============================================================================
-HERO: UV CURING (FINAL VERSION)
-==============================================================================
-*/
-
+#spectrum-canvas,
 .hero-curing #curing-hero-canvas {
     position: absolute;
     top: 0;
@@ -263,17 +223,4 @@ HERO: UV CURING (FINAL VERSION)
 
 .hero-curing .luvex-cta-primary {
     pointer-events: auto; /* Re-enable pointer events for the button */
-}
-
-/* Improve subtitle readability */
-.hero-curing .luvex-hero__subtitle {
-    color: var(--luvex-bright-cyan);
-    text-shadow: 0 0 8px rgba(109, 213, 237, 0.6);
-}
-
-/* Class for JS-driven hover state */
-.hero-curing .luvex-cta-primary.is-hovered {
-    background: #87e0f5;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(109, 213, 237, 0.2);
 }
