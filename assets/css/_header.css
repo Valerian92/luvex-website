@@ -1,10 +1,10 @@
 /*
 ==============================================================================
-LUVEX THEME v2.2 - HEADER
+LUVEX THEME v2.2 - HEADER (Corrected)
 ==============================================================================
 
 Description: Styling for the main site header and navigation system.
-             Refactored to use Flexbox for robust alignment.
+             Restored horizontal dropdown layout and fixed Astra arrow issue.
 Dependencies: _variables.css, _core.css
 Last Update: 2025-08-05
 
@@ -34,9 +34,9 @@ Last Update: 2025-08-05
 }
 
 .header-container {
-    max-width: 1600px; /* Increased max-width for wider screens */
+    max-width: 1600px;
     margin: 0 auto;
-    padding: 0 2rem; /* Standard padding */
+    padding: 0 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -50,7 +50,7 @@ Last Update: 2025-08-05
 */
 
 .site-branding {
-    flex-shrink: 0; /* Prevents the logo from shrinking */
+    flex-shrink: 0;
 }
 
 .site-branding .custom-logo {
@@ -66,9 +66,9 @@ Last Update: 2025-08-05
 */
 
 .main-navigation {
-    flex-grow: 1; /* Allows the navigation to take up available space */
+    flex-grow: 1;
     display: flex;
-    justify-content: center; /* Centers the navigation links */
+    justify-content: center;
 }
 
 .main-navigation ul {
@@ -76,7 +76,7 @@ Last Update: 2025-08-05
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 2.5rem; /* Adjusted gap for better spacing */
+    gap: 2.5rem;
 }
 
 .main-navigation li {
@@ -91,18 +91,21 @@ Last Update: 2025-08-05
     text-decoration: none;
     position: relative;
     transition: all 0.3s ease;
-    padding: 0.5rem 0; /* Vertical padding for click area, horizontal is handled by gap */
+    padding: 1rem 0;
+    display: flex; /* Ensure icon and text are aligned */
+    align-items: center;
+    gap: 0.5rem; /* Space between text and arrow */
 }
 
 .main-navigation a:hover {
     color: var(--luvex-bright-cyan);
-    transform: translateY(-2px);
 }
 
-.main-navigation a::after {
+/* Animated line below link */
+.main-navigation > ul > li > a::after {
     content: '';
     position: absolute;
-    bottom: -8px;
+    bottom: 8px; /* Adjust position relative to padding */
     left: 0;
     width: 0;
     height: 2px;
@@ -110,9 +113,20 @@ Last Update: 2025-08-05
     transition: width 0.3s ease;
 }
 
-.main-navigation a:hover::after {
+.main-navigation > ul > li > a:hover::after {
     width: 100%;
 }
+
+/* --- 3.2 Custom Dropdown Arrow --- */
+.main-navigation .dropdown-arrow {
+    font-size: 0.7em; /* Make arrow slightly smaller */
+    transition: transform 0.3s ease;
+}
+
+.main-navigation .menu-item-has-children:hover > a .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
 
 /*
 ==============================================================================
@@ -122,37 +136,40 @@ Last Update: 2025-08-05
 
 .main-navigation .sub-menu {
     position: absolute;
-    top: calc(100% + 15px); /* More space from parent item */
-    left: 50%;
-    transform: translateX(-50%); /* Centered below parent */
-    display: block;
+    top: calc(100% + 8px);
+    left: 0;
+    
+    /* KORREKTUR: Horizontal layout restored */
+    display: flex;
+    flex-wrap: nowrap;
+
     background: var(--luvex-dark-blue);
-    width: max-content;
+    width: max-content; 
     min-width: 220px;
     z-index: 9999;
     opacity: 0;
     visibility: hidden;
+    
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(109, 213, 237, 0.2);
-    padding: 0.5rem 0;
-    transform-origin: top center;
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-    transform: translateY(10px) translateX(-50%);
+    transform: translateY(10px);
+    transition: all 0.3s ease;
 }
 
 .main-navigation .menu-item-has-children:hover > .sub-menu {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0) translateX(-50%);
+    transform: translateY(0);
 }
 
+/* --- 4.1 Dropdown Links --- */
 .main-navigation .sub-menu a {
     padding: 0.75rem 1.5rem;
     display: block;
     font-size: var(--text-sm);
-    white-space: nowrap;
     border-bottom: 1px solid rgba(109, 213, 237, 0.1);
+    white-space: nowrap;
 }
 
 .main-navigation .sub-menu a:hover {
@@ -164,28 +181,43 @@ Last Update: 2025-08-05
     border-bottom: none;
 }
 
-/* --- 4.1 Sub-Sub-Menus --- */
+/* --- 4.2 Sub-Sub-Menus --- */
+.main-navigation .sub-menu .menu-item-has-children {
+    position: relative;
+}
+
 .main-navigation .sub-menu .sub-menu {
+    position: absolute;
     left: 100%;
-    top: -1px; /* Align with the top of the parent item */
-    transform: translateX(10px); /* Move it to the right with some space */
+    top: -1px;
+    display: block; 
+    margin-left: 1px;
+    transform: translateY(10px); /* Start slightly lower for animation */
 }
 
 .main-navigation .sub-menu .menu-item-has-children:hover > .sub-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
+    transform: translateY(0);
 }
 
 
 /*
 ==============================================================================
-5. HEADER CTA & MOBILE
+5. ASTRA OVERRIDES & MOBILE
 ==============================================================================
 */
 
+/* KORREKTUR: Specific rule to hide Astra's SVG arrow */
+.main-navigation .ast-arrow-svg {
+    display: none !important;
+}
+
+/* Hide the old toggle button as well, just in case */
+.main-navigation .ast-menu-toggle {
+    display: none !important;
+}
+
 .header-cta {
-    flex-shrink: 0; /* Prevents the CTA from shrinking */
+    flex-shrink: 0;
 }
 
 .header-cta-button {
@@ -206,10 +238,9 @@ Last Update: 2025-08-05
 }
 
 .mobile-menu-toggle {
-    display: none; /* Handled by media query */
+    display: none;
 }
 
-/* --- 5.1 Responsive --- */
 @media (max-width: 1024px) { /* Adjust breakpoint as needed */
     .main-navigation, .header-cta {
         display: none;
