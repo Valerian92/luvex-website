@@ -224,6 +224,24 @@ Last Update: 2025-08-05
     display: none;
 }
 
+/* KORREKTUR: Wellenlängen-Anzeige in der Mitte positioniert */
+.wavelength-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 20px; /* Verschiebt es leicht nach unten, zwischen Titel und Button */
+    z-index: 12;
+    font-family: 'Courier New', monospace;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.2rem; /* Etwas größer für mehr Präsenz */
+    pointer-events: none;
+    background: rgba(11, 26, 61, 0.5);
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(109, 213, 237, 0.2);
+}
+
 
 .hero-curing .luvex-hero__container {
     pointer-events: none; /* Let mouse events pass through to the canvas */
