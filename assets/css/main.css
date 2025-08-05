@@ -39,9 +39,12 @@ Last Update: 2025-07-31
 
 @import '_header.css';
 @import '_footer.css';
-@import '_loading.css';
-
 @import '_heroes.css';
+
+
+
+
+
 
 
 /* 5. PAGE-SPECIFIC */
@@ -69,3 +72,4 @@ Last Update: 2025-07-31
 
 /* Besser Weg ist das Laden über functions --> schneller für Animations:
 @import '_animations.css'; */
+/* @import '_loading.css'; --> merged into animations */

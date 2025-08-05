@@ -131,11 +131,13 @@ Last Update: 2025-08-05
     font-size: var(--text-base);
 }
 
+/* KORREKTUR: More subtle, theme-consistent hover effect */
 .luvex-hero__cta-secondary:hover {
-    background: var(--luvex-white);
-    color: var(--luvex-dark-blue);
-    border-color: var(--luvex-white);
+    background: rgba(109, 213, 237, 0.1); /* Subtle cyan fill */
+    color: var(--luvex-white); /* Keep text white */
+    border-color: var(--luvex-bright-cyan); /* Make border solid cyan */
     transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.2); /* Add a subtle glow */
 }
 
 /* KORREKTUR: This ensures the special purple animation from _animations.css overrides the default hover.
