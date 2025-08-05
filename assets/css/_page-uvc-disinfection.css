@@ -1,15 +1,20 @@
 /*
 ==============================================================================
-LUVEX THEME - PAGE: UV-C DISINFECTION (Gallery Version)
+LUVEX THEME - PAGE: UV-C DISINFECTION (Refactored)
 ==============================================================================
 */
 
-/* ===== HERO SECTION SPECIFIC ===== */
+/* --- HERO SECTION SPECIFIC --- */
 .uvc-hero {
     min-height: 600px;
 }
 
-/* ===== HOW IT WORKS SECTION (Gallery Style) ===== */
+/* KORREKTUR: Stellt sicher, dass die Animation über dem Grid-Hintergrund liegt */
+.uvc-hero .animation-background {
+    z-index: 1; 
+}
+
+/* --- HOW IT WORKS SECTION (Gallery Style) --- */
 :root {
     --luvex-purple-uv: #8b5cf6;
 }
@@ -17,7 +22,7 @@ LUVEX THEME - PAGE: UV-C DISINFECTION (Gallery Version)
 .science-section {
     background: rgba(109, 213, 237, 0.03);
     position: relative;
-    padding: var(--space-md) 0;
+    padding: var(--space-xl) 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -123,7 +128,7 @@ LUVEX THEME - PAGE: UV-C DISINFECTION (Gallery Version)
     position: relative;
     opacity: 0.4;
     transition: opacity 0.4s ease;
-    padding: 2rem 2rem 2rem 2rem;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -153,12 +158,6 @@ LUVEX THEME - PAGE: UV-C DISINFECTION (Gallery Version)
     box-shadow: 0 0 0 8px rgba(109, 213, 237, 0.15);
 }
 
-.science-step[data-step="6"].is-active::before {
-    background-color: var(--luvex-purple-uv);
-    border-color: var(--luvex-purple-uv);
-    box-shadow: 0 0 0 8px rgba(139, 92, 246, 0.15);
-}
-
 .science-step h3 {
     font-size: 1.8rem;
     font-weight: 600;
@@ -174,174 +173,10 @@ LUVEX THEME - PAGE: UV-C DISINFECTION (Gallery Version)
     margin: 0 0 1.5rem 0;
 }
 
-.final-cta {
-    margin-top: 1.5rem;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;
-}
 
-.science-step[data-step="6"].is-active .final-cta {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.final-cta a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 16px 32px;
-    background: var(--luvex-purple-uv);
-    color: var(--luvex-white);
-    border-radius: var(--radius-full);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-}
-
-.final-cta a:hover {
-    background: var(--luvex-dark-blue);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
-}
-
-/* Gallery Navigation Indicators */
-.gallery-indicators {
-    position: absolute;
-    bottom: -60px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
-    z-index: 10;
-}
-
-.gallery-indicator {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--luvex-gray-300);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.gallery-indicator.active {
-    background: var(--luvex-bright-cyan);
-    transform: scale(1.2);
-}
-
-/* Scroll Hint */
-.scroll-hint {
-    position: absolute;
-    top: 50%;
-    right: -80px;
-    transform: translateY(-50%);
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    color: var(--luvex-gray-500);
-    font-size: 0.9rem;
-    opacity: 0.7;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 0.7; }
-    50% { opacity: 1; }
-}
-
-/* Mouse inside section indicator */
-.science-section.mouse-active {
-    cursor: grab;
-}
-
-.science-section.mouse-active:active {
-    cursor: grabbing;
-}
-
-/* Responsive Design */
-@media (max-width: 992px) {
-    .science-layout-wrapper {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    
-    .science-animation-column {
-        height: 50vh;
-        order: -1;
-    }
-    
-    .science-steps-column {
-        padding-left: 2rem;
-        height: auto;
-        min-height: 60vh;
-    }
-    
-    .science-steps::before {
-        height: 40px;
-    }
-    
-    .science-step {
-        padding: 1.5rem 1rem;
-    }
-    
-    .science-step h3 {
-        font-size: 1.5rem;
-    }
-    
-    .science-step p {
-        font-size: 1.1rem;
-    }
-    
-    .scroll-hint {
-        display: none;
-    }
-}
-
-@media (max-width: 768px) {
-    .science-section {
-        padding: var(--space-md) 0;
-    }
-    
-    .science-animation-column {
-        height: 40vh;
-    }
-    
-    .science-steps-column {
-        padding-left: 1rem;
-    }
-    
-    .science-step {
-        padding: 1rem 0.5rem;
-    }
-    
-    .gallery-indicators {
-        bottom: -40px;
-    }
-}
-
-/* ===== APPLICATIONS SECTIONS ===== */
-.applications-section,
-#applications-surface,
-#applications-water {
-    padding: var(--space-xl) 0;
-}
-
-#applications-air { 
-    background-color: rgba(109, 213, 237, 0.05);
-} 
-
-#applications-surface { 
-    background-color: rgba(240, 248, 255, 0.8);
-}
-
-#applications-water { 
-    background-color: rgba(0, 123, 255, 0.05); 
-}
-
-.applications-section h2,
-#applications-surface h2,
-#applications-water h2 {
+/* --- APPLICATIONS SECTIONS --- */
+/* Redundant .value-card styles removed as they are now global */
+.applications-section h2 {
     font-size: clamp(1.8rem, 3.5vw, 2.25rem);
     display: flex;
     align-items: center;
@@ -351,59 +186,24 @@ LUVEX THEME - PAGE: UV-C DISINFECTION (Gallery Version)
     color: var(--luvex-dark-blue);
 }
 
-.applications-section h2 i,
-#applications-surface h2 i,
-#applications-water h2 i {
+.applications-section h2 i {
     color: var(--luvex-vibrant-blue);
 }
 
-.grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-}
 
+/* --- Responsive Design --- */
 @media (max-width: 992px) {
-    .grid-3 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .grid-3 {
+    .science-layout-wrapper {
         grid-template-columns: 1fr;
+        gap: 2rem;
     }
-}
-
-.value-card {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    background: var(--luvex-white);
-    padding: 1.5rem;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--luvex-gray-200);
-    transition: all 0.3s ease;
-}
-
-.value-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--luvex-bright-cyan);
-}
-
-.value-card__title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--luvex-dark-blue);
-    margin-bottom: 0.75rem;
-}
-
-.value-card__description {
-    font-size: 0.95rem;
-    color: var(--luvex-gray-700);
-    line-height: 1.6;
-    margin: 0;
-    flex-grow: 1;
-    margin-bottom: 1rem;
+    .science-animation-column {
+        height: 50vh;
+        order: -1;
+    }
+    .science-steps-column {
+        padding-left: 2rem;
+        height: auto;
+        min-height: 60vh;
+    }
 }
