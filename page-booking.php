@@ -2,9 +2,8 @@
 /**
  * Template Name: Booking Page
  * Template for Google Calendar appointment scheduling
- * 
- * @package Luvex
- * @since 2.0.0
+ * * @package Luvex
+ * @since 2.1.0
  */
 
 get_header(); ?>
@@ -28,8 +27,33 @@ get_header(); ?>
         </div>
     </section>
 
+    <!-- Calendar Section (NEUE POSITION & DESIGN) -->
+    <section id="schedule" class="booking-calendar section">
+        <div class="container container--narrow">
+            <div class="booking-calendar__header">
+                <h2 class="booking-calendar__title">Choose Your Preferred Time</h2>
+                <p class="booking-calendar__subtitle">
+                    Select a convenient time slot below. All consultations are conducted via video call and typically last <span class="text-highlight">30-45 minutes</span>.
+                </p>
+            </div>
+            
+            <div class="booking-calendar__container">
+                <div class="google-calendar-wrapper google-calendar-wrapper--optimized">
+                    <!-- Google Calendar Appointment Scheduling begin -->
+                    <iframe 
+                        src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0Z1Zckgop66eOjfq4HHhTFRGf6buFbZuP5LJj2M6Yqke3PFCQcG2pMDaORu6ZJb_F5nHCyGe7T?gv=true" 
+                        class="google-calendar-iframe"
+                        title="Schedule a consultation with LUVEX UV Technology Experts"
+                        loading="lazy">
+                    </iframe>
+                    <!-- end Google Calendar Appointment Scheduling -->
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- What You Get Section -->
-   <section class="booking-benefits">
+   <section class="booking-benefits section--small">
         <div class="container container--medium">
             <h2 class="text-center mb-2">What You'll Get in Your Consultation</h2>
             <div class="booking-benefits-grid">
@@ -66,33 +90,8 @@ get_header(); ?>
         </div>
     </section>
 
-    <!-- Calendar Section -->
-    <section class="booking-calendar">
-        <div class="container container--wide">
-            <div class="booking-calendar__header">
-                <h2 class="booking-calendar__title">Choose Your Preferred Time</h2>
-                <p class="booking-calendar__subtitle">
-                    Select a convenient time slot below. All consultations are conducted via video call and typically last <span class="text-highlight">30-45 minutes</span>.
-                </p>
-            </div>
-            
-            <div class="booking-calendar__container booking-calendar__container--wide">
-             <div class="google-calendar-wrapper google-calendar-wrapper--optimized">
-                    <!-- Google Calendar Appointment Scheduling begin -->
-                    <iframe 
-                        src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0Z1Zckgop66eOjfq4HHhTFRGf6buFbZuP5LJj2M6Yqke3PFCQcG2pMDaORu6ZJb_F5nHCyGe7T?gv=true" 
-                        class="google-calendar-iframe"
-                        title="Schedule a consultation with LUVEX UV Technology Experts"
-                        loading="lazy">
-                    </iframe>
-                    <!-- end Google Calendar Appointment Scheduling -->
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Team Section -->
-    <section class="team-section section--small">
+    <section class="team-section section">
         <div class="container container--narrow">
             <div class="team-section__header">
                 <h2 class="team-section__title">Meet Your Consultation Experts</h2>
@@ -154,44 +153,61 @@ get_header(); ?>
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="booking-faq section bg-light">
-        <div class="container container--medium">
+    <!-- FAQ Section (NEU: Umbau zum Akkordeon) -->
+    <section class="booking-faq section section--turquoise-light">
+        <div class="container container--narrow" style="max-width: 900px;">
             <h2 class="text-center mb-2">Frequently Asked Questions</h2>
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <h3 class="faq-question">How long is the consultation?</h3>
-                    <p class="faq-answer">
-                        Most consultations last 30-45 minutes, giving us enough time to understand your challenges and provide meaningful guidance.
-                    </p>
-                </div>
-                
-                <div class="faq-item">
-                    <h3 class="faq-question">Is there really no cost?</h3>
-                    <p class="faq-answer">
-                        Absolutely. The initial consultation is completely free. We believe in providing value first and building relationships based on trust.
-                    </p>
-                </div>
-                
-                <div class="faq-item">
-                    <h3 class="faq-question">What should I prepare?</h3>
-                    <p class="faq-answer">
-                        Just bring your specific challenges or questions. If you have process documentation or current setup details, that's helpful but not required.
-                    </p>
-                </div>
-                
-                <div class="faq-item">
-                    <h3 class="faq-question">Will you try to sell me something?</h3>
-                    <p class="faq-answer">
-                        No. We're independent consultants, not equipment vendors. Our goal is to help you optimize your processes, regardless of your current setup.
-                    </p>
+            
+            <div class="faq-accordion">
+                <div class="faq-accordion__list">
+                    
+                    <details class="faq-accordion__item">
+                        <summary class="faq-accordion__question">
+                            How long is the consultation?
+                            <i class="faq-accordion__chevron fa-solid fa-chevron-down"></i>
+                        </summary>
+                        <div class="faq-accordion__answer">
+                            <p>Most consultations last 30-45 minutes, giving us enough time to understand your challenges and provide meaningful guidance.</p>
+                        </div>
+                    </details>
+                    
+                    <details class="faq-accordion__item">
+                        <summary class="faq-accordion__question">
+                            Is there really no cost?
+                            <i class="faq-accordion__chevron fa-solid fa-chevron-down"></i>
+                        </summary>
+                        <div class="faq-accordion__answer">
+                           <p>Absolutely. The initial consultation is completely free. We believe in providing value first and building relationships based on trust.</p>
+                        </div>
+                    </details>
+                    
+                    <details class="faq-accordion__item">
+                        <summary class="faq-accordion__question">
+                            What should I prepare?
+                            <i class="faq-accordion__chevron fa-solid fa-chevron-down"></i>
+                        </summary>
+                        <div class="faq-accordion__answer">
+                            <p>Just bring your specific challenges or questions. If you have process documentation or current setup details, that's helpful but not required.</p>
+                        </div>
+                    </details>
+                    
+                    <details class="faq-accordion__item">
+                        <summary class="faq-accordion__question">
+                            Will you try to sell me something?
+                            <i class="faq-accordion__chevron fa-solid fa-chevron-down"></i>
+                        </summary>
+                        <div class="faq-accordion__answer">
+                            <p>No. We're independent consultants, not equipment vendors. Our goal is to help you optimize your processes, regardless of your current setup.</p>
+                        </div>
+                    </details>
+
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Alternative Contact Section -->
-    <section class="booking-alternative">
+    <section class="booking-alternative section--small">
         <div class="container">
             <div class="booking-alternative__content">
                 <h2 class="booking-alternative__title">Prefer to Contact Us Directly?</h2>
