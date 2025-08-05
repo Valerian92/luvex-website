@@ -30,22 +30,81 @@ get_header(); ?>
         </div>
         <!-- Wave Divider pointing down to the next section -->
         <div class="section-divider section-divider--bottom">
-            <svg data-name="Layer 1" xmlns="http://www.w.3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                 <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill" style="fill: #F8FAFC;"></path>
             </svg>
         </div>
     </section>
 
-    <!-- Partnership Model Section -->
-    <section class="section" style="background-color: #F8FAFC;">
+    <!-- Partnership Foundation Section -->
+    <section class="section partnership-foundation">
         <div class="container container--narrow">
             <div class="text-center mb-3">
-                <h2 class="section__title">Our Partnership Model</h2>
-                <p class="section__subtitle">Our collaboration is a dynamic cycle focused on a central goal: your success.</p>
+                <h2 class="section__title">Our Partnership Foundation</h2>
+                <p class="section__subtitle">
+                    Built on four fundamental principles that form the foundation of our consulting excellence and ensure your project success.
+                </p>
             </div>
-            <!-- Placeholder for the animation, currently static -->
-            <div class="orbit-container" style="display: flex; justify-content: center; align-items: center; min-height: 500px; border: 2px dashed var(--luvex-gray-300); border-radius: var(--radius-lg);">
-                 <p style="text-align: center; font-style: italic; color: var(--luvex-gray-700);">[Animation Concept Area]</p>
+            
+            <!-- Partnership Grid -->
+            <div class="partnership-grid">
+                <div class="partnership-card">
+                    <i class="fa-solid fa-user-shield partnership-card__icon"></i>
+                    <h3 class="partnership-card__title">Absolute Confidentiality</h3>
+                    <p class="partnership-card__description">
+                        Trust forms the foundation of every partnership we build. Your sensitive data and business processes remain completely secure.
+                    </p>
+                </div>
+                
+                <div class="partnership-card">
+                    <i class="fa-solid fa-handshake partnership-card__icon"></i>
+                    <h3 class="partnership-card__title">Reliable Statements</h3>
+                    <p class="partnership-card__description">
+                        Precision and honesty in every communication and recommendation. No overselling, just facts and actionable insights.
+                    </p>
+                </div>
+                
+                <div class="partnership-card">
+                    <i class="fa-solid fa-search partnership-card__icon"></i>
+                    <h3 class="partnership-card__title">Critical Self-Reflection</h3>
+                    <p class="partnership-card__description">
+                        Continuous improvement through rigorous analysis and feedback. We constantly challenge our own assumptions and methods.
+                    </p>
+                </div>
+                
+                <div class="partnership-card">
+                    <i class="fa-solid fa-lightbulb partnership-card__icon"></i>
+                    <h3 class="partnership-card__title">Innovative Solutions</h3>
+                    <p class="partnership-card__description">
+                        Forward-thinking approaches to complex technical challenges. We don't just follow best practices - we create them.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Core Values Summary -->
+            <div class="partnership-values">
+                <h3 class="partnership-values__title">Partnership Excellence</h3>
+                <p class="partnership-values__subtitle">
+                    These values guide every project decision, every client interaction, and every solution we deliver.
+                </p>
+                <div class="values-list">
+                    <div class="value-item">
+                        <div class="value-item__icon"></div>
+                        <span>German Engineering Precision</span>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-item__icon"></div>
+                        <span>Independent Vendor-Neutral Advice</span>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-item__icon"></div>
+                        <span>Long-term Partnership Focus</span>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-item__icon"></div>
+                        <span>Measurable Results Delivery</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

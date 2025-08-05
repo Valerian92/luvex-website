@@ -45,10 +45,10 @@ Last Update: 2025-07-31
 
 
 /* 5. PAGE-SPECIFIC */
-@import '_homepage.css';
+@import '_page-home.css';
 @import '_page-about.css';
-@import '_contact.css';
-@import '_booking.css';
+@import '_page-contact.css';
+@import '_page-booking.css';
 @import '_page-uvc-disinfection.css';
 @import '_page-uv-led.css';
 @import '_page-uv-consulting.css';
