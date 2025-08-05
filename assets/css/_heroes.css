@@ -219,6 +219,12 @@ Last Update: 2025-08-05
     cursor: none;
 }
 
+/* KORREKTUR: Versteckt den HTML-Fallback-Text, sobald das JS aktiv ist und ihn auf das Canvas zeichnet. */
+.hero-spectrum-engine .hero-content-fallback {
+    display: none;
+}
+
+
 .hero-curing .luvex-hero__container {
     pointer-events: none; /* Let mouse events pass through to the canvas */
 }
