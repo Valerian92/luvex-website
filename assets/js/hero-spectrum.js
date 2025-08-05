@@ -125,6 +125,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    class Spark {
+        constructor(x, y) {
+            this.x = x; this.y = y;
+            const angle = Math.random() * Math.PI * 2;
+            const speed = Math.random() * 2 + 1;
+            this.vx = Math.cos(angle) * speed;
+            this.vy = Math.sin(angle) * speed;
+            this.lifespan = 100;
+            this.size = Math.random() * 2 + 1;
+        }
+        update() {
+            this.x += this.vx; this.y += this.vy; this.lifespan--;
+        }
+        draw() {
+            ctx.fillStyle = `rgba(190, 100, 255, ${this.lifespan / 100})`;
+            ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+        }
+    }
+
     function init() {
         particlesArray = [];
         let num = (width * height) / 9000;
@@ -146,18 +165,16 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.font = "bold clamp(2.5rem, 5vw, 4rem) -apple-system, sans-serif";
         ctx.fillStyle = "white";
         ctx.textAlign = "center";
-        // KORREKTUR: Y-Position angepasst für mehr Abstand
+        ctx.textBaseline = 'middle';
         ctx.fillText("Mastering the UV Spectrum", width / 2, height / 2 - 90);
         
         // Description
         ctx.font = "1.125rem -apple-system, sans-serif";
         ctx.fillStyle = "rgba(206, 212, 218, 0.9)";
-        // KORREKTUR: Y-Position angepasst für mehr Abstand
         ctx.fillText("Precision analysis and solutions with advanced UVC and UVA technology.", width / 2, height / 2 - 30);
         
         // Button
         button.x = width / 2 - button.width / 2;
-        // KORREKTUR: Y-Position angepasst für mehr Abstand
         button.y = height / 2 + 80;
         
         ctx.beginPath();
@@ -184,10 +201,42 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Button Text
         ctx.font = "bold 1rem -apple-system, sans-serif";
-        // KORREKTUR: Y-Position für vertikale Zentrierung im Button
-        ctx.textBaseline = 'middle';
         ctx.fillText(button.text, width / 2, button.y + button.height / 2);
         ctx.restore();
+    }
+
+    function drawAnimatedCursor() {
+        if (mouse.currentX === undefined) return;
+        
+        if (isHoveringButton) {
+            animatedCursor.targetRadius = 6 + Math.sin(increment * 15) * 2;
+            animatedCursor.targetColor = { r: 190, g: 100, b: 255 };
+            if (Math.random() > 0.8) {
+                sparks.push(new Spark(mouse.currentX, mouse.currentY));
+            }
+        } else {
+            animatedCursor.targetRadius = 20;
+            animatedCursor.targetColor = { r: 109, g: 213, b: 237 };
+        }
+
+        animatedCursor.currentRadius = lerp(animatedCursor.currentRadius, animatedCursor.targetRadius, 0.2);
+        animatedCursor.color.r = lerp(animatedCursor.color.r, animatedCursor.targetColor.r, 0.2);
+        animatedCursor.color.g = lerp(animatedCursor.color.g, animatedCursor.targetColor.g, 0.2);
+        animatedCursor.color.b = lerp(animatedCursor.color.b, animatedCursor.targetColor.b, 0.2);
+
+        let fillOpacity = isHoveringButton ? 0.8 + Math.sin(increment * 15) * 0.2 : 0.15;
+
+        const color = animatedCursor.color;
+        ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${fillOpacity})`;
+        ctx.strokeStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${Math.min(1, fillOpacity + 0.5)})`;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.arc(mouse.currentX, mouse.currentY, animatedCursor.currentRadius, 0, Math.PI * 2);
+        ctx.fill();
+        
+        if (animatedCursor.currentRadius > 10) {
+             ctx.stroke();
+        }
     }
 
     function updateWavelengthIndicator(wavelength) {
@@ -240,6 +289,16 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.globalAlpha = contentFadeIn;
         drawContent();
         ctx.restore();
+        
+        for (let i = sparks.length - 1; i >= 0; i--) {
+            sparks[i].update();
+            sparks[i].draw();
+            if (sparks[i].lifespan <= 0) {
+                sparks.splice(i, 1);
+            }
+        }
+        
+        drawAnimatedCursor();
         
         updateWavelengthIndicator(currentWavelength);
         increment += 0.02;
