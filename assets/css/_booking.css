@@ -574,3 +574,43 @@ LUVEX THEME v2.2 - BOOKING PAGE
         order: 2; /* Reihenfolge zurücksetzen */
     }
 }
+
+
+/*
+==============================================================================
+LUVEX THEME v2.3 - BOOKING PAGE FEINSCHLIFF
+==============================================================================
+*/
+
+/* --- Hero Text Optimierung --- */
+.booking-hero__description {
+    color: #ced4da; /* Helleres Grau für besseren Kontrast */
+    max-width: 750px; /* Breite anpassen für natürlicheren Textfluss */
+    margin: 0 auto 2.5rem auto;
+    line-height: 1.7; /* Etwas mehr Zeilenabstand */
+}
+
+/* --- Kalender Subtitle Optimierung --- */
+.booking-calendar__subtitle {
+    color: var(--luvex-gray-800, #1f2937); /* Dunkleres Grau für Top-Lesbarkeit */
+    font-weight: 500; /* Etwas dicker für mehr Präsenz */
+    max-width: 550px; /* Breite für besseren Umbruch anpassen */
+}
+
+/* --- Anpassung für die neuen Knowledge Cards in diesem Kontext --- */
+.booking-benefits.knowledge-navigator-section {
+    background: #F8FAFC; /* Hintergrund von der Homepage übernehmen */
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+}
+
+.booking-benefits .value-card__description {
+    /* Stellt sicher, dass der Beschreibungstext den verfügbaren Platz einnimmt,
+       was die Karten auf gleicher Höhe hält. */
+    flex-grow: 1;
+}
+
+/* Optional: Wenn die Karten keinen Button haben, fügen wir unten etwas mehr Platz hinzu */
+.booking-benefits .knowledge-card {
+    padding-bottom: 2.5rem;
+}
