@@ -11,7 +11,8 @@ get_header(); ?>
 <div class="booking-page">
     
     <!-- HERO SECTION (KORRIGIERT) -->
-    <section class="booking-hero diagonal-transition">
+    <!-- KORREKT -->
+    <section class="luvex-hero booking-hero diagonal-transition">
         <div class="booking-hero__container container--wide">
             <div class="booking-hero__content">
                 <h1 class="booking-hero__title">
