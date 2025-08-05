@@ -10,14 +10,56 @@ Last Update: 2025-08-05
 ==============================================================================
 */
 
-/* ===== PARTNERSHIP FOUNDATION SECTION ===== */
+/* ===== SECTION BACKGROUNDS & COLOR HARMONY ===== */
 
-/* Partnership Section Container */
+/* Partnership Foundation - Light Gray nach Dark Hero */
 .partnership-foundation {
     background: #F8FAFC;
     padding: 6rem 0;
     position: relative;
 }
+
+/* Core Competencies - Clean White für harten Cut */
+.core-competencies {
+    background: var(--luvex-white);
+    padding: 6rem 0;
+}
+
+/* FAQ Section - Leichtes Türkis für sanften Übergang */
+.faq-section {
+    background: linear-gradient(180deg, rgba(109, 213, 237, 0.08) 0%, rgba(248, 250, 252, 0) 100%);
+    padding: 6rem 0;
+}
+
+/* CTA Final - Dunkler Hintergrund für starken Call-to-Action */
+.cta-final {
+    background: linear-gradient(135deg, var(--luvex-dark-blue) 0%, var(--luvex-dark-blue-medium) 100%);
+    color: var(--luvex-white);
+    padding: 6rem 0;
+}
+
+/* Titel-Farben je nach Sektion anpassen */
+.faq-section .section__title,
+.core-competencies .section__title {
+    color: var(--luvex-dark-blue);
+}
+
+.cta-final .section__title {
+    color: var(--luvex-white);
+}
+
+.faq-section .section__subtitle,
+.core-competencies .section__subtitle {
+    color: var(--luvex-gray-700);
+}
+
+.cta-final .section__subtitle {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* ===== PARTNERSHIP FOUNDATION SECTION ===== */
+
+/* Partnership Section Container */
 
 /* Partnership Grid */
 .partnership-grid {
@@ -290,6 +332,34 @@ Last Update: 2025-08-05
 
 .cta-button i {
     font-size: 1.1rem;
+}
+
+/* ===== FAQ SECTION SPECIFIC STYLES ===== */
+
+.faq-section .faq-accordion__item {
+    background: var(--luvex-white);
+    border: 1px solid rgba(109, 213, 237, 0.2);
+}
+
+.faq-section .faq-accordion__item:hover {
+    background: #f8fafc;
+    border-color: rgba(109, 213, 237, 0.3);
+}
+
+/* ===== CTA SECTION SPECIFIC STYLES ===== */
+
+.cta-final .cta-section {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cta-final .cta-section h3 {
+    color: var(--luvex-white);
+}
+
+.cta-final .cta-section p {
+    color: rgba(255, 255, 255, 0.9);
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
