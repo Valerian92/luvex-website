@@ -13,11 +13,15 @@ Last Update: 2025-07-31
 /* 1. DESIGN TOKENS (Variables first!) */
 @import '_variables.css';
 
+
 /* 2. BASE STYLES */
-@import '_base.css';
+/* @import '_base.css';*/
 
 /* 3. LAYOUT SYSTEM */
-@import '_layout.css';
+/*@import '_layout.css'; */
+/* NEU: CORE STYLES */
+@import '_core.css';
+
 
 /* 4. UI COMPONENTS */
 @import '_buttons.css';

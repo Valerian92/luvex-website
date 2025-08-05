@@ -85,7 +85,7 @@ LUVEX THEME v2.5 - BOOKING PAGE (FINAL STYLES V2)
 .faq-accordion__answer { padding: 0 1.25rem 1.25rem 1.25rem; }
 
 /* --- Alternative Contact Section (KORRIGIERT) --- */
-.booking-alternative { text-align: center; background: var(--luvex-white); }
+.booking-alternative { text-align: center; background: var(--luvex-white); padding: 4rem 0; }
 .booking-alternative__content { max-width: 600px; margin: 0 auto; }
 .booking-alternative__title { font-size: 1.8rem; color: var(--luvex-dark-blue); margin-bottom: 0.5rem; }
 .booking-alternative__description { color: var(--luvex-gray-700); margin-bottom: 2rem; }
@@ -108,11 +108,4 @@ LUVEX THEME v2.5 - BOOKING PAGE (FINAL STYLES V2)
 }
 @media (max-width: 768px) {
     .benefits-grid { grid-template-columns: 1fr; }
-}
-
-/* Deaktiviert die Scroll-Animation für die Benefit-Karten */
-.booking-benefits .benefit-card {
-  opacity: 1;
-  transform: none;
-  transition: none; /* Optional, aber gut, um alle Übergänge zu stoppen */
 }
