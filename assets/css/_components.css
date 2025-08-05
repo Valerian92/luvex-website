@@ -21,7 +21,7 @@ Last Update: 2025-08-05
 .btn {
     display: inline-flex;
     align-items: center;
-    justify-content: center; /* NEU: Horizontale Zentrierung für Text & Icons */
+    justify-content: center; /* Horizontale Zentrierung für Text & Icons */
     gap: var(--space-xs);
     padding: 12px 24px;
     font-size: var(--text-base);
@@ -32,8 +32,9 @@ Last Update: 2025-08-05
     transition: var(--transition-normal);
     text-decoration: none;
     line-height: 1;
-    text-align: center; /* Fallback für Nicht-Flex-Kontexte */
+    text-align: center; /* Fallback */
 }
+
 
 .btn--primary {
     background: var(--color-primary);
@@ -168,6 +169,11 @@ Last Update: 2025-08-05
     padding: var(--space-md);
     transition: var(--transition-normal);
     box-shadow: var(--shadow-sm);
+    
+    /* KORREKTUR: Flexbox-Layout für den Karteninhalt */
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
 
 .card:hover {
@@ -193,6 +199,7 @@ Last Update: 2025-08-05
     font-size: var(--text-2xl);
     color: var(--color-primary);
     transition: var(--transition-normal);
+    flex-shrink: 0; /* Verhindert, dass das Icon schrumpft */
 }
 
 .card:hover .card__icon {
@@ -215,11 +222,20 @@ Last Update: 2025-08-05
     font-size: var(--text-base);
 }
 
+
 .card__content {
     text-align: center;
     font-size: var(--text-base);
     margin: 0;
     color: var(--color-gray);
+    
+    /* KORREKTUR: Lässt den Inhaltsbereich wachsen, um den Button nach unten zu drücken */
+    flex-grow: 1;
+}
+
+.card .btn {
+    margin-top: auto;
+    padding-top: var(--space-sm); /* Fügt etwas expliziten Abstand hinzu */
 }
 
 /* --- 2.2 LUVEX Value Card --- */
