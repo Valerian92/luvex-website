@@ -1,15 +1,16 @@
 <?php
 /**
- * Template Name: Booking Page (Final Design)
+ * Template Name: Booking Page (Final Design V2)
  * Template for Google Calendar appointment scheduling
  * * @package Luvex
- * @since 2.4.0
+ * @since 2.5.0
  */
 
 get_header(); ?>
 
 <div class="booking-page">
     
+    <!-- HERO SECTION (KORRIGIERT) -->
     <section class="booking-hero diagonal-transition">
         <div class="booking-hero__container container--wide">
             <div class="booking-hero__content">
@@ -26,6 +27,7 @@ get_header(); ?>
         </div>
     </section>
 
+    <!-- KALENDER SECTION -->
     <section id="schedule" class="booking-calendar section">
         <div class="container container--medium">
             <div class="booking-calendar__header">
@@ -47,14 +49,13 @@ get_header(); ?>
         </div>
     </section>
 
-    <!-- NEUE STRUKTUR: Benefits und Team in einem Wrapper für nahtlosen Hintergrund -->
+    <!-- CONTENT WRAPPER FÜR NAHTLOSEN HINTERGRUND -->
     <div class="content-wrapper-bg">
-        <!-- What You Get Section (NEU: Kompaktes Benefit-Card Design) -->
-       <section class="booking-benefits section--small">
+        <!-- WHAT YOU'LL GET SECTION -->
+       <section class="booking-benefits section">
             <div class="container container--wide">
                 <h2 class="text-center mb-2">What You'll Get in Your Consultation</h2>
                 <div class="benefits-grid">
-                    
                     <div class="benefit-card">
                         <div class="benefit-card__icon"><i class="fa-solid fa-lightbulb"></i></div>
                         <div class="benefit-card__content">
@@ -62,7 +63,6 @@ get_header(); ?>
                             <p class="benefit-card__description">Professional assessment of your current UV setup and identification of optimization opportunities.</p>
                         </div>
                     </div>
-                    
                     <div class="benefit-card">
                         <div class="benefit-card__icon"><i class="fa-solid fa-chart-line"></i></div>
                         <div class="benefit-card__content">
@@ -70,7 +70,6 @@ get_header(); ?>
                             <p class="benefit-card__description">Practical next steps tailored to your specific goals, timeline, and budget constraints.</p>
                         </div>
                     </div>
-                    
                     <div class="benefit-card">
                         <div class="benefit-card__icon"><i class="fa-solid fa-handshake"></i></div>
                         <div class="benefit-card__content">
@@ -78,12 +77,11 @@ get_header(); ?>
                             <p class="benefit-card__description">Honest recommendations without vendor bias – we're not selling equipment, just expertise.</p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
 
-        <!-- Team Section (NEU: Grid-Layout mit 2 Spalten) -->
+        <!-- TEAM SECTION (NEUES HIGH-END DESIGN) -->
         <section class="team-section section">
             <div class="container container--wide">
                 <div class="team-section__header">
@@ -92,25 +90,25 @@ get_header(); ?>
                 </div>
                 <div class="team-section__grid">
                     
-                    <div class="team-card">
-                        <div class="team-card__photo">
+                    <div class="expert-card">
+                        <div class="expert-card__photo">
                             <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Bewerbungsbild_Valerian-Huber.jpg" alt="Valerian Huber">
                         </div>
-                        <div class="team-card__content">
+                        <div class="expert-card__content">
                             <h3>Valerian Huber</h3>
-                            <p class="team-card__role">CEO & UV Technology Lead</p>
-                            <p class="team-card__quote">"Our goal is to bring clarity and precision into every UV application, empowering our clients with knowledge."</p>
+                            <p class="expert-card__role">CEO & UV Technology Lead</p>
+                            <p class="expert-card__bio">With a deep focus on UV-C systems, LEDs, and process validation, Valerian brings clarity and precision into every UV application, empowering clients with actionable knowledge.</p>
                         </div>
                     </div>
 
-                    <div class="team-card">
-                        <div class="team-card__photo">
+                    <div class="expert-card">
+                        <div class="expert-card__photo">
                             <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Matthias.jpg" alt="Matthias Slapka">
                         </div>
-                        <div class="team-card__content">
+                        <div class="expert-card__content">
                             <h3>Matthias Slapka</h3>
-                            <p class="team-card__role">Automation & Integration Expert</p>
-                            <p class="team-card__quote">"A perfectly integrated and documented system is the foundation for reliable and efficient industrial processes."</p>
+                            <p class="expert-card__role">Automation & Integration Expert</p>
+                            <p class="expert-card__bio">As a specialist for system integration and E-PLAN documentation, Matthias ensures that every solution is not just effective, but also flawlessly integrated and reliably documented for long-term success.</p>
                         </div>
                     </div>
 
@@ -119,7 +117,7 @@ get_header(); ?>
         </section>
     </div>
 
-    <!-- FAQ Section (Styling überarbeitet) -->
+    <!-- FAQ SECTION -->
     <section class="booking-faq section">
         <div class="container container--narrow" style="max-width: 900px;">
             <h2 class="text-center mb-2">Frequently Asked Questions</h2>
@@ -134,6 +132,7 @@ get_header(); ?>
         </div>
     </section>
 
+    <!-- ALTERNATIVE CONTACT SECTION (KORRIGIERT) -->
     <section class="booking-alternative section--small">
         <div class="container">
             <div class="booking-alternative__content">

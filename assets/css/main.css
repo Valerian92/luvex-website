@@ -57,7 +57,7 @@ Last Update: 2025-07-31
 @import '_page-uv-led.css';
 
 @import '_page-uv-consulting.css';
-
+@import '_section-patterns.css';
 
 /* Besser Weg ist das Laden über functions --> schneller für Animations:
 @import '_animations.css'; */
