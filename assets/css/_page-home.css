@@ -155,9 +155,9 @@ Last Update: 2025-08-06
 /* --- 4. Global UV Expert Community Section --- */
 .homepage-community-section {
     padding: 6rem 0;
-    overflow: hidden;
     position: relative;
     background-color: transparent; /* Wichtig, damit ::before sichtbar ist */
+    overflow: hidden; /* Beibehalten, um seitliches Scrollen zu verhindern */
 }
 
 /* KORREKTUR: Hintergrund-Grid wieder hinzugefügt */
@@ -182,13 +182,13 @@ Last Update: 2025-08-06
     display: flex;
     align-items: center;
     gap: var(--space-lg);
+    position: relative; /* Stellt sicher, dass der Inhalt über dem ::before liegt */
+    z-index: 2;
 }
 
 .homepage-community-content {
     flex: 1;
     min-width: 50%;
-    position: relative;
-    z-index: 2;
 }
 
 .homepage-community-visual {
@@ -205,7 +205,7 @@ Last Update: 2025-08-06
     position: absolute;
     left: 25%;
     top: -10%;
-    z-index: 1;
+    z-index: 1; /* Zwischen Grid und Inhalt */
 }
 
 .homepage-community-title {
@@ -233,6 +233,7 @@ Last Update: 2025-08-06
 /* --- 5. Evidence-Based Expertise Section --- */
 .evidence-section {
     padding: 6rem 0;
+    overflow: visible; /* KORREKTUR: Erlaubt dem Bild, überzulaufen */
 }
 
 .evidence-grid {
@@ -253,7 +254,6 @@ Last Update: 2025-08-06
     max-width: 550px;
 }
 
-/* KORREKTUR: Macht die Team-Member-Karte sofort sichtbar */
 .evidence-section .team-member {
     opacity: 1 !important;
     transform: none !important;
