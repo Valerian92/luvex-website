@@ -1,11 +1,12 @@
 /*
 ==============================================================================
-LUVEX THEME v2.4 - UV CONSULTING PAGE (Final Refinements)
+LUVEX THEME v2.5 - UV CONSULTING PAGE (Final & Corrected)
 ==============================================================================
 
-Description: Styles für die UV Consulting Seite.
-             - "Partnership Excellence" Sektion im eleganten, zentrierten Stil.
-             - Interaktive FAQ Sektion mit Button-Steuerung.
+Description: Styles for the UV Consulting page.
+             - Corrected subtitle width.
+             - Restored Core Competencies styles.
+             - Implemented alternating background colors.
 Dependencies: _variables.css, _core.css, _components.css
 Last Update: 2025-08-07
 
@@ -14,24 +15,12 @@ Last Update: 2025-08-07
 
 /* ===== SECTION BACKGROUNDS & GENERAL STYLES ===== */
 
-.partnership-foundation {
+.section--light-gray {
     background: #F8FAFC;
-    padding: 6rem 0;
 }
 
-.core-competencies {
+.section--white {
     background: var(--luvex-white);
-    padding: 6rem 0;
-}
-
-.faq-section-v2 {
-    background: linear-gradient(180deg, rgba(248, 250, 252, 0) 0%, rgba(109, 213, 237, 0.08) 100%);
-    padding: 6rem 0;
-}
-
-.cta-final {
-    background: linear-gradient(135deg, var(--luvex-dark-blue) 0%, var(--luvex-dark-blue-medium) 100%);
-    padding: 6rem 0;
 }
 
 .section__title {
@@ -51,7 +40,7 @@ Last Update: 2025-08-07
     text-align: center;
 }
 
-/* ===== PARTNERSHIP FOUNDATION & CARDS (Unverändert) ===== */
+/* ===== PARTNERSHIP FOUNDATION & CARDS ===== */
 .partnership-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -59,20 +48,18 @@ Last Update: 2025-08-07
     margin-bottom: 4rem;
 }
 .partnership-card {
-    background: linear-gradient(135deg, var(--luvex-white) 0%, #f8fafc 100%);
-    border: 2px solid rgba(109, 213, 237, 0.2);
+    background: linear-gradient(135deg, var(--luvex-white) 0%, #fdfdff 100%);
+    border: 1px solid var(--luvex-gray-200);
     border-radius: var(--radius-lg);
     padding: 2.5rem 2rem;
     text-align: center;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-sm);
 }
 .partnership-card:hover {
     transform: translateY(-8px);
-    border-color: rgba(109, 213, 237, 0.6);
-    box-shadow: 0 15px 35px rgba(109, 213, 237, 0.15);
+    border-color: rgba(109, 213, 237, 0.4);
+    box-shadow: var(--shadow-md);
 }
 .partnership-card__icon {
     font-size: 3rem;
@@ -92,7 +79,7 @@ Last Update: 2025-08-07
 }
 
 
-/* ===== ÜBERARBEITET: Partnership Excellence v2 ===== */
+/* ===== Partnership Excellence v2 ===== */
 .partnership-excellence-v2 {
     background: var(--luvex-dark-blue);
     color: var(--luvex-white);
@@ -111,11 +98,12 @@ Last Update: 2025-08-07
     margin: 0 0 1rem 0;
 }
 
+/* KORREKTUR: Breite des Untertitels erhöht */
 .partnership-excellence-v2__subtitle {
     font-size: 1.1rem;
     color: var(--luvex-gray-300);
     line-height: 1.6;
-    max-width: 700px;
+    max-width: 850px; /* Breiter gemacht */
     margin: 0 auto 2.5rem auto;
 }
 
@@ -139,8 +127,11 @@ Last Update: 2025-08-07
     color: var(--luvex-bright-cyan);
 }
 
+/* ===== Core Competencies - Value Cards (Stile aus _components.css werden wiederverwendet) ===== */
+/* Die .value-card Stile sind global und benötigen hier keine zusätzlichen Regeln. */
 
-/* ===== NEU: Interaktive FAQ Section v2 ===== */
+
+/* ===== Interaktive FAQ Section v2 ===== */
 .faq-interactive-layout {
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -189,7 +180,7 @@ Last Update: 2025-08-07
 
 .faq-answers {
     position: relative;
-    min-height: 200px; /* Ensures consistent height */
+    min-height: 200px;
 }
 
 .faq-answer-panel {

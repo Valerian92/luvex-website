@@ -2,7 +2,7 @@
 /**
  * Template Name: UV Consulting
  * @package Luvex
- * @since 2.4 (Refined Partnership & FAQ sections)
+ * @since 2.5 (Restored content and optimized section flow)
  */
 get_header(); ?>
 
@@ -31,7 +31,7 @@ get_header(); ?>
     </section>
 
     <!-- Partnership Foundation Section -->
-    <section class="section partnership-foundation">
+    <section class="section section--light-gray">
         <div class="container container--wide">
             <div class="text-center mb-3">
                 <h2 class="section__title">Our Partnership Foundation</h2>
@@ -40,7 +40,6 @@ get_header(); ?>
                 </p>
             </div>
             
-            <!-- Partnership Grid (unverändert) -->
             <div class="partnership-grid">
                 <div class="partnership-card">
                     <i class="fa-solid fa-user-shield partnership-card__icon"></i>
@@ -72,7 +71,6 @@ get_header(); ?>
                 </div>
             </div>
             
-            <!-- ÜBERARBEITET: Partnership Excellence Section -->
             <div class="partnership-excellence-v2">
                 <h3 class="partnership-excellence-v2__title">Partnership Excellence</h3>
                 <p class="partnership-excellence-v2__subtitle">
@@ -100,21 +98,35 @@ get_header(); ?>
         </div>
     </section>
 
-    <!-- Core Competencies Section (unverändert) -->
-    <section class="section core-competencies">
+    <!-- Core Competencies Section (WIEDERHERGESTELLT) -->
+    <section class="section section--white">
         <div class="container container--wide">
             <div class="text-center mb-3">
                 <h2 class="section__title">Core Competencies</h2>
                 <p class="section__subtitle">We provide end-to-end expertise for your UV applications, ensuring efficiency, safety, and compliance.</p>
             </div>
             <div class="grid-3">
-                <!-- Value cards unverändert -->
+                <div class="value-card value-card--turquoise">
+                    <div class="value-card__icon"><i class="fa-solid fa-flask-vial"></i></div>
+                    <h3 class="value-card__title">System & Process Analysis</h3>
+                    <p class="value-card__description">We evaluate your existing UV systems and processes to identify bottlenecks and opportunities for improvement.</p>
+                </div>
+                <div class="value-card value-card--turquoise">
+                    <div class="value-card__icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3 class="value-card__title">Performance Optimization</h3>
+                    <p class="value-card__description">We fine-tune your UV applications for maximum efficiency, dose delivery, and energy savings.</p>
+                </div>
+                <div class="value-card value-card--turquoise">
+                    <div class="value-card__icon"><i class="fa-solid fa-clipboard-check"></i></div>
+                    <h3 class="value-card__title">Validation & Compliance</h3>
+                    <p class="value-card__description">We ensure your systems meet industry standards and regulatory requirements (e.g., DVGW, ÖNORM).</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- ÜBERARBEITET: FAQ Section mit interaktivem Layout -->
-    <section class="section faq-section-v2">
+    <!-- Interaktive FAQ Section -->
+    <section class="section section--light-gray">
         <div class="container container--medium">
             <div class="faq-intro">
                 <h2 class="section__title">Your Questions, Answered</h2>
@@ -171,11 +183,6 @@ get_header(); ?>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- CTA Section (unverändert) -->
-    <section class="section cta-final">
-        <!-- ... -->
     </section>
 
 </main><!-- #main -->
