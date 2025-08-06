@@ -431,8 +431,6 @@ Last Update: 2025-08-05
 .has-shine-effect {
     position: relative;
     overflow: hidden;
-    /* Stellt sicher, dass die Karte einen eigenen Stapelkontext hat */
-    z-index: 1;
 }
 
 .has-shine-effect::before {
@@ -442,7 +440,6 @@ Last Update: 2025-08-05
     left: -100%;
     width: 100%;
     height: 100%;
-    /* Weicher Cyan-Glanz-Effekt für einen hochwertigen Look */
     background: linear-gradient(90deg, 
         transparent 0%, 
         rgba(109, 213, 237, 0.15) 40%,
@@ -450,24 +447,24 @@ Last Update: 2025-08-05
         rgba(109, 213, 237, 0.15) 60%,
         transparent 100%
     );
-    /* Langsamere, elegante Animation */
-    transition: left 0.8s ease-in-out; 
+    transition: left 0.8s ease-in-out;
+    /* Liegt über dem Hintergrund der Karte */
     z-index: 1;
+}
+
+/* Stellt sicher, dass der Inhalt der Karte immer ganz oben ist */
+.has-shine-effect > * {
+    position: relative;
+    z-index: 2;
 }
 
 .has-shine-effect:hover::before {
     left: 100%;
 }
 
-/* KORREKTUR: Hebt die gehoverte Karte über ihre Nachbarn */
+/* Hebt die gehoverte Karte über ihre Nachbarn */
 .has-shine-effect:hover {
-    z-index: 2;
-}
-
-/* Stellt sicher, dass der Inhalt über dem Effekt bleibt */
-.has-shine-effect > * {
-    position: relative;
-    z-index: 2;
+    z-index: 3;
 }
 
 /*
