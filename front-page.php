@@ -1,7 +1,7 @@
 <?php
 /**
- * Template Name: Homepage
- * * Main homepage for Luvex UV Technology
+ * Template Name: Homepage (Refactored)
+ * Main homepage for Luvex UV Technology
  *
  * @package Luvex
  */
@@ -38,7 +38,7 @@ get_header(); ?>
 </section>
 
 <!-- UV Knowledge Navigator -->
-<section class="section section--turquoise-light knowledge-navigator-section diagonal-transition">
+<section class="section section--turquoise-light knowledge-navigator-section">
     <div class="container container--medium"> 
         <div class="knowledge-navigator-header">
             <h2 class="text-center">UV Knowledge Navigator</h2>
@@ -46,52 +46,38 @@ get_header(); ?>
                 Your pathway to UV expertise - from fundamentals to advanced applications
             </p>
         </div>
-        <div class="grid-3 knowledge-navigator">
-            <div class="value-card knowledge-card">
+        <div class="grid grid-3 knowledge-navigator">
+            <!-- Refactored to use global .card component with a modifier -->
+            <div class="card knowledge-card">
                 <div class="knowledge-card__header">
-                    <div class="value-card__icon"><i class="fas fa-atom"></i></div>
-                    <h3 class="value-card__title">UV Fundamentals</h3>
+                    <div class="card__icon"><i class="fas fa-atom"></i></div>
+                    <h3 class="card__title">UV Fundamentals</h3>
                 </div>
-                <p class="value-card__description">Master the physics and engineering principles behind UV technology. From wavelength spectrum to dose calculations.</p>
-                <ul class="knowledge-list">
-                    <li><i class="fas fa-wave-square"></i> Wavelength spectrum & applications</li>
-                    <li><i class="fas fa-calculator"></i> Dose calculations & Beer-Lambert law</li>
-                    <li><i class="fas fa-shield-alt"></i> Safety standards & protocols</li>
-                </ul>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--primary btn--small">Explore UV Science</a>
+                <p class="card__content">Master the physics and engineering principles behind UV technology. From wavelength spectrum to dose calculations.</p>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--outline">Explore UV Science</a>
             </div>
-            <div class="value-card knowledge-card">
+            <div class="card knowledge-card">
                 <div class="knowledge-card__header">
-                    <div class="value-card__icon"><i class="fas fa-lightbulb"></i></div>
-                    <h3 class="value-card__title">Technology Platforms</h3>
+                    <div class="card__icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3 class="card__title">Technology Platforms</h3>
                 </div>
-                <p class="value-card__description">Compare conventional mercury and cutting-edge LED UV systems with objective analysis.</p>
-                <ul class="knowledge-list">
-                    <li><i class="fas fa-balance-scale"></i> Objective technology comparison</li>
-                    <li><i class="fas fa-chart-line"></i> Performance & efficiency analysis</li>
-                    <li><i class="fas fa-route"></i> Technology selection guidance</li>
-                </ul>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--primary btn--small">Compare Technologies</a>
+                <p class="card__content">Compare conventional mercury and cutting-edge LED UV systems with objective analysis.</p>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--outline">Compare Technologies</a>
             </div>
-            <div class="value-card knowledge-card">
+            <div class="card knowledge-card">
                 <div class="knowledge-card__header">
-                    <div class="value-card__icon"><i class="fas fa-industry"></i></div>
-                    <h3 class="value-card__title">Applications Hub</h3>
+                    <div class="card__icon"><i class="fas fa-industry"></i></div>
+                    <h3 class="card__title">Applications Hub</h3>
                 </div>
-                <p class="value-card__description">Discover UV solutions across industries from water treatment to advanced curing applications.</p>
-                <ul class="knowledge-list">
-                    <li><i class="fas fa-water"></i> Water disinfection systems</li>
-                    <li><i class="fas fa-wind"></i> Air treatment & HVAC integration</li>
-                    <li><i class="fas fa-hand-sparkles"></i> Surface sterilization solutions</li>
-                </ul>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--primary btn--small">Explore Applications</a>
+                <p class="card__content">Discover UV solutions across industries from water treatment to advanced curing applications.</p>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--outline">Explore Applications</a>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Interactive UV Simulator Showcase -->
-<section class="section precision-transition">
+<section class="section section--turquoise-light">
     <div class="container" style="max-width: 1200px; margin: 0 auto;">
         <div class="uv-simulator-showcase">
             <div class="simulator-content">
@@ -101,31 +87,19 @@ get_header(); ?>
                     <div class="simulator-feature"><i class="fas fa-shield-virus"></i><h4>UV Disinfection</h4><p>Pathogen inactivation modeling</p></div>
                     <div class="simulator-feature"><i class="fas fa-layer-group"></i><h4>Substrate Curing</h4><p>UV polymerization simulation</p></div>
                     <div class="simulator-feature"><i class="fas fa-database"></i><h4>Real Templates</h4><p>Industry-based configurations</p></div>
-                    <div class="simulator-feature"><i class="fas fa-exclamation-triangle"></i><h4>Smart Warnings</h4><p>Unrealistic parameter alerts</p></div>
-                    <div class="simulator-feature"><i class="fas fa-chart-line"></i><h4>Precise Distribution</h4><p>Exact intensity mapping</p></div>
-                    <div class="simulator-feature"><i class="fas fa-mouse-pointer"></i><h4>Intuitive Control</h4><p>User-friendly interface</p></div>
                 </div>
-                <div class="simulator-cta-container">
-                    <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="simulator-cta"><i class="fas fa-play-circle"></i><span>Launch Interactive Simulator</span></a>
-                </div>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="luvex-cta-primary simulator-cta"><i class="fas fa-play-circle"></i><span>Launch Interactive Simulator</span></a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- GLOBAL UV EXPERT COMMUNITY SEKTION -->
-<!-- ÄNDERUNG: Die Klasse 'curved-transition' wurde entfernt -->
+<!-- GLOBAL UV EXPERT COMMUNITY SECTION -->
 <section class="section homepage-community-section">
     <div class="homepage-community-container">
-        <div class="homepage-community-content">
+        <div class= "homepage-community-content">
             <h2 class="homepage-community-title">Building the Global <span class="text-highlight">UV Network</span></h2>
             <p class="homepage-community-description">Join thousands of UV professionals from around the world in advancing technology, sharing knowledge, and solving complex engineering challenges together.</p>
-            <ul class="homepage-community-features">
-                <li><i class="fa-solid fa-chalkboard-user"></i><div><strong>Expert Sessions:</strong> Monthly webinars with industry leaders</div></li>
-                <li><i class="fa-solid fa-comments"></i><div><strong>Knowledge Exchange:</strong> Technical forums and case study sharing</div></li>
-                <li><i class="fa-solid fa-people-group"></i><div><strong>Global Network:</strong> Connect with experts across 6 continents</div></li>
-                <li><i class="fa-solid fa-book-open"></i><div><strong>Resource Library:</strong> Free access to calculation tools and guides</div></li>
-            </ul>
             <div class="homepage-community-actions">
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'login' ) ) ); ?>" class="luvex-cta-primary">Join Community</a>
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="luvex-cta-secondary">Learn About Us</a>
@@ -138,21 +112,17 @@ get_header(); ?>
 </section>
 
 <!-- Evidence-Based Expertise Section -->
-<section class="section evidence-section layered-transition">
+<section class="section evidence-section">
     <div class="container container--narrow">
         <div class="evidence-grid">
             <div class="evidence-content">
                 <h2 class="evidence-title"><span class="text-highlight">Evidence-Based</span> UV Expertise</h2>
                 <p class="evidence-description">Our commitment is to vendor-neutral, scientifically-backed guidance. We deliver clarity and confidence by grounding every recommendation in empirical data and peer-reviewed research.</p>
-                <ul class="evidence-list">
-                    <li><i class="fas fa-balance-scale"></i><div><strong>Vendor-Neutral Analysis</strong><p>Objective assessments free from manufacturer bias, ensuring the best solution for your specific needs.</p></div></li>
-                    <li><i class="fas fa-microscope"></i><div><strong>Scientific Validation</strong><p>Recommendations backed by rigorous testing, simulation data, and the latest scientific publications.</p></div></li>
-                    <li><i class="fas fa-globe-americas"></i><div><strong>Global Research Network</strong><p>Access to insights from leading UV research institutions and experts worldwide.</p></div></li>
-                </ul>
                  <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="btn btn--primary" style="margin-top: 2rem;">Our Scientific Approach</a>
             </div>
             <div class="evidence-visual">
-                <div class="featured-expert-card">
+                <!-- Using global .team-member card component -->
+                <div class="team-member">
                     <div class="team-member__photo"><img src="https://www.luvex.tech/wp-content/uploads/2025/07/Bewerbungsbild_Valerian-Huber.jpg" alt="Photo of Valerian Huber"></div>
                     <div class="team-member__content"><h3>Valerian Huber</h3><p class="team-member__role">Founder & UV Technology Expert</p></div>
                     <div class="team-member__quote"><p>"My goal is to make the complexity of UV technology accessible to everyone. True innovation comes from substantiated knowledge, not from guesswork."</p></div>
@@ -165,12 +135,13 @@ get_header(); ?>
 <!-- FINAL CTA SEKTION -->
 <section class="section section--final-cta">
     <div class="container">
-        <div class="cta-content">
+        <!-- Using global .cta-section component -->
+        <div class="cta-section cta-section--dark">
             <h3>Ready to Master UV Technology?</h3>
             <p>Join the global community of UV experts. Whether you need consultation, training, or technical support - start your journey with the world's leading UV specialists.</p>
             <div class="cta-actions">
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-cta-primary"><i class="fas fa-comments"></i><span>Get Expert Consultation</span></a>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="luvex-cta-secondary"><i class="fas fa-graduation-cap"></i><span>Start Learning</span></a>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="cta-button"><i class="fas fa-comments"></i><span>Get Expert Consultation</span></a>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="cta-button"><i class="fas fa-graduation-cap"></i><span>Start Learning</span></a>
             </div>
         </div>
     </div>
