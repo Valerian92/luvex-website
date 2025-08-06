@@ -428,11 +428,27 @@ Last Update: 2025-08-05
 ==============================================================================
 */
 
+/* --- DEFINITIVE FIX: Globaler Glanz-Effekt mit korrekter Stapelreihenfolge --- */
 .has-shine-effect {
+    /* Wichtig: position: relative, damit der ::before-Effekt sich daran orientieren kann */
     position: relative;
-    overflow: hidden;
 }
 
+/* Der Container für den Glanz-Effekt. Er wird über die Karte gelegt, aber unter den Inhalt. */
+.has-shine-effect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: var(--radius-lg); /* Muss mit dem Radius der Karte übereinstimmen */
+    overflow: hidden; /* Stellt sicher, dass der Glanz die Karte nicht verlässt */
+    z-index: 1; /* Liegt über dem Kartenhintergrund */
+    pointer-events: none; /* Erlaubt Klicks auf den Karteninhalt */
+}
+
+/* Der eigentliche Glanz-Effekt, der sich innerhalb des ::after Containers bewegt */
 .has-shine-effect::before {
     content: '';
     position: absolute;
@@ -448,23 +464,18 @@ Last Update: 2025-08-05
         transparent 100%
     );
     transition: left 0.8s ease-in-out;
-    /* Liegt über dem Hintergrund der Karte */
-    z-index: 1;
+    z-index: 2; /* Liegt über dem ::after Container, aber unter dem Inhalt */
+    pointer-events: none;
 }
 
 /* Stellt sicher, dass der Inhalt der Karte immer ganz oben ist */
 .has-shine-effect > * {
     position: relative;
-    z-index: 2;
+    z-index: 3;
 }
 
 .has-shine-effect:hover::before {
     left: 100%;
-}
-
-/* Hebt die gehoverte Karte über ihre Nachbarn */
-.has-shine-effect:hover {
-    z-index: 3;
 }
 
 /*
