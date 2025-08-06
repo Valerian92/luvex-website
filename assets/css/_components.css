@@ -431,6 +431,8 @@ Last Update: 2025-08-05
 .has-shine-effect {
     position: relative;
     overflow: hidden;
+    /* Stellt sicher, dass die Karte einen eigenen Stapelkontext hat */
+    z-index: 1;
 }
 
 .has-shine-effect::before {
@@ -455,6 +457,11 @@ Last Update: 2025-08-05
 
 .has-shine-effect:hover::before {
     left: 100%;
+}
+
+/* KORREKTUR: Hebt die gehoverte Karte über ihre Nachbarn */
+.has-shine-effect:hover {
+    z-index: 2;
 }
 
 /* Stellt sicher, dass der Inhalt über dem Effekt bleibt */
