@@ -1,67 +1,43 @@
 /*
 ==============================================================================
-LUVEX THEME v2.2 - UV CONSULTING PAGE
+LUVEX THEME v2.3 - UV CONSULTING PAGE (Optimized)
 ==============================================================================
 
-Description: Styles für die UV Consulting Seite, Partnership Foundation und Value Cards
-Dependencies: _variables.css, _core.css
-Last Update: 2025-08-05
+Description: Styles für die UV Consulting Seite.
+             - "Partnership Excellence" Sektion neugestaltet.
+             - FAQ Sektion modernisiert und mit Interaktionselementen versehen.
+Dependencies: _variables.css, _core.css, _components.css
+Last Update: 2025-08-06
 
 ==============================================================================
 */
 
 /* ===== SECTION BACKGROUNDS & COLOR HARMONY ===== */
 
-/* Partnership Foundation - Light Gray nach Dark Hero */
 .partnership-foundation {
     background: #F8FAFC;
     padding: 6rem 0;
     position: relative;
 }
 
-/* Core Competencies - Clean White für harten Cut */
 .core-competencies {
     background: var(--luvex-white);
     padding: 6rem 0;
 }
 
-/* FAQ Section - Leichtes Türkis für sanften Übergang */
 .faq-section {
-    background: linear-gradient(180deg, rgba(109, 213, 237, 0.08) 0%, rgba(248, 250, 252, 0) 100%);
+    background: linear-gradient(180deg, rgba(248, 250, 252, 0) 0%, rgba(109, 213, 237, 0.08) 100%);
     padding: 6rem 0;
 }
 
-/* CTA Final - Dunkler Hintergrund für starken Call-to-Action */
 .cta-final {
     background: linear-gradient(135deg, var(--luvex-dark-blue) 0%, var(--luvex-dark-blue-medium) 100%);
     color: var(--luvex-white);
     padding: 6rem 0;
 }
 
-/* Titel-Farben je nach Sektion anpassen */
-.faq-section .section__title,
-.core-competencies .section__title {
-    color: var(--luvex-dark-blue);
-}
-
-.cta-final .section__title {
-    color: var(--luvex-white);
-}
-
-.faq-section .section__subtitle,
-.core-competencies .section__subtitle {
-    color: var(--luvex-gray-700);
-}
-
-.cta-final .section__subtitle {
-    color: rgba(255, 255, 255, 0.9);
-}
-
 /* ===== PARTNERSHIP FOUNDATION SECTION ===== */
 
-/* Partnership Section Container */
-
-/* Partnership Grid */
 .partnership-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -69,12 +45,8 @@ Last Update: 2025-08-05
     margin-bottom: 4rem;
 }
 
-/* Partnership Cards */
 .partnership-card {
-    background: linear-gradient(135deg, 
-        var(--luvex-white) 0%, 
-        #f8fafc 100%
-    );
+    background: linear-gradient(135deg, var(--luvex-white) 0%, #f8fafc 100%);
     border: 2px solid rgba(109, 213, 237, 0.2);
     border-radius: var(--radius-lg);
     padding: 2.5rem 2rem;
@@ -82,10 +54,7 @@ Last Update: 2025-08-05
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-    backdrop-filter: blur(10px);
-    box-shadow: 
-        0 4px 15px rgba(0, 0, 0, 0.05),
-        0 1px 4px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .partnership-card::before {
@@ -95,20 +64,14 @@ Last Update: 2025-08-05
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        rgba(109, 213, 237, 0.1) 50%, 
-        transparent 100%
-    );
+    background: linear-gradient(90deg, transparent 0%, rgba(109, 213, 237, 0.1) 50%, transparent 100%);
     transition: left 0.6s ease;
 }
 
 .partnership-card:hover {
     transform: translateY(-8px);
     border-color: rgba(109, 213, 237, 0.6);
-    box-shadow: 
-        0 15px 35px rgba(109, 213, 237, 0.15),
-        0 5px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 15px 35px rgba(109, 213, 237, 0.15);
 }
 
 .partnership-card:hover::before {
@@ -132,7 +95,6 @@ Last Update: 2025-08-05
     font-weight: 700;
     color: var(--luvex-dark-blue);
     margin-bottom: 1rem;
-    line-height: 1.3;
 }
 
 .partnership-card__description {
@@ -141,85 +103,87 @@ Last Update: 2025-08-05
     line-height: 1.6;
 }
 
-/* Core Values Section */
-.partnership-values {
-    background: var(--luvex-white);
-    border-radius: var(--radius-lg);
-    padding: 3rem;
-    text-align: center;
-    box-shadow: 
-        0 10px 30px rgba(0, 0, 0, 0.06),
-        0 2px 8px rgba(0, 0, 0, 0.02);
-    border: 1px solid rgba(109, 213, 237, 0.1);
+/* NEU: Partnership Excellence Section (ersetzt .partnership-values) */
+.partnership-excellence {
+    background: linear-gradient(135deg, var(--luvex-dark-blue-light) 0%, var(--luvex-dark-blue) 100%);
+    color: var(--luvex-white);
+    border-radius: var(--radius-xl);
+    padding: 3rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    align-items: center;
+    gap: 3rem;
+    box-shadow: 0 20px 40px rgba(27, 42, 73, 0.2);
+    border: 1px solid rgba(109, 213, 237, 0.2);
 }
 
-.partnership-values__title {
-    font-size: 1.5rem;
+.partnership-excellence__content {
+    border-right: 1px solid rgba(109, 213, 237, 0.2);
+    padding-right: 3rem;
+}
+
+.partnership-excellence__title {
+    font-size: 1.8rem;
     font-weight: 700;
-    color: var(--luvex-dark-blue);
+    color: var(--luvex-white);
     margin-bottom: 1rem;
 }
 
-.partnership-values__subtitle {
-    font-size: 1rem;
-    color: var(--luvex-gray-700);
-    margin-bottom: 2rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+.partnership-excellence__subtitle {
+    font-size: 1.1rem;
+    color: var(--luvex-gray-300);
+    line-height: 1.6;
+    max-width: 450px; /* Verhindert unschönen Umbruch */
+    margin: 0;
 }
 
-.values-list {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    flex-wrap: wrap;
+.partnership-excellence__values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
 }
 
-.value-item {
+.partnership-excellence .value-item {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    font-size: 0.95rem;
-    color: var(--luvex-gray-700);
+    gap: 1rem;
+    font-size: 1rem;
+    color: var(--luvex-gray-200);
     font-weight: 500;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    transition: background-color 0.3s ease;
 }
 
-.value-item__icon {
-    width: 12px;
-    height: 12px;
-    background: var(--luvex-bright-cyan);
-    border-radius: 50%;
-    flex-shrink: 0;
+.partnership-excellence .value-item:hover {
+    background: rgba(255, 255, 255, 0.1);
 }
+
+.partnership-excellence .value-item__icon {
+    color: var(--luvex-bright-cyan);
+    font-size: 1.2rem;
+}
+
 
 /* ===== VALUE CARDS (für Core Competencies) ===== */
-
 .value-card {
     background: var(--luvex-white);
     border-radius: var(--radius-lg);
     padding: 2.5rem 2rem;
     text-align: center;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 
-        0 4px 15px rgba(0, 0, 0, 0.06),
-        0 1px 4px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
     border: 1px solid rgba(109, 213, 237, 0.1);
 }
 
 .value-card:hover {
     transform: translateY(-5px);
-    box-shadow: 
-        0 12px 30px rgba(0, 0, 0, 0.1),
-        0 4px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
 }
 
 .value-card--turquoise {
     border-color: rgba(109, 213, 237, 0.2);
-}
-
-.value-card--turquoise:hover {
-    border-color: rgba(109, 213, 237, 0.4);
 }
 
 .value-card__icon {
@@ -248,7 +212,6 @@ Last Update: 2025-08-05
     font-weight: 700;
     color: var(--luvex-dark-blue);
     margin-bottom: 1rem;
-    line-height: 1.3;
 }
 
 .value-card__description {
@@ -271,99 +234,72 @@ Last Update: 2025-08-05
     font-size: 1.3rem;
     color: var(--luvex-gray-700);
     max-width: 700px;
-    margin: 0 auto;
+    margin: 0 auto 3rem auto;
     line-height: 1.6;
     text-align: center;
 }
 
-/* ===== CTA SECTION ===== */
-
-.cta-section {
-    background: var(--luvex-white);
-    border-radius: var(--radius-lg);
-    padding: 4rem 3rem;
+/* ===== NEU: FAQ SECTION STYLING ===== */
+.faq-intro {
     text-align: center;
-    box-shadow: 
-        0 10px 30px rgba(0, 0, 0, 0.08),
-        0 2px 8px rgba(0, 0, 0, 0.04);
+    margin-bottom: 3rem;
 }
 
-.cta-section--dark {
-    background: linear-gradient(135deg, var(--luvex-dark-blue) 0%, var(--luvex-dark-blue-medium) 100%);
-    color: var(--luvex-white);
+.faq-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    align-items: flex-start;
 }
-
-.cta-section h3 {
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    color: inherit;
-}
-
-.cta-section p {
-    font-size: 1.1rem;
-    margin-bottom: 2.5rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    color: inherit;
-    opacity: 0.9;
-}
-
-.cta-button {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-xs);
-    padding: 16px 32px;
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
-    border-radius: var(--radius-full);
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.cta-button:hover {
-    background: #5ac7e0;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(109, 213, 237, 0.4);
-    color: var(--luvex-dark-blue);
-}
-
-.cta-button i {
-    font-size: 1.1rem;
-}
-
-/* ===== FAQ SECTION SPECIFIC STYLES ===== */
 
 .faq-section .faq-accordion__item {
     background: var(--luvex-white);
-    border: 1px solid rgba(109, 213, 237, 0.2);
+    border: 1px solid var(--luvex-gray-200);
+    box-shadow: var(--shadow-sm);
 }
 
 .faq-section .faq-accordion__item:hover {
-    background: #f8fafc;
-    border-color: rgba(109, 213, 237, 0.3);
+    border-color: var(--luvex-gray-300);
 }
 
-/* ===== CTA SECTION SPECIFIC STYLES ===== */
+.faq-section .faq-accordion__item[open] {
+    border-color: var(--luvex-bright-cyan);
+}
 
-.cta-final .cta-section {
+.faq-contact-box {
+    background: var(--luvex-dark-blue);
+    color: var(--luvex-white);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    position: sticky;
+    top: 120px; /* Abstand zum Header */
+}
+
+.faq-contact-box h4 {
+    font-size: 1.25rem;
+    margin: 0 0 0.5rem 0;
+    color: var(--luvex-white);
+}
+
+.faq-contact-box p {
+    font-size: 0.95rem;
+    color: var(--luvex-gray-300);
+    margin-bottom: 1.5rem;
+}
+
+.faq-contact-box .floating-label-input {
+    margin-bottom: 1rem;
+}
+
+
+/* ===== CTA SECTION ===== */
+.cta-section--dark {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.cta-final .cta-section h3 {
-    color: var(--luvex-white);
-}
-
-.cta-final .cta-section p {
-    color: rgba(255, 255, 255, 0.9);
-}
-
 /* ===== RESPONSIVE DESIGN ===== */
-
 @media (max-width: 1200px) {
     .partnership-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -371,47 +307,35 @@ Last Update: 2025-08-05
     }
 }
 
+@media (max-width: 992px) {
+    .partnership-excellence {
+        grid-template-columns: 1fr;
+        padding: 2.5rem;
+        gap: 2.5rem;
+    }
+    .partnership-excellence__content {
+        border-right: none;
+        border-bottom: 1px solid rgba(109, 213, 237, 0.2);
+        padding-right: 0;
+        padding-bottom: 2rem;
+        text-align: center;
+    }
+    .faq-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (max-width: 768px) {
-    .partnership-foundation {
-        padding: 4rem 0;
-    }
-    
-    .section__title {
-        font-size: 2.2rem;
-    }
-    
-    .section__subtitle {
-        font-size: 1.1rem;
-    }
+    .section__title { font-size: 2.2rem; }
+    .section__subtitle { font-size: 1.1rem; }
     
     .partnership-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
     
-    .partnership-card {
-        padding: 2rem 1.5rem;
-    }
-    
-    .partnership-values {
-        padding: 2rem;
-    }
-    
-    .values-list {
-        gap: 1.5rem;
-    }
-    
-    .value-item {
-        font-size: 0.9rem;
-    }
-    
-    .cta-section {
-        padding: 3rem 2rem;
-    }
-    
-    .cta-section h3 {
-        font-size: 1.8rem;
+    .partnership-excellence__values {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 }
-
-/* ===== END UV CONSULTING PAGE STYLES ===== */

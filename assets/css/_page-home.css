@@ -117,6 +117,7 @@ Last Update: 2025-08-06
     transform: translateY(-4px);
 }
 
+/* KORREKTUR: Hover-Effekt für Text in den Features */
 .simulator-feature:hover h4 {
     color: var(--luvex-bright-cyan);
 }
@@ -265,6 +266,19 @@ Last Update: 2025-08-06
     box-shadow: var(--shadow-lg);
     border: 1px solid var(--luvex-gray-200);
     padding: 2.5rem;
+    padding-top: 5rem; /* Platz für das überlappende Bild */
+    margin-top: 4rem; /* Platz für das überlappende Bild */
+    position: relative;
+    text-align: center;
+}
+
+.team-member--light .team-member__photo {
+    position: absolute;
+    top: -4rem; /* Zieht das Bild nach oben */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 120px;
 }
 
 .team-member--light .team-member__content h3,
@@ -307,6 +321,7 @@ Last Update: 2025-08-06
     }
     .evidence-visual {
         order: -1;
+        margin-bottom: 3rem;
     }
     .evidence-content {
         text-align: center;

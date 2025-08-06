@@ -2,13 +2,13 @@
 /**
  * Template Name: UV Consulting
  * @package Luvex
- * @since 2.2
+ * @since 2.3 (Updated with new sections)
  */
 get_header(); ?>
 
 <main id="main" class="site-main">
 
-    <!-- Hero Section -->
+    <!-- Hero Section (unverändert) -->
     <section class="luvex-hero">
         <canvas id="particle-canvas"></canvas>
         <div class="luvex-hero__container">
@@ -30,7 +30,7 @@ get_header(); ?>
         </div>
     </section>
 
-    <!-- Partnership Foundation Section -->
+    <!-- Partnership Foundation Section (unverändert) -->
     <section class="section partnership-foundation">
         <div class="container container--wide">
             <div class="text-center mb-3">
@@ -40,7 +40,6 @@ get_header(); ?>
                 </p>
             </div>
             
-            <!-- Partnership Grid -->
             <div class="partnership-grid">
                 <div class="partnership-card">
                     <i class="fa-solid fa-user-shield partnership-card__icon"></i>
@@ -75,27 +74,29 @@ get_header(); ?>
                 </div>
             </div>
             
-            <!-- Core Values Summary -->
-            <div class="partnership-values">
-                <h3 class="partnership-values__title">Partnership Excellence</h3>
-                <p class="partnership-values__subtitle">
-                    These values guide every project decision, every client interaction, and every solution we deliver.
-                </p>
-                <div class="values-list">
+            <!-- NEU: Partnership Excellence Section -->
+            <div class="partnership-excellence">
+                <div class="partnership-excellence__content">
+                    <h3 class="partnership-excellence__title">Partnership Excellence</h3>
+                    <p class="partnership-excellence__subtitle">
+                        These values guide every project decision, every client interaction, and every solution we deliver.
+                    </p>
+                </div>
+                <div class="partnership-excellence__values">
                     <div class="value-item">
-                        <div class="value-item__icon"></div>
+                        <i class="fa-solid fa-check-circle value-item__icon"></i>
                         <span>German Engineering Precision</span>
                     </div>
                     <div class="value-item">
-                        <div class="value-item__icon"></div>
+                        <i class="fa-solid fa-check-circle value-item__icon"></i>
                         <span>Independent Vendor-Neutral Advice</span>
                     </div>
                     <div class="value-item">
-                        <div class="value-item__icon"></div>
+                        <i class="fa-solid fa-check-circle value-item__icon"></i>
                         <span>Long-term Partnership Focus</span>
                     </div>
                     <div class="value-item">
-                        <div class="value-item__icon"></div>
+                        <i class="fa-solid fa-check-circle value-item__icon"></i>
                         <span>Measurable Results Delivery</span>
                     </div>
                 </div>
@@ -103,7 +104,7 @@ get_header(); ?>
         </div>
     </section>
 
-    <!-- Core Competencies Section -->
+    <!-- Core Competencies Section (unverändert) -->
     <section class="section core-competencies">
         <div class="container container--wide">
             <div class="text-center mb-3">
@@ -130,32 +131,53 @@ get_header(); ?>
         </div>
     </section>
 
-    <!-- FAQ Section -->
+    <!-- NEU: FAQ Section mit modernem Layout -->
     <section class="section faq-section">
         <div class="container container--medium">
-            <div class="text-center mb-3">
-                <h2 class="section__title">Frequently Asked Questions</h2>
+            <div class="faq-intro">
+                <h2 class="section__title">Your Questions, Answered</h2>
+                <p class="section__subtitle">Find quick answers to common questions. If you don't find what you're looking for, feel free to ask us directly.</p>
             </div>
-            <div class="faq-accordion">
-                <div class="faq-accordion__list">
-                    <details class="faq-accordion__item">
-                        <summary class="faq-accordion__question"><span>For which industries do you offer consulting?</span><i class="fa-solid fa-chevron-down faq-accordion__chevron"></i></summary>
-                        <div class="faq-accordion__answer"><p>We serve a wide range of industries, including water treatment, air purification, UV curing, medical device sterilization, and food and beverage processing.</p></div>
-                    </details>
-                    <details class="faq-accordion__item">
-                        <summary class="faq-accordion__question"><span>Is your consulting vendor-neutral?</span><i class="fa-solid fa-chevron-down faq-accordion__chevron"></i></summary>
-                        <div class="faq-accordion__answer"><p>Absolutely. Our recommendations are based purely on technical requirements, performance data, and the best fit for your application and budget.</p></div>
-                    </details>
-                    <details class="faq-accordion__item">
-                        <summary class="faq-accordion__question"><span>Can you help with retrofitting existing systems?</span><i class="fa-solid fa-chevron-down faq-accordion__chevron"></i></summary>
-                        <div class="faq-accordion__answer"><p>Yes, retrofitting and upgrading existing infrastructure is one of our core competencies. We develop a strategic plan to integrate modern UV technology with minimal disruption.</p></div>
-                    </details>
+            <div class="faq-layout">
+                <div class="faq-accordion">
+                    <div class="faq-accordion__list">
+                        <details class="faq-accordion__item" open>
+                            <summary class="faq-accordion__question"><span>For which industries do you offer consulting?</span><i class="fa-solid fa-chevron-down faq-accordion__chevron"></i></summary>
+                            <div class="faq-accordion__answer"><p>We serve a wide range of industries, including water treatment, air purification, UV curing, medical device sterilization, and food and beverage processing.</p></div>
+                        </details>
+                        <details class="faq-accordion__item">
+                            <summary class="faq-accordion__question"><span>Is your consulting vendor-neutral?</span><i class="fa-solid fa-chevron-down faq-accordion__chevron"></i></summary>
+                            <div class="faq-accordion__answer"><p>Absolutely. Our recommendations are based purely on technical requirements, performance data, and the best fit for your application and budget. Our goal is your success, not selling a specific brand.</p></div>
+                        </details>
+                        <details class="faq-accordion__item">
+                            <summary class="faq-accordion__question"><span>Can you help with retrofitting existing systems?</span><i class="fa-solid fa-chevron-down faq-accordion__chevron"></i></summary>
+                            <div class="faq-accordion__answer"><p>Yes, retrofitting and upgrading existing infrastructure is one of our core competencies. We develop a strategic plan to integrate modern UV technology with minimal disruption and maximum performance gain.</p></div>
+                        </details>
+                         <details class="faq-accordion__item">
+                            <summary class="faq-accordion__question"><span>What does a typical consulting process look like?</span><i class="fa-solid fa-chevron-down faq-accordion__chevron"></i></summary>
+                            <div class="faq-accordion__answer"><p>Our process typically starts with a free discovery call to understand your needs. This is followed by a detailed analysis, solution proposal, implementation support, and finally, performance validation. Each step is tailored to your project.</p></div>
+                        </details>
+                    </div>
+                </div>
+                <div class="faq-contact-box">
+                    <h4>Can't find an answer?</h4>
+                    <p>Our experts are ready to help with your specific questions.</p>
+                    <form>
+                        <div class="floating-label-input floating-label-input--dark">
+                            <input type="text" id="faq-question" name="faq-question" placeholder=" ">
+                            <label for="faq-question">Ask your question here...</label>
+                        </div>
+                        <button type="submit" class="btn btn--primary btn--small" style="width: 100%;">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Ask Question</span>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
+    <!-- CTA Section (unverändert) -->
     <section class="section cta-final">
         <div class="container container--narrow">
             <div class="cta-section cta-section--dark">
