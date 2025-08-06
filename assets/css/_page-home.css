@@ -34,7 +34,6 @@ Last Update: 2025-08-06
     font-size: 1.125rem;
 }
 
-/* KORREKTUR: Karteninhalt linksbündig ausrichten */
 .knowledge-card {
     text-align: left;
 }
@@ -53,7 +52,7 @@ Last Update: 2025-08-06
 }
 
 .knowledge-card .card__icon {
-    margin: 0; /* Override default auto margin */
+    margin: 0;
     font-size: 2.2rem;
     width: 60px;
     height: 60px;
@@ -67,7 +66,6 @@ Last Update: 2025-08-06
     font-size: 1.5rem;
 }
 
-/* KORREKTUR: Button in der Karte zentrieren */
 .knowledge-card .btn {
     align-self: center;
 }
@@ -112,14 +110,22 @@ Last Update: 2025-08-06
     padding: 1.5rem;
     background: rgba(255, 255, 255, 0.05);
     border-radius: var(--radius-md);
-    transition: all 0.3s ease; /* KORREKTUR: Hover-Effekt wiederhergestellt */
+    transition: all 0.3s ease;
 }
 
-/* KORREKTUR: Hover-Effekt wiederhergestellt */
 .simulator-feature:hover {
     background: rgba(255, 255, 255, 0.1);
     transform: translateY(-4px);
 }
+
+/* KORREKTUR: Hover-Effekt für Text in den Features */
+.simulator-feature:hover h4 {
+    color: var(--luvex-bright-cyan);
+}
+.simulator-feature:hover p {
+    color: var(--luvex-white);
+}
+
 
 .simulator-feature i {
     font-size: 2.5rem;
@@ -130,13 +136,17 @@ Last Update: 2025-08-06
 .simulator-feature h4 {
     color: var(--luvex-white);
     margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.simulator-feature p {
+    transition: color 0.3s ease;
 }
 
 .simulator-cta {
     margin-top: 2rem;
 }
 
-/* KORREKTUR: Hover-Effekt für Simulator-Button */
 .simulator-cta:hover {
     color: var(--luvex-vibrant-blue);
 }
@@ -256,7 +266,7 @@ Last Update: 2025-08-06
     background: transparent;
     box-shadow: none;
     border: none;
-    max-width: 900px; /* KORREKTUR: Breiter gemacht */
+    max-width: 900px;
 }
 
 /* --- 7. Responsive Overrides --- */
