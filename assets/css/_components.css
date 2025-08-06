@@ -760,7 +760,7 @@ Last Update: 2025-08-05
 .cta-section .cta-button {
     display: inline-flex;
     align-items: center;
-    justify-content: center; /* NEU */
+    justify-content: center;
     gap: var(--space-xs);
     padding: 14px 28px;
     margin: 0 0.75rem;
@@ -774,13 +774,13 @@ Last Update: 2025-08-05
 .cta-section .cta-button:first-of-type {
     background: var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
+    border: 2px solid var(--luvex-bright-cyan);
 }
 
+/* KORREKTUR: Verbesserter Hover-Effekt */
 .cta-section .cta-button:first-of-type:hover {
-    background: #5ac7e0;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(109, 213, 237, 0.4);
-    color: var(--luvex-dark-blue);
+    background: transparent;
+    color: var(--luvex-bright-cyan);
 }
 
 .cta-section .cta-button:last-of-type {
@@ -789,9 +789,10 @@ Last Update: 2025-08-05
     border: 2px solid var(--luvex-bright-cyan);
 }
 
+/* KORREKTUR: Verbesserter Hover-Effekt */
 .cta-section .cta-button:last-of-type:hover {
-    background: rgba(109, 213, 237, 0.1);
-    color: var(--luvex-bright-cyan);
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
 }
 
 /* --- 4.4 CTA Responsive --- */

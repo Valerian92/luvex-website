@@ -4,20 +4,18 @@ LUVEX THEME v2.2 - HOMEPAGE (Refactored)
 ==============================================================================
 Description: Highly specific styles for the homepage. Most layout and
              component styles are now inherited from global files.
-Last Update: 2025-08-05
+Last Update: 2025-08-06
 ==============================================================================
 */
 
 /* --- 1. Hero Section Specifics --- */
 
-/* KORREKTUR: Buttons vertikal anordnen */
 .home .luvex-hero__cta-container {
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
 }
 
-/* KORREKTUR: Hover-Effekt für primären Button anpassen */
 .home .luvex-hero__cta.luvex-cta-primary:hover {
     color: var(--luvex-bright-cyan);
 }
@@ -36,10 +34,9 @@ Last Update: 2025-08-05
     font-size: 1.125rem;
 }
 
-/* Modifier for cards in this section */
+/* KORREKTUR: Karteninhalt linksbündig ausrichten */
 .knowledge-card {
     text-align: left;
-    padding: 2.5rem 2rem;
 }
 
 .knowledge-card__header {
@@ -50,7 +47,7 @@ Last Update: 2025-08-05
 }
 
 .knowledge-card .card__icon {
-    margin: 0; /* Override default auto margin */
+    margin: 0;
     font-size: 2.2rem;
     width: 60px;
     height: 60px;
@@ -65,8 +62,9 @@ Last Update: 2025-08-05
     font-size: 1.5rem;
 }
 
+/* KORREKTUR: Button in der Karte zentrieren */
 .knowledge-card .btn {
-    align-self: flex-start; /* Align button to the left */
+    align-self: center;
 }
 
 
@@ -108,6 +106,13 @@ Last Update: 2025-08-05
     padding: 1.5rem;
     background: rgba(255, 255, 255, 0.05);
     border-radius: var(--radius-md);
+    transition: all 0.3s ease; /* KORREKTUR: Hover-Effekt wiederhergestellt */
+}
+
+/* KORREKTUR: Hover-Effekt wiederhergestellt */
+.simulator-feature:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-4px);
 }
 
 .simulator-feature i {
@@ -123,6 +128,11 @@ Last Update: 2025-08-05
 
 .simulator-cta {
     margin-top: 2rem;
+}
+
+/* KORREKTUR: Hover-Effekt für Simulator-Button */
+.simulator-cta:hover {
+    color: var(--luvex-vibrant-blue);
 }
 
 
@@ -212,8 +222,21 @@ Last Update: 2025-08-05
     max-width: 550px;
 }
 
-.evidence-visual .team-member {
-    text-align: center;
+/* KORREKTUR: Macht die Team-Member-Karte auf hellem Hintergrund sichtbar */
+.evidence-visual .team-member--light {
+    background: var(--luvex-white);
+    color: var(--luvex-dark-blue);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--luvex-gray-200);
+}
+
+.evidence-visual .team-member--light .team-member__content h3,
+.evidence-visual .team-member--light .team-member__quote p {
+    color: var(--luvex-dark-blue);
+}
+
+.evidence-visual .team-member--light .team-member__role {
+    color: var(--luvex-vibrant-blue);
 }
 
 
@@ -227,6 +250,7 @@ Last Update: 2025-08-05
     background: transparent;
     box-shadow: none;
     border: none;
+    max-width: 900px; /* KORREKTUR: Breiter gemacht */
 }
 
 /* --- 7. Responsive Overrides --- */

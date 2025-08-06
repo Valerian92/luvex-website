@@ -47,13 +47,12 @@ get_header(); ?>
             </p>
         </div>
         <div class="grid grid-3 knowledge-navigator">
-            <!-- Refactored to use global .card component with a modifier -->
             <div class="card knowledge-card">
                 <div class="knowledge-card__header">
                     <div class="card__icon"><i class="fas fa-atom"></i></div>
                     <h3 class="card__title">UV Fundamentals</h3>
                 </div>
-                <p class="card__content">Master the physics and engineering principles behind UV technology. From wavelength spectrum to dose calculations.</p>
+                <p class="card__content">Master the core physics and engineering principles behind UV technology. We cover everything from the wavelength spectrum and its effects to critical dose calculations and international safety standards.</p>
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--outline">Explore UV Science</a>
             </div>
             <div class="card knowledge-card">
@@ -61,7 +60,7 @@ get_header(); ?>
                     <div class="card__icon"><i class="fas fa-lightbulb"></i></div>
                     <h3 class="card__title">Technology Platforms</h3>
                 </div>
-                <p class="card__content">Compare conventional mercury and cutting-edge LED UV systems with objective analysis.</p>
+                <p class="card__content">Get an objective, data-driven comparison between conventional mercury lamps and cutting-edge LED UV systems. We analyze performance, efficiency, and operational costs to guide your selection.</p>
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--outline">Compare Technologies</a>
             </div>
             <div class="card knowledge-card">
@@ -69,7 +68,7 @@ get_header(); ?>
                     <div class="card__icon"><i class="fas fa-industry"></i></div>
                     <h3 class="card__title">Applications Hub</h3>
                 </div>
-                <p class="card__content">Discover UV solutions across industries from water treatment to advanced curing applications.</p>
+                <p class="card__content">Discover a wide range of proven UV solutions across various industries. Explore detailed case studies for water treatment, air purification, surface sterilization, and advanced material curing.</p>
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--outline">Explore Applications</a>
             </div>
         </div>
@@ -83,10 +82,14 @@ get_header(); ?>
             <div class="simulator-content">
                 <h3>3D UV System Designer</h3>
                 <p class="simulator-description">Professional-grade simulation tools for UV system optimization and validation.</p>
+                <!-- KORREKTUR: Fehlende 3 Features wieder hinzugefügt -->
                 <div class="simulator-features grid-3">
                     <div class="simulator-feature"><i class="fas fa-shield-virus"></i><h4>UV Disinfection</h4><p>Pathogen inactivation modeling</p></div>
                     <div class="simulator-feature"><i class="fas fa-layer-group"></i><h4>Substrate Curing</h4><p>UV polymerization simulation</p></div>
                     <div class="simulator-feature"><i class="fas fa-database"></i><h4>Real Templates</h4><p>Industry-based configurations</p></div>
+                    <div class="simulator-feature"><i class="fas fa-exclamation-triangle"></i><h4>Smart Warnings</h4><p>Unrealistic parameter alerts</p></div>
+                    <div class="simulator-feature"><i class="fas fa-chart-line"></i><h4>Precise Distribution</h4><p>Exact intensity mapping</p></div>
+                    <div class="simulator-feature"><i class="fas fa-mouse-pointer"></i><h4>Intuitive Control</h4><p>User-friendly interface</p></div>
                 </div>
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="luvex-cta-primary simulator-cta"><i class="fas fa-play-circle"></i><span>Launch Interactive Simulator</span></a>
             </div>
@@ -97,7 +100,7 @@ get_header(); ?>
 <!-- GLOBAL UV EXPERT COMMUNITY SECTION -->
 <section class="section homepage-community-section">
     <div class="homepage-community-container">
-        <div class= "homepage-community-content">
+        <div class="homepage-community-content">
             <h2 class="homepage-community-title">Building the Global <span class="text-highlight">UV Network</span></h2>
             <p class="homepage-community-description">Join thousands of UV professionals from around the world in advancing technology, sharing knowledge, and solving complex engineering challenges together.</p>
             <div class="homepage-community-actions">
@@ -121,8 +124,8 @@ get_header(); ?>
                  <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="btn btn--primary" style="margin-top: 2rem;">Our Scientific Approach</a>
             </div>
             <div class="evidence-visual">
-                <!-- Using global .team-member card component -->
-                <div class="team-member">
+                <!-- KORREKTUR: Modifier-Klasse für hellen Hintergrund hinzugefügt -->
+                <div class="team-member team-member--light">
                     <div class="team-member__photo"><img src="https://www.luvex.tech/wp-content/uploads/2025/07/Bewerbungsbild_Valerian-Huber.jpg" alt="Photo of Valerian Huber"></div>
                     <div class="team-member__content"><h3>Valerian Huber</h3><p class="team-member__role">Founder & UV Technology Expert</p></div>
                     <div class="team-member__quote"><p>"My goal is to make the complexity of UV technology accessible to everyone. True innovation comes from substantiated knowledge, not from guesswork."</p></div>
@@ -135,7 +138,6 @@ get_header(); ?>
 <!-- FINAL CTA SEKTION -->
 <section class="section section--final-cta">
     <div class="container">
-        <!-- Using global .cta-section component -->
         <div class="cta-section cta-section--dark">
             <h3>Ready to Master UV Technology?</h3>
             <p>Join the global community of UV experts. Whether you need consultation, training, or technical support - start your journey with the world's leading UV specialists.</p>
