@@ -97,7 +97,7 @@ function luvex_enqueue_assets() {
         wp_enqueue_script($handle, get_stylesheet_directory_uri() . $path, $dependencies, $version, true);
     }
     
-    // Bedingtes Laden der Hero-Animationen
+    // Bedingtes Laden der Hero-Animationen und seiten-spezifischer Skripte
     if (is_front_page() || is_home()) {
         $photons_js_path = get_stylesheet_directory() . '/assets/js/hero-photons.js';
         if (file_exists($photons_js_path)) {
@@ -130,21 +130,24 @@ function luvex_enqueue_assets() {
             $hexagon_js_version = filemtime($hexagon_js_path);
             wp_enqueue_script('luvex-hero-hexagon', get_stylesheet_directory_uri() . '/assets/js/hero-hexagon.js', array(), $hexagon_js_version, true);
         }
+
+        // HIER IST DIE ERGÄNZUNG: Laden des interaktiven FAQ-Skripts
+        $faq_js_path = get_stylesheet_directory() . '/assets/js/interactive-faq.js';
+        if (file_exists($faq_js_path)) {
+            $faq_js_version = filemtime($faq_js_path);
+            wp_enqueue_script('luvex-interactive-faq', get_stylesheet_directory_uri() . '/assets/js/interactive-faq.js', array(), $faq_js_version, true);
+        }
     } 
-    // UV-C DISINFECTION SEITE - Gallery System
     elseif ( is_page('uv-c-disinfection') ) { 
-        // Lade die Hero Partikel Animation
         $disinfection_js_path = get_stylesheet_directory() . '/assets/js/hero-disinfection.js';
         if (file_exists($disinfection_js_path)) {
             $disinfection_js_version = filemtime($disinfection_js_path);
             wp_enqueue_script('luvex-hero-disinfection', get_stylesheet_directory_uri() . '/assets/js/hero-disinfection.js', array(), $disinfection_js_version, true);
         }
         
-        // Lade Three.js als Abhängigkeit für die DNA Animation
         wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), null, true);
         
- 
-      $gallery_js_path = get_stylesheet_directory() . '/assets/js/science-gallery.js';
+        $gallery_js_path = get_stylesheet_directory() . '/assets/js/science-gallery.js';
         if (file_exists($gallery_js_path)) {
             $gallery_js_version = filemtime($gallery_js_path);
             wp_enqueue_script('luvex-science-gallery', get_stylesheet_directory_uri() . '/assets/js/science-gallery.js', array('jquery'), $gallery_js_version, true);
