@@ -140,6 +140,7 @@ Last Update: 2025-08-06
 }
 
 .simulator-feature p {
+    color: var(--luvex-text-muted-dark);
     transition: color 0.3s ease;
 }
 
@@ -239,6 +240,11 @@ Last Update: 2025-08-06
 }
 
 /* KORREKTUR: Macht die Team-Member-Karte auf hellem Hintergrund sichtbar */
+.evidence-section .team-member {
+    opacity: 1;
+    transform: scale(1);
+}
+
 .team-member--light {
     background: var(--luvex-white);
     color: var(--luvex-dark-blue);
