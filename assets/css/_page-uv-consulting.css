@@ -1,12 +1,10 @@
 /*
 ==============================================================================
-LUVEX THEME v2.5 - UV CONSULTING PAGE (Final & Corrected)
+LUVEX THEME v2.6 - UV CONSULTING PAGE (Final with Shine Effect)
 ==============================================================================
 
 Description: Styles for the UV Consulting page.
-             - Corrected subtitle width.
-             - Restored Core Competencies styles.
-             - Implemented alternating background colors.
+             - Re-added the hover shine effect for partnership cards.
 Dependencies: _variables.css, _core.css, _components.css
 Last Update: 2025-08-07
 
@@ -47,6 +45,7 @@ Last Update: 2025-08-07
     gap: 2.5rem;
     margin-bottom: 4rem;
 }
+
 .partnership-card {
     background: linear-gradient(135deg, var(--luvex-white) 0%, #fdfdff 100%);
     border: 1px solid var(--luvex-gray-200);
@@ -55,12 +54,37 @@ Last Update: 2025-08-07
     text-align: center;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: var(--shadow-sm);
+    position: relative; /* Wichtig für den ::before Pseudo-Effekt */
+    overflow: hidden;   /* Stellt sicher, dass der Effekt in der Karte bleibt */
 }
+
+/* WIEDERHERGESTELLT: Eleganter Glanz-Effekt beim Hovern */
+.partnership-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(109, 213, 237, 0.1) 50%, 
+        transparent 100%
+    );
+    transition: left 0.8s cubic-bezier(0.25, 1, 0.5, 1); /* Etwas weichere Animation */
+}
+
 .partnership-card:hover {
     transform: translateY(-8px);
     border-color: rgba(109, 213, 237, 0.4);
     box-shadow: var(--shadow-md);
 }
+
+/* WIEDERHERGESTELLT: Trigger für den Glanz-Effekt */
+.partnership-card:hover::before {
+    left: 100%;
+}
+
 .partnership-card__icon {
     font-size: 3rem;
     color: var(--luvex-vibrant-blue);
@@ -98,12 +122,11 @@ Last Update: 2025-08-07
     margin: 0 0 1rem 0;
 }
 
-/* KORREKTUR: Breite des Untertitels erhöht */
 .partnership-excellence-v2__subtitle {
     font-size: 1.1rem;
     color: var(--luvex-gray-300);
     line-height: 1.6;
-    max-width: 850px; /* Breiter gemacht */
+    max-width: 850px;
     margin: 0 auto 2.5rem auto;
 }
 
@@ -126,9 +149,6 @@ Last Update: 2025-08-07
 .partnership-excellence-v2 .value-item__icon {
     color: var(--luvex-bright-cyan);
 }
-
-/* ===== Core Competencies - Value Cards (Stile aus _components.css werden wiederverwendet) ===== */
-/* Die .value-card Stile sind global und benötigen hier keine zusätzlichen Regeln. */
 
 
 /* ===== Interaktive FAQ Section v2 ===== */
