@@ -100,7 +100,6 @@ Last Update: 2025-08-06
 .simulator-features {
     margin: 3rem auto;
     display: grid;
-    /* KORREKTUR: Grid auf 3 Spalten festlegen */
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     max-width: 900px;
@@ -118,7 +117,6 @@ Last Update: 2025-08-06
     transform: translateY(-4px);
 }
 
-/* KORREKTUR: Hover-Effekt für Text in den Features */
 .simulator-feature:hover h4 {
     color: var(--luvex-bright-cyan);
 }
@@ -155,10 +153,25 @@ Last Update: 2025-08-06
 
 /* --- 4. Global UV Expert Community Section --- */
 .homepage-community-section {
-    background-color: var(--luvex-dark-blue);
     padding: 6rem 0;
     overflow: hidden;
     position: relative;
+    background-color: transparent; /* Wichtig, damit ::before sichtbar ist */
+}
+
+/* KORREKTUR: Hintergrund-Grid wieder hinzugefügt */
+.homepage-community-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--luvex-dark-blue);
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse"><path d="M 80 0 L 0 0 0 80" fill="none" stroke="rgba(109, 213, 237, 0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .homepage-community-container {
@@ -191,7 +204,7 @@ Last Update: 2025-08-06
     position: absolute;
     left: 25%;
     top: -10%;
-    z-index: 0;
+    z-index: 1;
 }
 
 .homepage-community-title {
@@ -239,17 +252,19 @@ Last Update: 2025-08-06
     max-width: 550px;
 }
 
-/* KORREKTUR: Macht die Team-Member-Karte auf hellem Hintergrund sichtbar */
+/* KORREKTUR: Macht die Team-Member-Karte sofort sichtbar */
 .evidence-section .team-member {
-    opacity: 1;
-    transform: scale(1);
+    opacity: 1 !important;
+    transform: none !important;
 }
 
+/* KORREKTUR: Neues, hochwertigeres Design für die helle Variante */
 .team-member--light {
-    background: var(--luvex-white);
+    background: var(--luvex-gray-100);
     color: var(--luvex-dark-blue);
     box-shadow: var(--shadow-lg);
     border: 1px solid var(--luvex-gray-200);
+    padding: 2.5rem;
 }
 
 .team-member--light .team-member__content h3,
