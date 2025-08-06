@@ -763,18 +763,19 @@ Last Update: 2025-08-05
     justify-content: center;
     gap: var(--space-xs);
     padding: 14px 28px;
-    margin: 0 0.75rem;
+    margin: 0.5rem 0.75rem; /* Added vertical margin for wrapping */
     border-radius: var(--radius-md);
     text-decoration: none;
     font-weight: 600;
     transition: var(--transition-normal);
     font-size: var(--text-base);
+    border: 2px solid var(--luvex-bright-cyan);
 }
 
+/* Primary CTA Button (Solid) */
 .cta-section .cta-button:first-of-type {
     background: var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
-    border: 2px solid var(--luvex-bright-cyan);
 }
 
 /* KORREKTUR: Verbesserter Hover-Effekt */
@@ -783,10 +784,10 @@ Last Update: 2025-08-05
     color: var(--luvex-bright-cyan);
 }
 
+/* Secondary CTA Button (Outline) */
 .cta-section .cta-button:last-of-type {
     background: transparent;
     color: var(--luvex-bright-cyan);
-    border: 2px solid var(--luvex-bright-cyan);
 }
 
 /* KORREKTUR: Verbesserter Hover-Effekt */

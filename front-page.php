@@ -83,7 +83,7 @@ get_header(); ?>
                 <h3>3D UV System Designer</h3>
                 <p class="simulator-description">Professional-grade simulation tools for UV system optimization and validation.</p>
                 <!-- KORREKTUR: Fehlende 3 Features wieder hinzugefügt -->
-                <div class="simulator-features grid-3">
+                <div class="simulator-features">
                     <div class="simulator-feature"><i class="fas fa-shield-virus"></i><h4>UV Disinfection</h4><p>Pathogen inactivation modeling</p></div>
                     <div class="simulator-feature"><i class="fas fa-layer-group"></i><h4>Substrate Curing</h4><p>UV polymerization simulation</p></div>
                     <div class="simulator-feature"><i class="fas fa-database"></i><h4>Real Templates</h4><p>Industry-based configurations</p></div>
