@@ -8,7 +8,7 @@ get_header(); ?>
 
 <main id="main" class="site-main">
 
-    <!-- Hero Section (unverändert) -->
+    <!-- Hero Section -->
     <section class="luvex-hero">
         <canvas id="particle-canvas"></canvas>
         <div class="luvex-hero__container">
@@ -41,28 +41,28 @@ get_header(); ?>
             </div>
             
             <div class="partnership-grid">
-                <div class="partnership-card">
+                <div class="partnership-card has-shine-effect">
                     <i class="fa-solid fa-user-shield partnership-card__icon"></i>
                     <h3 class="partnership-card__title">Absolute Confidentiality</h3>
                     <p class="partnership-card__description">
                         Trust forms the foundation of every partnership we build. Your sensitive data and business processes remain completely secure.
                     </p>
                 </div>
-                <div class="partnership-card">
+                <div class="partnership-card has-shine-effect">
                     <i class="fa-solid fa-handshake partnership-card__icon"></i>
                     <h3 class="partnership-card__title">Reliable Statements</h3>
                     <p class="partnership-card__description">
                         Precision and honesty in every communication and recommendation. No overselling, just facts and actionable insights.
                     </p>
                 </div>
-                <div class="partnership-card">
+                <div class="partnership-card has-shine-effect">
                     <i class="fa-solid fa-search partnership-card__icon"></i>
                     <h3 class="partnership-card__title">Critical Self-Reflection</h3>
                     <p class="partnership-card__description">
                         Continuous improvement through rigorous analysis and feedback. We constantly challenge our own assumptions and methods.
                     </p>
                 </div>
-                <div class="partnership-card">
+                <div class="partnership-card has-shine-effect">
                     <i class="fa-solid fa-lightbulb partnership-card__icon"></i>
                     <h3 class="partnership-card__title">Innovative Solutions</h3>
                     <p class="partnership-card__description">
@@ -98,7 +98,7 @@ get_header(); ?>
         </div>
     </section>
 
-    <!-- Core Competencies Section (WIEDERHERGESTELLT) -->
+    <!-- Core Competencies Section -->
     <section class="section section--white">
         <div class="container container--wide">
             <div class="text-center mb-3">
@@ -125,7 +125,7 @@ get_header(); ?>
         </div>
     </section>
 
-    <!-- Interaktive FAQ Section -->
+    <!-- Interactive FAQ Section -->
     <section class="section section--light-gray">
         <div class="container container--medium">
             <div class="faq-intro">

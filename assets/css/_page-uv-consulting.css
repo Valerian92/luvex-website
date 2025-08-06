@@ -1,10 +1,10 @@
 /*
 ==============================================================================
-LUVEX THEME v2.6 - UV CONSULTING PAGE (Final with Shine Effect)
+LUVEX THEME v2.7 - UV CONSULTING PAGE (Cleaned)
 ==============================================================================
 
 Description: Styles for the UV Consulting page.
-             - Re-added the hover shine effect for partnership cards.
+             - Shine effect has been moved to _components.css as a global utility.
 Dependencies: _variables.css, _core.css, _components.css
 Last Update: 2025-08-07
 
@@ -45,7 +45,6 @@ Last Update: 2025-08-07
     gap: 2.5rem;
     margin-bottom: 4rem;
 }
-
 .partnership-card {
     background: linear-gradient(135deg, var(--luvex-white) 0%, #fdfdff 100%);
     border: 1px solid var(--luvex-gray-200);
@@ -54,37 +53,12 @@ Last Update: 2025-08-07
     text-align: center;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: var(--shadow-sm);
-    position: relative; /* Wichtig für den ::before Pseudo-Effekt */
-    overflow: hidden;   /* Stellt sicher, dass der Effekt in der Karte bleibt */
 }
-
-/* WIEDERHERGESTELLT: Eleganter Glanz-Effekt beim Hovern */
-.partnership-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        rgba(109, 213, 237, 0.1) 50%, 
-        transparent 100%
-    );
-    transition: left 0.8s cubic-bezier(0.25, 1, 0.5, 1); /* Etwas weichere Animation */
-}
-
 .partnership-card:hover {
     transform: translateY(-8px);
     border-color: rgba(109, 213, 237, 0.4);
     box-shadow: var(--shadow-md);
 }
-
-/* WIEDERHERGESTELLT: Trigger für den Glanz-Effekt */
-.partnership-card:hover::before {
-    left: 100%;
-}
-
 .partnership-card__icon {
     font-size: 3rem;
     color: var(--luvex-vibrant-blue);

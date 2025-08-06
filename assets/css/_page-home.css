@@ -157,7 +157,7 @@ Last Update: 2025-08-06
     padding: 6rem 0;
     position: relative;
     background-color: transparent; /* Wichtig, damit ::before sichtbar ist */
-    overflow: hidden; /* Beibehalten, um seitliches Scrollen zu verhindern */
+    overflow: hidden; 
 }
 
 /* KORREKTUR: Hintergrund-Grid wieder hinzugefügt */
@@ -182,7 +182,7 @@ Last Update: 2025-08-06
     display: flex;
     align-items: center;
     gap: var(--space-lg);
-    position: relative; /* Stellt sicher, dass der Inhalt über dem ::before liegt */
+    position: relative; 
     z-index: 2;
 }
 
@@ -205,7 +205,7 @@ Last Update: 2025-08-06
     position: absolute;
     left: 25%;
     top: -10%;
-    z-index: 1; /* Zwischen Grid und Inhalt */
+    z-index: 1; 
 }
 
 .homepage-community-title {

@@ -167,20 +167,17 @@ Last Update: 2025-08-05
 */
 
 /* --- 2.1 Standard Card System --- */
-.card {
+card {
     background: var(--color-white);
     border: 1px solid #e5e5e7;
     border-radius: var(--radius-lg);
-    padding: 2rem; /* Mehr Innenabstand für die ganze Karte */
+    padding: 2rem;
     transition: var(--transition-normal);
     box-shadow: var(--shadow-sm);
-    
-    /* Flexbox-Layout für den Karteninhalt */
     display: flex;
     flex-direction: column;
     text-align: center;
 }
-
 
 .card:hover {
     transform: translateY(-4px);
@@ -426,6 +423,42 @@ Last Update: 2025-08-05
     line-height: 1.6;
 }
 
+/* ==============================================================================
+2.5 CARD EFFECTS (GLOBAL UTILITIES)
+==============================================================================
+*/
+
+/* --- NEU: Globaler Shine-Effekt für Karten und andere Elemente --- */
+.has-shine-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.has-shine-effect::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(109, 213, 237, 0.1) 50%, 
+        transparent 100%
+    );
+    transition: left 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 1; /* Stellt sicher, dass der Effekt über dem Hintergrund, aber unter dem Inhalt liegt */
+}
+
+.has-shine-effect:hover::before {
+    left: 100%;
+}
+
+/* Stellt sicher, dass der Inhalt über dem Effekt bleibt */
+.has-shine-effect > * {
+    position: relative;
+    z-index: 2;
+}
 
 /*
 ==============================================================================
