@@ -1,172 +1,62 @@
 /*
 ==============================================================================
-LUVEX THEME v2.3 - HOMEPAGE (FINAL FIX)
+LUVEX THEME v2.4 - HOMEPAGE (FINAL FIX V3)
 ==============================================================================
-Description: Final corrected styles for the homepage. Fixes issues with
-             the Globe and Evidence sections.
+Description: This version uses highly specific overrides to fix cascading
+             issues from core stylesheets, restoring the globe and
+             evidence sections to their intended appearance.
 Last Update: 2025-08-07
 ==============================================================================
 */
 
-/* --- 1. Hero Section Specifics --- */
+/* --- 1. Hero Section Specifics (No changes) --- */
 .home .luvex-hero__cta-container {
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
 }
-
 .home .luvex-hero__cta.luvex-cta-primary:hover {
     color: var(--luvex-bright-cyan);
 }
 
+/* --- 2. Knowledge Navigator Section (No changes) --- */
+.knowledge-navigator-header { text-align: center; margin-bottom: 4rem; }
+.knowledge-navigator-intro { max-width: 650px; margin: 1rem auto 0; color: var(--luvex-gray-700); font-size: 1.125rem; }
+.knowledge-card { text-align: left; }
+.knowledge-card .card__title { text-align: left; }
+.knowledge-card .card__content { text-align: left; }
+.knowledge-card__header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+.knowledge-card .card__icon { margin: 0; font-size: 2.2rem; width: 60px; height: 60px; background: linear-gradient(135deg, #e7f1ff, #f0f8ff); color: var(--luvex-vibrant-blue); border-radius: 12px; }
+.knowledge-card .card__title { margin-bottom: 0; font-size: 1.5rem; }
+.knowledge-card .btn { align-self: center; }
 
-/* --- 2. Knowledge Navigator Section --- */
-.knowledge-navigator-header {
-    text-align: center;
-    margin-bottom: 4rem;
-}
-
-.knowledge-navigator-intro {
-    max-width: 650px;
-    margin: 1rem auto 0 auto;
-    color: var(--luvex-gray-700);
-    font-size: 1.125rem;
-}
-
-.knowledge-card {
-    text-align: left;
-}
-.knowledge-card .card__title {
-    text-align: left;
-}
-.knowledge-card .card__content {
-    text-align: left;
-}
-
-.knowledge-card__header {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.knowledge-card .card__icon {
-    margin: 0;
-    font-size: 2.2rem;
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, #e7f1ff, #f0f8ff);
-    color: var(--luvex-vibrant-blue);
-    border-radius: 12px;
-}
-
-.knowledge-card .card__title {
-    margin-bottom: 0;
-    font-size: 1.5rem;
-}
-
-.knowledge-card .btn {
-    align-self: center;
-}
-
-
-/* --- 3. UV Simulator Showcase --- */
-.uv-simulator-showcase {
-    background: linear-gradient(135deg, var(--luvex-dark-blue), var(--luvex-accent-blue));
-    border-radius: var(--radius-xl);
-    padding: 4rem 3rem;
-    position: relative;
-    overflow: hidden;
-    text-align: center;
-    color: var(--luvex-white);
-}
-
-.simulator-content h3 {
-    color: var(--luvex-white);
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.simulator-description {
-    color: var(--luvex-text-muted-dark);
-    font-size: 1.2rem;
-    margin-bottom: 3rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.simulator-features {
-    margin: 3rem auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    max-width: 900px;
-}
-
-.simulator-feature {
-    padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: var(--radius-md);
-    transition: all 0.3s ease;
-}
-
-.simulator-feature:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-4px);
-}
-
-/* KORREKTUR: Hover-Effekt für Text in den Features (beibehalten) */
-.simulator-feature:hover h4 {
-    color: var(--luvex-bright-cyan);
-}
-.simulator-feature:hover p {
-    color: var(--luvex-white);
-}
-
-
-.simulator-feature i {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: var(--luvex-bright-cyan);
-}
-
-.simulator-feature h4 {
-    color: var(--luvex-white);
-    margin-bottom: 0.5rem;
-    transition: color 0.3s ease;
-}
-
-.simulator-feature p {
-    color: var(--luvex-text-muted-dark);
-    transition: color 0.3s ease;
-}
-
-.simulator-cta {
-    margin-top: 2rem;
-}
-
-.simulator-cta:hover {
-    color: var(--luvex-vibrant-blue);
-}
-
+/* --- 3. UV Simulator Showcase (No changes) --- */
+.uv-simulator-showcase { background: linear-gradient(135deg, var(--luvex-dark-blue), var(--luvex-accent-blue)); border-radius: var(--radius-xl); padding: 4rem 3rem; position: relative; overflow: hidden; text-align: center; color: var(--luvex-white); }
+.simulator-content h3 { color: var(--luvex-white); font-size: 2.5rem; margin-bottom: 1.5rem; }
+.simulator-description { color: var(--luvex-text-muted-dark); font-size: 1.2rem; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+.simulator-features { margin: 3rem auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 900px; }
+.simulator-feature { padding: 1.5rem; background: rgba(255, 255, 255, 0.05); border-radius: var(--radius-md); transition: all 0.3s ease; }
+.simulator-feature:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-4px); }
+.simulator-feature:hover h4 { color: var(--luvex-bright-cyan); }
+.simulator-feature:hover p { color: var(--luvex-white); }
+.simulator-feature i { font-size: 2.5rem; margin-bottom: 1rem; color: var(--luvex-bright-cyan); }
+.simulator-feature h4 { color: var(--luvex-white); margin-bottom: 0.5rem; transition: color 0.3s ease; }
+.simulator-feature p { color: var(--luvex-text-muted-dark); transition: color 0.3s ease; }
+.simulator-cta { margin-top: 2rem; }
+.simulator-cta:hover { color: var(--luvex-vibrant-blue); }
 
 /*
 ==============================================================================
-4. Global UV Expert Community Section (FINAL FIX)
+4. Global UV Expert Community Section (FINAL FIX V3)
 ==============================================================================
 */
-.homepage-community-section {
-    padding: 6rem 0;
+/* DEFINITIVE FIX: Override core 'overflow' property to allow the globe to be larger than the section */
+.home .homepage-community-section {
+    overflow: visible !important; /* Force overflow to be visible, breaking out of the container */
     position: relative;
-    background-color: var(--luvex-dark-blue); /* DEFINITIVE FIX: Setzt den Hintergrund direkt */
-    overflow-x: hidden; /* Verhindert horizontales Scrollen */
-    overflow-y: visible; /* Erlaubt vertikales Überlappen */
-}
-
-/* DEFINITIVE FIX: Grid wird direkt auf den Hintergrund gelegt, nicht auf ein Pseudo-Element */
-.homepage-community-section {
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse"><path d="M 80 0 L 0 0 0 80" fill="none" stroke="rgba(109, 213, 237, 0.08)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+    background-color: var(--luvex-dark-blue);
+    /* DEFINITIVE FIX: Finer grid as requested */
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(109, 213, 237, 0.08)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
 }
 
 .homepage-community-container {
@@ -183,7 +73,7 @@ Last Update: 2025-08-07
 .homepage-community-content {
     flex: 1;
     min-width: 50%;
-    z-index: 3; /* Stellt sicher, dass der Text über dem Globus ist */
+    z-index: 3;
 }
 
 .homepage-community-visual {
@@ -191,51 +81,35 @@ Last Update: 2025-08-07
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 600px;
-    position: relative; /* Wichtig für die Positionierung des Globus */
+    /* DEFINITIVE FIX: Make container much larger to allow for a larger globe canvas */
+    min-height: 700px;
+    position: relative;
 }
 
 .homepage-community-globe-wrapper {
-    width: 120%;
-    height: 120%;
+    /* DEFINITIVE FIX: Make globe significantly larger and reposition */
+    width: 160%;
+    height: 160%;
     position: absolute;
-    /* Passt die Position an, um den Globus besser zu zentrieren und das "Abschneiden" zu kontrollieren */
     left: 50%;
     top: 50%;
-    transform: translate(-40%, -50%);
+    transform: translate(-45%, -50%);
     z-index: 1;
 }
 
-.homepage-community-title {
-    color: var(--luvex-white);
-    font-size: clamp(2.4rem, 4.5vw, 3.2rem);
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
-}
-
-.homepage-community-description {
-    font-size: var(--text-lg);
-    color: var(--luvex-gray-300);
-    max-width: 600px;
-    line-height: 1.7;
-    margin-bottom: 2.5rem;
-}
-
-.homepage-community-actions {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-
+.homepage-community-title { color: var(--luvex-white); font-size: clamp(2.4rem, 4.5vw, 3.2rem); line-height: 1.2; margin-bottom: 1.5rem; }
+.homepage-community-description { font-size: var(--text-lg); color: var(--luvex-gray-300); max-width: 600px; line-height: 1.7; margin-bottom: 2.5rem; }
+.homepage-community-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
 /*
 ==============================================================================
-5. Evidence-Based Expertise Section (FINAL FIX)
+5. Evidence-Based Expertise Section (FINAL FIX V3)
 ==============================================================================
 */
-.evidence-section {
-    padding: 8rem 0 6rem 0; /* Mehr Platz oben für das überlappende Bild */
-    /* overflow: visible; wird nicht mehr benötigt, da der Fix direkt an der Komponente ansetzt */
+/* DEFINITIVE FIX: Override core 'overflow' property for the section itself */
+.home .evidence-section {
+    padding: 8rem 0 6rem 0;
+    overflow: visible !important; /* This allows the child card to overflow */
 }
 
 .evidence-grid {
@@ -245,18 +119,10 @@ Last Update: 2025-08-07
     gap: 4rem;
 }
 
-.evidence-title {
-    font-size: clamp(2.2rem, 4vw, 3rem);
-    margin-bottom: 1.5rem;
-}
+.evidence-title { font-size: clamp(2.2rem, 4vw, 3rem); margin-bottom: 1.5rem; }
+.evidence-description { font-size: var(--text-lg); margin-bottom: 3rem; max-width: 550px; }
 
-.evidence-description {
-    font-size: var(--text-lg);
-    margin-bottom: 3rem;
-    max-width: 550px;
-}
-
-/* DEFINITIVE FIX: Die helle Variante der Karte überschreibt die `overflow`-Eigenschaft */
+/* This rule is now redundant because the parent section is fixed, but kept for safety */
 .team-member--light {
     background: var(--luvex-gray-100);
     color: var(--luvex-dark-blue);
@@ -266,7 +132,7 @@ Last Update: 2025-08-07
     padding-top: 5rem;
     position: relative;
     text-align: center;
-    overflow: visible; /* Dies ist die entscheidende Korrektur! */
+    overflow: visible; /* Kept for robustness */
 }
 
 .team-member--light .team-member__photo {
@@ -276,55 +142,38 @@ Last Update: 2025-08-07
     transform: translateX(-50%);
     width: 120px;
     height: 120px;
-    border-radius: 50%; /* Stellt sicher, dass das Bild rund bleibt */
-    border: 4px solid var(--luvex-white); /* Fügt einen weißen Rand hinzu, um es besser abzuheben */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Fügt einen leichten Schatten hinzu */
+    border-radius: 50%;
+    border: 4px solid var(--luvex-white);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .team-member--light .team-member__content h3,
-.team-member--light .team-member__quote p {
-    color: var(--luvex-dark-blue);
-}
+.team-member--light .team-member__quote p { color: var(--luvex-dark-blue); }
+.team-member--light .team-member__role { color: var(--luvex-vibrant-blue); }
 
-.team-member--light .team-member__role {
-    color: var(--luvex-vibrant-blue);
-}
+/* --- 6. Final CTA Section (No changes) --- */
+.section--final-cta { background: linear-gradient(135deg, var(--luvex-accent-blue) 0%, var(--luvex-dark-blue) 100%); color: var(--luvex-white); }
+.section--final-cta .cta-section--dark { background: transparent; box-shadow: none; border: none; max-width: 900px; }
 
-
-/* --- 6. Final CTA Section --- */
-.section--final-cta {
-    background: linear-gradient(135deg, var(--luvex-accent-blue) 0%, var(--luvex-dark-blue) 100%);
-    color: var(--luvex-white);
-}
-
-.section--final-cta .cta-section--dark {
-    background: transparent;
-    box-shadow: none;
-    border: none;
-    max-width: 900px;
-}
-
-/* --- 7. Responsive Overrides --- */
+/* --- 7. Responsive Overrides (Adjusted for Globe) --- */
 @media (max-width: 1024px) {
     .homepage-community-container {
         flex-direction: column;
         text-align: center;
+        padding-top: 3rem;
     }
     .homepage-community-content {
-        margin-bottom: 250px; /* Gibt dem Globus unten mehr Raum */
-        margin-top: 3rem;
+        margin-bottom: 3rem;
     }
     .homepage-community-visual {
-        position: absolute;
+        /* Make the visual container a block under the text */
+        min-height: 500px;
         width: 100%;
-        height: 500px;
-        bottom: -6rem;
-        left: 0;
-        z-index: 0;
     }
-     .homepage-community-globe-wrapper {
-        width: 150%;
-        transform: translate(-50%, -40%);
+    .homepage-community-globe-wrapper {
+        width: 180%; /* Even larger on mobile to fill space */
+        height: 180%;
+        transform: translate(-50%, -50%);
     }
     .homepage-community-actions {
         justify-content: center;
@@ -340,17 +189,10 @@ Last Update: 2025-08-07
         text-align: center;
     }
 }
-
 @media (max-width: 768px) {
-    .simulator-features {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .evidence-section {
-        padding-top: 6rem;
-    }
+    .simulator-features { grid-template-columns: repeat(2, 1fr); }
+    .evidence-section { padding-top: 6rem; }
 }
 @media (max-width: 480px) {
-    .simulator-features {
-        grid-template-columns: 1fr;
-    }
+    .simulator-features { grid-template-columns: 1fr; }
 }
