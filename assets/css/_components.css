@@ -1,6 +1,6 @@
 /*
 ==============================================================================
-LUVEX THEME v4.0 - UI COMPONENTS (Final Form & Effect Polish)
+LUVEX THEME v4.1 - UI COMPONENTS (Final Form & Effect Polish)
 ==============================================================================
 
 Description: Final adjustments for select/dropdown elements and shine effect.
@@ -10,7 +10,7 @@ Last Update: 2025-08-07
 ==============================================================================
 */
 
-/* ... (section 1 remains unchanged) ... */
+/* ... (section 1 & 2 remain unchanged) ... */
 /*
 ==============================================================================
 1. BUTTONS 
@@ -469,8 +469,8 @@ Last Update: 2025-08-07
     content: '';
     position: absolute;
     top: 0;
-    left: -150%; /* Start further off-screen */
-    width: 50%;   /* Make the shine narrower */
+    left: -150%; 
+    width: 50%;
     height: 100%;
     background: linear-gradient(90deg, 
         transparent 0%, 
@@ -481,7 +481,6 @@ Last Update: 2025-08-07
     );
     z-index: 1; 
     pointer-events: none;
-    /* UPDATE: Remove transition from the base state */
 }
 
 .has-shine-effect > * {
@@ -489,9 +488,8 @@ Last Update: 2025-08-07
     z-index: 2;
 }
 
-/* UPDATE: Apply transition only on hover to prevent the effect on mouseout */
 .has-shine-effect:hover::before {
-    left: 150%; /* End further off-screen */
+    left: 150%;
     transition: left 0.8s ease-in-out;
 }
 
@@ -524,7 +522,7 @@ Last Update: 2025-08-07
     background: var(--luvex-white);
     transition: var(--transition-normal);
     color: var(--luvex-dark-blue);
-    font-family: inherit; /* Ensure select uses theme font */
+    font-family: inherit;
 }
 
 .floating-label-input textarea {
@@ -543,12 +541,11 @@ Last Update: 2025-08-07
     padding-right: 40px;
 }
 
-/* UPDATE: Refined styling for select options */
 .floating-label-input select option {
     background: var(--luvex-white);
     color: var(--luvex-dark-blue);
-    padding: 12px 16px; /* Add padding to options */
-    font-family: 'Segoe UI', system-ui, sans-serif; /* Example of a modern font */
+    padding: 12px 16px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
 }
 
 .floating-label-input label {
@@ -599,16 +596,27 @@ Last Update: 2025-08-07
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
 }
 
-/* UPDATE: Refined styling for dark theme select options */
+/* UPDATE: Final, refined styling for dark theme select options */
 .floating-label-input--dark select option {
-    background: var(--luvex-dark-blue);
+    background: #0F254E; /* Slightly lighter than the form background */
     color: var(--luvex-white);
-    padding: 12px 16px; /* Add padding to options */
-    font-family: 'Segoe UI', system-ui, sans-serif; /* Example of a modern font */
+    padding: 14px 18px; /* More padding */
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    border-bottom: 1px solid rgba(109, 213, 237, 0.1); /* Subtle separator */
+}
+.floating-label-input--dark select option:last-child {
+    border-bottom: none;
 }
 
+/* UPDATE: Hide scrollbar in dropdown */
+.floating-label-input--dark select::-webkit-scrollbar {
+  display: none;
+}
+.floating-label-input--dark select {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
 
-/* ... (rest of the file remains unchanged) ... */
 
 /* --- 3.3 Validation States --- */
 .floating-label-input--success input,

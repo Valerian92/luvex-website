@@ -2,7 +2,7 @@
 /**
  * Contact Page Template
  * @package Luvex
- * @since 2.6.0 (Final contact details and structure)
+ * @since 2.7.0 (Final layout adjustments)
  */
 
 get_header(); ?>
@@ -53,7 +53,6 @@ get_header(); ?>
     <div class="container">
         <div class="contact-form-v2__layout">
             
-            <!-- Left Column: Contact Information -->
             <div class="contact-form-v2__info">
                 <h2 class="contact-form-v2__title">Get in Touch</h2>
                 <p class="contact-form-v2__description">
@@ -64,7 +63,6 @@ get_header(); ?>
                         <i class="fa-solid fa-envelope"></i>
                         <div>
                             <strong>Email Us</strong>
-                            <!-- UPDATE: Email is now a clickable mailto link -->
                             <a href="mailto:support@luvex.tech">support@luvex.tech</a>
                         </div>
                     </div>
@@ -72,7 +70,6 @@ get_header(); ?>
                         <i class="fa-solid fa-phone"></i>
                         <div>
                             <strong>Call Us</strong>
-                            <!-- UPDATE: Phone number changed -->
                             <span>+49 0174 3122674</span>
                         </div>
                     </div>
@@ -86,9 +83,7 @@ get_header(); ?>
                 </div>
             </div>
 
-            <!-- Right Column: Contact Form -->
             <div class="contact-form-v2__form-container">
-                <!-- This is a structural example. You would typically use a shortcode from a form plugin like Contact Form 7 here. -->
                 <form action="#" method="POST" id="luvex-contact-form">
                     <div class="form-grid form-grid--2-cols">
                         <div class="floating-label-input floating-label-input--dark">
@@ -133,8 +128,9 @@ get_header(); ?>
     </div>
 </section>
 
+<!-- UPDATE: Changed container to container--wide for full-width layout -->
 <section class="what-to-expect-section section">
-    <div class="container container--narrow">
+    <div class="container container--wide">
         <div class="text-center">
             <h2 class="section__title">What Happens Next?</h2>
             <p class="section__subtitle">We believe in clear communication from the very first step.</p>
