@@ -1,32 +1,20 @@
 /*
 ==============================================================================
-LUVEX THEME v2.9.2 - CONTACT PAGE (Final Polish)
-==============================================================================
-
-Description: Final adjustments for the contact page.
-             - Corrected hero height.
-             - Ensured default cursor is hidden.
-Last Update: 2025-08-07
-
+LUVEX THEME v2.9.3 - CONTACT PAGE (Final Polish)
 ==============================================================================
 */
 
-/* --- General Page Setup for Animation --- */
-body.page-template-page-contact {
-    /* Force hide the default cursor to ensure custom one is always shown */
-    cursor: none !important;
-}
-
 /* --- 1. Modern Hero Section with Interactive Canvas --- */
 .contact-hero-v2 {
-    /* Adjusted height to be large but not full screen */
+    /* Hide default cursor ONLY when hovering over the hero section */
+    cursor: none;
     min-height: 650px;
     height: 75vh;
     max-height: 800px;
     padding: 0;
     position: relative;
     overflow: hidden;
-    display: flex; /* Ensures content inside is vertically and horizontally centered */
+    display: flex;
     align-items: center;
     justify-content: center;
 }
@@ -43,7 +31,7 @@ body.page-template-page-contact {
 .contact-hero-v2 .luvex-hero__container { 
     max-width: 800px; 
     position: relative;
-    z-index: 2; /* Ensure content is above the canvas */
+    z-index: 2;
 }
 
 .contact-hero-v2 .luvex-hero__subtitle { 
@@ -64,42 +52,42 @@ body.page-template-page-contact {
     left: 0;
     width: 30px;
     height: 30px;
-    border: 2px solid #6dd5ed; /* --luvex-bright-cyan */
+    border: 2px solid #6dd5ed;
     border-radius: 50%;
     pointer-events: none;
-    /* Use translate(0,0) initially and update via JS for smooth movement */
-    transform: translate(0, 0); 
+    /* This transform centers the cursor div on its own axis */
+    transform: translate(-50%, -50%); 
     transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, opacity 0.3s ease;
     z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 1; /* Make it visible by default */
+    /* Start hidden, made visible by JS on hero hover */
+    opacity: 0; 
 }
 
 .custom-cursor::after {
     content: '';
     width: 6px;
     height: 6px;
-    background-color: #6dd5ed; /* --luvex-bright-cyan */
+    background-color: #6dd5ed;
     border-radius: 50%;
     display: block;
     transition: transform 0.2s ease;
 }
 
 /* --- Cursor Hover Effect --- */
-body.page-template-page-contact:has(a:hover, button:hover, .btn:hover) .custom-cursor {
+.contact-hero-v2:has(a:hover, button:hover, .btn:hover) .custom-cursor {
     width: 50px;
     height: 50px;
     background-color: rgba(109, 213, 237, 0.2);
 }
 
-body.page-template-page-contact:has(a:hover, button:hover, .btn:hover) .custom-cursor::after {
+.contact-hero-v2:has(a:hover, button:hover, .btn:hover) .custom-cursor::after {
      transform: scale(0.5);
 }
 
-
-/* --- 2. Modern Contact Form Section --- */
+/* --- 2. Modern Contact Form Section (unverändert) --- */
 .contact-form-section-v2 {
     background: var(--luvex-white);
 }
@@ -141,7 +129,7 @@ body.page-template-page-contact:has(a:hover, button:hover, .btn:hover) .custom-c
     color: var(--luvex-gray-300);
 }
 
-/* --- 3. "What to Expect" Section (ENHANCED) --- */
+/* --- 3. "What to Expect" Section (unverändert) --- */
 .what-to-expect-section { padding: 6rem 0; }
 .what-to-expect-section .container--wide { padding-left: 3rem; padding-right: 3rem; }
 .what-to-expect-section .section__title { color: var(--luvex-dark-blue); }
@@ -153,14 +141,14 @@ body.page-template-page-contact:has(a:hover, button:hover, .btn:hover) .custom-c
 .expect-step__title { font-size: 1.25rem; color: var(--luvex-dark-blue); margin-bottom: 0.5rem; }
 .expect-step__description { color: var(--luvex-gray-700); line-height: 1.6; margin: 0; flex-grow: 1; }
 
-/* --- Responsive Adjustments --- */
+/* --- Responsive Adjustments (unverändert) --- */
 @media (max-width: 992px) {
     .contact-form-v2__layout { grid-template-columns: 1fr; gap: 3rem; padding: 3rem; }
 }
 @media (max-width: 768px) {
     .contact-hero-v2 { 
         min-height: 550px; 
-        height: auto; /* Allow height to be determined by content on mobile */
+        height: auto; 
     }
     .contact-form-v2__layout { padding: 2rem 1.5rem; }
     .contact-form-v2__form-container { padding: 2rem; }

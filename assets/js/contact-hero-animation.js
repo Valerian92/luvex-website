@@ -1,12 +1,13 @@
 /**
  * LUVEX Contact Page - Interactive Ripple Hero Animation
  * @package Luvex
- * @since 2.9.2 (Final Polish)
- * @description Creates an interactive ripple wave effect, a custom cursor, and an initial burst animation.
+ * @since 2.9.3 (Final Scope & Centering Fix)
+ * @description Creates an interactive ripple wave effect and a custom cursor scoped to the hero section.
  */
 document.addEventListener('DOMContentLoaded', () => {
+    const heroSection = document.querySelector('.contact-hero-v2');
     const canvas = document.getElementById('contact-hero-animation-canvas');
-    if (!canvas) return;
+    if (!heroSection || !canvas) return;
 
     const ctx = canvas.getContext('2d');
     const cursor = document.querySelector('.custom-cursor');
@@ -17,30 +18,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const RANDOM_WAVE_INTERVAL = 1800;
     const RIPPLE_COUNT = 4;
     const RIPPLE_DELAY = 120;
-    const INITIAL_BURST_COUNT = 15; // More waves for the initial burst
+    const INITIAL_BURST_COUNT = 15;
     const INITIAL_BURST_DELAY = 100;
 
     let waves = [];
     let canCreateMouseWave = true;
-    let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
 
     function resizeCanvas() {
-        // The canvas should fill its container, which is the hero section
-        const heroSection = document.querySelector('.contact-hero-v2');
         canvas.width = heroSection.offsetWidth;
         canvas.height = heroSection.offsetHeight;
     }
     window.addEventListener('resize', resizeCanvas);
-    resizeCanvas(); // Initial size calculation
+    resizeCanvas();
 
-    window.addEventListener('mousemove', (e) => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-        // Use transform for smoother cursor movement
-        cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    // --- Event Listeners Scoped to Hero Section ---
+
+    heroSection.addEventListener('mouseenter', () => {
+        cursor.style.opacity = '1';
+    });
+
+    heroSection.addEventListener('mouseleave', () => {
+        cursor.style.opacity = '0';
+    });
+
+    heroSection.addEventListener('mousemove', (e) => {
+        // Update cursor position for perfect centering
+        cursor.style.left = `${e.clientX}px`;
+        cursor.style.top = `${e.clientY}px`;
 
         if (canCreateMouseWave) {
-            // Adjust mouse coordinates relative to the canvas
             const rect = canvas.getBoundingClientRect();
             const canvasX = e.clientX - rect.left;
             const canvasY = e.clientY - rect.top;
@@ -50,8 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    document.body.addEventListener('mouseleave', () => { cursor.style.opacity = '0'; });
-    document.body.addEventListener('mouseenter', () => { cursor.style.opacity = '1'; });
 
     class Wave {
         constructor(x, y, options = {}) {
@@ -64,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.opacity = this.isInitial ? 0.9 : 1;
 
             if (this.isInitial) {
-                this.maxRadius = Math.random() * 200 + (canvas.width * 0.2); // Make initial burst larger
+                this.maxRadius = Math.random() * 200 + (canvas.width * 0.2);
                 this.speed = Math.random() * 0.6 + 0.4;
                 this.lineWidth = Math.random() * 1 + 2;
             } else {
@@ -99,14 +103,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Initial Animation Burst ---
     function createInitialBurst() {
         const centerX = canvas.width / 2;
         const centerY = canvas.height / 2;
         createRippleEffect(centerX, centerY, { isInitial: true });
     }
 
-    // --- Generate random background ripples ---
     const randomWaveIntervalId = setInterval(() => {
         const x = Math.random() * canvas.width;
         const y = Math.random() * canvas.height;
@@ -126,8 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(animate);
     }
 
-    // Start everything
-    setTimeout(createInitialBurst, 500); // Start burst after a short delay
+    setTimeout(createInitialBurst, 500);
     animate();
     
     window.addEventListener('beforeunload', () => {
