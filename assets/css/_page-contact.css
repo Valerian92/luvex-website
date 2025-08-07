@@ -1,131 +1,172 @@
 /*
 ==============================================================================
-LUVEX THEME v2.2 - CONTACT PAGE (Refactored)
+LUVEX THEME v2.3 - CONTACT PAGE (Modernized)
 ==============================================================================
 
-Description: Page-specific styles for the contact page. Cleaned up to rely
-             on global styles.
-Last Update: 2025-08-05
+Description: Page-specific styles for the modernized contact page.
+Last Update: 2025-08-07
 
 ==============================================================================
 */
 
-/* Hero styles are now inherited from .luvex-hero in _heroes.css.
-   Contact method card styles are now inherited from .card in _components.css.
-   Only page-specific layout and component styles remain.
-*/
-
-/* --- 1. Contact Form Section --- */
-.contact-form-section {
-    padding: var(--space-xl) 0;
+/* --- 1. Modern Hero Section --- */
+.contact-hero-v2 {
+    min-height: 500px;
+    padding: 6rem 2rem;
 }
 
-.contact-form-layout {
+.contact-hero-v2 .luvex-hero__container {
+    max-width: 800px; /* Besserer Zeilenumbruch */
+}
+
+.contact-hero-v2 .luvex-hero__subtitle {
+    color: var(--luvex-gray-300);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.contact-hero-v2 .luvex-hero__description {
+    color: var(--luvex-gray-400);
+    font-size: 1.1rem;
+}
+
+.contact-hero-v2__animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+/* --- 2. Modern Contact Form Section --- */
+.contact-form-section-v2 {
+    background: var(--luvex-white);
+}
+
+.contact-form-v2__layout {
     display: grid;
-    gap: 3rem; /* Increased gap */
-}
-
-.contact-form-intro {
-    text-align: center;
-    max-width: 700px; /* Wider for better text flow */
-    margin: 0 auto;
-}
-
-.contact-form-intro__title {
-    font-size: clamp(2rem, 4vw, 2.5rem);
-    font-weight: 600;
-    color: var(--luvex-dark-blue);
-    margin: 0 0 1rem 0;
-}
-
-.contact-form-intro__description {
-    color: var(--luvex-gray-700);
-    font-size: var(--text-lg);
-    line-height: 1.7;
-    margin: 0;
-}
-
-.contact-form-container {
-    background: #F8FAFC; /* Lighter background */
-    border-radius: var(--radius-xl);
-    padding: 3rem;
-    border: 1px solid var(--luvex-gray-200);
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.luvex-contact-form .floating-label-input {
-    margin-bottom: 2rem;
-}
-
-.form-consent {
-    margin-bottom: 2rem;
-}
-
-.form-checkbox__text {
-    font-size: var(--text-sm);
-    color: var(--luvex-gray-700);
-    line-height: 1.5;
-}
-
-/* --- 2. Contact Info Section --- */
-.contact-info {
-    padding: var(--space-xl) 0;
+    grid-template-columns: 1fr 1.25fr;
+    align-items: center;
+    gap: 4rem;
     background: #F8FAFC;
+    border-radius: var(--radius-xl);
+    padding: 4rem;
+    border: 1px solid var(--luvex-gray-200);
 }
 
-.contact-info__content {
-    text-align: center;
-}
-
-.contact-info__title {
-    font-size: clamp(2rem, 4vw, 2.5rem);
-    font-weight: 600;
+.contact-form-v2__title {
+    font-size: 2.5rem;
     color: var(--luvex-dark-blue);
-    margin: 0 0 3rem 0;
+    margin-bottom: 1rem;
 }
 
-.contact-info__grid {
+.contact-form-v2__description {
+    font-size: 1.1rem;
+    color: var(--luvex-gray-700);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+}
+
+.contact-form-v2__details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border-top: 1px solid var(--luvex-gray-200);
+    padding-top: 2rem;
+}
+
+.contact-form-v2__details .detail-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.contact-form-v2__details .detail-item i {
+    font-size: 1.5rem;
+    color: var(--luvex-bright-cyan);
+}
+
+.contact-form-v2__details .detail-item strong {
+    display: block;
+    color: var(--luvex-dark-blue);
+    font-weight: 600;
+}
+
+.contact-form-v2__details .detail-item span {
+    color: var(--luvex-gray-700);
+}
+
+.contact-form-v2__form-container {
+    background: var(--luvex-white);
+    padding: 2.5rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+/* --- 3. "What to Expect" Section --- */
+.what-to-expect-section .section__title {
+    color: var(--luvex-dark-blue);
+}
+
+.expect-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    max-width: 900px;
-    margin: 0 auto;
+    margin-top: 3rem;
 }
 
-.contact-info__item {
-    padding: 1.5rem;
+.expect-step {
+    text-align: center;
+    padding: 2rem;
 }
 
-.contact-info__icon {
-    width: 48px;
-    height: 48px;
+.expect-step__icon {
+    width: 60px;
+    height: 60px;
     background: var(--luvex-dark-blue);
+    color: var(--luvex-white);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1rem;
-    color: var(--luvex-bright-cyan);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 auto 1.5rem auto;
+    border: 4px solid var(--luvex-white);
+    box-shadow: 0 0 0 4px var(--luvex-dark-blue);
+}
+
+.expect-step__title {
     font-size: 1.25rem;
-}
-
-.contact-info__item h3 {
-    font-size: var(--text-lg);
-    font-weight: 600;
     color: var(--luvex-dark-blue);
-    margin: 0 0 0.5rem 0;
+    margin-bottom: 0.5rem;
 }
 
-.contact-info__item p {
+.expect-step__description {
     color: var(--luvex-gray-700);
-    margin: 0;
     line-height: 1.6;
+    margin: 0;
 }
 
-/* --- 3. Responsive Adjustments --- */
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .contact-form-v2__layout {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 3rem;
+    }
+    .expect-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (max-width: 768px) {
-    .contact-form-container {
+    .contact-form-v2__layout {
         padding: 2rem 1.5rem;
+    }
+    .contact-form-v2__form-container {
+        padding: 2rem;
     }
 }

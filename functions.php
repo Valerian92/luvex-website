@@ -131,13 +131,19 @@ function luvex_enqueue_assets() {
             wp_enqueue_script('luvex-hero-hexagon', get_stylesheet_directory_uri() . '/assets/js/hero-hexagon.js', array(), $hexagon_js_version, true);
         }
 
-        // HIER IST DIE ERGÄNZUNG: Laden des interaktiven FAQ-Skripts
         $faq_js_path = get_stylesheet_directory() . '/assets/js/interactive-faq.js';
         if (file_exists($faq_js_path)) {
             $faq_js_version = filemtime($faq_js_path);
             wp_enqueue_script('luvex-interactive-faq', get_stylesheet_directory_uri() . '/assets/js/interactive-faq.js', array(), $faq_js_version, true);
         }
     } 
+    elseif ( is_page('contact') ) {
+        $contact_hero_js_path = get_stylesheet_directory() . '/assets/js/contact-hero-animation.js';
+        if (file_exists($contact_hero_js_path)) {
+            $contact_hero_js_version = filemtime($contact_hero_js_path);
+            wp_enqueue_script('luvex-contact-hero', get_stylesheet_directory_uri() . '/assets/js/contact-hero-animation.js', array(), $contact_hero_js_version, true);
+        }
+    }
     elseif ( is_page('uv-c-disinfection') ) { 
         $disinfection_js_path = get_stylesheet_directory() . '/assets/js/hero-disinfection.js';
         if (file_exists($disinfection_js_path)) {
