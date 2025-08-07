@@ -1,11 +1,11 @@
 /*
 ==============================================================================
-LUVEX THEME v2.6 - CONTACT PAGE (Optimized)
+LUVEX THEME v2.7 - CONTACT PAGE (Final Polish)
 ==============================================================================
 
-Description: Page-specific styles for the modernized contact page.
-             - Fixed "What Happens Next" section styling.
-             - Cleaned up responsive rules.
+Description: Final adjustments for the contact page.
+             - Added custom cursor for hero.
+             - Increased padding for "What Happens Next" cards.
 Last Update: 2025-08-07
 
 ==============================================================================
@@ -15,11 +15,33 @@ Last Update: 2025-08-07
 .contact-hero-v2 {
     min-height: 500px;
     padding: 6rem 2rem;
+    position: relative; /* Required for custom cursor positioning */
 }
-.contact-hero-v2 .luvex-hero__container { max-width: 800px; }
+.contact-hero-v2 .luvex-hero__container { 
+    max-width: 800px; 
+    position: relative; /* Ensure text is above the animation */
+    z-index: 3;
+}
 .contact-hero-v2 .luvex-hero__subtitle { color: var(--luvex-gray-300); font-size: 1.5rem; margin-bottom: 1.5rem; }
 .contact-hero-v2 .luvex-hero__description { color: var(--luvex-gray-400); font-size: 1.1rem; }
-.contact-hero-v2__animation { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; }
+.contact-hero-v2__animation { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; overflow: hidden; }
+
+/* UPDATE: Custom cursor for hero animation */
+.hero-custom-cursor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(109, 213, 237, 0.5);
+    border-radius: 50%;
+    border: 2px solid rgba(109, 213, 237, 0.8);
+    transform: translate(-50%, -50%);
+    pointer-events: none; /* Allows clicks to pass through */
+    z-index: 2;
+    transition: transform 0.1s ease-out;
+}
+
 
 /* --- 2. Modern Contact Form Section --- */
 .contact-form-section-v2 {
@@ -45,10 +67,17 @@ Last Update: 2025-08-07
 .contact-form-v2__details .detail-item { display: flex; align-items: center; gap: 1rem; }
 .contact-form-v2__details .detail-item i { font-size: 1.5rem; color: var(--luvex-bright-cyan); width: 24px; text-align: center; }
 .contact-form-v2__details .detail-item strong { display: block; color: var(--luvex-white); font-weight: 600; }
-.contact-form-v2__details .detail-item span { color: var(--luvex-gray-300); }
+.contact-form-v2__details .detail-item span,
+.contact-form-v2__details .detail-item a { 
+    color: var(--luvex-gray-300); 
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.contact-form-v2__details .detail-item a:hover {
+    color: var(--luvex-bright-cyan);
+}
 .contact-form-v2__form-container { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 2.5rem; border-radius: var(--radius-lg); }
 
-/* Input fields within the dark form inherit dark-theme styles */
 .contact-form-v2__form-container .floating-label-input input,
 .contact-form-v2__form-container .floating-label-input textarea,
 .contact-form-v2__form-container .floating-label-input select {
@@ -59,10 +88,8 @@ Last Update: 2025-08-07
 .contact-form-v2__form-container .floating-label-input label {
     color: var(--luvex-gray-300);
 }
-/* The checkbox text color is now handled globally in _components.css */
 
-
-/* --- 3. "What to Expect" Section (FIXED & ENHANCED) --- */
+/* --- 3. "What to Expect" Section (ENHANCED) --- */
 .what-to-expect-section {
     padding: 6rem 0;
 }
@@ -78,20 +105,22 @@ Last Update: 2025-08-07
 }
 .expect-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     margin-top: 3rem;
 }
 
-/* FIX: Corrected selector to match PHP and added card styling */
 .expect-step-card {
     text-align: center;
-    padding: 2.5rem 2rem;
+    /* UPDATE: Increased padding for more whitespace */
+    padding: 3rem 2.5rem; 
     background: var(--luvex-white);
     border-radius: var(--radius-lg);
     border: 1px solid var(--luvex-gray-200);
     box-shadow: var(--shadow-sm);
     transition: var(--transition-normal);
+    display: flex;
+    flex-direction: column;
 }
 
 .expect-step-card:hover {
@@ -114,6 +143,7 @@ Last Update: 2025-08-07
     margin: 0 auto 1.5rem auto;
     border: 4px solid var(--luvex-white);
     box-shadow: 0 0 0 4px var(--luvex-dark-blue);
+    flex-shrink: 0;
 }
 .expect-step__title {
     font-size: 1.25rem;
@@ -124,6 +154,7 @@ Last Update: 2025-08-07
     color: var(--luvex-gray-700);
     line-height: 1.6;
     margin: 0;
+    flex-grow: 1; /* Allows description to take up space */
 }
 
 /* --- Responsive Adjustments --- */

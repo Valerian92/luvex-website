@@ -2,7 +2,7 @@
 /**
  * Contact Page Template
  * @package Luvex
- * @since 2.5.0 (Form and layout fixes)
+ * @since 2.6.0 (Final contact details and structure)
  */
 
 get_header(); ?>
@@ -49,7 +49,6 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- FIX: Contact Form Section with restored HTML content -->
 <section class="contact-form-section-v2 section" id="contact-form-v2">
     <div class="container">
         <div class="contact-form-v2__layout">
@@ -65,14 +64,16 @@ get_header(); ?>
                         <i class="fa-solid fa-envelope"></i>
                         <div>
                             <strong>Email Us</strong>
-                            <span>support@luvex.tech</span>
+                            <!-- UPDATE: Email is now a clickable mailto link -->
+                            <a href="mailto:support@luvex.tech">support@luvex.tech</a>
                         </div>
                     </div>
                     <div class="detail-item">
                         <i class="fa-solid fa-phone"></i>
                         <div>
                             <strong>Call Us</strong>
-                            <span>+49 (0) 123 456 7890</span>
+                            <!-- UPDATE: Phone number changed -->
+                            <span>+49 0174 3122674</span>
                         </div>
                     </div>
                     <div class="detail-item">
@@ -114,7 +115,6 @@ get_header(); ?>
                         <label for="contact-message">Your Message</label>
                     </div>
                     
-                    <!-- FIX: Corrected checkbox structure for better styling and accessibility -->
                     <div class="form-checkbox">
                         <input type="checkbox" id="privacy-policy" name="privacy-policy" required>
                         <label for="privacy-policy" class="form-checkbox__label">
@@ -133,7 +133,6 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- "What to Expect" Section with corrected class names -->
 <section class="what-to-expect-section section">
     <div class="container container--narrow">
         <div class="text-center">
@@ -141,7 +140,6 @@ get_header(); ?>
             <p class="section__subtitle">We believe in clear communication from the very first step.</p>
         </div>
         <div class="expect-grid">
-            <!-- The class "expect-step-card" now matches the updated CSS -->
             <div class="expect-step-card">
                 <div class="expect-step__icon">1</div>
                 <h3 class="expect-step__title">Prompt Response</h3>

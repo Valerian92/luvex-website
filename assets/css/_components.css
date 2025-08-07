@@ -1,11 +1,9 @@
 /*
 ==============================================================================
-LUVEX THEME v3.8 - UI COMPONENTS (CHECKBOX FIX)
+LUVEX THEME v3.9 - UI COMPONENTS (FORM FIXES)
 ==============================================================================
 
-Description: Komplette Überarbeitung der Card-Systeme und Shine Effects
-             für globale Kompatibilität auf allen Seiten.
-             FIX: Checkbox-System für bessere Funktionalität und Optik.
+Description: Final form adjustments for select/dropdown elements.
 Dependencies: _variables.css, _core.css
 Last Update: 2025-08-07
 
@@ -13,7 +11,6 @@ Last Update: 2025-08-07
 */
 
 /* ... (sections 1 and 2 remain unchanged) ... */
-
 /*
 ==============================================================================
 1. BUTTONS 
@@ -535,9 +532,9 @@ Last Update: 2025-08-07
     border-radius: var(--radius-md);
     padding: 24px 16px 8px 16px;
     font-size: var(--text-base);
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--luvex-white); /* Changed from transparent for light theme */
     transition: var(--transition-normal);
-    color: inherit;
+    color: var(--luvex-dark-blue); /* Default text color for light theme */
 }
 
 .floating-label-input textarea {
@@ -554,6 +551,12 @@ Last Update: 2025-08-07
     background-position: right 12px center;
     background-size: 16px;
     padding-right: 40px;
+}
+
+/* UPDATE: Specific styling for select options */
+.floating-label-input select option {
+    background: var(--luvex-white);
+    color: var(--luvex-dark-blue);
 }
 
 .floating-label-input label {
@@ -602,6 +605,12 @@ Last Update: 2025-08-07
 
 .floating-label-input--dark select {
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+}
+
+/* UPDATE: Specific styling for dark theme select options */
+.floating-label-input--dark select option {
+    background: var(--luvex-dark-blue);
+    color: var(--luvex-white);
 }
 
 /* --- 3.3 Validation States --- */
@@ -829,7 +838,6 @@ Last Update: 2025-08-07
 
 
 /* ... (sections 4, 5, 6 remain unchanged) ... */
-
 /*
 ==============================================================================
 4. CTA (CALL TO ACTION) SECTIONS (BUTTON COLOR FIX)
