@@ -1,7 +1,7 @@
 /**
  * LUVEX Contact Page - Interactive Ripple Hero Animation
  * @package Luvex
- * @since 2.9.1 (Final Polish)
+ * @since 2.9.2 (Final Polish)
  * @description Creates an interactive ripple wave effect, a custom cursor, and an initial burst animation.
  */
 document.addEventListener('DOMContentLoaded', () => {
@@ -25,19 +25,26 @@ document.addEventListener('DOMContentLoaded', () => {
     let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
 
     function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        // The canvas should fill its container, which is the hero section
+        const heroSection = document.querySelector('.contact-hero-v2');
+        canvas.width = heroSection.offsetWidth;
+        canvas.height = heroSection.offsetHeight;
     }
     window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
+    resizeCanvas(); // Initial size calculation
 
     window.addEventListener('mousemove', (e) => {
         mouse.x = e.clientX;
         mouse.y = e.clientY;
+        // Use transform for smoother cursor movement
         cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
 
         if (canCreateMouseWave) {
-            createRippleEffect(mouse.x, mouse.y, { isRandom: false });
+            // Adjust mouse coordinates relative to the canvas
+            const rect = canvas.getBoundingClientRect();
+            const canvasX = e.clientX - rect.left;
+            const canvasY = e.clientY - rect.top;
+            createRippleEffect(canvasX, canvasY, { isRandom: false });
             canCreateMouseWave = false;
             setTimeout(() => { canCreateMouseWave = true; }, MOUSE_WAVE_INTERVAL);
         }
@@ -57,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.opacity = this.isInitial ? 0.9 : 1;
 
             if (this.isInitial) {
-                this.maxRadius = Math.random() * 200 + 200;
+                this.maxRadius = Math.random() * 200 + (canvas.width * 0.2); // Make initial burst larger
                 this.speed = Math.random() * 0.6 + 0.4;
                 this.lineWidth = Math.random() * 1 + 2;
             } else {
@@ -94,11 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Initial Animation Burst ---
     function createInitialBurst() {
-        // Use the center of the hero container, not the full window
-        const heroSection = document.querySelector('.contact-hero-v2');
-        const rect = heroSection.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
         createRippleEffect(centerX, centerY, { isInitial: true });
     }
 
