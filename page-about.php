@@ -1,8 +1,8 @@
 <?php
 /**
- * About Page Template - Final Fix for Parallax, New Story & Content Update
+ * About Page Template - Final Fix for Icon & Content
  * @package Luvex
- * @since 2.9.0
+ * @since 3.0.0
  */
 
 get_header(); ?>
@@ -14,10 +14,6 @@ get_header(); ?>
         <div class="about-parallax-layer about-layer-grid"></div>
         <div class="about-parallax-layer about-layer-elements">
             <div class="about-elements-container">
-                <!-- 
-                    Hintergrund-Elemente sind jetzt wieder korrekt im Hero platziert.
-                    'data-depth' steuert die Parallax-Intensität.
-                -->
                 <div class="about-sci-element about-sci-text" style="top: 18%; left: 12%;" data-depth="0.3">Knowledge</div>
                 <div class="about-sci-element about-sci-text" style="top: 75%; left: 18%;" data-depth="0.8">Independence</div>
                 <div class="about-sci-element about-sci-text" style="top: 50%; left: 25%;" data-depth="0.5">Partnership</div>
@@ -130,7 +126,7 @@ get_header(); ?>
                 </div>
             </div>
             
-            <!-- Team Member 3: Claire (UPDATED IMAGE) -->
+            <!-- Team Member 3: Claire -->
             <div class="team-card-v2 has-shine-effect">
                 <div class="team-card-v2__photo">
                     <img src="https://www.luvex.tech/wp-content/uploads/2025/08/claire_athen-1-e1754336086484.jpeg" alt="Claire Chen - Asia-Pacific Liaison & Strategic Partnerships" />
@@ -151,7 +147,7 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- 4. CORE VALUES SECTION (Unchanged) -->
+<!-- 4. CORE VALUES SECTION (ICON FIXED) -->
 <section class="section core-values-v2 section--light-gray">
     <div class="container container--narrow">
         <div class="text-center">
@@ -179,7 +175,7 @@ get_header(); ?>
             </div>
             
             <div class="card has-shine-effect">
-                <div class="card__icon"><i class="fa-solid fa-bullseye-arrow"></i></div>
+                <div class="card__icon"><i class="fa-solid fa-bullseye"></i></div> <!-- ICON FIXED HERE -->
                 <h3 class="card__title">Results-Focused</h3>
                 <p class="card__content">
                     We measure our success by your outcomes. Our approach is practical, solution-oriented, and delivers tangible process improvements.

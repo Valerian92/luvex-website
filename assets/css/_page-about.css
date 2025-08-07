@@ -1,16 +1,16 @@
 /*
 ==============================================================================
-LUVEX THEME v2.9 - ABOUT PAGE (Final Fix & Content Update)
+LUVEX THEME v3.0 - ABOUT PAGE (Final Design & Fixes)
 ==============================================================================
-Description: Reparierter Parallax-Effekt, neue Stile für die überarbeitete 
-             "Our Story"-Sektion und allgemeine Bereinigung.
+Description: Final version with a redesigned "Our Story" section, a fix
+             for the missing icon, and cleaned-up styles.
 Last Update: 2025-08-07
 ==============================================================================
 */
 
 /*
 ==============================================================================
-1. ABOUT HERO (REPARIERT)
+1. ABOUT HERO (REPAIRED)
 ==============================================================================
 */
 
@@ -109,7 +109,7 @@ Last Update: 2025-08-07
 
 /*
 ==============================================================================
-2. OUR STORY SECTION (NEUES DESIGN)
+2. OUR STORY SECTION (REDESIGNED)
 ==============================================================================
 */
 
@@ -119,34 +119,38 @@ Last Update: 2025-08-07
 }
 
 .our-story-v3__content {
-    max-width: 800px;
+    max-width: 960px; /* Etwas breiter für besseres Layout */
     margin: 0 auto;
     text-align: left;
 }
 
 .our-story-v3 .section__title {
-    text-align: left;
-    margin-bottom: 1rem;
+    text-align: center; /* Haupttitel zentriert */
+    margin-bottom: 1.5rem;
 }
 
 .our-story-v3 .section__intro {
-    font-size: 1.2rem;
+    font-size: 1.25rem; /* Größere Einleitung */
     color: var(--luvex-gray-700);
     line-height: 1.7;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .story-block {
-    margin-bottom: 2.5rem;
-    padding-left: 2.5rem;
-    border-left: 3px solid var(--luvex-bright-cyan);
+    margin-bottom: 3rem;
 }
 
 .story-block__title {
-    font-size: 1.5rem;
+    font-size: 1.75rem; /* Größere Untertitel */
     font-weight: 600;
     color: var(--luvex-dark-blue);
-    margin: 0 0 1rem 0;
+    margin: 0 0 1.5rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--luvex-gray-200);
 }
 
 .story-block p {
@@ -156,33 +160,40 @@ Last Update: 2025-08-07
 }
 
 .story-differentiators {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin: 4rem 0;
 }
 
 .differentiators-list {
     list-style: none;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr); /* Immer 2 Spalten auf Desktop */
+    gap: 2.5rem;
 }
 
 .differentiators-list li {
     display: flex;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 1.5rem;
     background: var(--luvex-gray-100);
-    padding: 1.5rem;
+    padding: 2rem;
     border-radius: var(--radius-lg);
+    border: 1px solid var(--luvex-gray-200);
+    transition: var(--transition-normal);
+}
+
+.differentiators-list li:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--luvex-bright-cyan);
 }
 
 .differentiators-list i {
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: var(--luvex-vibrant-blue);
     margin-top: 0.25rem;
     flex-shrink: 0;
-    width: 24px;
+    width: 30px;
     text-align: center;
 }
 
@@ -191,21 +202,30 @@ Last Update: 2025-08-07
     line-height: 1.6;
 }
 
+.differentiators-list strong {
+    color: var(--luvex-dark-blue);
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
 .story-block--mission {
-    border-left-color: var(--luvex-vibrant-blue);
-    background: linear-gradient(90deg, rgba(0, 123, 255, 0.05), transparent);
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    margin-left: -2.5rem;
+    margin-top: 4rem;
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.03), rgba(109, 213, 237, 0.05));
+    padding: 3rem;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--luvex-gray-200);
+}
+
+.story-block--mission .story-block__title {
+    border-bottom-color: rgba(0, 123, 255, 0.2);
 }
 
 /*
 ==============================================================================
-3. TEAM, VALUES & CTA (BESTEHENDE STILE)
+3. TEAM, VALUES & CTA (EXISTING STYLES)
 ==============================================================================
 */
 
-/* --- Team Section --- */
 .team-section-v2 {
     background: var(--luvex-gray-100);
     padding: 8rem 0;
@@ -272,47 +292,16 @@ Last Update: 2025-08-07
     object-fit: cover;
 }
 
-.team-card-v2__name {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--luvex-dark-blue);
-    margin: 0 0 0.5rem 0;
+.team-card-v2__name, .team-card-v2__role, .team-card-v2__tags, .team-card-v2__quote {
+    /* Styles for these elements remain the same */
 }
+.team-card-v2__name { font-size: 1.5rem; font-weight: 600; color: var(--luvex-dark-blue); margin: 0 0 0.5rem 0; }
+.team-card-v2__role { color: var(--luvex-vibrant-blue); font-weight: 500; margin: 0 0 1rem 0; font-size: 1rem; }
+.team-card-v2__tags { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; }
+.team-card-v2__tags span { background: var(--luvex-gray-100); color: var(--luvex-gray-700); padding: 0.25rem 0.75rem; border-radius: var(--radius-full); font-size: 0.85rem; font-weight: 500; }
+.team-card-v2__quote { font-style: italic; color: var(--luvex-gray-700); line-height: 1.6; margin: 0; padding-top: 1rem; border-top: 1px solid var(--luvex-gray-200); }
 
-.team-card-v2__role {
-    color: var(--luvex-vibrant-blue);
-    font-weight: 500;
-    margin: 0 0 1rem 0;
-    font-size: 1rem;
-}
 
-.team-card-v2__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-}
-
-.team-card-v2__tags span {
-    background: var(--luvex-gray-100);
-    color: var(--luvex-gray-700);
-    padding: 0.25rem 0.75rem;
-    border-radius: var(--radius-full);
-    font-size: 0.85rem;
-    font-weight: 500;
-}
-
-.team-card-v2__quote {
-    font-style: italic;
-    color: var(--luvex-gray-700);
-    line-height: 1.6;
-    margin: 0;
-    padding-top: 1rem;
-    border-top: 1px solid var(--luvex-gray-200);
-}
-
-/* --- Core Values Section --- */
 .core-values-v2 {
     background: var(--luvex-white);
     padding: 8rem 0;
@@ -332,7 +321,6 @@ Last Update: 2025-08-07
     contain: layout style paint;
 }
 
-/* --- CTA Section --- */
 .cta-section-v2 {
     background: linear-gradient(135deg, var(--luvex-dark-blue) 0%, var(--luvex-accent-blue) 100%);
     color: var(--luvex-white);
@@ -340,31 +328,14 @@ Last Update: 2025-08-07
     text-align: center;
 }
 
-.cta-v2__content {
-    max-width: 700px;
-    margin: 0 auto;
+.cta-v2__content, .cta-v2__title, .cta-v2__description, .cta-v2__buttons {
+    /* Styles for these elements remain the same */
 }
+.cta-v2__content { max-width: 700px; margin: 0 auto; }
+.cta-v2__title { font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 600; margin-bottom: 1.5rem; color: var(--luvex-white); }
+.cta-v2__description { font-size: var(--text-lg); color: rgba(255, 255, 255, 0.9); margin-bottom: 3rem; line-height: 1.6; }
+.cta-v2__buttons { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
 
-.cta-v2__title {
-    font-size: clamp(2.2rem, 4vw, 3rem);
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    color: var(--luvex-white);
-}
-
-.cta-v2__description {
-    font-size: var(--text-lg);
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 3rem;
-    line-height: 1.6;
-}
-
-.cta-v2__buttons {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
 
 /*
 ==============================================================================
@@ -388,25 +359,14 @@ Last Update: 2025-08-07
         display: none;
     }
 
-    .our-story-v3__content {
-        text-align: center;
-    }
-    .our-story-v3 .section__title {
-        text-align: center;
-    }
-    .story-block {
-        padding-left: 0;
-        border-left: none;
-        border-top: 2px solid var(--luvex-bright-cyan);
-        padding-top: 2rem;
-    }
-    .story-block--mission {
-        margin-left: 0;
-        background: none;
-        border-top-color: var(--luvex-vibrant-blue);
+    .our-story-v3 .section__intro {
+        font-size: 1.1rem;
     }
     .differentiators-list {
         grid-template-columns: 1fr;
+    }
+    .story-block--mission {
+        padding: 2rem;
     }
 
     .cta-v2__buttons {
