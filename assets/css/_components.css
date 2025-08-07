@@ -1,6 +1,6 @@
 /*
 ==============================================================================
-LUVEX THEME v4.1 - UI COMPONENTS (Final Form & Effect Polish)
+LUVEX THEME v4.2 - UI COMPONENTS (Final Form & Effect Polish)
 ==============================================================================
 
 Description: Final adjustments for select/dropdown elements and shine effect.
@@ -598,23 +598,28 @@ Last Update: 2025-08-07
 
 /* UPDATE: Final, refined styling for dark theme select options */
 .floating-label-input--dark select option {
-    background: #0F254E; /* Slightly lighter than the form background */
+    background: #0F254E;
     color: var(--luvex-white);
-    padding: 14px 18px; /* More padding */
+    padding: 14px 18px;
     font-family: 'Segoe UI', system-ui, sans-serif;
-    border-bottom: 1px solid rgba(109, 213, 237, 0.1); /* Subtle separator */
+    border-bottom: 1px solid rgba(109, 213, 237, 0.1);
 }
 .floating-label-input--dark select option:last-child {
     border-bottom: none;
 }
+/* This ensures the initial state (before opening) doesn't have a gray background */
+.floating-label-input--dark select {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
 
 /* UPDATE: Hide scrollbar in dropdown */
 .floating-label-input--dark select::-webkit-scrollbar {
   display: none;
 }
 .floating-label-input--dark select {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 
@@ -1239,3 +1244,4 @@ Last Update: 2025-08-07
         align-items: flex-start;
     }
 }
+

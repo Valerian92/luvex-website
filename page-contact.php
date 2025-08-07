@@ -2,7 +2,7 @@
 /**
  * Contact Page Template
  * @package Luvex
- * @since 2.7.0 (Final layout adjustments)
+ * @since 2.8.0 (Final layout refinements)
  */
 
 get_header(); ?>

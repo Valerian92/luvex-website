@@ -91,7 +91,6 @@ Last Update: 2025-08-07
 .what-to-expect-section {
     padding: 6rem 0;
 }
-/* UPDATE: Added padding for the wide container to prevent touching screen edges */
 .what-to-expect-section .container--wide {
     padding-left: 3rem;
     padding-right: 3rem;
