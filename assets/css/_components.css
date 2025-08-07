@@ -1,16 +1,16 @@
 /*
 ==============================================================================
-LUVEX THEME v3.9 - UI COMPONENTS (FORM FIXES)
+LUVEX THEME v4.0 - UI COMPONENTS (Final Form & Effect Polish)
 ==============================================================================
 
-Description: Final form adjustments for select/dropdown elements.
+Description: Final adjustments for select/dropdown elements and shine effect.
 Dependencies: _variables.css, _core.css
 Last Update: 2025-08-07
 
 ==============================================================================
 */
 
-/* ... (sections 1 and 2 remain unchanged) ... */
+/* ... (section 1 remains unchanged) ... */
 /*
 ==============================================================================
 1. BUTTONS 
@@ -174,10 +174,8 @@ Last Update: 2025-08-07
     display: flex;
     flex-direction: column;
     text-align: center;
-    
-    /* KRITISCH: Basis-Overflow für alle Cards */
-    overflow: visible; /* Standard: visible, damit Content nicht abgeschnitten wird */
-    position: relative; /* Für korrekte Stacking Context */
+    overflow: visible;
+    position: relative;
 }
 
 .card:hover {
@@ -241,7 +239,6 @@ Last Update: 2025-08-07
 
 /* --- 2.3 LUVEX VALUE CARD (Erbt von .card) --- */
 .value-card {
-    /* Erbt background, padding etc. von .card */
     border-top: 4px solid var(--luvex-bright-cyan);
 }
 
@@ -290,12 +287,11 @@ Last Update: 2025-08-07
 }
 
 .knowledge-navigator .card {
-    text-align: left; /* Überschreibt card center alignment */
+    text-align: left;
 }
 
 .knowledge-card {
-    /* Erbt alle .card Eigenschaften */
-    text-align: left !important; /* Erzwingt left alignment */
+    text-align: left !important;
 }
 
 .knowledge-card .card__title { 
@@ -360,9 +356,7 @@ Last Update: 2025-08-07
     padding: 2rem;
     color: var(--luvex-white);
     position: relative;
-    
-    /* WICHTIG: Team Member Cards haben controlled overflow */
-    overflow: hidden; /* Team cards können overflow:hidden haben */
+    overflow: hidden;
 }
 
 .team-member__layout {
@@ -461,16 +455,13 @@ Last Update: 2025-08-07
 
 /*
 ==============================================================================
-2.6 SHINE EFFECT (DEFINITIVE GLOBAL SOLUTION)
+2.6 SHINE EFFECT (REFINED)
 ==============================================================================
 */
 
-/* GLOBALER SHINE EFFECT - funktioniert mit allen Card-Typen */
 .has-shine-effect {
     position: relative;
-    /* KRITISCH: overflow:hidden NUR für Shine Effect Container */
     overflow: hidden !important; 
-    /* Verhindert dass Shine über Grid/Flex boundaries läuft */
     isolation: isolate; 
 }
 
@@ -478,36 +469,34 @@ Last Update: 2025-08-07
     content: '';
     position: absolute;
     top: 0;
-    left: -100%;
-    width: 100%;
+    left: -150%; /* Start further off-screen */
+    width: 50%;   /* Make the shine narrower */
     height: 100%;
     background: linear-gradient(90deg, 
         transparent 0%, 
-        rgba(109, 213, 237, 0.15) 40%,
-        rgba(109, 213, 237, 0.2) 50%,
-        rgba(109, 213, 237, 0.15) 60%,
+        rgba(109, 213, 237, 0.1) 40%,
+        rgba(109, 213, 237, 0.15) 50%,
+        rgba(109, 213, 237, 0.1) 60%,
         transparent 100%
     );
-    transition: left 0.8s ease-in-out;
-    /* KRITISCH: Z-Index Management */
     z-index: 1; 
-    pointer-events: none; /* Verhindert Interference mit Klicks */
+    pointer-events: none;
+    /* UPDATE: Remove transition from the base state */
 }
 
-/* Alle direkten Kinder bekommen höheren Z-Index */
 .has-shine-effect > * {
     position: relative;
     z-index: 2;
 }
 
+/* UPDATE: Apply transition only on hover to prevent the effect on mouseout */
 .has-shine-effect:hover::before {
-    left: 100%;
+    left: 150%; /* End further off-screen */
+    transition: left 0.8s ease-in-out;
 }
 
-/* GRID/FLEXBOX COMPATIBILITY: Verhindert Shine-Overflow zwischen Cards */
 .grid .has-shine-effect,
 .flex .has-shine-effect {
-    /* Zusätzliche Isolation für Grid/Flex Layouts */
     contain: layout style paint;
 }
 
@@ -532,9 +521,10 @@ Last Update: 2025-08-07
     border-radius: var(--radius-md);
     padding: 24px 16px 8px 16px;
     font-size: var(--text-base);
-    background: var(--luvex-white); /* Changed from transparent for light theme */
+    background: var(--luvex-white);
     transition: var(--transition-normal);
-    color: var(--luvex-dark-blue); /* Default text color for light theme */
+    color: var(--luvex-dark-blue);
+    font-family: inherit; /* Ensure select uses theme font */
 }
 
 .floating-label-input textarea {
@@ -553,10 +543,12 @@ Last Update: 2025-08-07
     padding-right: 40px;
 }
 
-/* UPDATE: Specific styling for select options */
+/* UPDATE: Refined styling for select options */
 .floating-label-input select option {
     background: var(--luvex-white);
     color: var(--luvex-dark-blue);
+    padding: 12px 16px; /* Add padding to options */
+    font-family: 'Segoe UI', system-ui, sans-serif; /* Example of a modern font */
 }
 
 .floating-label-input label {
@@ -607,11 +599,16 @@ Last Update: 2025-08-07
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
 }
 
-/* UPDATE: Specific styling for dark theme select options */
+/* UPDATE: Refined styling for dark theme select options */
 .floating-label-input--dark select option {
     background: var(--luvex-dark-blue);
     color: var(--luvex-white);
+    padding: 12px 16px; /* Add padding to options */
+    font-family: 'Segoe UI', system-ui, sans-serif; /* Example of a modern font */
 }
+
+
+/* ... (rest of the file remains unchanged) ... */
 
 /* --- 3.3 Validation States --- */
 .floating-label-input--success input,
@@ -837,7 +834,6 @@ Last Update: 2025-08-07
 }
 
 
-/* ... (sections 4, 5, 6 remain unchanged) ... */
 /*
 ==============================================================================
 4. CTA (CALL TO ACTION) SECTIONS (BUTTON COLOR FIX)

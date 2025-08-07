@@ -1,17 +1,15 @@
 /**
  * LUVEX Theme - Interactive Contact Hero Animation
  *
- * Description: Creates a continuous, soft wave animation that follows a custom mouse cursor.
- * Version: 3.0
+ * Description: Creates a refined, continuous wave animation that follows a custom mouse cursor.
+ * Version: 4.0
  * Author: Gemini
  */
 document.addEventListener('DOMContentLoaded', function () {
-    // Find the main hero and animation containers in the DOM.
     const heroContainer = document.querySelector('.contact-hero-v2');
     const animationContainer = document.getElementById('contact-hero-animation');
 
     if (!heroContainer || !animationContainer) {
-        // If containers don't exist, stop the script.
         return;
     }
 
@@ -19,9 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const cursor = document.createElement('div');
     cursor.className = 'hero-custom-cursor';
     heroContainer.appendChild(cursor);
-
-    // Hide the custom cursor initially.
-    cursor.style.display = 'none';
+    cursor.style.display = 'none'; // Initially hidden
 
     // --- 2. SVG Canvas Setup ---
     const svgNS = "http://www.w3.org/2000/svg";
@@ -31,21 +27,22 @@ document.addEventListener('DOMContentLoaded', function () {
     svg.style.position = 'absolute';
     svg.style.top = '0';
     svg.style.left = '0';
-    // Ensure the SVG doesn't capture mouse events meant for the text.
-    svg.style.pointerEvents = 'none';
+    svg.style.pointerEvents = 'none'; // Let mouse events pass through to elements below
     animationContainer.appendChild(svg);
 
     // --- 3. Animation Logic ---
-    const colors = ['rgba(109, 213, 237, 0.15)', 'rgba(109, 213, 237, 0.1)', 'rgba(109, 213, 237, 0.05)'];
+    const colors = ['rgba(109, 213, 237, 0.12)', 'rgba(109, 213, 237, 0.08)', 'rgba(109, 213, 237, 0.05)'];
     let waveInterval;
     let mouseX = 0;
     let mouseY = 0;
+    let isMouseMoving = false;
 
     /**
      * Creates a single expanding, fading wave at the current cursor position.
      */
     function createWave() {
-        // Create three concentric circles for a layered wave effect.
+        if (!isMouseMoving) return; // Only create waves if the mouse is moving
+
         for (let i = 0; i < colors.length; i++) {
             const circle = document.createElementNS(svgNS, 'circle');
             circle.setAttribute('cx', mouseX);
@@ -57,20 +54,19 @@ document.addEventListener('DOMContentLoaded', function () {
             
             svg.appendChild(circle);
 
-            // Stagger the animation for a more natural effect.
-            const animationDur = 4 + i * 1.5; // e.g., 4s, 5.5s, 7s
+            const animationDur = 3 + i * 1.5; // Staggered duration
 
-            // Animate the radius to make the circle expand.
+            // Animate radius
             const rAnimation = document.createElementNS(svgNS, 'animate');
             rAnimation.setAttribute('attributeName', 'r');
             rAnimation.setAttribute('from', '1');
-            rAnimation.setAttribute('to', '200'); // Final radius of the wave.
+            rAnimation.setAttribute('to', '150'); // Smaller, more subtle waves
             rAnimation.setAttribute('dur', `${animationDur}s`);
             rAnimation.setAttribute('begin', '0s');
             rAnimation.setAttribute('fill', 'freeze');
             rAnimation.setAttribute('calcMode', 'easeOut');
 
-            // Animate the opacity to make the circle fade away.
+            // Animate opacity
             const opacityAnimation = document.createElementNS(svgNS, 'animate');
             opacityAnimation.setAttribute('attributeName', 'opacity');
             opacityAnimation.setAttribute('from', '1');
@@ -82,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
             circle.appendChild(rAnimation);
             circle.appendChild(opacityAnimation);
 
-            // Remove the circle from the DOM after its animation is complete.
+            // Remove the circle from the DOM after animation completes
             setTimeout(() => {
                 if (circle.parentNode === svg) {
                     svg.removeChild(circle);
@@ -92,28 +88,38 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // --- 4. Event Listeners ---
-
-    // Update mouse coordinates and cursor position.
+    let moveTimeout;
     heroContainer.addEventListener('mousemove', (e) => {
+        isMouseMoving = true;
         const rect = heroContainer.getBoundingClientRect();
         mouseX = e.clientX - rect.left;
         mouseY = e.clientY - rect.top;
-        cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+        
+        // Use requestAnimationFrame for smoother cursor positioning
+        requestAnimationFrame(() => {
+            cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+        });
+
+        // Detect when the mouse stops moving
+        clearTimeout(moveTimeout);
+        moveTimeout = setTimeout(() => {
+            isMouseMoving = false;
+        }, 100); // Consider mouse stopped after 100ms
     });
 
-    // Show cursor, hide default cursor, and start spawning waves on enter.
     heroContainer.addEventListener('mouseenter', () => {
         cursor.style.display = 'block';
         heroContainer.style.cursor = 'none';
         if (!waveInterval) {
-            waveInterval = setInterval(createWave, 200); // Spawn a new wave every 200ms.
+            // Start the wave creation loop
+            waveInterval = setInterval(createWave, 250); // Spawn waves less frequently
         }
     });
 
-    // Hide cursor, restore default cursor, and stop spawning waves on leave.
     heroContainer.addEventListener('mouseleave', () => {
         cursor.style.display = 'none';
         heroContainer.style.cursor = 'default';
+        isMouseMoving = false;
         clearInterval(waveInterval);
         waveInterval = null;
     });
