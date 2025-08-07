@@ -47,7 +47,7 @@ get_header(); ?>
             </p>
         </div>
         <div class="grid grid-3 knowledge-navigator">
-            <div class="card knowledge-card">
+            <div class="card knowledge-card has-shine-effect">
                 <div class="knowledge-card__header">
                     <div class="card__icon"><i class="fas fa-atom"></i></div>
                     <h3 class="card__title">UV Fundamentals</h3>
@@ -55,7 +55,7 @@ get_header(); ?>
                 <p class="card__content">Master the core physics and engineering principles behind UV technology. We cover everything from the wavelength spectrum and its effects to critical dose calculations and international safety standards.</p>
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--outline">Explore UV Science</a>
             </div>
-            <div class="card knowledge-card">
+            <div class="card knowledge-card has-shine-effect">
                 <div class="knowledge-card__header">
                     <div class="card__icon"><i class="fas fa-lightbulb"></i></div>
                     <h3 class="card__title">Technology Platforms</h3>
@@ -63,7 +63,7 @@ get_header(); ?>
                 <p class="card__content">Get an objective, data-driven comparison between conventional mercury lamps and cutting-edge LED UV systems. We analyze performance, efficiency, and operational costs to guide your selection.</p>
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--outline">Compare Technologies</a>
             </div>
-            <div class="card knowledge-card">
+            <div class="card knowledge-card has-shine-effect">
                 <div class="knowledge-card__header">
                     <div class="card__icon"><i class="fas fa-industry"></i></div>
                     <h3 class="card__title">Applications Hub</h3>

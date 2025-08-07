@@ -430,26 +430,10 @@ Last Update: 2025-08-05
 
 .has-shine-effect {
     position: relative;
+    /* Diese Regel ist der Schlüssel: Sie beschneidet den ::before Effekt und verhindert ein "Durchbluten". */
+    overflow: hidden;
 }
 
-/* 1. Die Maske: Ein unsichtbarer Container, der den Effekt einschließt. */
-.has-shine-effect::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    /* Muss mit dem Radius der Karte übereinstimmen */
-    border-radius: var(--radius-lg); 
-    /* Stellt sicher, dass der Glanz die Karte nicht verlässt */
-    overflow: hidden; 
-    z-index: 1;
-    /* Erlaubt Klicks auf den Karteninhalt */
-    pointer-events: none; 
-}
-
-/* 2. Der Glanz-Effekt, der sich innerhalb der Maske bewegt. */
 .has-shine-effect::before {
     content: '';
     position: absolute;
@@ -465,20 +449,20 @@ Last Update: 2025-08-05
         transparent 100%
     );
     transition: left 0.8s ease-in-out;
-    /* Liegt über der Maske, aber unter dem Inhalt */
-    z-index: 2; 
-    pointer-events: none;
+    /* Liegt über dem Hintergrund der Karte, aber unter dem Inhalt. */
+    z-index: 1; 
 }
 
-/* 3. Der Inhalt der Karte, der immer ganz oben liegt. */
+/* Stellt sicher, dass der Inhalt der Karte immer über dem Effekt liegt. */
 .has-shine-effect > * {
     position: relative;
-    z-index: 3;
+    z-index: 2;
 }
 
 .has-shine-effect:hover::before {
     left: 100%;
 }
+
 
 
 /*

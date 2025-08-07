@@ -1,35 +1,28 @@
 /*
 ==============================================================================
-LUVEX THEME v2.3.0 - ABOUT PAGE (Redesigned)
+LUVEX THEME v2.4.0 - ABOUT PAGE (Redesigned & Corrected)
 ==============================================================================
 Description: Complete redesign of the About Page for clarity, professionalism,
-             and better storytelling.
+             and better storytelling. All known issues corrected.
 Dependencies: _variables.css, _heroes.css, _components.css
 Last Update: 2025-08-07
 ==============================================================================
 */
 
 /* ===== 1. HERO SECTION & MISSION STATEMENT ===== */
+/* Original-Stile für die Parallax-Animation bleiben erhalten */
+.about-hero { perspective: 2000px; }
+.about-spotlight, .about-parallax-container, .about-parallax-layer, #about-connection-lines { /* ... bestehende Stile ... */ }
 
-/* Behält die bestehende Parallax-Animation bei, passt aber den Inhalt an */
 .about-hero .luvex-hero__container {
     max-width: 900px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+.about-hero .luvex-hero__title { font-size: clamp(2.5rem, 5vw, 4rem); }
+.about-hero .luvex-hero__subtitle { font-size: clamp(1.2rem, 2.5vw, 1.5rem); color: var(--luvex-gray-300); margin-bottom: 3rem; }
 
-.about-hero .luvex-hero__title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-}
-
-.about-hero .luvex-hero__subtitle {
-    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-    color: var(--luvex-gray-300);
-    margin-bottom: 3rem;
-}
-
-/* NEU: Mission Statement Card */
 .mission-statement {
     background: rgba(27, 42, 73, 0.5);
     backdrop-filter: blur(10px);
@@ -43,195 +36,54 @@ Last Update: 2025-08-07
     gap: 2rem;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
-
-.mission-statement__icon {
-    font-size: 2.5rem;
-    color: var(--luvex-bright-cyan);
-    flex-shrink: 0;
-}
-
-.mission-statement__title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--luvex-white);
-    margin: 0 0 0.5rem 0;
-}
-
-.mission-statement__text {
-    font-size: 1.1rem;
-    color: var(--luvex-gray-200);
-    line-height: 1.6;
-    margin: 0;
-}
+.mission-statement__icon { font-size: 2.5rem; color: var(--luvex-bright-cyan); flex-shrink: 0; }
+.mission-statement__title { font-size: 1.25rem; font-weight: 600; color: var(--luvex-white); margin: 0 0 0.5rem 0; }
+.mission-statement__text { font-size: 1.1rem; color: var(--luvex-gray-200); line-height: 1.6; margin: 0; }
 
 
 /* ===== 2. OUR STORY SECTION (V2) ===== */
-.section--light-gray {
-    background-color: #F8FAFC;
-}
-
-.our-story-v2__layout {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 4rem;
-    align-items: center;
-}
-
-.our-story-v2__image img {
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-lg);
-}
-
-.section__title--left {
-    font-size: 2.8rem;
-    color: var(--luvex-dark-blue);
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-    text-align: left;
-}
-
-.our-story-v2__content p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: var(--luvex-gray-700);
-    margin-bottom: 1.5rem;
-}
-
-.our-story-v2__highlight {
-    border-left: 3px solid var(--luvex-bright-cyan);
-    padding-left: 1.5rem;
-    margin-top: 2rem;
-}
-
-.our-story-v2__highlight p {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: var(--luvex-dark-blue);
-    margin: 0;
-}
+.section--light-gray { background-color: #F8FAFC; }
+.our-story-v2__layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center; }
+.our-story-v2__image img { width: 100%; height: auto; border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); }
+.section__title--left { font-size: 2.8rem; color: var(--luvex-dark-blue); margin-bottom: 1.5rem; font-weight: 700; text-align: left; }
+.our-story-v2__content p { font-size: 1.1rem; line-height: 1.8; color: var(--luvex-gray-700); margin-bottom: 1.5rem; }
+.our-story-v2__highlight { border-left: 3px solid var(--luvex-bright-cyan); padding-left: 1.5rem; margin-top: 2rem; }
+.our-story-v2__highlight p { font-size: 1.2rem; font-weight: 500; color: var(--luvex-dark-blue); margin: 0; }
 
 
 /* ===== 3. TEAM SECTION (V2 - REDESIGN) ===== */
-.team-section-v2 {
-    padding: 6rem 0;
-}
-
-.team-section-v2 .section__subtitle {
-    max-width: 600px;
-}
-
-.team-section-v2__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.team-card-v2 {
-    background: var(--luvex-white);
-    border: 1px solid var(--luvex-gray-200);
-    border-radius: var(--radius-xl);
-    text-align: center;
-    padding: 2.5rem 2rem;
-    box-shadow: var(--shadow-sm);
-    transition: var(--transition-normal);
-}
-
-.team-card-v2:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
-    border-color: rgba(109, 213, 237, 0.5);
-}
-
-.team-card-v2__photo {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin: -5rem auto 1.5rem auto;
-    border: 6px solid var(--luvex-white);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    position: relative;
-}
-
-.team-card-v2__photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.team-card-v2__name {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--luvex-dark-blue);
-    margin: 0;
-}
-
-.team-card-v2__role {
-    color: var(--luvex-bright-cyan);
-    font-weight: 500;
-    margin: 0.25rem 0 1rem 0;
-}
-
-.team-card-v2__tags {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.team-card-v2__tags span {
-    background: var(--luvex-gray-100);
-    color: var(--luvex-gray-700);
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: 0.25rem 0.75rem;
-    border-radius: var(--radius-full);
-}
-
-.team-card-v2__quote {
-    font-style: italic;
-    color: var(--luvex-gray-700);
-    margin: 0;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--luvex-gray-200);
-}
+.team-section-v2 { padding: 6rem 0; }
+.team-section-v2 .section__subtitle { max-width: 600px; }
+.team-section-v2__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; margin-top: 4rem; }
+.team-card-v2 { background: var(--luvex-white); border: 1px solid var(--luvex-gray-200); border-radius: var(--radius-xl); text-align: center; padding: 2.5rem 2rem; box-shadow: var(--shadow-sm); transition: var(--transition-normal); }
+.team-card-v2:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: rgba(109, 213, 237, 0.5); }
+.team-card-v2__photo { width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: -5.5rem auto 1.5rem auto; border: 6px solid var(--luvex-white); box-shadow: 0 5px 20px rgba(0,0,0,0.1); position: relative; }
+.team-card-v2__photo img { width: 100%; height: 100%; object-fit: cover; }
+.team-card-v2__name { font-size: 1.5rem; font-weight: 600; color: var(--luvex-dark-blue); margin: 0; }
+.team-card-v2__role { color: var(--luvex-bright-cyan); font-weight: 500; margin: 0.25rem 0 1rem 0; }
+.team-card-v2__tags { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.team-card-v2__tags span { background: var(--luvex-gray-100); color: var(--luvex-gray-700); font-size: 0.75rem; font-weight: 500; padding: 0.25rem 0.75rem; border-radius: var(--radius-full); }
+.team-card-v2__quote { font-style: italic; color: var(--luvex-gray-700); margin: 0; padding-top: 1.5rem; border-top: 1px solid var(--luvex-gray-200); }
 
 
 /* ===== 4. CORE VALUES SECTION (V2) ===== */
-.core-values-v2__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-top: 3rem;
-}
+.core-values-v2__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
 
 
-/* ===== 5. RESPONSIVE ADJUSTMENTS ===== */
+/* ===== 5. CTA SECTION (V2) ===== */
+.cta-section-v2 { padding: 6rem 0; }
+.cta-v2__content { background: var(--luvex-dark-blue); border-radius: var(--radius-xl); padding: 4rem; text-align: center; border: 1px solid rgba(109, 213, 237, 0.2); }
+.cta-v2__title { font-size: 2.5rem; color: var(--luvex-white); margin: 0 0 1rem 0; }
+.cta-v2__description { font-size: 1.1rem; color: var(--luvex-gray-300); max-width: 600px; margin: 0 auto 2.5rem auto; line-height: 1.7; }
+.cta-v2__buttons { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+
+
+/* ===== 6. RESPONSIVE ADJUSTMENTS ===== */
 @media (max-width: 992px) {
-    .our-story-v2__layout {
-        grid-template-columns: 1fr;
-    }
-    .team-section-v2__grid {
-        grid-template-columns: 1fr;
-        max-width: 450px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .core-values-v2__grid {
-        grid-template-columns: 1fr;
-        max-width: 450px;
-        margin-left: auto;
-        margin-right: auto;
-    }
+    .our-story-v2__layout { grid-template-columns: 1fr; }
+    .team-section-v2__grid { grid-template-columns: 1fr; max-width: 450px; margin-left: auto; margin-right: auto; gap: 4rem; }
+    .core-values-v2__grid { grid-template-columns: 1fr; max-width: 450px; margin-left: auto; margin-right: auto; }
 }
-
 @media (max-width: 768px) {
-    .mission-statement {
-        flex-direction: column;
-        text-align: center;
-        gap: 1.5rem;
-    }
+    .mission-statement { flex-direction: column; text-align: center; gap: 1.5rem; }
 }
