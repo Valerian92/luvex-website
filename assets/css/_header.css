@@ -76,8 +76,6 @@ Last Update: 2025-08-07
     list-style: none;
     margin: 0;
     padding: 0;
-    /* Die 'gap' Eigenschaft entfernen wir testweise, da wir den Abstand nun anders steuern. */
-    /* gap: 3.5rem; */
 }
 
 .main-navigation li {
@@ -85,25 +83,23 @@ Last Update: 2025-08-07
 }
 
 /* --- 3.1 Navigation Links --- */
-.main-navigation a {
+
+/* KORREKTUR: Regel nur für die oberste Ebene anwenden */
+.main-navigation > ul > li > a {
     color: var(--luvex-white);
     font-size: 1.05rem;
     font-weight: 500;
     text-decoration: none;
     position: relative;
     transition: all 0.3s ease;
-    /* --- ÄNDERUNG (VERSUCH 2) ---
-       Hier fügen wir seitliches Padding hinzu, um die Elemente auseinanderzudrücken.
-       Der erste Wert ist für oben/unten, der zweite für links/rechts.
-       Erhöhen Sie '2rem' bei Bedarf (z.B. auf 2.5rem).
-    */
-    padding: 1rem 2rem;
-    display: flex; /* Ensure icon and text are aligned */
+    /* Hier den Abstand nur für die Haupt-Menüpunkte anpassen */
+    padding: 1rem 1.8rem; /* Oben/Unten | Links/Rechts (Wert von 2.5rem reduziert) */
+    display: flex;
     align-items: center;
-    gap: 0.5rem; /* Space between text and arrow */
+    gap: 0.5rem;
 }
 
-.main-navigation a:hover {
+.main-navigation > ul > li > a:hover {
     color: var(--luvex-bright-cyan);
 }
 
@@ -112,18 +108,19 @@ Last Update: 2025-08-07
     content: '';
     position: absolute;
     bottom: 8px; /* Adjust position relative to padding */
-    left: 0;
-    width: 0;
+    left: 1.8rem; /* Muss dem horizontalen Padding entsprechen */
+    width: calc(100% - 3.6rem); /* Gesamtbreite minus linkes und rechtes Padding */
     height: 2px;
     background: var(--luvex-bright-cyan);
     transition: width 0.3s ease;
+    /* Startet mit Breite 0 */
+    width: 0;
 }
 
-/* Korrektur: Die Linie soll sich an das Padding anpassen */
 .main-navigation > ul > li > a:hover::after {
-    left: 2rem; /* Muss dem horizontalen Padding entsprechen */
-    width: calc(100% - 4rem); /* Gesamtbreite minus linkes und rechtes Padding */
+    width: calc(100% - 3.6rem); /* Volle Breite beim Hover */
 }
+
 
 /* --- 3.2 Custom Dropdown Arrow --- */
 .main-navigation .dropdown-arrow {
@@ -146,18 +143,14 @@ Last Update: 2025-08-07
     position: absolute;
     top: calc(100% + 8px);
     left: 0;
-    
-    /* KORREKTUR: Horizontal layout restored */
     display: flex;
     flex-wrap: nowrap;
-
     background: var(--luvex-dark-blue);
     width: max-content; 
     min-width: 220px;
     z-index: 9999;
     opacity: 0;
     visibility: hidden;
-    
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(109, 213, 237, 0.2);
@@ -172,18 +165,22 @@ Last Update: 2025-08-07
 }
 
 /* --- 4.1 Dropdown Links --- */
+/* Diese Regel stellt sicher, dass die Untermenü-Links ihr ursprüngliches Padding behalten */
 .main-navigation .sub-menu a {
-    /* Padding hier zurücksetzen, damit es nur die Hauptnavigation betrifft */
     padding: 0.75rem 1.5rem;
     display: block;
     font-size: var(--text-sm);
     border-bottom: 1px solid rgba(109, 213, 237, 0.1);
     white-space: nowrap;
+    color: var(--luvex-white); /* Farbe explizit setzen, falls vererbt */
+    font-weight: 500; /* Gewicht explizit setzen */
+    transition: all 0.3s ease;
 }
 
 .main-navigation .sub-menu a:hover {
     background: rgba(109, 213, 237, 0.1);
     padding-left: 2rem;
+    color: var(--luvex-bright-cyan); /* Farbe beim Hover explizit setzen */
 }
 
 .main-navigation .sub-menu li:last-child a {
@@ -201,7 +198,7 @@ Last Update: 2025-08-07
     top: -1px;
     display: block; 
     margin-left: 1px;
-    transform: translateY(10px); /* Start slightly lower for animation */
+    transform: translateY(10px);
 }
 
 .main-navigation .sub-menu .menu-item-has-children:hover > .sub-menu {
@@ -215,12 +212,10 @@ Last Update: 2025-08-07
 ==============================================================================
 */
 
-/* KORREKTUR: Specific rule to hide Astra's SVG arrow */
 .main-navigation .ast-arrow-svg {
     display: none !important;
 }
 
-/* Hide the old toggle button as well, just in case */
 .main-navigation .ast-menu-toggle {
     display: none !important;
 }
@@ -250,12 +245,11 @@ Last Update: 2025-08-07
     display: none;
 }
 
-@media (max-width: 1024px) { /* Adjust breakpoint as needed */
+@media (max-width: 1024px) { 
     .main-navigation, .header-cta {
         display: none;
     }
     .mobile-menu-toggle {
         display: block;
-        /* Add styles for your mobile menu button here */
     }
 }

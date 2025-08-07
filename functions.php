@@ -130,6 +130,13 @@ function luvex_enqueue_assets() {
         }
     } 
     elseif ( is_page('contact') ) {
+        // Enqueue new CSS for the contact page
+        $contact_css_path = get_stylesheet_directory() . '/assets/css/_page-contact.css';
+        if (file_exists($contact_css_path)) {
+            wp_enqueue_style('luvex-page-contact', get_stylesheet_directory_uri() . '/assets/css/_page-contact.css', array('luvex-main'), filemtime($contact_css_path));
+        }
+
+        // Enqueue new JS for the contact hero animation
         $contact_hero_js_path = get_stylesheet_directory() . '/assets/js/contact-hero-animation.js';
         if (file_exists($contact_hero_js_path)) {
             wp_enqueue_script('luvex-contact-hero', get_stylesheet_directory_uri() . '/assets/js/contact-hero-animation.js', array(), filemtime($contact_hero_js_path), true);
