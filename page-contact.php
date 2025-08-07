@@ -2,13 +2,18 @@
 /**
  * Contact Page Template
  * @package Luvex
- * @since 2.8.0 (Final layout refinements)
+ * @since 2.9.0 (Interactive Hero Update)
  */
 
 get_header(); ?>
 
+<!-- The custom cursor element for the animation -->
+<div class="custom-cursor"></div>
+
 <section class="luvex-hero contact-hero-v2">
-    <div class="contact-hero-v2__animation" id="contact-hero-animation"></div>
+    <!-- Canvas for the interactive animation -->
+    <canvas id="contact-hero-animation-canvas"></canvas>
+    
     <div class="luvex-hero__container">
         <h1 class="luvex-hero__title">
             Let's Start a <span class="text-highlight">Conversation</span>

@@ -1,143 +1,122 @@
 /**
- * LUVEX Theme - Interactive Contact Hero Animation
- *
- * Description: Creates a dual-layer animation with continuous background pulses 
- * and a refined, interactive wave effect that follows the user's mouse cursor.
- * Version: 6.0 (Final)
- * Author: Gemini
+ * LUVEX Contact Page - Interactive Ripple Hero Animation
+ * @package Luvex
+ * @since 2.9.0
+ * @description Creates an interactive ripple wave effect on a canvas element and a custom cursor.
  */
-document.addEventListener('DOMContentLoaded', function () {
-    const heroContainer = document.querySelector('.contact-hero-v2');
-    const animationContainer = document.getElementById('contact-hero-animation');
+document.addEventListener('DOMContentLoaded', () => {
+    // Make sure we are on the contact page with the correct elements
+    const canvas = document.getElementById('contact-hero-animation-canvas');
+    if (!canvas) return;
 
-    if (!heroContainer || !animationContainer) {
-        return;
+    const ctx = canvas.getContext('2d');
+    const cursor = document.querySelector('.custom-cursor');
+    if (!cursor) return;
+
+    // --- Configuration ---
+    const MOUSE_WAVE_INTERVAL = 150; // ms between ripples on mouse move
+    const RANDOM_WAVE_INTERVAL = 1800; // ms for random background ripples
+    const RIPPLE_COUNT = 4; // Number of waves per ripple effect
+    const RIPPLE_DELAY = 120; // Delay between each wave in a ripple
+
+    let waves = [];
+    let canCreateMouseWave = true;
+    let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+
+    // --- Adjust canvas size on window resize ---
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
     }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
-    // --- 1. Custom Cursor Setup ---
-    const cursor = document.createElement('div');
-    cursor.className = 'hero-custom-cursor';
-    heroContainer.appendChild(cursor);
-    cursor.style.display = 'none'; // Initially hidden
+    // --- Custom cursor logic ---
+    window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+        // Update cursor position
+        cursor.style.left = `${e.clientX}px`;
+        cursor.style.top = `${e.clientY}px`;
 
-    // --- 2. SVG Canvas Setup ---
-    const svgNS = "http://www.w3.org/2000/svg";
-    const svg = document.createElementNS(svgNS, 'svg');
-    svg.setAttribute('width', '100%');
-    svg.setAttribute('height', '100%');
-    svg.style.position = 'absolute';
-    svg.style.top = '0';
-    svg.style.left = '0';
-    svg.style.pointerEvents = 'none'; // Let mouse events pass through
-    animationContainer.appendChild(svg);
-
-    // --- 3. Animation Logic ---
-    const colors = ['rgba(109, 213, 237, 0.12)', 'rgba(109, 213, 237, 0.08)', 'rgba(109, 213, 237, 0.05)'];
-    let mouseWaveInterval;
-    let backgroundWaveInterval;
-    let mouseX = 0;
-    let mouseY = 0;
-
-    /**
-     * Creates a single expanding, fading wave at a specific coordinate.
-     * @param {number} x - The horizontal coordinate.
-     * @param {number} y - The vertical coordinate.
-     * @param {number} maxRadius - The maximum radius the circle will expand to.
-     * @param {number} duration - The base duration of the animation.
-     */
-    function createWave(x, y, maxRadius, duration) {
-        for (let i = 0; i < colors.length; i++) {
-            const circle = document.createElementNS(svgNS, 'circle');
-            circle.setAttribute('cx', x);
-            circle.setAttribute('cy', y);
-            circle.setAttribute('r', '1');
-            circle.setAttribute('fill', 'none');
-            circle.setAttribute('stroke', colors[i]);
-            circle.setAttribute('stroke-width', '2');
-            
-            svg.appendChild(circle);
-
-            const animationDur = duration + i * 1.5;
-
-            // Animate radius
-            const rAnimation = document.createElementNS(svgNS, 'animate');
-            rAnimation.setAttribute('attributeName', 'r');
-            rAnimation.setAttribute('from', '1');
-            rAnimation.setAttribute('to', maxRadius);
-            rAnimation.setAttribute('dur', `${animationDur}s`);
-            rAnimation.setAttribute('begin', '0s');
-            rAnimation.setAttribute('fill', 'freeze');
-            rAnimation.setAttribute('calcMode', 'easeOut');
-
-            // Animate opacity
-            const opacityAnimation = document.createElementNS(svgNS, 'animate');
-            opacityAnimation.setAttribute('attributeName', 'opacity');
-            opacityAnimation.setAttribute('from', '1');
-            opacityAnimation.setAttribute('to', '0');
-            opacityAnimation.setAttribute('dur', `${animationDur}s`);
-            opacityAnimation.setAttribute('begin', '0s');
-            opacityAnimation.setAttribute('fill', 'freeze');
-
-            circle.appendChild(rAnimation);
-            circle.appendChild(opacityAnimation);
-
+        // Create a ripple effect on mouse move (throttled)
+        if (canCreateMouseWave) {
+            createRippleEffect(mouse.x, mouse.y, false);
+            canCreateMouseWave = false;
             setTimeout(() => {
-                if (circle.parentNode === svg) {
-                    svg.removeChild(circle);
-                }
-            }, animationDur * 1000);
-        }
-    }
-
-    /**
-     * Spawns a wave at the current mouse position.
-     */
-    function spawnMouseWave() {
-        createWave(mouseX, mouseY, 150, 3);
-    }
-
-    /**
-     * Spawns a wave at a random position in the background.
-     */
-    function spawnBackgroundWave() {
-        const randX = Math.random() * heroContainer.offsetWidth;
-        const randY = Math.random() * heroContainer.offsetHeight;
-        createWave(randX, randY, 100, 5); // Smaller, slower waves for background
-    }
-
-
-    // --- 4. Event Listeners ---
-    heroContainer.addEventListener('mousemove', (e) => {
-        const rect = heroContainer.getBoundingClientRect();
-        mouseX = e.clientX - rect.left;
-        mouseY = e.clientY - rect.top;
-        
-        requestAnimationFrame(() => {
-            cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
-        });
-    });
-
-    heroContainer.addEventListener('mouseenter', () => {
-        cursor.style.display = 'block';
-        heroContainer.style.cursor = 'none';
-        
-        // Start continuous spawning for both mouse and background
-        if (!mouseWaveInterval) {
-            mouseWaveInterval = setInterval(spawnMouseWave, 250);
-        }
-        if (!backgroundWaveInterval) {
-            backgroundWaveInterval = setInterval(spawnBackgroundWave, 1500); // Slower interval for background
+                canCreateMouseWave = true;
+            }, MOUSE_WAVE_INTERVAL);
         }
     });
 
-    heroContainer.addEventListener('mouseleave', () => {
-        cursor.style.display = 'none';
-        heroContainer.style.cursor = 'default';
+    // Hide cursor when the mouse leaves the window
+    document.body.addEventListener('mouseleave', () => { cursor.style.opacity = '0'; });
+    document.body.addEventListener('mouseenter', () => { cursor.style.opacity = '1'; });
 
-        // Stop all wave spawning
-        clearInterval(mouseWaveInterval);
-        clearInterval(backgroundWaveInterval);
-        mouseWaveInterval = null;
-        backgroundWaveInterval = null;
+    // --- Wave Class Definition ---
+    class Wave {
+        constructor(x, y, isRandom = false) {
+            this.x = x;
+            this.y = y;
+            this.radius = 1;
+            this.maxRadius = isRandom ? (Math.random() * 120 + 60) : 100;
+            this.speed = isRandom ? (Math.random() * 0.5 + 0.3) : 1.2;
+            this.lineWidth = isRandom ? 2.5 : 1.5;
+            this.opacity = 1;
+        }
+
+        update() {
+            this.radius += this.speed;
+            this.opacity = 1 - (this.radius / this.maxRadius);
+        }
+
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(109, 213, 237, ${this.opacity})`;
+            ctx.lineWidth = this.lineWidth;
+            ctx.stroke();
+        }
+    }
+
+    // --- Function to create the ripple effect ---
+    function createRippleEffect(x, y, isRandom) {
+        for (let i = 0; i < RIPPLE_COUNT; i++) {
+            setTimeout(() => {
+                waves.push(new Wave(x, y, isRandom));
+            }, i * RIPPLE_DELAY);
+        }
+    }
+
+    // --- Generate random background ripples periodically ---
+    const randomWaveIntervalId = setInterval(() => {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        createRippleEffect(x, y, true);
+    }, RANDOM_WAVE_INTERVAL);
+
+    // --- Main Animation Loop ---
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (let i = waves.length - 1; i >= 0; i--) {
+            const wave = waves[i];
+            wave.update();
+            wave.draw();
+
+            if (wave.opacity <= 0) {
+                waves.splice(i, 1);
+            }
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    // Start the animation
+    animate();
+    
+    // Cleanup on unload
+    window.addEventListener('beforeunload', () => {
+        clearInterval(randomWaveIntervalId);
     });
 });
