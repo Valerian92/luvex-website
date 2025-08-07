@@ -1,0 +1,265 @@
+/*
+==============================================================================
+LUVEX THEME v2.5 - HOMEPAGE (FINALER GLOBE + EVIDENCE FIX)
+==============================================================================
+Last Update: 2025-08-07 - Globe Position + Evidence Overflow Fix
+==============================================================================
+*/
+
+/* --- 1. Hero Section Specifics --- */
+.home .luvex-hero__cta-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+.home .luvex-hero__cta.luvex-cta-primary:hover {
+    color: var(--luvex-bright-cyan);
+}
+
+/* --- 2. Knowledge Navigator Section --- */
+.knowledge-navigator-header { text-align: center; margin-bottom: 4rem; }
+.knowledge-navigator-intro { max-width: 650px; margin: 1rem auto 0; color: var(--luvex-gray-700); font-size: 1.125rem; }
+.knowledge-card { text-align: left; }
+.knowledge-card .card__title { text-align: left; }
+.knowledge-card .card__content { text-align: left; }
+.knowledge-card__header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+.knowledge-card .card__icon { margin: 0; font-size: 2.2rem; width: 60px; height: 60px; background: linear-gradient(135deg, #e7f1ff, #f0f8ff); color: var(--luvex-vibrant-blue); border-radius: 12px; }
+.knowledge-card .card__title { margin-bottom: 0; font-size: 1.5rem; }
+.knowledge-card .btn { align-self: center; }
+
+/* --- 3. UV Simulator Showcase --- */
+.uv-simulator-showcase { background: linear-gradient(135deg, var(--luvex-dark-blue), var(--luvex-accent-blue)); border-radius: var(--radius-xl); padding: 4rem 3rem; position: relative; overflow: hidden; text-align: center; color: var(--luvex-white); }
+.simulator-content h3 { color: var(--luvex-white); font-size: 2.5rem; margin-bottom: 1.5rem; }
+.simulator-description { color: var(--luvex-text-muted-dark); font-size: 1.2rem; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+.simulator-features { margin: 3rem auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 900px; }
+.simulator-feature { padding: 1.5rem; background: rgba(255, 255, 255, 0.05); border-radius: var(--radius-md); transition: all 0.3s ease; }
+.simulator-feature:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-4px); }
+.simulator-feature:hover h4 { color: var(--luvex-bright-cyan); }
+.simulator-feature:hover p { color: var(--luvex-white); }
+.simulator-feature i { font-size: 2.5rem; margin-bottom: 1rem; color: var(--luvex-bright-cyan); }
+.simulator-feature h4 { color: var(--luvex-white); margin-bottom: 0.5rem; transition: color 0.3s ease; }
+.simulator-feature p { color: var(--luvex-text-muted-dark); transition: color 0.3s ease; }
+.simulator-cta { margin-top: 2rem; }
+.simulator-cta:hover { color: var(--luvex-vibrant-blue); }
+
+/*
+==============================================================================
+4. Global UV Expert Community Section (FINALER GLOBE FIX)
+==============================================================================
+*/
+/* KRITISCH: Section overflow:hidden für oben/unten Beschneidung */
+.homepage-community-section.section {
+    overflow: hidden !important; /* Globe wird oben/unten beschnitten */
+}
+
+.homepage-community-section {
+    position: relative;
+    background-color: var(--luvex-dark-blue);
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(109, 213, 237, 0.08)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+}
+
+.homepage-community-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    position: relative;
+    z-index: 2;
+}
+
+.homepage-community-content {
+    flex: 1;
+    min-width: 50%;
+    z-index: 3;
+}
+
+.homepage-community-visual {
+    flex: 1.3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 700px;
+    position: relative;
+}
+
+/* GLOBE POSITION FIX: Von -30% auf -20% für mehr rechts */
+.homepage-community-globe-wrapper {
+    width: 100vw; /* Vollbreite */
+    height: 130%; /* Leicht höher für schöne Beschneidung oben/unten */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-20%, -50%); /* GEÄNDERT: Von -30% auf -20% für weiter rechts */
+    z-index: 1;
+    margin-left: calc(-50vw + 50%); /* Verschiebt zur Viewport-Mitte */
+}
+
+.homepage-community-title { color: var(--luvex-white); font-size: clamp(2.4rem, 4.5vw, 3.2rem); line-height: 1.2; margin-bottom: 1.5rem; }
+.homepage-community-description { font-size: var(--text-lg); color: var(--luvex-gray-300); max-width: 600px; line-height: 1.7; margin-bottom: 2.5rem; }
+.homepage-community-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+/*
+==============================================================================
+5. Evidence-Based Expertise Section (OVERFLOW PROBLEM LÖSUNG)
+==============================================================================
+*/
+/* WICHTIG: Evidence Section braucht overflow:visible für das überlappende Foto */
+.evidence-section.section {
+    overflow: visible !important; /* Damit das Foto sichtbar bleibt */
+}
+
+.evidence-section {
+    padding: 8rem 0 6rem 0;
+}
+
+.evidence-grid {
+    display: grid;
+    grid-template-columns: 1fr 0.8fr;
+    align-items: center;
+    gap: 4rem;
+}
+
+.evidence-title { font-size: clamp(2.2rem, 4vw, 3rem); margin-bottom: 1.5rem; }
+.evidence-description { font-size: var(--text-lg); margin-bottom: 3rem; max-width: 550px; }
+
+/* EVIDENCE VISUAL CONTAINER FIX: Genug Platz für überlappendes Foto */
+.evidence-visual {
+    position: relative;
+    min-height: 400px; /* Stellt sicher, dass genug Platz für die Card + Foto ist */
+    padding-top: 4rem; /* Zusätzlicher Raum oben für das überlappende Foto */
+    overflow: visible !important; /* KRITISCH: Verhindert Abschneiden des Fotos */
+}
+
+/* TEAM CARD OVERFLOW FIX: Überschreibt _components.css */
+.evidence-section .team-member--light {
+    background: var(--luvex-gray-100) !important;
+    color: var(--luvex-dark-blue) !important;
+    box-shadow: var(--shadow-lg) !important;
+    border: 1px solid var(--luvex-gray-200) !important;
+    padding: 2.5rem !important;
+    padding-top: 5rem !important; /* Space for the overlapping photo */
+    margin-top: 4rem !important; /* Pushes the card down to make space for the photo */
+    position: relative !important;
+    text-align: center !important;
+    
+    /* CRITICAL OVERFLOW FIX: Überschreibt _components.css .team-member { overflow: hidden } */
+    overflow: visible !important; /* WICHTIGSTE ÄNDERUNG */
+    
+    /* SICHTBARKEITS-FIX */
+    opacity: 1 !important;
+    display: block !important;
+    visibility: visible !important;
+    z-index: 10 !important;
+    transform: none !important;
+}
+
+.evidence-section .team-member--light .team-member__photo {
+    position: absolute !important;
+    top: -4rem !important; /* Pulls the photo up, out of the card's normal flow */
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 120px !important;
+    height: 120px !important;
+    border-radius: 50% !important;
+    border: 4px solid var(--luvex-white) !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+    overflow: hidden !important; /* Foto selbst kann overflow:hidden haben */
+    z-index: 15 !important; /* Höher als die Card */
+    
+    /* FOTO-SICHTBARKEIT ERZWINGEN */
+    opacity: 1 !important;
+    display: block !important;
+    visibility: visible !important;
+}
+
+.evidence-section .team-member--light .team-member__photo img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    opacity: 1 !important;
+}
+
+.evidence-section .team-member--light .team-member__content h3,
+.evidence-section .team-member--light .team-member__quote p { 
+    color: var(--luvex-dark-blue) !important;
+    opacity: 1 !important;
+}
+
+.evidence-section .team-member--light .team-member__role { 
+    color: var(--luvex-vibrant-blue) !important;
+    opacity: 1 !important;
+}
+
+.evidence-section .team-member--light .team-member__content h3 {
+    font-size: 1.5rem !important;
+    margin-bottom: 0.5rem !important;
+    font-weight: 600 !important;
+}
+
+.evidence-section .team-member--light .team-member__role {
+    font-size: 1rem !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.evidence-section .team-member--light .team-member__quote p {
+    font-style: italic !important;
+    line-height: 1.6 !important;
+    font-size: 0.95rem !important;
+    margin: 0 !important;
+}
+
+/* --- 6. Final CTA Section --- */
+.section--final-cta { background: linear-gradient(135deg, var(--luvex-accent-blue) 0%, var(--luvex-dark-blue) 100%); color: var(--luvex-white); }
+.section--final-cta .cta-section--dark { background: transparent; box-shadow: none; border: none; max-width: 900px; }
+
+/* --- 7. Responsive Overrides --- */
+@media (max-width: 1024px) {
+    .homepage-community-container {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 3rem;
+    }
+    .homepage-community-content {
+        margin-bottom: 3rem;
+    }
+    .homepage-community-visual {
+        min-height: 500px;
+        width: 100%;
+    }
+    .homepage-community-globe-wrapper {
+        width: 100vw;
+        height: 140%;
+        transform: translate(-50%, -50%); /* Zentriert auf Tablets */
+    }
+    .homepage-community-actions {
+        justify-content: center;
+    }
+    .evidence-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .evidence-visual {
+        order: -1;
+        margin-bottom: 3rem;
+    }
+    .evidence-content {
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .simulator-features { grid-template-columns: repeat(2, 1fr); }
+    .evidence-section { padding-top: 6rem; }
+    .homepage-community-globe-wrapper {
+        width: 100vw;
+        height: 150%;
+        transform: translate(-50%, -50%); /* Zentriert auf Mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .simulator-features { grid-template-columns: 1fr; }
+}

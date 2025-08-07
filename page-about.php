@@ -1,375 +1,193 @@
 <?php
 /**
- * About Page Template
- * 
+ * About Page Template - Redesigned
  * @package Luvex
- * @since 2.0.0
+ * @since 2.4.0
  */
 
 get_header(); ?>
 
-<!-- About Hero Section -->
-<section class="luvex-hero">
+<!-- About Hero Section with restored animation and new mission statement card -->
+<section class="luvex-hero about-hero">
+    <!-- WIEDERHERGESTELLT: Original-Struktur für die Parallax-Animation -->
+    <div class="about-spotlight"></div>
+    <div class="about-parallax-container">
+        <div class="about-parallax-layer about-layer-grid"></div>
+        <div class="about-parallax-layer about-layer-elements">
+            <div class="about-elements-container">
+                <!-- Die JS-gesteuerten Elemente bleiben unverändert -->
+            </div>
+        </div>
+    </div>
+    <svg id="about-connection-lines"></svg>
+
     <div class="luvex-hero__container">
         <h1 class="luvex-hero__title">
-            About <span class="text-highlight">LUVEX</span> - Your Independent UV Technology Partners
+            Pioneering UV Technology with <span class="text-highlight">Integrity</span>
         </h1>
         <h2 class="luvex-hero__subtitle">
-            Advancing UV technology through knowledge sharing, independent consultation, and customer success.
+            Advancing UV applications through knowledge, independence, and your success.
         </h2>
-        <p class="luvex-hero__description">
-            Our mission is simple: help you optimize your UV processes through honest guidance, proven expertise, and innovative tools. We believe the best solutions come from understanding your specific challenges and working together to solve them.
-        </p>
-        <div class="header-cta" style="justify-content: center; margin-top: 2rem;">
-             <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-cta-primary">
-                <i class="fa-solid fa-arrow-right"></i>
-                <span>Start a Conversation</span>
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- Our Story Section -->
-<section class="our-story">
-    <div class="our-story__container">
-        <div class="our-story__layout">
-            <div class="our-story__content">
-                <h2>Our Story</h2>
-                <p>
-                    LUVEX was founded by UV process engineers who saw a gap in the market: while UV technology was rapidly advancing, honest, independent guidance was hard to find. Too often, companies were forced to rely on equipment manufacturers for technical advice – creating an inherent conflict of interest.
-                </p>
-                <p>
-                    We started LUVEX to provide something different: truly independent UV technology expertise focused on your success, not selling specific equipment. Our commitment is to honest guidance, practical knowledge sharing, and innovative tools that help you optimize your processes.
-                </p>
-                <div class="our-story__highlight">
-                    <div class="our-story__highlight-line"></div>
-                    <p class="our-story__highlight-text">Founded in 2018</p>
-                </div>
-            </div>
-            <div class="our-story__image">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/uv-laboratory-team.jpg" alt="Professional UV technology engineers working in a laboratory with UV equipment" />
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Why We Do Things Differently Section -->
-<section class="why-different">
-    <div class="why-different__container">
-        <div class="why-different__header">
-            <h2 class="why-different__title">Why We Do Things Differently</h2>
-            <div class="why-different__accent-line"></div>
-        </div>
         
-        <div class="why-different__grid">
-            <!-- Card 1 -->
-            <div class="why-different__card">
-                <div class="why-different__card-icon">
-                    <i class="fa-solid fa-handshake"></i>
-                </div>
-                <h3 class="why-different__card-title">Independent & Honest Guidance</h3>
-                <ul class="why-different__card-list">
-                    <li><i class="fa-solid fa-check"></i>No product sales pressure - our focus is finding the right solution for YOUR needs</li>
-                    <li><i class="fa-solid fa-check"></i>Unbiased evaluation of different UV technologies and manufacturers</li>
-                    <li><i class="fa-solid fa-check"></i>Transparent advice that puts your process success first</li>
-                </ul>
-            </div>
-            
-            <!-- Card 2 -->
-            <div class="why-different__card">
-                <div class="why-different__card-icon">
-                    <i class="fa-solid fa-flask"></i>
-                </div>
-                <h3 class="why-different__card-title">Real-World Experience</h3>
-                <ul class="why-different__card-list">
-                    <li><i class="fa-solid fa-check"></i>Hands-on experience from manufacturer side, customer side, and process integration</li>
-                    <li><i class="fa-solid fa-check"></i>Understanding of both technical possibilities and practical constraints</li>
-                    <li><i class="fa-solid fa-check"></i>Proven track record in automotive, electronics, and diverse UV applications</li>
-                </ul>
-            </div>
-            
-            <!-- Card 3 -->
-            <div class="why-different__card">
-                <div class="why-different__card-icon">
-                    <i class="fa-solid fa-users-gear"></i>
-                </div>
-                <h3 class="why-different__card-title">Collaborative Learning</h3>
-                <ul class="why-different__card-list">
-                    <li><i class="fa-solid fa-check"></i>We grow our expertise through every customer challenge we solve together</li>
-                    <li><i class="fa-solid fa-check"></i>Continuous knowledge exchange that benefits all our clients</li>
-                    <li><i class="fa-solid fa-check"></i>Honest approach - if we don't know something, we'll research it together</li>
-                </ul>
-            </div>
-            
-            <!-- Card 4 -->
-            <div class="why-different__card">
-                <div class="why-different__card-icon">
-                    <i class="fa-solid fa-lightbulb"></i>
-                </div>
-                <h3 class="why-different__card-title">Free Tools & Knowledge Sharing</h3>
-                <ul class="why-different__card-list">
-                    <li><i class="fa-solid fa-check"></i>Our UV dose calculation simulator is free for everyone to use</li>
-                    <li><i class="fa-solid fa-check"></i>Process validation tools available regardless of whether you work with us</li>
-                    <li><i class="fa-solid fa-check"></i>Commitment to advancing UV technology knowledge across the industry</li>
-                </ul>
+        <div class="mission-statement">
+            <div class="mission-statement__icon"><i class="fa-solid fa-bullseye"></i></div>
+            <div class="mission-statement__content">
+                <h3 class="mission-statement__title">Our Mission</h3>
+                <p class="mission-statement__text">
+                    To empower engineers and businesses by providing honest guidance, proven expertise, and innovative tools to solve complex UV technology challenges.
+                </p>
             </div>
         </div>
     </div>
 </section>
 
+<!-- Our Story Section - V2 -->
+<section class="section our-story-v2 section--light-gray">
+    <div class="container container--narrow">
+        <div class="our-story-v2__layout">
+            <div class="our-story-v2__image">
+                <img src="https://placehold.co/600x750/1B2A49/FFFFFF?text=LUVEX+Team\nin+Action" alt="Das LUVEX Team bei der Arbeit an UV-Technologie-Lösungen" />
+            </div>
+            <div class="our-story-v2__content">
+                <h2 class="section__title--left">Our Story</h2>
+                <p>
+                    LUVEX was founded by UV process engineers who saw a critical gap in the market: while UV technology was rapidly advancing, honest, independent guidance was hard to find. Too often, companies were forced to rely on equipment manufacturers for technical advice, creating an inherent conflict of interest.
+                </p>
+                <p>
+                    We started LUVEX to provide something different: truly independent UV technology expertise focused on **your success**, not on selling specific equipment. Our commitment is to transparent guidance, practical knowledge sharing, and innovative tools that help you optimize your processes with confidence.
+                </p>
+                <div class="our-story-v2__highlight">
+                    <p>Founded in 2018 to bring clarity and integrity to the UV industry.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-<!-- Core Values Section -->
-<section class="core-values">
-    <div class="core-values__container">
-        <div class="core-values__header">
-            <h2 class="core-values__title">Our Core Values</h2>
-            <p class="core-values__description">
-                These principles guide everything we do at LUVEX, from how we approach client relationships to how we develop our tools and services.
+<!-- Team Section - V2 (Komplettes Redesign) -->
+<section class="section team-section-v2">
+    <div class="container container--wide"> <!-- Breiterer Container -->
+        <div class="text-center">
+            <h2 class="section__title">Meet Your UV Technology Partners</h2>
+            <p class="section__subtitle">
+                A dedicated team of engineers and specialists with real-world experience and a genuine passion for solving UV challenges.
             </p>
         </div>
         
-        <div class="core-values__grid">
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fa-solid fa-handshake"></i>
+        <div class="team-section-v2__grid">
+            <!-- Team Member 1: Valerian -->
+            <div class="team-card-v2 has-shine-effect">
+                <div class="team-card-v2__photo">
+                    <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Bewerbungsbild_Valerian-Huber.jpg" alt="Valerian Huber - UV Technology Specialist & Founder" />
                 </div>
-                <h3 class="value-card__title">Independence</h3>
-                <p class="value-card__description">
-                    We provide unbiased advice because we're not tied to any equipment manufacturer. Our only goal is finding the right solution for your specific needs.
-                </p>
+                <div class="team-card-v2__content">
+                    <h3 class="team-card-v2__name">Valerian Huber</h3>
+                    <p class="team-card-v2__role">Lead UV Process Engineer & Founder</p>
+                    <div class="team-card-v2__tags">
+                        <span>Mechanical Engineering</span>
+                        <span>UV Manufacturing</span>
+                    </div>
+                    <p class="team-card-v2__quote">
+                        "My goal is to bridge the gap between manufacturer and customer with honest, practical guidance."
+                    </p>
+                </div>
             </div>
             
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fa-solid fa-lightbulb"></i>
+            <!-- Team Member 2: Matthias -->
+            <div class="team-card-v2 has-shine-effect">
+                <div class="team-card-v2__photo">
+                    <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Matthias.jpg" alt="Matthias Slapka - Automation Technology Specialist & CO-Founder" />
                 </div>
-                <h3 class="value-card__title">Knowledge Sharing</h3>
-                <p class="value-card__description">
-                    We believe in democratizing UV technology expertise through education, free tools, and open collaboration that elevates the entire industry.
-                </p>
+                <div class="team-card-v2__content">
+                    <h3 class="team-card-v2__name">Matthias Slapka</h3>
+                    <p class="team-card-v2__role">Automation & Systems Expert</p>
+                    <div class="team-card-v2__tags">
+                        <span>Electrical Engineering</span>
+                        <span>Automation</span>
+                    </div>
+                    <p class="team-card-v2__quote">
+                        "Great UV technology only works when it integrates perfectly with your existing processes."
+                    </p>
+                </div>
             </div>
             
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fa-solid fa-chart-line"></i>
+            <!-- Team Member 3: Claire -->
+            <div class="team-card-v2 has-shine-effect">
+                <div class="team-card-v2__photo">
+                    <img src="https://www.luvex.tech/wp-content/uploads/2025/08/claire_athen-1.jpeg" alt="Claire Chen - Asia-Pacific Liaison & Strategic Partnerships" />
                 </div>
-                <h3 class="value-card__title">Results-Focused</h3>
-                <p class="value-card__description">
-                    We measure our success by your outcomes. Our practical, solution-oriented approach focuses on delivering tangible improvements to your UV processes.
-                </p>
+                <div class="team-card-v2__content">
+                    <h3 class="team-card-v2__name">Claire Chen</h3>
+                    <p class="team-card-v2__role">Asia-Pacific Partnerships</p>
+                    <div class="team-card-v2__tags">
+                        <span>International Business</span>
+                        <span>Market Development</span>
+                    </div>
+                    <p class="team-card-v2__quote">
+                        "My role is ensuring global expertise meets local innovation needs across every region."
+                    </p>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Team Section -->
-<section class="team-section">
-    <div class="team-section__container">
-            <div class="team-section__header">
-            <h2 class="team-section__title">Meet Your UV Technology Team</h2>
-            <p class="team-section__description">
-                Meet the experts behind LUVEX - real experience, genuine passion for UV technology advancement
+<!-- Core Values Section - V2 -->
+<section class="section core-values-v2 section--light-gray">
+    <div class="container container--narrow">
+        <div class="text-center">
+            <h2 class="section__title">Our Guiding Principles</h2>
+            <p class="section__subtitle">
+                These principles are the foundation of our work, our relationships, and our commitment to the industry.
             </p>
-            </div>
+        </div>
         
-        <div class="team-section__grid grid grid-2">
-            <!-- Team Member 1 -->
-            <div class="team-member">
-                <div class="team-member__layout">
-                    <div class="team-member__photo">
-                        <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Bewerbungsbild_Valerian-Huber.jpg" alt="Valerian Huber - UV Technology Specialist & Founder" />
-                    </div>
-                    <div class="team-member__content">
-                        <h3>UV Technology Specialist & Founder</h3>
-                        <p class="team-member__role">Lead UV Process Engineer</p>
-                        
-                        <div class="team-member__tags">
-                            <span class="team-member__tag">Mechanical Engineering</span>
-                            <span class="team-member__tag">Automotive</span>
-                            <span class="team-member__tag">UV Manufacturing</span>
-                        </div>
-                        
-                        <div class="team-member__details">
-                            <div class="team-member__detail">
-                                <div class="team-member__detail-icon">
-                                    <i class="fa-solid fa-graduation-cap"></i>
-                                </div>
-                                <p class="team-member__detail-text">
-                                    Mechanical Engineering graduate with hands-on experience at leading UV-A and UV-C manufacturers
-                                </p>
-                            </div>
-                            <div class="team-member__detail">
-                                <div class="team-member__detail-icon">
-                                    <i class="fa-solid fa-car"></i>
-                                </div>
-                                <p class="team-member__detail-text">
-                                    Practical experience at Audi and BMW during studies - excelled in real-world applications
-                                </p>
-                            </div>
-                            <div class="team-member__detail">
-                                <div class="team-member__detail-icon">
-                                    <i class="fa-solid fa-users"></i>
-                                </div>
-                                <p class="team-member__detail-text">
-                                    Professional sales and process experience at Keyence (coordinate measuring technology) - learned the importance of understanding customer needs
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div class="team-member__quote">
-                            <p>
-                                "I've seen UV technology from manufacturer and customer perspectives. My goal is to bridge that gap with honest, practical guidance."
-                            </p>
-                        </div>
-                    </div>
-                </div>
+        <div class="core-values-v2__grid">
+            <div class="card has-shine-effect">
+                <div class="card__icon"><i class="fa-solid fa-handshake-slash"></i></div>
+                <h3 class="card__title">True Independence</h3>
+                <p class="card__content">
+                    Our advice is unbiased because we are not tied to any equipment manufacturer. Your best solution is our only goal.
+                </p>
             </div>
             
-            <!-- Team Member 2 -->
-            <div class="team-member">
-                <div class="team-member__layout">
-                    <div class="team-member__photo">
-                        <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Matthias.jpg" alt="Matthias Slaoka - Automation Technology Specialist & CO-Founder" />
-                    </div>
-                    <div class="team-member__content">
-                        <h3>Matthias Slapka</h3>
-                        <p class="team-member__role">Automation & Systems Integration Expert</p>
-                        
-                        <div class="team-member__tags">
-                            <span class="team-member__tag">Electrical Engineering</span>
-                            <span class="team-member__tag">Automation</span>
-                            <span class="team-member__tag">Systems Integration</span>
-                        </div>
-                        
-                        <div class="team-member__details">
-                            <div class="team-member__detail">
-                                <div class="team-member__detail-icon">
-                                    <i class="fa-solid fa-bolt"></i>
-                                </div>
-                                <p class="team-member__detail-text">
-                                    Electrical engineering planning specialist with deep automation expertise
-                                </p>
-                            </div>
-                            <div class="team-member__detail">
-                                <div class="team-member__detail-icon">
-                                    <i class="fa-solid fa-gears"></i>
-                                </div>
-                                <p class="team-member__detail-text">
-                                    Expert in incorporating UV systems into automated production processes
-                                </p>
-                            </div>
-                            <div class="team-member__detail">
-                                <div class="team-member__detail-icon">
-                                    <i class="fa-solid fa-arrows-spin"></i>
-                                </div>
-                                <p class="team-member__detail-text">
-                                    Specialized in seamless integration of UV technology with existing workflows
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div class="team-member__quote">
-                            <p>
-                                "Great UV technology only works when it integrates perfectly with your existing processes."
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div class="card has-shine-effect">
+                <div class="card__icon"><i class="fa-solid fa-book-open-reader"></i></div>
+                <h3 class="card__title">Knowledge Sharing</h3>
+                <p class="card__content">
+                    We democratize UV expertise through education and free tools, believing an informed industry is a stronger industry.
+                </p>
+            </div>
+            
+            <div class="card has-shine-effect">
+                <div class="card__icon"><i class="fa-solid fa-bullseye-arrow"></i></div>
+                <h3 class="card__title">Results-Focused</h3>
+                <p class="card__content">
+                    We measure our success by your outcomes. Our approach is practical, solution-oriented, and delivers tangible process improvements.
+                </p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- More Than Consulting Section -->
-<section class="mission-section">
-    <div class="mission-section__container">
-        <div class="mission-section__header">
-            <h2 class="mission-section__title">More Than Consulting - Building the UV Knowledge Community</h2>
-            <p class="mission-section__description">We believe the UV technology market is too important and too diverse for any single company to dominate. Our mission is spreading UV knowledge and helping every application succeed.</p>
-        </div>
-        
-        <div class="mission-section__layout">
-            <div class="mission-section__image">
-                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/6a28689c01-733f06399a723ca96467.png" alt="High tech laboratory with UV technology equipment and engineers collaborating" />
+<!-- CTA Section - V2 (Neues Design) -->
+<section class="section cta-section-v2">
+    <div class="container container--narrow">
+        <div class="cta-v2__content">
+            <h2 class="cta-v2__title">Ready to Optimize Your UV Process?</h2>
+            <p class="cta-v2__description">
+                Whether you're facing specific challenges or looking to improve overall efficiency, our team is here to help with honest, independent expertise.
+            </p>
+            <div class="cta-v2__buttons">
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-cta-primary">
+                    <span>Schedule a Consultation</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="luvex-cta-secondary">
+                    <span>Try Our Free Tools</span>
+                    <i class="fa-solid fa-calculator"></i>
+                </a>
             </div>
-            <div class="mission-section__content">
-                <div class="mission-section__points">
-                    <div class="mission-point">
-                        <div class="mission-point__icon">
-                            <i class="fa-solid fa-book-open"></i>
-                        </div>
-                        <div class="mission-point__content">
-                            <h3>Knowledge First</h3>
-                            <p>We share information freely because educated customers make better decisions</p>
-                        </div>
-                    </div>
-                    
-                    <div class="mission-point">
-                        <div class="mission-point__icon">
-                            <i class="fa-solid fa-shield-alt"></i>
-                        </div>
-                        <div class="mission-point__content">
-                            <h3>Process Security</h3>
-                            <p>Your process reliability is our top priority - we recommend solutions that actually work</p>
-                        </div>
-                    </div>
-                    
-                    <div class="mission-point">
-                        <div class="mission-point__icon">
-                            <i class="fa-solid fa-chart-line"></i>
-                        </div>
-                        <div class="mission-point__content">
-                            <h3>Industry Growth</h3>
-                            <p>By helping more companies succeed with UV technology, we grow the entire market</p>
-                        </div>
-                    </div>
-                    
-                    <div class="mission-point">
-                        <div class="mission-point__icon">
-                            <i class="fa-solid fa-rocket"></i>
-                        </div>
-                        <div class="mission-point__content">
-                            <h3>Continuous Innovation</h3>
-                            <p>Every project teaches us something new that we can share with future customers</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="mission-section__simulator">
-                    <div class="simulator-callout">
-                        <div class="simulator-callout__header">
-                            <i class="fa-solid fa-calculator"></i>
-                            <h3>Free UV Simulator</h3>
-                        </div>
-                        <p>Our UV dose calculation simulator is available free to everyone - use it to validate processes before implementation, completely independent of any consultation with us.</p>
-                        <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="simulator-callout__cta">
-                            Try Our Free Simulator
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-<!-- CTA Section -->
-<section class="about-cta">
-    <div class="about-cta__container">
-        <h2 class="about-cta__title">Ready to Optimize Your UV Processes?</h2>
-        <p class="about-cta__description">
-            Whether you're facing specific challenges or looking to improve overall efficiency, our team is here to help with honest, independent expertise.
-        </p>
-        <div class="about-cta__buttons">
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="about-cta__primary">
-                <span>Schedule a Consultation</span>
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="about-cta__secondary">
-                <span>Try Our Free Tools</span>
-                <i class="fa-solid fa-calculator"></i>
-            </a>
         </div>
     </div>
 </section>

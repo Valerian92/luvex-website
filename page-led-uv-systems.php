@@ -1,11 +1,13 @@
 <?php
 /**
- * LED UV Systems Page
+ * LED UV Systems Page (Reworked Hero)
  * @package Luvex
  */
 get_header(); ?>
 
-<section class="luvex-hero">
+<section class="luvex-hero uv-led-hero">
+    <canvas id="uv-led-canvas"></canvas>
+    
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
             <h1 class="luvex-hero__title">
@@ -23,6 +25,10 @@ get_header(); ?>
             </a>
         </div>
     </div>
+
+    <!-- NEW: Container for the integrated HUD controls -->
+    <div id="integrated-controls-container"></div>
+
 </section>
 
 <!-- Key Advantages Section -->
@@ -76,6 +82,8 @@ get_header(); ?>
         </div>
     </div>
 </section>
+
+<!-- (Rest of the page content remains the same) -->
 
 <!-- Technical Specifications -->
 <section class="section section--light-gray">
@@ -190,37 +198,6 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- ROI Calculator Teaser -->
-<section class="section section--gradient">
-    <div class="container">
-        <div class="roi-teaser">
-            <div class="roi-teaser__content">
-                <h2>Calculate Your LED UV ROI</h2>
-                <p>See how much you could save by switching to LED UV technology</p>
-                
-                <div class="roi-preview">
-                    <div class="roi-metric">
-                        <span class="roi-metric__value">70%</span>
-                        <span class="roi-metric__label">Energy Savings</span>
-                    </div>
-                    <div class="roi-metric">
-                        <span class="roi-metric__value">90%</span>
-                        <span class="roi-metric__label">Less Maintenance</span>
-                    </div>
-                    <div class="roi-metric">
-                        <span class="roi-metric__value">5x</span>
-                        <span class="roi-metric__label">Longer Lifetime</span>
-                    </div>
-                </div>
-                
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-calculator' ) ) ); ?>" class="btn btn--primary">
-                    Calculate Your Savings <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- FAQ Section -->
 <section class="section">
     <div class="container container--narrow">
@@ -260,23 +237,6 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- CTA Section -->
-<section class="section section--dark">
-    <div class="container">
-        <div class="cta-section" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(109, 213, 237, 0.3);">
-            <h3 style="color: white;">Ready to upgrade to LED UV?</h3>
-            <p style="color: rgba(255,255,255,0.9);">Get expert guidance on implementing LED UV technology in your application</p>
-            <div class="cta-actions">
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-cta-primary">
-                    Schedule LED UV Consultation
-                </a>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'mercury-uv-lamps' ) ) ); ?>" class="luvex-cta-secondary" style="border-color: white; color: white;">
-                    Compare with Mercury UV
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
 
 <style>
 /* Zusätzliche Styles für diese Seite */
@@ -312,10 +272,6 @@ get_header(); ?>
     color: var(--luvex-dark-blue);
 }
 
-.comparison-table tr:last-child td {
-    border-bottom: none;
-}
-
 .application-card {
     background: white;
     border-radius: var(--radius-lg);
@@ -328,76 +284,6 @@ get_header(); ?>
     transform: translateY(-5px);
     box-shadow: var(--shadow-lg);
 }
-
-.application-card__header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.application-card__header i {
-    font-size: 2rem;
-    color: var(--luvex-bright-cyan);
-}
-
-.application-card__header h3 {
-    margin: 0;
-    font-size: 1.25rem;
-}
-
-.feature-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.feature-list li {
-    padding: 0.5rem 0;
-    padding-left: 1.5rem;
-    position: relative;
-}
-
-.feature-list li:before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    color: var(--luvex-bright-cyan);
-    font-weight: bold;
-}
-
-.roi-teaser {
-    text-align: center;
-    padding: 3rem;
-    background: rgba(255,255,255,0.1);
-    border-radius: var(--radius-xl);
-}
-
-.roi-preview {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    margin: 2rem 0;
-}
-
-.roi-metric {
-    text-align: center;
-}
-
-.roi-metric__value {
-    display: block;
-    font-size: 3rem;
-    font-weight: 700;
-    color: var(--luvex-bright-cyan);
-    line-height: 1;
-}
-
-.roi-metric__label {
-    display: block;
-    font-size: 0.875rem;
-    color: white;
-    margin-top: 0.5rem;
-}
 </style>
 
 <script>
@@ -407,24 +293,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
-        const answer = item.querySelector('.faq-answer');
-        const icon = question.querySelector('i');
-        
         question.addEventListener('click', () => {
             const isOpen = item.classList.contains('active');
-            
-            // Close all items
-            faqItems.forEach(otherItem => {
-                otherItem.classList.remove('active');
-                otherItem.querySelector('.faq-answer').style.maxHeight = null;
-                otherItem.querySelector('i').classList.replace('fa-minus', 'fa-plus');
+            faqItems.forEach(i => {
+                i.classList.remove('active');
+                i.querySelector('.faq-answer').style.maxHeight = null;
+                i.querySelector('i').classList.replace('fa-minus', 'fa-plus');
             });
-            
-            // Toggle current item
             if (!isOpen) {
                 item.classList.add('active');
+                const answer = item.querySelector('.faq-answer');
                 answer.style.maxHeight = answer.scrollHeight + 'px';
-                icon.classList.replace('fa-plus', 'fa-minus');
+                item.querySelector('i').classList.replace('fa-plus', 'fa-minus');
             }
         });
     });

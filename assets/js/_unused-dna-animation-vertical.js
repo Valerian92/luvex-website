@@ -29,7 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const microorganismGroup = new THREE.Group();
     const dnaGroup = new THREE.Group();
-    scene.add(microorganismGroup, dnaGroup);
+    const benefitsGroup = new THREE.Group();
+    scene.add(microorganismGroup, dnaGroup, benefitsGroup);
 
     const materials = {
         microbe: new THREE.MeshPhongMaterial({ color: 0x6dd5ed, transparent: true, opacity: 0.9, emissive: 0x6dd5ed, emissiveIntensity: 0.1 }),
@@ -116,6 +117,21 @@ document.addEventListener('DOMContentLoaded', () => {
     dimerBond.visible = false;
     dnaGroup.add(dimerBond);
 
+    // Benefits Text
+    const benefits = ["Longer Shelf Life", "Health", "Higher Quality"];
+    benefits.forEach((text, i) => {
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        context.font = 'bold 40px Arial';
+        context.fillStyle = 'white';
+        context.fillText(text, 10, 50);
+        const texture = new THREE.CanvasTexture(canvas);
+        const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, opacity: 0 });
+        const mesh = new THREE.Mesh(new THREE.PlaneGeometry(15, 5), material);
+        mesh.position.y = 5 - i * 6;
+        benefitsGroup.add(mesh);
+    });
+
     let currentStep = 0;
     let pulseActive = false;
     let lastReplicationTime = 0;
@@ -155,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
         switch(step) {
             case 3: setTimeout(() => formThymineDimer(), 2000); break;
             case 5: deactivateMicrobes(); break;
+            case 6: showBenefits(); break;
         }
     }
 
@@ -226,6 +243,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }, i * delayBetween);
         });
     }
+
+    function showBenefits() {
+        animateGroupOpacity(microorganismGroup, 0, 500);
+        animateGroupOpacity(dnaGroup, 0, 500);
+        setTimeout(() => {
+            benefitsGroup.visible = true;
+            benefitsGroup.children.forEach((child, i) => {
+                const startOpacity = 0;
+                const targetOpacity = 1;
+                const duration = 1000;
+                const startTime = Date.now();
+                function update() {
+                    const progress = Math.min((Date.now() - startTime) / duration, 1);
+                    child.material.opacity = startOpacity + (targetOpacity - startOpacity) * progress;
+                    if (progress < 1) requestAnimationFrame(update);
+                }
+                setTimeout(update, i * 300);
+            });
+        }, 500);
+    }
     
     function animateUVWave(repeat = 1) {
         let count = 0;
@@ -248,6 +285,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function resetAnimation() {
+        benefitsGroup.visible = false;
+        benefitsGroup.children.forEach(child => child.material.opacity = 0);
         microbes.forEach((microbe) => {
             if(microbe.userData.isActive) return;
             microbe.material = materials.microbe;

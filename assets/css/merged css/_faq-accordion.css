@@ -112,3 +112,21 @@ Last Update: 2025-07-31
 }
 
 /* ===== END [SECTION NAME] ===== */
+
+/*
+==============================================================================
+LUVEX THEME v2.2 - FAQ ACCORDION (Ergänzung)
+==============================================================================
+*/
+
+/* NEU: Styling für den aktiven/geöffneten Zustand */
+
+.faq-accordion__item[open] > .faq-accordion__question {
+    /* Frage wird in Markenfarbe hervorgehoben */
+    color: var(--luvex-bright-cyan); 
+}
+
+.faq-accordion__item[open] > .faq-accordion__question .faq-accordion__chevron {
+    /* Chevron-Icon wird ebenfalls in Markenfarbe hervorgehoben */
+    color: var(--luvex-bright-cyan);
+}

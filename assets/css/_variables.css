@@ -77,7 +77,11 @@ Last Update: 2025-07-31
     --luvex-gray-700: #495057;
     --luvex-gray-900: #212529;
     --luvex-accent-blue: #0066cc;
-}
+            /* Dark Blue Variations für Section-Pattern */
+        --luvex-dark-blue-light: #2A3B5C;  /* Heller für alternierende Sections */
+        --luvex-dark-blue-dark: #151F35;   /* Dunkler für alternierende Sections */
+        --luvex-dark-blue-medium: #1F2F47; /* Zwischenton */
+    }
 
 
 
