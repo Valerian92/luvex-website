@@ -223,11 +223,16 @@ Last Update: 2025-08-07
         width: 100%;
         margin-top: -5rem; /* Pulls the globe up a bit on tablets */
     }
-    .homepage-community-globe-wrapper {
-        width: 250%; /* Noch größer auf Tablets */
-        height: 200%;
-        transform: translate(-50%, -50%);
-    }
+.homepage-community-globe-wrapper {
+    /* ORIGINAL-WERTE die früher funktionierten */
+    width: 150%; /* Zurück von 220% */
+    height: 150%; /* Zurück von 140%/180% */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-40%, -50%); /* ORIGINAL-POSITION! */
+    z-index: 1;
+}
     .homepage-community-actions {
         justify-content: center;
     }
