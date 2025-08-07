@@ -67,8 +67,10 @@ add_action('wp_enqueue_scripts', 'luvex_enqueue_assets', 999);
 function luvex_enqueue_assets() {
     wp_dequeue_style('astra-theme-css');
 
+    // DEBUG: Page Detection
     global $post;
     $current_page_slug = isset($post->post_name) ? $post->post_name : 'no-slug';
+    $current_page_id = get_the_ID();
     
     // CSS-Dateien
     $main_css_path = get_stylesheet_directory() . '/assets/css/main.css';
@@ -99,74 +101,90 @@ function luvex_enqueue_assets() {
     if (is_front_page() || is_home()) {
         $photons_js_path = get_stylesheet_directory() . '/assets/js/hero-photons.js';
         if (file_exists($photons_js_path)) {
-            wp_enqueue_script('luvex-hero-photons', get_stylesheet_directory_uri() . '/assets/js/hero-photons.js', array(), filemtime($photons_js_path), true);
+            $photons_js_version = filemtime($photons_js_path);
+            wp_enqueue_script('luvex-hero-photons', get_stylesheet_directory_uri() . '/assets/js/hero-photons.js', array(), $photons_js_version, true);
         }
         wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), null, true);
         $globe_js_path = get_stylesheet_directory() . '/assets/js/globe-animation.js';
-        if (file_exists($globe_js_path)) {
-            wp_enqueue_script('luvex-globe', get_stylesheet_directory_uri() . '/assets/js/globe-animation.js', array('three-js'), filemtime($globe_js_path), true);
-        }
+        $globe_js_version = file_exists($globe_js_path) ? filemtime($globe_js_path) : '1.0.0';
+        wp_enqueue_script('luvex-globe', get_stylesheet_directory_uri() . '/assets/js/globe-animation.js', array('three-js'), $globe_js_version, true);
+
     } 
     elseif ( is_page('about') ) {
         $about_hero_js_path = get_stylesheet_directory() . '/assets/js/hero-about-interactive.js';
         if (file_exists($about_hero_js_path)) {
-            wp_enqueue_script('luvex-hero-about', get_stylesheet_directory_uri() . '/assets/js/hero-about-interactive.js', array(), filemtime($about_hero_js_path), true);
+            $about_hero_js_version = filemtime($about_hero_js_path);
+            wp_enqueue_script('luvex-hero-about', get_stylesheet_directory_uri() . '/assets/js/hero-about-interactive.js', array(), $about_hero_js_version, true);
         }
     }
     elseif ( is_page('uv-curing') ) {
         $curing_js_path = get_stylesheet_directory() . '/assets/js/hero-curing-interactive.js';
         if (file_exists($curing_js_path)) {
-            wp_enqueue_script('luvex-hero-curing', get_stylesheet_directory_uri() . '/assets/js/hero-curing-interactive.js', array(), filemtime($curing_js_path), true);
+            $curing_js_version = filemtime($curing_js_path);
+            wp_enqueue_script('luvex-hero-curing', get_stylesheet_directory_uri() . '/assets/js/hero-curing-interactive.js', array(), $curing_js_version, true);
         }
     } 
     elseif ( is_page('uv-consulting') ) { 
         $hexagon_js_path = get_stylesheet_directory() . '/assets/js/hero-hexagon.js';
         if (file_exists($hexagon_js_path)) {
-            wp_enqueue_script('luvex-hero-hexagon', get_stylesheet_directory_uri() . '/assets/js/hero-hexagon.js', array(), filemtime($hexagon_js_path), true);
+            $hexagon_js_version = filemtime($hexagon_js_path);
+            wp_enqueue_script('luvex-hero-hexagon', get_stylesheet_directory_uri() . '/assets/js/hero-hexagon.js', array(), $hexagon_js_version, true);
         }
+
         $faq_js_path = get_stylesheet_directory() . '/assets/js/interactive-faq.js';
         if (file_exists($faq_js_path)) {
-            wp_enqueue_script('luvex-interactive-faq', get_stylesheet_directory_uri() . '/assets/js/interactive-faq.js', array(), filemtime($faq_js_path), true);
+            $faq_js_version = filemtime($faq_js_path);
+            wp_enqueue_script('luvex-interactive-faq', get_stylesheet_directory_uri() . '/assets/js/interactive-faq.js', array(), $faq_js_version, true);
         }
     } 
     elseif ( is_page('contact') ) {
         $contact_hero_js_path = get_stylesheet_directory() . '/assets/js/contact-hero-animation.js';
         if (file_exists($contact_hero_js_path)) {
-            wp_enqueue_script('luvex-contact-hero', get_stylesheet_directory_uri() . '/assets/js/contact-hero-animation.js', array(), filemtime($contact_hero_js_path), true);
+            $contact_hero_js_version = filemtime($contact_hero_js_path);
+            wp_enqueue_script('luvex-contact-hero', get_stylesheet_directory_uri() . '/assets/js/contact-hero-animation.js', array(), $contact_hero_js_version, true);
         }
     }
     elseif ( is_page('uv-c-disinfection') ) { 
         $disinfection_js_path = get_stylesheet_directory() . '/assets/js/hero-disinfection.js';
         if (file_exists($disinfection_js_path)) {
-            wp_enqueue_script('luvex-hero-disinfection', get_stylesheet_directory_uri() . '/assets/js/hero-disinfection.js', array(), filemtime($disinfection_js_path), true);
+            $disinfection_js_version = filemtime($disinfection_js_path);
+            wp_enqueue_script('luvex-hero-disinfection', get_stylesheet_directory_uri() . '/assets/js/hero-disinfection.js', array(), $disinfection_js_version, true);
         }
+        
         wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), null, true);
+        
         $gallery_js_path = get_stylesheet_directory() . '/assets/js/science-gallery.js';
         if (file_exists($gallery_js_path)) {
-            wp_enqueue_script('luvex-science-gallery', get_stylesheet_directory_uri() . '/assets/js/science-gallery.js', array('jquery'), filemtime($gallery_js_path), true);
+            $gallery_js_version = filemtime($gallery_js_path);
+            wp_enqueue_script('luvex-science-gallery', get_stylesheet_directory_uri() . '/assets/js/science-gallery.js', array('jquery'), $gallery_js_version, true);
         }
     } 
     elseif ( is_page('uv-knowledge') ) {
         $spectrum_js_path = get_stylesheet_directory() . '/assets/js/hero-spectrum.js';
         if (file_exists($spectrum_js_path)) {
-            wp_enqueue_script('luvex-hero-spectrum', get_stylesheet_directory_uri() . '/assets/js/hero-spectrum.js', array(), filemtime($spectrum_js_path), true);
+            $spectrum_js_version = filemtime($spectrum_js_path);
+            wp_enqueue_script('luvex-hero-spectrum', get_stylesheet_directory_uri() . '/assets/js/hero-spectrum.js', array(), $spectrum_js_version, true);
         }
     } 
     elseif ( is_page('led-uv-systems') || is_page('uv-led') || $current_page_slug === 'led-uv-systems' || strpos($_SERVER['REQUEST_URI'], 'led-uv-systems') !== false ) {
         $uv_led_css_path = get_stylesheet_directory() . '/assets/css/_page-uv-led.css';
         if (file_exists($uv_led_css_path)) {
-            wp_enqueue_style('luvex-page-uv-led', get_stylesheet_directory_uri() . '/assets/css/_page-uv-led.css', array('luvex-main'), filemtime($uv_led_css_path));
+            $uv_led_css_version = filemtime($uv_led_css_path);
+            wp_enqueue_style('luvex-page-uv-led', get_stylesheet_directory_uri() . '/assets/css/_page-uv-led.css', array('luvex-main'), $uv_led_css_version);
         }
+        
         $uv_led_js_path = get_stylesheet_directory() . '/assets/js/hero-uv-led.js';
         if (file_exists($uv_led_js_path)) {
-            wp_enqueue_script('luvex-hero-uv-led', get_stylesheet_directory_uri() . '/assets/js/hero-uv-led.js', array(), filemtime($uv_led_js_path), true);
+            $uv_led_js_version = filemtime($uv_led_js_path);
+            wp_enqueue_script('luvex-hero-uv-led', get_stylesheet_directory_uri() . '/assets/js/hero-uv-led.js', array(), $uv_led_js_version, true);
         }
     }
 
     // Lade Scroll-Animationen auf allen Seiten
     $scroll_animations_js_path = get_stylesheet_directory() . '/assets/js/scroll-animations.js';
     if(file_exists($scroll_animations_js_path)) {
-        wp_enqueue_script('luvex-scroll-animations', get_stylesheet_directory_uri() . '/assets/js/scroll-animations.js', array(), filemtime($scroll_animations_js_path), true);
+        $scroll_animations_js_version = filemtime($scroll_animations_js_path);
+        wp_enqueue_script('luvex-scroll-animations', get_stylesheet_directory_uri() . '/assets/js/scroll-animations.js', array(), $scroll_animations_js_version, true);
     }
 }
 
