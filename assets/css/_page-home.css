@@ -1,10 +1,10 @@
 /*
 ==============================================================================
-LUVEX THEME v2.4 - HOMEPAGE (FINAL FIX V3)
+LUVEX THEME v2.5 - HOMEPAGE (DEFINITIVE FIX)
 ==============================================================================
-Description: This version uses highly specific overrides to fix cascading
-             issues from core stylesheets, restoring the globe and
-             evidence sections to their intended appearance.
+Description: This version directly overrides the core ".section { overflow: hidden; }"
+             rule that was causing all clipping issues. This should be the
+             final and correct version.
 Last Update: 2025-08-07
 ==============================================================================
 */
@@ -47,15 +47,18 @@ Last Update: 2025-08-07
 
 /*
 ==============================================================================
-4. Global UV Expert Community Section (FINAL FIX V3)
+4. Global UV Expert Community Section (DEFINITIVE FIX)
 ==============================================================================
 */
-/* DEFINITIVE FIX: Override core 'overflow' property to allow the globe to be larger than the section */
-.home .homepage-community-section {
-    overflow: visible !important; /* Force overflow to be visible, breaking out of the container */
+/* This rule targets the specific section on the homepage to override the global .section style */
+.homepage-community-section.section {
+    overflow: visible !important; /* The most important fix: allows the globe to break out */
+}
+
+.homepage-community-section {
     position: relative;
     background-color: var(--luvex-dark-blue);
-    /* DEFINITIVE FIX: Finer grid as requested */
+    /* Restored finer grid as requested */
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(109, 213, 237, 0.08)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
 }
 
@@ -81,19 +84,18 @@ Last Update: 2025-08-07
     display: flex;
     align-items: center;
     justify-content: center;
-    /* DEFINITIVE FIX: Make container much larger to allow for a larger globe canvas */
-    min-height: 700px;
+    min-height: 700px; /* Gives the globe enough vertical space */
     position: relative;
 }
 
 .homepage-community-globe-wrapper {
-    /* DEFINITIVE FIX: Make globe significantly larger and reposition */
-    width: 160%;
-    height: 160%;
+    /* Making the globe large and positioning it to feel immersive */
+    width: 150%;
+    height: 150%;
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-45%, -50%);
+    transform: translate(-40%, -50%); /* Fine-tuned position */
     z-index: 1;
 }
 
@@ -103,13 +105,16 @@ Last Update: 2025-08-07
 
 /*
 ==============================================================================
-5. Evidence-Based Expertise Section (FINAL FIX V3)
+5. Evidence-Based Expertise Section (DEFINITIVE FIX)
 ==============================================================================
 */
-/* DEFINITIVE FIX: Override core 'overflow' property for the section itself */
-.home .evidence-section {
+/* This rule targets the specific section on the homepage to override the global .section style */
+.evidence-section.section {
+    overflow: visible !important; /* The most important fix: allows the card to be visible */
+}
+
+.evidence-section {
     padding: 8rem 0 6rem 0;
-    overflow: visible !important; /* This allows the child card to overflow */
 }
 
 .evidence-grid {
@@ -122,22 +127,22 @@ Last Update: 2025-08-07
 .evidence-title { font-size: clamp(2.2rem, 4vw, 3rem); margin-bottom: 1.5rem; }
 .evidence-description { font-size: var(--text-lg); margin-bottom: 3rem; max-width: 550px; }
 
-/* This rule is now redundant because the parent section is fixed, but kept for safety */
+/* The card itself, ensuring it appears correctly */
 .team-member--light {
     background: var(--luvex-gray-100);
     color: var(--luvex-dark-blue);
     box-shadow: var(--shadow-lg);
     border: 1px solid var(--luvex-gray-200);
     padding: 2.5rem;
-    padding-top: 5rem;
+    padding-top: 5rem; /* Space for the overlapping photo */
+    margin-top: 4rem; /* Pushes the card down to make space for the photo */
     position: relative;
     text-align: center;
-    overflow: visible; /* Kept for robustness */
 }
 
 .team-member--light .team-member__photo {
     position: absolute;
-    top: -4rem;
+    top: -4rem; /* Pulls the photo up, out of the card's normal flow */
     left: 50%;
     transform: translateX(-50%);
     width: 120px;
@@ -155,7 +160,7 @@ Last Update: 2025-08-07
 .section--final-cta { background: linear-gradient(135deg, var(--luvex-accent-blue) 0%, var(--luvex-dark-blue) 100%); color: var(--luvex-white); }
 .section--final-cta .cta-section--dark { background: transparent; box-shadow: none; border: none; max-width: 900px; }
 
-/* --- 7. Responsive Overrides (Adjusted for Globe) --- */
+/* --- 7. Responsive Overrides (Adjusted for new layout) --- */
 @media (max-width: 1024px) {
     .homepage-community-container {
         flex-direction: column;
@@ -166,12 +171,12 @@ Last Update: 2025-08-07
         margin-bottom: 3rem;
     }
     .homepage-community-visual {
-        /* Make the visual container a block under the text */
         min-height: 500px;
         width: 100%;
+        margin-top: -5rem; /* Pulls the globe up a bit on tablets */
     }
     .homepage-community-globe-wrapper {
-        width: 180%; /* Even larger on mobile to fill space */
+        width: 180%;
         height: 180%;
         transform: translate(-50%, -50%);
     }
@@ -180,6 +185,7 @@ Last Update: 2025-08-07
     }
     .evidence-grid {
         grid-template-columns: 1fr;
+        gap: 2rem;
     }
     .evidence-visual {
         order: -1;
