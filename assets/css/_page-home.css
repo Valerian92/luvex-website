@@ -1,15 +1,14 @@
 /*
 ==============================================================================
-LUVEX THEME v2.2 - HOMEPAGE (Refactored)
+LUVEX THEME v2.3 - HOMEPAGE (FINAL FIX)
 ==============================================================================
-Description: Highly specific styles for the homepage. Most layout and
-             component styles are now inherited from global files.
+Description: Final corrected styles for the homepage. Fixes issues with
+             the Globe and Evidence sections.
 Last Update: 2025-08-07
 ==============================================================================
 */
 
 /* --- 1. Hero Section Specifics --- */
-
 .home .luvex-hero__cta-container {
     flex-direction: column;
     align-items: center;
@@ -117,7 +116,7 @@ Last Update: 2025-08-07
     transform: translateY(-4px);
 }
 
-/* KORREKTUR: Hover-Effekt für Text in den Features */
+/* KORREKTUR: Hover-Effekt für Text in den Features (beibehalten) */
 .simulator-feature:hover h4 {
     color: var(--luvex-bright-cyan);
 }
@@ -152,27 +151,22 @@ Last Update: 2025-08-07
 }
 
 
-/* --- 4. Global UV Expert Community Section --- */
+/*
+==============================================================================
+4. Global UV Expert Community Section (FINAL FIX)
+==============================================================================
+*/
 .homepage-community-section {
     padding: 6rem 0;
     position: relative;
-    background-color: transparent; /* Wichtig, damit ::before sichtbar ist */
-    overflow: hidden; 
+    background-color: var(--luvex-dark-blue); /* DEFINITIVE FIX: Setzt den Hintergrund direkt */
+    overflow-x: hidden; /* Verhindert horizontales Scrollen */
+    overflow-y: visible; /* Erlaubt vertikales Überlappen */
 }
 
-/* KORREKTUR: Hintergrund-Grid wieder hinzugefügt */
-.homepage-community-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--luvex-dark-blue);
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse"><path d="M 80 0 L 0 0 0 80" fill="none" stroke="rgba(109, 213, 237, 0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
-    opacity: 0.6;
-    pointer-events: none;
-    z-index: 0;
+/* DEFINITIVE FIX: Grid wird direkt auf den Hintergrund gelegt, nicht auf ein Pseudo-Element */
+.homepage-community-section {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse"><path d="M 80 0 L 0 0 0 80" fill="none" stroke="rgba(109, 213, 237, 0.08)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
 }
 
 .homepage-community-container {
@@ -182,13 +176,14 @@ Last Update: 2025-08-07
     display: flex;
     align-items: center;
     gap: var(--space-lg);
-    position: relative; 
+    position: relative;
     z-index: 2;
 }
 
 .homepage-community-content {
     flex: 1;
     min-width: 50%;
+    z-index: 3; /* Stellt sicher, dass der Text über dem Globus ist */
 }
 
 .homepage-community-visual {
@@ -197,15 +192,18 @@ Last Update: 2025-08-07
     align-items: center;
     justify-content: center;
     min-height: 600px;
+    position: relative; /* Wichtig für die Positionierung des Globus */
 }
 
 .homepage-community-globe-wrapper {
     width: 120%;
     height: 120%;
     position: absolute;
-    left: 25%;
-    top: -10%;
-    z-index: 1; 
+    /* Passt die Position an, um den Globus besser zu zentrieren und das "Abschneiden" zu kontrollieren */
+    left: 50%;
+    top: 50%;
+    transform: translate(-40%, -50%);
+    z-index: 1;
 }
 
 .homepage-community-title {
@@ -230,10 +228,14 @@ Last Update: 2025-08-07
 }
 
 
-/* --- 5. Evidence-Based Expertise Section --- */
+/*
+==============================================================================
+5. Evidence-Based Expertise Section (FINAL FIX)
+==============================================================================
+*/
 .evidence-section {
-    padding: 6rem 0;
-    overflow: visible; /* KORREKTUR: Erlaubt dem Bild, überzulaufen */
+    padding: 8rem 0 6rem 0; /* Mehr Platz oben für das überlappende Bild */
+    /* overflow: visible; wird nicht mehr benötigt, da der Fix direkt an der Komponente ansetzt */
 }
 
 .evidence-grid {
@@ -254,31 +256,29 @@ Last Update: 2025-08-07
     max-width: 550px;
 }
 
-.evidence-section .team-member {
-    opacity: 1 !important;
-    transform: none !important;
-}
-
-/* KORREKTUR: Neues, hochwertigeres Design für die helle Variante */
+/* DEFINITIVE FIX: Die helle Variante der Karte überschreibt die `overflow`-Eigenschaft */
 .team-member--light {
     background: var(--luvex-gray-100);
     color: var(--luvex-dark-blue);
     box-shadow: var(--shadow-lg);
     border: 1px solid var(--luvex-gray-200);
     padding: 2.5rem;
-    padding-top: 5rem; /* Platz für das überlappende Bild */
-    margin-top: 4rem; /* Platz für das überlappende Bild */
+    padding-top: 5rem;
     position: relative;
     text-align: center;
+    overflow: visible; /* Dies ist die entscheidende Korrektur! */
 }
 
 .team-member--light .team-member__photo {
     position: absolute;
-    top: -4rem; /* Zieht das Bild nach oben */
+    top: -4rem;
     left: 50%;
     transform: translateX(-50%);
     width: 120px;
     height: 120px;
+    border-radius: 50%; /* Stellt sicher, dass das Bild rund bleibt */
+    border: 4px solid var(--luvex-white); /* Fügt einen weißen Rand hinzu, um es besser abzuheben */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Fügt einen leichten Schatten hinzu */
 }
 
 .team-member--light .team-member__content h3,
@@ -311,7 +311,20 @@ Last Update: 2025-08-07
         text-align: center;
     }
     .homepage-community-content {
-        margin-bottom: 3rem;
+        margin-bottom: 250px; /* Gibt dem Globus unten mehr Raum */
+        margin-top: 3rem;
+    }
+    .homepage-community-visual {
+        position: absolute;
+        width: 100%;
+        height: 500px;
+        bottom: -6rem;
+        left: 0;
+        z-index: 0;
+    }
+     .homepage-community-globe-wrapper {
+        width: 150%;
+        transform: translate(-50%, -40%);
     }
     .homepage-community-actions {
         justify-content: center;
@@ -331,6 +344,9 @@ Last Update: 2025-08-07
 @media (max-width: 768px) {
     .simulator-features {
         grid-template-columns: repeat(2, 1fr);
+    }
+    .evidence-section {
+        padding-top: 6rem;
     }
 }
 @media (max-width: 480px) {
