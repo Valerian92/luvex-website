@@ -2,7 +2,7 @@
  * LUVEX Theme - Interactive Contact Hero Animation
  *
  * Description: Creates a refined, continuous wave animation that follows a custom mouse cursor.
- * Version: 4.0
+ * Version: 5.0 (Final)
  * Author: Gemini
  */
 document.addEventListener('DOMContentLoaded', function () {
@@ -41,7 +41,8 @@ document.addEventListener('DOMContentLoaded', function () {
      * Creates a single expanding, fading wave at the current cursor position.
      */
     function createWave() {
-        if (!isMouseMoving) return; // Only create waves if the mouse is moving
+        // Only create waves if the mouse is moving inside the hero container
+        if (!isMouseMoving) return; 
 
         for (let i = 0; i < colors.length; i++) {
             const circle = document.createElementNS(svgNS, 'circle');
@@ -78,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
             circle.appendChild(rAnimation);
             circle.appendChild(opacityAnimation);
 
-            // Remove the circle from the DOM after animation completes
+            // Remove the circle from the DOM after animation completes to prevent performance issues
             setTimeout(() => {
                 if (circle.parentNode === svg) {
                     svg.removeChild(circle);
@@ -100,11 +101,11 @@ document.addEventListener('DOMContentLoaded', function () {
             cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
         });
 
-        // Detect when the mouse stops moving
+        // Detect when the mouse stops moving to pause the wave creation
         clearTimeout(moveTimeout);
         moveTimeout = setTimeout(() => {
             isMouseMoving = false;
-        }, 100); // Consider mouse stopped after 100ms
+        }, 100); // Consider mouse stopped after 100ms of inactivity
     });
 
     heroContainer.addEventListener('mouseenter', () => {
@@ -112,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
         heroContainer.style.cursor = 'none';
         if (!waveInterval) {
             // Start the wave creation loop
-            waveInterval = setInterval(createWave, 250); // Spawn waves less frequently
+            waveInterval = setInterval(createWave, 250); // Spawn waves every 250ms
         }
     });
 
