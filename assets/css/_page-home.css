@@ -1,15 +1,13 @@
 /*
 ==============================================================================
-LUVEX THEME v2.5 - HOMEPAGE (DEFINITIVE FIX)
+LUVEX THEME v2.5 - HOMEPAGE (FINALER KOMPLETT-FIX)
 ==============================================================================
-Description: This version directly overrides the core ".section { overflow: hidden; }"
-             rule that was causing all clipping issues. This should be the
-             final and correct version.
+Description: Kombiniert alle Fixes für Globe-Animation und Evidence Section
 Last Update: 2025-08-07
 ==============================================================================
 */
 
-/* --- 1. Hero Section Specifics (No changes) --- */
+/* --- 1. Hero Section Specifics --- */
 .home .luvex-hero__cta-container {
     flex-direction: column;
     align-items: center;
@@ -19,7 +17,7 @@ Last Update: 2025-08-07
     color: var(--luvex-bright-cyan);
 }
 
-/* --- 2. Knowledge Navigator Section (No changes) --- */
+/* --- 2. Knowledge Navigator Section --- */
 .knowledge-navigator-header { text-align: center; margin-bottom: 4rem; }
 .knowledge-navigator-intro { max-width: 650px; margin: 1rem auto 0; color: var(--luvex-gray-700); font-size: 1.125rem; }
 .knowledge-card { text-align: left; }
@@ -30,7 +28,7 @@ Last Update: 2025-08-07
 .knowledge-card .card__title { margin-bottom: 0; font-size: 1.5rem; }
 .knowledge-card .btn { align-self: center; }
 
-/* --- 3. UV Simulator Showcase (No changes) --- */
+/* --- 3. UV Simulator Showcase --- */
 .uv-simulator-showcase { background: linear-gradient(135deg, var(--luvex-dark-blue), var(--luvex-accent-blue)); border-radius: var(--radius-xl); padding: 4rem 3rem; position: relative; overflow: hidden; text-align: center; color: var(--luvex-white); }
 .simulator-content h3 { color: var(--luvex-white); font-size: 2.5rem; margin-bottom: 1.5rem; }
 .simulator-description { color: var(--luvex-text-muted-dark); font-size: 1.2rem; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; }
@@ -47,18 +45,17 @@ Last Update: 2025-08-07
 
 /*
 ==============================================================================
-4. Global UV Expert Community Section (GLOBE FIX)
+4. Global UV Expert Community Section (FINALER GLOBE FIX)
 ==============================================================================
 */
-/* This rule targets the specific section on the homepage to override the global .section style */
+/* KRITISCH: Section overflow:hidden für oben/unten Beschneidung */
 .homepage-community-section.section {
-    overflow: visible !important; /* The most important fix: allows the globe to break out */
+    overflow: hidden !important; /* Globe wird oben/unten beschnitten */
 }
 
 .homepage-community-section {
     position: relative;
     background-color: var(--luvex-dark-blue);
-    /* Restored finer grid as requested */
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(109, 213, 237, 0.08)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
 }
 
@@ -84,20 +81,23 @@ Last Update: 2025-08-07
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 700px; /* Gives the globe enough vertical space */
+    min-height: 700px;
     position: relative;
 }
 
-/* GLOBE FIX: Erweitert den Globe Container damit er nicht seitlich abgeschnitten wird */
+/* FINALER GLOBE FIX: Vollbreite + Position rechts + ursprüngliche Größe */
 .homepage-community-globe-wrapper {
-    /* Größerer Globe der den ganzen Hintergrund ausfüllt aber oben/unten beschnitten wird */
-    width: 220%; /* Erweitert von 150% auf 220% */
-    height: 180%; /* Erweitert von 150% auf 180% */
+    /* Globe füllt komplette Viewport-Breite aber bleibt in ursprünglicher Größe */
+    width: 100vw; /* Vollbreite */
+    height: 130%; /* Leicht höher für schöne Beschneidung oben/unten */
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%); /* Zentriert statt -40% offset */
+    transform: translate(-30%, -50%); /* -30% positioniert Globe rechts vom Text */
     z-index: 1;
+    
+    /* Globe soll über Section-Container hinausgehen */
+    margin-left: calc(-50vw + 50%); /* Verschiebt zur Viewport-Mitte */
 }
 
 .homepage-community-title { color: var(--luvex-white); font-size: clamp(2.4rem, 4.5vw, 3.2rem); line-height: 1.2; margin-bottom: 1.5rem; }
@@ -106,12 +106,12 @@ Last Update: 2025-08-07
 
 /*
 ==============================================================================
-5. Evidence-Based Expertise Section (TEAM CARD FIX)
+5. Evidence-Based Expertise Section (TEAM FOTO FIX)
 ==============================================================================
 */
-/* This rule targets the specific section on the homepage to override the global .section style */
+/* WICHTIG: Evidence Section braucht overflow:visible für das überlappende Foto */
 .evidence-section.section {
-    overflow: visible !important; /* The most important fix: allows the card to be visible */
+    overflow: visible !important; /* Damit das Foto sichtbar bleibt */
 }
 
 .evidence-section {
@@ -128,7 +128,14 @@ Last Update: 2025-08-07
 .evidence-title { font-size: clamp(2.2rem, 4vw, 3rem); margin-bottom: 1.5rem; }
 .evidence-description { font-size: var(--text-lg); margin-bottom: 3rem; max-width: 550px; }
 
-/* TEAM CARD OPACITY FIX: Das war das Hauptproblem - opacity war 0 */
+/* EVIDENCE VISUAL CONTAINER FIX: Genug Platz für überlappendes Foto */
+.evidence-visual {
+    position: relative;
+    min-height: 400px; /* Stellt sicher, dass genug Platz für die Card + Foto ist */
+    padding-top: 4rem; /* Zusätzlicher Raum oben für das überlappende Foto */
+}
+
+/* TEAM CARD SICHTBARKEITS-FIX */
 .team-member--light {
     background: var(--luvex-gray-100) !important;
     color: var(--luvex-dark-blue) !important;
@@ -140,8 +147,8 @@ Last Update: 2025-08-07
     position: relative !important;
     text-align: center !important;
     
-    /* CRITICAL FIX: Sichtbarkeit erzwingen */
-    opacity: 1 !important; /* War 0, jetzt 1 */
+    /* CRITICAL FIX: Vollständige Sichtbarkeit */
+    opacity: 1 !important;
     display: block !important;
     visibility: visible !important;
     z-index: 10 !important;
@@ -159,9 +166,9 @@ Last Update: 2025-08-07
     border: 4px solid var(--luvex-white) !important;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
     overflow: hidden !important;
-    z-index: 11 !important;
+    z-index: 15 !important; /* Höher als die Card */
     
-    /* CRITICAL FIX: Foto-Sichtbarkeit */
+    /* FOTO-SICHTBARKEIT ERZWINGEN */
     opacity: 1 !important;
     display: block !important;
     visibility: visible !important;
@@ -204,11 +211,11 @@ Last Update: 2025-08-07
     margin: 0 !important;
 }
 
-/* --- 6. Final CTA Section (No changes) --- */
+/* --- 6. Final CTA Section --- */
 .section--final-cta { background: linear-gradient(135deg, var(--luvex-accent-blue) 0%, var(--luvex-dark-blue) 100%); color: var(--luvex-white); }
 .section--final-cta .cta-section--dark { background: transparent; box-shadow: none; border: none; max-width: 900px; }
 
-/* --- 7. Responsive Overrides (Adjusted for new layout) --- */
+/* --- 7. Responsive Overrides --- */
 @media (max-width: 1024px) {
     .homepage-community-container {
         flex-direction: column;
@@ -221,18 +228,12 @@ Last Update: 2025-08-07
     .homepage-community-visual {
         min-height: 500px;
         width: 100%;
-        margin-top: -5rem; /* Pulls the globe up a bit on tablets */
     }
-.homepage-community-globe-wrapper {
-    /* ORIGINAL-WERTE die früher funktionierten */
-    width: 150%; /* Zurück von 220% */
-    height: 150%; /* Zurück von 140%/180% */
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-40%, -50%); /* ORIGINAL-POSITION! */
-    z-index: 1;
-}
+    .homepage-community-globe-wrapper {
+        width: 100vw;
+        height: 140%;
+        transform: translate(-50%, -50%); /* Zentriert auf Tablets */
+    }
     .homepage-community-actions {
         justify-content: center;
     }
@@ -248,14 +249,16 @@ Last Update: 2025-08-07
         text-align: center;
     }
 }
+
 @media (max-width: 768px) {
     .simulator-features { grid-template-columns: repeat(2, 1fr); }
     .evidence-section { padding-top: 6rem; }
     .homepage-community-globe-wrapper {
-        width: 280%; /* Noch größer auf Mobile */
-        height: 220%;
+        width: 100vw;
+        height: 150%;
     }
 }
+
 @media (max-width: 480px) {
     .simulator-features { grid-template-columns: 1fr; }
 }
