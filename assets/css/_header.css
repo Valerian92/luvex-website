@@ -93,7 +93,7 @@ Last Update: 2025-08-07
     position: relative;
     transition: all 0.3s ease;
     /* Hier den Abstand nur für die Haupt-Menüpunkte anpassen */
-    padding: 1rem 1.8rem; /* Oben/Unten | Links/Rechts (Wert von 2.5rem reduziert) */
+    padding: 1rem 2.2rem; /* Oben/Unten | Links/Rechts (Wert von 1.8rem erhöht) */
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -108,8 +108,8 @@ Last Update: 2025-08-07
     content: '';
     position: absolute;
     bottom: 8px; /* Adjust position relative to padding */
-    left: 1.8rem; /* Muss dem horizontalen Padding entsprechen */
-    width: calc(100% - 3.6rem); /* Gesamtbreite minus linkes und rechtes Padding */
+    left: 2.2rem; /* Muss dem horizontalen Padding entsprechen */
+    width: calc(100% - 4.4rem); /* Gesamtbreite minus linkes und rechtes Padding */
     height: 2px;
     background: var(--luvex-bright-cyan);
     transition: width 0.3s ease;
@@ -118,7 +118,7 @@ Last Update: 2025-08-07
 }
 
 .main-navigation > ul > li > a:hover::after {
-    width: calc(100% - 3.6rem); /* Volle Breite beim Hover */
+    width: calc(100% - 4.4rem); /* Volle Breite beim Hover */
 }
 
 
