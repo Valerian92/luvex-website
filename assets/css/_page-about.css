@@ -1,6 +1,6 @@
 /*
 ==============================================================================
-LUVEX THEME v2.4.0 - ABOUT PAGE (Redesigned & Corrected)
+LUVEX THEME v2.4.1 - ABOUT PAGE (Redesigned & Corrected)
 ==============================================================================
 Description: Complete redesign of the About Page for clarity, professionalism,
              and better storytelling. All known issues corrected.
@@ -10,7 +10,6 @@ Last Update: 2025-08-07
 */
 
 /* ===== 1. HERO SECTION & MISSION STATEMENT ===== */
-/* Original-Stile für die Parallax-Animation bleiben erhalten */
 .about-hero { perspective: 2000px; }
 .about-spotlight { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; transition: background 0.05s ease-out; }
 .about-parallax-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.05s ease-out; z-index: 1; }
@@ -59,8 +58,17 @@ Last Update: 2025-08-07
 
 /* ===== 3. TEAM SECTION (V2 - REDESIGN) ===== */
 .team-section-v2 { padding: 6rem 0; }
-.team-section-v2 .section__subtitle { max-width: 600px; }
-.team-section-v2__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; margin-top: 4rem; }
+.team-section-v2 .section__subtitle { max-width: 600px; margin-left:auto; margin-right:auto; }
+
+/* KORREKTUR: Padding oben hinzugefügt, um Platz für die Bilder zu schaffen */
+.team-section-v2__grid { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 2.5rem; 
+    margin-top: 4rem; 
+    padding-top: 6rem; /* <-- HIER IST DER FIX */
+}
+
 .team-card-v2 { background: var(--luvex-white); border: 1px solid var(--luvex-gray-200); border-radius: var(--radius-xl); text-align: center; padding: 2.5rem 2rem; box-shadow: var(--shadow-sm); transition: var(--transition-normal); }
 .team-card-v2:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: rgba(109, 213, 237, 0.5); }
 .team-card-v2__photo { width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: -5.5rem auto 1.5rem auto; border: 6px solid var(--luvex-white); box-shadow: 0 5px 20px rgba(0,0,0,0.1); position: relative; }
@@ -70,58 +78,6 @@ Last Update: 2025-08-07
 .team-card-v2__tags { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
 .team-card-v2__tags span { background: var(--luvex-gray-100); color: var(--luvex-gray-700); font-size: 0.75rem; font-weight: 500; padding: 0.25rem 0.75rem; border-radius: var(--radius-full); }
 .team-card-v2__quote { font-style: italic; color: var(--luvex-gray-700); margin: 0; padding-top: 1.5rem; border-top: 1px solid var(--luvex-gray-200); }
-/* ===== 3. TEAM SECTION (V2 - REDESIGN) ===== */
-.team-section-v2 { 
-    padding: 6rem 0; 
-}
-
-.team-section-v2 .section__subtitle { 
-    max-width: 600px; 
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* KORREKTUR: Padding oben hinzugefügt, um Platz für die Bilder zu schaffen */
-.team-section-v2__grid { 
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 2.5rem; 
-    margin-top: 4rem; 
-    padding-top: 6rem; /* <-- DIESE ZEILE IST DER FIX */
-}
-
-.team-card-v2 { 
-    background: var(--luvex-white); 
-    border: 1px solid var(--luvex-gray-200); 
-    border-radius: var(--radius-xl); 
-    text-align: center; 
-    padding: 2.5rem 2rem; 
-    box-shadow: var(--shadow-sm); 
-    transition: var(--transition-normal); 
-}
-
-.team-card-v2:hover { 
-    transform: translateY(-8px); 
-    box-shadow: var(--shadow-lg); 
-    border-color: rgba(109, 213, 237, 0.5); 
-}
-
-.team-card-v2__photo { 
-    width: 140px; 
-    height: 140px; 
-    border-radius: 50%; 
-    overflow: hidden; 
-    margin: -5.5rem auto 1.5rem auto; /* Negativer Margin bleibt, da er für das Design gewollt ist */
-    border: 6px solid var(--luvex-white); 
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1); 
-    position: relative; 
-}
-
-.team-card-v2__photo img { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-}
 
 
 /* ===== 4. CORE VALUES SECTION (V2) ===== */

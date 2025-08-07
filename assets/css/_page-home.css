@@ -1,8 +1,9 @@
 /*
 ==============================================================================
-LUVEX THEME v2.5 - HOMEPAGE (FINALER GLOBE + EVIDENCE FIX)
+LUVEX THEME v2.6 - HOMEPAGE (FINALE POLISH-VERSION)
 ==============================================================================
-Last Update: 2025-08-07 - Globe Position + Evidence Overflow Fix
+Description: Globe Position + Evidence Layout optimiert
+Last Update: 2025-08-07 - Finale Optimierungen basierend auf Console-Tests
 ==============================================================================
 */
 
@@ -44,7 +45,7 @@ Last Update: 2025-08-07 - Globe Position + Evidence Overflow Fix
 
 /*
 ==============================================================================
-4. Global UV Expert Community Section (FINALER GLOBE FIX)
+4. Global UV Expert Community Section (FINALE GLOBE POSITION)
 ==============================================================================
 */
 /* KRITISCH: Section overflow:hidden für oben/unten Beschneidung */
@@ -84,16 +85,16 @@ Last Update: 2025-08-07 - Globe Position + Evidence Overflow Fix
     position: relative;
 }
 
-/* GLOBE POSITION FIX: Von -30% auf -20% für mehr rechts */
+/* FINALE GLOBE POSITION: Console-getestet und optimiert */
 .homepage-community-globe-wrapper {
-    width: 100vw; /* Vollbreite */
-    height: 130%; /* Leicht höher für schöne Beschneidung oben/unten */
+    width: 100vw;
+    height: 130%;
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-20%, -50%); /* GEÄNDERT: Von -30% auf -20% für weiter rechts */
+    transform: translate(-5%, -50%); /* VON -10% AUF -5% für noch weiter rechts */
     z-index: 1;
-    margin-left: calc(-50vw + 50%); /* Verschiebt zur Viewport-Mitte */
+    margin-left: calc(-50vw + 50%);
 }
 
 .homepage-community-title { color: var(--luvex-white); font-size: clamp(2.4rem, 4.5vw, 3.2rem); line-height: 1.2; margin-bottom: 1.5rem; }
@@ -102,7 +103,7 @@ Last Update: 2025-08-07 - Globe Position + Evidence Overflow Fix
 
 /*
 ==============================================================================
-5. Evidence-Based Expertise Section (OVERFLOW PROBLEM LÖSUNG)
+5. Evidence-Based Expertise Section (OPTIMIERTES LAYOUT)
 ==============================================================================
 */
 /* WICHTIG: Evidence Section braucht overflow:visible für das überlappende Foto */
@@ -114,9 +115,10 @@ Last Update: 2025-08-07 - Globe Position + Evidence Overflow Fix
     padding: 8rem 0 6rem 0;
 }
 
+/* GRID OPTIMIERUNG: Gleichmäßiger Platz für beide Spalten */
 .evidence-grid {
     display: grid;
-    grid-template-columns: 1fr 0.8fr;
+    grid-template-columns: 1fr 1fr; /* GEÄNDERT: Von 1fr 0.8fr auf 1fr 1fr für mehr Platz rechts */
     align-items: center;
     gap: 4rem;
 }
@@ -124,23 +126,23 @@ Last Update: 2025-08-07 - Globe Position + Evidence Overflow Fix
 .evidence-title { font-size: clamp(2.2rem, 4vw, 3rem); margin-bottom: 1.5rem; }
 .evidence-description { font-size: var(--text-lg); margin-bottom: 3rem; max-width: 550px; }
 
-/* EVIDENCE VISUAL CONTAINER FIX: Genug Platz für überlappendes Foto */
+/* EVIDENCE VISUAL CONTAINER OPTIMIERT: Weniger Padding für bessere Photo-Position */
 .evidence-visual {
     position: relative;
-    min-height: 400px; /* Stellt sicher, dass genug Platz für die Card + Foto ist */
-    padding-top: 4rem; /* Zusätzlicher Raum oben für das überlappende Foto */
+    min-height: 350px; /* REDUZIERT: Von 400px auf 350px */
+    padding-top: 0; /* ENTFERNT: War 4rem, jetzt 0 für cleanes Layout */
     overflow: visible !important; /* KRITISCH: Verhindert Abschneiden des Fotos */
 }
 
-/* TEAM CARD OVERFLOW FIX: Überschreibt _components.css */
+/* TEAM CARD OPTIMIERT: Bessere Positionierung für Foto */
 .evidence-section .team-member--light {
     background: var(--luvex-gray-100) !important;
     color: var(--luvex-dark-blue) !important;
     box-shadow: var(--shadow-lg) !important;
     border: 1px solid var(--luvex-gray-200) !important;
     padding: 2.5rem !important;
-    padding-top: 5rem !important; /* Space for the overlapping photo */
-    margin-top: 4rem !important; /* Pushes the card down to make space for the photo */
+    padding-top: 3rem !important; /* REDUZIERT: Von 5rem auf 3rem für bessere Photo-Höhe */
+    margin-top: 0 !important; /* ENTFERNT: War 4rem, jetzt 0 für Alignment mit Titel */
     position: relative !important;
     text-align: center !important;
     
@@ -155,9 +157,10 @@ Last Update: 2025-08-07 - Globe Position + Evidence Overflow Fix
     transform: none !important;
 }
 
+/* PHOTO POSITION OPTIMIERT: Passt zur Titel-Höhe */
 .evidence-section .team-member--light .team-member__photo {
     position: absolute !important;
-    top: -4rem !important; /* Pulls the photo up, out of the card's normal flow */
+    top: -1.5rem !important; /* OPTIMIERT: Von -4rem auf -1.5rem für bessere Titel-Alignment */
     left: 50% !important;
     transform: translateX(-50%) !important;
     width: 120px !important;
@@ -238,7 +241,7 @@ Last Update: 2025-08-07 - Globe Position + Evidence Overflow Fix
         justify-content: center;
     }
     .evidence-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Mobile: Single Column */
         gap: 2rem;
     }
     .evidence-visual {
