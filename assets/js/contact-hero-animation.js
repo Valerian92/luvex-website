@@ -1,8 +1,9 @@
 /**
  * LUVEX Contact Page - Interactive Ripple Hero Animation
  * @package Luvex
- * @since 2.9.3 (Final Scope & Centering Fix)
- * @description Creates an interactive ripple wave effect and a custom cursor scoped to the hero section.
+ * @since 2.9.4 (Final Initialization Fix)
+ * @description Creates an interactive ripple wave effect and a custom cursor scoped to the hero section,
+ * ensuring it's visible on page load if the mouse is already inside the hero area.
  */
 document.addEventListener('DOMContentLoaded', () => {
     const heroSection = document.querySelector('.contact-hero-v2');
@@ -33,16 +34,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Event Listeners Scoped to Hero Section ---
 
+    // Handles making the cursor visible when entering the hero
     heroSection.addEventListener('mouseenter', () => {
         cursor.style.opacity = '1';
     });
 
+    // Handles hiding the cursor when leaving the hero
     heroSection.addEventListener('mouseleave', () => {
         cursor.style.opacity = '0';
     });
 
+    // Handles cursor position and wave creation
     heroSection.addEventListener('mousemove', (e) => {
         // Update cursor position for perfect centering
+        // The CSS transform: translate(-50%, -50%) centers the div on its own axis,
+        // and top/left move that centered point to the mouse coordinates.
         cursor.style.left = `${e.clientX}px`;
         cursor.style.top = `${e.clientY}px`;
 
@@ -55,8 +61,20 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => { canCreateMouseWave = true; }, MOUSE_WAVE_INTERVAL);
         }
     });
+    
+    // --- FIX: Handle initial state if mouse is already in hero on load ---
+    const handleInitialLoad = (e) => {
+        const heroRect = heroSection.getBoundingClientRect();
+        if (e.clientX >= heroRect.left && e.clientX <= heroRect.right && e.clientY >= heroRect.top && e.clientY <= heroRect.bottom) {
+            cursor.style.opacity = '1';
+        }
+        // This handler only needs to run once to fix the initial state.
+        window.removeEventListener('mousemove', handleInitialLoad);
+    };
+    window.addEventListener('mousemove', handleInitialLoad);
 
 
+    // --- Wave Logic ---
     class Wave {
         constructor(x, y, options = {}) {
             this.x = x;
