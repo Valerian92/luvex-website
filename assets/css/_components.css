@@ -1,12 +1,12 @@
 /*
 ==============================================================================
-LUVEX THEME v3.6 - UI COMPONENTS (Shine Effect Definitive Fix)
+LUVEX THEME v3.7 - UI COMPONENTS (GLOBALE CARD + SHINE FIXES)
 ==============================================================================
 
-Description: Central file for all reusable UI components.
-             - Implemented the definitive, simplified fix for the shine effect.
+Description: Komplette Überarbeitung der Card-Systeme und Shine Effects
+             für globale Kompatibilität auf allen Seiten.
 Dependencies: _variables.css, _core.css
-Last Update: 2025-08-07
+Last Update: 2025-08-07 - Globale Card System Fixes
 
 ==============================================================================
 */
@@ -34,7 +34,6 @@ Last Update: 2025-08-07
     line-height: 1;
     text-align: center;
 }
-
 
 .btn--primary {
     background: var(--color-primary);
@@ -81,7 +80,6 @@ Last Update: 2025-08-07
     font-weight: 600;
     min-height: 48px;
 }
-
 
 /* --- 1.3 LUVEX Brand Buttons (Reusable) --- */
 .luvex-cta-primary {
@@ -159,14 +157,13 @@ Last Update: 2025-08-07
     color: var(--luvex-dark-blue);
 }
 
-
 /*
 ==============================================================================
-2. CARDS
+2. CARDS (GLOBALE ÜBERARBEITUNG)
 ==============================================================================
 */
 
-/* --- 2.1 Standard Card System --- */
+/* --- 2.1 UNIVERSAL CARD BASE (Alle Card-Typen erben davon) --- */
 .card {
     background: var(--color-white);
     border: 1px solid #e5e5e7;
@@ -177,8 +174,11 @@ Last Update: 2025-08-07
     display: flex;
     flex-direction: column;
     text-align: center;
+    
+    /* KRITISCH: Basis-Overflow für alle Cards */
+    overflow: visible; /* Standard: visible, damit Content nicht abgeschnitten wird */
+    position: relative; /* Für korrekte Stacking Context */
 }
-
 
 .card:hover {
     transform: translateY(-4px);
@@ -191,6 +191,7 @@ Last Update: 2025-08-07
     background: linear-gradient(135deg, var(--color-white) 0%, #f8fbff 100%);
 }
 
+/* --- 2.2 CARD CONTENT STRUCTURE --- */
 .card__icon {
     width: 60px;
     height: 60px;
@@ -226,7 +227,6 @@ Last Update: 2025-08-07
     font-size: var(--text-base);
 }
 
-
 .card__content {
     text-align: center;
     font-size: var(--text-base);
@@ -234,25 +234,15 @@ Last Update: 2025-08-07
     flex-grow: 1;
 }
 
-
 .card .btn {
     margin-top: var(--space-lg);
     align-self: center;
 }
 
-
-
-/* --- 2.2 LUVEX Value Card --- */
+/* --- 2.3 LUVEX VALUE CARD (Erbt von .card) --- */
 .value-card {
-    background: var(--luvex-white);
-    padding: 2.5rem 2rem;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
+    /* Erbt background, padding etc. von .card */
     border-top: 4px solid var(--luvex-bright-cyan);
-    transition: var(--transition-normal);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
 }
 
 .value-card:hover {
@@ -294,9 +284,52 @@ Last Update: 2025-08-07
     margin-bottom: 1.5rem;
 }
 
-/* --- 2.3 Knowledge Navigator Card --- */
+/* --- 2.4 KNOWLEDGE NAVIGATOR CARD (Spezifische Anpassungen) --- */
 .knowledge-navigator .value-card {
     text-align: left;
+}
+
+.knowledge-navigator .card {
+    text-align: left; /* Überschreibt card center alignment */
+}
+
+.knowledge-card {
+    /* Erbt alle .card Eigenschaften */
+    text-align: left !important; /* Erzwingt left alignment */
+}
+
+.knowledge-card .card__title { 
+    text-align: left !important; 
+}
+
+.knowledge-card .card__content { 
+    text-align: left !important; 
+}
+
+.knowledge-card__header { 
+    display: flex; 
+    align-items: center; 
+    gap: 1.5rem; 
+    margin-bottom: 1.5rem; 
+}
+
+.knowledge-card .card__icon { 
+    margin: 0; 
+    font-size: 2.2rem; 
+    width: 60px; 
+    height: 60px; 
+    background: linear-gradient(135deg, #e7f1ff, #f0f8ff); 
+    color: var(--luvex-vibrant-blue); 
+    border-radius: 12px; 
+}
+
+.knowledge-card .card__title { 
+    margin-bottom: 0; 
+    font-size: 1.5rem; 
+}
+
+.knowledge-card .btn { 
+    align-self: center; 
 }
 
 .knowledge-list {
@@ -320,14 +353,16 @@ Last Update: 2025-08-07
     flex-shrink: 0;
 }
 
-/* --- 2.4 Team Member Card --- */
+/* --- 2.5 TEAM MEMBER CARD (Separate Klasse, erbt NICHT von .card) --- */
 .team-member {
     background: var(--luvex-dark-blue);
     border-radius: var(--radius-xl);
     padding: 2rem;
     color: var(--luvex-white);
-    overflow: hidden;
     position: relative;
+    
+    /* WICHTIG: Team Member Cards haben controlled overflow */
+    overflow: hidden; /* Team cards können overflow:hidden haben */
 }
 
 .team-member__layout {
@@ -424,16 +459,19 @@ Last Update: 2025-08-07
     line-height: 1.6;
 }
 
-/* ==============================================================================
-2.5 CARD EFFECTS (GLOBAL UTILITIES)
+/*
+==============================================================================
+2.6 SHINE EFFECT (DEFINITIVE GLOBAL SOLUTION)
 ==============================================================================
 */
 
-/* --- DEFINITIVE FIX v5: Globaler Glanz-Effekt (vereinfacht & robust) --- */
+/* GLOBALER SHINE EFFECT - funktioniert mit allen Card-Typen */
 .has-shine-effect {
     position: relative;
-    /* Diese Regel ist der Schlüssel: Sie beschneidet den ::before Effekt und verhindert ein "Durchbluten". */
-    overflow: hidden;
+    /* KRITISCH: overflow:hidden NUR für Shine Effect Container */
+    overflow: hidden !important; 
+    /* Verhindert dass Shine über Grid/Flex boundaries läuft */
+    isolation: isolate; 
 }
 
 .has-shine-effect::before {
@@ -451,11 +489,12 @@ Last Update: 2025-08-07
         transparent 100%
     );
     transition: left 0.8s ease-in-out;
-    /* Liegt über dem Hintergrund der Karte, aber unter dem Inhalt. */
+    /* KRITISCH: Z-Index Management */
     z-index: 1; 
+    pointer-events: none; /* Verhindert Interference mit Klicks */
 }
 
-/* Stellt sicher, dass der Inhalt der Karte immer über dem Effekt liegt. */
+/* Alle direkten Kinder bekommen höheren Z-Index */
 .has-shine-effect > * {
     position: relative;
     z-index: 2;
@@ -465,6 +504,12 @@ Last Update: 2025-08-07
     left: 100%;
 }
 
+/* GRID/FLEXBOX COMPATIBILITY: Verhindert Shine-Overflow zwischen Cards */
+.grid .has-shine-effect,
+.flex .has-shine-effect {
+    /* Zusätzliche Isolation für Grid/Flex Layouts */
+    contain: layout style paint;
+}
 
 /*
 ==============================================================================
@@ -745,10 +790,9 @@ Last Update: 2025-08-07
     }
 }
 
-
 /*
 ==============================================================================
-4. CTA (CALL TO ACTION) SECTIONS
+4. CTA (CALL TO ACTION) SECTIONS (BUTTON COLOR FIX)
 ==============================================================================
 */
 
@@ -795,14 +839,14 @@ Last Update: 2025-08-07
     color: var(--luvex-gray-300);
 }
 
-/* --- 4.3 CTA Buttons --- */
+/* --- 4.3 CTA BUTTONS (VERSCHIEDENE HOVER-FARBEN FIX) --- */
 .cta-section .cta-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: var(--space-xs);
     padding: 14px 28px;
-    margin: 0.5rem 0.75rem; /* Added vertical margin for wrapping */
+    margin: 0.5rem 0.75rem;
     border-radius: var(--radius-md);
     text-decoration: none;
     font-weight: 600;
@@ -811,28 +855,28 @@ Last Update: 2025-08-07
     border: 2px solid var(--luvex-bright-cyan);
 }
 
-/* Primary CTA Button (Solid) */
+/* ERSTER BUTTON: "Get Expert Consultation" */
 .cta-section .cta-button:first-of-type {
     background: var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
 }
 
-/* KORREKTUR: Verbesserter Hover-Effekt */
 .cta-section .cta-button:first-of-type:hover {
-    background: transparent;
-    color: var(--luvex-bright-cyan);
+    background: var(--luvex-vibrant-blue); /* NEUE FARBE für ersten Button */
+    color: var(--luvex-white);
+    border-color: var(--luvex-vibrant-blue);
 }
 
-/* Secondary CTA Button (Outline) */
+/* ZWEITER BUTTON: "Start Learning" */
 .cta-section .cta-button:last-of-type {
     background: transparent;
     color: var(--luvex-bright-cyan);
 }
 
-/* KORREKTUR: Verbesserter Hover-Effekt */
 .cta-section .cta-button:last-of-type:hover {
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
+    background: var(--luvex-dark-blue); /* ANDERE FARBE für zweiten Button */
+    color: var(--luvex-white);
+    border-color: var(--luvex-dark-blue);
 }
 
 /* --- 4.4 CTA Responsive --- */
@@ -851,7 +895,6 @@ Last Update: 2025-08-07
         justify-content: center;
     }
 }
-
 
 /*
 ==============================================================================

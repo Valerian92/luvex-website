@@ -1,9 +1,8 @@
 /*
 ==============================================================================
-LUVEX THEME v2.5 - HOMEPAGE (FINALER KOMPLETT-FIX)
+LUVEX THEME v2.5 - HOMEPAGE (FINALER GLOBE + EVIDENCE FIX)
 ==============================================================================
-Description: Kombiniert alle Fixes für Globe-Animation und Evidence Section
-Last Update: 2025-08-07
+Last Update: 2025-08-07 - Globe Position + Evidence Overflow Fix
 ==============================================================================
 */
 
@@ -85,18 +84,15 @@ Last Update: 2025-08-07
     position: relative;
 }
 
-/* FINALER GLOBE FIX: Vollbreite + Position rechts + ursprüngliche Größe */
+/* GLOBE POSITION FIX: Von -30% auf -20% für mehr rechts */
 .homepage-community-globe-wrapper {
-    /* Globe füllt komplette Viewport-Breite aber bleibt in ursprünglicher Größe */
     width: 100vw; /* Vollbreite */
     height: 130%; /* Leicht höher für schöne Beschneidung oben/unten */
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-30%, -50%); /* -30% positioniert Globe rechts vom Text */
+    transform: translate(-20%, -50%); /* GEÄNDERT: Von -30% auf -20% für weiter rechts */
     z-index: 1;
-    
-    /* Globe soll über Section-Container hinausgehen */
     margin-left: calc(-50vw + 50%); /* Verschiebt zur Viewport-Mitte */
 }
 
@@ -106,7 +102,7 @@ Last Update: 2025-08-07
 
 /*
 ==============================================================================
-5. Evidence-Based Expertise Section (TEAM FOTO FIX)
+5. Evidence-Based Expertise Section (OVERFLOW PROBLEM LÖSUNG)
 ==============================================================================
 */
 /* WICHTIG: Evidence Section braucht overflow:visible für das überlappende Foto */
@@ -133,10 +129,11 @@ Last Update: 2025-08-07
     position: relative;
     min-height: 400px; /* Stellt sicher, dass genug Platz für die Card + Foto ist */
     padding-top: 4rem; /* Zusätzlicher Raum oben für das überlappende Foto */
+    overflow: visible !important; /* KRITISCH: Verhindert Abschneiden des Fotos */
 }
 
-/* TEAM CARD SICHTBARKEITS-FIX */
-.team-member--light {
+/* TEAM CARD OVERFLOW FIX: Überschreibt _components.css */
+.evidence-section .team-member--light {
     background: var(--luvex-gray-100) !important;
     color: var(--luvex-dark-blue) !important;
     box-shadow: var(--shadow-lg) !important;
@@ -147,7 +144,10 @@ Last Update: 2025-08-07
     position: relative !important;
     text-align: center !important;
     
-    /* CRITICAL FIX: Vollständige Sichtbarkeit */
+    /* CRITICAL OVERFLOW FIX: Überschreibt _components.css .team-member { overflow: hidden } */
+    overflow: visible !important; /* WICHTIGSTE ÄNDERUNG */
+    
+    /* SICHTBARKEITS-FIX */
     opacity: 1 !important;
     display: block !important;
     visibility: visible !important;
@@ -155,7 +155,7 @@ Last Update: 2025-08-07
     transform: none !important;
 }
 
-.team-member--light .team-member__photo {
+.evidence-section .team-member--light .team-member__photo {
     position: absolute !important;
     top: -4rem !important; /* Pulls the photo up, out of the card's normal flow */
     left: 50% !important;
@@ -165,7 +165,7 @@ Last Update: 2025-08-07
     border-radius: 50% !important;
     border: 4px solid var(--luvex-white) !important;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
-    overflow: hidden !important;
+    overflow: hidden !important; /* Foto selbst kann overflow:hidden haben */
     z-index: 15 !important; /* Höher als die Card */
     
     /* FOTO-SICHTBARKEIT ERZWINGEN */
@@ -174,7 +174,7 @@ Last Update: 2025-08-07
     visibility: visible !important;
 }
 
-.team-member--light .team-member__photo img {
+.evidence-section .team-member--light .team-member__photo img {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
@@ -182,29 +182,29 @@ Last Update: 2025-08-07
     opacity: 1 !important;
 }
 
-.team-member--light .team-member__content h3,
-.team-member--light .team-member__quote p { 
+.evidence-section .team-member--light .team-member__content h3,
+.evidence-section .team-member--light .team-member__quote p { 
     color: var(--luvex-dark-blue) !important;
     opacity: 1 !important;
 }
 
-.team-member--light .team-member__role { 
+.evidence-section .team-member--light .team-member__role { 
     color: var(--luvex-vibrant-blue) !important;
     opacity: 1 !important;
 }
 
-.team-member--light .team-member__content h3 {
+.evidence-section .team-member--light .team-member__content h3 {
     font-size: 1.5rem !important;
     margin-bottom: 0.5rem !important;
     font-weight: 600 !important;
 }
 
-.team-member--light .team-member__role {
+.evidence-section .team-member--light .team-member__role {
     font-size: 1rem !important;
     margin-bottom: 1.5rem !important;
 }
 
-.team-member--light .team-member__quote p {
+.evidence-section .team-member--light .team-member__quote p {
     font-style: italic !important;
     line-height: 1.6 !important;
     font-size: 0.95rem !important;
@@ -256,6 +256,7 @@ Last Update: 2025-08-07
     .homepage-community-globe-wrapper {
         width: 100vw;
         height: 150%;
+        transform: translate(-50%, -50%); /* Zentriert auf Mobile */
     }
 }
 
