@@ -76,11 +76,8 @@ Last Update: 2025-08-07
     list-style: none;
     margin: 0;
     padding: 0;
-    /* --- ÄNDERUNG ---
-       Ich habe den Wert von 2.5rem auf 3.5rem erhöht, um den Abstand zu vergrößern.
-       Sie können diesen Wert nach Belieben anpassen (z.B. 4rem für noch mehr Abstand).
-    */
-    gap: 3.5rem;
+    /* Die 'gap' Eigenschaft entfernen wir testweise, da wir den Abstand nun anders steuern. */
+    /* gap: 3.5rem; */
 }
 
 .main-navigation li {
@@ -95,7 +92,12 @@ Last Update: 2025-08-07
     text-decoration: none;
     position: relative;
     transition: all 0.3s ease;
-    padding: 1rem 0;
+    /* --- ÄNDERUNG (VERSUCH 2) ---
+       Hier fügen wir seitliches Padding hinzu, um die Elemente auseinanderzudrücken.
+       Der erste Wert ist für oben/unten, der zweite für links/rechts.
+       Erhöhen Sie '2rem' bei Bedarf (z.B. auf 2.5rem).
+    */
+    padding: 1rem 2rem;
     display: flex; /* Ensure icon and text are aligned */
     align-items: center;
     gap: 0.5rem; /* Space between text and arrow */
@@ -117,8 +119,10 @@ Last Update: 2025-08-07
     transition: width 0.3s ease;
 }
 
+/* Korrektur: Die Linie soll sich an das Padding anpassen */
 .main-navigation > ul > li > a:hover::after {
-    width: 100%;
+    left: 2rem; /* Muss dem horizontalen Padding entsprechen */
+    width: calc(100% - 4rem); /* Gesamtbreite minus linkes und rechtes Padding */
 }
 
 /* --- 3.2 Custom Dropdown Arrow --- */
@@ -169,6 +173,7 @@ Last Update: 2025-08-07
 
 /* --- 4.1 Dropdown Links --- */
 .main-navigation .sub-menu a {
+    /* Padding hier zurücksetzen, damit es nur die Hauptnavigation betrifft */
     padding: 0.75rem 1.5rem;
     display: block;
     font-size: var(--text-sm);
