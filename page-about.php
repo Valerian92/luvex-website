@@ -1,13 +1,13 @@
 <?php
 /**
- * About Page Template - Redesigned for Parallax & Mission Clarity
+ * About Page Template - Final Fix for Parallax, New Story & Content Update
  * @package Luvex
- * @since 2.7.0
+ * @since 2.9.0
  */
 
 get_header(); ?>
 
-<!-- About Hero Section with restored animation and refined elements -->
+<!-- 1. HERO SECTION (REPAIRED) -->
 <section class="luvex-hero about-hero">
     <div class="about-spotlight"></div>
     <div class="about-parallax-container">
@@ -15,8 +15,8 @@ get_header(); ?>
         <div class="about-parallax-layer about-layer-elements">
             <div class="about-elements-container">
                 <!-- 
-                    Hintergrund-Elemente direkt im HTML platziert.
-                    'data-depth' steuert die Parallax-Intensität (0.2 = langsam, 1.0 = schnell).
+                    Hintergrund-Elemente sind jetzt wieder korrekt im Hero platziert.
+                    'data-depth' steuert die Parallax-Intensität.
                 -->
                 <div class="about-sci-element about-sci-text" style="top: 18%; left: 12%;" data-depth="0.3">Knowledge</div>
                 <div class="about-sci-element about-sci-text" style="top: 75%; left: 18%;" data-depth="0.8">Independence</div>
@@ -46,56 +46,44 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- NEU GESTALTETE MISSION SECTION -->
-<section class="section mission-section">
+<!-- 2. OUR STORY SECTION (UPDATED CONTENT & DESIGN) -->
+<section class="section our-story-v3 section--light-gray">
     <div class="container container--narrow">
-        <div class="mission-layout">
-            <div class="mission-keywords">
-                <div class="mission-keyword">Knowledge</div>
-                <div class="mission-keyword">Independence</div>
-                <div class="mission-keyword">Partnership</div>
-                <div class="mission-keyword">Innovation</div>
-                <div class="mission-keyword">Consulting</div>
-                <div class="mission-keyword">Trust</div>
-                <div class="mission-keyword">Expertise</div>
-                <div class="mission-keyword">Results</div>
+        <div class="our-story-v3__content">
+            <h2 class="section__title">Building the Future of UV Technology - Together</h2>
+            <p class="section__intro">
+                In 2025, after years of working within the traditional UV industry, we realized something was fundamentally broken. While UV technology was evolving rapidly, customers were still trapped in old-fashioned vendor relationships - forced to navigate complex decisions with limited, biased information.
+            </p>
+
+            <div class="story-block">
+                <h3 class="story-block__title">The Problem We're Solving</h3>
+                <p>Companies deserve honest, independent guidance when implementing UV technology. Yet most "consultation" comes from manufacturers who can only recommend their own products. This creates suboptimal solutions and missed opportunities for innovation.</p>
             </div>
-            <div class="mission-statement-v2">
-                <h3 class="section__subtitle">Our Mission</h3>
-                <h2 class="section__title">Empowering Progress Through Honest Expertise</h2>
-                <p>
-                    To empower engineers and businesses by providing honest guidance, proven expertise, and innovative tools to solve complex UV technology challenges. We believe in building partnerships based on trust and delivering results that matter.
-                </p>
+
+            <div class="story-block">
+                <h3 class="story-block__title">Our Vision</h3>
+                <p>We're building the world's most comprehensive, independent UV knowledge ecosystem. Through modern technology - our UV Simulator, interactive knowledge base, and global community platform - we're making expert-level UV knowledge accessible to everyone.</p>
+            </div>
+
+            <div class="story-differentiators">
+                <h3 class="story-block__title">What Makes Us Different</h3>
+                <ul class="differentiators-list">
+                    <li><i class="fa-solid fa-handshake-slash"></i><span><strong>Truly Independent:</strong> We don't manufacture equipment, so our only loyalty is to finding you the best solution.</span></li>
+                    <li><i class="fa-solid fa-microchip"></i><span><strong>Modern Approach:</strong> Advanced simulation tools and data-driven recommendations, not just experience and intuition.</span></li>
+                    <li><i class="fa-solid fa-globe"></i><span><strong>Global Community:</strong> Connecting UV professionals worldwide to share knowledge and accelerate innovation.</span></li>
+                    <li><i class="fa-solid fa-arrows-rotate"></i><span><strong>Continuous Learning:</strong> Every project teaches us something new that we share back with the community.</span></li>
+                </ul>
+            </div>
+
+            <div class="story-block story-block--mission">
+                <h3 class="story-block__title">Our Mission for the Future</h3>
+                <p>Transform how the UV industry operates - from vendor-driven sales to collaborative problem-solving. We believe that when knowledge flows freely and recommendations are truly objective, everyone wins: better solutions, faster innovation, and a more sustainable future.</p>
             </div>
         </div>
     </div>
 </section>
 
-
-<!-- Our Story Section - V2 (unverändert) -->
-<section class="section our-story-v2 section--light-gray">
-    <div class="container container--narrow">
-        <div class="our-story-v2__layout">
-            <div class="our-story-v2__image">
-                <img src="https://placehold.co/600x750/1B2A49/FFFFFF?text=LUVEX+Team%0Ain+Action" alt="Das LUVEX Team bei der Arbeit an UV-Technologie-Lösungen" />
-            </div>
-            <div class="our-story-v2__content">
-                <h2 class="section__title--left">Our Story</h2>
-                <p>
-                    LUVEX was founded by UV process engineers who saw a critical gap in the market: while UV technology was rapidly advancing, honest, independent guidance was hard to find. Too often, companies were forced to rely on equipment manufacturers for technical advice, creating an inherent conflict of interest.
-                </p>
-                <p>
-                    We started LUVEX to provide something different: truly independent UV technology expertise focused on **your success**, not on selling specific equipment. Our commitment is to transparent guidance, practical knowledge sharing, and innovative tools that help you optimize your processes with confidence.
-                </p>
-                <div class="our-story-v2__highlight">
-                    <p>Founded in 2018 to bring clarity and integrity to the UV industry.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Team Section - V2 (unverändert) -->
+<!-- 3. TEAM SECTION (UPDATED IMAGE) -->
 <section class="section team-section-v2">
     <div class="container container--wide">
         <div class="text-center">
@@ -142,10 +130,10 @@ get_header(); ?>
                 </div>
             </div>
             
-            <!-- Team Member 3: Claire -->
+            <!-- Team Member 3: Claire (UPDATED IMAGE) -->
             <div class="team-card-v2 has-shine-effect">
                 <div class="team-card-v2__photo">
-                    <img src="https://www.luvex.tech/wp-content/uploads/2025/08/claire_athen-1.jpeg" alt="Claire Chen - Asia-Pacific Liaison & Strategic Partnerships" />
+                    <img src="https://www.luvex.tech/wp-content/uploads/2025/08/claire_athen-1-e1754336086484.jpeg" alt="Claire Chen - Asia-Pacific Liaison & Strategic Partnerships" />
                 </div>
                 <div class="team-card-v2__content">
                     <h3 class="team-card-v2__name">Claire Chen</h3>
@@ -163,7 +151,7 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- Core Values Section - V2 (unverändert) -->
+<!-- 4. CORE VALUES SECTION (Unchanged) -->
 <section class="section core-values-v2 section--light-gray">
     <div class="container container--narrow">
         <div class="text-center">
@@ -201,7 +189,7 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- CTA Section - V2 (unverändert) -->
+<!-- 5. CTA SECTION (Unchanged) -->
 <section class="section cta-section-v2">
     <div class="container container--narrow">
         <div class="cta-v2__content">
