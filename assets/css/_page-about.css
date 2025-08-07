@@ -1,16 +1,16 @@
 /*
 ==============================================================================
-LUVEX THEME v3.0 - ABOUT PAGE (Final Design & Fixes)
+LUVEX THEME v3.1 - ABOUT PAGE (Final Polishing)
 ==============================================================================
-Description: Final version with a redesigned "Our Story" section, a fix
-             for the missing icon, and cleaned-up styles.
+Description: Final layout adjustments for the "Our Story" section, including
+             spacing, alignment, and style unification.
 Last Update: 2025-08-07
 ==============================================================================
 */
 
 /*
 ==============================================================================
-1. ABOUT HERO (REPAIRED)
+1. ABOUT HERO (UNCHANGED)
 ==============================================================================
 */
 
@@ -109,28 +109,29 @@ Last Update: 2025-08-07
 
 /*
 ==============================================================================
-2. OUR STORY SECTION (REDESIGNED)
+2. OUR STORY SECTION (FINAL DESIGN)
 ==============================================================================
 */
 
 .our-story-v3 {
     background: var(--luvex-white);
-    padding: 8rem 0;
+    /* ÄNDERUNG: Abstand nach unten reduziert */
+    padding: 8rem 0 4rem; 
 }
 
 .our-story-v3__content {
-    max-width: 960px; /* Etwas breiter für besseres Layout */
+    max-width: 960px;
     margin: 0 auto;
     text-align: left;
 }
 
 .our-story-v3 .section__title {
-    text-align: center; /* Haupttitel zentriert */
+    text-align: center;
     margin-bottom: 1.5rem;
 }
 
 .our-story-v3 .section__intro {
-    font-size: 1.25rem; /* Größere Einleitung */
+    font-size: 1.25rem;
     color: var(--luvex-gray-700);
     line-height: 1.7;
     margin-bottom: 4rem;
@@ -140,12 +141,17 @@ Last Update: 2025-08-07
     margin-right: auto;
 }
 
+/* ÄNDERUNG: Einheitlicher Stil für alle Story-Blöcke */
 .story-block {
-    margin-bottom: 3rem;
+    background: linear-gradient(135deg, rgba(248, 250, 252, 0.5), rgba(241, 245, 249, 0.8));
+    padding: 2.5rem 3rem;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--luvex-gray-200);
+    margin-bottom: 2.5rem;
 }
 
 .story-block__title {
-    font-size: 1.75rem; /* Größere Untertitel */
+    font-size: 1.75rem;
     font-weight: 600;
     color: var(--luvex-dark-blue);
     margin: 0 0 1.5rem 0;
@@ -159,23 +165,31 @@ Last Update: 2025-08-07
     line-height: 1.8;
 }
 
+/* ÄNDERUNG: "What makes us different" zentrieren */
 .story-differentiators {
     margin: 4rem 0;
+    text-align: center; /* Zentriert den Titel */
+}
+
+.story-differentiators .story-block__title {
+    border-bottom: none; /* Keine Linie unter dem zentrierten Titel */
+    margin-bottom: 2.5rem;
 }
 
 .differentiators-list {
     list-style: none;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Immer 2 Spalten auf Desktop */
+    grid-template-columns: repeat(2, 1fr);
     gap: 2.5rem;
+    text-align: left; /* Text in den Karten wieder linksbündig */
 }
 
 .differentiators-list li {
     display: flex;
     align-items: flex-start;
     gap: 1.5rem;
-    background: var(--luvex-gray-100);
+    background: var(--luvex-white);
     padding: 2rem;
     border-radius: var(--radius-lg);
     border: 1px solid var(--luvex-gray-200);
@@ -208,12 +222,10 @@ Last Update: 2025-08-07
     margin-bottom: 0.25rem;
 }
 
+/* ÄNDERUNG: "Mission" Block bekommt einen stärkeren Akzent */
 .story-block--mission {
-    margin-top: 4rem;
-    background: linear-gradient(135deg, rgba(0, 123, 255, 0.03), rgba(109, 213, 237, 0.05));
-    padding: 3rem;
-    border-radius: var(--radius-xl);
-    border: 1px solid var(--luvex-gray-200);
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.05), rgba(109, 213, 237, 0.07));
+    border-color: rgba(0, 123, 255, 0.1);
 }
 
 .story-block--mission .story-block__title {
@@ -292,9 +304,6 @@ Last Update: 2025-08-07
     object-fit: cover;
 }
 
-.team-card-v2__name, .team-card-v2__role, .team-card-v2__tags, .team-card-v2__quote {
-    /* Styles for these elements remain the same */
-}
 .team-card-v2__name { font-size: 1.5rem; font-weight: 600; color: var(--luvex-dark-blue); margin: 0 0 0.5rem 0; }
 .team-card-v2__role { color: var(--luvex-vibrant-blue); font-weight: 500; margin: 0 0 1rem 0; font-size: 1rem; }
 .team-card-v2__tags { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; }
@@ -328,9 +337,6 @@ Last Update: 2025-08-07
     text-align: center;
 }
 
-.cta-v2__content, .cta-v2__title, .cta-v2__description, .cta-v2__buttons {
-    /* Styles for these elements remain the same */
-}
 .cta-v2__content { max-width: 700px; margin: 0 auto; }
 .cta-v2__title { font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 600; margin-bottom: 1.5rem; color: var(--luvex-white); }
 .cta-v2__description { font-size: var(--text-lg); color: rgba(255, 255, 255, 0.9); margin-bottom: 3rem; line-height: 1.6; }
@@ -365,7 +371,7 @@ Last Update: 2025-08-07
     .differentiators-list {
         grid-template-columns: 1fr;
     }
-    .story-block--mission {
+    .story-block {
         padding: 2rem;
     }
 
