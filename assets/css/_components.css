@@ -1,19 +1,22 @@
 /*
 ==============================================================================
-LUVEX THEME v3.7 - UI COMPONENTS (GLOBALE CARD + SHINE FIXES)
+LUVEX THEME v3.8 - UI COMPONENTS (CHECKBOX FIX)
 ==============================================================================
 
 Description: Komplette Überarbeitung der Card-Systeme und Shine Effects
              für globale Kompatibilität auf allen Seiten.
+             FIX: Checkbox-System für bessere Funktionalität und Optik.
 Dependencies: _variables.css, _core.css
-Last Update: 2025-08-07 - Globale Card System Fixes
+Last Update: 2025-08-07
 
 ==============================================================================
 */
 
+/* ... (sections 1 and 2 remain unchanged) ... */
+
 /*
 ==============================================================================
-1. BUTTONS
+1. BUTTONS 
 ==============================================================================
 */
 
@@ -546,7 +549,7 @@ Last Update: 2025-08-07 - Globale Card System Fixes
 
 .floating-label-input select {
     appearance: none;
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg>');
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 16px;
@@ -577,7 +580,7 @@ Last Update: 2025-08-07 - Globale Card System Fixes
 .floating-label-input select:focus ~ label,
 .floating-label-input input:not(:placeholder-shown) ~ label,
 .floating-label-input textarea:not(:placeholder-shown) ~ label,
-.floating-label-input select:not([value=""]) ~ label {
+.floating-label-input select:not([value=""]):not([disabled]) ~ label {
     top: 8px;
     font-size: var(--text-xs);
     color: var(--luvex-bright-cyan);
@@ -595,6 +598,10 @@ Last Update: 2025-08-07 - Globale Card System Fixes
 
 .floating-label-input--dark label {
     color: var(--luvex-gray-300);
+}
+
+.floating-label-input--dark select {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
 }
 
 /* --- 3.3 Validation States --- */
@@ -623,12 +630,12 @@ Last Update: 2025-08-07 - Globale Card System Fixes
 .form-validation-message--success { color: #10b981; }
 .form-validation-message--error { color: #ef4444; }
 
-/* --- 3.4 Checkbox & Radio System --- */
+/* --- 3.4 Checkbox & Radio System (FIXED) --- */
 .form-checkbox,
 .form-radio {
     display: flex;
     align-items: center;
-    cursor: pointer;
+    position: relative;
     margin-bottom: 0.75rem;
 }
 
@@ -637,6 +644,16 @@ Last Update: 2025-08-07 - Globale Card System Fixes
     position: absolute;
     opacity: 0;
     cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.form-checkbox__label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--luvex-gray-700);
 }
 
 .form-checkbox__indicator {
@@ -650,38 +667,58 @@ Last Update: 2025-08-07 - Globale Card System Fixes
     justify-content: center;
     transition: var(--transition-normal);
     background: var(--luvex-white);
+    flex-shrink: 0;
 }
 
-.form-radio__indicator {
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--luvex-gray-300);
-    border-radius: 50%;
-    margin-right: 0.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.form-checkbox__text {
+    line-height: 1.5;
+}
+
+.form-checkbox__text a {
+    color: var(--luvex-bright-cyan);
+    text-decoration: none;
     transition: var(--transition-normal);
-    background: var(--luvex-white);
+}
+.form-checkbox__text a:hover {
+    text-decoration: underline;
 }
 
-.form-checkbox input:checked + .form-checkbox__indicator {
+/* Checked State */
+.form-checkbox input:checked ~ .form-checkbox__label .form-checkbox__indicator {
     border-color: var(--luvex-bright-cyan);
     background: var(--luvex-bright-cyan);
+}
+
+/* Checkmark Icon */
+.form-checkbox__indicator i {
+    font-size: 12px;
     color: var(--luvex-dark-blue);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.2s ease-in-out;
 }
 
-.form-radio input:checked + .form-radio__indicator {
+.form-checkbox input:checked ~ .form-checkbox__label .form-checkbox__indicator i {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Dark Theme Checkbox */
+.form-section--dark .form-checkbox__label,
+.contact-form-v2__form-container .form-checkbox__label {
+    color: var(--luvex-gray-300);
+}
+.form-section--dark .form-checkbox__indicator,
+.contact-form-v2__form-container .form-checkbox__indicator {
+    background: transparent;
+    border-color: var(--luvex-gray-500);
+}
+.form-section--dark .form-checkbox input:checked ~ .form-checkbox__label .form-checkbox__indicator,
+.contact-form-v2__form-container .form-checkbox input:checked ~ .form-checkbox__label .form-checkbox__indicator {
+    background: var(--luvex-bright-cyan);
     border-color: var(--luvex-bright-cyan);
 }
 
-.form-radio input:checked + .form-radio__indicator::after {
-    content: '';
-    width: 8px;
-    height: 8px;
-    background: var(--luvex-bright-cyan);
-    border-radius: 50%;
-}
 
 /* --- 3.5 Form Layout & Sections --- */
 .form-grid {
@@ -789,6 +826,9 @@ Last Update: 2025-08-07 - Globale Card System Fixes
         top: 6px;
     }
 }
+
+
+/* ... (sections 4, 5, 6 remain unchanged) ... */
 
 /*
 ==============================================================================
