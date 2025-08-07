@@ -1,9 +1,9 @@
 /*
 ==============================================================================
-LUVEX THEME v3.1 - ABOUT PAGE (Final Polishing)
+LUVEX THEME v3.2 - ABOUT PAGE (Final Layout & Style)
 ==============================================================================
 Description: Final layout adjustments for the "Our Story" section, including
-             spacing, alignment, and style unification.
+             spacing, alignment, and style unification for all story blocks.
 Last Update: 2025-08-07
 ==============================================================================
 */
@@ -116,7 +116,7 @@ Last Update: 2025-08-07
 .our-story-v3 {
     background: var(--luvex-white);
     /* ÄNDERUNG: Abstand nach unten reduziert */
-    padding: 8rem 0 4rem; 
+    padding: 8rem 0 5rem; 
 }
 
 .our-story-v3__content {
@@ -141,12 +141,12 @@ Last Update: 2025-08-07
     margin-right: auto;
 }
 
-/* ÄNDERUNG: Einheitlicher Stil für alle Story-Blöcke */
+/* ÄNDERUNG: Einheitlicher, hochwertiger Stil für alle Story-Blöcke */
 .story-block {
-    background: linear-gradient(135deg, rgba(248, 250, 252, 0.5), rgba(241, 245, 249, 0.8));
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.02), rgba(109, 213, 237, 0.03));
     padding: 2.5rem 3rem;
     border-radius: var(--radius-xl);
-    border: 1px solid var(--luvex-gray-200);
+    border: 1px solid rgba(0, 123, 255, 0.1);
     margin-bottom: 2.5rem;
 }
 
@@ -156,7 +156,7 @@ Last Update: 2025-08-07
     color: var(--luvex-dark-blue);
     margin: 0 0 1.5rem 0;
     padding-bottom: 1rem;
-    border-bottom: 1px solid var(--luvex-gray-200);
+    border-bottom: 1px solid rgba(0, 123, 255, 0.15);
 }
 
 .story-block p {
@@ -169,10 +169,14 @@ Last Update: 2025-08-07
 .story-differentiators {
     margin: 4rem 0;
     text-align: center; /* Zentriert den Titel */
+    /* Entfernt den Hintergrund und Rand von diesem speziellen Block */
+    background: none;
+    padding: 0;
+    border: none;
 }
 
 .story-differentiators .story-block__title {
-    border-bottom: none; /* Keine Linie unter dem zentrierten Titel */
+    border-bottom: none;
     margin-bottom: 2.5rem;
 }
 
@@ -182,7 +186,7 @@ Last Update: 2025-08-07
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2.5rem;
-    text-align: left; /* Text in den Karten wieder linksbündig */
+    text-align: left;
 }
 
 .differentiators-list li {
@@ -222,15 +226,11 @@ Last Update: 2025-08-07
     margin-bottom: 0.25rem;
 }
 
-/* ÄNDERUNG: "Mission" Block bekommt einen stärkeren Akzent */
+/* Der Mission-Block behält seinen Stil, der jetzt der Standard für alle ist */
 .story-block--mission {
-    background: linear-gradient(135deg, rgba(0, 123, 255, 0.05), rgba(109, 213, 237, 0.07));
-    border-color: rgba(0, 123, 255, 0.1);
+    /* Keine zusätzlichen Stile mehr nötig, da sie im .story-block sind */
 }
 
-.story-block--mission .story-block__title {
-    border-bottom-color: rgba(0, 123, 255, 0.2);
-}
 
 /*
 ==============================================================================
@@ -238,9 +238,10 @@ Last Update: 2025-08-07
 ==============================================================================
 */
 
+/* ÄNDERUNG: Abstand nach oben reduziert */
 .team-section-v2 {
     background: var(--luvex-gray-100);
-    padding: 8rem 0;
+    padding: 5rem 0 8rem; 
     overflow: visible !important;
 }
 
