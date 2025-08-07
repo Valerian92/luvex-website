@@ -1,52 +1,83 @@
 <?php
 /**
- * About Page Template - Redesigned
+ * About Page Template - Redesigned for Parallax & Mission Clarity
  * @package Luvex
- * @since 2.4.0
+ * @since 2.7.0
  */
 
 get_header(); ?>
 
-<!-- About Hero Section with restored animation and new mission statement card -->
+<!-- About Hero Section with restored animation and refined elements -->
 <section class="luvex-hero about-hero">
-    <!-- WIEDERHERGESTELLT: Original-Struktur für die Parallax-Animation -->
     <div class="about-spotlight"></div>
     <div class="about-parallax-container">
         <div class="about-parallax-layer about-layer-grid"></div>
         <div class="about-parallax-layer about-layer-elements">
             <div class="about-elements-container">
-                <!-- Die JS-gesteuerten Elemente bleiben unverändert -->
+                <!-- 
+                    Hintergrund-Elemente direkt im HTML platziert.
+                    'data-depth' steuert die Parallax-Intensität (0.2 = langsam, 1.0 = schnell).
+                -->
+                <div class="about-sci-element about-sci-text" style="top: 18%; left: 12%;" data-depth="0.3">Knowledge</div>
+                <div class="about-sci-element about-sci-text" style="top: 75%; left: 18%;" data-depth="0.8">Independence</div>
+                <div class="about-sci-element about-sci-text" style="top: 50%; left: 25%;" data-depth="0.5">Partnership</div>
+                <div class="about-sci-element about-sci-text" style="top: 45%; left: 88%;" data-depth="0.4">Innovation</div>
+                <div class="about-sci-element about-sci-text" style="top: 25%; left: 75%;" data-depth="0.9">Consulting</div>
+                <div class="about-sci-element about-sci-text" style="top: 12%; left: 65%;" data-depth="0.6">Trust</div>
+                <div class="about-sci-element about-sci-text" style="top: 78%; left: 82%;" data-depth="0.7">Expertise</div>
+                <div class="about-sci-element about-sci-text" style="top: 92%; left: 15%;" data-depth="0.4">Results</div>
+                <div class="about-sci-element about-sci-formula" style="top: 28%; left: 35%;" data-depth="1.0">E=mc²</div>
+                <div class="about-sci-element about-sci-formula" style="top: 8%; left: 42%;" data-depth="0.2">E = hν</div>
+                <div class="about-sci-element about-sci-formula" style="top: 88%; left: 58%;" data-depth="0.9">λ = c/f</div>
+                <div class="about-sci-element about-sci-formula" style="top: 65%; left: 92%;" data-depth="0.3">H₂O</div>
+                <div class="about-sci-element about-sci-formula" style="top: 35%; left: 8%;" data-depth="0.7">E = hc/λ</div>
+                <div class="about-sci-element about-sci-formula" style="top: 62%; left: 68%;" data-depth="0.5">P = I × A</div>
             </div>
         </div>
     </div>
-    <svg id="about-connection-lines"></svg>
 
-    <div class="luvex-hero__container">
+    <div class="about-hero__content">
         <h1 class="luvex-hero__title">
             Pioneering UV Technology with <span class="text-highlight">Integrity</span>
         </h1>
         <h2 class="luvex-hero__subtitle">
             Advancing UV applications through knowledge, independence, and your success.
         </h2>
-        
-        <div class="mission-statement">
-            <div class="mission-statement__icon"><i class="fa-solid fa-bullseye"></i></div>
-            <div class="mission-statement__content">
-                <h3 class="mission-statement__title">Our Mission</h3>
-                <p class="mission-statement__text">
-                    To empower engineers and businesses by providing honest guidance, proven expertise, and innovative tools to solve complex UV technology challenges.
+    </div>
+</section>
+
+<!-- NEU GESTALTETE MISSION SECTION -->
+<section class="section mission-section">
+    <div class="container container--narrow">
+        <div class="mission-layout">
+            <div class="mission-keywords">
+                <div class="mission-keyword">Knowledge</div>
+                <div class="mission-keyword">Independence</div>
+                <div class="mission-keyword">Partnership</div>
+                <div class="mission-keyword">Innovation</div>
+                <div class="mission-keyword">Consulting</div>
+                <div class="mission-keyword">Trust</div>
+                <div class="mission-keyword">Expertise</div>
+                <div class="mission-keyword">Results</div>
+            </div>
+            <div class="mission-statement-v2">
+                <h3 class="section__subtitle">Our Mission</h3>
+                <h2 class="section__title">Empowering Progress Through Honest Expertise</h2>
+                <p>
+                    To empower engineers and businesses by providing honest guidance, proven expertise, and innovative tools to solve complex UV technology challenges. We believe in building partnerships based on trust and delivering results that matter.
                 </p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Our Story Section - V2 -->
+
+<!-- Our Story Section - V2 (unverändert) -->
 <section class="section our-story-v2 section--light-gray">
     <div class="container container--narrow">
         <div class="our-story-v2__layout">
             <div class="our-story-v2__image">
-                <img src="https://placehold.co/600x750/1B2A49/FFFFFF?text=LUVEX+Team\nin+Action" alt="Das LUVEX Team bei der Arbeit an UV-Technologie-Lösungen" />
+                <img src="https://placehold.co/600x750/1B2A49/FFFFFF?text=LUVEX+Team%0Ain+Action" alt="Das LUVEX Team bei der Arbeit an UV-Technologie-Lösungen" />
             </div>
             <div class="our-story-v2__content">
                 <h2 class="section__title--left">Our Story</h2>
@@ -64,9 +95,9 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- Team Section - V2 (Komplettes Redesign) -->
+<!-- Team Section - V2 (unverändert) -->
 <section class="section team-section-v2">
-    <div class="container container--wide"> <!-- Breiterer Container -->
+    <div class="container container--wide">
         <div class="text-center">
             <h2 class="section__title">Meet Your UV Technology Partners</h2>
             <p class="section__subtitle">
@@ -132,7 +163,7 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- Core Values Section - V2 -->
+<!-- Core Values Section - V2 (unverändert) -->
 <section class="section core-values-v2 section--light-gray">
     <div class="container container--narrow">
         <div class="text-center">
@@ -170,7 +201,7 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- CTA Section - V2 (Neues Design) -->
+<!-- CTA Section - V2 (unverändert) -->
 <section class="section cta-section-v2">
     <div class="container container--narrow">
         <div class="cta-v2__content">
