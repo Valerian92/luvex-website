@@ -428,14 +428,12 @@ Last Update: 2025-08-05
 ==============================================================================
 */
 
-/* --- DEFINITIVE FIX v3: Globaler Glanz-Effekt mit robuster Stapelreihenfolge --- */
 .has-shine-effect {
     position: relative;
     /* Diese Regel ist der Schlüssel: Sie beschneidet alles, was über die Grenzen der Karte hinausgeht. */
     overflow: hidden;
 }
 
-/* Der eigentliche Glanz-Effekt. Es wird nur noch ein Pseudo-Element benötigt. */
 .has-shine-effect::before {
     content: '';
     position: absolute;
@@ -464,6 +462,7 @@ Last Update: 2025-08-05
 .has-shine-effect:hover::before {
     left: 100%;
 }
+
 
 /*
 ==============================================================================
