@@ -12,7 +12,13 @@ Last Update: 2025-08-07
 /* ===== 1. HERO SECTION & MISSION STATEMENT ===== */
 /* Original-Stile für die Parallax-Animation bleiben erhalten */
 .about-hero { perspective: 2000px; }
-.about-spotlight, .about-parallax-container, .about-parallax-layer, #about-connection-lines { /* ... bestehende Stile ... */ }
+.about-spotlight { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; transition: background 0.05s ease-out; }
+.about-parallax-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.05s ease-out; z-index: 1; }
+.about-parallax-layer { position: absolute; width: 100%; height: 100%; }
+.about-layer-grid { transform: translateZ(-1000px) scale(5); background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="about-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.12)" stroke-width="1.5"/></pattern></defs><rect width="100%" height="100%" fill="url(%23about-grid)"/></svg>'); opacity: 0.8; animation: about-grid-pulse 4s ease-in-out infinite; }
+.about-layer-elements { transform: translateZ(-300px) scale(2); }
+.about-elements-container { position: relative; width: 100%; height: 100%; }
+#about-connection-lines { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
 
 .about-hero .luvex-hero__container {
     max-width: 900px;

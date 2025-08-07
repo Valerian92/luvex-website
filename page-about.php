@@ -2,13 +2,25 @@
 /**
  * About Page Template - Redesigned
  * @package Luvex
- * @since 2.3.0
+ * @since 2.4.0
  */
 
 get_header(); ?>
 
-<!-- About Hero Section with unchanged animation but new mission statement card -->
+<!-- About Hero Section with restored animation and new mission statement card -->
 <section class="luvex-hero about-hero">
+    <!-- WIEDERHERGESTELLT: Original-Struktur für die Parallax-Animation -->
+    <div class="about-spotlight"></div>
+    <div class="about-parallax-container">
+        <div class="about-parallax-layer about-layer-grid"></div>
+        <div class="about-parallax-layer about-layer-elements">
+            <div class="about-elements-container">
+                <!-- Die JS-gesteuerten Elemente bleiben unverändert -->
+            </div>
+        </div>
+    </div>
+    <svg id="about-connection-lines"></svg>
+
     <div class="luvex-hero__container">
         <h1 class="luvex-hero__title">
             Pioneering UV Technology with <span class="text-highlight">Integrity</span>
@@ -17,11 +29,8 @@ get_header(); ?>
             Advancing UV applications through knowledge, independence, and your success.
         </h2>
         
-        <!-- NEU: Mission Statement als eigene, gut lesbare Karte -->
         <div class="mission-statement">
-            <div class="mission-statement__icon">
-                <i class="fa-solid fa-bullseye"></i>
-            </div>
+            <div class="mission-statement__icon"><i class="fa-solid fa-bullseye"></i></div>
             <div class="mission-statement__content">
                 <h3 class="mission-statement__title">Our Mission</h3>
                 <p class="mission-statement__text">
@@ -37,7 +46,6 @@ get_header(); ?>
     <div class="container container--narrow">
         <div class="our-story-v2__layout">
             <div class="our-story-v2__image">
-                <!-- Bild-Vorschlag: Ein professionelles Bild Ihres Teams oder Labors -->
                 <img src="https://placehold.co/600x750/1B2A49/FFFFFF?text=LUVEX+Team\nin+Action" alt="Das LUVEX Team bei der Arbeit an UV-Technologie-Lösungen" />
             </div>
             <div class="our-story-v2__content">
@@ -58,7 +66,7 @@ get_header(); ?>
 
 <!-- Team Section - V2 (Komplettes Redesign) -->
 <section class="section team-section-v2">
-    <div class="container container--narrow">
+    <div class="container container--wide"> <!-- Breiterer Container -->
         <div class="text-center">
             <h2 class="section__title">Meet Your UV Technology Partners</h2>
             <p class="section__subtitle">
@@ -162,22 +170,24 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- CTA Section (unverändert) -->
-<section class="section about-cta">
+<!-- CTA Section - V2 (Neues Design) -->
+<section class="section cta-section-v2">
     <div class="container container--narrow">
-        <h2 class="about-cta__title">Ready to Optimize Your UV Processes?</h2>
-        <p class="about-cta__description">
-            Whether you're facing specific challenges or looking to improve overall efficiency, our team is here to help with honest, independent expertise.
-        </p>
-        <div class="about-cta__buttons">
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-cta-primary">
-                <span>Schedule a Consultation</span>
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="luvex-cta-secondary">
-                <span>Try Our Free Tools</span>
-                <i class="fa-solid fa-calculator"></i>
-            </a>
+        <div class="cta-v2__content">
+            <h2 class="cta-v2__title">Ready to Optimize Your UV Process?</h2>
+            <p class="cta-v2__description">
+                Whether you're facing specific challenges or looking to improve overall efficiency, our team is here to help with honest, independent expertise.
+            </p>
+            <div class="cta-v2__buttons">
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-cta-primary">
+                    <span>Schedule a Consultation</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="luvex-cta-secondary">
+                    <span>Try Our Free Tools</span>
+                    <i class="fa-solid fa-calculator"></i>
+                </a>
+            </div>
         </div>
     </div>
 </section>

@@ -1,12 +1,12 @@
 /*
 ==============================================================================
-LUVEX THEME v2.2 - UI COMPONENTS
+LUVEX THEME v3.6 - UI COMPONENTS (Shine Effect Definitive Fix)
 ==============================================================================
 
-Description: Central file for all reusable UI components like buttons,
-             cards, forms, CTAs, accordions, timelines, etc.
+Description: Central file for all reusable UI components.
+             - Implemented the definitive, simplified fix for the shine effect.
 Dependencies: _variables.css, _core.css
-Last Update: 2025-08-05
+Last Update: 2025-08-07
 
 ==============================================================================
 */
@@ -21,7 +21,7 @@ Last Update: 2025-08-05
 .btn {
     display: inline-flex;
     align-items: center;
-    justify-content: center; /* Horizontale Zentrierung für Text & Icons */
+    justify-content: center;
     gap: var(--space-xs);
     padding: 12px 24px;
     font-size: var(--text-base);
@@ -32,7 +32,7 @@ Last Update: 2025-08-05
     transition: var(--transition-normal);
     text-decoration: none;
     line-height: 1;
-    text-align: center; /* Fallback */
+    text-align: center;
 }
 
 
@@ -87,7 +87,7 @@ Last Update: 2025-08-05
 .luvex-cta-primary {
     display: inline-flex;
     align-items: center;
-    justify-content: center; /* NEU */
+    justify-content: center;
     gap: var(--space-xs);
     padding: 14px 32px;
     background: var(--luvex-bright-cyan);
@@ -108,7 +108,7 @@ Last Update: 2025-08-05
 .luvex-cta-secondary {
     display: inline-flex;
     align-items: center;
-    justify-content: center; /* NEU */
+    justify-content: center;
     gap: var(--space-xs);
     padding: 14px 32px;
     background: transparent;
@@ -127,7 +127,7 @@ Last Update: 2025-08-05
 
 /* --- 1.4 Scroll-to-Top Button --- */
 #scrollToTopBtn {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     bottom: 30px;
     right: 30px;
@@ -179,6 +179,7 @@ Last Update: 2025-08-05
     text-align: center;
 }
 
+
 .card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-md);
@@ -202,7 +203,7 @@ Last Update: 2025-08-05
     font-size: var(--text-2xl);
     color: var(--color-primary);
     transition: var(--transition-normal);
-    flex-shrink: 0; /* Verhindert, dass das Icon schrumpft */
+    flex-shrink: 0;
 }
 
 .card:hover .card__icon {
@@ -230,13 +231,13 @@ Last Update: 2025-08-05
     text-align: center;
     font-size: var(--text-base);
     color: var(--color-gray);
-    flex-grow: 1; /* Lässt den Inhaltsbereich wachsen */
+    flex-grow: 1;
 }
 
 
 .card .btn {
-    margin-top: var(--space-lg); /* KORREKTUR: Expliziter, großer Abstand zum Inhalt */
-    align-self: center; /* Verhindert, dass der Button die volle Breite einnimmt */
+    margin-top: var(--space-lg);
+    align-self: center;
 }
 
 
@@ -428,6 +429,7 @@ Last Update: 2025-08-05
 ==============================================================================
 */
 
+/* --- DEFINITIVE FIX v5: Globaler Glanz-Effekt (vereinfacht & robust) --- */
 .has-shine-effect {
     position: relative;
     /* Diese Regel ist der Schlüssel: Sie beschneidet den ::before Effekt und verhindert ein "Durchbluten". */
@@ -462,7 +464,6 @@ Last Update: 2025-08-05
 .has-shine-effect:hover::before {
     left: 100%;
 }
-
 
 
 /*
