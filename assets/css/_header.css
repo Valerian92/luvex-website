@@ -6,7 +6,7 @@ LUVEX THEME v2.2 - HEADER (Corrected)
 Description: Styling for the main site header and navigation system.
              Restored horizontal dropdown layout and fixed Astra arrow issue.
 Dependencies: _variables.css, _core.css
-Last Update: 2025-08-05
+Last Update: 2025-08-07
 
 ==============================================================================
 */
@@ -76,7 +76,11 @@ Last Update: 2025-08-05
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 2.5rem;
+    /* --- ÄNDERUNG ---
+       Ich habe den Wert von 2.5rem auf 3.5rem erhöht, um den Abstand zu vergrößern.
+       Sie können diesen Wert nach Belieben anpassen (z.B. 4rem für noch mehr Abstand).
+    */
+    gap: 3.5rem;
 }
 
 .main-navigation li {
