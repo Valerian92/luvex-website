@@ -129,7 +129,7 @@ get_header(); ?>
             <!-- Team Member 3: Claire -->
             <div class="team-card-v2 has-shine-effect">
                 <div class="team-card-v2__photo">
-                    <img src="https://www.luvex.tech/wp-content/uploads/2025/08/claire_athen-1-e1754336086484.jpeg" alt="Claire Chen - Asia-Pacific Liaison & Strategic Partnerships" />
+                    <img src="https://www.luvex.tech/wp-content/uploads/2025/08/Claire_Bewerbung.jpg" alt="Claire Chen - Asia-Pacific Liaison & Strategic Partnerships" />
                 </div>
                 <div class="team-card-v2__content">
                     <h3 class="team-card-v2__name">Claire Chen</h3>
