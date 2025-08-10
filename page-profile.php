@@ -134,6 +134,12 @@ get_header(); ?>
                             <p>Schedule expert session</p>
                         </a>
                         
+                        <a href="https://analyzer.luvex.tech" target="_blank" class="quick-action-card">
+                            <i class="fa-solid fa-microscope"></i>
+                            <h4>UV Strip Analyzer</h4>
+                            <p>Analyze UV dosimeter strips</p>
+                        </a>
+
                         <a href="<?php echo wp_logout_url(home_url()); ?>" class="quick-action-card quick-action-card--secondary">
                             <i class="fa-solid fa-sign-out-alt"></i>
                             <h4>Sign Out</h4>
