@@ -1,14 +1,14 @@
 <?php
 /**
  * Login Page Template
- * 
- * @package Luvex
+ * * @package Luvex
  * @since 2.0.0
  */
 
 get_header(); ?>
 
-<section class="luvex-hero">
+<!-- The modifier class 'luvex-hero--auth' is added here to make the hero smaller -->
+<section class="luvex-hero luvex-hero--auth">
     <div class="luvex-hero__container">
         <h1 class="luvex-hero__title">
             Welcome Back to <span class="text-highlight">LUVEX</span>

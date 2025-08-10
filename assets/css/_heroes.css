@@ -1,12 +1,12 @@
 /*
 ==============================================================================
-LUVEX THEME v2.2 - HERO SECTIONS
+LUVEX THEME v2.3 - HERO SECTIONS
 ==============================================================================
 
 Description: Styling for all Hero components.
-             Refactored for clarity and corrected button hover states.
+             Added a modifier for a more compact profile hero.
 Dependencies: _variables.css, _core.css
-Last Update: 2025-08-05
+Last Update: 2025-08-10
 
 ==============================================================================
 */
@@ -160,13 +160,26 @@ Last Update: 2025-08-05
 /* --- 3.1 Sizing Adjustments --- */
 .booking-hero,
 .contact-hero,
-.auth-hero {
+.luvex-hero--auth { /* Renamed from .auth-hero for consistency */
     min-height: 400px;
 }
 
-.profile-hero {
-    min-height: 350px;
+/* NEW: Modifier for a compact profile hero */
+.luvex-hero--profile {
+    min-height: auto;
+    padding: 6rem 2rem 5rem; /* Reduced padding */
 }
+
+.luvex-hero--profile .luvex-hero__title {
+    font-size: clamp(2.2rem, 4vw, 3rem); /* Smaller title */
+    margin-bottom: 1rem;
+}
+
+.luvex-hero--profile .luvex-hero__description {
+    font-size: var(--text-lg);
+    margin-bottom: 0; /* No bottom margin */
+}
+
 
 /* --- 3.2 Hero Navigation (for specific pages) --- */
 .hero-navigation {
