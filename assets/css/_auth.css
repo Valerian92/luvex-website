@@ -1,11 +1,11 @@
 /*
 ==============================================================================
-LUVEX THEME v2.3 - AUTH & PROFILE SYSTEM
+LUVEX THEME v2.3.1 - AUTH & PROFILE SYSTEM
 ==============================================================================
 
 Description: Styling for Login, Register, and the optimized Profile page.
 Dependencies: _variables.css, _core.css
-Last Update: 2025-08-10
+Last Update: 2025-08-11
 
 */
 
@@ -120,14 +120,23 @@ Last Update: 2025-08-10
     background: var(--luvex-gray-100);
 }
 
-/* --- 2.2 Quick Actions (Top Section) --- */
+/* --- 2.2 Quick Actions (Top Section) - UPDATED --- */
 .profile-quick-actions {
     background: var(--luvex-white);
     border-radius: var(--radius-lg);
     padding: 2rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem; /* Increased spacing */
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--luvex-gray-200);
+}
+
+.quick-actions__title {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--luvex-dark-blue);
+    margin: 0 0 1.5rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--luvex-gray-200);
 }
 
 .quick-actions-grid {

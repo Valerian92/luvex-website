@@ -2,7 +2,7 @@
 /**
  * Profile Page Template (Optimized)
  * * @package Luvex
- * @since 2.3.0
+ * @since 2.3.1
  */
 
 // Redirect if not logged in
@@ -31,8 +31,9 @@ get_header(); ?>
 <section class="profile-dashboard">
     <div class="container container--wide">
 
-        <!-- 3. Quick Actions moved to the top -->
+        <!-- 3. Quick Actions moved to the top and styled as a distinct container -->
         <div class="profile-quick-actions">
+            <h3 class="quick-actions__title">Quick Actions</h3>
             <div class="quick-actions-grid">
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="quick-action-card has-shine-effect">
                     <i class="fa-solid fa-cube"></i>
