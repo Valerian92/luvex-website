@@ -177,6 +177,86 @@ function luvex_enqueue_assets() {
     }
 }
 
+
+// === USER AUTHENTICATION HANDLERS (NEW) ===
+
+add_action('after_setup_theme', 'luvex_add_auth_handlers');
+function luvex_add_auth_handlers() {
+    if (!is_admin()) {
+        add_action('init', 'luvex_handle_login_form');
+        add_action('init', 'luvex_handle_registration_form');
+        add_action('init', 'luvex_handle_profile_update_form');
+    }
+}
+
+/**
+ * Handles the custom login form submission.
+ * Allows login with either username or email address.
+ */
+function luvex_handle_login_form() {
+    if (isset($_POST['luvex_login_submit']) && wp_verify_nonce($_POST['_wpnonce'], 'luvex_login_form')) {
+        
+        $credential = sanitize_text_field($_POST['user_login']);
+        $password = $_POST['user_password'];
+        $remember = isset($_POST['remember_me']);
+        $user = null;
+
+        // Determine if the credential is an email or a username
+        if (is_email($credential)) {
+            $user = get_user_by('email', $credential);
+        } else {
+            $user = get_user_by('login', $credential);
+        }
+
+        // If a user was found, attempt to sign them in using their actual username
+        if ($user) {
+            $creds = array(
+                'user_login'    => $user->user_login,
+                'user_password' => $password,
+                'remember'      => $remember,
+            );
+
+            $signon_user = wp_signon($creds, false);
+
+            if (is_wp_error($signon_user)) {
+                wp_redirect(add_query_arg('error', '1', home_url('/login/')));
+                exit;
+            } else {
+                // Check for a redirect parameter, otherwise go to profile
+                $redirect_url = isset($_GET['redirect']) ? home_url('/' . sanitize_key($_GET['redirect']) . '/') : home_url('/profile/');
+                wp_redirect($redirect_url);
+                exit;
+            }
+        } else {
+            // User not found by email or username
+            wp_redirect(add_query_arg('error', '1', home_url('/login/')));
+            exit;
+        }
+    }
+}
+
+/**
+ * Handles the custom registration form submission.
+ * (Placeholder for your registration logic)
+ */
+function luvex_handle_registration_form() {
+    if (isset($_POST['luvex_register_submit']) && wp_verify_nonce($_POST['_wpnonce'], 'luvex_register_form')) {
+        // Your registration logic would go here.
+        // For now, it does nothing to prevent errors.
+    }
+}
+
+/**
+ * Handles the profile update form submission.
+ * (Placeholder for your profile update logic)
+ */
+function luvex_handle_profile_update_form() {
+     if (isset($_POST['luvex_profile_update_submit']) && wp_verify_nonce($_POST['_wpnonce'], 'luvex_profile_update')) {
+        // Your profile update logic would go here.
+    }
+}
+
+
 // UV-News werden eigener Blog-Typ
 register_post_type('uv_news', [
     'public' => true,

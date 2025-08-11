@@ -2,12 +2,11 @@
 /**
  * Login Page Template
  * * @package Luvex
- * @since 2.0.0
+ * @since 2.1.0
  */
 
 get_header(); ?>
 
-<!-- The modifier class 'luvex-hero--auth' is added here to make the hero smaller -->
 <section class="luvex-hero luvex-hero--auth">
     <div class="luvex-hero__container">
         <h1 class="luvex-hero__title">
@@ -40,9 +39,10 @@ get_header(); ?>
             <form class="luvex-auth-form" method="post" action="">
                 <?php wp_nonce_field('luvex_login_form'); ?>
                 
+                <!-- FIX: Changed type to "text" and updated label to allow username or email -->
                 <div class="floating-label-input floating-label-input--dark">
-                    <input type="email" name="user_email" id="user_email" placeholder=" " required>
-                    <label for="user_email">Email Address</label>
+                    <input type="text" name="user_login" id="user_login" placeholder=" " required>
+                    <label for="user_login">Username or Email</label>
                 </div>
                 
                 <div class="floating-label-input floating-label-input--dark">
@@ -53,9 +53,7 @@ get_header(); ?>
                 <div class="auth-options">
                     <label class="form-checkbox">
                         <input type="checkbox" name="remember_me">
-                        <span class="form-checkbox__indicator">
-                            <i class="fa-solid fa-check"></i>
-                        </span>
+                        <span class="form-checkbox__indicator"></span>
                         <span class="form-checkbox__text">Keep me logged in</span>
                     </label>
                     
