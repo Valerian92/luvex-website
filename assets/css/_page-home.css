@@ -1,9 +1,9 @@
 /*
 ==============================================================================
-LUVEX THEME v3.0 - HOMEPAGE (FINAL POLISH)
+LUVEX THEME v3.1 - HOMEPAGE (FINAL BUTTON HOVER FIX)
 ==============================================================================
-Description: Adjusted shine effect color and centered card content text for
-             better visual harmony.
+Description: Removed specific simulator button hover style to fall back to
+             the default hero button hover style for consistency.
 Last Update: 2025-08-11
 ==============================================================================
 */
@@ -46,7 +46,7 @@ Last Update: 2025-08-11
     align-items: center; 
     gap: 1.5rem; 
     margin-bottom: 1.5rem;
-    justify-content: center; /* Center the header content */
+    justify-content: center;
 }
 
 .knowledge-card .card__icon {
@@ -69,9 +69,8 @@ Last Update: 2025-08-11
     text-align: left; 
 }
 
-/* TEXT ALIGNMENT FIX: Centered the card content text */
 .knowledge-card .card__content {
-    text-align: center; /* CHANGED: from left to center */
+    text-align: center;
     flex-grow: 1;
     margin-bottom: 1.5rem;
 }
@@ -81,7 +80,6 @@ Last Update: 2025-08-11
     align-self: center;
 }
 
-/* SHINE EFFECT FIX: Changed color to be visible on white background */
 .knowledge-card.has-shine-effect::after {
     content: '';
     position: absolute;
@@ -91,7 +89,6 @@ Last Update: 2025-08-11
     height: 200%;
     opacity: 0;
     transform: rotate(20deg);
-    /* CHANGED: Using a semi-transparent blue for better visibility */
     background: linear-gradient(
         to right, 
         rgba(0, 123, 255, 0.05) 0%,
@@ -124,12 +121,8 @@ Last Update: 2025-08-11
 .simulator-cta { 
     margin-top: 2rem; 
 }
-.simulator-cta:hover {
-    background-color: #7B68EE; /* Medium Purple */
-    color: var(--luvex-white);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(123, 104, 238, 0.4);
-}
+/* REMOVED: Specific hover style for .simulator-cta to allow fallback to .luvex-cta-primary:hover */
+
 
 /*
 ==============================================================================
