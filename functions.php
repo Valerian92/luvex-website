@@ -87,7 +87,8 @@ function luvex_enqueue_assets() {
         'luvex-modal' => '/assets/js/modal.js',
         'luvex-mobile-menu' => '/assets/js/mobile-menu.js',
         'luvex-footer-light' => '/assets/js/footer-light-effect.js',
-        'luvex-scroll-to-top' => '/assets/js/scroll-to-top.js'
+        'luvex-scroll-to-top' => '/assets/js/scroll-to-top.js',
+        'luvex-profile-menu' => '/assets/js/profile-menu.js'
     ];
     foreach ($scripts_to_enqueue as $handle => $path) {
         $full_path = get_stylesheet_directory() . $path;
@@ -321,10 +322,6 @@ function luvex_handle_cors_preflight() {
     }
 }
 
-function luvex_enqueue_profile_menu_script() {
-    wp_enqueue_script('luvex-profile-menu', get_template_directory_uri() . '/assets/js/profile-menu.js', array(), '1.0.0', true);
-}
-add_action('wp_enqueue_scripts', 'luvex_enqueue_profile_menu_script');
 
 
 // UV-News werden eigener Blog-Typ
