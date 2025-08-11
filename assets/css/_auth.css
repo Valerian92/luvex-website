@@ -365,12 +365,14 @@ Last Update: 2025-08-11
     border-radius: 0.5rem;
     transition: all 0.2s ease;
     user-select: none;
-    background: var(--color-primary);
-    color: var(--color-white);
+    /* ENTFERNT: background: var(--color-primary); */
+    /* ENTFERNT: color: var(--color-white); */
 }
+
 
 .user-info:hover {
     background: rgba(109, 213, 237, 0.1);
+    border-radius: 0.5rem;
 }
 
 .user-avatar {
