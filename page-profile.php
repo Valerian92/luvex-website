@@ -15,17 +15,31 @@ $current_user = wp_get_current_user();
 
 get_header(); ?>
 
-<!-- 1. Compact Hero Section -->
+<!-- 1. Hero Section with Profile Avatar -->
 <section class="luvex-hero luvex-hero--profile">
     <div class="luvex-hero__container">
-        <h1 class="luvex-hero__title">
-            Welcome, <span class="text-highlight"><?php echo esc_html($current_user->first_name ?: $current_user->display_name); ?></span>
-        </h1>
-        <p class="luvex-hero__description">
-            Manage your account, settings, and community preferences.
-        </p>
+        <div class="luvex-hero__content">
+            <h1 class="luvex-hero__title">
+                Welcome, <span class="text-highlight"><?php echo esc_html($current_user->first_name ?: $current_user->display_name); ?></span>
+            </h1>
+            <p class="luvex-hero__description">
+                Manage your account, settings, and community preferences.
+            </p>
+        </div>
+        <div class="luvex-hero__profile">
+            <div class="profile-avatar-large" onclick="openProfileModal()">
+                <?php 
+                $first_name = $current_user->first_name ?: $current_user->display_name;
+                $last_name = $current_user->last_name ?: '';
+                $initials = strtoupper(substr($first_name, 0, 1) . substr($last_name, 0, 1));
+                echo $initials ?: '?';
+                ?>
+                <div class="avatar-plus">+</div>
+            </div>
+        </div>
     </div>
 </section>
+
 
 <!-- 2. Main Dashboard Section -->
 <section class="profile-dashboard">

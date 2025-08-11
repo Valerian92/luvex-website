@@ -511,3 +511,80 @@ Last Update: 2025-08-11
     height: 16px;
     flex-shrink: 0;
 }
+
+
+/* Profile Avatar in Hero */
+.luvex-hero--profile {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    padding: 2.5rem 2rem;
+}
+
+.luvex-hero--profile .luvex-hero__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.luvex-hero__content {
+    flex: 1;
+}
+
+.luvex-hero__profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+.profile-avatar-large {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--luvex-bright-cyan), #8ee3f5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--luvex-dark-blue);
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    border: 3px solid rgba(109, 213, 237, 0.3);
+}
+
+.profile-avatar-large:hover {
+    transform: scale(1.05);
+}
+
+.avatar-plus {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 24px;
+    height: 24px;
+    background: var(--luvex-bright-cyan);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--luvex-dark-blue);
+    font-size: 0.8rem;
+    font-weight: bold;
+    border: 2px solid var(--luvex-white);
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .luvex-hero--profile .luvex-hero__container {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+}
