@@ -256,6 +256,70 @@ function luvex_handle_profile_update_form() {
     }
 }
 
+// === CORS FIX FÜR UV STRIP ANALYZER ===
+// CORS Headers für UV Strip Analyzer Ajax Requests
+add_action('wp_ajax_luvex_uvstrip_get_token', 'luvex_add_cors_headers', 1);
+add_action('wp_ajax_nopriv_luvex_uvstrip_get_token', 'luvex_add_cors_headers', 1);
+
+function luvex_add_cors_headers() {
+    $allowed_origins = [
+        'https://analyzer.luvex.tech',
+        'https://www.luvex.tech',
+        'https://luvex.tech'
+    ];
+    
+    $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+    
+    error_log('CORS: Origin received: ' . $origin);
+    error_log('CORS: Action: ' . ($_POST['action'] ?? 'no-action'));
+    
+    if (in_array($origin, $allowed_origins)) {
+        header("Access-Control-Allow-Origin: $origin");
+        header('Access-Control-Allow-Credentials: true');
+        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization');
+        
+        error_log('CORS: Headers set for origin: ' . $origin);
+    } else {
+        error_log('CORS: Origin not allowed: ' . $origin);
+    }
+    
+    // Handle OPTIONS preflight request
+    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        error_log('CORS: OPTIONS request handled');
+        http_response_code(200);
+        exit;
+    }
+}
+
+// Zusätzlich: Globaler CORS für admin-ajax.php
+add_action('init', 'luvex_handle_cors_preflight');
+function luvex_handle_cors_preflight() {
+    if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], 'admin-ajax.php') !== false) {
+        
+        $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+        $allowed_origins = [
+            'https://analyzer.luvex.tech',
+            'https://www.luvex.tech', 
+            'https://luvex.tech'
+        ];
+        
+        if (in_array($origin, $allowed_origins)) {
+            header("Access-Control-Allow-Origin: $origin");
+            header('Access-Control-Allow-Credentials: true');
+            header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+            header('Access-Control-Allow-Headers: Content-Type, Authorization');
+        }
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            http_response_code(200);
+            exit;
+        }
+    }
+}
+
+
+
 
 // UV-News werden eigener Blog-Typ
 register_post_type('uv_news', [
