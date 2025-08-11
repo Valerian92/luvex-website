@@ -1,8 +1,9 @@
 /*
 ==============================================================================
-LUVEX THEME v2.9 - HOMEPAGE (FINAL LAYOUT FIXES)
+LUVEX THEME v3.0 - HOMEPAGE (FINAL POLISH)
 ==============================================================================
-Description: Centered the buttons within the knowledge navigator cards.
+Description: Adjusted shine effect color and centered card content text for
+             better visual harmony.
 Last Update: 2025-08-11
 ==============================================================================
 */
@@ -44,7 +45,8 @@ Last Update: 2025-08-11
     display: flex; 
     align-items: center; 
     gap: 1.5rem; 
-    margin-bottom: 1.5rem; 
+    margin-bottom: 1.5rem;
+    justify-content: center; /* Center the header content */
 }
 
 .knowledge-card .card__icon {
@@ -67,18 +69,19 @@ Last Update: 2025-08-11
     text-align: left; 
 }
 
+/* TEXT ALIGNMENT FIX: Centered the card content text */
 .knowledge-card .card__content {
-    text-align: left;
+    text-align: center; /* CHANGED: from left to center */
     flex-grow: 1;
     margin-bottom: 1.5rem;
 }
 
-/* BUTTON FIX: Changed alignment to center */
 .knowledge-card .btn {
     margin-top: auto;
-    align-self: center; /* CHANGED: from flex-start to center */
+    align-self: center;
 }
 
+/* SHINE EFFECT FIX: Changed color to be visible on white background */
 .knowledge-card.has-shine-effect::after {
     content: '';
     position: absolute;
@@ -88,11 +91,12 @@ Last Update: 2025-08-11
     height: 200%;
     opacity: 0;
     transform: rotate(20deg);
+    /* CHANGED: Using a semi-transparent blue for better visibility */
     background: linear-gradient(
         to right, 
-        rgba(255, 255, 255, 0.1) 0%,
-        rgba(255, 255, 255, 0.4) 50%,
-        rgba(255, 255, 255, 0.1) 100%
+        rgba(0, 123, 255, 0.05) 0%,
+        rgba(0, 123, 255, 0.15) 50%,
+        rgba(0, 123, 255, 0.05) 100%
     );
     pointer-events: none;
     transition: left 1.2s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.6s ease;
