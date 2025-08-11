@@ -321,7 +321,10 @@ function luvex_handle_cors_preflight() {
     }
 }
 
-
+function luvex_enqueue_profile_menu_script() {
+    wp_enqueue_script('luvex-profile-menu', get_template_directory_uri() . '/assets/js/profile-menu.js', array(), '1.0.0', true);
+}
+add_action('wp_enqueue_scripts', 'luvex_enqueue_profile_menu_script');
 
 
 // UV-News werden eigener Blog-Typ
