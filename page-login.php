@@ -2,7 +2,7 @@
 /**
  * Login Page Template
  * * @package Luvex
- * @since 2.1.0
+ * @since 2.1.1
  */
 
 get_header(); ?>
@@ -39,7 +39,6 @@ get_header(); ?>
             <form class="luvex-auth-form" method="post" action="">
                 <?php wp_nonce_field('luvex_login_form'); ?>
                 
-                <!-- FIX: Changed type to "text" and updated label to allow username or email -->
                 <div class="floating-label-input floating-label-input--dark">
                     <input type="text" name="user_login" id="user_login" placeholder=" " required>
                     <label for="user_login">Username or Email</label>
@@ -53,7 +52,10 @@ get_header(); ?>
                 <div class="auth-options">
                     <label class="form-checkbox">
                         <input type="checkbox" name="remember_me">
-                        <span class="form-checkbox__indicator"></span>
+                        <span class="form-checkbox__indicator">
+                            <!-- FIX: The checkmark icon was missing here. It's now added back. -->
+                            <i class="fa-solid fa-check"></i>
+                        </span>
                         <span class="form-checkbox__text">Keep me logged in</span>
                     </label>
                     
