@@ -1,9 +1,9 @@
 /*
 ==============================================================================
-LUVEX THEME v2.7 - HOMEPAGE (KNOWLEDGE NAVIGATOR FIX)
+LUVEX THEME v2.8 - HOMEPAGE (LAYOUT & HOVER FIXES)
 ==============================================================================
-Description: Fixed icon alignment, button positioning, and re-added hover/shine effects
-             for the Knowledge Navigator section.
+Description: Fixed Evidence-Card layout to prevent image overlapping text.
+             Changed simulator button hover color to purple.
 Last Update: 2025-08-11
 ==============================================================================
 */
@@ -18,7 +18,7 @@ Last Update: 2025-08-11
     color: var(--luvex-bright-cyan);
 }
 
-/* --- 2. Knowledge Navigator Section (REVISED) --- */
+/* --- 2. Knowledge Navigator Section --- */
 .knowledge-navigator-header { 
     text-align: center; 
     margin-bottom: 4rem; 
@@ -30,11 +30,10 @@ Last Update: 2025-08-11
     font-size: 1.125rem; 
 }
 
-/* Card General Styling */
 .knowledge-card {
     text-align: left;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden; /* CRITICAL: Required for the shine effect to be contained */
+    overflow: hidden;
 }
 
 .knowledge-card:hover {
@@ -49,7 +48,6 @@ Last Update: 2025-08-11
     margin-bottom: 1.5rem; 
 }
 
-/* Icon FIX: Added flex properties to center the icon perfectly */
 .knowledge-card .card__icon {
     margin: 0;
     font-size: 2.2rem;
@@ -58,7 +56,6 @@ Last Update: 2025-08-11
     background: linear-gradient(135deg, #e7f1ff, #f0f8ff);
     color: var(--luvex-vibrant-blue);
     border-radius: 12px;
-    /* ADDED FOR CENTERING */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -71,19 +68,17 @@ Last Update: 2025-08-11
     text-align: left; 
 }
 
-/* Content & Button FIX: Ensure content grows and button is pushed to the bottom */
 .knowledge-card .card__content {
     text-align: left;
-    flex-grow: 1; /* Allows this element to take up available space */
-    margin-bottom: 1.5rem; /* Space between text and button */
+    flex-grow: 1;
+    margin-bottom: 1.5rem;
 }
 
 .knowledge-card .btn {
-    margin-top: auto; /* Pushes the button to the bottom of the card */
-    align-self: flex-start; /* Aligns button to the left, matching the text */
+    margin-top: auto;
+    align-self: flex-start;
 }
 
-/* Shine Effect FIX: Re-implementation of the hover shine effect */
 .knowledge-card.has-shine-effect::after {
     content: '';
     position: absolute;
@@ -121,17 +116,25 @@ Last Update: 2025-08-11
 .simulator-feature i { font-size: 2.5rem; margin-bottom: 1rem; color: var(--luvex-bright-cyan); }
 .simulator-feature h4 { color: var(--luvex-white); margin-bottom: 0.5rem; transition: color 0.3s ease; }
 .simulator-feature p { color: var(--luvex-text-muted-dark); transition: color 0.3s ease; }
-.simulator-cta { margin-top: 2rem; }
-.simulator-cta:hover { color: var(--luvex-vibrant-blue); }
+
+/* BUTTON HOVER FIX: Changed hover state to purple background */
+.simulator-cta { 
+    margin-top: 2rem; 
+}
+.simulator-cta:hover {
+    background-color: #7B68EE; /* Medium Purple */
+    color: var(--luvex-white);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(123, 104, 238, 0.4);
+}
 
 /*
 ==============================================================================
-4. Global UV Expert Community Section (FINALE GLOBE POSITION)
+4. Global UV Expert Community Section
 ==============================================================================
 */
-/* KRITISCH: Section overflow:hidden für oben/unten Beschneidung */
 .homepage-community-section.section {
-    overflow: hidden !important; /* Globe wird oben/unten beschnitten */
+    overflow: hidden !important;
 }
 
 .homepage-community-section {
@@ -166,14 +169,13 @@ Last Update: 2025-08-11
     position: relative;
 }
 
-/* FINALE GLOBE POSITION: Console-getestet und optimiert */
 .homepage-community-globe-wrapper {
     width: 100vw;
     height: 130%;
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-5%, -50%); /* VON -10% AUF -5% für noch weiter rechts */
+    transform: translate(-5%, -50%);
     z-index: 1;
     margin-left: calc(-50vw + 50%);
 }
@@ -184,22 +186,20 @@ Last Update: 2025-08-11
 
 /*
 ==============================================================================
-5. Evidence-Based Expertise Section (OPTIMIERTES LAYOUT)
+5. Evidence-Based Expertise Section (LAYOUT FIX)
 ==============================================================================
 */
-/* WICHTIG: Evidence Section braucht overflow:visible für das überlappende Foto */
 .evidence-section.section {
-    overflow: visible !important; /* Damit das Foto sichtbar bleibt */
+    overflow: visible !important;
 }
 
 .evidence-section {
     padding: 8rem 0 6rem 0;
 }
 
-/* GRID OPTIMIERUNG: Gleichmäßiger Platz für beide Spalten */
 .evidence-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* GEÄNDERT: Von 1fr 0.8fr auf 1fr 1fr für mehr Platz rechts */
+    grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 4rem;
 }
@@ -207,30 +207,25 @@ Last Update: 2025-08-11
 .evidence-title { font-size: clamp(2.2rem, 4vw, 3rem); margin-bottom: 1.5rem; }
 .evidence-description { font-size: var(--text-lg); margin-bottom: 3rem; max-width: 550px; }
 
-/* EVIDENCE VISUAL CONTAINER OPTIMIERT: Weniger Padding für bessere Photo-Position */
 .evidence-visual {
     position: relative;
-    min-height: 350px; /* REDUZIERT: Von 400px auf 350px */
-    padding-top: 0; /* ENTFERNT: War 4rem, jetzt 0 für cleanes Layout */
-    overflow: visible !important; /* KRITISCH: Verhindert Abschneiden des Fotos */
+    min-height: 350px;
+    padding-top: 0;
+    overflow: visible !important;
 }
 
-/* TEAM CARD OPTIMIERT: Bessere Positionierung für Foto */
+/* LAYOUT FIX: Adjusted padding and photo position to prevent overlap */
 .evidence-section .team-member--light {
     background: var(--luvex-gray-100) !important;
     color: var(--luvex-dark-blue) !important;
     box-shadow: var(--shadow-lg) !important;
     border: 1px solid var(--luvex-gray-200) !important;
     padding: 2.5rem !important;
-    padding-top: 3rem !important; /* REDUZIERT: Von 5rem auf 3rem für bessere Photo-Höhe */
-    margin-top: 0 !important; /* ENTFERNT: War 4rem, jetzt 0 für Alignment mit Titel */
+    padding-top: 4.5rem !important; /* CHANGED: Increased top padding for space */
+    margin-top: 0 !important;
     position: relative !important;
     text-align: center !important;
-    
-    /* CRITICAL OVERFLOW FIX: Überschreibt _components.css .team-member { overflow: hidden } */
-    overflow: visible !important; /* WICHTIGSTE ÄNDERUNG */
-    
-    /* SICHTBARKEITS-FIX */
+    overflow: visible !important;
     opacity: 1 !important;
     display: block !important;
     visibility: visible !important;
@@ -238,10 +233,10 @@ Last Update: 2025-08-11
     transform: none !important;
 }
 
-/* PHOTO POSITION OPTIMIERT: Passt zur Titel-Höhe */
+/* LAYOUT FIX: Moved photo up to create space */
 .evidence-section .team-member--light .team-member__photo {
     position: absolute !important;
-    top: -1.5rem !important; /* OPTIMIERT: Von -4rem auf -1.5rem für bessere Titel-Alignment */
+    top: -4rem !important; /* CHANGED: Moved photo up significantly */
     left: 50% !important;
     transform: translateX(-50%) !important;
     width: 120px !important;
@@ -249,10 +244,8 @@ Last Update: 2025-08-11
     border-radius: 50% !important;
     border: 4px solid var(--luvex-white) !important;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
-    overflow: hidden !important; /* Foto selbst kann overflow:hidden haben */
-    z-index: 15 !important; /* Höher als die Card */
-    
-    /* FOTO-SICHTBARKEIT ERZWINGEN */
+    overflow: hidden !important;
+    z-index: 15 !important;
     opacity: 1 !important;
     display: block !important;
     visibility: visible !important;
@@ -316,13 +309,13 @@ Last Update: 2025-08-11
     .homepage-community-globe-wrapper {
         width: 100vw;
         height: 140%;
-        transform: translate(-50%, -50%); /* Zentriert auf Tablets */
+        transform: translate(-50%, -50%);
     }
     .homepage-community-actions {
         justify-content: center;
     }
     .evidence-grid {
-        grid-template-columns: 1fr; /* Mobile: Single Column */
+        grid-template-columns: 1fr;
         gap: 2rem;
     }
     .evidence-visual {
@@ -340,7 +333,7 @@ Last Update: 2025-08-11
     .homepage-community-globe-wrapper {
         width: 100vw;
         height: 150%;
-        transform: translate(-50%, -50%); /* Zentriert auf Mobile */
+        transform: translate(-50%, -50%);
     }
 }
 
