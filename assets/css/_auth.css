@@ -1,10 +1,9 @@
 /*
 ==============================================================================
-LUVEX THEME v2.3.2 - AUTH & PROFILE SYSTEM (COMPLETE)
+LUVEX THEME v2.3.3 - AUTH & PROFILE SYSTEM (COMPLETE)
 ==============================================================================
 
-Description: Complete and combined styles for Login, Register, and the 
-             optimized Profile page, including all recent fixes.
+Description: Constrained content width on profile page to align with header.
 Dependencies: _variables.css, _core.css
 Last Update: 2025-08-11
 
@@ -110,6 +109,11 @@ Last Update: 2025-08-11
 .profile-dashboard {
     padding: var(--space-lg) 0;
     background: var(--luvex-gray-100);
+}
+
+/* NEW: Constrain the main container to align with the header */
+.profile-dashboard > .container {
+    max-width: 1400px; /* Ensures content aligns with the header's visual boundaries */
 }
 
 /* --- 2.2 Quick Actions (Top Section) --- */
