@@ -189,13 +189,17 @@ function luvex_add_auth_handlers() {
     }
 }
 
-/**
- * Handles the custom login form submission.
- * Allows login with either username or email address.
- */
-function luvex_handle_login_form() {
-    if (isset($_POST['luvex_login_submit']) && wp_verify_nonce($_POST['_wpnonce'], 'luvex_login_form')) {
+    /**
+     * Handles the custom login form submission.
+     * Allows login with either username or email address.
+     */
+    function luvex_handle_login_form() {
+        // WICHTIG: Nur für Login-Formular-Submits, nicht für normale Seitenbesuche!
+        if (!isset($_POST['luvex_login_submit']) || !wp_verify_nonce($_POST['_wpnonce'], 'luvex_login_form')) {
+            return; // Früher Exit - kein Redirect für normale Besuche
+        }
         
+        // Ab hier nur bei tatsächlichen Login-Versuchen
         $credential = sanitize_text_field($_POST['user_login']);
         $password = $_POST['user_password'];
         $remember = isset($_POST['remember_me']);
@@ -233,7 +237,6 @@ function luvex_handle_login_form() {
             exit;
         }
     }
-}
 
 /**
  * Handles the custom registration form submission.
