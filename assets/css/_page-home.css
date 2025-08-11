@@ -1,9 +1,8 @@
 /*
 ==============================================================================
-LUVEX THEME v2.8 - HOMEPAGE (LAYOUT & HOVER FIXES)
+LUVEX THEME v2.9 - HOMEPAGE (FINAL LAYOUT FIXES)
 ==============================================================================
-Description: Fixed Evidence-Card layout to prevent image overlapping text.
-             Changed simulator button hover color to purple.
+Description: Centered the buttons within the knowledge navigator cards.
 Last Update: 2025-08-11
 ==============================================================================
 */
@@ -74,9 +73,10 @@ Last Update: 2025-08-11
     margin-bottom: 1.5rem;
 }
 
+/* BUTTON FIX: Changed alignment to center */
 .knowledge-card .btn {
     margin-top: auto;
-    align-self: flex-start;
+    align-self: center; /* CHANGED: from flex-start to center */
 }
 
 .knowledge-card.has-shine-effect::after {
@@ -117,7 +117,6 @@ Last Update: 2025-08-11
 .simulator-feature h4 { color: var(--luvex-white); margin-bottom: 0.5rem; transition: color 0.3s ease; }
 .simulator-feature p { color: var(--luvex-text-muted-dark); transition: color 0.3s ease; }
 
-/* BUTTON HOVER FIX: Changed hover state to purple background */
 .simulator-cta { 
     margin-top: 2rem; 
 }
@@ -214,14 +213,13 @@ Last Update: 2025-08-11
     overflow: visible !important;
 }
 
-/* LAYOUT FIX: Adjusted padding and photo position to prevent overlap */
 .evidence-section .team-member--light {
     background: var(--luvex-gray-100) !important;
     color: var(--luvex-dark-blue) !important;
     box-shadow: var(--shadow-lg) !important;
     border: 1px solid var(--luvex-gray-200) !important;
     padding: 2.5rem !important;
-    padding-top: 4.5rem !important; /* CHANGED: Increased top padding for space */
+    padding-top: 4.5rem !important;
     margin-top: 0 !important;
     position: relative !important;
     text-align: center !important;
@@ -233,10 +231,9 @@ Last Update: 2025-08-11
     transform: none !important;
 }
 
-/* LAYOUT FIX: Moved photo up to create space */
 .evidence-section .team-member--light .team-member__photo {
     position: absolute !important;
-    top: -4rem !important; /* CHANGED: Moved photo up significantly */
+    top: -4rem !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     width: 120px !important;
