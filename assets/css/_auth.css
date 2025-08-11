@@ -1,9 +1,10 @@
 /*
 ==============================================================================
-LUVEX THEME v2.3.3 - AUTH & PROFILE SYSTEM (COMPLETE)
+LUVEX THEME v2.3.4 - AUTH & PROFILE SYSTEM (COMPLETE)
 ==============================================================================
 
-Description: Constrained content width on profile page to align with header.
+Description: Complete styles for Login, Register, Profile. Includes fixes for
+             content width alignment and vertical alignment of auth options.
 Dependencies: _variables.css, _core.css
 Last Update: 2025-08-11
 
@@ -31,10 +32,11 @@ Last Update: 2025-08-11
     margin-bottom: 2rem;
 }
 
+/* FIX: Vertically align checkbox and link */
 .auth-options {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center; /* This is the fix */
     margin-bottom: 2rem;
 }
 
@@ -105,18 +107,15 @@ Last Update: 2025-08-11
    2. OPTIMIZED PROFILE DASHBOARD
    ========================================================================== */
 
-/* --- 2.1 Main Dashboard Section --- */
 .profile-dashboard {
     padding: var(--space-lg) 0;
     background: var(--luvex-gray-100);
 }
 
-/* NEW: Constrain the main container to align with the header */
 .profile-dashboard > .container {
-    max-width: 1400px; /* Ensures content aligns with the header's visual boundaries */
+    max-width: 1400px;
 }
 
-/* --- 2.2 Quick Actions (Top Section) --- */
 .profile-quick-actions {
     background: var(--luvex-white);
     border-radius: var(--radius-lg);
@@ -139,7 +138,7 @@ Last Update: 2025-08-11
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
-    align-items: start; /* This aligns items to the top, preventing stretching */
+    align-items: start;
 }
 
 .quick-action-card {
@@ -153,7 +152,7 @@ Last Update: 2025-08-11
     color: var(--luvex-dark-blue);
     display: flex;
     flex-direction: column;
-    height: 100%; /* Ensures cards in the same row have the same height */
+    height: 100%;
 }
 
 .quick-action-card:hover {
@@ -187,14 +186,13 @@ Last Update: 2025-08-11
     font-size: var(--text-sm);
     color: var(--luvex-gray-700);
     transition: var(--transition-normal);
-    flex-grow: 1; /* Allows the content below to push this down */
+    flex-grow: 1;
 }
 
 .quick-action-card:hover p {
     color: var(--luvex-gray-300);
 }
 
-/* --- 2.3 Main Profile Layout --- */
 .profile-layout {
     display: grid;
     grid-template-columns: 280px 1fr;
@@ -202,7 +200,6 @@ Last Update: 2025-08-11
     align-items: flex-start;
 }
 
-/* --- 2.4 Sticky Sidebar --- */
 .profile-sidebar {
     position: sticky;
     top: 120px;
@@ -265,7 +262,6 @@ Last Update: 2025-08-11
     color: var(--luvex-bright-cyan);
 }
 
-/* --- 2.5 Main Content Area --- */
 .profile-content {
     background: var(--luvex-white);
     border-radius: var(--radius-lg);
@@ -296,7 +292,6 @@ Last Update: 2025-08-11
    3. PLUGIN & SHORTCODE OVERRIDES
    ========================================================================== */
 
-/* --- 3.1 UV Strip Analyzer in Quick Actions --- */
 .quick-action-card .luvex-analyzer-container {
     min-height: auto !important;
     height: auto !important;

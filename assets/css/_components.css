@@ -1,10 +1,10 @@
 /*
 ==============================================================================
-LUVEX THEME v4.3 - UI COMPONENTS (FINAL & COMPLETE)
+LUVEX THEME v4.4 - UI COMPONENTS (FINAL & COMPLETE)
 ==============================================================================
 
-Description: Complete and final version of the components stylesheet,
-             including all sections and the latest accessibility/contrast fixes.
+Description: Final version with fixes for checkbox visibility, button hover,
+             and browser autofill background colors.
 Dependencies: _variables.css, _core.css
 Last Update: 2025-08-11
 
@@ -17,7 +17,6 @@ Last Update: 2025-08-11
 ==============================================================================
 */
 
-/* --- 1.1 Standard Button Base --- */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -46,8 +45,6 @@ Last Update: 2025-08-11
     box-shadow: var(--shadow-md);
     color: var(--color-white);
 }
-
-/* ... other button styles ... */
 
 .luvex-cta-primary {
     display: inline-flex;
@@ -90,15 +87,12 @@ Last Update: 2025-08-11
     position: relative;
 }
 
-/* ... other card styles ... */
-
 /*
 ==============================================================================
 3. FORMS (ACCESSIBILITY & CONTRAST UPDATE)
 ==============================================================================
 */
 
-/* --- 3.1 Floating Label Input System --- */
 .floating-label-input {
     position: relative;
     margin-bottom: 1.5rem;
@@ -148,12 +142,11 @@ Last Update: 2025-08-11
 .floating-label-input input:focus,
 .floating-label-input textarea:focus,
 .floating-label-input select:focus {
-    border-color: var(--luvex-vibrant-blue); /* Changed for better contrast */
+    border-color: var(--luvex-vibrant-blue);
     box-shadow: 0 0 0 1px var(--luvex-vibrant-blue);
     outline: none;
 }
 
-/* === CONTRAST FIX 1: Stronger color for active labels on light backgrounds (Profile Page) === */
 .floating-label-input input:focus ~ label,
 .floating-label-input textarea:focus ~ label,
 .floating-label-input select:focus ~ label,
@@ -162,11 +155,10 @@ Last Update: 2025-08-11
 .floating-label-input select:not([value=""]):not([disabled]) ~ label {
     top: 8px;
     font-size: var(--text-xs);
-    color: var(--luvex-vibrant-blue); /* Was --luvex-bright-cyan, now a strong blue */
+    color: var(--luvex-vibrant-blue);
     font-weight: 500;
 }
 
-/* --- 3.2 Dark Theme Inputs (Login/Register) --- */
 .floating-label-input--dark input,
 .floating-label-input--dark textarea,
 .floating-label-input--dark select {
@@ -179,7 +171,6 @@ Last Update: 2025-08-11
     color: var(--luvex-gray-300);
 }
 
-/* Active state for dark inputs remains bright cyan for good contrast on dark bg */
 .floating-label-input--dark input:focus ~ label,
 .floating-label-input--dark textarea:focus ~ label,
 .floating-label-input--dark select:focus ~ label,
@@ -189,7 +180,15 @@ Last Update: 2025-08-11
     color: var(--luvex-bright-cyan);
 }
 
-/* --- 3.3 Checkbox System --- */
+.floating-label-input--dark input:-webkit-autofill,
+.floating-label-input--dark input:-webkit-autofill:hover, 
+.floating-label-input--dark input:-webkit-autofill:focus, 
+.floating-label-input--dark input:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--luvex-white) !important;
+    -webkit-box-shadow: 0 0 0 30px var(--luvex-dark-blue-medium) inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
 .form-checkbox {
     display: flex;
     align-items: center;
@@ -222,10 +221,9 @@ Last Update: 2025-08-11
 .form-checkbox__text {
     line-height: 1.5;
     font-size: var(--text-sm);
-    color: var(--luvex-gray-900); /* Default text color for light backgrounds */
+    color: var(--luvex-gray-900);
 }
 
-/* Checked State */
 .form-checkbox input:checked ~ .form-checkbox__indicator {
     border-color: var(--luvex-vibrant-blue);
     background: var(--luvex-vibrant-blue);
@@ -244,14 +242,13 @@ Last Update: 2025-08-11
     transform: scale(1);
 }
 
-/* === CONTRAST FIX 2: Checkbox text color on dark backgrounds (Login/Register) === */
 .auth-form-container .form-checkbox__text {
-    color: var(--luvex-gray-300); /* Was inheriting dark color, now light gray */
+    color: var(--luvex-gray-300);
 }
 
 .auth-form-container .form-checkbox__indicator {
     background: transparent;
-    border-color: var(--luvex-gray-500);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 .auth-form-container .form-checkbox input:checked ~ .form-checkbox__indicator {
@@ -263,7 +260,6 @@ Last Update: 2025-08-11
     color: var(--luvex-dark-blue);
 }
 
-/* --- 3.4 Form Layout & Buttons (Renumbered) --- */
 .form-grid {
     display: grid;
     gap: 1rem;
@@ -296,14 +292,15 @@ Last Update: 2025-08-11
 }
 
 .form-submit--accent:hover {
-    background: #5ac7e0;
+    background: var(--luvex-vibrant-blue);
+    color: var(--luvex-white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
 }
 
-/* --- 3.5 Form Responsive Design (Renumbered) --- */
 @media (max-width: 768px) {
     .floating-label-input { margin-bottom: 1rem; }
     .form-grid--2-cols { grid-template-columns: 1fr; }
-    .form-section { padding: 1.5rem; }
     .floating-label-input input,
     .floating-label-input textarea,
     .floating-label-input select {
@@ -319,10 +316,18 @@ Last Update: 2025-08-11
     .floating-label-input select:focus ~ label,
     .floating-label-input input:not(:placeholder-shown) ~ label,
     .floating-label-input textarea:not(:placeholder-shown) ~ label,
-    .floating-label-input select:not([value=""]) ~ label {
+    .floating-label-input select:not([value=""]):not([disabled]) ~ label {
         top: 6px;
     }
 }
+
+/*
+==============================================================================
+4. CTA (CALL TO ACTION) SECTIONS, FAQ, TIMELINE, etc.
+==============================================================================
+*/
+
+/* (All other sections remain unchanged) */
 
 
 /*
