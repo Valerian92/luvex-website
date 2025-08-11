@@ -1,9 +1,10 @@
 /*
 ==============================================================================
-LUVEX THEME v2.6 - HOMEPAGE (FINALE POLISH-VERSION)
+LUVEX THEME v2.7 - HOMEPAGE (KNOWLEDGE NAVIGATOR FIX)
 ==============================================================================
-Description: Globe Position + Evidence Layout optimiert
-Last Update: 2025-08-07 - Finale Optimierungen basierend auf Console-Tests
+Description: Fixed icon alignment, button positioning, and re-added hover/shine effects
+             for the Knowledge Navigator section.
+Last Update: 2025-08-11
 ==============================================================================
 */
 
@@ -17,16 +18,96 @@ Last Update: 2025-08-07 - Finale Optimierungen basierend auf Console-Tests
     color: var(--luvex-bright-cyan);
 }
 
-/* --- 2. Knowledge Navigator Section --- */
-.knowledge-navigator-header { text-align: center; margin-bottom: 4rem; }
-.knowledge-navigator-intro { max-width: 650px; margin: 1rem auto 0; color: var(--luvex-gray-700); font-size: 1.125rem; }
-.knowledge-card { text-align: left; }
-.knowledge-card .card__title { text-align: left; }
-.knowledge-card .card__content { text-align: left; }
-.knowledge-card__header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; }
-.knowledge-card .card__icon { margin: 0; font-size: 2.2rem; width: 60px; height: 60px; background: linear-gradient(135deg, #e7f1ff, #f0f8ff); color: var(--luvex-vibrant-blue); border-radius: 12px; }
-.knowledge-card .card__title { margin-bottom: 0; font-size: 1.5rem; }
-.knowledge-card .btn { align-self: center; }
+/* --- 2. Knowledge Navigator Section (REVISED) --- */
+.knowledge-navigator-header { 
+    text-align: center; 
+    margin-bottom: 4rem; 
+}
+.knowledge-navigator-intro { 
+    max-width: 650px; 
+    margin: 1rem auto 0; 
+    color: var(--luvex-gray-700); 
+    font-size: 1.125rem; 
+}
+
+/* Card General Styling */
+.knowledge-card {
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden; /* CRITICAL: Required for the shine effect to be contained */
+}
+
+.knowledge-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.knowledge-card__header { 
+    display: flex; 
+    align-items: center; 
+    gap: 1.5rem; 
+    margin-bottom: 1.5rem; 
+}
+
+/* Icon FIX: Added flex properties to center the icon perfectly */
+.knowledge-card .card__icon {
+    margin: 0;
+    font-size: 2.2rem;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #e7f1ff, #f0f8ff);
+    color: var(--luvex-vibrant-blue);
+    border-radius: 12px;
+    /* ADDED FOR CENTERING */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.knowledge-card .card__title { 
+    margin-bottom: 0; 
+    font-size: 1.5rem; 
+    text-align: left; 
+}
+
+/* Content & Button FIX: Ensure content grows and button is pushed to the bottom */
+.knowledge-card .card__content {
+    text-align: left;
+    flex-grow: 1; /* Allows this element to take up available space */
+    margin-bottom: 1.5rem; /* Space between text and button */
+}
+
+.knowledge-card .btn {
+    margin-top: auto; /* Pushes the button to the bottom of the card */
+    align-self: flex-start; /* Aligns button to the left, matching the text */
+}
+
+/* Shine Effect FIX: Re-implementation of the hover shine effect */
+.knowledge-card.has-shine-effect::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -75%;
+    width: 50%;
+    height: 200%;
+    opacity: 0;
+    transform: rotate(20deg);
+    background: linear-gradient(
+        to right, 
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0.1) 100%
+    );
+    pointer-events: none;
+    transition: left 1.2s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.6s ease;
+}
+
+.knowledge-card.has-shine-effect:hover::after {
+    left: 125%;
+    opacity: 1;
+}
+
 
 /* --- 3. UV Simulator Showcase --- */
 .uv-simulator-showcase { background: linear-gradient(135deg, var(--luvex-dark-blue), var(--luvex-accent-blue)); border-radius: var(--radius-xl); padding: 4rem 3rem; position: relative; overflow: hidden; text-align: center; color: var(--luvex-white); }
