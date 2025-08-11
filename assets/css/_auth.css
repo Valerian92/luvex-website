@@ -682,3 +682,33 @@ Last Update: 2025-08-11
         margin-left: 0;
     }
 }
+
+
+
+/* Override Hero Container für Profile */
+.luvex-hero--profile .luvex-hero__container {
+    max-width: 1400px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    text-align: left !important;
+}
+
+.luvex-hero--profile .luvex-hero__content {
+    text-align: left !important;
+    flex: 1;
+}
+
+.luvex-hero--profile .luvex-hero__profile {
+    flex-shrink: 0;
+    margin-left: 2rem;
+}
+
+/* Text Links ausrichten */
+.luvex-hero--profile .luvex-hero__title,
+.luvex-hero--profile .luvex-hero__description {
+    text-align: left !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+}
