@@ -18,25 +18,12 @@ get_header(); ?>
 <!-- 1. Hero Section with Profile Avatar -->
 <section class="luvex-hero luvex-hero--profile">
     <div class="luvex-hero__container">
-        <div class="luvex-hero__content">
-            <h1 class="luvex-hero__title">
-                Welcome, <span class="text-highlight"><?php echo esc_html($current_user->first_name ?: $current_user->display_name); ?></span>
-            </h1>
-            <p class="luvex-hero__description">
-                Manage your account, settings, and community preferences.
-            </p>
-        </div>
-        <div class="luvex-hero__profile">
-            <div class="profile-avatar-large" onclick="openProfileModal()">
-                <?php 
-                $first_name = $current_user->first_name ?: $current_user->display_name;
-                $last_name = $current_user->last_name ?: '';
-                $initials = strtoupper(substr($first_name, 0, 1) . substr($last_name, 0, 1));
-                echo $initials ?: '?';
-                ?>
-                <div class="avatar-plus">+</div>
-            </div>
-        </div>
+        <h1 class="luvex-hero__title">
+            Welcome, <span class="text-highlight"><?php echo esc_html($current_user->first_name ?: $current_user->display_name); ?></span>
+        </h1>
+        <p class="luvex-hero__description">
+            Manage your account, settings, and community preferences.
+        </p>
     </div>
 </section>
 
@@ -118,9 +105,20 @@ get_header(); ?>
                 <!-- Profile Info Section -->
                 <div id="profile-info" class="profile-section profile-section--active">
                     <div class="profile-section__header">
+                    <div class="header-content">
                         <h2>Profile Information</h2>
                         <p>Update your personal information and account details.</p>
                     </div>
+                    <div class="header-avatar" data-modal="profilePictureModal">
+                        <?php 
+                        $first_name = $current_user->first_name ?: $current_user->display_name;
+                        $last_name = $current_user->last_name ?: '';
+                        $initials = strtoupper(substr($first_name, 0, 1) . substr($last_name, 0, 1));
+                        echo $initials ?: '?';
+                        ?>
+                        <div class="avatar-plus">+</div>
+                    </div>
+                </div>
                     
                     <form class="luvex-profile-form" method="post" action="">
                         <?php wp_nonce_field('luvex_profile_update'); ?>
@@ -203,5 +201,45 @@ get_header(); ?>
         </div>
     </div>
 </section>
+
+<!-- Profile Picture Modal -->
+<div id="profilePictureModal" class="modal-overlay">
+    <div class="modal-container modal--large">
+        <div class="modal-header">
+            <div class="modal-header__content">
+                <i class="fa-solid fa-user-circle modal-header__icon"></i>
+                <h3 class="modal-header__title">Profilbild</h3>
+            </div>
+            <div class="modal-header__actions">
+                <button class="modal-header__action" data-modal-close>
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="modal-content">
+            <div style="text-align: center; padding: 2rem;">
+                <div class="current-avatar" style="margin-bottom: 2rem;">
+                    <div class="header-avatar" style="width: 150px; height: 150px; font-size: 3rem; margin: 0 auto;">
+                        <?php echo $initials ?: '?'; ?>
+                    </div>
+                </div>
+                <p style="color: #64748b; margin-bottom: 2rem;">Klicken Sie auf "Bild ändern" um ein neues Profilbild hochzuladen.</p>
+            </div>
+        </div>
+        <div class="modal-footer modal-footer--center">
+            <div class="modal-footer__actions">
+                <button class="modal-btn modal-btn--accent">
+                    <i class="fa-solid fa-camera"></i>
+                    Bild ändern
+                </button>
+                <button class="modal-btn modal-btn--secondary" data-modal-close>
+                    Schließen
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <?php get_footer(); ?>
