@@ -223,23 +223,27 @@ get_header(); ?>
                         <?php echo $initials ?: '?'; ?>
                     </div>
                 </div>
-                <p style="color: #64748b; margin-bottom: 2rem;">Klicken Sie auf "Bild ändern" um ein neues Profilbild hochzuladen.</p>
+                  <p style="color: #64748b; margin-bottom: 2rem;">Click "Change Picture" to upload a new profile picture.</p>
+         </div>
+     </div>
+                <div class="modal-footer modal-footer--center">
+                    <div class="modal-footer__actions">
+                        <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
+                        <button class="modal-btn modal-btn--secondary" onclick="document.getElementById('avatarFileInput').click()">
+                            <i class="fa-solid fa-camera"></i>
+                            Change Picture
+                        </button>
+                        <button class="modal-btn modal-btn--accent" id="saveAvatarBtn" style="display: none;">
+                            <i class="fa-solid fa-save"></i>
+                            Save
+                        </button>
+                        <button class="modal-btn modal-btn--secondary" data-modal-close>
+                            Close
+                        </button>
+                    </div>
+                </div>
+                </div>
             </div>
-        </div>
-        <div class="modal-footer modal-footer--center">
-            <div class="modal-footer__actions">
-                <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
-                <button class="modal-btn modal-btn--accent" onclick="document.getElementById('avatarFileInput').click()">
-                    <i class="fa-solid fa-camera"></i>
-                    Bild ändern
-                </button>
-                <button class="modal-btn modal-btn--secondary" data-modal-close>
-                    Schließen
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 

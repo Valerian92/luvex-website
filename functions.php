@@ -96,6 +96,14 @@ function luvex_enqueue_assets() {
         wp_enqueue_script($handle, get_stylesheet_directory_uri() . $path, $dependencies, $version, true);
     }
     
+    // AJAX Localization für Profile Menu
+    if (is_page('profile')) {
+        wp_localize_script('luvex-profile-menu', 'luvex_ajax', array(
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'nonce' => wp_create_nonce('luvex_avatar_upload')
+        ));
+    }
+    
     // Bedingtes Laden der Hero-Animationen und seiten-spezifischer Skripte
     if (is_front_page() || is_home()) {
         $photons_js_path = get_stylesheet_directory() . '/assets/js/hero-photons.js';
@@ -131,13 +139,10 @@ function luvex_enqueue_assets() {
         }
     } 
     elseif ( is_page('contact') ) {
-        // Enqueue new CSS for the contact page
         $contact_css_path = get_stylesheet_directory() . '/assets/css/_page-contact.css';
         if (file_exists($contact_css_path)) {
             wp_enqueue_style('luvex-page-contact', get_stylesheet_directory_uri() . '/assets/css/_page-contact.css', array('luvex-main'), filemtime($contact_css_path));
         }
-
-        // Enqueue new JS for the contact hero animation
         $contact_hero_js_path = get_stylesheet_directory() . '/assets/js/contact-hero-animation.js';
         if (file_exists($contact_hero_js_path)) {
             wp_enqueue_script('luvex-contact-hero', get_stylesheet_directory_uri() . '/assets/js/contact-hero-animation.js', array(), filemtime($contact_hero_js_path), true);
@@ -178,8 +183,69 @@ function luvex_enqueue_assets() {
     }
 }
 
+// === AVATAR UPLOAD SYSTEM ===
 
-// === USER AUTHENTICATION HANDLERS (NEW) ===
+// AJAX handler for avatar upload
+add_action('wp_ajax_luvex_upload_avatar', 'luvex_handle_avatar_upload');
+
+function luvex_handle_avatar_upload() {
+    // Verify nonce
+    if (!wp_verify_nonce($_POST['nonce'], 'luvex_avatar_upload')) {
+        wp_send_json_error('Security check failed');
+    }
+    
+    if (!isset($_FILES['avatar_file'])) {
+        wp_send_json_error('No file uploaded');
+    }
+    
+    $uploaded_file = $_FILES['avatar_file'];
+    
+    // Validate file type
+    $allowed_types = array('image/jpeg', 'image/png', 'image/gif', 'image/webp');
+    if (!in_array($uploaded_file['type'], $allowed_types)) {
+        wp_send_json_error('Invalid file type. Please upload JPG, PNG, GIF or WebP images only.');
+    }
+    
+    // Validate file size (max 5MB)
+    if ($uploaded_file['size'] > 5 * 1024 * 1024) {
+        wp_send_json_error('File too large. Maximum size is 5MB.');
+    }
+    
+    // Handle the upload
+    $upload = wp_handle_upload($uploaded_file, array('test_form' => false));
+    
+    if (isset($upload['error'])) {
+        wp_send_json_error($upload['error']);
+    }
+    
+    // Save to user meta
+    $current_user = wp_get_current_user();
+    update_user_meta($current_user->ID, 'luvex_avatar_url', $upload['url']);
+    
+    wp_send_json_success(array('avatar_url' => $upload['url']));
+}
+
+// Function to get user avatar (fallback to initials)
+function luvex_get_user_avatar($user_id = null) {
+    if (!$user_id) {
+        $user_id = get_current_user_id();
+    }
+    
+    $avatar_url = get_user_meta($user_id, 'luvex_avatar_url', true);
+    
+    if ($avatar_url) {
+        return '<img src="' . esc_url($avatar_url) . '" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">';
+    } else {
+        // Fallback to initials
+        $user = get_userdata($user_id);
+        $first_name = $user->first_name ?: $user->display_name;
+        $last_name = $user->last_name ?: '';
+        $initials = strtoupper(substr($first_name, 0, 1) . substr($last_name, 0, 1));
+        return $initials ?: '?';
+    }
+}
+
+// === USER AUTHENTICATION HANDLERS ===
 
 add_action('after_setup_theme', 'luvex_add_auth_handlers');
 function luvex_add_auth_handlers() {
@@ -190,78 +256,59 @@ function luvex_add_auth_handlers() {
     }
 }
 
-    /**
-     * Handles the custom login form submission.
-     * Allows login with either username or email address.
-     */
-    function luvex_handle_login_form() {
-        // WICHTIG: Nur für Login-Formular-Submits, nicht für normale Seitenbesuche!
-        if (!isset($_POST['luvex_login_submit']) || !wp_verify_nonce($_POST['_wpnonce'], 'luvex_login_form')) {
-            return; // Früher Exit - kein Redirect für normale Besuche
-        }
-        
-        // Ab hier nur bei tatsächlichen Login-Versuchen
-        $credential = sanitize_text_field($_POST['user_login']);
-        $password = $_POST['user_password'];
-        $remember = isset($_POST['remember_me']);
-        $user = null;
+function luvex_handle_login_form() {
+    if (!isset($_POST['luvex_login_submit']) || !wp_verify_nonce($_POST['_wpnonce'], 'luvex_login_form')) {
+        return;
+    }
+    
+    $credential = sanitize_text_field($_POST['user_login']);
+    $password = $_POST['user_password'];
+    $remember = isset($_POST['remember_me']);
+    $user = null;
 
-        // Determine if the credential is an email or a username
-        if (is_email($credential)) {
-            $user = get_user_by('email', $credential);
-        } else {
-            $user = get_user_by('login', $credential);
-        }
-
-        // If a user was found, attempt to sign them in using their actual username
-        if ($user) {
-            $creds = array(
-                'user_login'    => $user->user_login,
-                'user_password' => $password,
-                'remember'      => $remember,
-            );
-
-            $signon_user = wp_signon($creds, false);
-
-            if (is_wp_error($signon_user)) {
-                wp_redirect(add_query_arg('error', '1', home_url('/login/')));
-                exit;
-            } else {
-                // Check for a redirect parameter, otherwise go to profile
-                $redirect_url = isset($_GET['redirect']) ? home_url('/' . sanitize_key($_GET['redirect']) . '/') : home_url('/profile/');
-                wp_redirect($redirect_url);
-                exit;
-            }
-        } else {
-            // User not found by email or username
-            wp_redirect(add_query_arg('error', '1', home_url('/login/')));
-            exit;
-        }
+    if (is_email($credential)) {
+        $user = get_user_by('email', $credential);
+    } else {
+        $user = get_user_by('login', $credential);
     }
 
-/**
- * Handles the custom registration form submission.
- * (Placeholder for your registration logic)
- */
-function luvex_handle_registration_form() {
-    if (isset($_POST['luvex_register_submit']) && wp_verify_nonce($_POST['_wpnonce'], 'luvex_register_form')) {
-        // Your registration logic would go here.
-        // For now, it does nothing to prevent errors.
+    if ($user) {
+        $creds = array(
+            'user_login'    => $user->user_login,
+            'user_password' => $password,
+            'remember'      => $remember,
+        );
+
+        $signon_user = wp_signon($creds, false);
+
+        if (is_wp_error($signon_user)) {
+            wp_redirect(add_query_arg('error', '1', home_url('/login/')));
+            exit;
+        } else {
+            $redirect_url = isset($_GET['redirect']) ? home_url('/' . sanitize_key($_GET['redirect']) . '/') : home_url('/profile/');
+            wp_redirect($redirect_url);
+            exit;
+        }
+    } else {
+        wp_redirect(add_query_arg('error', '1', home_url('/login/')));
+        exit;
     }
 }
 
-/**
- * Handles the profile update form submission.
- * (Placeholder for your profile update logic)
- */
+function luvex_handle_registration_form() {
+    if (isset($_POST['luvex_register_submit']) && wp_verify_nonce($_POST['_wpnonce'], 'luvex_register_form')) {
+        // Registration logic placeholder
+    }
+}
+
 function luvex_handle_profile_update_form() {
      if (isset($_POST['luvex_profile_update_submit']) && wp_verify_nonce($_POST['_wpnonce'], 'luvex_profile_update')) {
-        // Your profile update logic would go here.
+        // Profile update logic placeholder
     }
 }
 
 // === CORS FIX FÜR UV STRIP ANALYZER ===
-// CORS Headers für UV Strip Analyzer Ajax Requests
+
 add_action('wp_ajax_luvex_uvstrip_get_token', 'luvex_add_cors_headers', 1);
 add_action('wp_ajax_nopriv_luvex_uvstrip_get_token', 'luvex_add_cors_headers', 1);
 
@@ -274,33 +321,22 @@ function luvex_add_cors_headers() {
     
     $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
     
-    error_log('CORS: Origin received: ' . $origin);
-    error_log('CORS: Action: ' . ($_POST['action'] ?? 'no-action'));
-    
     if (in_array($origin, $allowed_origins)) {
         header("Access-Control-Allow-Origin: $origin");
         header('Access-Control-Allow-Credentials: true');
         header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
         header('Access-Control-Allow-Headers: Content-Type, Authorization');
-        
-        error_log('CORS: Headers set for origin: ' . $origin);
-    } else {
-        error_log('CORS: Origin not allowed: ' . $origin);
     }
     
-    // Handle OPTIONS preflight request
     if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-        error_log('CORS: OPTIONS request handled');
         http_response_code(200);
         exit;
     }
 }
 
-// Zusätzlich: Globaler CORS für admin-ajax.php
 add_action('init', 'luvex_handle_cors_preflight');
 function luvex_handle_cors_preflight() {
     if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], 'admin-ajax.php') !== false) {
-        
         $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
         $allowed_origins = [
             'https://analyzer.luvex.tech',
@@ -322,9 +358,7 @@ function luvex_handle_cors_preflight() {
     }
 }
 
-
-
-// UV-News werden eigener Blog-Typ
+// UV-News Custom Post Type
 register_post_type('uv_news', [
     'public' => true,
     'show_in_rest' => true,
