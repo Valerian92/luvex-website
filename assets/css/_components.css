@@ -782,3 +782,157 @@ Last Update: 2025-08-12
         align-items: flex-start;
     }
 }
+
+
+
+/*
+==============================================================================
+RESTORED DELETED STYLES
+==============================================================================
+*/
+
+/* Scroll-to-Top Button */
+#scrollToTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    background-color: var(--luvex-vibrant-blue);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+#scrollToTopBtn.visible {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#scrollToTopBtn:hover {
+    background-color: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+}
+
+/* Card Hover Effects */
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary);
+}
+
+/* Card Icon */
+.card__icon {
+    width: 60px;
+    height: 60px;
+    background: var(--color-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-md);
+    font-size: var(--text-2xl);
+    color: var(--color-primary);
+    transition: var(--transition-normal);
+    flex-shrink: 0;
+}
+
+.card:hover .card__icon {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+/* Team Member Card */
+.team-member {
+    background: var(--luvex-dark-blue);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    color: var(--luvex-white);
+    position: relative;
+    overflow: hidden;
+}
+
+.team-member--light {
+    background: var(--luvex-white);
+    color: var(--luvex-dark-blue);
+    border: 1px solid var(--luvex-gray-200);
+}
+
+.team-member__photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid var(--luvex-bright-cyan);
+    flex-shrink: 0;
+}
+
+.team-member__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.team-member__content h3 {
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+}
+
+.team-member__role {
+    color: var(--luvex-bright-cyan);
+    font-weight: 500;
+    margin: 0 0 1rem 0;
+}
+
+.team-member__quote p {
+    font-style: italic;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Shine Effect */
+.has-shine-effect {
+    position: relative;
+    overflow: hidden !important;
+    isolation: isolate;
+}
+
+.has-shine-effect::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(109, 213, 237, 0.1) 40%,
+        rgba(109, 213, 237, 0.15) 50%,
+        rgba(109, 213, 237, 0.1) 60%,
+        transparent 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+}
+
+.has-shine-effect > * {
+    position: relative;
+    z-index: 2;
+}
+
+.has-shine-effect:hover::before {
+    left: 150%;
+    transition: left 0.8s ease-in-out;
+}
