@@ -2,6 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('disinfection-animation-container');
     if (!container) return;
 
+    // Verhindere mehrfache Initialisierung
+    if (container.dataset.initialized) return;
+    container.dataset.initialized = 'true';
+
     const particleCount = 150;
     const particles = [];
     const pulseDuration = 8000; // 8 Sekunden, muss zur CSS-Animation passen

@@ -1,12 +1,12 @@
 /*
 ==============================================================================
-LUVEX THEME v4.4 - UI COMPONENTS (FINAL & COMPLETE)
+LUVEX THEME v4.5 - UI COMPONENTS (HERO FIX)
 ==============================================================================
 
-Description: Final version with fixes for checkbox visibility, button hover,
-             and browser autofill background colors. Added .btn--outline.
+Description: Added global styles for the .luvex-hero component to fix
+             alignment issues across all pages.
 Dependencies: _variables.css, _core.css
-Last Update: 2025-08-11
+Last Update: 2025-08-12
 
 ==============================================================================
 */
@@ -25,7 +25,7 @@ Last Update: 2025-08-11
     padding: 12px 24px;
     font-size: var(--text-base);
     font-weight: 500;
-    border: 2px solid transparent; /* Changed to 2px for consistency with outline */
+    border: 2px solid transparent;
     border-radius: var(--radius-full);
     cursor: pointer;
     transition: var(--transition-normal);
@@ -48,7 +48,6 @@ Last Update: 2025-08-11
     color: var(--color-white);
 }
 
-/* ADDED: Outline Button Style */
 .btn--outline {
     background-color: transparent;
     border: 2px solid var(--luvex-vibrant-blue);
@@ -107,7 +106,69 @@ Last Update: 2025-08-11
 
 /*
 ==============================================================================
-3. FORMS (ACCESSIBILITY & CONTRAST UPDATE)
+3. HERO SECTIONS (GLOBAL FIX)
+==============================================================================
+*/
+
+.luvex-hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh; /* Adjust as needed */
+    padding: var(--space-xl) 0;
+    color: var(--luvex-white);
+    background-color: var(--luvex-dark-blue); /* Fallback color */
+}
+
+.luvex-hero__container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px; /* Adjust for desired content width */
+    padding: 0 var(--space-md);
+}
+
+.luvex-hero__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.luvex-hero__title {
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    color: var(--luvex-white);
+    margin-bottom: var(--space-sm);
+}
+
+.luvex-hero__subtitle {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    color: var(--luvex-gray-300);
+    font-weight: 400;
+    max-width: 800px;
+    margin-bottom: var(--space-md);
+}
+
+.luvex-hero__description {
+    font-size: var(--text-lg);
+    color: var(--luvex-gray-300);
+    max-width: 700px;
+    line-height: 1.7;
+    margin-bottom: var(--space-lg);
+}
+
+.luvex-hero__cta-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+
+/*
+==============================================================================
+4. FORMS (ACCESSIBILITY & CONTRAST UPDATE)
 ==============================================================================
 */
 
@@ -341,20 +402,10 @@ Last Update: 2025-08-11
 
 /*
 ==============================================================================
-4. CTA (CALL TO ACTION) SECTIONS, FAQ, TIMELINE, etc.
+5. CTA (CALL TO ACTION) SECTIONS
 ==============================================================================
 */
 
-/* (All other sections remain unchanged) */
-
-
-/*
-==============================================================================
-4. CTA (CALL TO ACTION) SECTIONS (BUTTON COLOR FIX)
-==============================================================================
-*/
-
-/* --- 4.1 Default CTA Section Styling --- */
 .cta-section {
     text-align: center;
     background: var(--luvex-white);
@@ -383,7 +434,6 @@ Last Update: 2025-08-11
     margin-right: auto;
 }
 
-/* --- 4.2 Dark CTA Section Modifier --- */
 .cta-section--dark {
     background: var(--luvex-dark-blue);
     color: var(--luvex-white);
@@ -397,7 +447,6 @@ Last Update: 2025-08-11
     color: var(--luvex-gray-300);
 }
 
-/* --- 4.3 CTA BUTTONS (VERSCHIEDENE HOVER-FARBEN FIX) --- */
 .cta-section .cta-button {
     display: inline-flex;
     align-items: center;
@@ -413,31 +462,28 @@ Last Update: 2025-08-11
     border: 2px solid var(--luvex-bright-cyan);
 }
 
-/* ERSTER BUTTON: "Get Expert Consultation" */
 .cta-section .cta-button:first-of-type {
     background: var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
 }
 
 .cta-section .cta-button:first-of-type:hover {
-    background: var(--luvex-vibrant-blue); /* NEUE FARBE für ersten Button */
+    background: var(--luvex-vibrant-blue);
     color: var(--luvex-white);
     border-color: var(--luvex-vibrant-blue);
 }
 
-/* ZWEITER BUTTON: "Start Learning" */
 .cta-section .cta-button:last-of-type {
     background: transparent;
     color: var(--luvex-bright-cyan);
 }
 
 .cta-section .cta-button:last-of-type:hover {
-    background: var(--luvex-dark-blue); /* ANDERE FARBE für zweiten Button */
+    background: var(--luvex-dark-blue);
     color: var(--luvex-white);
     border-color: var(--luvex-dark-blue);
 }
 
-/* --- 4.4 CTA Responsive --- */
 @media (max-width: 768px) {
     .cta-section {
         padding: 3rem 1.5rem;
@@ -456,11 +502,10 @@ Last Update: 2025-08-11
 
 /*
 ==============================================================================
-5. FAQ ACCORDION
+6. FAQ ACCORDION
 ==============================================================================
 */
 
-/* --- 5.1 Accordion Container & List --- */
 .faq-accordion {
   width: 100%;
 }
@@ -478,7 +523,6 @@ Last Update: 2025-08-11
   gap: 1rem;
 }
 
-/* --- 5.2 Accordion Item --- */
 .faq-accordion__item {
   background-color: #f8fafc;
   border: 1px solid #e2e8f0;
@@ -490,7 +534,6 @@ Last Update: 2025-08-11
   background-color: #f1f5f9;
 }
 
-/* --- 5.3 Accordion Question (Summary) --- */
 .faq-accordion__question {
   display: flex;
   justify-content: space-between;
@@ -499,14 +542,13 @@ Last Update: 2025-08-11
   font-weight: 600;
   color: var(--luvex-gray-700, #374151);
   cursor: pointer;
-  list-style: none; /* Removes default marker */
+  list-style: none;
 }
 
 .faq-accordion__question::-webkit-details-marker {
-  display: none; /* Removes default arrow in Webkit */
+  display: none;
 }
 
-/* --- 5.4 Accordion Answer (Content) --- */
 .faq-accordion__answer {
   padding: 0 1rem 1rem 1rem;
   color: var(--luvex-gray-600, #4b5563);
@@ -523,7 +565,6 @@ Last Update: 2025-08-11
     margin-top: 0.5rem;
 }
 
-/* --- 5.5 Accordion Chevron Icon & Open State --- */
 .faq-accordion__chevron {
   width: 1.25rem;
   height: 1.25rem;
@@ -533,7 +574,6 @@ Last Update: 2025-08-11
   margin-left: 1rem;
 }
 
-/* Combined open state styles */
 .faq-accordion__item[open] > .faq-accordion__question {
     color: var(--luvex-bright-cyan);
 }
@@ -545,11 +585,10 @@ Last Update: 2025-08-11
 
 /*
 ==============================================================================
-6. TIMELINE
+7. TIMELINE
 ==============================================================================
 */
 
-/* --- 6.1 Vertical Process Flow Timeline --- */
 .process-timeline {
     position: relative;
     max-width: 700px;
@@ -688,7 +727,6 @@ Last Update: 2025-08-11
     color: var(--luvex-bright-cyan);
 }
 
-/* --- 6.2 Timeline Section Container --- */
 .timeline-section {
     padding: var(--space-xl) 0;
     background: var(--luvex-gray-100);
@@ -716,7 +754,6 @@ Last Update: 2025-08-11
     line-height: 1.7;
 }
 
-/* --- 6.3 Timeline Responsive --- */
 @media (max-width: 768px) {
     .process-timeline::before {
         left: 20px;

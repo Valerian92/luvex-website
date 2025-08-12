@@ -90,12 +90,12 @@ get_header(); ?>
                     <h4>Update Photo</h4>
                     <p>Change your profile picture</p>
                 </a>
-                <a href="<?php echo home_url('/uv-simulator'); ?>" target="_blank" class="quick-action-card">
+                <a href="https://simulator.luvex.tech" target="_blank" class="quick-action-card">
                     <i class="fa-solid fa-sun"></i>
                     <h4>UV Simulator</h4>
                     <p>Simulate UV conditions and protection</p>
                 </a>
-                <a href="<?php echo home_url('/uv-analyzer'); ?>" target="_blank" class="quick-action-card">
+                <a href="https://analyzer.luvex.tech" target="_blank" class="quick-action-card">
                     <i class="fa-solid fa-microscope"></i>
                     <h4>Strip Analyzer</h4>
                     <p>Analyze UV dose measurement strips</p>
@@ -547,25 +547,51 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelectorAll('.profile-nav-link');
     const sections = document.querySelectorAll('.profile-section');
     
+    // Function to switch sections
+    function switchToSection(sectionId) {
+        // Remove active states from all nav items and sections
+        navLinks.forEach(l => l.closest('.profile-nav__item').classList.remove('profile-nav__item--active'));
+        sections.forEach(s => s.classList.remove('profile-section--active'));
+        
+        // Add active state to the correct nav item
+        const targetNavLink = document.querySelector(`[data-section="${sectionId}"]`);
+        if (targetNavLink) {
+            targetNavLink.closest('.profile-nav__item').classList.add('profile-nav__item--active');
+        }
+        
+        // Show corresponding section
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.classList.add('profile-section--active');
+        }
+    }
+    
+    // Handle all navigation clicks (both sidebar and quick actions)
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Remove active states
-            navLinks.forEach(l => l.closest('.profile-nav__item').classList.remove('profile-nav__item--active'));
-            sections.forEach(s => s.classList.remove('profile-section--active'));
-            
-            // Add active state to clicked link
-            this.closest('.profile-nav__item').classList.add('profile-nav__item--active');
-            
-            // Show corresponding section
-            const sectionId = this.getAttribute('data-section');
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                targetSection.classList.add('profile-section--active');
+            // Only prevent default if it has data-section (is a navigation link)
+            if (this.getAttribute('data-section')) {
+                e.preventDefault();
+                const sectionId = this.getAttribute('data-section');
+                switchToSection(sectionId);
             }
+            // If no data-section, let it work as normal link (like external links)
         });
     });
+    
+    // Handle URL hash navigation (if someone bookmarks #community-settings)
+    function handleHashNavigation() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash && document.getElementById(hash)) {
+            switchToSection(hash);
+        }
+    }
+    
+    // Check for hash on page load
+    handleHashNavigation();
+    
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashNavigation);
     
     // Bio character counter
     const bioTextarea = document.getElementById('user_bio');
