@@ -712,3 +712,52 @@ Last Update: 2025-08-11
     margin-left: 0 !important;
     margin-right: auto !important;
 }
+
+
+/* Profile Avatar - Größer und auf Trennlinie */
+.luvex-hero--profile {
+    padding: 6rem 0 3rem !important; /* Mehr Abstand zum Header */
+    margin-bottom: 4rem; /* Platz für überlappendes Avatar */
+    position: relative;
+}
+
+.luvex-hero--profile .luvex-hero__profile {
+    position: absolute;
+    bottom: -60px; /* Avatar überlappt zur nächsten Section */
+    right: 2rem;
+    margin-left: 0;
+}
+
+.profile-avatar-large {
+    width: 120px !important; /* Deutlich größer */
+    height: 120px !important;
+    font-size: 2.2rem !important; /* Größere Schrift */
+    border: 4px solid var(--luvex-white) !important; /* Weißer Rand */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important; /* Schatten für Tiefe */
+}
+
+.avatar-plus {
+    width: 32px !important; /* Größerer Plus-Button */
+    height: 32px !important;
+    font-size: 1.1rem !important;
+    border: 3px solid var(--luvex-white) !important;
+    bottom: -4px !important;
+    right: -4px !important;
+}
+
+/* Nächste Section bekommt Padding-Top für das überlappende Avatar */
+.profile-dashboard {
+    padding-top: 5rem !important; /* Platz für das überlappende Avatar */
+}
+
+@media (max-width: 768px) {
+    .luvex-hero--profile .luvex-hero__profile {
+        position: static;
+        margin-top: 2rem;
+        margin-left: 0;
+    }
+    
+    .profile-dashboard {
+        padding-top: 2rem !important;
+    }
+}
