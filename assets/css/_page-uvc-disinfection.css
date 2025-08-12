@@ -371,3 +371,95 @@ PAGE: UV-C DISINFECTION - SCIENCE GALLERY UI STYLES
         display: none; /* Scroll-Hinweis auf Mobilgeräten ausblenden */
     }
 }
+
+
+
+
+/*
+==============================================================================
+LUVEX WEBSITE - OPTIMIERUNGEN (12.08.2025)
+==============================================================================
+*/
+
+/* ---------------------------------------------------------------------------
+1. HERO-BEREICH OPTIMIERUNGEN
+---------------------------------------------------------------------------
+*/
+
+/* --- 1.1 Hero Animation: Farben intensivieren --- */
+/* Partikel werden heller und bekommen einen stärkeren Schein für mehr Präsenz. */
+.pathogen-particle {
+    background-color: var(--luvex-bright-cyan); /* Helleres Cyan als Grundfarbe */
+    opacity: 0.8; /* Etwas höhere Sichtbarkeit */
+    box-shadow: 0 0 12px 2px var(--luvex-bright-cyan); /* Stärkerer Leuchteffekt */
+}
+
+/* Der Puls wird ebenfalls etwas intensiver. */
+.uvc-hero .pulse {
+    background: radial-gradient(circle, rgba(109, 213, 237, 0.4) 0%, transparent 65%);
+}
+
+
+/* --- 1.2 Hero Layout & Typografie --- */
+/* Behebt den Umbruch des Untertitels, indem die maximale Breite erhöht wird. */
+.luvex-hero__subtitle {
+    max-width: 950px; /* Erhöht von 800px, damit der Text in eine Zeile passt */
+}
+
+/* Fügt deutlichen Abstand zwischen Beschreibung und den Navigations-Buttons hinzu. */
+.luvex-hero__description {
+    margin-bottom: var(--space-lg); /* Erhöht von var(--space-md) */
+}
+
+
+/* ---------------------------------------------------------------------------
+2. SCIENCE GALLERY OPTIMIERUNGEN
+---------------------------------------------------------------------------
+*/
+
+/* --- 2.1 Grundlayout der Sektion anpassen --- */
+/* Reduziert die Höhe der Sektion, damit man leichter rein- und rausscrollen kann. */
+.science-section {
+    min-height: 90vh; /* Reduziert von 100vh */
+    padding-top: 5vh; /* Schafft etwas Platz oben */
+    padding-bottom: 5vh; /* Schafft etwas Platz unten */
+    
+    /* DEBUG-STIL: Fügt einen leichten Hintergrund hinzu, um die Grenzen der Sektion zu sehen. */
+    background-color: #f0f7fa; 
+}
+
+/* --- 2.2 DEBUG-STILE für die Container --- */
+/* Macht die beiden Hauptspalten klar erkennbar. */
+
+/* Linke Spalte (für die Canvas-Animation) */
+.science-animation-column {
+    /* DEBUG-STIL: Roter Rand, damit klar ist, wo die Animation hingehört. */
+    border: 2px dashed red;
+    background-color: rgba(255, 0, 0, 0.05); /* Leichter roter Hintergrund */
+}
+.science-animation-container {
+    /* Der dunkelblaue Container innerhalb der Spalte */
+    border: 2px solid var(--luvex-bright-cyan); /* Hebt den Container hervor */
+}
+
+/* Rechte Spalte (für die Text-Schritte) */
+.science-steps-column {
+    /* DEBUG-STIL: Blauer Rand, um den Textbereich zu visualisieren. */
+    border: 2px dashed blue;
+    background-color: rgba(0, 123, 255, 0.05); /* Leichter blauer Hintergrund */
+}
+
+/* --- 2.3 Scroll-Verhalten verbessern --- */
+/* Stellt sicher, dass der Layout-Wrapper nicht die volle Höhe einnimmt,
+   sodass man mit der Maus oben/unten aus dem "Scroll-Fangbereich" kommt. */
+.science-layout-wrapper {
+    height: 80vh; /* Feste Höhe, die kleiner als die Sektion ist */
+    max-height: 700px; /* Maximale Höhe für sehr große Bildschirme */
+    align-items: center;
+}
+
+/* Die Spalten passen sich der Höhe des Wrappers an. */
+.science-animation-column,
+.science-steps-column {
+    height: 100%; /* Füllt die Höhe des Wrappers */
+}

@@ -105,6 +105,24 @@ Last Update: 2025-08-12
 }
 
 
+/* Hero Button Active Effect */
+.hero-button-active:hover {
+    background: linear-gradient(135deg, 
+        var(--luvex-bright-cyan) 0%, 
+        #8a2be2 50%, 
+        var(--luvex-bright-cyan) 100%);
+    background-size: 200% 200%;
+    animation: gradient-shift 2s ease-in-out infinite;
+    box-shadow: 
+        0 8px 25px rgba(109, 213, 237, 0.4),
+        0 0 20px rgba(138, 43, 226, 0.3);
+}
+
+@keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
 
 /*
 ==============================================================================
