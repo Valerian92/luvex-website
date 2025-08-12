@@ -74,14 +74,9 @@
                 $current_user = wp_get_current_user(); ?>
                 <div class="user-section">
                 <div class="user-info" onclick="toggleUserDropdown()">
-                    <div class="user-avatar" id="userAvatar">
-                        <?php 
-                        $first_name = $current_user->first_name ?: $current_user->display_name;
-                        $last_name = $current_user->last_name ?: '';
-                        $initials = strtoupper(substr($first_name, 0, 1) . substr($last_name, 0, 1));
-                        echo $initials ?: '?';
-                        ?>
-                    </div>
+              <div class="user-avatar" id="userAvatar">
+                    <?php echo luvex_get_user_avatar(); ?>
+                </div>
                     <div class="user-details">
                         <p class="user-welcome">Willkommen</p>
                         <p class="user-name"><?php echo esc_html($first_name); ?></p>
@@ -92,7 +87,9 @@
                 <div class="user-dropdown" id="userDropdown">
                     <div class="dropdown-header">
                         <div class="dropdown-user-info">
-                            <div class="dropdown-avatar"><?php echo $initials ?: '?'; ?></div>
+                           <div class="dropdown-avatar" id="dropdownAvatar">
+                                <?php echo luvex_get_user_avatar(); ?>
+                            </div>
                             <div class="dropdown-user-details">
                                 <h4><?php echo esc_html($current_user->display_name); ?></h4>
                                 <p><?php echo esc_html($current_user->user_email); ?></p>

@@ -109,15 +109,10 @@ get_header(); ?>
                         <h2>Profile Information</h2>
                         <p>Update your personal information and account details.</p>
                     </div>
-                    <div class="header-avatar" data-modal="profilePictureModal">
-                        <?php 
-                        $first_name = $current_user->first_name ?: $current_user->display_name;
-                        $last_name = $current_user->last_name ?: '';
-                        $initials = strtoupper(substr($first_name, 0, 1) . substr($last_name, 0, 1));
-                        echo $initials ?: '?';
-                        ?>
-                        <div class="avatar-plus">+</div>
-                    </div>
+               <div class="header-avatar" data-modal="profilePictureModal">
+                    <?php echo luvex_get_user_avatar($current_user->ID); ?>
+                    <div class="avatar-plus">+</div>
+                </div>
                 </div>
                     
                     <form class="luvex-profile-form" method="post" action="">
@@ -220,7 +215,7 @@ get_header(); ?>
             <div style="text-align: center; padding: 2rem;">
                 <div class="current-avatar" style="margin-bottom: 2rem;">
                     <div class="header-avatar" style="width: 150px; height: 150px; font-size: 3rem; margin: 0 auto;">
-                        <?php echo $initials ?: '?'; ?>
+                        <?php echo luvex_get_user_avatar($current_user->ID); ?>
                     </div>
                 </div>
                   <p style="color: #64748b; margin-bottom: 2rem;">Click "Change Picture" to upload a new profile picture.</p>
