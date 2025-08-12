@@ -14,7 +14,8 @@ get_header(); ?>
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
             <h1 class="luvex-hero__title">
-                Precision through <span class="text-highlight">Light</span>. Excellence through Engineering.
+                Precision through <span class="text-highlight">Light</span>.<br>
+                <strong>Excellence through Engineering.</strong>
             </h1>
             <h2 class="luvex-hero__subtitle">
                 Independent UV technology experts advancing global knowledge

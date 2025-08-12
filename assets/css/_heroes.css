@@ -69,10 +69,10 @@ Last Update: 2025-08-11
 
 .luvex-hero__description {
     font-size: var(--text-lg);
-    color: #ced4da;
-    margin: 0 auto 2.5rem auto;
-    line-height: 1.6;
+    color: #f8f9fa; /* Heller für bessere Lesbarkeit */
     max-width: 700px;
+    line-height: 1.7;
+    margin-bottom: var(--space-xl); /* Mehr Abstand zu Buttons */
 }
 
 /*
@@ -85,8 +85,9 @@ Last Update: 2025-08-11
     display: flex;
     flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
     justify-content: center;
-    gap: 1.5rem;
-    margin-top: 2.5rem;
+    gap: 1rem;
+    margin-top: auto;
+    padding-bottom: 2rem;
 }
 
 /* --- 2.1 Primary Hero CTA (Base Style) --- */
