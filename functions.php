@@ -285,6 +285,25 @@ function luvex_handle_login_form() {
             wp_redirect(add_query_arg('error', '1', home_url('/login/')));
             exit;
         } else {
+            // FIXED: Support für externe LUVEX Apps
+            $redirect_param = $_GET['redirect'] ?? '';
+            
+            // Liste der erlaubten externen LUVEX Apps
+            $external_apps = [
+                'analyzer.luvex.tech',
+                'simulator.luvex.tech'
+            ];
+            
+            // Prüfe ob Redirect zu externer LUVEX App
+            foreach ($external_apps as $app) {
+                if (strpos($redirect_param, $app) !== false) {
+                    // Externe App - vollständige URL verwenden
+                    wp_redirect(esc_url_raw($redirect_param));
+                    exit;
+                }
+            }
+            
+            // Standard interne Redirect-Logik
             $redirect_url = isset($_GET['redirect']) ? home_url('/' . sanitize_key($_GET['redirect']) . '/') : home_url('/profile/');
             wp_redirect($redirect_url);
             exit;
