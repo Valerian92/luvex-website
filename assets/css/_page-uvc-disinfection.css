@@ -4,6 +4,81 @@ LUVEX THEME - PAGE: UV-C DISINFECTION (Refactored)
 ==============================================================================
 */
 
+/*
+==============================================================================
+PAGE: UV-C DISINFECTION - HERO ANIMATION STYLES
+==============================================================================
+*/
+
+/* KORREKTUR: Container für die Animation positionieren */
+.uvc-hero .animation-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0; /* Stellt sicher, dass die Animation hinter dem Inhalt liegt */
+}
+
+/* Der zentrale Lichtimpuls */
+.uvc-hero .pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(109, 213, 237, 0.25) 0%, transparent 70%);
+    border-radius: 50%;
+    /* Die Animation 'expand-pulse' wird unten definiert */
+    animation: expand-pulse 8s ease-out infinite;
+}
+
+/* Stil für die einzelnen Partikel */
+.pathogen-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: rgba(109, 213, 237, 0.6);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(109, 213, 237, 0.5);
+    /* Die Animation 'float' wird unten definiert */
+    animation: float 20s ease-in-out infinite;
+    transition: background-color 0.5s ease, transform 0.5s ease;
+}
+
+/* Stil für inaktivierte Partikel */
+.pathogen-particle.inactive {
+    background-color: rgba(73, 80, 87, 0.4); /* Dunkler/Grau */
+    transform: scale(0.8);
+    box-shadow: none;
+}
+
+/* Keyframe-Animation für den Lichtimpuls */
+@keyframes expand-pulse {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.5;
+    }
+    100% {
+        width: 250vmax; /* Groß genug, um immer den ganzen Bildschirm abzudecken */
+        height: 250vmax;
+        opacity: 0;
+    }
+}
+
+/* Keyframe-Animation für das Schweben der Partikel */
+@keyframes float {
+    0% { transform: translateY(0px) translateX(0px); }
+    25% { transform: translateY(-15px) translateX(10px); }
+    50% { transform: translateY(0px) translateX(20px); }
+    75% { transform: translateY(15px) translateX(10px); }
+    100% { transform: translateY(0px) translateX(0px); }
+}
+
+
 /* --- HERO SECTION SPECIFIC --- */
 .uvc-hero {
     min-height: 600px;
