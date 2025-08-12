@@ -282,3 +282,92 @@ LUVEX THEME - PAGE: UV-C DISINFECTION (Refactored)
         min-height: 60vh;
     }
 }
+
+
+/*
+==============================================================================
+PAGE: UV-C DISINFECTION - SCIENCE GALLERY UI STYLES
+==============================================================================
+*/
+
+/* Container für die Indikatoren am unteren Rand der Sektion */
+.gallery-indicators {
+    position: absolute;
+    bottom: 2rem;
+    /* Zentriert sich relativ zur linken Spalte, wir passen das an */
+    left: 75%; /* Positioniert es in der Mitte der rechten Texthälfte */
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.75rem;
+    z-index: 10;
+}
+
+/* Stil für einen einzelnen Indikator-Button */
+.gallery-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--luvex-gray-300);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.gallery-indicator:hover {
+    background-color: var(--luvex-bright-cyan);
+}
+
+.gallery-indicator.active {
+    background-color: var(--luvex-vibrant-blue);
+    transform: scale(1.2);
+}
+
+/* Hinweis zum Scrollen, der im HTML bereits vorhanden ist */
+.scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem; 
+    font-size: var(--text-sm);
+    color: var(--luvex-gray-700);
+    opacity: 0.7;
+    z-index: 10;
+    transition: opacity 0.3s ease;
+}
+
+/* Anpassung an das neue JS: Die Timeline-Hülle erstreckt sich über 100% der Höhe */
+.science-steps::before {
+    content: '';
+    position: absolute;
+    left: -24px;
+    top: 0;
+    bottom: 0; 
+    width: 4px;
+    height: 100%; /* Volle Höhe als "Container" für den Fortschrittsbalken */
+    background: var(--luvex-gray-200);
+    border-radius: 2px;
+}
+
+/* Der eigentliche Fortschrittsbalken, der per JS in der Höhe animiert wird */
+#timeline-progress {
+    position: absolute;
+    top: 0;
+    left: -24px;
+    transform: none; /* Reset der alten Positionierung */
+    width: 4px;
+    height: 0%; /* Startet bei 0% Höhe */
+    background: var(--luvex-bright-cyan);
+    border-radius: 2px;
+    transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Gleiche Dauer wie Text-Slide */
+    z-index: 1;
+}
+
+/* Responsive Anpassung für die Indikatoren auf kleineren Bildschirmen */
+@media (max-width: 992px) {
+    .gallery-indicators {
+        left: 50%; /* Zentriert auf dem ganzen Bildschirm */
+    }
+    .scroll-hint {
+        display: none; /* Scroll-Hinweis auf Mobilgeräten ausblenden */
+    }
+}

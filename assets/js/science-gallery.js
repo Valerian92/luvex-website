@@ -1,172 +1,137 @@
-/**
- * Science Gallery - Interactive Step Navigation
- * Handles horizontal scrolling through UV-C disinfection mechanism steps
- */
-
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Science Gallery: DOM loaded');
+    // Log to confirm the script is initializing.
+    console.log('[Science Gallery] DOM loaded. Initializing script.');
     
+    // --- 1. ELEMENT SELECTION ---
     const scienceSection = document.querySelector('.science-section');
     const stepsContainer = document.querySelector('.science-steps');
     const steps = document.querySelectorAll('.science-step');
     const timelineProgress = document.getElementById('timeline-progress');
     
-    console.log('Science Gallery Elements:', {
-        scienceSection: !!scienceSection,
-        stepsContainer: !!stepsContainer,
-        steps: steps.length,
-        timelineProgress: !!timelineProgress
-    });
-    
-    if (!scienceSection || !steps.length) {
-        console.error('Science Gallery: Required elements not found');
+    // Early exit if critical elements are missing to prevent errors.
+    if (!scienceSection || !stepsContainer || steps.length === 0) {
+        console.error('[Science Gallery] Error: One or more required elements were not found.', {
+            scienceSection: !!scienceSection,
+            stepsContainer: !!stepsContainer,
+            stepsCount: steps.length
+        });
         return;
     }
     
+    // --- 2. STATE VARIABLES ---
     let currentStep = 0;
-    let isInSection = false;
-    let isTransitioning = false;
+    let isTransitioning = false; // Prevents new animations while one is running.
     const totalSteps = steps.length;
     
-    console.log('Science Gallery: Setup with', totalSteps, 'steps');
-    
-    // Create gallery indicators
+    console.log(`[Science Gallery] Setup successful with ${totalSteps} steps.`);
+
+    // --- 3. UI CREATION ---
+
+    // Creates clickable indicator dots at the bottom.
     function createIndicators() {
-        console.log('Science Gallery: Creating indicators');
-        const indicatorsContainer = document.createElement('div');
-        indicatorsContainer.className = 'gallery-indicators';
-        
+        const container = document.createElement('div');
+        container.className = 'gallery-indicators';
+        scienceSection.appendChild(container);
+
         for (let i = 0; i < totalSteps; i++) {
-            const indicator = document.createElement('div');
+            const indicator = document.createElement('button'); // Using <button> is better for accessibility.
             indicator.className = 'gallery-indicator';
+            indicator.setAttribute('aria-label', `Go to step ${i + 1}`);
             if (i === 0) indicator.classList.add('active');
             
             indicator.addEventListener('click', () => {
-                console.log('Science Gallery: Indicator clicked:', i);
                 if (!isTransitioning) {
+                    console.log(`[Science Gallery] Indicator ${i} clicked.`);
                     updateStep(i);
                 }
             });
-            
-            indicatorsContainer.appendChild(indicator);
+            container.appendChild(indicator);
         }
-        
-        scienceSection.appendChild(indicatorsContainer);
-        return indicatorsContainer.querySelectorAll('.gallery-indicator');
+        console.log('[Science Gallery] Indicators created.');
+        return scienceSection.querySelectorAll('.gallery-indicator');
     }
-    
-    // Create scroll hint
-    function createScrollHint() {
-        const scrollHint = document.createElement('div');
-        scrollHint.className = 'scroll-hint';
-        scrollHint.textContent = 'Scroll to navigate';
-        scienceSection.appendChild(scrollHint);
-    }
-    
+
     const indicators = createIndicators();
-    createScrollHint();
     
-    // Update step function
-    function updateStep(stepIndex, smooth = true) {
-        console.log('Science Gallery: updateStep called:', stepIndex);
-        
-        if (isTransitioning) {
-            console.log('Science Gallery: Skipping - transition in progress');
-            return;
+    // --- 4. CORE FUNCTION ---
+    
+    // This function handles all the logic for changing steps.
+    function updateStep(newStepIndex) {
+        // Guard clause: Do nothing if a transition is in progress, the index is invalid, or it's the same step.
+        if (isTransitioning || newStepIndex < 0 || newStepIndex >= totalSteps || newStepIndex === currentStep) {
+            return; 
         }
         
-        const newStep = Math.max(0, Math.min(stepIndex, totalSteps - 1));
-        if (newStep === currentStep) {
-            console.log('Science Gallery: Skipping - same step');
-            return;
-        }
+        console.log(`[Science Gallery] Transitioning from step ${currentStep} to ${newStepIndex}.`);
+        isTransitioning = true; // Lock the state
         
-        console.log('Science Gallery: Transitioning from', currentStep, 'to', newStep);
+        const oldStep = currentStep;
+        currentStep = newStepIndex;
+
+        // 1. Move the text container horizontally.
+        stepsContainer.style.transform = `translateX(-${currentStep * 100}%)`;
+        console.log(`[Science Gallery] CSS transform set to: translateX(-${currentStep * 100}%)`);
         
-        isTransitioning = true;
-        currentStep = newStep;
+        // 2. Update active classes for the text steps.
+        steps[oldStep].classList.remove('is-active');
+        steps[currentStep].classList.add('is-active');
+
+        // 3. Update active classes for the indicators.
+        indicators[oldStep].classList.remove('active');
+        indicators[currentStep].classList.add('active');
         
-        // Move gallery
-        const translateX = -currentStep * 100;
-        stepsContainer.style.transform = `translateX(${translateX}%)`;
-        console.log('Science Gallery: Applied transform:', `translateX(${translateX}%)`);
-        
-        // Update active states
-        steps.forEach((step, index) => {
-            step.classList.toggle('is-active', index === currentStep);
-        });
-        
-        // Update indicators
-        indicators.forEach((indicator, index) => {
-            indicator.classList.toggle('active', index === currentStep);
-        });
-        
-        // Update timeline progress
-        const progressHeight = ((currentStep + 1) / totalSteps) * 60;
+        // 4. Update the timeline progress bar height.
         if (timelineProgress) {
-            timelineProgress.style.height = `${progressHeight}px`;
+            // Calculate progress as a percentage.
+            const progressPercentage = (currentStep / (totalSteps - 1)) * 100;
+            timelineProgress.style.height = `${progressPercentage}%`;
+            console.log(`[Science Gallery] Timeline progress updated to ${progressPercentage.toFixed(2)}%`);
         }
         
-        // Trigger DNA animation update
+        // 5. Notify the canvas animation (if it exists).
+        // This cleanly separates the logic.
         if (window.updateDNAAnimation && typeof window.updateDNAAnimation === 'function') {
-            console.log('Science Gallery: Calling DNA animation update');
-            window.updateDNAAnimation(currentStep + 1);
+            console.log(`[Science Gallery] Calling window.updateDNAAnimation with step index ${currentStep}.`);
+            window.updateDNAAnimation(currentStep);
         } else {
-            console.log('Science Gallery: DNA animation function not found');
+            // This is not an error, just a notification.
+            console.warn('[Science Gallery] Note: window.updateDNAAnimation() function was not found.');
         }
-        
-        // Reset transition lock
+
+        // Release the lock after the CSS transition is complete (600ms).
         setTimeout(() => {
             isTransitioning = false;
-            console.log('Science Gallery: Transition lock released');
+            console.log('[Science Gallery] Transition finished. Ready for next scroll event.');
         }, 600);
     }
-    
-    // Mouse enter/leave detection
-    scienceSection.addEventListener('mouseenter', () => {
-        console.log('Science Gallery: Mouse entered section');
-        isInSection = true;
-        scienceSection.classList.add('mouse-active');
-        document.body.style.overflow = 'hidden';
-    });
-    
-    scienceSection.addEventListener('mouseleave', () => {
-        console.log('Science Gallery: Mouse left section');
-        isInSection = false;
-        scienceSection.classList.remove('mouse-active');
-        document.body.style.overflow = 'auto';
-    });
-    
-    // Wheel event for horizontal scrolling
+
+    // --- 5. EVENT LISTENERS ---
+
     let scrollTimeout;
+    // Listen for the mouse wheel event ONLY on the science section.
     scienceSection.addEventListener('wheel', (e) => {
-        console.log('Science Gallery: Wheel event detected', {
-            isInSection,
-            isTransitioning,
-            deltaY: e.deltaY
-        });
-        
-        if (!isInSection || isTransitioning) return;
-        
+        // Immediately prevent the default browser scroll (page moving up/down).
         e.preventDefault();
-        console.log('Science Gallery: Processing wheel event');
-        
-        // Debounce rapid scroll events
+
+        // If we are already animating, ignore this event.
+        if (isTransitioning) {
+            return;
+        }
+
+        // Debounce the scroll event to avoid firing too rapidly.
         clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(() => {
             if (e.deltaY > 0) {
-                console.log('Science Gallery: Scrolling to next step');
+                // Scrolled down -> next step.
+                console.log('[Science Gallery] Wheel event: Detected scroll DOWN.');
                 updateStep(currentStep + 1);
             } else if (e.deltaY < 0) {
-                console.log('Science Gallery: Scrolling to previous step');
+                // Scrolled up -> previous step.
+                console.log('[Science Gallery] Wheel event: Detected scroll UP.');
                 updateStep(currentStep - 1);
             }
-        }, 50);
-    });
-    
-    // Start with first step active
-    console.log('Science Gallery: Initializing with step 0');
-    updateStep(0, false);
-    
-    console.log('Science Gallery: Setup complete');
+        }, 50); // Wait 50ms for more scroll events before firing.
+    }, { passive: false }); // { passive: false } is crucial for preventDefault() to work reliably.
+
+    console.log('[Science Gallery] Setup complete. Awaiting scroll events on the science section.');
 });
