@@ -60,19 +60,20 @@ $profile_visibility = get_user_meta($current_user->ID, 'profile_visibility', tru
 
 get_header(); ?>
 
-<!-- Hero Section with Avatar -->
+<!-- Hero Section with Wave Animation -->
 <section class="luvex-hero luvex-hero--profile section-pattern-2">
     <div class="luvex-hero__container container--narrow">
         <div class="luvex-hero__content">
             <h1 class="luvex-hero__title">Your Profile</h1>
             <p class="luvex-hero__description">Manage your account settings, community preferences, and connect with the LUVEX community.</p>
         </div>
-        <div class="luvex-hero__profile">
-            <div class="profile-avatar-large" data-modal="avatarModal">
-                <?php echo luvex_get_user_avatar($current_user->ID); ?>
-                <span class="avatar-plus">+</span>
-            </div>
-        </div>
+    </div>
+    
+    <!-- Elegant Wave Animation -->
+    <div class="hero-waves">
+        <div class="wave wave-1"></div>
+        <div class="wave wave-2"></div>
+        <div class="wave wave-3"></div>
     </div>
 </section>
 
@@ -80,29 +81,29 @@ get_header(); ?>
 <section class="profile-dashboard">
     <div class="container">
         
-        <!-- Quick Actions -->
+        <!-- Quick Actions - ORIGINAL ZURÜCK -->
         <div class="profile-quick-actions">
             <h3 class="quick-actions__title">Quick Actions</h3>
             <div class="quick-actions-grid">
-                <a href="#" class="quick-action-card">
+                <a href="#" data-modal="avatarModal" class="quick-action-card">
                     <i class="fa-solid fa-camera"></i>
                     <h4>Update Photo</h4>
                     <p>Change your profile picture</p>
                 </a>
-                <a href="<?php echo home_url('/uv-analyzer'); ?>" class="quick-action-card">
+                <a href="<?php echo home_url('/uv-simulator'); ?>" target="_blank" class="quick-action-card">
                     <i class="fa-solid fa-sun"></i>
-                    <h4>UV Analysis</h4>
-                    <p>Check your UV protection level</p>
+                    <h4>UV Simulator</h4>
+                    <p>Simulate UV conditions and protection</p>
                 </a>
-                <a href="#" class="quick-action-card">
+                <a href="<?php echo home_url('/uv-analyzer'); ?>" target="_blank" class="quick-action-card">
+                    <i class="fa-solid fa-microscope"></i>
+                    <h4>Strip Analyzer</h4>
+                    <p>Analyze UV dose measurement strips</p>
+                </a>
+                <a href="#community-settings" class="quick-action-card profile-nav-link" data-section="community-settings">
                     <i class="fa-solid fa-users"></i>
                     <h4>Community</h4>
-                    <p>Connect with other members</p>
-                </a>
-                <a href="#" class="quick-action-card">
-                    <i class="fa-solid fa-bell"></i>
-                    <h4>Notifications</h4>
-                    <p>Manage your preferences</p>
+                    <p>Manage community preferences</p>
                 </a>
             </div>
         </div>
@@ -125,6 +126,12 @@ get_header(); ?>
                             <a href="#community-settings" class="profile-nav__link profile-nav-link" data-section="community-settings">
                                 <i class="fa-solid fa-users"></i>
                                 Community Settings
+                            </a>
+                        </li>
+                        <li class="profile-nav__item">
+                            <a href="#app-settings" class="profile-nav__link profile-nav-link" data-section="app-settings">
+                                <i class="fa-solid fa-cog"></i>
+                                Application Settings
                             </a>
                         </li>
                         <li class="profile-nav__item">
@@ -308,6 +315,139 @@ get_header(); ?>
                             Update Community Settings
                         </button>
                     </form>
+                </div>
+
+                <!-- Application Settings Section -->
+                <div id="app-settings" class="profile-section">
+                    <div class="profile-section__header">
+                        <div class="header-content">
+                            <h2>Application Settings</h2>
+                            <p>Configure and manage your LUVEX applications and tools.</p>
+                        </div>
+                    </div>
+
+                    <div class="app-settings-grid">
+                        
+                        <!-- UV Simulator Settings -->
+                        <div class="app-settings-card">
+                            <div class="app-settings-card__header">
+                                <div class="app-settings-card__icon">
+                                    <i class="fa-solid fa-sun"></i>
+                                </div>
+                                <div class="app-settings-card__info">
+                                    <h4>UV Simulator</h4>
+                                    <p>Advanced UV condition simulation tool</p>
+                                    <span class="app-settings-card__status app-settings-card__status--active">Active</span>
+                                </div>
+                                <div class="app-settings-card__actions">
+                                    <a href="https://simulator.luvex.tech" target="_blank" class="modal-btn modal-btn--primary">
+                                        <i class="fa-solid fa-external-link-alt"></i>
+                                        Open App
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="app-settings-card__content">
+                                <div class="app-setting-row">
+                                    <span class="app-setting-label">Default Location</span>
+                                    <div class="floating-label-input floating-label-input--compact">
+                                        <select>
+                                            <option value="">Select location...</option>
+                                            <option value="germany">Germany</option>
+                                            <option value="spain">Spain</option>
+                                            <option value="australia">Australia</option>
+                                        </select>
+                                        <label>Location</label>
+                                    </div>
+                                </div>
+                                <div class="app-setting-row">
+                                    <span class="app-setting-label">Simulation Quality</span>
+                                    <div class="floating-label-input floating-label-input--compact">
+                                        <select>
+                                            <option value="standard">Standard</option>
+                                            <option value="high" selected>High Quality</option>
+                                            <option value="ultra">Ultra HD</option>
+                                        </select>
+                                        <label>Quality</label>
+                                    </div>
+                                </div>
+                                <div class="app-setting-row">
+                                    <div class="form-checkbox form-checkbox--compact">
+                                        <input type="checkbox" id="uv_sim_notifications" checked>
+                                        <div class="form-checkbox__indicator">
+                                            <i class="fa-solid fa-check"></i>
+                                        </div>
+                                        <div class="form-checkbox__text">
+                                            Enable real-time UV alerts
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="modal-btn modal-btn--secondary">
+                                    <i class="fa-solid fa-save"></i>
+                                    Save Settings
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Strip Dose Analyzer Settings -->
+                        <div class="app-settings-card">
+                            <div class="app-settings-card__header">
+                                <div class="app-settings-card__icon">
+                                    <i class="fa-solid fa-microscope"></i>
+                                </div>
+                                <div class="app-settings-card__info">
+                                    <h4>Strip Dose Analyzer</h4>
+                                    <p>UV measurement strip analysis tool</p>
+                                    <span class="app-settings-card__status app-settings-card__status--active">Active</span>
+                                </div>
+                                <div class="app-settings-card__actions">
+                                    <a href="https://analyzer.luvex.tech" target="_blank" class="modal-btn modal-btn--primary">
+                                        <i class="fa-solid fa-external-link-alt"></i>
+                                        Open App
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="app-settings-card__content">
+                                <div class="app-setting-row">
+                                    <span class="app-setting-label">Analysis Precision</span>
+                                    <div class="floating-label-input floating-label-input--compact">
+                                        <select>
+                                            <option value="basic">Basic</option>
+                                            <option value="precise" selected>Precise</option>
+                                            <option value="laboratory">Laboratory Grade</option>
+                                        </select>
+                                        <label>Precision Level</label>
+                                    </div>
+                                </div>
+                                <div class="app-setting-row">
+                                    <span class="app-setting-label">Auto-Calibration</span>
+                                    <div class="floating-label-input floating-label-input--compact">
+                                        <select>
+                                            <option value="disabled">Disabled</option>
+                                            <option value="weekly">Weekly</option>
+                                            <option value="daily" selected>Daily</option>
+                                        </select>
+                                        <label>Frequency</label>
+                                    </div>
+                                </div>
+                                <div class="app-setting-row">
+                                    <div class="form-checkbox form-checkbox--compact">
+                                        <input type="checkbox" id="strip_analyzer_history" checked>
+                                        <div class="form-checkbox__indicator">
+                                            <i class="fa-solid fa-check"></i>
+                                        </div>
+                                        <div class="form-checkbox__text">
+                                            Save analysis history
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="modal-btn modal-btn--secondary">
+                                    <i class="fa-solid fa-save"></i>
+                                    Save Settings
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
 
                 <!-- Password & Security Section -->
