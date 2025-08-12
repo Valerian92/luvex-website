@@ -377,89 +377,91 @@ PAGE: UV-C DISINFECTION - SCIENCE GALLERY UI STYLES
 
 /*
 ==============================================================================
-LUVEX WEBSITE - OPTIMIERUNGEN (12.08.2025)
+LUVEX WEBSITE - OPTIMIERUNGEN (12.08.2025) - Revision 2
 ==============================================================================
 */
 
 /* ---------------------------------------------------------------------------
-1. HERO-BEREICH OPTIMIERUNGEN
+1. HERO-BEREICH OPTIMIERUNGEN (Revision 2)
 ---------------------------------------------------------------------------
 */
 
-/* --- 1.1 Hero Animation: Farben intensivieren --- */
-/* Partikel werden heller und bekommen einen stärkeren Schein für mehr Präsenz. */
+/* --- 1.1 Hero Animation: Farben intensivieren (unverändert) --- */
 .pathogen-particle {
-    background-color: var(--luvex-bright-cyan); /* Helleres Cyan als Grundfarbe */
-    opacity: 0.8; /* Etwas höhere Sichtbarkeit */
-    box-shadow: 0 0 12px 2px var(--luvex-bright-cyan); /* Stärkerer Leuchteffekt */
+    background-color: var(--luvex-bright-cyan);
+    opacity: 0.8;
+    box-shadow: 0 0 12px 2px var(--luvex-bright-cyan);
 }
-
-/* Der Puls wird ebenfalls etwas intensiver. */
 .uvc-hero .pulse {
     background: radial-gradient(circle, rgba(109, 213, 237, 0.4) 0%, transparent 65%);
 }
 
-
-/* --- 1.2 Hero Layout & Typografie --- */
-/* Behebt den Umbruch des Untertitels, indem die maximale Breite erhöht wird. */
+/* --- 1.2 Hero Layout & Typografie (Revision 2) --- */
+/* Erhöht die vertikalen Abstände zwischen den Textelementen. */
+.luvex-hero__title {
+    margin-bottom: var(--space-sm); /* NEU: Abstand nach dem Titel */
+}
 .luvex-hero__subtitle {
-    max-width: 950px; /* Erhöht von 800px, damit der Text in eine Zeile passt */
+    margin-bottom: var(--space-md); /* NEU: Größerer Abstand nach dem Untertitel */
 }
 
-/* Fügt deutlichen Abstand zwischen Beschreibung und den Navigations-Buttons hinzu. */
+/* Verhindert den Zeilenumbruch und schafft massiv Platz zu den Buttons. */
 .luvex-hero__description {
-    margin-bottom: var(--space-lg); /* Erhöht von var(--space-md) */
+    max-width: 950px; /* Erhöht, um Umbruch zu verhindern */
+    margin-bottom: var(--space-xl); /* Erhöht auf den größten Abstandswert */
 }
 
 
 /* ---------------------------------------------------------------------------
-2. SCIENCE GALLERY OPTIMIERUNGEN
+2. SCIENCE GALLERY OPTIMIERUNGEN (Revision 2)
 ---------------------------------------------------------------------------
 */
 
-/* --- 2.1 Grundlayout der Sektion anpassen --- */
-/* Reduziert die Höhe der Sektion, damit man leichter rein- und rausscrollen kann. */
+/* --- 2.1 Grundlayout der Sektion anpassen (Revision 2) --- */
+/* Macht die Sektion deutlich flacher, um das "Gefangen sein" zu verhindern. */
 .science-section {
-    min-height: 90vh; /* Reduziert von 100vh */
-    padding-top: 5vh; /* Schafft etwas Platz oben */
-    padding-bottom: 5vh; /* Schafft etwas Platz unten */
+    min-height: 85vh; /* Reduziert auf 85% der Bildschirmhöhe */
+    padding-top: 2.5vh; /* Kleiner Puffer oben */
+    padding-bottom: 2.5vh; /* Kleiner Puffer unten */
+    display: flex; /* Stellt vertikale Zentrierung sicher */
+    align-items: center;
     
-    /* DEBUG-STIL: Fügt einen leichten Hintergrund hinzu, um die Grenzen der Sektion zu sehen. */
+    /* DEBUG-STIL (unverändert) */
     background-color: #f0f7fa; 
 }
 
-/* --- 2.2 DEBUG-STILE für die Container --- */
-/* Macht die beiden Hauptspalten klar erkennbar. */
-
-/* Linke Spalte (für die Canvas-Animation) */
-.science-animation-column {
-    /* DEBUG-STIL: Roter Rand, damit klar ist, wo die Animation hingehört. */
-    border: 2px dashed red;
-    background-color: rgba(255, 0, 0, 0.05); /* Leichter roter Hintergrund */
-}
-.science-animation-container {
-    /* Der dunkelblaue Container innerhalb der Spalte */
-    border: 2px solid var(--luvex-bright-cyan); /* Hebt den Container hervor */
-}
-
-/* Rechte Spalte (für die Text-Schritte) */
-.science-steps-column {
-    /* DEBUG-STIL: Blauer Rand, um den Textbereich zu visualisieren. */
-    border: 2px dashed blue;
-    background-color: rgba(0, 123, 255, 0.05); /* Leichter blauer Hintergrund */
-}
-
-/* --- 2.3 Scroll-Verhalten verbessern --- */
-/* Stellt sicher, dass der Layout-Wrapper nicht die volle Höhe einnimmt,
-   sodass man mit der Maus oben/unten aus dem "Scroll-Fangbereich" kommt. */
+/* --- 2.2 Layout-Wrapper und Spalten anpassen (Revision 2) --- */
+/* Stellt das Layout auf eine breite Animations-Spalte (links) und eine
+   schmale Text-Spalte (rechts) um. */
 .science-layout-wrapper {
+    grid-template-columns: 2fr 1fr; /* NEU: Verhältnis 2:1 */
+    gap: 2rem; /* NEU: Reduzierter Abstand zwischen den Spalten */
     height: 80vh; /* Feste Höhe, die kleiner als die Sektion ist */
-    max-height: 700px; /* Maximale Höhe für sehr große Bildschirme */
+    max-height: 650px; /* Maximale Höhe für sehr große Bildschirme */
     align-items: center;
 }
 
-/* Die Spalten passen sich der Höhe des Wrappers an. */
+/* --- 2.3 DEBUG-STILE für die Container (unverändert) --- */
+.science-animation-column {
+    border: 2px dashed red;
+    background-color: rgba(255, 0, 0, 0.05);
+}
+.science-animation-container {
+    border: 2px solid var(--luvex-bright-cyan);
+}
+.science-steps-column {
+    border: 2px dashed blue;
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+/* --- 2.4 UI-Elemente an neues Layout anpassen (Revision 2) --- */
+/* Positioniert die Indikatoren mittig unter der neuen, schmaleren Text-Spalte. */
+.gallery-indicators {
+    left: 83.33%; /* Zentriert im rechten Drittel des Layouts (2/3 + 1/6) */
+}
+
+/* Die Spalten passen sich der Höhe des Wrappers an (unverändert) */
 .science-animation-column,
 .science-steps-column {
-    height: 100%; /* Füllt die Höhe des Wrappers */
+    height: 100%;
 }
