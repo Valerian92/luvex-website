@@ -84,6 +84,28 @@ Last Update: 2025-08-12
     color: var(--luvex-dark-blue);
 }
 
+.luvex-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    padding: 14px 32px;
+    background: transparent;
+    color: var(--luvex-bright-cyan);
+    border: 2px solid var(--luvex-bright-cyan);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-normal);
+}
+
+.luvex-cta-secondary:hover {
+    background: rgba(109, 213, 237, 0.1);
+    color: var(--luvex-bright-cyan);
+}
+
+
+
 /*
 ==============================================================================
 2. CARDS
@@ -936,3 +958,6 @@ RESTORED DELETED STYLES
     left: 150%;
     transition: left 0.8s ease-in-out;
 }
+
+
+

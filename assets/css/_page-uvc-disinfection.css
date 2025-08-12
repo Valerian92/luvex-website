@@ -1,11 +1,5 @@
 /*
 ==============================================================================
-LUVEX THEME - PAGE: UV-C DISINFECTION (Refactored)
-==============================================================================
-*/
-
-/*
-==============================================================================
 PAGE: UV-C DISINFECTION - HERO ANIMATION STYLES
 ==============================================================================
 */
@@ -78,6 +72,11 @@ PAGE: UV-C DISINFECTION - HERO ANIMATION STYLES
     100% { transform: translateY(0px) translateX(0px); }
 }
 
+/*
+==============================================================================
+LUVEX THEME - PAGE: UV-C DISINFECTION (Refactored)
+==============================================================================
+*/
 
 /* --- HERO SECTION SPECIFIC --- */
 .uvc-hero {
@@ -85,9 +84,10 @@ PAGE: UV-C DISINFECTION - HERO ANIMATION STYLES
 }
 
 /* KORREKTUR: Stellt sicher, dass die Animation über dem Grid-Hintergrund liegt */
-.uvc-hero .animation-background {
+/* Wurde oben durch spezifischere Regel ersetzt. Kann hier entfernt oder belassen werden. */
+/* .uvc-hero .animation-background {
     z-index: 1; 
-}
+} */
 
 /* --- HOW IT WORKS SECTION (Gallery Style) --- */
 :root {
