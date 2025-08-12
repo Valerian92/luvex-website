@@ -28,7 +28,7 @@ get_header(); ?>
                     <i class="fas fa-atom"></i>
                     <span>Explore UV Science</span>
                 </a>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="luvex-hero__cta luvex-cta-primary">
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="luvex-hero__cta luvex-cta-primary hero-button-active">
                     <i class="fas fa-cube"></i>
                     <span>Launch UV Simulator</span>
                 </a>
@@ -82,7 +82,6 @@ get_header(); ?>
             <div class="simulator-content">
                 <h3>3D UV System Designer</h3>
                 <p class="simulator-description">Professional-grade simulation tools for UV system optimization and validation.</p>
-                <!-- KORREKTUR: Fehlende 3 Features wieder hinzugefügt -->
                 <div class="simulator-features">
                     <div class="simulator-feature"><i class="fas fa-shield-virus"></i><h4>UV Disinfection</h4><p>Pathogen inactivation modeling</p></div>
                     <div class="simulator-feature"><i class="fas fa-layer-group"></i><h4>Substrate Curing</h4><p>UV polymerization simulation</p></div>
@@ -91,7 +90,8 @@ get_header(); ?>
                     <div class="simulator-feature"><i class="fas fa-chart-line"></i><h4>Precise Distribution</h4><p>Exact intensity mapping</p></div>
                     <div class="simulator-feature"><i class="fas fa-mouse-pointer"></i><h4>Intuitive Control</h4><p>User-friendly interface</p></div>
                 </div>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="luvex-cta-primary simulator-cta"><i class="fas fa-play-circle"></i><span>Launch Interactive Simulator</span></a>
+                <!-- CHANGED: Added the 'hero-button-active' class to enable the animation -->
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="luvex-cta-primary simulator-cta hero-button-active"><i class="fas fa-play-circle"></i><span>Launch Interactive Simulator</span></a>
             </div>
         </div>
     </div>
@@ -124,7 +124,6 @@ get_header(); ?>
                  <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="btn btn--primary" style="margin-top: 2rem;">Our Scientific Approach</a>
             </div>
             <div class="evidence-visual">
-                <!-- KORREKTUR: Modifier-Klasse für hellen Hintergrund hinzugefügt -->
                 <div class="team-member team-member--light">
                     <div class="team-member__photo"><img src="https://www.luvex.tech/wp-content/uploads/2025/07/Bewerbungsbild_Valerian-Huber.jpg" alt="Photo of Valerian Huber"></div>
                     <div class="team-member__content"><h3>Valerian Huber</h3><p class="team-member__role">Founder & UV Technology Expert</p></div>

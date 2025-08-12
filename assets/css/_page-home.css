@@ -1,10 +1,9 @@
 /*
 ==============================================================================
-LUVEX THEME v3.1 - HOMEPAGE (FINAL BUTTON HOVER FIX)
+LUVEX THEME v3.3 - HOMEPAGE (FINAL ANIMATION FIX)
 ==============================================================================
-Description: Removed specific simulator button hover style to fall back to
-             the default hero button hover style for consistency.
-Last Update: 2025-08-11
+Description: Removed conflicting hover style to allow animation to work.
+Last Update: 2025-08-12
 ==============================================================================
 */
 
@@ -121,7 +120,8 @@ Last Update: 2025-08-11
 .simulator-cta { 
     margin-top: 2rem; 
 }
-/* REMOVED: Specific hover style for .simulator-cta to allow fallback to .luvex-cta-primary:hover */
+
+/* REMOVED: The conflicting hover rule was here. It's now gone to let the animation play. */
 
 
 /*
@@ -334,3 +334,4 @@ Last Update: 2025-08-11
 @media (max-width: 480px) {
     .simulator-features { grid-template-columns: 1fr; }
 }
+
