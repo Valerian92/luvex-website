@@ -228,7 +228,8 @@ get_header(); ?>
         </div>
         <div class="modal-footer modal-footer--center">
             <div class="modal-footer__actions">
-                <button class="modal-btn modal-btn--accent">
+                <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
+                <button class="modal-btn modal-btn--accent" onclick="document.getElementById('avatarFileInput').click()">
                     <i class="fa-solid fa-camera"></i>
                     Bild ändern
                 </button>
