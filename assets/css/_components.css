@@ -152,8 +152,8 @@ Last Update: 2025-08-14
     background: var(--luvex-dark-blue);
     position: relative;
     overflow: hidden;
-    padding: var(--space-xl) 2rem;
-    min-height: 80vh;
+    padding: var(--space-xl) 2rem var(--space-md) 2rem; /* Weniger Bottom-Padding */
+    min-height: 60vh; /* Reduzierte Mindesthöhe */
     display: flex;
     align-items: stretch;
     justify-content: center;
@@ -184,10 +184,11 @@ Last Update: 2025-08-14
     padding: 0 var(--space-md);
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Maximaler Freiraum zwischen Text und Buttons */
+    justify-content: space-between;
     align-items: center;
-    min-height: 60vh;
+    min-height: 40vh; /* Reduzierte Mindesthöhe */
 }
+
 
 /* --- 3.4 Text-Block (oben zentriert) - UPDATED --- */
 .luvex-hero__content {
@@ -197,18 +198,17 @@ Last Update: 2025-08-14
     text-align: center;
     flex-grow: 0;
     width: 100%;
-    margin-bottom: 4rem; /* Mehr Abstand zu Buttons */
+    margin-bottom: 2rem; /* Reduzierter Abstand zu Buttons */
 }
 
-
-/* UPDATED: Deutlich größere Hero-Titel */
+/* Haupttitel - Pyramiden-Basis (breiteste Ebene) */
 .luvex-hero__title {
-    font-size: clamp(3.2rem, 7vw, 5.5rem); /* Viel größer! */
+    font-size: clamp(3.2rem, 7vw, 5.5rem);
     font-weight: 600;
     color: var(--luvex-white);
-    margin: 0 0 var(--space-md) 0; /* Mehr Abstand nach unten */
+    margin: 0 0 var(--space-md) 0;
     line-height: 1.1;
-    max-width: 900px; /* Pyramiden-Basis */
+    max-width: 900px; /* Breiteste Ebene */
     text-align: center;
 }
 
@@ -217,48 +217,81 @@ Last Update: 2025-08-14
     color: var(--luvex-bright-cyan);
 }
 
-/* UPDATED: Größere Subtitel */
+/* Untertitel - Pyramiden-Mitte */
 .luvex-hero__subtitle {
-    font-size: clamp(1.5rem, 4vw, 2.2rem); /* Deutlich größer */
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
     color: var(--luvex-gray-300);
     font-weight: 400;
-    max-width: 800px; /* Etwas schmaler als H1 für Pyramide */
-    margin: 0 0 var(--space-lg) 0; /* Mehr Abstand */
+    max-width: 800px; /* Etwas schmaler */
+    margin: 0 0 var(--space-lg) 0;
     line-height: 1.3;
     text-align: center;
 }
 
-/* UPDATED: Beschreibung (Standard) - Pyramiden-Spitze */
+/* NEUE PYRAMIDEN-LOGIK für Description */
 .luvex-hero__description {
-    font-size: clamp(1.1rem, 2.5vw, 1.4rem); /* Standard laut Plan, aber größer als normal */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    width: 100%;
+}
+
+/* Erster Beschreibungs-Container - Mittlere Breite */
+.luvex-hero__description-main {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
     color: var(--luvex-gray-300);
-    max-width: 700px; /* Schmalste Ebene für Pyramide */
+    max-width: 700px; /* Mittlere Ebene */
+    line-height: 1.7;
+    text-align: center;
+    margin: 0;
+}
+
+/* Zweiter Beschreibungs-Container - Schmalste Ebene (falls vorhanden) */
+.luvex-hero__description-detail {
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
+    color: var(--luvex-gray-300);
+    max-width: 600px; /* Schmalste Ebene - Pyramiden-Spitze */
+    line-height: 1.6;
+    text-align: center;
+    margin: 0;
+    opacity: 0.9; /* Leicht transparenter für Hierarchie */
+}
+
+/* Fallback für alte Description-Struktur */
+.luvex-hero__description:not(:has(.luvex-hero__description-main)) {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: var(--luvex-gray-300);
+    max-width: 700px;
     line-height: 1.7;
     margin: 0;
     text-align: center;
 }
+
+
 
 /* --- 3.5 Button-Block (unten zentriert) --- */
 .luvex-hero__cta-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1.5rem; /* Mehr Platz zwischen Buttons */
+    gap: 1.5rem;
     margin-top: auto;
     flex-shrink: 0;
     width: 100%;
-    padding-top: 2rem; /* Zusätzlicher Abstand vom Text */
+    padding-top: 1rem; /* Reduziertes Padding */
+    padding-bottom: var(--space-md); /* Abstand zum Sectionende */
 }
 
 /* --- 3.6 Hero Layout Modifiers --- */
 .luvex-hero--compact {
-    min-height: auto;
-    padding: 4rem 2rem;
+    min-height: 40vh; /* Noch kompakter */
+    padding: var(--space-lg) 2rem var(--space-sm) 2rem;
 }
 
 .luvex-hero--compact .luvex-hero__container {
-    min-height: auto;
-    justify-content: center;
+    min-height: 30vh;
+    justify-content: center; /* Zentriert statt space-between */
 }
 
 .luvex-hero--full {
@@ -1243,23 +1276,22 @@ HERO FIXES - Diese Regeln in _components.css ersetzen/ergänzen
 
 @media (max-width: 768px) {
     /* Hero Responsive */
-    .luvex-hero {
-        padding: var(--space-lg) 1rem;
-        min-height: 70vh;
-    }
-    
-    .luvex-hero__container {
+  .luvex-hero {
+        padding: var(--space-lg) 1rem var(--space-sm) 1rem;
         min-height: 50vh;
+    }
+    .luvex-hero__container {
+        min-height: 35vh;
         padding: 0 1rem;
     }
-    
+
     .luvex-hero__cta-container {
         flex-direction: column;
         align-items: center;
         gap: 0.75rem;
     }
     
-    .luvex-hero__cta,
+      .luvex-hero__cta,
     .luvex-hero__cta-secondary {
         width: 100%;
         max-width: 280px;
@@ -1295,12 +1327,12 @@ HERO FIXES - Diese Regeln in _components.css ersetzen/ergänzen
 }
 
 @media (max-width: 480px) {
-    .luvex-hero {
-        min-height: 60vh;
+     .luvex-hero {
+        min-height: 45vh;
     }
     
-    .luvex-hero__container {
-        min-height: 40vh;
+     .luvex-hero__container {
+        min-height: 30vh;
     }
     
     .luvex-hero__title {
@@ -1321,8 +1353,9 @@ HERO FIXES - Diese Regeln in _components.css ersetzen/ergänzen
 
 /* SPEZIELLE MODIFIER für kompakte Heroes (News-Seite) */
 .luvex-hero--compact .luvex-hero__content {
-    margin-bottom: 2rem; /* Weniger Abstand bei kompakten Heroes */
+    margin-bottom: 1.5rem;
 }
+
 
 .luvex-hero--compact .luvex-hero__title {
     font-size: clamp(2.8rem, 6vw, 4.5rem); /* Etwas kleiner bei kompakten */
@@ -1335,37 +1368,42 @@ HERO FIXES - Diese Regeln in _components.css ersetzen/ergänzen
 }
 
 .luvex-hero--compact .luvex-hero__cta-container {
-    padding-top: 1.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: var(--space-sm);
 }
 
 /* RESPONSIVE: Mobile Anpassungen für Pyramiden-Look */
 @media (max-width: 768px) {
     .luvex-hero__content {
-        margin-bottom: 3rem;
+        margin-bottom: 1.5rem;
     }
     
     /* Pyramiden-Verhältnisse auch auf Mobile beibehalten */
-    .luvex-hero__title {
-        font-size: clamp(2.8rem, 8vw, 4rem);
-        margin-bottom: var(--space-sm);
-        max-width: 100%; /* Volle Breite auf Mobile */
+     .luvex-hero__title {
+        max-width: 100%;
+    }
+
+
+   .luvex-hero__subtitle {
+        max-width: 95%;
     }
     
-    .luvex-hero__subtitle {
-        font-size: clamp(1.2rem, 5vw, 1.8rem);
-        margin-bottom: var(--space-md);
-        max-width: 95%; /* Etwas schmaler */
+     .luvex-hero__description-main {
+        max-width: 90%;
     }
     
-    .luvex-hero__description {
-        font-size: clamp(1rem, 3vw, 1.2rem);
-        max-width: 90%; /* Schmalste Ebene */
+    .luvex-hero__description-detail {
+        max-width: 85%;
     }
-    
-    .luvex-hero__cta-container {
+
+
+     .luvex-hero__cta-container {
+        flex-direction: column;
+        align-items: center;
         gap: 1rem;
-        padding-top: 1.5rem;
+        padding-top: 0.5rem;
     }
+    
 }
 
 @media (max-width: 480px) {
