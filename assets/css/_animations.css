@@ -586,6 +586,15 @@ Verwendet von: hero-disinfection.js + uvc-science-gallery.js
 ==============================================================================
 */
 
+/*
+==============================================================================
+LUVEX THEME - UV-C ANIMATIONS (animations.css)
+==============================================================================
+Beschreibung: Reine Animationen und visuelle Effekte für UV-C Disinfection
+Verwendet von: hero-disinfection.js + uvc-science-gallery.js
+==============================================================================
+*/
+
 /* --- HERO ANIMATION PARTICLES --- */
 .pathogen-particle {
     position: absolute;
@@ -882,7 +891,7 @@ Verwendet von: hero-disinfection.js + uvc-science-gallery.js
     animation: death-ripple 4s infinite;
 }
 
-/* STEP 6: Permanenter Schutz + Anwendungen */
+/* STEP 6: Permanenter Schutz + Anwendungen (ÜBERARBEITET) */
 .visual-step-6 .protection-shield {
     width: 120px;
     height: 120px;
@@ -929,38 +938,63 @@ Verwendet von: hero-disinfection.js + uvc-science-gallery.js
     transform-origin: 50% 90px;
 }
 
-.visual-step-6 .no-chemicals-text {
+/* Benefits aus dem Kreis */
+.visual-step-6 .benefit-text {
     position: absolute;
-    bottom: 15px;
+    background: rgba(40, 167, 69, 0.9);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    opacity: 0;
+    animation: benefit-appear 0.8s ease-out forwards;
+    z-index: 3;
+    box-shadow: 0 2px 10px rgba(40, 167, 69, 0.3);
+}
+
+/* Application Buttons unten */
+.visual-step-6 .application-buttons {
+    position: absolute;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    color: #28a745;
-    font-weight: bold;
-    font-size: 14px;
-    animation: text-glow 2s infinite;
+    display: flex;
+    gap: 1rem;
     z-index: 3;
 }
 
-.visual-step-6 .application-icon {
-    position: absolute;
+.visual-step-6 .application-button {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    opacity: 0;
-    animation: app-icon-appear 1s ease-out forwards;
-}
-
-.visual-step-6 .application-icon .icon {
-    font-size: 2rem;
-    animation: app-icon-bounce 2s ease-in-out infinite;
-}
-
-.visual-step-6 .application-icon .label {
-    font-size: 0.8rem;
-    font-weight: 600;
+    background: rgba(109, 213, 237, 0.1);
+    border: 2px solid var(--luvex-bright-cyan);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
     color: var(--luvex-bright-cyan);
+    font-size: 0.7rem;
+    font-weight: 600;
+    opacity: 0;
+    animation: app-button-appear 0.6s ease-out forwards;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.visual-step-6 .application-button:hover {
+    background: rgba(109, 213, 237, 0.2);
+    transform: translateY(-2px);
+}
+
+.visual-step-6 .application-button i {
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+}
+
+.visual-step-6 .application-button span {
     text-align: center;
+    line-height: 1.2;
 }
 
 /* --- KEYFRAME ANIMATIONS --- */
@@ -1097,5 +1131,28 @@ Verwendet von: hero-disinfection.js + uvc-science-gallery.js
     }
     50% {
         transform: translateY(-5px);
+    }
+}
+
+/* Step 6 Neue Animationen */
+@keyframes benefit-appear {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes app-button-appear {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
 }
