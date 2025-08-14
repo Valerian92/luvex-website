@@ -75,6 +75,7 @@ function luvex_enqueue_assets() {
     $main_css_version = file_exists($main_css_path) ? filemtime($main_css_path) : '1.0.0';
     wp_enqueue_style('luvex-main', get_stylesheet_directory_uri() . '/assets/css/main.css', array(), $main_css_version);
 
+    // KORREKTUR: wp_enqueue_style (nicht wp_enqueue_script) für CSS
     $animations_css_path = get_stylesheet_directory() . '/assets/css/_animations.css';
     if (file_exists($animations_css_path)) {
         $animations_css_version = filemtime($animations_css_path);
@@ -157,10 +158,19 @@ function luvex_enqueue_assets() {
             wp_enqueue_script('luvex-hero-disinfection', get_stylesheet_directory_uri() . '/assets/js/hero-disinfection.js', array(), filemtime($disinfection_js_path), true);
         }
         
-        // NEU: UV-C Science Gallery Animation System
+        // UV-C Science Gallery Animation System (mit Debug-Logging)
         $uvc_science_js_path = get_stylesheet_directory() . '/assets/js/uvc-science-gallery.js';
         if (file_exists($uvc_science_js_path)) {
             wp_enqueue_script('luvex-uvc-science-gallery', get_stylesheet_directory_uri() . '/assets/js/uvc-science-gallery.js', array(), filemtime($uvc_science_js_path), true);
+            
+            // Debug-Information für JavaScript verfügbar machen
+            wp_localize_script('luvex-uvc-science-gallery', 'luvex_debug', array(
+                'debug_mode' => WP_DEBUG,
+                'theme_uri' => get_stylesheet_directory_uri(),
+                'page_slug' => $current_page_slug,
+                'css_version' => $animations_css_version,
+                'js_version' => filemtime($uvc_science_js_path)
+            ));
         }
     } 
     elseif ( is_page('uv-knowledge') ) {

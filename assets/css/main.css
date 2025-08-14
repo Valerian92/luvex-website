@@ -34,37 +34,44 @@ Last Update: 2025-07-31
 /*@import '_timeline.css';*/
 
 @import '_components.css';
-
+@import '_modals.css';
 /*-------------merged------------*/
 
 @import '_header.css';
 @import '_footer.css';
 @import '_heroes.css';
 
-/* 5. PAGE-SPECIFIC */
+
+/* 5. RESPONSIVE  */
+@import '_responsive.css';
+
+/* 6. Multiple-PAGE-SPECIFIC */
+@import '_404.css';
+@import '_auth.css';
+@import '_legal.css';
+@import '_news.css';
+@import '_resources.css';
+
+
+
+
+/* 5. PAGE-SPECIFIC (Last!) */
 @import '_page-home.css';
 @import '_page-about.css';
 @import '_page-contact.css';
 @import '_page-booking.css';
-@import '_page-uvc-disinfection.css';
+@import '_page-uv-c-disinfection.css';
 @import '_page-uv-led.css';
 @import '_page-uv-consulting.css';
 @import '_page-mercury-uv-lamps.css';
 @import '_page-uv-safety-equipment.css';
 @import '_page-uv-process-equipment.css';
 @import '_page-uv-testing-equipment.css';
-/* 6. Multiple-PAGE-SPECIFIC */
-
-@import '_404.css';
-@import '_auth.css';
-@import '_legal.css';
-@import '_news.css';
-@import '_resources.css';
-/* 7. RESPONSIVE (Last!) */
-@import '_responsive.css';
 
 
-@import '_modals.css';
+
+
+
 
 
 /* Besser Weg ist das Laden über functions --> schneller für Animations:
