@@ -71,13 +71,12 @@ Dependencies: animations.css, _variables.css, _layout.css
     max-width: 1400px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 2rem;
     background-color: var(--luvex-white);
     border-radius: 16px;
     padding: 3rem;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    border: 1px solid var(--luvex-gray-200);
     height: 80vh;
     max-height: 650px;
     align-items: center;
@@ -90,14 +89,12 @@ Dependencies: animations.css, _variables.css, _layout.css
     position: relative;
     height: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
     overflow: hidden;
 }
 
 .animation-display {
-    width: 100%;
-    height: 100%;
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -129,6 +126,7 @@ Dependencies: animations.css, _variables.css, _layout.css
     height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     position: relative;
     z-index: 1;
 }
@@ -207,41 +205,50 @@ Dependencies: animations.css, _variables.css, _layout.css
     transform: translateX(5px);
 }
 
-/* --- NAVIGATION CONTROLS --- */
+/* --- NAVIGATION CONTROLS (IN ANIMATION PANEL) --- */
 .navigation-controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    gap: 2rem;
-    margin-top: 3rem;
-    position: relative;
+    padding: 1rem;
+    pointer-events: none;
     z-index: 1000;
-}
-
-.navigation-arrows {
-    display: flex;
-    gap: 1rem;
-    order: 1;
-    position: relative;
-    z-index: 1001;
 }
 
 .step-indicators {
     display: flex;
     gap: 0.5rem;
-    order: 2;
+    order: 1;
     position: relative;
     z-index: 1001;
+    pointer-events: auto;
+    margin-top: 0.5rem;
+}
+
+.navigation-arrows {
+    display: flex;
+    gap: 1rem;
+    order: 3;
+    position: relative;
+    z-index: 1001;
+    pointer-events: auto;
+    margin-bottom: 0.5rem;
 }
 
 .nav-arrow {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     border: 2px solid var(--luvex-bright-cyan);
     background: rgba(109, 213, 237, 0.1);
     border-radius: 50%;
     color: var(--luvex-bright-cyan);
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
@@ -255,7 +262,7 @@ Dependencies: animations.css, _variables.css, _layout.css
 
 .nav-arrow:hover {
     background: var(--luvex-bright-cyan);
-    color: var(--luvex-white);
+    color: var(--luvex-dark-blue);
     transform: scale(1.1);
 }
 
@@ -266,40 +273,35 @@ Dependencies: animations.css, _variables.css, _layout.css
 }
 
 .step-indicator {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
-    background: var(--luvex-gray-200);
-    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.8);
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    color: var(--luvex-gray-700);
     position: relative;
     z-index: 1002;
     pointer-events: auto;
+    font-size: 0.9rem;
 }
 
 .step-indicator.active {
-    background: var(--luvex-vibrant-blue);
-    color: var(--luvex-white);
+    background: var(--luvex-bright-cyan);
+    border-color: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
     transform: scale(1.1);
 }
 
 .step-indicator.completed {
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
-}
-
-.scroll-hint {
-    text-align: center;
-    margin-top: 2rem;
-    font-size: var(--text-sm);
-    color: var(--luvex-gray-700);
-    opacity: 0.7;
+    background: rgba(109, 213, 237, 0.3);
+    border-color: var(--luvex-bright-cyan);
+    color: var(--luvex-bright-cyan);
 }
 
 /* --- APPLICATIONS SECTIONS --- */

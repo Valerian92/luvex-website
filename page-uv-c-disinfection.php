@@ -111,7 +111,6 @@ get_header(); ?>
                 </div>
             </div>
         </div>
-        <div class="scroll-hint">Click arrows or numbers to navigate</div>
     </div>
 </section>
 <!-- ==========================================================================

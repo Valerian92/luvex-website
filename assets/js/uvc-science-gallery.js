@@ -433,7 +433,7 @@ class UVCAnimationSystem {
         this.animationVisual.appendChild(replicationFailure);
     }
 
-    // STEP 5: Population Collapse
+    // STEP 5: Population Collapse (SCHNELLER START)
     createCollapseAnimation() {
         console.log('💀 [UVC DEBUG] Creating population collapse animation');
         
@@ -446,13 +446,13 @@ class UVCAnimationSystem {
             const pos = this.getRandomPosition(280, 280, 20, 20);
             dyingOrganism.style.left = `${pos.x}px`;
             dyingOrganism.style.top = `${pos.y}px`;
-            dyingOrganism.style.animationDelay = `${Math.random() * 2}s`;
+            dyingOrganism.style.animationDelay = `${Math.random() * 0.5}s`; // REDUZIERT von 2s auf 0.5s
             
             this.animationVisual.appendChild(dyingOrganism);
         }
     }
 
-    // STEP 6: Permanent Protection + Applications
+    // STEP 6: Permanent Protection + Applications (ÜBERARBEITET)
     createProtectionAnimation() {
         console.log('🛡️ [UVC DEBUG] Creating protection + applications animation');
         
@@ -472,28 +472,47 @@ class UVCAnimationSystem {
         
         this.animationVisual.appendChild(rays);
         
-        // Application Icons (Water, Air, Surface)
+        // Benefits aus dem Kreis hervorkommend
+        const benefits = [
+            { text: 'No Chemicals', position: { x: 175, y: 60 }, delay: 500 },
+            { text: 'Energy Efficient', position: { x: 260, y: 120 }, delay: 800 },
+            { text: 'Increased Quality', position: { x: 175, y: 300 }, delay: 1100 }
+        ];
+        
+        benefits.forEach((benefit, index) => {
+            setTimeout(() => {
+                const benefitElement = document.createElement('div');
+                benefitElement.className = 'benefit-text';
+                benefitElement.style.left = `${benefit.position.x}px`;
+                benefitElement.style.top = `${benefit.position.y}px`;
+                benefitElement.textContent = benefit.text;
+                this.animationVisual.appendChild(benefitElement);
+            }, benefit.delay);
+        });
+        
+        // Application Buttons unten (wie im Hero)
+        const applicationContainer = document.createElement('div');
+        applicationContainer.className = 'application-buttons';
+        
         const applications = [
-            { icon: '💧', position: { x: 80, y: 80 }, label: 'Water' },
-            { icon: '🌬️', position: { x: 220, y: 80 }, label: 'Air' },
-            { icon: '🧽', position: { x: 150, y: 220 }, label: 'Surface' }
+            { icon: 'fas fa-wind', text: 'Air Disinfection' },
+            { icon: 'fas fa-layer-group', text: 'Surface Treatment' },
+            { icon: 'fas fa-droplet', text: 'Water Purification' }
         ];
         
         applications.forEach((app, index) => {
             setTimeout(() => {
-                const appElement = document.createElement('div');
-                appElement.className = 'application-icon';
-                appElement.style.left = `${app.position.x}px`;
-                appElement.style.top = `${app.position.y}px`;
-                appElement.innerHTML = `<span class="icon">${app.icon}</span><span class="label">${app.label}</span>`;
-                this.animationVisual.appendChild(appElement);
-            }, index * 800);
+                const appButton = document.createElement('div');
+                appButton.className = 'application-button';
+                appButton.innerHTML = `
+                    <i class="${app.icon}"></i>
+                    <span>${app.text}</span>
+                `;
+                applicationContainer.appendChild(appButton);
+            }, 1500 + (index * 300));
         });
         
-        const noChemText = document.createElement('div');
-        noChemText.className = 'no-chemicals-text';
-        noChemText.textContent = 'NO CHEMICALS';
-        this.animationVisual.appendChild(noChemText);
+        this.animationVisual.appendChild(applicationContainer);
     }
 
     getRandomPosition(maxX, maxY, offsetX, offsetY) {
