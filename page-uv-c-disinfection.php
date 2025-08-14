@@ -36,54 +36,89 @@ get_header(); ?>
      ========================================================================== -->
 
 <!-- ==========================================================================
-     START: Interactive Gallery - How UV-C Works
+     START: Interactive Gallery - How UV-C Works (Ersetzt alte Version)
      ========================================================================== -->
 <section class="section science-section">
     <div class="container">
-        <h2 class="section-title text-center">The Mechanism of UV-C Inactivation</h2>
-        <div class="science-layout-wrapper">
-            <div class="science-animation-column">
-                <div class="science-animation-container">
-                    <canvas id="dna-canvas"></canvas>
+        <div class="section-header">
+            <h2>How UVC Disinfection Works</h2>
+            <p>Discover the scientific principle behind UVC technology in 6 simple steps</p>
+        </div>
+
+        <div class="showcase-container">
+            <div class="animation-panel">
+                <div class="animation-display">
+                    <div class="animation-content">
+                        <div class="animation-title" id="animation-title">Contamination</div>
+                        <div class="animation-visual" id="animation-visual">
+                            <!-- Content wird per JavaScript generiert -->
+                        </div>
+                        <div class="timer-display" id="timer-display">0:00 / 0:24</div>
+                    </div>
                 </div>
             </div>
-            <div class="science-steps-column">
-                <ul class="science-steps" id="steps-list">
-                    <div id="timeline-progress"></div>
-                    <li class="science-step is-active" data-step="1">
+
+            <div class="control-panel">
+                <div style="position: relative; height: 220px;">
+                    <div class="step-content active" data-step="1">
                         <h3>1. Contamination</h3>
-                        <p>Active microorganisms populate the environment. They continuously replicate, increasing the contamination.</p>
-                    </li>
-                    <li class="science-step" data-step="2">
-                        <h3>2. UV-C Exposure</h3>
-                        <p>A high-energy UV-C light field is generated. The light penetrates a microorganism, targeting the delicate DNA helix within its core.</p>
-                    </li>
-                    <li class="science-step" data-step="3">
+                        <p>Active microorganisms populate the environment. They replicate continuously and increase contamination levels.</p>
+                    </div>
+
+                    <div class="step-content" data-step="2">
+                        <h3>2. UV-C Irradiation</h3>
+                        <p>A high-energy UV-C light field is generated. The light penetrates a microorganism and targets the sensitive DNA helix in its core.</p>
+                    </div>
+
+                    <div class="step-content" data-step="3">
                         <h3>3. DNA Damage</h3>
-                        <p>The UV-C energy is absorbed, breaking hydrogen bonds and forcing adjacent thymine bases to fuse into a permanent, irreparable "thymine dimer".</p>
-                    </li>
-                    <li class="science-step" data-step="4">
-                        <h3>4. Replication Fails</h3>
-                        <p>The dimer lesion makes the genetic code unreadable. The cell's replication machinery stalls at the corrupted site, halting the process.</p>
-                    </li>
-                    <li class="science-step" data-step="5">
+                        <p>UV-C energy is absorbed, breaking hydrogen bonds and forcing adjacent thymine bases into a permanent, irreparable "thymine dimer" fusion.</p>
+                    </div>
+
+                    <div class="step-content" data-step="4">
+                        <h3>4. Replication Failure</h3>
+                        <p>The dimer lesion makes the genetic code unreadable. The cell's replication machinery stops at the damaged site and halts the process.</p>
+                    </div>
+
+                    <div class="step-content" data-step="5">
                         <h3>5. Population Collapse</h3>
-                        <p>Unable to reproduce, the microorganisms are rendered inert. The entire population gradually collapses, achieving complete inactivation.</p>
-                    </li>
-                    <li class="science-step" data-step="6">
+                        <p>Unable to reproduce, microorganisms become inactivated. The entire population gradually collapses, leading to complete inactivation.</p>
+                    </div>
+
+                    <div class="step-content" data-step="6">
                         <h3>6. Permanent Protection</h3>
-                        <p>Continuous UV-C exposure maintains a disinfected state, preventing the formation of new colonies and biofilm.</p>
+                        <p>Continuous UV-C irradiation maintains a disinfected state and prevents formation of new colonies and biofilms. <strong>No chemicals required</strong> – purely physical disinfection process.</p>
                         <div class="final-cta">
                             <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-consulting' ) ) ); ?>">
                                 Explore beneficial applications
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                             </a>
                         </div>
-                    </li>
-                </ul>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button class="play-pause-btn" id="play-pause-btn">
+                        ▶️ Play Animation
+                    </button>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progress-bar"></div>
+                    </div>
+                    <div class="timer-display-mobile" id="timer-display-mobile">0:00 / 0:24</div>
+                </div>
+
+                <div class="navigation-controls">
+                    <div class="step-indicators" id="step-indicators">
+                        <!-- Wird per JavaScript generiert -->
+                    </div>
+                    <div class="navigation-arrows">
+                        <button class="nav-arrow" id="prev-btn" aria-label="Previous step">‹</button>
+                        <button class="nav-arrow" id="next-btn" aria-label="Next step">›</button>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="scroll-hint">Scroll to navigate</div>
+        <div class="scroll-hint">Navigate with indicators or arrows</div>
     </div>
 </section>
 <!-- ==========================================================================

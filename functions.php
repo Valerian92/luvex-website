@@ -151,14 +151,16 @@ function luvex_enqueue_assets() {
         }
     }
     elseif ( is_page('uv-c-disinfection') ) { 
+        // Hero Animation (bleibt bestehen)
         $disinfection_js_path = get_stylesheet_directory() . '/assets/js/hero-disinfection.js';
         if (file_exists($disinfection_js_path)) {
             wp_enqueue_script('luvex-hero-disinfection', get_stylesheet_directory_uri() . '/assets/js/hero-disinfection.js', array(), filemtime($disinfection_js_path), true);
         }
-        wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), null, true);
-        $gallery_js_path = get_stylesheet_directory() . '/assets/js/science-gallery.js';
-        if (file_exists($gallery_js_path)) {
-            wp_enqueue_script('luvex-science-gallery', get_stylesheet_directory_uri() . '/assets/js/science-gallery.js', array('jquery'), filemtime($gallery_js_path), true);
+        
+        // NEU: UV-C Science Gallery Animation System
+        $uvc_science_js_path = get_stylesheet_directory() . '/assets/js/uvc-science-gallery.js';
+        if (file_exists($uvc_science_js_path)) {
+            wp_enqueue_script('luvex-uvc-science-gallery', get_stylesheet_directory_uri() . '/assets/js/uvc-science-gallery.js', array(), filemtime($uvc_science_js_path), true);
         }
     } 
     elseif ( is_page('uv-knowledge') ) {
