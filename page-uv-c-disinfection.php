@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: UV-C Disinfection (Simplified Gallery)
+ * Template Name: UV-C Disinfection (Extended Gallery)
  * @package Luvex
  */
 get_header(); ?>
@@ -36,7 +36,7 @@ get_header(); ?>
      ========================================================================== -->
 
 <!-- ==========================================================================
-     START: Interactive Gallery - How UV-C Works (Simplified Manual Navigation)
+     START: Interactive Gallery - How UV-C Works (Extended with Applications)
      ========================================================================== -->
 <section class="section science-section">
     <div class="container">
@@ -57,35 +57,40 @@ get_header(); ?>
             </div>
 
             <div class="control-panel">
-                <div style="position: relative; height: 220px;">
+                <div style="position: relative; height: 280px;">
                     <div class="step-content active" data-step="1">
                         <h3>1. Contamination</h3>
-                        <p>Active microorganisms populate the environment. They replicate continuously and increase contamination levels.</p>
+                        <p>Active microorganisms populate the environment. They replicate continuously and increase contamination levels, creating ongoing health and safety risks.</p>
                     </div>
 
                     <div class="step-content" data-step="2">
                         <h3>2. UV-C Irradiation</h3>
-                        <p>A high-energy UV-C light field is generated. The light penetrates a microorganism and targets the sensitive DNA helix in its core.</p>
+                        <p>A high-energy UV-C light field is generated. The light penetrates a microorganism and targets the sensitive DNA helix in its core with precise wavelengths.</p>
                     </div>
 
                     <div class="step-content" data-step="3">
                         <h3>3. DNA Damage</h3>
-                        <p>UV-C energy is absorbed, breaking hydrogen bonds and forcing adjacent thymine bases into a permanent, irreparable "thymine dimer" fusion.</p>
+                        <p>UV-C energy is absorbed, breaking hydrogen bonds and forcing adjacent thymine bases into a permanent, irreparable "thymine dimer" fusion that corrupts the genetic code.</p>
                     </div>
 
                     <div class="step-content" data-step="4">
                         <h3>4. Replication Failure</h3>
-                        <p>The dimer lesion makes the genetic code unreadable. The cell's replication machinery stops at the damaged site and halts the process.</p>
+                        <p>The dimer lesion makes the genetic code unreadable. The cell's replication machinery stops at the damaged site and completely halts the reproduction process.</p>
                     </div>
 
                     <div class="step-content" data-step="5">
                         <h3>5. Population Collapse</h3>
-                        <p>Unable to reproduce, microorganisms become inactivated. The entire population gradually collapses, leading to complete inactivation.</p>
+                        <p>Unable to reproduce, microorganisms become inactivated. The entire population gradually collapses, leading to complete inactivation without resistance development.</p>
                     </div>
 
                     <div class="step-content" data-step="6">
                         <h3>6. Permanent Protection</h3>
-                        <p>Continuous UV-C irradiation maintains a disinfected state and prevents formation of new colonies and biofilms. <strong>No chemicals required</strong> – purely physical disinfection process.</p>
+                        <p>Continuous UV-C irradiation maintains a disinfected state and prevents formation of new colonies and biofilms. <strong>Integration into various applications</strong> enables comprehensive protection for water treatment, air purification, and surface disinfection systems.</p>
+                        <ul class="benefits-list">
+                            <li><strong>No chemicals required</strong> – purely physical process</li>
+                            <li><strong>Immediate effectiveness</strong> – no contact time needed</li>
+                            <li><strong>Broad spectrum</strong> – effective against all microorganisms</li>
+                        </ul>
                         <div class="final-cta">
                             <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-consulting' ) ) ); ?>">
                                 Explore beneficial applications
@@ -96,21 +101,55 @@ get_header(); ?>
                 </div>
 
                 <div class="navigation-controls">
-                    <div class="step-indicators" id="step-indicators">
-                        <!-- Wird per JavaScript generiert -->
-                    </div>
                     <div class="navigation-arrows">
                         <button class="nav-arrow" id="prev-btn" aria-label="Previous step">‹</button>
                         <button class="nav-arrow" id="next-btn" aria-label="Next step">›</button>
                     </div>
+                    <div class="step-indicators" id="step-indicators">
+                        <!-- Wird per JavaScript generiert -->
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="scroll-hint">Click numbers or arrows to navigate</div>
+        <div class="scroll-hint">Click arrows or numbers to navigate</div>
     </div>
 </section>
 <!-- ==========================================================================
      END: Interactive Gallery Section
+     ========================================================================== -->
+
+<!-- ==========================================================================
+     START: UV-C Benefits Summary (Optional Enhancement)
+     ========================================================================== -->
+<section class="section benefits-section">
+    <div class="container">
+        <h2 class="text-center">Why Choose UV-C Technology?</h2>
+        <div class="grid-4">
+            <div class="benefit-card">
+                <div class="benefit-icon">🧪</div>
+                <h3>No Chemicals</h3>
+                <p>Harmless physical process without toxic residues or chemical handling requirements.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🛡️</div>
+                <h3>Permanent Protection</h3>
+                <p>Continuous operation maintains sterile conditions and prevents biofilm formation.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">📈</div>
+                <h3>Extended Shelf Life</h3>
+                <p>Reduces spoilage and contamination, significantly extending product usability periods.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">👥</div>
+                <h3>Healthier Environment</h3>
+                <p>Improved air quality reduces employee sick time and increases workplace productivity.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==========================================================================
+     END: Benefits Summary Section
      ========================================================================== -->
 
 <main>

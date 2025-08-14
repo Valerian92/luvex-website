@@ -984,3 +984,333 @@ LUVEX THEME - UV-C SCIENCE GALLERY ANIMATIONS
     0%, 100% { opacity: 0.8; }
     50% { opacity: 1; text-shadow: 0 0 10px rgba(40, 167, 69, 0.5); }
 }
+
+
+/* 
+==============================================================================
+UV-C SCIENCE GALLERY - NAVIGATION & ANIMATION IMPROVEMENTS
+==============================================================================
+*/
+
+/* Zentrierte Navigation: Pfeile über den Nummern */
+.navigation-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.navigation-arrows {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.step-indicators {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.nav-arrow {
+    width: 45px;
+    height: 45px;
+    border: 2px solid var(--luvex-bright-cyan);
+    background: rgba(109, 213, 237, 0.1);
+    border-radius: 50%;
+    color: var(--luvex-bright-cyan);
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.nav-arrow:hover {
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-white);
+    transform: scale(1.1);
+}
+
+.nav-arrow:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Größere Animation Area ohne Titel */
+.animation-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.animation-visual {
+    width: 350px;
+    height: 350px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* STEP 6: Application Icons */
+.visual-step-6 .application-icon {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: app-icon-appear 1s ease-out forwards;
+}
+
+.visual-step-6 .application-icon .icon {
+    font-size: 2rem;
+    animation: app-icon-bounce 2s ease-in-out infinite;
+}
+
+.visual-step-6 .application-icon .label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--luvex-bright-cyan);
+    text-align: center;
+}
+
+/* STEP 1: Verbesserte Mikroben mit sanftem Verschwinden */
+.visual-step-1 .microorganism {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* STEP 6: Enhanced Protection Elements */
+.visual-step-6 .protection-shield {
+    width: 120px;
+    height: 120px;
+    border: 3px solid #28a745;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: shield-pulse 3s infinite;
+    z-index: 2;
+}
+
+.visual-step-6 .protection-shield::before {
+    content: '✓';
+    position: absolute;
+    font-size: 40px;
+    color: #28a745;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+}
+
+.visual-step-6 .protection-rays {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: rotate-rays 8s infinite linear;
+    z-index: 1;
+}
+
+.visual-step-6 .protection-ray {
+    position: absolute;
+    width: 2px;
+    height: 30px;
+    background: linear-gradient(to bottom, rgba(255, 193, 7, 0.8), transparent);
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    transform-origin: 50% 90px;
+}
+
+.visual-step-6 .no-chemicals-text {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #28a745;
+    font-weight: bold;
+    font-size: 14px;
+    animation: text-glow 2s infinite;
+    z-index: 3;
+}
+
+/* Animation Keyframes */
+@keyframes app-icon-appear {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes app-icon-bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Responsive Anpassungen */
+@media (max-width: 768px) {
+    .navigation-controls {
+        gap: 0.75rem;
+    }
+    
+    .navigation-arrows {
+        gap: 0.75rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    .nav-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .step-indicators {
+        gap: 0.4rem;
+    }
+    
+    .step-indicator {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+    
+    .animation-visual {
+        width: 280px;
+        height: 280px;
+    }
+}
+
+
+/* 
+==============================================================================
+UV-C BENEFITS SECTION + ENHANCED STEP 6
+==============================================================================
+*/
+
+/* Benefits Section */
+.benefits-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e8f4f8 100%);
+    padding: 4rem 0;
+}
+
+.benefits-section h2 {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    color: var(--luvex-dark-blue);
+    margin-bottom: 3rem;
+}
+
+.benefit-card {
+    background: var(--luvex-white);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(27, 42, 73, 0.08);
+    border: 1px solid rgba(109, 213, 237, 0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(27, 42, 73, 0.15);
+    border-color: var(--luvex-bright-cyan);
+}
+
+.benefit-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.benefit-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--luvex-dark-blue);
+    margin: 0 0 1rem 0;
+}
+
+.benefit-card p {
+    color: var(--luvex-gray-700);
+    line-height: 1.6;
+    margin: 0;
+    flex: 1;
+}
+
+/* Enhanced Step 6 */
+.step-content .benefits-list {
+    margin: 1rem 0;
+    padding: 0;
+    list-style: none;
+}
+
+.step-content .benefits-list li {
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
+    color: var(--luvex-gray-700);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.step-content .benefits-list li::before {
+    content: '✓';
+    color: var(--luvex-bright-cyan);
+    font-weight: bold;
+    font-size: 1rem;
+    margin-top: 0.1rem;
+    flex-shrink: 0;
+}
+
+.step-content .benefits-list strong {
+    color: var(--luvex-dark-blue);
+}
+
+/* Responsive Benefits Grid */
+@media (max-width: 992px) {
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .grid-4 {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .benefit-card {
+        padding: 1.5rem;
+    }
+    
+    .benefit-icon {
+        font-size: 2.5rem;
+        height: 50px;
+    }
+}

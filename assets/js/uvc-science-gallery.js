@@ -1,14 +1,15 @@
 /**
- * LUVEX Theme - UV-C Science Gallery (Simplified Manual Navigation)
+ * LUVEX Theme - UV-C Science Gallery (Complete Simplified Manual Navigation)
  */
 
 class UVCAnimationSystem {
     constructor() {
-        console.log('🧪 [UVC DEBUG] Initializing Simplified UV-C Animation System...');
+        console.log('🧪 [UVC DEBUG] Initializing Complete UV-C Animation System...');
         
         this.currentStep = 0;
         this.totalSteps = 6;
         this.step3Timer = null;
+        this.step1LoopTimer = null; // Für kontinuierliche Animation in Step 1
 
         if (!this.initializeElements()) {
             console.error('💥 [UVC DEBUG] Critical elements missing - ABORTING');
@@ -19,7 +20,7 @@ class UVCAnimationSystem {
         this.bindEvents();
         this.updateDisplay();
         
-        console.log('✅ [UVC DEBUG] Simplified system ready - manual navigation only!');
+        console.log('✅ [UVC DEBUG] Complete system ready - manual navigation with all steps!');
     }
 
     initializeElements() {
@@ -116,19 +117,23 @@ class UVCAnimationSystem {
     updateVisualAnimation(stepNumber) {
         console.log(`🎨 Creating animation for step ${stepNumber}`);
         
-        // Clear existing
-        this.animationVisual.className = 'animation-visual';
-        this.animationVisual.innerHTML = '';
-        
+        // Clear existing timers
         if (this.step3Timer) {
             clearTimeout(this.step3Timer);
             this.step3Timer = null;
         }
+        if (this.step1LoopTimer) {
+            clearInterval(this.step1LoopTimer);
+            this.step1LoopTimer = null;
+        }
         
+        // Clear existing
+        this.animationVisual.className = 'animation-visual';
+        this.animationVisual.innerHTML = '';
         this.animationVisual.classList.add(`visual-step-${stepNumber}`);
         
         switch(stepNumber) {
-            case 1: this.createContaminationAnimation(); break;
+            case 1: this.createContaminationLoop(); break;
             case 2: this.createUVCAnimation(); break;
             case 3: this.createDNAAnimation(); break;
             case 4: this.createReplicationFailureAnimation(); break;
@@ -137,41 +142,91 @@ class UVCAnimationSystem {
         }
     }
 
-    // Animation creation methods bleiben gleich...
-    createContaminationAnimation() {
-        const numMicrobes = 25;
-        for (let i = 0; i < numMicrobes; i++) {
+    // STEP 1: Kontinuierliche Kontaminations-Loop
+    createContaminationLoop() {
+        console.log('🦠 Creating continuous contamination loop');
+        
+        const maxMicrobes = 30;
+        let microbeCount = 0;
+        const microbes = [];
+        
+        const spawnMicrobe = () => {
+            if (microbeCount >= maxMicrobes) return;
+            
             const organism = document.createElement('div');
             organism.className = 'microorganism';
-            const pos = this.getRandomPosition(320, 320, 15, 15);
+            const pos = this.getRandomPosition(280, 280, 20, 20);
             organism.style.left = `${pos.x}px`;
             organism.style.top = `${pos.y}px`;
             organism.style.animationDelay = '0s';
-            if (Math.random() < 0.3) organism.classList.add('dividing');
+            
+            if (Math.random() < 0.25) organism.classList.add('dividing');
+            
             this.animationVisual.appendChild(organism);
+            microbes.push(organism);
+            microbeCount++;
+            
+            // Mikrobe nach 8-12 Sekunden entfernen
+            setTimeout(() => {
+                if (organism.parentNode && this.currentStep === 0) {
+                    organism.style.opacity = '0';
+                    organism.style.transform = 'scale(0.1)';
+                    setTimeout(() => {
+                        if (organism.parentNode) {
+                            organism.parentNode.removeChild(organism);
+                            microbeCount--;
+                        }
+                    }, 500);
+                }
+            }, 8000 + Math.random() * 4000);
+        };
+        
+        // Initial spawn
+        for (let i = 0; i < 15; i++) {
+            setTimeout(() => spawnMicrobe(), i * 200);
         }
+        
+        // Kontinuierliches Spawning
+        this.step1LoopTimer = setInterval(() => {
+            if (this.currentStep === 0) {
+                spawnMicrobe();
+                if (Math.random() < 0.3) spawnMicrobe(); // Zufällig doppelt spawnen
+            }
+        }, 2000);
     }
 
-    // Weitere Animation-Methoden hier... (gleich wie vorher)
+    // STEP 2: UV-C Irradiation
     createUVCAnimation() {
-        ['uv-source', 'uv-beam', 'target-organism'].forEach(className => {
-            const element = document.createElement('div');
-            element.className = className;
-            this.animationVisual.appendChild(element);
-        });
+        console.log('💡 Creating UV-C irradiation');
+        
+        const uvSource = document.createElement('div');
+        uvSource.className = 'uv-source';
+        this.animationVisual.appendChild(uvSource);
+        
+        const uvBeam = document.createElement('div');
+        uvBeam.className = 'uv-beam';
+        this.animationVisual.appendChild(uvBeam);
+        
+        const targetOrganism = document.createElement('div');
+        targetOrganism.className = 'target-organism';
+        this.animationVisual.appendChild(targetOrganism);
     }
 
+    // STEP 3: DNA Damage
     createDNAAnimation() {
+        console.log('🧬 Creating DNA damage animation');
+        
         const dnaHelix = document.createElement('div');
         dnaHelix.className = 'dna-helix';
         
-        ['dna-strand-left', 'dna-strand-right'].forEach(className => {
-            const strand = document.createElement('div');
-            strand.className = className;
-            dnaHelix.appendChild(strand);
-        });
+        const strandLeft = document.createElement('div');
+        strandLeft.className = 'dna-strand-left';
+        const strandRight = document.createElement('div');
+        strandRight.className = 'dna-strand-right';
         
-        // Base pairs und dimers... (wie vorher)
+        dnaHelix.appendChild(strandLeft);
+        dnaHelix.appendChild(strandRight);
+        
         const basePairs = [];
         for (let i = 0; i < 12; i++) {
             const basePairLeft = document.createElement('div');
@@ -231,7 +286,121 @@ class UVCAnimationSystem {
         animate();
     }
 
-    // Weitere Methoden... (createReplicationFailureAnimation, etc.)
+    // STEP 4: Replication Failure
+    createReplicationFailureAnimation() {
+        console.log('❌ Creating replication failure animation');
+        
+        const replicationFailure = document.createElement('div');
+        replicationFailure.className = 'replication-failure';
+        
+        const staticDNA = document.createElement('div');
+        staticDNA.className = 'static-dna-helix';
+        
+        const staticStrandLeft = document.createElement('div');
+        staticStrandLeft.className = 'static-strand-left';
+        const staticStrandRight = document.createElement('div');
+        staticStrandRight.className = 'static-strand-right';
+        
+        staticDNA.appendChild(staticStrandLeft);
+        staticDNA.appendChild(staticStrandRight);
+        
+        // Add broken base pairs
+        for (let i = 0; i < 10; i++) {
+            if (Math.random() > 0.3) {
+                const brokenLeft = document.createElement('div');
+                brokenLeft.className = 'broken-base-left';
+                brokenLeft.style.top = `${20 + i * 16}px`;
+                
+                const brokenRight = document.createElement('div');
+                brokenRight.className = 'broken-base-right';
+                brokenRight.style.top = `${20 + i * 16}px`;
+                
+                staticDNA.appendChild(brokenLeft);
+                staticDNA.appendChild(brokenRight);
+            }
+        }
+        
+        const scanner = document.createElement('div');
+        scanner.className = 'scanner';
+        
+        const errorCode = document.createElement('div');
+        errorCode.className = 'error-code';
+        errorCode.textContent = 'ERROR: CODE UNREADABLE\n???###???###???';
+        
+        const errorSymbol = document.createElement('div');
+        errorSymbol.className = 'error-symbol';
+        errorSymbol.textContent = '⚠';
+        
+        replicationFailure.appendChild(staticDNA);
+        replicationFailure.appendChild(scanner);
+        replicationFailure.appendChild(errorCode);
+        replicationFailure.appendChild(errorSymbol);
+        this.animationVisual.appendChild(replicationFailure);
+    }
+
+    // STEP 5: Population Collapse
+    createCollapseAnimation() {
+        console.log('💀 Creating population collapse animation');
+        
+        const numDyingMicrobes = 25;
+        
+        for (let i = 0; i < numDyingMicrobes; i++) {
+            const dyingOrganism = document.createElement('div');
+            dyingOrganism.className = 'dying-organism';
+            
+            const pos = this.getRandomPosition(280, 280, 20, 20);
+            dyingOrganism.style.left = `${pos.x}px`;
+            dyingOrganism.style.top = `${pos.y}px`;
+            dyingOrganism.style.animationDelay = `${Math.random() * 2}s`;
+            
+            this.animationVisual.appendChild(dyingOrganism);
+        }
+    }
+
+    // STEP 6: Permanent Protection + Applications
+    createProtectionAnimation() {
+        console.log('🛡️ Creating protection + applications animation');
+        
+        const shield = document.createElement('div');
+        shield.className = 'protection-shield';
+        this.animationVisual.appendChild(shield);
+        
+        const rays = document.createElement('div');
+        rays.className = 'protection-rays';
+        
+        for (let i = 0; i < 8; i++) {
+            const ray = document.createElement('div');
+            ray.className = 'protection-ray';
+            ray.style.transform = `translateX(-50%) rotate(${i * 45}deg)`;
+            rays.appendChild(ray);
+        }
+        
+        this.animationVisual.appendChild(rays);
+        
+        // Application Icons (Water, Air, Surface)
+        const applications = [
+            { icon: '💧', position: { x: 80, y: 80 }, label: 'Water' },
+            { icon: '🌬️', position: { x: 220, y: 80 }, label: 'Air' },
+            { icon: '🧽', position: { x: 150, y: 220 }, label: 'Surface' }
+        ];
+        
+        applications.forEach((app, index) => {
+            setTimeout(() => {
+                const appElement = document.createElement('div');
+                appElement.className = 'application-icon';
+                appElement.style.left = `${app.position.x}px`;
+                appElement.style.top = `${app.position.y}px`;
+                appElement.innerHTML = `<span class="icon">${app.icon}</span><span class="label">${app.label}</span>`;
+                this.animationVisual.appendChild(appElement);
+            }, index * 800);
+        });
+        
+        const noChemText = document.createElement('div');
+        noChemText.className = 'no-chemicals-text';
+        noChemText.textContent = 'NO CHEMICALS';
+        this.animationVisual.appendChild(noChemText);
+    }
+
     getRandomPosition(maxX, maxY, offsetX, offsetY) {
         return {
             x: Math.random() * maxX + offsetX,

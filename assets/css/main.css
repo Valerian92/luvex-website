@@ -39,7 +39,7 @@ Last Update: 2025-07-31
 
 @import '_header.css';
 @import '_footer.css';
-@import '_heroes.css';
+/*@import '_heroes.css'; --> gemerged in components */
 
 
 /* 5. RESPONSIVE  */
