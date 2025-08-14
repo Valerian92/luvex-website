@@ -9,15 +9,15 @@ get_header(); ?>
 <section class="luvex-hero">
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
-            <h1 class="luvex-hero__title">
-                UV <span class="text-highlight">Protective Materials</span>
-            </h1>
-            <h2 class="luvex-hero__subtitle">
-                High-performance materials for UV system construction and protection
-            </h2>
             <p class="luvex-hero__description">
                 From UV-blocking plexiglas to PTFE-coated components - get the specialized materials you need for professional UV installations.
             </p>
+            <h2 class="luvex-hero__subtitle">
+                High-performance materials for UV system construction and protection
+            </h2>
+            <h1 class="luvex-hero__title">
+                UV <span class="text-highlight">Protective</span> Materials
+            </h1>
         </div>
         <div class="luvex-hero__cta-container">
             <a href="#material-properties" class="luvex-hero__cta-secondary">

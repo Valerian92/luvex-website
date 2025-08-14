@@ -15,22 +15,22 @@ get_header(); ?>
 <section class="luvex-hero">
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
-            <h1 class="luvex-hero__title">
-                UV Curing Technology
-            </h1>
-            <h2 class="luvex-hero__subtitle">
-                Industrial UV curing for coatings, inks, and adhesives
-            </h2>
             <p class="luvex-hero__description">
                 Optimize your UV curing processes for maximum efficiency and quality.
             </p>
+            <h2 class="luvex-hero__subtitle">
+                Industrial UV curing for coatings, inks, and adhesives
+            </h2>
+            <h1 class="luvex-hero__title">
+                UV <span class="text-highlight">Curing</span> Technology
+            </h1>
         </div>
         <div class="luvex-hero__cta-container">
             <a href="#applications" class="luvex-hero__cta-secondary">
                 <i class="fas fa-industry"></i>
                 <span>View Applications</span>
             </a>
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>" class="luvex-hero__cta">
+            <a href="/contact/" class="luvex-hero__cta">
                 <i class="fas fa-comments"></i>
                 <span>Get Expert Advice</span>
             </a>

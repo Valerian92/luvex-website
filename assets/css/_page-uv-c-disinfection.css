@@ -129,6 +129,8 @@ Dependencies: animations.css, _variables.css, _layout.css
     height: 100%;
     display: flex;
     flex-direction: column;
+    position: relative;
+    z-index: 1;
 }
 
 .step-content {
@@ -139,12 +141,14 @@ Dependencies: animations.css, _variables.css, _layout.css
     top: 0;
     left: 0;
     width: 100%;
+    pointer-events: none;
 }
 
 .step-content.active {
     opacity: 1;
     transform: translateY(0);
     position: relative;
+    pointer-events: auto;
 }
 
 .step-content h3 {
@@ -208,19 +212,26 @@ Dependencies: animations.css, _variables.css, _layout.css
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    margin-top: 2rem;
+    gap: 2rem;
+    margin-top: 3rem;
+    position: relative;
+    z-index: 1000;
 }
 
 .navigation-arrows {
     display: flex;
-    gap: 0.75rem;
-    margin-bottom: 0.5rem;
+    gap: 1rem;
+    order: 1;
+    position: relative;
+    z-index: 1001;
 }
 
 .step-indicators {
     display: flex;
     gap: 0.5rem;
+    order: 2;
+    position: relative;
+    z-index: 1001;
 }
 
 .nav-arrow {
@@ -237,6 +248,9 @@ Dependencies: animations.css, _variables.css, _layout.css
     align-items: center;
     justify-content: center;
     font-weight: bold;
+    position: relative;
+    z-index: 1002;
+    pointer-events: auto;
 }
 
 .nav-arrow:hover {
@@ -264,6 +278,9 @@ Dependencies: animations.css, _variables.css, _layout.css
     cursor: pointer;
     transition: all 0.3s ease;
     color: var(--luvex-gray-700);
+    position: relative;
+    z-index: 1002;
+    pointer-events: auto;
 }
 
 .step-indicator.active {
@@ -429,12 +446,12 @@ Dependencies: animations.css, _variables.css, _layout.css
     }
     
     .navigation-controls {
-        gap: 0.75rem;
+        gap: 1.5rem;
+        margin-top: 2rem;
     }
     
     .navigation-arrows {
         gap: 0.75rem;
-        margin-bottom: 0.25rem;
     }
     
     .nav-arrow {

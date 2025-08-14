@@ -1,5 +1,5 @@
 /**
- * LUVEX Theme - UV-C Science Gallery (Complete Simplified Manual Navigation)
+ * LUVEX Theme - UV-C Science Gallery (DEBUG VERSION)
  */
 
 class UVCAnimationSystem {
@@ -9,7 +9,7 @@ class UVCAnimationSystem {
         this.currentStep = 0;
         this.totalSteps = 6;
         this.step3Timer = null;
-        this.step1LoopTimer = null; // Für kontinuierliche Animation in Step 1
+        this.step1LoopTimer = null;
 
         if (!this.initializeElements()) {
             console.error('💥 [UVC DEBUG] Critical elements missing - ABORTING');
@@ -19,16 +19,27 @@ class UVCAnimationSystem {
         this.createIndicators();
         this.bindEvents();
         this.updateDisplay();
+        this.debugLayout();
         
         console.log('✅ [UVC DEBUG] Complete system ready - manual navigation with all steps!');
     }
 
     initializeElements() {
+        console.log('🔍 [UVC DEBUG] Searching for DOM elements...');
+        
         this.animationVisual = document.getElementById('animation-visual');
         this.stepIndicators = document.getElementById('step-indicators');
         this.stepContents = document.querySelectorAll('.step-content');
         this.prevBtn = document.getElementById('prev-btn');
         this.nextBtn = document.getElementById('next-btn');
+
+        // Debug Element Status
+        console.log('📍 [UVC DEBUG] Element Status:');
+        console.log('  - animationVisual:', this.animationVisual ? '✅ Found' : '❌ Missing');
+        console.log('  - stepIndicators:', this.stepIndicators ? '✅ Found' : '❌ Missing');
+        console.log('  - stepContents:', this.stepContents.length, 'found');
+        console.log('  - prevBtn:', this.prevBtn ? '✅ Found' : '❌ Missing');
+        console.log('  - nextBtn:', this.nextBtn ? '✅ Found' : '❌ Missing');
 
         const criticalElements = ['animationVisual', 'stepIndicators'];
         const missing = criticalElements.filter(name => !this[name]);
@@ -43,6 +54,8 @@ class UVCAnimationSystem {
     }
 
     createIndicators() {
+        console.log('🎯 [UVC DEBUG] Creating step indicators...');
+        
         this.stepIndicators.innerHTML = '';
         
         for (let i = 0; i < this.totalSteps; i++) {
@@ -50,53 +63,133 @@ class UVCAnimationSystem {
             indicator.className = 'step-indicator';
             indicator.textContent = i + 1;
             indicator.setAttribute('aria-label', `Go to step ${i + 1}`);
+            indicator.style.zIndex = '1000'; // DEBUG: Force high z-index
+            indicator.style.position = 'relative'; // DEBUG: Ensure positioning
             if (i === 0) indicator.classList.add('active');
             
-            indicator.addEventListener('click', () => {
-                console.log(`🎯 Manual navigation to step ${i + 1}`);
+            // DEBUG: Add visual feedback
+            indicator.addEventListener('mouseenter', () => {
+                console.log(`🎯 [UVC DEBUG] Hover on step ${i + 1} button`);
+            });
+            
+            indicator.addEventListener('click', (e) => {
+                console.log(`🎯 [UVC DEBUG] CLICK detected on step ${i + 1} button!`);
+                console.log('🎯 [UVC DEBUG] Event target:', e.target);
+                console.log('🎯 [UVC DEBUG] Button element:', indicator);
+                e.preventDefault();
+                e.stopPropagation();
                 this.goToStep(i);
             });
             
             this.stepIndicators.appendChild(indicator);
         }
+        
+        console.log(`✅ [UVC DEBUG] Created ${this.totalSteps} step indicators`);
     }
 
     bindEvents() {
+        console.log('🔗 [UVC DEBUG] Binding navigation events...');
+        
         if (this.prevBtn) {
-            this.prevBtn.addEventListener('click', () => this.previousStep());
+            // DEBUG: Add visual feedback
+            this.prevBtn.style.zIndex = '1000';
+            this.prevBtn.style.position = 'relative';
+            
+            this.prevBtn.addEventListener('mouseenter', () => {
+                console.log('⬅️ [UVC DEBUG] Hover on prev button');
+            });
+            
+            this.prevBtn.addEventListener('click', (e) => {
+                console.log('⬅️ [UVC DEBUG] PREV button clicked!');
+                e.preventDefault();
+                e.stopPropagation();
+                this.previousStep();
+            });
+            
+            console.log('✅ [UVC DEBUG] Prev button events bound');
+        } else {
+            console.warn('⚠️ [UVC DEBUG] Prev button not found!');
         }
         
         if (this.nextBtn) {
-            this.nextBtn.addEventListener('click', () => this.nextStep());
+            // DEBUG: Add visual feedback  
+            this.nextBtn.style.zIndex = '1000';
+            this.nextBtn.style.position = 'relative';
+            
+            this.nextBtn.addEventListener('mouseenter', () => {
+                console.log('➡️ [UVC DEBUG] Hover on next button');
+            });
+            
+            this.nextBtn.addEventListener('click', (e) => {
+                console.log('➡️ [UVC DEBUG] NEXT button clicked!');
+                e.preventDefault();
+                e.stopPropagation();
+                this.nextStep();
+            });
+            
+            console.log('✅ [UVC DEBUG] Next button events bound');
+        } else {
+            console.warn('⚠️ [UVC DEBUG] Next button not found!');
         }
+    }
+
+    debugLayout() {
+        console.log('🔍 [UVC DEBUG] Debugging layout and click areas...');
+        
+        // Check all navigation elements
+        const navControls = document.querySelector('.navigation-controls');
+        const navArrows = document.querySelector('.navigation-arrows');
+        
+        if (navControls) {
+            console.log('📐 [UVC DEBUG] Navigation controls bounds:', navControls.getBoundingClientRect());
+            navControls.style.outline = '2px solid red'; // DEBUG: Visual indicator
+        }
+        
+        if (navArrows) {
+            console.log('📐 [UVC DEBUG] Navigation arrows bounds:', navArrows.getBoundingClientRect());
+            navArrows.style.outline = '2px solid blue'; // DEBUG: Visual indicator
+        }
+        
+        // Test all buttons
+        const allButtons = document.querySelectorAll('.nav-arrow, .step-indicator');
+        console.log(`🔍 [UVC DEBUG] Found ${allButtons.length} navigation buttons`);
+        
+        allButtons.forEach((btn, index) => {
+            console.log(`  Button ${index}:`, btn.getBoundingClientRect());
+            btn.style.outline = '1px solid green'; // DEBUG: Visual indicator
+        });
     }
 
     previousStep() {
         const newStep = this.currentStep > 0 ? this.currentStep - 1 : this.totalSteps - 1;
-        console.log(`⬅️ Previous: ${this.currentStep + 1} → ${newStep + 1}`);
+        console.log(`⬅️ [UVC DEBUG] Previous: ${this.currentStep + 1} → ${newStep + 1}`);
         this.goToStep(newStep);
     }
 
     nextStep() {
         const newStep = (this.currentStep + 1) % this.totalSteps;
-        console.log(`➡️ Next: ${this.currentStep + 1} → ${newStep + 1}`);
+        console.log(`➡️ [UVC DEBUG] Next: ${this.currentStep + 1} → ${newStep + 1}`);
         this.goToStep(newStep);
     }
 
     goToStep(stepIndex) {
         if (stepIndex >= 0 && stepIndex < this.totalSteps) {
-            console.log(`🎯 Jumping to step ${stepIndex + 1}`);
+            console.log(`🎯 [UVC DEBUG] Jumping to step ${stepIndex + 1}`);
             this.currentStep = stepIndex;
             this.updateDisplay();
+        } else {
+            console.error(`❌ [UVC DEBUG] Invalid step index: ${stepIndex}`);
         }
     }
 
     updateDisplay() {
-        console.log(`🔄 Updating to step ${this.currentStep + 1}`);
+        console.log(`🔄 [UVC DEBUG] Updating to step ${this.currentStep + 1}`);
         
         // Update step content
         this.stepContents.forEach((content, index) => {
-            content.classList.toggle('active', index === this.currentStep);
+            const isActive = index === this.currentStep;
+            content.classList.toggle('active', isActive);
+            console.log(`  Step ${index + 1} content: ${isActive ? 'ACTIVE' : 'inactive'}`);
         });
 
         // Update indicators
@@ -105,8 +198,10 @@ class UVCAnimationSystem {
             indicator.classList.remove('active', 'completed');
             if (index === this.currentStep) {
                 indicator.classList.add('active');
+                console.log(`  Indicator ${index + 1}: ACTIVE`);
             } else if (index < this.currentStep) {
                 indicator.classList.add('completed');
+                console.log(`  Indicator ${index + 1}: completed`);
             }
         });
 
@@ -115,7 +210,7 @@ class UVCAnimationSystem {
     }
 
     updateVisualAnimation(stepNumber) {
-        console.log(`🎨 Creating animation for step ${stepNumber}`);
+        console.log(`🎨 [UVC DEBUG] Creating animation for step ${stepNumber}`);
         
         // Clear existing timers
         if (this.step3Timer) {
@@ -144,7 +239,7 @@ class UVCAnimationSystem {
 
     // STEP 1: Kontinuierliche Kontaminations-Loop
     createContaminationLoop() {
-        console.log('🦠 Creating continuous contamination loop');
+        console.log('🦠 [UVC DEBUG] Creating continuous contamination loop');
         
         const maxMicrobes = 30;
         let microbeCount = 0;
@@ -190,14 +285,14 @@ class UVCAnimationSystem {
         this.step1LoopTimer = setInterval(() => {
             if (this.currentStep === 0) {
                 spawnMicrobe();
-                if (Math.random() < 0.3) spawnMicrobe(); // Zufällig doppelt spawnen
+                if (Math.random() < 0.3) spawnMicrobe();
             }
         }, 2000);
     }
 
     // STEP 2: UV-C Irradiation
     createUVCAnimation() {
-        console.log('💡 Creating UV-C irradiation');
+        console.log('💡 [UVC DEBUG] Creating UV-C irradiation');
         
         const uvSource = document.createElement('div');
         uvSource.className = 'uv-source';
@@ -214,7 +309,7 @@ class UVCAnimationSystem {
 
     // STEP 3: DNA Damage
     createDNAAnimation() {
-        console.log('🧬 Creating DNA damage animation');
+        console.log('🧬 [UVC DEBUG] Creating DNA damage animation');
         
         const dnaHelix = document.createElement('div');
         dnaHelix.className = 'dna-helix';
@@ -288,7 +383,7 @@ class UVCAnimationSystem {
 
     // STEP 4: Replication Failure
     createReplicationFailureAnimation() {
-        console.log('❌ Creating replication failure animation');
+        console.log('❌ [UVC DEBUG] Creating replication failure animation');
         
         const replicationFailure = document.createElement('div');
         replicationFailure.className = 'replication-failure';
@@ -340,7 +435,7 @@ class UVCAnimationSystem {
 
     // STEP 5: Population Collapse
     createCollapseAnimation() {
-        console.log('💀 Creating population collapse animation');
+        console.log('💀 [UVC DEBUG] Creating population collapse animation');
         
         const numDyingMicrobes = 25;
         
@@ -359,7 +454,7 @@ class UVCAnimationSystem {
 
     // STEP 6: Permanent Protection + Applications
     createProtectionAnimation() {
-        console.log('🛡️ Creating protection + applications animation');
+        console.log('🛡️ [UVC DEBUG] Creating protection + applications animation');
         
         const shield = document.createElement('div');
         shield.className = 'protection-shield';
@@ -416,8 +511,10 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 window.uvcAnimationSystem = new UVCAnimationSystem();
             } catch (error) {
-                console.error('💥 Initialization failed:', error);
+                console.error('💥 [UVC DEBUG] Initialization failed:', error);
             }
+        } else {
+            console.warn('⚠️ [UVC DEBUG] Science section not found - skipping initialization');
         }
     }, 500);
 });

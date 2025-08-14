@@ -69,11 +69,22 @@ Last Update: 2025-08-14
     padding: 14px 32px;
     background: var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-full); /* FIXED: Runde Ecken statt --radius-md */
     text-decoration: none;
     font-weight: 600;
     transition: var(--transition-normal);
 }
+
+.luvex-hero__content .luvex-hero__cta {
+    margin-top: 2rem; /* Abstand nach oben zum Text */
+    margin-bottom: var(--space-md); /* Abstand nach unten zum Sectionende */
+}
+
+.luvex-hero__content .hero-navigation {
+    margin-top: 2rem;
+    margin-bottom: 0;
+}
+
 
 .luvex-cta-primary:hover {
     background: #5ac7e0;
@@ -190,7 +201,7 @@ Last Update: 2025-08-14
 }
 
 
-/* --- 3.4 Text-Block (oben zentriert) - UPDATED --- */
+/* --- 3.4 Text-Block - UMGEKEHRTE REIHENFOLGE --- */
 .luvex-hero__content {
     display: flex;
     flex-direction: column;
@@ -198,44 +209,55 @@ Last Update: 2025-08-14
     text-align: center;
     flex-grow: 0;
     width: 100%;
-    margin-bottom: 2rem; /* Reduzierter Abstand zu Buttons */
+    margin-bottom: 2rem;
 }
 
-/* Haupttitel - Pyramiden-Basis (breiteste Ebene) */
-.luvex-hero__title {
-    font-size: clamp(3.2rem, 7vw, 5.5rem);
-    font-weight: 600;
-    color: var(--luvex-white);
-    margin: 0 0 var(--space-md) 0;
-    line-height: 1.1;
-    max-width: 900px; /* Breiteste Ebene */
-    text-align: center;
-}
 
 /* Cyan-Highlight für "Light" */
 .luvex-hero__title .text-highlight {
     color: var(--luvex-bright-cyan);
 }
 
-/* Untertitel - Pyramiden-Mitte */
+
+/* NEUE REIHENFOLGE: Description → Subtitle → Title */
+
+/* 1. Description (ganz oben) - Schmalste Ebene */
+.luvex-hero__description {
+    font-size: clamp(1rem, 2.2vw, 1.2rem); /* Kleinste Schrift */
+    color: var(--luvex-gray-300);
+    max-width: 600px; /* Schmalste Breite - Pyramiden-Spitze */
+    line-height: 1.6;
+    text-align: center;
+    margin: 0 0 var(--space-lg) 0; /* Abstand nach unten */
+    opacity: 0.9;
+    order: 1; /* Ganz oben */
+}
+
+
+/* 2. Subtitle (Mitte) - Mittlere Ebene */
 .luvex-hero__subtitle {
-    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-size: clamp(1.4rem, 3.5vw, 2rem); /* Mittlere Schrift */
     color: var(--luvex-gray-300);
     font-weight: 400;
-    max-width: 800px; /* Etwas schmaler */
+    max-width: 750px; /* Mittlere Breite */
     margin: 0 0 var(--space-lg) 0;
     line-height: 1.3;
     text-align: center;
+    order: 2; /* In der Mitte */
 }
 
-/* NEUE PYRAMIDEN-LOGIK für Description */
-.luvex-hero__description {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-sm);
-    width: 100%;
+/* 3. Title (ganz unten) - Breiteste Ebene */
+.luvex-hero__title {
+    font-size: clamp(3.5rem, 8vw, 6rem); /* Größte Schrift - noch größer als vorher */
+    font-weight: 600;
+    color: var(--luvex-white);
+    margin: 0; /* Kein Margin, da letztes Element vor Buttons */
+    line-height: 1.1;
+    max-width: 900px; /* Breiteste Ebene - Pyramiden-Basis */
+    text-align: center;
+    order: 3; /* Ganz unten, direkt vor Buttons */
 }
+
 
 /* Erster Beschreibungs-Container - Mittlere Breite */
 .luvex-hero__description-main {
@@ -359,45 +381,37 @@ HERO FIXES - Diese Regeln in _components.css ersetzen/ergänzen
 }
 
 
-/* RESPONSIVE: Mobile Anpassungen für größere Texte */
-@media (max-width: 768px) {
-    .luvex-hero__content {
-        margin-bottom: 3rem;
-    }
-    
-    .luvex-hero__title {
-        font-size: clamp(2.8rem, 8vw, 4rem);
-        margin-bottom: var(--space-sm);
-    }
-    
-    .luvex-hero__subtitle {
-        font-size: clamp(1.2rem, 5vw, 1.8rem);
-        margin-bottom: var(--space-md);
-    }
-    
-    .luvex-hero__description {
-        font-size: clamp(1rem, 3vw, 1.2rem);
-    }
-    
-    .luvex-hero__cta-container {
-        gap: 1rem;
-        padding-top: 1.5rem;
-    }
+
+
+/* SPEZIELLE MODIFIER für kompakte Heroes (News-Seite) */
+.luvex-hero--compact .luvex-hero__content {
+    margin-bottom: 1.5rem;
 }
 
-@media (max-width: 480px) {
-    .luvex-hero__cta-container {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .luvex-hero__cta,
-    .luvex-hero__cta-secondary {
-        width: 100%;
-        max-width: 280px;
-    }
+/* KOMPAKTE HEROES - Angepasst für umgekehrte Pyramide */
+.luvex-hero--compact .luvex-hero__description {
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    max-width: 550px;
+    margin-bottom: var(--space-md);
 }
 
+.luvex-hero--compact .luvex-hero__subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.7rem);
+    max-width: 700px;
+    margin-bottom: var(--space-md);
+}
+
+.luvex-hero--compact .luvex-hero__title {
+    font-size: clamp(3rem, 7vw, 4.5rem);
+    max-width: 800px;
+}
+
+
+
+.luvex-hero--compact .luvex-hero__cta-container {
+    padding-top: 0.5rem;
+    padding-bottom: var(--space-sm);
+}
 
 
 
@@ -454,16 +468,20 @@ HERO FIXES - Diese Regeln in _components.css ersetzen/ergänzen
 /* --- 5.1 Hero Navigation (for specific pages) --- */
 .hero-navigation {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: 2rem; /* Gleicher Abstand wie .luvex-hero__cta-container */
+    padding-top: 1rem; /* Gleicher Abstand wie .luvex-hero__cta-container */
+    padding-bottom: var(--space-md); /* Gleicher Abstand zum Sectionende */
+    width: 100%;
 }
 
 .hero-navigation__link {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 12px 24px;
+    padding: 16px 32px; /* Gleiche Padding wie normale CTAs */
     background: rgba(255, 255, 255, 0.05);
     color: var(--luvex-white);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -471,7 +489,9 @@ HERO FIXES - Diese Regeln in _components.css ersetzen/ergänzen
     text-decoration: none;
     font-weight: 500;
     transition: var(--transition-normal);
+    font-size: var(--text-base); /* Gleiche Schriftgröße */
 }
+
 
 .hero-navigation__link:hover {
     background: var(--luvex-bright-cyan);
@@ -738,28 +758,6 @@ HERO FIXES - Diese Regeln in _components.css ersetzen/ergänzen
     box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
 }
 
-@media (max-width: 768px) {
-    .floating-label-input { margin-bottom: 1rem; }
-    .form-grid--2-cols { grid-template-columns: 1fr; }
-    .floating-label-input input,
-    .floating-label-input textarea,
-    .floating-label-input select {
-        height: 52px;
-        padding: 20px 12px 6px 12px;
-    }
-    .floating-label-input label {
-        top: 16px;
-        left: 12px;
-    }
-    .floating-label-input input:focus ~ label,
-    .floating-label-input textarea:focus ~ label,
-    .floating-label-input select:focus ~ label,
-    .floating-label-input input:not(:placeholder-shown) ~ label,
-    .floating-label-input textarea:not(:placeholder-shown) ~ label,
-    .floating-label-input select:not([value=""]):not([disabled]) ~ label {
-        top: 6px;
-    }
-}
 
 /*
 ==============================================================================
@@ -845,21 +843,7 @@ HERO FIXES - Diese Regeln in _components.css ersetzen/ergänzen
     border-color: var(--luvex-dark-blue);
 }
 
-@media (max-width: 768px) {
-    .cta-section {
-        padding: 3rem 1.5rem;
-    }
 
-    .cta-section .cta-button {
-        display: block;
-        margin: 0 0 1rem 0;
-        width: 100%;
-        max-width: 280px;
-        margin-left: auto;
-        margin-right: auto;
-        justify-content: center;
-    }
-}
 
 /*
 ==============================================================================
@@ -1268,6 +1252,15 @@ HERO FIXES - Diese Regeln in _components.css ersetzen/ergänzen
     transition: left 0.8s ease-in-out;
 }
 
+
+
+
+
+
+
+
+
+
 /*
 ==============================================================================
 11. RESPONSIVE BREAKPOINTS FOR HEROES AND COMPONENTS
@@ -1324,64 +1317,90 @@ HERO FIXES - Diese Regeln in _components.css ersetzen/ergänzen
         gap: 0.5rem;
         align-items: flex-start;
     }
-}
 
-@media (max-width: 480px) {
-     .luvex-hero {
-        min-height: 45vh;
-    }
-    
-     .luvex-hero__container {
-        min-height: 30vh;
+
+    /* RESPONSIVE: Mobile Anpassungen für größere Texte */
+
+    .luvex-hero__content {
+        margin-bottom: 3rem;
     }
     
     .luvex-hero__title {
-        font-size: clamp(2.2rem, 8vw, 3.5rem);
+        max-width: 100%; /* Breiteste Ebene */
+        font-size: clamp(2.8rem, 8vw, 4.5rem);
     }
     
-    .luvex-hero__subtitle {
-        font-size: clamp(1rem, 4vw, 1.5rem);
+     .luvex-hero__subtitle {
+        max-width: 90%; /* Mittlere Ebene */
+        font-size: clamp(1.1rem, 4vw, 1.6rem);
+        margin-bottom: var(--space-md);
     }
-}
+    
+    .luvex-hero__description {
+        max-width: 95%; /* Schmalste Ebene */
+        font-size: clamp(0.9rem, 3vw, 1.1rem);
+        margin-bottom: var(--space-md);
+    }
+    
+    .luvex-hero__cta-container {
+        gap: 1rem;
+        padding-top: 1.5rem;
+    }
+     .hero-navigation {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 1.5rem;
+        padding-top: 0.5rem;
+    }
+     .hero-navigation__link {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
 
+    .cta-section {
+        padding: 3rem 1.5rem;
+    }
 
+    .cta-section .cta-button {
+        display: block;
+        margin: 0 0 1rem 0;
+        width: 100%;
+        max-width: 280px;
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center;
+    }
 
-/* ---------------------------------------------------- */
+    .floating-label-input { margin-bottom: 1rem; }
+    .form-grid--2-cols { grid-template-columns: 1fr; }
+    .floating-label-input input,
+    .floating-label-input textarea,
+    .floating-label-input select {
+        height: 52px;
+        padding: 20px 12px 6px 12px;
+    }
+    .floating-label-input label {
+        top: 16px;
+        left: 12px;
+    }
+    .floating-label-input input:focus ~ label,
+    .floating-label-input textarea:focus ~ label,
+    .floating-label-input select:focus ~ label,
+    .floating-label-input input:not(:placeholder-shown) ~ label,
+    .floating-label-input textarea:not(:placeholder-shown) ~ label,
+    .floating-label-input select:not([value=""]):not([disabled]) ~ label {
+        top: 6px;
+    }
 
-
-
-
-/* SPEZIELLE MODIFIER für kompakte Heroes (News-Seite) */
-.luvex-hero--compact .luvex-hero__content {
-    margin-bottom: 1.5rem;
-}
-
-
-.luvex-hero--compact .luvex-hero__title {
-    font-size: clamp(2.8rem, 6vw, 4.5rem); /* Etwas kleiner bei kompakten */
-    margin-bottom: var(--space-sm);
-}
-
-.luvex-hero--compact .luvex-hero__subtitle {
-    font-size: clamp(1.3rem, 3.5vw, 1.9rem);
-    margin-bottom: var(--space-md);
-}
-
-.luvex-hero--compact .luvex-hero__cta-container {
-    padding-top: 0.5rem;
-    padding-bottom: var(--space-sm);
-}
 
 /* RESPONSIVE: Mobile Anpassungen für Pyramiden-Look */
-@media (max-width: 768px) {
+
     .luvex-hero__content {
         margin-bottom: 1.5rem;
     }
     
-    /* Pyramiden-Verhältnisse auch auf Mobile beibehalten */
-     .luvex-hero__title {
-        max-width: 100%;
-    }
 
 
    .luvex-hero__subtitle {
@@ -1406,6 +1425,13 @@ HERO FIXES - Diese Regeln in _components.css ersetzen/ergänzen
     
 }
 
+
+/* ---------------------------------------------------- */
+
+
+
+
+
 @media (max-width: 480px) {
     .luvex-hero__cta-container {
         flex-direction: column;
@@ -1420,10 +1446,40 @@ HERO FIXES - Diese Regeln in _components.css ersetzen/ergänzen
     
     /* Pyramiden-Abstufung auch auf sehr kleinen Screens */
     .luvex-hero__subtitle {
-        max-width: 98%;
+        max-width: 95%;
     }
     
     .luvex-hero__description {
-        max-width: 95%;
+        max-width: 98%;
     }
+
+    .luvex-hero__cta-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .luvex-hero__cta,
+    .luvex-hero__cta-secondary {
+        width: 100%;
+        max-width: 280px;
+    }
+
+     .hero-navigation__link {
+        padding: 14px 24px;
+        font-size: var(--text-sm);
+    }
+
+     .luvex-hero {
+        min-height: 45vh;
+    }
+    
+     .luvex-hero__container {
+        min-height: 30vh;
+    }
+    
+     .luvex-hero__title {
+        max-width: 100%;
+        font-size: clamp(2.5rem, 9vw, 4rem);
+    }
+    
 }

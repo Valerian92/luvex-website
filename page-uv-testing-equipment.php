@@ -9,15 +9,15 @@ get_header(); ?>
 <section class="luvex-hero">
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
-            <h1 class="luvex-hero__title">
-                UV <span class="text-highlight">Testing Equipment</span>
-            </h1>
-            <h2 class="luvex-hero__subtitle">
-                Precision measurement tools for UV process validation
-            </h2>
             <p class="luvex-hero__description">
                 Ensure optimal UV performance with professional-grade measurement and testing equipment. From simple test strips to advanced dosimeters.
             </p>
+            <h2 class="luvex-hero__subtitle">
+                Precision measurement tools for UV process validation
+            </h2>
+            <h1 class="luvex-hero__title">
+                UV <span class="text-highlight">Testing</span> Equipment
+            </h1>
         </div>
         <div class="luvex-hero__cta-container">
             <a href="#measurement-guide" class="luvex-hero__cta-secondary">

@@ -13,29 +13,35 @@ get_header(); ?>
     <canvas id="homepage-hero-canvas"></canvas>
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
+            <!-- 1. Description (oben, schmal) -->
+            <p class="luvex-hero__description">
+                From area disinfection to precision curing - master UV technology with the world's leading specialists. Independent consulting, advanced simulations, and proven results.
+            </p>
+            
+            <!-- 2. Subtitle (Mitte) -->
+            <h2 class="luvex-hero__subtitle">
+                Independent UV technology experts advancing global knowledge
+            </h2>
+            
+            <!-- 3. Title (unten, breit, groß) -->
             <h1 class="luvex-hero__title">
                 Precision through <span class="text-highlight">Light</span>.<br>
                 Excellence through Engineering.
             </h1>
-            <h2 class="luvex-hero__subtitle">
-                Independent UV technology experts advancing global knowledge
-            </h2>
-            <p class="luvex-hero__description">
-                From area disinfection to precision curing - master UV technology with the world's leading specialists. Independent consulting, advanced simulations, and proven results.
-            </p>
-            <div class="luvex-hero__cta-container">
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="luvex-hero__cta-secondary">
-                    <i class="fas fa-atom"></i>
-                    <span>Explore UV Science</span>
-                </a>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="luvex-hero__cta luvex-cta-primary hero-button-active">
-                    <i class="fas fa-cube"></i>
-                    <span>Launch UV Simulator</span>
-                </a>
-            </div>
+        </div>
+        <div class="luvex-hero__cta-container">
+            <a href="/about/" class="luvex-hero__cta-secondary">
+                <i class="fas fa-atom"></i>
+                <span>Explore UV Science</span>
+            </a>
+            <a href="/uv-simulator/" class="luvex-hero__cta">
+                <i class="fas fa-cube"></i>
+                <span>Launch UV Simulator</span>
+            </a>
         </div>
     </div>
 </section>
+
 
 <!-- UV Knowledge Navigator -->
 <section class="section section--turquoise-light knowledge-navigator-section">

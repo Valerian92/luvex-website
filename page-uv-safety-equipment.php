@@ -9,15 +9,15 @@ get_header(); ?>
 <section class="luvex-hero">
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
-            <h1 class="luvex-hero__title">
-                <span class="text-highlight">UV Safety</span> Equipment
-            </h1>
-            <h2 class="luvex-hero__subtitle">
-                Professional-grade protection for UV work environments
-            </h2>
             <p class="luvex-hero__description">
                 Protect yourself and your team with high-quality UV safety equipment. From UV-blocking eyewear to protective clothing - ensure safe UV operations.
             </p>
+            <h2 class="luvex-hero__subtitle">
+                Professional-grade protection for UV work environments
+            </h2>
+            <h1 class="luvex-hero__title">
+                <span class="text-highlight">UV Safety</span> Equipment
+            </h1>
         </div>
         <div class="luvex-hero__cta-container">
             <a href="#safety-guide" class="luvex-hero__cta-secondary">

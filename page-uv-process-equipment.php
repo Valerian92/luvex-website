@@ -8,22 +8,22 @@ get_header(); ?>
 <section class="luvex-hero">
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
-            <h1 class="luvex-hero__title">
-                Professional <span class="text-highlight">UV Process Equipment</span>
-            </h1>
-            <h2 class="luvex-hero__subtitle">
-                Quality equipment for UV professionals and researchers
-            </h2>
             <p class="luvex-hero__description">
                 From safety equipment to precision measurement tools - get professional-grade UV equipment recommended by independent experts. No vendor bias, just the best tools for your applications.
             </p>
+            <h2 class="luvex-hero__subtitle">
+                Quality equipment for UV professionals and researchers
+            </h2>
+            <h1 class="luvex-hero__title">
+                Professional <span class="text-highlight">UV Process</span> Equipment
+            </h1>
         </div>
         <div class="luvex-hero__cta-container">
             <a href="#equipment-categories" class="luvex-hero__cta-secondary">
                 <i class="fas fa-list"></i>
                 <span>Browse Categories</span>
             </a>
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>" class="luvex-hero__cta">
+            <a href="/contact/" class="luvex-hero__cta">
                 <i class="fas fa-tools"></i>
                 <span>Get Recommendations</span>
             </a>

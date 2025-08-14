@@ -10,15 +10,15 @@ get_header(); ?>
 <main id="main" class="site-main">
 
 <!-- Hero Section -->
-  <section class="luvex-hero luvex-hero--compact">
+<section class="luvex-hero luvex-hero--compact">
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
-            <h1 class="luvex-hero__title">
-                UV Technology News
-            </h1>
-            <h2 class="luvex-hero__subtitle">
+            <p class="luvex-hero__description">
                 The latest innovations, research findings, and industry updates in ultraviolet technology.
-            </h2>
+            </p>
+            <h1 class="luvex-hero__title">
+                UV Technology <span class="text-highlight">News</span>
+            </h1>
         </div>
         <div class="luvex-hero__cta-container">
             <a href="#latest-articles" class="luvex-hero__cta-secondary">
@@ -32,6 +32,7 @@ get_header(); ?>
         </div>
     </div>
 </section>
+
 
 <!-- Filter und Suche bleibt unverändert -->
 <section class="news-filter-section">
