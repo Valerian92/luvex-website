@@ -9,8 +9,8 @@ get_header(); ?>
 
 <main id="main" class="site-main">
 
-    <!-- Hero Section -->
-    <section class="news-hero-section">
+<!-- Hero Section -->
+    <section class="news-hero-section luvex-hero--animated-flow">
         <div class="news-hero-content">
             <h1 class="title">UV Technology News</h1>
             <p class="subtitle">The latest innovations, research findings, and industry updates in ultraviolet technology.</p>
@@ -38,6 +38,7 @@ get_header(); ?>
         </div>
     </section>
 
+    
     <!-- Artikel-Grid -->
     <section class="news-grid-section">
         <div class="news-grid-container">
