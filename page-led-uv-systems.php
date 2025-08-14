@@ -41,25 +41,25 @@ get_header(); ?>
     
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
-            <!-- Umgekehrte Pyramide: Description → Subtitle → Title -->
+            <!-- Normal Pyramide durch HTML-Reihenfolge -->
             
-            <!-- 1. Description (oben, schmal) -->
-            <p class="luvex-hero__description">
-                Discover the advantages of LED UV technology for modern applications.
-            </p>
+            <!-- 1. Title (oben) -->
+            <h1 class="luvex-hero__title">
+                <span class="text-highlight">LED UV</span> Systems
+            </h1>
             
             <!-- 2. Subtitle (Mitte) -->
             <h2 class="luvex-hero__subtitle">
                 Next-generation UV technology with precision control
             </h2>
             
-            <!-- 3. Title (unten, breit, groß) -->
-            <h1 class="luvex-hero__title">
-                <span class="text-highlight">LED UV</span> Systems
-            </h1>
+            <!-- 3. Description (unten) -->
+            <p class="luvex-hero__description">
+                Discover the advantages of LED UV technology for modern applications.
+            </p>
         </div>
         
-        <!-- CTA Container mit korrektem Abstand -->
+        <!-- CTA Container -->
         <div class="luvex-hero__cta-container">
             <a href="#comparison" class="luvex-hero__cta-secondary">
                 <i class="fas fa-balance-scale"></i>
@@ -75,6 +75,8 @@ get_header(); ?>
     <!-- Container for the integrated HUD controls -->
     <div id="integrated-controls-container"></div>
 </section>
+    
+  
 
 <!-- Key Advantages Section -->
 <section class="section">

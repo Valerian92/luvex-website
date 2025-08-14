@@ -246,3 +246,64 @@ Description: Dark-themed FAQ styles that apply ONLY to the .faq-accordion
   transform: rotate(135deg);
   color: var(--luvex-bright-cyan, #6DD5ED);
 }
+
+
+
+
+/* Ergänzungen */ 
+
+/*
+==============================================================================
+PAGE-SPECIFIC CSS: _page-uv-led.css
+==============================================================================
+*/
+
+/* LED UV Hero - Normal Pyramide (überschreibt Standard umgekehrte Pyramide) */
+.uv-led-hero .luvex-hero__content {
+    /* Reihenfolge zurücksetzen für normale Pyramide */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.uv-led-hero .luvex-hero__title {
+    order: 1; /* Title oben */
+    margin-bottom: var(--space-md);
+}
+
+.uv-led-hero .luvex-hero__subtitle {
+    order: 2; /* Subtitle Mitte */
+    margin-bottom: var(--space-lg);
+}
+
+.uv-led-hero .luvex-hero__description {
+    order: 3; /* Description unten */
+    margin-bottom: 0;
+}
+
+/* Z-Index Fixes für Canvas + Buttons */
+.uv-led-hero #uv-led-canvas {
+    z-index: 1;
+    pointer-events: none;
+}
+
+.uv-led-hero .luvex-hero__container {
+    z-index: 10;
+}
+
+.uv-led-hero .luvex-hero__cta-container {
+    z-index: 11;
+}
+
+.uv-led-hero .luvex-hero__cta,
+.uv-led-hero .luvex-hero__cta-secondary {
+    position: relative;
+    z-index: 12;
+    pointer-events: auto;
+}
+
+.uv-led-hero #integrated-controls-container {
+    z-index: 15;
+    pointer-events: auto;
+}
