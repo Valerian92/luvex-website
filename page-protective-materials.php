@@ -18,8 +18,14 @@ get_header(); ?>
             <p class="luvex-hero__description">
                 From UV-blocking plexiglas to PTFE-coated components - get the specialized materials you need for professional UV installations.
             </p>
-            <a href="#products" class="luvex-hero__cta">
-                <i class="fa-solid fa-cube"></i>
+        </div>
+        <div class="luvex-hero__cta-container">
+            <a href="#material-properties" class="luvex-hero__cta-secondary">
+                <i class="fas fa-atom"></i>
+                <span>Material Properties</span>
+            </a>
+            <a href="#catalog" class="luvex-hero__cta">
+                <i class="fas fa-cube"></i>
                 <span>Shop Materials</span>
             </a>
         </div>

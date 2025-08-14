@@ -6,34 +6,32 @@
  */
 get_header(); ?>
 
-<section class="luvex-hero luvex-hero--safety-equipment luvex-hero--animated-blueprint">
+<section class="luvex-hero">
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
-
-            <!-- Wrapper für den Textinhalt -->
-            <div class="luvex-hero__text-wrapper">
-                <h1 class="luvex-hero__title">
-                    <span class="text-highlight">UV Safety</span> Equipment
-                </h1>
-                <h2 class="luvex-hero__subtitle">
-                    Professional-grade protection for UV work environments
-                </h2>
-                <p class="luvex-hero__description">
-                    Protect yourself and your team with high-quality UV safety equipment. From UV-blocking eyewear to protective clothing - ensure safe UV operations.
-                </p>
-            </div>
-
-            <!-- Wrapper für den Button -->
-            <div class="luvex-hero__cta-container">
-                <a href="#products" class="luvex-hero__cta">
-                    <i class="fa-solid fa-shield-alt"></i>
-                    <span>Shop Safety Equipment</span>
-                </a>
-            </div>
-            
+            <h1 class="luvex-hero__title">
+                <span class="text-highlight">UV Safety</span> Equipment
+            </h1>
+            <h2 class="luvex-hero__subtitle">
+                Professional-grade protection for UV work environments
+            </h2>
+            <p class="luvex-hero__description">
+                Protect yourself and your team with high-quality UV safety equipment. From UV-blocking eyewear to protective clothing - ensure safe UV operations.
+            </p>
+        </div>
+        <div class="luvex-hero__cta-container">
+            <a href="#safety-guide" class="luvex-hero__cta-secondary">
+                <i class="fas fa-shield-alt"></i>
+                <span>Safety Guidelines</span>
+            </a>
+            <a href="#products" class="luvex-hero__cta">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Shop Safety Gear</span>
+            </a>
         </div>
     </div>
 </section>
+
 
 <!-- Section for UV Safety Glasses with FAQ -->
 <section class="section" id="uv-safety-glasses">

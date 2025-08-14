@@ -5,34 +5,32 @@
  */
 get_header(); ?>
 
-<section class="luvex-hero luvex-hero--process-equipment luvex-hero--animated-blueprint">
+<section class="luvex-hero">
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
-
-            <!-- Wrapper für den Textinhalt -->
-            <div class="luvex-hero__text-wrapper">
-                <h1 class="luvex-hero__title">
-                    Professional <span class="text-highlight">UV Process Equipment</span>
-                </h1>
-                <h2 class="luvex-hero__subtitle">
-                    Quality equipment for UV professionals and researchers
-                </h2>
-                <p class="luvex-hero__description">
-                    From safety equipment to precision measurement tools - get professional-grade UV equipment recommended by independent experts. No vendor bias, just the best tools for your applications.
-                </p>
-            </div>
-
-            <!-- Wrapper für den Button -->
-            <div class="luvex-hero__cta-container">
-                <a href="#equipment-categories" class="luvex-hero__cta">
-                    <i class="fa-solid fa-tools"></i>
-                    <span>Browse Equipment</span>
-                </a>
-            </div>
-
+            <h1 class="luvex-hero__title">
+                Professional <span class="text-highlight">UV Process Equipment</span>
+            </h1>
+            <h2 class="luvex-hero__subtitle">
+                Quality equipment for UV professionals and researchers
+            </h2>
+            <p class="luvex-hero__description">
+                From safety equipment to precision measurement tools - get professional-grade UV equipment recommended by independent experts. No vendor bias, just the best tools for your applications.
+            </p>
+        </div>
+        <div class="luvex-hero__cta-container">
+            <a href="#equipment-categories" class="luvex-hero__cta-secondary">
+                <i class="fas fa-list"></i>
+                <span>Browse Categories</span>
+            </a>
+            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>" class="luvex-hero__cta">
+                <i class="fas fa-tools"></i>
+                <span>Get Recommendations</span>
+            </a>
         </div>
     </div>
 </section>
+
 
 <section class="section" id="equipment-categories">
     <div class="container">

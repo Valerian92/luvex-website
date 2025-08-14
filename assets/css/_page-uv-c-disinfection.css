@@ -1,10 +1,19 @@
 /*
 ==============================================================================
-PAGE: UV-C DISINFECTION - HERO ANIMATION STYLES
+PAGE: UV-C DISINFECTION - LAYOUT & SECTIONS
+==============================================================================
+Datei: _page-uv-c-disinfection.css
+Beschreibung: Komplettes Layout für UV-C Disinfection Seite
+Dependencies: animations.css, _variables.css, _layout.css
 ==============================================================================
 */
 
-/* KORREKTUR: Container für die Animation positionieren */
+/* --- HERO SECTION LAYOUT --- */
+.uvc-hero {
+    min-height: 600px;
+    position: relative;
+}
+
 .uvc-hero .animation-background {
     position: absolute;
     top: 0;
@@ -12,473 +21,29 @@ PAGE: UV-C DISINFECTION - HERO ANIMATION STYLES
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: 0; /* Stellt sicher, dass die Animation hinter dem Inhalt liegt */
+    z-index: 0;
 }
 
-/* Der zentrale Lichtimpuls */
-.uvc-hero .pulse {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 0;
-    height: 0;
-    background: radial-gradient(circle, rgba(109, 213, 237, 0.25) 0%, transparent 70%);
-    border-radius: 50%;
-    /* Die Animation 'expand-pulse' wird unten definiert */
-    animation: expand-pulse 8s ease-out infinite;
-}
-
-/* Stil für die einzelnen Partikel */
-.pathogen-particle {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background-color: rgba(109, 213, 237, 0.6);
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(109, 213, 237, 0.5);
-    /* Die Animation 'float' wird unten definiert */
-    animation: float 20s ease-in-out infinite;
-    transition: background-color 0.5s ease, transform 0.5s ease;
-}
-
-/* Stil für inaktivierte Partikel */
-.pathogen-particle.inactive {
-    background-color: rgba(73, 80, 87, 0.4); /* Dunkler/Grau */
-    transform: scale(0.8);
-    box-shadow: none;
-}
-
-/* Keyframe-Animation für den Lichtimpuls */
-@keyframes expand-pulse {
-    0% {
-        width: 0;
-        height: 0;
-        opacity: 0.5;
-    }
-    100% {
-        width: 250vmax; /* Groß genug, um immer den ganzen Bildschirm abzudecken */
-        height: 250vmax;
-        opacity: 0;
-    }
-}
-
-/* Keyframe-Animation für das Schweben der Partikel */
-@keyframes float {
-    0% { transform: translateY(0px) translateX(0px); }
-    25% { transform: translateY(-15px) translateX(10px); }
-    50% { transform: translateY(0px) translateX(20px); }
-    75% { transform: translateY(15px) translateX(10px); }
-    100% { transform: translateY(0px) translateX(0px); }
-}
-
-/*
-==============================================================================
-LUVEX THEME - PAGE: UV-C DISINFECTION (Refactored)
-==============================================================================
-*/
-
-/* --- HERO SECTION SPECIFIC --- */
-.uvc-hero {
-    min-height: 600px;
-}
-
-/* KORREKTUR: Stellt sicher, dass die Animation über dem Grid-Hintergrund liegt */
-/* Wurde oben durch spezifischere Regel ersetzt. Kann hier entfernt oder belassen werden. */
-/* .uvc-hero .animation-background {
-    z-index: 1; 
-} */
-
-/* --- HOW IT WORKS SECTION (Gallery Style) --- */
-:root {
-    --luvex-purple-uv: #8b5cf6;
-}
-
-.science-section {
-    background: rgba(109, 213, 237, 0.03);
-    position: relative;
-    padding: var(--space-xl) 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.science-section .section-title {
-    color: var(--luvex-dark-blue);
-    margin-bottom: 3rem;
-    font-size: clamp(2rem, 4vw, 2.5rem);
-    position: relative;
-}
-
-.science-section .section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, var(--luvex-bright-cyan), var(--luvex-vibrant-blue));
-    border-radius: 2px;
-}
-
-.science-layout-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    position: relative;
-    flex: 1;
-    align-items: center;
-}
-
-.science-animation-column {
-    height: 70vh;
-    display: flex;
-    align-items: center;
-}
-
-.science-animation-container {
-    width: 100%;
-    height: 100%;
-    border-radius: var(--radius-lg);
-    background: var(--luvex-dark-blue);
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(27, 42, 73, 0.3);
-}
-
-.science-steps-column {
-    position: relative;
-    z-index: 2;
-    padding-left: 3rem;
-    height: 70vh;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-}
-
-#dna-canvas {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
-.science-steps {
-    list-style: none;
-    padding: 0;
-    position: relative;
-    display: flex;
-    width: 100%;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.science-steps::before {
-    content: '';
-    position: absolute;
-    left: -24px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 4px;
-    height: 60px;
-    background: var(--luvex-gray-200);
-    border-radius: 2px;
-}
-
-#timeline-progress {
-    position: absolute;
-    top: 50%;
-    left: -24px;
-    transform: translateY(-50%);
-    width: 4px;
-    height: 0;
-    background: var(--luvex-bright-cyan);
-    border-radius: 2px;
-    transition: height 0.4s ease-out;
-    z-index: 1;
-}
-
-.science-step {
-    min-width: 100%;
-    flex-shrink: 0;
-    position: relative;
-    opacity: 0.4;
-    transition: opacity 0.4s ease;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.science-step.is-active {
-    opacity: 1;
-}
-
-.science-step::before {
-    content: '';
-    position: absolute;
-    left: -35px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background-color: var(--luvex-white);
-    border: 4px solid var(--luvex-gray-200);
-    transition: all 0.3s ease;
-    z-index: 2;
-}
-
-.science-step.is-active::before {
-    border-color: var(--luvex-bright-cyan);
-    box-shadow: 0 0 0 8px rgba(109, 213, 237, 0.15);
-}
-
-.science-step h3 {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--luvex-dark-blue);
-    margin-bottom: 1rem;
-    line-height: 1.2;
-}
-
-.science-step p {
-    font-size: 1.2rem;
-    color: var(--luvex-gray-700);
-    line-height: 1.7;
-    margin: 0 0 1.5rem 0;
-}
-
-
-/* --- APPLICATIONS SECTIONS --- */
-/* Redundant .value-card styles removed as they are now global */
-.applications-section h2 {
-    font-size: clamp(1.8rem, 3.5vw, 2.25rem);
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    justify-content: center;
-    margin-bottom: 3rem;
-    color: var(--luvex-dark-blue);
-}
-
-.applications-section h2 i {
-    color: var(--luvex-vibrant-blue);
-}
-
-
-/* --- Responsive Design --- */
-@media (max-width: 992px) {
-    .science-layout-wrapper {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    .science-animation-column {
-        height: 50vh;
-        order: -1;
-    }
-    .science-steps-column {
-        padding-left: 2rem;
-        height: auto;
-        min-height: 60vh;
-    }
-}
-
-
-/*
-==============================================================================
-PAGE: UV-C DISINFECTION - SCIENCE GALLERY UI STYLES
-==============================================================================
-*/
-
-/* Container für die Indikatoren am unteren Rand der Sektion */
-.gallery-indicators {
-    position: absolute;
-    bottom: 2rem;
-    /* Zentriert sich relativ zur linken Spalte, wir passen das an */
-    left: 75%; /* Positioniert es in der Mitte der rechten Texthälfte */
-    transform: translateX(-50%);
-    display: flex;
-    gap: 0.75rem;
-    z-index: 10;
-}
-
-/* Stil für einen einzelnen Indikator-Button */
-.gallery-indicator {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: var(--luvex-gray-300);
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    transition: all 0.3s ease;
-}
-
-.gallery-indicator:hover {
-    background-color: var(--luvex-bright-cyan);
-}
-
-.gallery-indicator.active {
-    background-color: var(--luvex-vibrant-blue);
-    transform: scale(1.2);
-}
-
-/* Hinweis zum Scrollen, der im HTML bereits vorhanden ist */
-.scroll-hint {
-    position: absolute;
-    bottom: 2rem;
-    right: 2rem; 
-    font-size: var(--text-sm);
-    color: var(--luvex-gray-700);
-    opacity: 0.7;
-    z-index: 10;
-    transition: opacity 0.3s ease;
-}
-
-/* Anpassung an das neue JS: Die Timeline-Hülle erstreckt sich über 100% der Höhe */
-.science-steps::before {
-    content: '';
-    position: absolute;
-    left: -24px;
-    top: 0;
-    bottom: 0; 
-    width: 4px;
-    height: 100%; /* Volle Höhe als "Container" für den Fortschrittsbalken */
-    background: var(--luvex-gray-200);
-    border-radius: 2px;
-}
-
-/* Der eigentliche Fortschrittsbalken, der per JS in der Höhe animiert wird */
-#timeline-progress {
-    position: absolute;
-    top: 0;
-    left: -24px;
-    transform: none; /* Reset der alten Positionierung */
-    width: 4px;
-    height: 0%; /* Startet bei 0% Höhe */
-    background: var(--luvex-bright-cyan);
-    border-radius: 2px;
-    transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Gleiche Dauer wie Text-Slide */
-    z-index: 1;
-}
-
-/* Responsive Anpassung für die Indikatoren auf kleineren Bildschirmen */
-@media (max-width: 992px) {
-    .gallery-indicators {
-        left: 50%; /* Zentriert auf dem ganzen Bildschirm */
-    }
-    .scroll-hint {
-        display: none; /* Scroll-Hinweis auf Mobilgeräten ausblenden */
-    }
-}
-
-
-
-
-/*
-==============================================================================
-LUVEX WEBSITE - OPTIMIERUNGEN (12.08.2025) - Revision 2
-==============================================================================
-*/
-
-/* ---------------------------------------------------------------------------
-1. HERO-BEREICH OPTIMIERUNGEN (Revision 2)
----------------------------------------------------------------------------
-*/
-
-/* --- 1.1 Hero Animation: Farben intensivieren (unverändert) --- */
-.pathogen-particle {
-    background-color: var(--luvex-bright-cyan);
-    opacity: 0.8;
-    box-shadow: 0 0 12px 2px var(--luvex-bright-cyan);
-}
-.uvc-hero .pulse {
-    background: radial-gradient(circle, rgba(109, 213, 237, 0.4) 0%, transparent 65%);
-}
-
-/* --- 1.2 Hero Layout & Typografie (Revision 2) --- */
-/* Erhöht die vertikalen Abstände zwischen den Textelementen. */
+/* Hero Layout Optimierungen */
 .luvex-hero__title {
-    margin-bottom: var(--space-sm); /* NEU: Abstand nach dem Titel */
+    margin-bottom: var(--space-sm);
 }
+
 .luvex-hero__subtitle {
-    margin-bottom: var(--space-md); /* NEU: Größerer Abstand nach dem Untertitel */
+    margin-bottom: var(--space-md);
 }
 
-/* Verhindert den Zeilenumbruch und schafft massiv Platz zu den Buttons. */
 .luvex-hero__description {
-    max-width: 950px; /* Erhöht, um Umbruch zu verhindern */
-    margin-bottom: var(--space-xl); /* Erhöht auf den größten Abstandswert */
+    max-width: 950px;
+    margin-bottom: var(--space-xl);
 }
 
-
-/* ---------------------------------------------------------------------------
-2. SCIENCE GALLERY OPTIMIERUNGEN (Revision 2)
----------------------------------------------------------------------------
-*/
-
-/* --- 2.1 Grundlayout der Sektion anpassen (Revision 2) --- */
-/* Macht die Sektion deutlich flacher, um das "Gefangen sein" zu verhindern. */
-.science-section {
-    min-height: 85vh; /* Reduziert auf 85% der Bildschirmhöhe */
-    padding-top: 2.5vh; /* Kleiner Puffer oben */
-    padding-bottom: 2.5vh; /* Kleiner Puffer unten */
-    display: flex; /* Stellt vertikale Zentrierung sicher */
-    align-items: center;
-    
-    /* DEBUG-STIL (unverändert) */
-    background-color: #f0f7fa; 
-}
-
-/* --- 2.2 Layout-Wrapper und Spalten anpassen (Revision 2) --- */
-/* Stellt das Layout auf eine breite Animations-Spalte (links) und eine
-   schmale Text-Spalte (rechts) um. */
-.science-layout-wrapper {
-    grid-template-columns: 2fr 1fr; /* NEU: Verhältnis 2:1 */
-    gap: 2rem; /* NEU: Reduzierter Abstand zwischen den Spalten */
-    height: 80vh; /* Feste Höhe, die kleiner als die Sektion ist */
-    max-height: 650px; /* Maximale Höhe für sehr große Bildschirme */
-    align-items: center;
-}
-
-/* --- 2.3 DEBUG-STILE für die Container (unverändert) --- */
-.science-animation-column {
-    border: 2px dashed red;
-    background-color: rgba(255, 0, 0, 0.05);
-}
-.science-animation-container {
-    border: 2px solid var(--luvex-bright-cyan);
-}
-.science-steps-column {
-    border: 2px dashed blue;
-    background-color: rgba(0, 123, 255, 0.05);
-}
-
-/* --- 2.4 UI-Elemente an neues Layout anpassen (Revision 2) --- */
-/* Positioniert die Indikatoren mittig unter der neuen, schmaleren Text-Spalte. */
-.gallery-indicators {
-    left: 83.33%; /* Zentriert im rechten Drittel des Layouts (2/3 + 1/6) */
-}
-
-/* Die Spalten passen sich der Höhe des Wrappers an (unverändert) */
-.science-animation-column,
-.science-steps-column {
-    height: 100%;
-}
-
-
-
-/*
-==============================================================================
-PAGE: UV-C DISINFECTION - SCIENCE GALLERY (UPDATED)
-==============================================================================
-*/
-
+/* --- SCIENCE GALLERY SECTION LAYOUT --- */
 .science-section {
     background-color: #f8fafc;
     padding: 4rem 2rem;
     position: relative;
-    min-height: 100vh;
+    min-height: 85vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -506,20 +71,24 @@ PAGE: UV-C DISINFECTION - SCIENCE GALLERY (UPDATED)
     max-width: 1400px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 3rem;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
     background-color: var(--luvex-white);
     border-radius: 16px;
     padding: 3rem;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     border: 1px solid var(--luvex-gray-200);
+    height: 80vh;
+    max-height: 650px;
+    align-items: center;
 }
 
+/* --- ANIMATION PANEL LAYOUT --- */
 .animation-panel {
     background: linear-gradient(135deg, var(--luvex-dark-blue) 0%, #2D4A7C 100%);
     border-radius: 12px;
     position: relative;
-    min-height: 500px;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -536,35 +105,6 @@ PAGE: UV-C DISINFECTION - SCIENCE GALLERY (UPDATED)
 }
 
 .animation-content {
-    text-align: center;
-    color: var(--luvex-white);
-    position: relative;
-    z-index: 2;
-}
-
-.animation-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 2rem;
-    background: rgba(0,0,0,0.3);
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
-}
-
-.animation-visual {
-    width: 300px;
-    height: 300px;
-    margin: 0 auto;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
-/* Vereinfachte Animation ohne Timer/Play Controls */
-.animation-content {
     width: 100%;
     height: 100%;
     display: flex;
@@ -574,7 +114,7 @@ PAGE: UV-C DISINFECTION - SCIENCE GALLERY (UPDATED)
 }
 
 .animation-visual {
-    width: 350px;  /* Etwas größer ohne Titel */
+    width: 350px;
     height: 350px;
     margin: 0 auto;
     position: relative;
@@ -583,41 +123,12 @@ PAGE: UV-C DISINFECTION - SCIENCE GALLERY (UPDATED)
     justify-content: center;
 }
 
-/* Navigation Controls anpassen */
-.navigation-controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.step-indicators {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.navigation-arrows {
-    display: flex;
-    gap: 0.75rem;
-}
-
-
-.timer-display {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    color: rgba(255,255,255,0.8);
-    font-size: 0.9rem;
-    background: rgba(0,0,0,0.3);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-}
-
-/* Control Panel */
+/* --- CONTROL PANEL --- */
 .control-panel {
     padding: 2rem 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .step-content {
@@ -648,6 +159,35 @@ PAGE: UV-C DISINFECTION - SCIENCE GALLERY (UPDATED)
     margin: 0 0 2rem 0;
 }
 
+/* Benefits List für Step 6 */
+.step-content .benefits-list {
+    margin: 1rem 0;
+    padding: 0;
+    list-style: none;
+}
+
+.step-content .benefits-list li {
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
+    color: var(--luvex-gray-700);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.step-content .benefits-list li::before {
+    content: '✓';
+    color: var(--luvex-bright-cyan);
+    font-weight: bold;
+    font-size: 1rem;
+    margin-top: 0.1rem;
+    flex-shrink: 0;
+}
+
+.step-content .benefits-list strong {
+    color: var(--luvex-dark-blue);
+}
+
 .final-cta a {
     display: inline-flex;
     align-items: center;
@@ -663,68 +203,52 @@ PAGE: UV-C DISINFECTION - SCIENCE GALLERY (UPDATED)
     transform: translateX(5px);
 }
 
-.controls {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin: 2rem 0;
-}
-
-.play-pause-btn {
-    background: var(--luvex-vibrant-blue);
-    color: var(--luvex-white);
-    border: none;
-    padding: 0.8rem 1.5rem;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-}
-
-.play-pause-btn:hover {
-    background: #0056b3;
-    transform: translateY(-2px);
-}
-
-.progress-container {
-    flex: 1;
-    background: var(--luvex-gray-200);
-    height: 8px;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, var(--luvex-vibrant-blue), var(--luvex-bright-cyan));
-    border-radius: 4px;
-    transition: width 0.3s ease;
-    width: 0%;
-}
-
-.timer-display-mobile {
-    display: none;
-    background: rgba(27, 42, 73, 0.1);
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    font-family: 'Courier New', monospace;
-    font-size: 0.9rem;
-    color: var(--luvex-dark-blue);
-    min-width: 80px;
-    text-align: center;
-}
-
+/* --- NAVIGATION CONTROLS --- */
 .navigation-controls {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    margin-top: 1rem;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.navigation-arrows {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
 }
 
 .step-indicators {
     display: flex;
     gap: 0.5rem;
+}
+
+.nav-arrow {
+    width: 45px;
+    height: 45px;
+    border: 2px solid var(--luvex-bright-cyan);
+    background: rgba(109, 213, 237, 0.1);
+    border-radius: 50%;
+    color: var(--luvex-bright-cyan);
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.nav-arrow:hover {
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-white);
+    transform: scale(1.1);
+}
+
+.nav-arrow:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
 }
 
 .step-indicator {
@@ -753,39 +277,6 @@ PAGE: UV-C DISINFECTION - SCIENCE GALLERY (UPDATED)
     color: var(--luvex-dark-blue);
 }
 
-.navigation-arrows {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.nav-arrow {
-    width: 50px;
-    height: 50px;
-    border: 2px solid var(--luvex-bright-cyan);
-    background: rgba(109, 213, 237, 0.1);
-    border-radius: 50%;
-    color: var(--luvex-bright-cyan);
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-}
-
-.nav-arrow:hover {
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-white);
-    transform: scale(1.1);
-}
-
-.nav-arrow:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-    transform: none;
-}
-
 .scroll-hint {
     text-align: center;
     margin-top: 2rem;
@@ -794,38 +285,234 @@ PAGE: UV-C DISINFECTION - SCIENCE GALLERY (UPDATED)
     opacity: 0.7;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* --- APPLICATIONS SECTIONS --- */
+.applications-section h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.25rem);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+    color: var(--luvex-dark-blue);
+}
+
+.applications-section h2 i {
+    color: var(--luvex-vibrant-blue);
+}
+
+/* --- BENEFITS SECTION --- */
+.benefits-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e8f4f8 100%);
+    padding: 4rem 0;
+}
+
+.benefits-section h2 {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    color: var(--luvex-dark-blue);
+    margin-bottom: 3rem;
+}
+
+.benefit-card {
+    background: var(--luvex-white);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(27, 42, 73, 0.08);
+    border: 1px solid rgba(109, 213, 237, 0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(27, 42, 73, 0.15);
+    border-color: var(--luvex-bright-cyan);
+}
+
+.benefit-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.benefit-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--luvex-dark-blue);
+    margin: 0 0 1rem 0;
+}
+
+.benefit-card p {
+    color: var(--luvex-gray-700);
+    line-height: 1.6;
+    margin: 0;
+    flex: 1;
+}
+
+/* --- CTA SECTION --- */
+.cta-section {
+    background: var(--luvex-dark-blue);
+    color: var(--luvex-white);
+    text-align: center;
+    padding: 4rem 0;
+}
+
+.cta-section h3 {
+    color: var(--luvex-white);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.cta-section p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+}
+
+.luvex-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    padding: 1rem 2rem;
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
+}
+
+.luvex-cta-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(109, 213, 237, 0.4);
+    background: #5ccde6;
+}
+
+.luvex-cta-primary i {
+    font-size: 1.2rem;
+}
+
+/* --- SECTION TRANSITIONS (von Standard LUVEX) --- */
+.precision-transition {
+    background: var(--luvex-white);
+}
+
+.diagonal-transition {
+    background: linear-gradient(135deg, #f8fafc 0%, #e8f4f8 100%);
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 992px) {
     .showcase-container {
         grid-template-columns: 1fr;
         gap: 2rem;
-        padding: 2rem;
+        height: auto;
+        max-height: none;
     }
     
-    .controls {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 1rem;
+    .animation-panel {
+        height: 400px;
+        order: -1;
     }
     
-    .timer-display {
-        display: none;
-    }
-    
-    .timer-display-mobile {
-        display: block;
+    .control-panel {
+        height: auto;
+        min-height: 300px;
     }
     
     .navigation-controls {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .step-indicators {
-        justify-content: center;
+        gap: 0.75rem;
     }
     
     .navigation-arrows {
-        justify-content: center;
+        gap: 0.75rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    .nav-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .step-indicators {
+        gap: 0.4rem;
+    }
+    
+    .step-indicator {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+    
+    .animation-visual {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .grid-3 {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .showcase-container {
+        padding: 2rem;
+    }
+    
+    .science-section {
+        padding: 2rem 1rem;
+        min-height: auto;
+    }
+    
+    .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .step-content h3 {
+        font-size: 1.5rem;
+    }
+    
+    .step-content p {
+        font-size: 1rem;
+    }
+    
+    .benefits-section {
+        padding: 3rem 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .grid-4 {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .benefit-card {
+        padding: 1.5rem;
+    }
+    
+    .benefit-icon {
+        font-size: 2.5rem;
+        height: 50px;
+    }
+    
+    .animation-visual {
+        width: 240px;
+        height: 240px;
+    }
+    
+    .luvex-cta-primary {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
     }
 }

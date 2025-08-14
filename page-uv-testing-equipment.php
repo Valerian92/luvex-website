@@ -6,34 +6,32 @@
  */
 get_header(); ?>
 
-<section class="luvex-hero luvex-hero--testing-equipment luvex-hero--animated-blueprint">
+<section class="luvex-hero">
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
-            
-            <!-- Wrapper für den Textinhalt -->
-            <div class="luvex-hero__text-wrapper">
-                <h1 class="luvex-hero__title">
-                    UV <span class="text-highlight">Testing Equipment</span>
-                </h1>
-                <h2 class="luvex-hero__subtitle">
-                    Precision measurement tools for UV process validation
-                </h2>
-                <p class="luvex-hero__description">
-                    Ensure optimal UV performance with professional-grade measurement and testing equipment. From simple test strips to advanced dosimeters.
-                </p>
-            </div>
-
-            <!-- Wrapper für den Button -->
-            <div class="luvex-hero__cta-container">
-                <a href="#products" class="luvex-hero__cta">
-                    <i class="fa-solid fa-vial"></i>
-                    <span>Shop Testing Equipment</span>
-                </a>
-            </div>
-
+            <h1 class="luvex-hero__title">
+                UV <span class="text-highlight">Testing Equipment</span>
+            </h1>
+            <h2 class="luvex-hero__subtitle">
+                Precision measurement tools for UV process validation
+            </h2>
+            <p class="luvex-hero__description">
+                Ensure optimal UV performance with professional-grade measurement and testing equipment. From simple test strips to advanced dosimeters.
+            </p>
+        </div>
+        <div class="luvex-hero__cta-container">
+            <a href="#measurement-guide" class="luvex-hero__cta-secondary">
+                <i class="fas fa-ruler"></i>
+                <span>Measurement Guide</span>
+            </a>
+            <a href="#products" class="luvex-hero__cta">
+                <i class="fas fa-vial"></i>
+                <span>Shop Testing Equipment</span>
+            </a>
         </div>
     </div>
 </section>
+
 
 <section class="section" id="products">
     <div class="container">

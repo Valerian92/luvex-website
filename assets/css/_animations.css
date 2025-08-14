@@ -579,11 +579,47 @@ Last Update: 2025-08-14
 
 /*
 ==============================================================================
-LUVEX THEME - UV-C SCIENCE GALLERY ANIMATIONS
+LUVEX THEME - UV-C ANIMATIONS (animations.css)
+==============================================================================
+Beschreibung: Reine Animationen und visuelle Effekte für UV-C Disinfection
+Verwendet von: hero-disinfection.js + uvc-science-gallery.js
 ==============================================================================
 */
 
-/* --- STEP 1: CONTAMINATION --- */
+/* --- HERO ANIMATION PARTICLES --- */
+.pathogen-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: var(--luvex-bright-cyan);
+    opacity: 0.8;
+    border-radius: 50%;
+    box-shadow: 0 0 12px 2px var(--luvex-bright-cyan);
+    animation: float 20s ease-in-out infinite;
+    transition: background-color 0.5s ease, transform 0.5s ease;
+}
+
+.pathogen-particle.inactive {
+    background-color: rgba(73, 80, 87, 0.4);
+    transform: scale(0.8);
+    box-shadow: none;
+}
+
+.pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(109, 213, 237, 0.4) 0%, transparent 65%);
+    border-radius: 50%;
+    animation: expand-pulse 8s ease-out infinite;
+}
+
+/* --- SCIENCE GALLERY STEP ANIMATIONS --- */
+
+/* STEP 1: Kontamination */
 .visual-step-1 .microorganism {
     width: 20px;
     height: 20px;
@@ -592,6 +628,7 @@ LUVEX THEME - UV-C SCIENCE GALLERY ANIMATIONS
     position: absolute;
     animation: microbe-appear-persistent 8s ease-in-out forwards;
     opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .visual-step-1 .microorganism::before {
@@ -618,7 +655,7 @@ LUVEX THEME - UV-C SCIENCE GALLERY ANIMATIONS
     animation: division-appear 3s ease-out forwards;
 }
 
-/* --- STEP 2: UV-C IRRADIATION --- */
+/* STEP 2: UV-C Bestrahlung */
 .visual-step-2 .uv-source {
     width: 60px;
     height: 60px;
@@ -656,7 +693,7 @@ LUVEX THEME - UV-C SCIENCE GALLERY ANIMATIONS
     animation: target-shake 0.5s infinite;
 }
 
-/* --- STEP 3: DNA DAMAGE --- */
+/* STEP 3: DNA Schädigung */
 .visual-step-3 .dna-helix {
     width: 150px;
     height: 250px;
@@ -732,7 +769,7 @@ LUVEX THEME - UV-C SCIENCE GALLERY ANIMATIONS
     opacity: 1;
 }
 
-/* --- STEP 4: REPLICATION FAILURE --- */
+/* STEP 4: Replikationsfehler */
 .visual-step-4 .replication-failure {
     position: absolute;
     left: 50%;
@@ -822,7 +859,7 @@ LUVEX THEME - UV-C SCIENCE GALLERY ANIMATIONS
     z-index: 10;
 }
 
-/* --- STEP 5: POPULATION COLLAPSE --- */
+/* STEP 5: Populationskollaps */
 .visual-step-5 .dying-organism {
     width: 18px;
     height: 18px;
@@ -845,250 +882,7 @@ LUVEX THEME - UV-C SCIENCE GALLERY ANIMATIONS
     animation: death-ripple 4s infinite;
 }
 
-/* --- STEP 6: PERMANENT PROTECTION --- */
-.visual-step-6 .protection-shield {
-    width: 150px;
-    height: 150px;
-    border: 4px solid #28a745;
-    border-radius: 50%;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    animation: shield-pulse 3s infinite;
-}
-
-.visual-step-6 .protection-shield::before {
-    content: '✓';
-    position: absolute;
-    font-size: 60px;
-    color: #28a745;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-weight: bold;
-}
-
-.visual-step-6 .protection-rays {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    animation: rotate-rays 6s infinite linear;
-}
-
-.visual-step-6 .protection-ray {
-    position: absolute;
-    width: 3px;
-    height: 40px;
-    background: linear-gradient(to bottom, rgba(255, 193, 7, 0.6), transparent);
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
-    transform-origin: 50% 100px;
-}
-
-.visual-step-6 .no-chemicals-text {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #28a745;
-    font-weight: bold;
-    font-size: 16px;
-    animation: text-glow 2s infinite;
-}
-
-/* --- KEYFRAME ANIMATIONS --- */
-
-@keyframes microbe-appear-persistent {
-    0% { opacity: 0; transform: scale(0); }
-    10% { opacity: 1; transform: scale(1); }
-    100% { opacity: 1; transform: scale(1); }
-}
-
-@keyframes microbe-slow-death {
-    0% { opacity: 1; transform: scale(1); background: radial-gradient(circle, #dc3545, #a71e2b); }
-    10% { opacity: 1; transform: scale(1); background: radial-gradient(circle, #dc3545, #a71e2b); }
-    70% { opacity: 0.3; transform: scale(0.6); background: radial-gradient(circle, #6c757d, #495057); }
-    100% { opacity: 0; transform: scale(0.2); background: radial-gradient(circle, #6c757d, #495057); }
-}
-
-@keyframes division-appear {
-    0% { opacity: 0; transform: scale(0); }
-    60% { opacity: 0; transform: scale(0); }
-    80% { opacity: 0.7; transform: scale(0.8); }
-    100% { opacity: 1; transform: scale(1); }
-}
-
-@keyframes ripple {
-    0% { transform: scale(0.8); opacity: 1; }
-    100% { transform: scale(1.8); opacity: 0; }
-}
-
-@keyframes death-ripple {
-    0% { transform: scale(1.8); opacity: 0; }
-    100% { transform: scale(0.8); opacity: 0.3; }
-}
-
-@keyframes rotate-helix-left {
-    0% { transform: rotateY(0deg); }
-    100% { transform: rotateY(360deg); }
-}
-
-@keyframes rotate-helix-right {
-    0% { transform: rotateY(180deg); }
-    100% { transform: rotateY(540deg); }
-}
-
-@keyframes scanner-sweep {
-    0% { top: 20%; }
-    50% { top: 70%; }
-    100% { top: 20%; }
-}
-
-@keyframes code-error {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; color: #ffc107; }
-}
-
-@keyframes error-blink {
-    0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
-    50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
-}
-
-@keyframes beam-pulse {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 1; }
-}
-
-@keyframes target-shake {
-    0%, 100% { transform: translateX(-50%); }
-    25% { transform: translateX(-52%); }
-    75% { transform: translateX(-48%); }
-}
-
-@keyframes shield-pulse {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); }
-    50% { transform: translate(-50%, -50%) scale(1.05); }
-}
-
-@keyframes rotate-rays {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-@keyframes text-glow {
-    0%, 100% { opacity: 0.8; }
-    50% { opacity: 1; text-shadow: 0 0 10px rgba(40, 167, 69, 0.5); }
-}
-
-
-/* 
-==============================================================================
-UV-C SCIENCE GALLERY - NAVIGATION & ANIMATION IMPROVEMENTS
-==============================================================================
-*/
-
-/* Zentrierte Navigation: Pfeile über den Nummern */
-.navigation-controls {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.navigation-arrows {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 0.5rem;
-}
-
-.step-indicators {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.nav-arrow {
-    width: 45px;
-    height: 45px;
-    border: 2px solid var(--luvex-bright-cyan);
-    background: rgba(109, 213, 237, 0.1);
-    border-radius: 50%;
-    color: var(--luvex-bright-cyan);
-    font-size: 1.4rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-}
-
-.nav-arrow:hover {
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-white);
-    transform: scale(1.1);
-}
-
-.nav-arrow:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-    transform: none;
-}
-
-/* Größere Animation Area ohne Titel */
-.animation-content {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-.animation-visual {
-    width: 350px;
-    height: 350px;
-    margin: 0 auto;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* STEP 6: Application Icons */
-.visual-step-6 .application-icon {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    opacity: 0;
-    animation: app-icon-appear 1s ease-out forwards;
-}
-
-.visual-step-6 .application-icon .icon {
-    font-size: 2rem;
-    animation: app-icon-bounce 2s ease-in-out infinite;
-}
-
-.visual-step-6 .application-icon .label {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--luvex-bright-cyan);
-    text-align: center;
-}
-
-/* STEP 1: Verbesserte Mikroben mit sanftem Verschwinden */
-.visual-step-1 .microorganism {
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-/* STEP 6: Enhanced Protection Elements */
+/* STEP 6: Permanenter Schutz + Anwendungen */
 .visual-step-6 .protection-shield {
     width: 120px;
     height: 120px;
@@ -1147,7 +941,145 @@ UV-C SCIENCE GALLERY - NAVIGATION & ANIMATION IMPROVEMENTS
     z-index: 3;
 }
 
-/* Animation Keyframes */
+.visual-step-6 .application-icon {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: app-icon-appear 1s ease-out forwards;
+}
+
+.visual-step-6 .application-icon .icon {
+    font-size: 2rem;
+    animation: app-icon-bounce 2s ease-in-out infinite;
+}
+
+.visual-step-6 .application-icon .label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--luvex-bright-cyan);
+    text-align: center;
+}
+
+/* --- KEYFRAME ANIMATIONS --- */
+
+/* Hero Animations */
+@keyframes expand-pulse {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.5;
+    }
+    100% {
+        width: 250vmax;
+        height: 250vmax;
+        opacity: 0;
+    }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px) translateX(0px); }
+    25% { transform: translateY(-15px) translateX(10px); }
+    50% { transform: translateY(0px) translateX(20px); }
+    75% { transform: translateY(15px) translateX(10px); }
+    100% { transform: translateY(0px) translateX(0px); }
+}
+
+/* Step 1 Animations */
+@keyframes microbe-appear-persistent {
+    0% { opacity: 0; transform: scale(0); }
+    10% { opacity: 1; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes division-appear {
+    0% { opacity: 0; transform: scale(0); }
+    60% { opacity: 0; transform: scale(0); }
+    80% { opacity: 0.7; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes ripple {
+    0% { transform: scale(0.8); opacity: 1; }
+    100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* Step 2 Animations */
+@keyframes pulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.1); }
+}
+
+@keyframes beam-pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+@keyframes target-shake {
+    0%, 100% { transform: translateX(-50%); }
+    25% { transform: translateX(-52%); }
+    75% { transform: translateX(-48%); }
+}
+
+/* Step 3 Animations */
+@keyframes rotate-helix-left {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+}
+
+@keyframes rotate-helix-right {
+    0% { transform: rotateY(180deg); }
+    100% { transform: rotateY(540deg); }
+}
+
+/* Step 4 Animations */
+@keyframes scanner-sweep {
+    0% { top: 20%; }
+    50% { top: 70%; }
+    100% { top: 20%; }
+}
+
+@keyframes code-error {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; color: #ffc107; }
+}
+
+@keyframes error-blink {
+    0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+    50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+}
+
+/* Step 5 Animations */
+@keyframes microbe-slow-death {
+    0% { opacity: 1; transform: scale(1); background: radial-gradient(circle, #dc3545, #a71e2b); }
+    10% { opacity: 1; transform: scale(1); background: radial-gradient(circle, #dc3545, #a71e2b); }
+    70% { opacity: 0.3; transform: scale(0.6); background: radial-gradient(circle, #6c757d, #495057); }
+    100% { opacity: 0; transform: scale(0.2); background: radial-gradient(circle, #6c757d, #495057); }
+}
+
+@keyframes death-ripple {
+    0% { transform: scale(1.8); opacity: 0; }
+    100% { transform: scale(0.8); opacity: 0.3; }
+}
+
+/* Step 6 Animations */
+@keyframes shield-pulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.05); }
+}
+
+@keyframes rotate-rays {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes text-glow {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; text-shadow: 0 0 10px rgba(40, 167, 69, 0.5); }
+}
+
 @keyframes app-icon-appear {
     0% {
         opacity: 0;
@@ -1165,152 +1097,5 @@ UV-C SCIENCE GALLERY - NAVIGATION & ANIMATION IMPROVEMENTS
     }
     50% {
         transform: translateY(-5px);
-    }
-}
-
-/* Responsive Anpassungen */
-@media (max-width: 768px) {
-    .navigation-controls {
-        gap: 0.75rem;
-    }
-    
-    .navigation-arrows {
-        gap: 0.75rem;
-        margin-bottom: 0.25rem;
-    }
-    
-    .nav-arrow {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
-    }
-    
-    .step-indicators {
-        gap: 0.4rem;
-    }
-    
-    .step-indicator {
-        width: 35px;
-        height: 35px;
-        font-size: 0.9rem;
-    }
-    
-    .animation-visual {
-        width: 280px;
-        height: 280px;
-    }
-}
-
-
-/* 
-==============================================================================
-UV-C BENEFITS SECTION + ENHANCED STEP 6
-==============================================================================
-*/
-
-/* Benefits Section */
-.benefits-section {
-    background: linear-gradient(135deg, #f8fafc 0%, #e8f4f8 100%);
-    padding: 4rem 0;
-}
-
-.benefits-section h2 {
-    font-size: clamp(2rem, 4vw, 2.5rem);
-    color: var(--luvex-dark-blue);
-    margin-bottom: 3rem;
-}
-
-.benefit-card {
-    background: var(--luvex-white);
-    border-radius: var(--radius-lg);
-    padding: 2rem;
-    text-align: center;
-    box-shadow: 0 4px 20px rgba(27, 42, 73, 0.08);
-    border: 1px solid rgba(109, 213, 237, 0.1);
-    transition: all 0.3s ease;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.benefit-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(27, 42, 73, 0.15);
-    border-color: var(--luvex-bright-cyan);
-}
-
-.benefit-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.benefit-card h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--luvex-dark-blue);
-    margin: 0 0 1rem 0;
-}
-
-.benefit-card p {
-    color: var(--luvex-gray-700);
-    line-height: 1.6;
-    margin: 0;
-    flex: 1;
-}
-
-/* Enhanced Step 6 */
-.step-content .benefits-list {
-    margin: 1rem 0;
-    padding: 0;
-    list-style: none;
-}
-
-.step-content .benefits-list li {
-    padding: 0.5rem 0;
-    font-size: 0.95rem;
-    color: var(--luvex-gray-700);
-    display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
-}
-
-.step-content .benefits-list li::before {
-    content: '✓';
-    color: var(--luvex-bright-cyan);
-    font-weight: bold;
-    font-size: 1rem;
-    margin-top: 0.1rem;
-    flex-shrink: 0;
-}
-
-.step-content .benefits-list strong {
-    color: var(--luvex-dark-blue);
-}
-
-/* Responsive Benefits Grid */
-@media (max-width: 992px) {
-    .grid-4 {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
-}
-
-@media (max-width: 576px) {
-    .grid-4 {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .benefit-card {
-        padding: 1.5rem;
-    }
-    
-    .benefit-icon {
-        font-size: 2.5rem;
-        height: 50px;
     }
 }

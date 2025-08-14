@@ -5,13 +5,11 @@
  */
 get_header(); ?>
 
-<section class="luvex-hero uv-led-hero">
-    <canvas id="uv-led-canvas"></canvas>
-    
+<section class="luvex-hero">
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
             <h1 class="luvex-hero__title">
-                <span class="text-highlight">LED UV</span> Systems
+                LED UV Systems
             </h1>
             <h2 class="luvex-hero__subtitle">
                 Next-generation UV technology with precision control
@@ -19,17 +17,20 @@ get_header(); ?>
             <p class="luvex-hero__description">
                 Discover the advantages of LED UV technology for modern applications.
             </p>
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-hero__cta">
-                <i class="fa-solid fa-microchip"></i>
-                <span>Learn About LED UV</span>
+        </div>
+        <div class="luvex-hero__cta-container">
+            <a href="#comparison" class="luvex-hero__cta-secondary">
+                <i class="fas fa-balance-scale"></i>
+                <span>Compare Technologies</span>
+            </a>
+            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="luvex-hero__cta">
+                <i class="fas fa-play-circle"></i>
+                <span>Try LED Simulator</span>
             </a>
         </div>
     </div>
-
-    <!-- NEW: Container for the integrated HUD controls -->
-    <div id="integrated-controls-container"></div>
-
 </section>
+
 
 <!-- Key Advantages Section -->
 <section class="section">

@@ -12,14 +12,11 @@ get_header(); ?>
   - Canvas-ID zu "curing-hero-canvas" geändert.
   ==============================================================================
 -->
-<section class="luvex-hero hero-curing">
-    <!-- Canvas Element für die neue interaktive Animation -->
-    <canvas id="curing-hero-canvas"></canvas>
-    
+<section class="luvex-hero">
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
             <h1 class="luvex-hero__title">
-                UV <span class="text-highlight">Curing</span> Technology
+                UV Curing Technology
             </h1>
             <h2 class="luvex-hero__subtitle">
                 Industrial UV curing for coatings, inks, and adhesives
@@ -27,9 +24,15 @@ get_header(); ?>
             <p class="luvex-hero__description">
                 Optimize your UV curing processes for maximum efficiency and quality.
             </p>
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-cta-primary">
-                <i class="fa-solid fa-industry"></i>
-                <span>Optimize UV Curing</span>
+        </div>
+        <div class="luvex-hero__cta-container">
+            <a href="#applications" class="luvex-hero__cta-secondary">
+                <i class="fas fa-industry"></i>
+                <span>View Applications</span>
+            </a>
+            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>" class="luvex-hero__cta">
+                <i class="fas fa-comments"></i>
+                <span>Get Expert Advice</span>
             </a>
         </div>
     </div>

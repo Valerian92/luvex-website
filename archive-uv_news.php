@@ -10,34 +10,49 @@ get_header(); ?>
 <main id="main" class="site-main">
 
 <!-- Hero Section -->
-    <section class="news-hero-section luvex-hero--animated-flow">
-        <div class="news-hero-content">
-            <h1 class="title">UV Technology News</h1>
-            <p class="subtitle">The latest innovations, research findings, and industry updates in ultraviolet technology.</p>
+  <section class="luvex-hero luvex-hero--compact">
+    <div class="luvex-hero__container">
+        <div class="luvex-hero__content">
+            <h1 class="luvex-hero__title">
+                UV Technology News
+            </h1>
+            <h2 class="luvex-hero__subtitle">
+                The latest innovations, research findings, and industry updates in ultraviolet technology.
+            </h2>
         </div>
-    </section>
-
-    <!-- Filter und Suche -->
-    <section class="news-filter-section">
-        <div class="news-filter-container">
-            <!-- Kategorie-Filter (dynamische Implementierung wäre ein nächster Schritt) -->
-            <div class="news-filter-categories" role="group" aria-label="Article Categories">
-                <button class="news-filter-btn active">All Topics</button>
-                <button class="news-filter-btn">UV-C LEDs</button>
-                <button class="news-filter-btn">Water Treatment</button>
-                <button class="news-filter-btn">Air Purification</button>
-                <button class="news-filter-btn">Research</button>
-            </div>
-            
-            <!-- Suchleiste -->
-            <form role="search" method="get" class="news-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-                <input type="search" class="news-search-input" placeholder="Search articles..." value="<?php echo get_search_query(); ?>" name="s" />
-                <input type="hidden" name="post_type" value="uv_news" />
-                <i class="fa-solid fa-search news-search-icon"></i>
-            </form>
+        <div class="luvex-hero__cta-container">
+            <a href="#latest-articles" class="luvex-hero__cta-secondary">
+                <i class="fas fa-newspaper"></i>
+                <span>Latest Articles</span>
+            </a>
+            <a href="#newsletter" class="luvex-hero__cta">
+                <i class="fas fa-envelope"></i>
+                <span>Subscribe Newsletter</span>
+            </a>
         </div>
-    </section>
+    </div>
+</section>
 
+<!-- Filter und Suche bleibt unverändert -->
+<section class="news-filter-section">
+    <div class="news-filter-container">
+        <!-- Kategorie-Filter (dynamische Implementierung wäre ein nächster Schritt) -->
+        <div class="news-filter-categories" role="group" aria-label="Article Categories">
+            <button class="news-filter-btn active">All Topics</button>
+            <button class="news-filter-btn">UV-C LEDs</button>
+            <button class="news-filter-btn">Water Treatment</button>
+            <button class="news-filter-btn">Air Purification</button>
+            <button class="news-filter-btn">Research</button>
+        </div>
+       
+        <!-- Suchleiste -->
+        <form role="search" method="get" class="news-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+            <input type="search" class="news-search-input" placeholder="Search articles..." value="<?php echo get_search_query(); ?>" name="s" />
+            <input type="hidden" name="post_type" value="uv_news" />
+            <i class="fa-solid fa-search news-search-icon"></i>
+        </form>
+    </div>
+</section>
     
     <!-- Artikel-Grid -->
     <section class="news-grid-section">
