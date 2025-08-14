@@ -611,7 +611,7 @@ Description: Anpassungen für das neue Hero-Layout auf der News-Seite.
 /* Wir machen aus der bestehenden Sektion einen Flex-Container,
    um den Inhalt perfekt vertikal zu zentrieren. */
 .news-hero-section {
-    min-height: 70vh; /* Eine gute Höhe für einen Header ohne Buttons */
+    /*min-height: 70vh; * Eine gute Höhe für einen Header ohne Buttons */
     display: flex;
     align-items: center;
     justify-content: center;

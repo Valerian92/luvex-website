@@ -6,22 +6,31 @@
  */
 get_header(); ?>
 
-<section class="luvex-hero">
+<section class="luvex-hero luvex-hero--testing-equipment luvex-hero--animated-blueprint">
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
-            <h1 class="luvex-hero__title">
-                UV <span class="text-highlight">Testing Equipment</span>
-            </h1>
-            <h2 class="luvex-hero__subtitle">
-                Precision measurement tools for UV process validation
-            </h2>
-            <p class="luvex-hero__description">
-                Ensure optimal UV performance with professional-grade measurement and testing equipment. From simple test strips to advanced dosimeters.
-            </p>
-            <a href="#products" class="luvex-hero__cta">
-                <i class="fa-solid fa-vial"></i>
-                <span>Shop Testing Equipment</span>
-            </a>
+            
+            <!-- Wrapper für den Textinhalt -->
+            <div class="luvex-hero__text-wrapper">
+                <h1 class="luvex-hero__title">
+                    UV <span class="text-highlight">Testing Equipment</span>
+                </h1>
+                <h2 class="luvex-hero__subtitle">
+                    Precision measurement tools for UV process validation
+                </h2>
+                <p class="luvex-hero__description">
+                    Ensure optimal UV performance with professional-grade measurement and testing equipment. From simple test strips to advanced dosimeters.
+                </p>
+            </div>
+
+            <!-- Wrapper für den Button -->
+            <div class="luvex-hero__cta-container">
+                <a href="#products" class="luvex-hero__cta">
+                    <i class="fa-solid fa-vial"></i>
+                    <span>Shop Testing Equipment</span>
+                </a>
+            </div>
+
         </div>
     </div>
 </section>
@@ -179,7 +188,7 @@ get_header(); ?>
                     <li><i class="fa-solid fa-camera"></i>Camera-based strip reading</li>
                     <li><i class="fa-solid fa-chart-bar"></i>Automatic dose calculation</li>
                     <li><i class="fa-solid fa-cloud"></i>Data logging and sharing</li>
-                    <li><i class="fa-solid fa-bell"></i>Trend analysis and alerts</li>
+                    <li><i class="fa-solid fa-check"></i>Trend analysis and alerts</li>
                 </ul>
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>" class="btn btn--secondary">Join Beta Test</a>
             </div>

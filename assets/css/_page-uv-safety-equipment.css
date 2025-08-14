@@ -1,0 +1,51 @@
+/*
+==============================================================================
+LUVEX THEME - PAGE: UV SAFETY EQUIPMENT (REDESIGN 2025-08-14)
+==============================================================================
+*/
+
+/* --- 1. Hero Section Layout --- */
+.luvex-hero--safety-equipment {
+    min-height: 100vh; /* Stellt sicher, dass der Hero den ganzen Bildschirm füllt */
+}
+
+/* Wir nutzen den bestehenden .luvex-hero__content-Container und machen ihn
+   zu einem Flex-Container, der seinen Inhalt (Text und Button) verteilt. */
+.luvex-hero--safety-equipment .luvex-hero__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Das ist der Schlüssel: Schiebt Text nach oben und Button nach unten */
+    flex-grow: 1;
+    width: 100%;
+    padding-top: 8rem; /* Platz für den Header */
+    padding-bottom: 4rem; /* Abstand ganz unten */
+}
+
+/* Der Text-Wrapper wird automatisch nach oben geschoben */
+.luvex-hero--safety-equipment .luvex-hero__text-wrapper {
+    /* Benötigt keine speziellen Styles, dient nur der Gruppierung */
+}
+
+/* Der Button-Container wird nach unten geschoben */
+.luvex-hero--safety-equipment .luvex-hero__cta-container {
+    margin-top: 0; /* Überschreibt eventuelle Standard-Abstände */
+    padding-bottom: 0;
+}
+
+
+/* --- 2. Typografie an das neue Design anpassen --- */
+.luvex-hero--safety-equipment .luvex-hero__title {
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    margin-bottom: 1rem;
+}
+
+.luvex-hero--safety-equipment .luvex-hero__subtitle {
+    font-size: clamp(1.5rem, 3vw, 1.875rem);
+    max-width: 800px;
+    margin-bottom: 1.5rem;
+}
+
+.luvex-hero--safety-equipment .luvex-hero__description {
+    max-width: 700px;
+    margin-bottom: 0; /* Kein Abstand mehr nötig, da der Button separat positioniert wird */
+}

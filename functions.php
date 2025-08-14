@@ -139,13 +139,15 @@ function luvex_enqueue_assets() {
         }
     } 
     elseif ( is_page('contact') ) {
-        $contact_css_path = get_stylesheet_directory() . '/assets/css/_page-contact.css';
-        if (file_exists($contact_css_path)) {
-            wp_enqueue_style('luvex-page-contact', get_stylesheet_directory_uri() . '/assets/css/_page-contact.css', array('luvex-main'), filemtime($contact_css_path));
-        }
         $contact_hero_js_path = get_stylesheet_directory() . '/assets/js/contact-hero-animation.js';
         if (file_exists($contact_hero_js_path)) {
             wp_enqueue_script('luvex-contact-hero', get_stylesheet_directory_uri() . '/assets/js/contact-hero-animation.js', array(), filemtime($contact_hero_js_path), true);
+        }
+    }
+    elseif ( is_page('mercury-uv-lamps') ) { 
+        $mercury_js_path = get_stylesheet_directory() . '/assets/js/hero-mercury-lamps.js';
+        if (file_exists($mercury_js_path)) {
+            wp_enqueue_script('luvex-hero-mercury', get_stylesheet_directory_uri() . '/assets/js/hero-mercury-lamps.js', array(), filemtime($mercury_js_path), true);
         }
     }
     elseif ( is_page('uv-c-disinfection') ) { 
@@ -166,10 +168,6 @@ function luvex_enqueue_assets() {
         }
     } 
     elseif ( is_page('led-uv-systems') || is_page('uv-led') || $current_page_slug === 'led-uv-systems' || strpos($_SERVER['REQUEST_URI'], 'led-uv-systems') !== false ) {
-        $uv_led_css_path = get_stylesheet_directory() . '/assets/css/_page-uv-led.css';
-        if (file_exists($uv_led_css_path)) {
-            wp_enqueue_style('luvex-page-uv-led', get_stylesheet_directory_uri() . '/assets/css/_page-uv-led.css', array('luvex-main'), filemtime($uv_led_css_path));
-        }
         $uv_led_js_path = get_stylesheet_directory() . '/assets/js/hero-uv-led.js';
         if (file_exists($uv_led_js_path)) {
             wp_enqueue_script('luvex-hero-uv-led', get_stylesheet_directory_uri() . '/assets/js/hero-uv-led.js', array(), filemtime($uv_led_js_path), true);

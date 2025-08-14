@@ -5,22 +5,31 @@
  */
 get_header(); ?>
 
-<section class="luvex-hero">
+<section class="luvex-hero luvex-hero--process-equipment luvex-hero--animated-blueprint">
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
-            <h1 class="luvex-hero__title">
-                Professional <span class="text-highlight">UV Process Equipment</span>
-            </h1>
-            <h2 class="luvex-hero__subtitle">
-                Quality equipment for UV professionals and researchers
-            </h2>
-            <p class="luvex-hero__description">
-                From safety equipment to precision measurement tools - get professional-grade UV equipment recommended by independent experts. No vendor bias, just the best tools for your applications.
-            </p>
-            <a href="#equipment-categories" class="luvex-hero__cta">
-                <i class="fa-solid fa-tools"></i>
-                <span>Browse Equipment</span>
-            </a>
+
+            <!-- Wrapper für den Textinhalt -->
+            <div class="luvex-hero__text-wrapper">
+                <h1 class="luvex-hero__title">
+                    Professional <span class="text-highlight">UV Process Equipment</span>
+                </h1>
+                <h2 class="luvex-hero__subtitle">
+                    Quality equipment for UV professionals and researchers
+                </h2>
+                <p class="luvex-hero__description">
+                    From safety equipment to precision measurement tools - get professional-grade UV equipment recommended by independent experts. No vendor bias, just the best tools for your applications.
+                </p>
+            </div>
+
+            <!-- Wrapper für den Button -->
+            <div class="luvex-hero__cta-container">
+                <a href="#equipment-categories" class="luvex-hero__cta">
+                    <i class="fa-solid fa-tools"></i>
+                    <span>Browse Equipment</span>
+                </a>
+            </div>
+
         </div>
     </div>
 </section>

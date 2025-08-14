@@ -1,0 +1,47 @@
+/*
+==============================================================================
+LUVEX THEME - PAGE: UV TESTING EQUIPMENT (REDESIGN 2025-08-14)
+==============================================================================
+*/
+
+/* --- 1. Hero Section Layout --- */
+.luvex-hero--testing-equipment {
+    min-height: 100vh;
+}
+
+.luvex-hero--testing-equipment .luvex-hero__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+    width: 100%;
+    padding-top: 8rem;
+    padding-bottom: 4rem;
+}
+
+.luvex-hero--testing-equipment .luvex-hero__text-wrapper {
+    /* Keine speziellen Styles nötig */
+}
+
+.luvex-hero--testing-equipment .luvex-hero__cta-container {
+    margin-top: 0;
+    padding-bottom: 0;
+}
+
+
+/* --- 2. Typografie an das neue Design anpassen --- */
+.luvex-hero--testing-equipment .luvex-hero__title {
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    margin-bottom: 1rem;
+}
+
+.luvex-hero--testing-equipment .luvex-hero__subtitle {
+    font-size: clamp(1.5rem, 3vw, 1.875rem);
+    max-width: 800px;
+    margin-bottom: 1.5rem;
+}
+
+.luvex-hero--testing-equipment .luvex-hero__description {
+    max-width: 700px;
+    margin-bottom: 0;
+}

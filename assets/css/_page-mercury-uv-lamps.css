@@ -1,0 +1,166 @@
+/*
+==============================================================================
+LUVEX THEME - PAGE: MERCURY UV LAMPS
+==============================================================================
+
+Description: Page-specific styles for the Mercury UV Lamps knowledge page.
+Dependencies: _core.css, _components.css
+Last Update: 2025-08-14
+
+==============================================================================
+*/
+
+/*
+==============================================================================
+1. HERO SECTION & ANIMATION
+==============================================================================
+*/
+
+.mercury-hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height */
+    min-height: 700px;
+    overflow: hidden;
+    text-align: center;
+}
+
+#mercury-animation-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Animation in the background */
+}
+
+.mercury-hero .luvex-hero__container {
+    position: relative;
+    z-index: 2; /* Content in the foreground */
+}
+
+/*
+==============================================================================
+2. COMPARISON TABLE
+==============================================================================
+*/
+
+.comparison-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.detailed-comparison {
+    width: 100%;
+    background: var(--luvex-white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border-collapse: collapse;
+}
+
+.detailed-comparison th,
+.detailed-comparison td {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--luvex-gray-200);
+}
+
+.detailed-comparison th {
+    background: var(--luvex-dark-blue-medium);
+    color: var(--luvex-white);
+    font-weight: 600;
+}
+
+.detailed-comparison th.recommended {
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+}
+
+.detailed-comparison tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.detailed-comparison .positive {
+    color: #10b981;
+    font-weight: 600;
+}
+
+.detailed-comparison .negative {
+    color: #ef4444;
+}
+
+.detailed-comparison .positive::before {
+    content: '✓ ';
+}
+
+.detailed-comparison .negative::before {
+    content: '✗ ';
+}
+
+
+/*
+==============================================================================
+3. FAQ SECTION
+==============================================================================
+*/
+
+.faq-accordion {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    margin-bottom: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.faq-item.active {
+    background-color: rgba(109, 213, 237, 0.05);
+    border-color: rgba(109, 213, 237, 0.3);
+}
+
+.faq-question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem;
+    font-weight: 600;
+    font-size: var(--text-lg);
+    color: var(--luvex-white);
+    cursor: pointer;
+    background: none;
+    border: none;
+    text-align: left;
+}
+
+.faq-question i {
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    margin-left: 1rem;
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(45deg);
+    color: var(--luvex-bright-cyan);
+}
+
+.faq-answer {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.4s ease-in-out, padding 0.4s ease;
+    padding: 0 1.25rem;
+}
+
+.faq-answer p {
+    color: var(--luvex-gray-300);
+    padding-bottom: 1.25rem;
+    margin: 0;
+    line-height: 1.7;
+}

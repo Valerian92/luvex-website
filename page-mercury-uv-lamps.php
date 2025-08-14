@@ -1,569 +1,357 @@
 <?php
 /**
- * Mercury UV Lamps Page
+ * Template Name: Mercury UV Lamps
  * @package Luvex
  */
 get_header(); ?>
 
-<section class="luvex-hero">
+<!-- ==========================================================================
+     START: Mercury Lamp Hero Section
+     ========================================================================== -->
+<section class="luvex-hero mercury-hero">
+    <!-- The Canvas for the animation -->
+    <canvas id="mercury-animation-container"></canvas>
+
+    <!-- The content overlay -->
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
-            <h1 class="luvex-hero__title">
-                <span class="text-highlight">Mercury UV</span> Lamps
-            </h1>
-            <h2 class="luvex-hero__subtitle">
-                Proven UV technology for high-power applications
-            </h2>
+            <h1 class="luvex-hero__title">The <span class="text-highlight">Mercury Lamp</span> Spectrum</h1>
             <p class="luvex-hero__description">
-                Understanding traditional mercury UV lamp technology and migration strategies.
+                Discover the powerful broadband emissions of mercury vapor lamps, 
+                characterized by distinct spectral peaks across the UV and visible light spectrum.
             </p>
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-hero__cta">
-                <i class="fa-solid fa-lightbulb"></i>
-                <span>Mercury UV Consultation</span>
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- Technology Overview -->
-<section class="section">
-    <div class="container">
-        <h2 class="text-center mb-2">Mercury UV Technology Overview</h2>
-        <p class="text-center text-muted mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto;">
-            While being phased out globally, mercury UV remains important for specific high-power applications
-        </p>
-        
-        <div class="grid-3">
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fas fa-sun"></i>
-                </div>
-                <h3 class="value-card__title">Broad Spectrum Output</h3>
-                <p class="value-card__description">
-                    Wide wavelength range (200-450nm) suitable for materials requiring multiple wavelengths simultaneously.
-                </p>
-            </div>
-            
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fas fa-bolt"></i>
-                </div>
-                <h3 class="value-card__title">High Power Density</h3>
-                <p class="value-card__description">
-                    Exceptional power output up to 240 W/cm for demanding industrial applications.
-                </p>
-            </div>
-            
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fas fa-layer-group"></i>
-                </div>
-                <h3 class="value-card__title">Deep Penetration</h3>
-                <p class="value-card__description">
-                    Ideal for thick coatings and pigmented materials requiring deep UV penetration.
-                </p>
+            <div class="luvex-hero__cta-container">
+                <a href="#how-it-works" class="luvex-hero__cta">How It Works</a>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-consulting' ) ) ); ?>" class="luvex-hero__cta-secondary">Request Consultation</a>
             </div>
         </div>
     </div>
 </section>
+<!-- ==========================================================================
+     END: Hero Section
+     ========================================================================== -->
 
-<!-- Migration Path Section -->
-<section class="section section--gradient">
-    <div class="container">
-        <h2 class="text-center mb-3">Your Path from Mercury to LED</h2>
-        
-        <div class="migration-timeline">
-            <div class="timeline-item">
-                <div class="timeline-number">1</div>
-                <div class="timeline-content">
-                    <h3>Assessment</h3>
-                    <p>Evaluate current mercury UV systems and identify LED-compatible applications</p>
-                </div>
+<main>
+    <!-- ==========================================================================
+         START: Technology Overview Section
+         ========================================================================== -->
+    <section id="how-it-works" class="section section-pattern-1">
+        <div class="container container--narrow">
+            <div class="text-center" style="max-width: 800px; margin: 0 auto 3rem auto;">
+                <h2 class="section-title">Broadband Powerhouse</h2>
+                <p class="text-large text-muted">Mercury vapor lamps generate a wide range of UV wavelengths by passing an electric arc through vaporized mercury. This process creates intense spectral lines ideal for applications requiring deep, powerful curing.</p>
             </div>
             
-            <div class="timeline-item">
-                <div class="timeline-number">2</div>
-                <div class="timeline-content">
-                    <h3>Chemistry Review</h3>
-                    <p>Test existing materials with LED wavelengths or identify LED-optimized alternatives</p>
-                </div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-number">3</div>
-                <div class="timeline-content">
-                    <h3>Pilot Testing</h3>
-                    <p>Run trials with LED systems to validate performance and quality standards</p>
-                </div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-number">4</div>
-                <div class="timeline-content">
-                    <h3>Implementation</h3>
-                    <p>Phased rollout with training and process optimization for maximum ROI</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="text-center mt-3">
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'led-uv-systems' ) ) ); ?>" class="btn btn--primary">
-                Explore LED UV Options <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- Current Applications -->
-<section class="section">
-    <div class="container">
-        <h2 class="text-center mb-2">Where Mercury UV Still Excels</h2>
-        
-        <div class="grid-2" style="max-width: 900px; margin: 0 auto;">
-            <div class="application-card">
-                <div class="application-card__icon">
-                    <i class="fas fa-newspaper"></i>
-                </div>
-                <h3>Web Offset Printing</h3>
-                <p>High-speed newspaper and publication printing requiring instant drying across wide webs.</p>
-                <ul class="specs-list">
-                    <li>Web speeds up to 15 m/s</li>
-                    <li>Full width coverage</li>
-                    <li>Heat-set ink compatibility</li>
-                </ul>
-            </div>
-            
-            <div class="application-card">
-                <div class="application-card__icon">
-                    <i class="fas fa-solar-panel"></i>
-                </div>
-                <h3>Large Area Coating</h3>
-                <p>Industrial coating lines for wood, metal, and composite materials.</p>
-                <ul class="specs-list">
-                    <li>Width up to 2+ meters</li>
-                    <li>Thick film capability</li>
-                    <li>High throughput rates</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Environmental & Regulatory -->
-<section class="section section--light-gray">
-    <div class="container">
-        <div class="regulatory-info">
-            <div class="regulatory-header">
-                <i class="fas fa-exclamation-triangle"></i>
-                <h2>Important Regulatory Information</h2>
-            </div>
-            
-            <div class="regulatory-grid">
-                <div class="regulatory-card">
-                    <h3>Minamata Convention</h3>
-                    <p>Global treaty to phase out mercury use in industrial processes by 2025-2030.</p>
-                    <a href="#" class="learn-more">Learn about compliance →</a>
+            <div class="grid-3">
+                <div class="card has-shine-effect">
+                    <div class="card__icon" style="color: #8a2be2;"><i class="fas fa-atom"></i></div>
+                    <h3 class="card__title">Electric Arc Ignition</h3>
+                    <p class="card__description">An electric arc excites mercury atoms inside a quartz tube, causing them to emit photons.</p>
                 </div>
                 
-                <div class="regulatory-card">
-                    <h3>RoHS Directive</h3>
-                    <p>EU restriction on mercury content in electrical and electronic equipment.</p>
-                    <a href="#" class="learn-more">View requirements →</a>
+                <div class="card has-shine-effect">
+                    <div class="card__icon" style="color: #007BFF;"><i class="fas fa-sun"></i></div>
+                    <h3 class="card__title">Broad Spectrum Emission</h3>
+                    <p class="card__description">The excited atoms release energy as light across multiple wavelengths, from UV-C to visible light.</p>
                 </div>
                 
-                <div class="regulatory-card">
-                    <h3>Safe Disposal</h3>
-                    <p>Proper handling and recycling procedures for mercury-containing lamps.</p>
-                    <a href="#" class="learn-more">Disposal guidelines →</a>
+                <div class="card has-shine-effect">
+                    <div class="card__icon" style="color: #10b981;"><i class="fas fa-layer-group"></i></div>
+                    <h3 class="card__title">Deep Material Curing</h3>
+                    <p class="card__description">The high-intensity, multi-wavelength output ensures deep penetration for thick and opaque materials.</p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Support Services -->
-<section class="section">
-    <div class="container">
-        <h2 class="text-center mb-2">Mercury UV Support Services</h2>
-        <p class="text-center text-muted mb-3" style="max-width: 700px; margin-left: auto; margin-right: auto;">
-            Comprehensive support for existing systems while planning your transition
-        </p>
-        
-        <div class="grid-4">
-            <div class="service-card">
-                <i class="fas fa-tools"></i>
-                <h4>Maintenance</h4>
-                <p>Keep existing systems running efficiently with expert service</p>
+    <!-- ==========================================================================
+         START: Comparison Table Section
+         ========================================================================== -->
+    <section class="section section-pattern-2">
+        <div class="container container--narrow">
+            <div class="text-center" style="max-width: 800px; margin: 0 auto 3rem auto;">
+                <h2 class="section-title">Mercury vs. LED: A Clear Comparison</h2>
+                <p class="text-large text-muted">While powerful, traditional mercury lamps face challenges in a modern, efficiency-focused world. Here's how they stack up against UV LED technology.</p>
             </div>
             
-            <div class="service-card">
-                <i class="fas fa-box"></i>
-                <h4>Spare Parts</h4>
-                <p>Source genuine replacement lamps and components</p>
-            </div>
-            
-            <div class="service-card">
-                <i class="fas fa-chart-line"></i>
-                <h4>Optimization</h4>
-                <p>Maximize performance of current mercury UV systems</p>
-            </div>
-            
-            <div class="service-card">
-                <i class="fas fa-recycle"></i>
-                <h4>Recycling</h4>
-                <p>Safe disposal and mercury recovery programs</p>
+            <div class="comparison-wrapper">
+                <table class="detailed-comparison">
+                    <thead>
+                        <tr>
+                            <th>Factor</th>
+                            <th>Mercury UV</th>
+                            <th class="recommended">LED UV</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Lamp Life</strong></td>
+                            <td>~2,000 hours</td>
+                            <td class="positive">20,000+ hours</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Energy Efficiency</strong></td>
+                            <td class="negative">Low (High heat output)</td>
+                            <td class="positive">High (Low heat output)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Environmental Impact</strong></td>
+                            <td class="negative">Contains mercury, produces ozone</td>
+                            <td class="positive">Mercury-free, no ozone</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Control & Startup</strong></td>
+                            <td class="negative">Warm-up time required</td>
+                            <td class="positive">Instant On/Off</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Spectral Output</strong></td>
+                            <td>Broadband (Fixed)</td>
+                            <td class="positive">Monochromatic (Targeted)</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Comparison Table -->
-<section class="section section--light-gray">
-    <div class="container container--narrow">
-        <h2 class="text-center mb-3">Mercury vs LED UV Comparison</h2>
-        
-        <div class="comparison-wrapper">
-            <table class="detailed-comparison">
-                <thead>
-                    <tr>
-                        <th>Factor</th>
-                        <th>Mercury UV</th>
-                        <th class="recommended">LED UV</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Initial Cost</strong></td>
-                        <td>Lower equipment cost</td>
-                        <td>Higher initial investment</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Operating Cost</strong></td>
-                        <td>High energy & maintenance</td>
-                        <td class="positive">70% lower operating costs</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Environmental Impact</strong></td>
-                        <td class="negative">Contains mercury, ozone generation</td>
-                        <td class="positive">No mercury, no ozone</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Heat Generation</strong></td>
-                        <td class="negative">Significant IR radiation</td>
-                        <td class="positive">Minimal heat output</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Lamp Life</strong></td>
-                        <td>1,000-5,000 hours</td>
-                        <td class="positive">50,000+ hours</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Best For</strong></td>
-                        <td>Legacy systems, wide web printing</td>
-                        <td class="positive">New installations, upgrades</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</section>
+    <!-- ==========================================================================
+         START: FAQ Section
+         ========================================================================== -->
+    <section class="section hero-pattern-primary">
+        <div class="container container--narrow">
+            <div class="text-center" style="max-width: 800px; margin: 0 auto 3rem auto;">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="text-large text-muted">Key information about the use and future of mercury vapor lamp technology.</p>
+            </div>
 
-<!-- FAQ Section -->
-<section class="section">
-    <div class="container container--narrow">
-        <h2 class="text-center mb-3">Mercury UV FAQs</h2>
-        
-        <div class="faq-accordion">
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>How long will mercury UV lamps remain available?</span>
-                    <i class="fas fa-plus"></i>
-                </button>
-                <div class="faq-answer">
-                    <p>While regulations vary by region, most manufacturers plan to support mercury UV systems through 2030. However, prices are increasing and availability is becoming limited. We recommend planning your LED migration strategy now.</p>
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Why are mercury lamps still used?</span>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Despite the rise of LEDs, mercury lamps excel in specific legacy applications. Their intense, broadband output is sometimes necessary for curing older ink or coating formulations that were designed specifically for this wide spectrum. Retrofitting these systems can be complex and costly.</p>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>Can I retrofit my mercury UV system with LED?</span>
-                    <i class="fas fa-plus"></i>
-                </button>
-                <div class="faq-answer">
-                    <p>Many mercury UV systems can be retrofitted with LED modules. The feasibility depends on your specific equipment, application, and chemistry. We offer free retrofit assessments to determine the best approach.</p>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What is the Minamata Convention?</span>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>The Minamata Convention on Mercury is a global treaty to protect human health and the environment from the adverse effects of mercury. It includes measures to phase out the manufacture, import, and export of mercury-containing products, which directly impacts the future availability of mercury vapor lamps.</p>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>What about my existing UV-curable materials?</span>
-                    <i class="fas fa-plus"></i>
-                </button>
-                <div class="faq-answer">
-                    <p>Some materials formulated for mercury UV may need adjustment for LED curing. We help identify compatible materials and work with suppliers to ensure a smooth transition without compromising quality.</p>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What is the process for migrating to LED?</span>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>The migration path involves several key steps: a thorough assessment of your current process, testing your materials (inks, coatings) with specific LED wavelengths, running pilot tests to validate quality, and finally, a phased implementation of the new LED systems. We offer consultations to guide you through every step.</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- CTA Section -->
-<section class="section section--gradient">
-    <div class="container">
-        <div class="cta-section">
-            <h3>Plan Your Mercury UV Transition Strategy</h3>
-            <p>Get expert guidance on maintaining current systems while preparing for the future</p>
-            <div class="cta-actions">
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-cta-primary">
-                    Schedule Transition Consultation
-                </a>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'led-uv-systems' ) ) ); ?>" class="luvex-cta-secondary">
-                    Explore LED Alternatives
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+</main>
 
-<style>
-/* Spezifische Styles für Mercury UV Seite */
-.migration-timeline {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    max-width: 1000px;
-    margin: 3rem auto;
-    position: relative;
-}
-
-.migration-timeline::before {
-    content: '';
-    position: absolute;
-    top: 25px;
-    left: 10%;
-    right: 10%;
-    height: 2px;
-    background: linear-gradient(90deg, var(--luvex-bright-cyan) 0%, var(--luvex-accent-blue) 100%);
-}
-
-.timeline-item {
-    flex: 1;
-    text-align: center;
-    position: relative;
-    padding: 0 1rem;
-}
-
-.timeline-number {
-    width: 50px;
-    height: 50px;
-    background: var(--luvex-dark-blue);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 1.25rem;
-    margin: 0 auto 1rem;
-    position: relative;
-    z-index: 1;
-}
-
-.timeline-content h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-    color: var(--luvex-dark-blue);
-}
-
-.timeline-content p {
-    font-size: 0.875rem;
-    color: var(--luvex-gray-700);
-    margin: 0;
-}
-
-.application-card {
-    background: white;
-    padding: 2rem;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-}
-
-.application-card__icon {
-    font-size: 2.5rem;
-    color: var(--luvex-bright-cyan);
-    margin-bottom: 1rem;
-}
-
-.specs-list {
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0 0;
-}
-
-.specs-list li {
-    padding: 0.5rem 0;
-    color: var(--luvex-gray-600);
-    font-size: 0.875rem;
-}
-
-.specs-list li::before {
-    content: "• ";
-    color: var(--luvex-bright-cyan);
-    font-weight: bold;
-}
-
-.regulatory-info {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.regulatory-header {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.regulatory-header i {
-    font-size: 3rem;
-    color: #f59e0b;
-    margin-bottom: 1rem;
-    display: block;
-}
-
-.regulatory-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-}
-
-.regulatory-card {
-    background: white;
-    padding: 2rem;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    border-top: 3px solid #f59e0b;
-}
-
-.regulatory-card h3 {
-    color: var(--luvex-dark-blue);
-    margin-bottom: 1rem;
-}
-
-.regulatory-card .learn-more {
-    color: var(--luvex-bright-cyan);
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 1rem;
-}
-
-.service-card {
-    text-align: center;
-}
-
-.service-card i {
-    font-size: 2.5rem;
-    color: var(--luvex-bright-cyan);
-    margin-bottom: 1rem;
-    display: block;
-}
-
-.service-card h4 {
-    margin-bottom: 0.5rem;
-    color: var(--luvex-dark-blue);
-}
-
-.service-card p {
-    font-size: 0.875rem;
-    color: var(--luvex-gray-600);
-    margin: 0;
-}
-
-.detailed-comparison {
-    width: 100%;
-    background: white;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-}
-
-.detailed-comparison th,
-.detailed-comparison td {
-    padding: 1rem 1.5rem;
-    text-align: left;
-    border-bottom: 1px solid var(--luvex-gray-200);
-}
-
-.detailed-comparison th {
-    background: var(--luvex-dark-blue);
-    color: white;
-    font-weight: 600;
-}
-
-.detailed-comparison th.recommended {
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
-}
-
-.detailed-comparison td.positive {
-    color: #10b981;
-    font-weight: 600;
-}
-
-.detailed-comparison td.negative {
-    color: #ef4444;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .migration-timeline {
-        flex-direction: column;
-        gap: 2rem;
-    }
-    
-    .migration-timeline::before {
-        display: none;
-    }
-    
-    .regulatory-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .detailed-comparison {
-        font-size: 0.875rem;
-    }
-    
-    .detailed-comparison th,
-    .detailed-comparison td {
-        padding: 0.75rem;
-    }
-}
-</style>
-
+<!-- Embedded JavaScript for Hero Animation -->
 <script>
-// FAQ Accordion wiederverwenden
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
+    /**
+     * Mercury Lamp "Spectral Aurora" Animation
+     * Description: Visualizes the broadband spectrum and characteristic peaks of mercury vapor lamps.
+     * @version 1.4
+     * @date 2025-08-14
+     */
+    const canvas = document.getElementById('mercury-animation-container');
+    if (canvas) {
+        new MercuryVaporAnimation(canvas);
+    }
+
+    class MercuryVaporAnimation {
+        constructor(canvasElement) {
+            this.canvas = canvasElement;
+            this.ctx = this.canvas.getContext('2d');
+            this.waves = [];
+            this.animationFrameId = null;
+            
+            // Get the title element to align the animation
+            this.titleElement = document.querySelector('.luvex-hero__title');
+            this.centerY = 0; // Will be calculated dynamically
+
+            // Animation configuration
+            this.config = {
+                waveCount: 50, // Number of base waves for the "aurora"
+                peakPulseInterval: 2000, // Interval in ms for peak pulses
+            };
+
+            // Spectral peaks of mercury lamps with stylized colors
+            this.spectralPeaks = [
+                { wavelength: 254, color: { h: 270, s: 95, l: 60 }, name: 'UV-C Peak' }, // Deep Violet
+                { wavelength: 365, color: { h: 240, s: 90, l: 65 }, name: 'UV-A Peak' }, // Strong Blue
+                { wavelength: 436, color: { h: 195, s: 88, l: 55 }, name: 'Blue Peak' },   // Cyan/Blue
+                { wavelength: 546, color: { h: 145, s: 80, l: 50 }, name: 'Green Peak' }  // Green
+            ];
+            this.lastPeakTime = 0;
+            this.currentPeakIndex = 0;
+
+            this.init();
+        }
+
+        init() {
+            this.resizeCanvas(); // Initial setup
+            this.createWaves();
+            this.bindEvents();
+            this.startAnimation();
+        }
+        
+        // Central function to calculate the animation's vertical center
+        updateCenterY() {
+            if (this.titleElement) {
+                const titleRect = this.titleElement.getBoundingClientRect();
+                // Calculate the vertical center of the title element
+                this.centerY = titleRect.top + titleRect.height / 2;
+            } else {
+                // Fallback to viewport center if the title isn't found
+                this.centerY = this.canvas.height * 0.5;
+            }
+        }
+
+        resizeCanvas() {
+            this.canvas.width = window.innerWidth;
+            this.canvas.height = window.innerHeight;
+            
+            // Recalculate the center based on the title's position on resize
+            this.updateCenterY();
+            
+            // Recreate waves to adapt to the new size and center
+            this.createWaves();
+        }
+
+        bindEvents() {
+            window.addEventListener('resize', () => this.resizeCanvas());
+        }
+
+        createWaves() {
+            this.waves = [];
+            for (let i = 0; i < this.config.waveCount; i++) {
+                this.waves.push({
+                    y: this.centerY, // Use the dynamically calculated center
+                    // Reduced amplitude randomness for a smoother, more uniform "tube"
+                    amplitude: Math.random() * 15 + 30, 
+                    frequency: Math.random() * 0.02 + 0.005,
+                    speed: Math.random() * 0.5 + 0.2,
+                    phaseOffset: Math.random() * Math.PI * 2,
+                    // Base color with low saturation for the "aurora" effect
+                    color: `hsla(${180 + Math.random() * 100}, 50%, 50%, 0.05)`,
+                    lineWidth: Math.random() * 2 + 0.5,
+                });
+            }
+        }
+
+        // Creates a special, bright wave for a spectral peak
+        createPeakPulse() {
+            const peak = this.spectralPeaks[this.currentPeakIndex];
+            
+            this.waves.push({
+                y: this.centerY, // Use the dynamically calculated center
+                amplitude: Math.random() * 80 + 50, // Larger amplitude for visibility
+                frequency: Math.random() * 0.015 + 0.008,
+                speed: Math.random() * 0.8 + 0.5, // Faster than base waves
+                phaseOffset: Math.random() * Math.PI * 2,
+                color: peak.color, // Store the HSL color object directly
+                lineWidth: Math.random() * 3 + 1.5,
+                isPeak: true, // Flag to identify the peak wave
+                life: 1.0, // Lifespan of the wave (fades over time)
+                decay: 0.005, // Rate at which the wave fades
+            });
+            
+            // Cycle to the next peak
+            this.currentPeakIndex = (this.currentPeakIndex + 1) % this.spectralPeaks.length;
+        }
+
+        startAnimation() {
+            const animate = (time) => {
+                // Check if it's time to create a new peak pulse
+                if (time - this.lastPeakTime > this.config.peakPulseInterval) {
+                    this.createPeakPulse();
+                    this.lastPeakTime = time;
+                }
+
+                this.draw(time);
+                this.animationFrameId = requestAnimationFrame(animate);
+            };
+            this.animationFrameId = requestAnimationFrame(animate);
+        }
+
+        draw(time) {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            // Paint over the background with a slight "trail" effect
+            this.ctx.fillStyle = 'rgba(27, 42, 73, 0.1)';
+            this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+            // Draw all waves
+            this.waves.forEach((wave, index) => {
+                this.ctx.beginPath();
+                this.ctx.lineWidth = wave.lineWidth;
+                
+                if (wave.isPeak) {
+                    const peakColor = `hsla(${wave.color.h}, ${wave.color.s}%, ${wave.color.l}%, ${0.6 * wave.life})`;
+                    this.ctx.strokeStyle = peakColor;
+                    wave.life -= wave.decay;
+                } else {
+                    this.ctx.strokeStyle = wave.color;
+                }
+
+                for (let x = 0; x < this.canvas.width; x++) {
+                    const phase = (time / 1000) * wave.speed + wave.phaseOffset;
+                    const y = wave.y + wave.amplitude * Math.sin(x * wave.frequency + phase);
+                    if (x === 0) {
+                        this.ctx.moveTo(x, y);
+                    } else {
+                        this.ctx.lineTo(x, y);
+                    }
+                }
+                this.ctx.stroke();
+
+                if (wave.isPeak && wave.life <= 0) {
+                    this.waves.splice(index, 1);
+                }
+            });
+        }
+    }
+
+    // FAQ Accordion Logic
     const faqItems = document.querySelectorAll('.faq-item');
-    
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
         const answer = item.querySelector('.faq-answer');
-        const icon = question.querySelector('i');
         
         question.addEventListener('click', () => {
-            const isOpen = item.classList.contains('active');
+            const isActive = item.classList.contains('active');
             
-            // Close all
+            // Close all others
             faqItems.forEach(otherItem => {
-                otherItem.classList.remove('active');
-                otherItem.querySelector('.faq-answer').style.maxHeight = null;
-                otherItem.querySelector('i').classList.replace('fa-minus', 'fa-plus');
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                }
             });
-            
-            // Toggle current
-            if (!isOpen) {
+
+            // Toggle current item
+            if (isActive) {
+                item.classList.remove('active');
+                answer.style.maxHeight = null;
+            } else {
                 item.classList.add('active');
                 answer.style.maxHeight = answer.scrollHeight + 'px';
-                icon.classList.replace('fa-plus', 'fa-minus');
             }
         });
     });
