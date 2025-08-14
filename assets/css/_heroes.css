@@ -1,19 +1,19 @@
 /*
 ==============================================================================
-LUVEX THEME v2.3.1 - HERO SECTIONS
+LUVEX THEME v2.4 - HERO SECTIONS (OPTIMIZED)
 ==============================================================================
 
-Description: Styling for all Hero components.
-             Added a modifier for a more compact profile hero.
+Description: Optimized hero sections with better spacing, text flow, and animations
+             Replaces existing _heroes.css completely
 Dependencies: _variables.css, _core.css
-Last Update: 2025-08-11
+Last Update: 2025-08-14
 
 ==============================================================================
 */
 
 /*
 ==============================================================================
-1. LUVEX HERO (BASE SYSTEM)
+1. LUVEX HERO (BASE SYSTEM) - IMPROVED LAYOUT
 ==============================================================================
 */
 
@@ -21,11 +21,12 @@ Last Update: 2025-08-11
     background: var(--luvex-dark-blue);
     position: relative;
     overflow: hidden;
-    padding: 8rem 2rem 6rem;
-    min-height: 600px;
+    padding: 4rem 2rem 2rem; /* Reduced top/bottom padding */
+    min-height: 100vh; /* Full viewport height */
     display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Space content from top to bottom */
     align-items: center;
-    justify-content: center;
     text-align: center;
     color: var(--luvex-white);
 }
@@ -44,23 +45,46 @@ Last Update: 2025-08-11
     z-index: 1;
 }
 
-/* --- 1.2 Hero Content Container --- */
+/* --- 1.2 Hero Content Container - FLEX LAYOUT --- */
 .luvex-hero__container {
     position: relative;
     z-index: 2;
-    max-width: 900px;
+    max-width: 1200px;
     width: 100%;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    justify-content: center; /* Center main content */
     align-items: center;
+    padding: 2rem 0;
+}
+
+.luvex-hero__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .luvex-hero__title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 600;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 700;
     color: inherit;
     margin: 0 0 1.5rem 0;
     line-height: 1.1;
+    letter-spacing: -0.02em;
+    max-width: 100%;
+}
+
+.luvex-hero__subtitle {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    color: var(--luvex-gray-300);
+    font-weight: 400;
+    max-width: 800px;
+    margin: 0 0 1rem 0;
+    line-height: 1.4;
 }
 
 .luvex-hero__title .text-highlight {
@@ -69,25 +93,28 @@ Last Update: 2025-08-11
 
 .luvex-hero__description {
     font-size: var(--text-lg);
-    color: #f8f9fa; /* Heller für bessere Lesbarkeit */
+    color: rgba(248, 249, 250, 0.9); /* Better readability */
     max-width: 700px;
     line-height: 1.7;
-    margin-bottom: var(--space-xl); /* Mehr Abstand zu Buttons */
+    margin: 0; /* No bottom margin - buttons will be positioned separately */
 }
 
 /*
 ==============================================================================
-2. HERO CALL-TO-ACTION BUTTONS
+2. HERO CALL-TO-ACTION BUTTONS - BOTTOM POSITIONED
 ==============================================================================
 */
 
 .luvex-hero__cta-container {
     display: flex;
-    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+    flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
-    margin-top: auto;
-    padding-bottom: 2rem;
+    margin-top: auto; /* Push to bottom */
+    padding: 2rem 0 3rem; /* More space from bottom */
+    width: 100%;
+    position: relative;
+    z-index: 3;
 }
 
 /* --- 2.1 Primary Hero CTA (Base Style) --- */
@@ -105,6 +132,7 @@ Last Update: 2025-08-11
     transition: var(--transition-normal);
     font-size: var(--text-base);
     border: 2px solid transparent;
+    min-width: 200px; /* Consistent button width */
 }
 
 .luvex-hero__cta:hover {
@@ -114,7 +142,7 @@ Last Update: 2025-08-11
     box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
 }
 
-/* --- 2.2 Secondary Hero CTA (e.g., "Explore") --- */
+/* --- 2.2 Secondary Hero CTA --- */
 .luvex-hero__cta-secondary {
     display: inline-flex;
     align-items: center;
@@ -129,6 +157,7 @@ Last Update: 2025-08-11
     font-weight: 600;
     transition: var(--transition-normal);
     font-size: var(--text-base);
+    min-width: 200px; /* Consistent button width */
 }
 
 .luvex-hero__cta-secondary:hover {
@@ -139,6 +168,7 @@ Last Update: 2025-08-11
     box-shadow: 0 4px 15px rgba(109, 213, 237, 0.2);
 }
 
+/* Special active button animation */
 .luvex-hero__cta.hero-button-active:hover {
     background: linear-gradient(135deg, 
         var(--luvex-bright-cyan) 0%, 
@@ -151,111 +181,194 @@ Last Update: 2025-08-11
         0 0 20px rgba(138, 43, 226, 0.3);
 }
 
-
 /*
 ==============================================================================
 3. HERO VARIATIONS & SPECIFIC STYLES
 ==============================================================================
 */
 
-/* --- 3.1 Sizing Adjustments --- */
-.luvex-hero--auth {
-    min-height: auto;
-    padding: 5rem 2rem 4rem; /* Reduced padding for auth pages */
+/* --- 3.1 Compact Heroes (Auth, Profile, Contact) --- */
+.luvex-hero--compact {
+    min-height: 60vh; /* Smaller height */
+    padding: 3rem 2rem 2rem;
 }
 
-/* NEW: Modifier for a compact profile hero */
-.luvex-hero--profile {
-    min-height: auto;
-    padding: 5rem 2rem 4rem; /* Further reduced padding for a more compact look */
-}
-
-.luvex-hero--profile .luvex-hero__title,
-.luvex-hero--auth .luvex-hero__title {
-    font-size: clamp(2.2rem, 4vw, 3rem); /* Smaller title */
+.luvex-hero--compact .luvex-hero__title {
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
     margin-bottom: 1rem;
 }
 
-.luvex-hero--profile .luvex-hero__description,
-.luvex-hero--auth .luvex-hero__description {
-    font-size: var(--text-lg);
-    margin-bottom: 0; /* No bottom margin */
+.luvex-hero--compact .luvex-hero__subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    margin-bottom: 0.75rem;
 }
 
-
-/* --- 3.2 Hero Navigation (for specific pages) --- */
-.hero-navigation {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
+.luvex-hero--compact .luvex-hero__description {
+    font-size: var(--text-base);
 }
 
-.hero-navigation__link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 12px 24px;
-    background: rgba(255, 255, 255, 0.05);
+.luvex-hero--compact .luvex-hero__cta-container {
+    padding: 1.5rem 0 2rem;
+}
+
+/* --- 3.2 Profile Header (Alternative to Hero) --- */
+.luvex-profile-header {
+    background: var(--luvex-dark-blue);
     color: var(--luvex-white);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-full);
-    text-decoration: none;
-    font-weight: 500;
-    transition: var(--transition-normal);
+    padding: 3rem 2rem;
+    box-shadow: var(--shadow-lg);
+    position: relative;
 }
 
-.hero-navigation__link:hover {
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
-    border-color: var(--luvex-bright-cyan);
-    transform: translateY(-2px);
-}
-
-/* --- 3.3 Interactive Canvas Heroes --- */
-.hero-spectrum-engine,
-.hero-curing {
-    height: 600px;
-}
-
-#spectrum-canvas,
-.hero-curing #curing-hero-canvas {
+.luvex-profile-header::before {
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid-small" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(109, 213, 237, 0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid-small)"/></svg>');
+    opacity: 0.5;
+    pointer-events: none;
     z-index: 1;
-    cursor: none;
 }
 
-.hero-spectrum-engine .hero-content-fallback {
-    display: none;
+.luvex-profile-header__content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.wavelength-indicator {
+.luvex-profile-header h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: var(--luvex-white);
+}
+
+.luvex-profile-header p {
+    font-size: var(--text-lg);
+    color: rgba(248, 249, 250, 0.7);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/*
+==============================================================================
+4. ANIMATED HERO BACKGROUNDS
+==============================================================================
+*/
+
+/* --- 4.1 Data Flow Animation (for News pages) --- */
+.luvex-hero--news {
+    background-image:
+        radial-gradient(rgba(50, 150, 255, 0.15) 1px, transparent 1px),
+        radial-gradient(rgba(50, 150, 255, 0.15) 1px, transparent 1px);
+    background-size: 30px 30px;
+    background-position: 0 0, 15px 15px;
+    animation: data-flow 3s linear infinite;
+}
+
+@keyframes data-flow {
+    from { background-position-y: 0px; }
+    to { background-position-y: -30px; }
+}
+
+/* --- 4.2 Blueprint Scan Animation (for Equipment/Testing pages) --- */
+.luvex-hero--blueprint {
+    background-image:
+        linear-gradient(rgba(50, 130, 220, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(50, 130, 220, 0.2) 1px, transparent 1px);
+    background-size: 50px 50px;
+}
+
+.luvex-hero--blueprint::after {
+    content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin-top: 30px;
-    z-index: 12;
-    font-family: 'Courier New', monospace;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 1.2rem;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(100, 200, 255, 0.2), transparent);
+    animation: blueprint-scan 7s linear infinite;
     pointer-events: none;
-    background: rgba(11, 26, 61, 0.5);
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: 1px solid rgba(109, 213, 237, 0.2);
-    transition: all 0.3s ease;
+    z-index: 1;
 }
 
-
-.hero-curing .luvex-hero__container {
-    pointer-events: none;
+@keyframes blueprint-scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
 }
 
-.hero-curing .luvex-cta-primary {
-    pointer-events: auto;
+/* --- 4.3 Floating Words Animation (for About page) --- */
+.luvex-hero--about .floating-words {
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.luvex-hero--about .floating-word {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.07);
+    font-weight: 700;
+    animation: float-words 20s linear infinite;
+    user-select: none;
+}
+
+@keyframes float-words {
+    0% { transform: translateY(5vh) translateX(0vw) rotate(0deg); }
+    50% { transform: translateY(-5vh) translateX(2vw) rotate(5deg); }
+    100% { transform: translateY(5vh) translateX(0vw) rotate(0deg); }
+}
+
+/*
+==============================================================================
+5. RESPONSIVE DESIGN
+==============================================================================
+*/
+
+@media (max-width: 768px) {
+    .luvex-hero {
+        padding: 2rem 1rem 1rem;
+        min-height: 90vh; /* Slightly smaller on mobile */
+    }
+    
+    .luvex-hero__container {
+        padding: 1rem 0;
+    }
+    
+    .luvex-hero__cta-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 1.5rem 0 2rem;
+    }
+    
+    .luvex-hero__cta,
+    .luvex-hero__cta-secondary {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+    
+    .luvex-hero--compact {
+        min-height: 70vh;
+        padding: 2rem 1rem 1rem;
+    }
+    
+    .luvex-profile-header {
+        padding: 2rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .luvex-hero__title {
+        font-size: clamp(2.2rem, 8vw, 3.5rem);
+    }
+    
+    .luvex-hero__subtitle {
+        font-size: clamp(1.1rem, 4vw, 1.4rem);
+    }
 }

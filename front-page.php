@@ -15,25 +15,25 @@ get_header(); ?>
         <div class="luvex-hero__content">
             <h1 class="luvex-hero__title">
                 Precision through <span class="text-highlight">Light</span>.<br>
-                <strong>Excellence through Engineering.</strong>
+                Excellence through <span class="text-highlight">Engineering</span>.
             </h1>
-            <h2 class="luvex-hero__subtitle">
+            <p class="luvex-hero__subtitle">
                 Independent UV technology experts advancing global knowledge
-            </h2>
-            <p class="luvex-hero__description">
-                From water disinfection to precision curing - master UV technology with the world's leading specialists.
-                Independent consulting, advanced simulations, and proven results.
             </p>
-            <div class="luvex-hero__cta-container">
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="luvex-hero__cta-secondary">
-                    <i class="fas fa-atom"></i>
-                    <span>Explore UV Science</span>
-                </a>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="luvex-hero__cta luvex-cta-primary hero-button-active">
-                    <i class="fas fa-cube"></i>
-                    <span>Launch UV Simulator</span>
-                </a>
-            </div>
+            <p class="luvex-hero__description">
+                From water disinfection to precision curing - master UV technology with the world's leading specialists. Independent consulting, advanced simulations, and proven results.
+            </p>
+        </div>
+        
+        <div class="luvex-hero__cta-container">
+            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="luvex-hero__cta-secondary">
+                <i class="fas fa-atom"></i>
+                <span>Explore UV Science</span>
+            </a>
+            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="luvex-hero__cta hero-button-active">
+                <i class="fas fa-cube"></i>
+                <span>Launch UV Simulator</span>
+            </a>
         </div>
     </div>
 </section>
