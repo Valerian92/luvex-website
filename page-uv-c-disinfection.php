@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: UV-C Disinfection (Gallery Version)
+ * Template Name: UV-C Disinfection (Simplified Gallery)
  * @package Luvex
  */
 get_header(); ?>
@@ -36,7 +36,7 @@ get_header(); ?>
      ========================================================================== -->
 
 <!-- ==========================================================================
-     START: Interactive Gallery - How UV-C Works (Ersetzt alte Version)
+     START: Interactive Gallery - How UV-C Works (Simplified Manual Navigation)
      ========================================================================== -->
 <section class="section science-section">
     <div class="container">
@@ -49,11 +49,9 @@ get_header(); ?>
             <div class="animation-panel">
                 <div class="animation-display">
                     <div class="animation-content">
-                        <div class="animation-title" id="animation-title">Contamination</div>
                         <div class="animation-visual" id="animation-visual">
                             <!-- Content wird per JavaScript generiert -->
                         </div>
-                        <div class="timer-display" id="timer-display">0:00 / 0:24</div>
                     </div>
                 </div>
             </div>
@@ -97,16 +95,6 @@ get_header(); ?>
                     </div>
                 </div>
 
-                <div class="controls">
-                    <button class="play-pause-btn" id="play-pause-btn">
-                        ▶️ Play Animation
-                    </button>
-                    <div class="progress-container">
-                        <div class="progress-bar" id="progress-bar"></div>
-                    </div>
-                    <div class="timer-display-mobile" id="timer-display-mobile">0:00 / 0:24</div>
-                </div>
-
                 <div class="navigation-controls">
                     <div class="step-indicators" id="step-indicators">
                         <!-- Wird per JavaScript generiert -->
@@ -118,7 +106,7 @@ get_header(); ?>
                 </div>
             </div>
         </div>
-        <div class="scroll-hint">Navigate with indicators or arrows</div>
+        <div class="scroll-hint">Click numbers or arrows to navigate</div>
     </div>
 </section>
 <!-- ==========================================================================

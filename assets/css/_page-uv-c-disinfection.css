@@ -562,6 +562,47 @@ PAGE: UV-C DISINFECTION - SCIENCE GALLERY (UPDATED)
     justify-content: center;
 }
 
+
+/* Vereinfachte Animation ohne Timer/Play Controls */
+.animation-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.animation-visual {
+    width: 350px;  /* Etwas größer ohne Titel */
+    height: 350px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Navigation Controls anpassen */
+.navigation-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.step-indicators {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.navigation-arrows {
+    display: flex;
+    gap: 0.75rem;
+}
+
+
 .timer-display {
     position: absolute;
     top: 1rem;
