@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', function() {
         isPaused: false // Sollen die Partikel stehenbleiben?
     };
 
-    // KOORDINATEN DES ZIELBUTTONS
+    // KOORDINATEN DES ZIELBUTTONS - FIXED: Spezifischerer Selector
     let targetButtonPosition = { x: null, y: null };
-    const targetButton = document.querySelector('.luvex-cta-primary');
+    const targetButton = document.querySelector('.luvex-hero .luvex-cta-primary.simulator-cta');
 
     // --- CONFIGURATION ---
     const maxParticles = 300; // Erhöht auf 300 Partikel
@@ -41,6 +41,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const heroRect = heroSection.getBoundingClientRect();
             targetButtonPosition.x = rect.left + rect.width / 2 - heroRect.left;
             targetButtonPosition.y = rect.top + rect.height / 2 - heroRect.top;
+            console.log('🎯 Target Button Position:', targetButtonPosition);
+        } else {
+            console.warn('⚠️ Target Button nicht gefunden!');
         }
     }
 
@@ -198,14 +201,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 button.addEventListener('mouseenter', () => {
                     mouse.isPaused = true;
                     button.classList.add('hero-button-active'); // Für CSS-Animation
+                    console.log('🎯 Button hover - Animation paused:', button.className);
                 });
                 button.addEventListener('mouseleave', () => {
                     mouse.isPaused = false;
                     button.classList.remove('hero-button-active'); // CSS-Animation entfernen
+                    console.log('🎯 Button leave - Animation resumed');
                 });
             }
         });
     }
+
     // --- EVENT LISTENERS ---
     window.addEventListener('resize', () => {
         setup();

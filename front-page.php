@@ -23,10 +23,10 @@ get_header(); ?>
                 Independent UV technology experts advancing global knowledge
             </h2>
             
-            <!-- 3. Title (unten, breit, groß) -->
+            <!-- 3. Title (unten, breit, groß) - UMGEDREHTE REIHENFOLGE -->
             <h1 class="luvex-hero__title">
-                Precision through <span class="text-highlight">Light</span>.<br>
-                Excellence through Engineering.
+                <span class="title-line-1">Excellence through Engineering.</span>
+                <span class="title-line-2">Precision through <span class="text-highlight">Light</span>.</span>
             </h1>
         </div>
         <div class="luvex-hero__cta-container">
@@ -34,14 +34,13 @@ get_header(); ?>
                 <i class="fas fa-atom"></i>
                 <span>Explore UV Science</span>
             </a>
-            <a href="/uv-simulator/" class="luvex-hero__cta">
+            <a href="/uv-simulator/" class="luvex-hero__cta luvex-cta-primary simulator-cta hero-button-active">
                 <i class="fas fa-cube"></i>
                 <span>Launch UV Simulator</span>
             </a>
         </div>
     </div>
 </section>
-
 
 <!-- UV Knowledge Navigator -->
 <section class="section section--turquoise-light knowledge-navigator-section">
