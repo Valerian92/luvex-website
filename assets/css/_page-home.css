@@ -539,3 +539,39 @@ HOMEPAGE PYRAMID FIXES + ROUND BUTTON
         font-size: clamp(2.5rem, 9vw, 4rem);
     }
 }
+
+
+
+
+/* FINALE PYRAMIDEN-LÖSUNG */
+.home .luvex-hero__description {
+    max-width: 950px !important;
+    font-size: 1.4rem !important;
+    text-align: center !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.home .luvex-hero__subtitle {  
+    max-width: 800px !important;
+    font-size: 1.5rem !important;
+    text-align: center !important;
+    margin-top: 2rem !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.home .luvex-hero__title {
+    max-width: 600px !important;
+    font-size: 2.5rem !important;
+    line-height: 1.0 !important;
+    text-align: center !important;
+}
+
+.home .luvex-hero__cta-container {
+    margin-top: 1rem !important;
+    gap: 1rem !important;
+}
+
+.luvex-hero .luvex-cta-primary,
+.luvex-hero .luvex-cta-secondary {
+    border-radius: 50px !important;
+}
