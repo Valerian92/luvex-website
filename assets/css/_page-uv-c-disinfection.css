@@ -154,8 +154,8 @@ Dependencies: animations.css, _variables.css, _layout.css
 
 .step-content {
     opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s ease;
+    transform: translateX(50px);
+    transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
     position: absolute;
     top: 0;
     left: 0;
@@ -165,9 +165,15 @@ Dependencies: animations.css, _variables.css, _layout.css
 
 .step-content.active {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
     position: relative;
     pointer-events: auto;
+}
+
+.step-content.exiting {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .step-content h3 {
@@ -214,16 +220,32 @@ Dependencies: animations.css, _variables.css, _layout.css
 .final-cta a {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    color: var(--luvex-bright-cyan);
-    text-decoration: none;
+    gap: 0.75rem;
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--radius-lg);
     font-weight: 600;
-    transition: var(--transition-normal);
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
+    border: 2px solid var(--luvex-bright-cyan);
 }
 
 .final-cta a:hover {
-    color: var(--luvex-vibrant-blue);
-    transform: translateX(5px);
+    background: var(--luvex-white);
+    color: var(--luvex-bright-cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(109, 213, 237, 0.4);
+}
+
+.final-cta a svg {
+    transition: transform 0.3s ease;
+}
+
+.final-cta a:hover svg {
+    transform: translateX(3px);
 }
 
 /* --- NAVIGATION CONTROLS (IN ANIMATION PANEL) --- */
@@ -562,5 +584,10 @@ Dependencies: animations.css, _variables.css, _layout.css
     .luvex-cta-primary {
         padding: 0.8rem 1.5rem;
         font-size: 1rem;
+    }
+    
+    .final-cta a {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
     }
 }

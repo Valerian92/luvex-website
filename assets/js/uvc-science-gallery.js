@@ -172,10 +172,24 @@ class UVCAnimationSystem {
     updateDisplay() {
         console.log(`🔄 [UVC DEBUG] Updating to step ${this.currentStep + 1}`);
         
-        // Update step content
+        // Smooth text transitions
         this.stepContents.forEach((content, index) => {
             const isActive = index === this.currentStep;
-            content.classList.toggle('active', isActive);
+            
+            if (content.classList.contains('active') && !isActive) {
+                // Ausgehender Text
+                content.classList.add('exiting');
+                content.classList.remove('active');
+                setTimeout(() => {
+                    content.classList.remove('exiting');
+                }, 800);
+            } else if (!content.classList.contains('active') && isActive) {
+                // Eingehender Text - kurze Verzögerung für smooth transition
+                setTimeout(() => {
+                    content.classList.add('active');
+                }, 200);
+            }
+            
             console.log(`  Step ${index + 1} content: ${isActive ? 'ACTIVE' : 'inactive'}`);
         });
 
@@ -458,7 +472,7 @@ class UVCAnimationSystem {
         }, 500);
     }
 
-    // STEP 6: Permanent Protection + Applications (OPTIMIERTE POSITIONIERUNG)
+    // STEP 6: Permanent Protection + Applications (PERFEKTE POSITIONIERUNG)
     createProtectionAnimation() {
         console.log('🛡️ [UVC DEBUG] Creating protection + applications animation');
         
@@ -478,26 +492,37 @@ class UVCAnimationSystem {
         
         this.animationVisual.appendChild(rays);
         
-        // Benefits oberhalb des Kreises - gleichmäßig verteilt
+        // Benefits perfekt um den Kreis herum positioniert
+        const centerX = 150; // Kreis-Mitte
+        const centerY = 150;
+        const radius = 90; // Abstand vom Kreis
+        
         const benefits = [
-            { text: 'Save Chemical Spendings', position: { x: 50, y: 40 }, delay: 500 },
-            { text: 'Energy Efficient', position: { x: 150, y: 20 }, delay: 800 },
-            { text: 'Longer Shelf-Life', position: { x: 250, y: 40 }, delay: 1100 },
-            { text: 'Increased Quality', position: { x: 300, y: 80 }, delay: 1400 }
+            { text: 'Save Chemical Spendings', angle: -90, delay: 500 }, // Oben
+            { text: 'Energy Efficient', angle: -45, delay: 800 }, // Oben rechts  
+            { text: 'Longer Shelf-Life', angle: 45, delay: 1100 }, // Unten rechts
+            { text: 'Increased Quality', angle: 135, delay: 1400 } // Unten links
         ];
         
         benefits.forEach((benefit, index) => {
             setTimeout(() => {
                 const benefitElement = document.createElement('div');
                 benefitElement.className = 'benefit-text';
-                benefitElement.style.left = `${benefit.position.x}px`;
-                benefitElement.style.top = `${benefit.position.y}px`;
+                
+                // Berechne Position basierend auf Winkel
+                const radian = (benefit.angle * Math.PI) / 180;
+                const x = centerX + radius * Math.cos(radian);
+                const y = centerY + radius * Math.sin(radian);
+                
+                benefitElement.style.left = `${x}px`;
+                benefitElement.style.top = `${y}px`;
+                benefitElement.style.transform = 'translate(-50%, -50%)';
                 benefitElement.textContent = benefit.text;
                 this.animationVisual.appendChild(benefitElement);
             }, benefit.delay);
         });
         
-        // Application Buttons unten mit mehr Abstand
+        // Application Buttons unten mit mehr Abstand und breiter
         const applicationContainer = document.createElement('div');
         applicationContainer.className = 'application-buttons';
         
