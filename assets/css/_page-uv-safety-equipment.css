@@ -1,51 +1,111 @@
 /*
 ==============================================================================
-LUVEX THEME - PAGE: UV SAFETY EQUIPMENT (REDESIGN 2025-08-14)
+LUVEX THEME - PAGE: UV SAFETY EQUIPMENT (PYRAMIDEN-HERO FIX 2025-08-15)
 ==============================================================================
 */
 
-/* --- 1. Hero Section Layout --- */
+/* --- 1. Hero Section Layout (Pyramiden-Struktur) --- */
 .luvex-hero--safety-equipment {
-    min-height: 100vh; /* Stellt sicher, dass der Hero den ganzen Bildschirm füllt */
+    min-height: 70vh;
 }
 
-/* Wir nutzen den bestehenden .luvex-hero__content-Container und machen ihn
-   zu einem Flex-Container, der seinen Inhalt (Text und Button) verteilt. */
 .luvex-hero--safety-equipment .luvex-hero__content {
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Das ist der Schlüssel: Schiebt Text nach oben und Button nach unten */
+    align-items: center;
+    text-align: center;
     flex-grow: 1;
     width: 100%;
-    padding-top: 8rem; /* Platz für den Header */
-    padding-bottom: 4rem; /* Abstand ganz unten */
+    padding-top: 6rem;
+    gap: 2rem;
 }
 
-/* Der Text-Wrapper wird automatisch nach oben geschoben */
-.luvex-hero--safety-equipment .luvex-hero__text-wrapper {
-    /* Benötigt keine speziellen Styles, dient nur der Gruppierung */
-}
+/* NEUE REIHENFOLGE: Title → Buttons → Subtitle → Description */
 
-/* Der Button-Container wird nach unten geschoben */
-.luvex-hero--safety-equipment .luvex-hero__cta-container {
-    margin-top: 0; /* Überschreibt eventuelle Standard-Abstände */
-    padding-bottom: 0;
-}
-
-
-/* --- 2. Typografie an das neue Design anpassen --- */
+/* 1. Title (oben, schmalster Container) */
 .luvex-hero--safety-equipment .luvex-hero__title {
-    font-size: clamp(3rem, 6vw, 4.5rem);
-    margin-bottom: 1rem;
+    font-size: clamp(3.2rem, 7vw, 5rem);
+    font-weight: 600;
+    color: var(--luvex-white);
+    margin: 0;
+    line-height: 1.1;
+    max-width: 600px; /* Schmalster Container */
+    text-align: center;
+    order: 1;
 }
 
+/* 2. Buttons (direkt nach Title) */
+.luvex-hero--safety-equipment .luvex-hero__cta-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    order: 2;
+}
+
+/* 3. Subtitle (mittlere Breite) */
 .luvex-hero--safety-equipment .luvex-hero__subtitle {
-    font-size: clamp(1.5rem, 3vw, 1.875rem);
-    max-width: 800px;
-    margin-bottom: 1.5rem;
+    font-size: clamp(1.4rem, 3.5vw, 2rem);
+    color: var(--luvex-gray-300);
+    font-weight: 400;
+    max-width: 750px; /* Mittlere Breite */
+    margin: 0;
+    line-height: 1.3;
+    text-align: center;
+    order: 3;
 }
 
+/* 4. Description (unten, breitester Container, 2 Zeilen) */
 .luvex-hero--safety-equipment .luvex-hero__description {
-    max-width: 700px;
-    margin-bottom: 0; /* Kein Abstand mehr nötig, da der Button separat positioniert wird */
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: var(--luvex-gray-300);
+    max-width: 900px; /* Breitester Container */
+    line-height: 1.6;
+    text-align: center;
+    margin: 0;
+    opacity: 0.9;
+    order: 4;
+    /* Für 2-Zeilen-Begrenzung */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* --- 2. Responsive Anpassungen --- */
+@media (max-width: 768px) {
+    .luvex-hero--safety-equipment .luvex-hero__content {
+        padding-top: 4rem;
+        gap: 1.5rem;
+    }
+    
+    .luvex-hero--safety-equipment .luvex-hero__title {
+        font-size: clamp(2.8rem, 8vw, 4rem);
+        max-width: 95%;
+    }
+    
+    .luvex-hero--safety-equipment .luvex-hero__subtitle {
+        font-size: clamp(1.2rem, 4vw, 1.7rem);
+        max-width: 90%;
+    }
+    
+    .luvex-hero--safety-equipment .luvex-hero__description {
+        font-size: clamp(1rem, 3vw, 1.2rem);
+        max-width: 95%;
+    }
+    
+    .luvex-hero--safety-equipment .luvex-hero__cta-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .luvex-hero--safety-equipment .luvex-hero__cta,
+    .luvex-hero--safety-equipment .luvex-hero__cta-secondary {
+        width: 100%;
+        max-width: 280px;
+    }
 }

@@ -586,3 +586,31 @@ HOMEPAGE PYRAMID FIXES + ROUND BUTTON
 .home .luvex-hero__subtitle {
     margin-bottom: 2.5rem !important; /* Mehr Abstand nach unten */
 }
+
+
+/* SCHRIFTFARBEN WEISSER + SCHÖNER */
+.home .luvex-hero__description {
+    max-width: 1200px !important; /* DEUTLICH breiter */
+    font-size: 1.6rem !important; /* Größer */
+    color: #f8f9fa !important; /* Weißer */
+    margin-bottom: 3rem !important; /* Großer Abstand nach unten */
+}
+
+.home .luvex-hero__subtitle {  
+    max-width: 850px !important; /* Breiter */
+    font-size: 1.8rem !important; /* Größer + wirksamer */
+    color: #e9ecef !important; /* Weißer */
+    margin-top: 2rem !important;
+    margin-bottom: 2rem !important; /* Mittlerer Abstand */
+}
+
+.home .luvex-hero__title {
+    max-width: 600px !important;
+    font-size: 2.5rem !important;
+    color: #ffffff !important; /* Reinweiß */
+    margin-bottom: 1.5rem !important; /* Kleiner Abstand */
+}
+
+.home .luvex-hero__cta-container {
+    margin-top: 1rem !important; /* Subtiler Abstand */
+}
