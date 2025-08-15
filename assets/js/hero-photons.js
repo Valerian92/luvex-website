@@ -25,9 +25,11 @@ document.addEventListener('DOMContentLoaded', function() {
         isPaused: false // Sollen die Partikel stehenbleiben?
     };
 
-    // KOORDINATEN DES ZIELBUTTONS - FIXED: Spezifischerer Selector
+    // KOORDINATEN DES ZIELBUTTONS - MEHRERE SELEKTOREN PROBIEREN
     let targetButtonPosition = { x: null, y: null };
-    const targetButton = document.querySelector('.luvex-hero .luvex-cta-primary.simulator-cta');
+    const targetButton = document.querySelector('.luvex-hero .simulator-cta') || 
+                        document.querySelector('.luvex-hero .luvex-cta-primary') ||
+                        document.querySelector('.simulator-cta');
 
     // --- CONFIGURATION ---
     const maxParticles = 300; // Erhöht auf 300 Partikel

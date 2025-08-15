@@ -431,3 +431,111 @@ HOMEPAGE HERO PYRAMID LAYOUT + CURSOR FIX
         font-size: clamp(2.5rem, 9vw, 4rem);
     }
 }
+
+
+
+
+/*
+==============================================================================
+HOMEPAGE PYRAMID FIXES + ROUND BUTTON
+==============================================================================
+*/
+
+/* RUNDER BUTTON FIX */
+.luvex-hero .luvex-cta-primary,
+.luvex-hero .luvex-cta-secondary {
+    border-radius: 50px !important; /* Super-rund */
+}
+
+/* KORREKTE PYRAMIDEN-STRUKTUR */
+.home .luvex-hero__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+/* 1. DESCRIPTION (ganz oben, SCHMALSTE Ebene) */
+.home .luvex-hero__description {
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
+    color: var(--luvex-gray-300);
+    max-width: 480px !important; /* SCHMALSTE - Pyramiden-Spitze */
+    line-height: 1.6;
+    text-align: center;
+    margin: 0 0 var(--space-lg) 0;
+    opacity: 0.9;
+    order: 1;
+}
+
+/* 2. SUBTITLE (Mitte, MITTLERE Ebene) */
+.home .luvex-hero__subtitle {
+    font-size: clamp(1.4rem, 3.5vw, 2rem);
+    color: var(--luvex-gray-300);
+    font-weight: 400;
+    max-width: 650px !important; /* MITTLERE Breite */
+    margin: 0 0 var(--space-lg) 0;
+    line-height: 1.3;
+    text-align: center;
+    order: 2;
+}
+
+/* 3. TITLE (ganz unten, BREITESTE Ebene) */
+.home .luvex-hero__title {
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    font-weight: 600;
+    color: var(--luvex-white);
+    margin: 0;
+    line-height: 1.1;
+    max-width: 850px !important; /* BREITESTE - Pyramiden-Basis */
+    text-align: center;
+    order: 3;
+}
+
+/* TITLE ZEILEN-STRUKTUR */
+.home .luvex-hero__title .title-line-1 {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.home .luvex-hero__title .title-line-2 {
+    display: block;
+}
+
+.home .luvex-hero__title .text-highlight {
+    color: var(--luvex-bright-cyan);
+}
+
+/* RESPONSIVE: Pyramiden-Proportionen beibehalten */
+@media (max-width: 768px) {
+    .home .luvex-hero__description {
+        max-width: 85% !important; /* Schmalste */
+        font-size: clamp(0.9rem, 3vw, 1.1rem);
+    }
+    
+    .home .luvex-hero__subtitle {
+        max-width: 90% !important; /* Mittlere */
+        font-size: clamp(1.1rem, 4vw, 1.6rem);
+    }
+    
+    .home .luvex-hero__title {
+        max-width: 95% !important; /* Breiteste */
+        font-size: clamp(2.8rem, 8vw, 4.5rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .home .luvex-hero__description {
+        max-width: 90% !important;
+    }
+    
+    .home .luvex-hero__subtitle {
+        max-width: 95% !important;
+    }
+    
+    .home .luvex-hero__title {
+        max-width: 100% !important;
+        font-size: clamp(2.5rem, 9vw, 4rem);
+    }
+}
