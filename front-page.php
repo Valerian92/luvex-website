@@ -30,13 +30,13 @@ get_header(); ?>
             </h1>
         </div>
         <div class="luvex-hero__cta-container">
-            <a href="/about/" class="luvex-hero__cta-secondary">
-                <i class="fas fa-atom"></i>
-                <span>Explore UV Science</span>
-            </a>
             <a href="/uv-simulator/" class="luvex-hero__cta luvex-cta-primary simulator-cta hero-button-active">
                 <i class="fas fa-cube"></i>
                 <span>Launch UV Simulator</span>
+            </a>
+            <a href="/about/" class="luvex-hero__cta-secondary">
+                <i class="fas fa-atom"></i>
+                <span>Explore UV Science</span>
             </a>
         </div>
     </div>

@@ -575,3 +575,14 @@ HOMEPAGE PYRAMID FIXES + ROUND BUTTON
 .luvex-hero .luvex-cta-secondary {
     border-radius: 50px !important;
 }
+
+
+/* ROTEN CONTAINER BREITER (keine 3. Zeile) */
+.home .luvex-hero__description {
+    max-width: 1000px !important; /* Noch breiter */
+}
+
+/* GRÖSSEREN ABSTAND ZWISCHEN GRÜN UND BLAU */
+.home .luvex-hero__subtitle {
+    margin-bottom: 2.5rem !important; /* Mehr Abstand nach unten */
+}
