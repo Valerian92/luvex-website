@@ -63,8 +63,6 @@ class UVCAnimationSystem {
             indicator.className = 'step-indicator';
             indicator.textContent = i + 1;
             indicator.setAttribute('aria-label', `Go to step ${i + 1}`);
-            indicator.style.zIndex = '1000'; // DEBUG: Force high z-index
-            indicator.style.position = 'relative'; // DEBUG: Ensure positioning
             if (i === 0) indicator.classList.add('active');
             
             // DEBUG: Add visual feedback
@@ -91,10 +89,6 @@ class UVCAnimationSystem {
         console.log('🔗 [UVC DEBUG] Binding navigation events...');
         
         if (this.prevBtn) {
-            // DEBUG: Add visual feedback
-            this.prevBtn.style.zIndex = '1000';
-            this.prevBtn.style.position = 'relative';
-            
             this.prevBtn.addEventListener('mouseenter', () => {
                 console.log('⬅️ [UVC DEBUG] Hover on prev button');
             });
@@ -112,10 +106,6 @@ class UVCAnimationSystem {
         }
         
         if (this.nextBtn) {
-            // DEBUG: Add visual feedback  
-            this.nextBtn.style.zIndex = '1000';
-            this.nextBtn.style.position = 'relative';
-            
             this.nextBtn.addEventListener('mouseenter', () => {
                 console.log('➡️ [UVC DEBUG] Hover on next button');
             });
@@ -142,12 +132,10 @@ class UVCAnimationSystem {
         
         if (navControls) {
             console.log('📐 [UVC DEBUG] Navigation controls bounds:', navControls.getBoundingClientRect());
-            navControls.style.outline = '2px solid red'; // DEBUG: Visual indicator
         }
         
         if (navArrows) {
             console.log('📐 [UVC DEBUG] Navigation arrows bounds:', navArrows.getBoundingClientRect());
-            navArrows.style.outline = '2px solid blue'; // DEBUG: Visual indicator
         }
         
         // Test all buttons
@@ -156,7 +144,6 @@ class UVCAnimationSystem {
         
         allButtons.forEach((btn, index) => {
             console.log(`  Button ${index}:`, btn.getBoundingClientRect());
-            btn.style.outline = '1px solid green'; // DEBUG: Visual indicator
         });
     }
 
@@ -433,26 +420,45 @@ class UVCAnimationSystem {
         this.animationVisual.appendChild(replicationFailure);
     }
 
-    // STEP 5: Population Collapse (SCHNELLER START)
+    // STEP 5: Population Collapse mit UV-Scanner (ÜBERARBEITET)
     createCollapseAnimation() {
-        console.log('💀 [UVC DEBUG] Creating population collapse animation');
+        console.log('💀 [UVC DEBUG] Creating population collapse animation with UV scanner');
         
-        const numDyingMicrobes = 25;
+        // Mikroben-Population erstellen
+        const numMicrobes = 20;
+        const microbes = [];
         
-        for (let i = 0; i < numDyingMicrobes; i++) {
-            const dyingOrganism = document.createElement('div');
-            dyingOrganism.className = 'dying-organism';
+        for (let i = 0; i < numMicrobes; i++) {
+            const microbe = document.createElement('div');
+            microbe.className = 'population-microbe';
             
-            const pos = this.getRandomPosition(280, 280, 20, 20);
-            dyingOrganism.style.left = `${pos.x}px`;
-            dyingOrganism.style.top = `${pos.y}px`;
-            dyingOrganism.style.animationDelay = `${Math.random() * 0.5}s`; // REDUZIERT von 2s auf 0.5s
+            const pos = this.getRandomPosition(250, 250, 25, 25);
+            microbe.style.left = `${pos.x}px`;
+            microbe.style.top = `${pos.y}px`;
             
-            this.animationVisual.appendChild(dyingOrganism);
+            this.animationVisual.appendChild(microbe);
+            microbes.push(microbe);
         }
+        
+        // UV-Scanner erstellen
+        const scanner = document.createElement('div');
+        scanner.className = 'uv-scanner';
+        this.animationVisual.appendChild(scanner);
+        
+        // Scanner-Animation + Mikroben-Tod sequenziell
+        setTimeout(() => {
+            scanner.classList.add('scanning');
+            
+            // Mikroben sterben nach und nach über 4 Sekunden
+            microbes.forEach((microbe, index) => {
+                setTimeout(() => {
+                    microbe.classList.add('dying');
+                }, (index * 200) + 1000); // Nach 1s beginnt das Sterben, 200ms Abstand
+            });
+        }, 500);
     }
 
-    // STEP 6: Permanent Protection + Applications (ÜBERARBEITET)
+    // STEP 6: Permanent Protection + Applications (OPTIMIERTE POSITIONIERUNG)
     createProtectionAnimation() {
         console.log('🛡️ [UVC DEBUG] Creating protection + applications animation');
         
@@ -472,11 +478,12 @@ class UVCAnimationSystem {
         
         this.animationVisual.appendChild(rays);
         
-        // Benefits aus dem Kreis hervorkommend
+        // Benefits oberhalb des Kreises - gleichmäßig verteilt
         const benefits = [
-            { text: 'No Chemicals', position: { x: 175, y: 60 }, delay: 500 },
-            { text: 'Energy Efficient', position: { x: 260, y: 120 }, delay: 800 },
-            { text: 'Increased Quality', position: { x: 175, y: 300 }, delay: 1100 }
+            { text: 'Save Chemical Spendings', position: { x: 50, y: 40 }, delay: 500 },
+            { text: 'Energy Efficient', position: { x: 150, y: 20 }, delay: 800 },
+            { text: 'Longer Shelf-Life', position: { x: 250, y: 40 }, delay: 1100 },
+            { text: 'Increased Quality', position: { x: 300, y: 80 }, delay: 1400 }
         ];
         
         benefits.forEach((benefit, index) => {
@@ -490,7 +497,7 @@ class UVCAnimationSystem {
             }, benefit.delay);
         });
         
-        // Application Buttons unten (wie im Hero)
+        // Application Buttons unten mit mehr Abstand
         const applicationContainer = document.createElement('div');
         applicationContainer.className = 'application-buttons';
         
@@ -509,7 +516,7 @@ class UVCAnimationSystem {
                     <span>${app.text}</span>
                 `;
                 applicationContainer.appendChild(appButton);
-            }, 1500 + (index * 300));
+            }, 1800 + (index * 300));
         });
         
         this.animationVisual.appendChild(applicationContainer);

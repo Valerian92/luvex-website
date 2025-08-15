@@ -91,6 +91,27 @@ Dependencies: animations.css, _variables.css, _layout.css
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    padding: 1rem;
+}
+
+.navigation-arrows {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    position: relative;
+    z-index: 1001;
+    pointer-events: auto;
+    margin-bottom: 1rem;
+}
+
+.step-indicators {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    position: relative;
+    z-index: 1001;
+    pointer-events: auto;
+    margin-bottom: 1rem;
 }
 
 .animation-display {
@@ -111,8 +132,8 @@ Dependencies: animations.css, _variables.css, _layout.css
 }
 
 .animation-visual {
-    width: 350px;
-    height: 350px;
+    width: 300px;
+    height: 300px;
     margin: 0 auto;
     position: relative;
     display: flex;
@@ -221,9 +242,9 @@ Dependencies: animations.css, _variables.css, _layout.css
     z-index: 1000;
 }
 
-.step-indicators {
+.navigation-arrows {
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
     order: 1;
     position: relative;
     z-index: 1001;
@@ -231,14 +252,22 @@ Dependencies: animations.css, _variables.css, _layout.css
     margin-top: 0.5rem;
 }
 
-.navigation-arrows {
+.step-indicators {
     display: flex;
-    gap: 1rem;
-    order: 3;
+    gap: 0.5rem;
+    order: 2;
     position: relative;
     z-index: 1001;
     pointer-events: auto;
-    margin-bottom: 0.5rem;
+}
+
+.animation-display {
+    order: 3;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 .nav-arrow {

@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: UV-C Disinfection (Extended Gallery)
+ * Template Name: UV-C Disinfection (Optimized Gallery)
  * @package Luvex
  */
 get_header(); ?>
@@ -24,9 +24,18 @@ get_header(); ?>
                 Navigate through our core applications to find the perfect UV-C solution for your specific needs.
             </p>
             <nav class="hero-navigation">
-                <a href="#applications-air" class="hero-navigation__link"><i class="fa-solid fa-wind"></i><span>Air Disinfection</span></a>
-                <a href="#applications-surface" class="hero-navigation__link"><i class="fa-solid fa-layer-group"></i><span>Surface Treatment</span></a>
-                <a href="#applications-water" class="hero-navigation__link"><i class="fa-solid fa-droplet"></i><span>Water Purification</span></a>
+                <a href="#applications-air" class="hero-navigation__link">
+                    <i class="fa-solid fa-wind"></i>
+                    <span>Air Disinfection</span>
+                </a>
+                <a href="#applications-surface" class="hero-navigation__link">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span>Surface Treatment</span>
+                </a>
+                <a href="#applications-water" class="hero-navigation__link">
+                    <i class="fa-solid fa-droplet"></i>
+                    <span>Water Purification</span>
+                </a>
             </nav>
         </div>
     </div>
@@ -36,7 +45,7 @@ get_header(); ?>
      ========================================================================== -->
 
 <!-- ==========================================================================
-     START: Interactive Gallery - How UV-C Works (Extended with Applications)
+     START: Interactive Science Gallery - How UV-C Works
      ========================================================================== -->
 <section class="section science-section">
     <div class="container">
@@ -46,7 +55,20 @@ get_header(); ?>
         </div>
 
         <div class="showcase-container">
+            <!-- Animation Panel mit integrierter Navigation -->
             <div class="animation-panel">
+                <!-- Navigation: Pfeile oben -->
+                <div class="navigation-arrows">
+                    <button class="nav-arrow" id="prev-btn" aria-label="Previous step">‹</button>
+                    <button class="nav-arrow" id="next-btn" aria-label="Next step">›</button>
+                </div>
+                
+                <!-- Navigation: Nummern -->
+                <div class="step-indicators" id="step-indicators">
+                    <!-- Wird per JavaScript generiert -->
+                </div>
+                
+                <!-- Animation Display -->
                 <div class="animation-display">
                     <div class="animation-content">
                         <div class="animation-visual" id="animation-visual">
@@ -56,57 +78,47 @@ get_header(); ?>
                 </div>
             </div>
 
+            <!-- Control Panel nur für Text-Content -->
             <div class="control-panel">
-                <div style="position: relative; height: 280px;">
-                    <div class="step-content active" data-step="1">
-                        <h3>1. Contamination</h3>
-                        <p>Active microorganisms populate the environment. They replicate continuously and increase contamination levels, creating ongoing health and safety risks.</p>
-                    </div>
-
-                    <div class="step-content" data-step="2">
-                        <h3>2. UV-C Irradiation</h3>
-                        <p>A high-energy UV-C light field is generated. The light penetrates a microorganism and targets the sensitive DNA helix in its core with precise wavelengths.</p>
-                    </div>
-
-                    <div class="step-content" data-step="3">
-                        <h3>3. DNA Damage</h3>
-                        <p>UV-C energy is absorbed, breaking hydrogen bonds and forcing adjacent thymine bases into a permanent, irreparable "thymine dimer" fusion that corrupts the genetic code.</p>
-                    </div>
-
-                    <div class="step-content" data-step="4">
-                        <h3>4. Replication Failure</h3>
-                        <p>The dimer lesion makes the genetic code unreadable. The cell's replication machinery stops at the damaged site and completely halts the reproduction process.</p>
-                    </div>
-
-                    <div class="step-content" data-step="5">
-                        <h3>5. Population Collapse</h3>
-                        <p>Unable to reproduce, microorganisms become inactivated. The entire population gradually collapses, leading to complete inactivation without resistance development.</p>
-                    </div>
-
-                    <div class="step-content" data-step="6">
-                        <h3>6. Permanent Protection</h3>
-                        <p>Continuous UV-C irradiation maintains a disinfected state and prevents formation of new colonies and biofilms. <strong>Integration into various applications</strong> enables comprehensive protection for water treatment, air purification, and surface disinfection systems.</p>
-                        <ul class="benefits-list">
-                            <li><strong>No chemicals required</strong> – purely physical process</li>
-                            <li><strong>Immediate effectiveness</strong> – no contact time needed</li>
-                            <li><strong>Broad spectrum</strong> – effective against all microorganisms</li>
-                        </ul>
-                        <div class="final-cta">
-                            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-consulting' ) ) ); ?>">
-                                Explore beneficial applications
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                            </a>
-                        </div>
-                    </div>
+                <div class="step-content active" data-step="1">
+                    <h3>1. Contamination</h3>
+                    <p>Active microorganisms populate the environment. They replicate continuously and increase contamination levels, creating ongoing health and safety risks.</p>
                 </div>
 
-                <div class="navigation-controls">
-                    <div class="navigation-arrows">
-                        <button class="nav-arrow" id="prev-btn" aria-label="Previous step">‹</button>
-                        <button class="nav-arrow" id="next-btn" aria-label="Next step">›</button>
-                    </div>
-                    <div class="step-indicators" id="step-indicators">
-                        <!-- Wird per JavaScript generiert -->
+                <div class="step-content" data-step="2">
+                    <h3>2. UV-C Irradiation</h3>
+                    <p>A high-energy UV-C light field is generated. The light penetrates a microorganism and targets the sensitive DNA helix in its core with precise wavelengths.</p>
+                </div>
+
+                <div class="step-content" data-step="3">
+                    <h3>3. DNA Damage</h3>
+                    <p>UV-C energy is absorbed, breaking hydrogen bonds and forcing adjacent thymine bases into a permanent, irreparable "thymine dimer" fusion that corrupts the genetic code.</p>
+                </div>
+
+                <div class="step-content" data-step="4">
+                    <h3>4. Replication Failure</h3>
+                    <p>The dimer lesion makes the genetic code unreadable. The cell's replication machinery stops at the damaged site and completely halts the reproduction process.</p>
+                </div>
+
+                <div class="step-content" data-step="5">
+                    <h3>5. Population Collapse</h3>
+                    <p>Unable to reproduce, microorganisms become inactivated. The entire population gradually collapses, leading to complete inactivation without resistance development.</p>
+                </div>
+
+                <div class="step-content" data-step="6">
+                    <h3>6. Permanent Protection</h3>
+                    <p>Continuous UV-C irradiation maintains a disinfected state and prevents formation of new colonies and biofilms. <strong>Integration into various applications</strong> enables comprehensive protection for water treatment, air purification, and surface disinfection systems.</p>
+                    <ul class="benefits-list">
+                        <li><strong>Save chemical spendings</strong> – purely physical process</li>
+                        <li><strong>Immediate effectiveness</strong> – no contact time needed</li>
+                        <li><strong>Broad spectrum</strong> – effective against all microorganisms</li>
+                        <li><strong>Longer shelf-life</strong> – extended product durability</li>
+                    </ul>
+                    <div class="final-cta">
+                        <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-consulting' ) ) ); ?>">
+                            Explore beneficial applications
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -118,7 +130,7 @@ get_header(); ?>
      ========================================================================== -->
 
 <!-- ==========================================================================
-     START: UV-C Benefits Summary (Optional Enhancement)
+     START: UV-C Benefits Summary
      ========================================================================== -->
 <section class="section benefits-section">
     <div class="container">
@@ -126,8 +138,8 @@ get_header(); ?>
         <div class="grid-4">
             <div class="benefit-card">
                 <div class="benefit-icon">🧪</div>
-                <h3>No Chemicals</h3>
-                <p>Harmless physical process without toxic residues or chemical handling requirements.</p>
+                <h3>Save Chemical Spendings</h3>
+                <p>Harmless physical process without toxic residues or expensive chemical handling requirements.</p>
             </div>
             <div class="benefit-card">
                 <div class="benefit-icon">🛡️</div>
@@ -140,7 +152,7 @@ get_header(); ?>
                 <p>Reduces spoilage and contamination, significantly extending product usability periods.</p>
             </div>
             <div class="benefit-card">
-                <div class="benefit-icon">👥</div>
+                <div class="benefit-icon">💪</div>
                 <h3>Healthier Environment</h3>
                 <p>Improved air quality reduces employee sick time and increases workplace productivity.</p>
             </div>
@@ -151,13 +163,17 @@ get_header(); ?>
      END: Benefits Summary Section
      ========================================================================== -->
 
+<!-- ==========================================================================
+     START: Applications Sections
+     ========================================================================== -->
 <main>
-    <!-- ==========================================================================
-         START: Air Disinfection Applications
-         ========================================================================== -->
+    <!-- Air Disinfection Applications -->
     <section id="applications-air" class="section applications-section precision-transition">
         <div class="container">
-            <h2 class="text-center"><i class="fa-solid fa-wind"></i>Air Disinfection</h2>
+            <h2 class="text-center">
+                <i class="fa-solid fa-wind"></i>
+                Air Disinfection
+            </h2>
             <div class="grid-3">
                 <div class="value-card">
                     <h3 class="value-card__title">In-Duct Systems</h3>
@@ -175,12 +191,13 @@ get_header(); ?>
         </div>
     </section>
 
-    <!-- ==========================================================================
-         START: Surface Treatment Applications
-         ========================================================================== -->
+    <!-- Surface Treatment Applications -->
     <section id="applications-surface" class="section diagonal-transition">
         <div class="container">
-            <h2 class="text-center"><i class="fa-solid fa-layer-group"></i>Surface Treatment</h2>
+            <h2 class="text-center">
+                <i class="fa-solid fa-layer-group"></i>
+                Surface Treatment
+            </h2>
             <div class="grid-3">
                 <div class="value-card">
                     <h3 class="value-card__title">Mobile Robots</h3>
@@ -198,12 +215,13 @@ get_header(); ?>
         </div>
     </section>
 
-    <!-- ==========================================================================
-         START: Water Purification Applications
-         ========================================================================== -->
+    <!-- Water Purification Applications -->
     <section id="applications-water" class="section applications-section precision-transition">
         <div class="container">
-            <h2 class="text-center"><i class="fa-solid fa-droplet"></i>Water Purification</h2>
+            <h2 class="text-center">
+                <i class="fa-solid fa-droplet"></i>
+                Water Purification
+            </h2>
             <div class="grid-3">
                 <div class="value-card">
                     <h3 class="value-card__title">Drinking Water</h3>
@@ -221,6 +239,9 @@ get_header(); ?>
         </div>
     </section>
 </main>
+<!-- ==========================================================================
+     END: Applications Sections
+     ========================================================================== -->
 
 <!-- ==========================================================================
      START: Call-to-Action Section
@@ -235,5 +256,8 @@ get_header(); ?>
         </a>
     </div>
 </section>
+<!-- ==========================================================================
+     END: Call-to-Action Section
+     ========================================================================== -->
 
 <?php get_footer(); ?>
