@@ -82,9 +82,49 @@ function luvex_enqueue_assets() {
         wp_enqueue_style('luvex-animations', get_stylesheet_directory_uri() . '/assets/css/_animations.css', array('luvex-main'), $animations_css_version);
     }
 
-    // === CURSOR EFFECTS INTEGRATION ===
-    // Cursor Effects (nur auf Homepage)
-    if (is_front_page() || is_home()) {
+    // === CURSOR EFFECTS - CONFIG-DATEI SYSTEM ===
+    // Lade separate Cursor-Konfiguration
+    $cursor_config_path = get_stylesheet_directory() . '/cursor-config.php';
+    if (file_exists($cursor_config_path)) {
+        include $cursor_config_path;
+    } else {
+        // Fallback wenn Config nicht existiert
+        $luvex_cursor_pages = array();
+        $luvex_cursor_sections = array();
+        $luvex_default_cursor = 'quantum';
+    }
+
+    // Prüfe welche Seite aktiv ist
+    $current_cursor_config = null;
+    $current_page_type = 'unknown';
+    
+    foreach ($luvex_cursor_pages as $page_type => $page_config) {
+        if (!$page_config['enabled']) continue;
+        
+        foreach ($page_config['conditions'] as $condition) {
+            $is_active = false;
+            
+            if ($condition === 'is_front_page' && is_front_page()) {
+                $is_active = true;
+            } elseif ($condition === 'is_home' && is_home()) {
+                $is_active = true;
+            } elseif (strpos($condition, 'is_page:') === 0) {
+                $page_slug = str_replace('is_page:', '', $condition);
+                if (is_page($page_slug)) {
+                    $is_active = true;
+                }
+            }
+            
+            if ($is_active) {
+                $current_cursor_config = $page_config;
+                $current_page_type = $page_type;
+                break 2;
+            }
+        }
+    }
+
+    // Cursor-System laden wenn Seite aktiv ist
+    if ($current_cursor_config) {
         $cursor_css_path = get_stylesheet_directory() . '/assets/css/_cursor-effects.css';
         if (file_exists($cursor_css_path)) {
             $cursor_css_version = filemtime($cursor_css_path);
@@ -95,6 +135,25 @@ function luvex_enqueue_assets() {
         if (file_exists($cursor_js_path)) {
             $cursor_js_version = filemtime($cursor_js_path);
             wp_enqueue_script('luvex-cursor-effects', get_stylesheet_directory_uri() . '/assets/js/cursor-effects.js', array(), $cursor_js_version, true);
+            
+            // Filtere Sections für aktuelle Seite
+            $active_sections = array();
+            foreach ($luvex_cursor_sections as $selector => $section_config) {
+                if (!$section_config['enabled']) continue;
+                if (in_array('all', $section_config['pages']) || in_array($current_page_type, $section_config['pages'])) {
+                    $active_sections[$selector] = $section_config['style'];
+                }
+            }
+            
+            // Konfiguration an JavaScript übergeben
+            wp_localize_script('luvex-cursor-effects', 'luvex_cursor_config', array(
+                'default_style' => $current_cursor_config['default_style'],
+                'luvex_standard' => $luvex_default_cursor,
+                'page_type' => $current_page_type,
+                'sections' => $active_sections,
+                'settings' => isset($luvex_cursor_settings) ? $luvex_cursor_settings : array(),
+                'debug_mode' => WP_DEBUG
+            ));
         }
     }
 
@@ -140,9 +199,31 @@ function luvex_enqueue_assets() {
         }
     }
     elseif ( is_page('uv-curing') ) {
+        // Page-specific CSS
+        $curing_css_path = get_stylesheet_directory() . '/assets/css/_page-uv-curing.css';
+        if (file_exists($curing_css_path)) {
+            wp_enqueue_style('luvex-page-uv-curing', get_stylesheet_directory_uri() . '/assets/css/_page-uv-curing.css', array('luvex-main'), filemtime($curing_css_path));
+        }
+        
+        // Hero Animation
         $curing_js_path = get_stylesheet_directory() . '/assets/js/hero-curing-interactive.js';
         if (file_exists($curing_js_path)) {
             wp_enqueue_script('luvex-hero-curing', get_stylesheet_directory_uri() . '/assets/js/hero-curing-interactive.js', array(), filemtime($curing_js_path), true);
+        }
+        
+        // UV-Curing Science Gallery Animation System (wird später implementiert)
+        $curing_science_js_path = get_stylesheet_directory() . '/assets/js/curing-science-gallery.js';
+        if (file_exists($curing_science_js_path)) {
+            wp_enqueue_script('luvex-curing-science-gallery', get_stylesheet_directory_uri() . '/assets/js/curing-science-gallery.js', array(), filemtime($curing_science_js_path), true);
+            
+            // Debug-Information für JavaScript verfügbar machen
+            wp_localize_script('luvex-curing-science-gallery', 'luvex_debug', array(
+                'debug_mode' => WP_DEBUG,
+                'theme_uri' => get_stylesheet_directory_uri(),
+                'page_slug' => $current_page_slug,
+                'css_version' => $animations_css_version,
+                'js_version' => filemtime($curing_science_js_path)
+            ));
         }
     } 
     elseif ( is_page('uv-consulting') ) { 
@@ -168,7 +249,13 @@ function luvex_enqueue_assets() {
         }
     }
     elseif ( is_page('uv-c-disinfection') ) { 
-        // Hero Animation (bleibt bestehen)
+        // Page-specific CSS
+        $disinfection_css_path = get_stylesheet_directory() . '/assets/css/_page-uv-c-disinfection.css';
+        if (file_exists($disinfection_css_path)) {
+            wp_enqueue_style('luvex-page-uv-c-disinfection', get_stylesheet_directory_uri() . '/assets/css/_page-uv-c-disinfection.css', array('luvex-main'), filemtime($disinfection_css_path));
+        }
+        
+        // Hero Animation
         $disinfection_js_path = get_stylesheet_directory() . '/assets/js/hero-disinfection.js';
         if (file_exists($disinfection_js_path)) {
             wp_enqueue_script('luvex-hero-disinfection', get_stylesheet_directory_uri() . '/assets/js/hero-disinfection.js', array(), filemtime($disinfection_js_path), true);

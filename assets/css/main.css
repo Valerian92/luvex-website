@@ -62,10 +62,14 @@ Last Update: 2025-07-31
 @import '_page-about.css';
 @import '_page-contact.css';
 @import '_page-booking.css';
-@import '_page-uv-c-disinfection.css';
+
+@import '_page-uv-curing.css';
 @import '_page-uv-led.css';
-@import '_page-uv-consulting.css';
 @import '_page-mercury-uv-lamps.css';
+@import '_page-uv-c-disinfection.css';
+
+@import '_page-uv-consulting.css';
+
 @import '_page-uv-safety-equipment.css';
 @import '_page-uv-process-equipment.css';
 @import '_page-uv-testing-equipment.css';
