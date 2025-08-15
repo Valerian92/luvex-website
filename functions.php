@@ -75,11 +75,27 @@ function luvex_enqueue_assets() {
     $main_css_version = file_exists($main_css_path) ? filemtime($main_css_path) : '1.0.0';
     wp_enqueue_style('luvex-main', get_stylesheet_directory_uri() . '/assets/css/main.css', array(), $main_css_version);
 
-    // KORREKTUR: wp_enqueue_style (nicht wp_enqueue_script) für CSS
+    // Animations CSS
     $animations_css_path = get_stylesheet_directory() . '/assets/css/_animations.css';
     if (file_exists($animations_css_path)) {
         $animations_css_version = filemtime($animations_css_path);
         wp_enqueue_style('luvex-animations', get_stylesheet_directory_uri() . '/assets/css/_animations.css', array('luvex-main'), $animations_css_version);
+    }
+
+    // === CURSOR EFFECTS INTEGRATION ===
+    // Cursor Effects (nur auf Homepage)
+    if (is_front_page() || is_home()) {
+        $cursor_css_path = get_stylesheet_directory() . '/assets/css/_cursor-effects.css';
+        if (file_exists($cursor_css_path)) {
+            $cursor_css_version = filemtime($cursor_css_path);
+            wp_enqueue_style('luvex-cursor-effects', get_stylesheet_directory_uri() . '/assets/css/_cursor-effects.css', array('luvex-main'), $cursor_css_version);
+        }
+        
+        $cursor_js_path = get_stylesheet_directory() . '/assets/js/cursor-effects.js';
+        if (file_exists($cursor_js_path)) {
+            $cursor_js_version = filemtime($cursor_js_path);
+            wp_enqueue_script('luvex-cursor-effects', get_stylesheet_directory_uri() . '/assets/js/cursor-effects.js', array(), $cursor_js_version, true);
+        }
     }
 
     // Standard JS-Dateien

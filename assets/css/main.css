@@ -35,6 +35,8 @@ Last Update: 2025-07-31
 
 @import '_components.css';
 @import '_modals.css';
+@import '_cursor-effects.css';
+
 /*-------------merged------------*/
 
 @import '_header.css';
