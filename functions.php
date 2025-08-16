@@ -199,19 +199,19 @@ function luvex_enqueue_assets() {
         }
     }
     elseif ( is_page('uv-curing') ) {
-        // Page-specific CSS
+        // Page-specific CSS für UV Curing
         $curing_css_path = get_stylesheet_directory() . '/assets/css/_page-uv-curing.css';
         if (file_exists($curing_css_path)) {
             wp_enqueue_style('luvex-page-uv-curing', get_stylesheet_directory_uri() . '/assets/css/_page-uv-curing.css', array('luvex-main'), filemtime($curing_css_path));
         }
         
-        // Hero Animation
+        // Hero Animation für UV Curing
         $curing_js_path = get_stylesheet_directory() . '/assets/js/hero-curing-interactive.js';
         if (file_exists($curing_js_path)) {
             wp_enqueue_script('luvex-hero-curing', get_stylesheet_directory_uri() . '/assets/js/hero-curing-interactive.js', array(), filemtime($curing_js_path), true);
         }
         
-        // UV-Curing Science Gallery Animation System (wird später implementiert)
+        // UV-Curing Science Gallery Animation System (VOLLSTÄNDIG IMPLEMENTIERT)
         $curing_science_js_path = get_stylesheet_directory() . '/assets/js/curing-science-gallery.js';
         if (file_exists($curing_science_js_path)) {
             wp_enqueue_script('luvex-curing-science-gallery', get_stylesheet_directory_uri() . '/assets/js/curing-science-gallery.js', array(), filemtime($curing_science_js_path), true);
@@ -221,7 +221,7 @@ function luvex_enqueue_assets() {
                 'debug_mode' => WP_DEBUG,
                 'theme_uri' => get_stylesheet_directory_uri(),
                 'page_slug' => $current_page_slug,
-                'css_version' => $animations_css_version,
+                'css_version' => isset($animations_css_version) ? $animations_css_version : '1.0.0',
                 'js_version' => filemtime($curing_science_js_path)
             ));
         }
@@ -271,7 +271,7 @@ function luvex_enqueue_assets() {
                 'debug_mode' => WP_DEBUG,
                 'theme_uri' => get_stylesheet_directory_uri(),
                 'page_slug' => $current_page_slug,
-                'css_version' => $animations_css_version,
+                'css_version' => isset($animations_css_version) ? $animations_css_version : '1.0.0',
                 'js_version' => filemtime($uvc_science_js_path)
             ));
         }

@@ -1260,6 +1260,24 @@ Verwendet von: hero-disinfection.js + uvc-science-gallery.js
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 ==============================================================================
 LUVEX THEME - UV CURING ANIMATIONS (animations.css extension)
@@ -2124,5 +2142,55 @@ Integration: Diese Styles in die bestehende _animations.css einfügen
     .animation-visual {
         width: 260px;
         height: 260px;
+    }
+}
+
+/* --- HERO ANIMATIONS FÜR UV CURING --- */
+.hero-curing .photon-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: linear-gradient(45deg, #6dd5ed, #4fb3d9);
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: curing-photon-float 15s ease-in-out infinite;
+    box-shadow: 0 0 8px rgba(109, 213, 237, 0.6);
+}
+
+@keyframes curing-photon-float {
+    0% { transform: translateY(0px) translateX(0px); opacity: 0.4; }
+    25% { transform: translateY(-20px) translateX(15px); opacity: 0.8; }
+    50% { transform: translateY(0px) translateX(30px); opacity: 1; }
+    75% { transform: translateY(20px) translateX(15px); opacity: 0.8; }
+    100% { transform: translateY(0px) translateX(0px); opacity: 0.4; }
+}
+
+.hero-curing .polymerization-wave {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 2px solid rgba(109, 213, 237, 0.3);
+    border-radius: 50%;
+    animation: polymerization-expand 8s ease-out infinite;
+    opacity: 0;
+}
+
+@keyframes polymerization-expand {
+    0% { 
+        width: 20px; 
+        height: 20px; 
+        opacity: 0.8; 
+        transform: translate(-50%, -50%); 
+    }
+    50% { 
+        width: 200px; 
+        height: 200px; 
+        opacity: 0.4; 
+    }
+    100% { 
+        width: 400px; 
+        height: 400px; 
+        opacity: 0; 
+        transform: translate(-50%, -50%); 
     }
 }
