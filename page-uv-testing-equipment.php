@@ -9,12 +9,12 @@ get_header(); ?>
 <section class="luvex-hero luvex-hero--testing-equipment">
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
-            <!-- 1. Title (oben) -->
+            <!-- 1. Title ganz oben -->
             <h1 class="luvex-hero__title">
                 UV <span class="text-highlight">Testing</span> Equipment
             </h1>
             
-            <!-- 2. Buttons (direkt nach Title) -->
+            <!-- 2. Buttons (gleichgroß) -->
             <div class="luvex-hero__cta-container">
                 <a href="#measurement-guide" class="luvex-hero__cta-secondary">
                     <i class="fas fa-ruler"></i>
@@ -31,7 +31,7 @@ get_header(); ?>
                 Precision measurement tools for UV process validation
             </h2>
             
-            <!-- 4. Description (unten) -->
+            <!-- 4. Description ganz unten -->
             <p class="luvex-hero__description">
                 Ensure optimal UV performance with professional-grade measurement and testing equipment. From simple test strips to advanced dosimeters.
             </p>

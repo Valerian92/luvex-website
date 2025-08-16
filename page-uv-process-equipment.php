@@ -8,12 +8,12 @@ get_header(); ?>
 <section class="luvex-hero luvex-hero--process-equipment">
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
-            <!-- 1. Title (oben) -->
+            <!-- 1. Title ganz oben -->
             <h1 class="luvex-hero__title">
                 Professional <span class="text-highlight">UV Process</span> Equipment
             </h1>
             
-            <!-- 2. Buttons (direkt nach Title) -->
+            <!-- 2. Buttons (gleichgroß) -->
             <div class="luvex-hero__cta-container">
                 <a href="#equipment-categories" class="luvex-hero__cta-secondary">
                     <i class="fas fa-list"></i>
@@ -30,7 +30,7 @@ get_header(); ?>
                 Quality equipment for UV professionals and researchers
             </h2>
             
-            <!-- 4. Description (unten) -->
+            <!-- 4. Description ganz unten -->
             <p class="luvex-hero__description">
                 From safety equipment to precision measurement tools - get professional-grade UV equipment recommended by independent experts. No vendor bias, just the best tools for your applications.
             </p>

@@ -9,12 +9,12 @@ get_header(); ?>
 <section class="luvex-hero luvex-hero--safety-equipment">
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
-            <!-- 1. Title (oben) -->
+            <!-- 1. Title ganz oben -->
             <h1 class="luvex-hero__title">
                 <span class="text-highlight">UV Safety</span> Equipment
             </h1>
             
-            <!-- 2. Buttons (direkt nach Title) -->
+            <!-- 2. Buttons (gleichgroß) -->
             <div class="luvex-hero__cta-container">
                 <a href="#safety-guide" class="luvex-hero__cta-secondary">
                     <i class="fas fa-shield-alt"></i>
@@ -31,7 +31,7 @@ get_header(); ?>
                 Professional-grade protection for UV work environments
             </h2>
             
-            <!-- 4. Description (unten) -->
+            <!-- 4. Description ganz unten -->
             <p class="luvex-hero__description">
                 Protect yourself and your team with high-quality UV safety equipment. From UV-blocking eyewear to protective clothing - ensure safe UV operations.
             </p>
