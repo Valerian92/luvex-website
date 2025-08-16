@@ -16,45 +16,59 @@ $luvex_default_cursor = 'quantum'; // Elegant, subtil, professional
 
 $luvex_cursor_sections = array(
     
-    // === HERO SECTIONS ===
+    // === HERO SECTIONS (AKTIVIERT!) ===
     '.luvex-hero' => array(
-        'style' => 'particles',     // Animierte Partikel (passt zur Animation)
+        'style' => 'particles',     // Animierte Partikel (⭐ Hero-Standard)
+        'enabled' => true,          // ✅ AKTIV für alle Heroes
+        'pages' => array('all')     // Auf allen Seiten mit Hero
+    ),
+    
+    // === SPEZIELLE HERO OVERRIDES ===
+    // Spezifische Heroes können andere Styles haben
+    '.hero-spectrum-engine' => array(
+        'style' => 'energy',        // Energy Ring für UV Knowledge
         'enabled' => true,          // ✅ AKTIV
-        'pages' => array('homepage', 'about') // Nur auf diesen Seiten
+        'pages' => array('uv-knowledge')
+    ),
+    
+    '.hero-curing' => array(
+        'style' => 'precision',     // Crosshair für UV Curing
+        'enabled' => true,          // ✅ AKTIV
+        'pages' => array('uv-curing')
     ),
     
     // === SIMULATOR SECTIONS ===
     '.uv-simulator-showcase' => array(
         'style' => 'precision',     // Crosshair für Präzision  
-        'enabled' => false,         // ❌ DEAKTIVIERT
+        'enabled' => true,          // ✅ AKTIVIERT
         'pages' => array('homepage')
     ),
     
     // === COMMUNITY SECTIONS ===
     '.homepage-community-section' => array(
         'style' => 'energy',        // Futuristisch für Community
-        'enabled' => false,         // ❌ DEAKTIVIERT  
+        'enabled' => false,         // ❌ DEAKTIVIERT (kann aktiviert werden)
         'pages' => array('homepage')
     ),
     
     // === EVIDENCE/TEAM SECTIONS ===
     '.evidence-section, .team-section' => array(
         'style' => 'quantum',       // Elegant für Expertise
-        'enabled' => false,         // ❌ DEAKTIVIERT
+        'enabled' => false,         // ❌ DEAKTIVIERT (kann aktiviert werden)
         'pages' => array('homepage', 'about')
     ),
     
     // === CTA SECTIONS ===
     '.section--final-cta, .cta-section' => array(
         'style' => 'beam',          // Einladend für Call-to-Action
-        'enabled' => false,         // ❌ DEAKTIVIERT
+        'enabled' => false,         // ❌ DEAKTIVIERT (kann aktiviert werden)
         'pages' => array('all')     // Auf allen Seiten
     ),
     
     // === CONTACT/BOOKING SECTIONS ===
     '.contact-section, .booking-section' => array(
         'style' => 'classic',       // Professionell für Business
-        'enabled' => false,         // ❌ DEAKTIVIERT
+        'enabled' => false,         // ❌ DEAKTIVIERT (kann aktiviert werden)
         'pages' => array('contact', 'booking')
     )
 );
@@ -66,32 +80,52 @@ $luvex_cursor_pages = array(
     'homepage' => array(
         'conditions' => array('is_front_page', 'is_home'),
         'enabled' => true,           // ✅ Homepage aktiv
-        'default_style' => $luvex_default_cursor
+        'default_style' => 'particles' // Particles für Homepage (Sterne-Animation)
     ),
     'about' => array(
         'conditions' => array('is_page:about'),
         'enabled' => true,           // ✅ About aktiv  
-        'default_style' => 'quantum'
+        'default_style' => 'quantum' // Elegant für About
     ),
     'uv-knowledge' => array(
         'conditions' => array('is_page:uv-knowledge'),
-        'enabled' => false,          // ❌ Deaktiviert
-        'default_style' => 'energy'
+        'enabled' => true,           // ✅ AKTIVIERT
+        'default_style' => 'energy'  // Futuristisch für Knowledge
+    ),
+    'uv-curing' => array(
+        'conditions' => array('is_page:uv-curing'),
+        'enabled' => true,           // ✅ AKTIVIERT
+        'default_style' => 'precision' // Crosshair für Curing
     ),
     'uv-simulator' => array(
         'conditions' => array('is_page:uv-simulator'),
-        'enabled' => false,          // ❌ Deaktiviert
-        'default_style' => 'precision'
+        'enabled' => true,           // ✅ AKTIVIERT
+        'default_style' => 'precision' // Crosshair für Simulator
+    ),
+    'uv-consulting' => array(
+        'conditions' => array('is_page:uv-consulting'),
+        'enabled' => true,           // ✅ AKTIVIERT  
+        'default_style' => 'classic'  // Professionell für Consulting
     ),
     'contact' => array(
         'conditions' => array('is_page:contact'),
-        'enabled' => false,          // ❌ Deaktiviert
-        'default_style' => 'beam'
+        'enabled' => true,           // ✅ AKTIVIERT
+        'default_style' => 'beam'     // Freundlich für Contact
     ),
-    'consulting' => array(
-        'conditions' => array('is_page:uv-consulting'),
-        'enabled' => false,          // ❌ Deaktiviert
-        'default_style' => 'classic'
+    'uv-c-disinfection' => array(
+        'conditions' => array('is_page:uv-c-disinfection'),
+        'enabled' => true,           // ✅ AKTIVIERT
+        'default_style' => 'energy'  // Energy für UV-C
+    ),
+    'mercury-uv-lamps' => array(
+        'conditions' => array('is_page:mercury-uv-lamps'),
+        'enabled' => true,           // ✅ AKTIVIERT
+        'default_style' => 'classic' // Klassisch für Mercury
+    ),
+    'led-uv-systems' => array(
+        'conditions' => array('is_page:led-uv-systems', 'is_page:uv-led'),
+        'enabled' => true,           // ✅ AKTIVIERT
+        'default_style' => 'energy'  // Modern für LED
     )
 );
 
