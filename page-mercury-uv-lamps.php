@@ -6,7 +6,7 @@
 get_header(); ?>
 
 <!-- ==========================================================================
-     START: Mercury Lamp Hero Section
+     START: Mercury Lamp Hero Section (Optimized Layout)
      ========================================================================== -->
 <section class="luvex-hero mercury-hero">
     <!-- The Canvas for the animation -->
@@ -15,15 +15,20 @@ get_header(); ?>
     <!-- The content overlay -->
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
+            <!-- 1. Titel (wie gewünscht oben) -->
             <h1 class="luvex-hero__title">The <span class="text-highlight">Mercury Lamp</span> Spectrum</h1>
-            <p class="luvex-hero__description">
-                Discover the powerful broadband emissions of mercury vapor lamps, 
-                characterized by distinct spectral peaks across the UV and visible light spectrum.
-            </p>
+
+            <!-- 2. Button-Container (jetzt in der Mitte) -->
             <div class="luvex-hero__cta-container">
                 <a href="#how-it-works" class="luvex-hero__cta">How It Works</a>
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-consulting' ) ) ); ?>" class="luvex-hero__cta-secondary">Request Consultation</a>
             </div>
+
+            <!-- 3. Beschreibung (jetzt unter den Buttons) -->
+            <p class="luvex-hero__description">
+                Discover the powerful broadband emissions of mercury vapor lamps,
+                characterized by distinct spectral peaks across the UV and visible light spectrum.
+            </p>
         </div>
     </div>
 </section>
@@ -41,20 +46,20 @@ get_header(); ?>
                 <h2 class="section-title">Broadband Powerhouse</h2>
                 <p class="text-large text-muted">Mercury vapor lamps generate a wide range of UV wavelengths by passing an electric arc through vaporized mercury. This process creates intense spectral lines ideal for applications requiring deep, powerful curing.</p>
             </div>
-            
+
             <div class="grid-3">
                 <div class="card has-shine-effect">
                     <div class="card__icon" style="color: #8a2be2;"><i class="fas fa-atom"></i></div>
                     <h3 class="card__title">Electric Arc Ignition</h3>
                     <p class="card__description">An electric arc excites mercury atoms inside a quartz tube, causing them to emit photons.</p>
                 </div>
-                
+
                 <div class="card has-shine-effect">
                     <div class="card__icon" style="color: #007BFF;"><i class="fas fa-sun"></i></div>
                     <h3 class="card__title">Broad Spectrum Emission</h3>
                     <p class="card__description">The excited atoms release energy as light across multiple wavelengths, from UV-C to visible light.</p>
                 </div>
-                
+
                 <div class="card has-shine-effect">
                     <div class="card__icon" style="color: #10b981;"><i class="fas fa-layer-group"></i></div>
                     <h3 class="card__title">Deep Material Curing</h3>
@@ -73,7 +78,7 @@ get_header(); ?>
                 <h2 class="section-title">Mercury vs. LED: A Clear Comparison</h2>
                 <p class="text-large text-muted">While powerful, traditional mercury lamps face challenges in a modern, efficiency-focused world. Here's how they stack up against UV LED technology.</p>
             </div>
-            
+
             <div class="comparison-wrapper">
                 <table class="detailed-comparison">
                     <thead>
@@ -135,7 +140,7 @@ get_header(); ?>
                         <p>Despite the rise of LEDs, mercury lamps excel in specific legacy applications. Their intense, broadband output is sometimes necessary for curing older ink or coating formulations that were designed specifically for this wide spectrum. Retrofitting these systems can be complex and costly.</p>
                     </div>
                 </div>
-                
+
                 <div class="faq-item">
                     <button class="faq-question">
                         <span>What is the Minamata Convention?</span>
@@ -145,7 +150,7 @@ get_header(); ?>
                         <p>The Minamata Convention on Mercury is a global treaty to protect human health and the environment from the adverse effects of mercury. It includes measures to phase out the manufacture, import, and export of mercury-containing products, which directly impacts the future availability of mercury vapor lamps.</p>
                     </div>
                 </div>
-                
+
                 <div class="faq-item">
                     <button class="faq-question">
                         <span>What is the process for migrating to LED?</span>
@@ -160,7 +165,5 @@ get_header(); ?>
     </section>
 
 </main>
-
-
 
 <?php get_footer(); ?>

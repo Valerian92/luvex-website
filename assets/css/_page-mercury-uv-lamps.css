@@ -5,7 +5,7 @@ LUVEX THEME - PAGE: MERCURY UV LAMPS
 
 Description: Page-specific styles for the Mercury UV Lamps knowledge page.
 Dependencies: _core.css, _components.css
-Last Update: 2025-08-14
+Last Update: 2025-08-16 (Layout and Button Fixes)
 
 ==============================================================================
 */
@@ -21,7 +21,7 @@ Last Update: 2025-08-14
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh; /* Full viewport height */
+    height: 100vh;
     min-height: 700px;
     overflow: hidden;
     text-align: center;
@@ -33,17 +33,49 @@ Last Update: 2025-08-14
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Animation in the background */
+    z-index: 1;
 }
 
 .mercury-hero .luvex-hero__container {
     position: relative;
-    z-index: 2; /* Content in the foreground */
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /*
 ==============================================================================
-2. COMPARISON TABLE
+2. PAGE-SPECIFIC HERO LAYOUT & BUTTON STYLES
+==============================================================================
+*/
+
+/* --- 2.1 Abstände für die neue Inhaltsreihenfolge --- */
+.mercury-hero .luvex-hero__cta-container {
+    margin-top: 2.5rem; /* Abstand zwischen Titel und Buttons */
+}
+
+.mercury-hero .luvex-hero__description {
+    margin-top: 2rem; /* Abstand zwischen Buttons und Beschreibung */
+    margin-bottom: 0;
+    max-width: 700px; /* Etwas breiter für besseren Look */
+}
+
+/* --- 2.2 Einheitliche Button-Größen NUR für diese Seite --- */
+.mercury-hero .luvex-hero__cta,
+.mercury-hero .luvex-hero__cta-secondary {
+    padding: 16px 32px; /* Einheitlicher Innenabstand */
+    border-radius: var(--radius-full); /* Einheitlich runde Ecken */
+    border-width: 2px; /* Stellt sicher, dass die Border-Dicke gleich ist */
+    border-style: solid;
+    line-height: 1; /* Verhindert Höhenunterschiede durch Textumbruch */
+}
+
+
+/*
+==============================================================================
+3. COMPARISON TABLE
 ==============================================================================
 */
 
@@ -103,7 +135,7 @@ Last Update: 2025-08-14
 
 /*
 ==============================================================================
-3. FAQ SECTION
+4. FAQ SECTION
 ==============================================================================
 */
 
