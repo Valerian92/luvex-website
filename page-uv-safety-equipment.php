@@ -6,28 +6,35 @@
  */
 get_header(); ?>
 
-<section class="luvex-hero">
+<section class="luvex-hero luvex-hero--safety-equipment">
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
-            <p class="luvex-hero__description">
-                Protect yourself and your team with high-quality UV safety equipment. From UV-blocking eyewear to protective clothing - ensure safe UV operations.
-            </p>
-            <h2 class="luvex-hero__subtitle">
-                Professional-grade protection for UV work environments
-            </h2>
+            <!-- 1. Title (oben) -->
             <h1 class="luvex-hero__title">
                 <span class="text-highlight">UV Safety</span> Equipment
             </h1>
-        </div>
-        <div class="luvex-hero__cta-container">
-            <a href="#safety-guide" class="luvex-hero__cta-secondary">
-                <i class="fas fa-shield-alt"></i>
-                <span>Safety Guidelines</span>
-            </a>
-            <a href="#products" class="luvex-hero__cta">
-                <i class="fas fa-shopping-cart"></i>
-                <span>Shop Safety Gear</span>
-            </a>
+            
+            <!-- 2. Buttons (direkt nach Title) -->
+            <div class="luvex-hero__cta-container">
+                <a href="#safety-guide" class="luvex-hero__cta-secondary">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Safety Guidelines</span>
+                </a>
+                <a href="#products" class="luvex-hero__cta">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Shop Safety Gear</span>
+                </a>
+            </div>
+            
+            <!-- 3. Subtitle -->
+            <h2 class="luvex-hero__subtitle">
+                Professional-grade protection for UV work environments
+            </h2>
+            
+            <!-- 4. Description (unten) -->
+            <p class="luvex-hero__description">
+                Protect yourself and your team with high-quality UV safety equipment. From UV-blocking eyewear to protective clothing - ensure safe UV operations.
+            </p>
         </div>
     </div>
 </section>

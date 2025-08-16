@@ -24,18 +24,25 @@ Dependencies: animations.css, _variables.css, _layout.css
     z-index: 0;
 }
 
-/* Hero Layout Optimierungen */
+/* Hero Layout Optimierungen - Neue Reihenfolge */
 .luvex-hero__title {
-    margin-bottom: var(--space-sm);
-}
-
-.luvex-hero__subtitle {
     margin-bottom: var(--space-md);
 }
 
+.hero-navigation {
+    margin-bottom: var(--space-md);
+}
+
+.luvex-hero__subtitle {
+    margin-bottom: var(--space-sm);
+}
+
 .luvex-hero__description {
-    max-width: 950px;
-    margin-bottom: var(--space-xl);
+    max-width: 650px;
+    margin: 0 auto var(--space-lg) auto;
+    text-align: center;
+    line-height: 1.6;
+    font-size: 1.1rem;
 }
 
 /* --- SCIENCE GALLERY SECTION LAYOUT --- */
@@ -147,7 +154,7 @@ Dependencies: animations.css, _variables.css, _layout.css
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     position: relative;
     z-index: 1;
 }
@@ -524,8 +531,12 @@ Dependencies: animations.css, _variables.css, _layout.css
     }
     
     .animation-visual {
-        width: 280px;
-        height: 280px;
+        width: 250px;
+        height: 250px;
+    }
+    
+    .luvex-hero__description br {
+        display: none;
     }
     
     .grid-3 {

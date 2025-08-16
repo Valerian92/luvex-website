@@ -67,11 +67,6 @@ get_header(); ?>
                     <div class="animation-content">
                         <div class="animation-visual" id="curing-animation-visual">
                             <!-- Content wird per JavaScript generiert -->
-                            <div class="placeholder-animation">
-                                <i class="fas fa-flask"></i>
-                                <p>UV Curing Animation</p>
-                                <small>Will be implemented next</small>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -81,37 +76,37 @@ get_header(); ?>
             <div class="control-panel">
                 <div class="step-content active" data-step="1">
                     <h3>1. Liquid Application</h3>
-                    <p>Liquid ink, coating, or adhesive is applied to the substrate. The formulation contains photoinitiators that remain inactive until exposed to specific UV wavelengths.</p>
+                    <p>UV-reactive liquid (ink, coating, or adhesive) is precisely applied to substrate. Contains ~1.5% photoinitiators that remain inactive until UV exposure.</p>
                 </div>
 
                 <div class="step-content" data-step="2">
                     <h3>2. UV Irradiation</h3>
-                    <p>High-intensity UV light irradiates the liquid material. The wavelength must match the absorption spectrum of the photoinitiators for optimal activation.</p>
+                    <p>High-intensity UV light irradiates the liquid coating. Wavelength must match photoinitiator absorption spectrum for optimal efficiency and complete cure.</p>
                 </div>
 
                 <div class="step-content" data-step="3">
-                    <h3>3. Photoinitiator Activation</h3>
-                    <p>UV photons are absorbed by photoinitiators, causing them to split into reactive radicals. This creates the starting point for polymerization chain reactions.</p>
+                    <h3>3. Wavelength-Dependent Activation</h3>
+                    <p>Different wavelengths penetrate to different depths. 365nm activates surface photoinitiators strongly but has limited penetration. 405nm reaches deeper layers but with reduced intensity.</p>
                 </div>
 
                 <div class="step-content" data-step="4">
-                    <h3>4. Polymerization Chain</h3>
-                    <p>Free radicals initiate rapid polymerization of monomers and oligomers. Cross-linking occurs instantly, creating a three-dimensional polymer network.</p>
+                    <h3>4. Polymer Network Formation</h3>
+                    <p>Activated radicals trigger rapid polymerization. Polymer chains grow organically in random directions, forming crosslinked network structures that create the final material properties.</p>
                 </div>
 
                 <div class="step-content" data-step="5">
-                    <h3>5. Penetration Depth Control</h3>
-                    <p>UV penetration depth depends on wavelength and material properties. Layer thickness must be optimized to ensure complete curing throughout the coating.</p>
+                    <h3>5. Post-Cure Development</h3>
+                    <p>Initial cure is instant, but molecular crosslinking continues over time. Hardness, tackiness and adhesion develop gradually to optimal values.</p>
                 </div>
 
                 <div class="step-content" data-step="6">
-                    <h3>6. Complete Curing</h3>
-                    <p>Liquid transforms into a solid, durable polymer film. The cured material exhibits enhanced properties including hardness, chemical resistance, and adhesion.</p>
+                    <h3>6. UV-Substrate Benefits</h3>
+                    <p>UV-reactive substrates enable: on-demand curing, customized mechanical properties, biocompatibility for medical devices, and precise process control.</p>
                     <ul class="benefits-list">
-                        <li><strong>Instant curing</strong> – seconds instead of hours</li>
-                        <li><strong>Energy efficient</strong> – no heat required</li>
-                        <li><strong>Solvent-free</strong> – environmentally friendly</li>
-                        <li><strong>Superior properties</strong> – enhanced performance</li>
+                        <li><strong>Instant curing</strong> — seconds instead of hours</li>
+                        <li><strong>Energy efficient</strong> — no heat required</li>
+                        <li><strong>Solvent-free</strong> — environmentally friendly</li>
+                        <li><strong>Superior properties</strong> — enhanced performance</li>
                     </ul>
                     <div class="final-cta">
                         <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-consulting' ) ) ); ?>">

@@ -576,7 +576,50 @@ Last Update: 2025-08-14
     z-index: 1;
 }
 
-/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 ==============================================================================
 LUVEX THEME - UV-C ANIMATIONS (animations.css)
@@ -769,11 +812,11 @@ Verwendet von: hero-disinfection.js + uvc-science-gallery.js
     opacity: 1;
 }
 
-/* STEP 4: Replikationsfehler */
+/* STEP 4: Replikationsfehler (NACH OBEN VERSCHOBEN) */
 .visual-step-4 .replication-failure {
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 40%;
     transform: translate(-50%, -50%);
     width: 250px;
     height: 250px;
@@ -933,12 +976,29 @@ Verwendet von: hero-disinfection.js + uvc-science-gallery.js
 .visual-step-6 .protection-ray {
     position: absolute;
     width: 2px;
-    height: 30px;
+    height: 25px;
     background: linear-gradient(to bottom, rgba(255, 193, 7, 0.8), transparent);
     left: 50%;
     top: 0;
     transform: translateX(-50%);
-    transform-origin: 50% 90px;
+    transform-origin: 50% 75px;
+}
+
+/* Benefits um den höher positionierten Kreis */
+.visual-step-6 .benefit-text {
+    position: absolute;
+    background: rgba(40, 167, 69, 0.9);
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    opacity: 0;
+    animation: benefit-appear 0.8s ease-out forwards;
+    z-index: 3;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+    white-space: nowrap;
+    transform-origin: center center;
 }
 
 /* Benefits perfekt um den Kreis positioniert */
@@ -1164,5 +1224,905 @@ Verwendet von: hero-disinfection.js + uvc-science-gallery.js
     100% {
         opacity: 1;
         transform: translateY(0) scale(1);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+==============================================================================
+LUVEX THEME - UV CURING ANIMATIONS (animations.css extension)
+==============================================================================
+Beschreibung: Reine Animationen und visuelle Effekte für UV Curing Science Gallery
+Verwendet von: hero-curing-interactive.js + curing-science-gallery.js
+Integration: Diese Styles in die bestehende _animations.css einfügen
+==============================================================================
+*/
+
+/* --- STEP 1: LIQUID APPLICATION (unverändert - ist perfekt) --- */
+.visual-step-1 .substrate {
+    width: 150px;
+    height: 30px;
+    background: #4a5568;
+    border-radius: 4px;
+    position: relative;
+    margin: 0 auto;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.visual-step-1 .dosing-robot {
+    position: absolute;
+    top: -60px;
+    left: 30px;
+    animation: dosing-movement 3s ease-in-out infinite;
+}
+
+.robot-arm {
+    width: 4px;
+    height: 40px;
+    background: #9ca3af;
+    border-radius: 2px;
+}
+
+.dosing-tip {
+    width: 8px;
+    height: 8px;
+    background: #6b7280;
+    border-radius: 50%;
+    margin: 2px -2px;
+    position: relative;
+}
+
+@keyframes dosing-movement {
+    0%, 100% { left: 30px; }
+    50% { left: 90px; }
+}
+
+.visual-step-1 .adhesive-layer {
+    width: 100px;
+    height: 8px;
+    background: linear-gradient(45deg, #6dd5ed, #4fb3d9);
+    border-radius: 2px;
+    position: absolute;
+    top: -12px;
+    left: 25px;
+    animation: adhesive-spread 3s ease-in-out infinite;
+}
+
+@keyframes adhesive-spread {
+    0% { width: 20px; opacity: 0.7; }
+    50% { width: 100px; opacity: 1; }
+    100% { width: 100px; opacity: 1; }
+}
+
+.visual-step-1 .photoinitiator-dots {
+    position: absolute;
+    top: -12px;
+    left: 25px;
+    width: 100px;
+    height: 8px;
+}
+
+.photoinitiator-dot {
+    width: 2px;
+    height: 2px;
+    background: #fbbf24;
+    border-radius: 50%;
+    position: absolute;
+    animation: dot-appear 3s ease-in-out infinite;
+    opacity: 0;
+}
+
+.photoinitiator-dot:nth-child(1) { top: 2px; left: 15px; animation-delay: 1s; }
+.photoinitiator-dot:nth-child(2) { top: 4px; left: 35px; animation-delay: 1.2s; }
+.photoinitiator-dot:nth-child(3) { top: 3px; left: 55px; animation-delay: 1.4s; }
+.photoinitiator-dot:nth-child(4) { top: 1px; left: 75px; animation-delay: 1.6s; }
+
+@keyframes dot-appear {
+    0%, 30% { opacity: 0; }
+    40%, 100% { opacity: 1; }
+}
+
+/* --- STEP 2: UV IRRADIATION (unverändert - ist perfekt) --- */
+.visual-step-2 .uv-irradiation-setup {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin: 0 auto;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.visual-step-2 .uv-source {
+    width: 160px;
+    height: 12px;
+    background: #8b5cf6;
+    border-radius: 6px;
+    position: absolute;
+    top: 20px;
+    left: 0;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+    animation: pulse 2s infinite;
+}
+
+.visual-step-2 .uv-rays {
+    position: absolute;
+    top: 32px;
+    left: 0;
+    width: 160px;
+    height: 100px;
+}
+
+.uv-ray {
+    width: 3px;
+    height: 100px;
+    background: linear-gradient(to bottom, rgba(139, 92, 246, 0.9), rgba(139, 92, 246, 0.4));
+    position: absolute;
+    animation: ray-pulse 1.5s ease-in-out infinite;
+}
+
+.uv-ray:nth-child(1) { left: 10%; animation-delay: 0s; }
+.uv-ray:nth-child(2) { left: 25%; animation-delay: 0.3s; }
+.uv-ray:nth-child(3) { left: 40%; animation-delay: 0.6s; }
+.uv-ray:nth-child(4) { left: 55%; animation-delay: 0.9s; }
+.uv-ray:nth-child(5) { left: 70%; animation-delay: 1.2s; }
+.uv-ray:nth-child(6) { left: 85%; animation-delay: 1.5s; }
+
+@keyframes ray-pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+.visual-step-2 .substrate-target {
+    width: 160px;
+    height: 20px;
+    background: #4a5568;
+    border-radius: 4px;
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+}
+
+.visual-step-2 .liquid-target {
+    width: 120px;
+    height: 6px;
+    background: linear-gradient(45deg, #6dd5ed, #4fb3d9);
+    border-radius: 2px;
+    position: absolute;
+    bottom: 36px;
+    left: 20px;
+}
+
+/* --- STEP 3: WAVELENGTH ACTIVATION (unverändert - ist perfekt) --- */
+.visual-step-3 .wavelength-activation {
+    position: relative;
+    width: 200px;
+    height: 160px;
+    margin: 0 auto;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.wavelength-sources-top {
+    position: absolute;
+    top: 5px;
+    left: 15px;
+    right: 30px;
+    display: flex;
+    gap: 8px;
+}
+
+.wavelength-source-mini {
+    height: 10px;
+    flex: 1;
+    border-radius: 5px;
+    box-shadow: 0 0 8px rgba(139, 92, 246, 0.4);
+}
+
+.source-365nm { background: #8b5cf6; }
+.source-385nm { background: #6366f1; }
+.source-405nm { background: #3b82f6; }
+
+.layer-with-light {
+    position: absolute;
+    top: 45px;
+    left: 15px;
+    right: 30px;
+    height: 80px;
+    display: flex;
+    gap: 8px;
+}
+
+.layer-column {
+    flex: 1;
+    position: relative;
+    border: 1px solid rgba(109, 213, 237, 0.3);
+    border-radius: 4px;
+    background: rgba(109, 213, 237, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px 4px;
+}
+
+.penetrating-beam {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    animation: beam-penetration-combo 3s ease-in-out infinite;
+}
+
+.beam-365nm-combo {
+    height: 25px;
+    background: linear-gradient(to bottom, rgba(139, 92, 246, 0.9), transparent);
+    animation-delay: 0s;
+}
+
+.beam-385nm-combo {
+    height: 45px;
+    background: linear-gradient(to bottom, rgba(99, 102, 241, 0.8), transparent);
+    animation-delay: 1s;
+}
+
+.beam-405nm-combo {
+    height: 65px;
+    background: linear-gradient(to bottom, rgba(59, 130, 246, 0.7), transparent);
+    animation-delay: 2s;
+}
+
+@keyframes beam-penetration-combo {
+    0%, 30% { opacity: 0; }
+    40%, 70% { opacity: 1; }
+    80%, 100% { opacity: 0; }
+}
+
+.zone-photoinitiator {
+    width: 6px;
+    height: 6px;
+    background: #fbbf24;
+    border-radius: 50%;
+    animation: zone-activation 3s ease-in-out infinite;
+    margin: 2px 0;
+}
+
+.layer-column:nth-child(1) .zone-photoinitiator {
+    animation-delay: 0.2s;
+}
+
+.layer-column:nth-child(1) .zone-photoinitiator:nth-child(4) { opacity: 0.4; animation: none; }
+.layer-column:nth-child(1) .zone-photoinitiator:nth-child(5) { opacity: 0.2; animation: none; }
+
+.layer-column:nth-child(2) .zone-photoinitiator {
+    animation-delay: 1.2s;
+    opacity: 0.8;
+}
+
+.layer-column:nth-child(2) .zone-photoinitiator:nth-child(5) { opacity: 0.3; animation: none; }
+
+.layer-column:nth-child(3) .zone-photoinitiator {
+    animation-delay: 2.2s;
+    opacity: 1;
+}
+
+@keyframes zone-activation {
+    0%, 30% { 
+        background: #fbbf24;
+        transform: scale(1);
+        box-shadow: none;
+    }
+    40%, 70% { 
+        background: #f59e0b;
+        transform: scale(1.3);
+        box-shadow: 0 0 10px rgba(245, 158, 11, 0.8);
+    }
+    80%, 100% {
+        background: #fbbf24;
+        transform: scale(1);
+        box-shadow: none;
+    }
+}
+
+.layer-thickness-indicator {
+    position: absolute;
+    right: 5px;
+    top: 45px;
+    height: 80px;
+    width: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.thickness-arrow {
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-bottom: 6px solid #6dd5ed;
+    margin-bottom: 2px;
+}
+
+.thickness-line {
+    width: 2px;
+    height: 28px;
+    background: #6dd5ed;
+    margin-bottom: 2px;
+}
+
+.thickness-arrow-bottom {
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-top: 6px solid #6dd5ed;
+}
+
+.wavelength-labels-bottom {
+    position: absolute;
+    bottom: 5px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    gap: 8px;
+    font-size: 0.6rem;
+    color: #6dd5ed;
+}
+
+.wavelength-label-bottom {
+    flex: 1;
+    text-align: center;
+}
+
+/* --- STEP 4: KRISTALLISATIONS-NETZWERK (KOMPLETT NEU) --- */
+.visual-step-4 .crystallization-network {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    margin: 0 auto;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.visual-step-4 .crystal-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, #ef4444, #dc2626);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: crystal-pulse 2s ease-in-out infinite;
+    z-index: 10;
+}
+
+@keyframes crystal-pulse {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.2);
+        box-shadow: 0 0 30px rgba(239, 68, 68, 0.9);
+    }
+}
+
+.visual-step-4 .crystal-rays {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    height: 280px;
+}
+
+.visual-step-4 .crystal-ray {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 80px;
+    background: linear-gradient(to top, 
+        rgba(239, 68, 68, 0.9) 0%, 
+        rgba(245, 101, 101, 0.7) 50%, 
+        rgba(252, 165, 165, 0.3) 100%);
+    transform-origin: 50% 100%;
+    animation: crystal-ray-grow 3s ease-out infinite;
+    opacity: 0;
+    border-radius: 2px 2px 0 0;
+}
+
+@keyframes crystal-ray-grow {
+    0% { 
+        opacity: 0;
+        height: 0;
+        transform: translateX(-50%) rotate(var(--ray-rotation, 0deg));
+    }
+    20% { 
+        opacity: 1;
+        height: 40px;
+    }
+    100% { 
+        opacity: 0.8;
+        height: 80px;
+        transform: translateX(-50%) rotate(var(--ray-rotation, 0deg));
+    }
+}
+
+.visual-step-4 .crystal-ray:nth-child(1) { --ray-rotation: 0deg; animation-delay: 0.2s; }
+.visual-step-4 .crystal-ray:nth-child(2) { --ray-rotation: 45deg; animation-delay: 0.4s; }
+.visual-step-4 .crystal-ray:nth-child(3) { --ray-rotation: 90deg; animation-delay: 0.6s; }
+.visual-step-4 .crystal-ray:nth-child(4) { --ray-rotation: 135deg; animation-delay: 0.8s; }
+.visual-step-4 .crystal-ray:nth-child(5) { --ray-rotation: 180deg; animation-delay: 1.0s; }
+.visual-step-4 .crystal-ray:nth-child(6) { --ray-rotation: 225deg; animation-delay: 1.2s; }
+.visual-step-4 .crystal-ray:nth-child(7) { --ray-rotation: 270deg; animation-delay: 1.4s; }
+.visual-step-4 .crystal-ray:nth-child(8) { --ray-rotation: 315deg; animation-delay: 1.6s; }
+
+.visual-step-4 .connection-nodes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.visual-step-4 .crystal-node {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, #f59e0b, #d97706);
+    border-radius: 50%;
+    animation: node-crystallize 0.5s ease-out forwards;
+    opacity: 0;
+    transform: scale(0);
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+}
+
+@keyframes node-crystallize {
+    0% { 
+        opacity: 0;
+        transform: scale(0);
+    }
+    80% { 
+        opacity: 1;
+        transform: scale(1.3);
+    }
+    100% { 
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.visual-step-4 .polymer-chains {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.visual-step-4 .polymer-chain {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        rgba(239, 68, 68, 0.6) 0%, 
+        rgba(245, 158, 11, 0.8) 50%, 
+        rgba(239, 68, 68, 0.6) 100%);
+    border-radius: 1px;
+    animation: chain-crystallize 0.8s ease-out forwards;
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: center;
+}
+
+@keyframes chain-crystallize {
+    0% { 
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    100% { 
+        opacity: 0.9;
+        transform: scaleX(1);
+    }
+}
+
+/* Individuelle Polymer-Ketten Positionen */
+.visual-step-4 .polymer-chain:nth-child(1) { top: 30%; left: 20%; width: 60px; transform-origin: left; animation-delay: 2.0s; }
+.visual-step-4 .polymer-chain:nth-child(2) { top: 45%; left: 15%; width: 70px; transform: rotate(25deg); animation-delay: 2.1s; }
+.visual-step-4 .polymer-chain:nth-child(3) { top: 60%; left: 25%; width: 50px; transform: rotate(-15deg); animation-delay: 2.2s; }
+.visual-step-4 .polymer-chain:nth-child(4) { top: 75%; left: 40%; width: 65px; transform: rotate(45deg); animation-delay: 2.3s; }
+.visual-step-4 .polymer-chain:nth-child(5) { top: 25%; left: 55%; width: 45px; transform: rotate(-30deg); animation-delay: 2.4s; }
+.visual-step-4 .polymer-chain:nth-child(6) { top: 40%; left: 60%; width: 55px; transform: rotate(60deg); animation-delay: 2.5s; }
+.visual-step-4 .polymer-chain:nth-child(7) { top: 55%; left: 55%; width: 40px; transform: rotate(-45deg); animation-delay: 2.6s; }
+.visual-step-4 .polymer-chain:nth-child(8) { top: 70%; left: 60%; width: 50px; transform: rotate(10deg); animation-delay: 2.7s; }
+
+/* --- STEP 5: POST-CURE DEVELOPMENT (VERBESSERTE POSITIONIERUNG) --- */
+.visual-step-5 .postcure-development {
+    position: relative;
+    width: 280px;
+    height: 200px;
+    margin: 0 auto;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.visual-step-5 .clock-indicator {
+    position: absolute;
+    left: 40px; /* LINKS positioniert */
+    top: 70px;
+    width: 40px;
+    height: 40px;
+    border: 3px solid #6dd5ed;
+    border-radius: 50%;
+    background: rgba(109, 213, 237, 0.1);
+}
+
+.visual-step-5 .clock-hand {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 15px;
+    background: #6dd5ed;
+    transform-origin: bottom center;
+    transform: translate(-50%, -100%) rotate(0deg);
+    animation: clock-rotation 6s linear infinite;
+}
+
+@keyframes clock-rotation {
+    0% { transform: translate(-50%, -100%) rotate(0deg); }
+    100% { transform: translate(-50%, -100%) rotate(1080deg); }
+}
+
+.visual-step-5 .property-development-bars {
+    position: absolute;
+    right: 20px; /* RECHTS positioniert */
+    top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px; /* Mehr Abstand zwischen Balken */
+}
+
+.visual-step-5 .property-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.visual-step-5 .property-label {
+    font-size: 0.65rem;
+    color: #6dd5ed;
+    width: 55px; /* Etwas breiter für bessere Lesbarkeit */
+    text-align: right;
+    font-weight: 500;
+}
+
+.visual-step-5 .property-bar {
+    width: 90px; /* Breitere Balken */
+    height: 10px; /* Höhere Balken */
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.visual-step-5 .property-fill {
+    height: 100%;
+    border-radius: 5px;
+    animation: property-development 6s ease-out infinite;
+    width: 0;
+}
+
+.hardness-fill {
+    background: linear-gradient(90deg, #ef4444, #dc2626);
+    animation-delay: 1s;
+}
+
+.tackiness-fill {
+    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+    animation-delay: 2.5s;
+}
+
+.adhesion-fill {
+    background: linear-gradient(90deg, #f59e0b, #d97706);
+    animation-delay: 4s;
+}
+
+@keyframes property-development {
+    0%, 16% { width: 0%; }
+    33% { width: 45%; }
+    66% { width: 75%; }
+    100% { width: 88%; } /* Etwas höherer Endwert */
+}
+
+/* --- STEP 6: BENEFITS SHOWCASE (RAUTEN-LAYOUT) --- */
+.visual-step-6 .benefits-showcase {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    margin: 0 auto;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.visual-step-6 .central-uv {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #10b981, #047857);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    animation: central-uv-pulse 3s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+    z-index: 10;
+}
+
+@keyframes central-uv-pulse {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.1);
+        box-shadow: 0 0 30px rgba(16, 185, 129, 0.7);
+    }
+}
+
+.visual-step-6 .diamond-layout {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.visual-step-6 .benefit-item {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    animation: benefit-appear 0.8s ease-out forwards;
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+.visual-step-6 .benefit-top {
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.visual-step-6 .benefit-right {
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.visual-step-6 .benefit-bottom {
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.visual-step-6 .benefit-left {
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.visual-step-6 .benefit-icon {
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(45deg, #6dd5ed, #4fb3d9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    animation: benefit-icon-bounce 2s ease-in-out infinite;
+}
+
+@keyframes benefit-icon-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+.visual-step-6 .benefit-label {
+    font-size: 0.65rem;
+    color: #6dd5ed;
+    font-weight: 600;
+    max-width: 70px;
+    line-height: 1.2;
+}
+
+.visual-step-6 .benefit-connections {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+}
+
+.visual-step-6 .connection-line {
+    position: absolute;
+    background: linear-gradient(var(--line-direction, 0deg), 
+        rgba(16, 185, 129, 0.8) 0%, 
+        #6dd5ed 50%, 
+        rgba(16, 185, 129, 0.8) 100%);
+    animation: connection-flow 2s ease-in-out infinite;
+    opacity: 0;
+    border-radius: 1px;
+}
+
+.visual-step-6 .connection-top {
+    top: 80px;
+    left: 50%;
+    width: 2px;
+    height: 60px;
+    transform: translateX(-50%);
+    --line-direction: 0deg;
+}
+
+.visual-step-6 .connection-right {
+    top: 50%;
+    right: 80px;
+    width: 60px;
+    height: 2px;
+    transform: translateY(-50%);
+    --line-direction: 90deg;
+}
+
+.visual-step-6 .connection-bottom {
+    bottom: 80px;
+    left: 50%;
+    width: 2px;
+    height: 60px;
+    transform: translateX(-50%);
+    --line-direction: 180deg;
+}
+
+.visual-step-6 .connection-left {
+    top: 50%;
+    left: 80px;
+    width: 60px;
+    height: 2px;
+    transform: translateY(-50%);
+    --line-direction: 270deg;
+}
+
+@keyframes benefit-appear {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translate(var(--transform-x, 0), var(--transform-y, 0));
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translate(var(--transform-x, 0), var(--transform-y, 0));
+    }
+}
+
+/* Transform-Variablen für verschiedene Positionen */
+.visual-step-6 .benefit-top { --transform-x: -50%; --transform-y: 0; }
+.visual-step-6 .benefit-right { --transform-x: 0; --transform-y: -50%; }
+.visual-step-6 .benefit-bottom { --transform-x: -50%; --transform-y: 0; }
+.visual-step-6 .benefit-left { --transform-x: 0; --transform-y: -50%; }
+
+@keyframes connection-flow {
+    0%, 100% { 
+        opacity: 0;
+        background-size: 200% 200%;
+        background-position: 0% 50%;
+    }
+    50% { 
+        opacity: 0.8;
+        background-position: 100% 50%;
+    }
+}
+
+/* Animation Delays für sequenzielle Erscheinung */
+.visual-step-6 .benefit-top { animation-delay: 0.5s; }
+.visual-step-6 .connection-top { animation-delay: 1s; }
+
+.visual-step-6 .benefit-right { animation-delay: 1s; }
+.visual-step-6 .connection-right { animation-delay: 1.5s; }
+
+.visual-step-6 .benefit-bottom { animation-delay: 1.5s; }
+.visual-step-6 .connection-bottom { animation-delay: 2s; }
+
+.visual-step-6 .benefit-left { animation-delay: 2s; }
+.visual-step-6 .connection-left { animation-delay: 2.5s; }
+
+/* --- RESPONSIVE ANPASSUNGEN --- */
+@media (max-width: 768px) {
+    .visual-step-1 .substrate,
+    .visual-step-2 .uv-irradiation-setup,
+    .visual-step-3 .wavelength-activation,
+    .visual-step-4 .crystallization-network,
+    .visual-step-5 .postcure-development,
+    .visual-step-6 .benefits-showcase {
+        width: 240px;
+        height: auto;
+        min-height: 200px;
+    }
+    
+    .visual-step-5 .property-bar {
+        width: 70px;
+    }
+    
+    .visual-step-5 .property-label {
+        width: 45px;
+        font-size: 0.6rem;
+    }
+    
+    .visual-step-6 .benefit-label {
+        font-size: 0.6rem;
+        max-width: 60px;
+    }
+}
+
+/* --- ALLGEMEINE VISUAL STEP CONTAINER --- */
+.animation-visual {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    overflow: visible;
+}
+
+@media (max-width: 768px) {
+    .animation-visual {
+        width: 260px;
+        height: 260px;
     }
 }

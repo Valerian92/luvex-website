@@ -472,7 +472,7 @@ class UVCAnimationSystem {
         }, 500);
     }
 
-    // STEP 6: Permanent Protection + Applications (PERFEKTE POSITIONIERUNG)
+    // STEP 6: Permanent Protection + Applications (OPTIMALE PLATZVERTEILUNG)
     createProtectionAnimation() {
         console.log('🛡️ [UVC DEBUG] Creating protection + applications animation');
         
@@ -492,16 +492,16 @@ class UVCAnimationSystem {
         
         this.animationVisual.appendChild(rays);
         
-        // Benefits perfekt um den Kreis herum positioniert
+        // Benefits um den höher positionierten Kreis
         const centerX = 150; // Kreis-Mitte
-        const centerY = 150;
-        const radius = 90; // Abstand vom Kreis
+        const centerY = 120; // HÖHER POSITIONIERT
+        const radius = 75; // Kleinerer Radius für kompaktere Anordnung
         
         const benefits = [
             { text: 'Save Chemical Spendings', angle: -90, delay: 500 }, // Oben
-            { text: 'Energy Efficient', angle: -45, delay: 800 }, // Oben rechts  
-            { text: 'Longer Shelf-Life', angle: 45, delay: 1100 }, // Unten rechts
-            { text: 'Increased Quality', angle: 135, delay: 1400 } // Unten links
+            { text: 'Energy Efficient', angle: -30, delay: 800 }, // Oben rechts  
+            { text: 'Longer Shelf-Life', angle: 30, delay: 1100 }, // Unten rechts
+            { text: 'Increased Quality', angle: 150, delay: 1400 } // Unten links
         ];
         
         benefits.forEach((benefit, index) => {
@@ -522,7 +522,7 @@ class UVCAnimationSystem {
             }, benefit.delay);
         });
         
-        // Application Buttons unten mit mehr Abstand und breiter
+        // Application Buttons ganz unten mit maximaler Breite
         const applicationContainer = document.createElement('div');
         applicationContainer.className = 'application-buttons';
         

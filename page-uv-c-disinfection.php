@@ -17,12 +17,6 @@ get_header(); ?>
             <h1 class="luvex-hero__title">
                 <span class="text-highlight">UV-C</span> Disinfection Technology
             </h1>
-            <h2 class="luvex-hero__subtitle">
-                Advanced germicidal solutions for water, air, and surface treatment
-            </h2>
-            <p class="luvex-hero__description">
-                Navigate through our core applications to find the perfect UV-C solution for your specific needs.
-            </p>
             <nav class="hero-navigation">
                 <a href="#applications-air" class="hero-navigation__link">
                     <i class="fa-solid fa-wind"></i>
@@ -37,6 +31,13 @@ get_header(); ?>
                     <span>Water Purification</span>
                 </a>
             </nav>
+            <h2 class="luvex-hero__subtitle">
+                Advanced germicidal solutions for water, air, and surface treatment
+            </h2>
+            <p class="luvex-hero__description">
+                Navigate through our core applications to find<br>
+                the perfect UV-C solution for your specific needs.
+            </p>
         </div>
     </div>
 </section>

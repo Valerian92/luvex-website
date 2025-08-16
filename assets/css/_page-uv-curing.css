@@ -151,7 +151,7 @@ Dependencies: animations.css, _variables.css, _layout.css
     justify-content: center;
 }
 
-/* Placeholder Animation (wird später ersetzt) */
+/* Placeholder Animation (wird durch echte Animation ersetzt) */
 .placeholder-animation {
     display: flex;
     flex-direction: column;
