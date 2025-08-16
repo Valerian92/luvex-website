@@ -6,28 +6,35 @@
  */
 get_header(); ?>
 
-<section class="luvex-hero">
+<section class="luvex-hero luvex-hero--testing-equipment">
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
-            <p class="luvex-hero__description">
-                Ensure optimal UV performance with professional-grade measurement and testing equipment. From simple test strips to advanced dosimeters.
-            </p>
-            <h2 class="luvex-hero__subtitle">
-                Precision measurement tools for UV process validation
-            </h2>
+            <!-- 1. Title (oben) -->
             <h1 class="luvex-hero__title">
                 UV <span class="text-highlight">Testing</span> Equipment
             </h1>
-        </div>
-        <div class="luvex-hero__cta-container">
-            <a href="#measurement-guide" class="luvex-hero__cta-secondary">
-                <i class="fas fa-ruler"></i>
-                <span>Measurement Guide</span>
-            </a>
-            <a href="#products" class="luvex-hero__cta">
-                <i class="fas fa-vial"></i>
-                <span>Shop Testing Equipment</span>
-            </a>
+            
+            <!-- 2. Buttons (direkt nach Title) -->
+            <div class="luvex-hero__cta-container">
+                <a href="#measurement-guide" class="luvex-hero__cta-secondary">
+                    <i class="fas fa-ruler"></i>
+                    <span>Measurement Guide</span>
+                </a>
+                <a href="#products" class="luvex-hero__cta">
+                    <i class="fas fa-vial"></i>
+                    <span>Shop Testing Equipment</span>
+                </a>
+            </div>
+            
+            <!-- 3. Subtitle -->
+            <h2 class="luvex-hero__subtitle">
+                Precision measurement tools for UV process validation
+            </h2>
+            
+            <!-- 4. Description (unten) -->
+            <p class="luvex-hero__description">
+                Ensure optimal UV performance with professional-grade measurement and testing equipment. From simple test strips to advanced dosimeters.
+            </p>
         </div>
     </div>
 </section>

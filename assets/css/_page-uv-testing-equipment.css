@@ -23,7 +23,7 @@ LUVEX THEME - PAGE: UV TESTING EQUIPMENT (PYRAMIDEN-HERO FIX 2025-08-15)
     gap: 2rem;
 }
 
-/* NEUE REIHENFOLGE: Title → Buttons → Subtitle → Description */
+/* REIHENFOLGE: Title → Buttons → Subtitle → Description (jetzt im HTML korrekt) */
 
 /* 1. Title (oben, schmalster Container) */
 .luvex-hero--testing-equipment .luvex-hero__title {
@@ -34,7 +34,6 @@ LUVEX THEME - PAGE: UV TESTING EQUIPMENT (PYRAMIDEN-HERO FIX 2025-08-15)
     line-height: 1.1;
     max-width: 650px; /* Schmalster Container */
     text-align: center;
-    order: 1;
 }
 
 /* 2. Buttons (direkt nach Title) */
@@ -46,31 +45,28 @@ LUVEX THEME - PAGE: UV TESTING EQUIPMENT (PYRAMIDEN-HERO FIX 2025-08-15)
     margin: 0;
     padding: 0;
     width: 100%;
-    order: 2;
 }
 
-/* 3. Subtitle (mittlere Breite) */
+/* 3. Subtitle (800px für eine Zeile) */
 .luvex-hero--testing-equipment .luvex-hero__subtitle {
     font-size: clamp(1.4rem, 3.5vw, 2.2rem);
     color: var(--luvex-gray-300);
     font-weight: 400;
-    max-width: 800px; /* Mittlere Breite */
+    max-width: 800px; /* Größer für eine Zeile ohne Umbruch */
     margin: 0;
     line-height: 1.3;
     text-align: center;
-    order: 3;
 }
 
-/* 4. Description (unten, breitester Container, 2 Zeilen) */
+/* 4. Description (900px, breitester Container, 2 Zeilen) */
 .luvex-hero--testing-equipment .luvex-hero__description {
     font-size: clamp(1.1rem, 2.5vw, 1.5rem);
     color: var(--luvex-gray-300);
-    max-width: 950px; /* Breitester Container */
+    max-width: 900px; /* Breitester Container */
     line-height: 1.6;
     text-align: center;
     margin: 0;
     opacity: 0.9;
-    order: 4;
     /* Für 2-Zeilen-Begrenzung */
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -92,12 +88,12 @@ LUVEX THEME - PAGE: UV TESTING EQUIPMENT (PYRAMIDEN-HERO FIX 2025-08-15)
     
     .luvex-hero--testing-equipment .luvex-hero__subtitle {
         font-size: clamp(1.2rem, 4vw, 1.8rem);
-        max-width: 90%;
+        max-width: 90%; /* Entsprechend angepasst */
     }
     
     .luvex-hero--testing-equipment .luvex-hero__description {
         font-size: clamp(1rem, 3vw, 1.3rem);
-        max-width: 95%;
+        max-width: 95%; /* Breitester auch auf Mobile */
     }
     
     .luvex-hero--testing-equipment .luvex-hero__cta-container {

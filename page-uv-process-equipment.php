@@ -5,28 +5,35 @@
  */
 get_header(); ?>
 
-<section class="luvex-hero">
+<section class="luvex-hero luvex-hero--process-equipment">
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
-            <p class="luvex-hero__description">
-                From safety equipment to precision measurement tools - get professional-grade UV equipment recommended by independent experts. No vendor bias, just the best tools for your applications.
-            </p>
-            <h2 class="luvex-hero__subtitle">
-                Quality equipment for UV professionals and researchers
-            </h2>
+            <!-- 1. Title (oben) -->
             <h1 class="luvex-hero__title">
                 Professional <span class="text-highlight">UV Process</span> Equipment
             </h1>
-        </div>
-        <div class="luvex-hero__cta-container">
-            <a href="#equipment-categories" class="luvex-hero__cta-secondary">
-                <i class="fas fa-list"></i>
-                <span>Browse Categories</span>
-            </a>
-            <a href="/contact/" class="luvex-hero__cta">
-                <i class="fas fa-tools"></i>
-                <span>Get Recommendations</span>
-            </a>
+            
+            <!-- 2. Buttons (direkt nach Title) -->
+            <div class="luvex-hero__cta-container">
+                <a href="#equipment-categories" class="luvex-hero__cta-secondary">
+                    <i class="fas fa-list"></i>
+                    <span>Browse Categories</span>
+                </a>
+                <a href="/contact/" class="luvex-hero__cta">
+                    <i class="fas fa-tools"></i>
+                    <span>Get Recommendations</span>
+                </a>
+            </div>
+            
+            <!-- 3. Subtitle -->
+            <h2 class="luvex-hero__subtitle">
+                Quality equipment for UV professionals and researchers
+            </h2>
+            
+            <!-- 4. Description (unten) -->
+            <p class="luvex-hero__description">
+                From safety equipment to precision measurement tools - get professional-grade UV equipment recommended by independent experts. No vendor bias, just the best tools for your applications.
+            </p>
         </div>
     </div>
 </section>
