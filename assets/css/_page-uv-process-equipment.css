@@ -81,6 +81,13 @@ LUVEX THEME - PAGE: UV PROCESS EQUIPMENT (PYRAMIDEN-HERO FIX 2025-08-15)
 }
 
 /* --- 2. Responsive Anpassungen --- */
+
+/* WICHTIG: Override der globalen order-Properties aus _heroes.css */
+.luvex-hero--process-equipment .luvex-hero__cta,
+.luvex-hero--process-equipment .luvex-hero__cta-secondary {
+    order: unset !important; /* Überschreibt globale order-Properties */
+}
+
 @media (max-width: 768px) {
     .luvex-hero--process-equipment .luvex-hero__content {
         padding-top: 4rem;

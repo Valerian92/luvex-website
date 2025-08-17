@@ -317,10 +317,11 @@ HOMEPAGE HERO PYRAMID LAYOUT + CURSOR FIX
 ==============================================================================
 */
 
-/* --- CUSTOM CURSOR IM HERO --- */
-.luvex-hero {
+/* --- CUSTOM CURSOR IM HERO ---  Deakvitiert
+.luvex-hero { 
     cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="%236dd5ed" stroke="%2300bcd4" stroke-width="3" opacity="0.8"/><circle cx="12" cy="12" r="3" fill="%23ffffff" opacity="0.9"/></svg>') 12 12, auto;
 }
+*/
 
 /* --- PYRAMIDEN-STRUKTUR (UMGEKEHRTE REIHENFOLGE) --- */
 .home .luvex-hero__content {
