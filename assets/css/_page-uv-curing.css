@@ -629,3 +629,249 @@ Dependencies: animations.css, _variables.css, _layout.css
         font-size: 0.9rem;
     }
 }
+
+
+/*
+==============================================================================
+UV CURING HERO - PYRAMID LAYOUT CSS FIXES
+==============================================================================
+Neues Layout: Title → Buttons → Subtitle → Description
+Pyramiden-Optik: groß → mittel → klein
+==============================================================================
+*/
+
+/* --- HERO BASE LAYOUT (unverändert) --- */
+.hero-curing {
+    min-height: 600px;
+    position: relative;
+}
+
+.hero-curing #curing-hero-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-curing .luvex-hero__container {
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.hero-curing .luvex-hero__cta,
+.hero-curing .luvex-hero__cta-secondary {
+    pointer-events: auto;
+}
+
+/* --- NEUE PYRAMIDEN-STRUKTUR --- */
+
+/* 1. TITLE - Pyramidenbasis (größtes Element) */
+.hero-curing .luvex-hero__title {
+    font-size: clamp(3.5rem, 8vw, 6rem); /* Noch größer als vorher */
+    font-weight: 600;
+    color: var(--luvex-white);
+    margin: 0 0 var(--space-lg) 0; /* Abstand zu den Buttons */
+    line-height: 1.1;
+    max-width: 100%; /* Breiteste Basis */
+    text-align: center;
+    order: 1; /* Ganz oben */
+}
+
+.hero-curing .luvex-hero__title .text-highlight {
+    color: var(--luvex-bright-cyan);
+}
+
+/* 2. BUTTONS - Direkt nach dem Title */
+.hero-curing .luvex-hero__cta-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 0 0 var(--space-xl) 0; /* Abstand zu Subtitle */
+    width: 100%;
+    order: 2; /* Nach dem Title */
+}
+
+/* Button Styles */
+.hero-curing .luvex-hero__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 16px 32px;
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-normal);
+    font-size: var(--text-base);
+    border: 2px solid transparent;
+}
+
+.hero-curing .luvex-hero__cta:hover {
+    background: var(--luvex-white);
+    color: var(--luvex-dark-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+}
+
+.hero-curing .luvex-hero__cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 16px 32px;
+    background: transparent;
+    color: var(--luvex-bright-cyan);
+    border: 2px solid var(--luvex-bright-cyan);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-normal);
+    font-size: var(--text-base);
+}
+
+.hero-curing .luvex-hero__cta-secondary:hover {
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    border-color: var(--luvex-bright-cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
+}
+
+/* 3. SUBTITLE - Mittlere Pyramidenebene */
+.hero-curing .luvex-hero__subtitle {
+    font-size: clamp(1.4rem, 3.5vw, 2rem); /* Mittlere Schrift */
+    color: var(--luvex-gray-300);
+    font-weight: 400;
+    max-width: 750px; /* Mittlere Breite */
+    margin: 0 0 var(--space-lg) 0; /* Abstand zur Description */
+    line-height: 1.3;
+    text-align: center;
+    order: 3; /* Nach den Buttons */
+}
+
+/* 4. DESCRIPTION - Pyramidenspitze (kleinstes Element) */
+.hero-curing .luvex-hero__description {
+    font-size: clamp(1rem, 2.2vw, 1.2rem); /* Kleinste Schrift */
+    color: var(--luvex-gray-300);
+    max-width: 600px; /* Schmalste Breite - Pyramiden-Spitze */
+    line-height: 1.6;
+    text-align: center;
+    margin: 0; /* Letztes Element, kein Abstand nach unten */
+    opacity: 0.9;
+    order: 4; /* Ganz unten */
+}
+
+/* --- FLEXBOX CONTAINER FÜR PYRAMIDEN-LAYOUT --- */
+.hero-curing .luvex-hero__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--space-xl) 0;
+}
+
+/* --- RESPONSIVE ANPASSUNGEN --- */
+@media (max-width: 992px) {
+    .hero-curing .luvex-hero__cta-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .hero-curing .luvex-hero__cta,
+    .hero-curing .luvex-hero__cta-secondary {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Pyramiden-Abstufung auch auf mobilen Geräten */
+    .hero-curing .luvex-hero__title {
+        font-size: clamp(2.8rem, 8vw, 4.5rem);
+        max-width: 100%; /* Breiteste Ebene */
+        margin-bottom: var(--space-md);
+    }
+    
+    .hero-curing .luvex-hero__subtitle {
+        font-size: clamp(1.1rem, 4vw, 1.6rem);
+        max-width: 95%; /* Mittlere Ebene */
+        margin-bottom: var(--space-md);
+    }
+    
+    .hero-curing .luvex-hero__description {
+        font-size: clamp(0.9rem, 3vw, 1.1rem);
+        max-width: 90%; /* Schmalste Ebene */
+    }
+    
+    .hero-curing .luvex-hero__cta-container {
+        margin: var(--space-lg) 0 var(--space-xl) 0;
+    }
+    
+    .hero-curing .luvex-hero__content {
+        padding: var(--space-lg) 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-curing .luvex-hero__title {
+        font-size: clamp(2.5rem, 9vw, 4rem);
+    }
+    
+    .hero-curing .luvex-hero__cta,
+    .hero-curing .luvex-hero__cta-secondary {
+        padding: 14px 24px;
+        font-size: var(--text-sm);
+    }
+}
+
+/* --- VISUAL HIERARCHY IMPROVEMENTS --- */
+
+/* Subtle shadow for depth */
+.hero-curing .luvex-hero__title {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Breathing animation for buttons */
+.hero-curing .luvex-hero__cta,
+.hero-curing .luvex-hero__cta-secondary {
+    animation: subtle-breathe 4s ease-in-out infinite;
+}
+
+@keyframes subtle-breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+/* Hover states pause the breathing */
+.hero-curing .luvex-hero__cta:hover,
+.hero-curing .luvex-hero__cta-secondary:hover {
+    animation-play-state: paused;
+}
+
+/* Focus states for accessibility */
+.hero-curing .luvex-hero__cta:focus,
+.hero-curing .luvex-hero__cta-secondary:focus {
+    outline: 2px solid var(--luvex-bright-cyan);
+    outline-offset: 4px;
+}
+
+/* --- CANVAS INTERACTION FIXES --- */
+.hero-curing .luvex-hero__container {
+    pointer-events: none; /* Canvas kann durch Container hindurch geklickt werden */
+}
+
+.hero-curing .luvex-hero__cta,
+.hero-curing .luvex-hero__cta-secondary {
+    pointer-events: auto; /* Buttons sind klickbar */
+    position: relative;
+    z-index: 10; /* Über dem Canvas */
+}

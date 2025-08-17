@@ -120,14 +120,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // === EVENT LISTENERS ===
     
-    // Universeller Mouse Tracking (nicht nur Hero)
-    document.addEventListener('mouseenter', () => {
-        if (!cursor) createCursor();
-        isActive = true;
-        cursor.classList.add('active');
-        if (debugMode) console.log('🎯 Cursor activated (global)');
+    // Mouse Movement aktiviert Cursor automatisch
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        // Cursor automatisch aktivieren bei Bewegung
+        if (!isActive) {
+            if (!cursor) createCursor();
+            isActive = true;
+            cursor.classList.add('active');
+            if (debugMode) console.log('🎯 Cursor activated via mousemove');
+        }
+        
+        updateCursorPosition();
     });
 
+    // Cursor deaktivieren wenn Maus Browser verlässt
     document.addEventListener('mouseleave', () => {
         isActive = false;
         if (cursor) {
@@ -137,14 +146,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 isHoveringButton = false;
             }
         }
-        if (debugMode) console.log('🎯 Cursor deactivated (global)');
+        if (debugMode) console.log('🎯 Cursor deactivated (mouse left browser)');
     });
 
-    // Mouse Movement Tracking (global)
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        updateCursorPosition();
+    // Cursor aktivieren wenn Maus Browser betritt
+    document.addEventListener('mouseenter', () => {
+        if (!cursor) createCursor();
+        isActive = true;
+        if (cursor) cursor.classList.add('active');
+        if (debugMode) console.log('🎯 Cursor activated (mouse entered browser)');
     });
 
     // Button Hover Effects (global)
@@ -239,6 +249,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // === INITIALIZATION ===
     // Setup section tracking
     setupSectionTracking();
+    
+    // BACKUP: Cursor nach 1 Sekunde automatisch aktivieren
+    setTimeout(() => {
+        if (!isActive && cursor) {
+            isActive = true;
+            cursor.classList.add('active');
+            if (debugMode) console.log('🎯 Cursor force-activated after 1s backup');
+        }
+    }, 1000);
     
     // === CLEANUP ===
     window.addEventListener('beforeunload', () => {

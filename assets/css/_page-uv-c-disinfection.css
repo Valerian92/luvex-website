@@ -24,17 +24,20 @@ Dependencies: animations.css, _variables.css, _layout.css
     z-index: 0;
 }
 
-/* Hero Layout Optimierungen - Neue Reihenfolge */
+/* Hero Layout Optimierungen - Neue Reihenfolge OHNE ORDER */
 .luvex-hero__title {
     margin-bottom: var(--space-md);
+    order: 1; /* Title zuerst */
 }
 
 .hero-navigation {
     margin-bottom: var(--space-md);
+    order: 2; /* Navigation nach Title */
 }
 
 .luvex-hero__subtitle {
     margin-bottom: var(--space-sm);
+    order: 3; /* Subtitle nach Navigation */
 }
 
 .luvex-hero__description {
@@ -43,6 +46,28 @@ Dependencies: animations.css, _variables.css, _layout.css
     text-align: center;
     line-height: 1.6;
     font-size: 1.1rem;
+    order: 4; /* Description zuletzt */
+}
+
+/* Hero Container als Flexbox mit korrekter Reihenfolge */
+.luvex-hero__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Überschreibe alle anderen Hero Order-Regeln */
+.luvex-hero__cta-secondary {
+    order: unset !important;
+}
+
+.luvex-hero__cta {
+    order: unset !important;
+}
+
+.luvex-hero__cta-container {
+    order: unset !important;
 }
 
 /* --- SCIENCE GALLERY SECTION LAYOUT --- */

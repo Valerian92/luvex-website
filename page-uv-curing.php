@@ -1,36 +1,44 @@
 <?php
 /**
- * Template Name: UV Curing Technology (Complete with Science Gallery)
+ * Template Name: UV Curing Technology (FIXED PYRAMID HERO)
  * @package Luvex
  */
 get_header(); ?>
 
 <!-- ==========================================================================
-     START: UV Curing Hero Section (FIXED with Canvas)
+     START: UV Curing Hero Section (FIXED PYRAMID LAYOUT)
      ========================================================================== -->
 <section class="luvex-hero hero-curing">
     <canvas id="curing-hero-canvas"></canvas>
     <div class="luvex-hero__container">
+        <!-- NEUE PYRAMIDEN-STRUKTUR: Title → Buttons → Subtitle → Description -->
         <div class="luvex-hero__content">
-            <p class="luvex-hero__description">
-                Optimize your UV curing processes for maximum efficiency and quality.
-            </p>
-            <h2 class="luvex-hero__subtitle">
-                Industrial UV curing for coatings, inks, and adhesives
-            </h2>
+            <!-- 1. TITLE (größtes Element - Pyramidenbasis) -->
             <h1 class="luvex-hero__title">
                 UV <span class="text-highlight">Curing</span> Technology
             </h1>
-        </div>
-        <div class="luvex-hero__cta-container">
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-hero__cta">
-                <i class="fas fa-comments"></i>
-                <span>Get Expert Advice</span>
-            </a>
-            <a href="#science-gallery" class="luvex-hero__cta-secondary">
-                <i class="fas fa-flask"></i>
-                <span>Explore UV Science</span>
-            </a>
+            
+            <!-- 2. BUTTONS (direkt nach dem Title) -->
+            <div class="luvex-hero__cta-container">
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-hero__cta">
+                    <i class="fas fa-comments"></i>
+                    <span>Get Expert Advice</span>
+                </a>
+                <a href="#science-gallery" class="luvex-hero__cta-secondary">
+                    <i class="fas fa-flask"></i>
+                    <span>Explore UV Science</span>
+                </a>
+            </div>
+            
+            <!-- 3. SUBTITLE (mittleres Element) -->
+            <h2 class="luvex-hero__subtitle">
+                Industrial UV curing for coatings, inks, and adhesives
+            </h2>
+            
+            <!-- 4. DESCRIPTION (kleinstes Element - Pyramidenspitze) -->
+            <p class="luvex-hero__description">
+                Optimize your UV curing processes for maximum efficiency and quality.
+            </p>
         </div>
     </div>
 </section>
@@ -103,10 +111,10 @@ get_header(); ?>
                     <h3>6. UV-Substrate Benefits</h3>
                     <p>UV-reactive substrates enable: on-demand curing, customized mechanical properties, biocompatibility for medical devices, and precise process control.</p>
                     <ul class="benefits-list">
-                        <li><strong>Instant curing</strong> — seconds instead of hours</li>
-                        <li><strong>Energy efficient</strong> — no heat required</li>
-                        <li><strong>Solvent-free</strong> — environmentally friendly</li>
-                        <li><strong>Superior properties</strong> — enhanced performance</li>
+                        <li><strong>Instant curing</strong> – seconds instead of hours</li>
+                        <li><strong>Energy efficient</strong> – no heat required</li>
+                        <li><strong>Solvent-free</strong> – environmentally friendly</li>
+                        <li><strong>Superior properties</strong> – enhanced performance</li>
                     </ul>
                     <div class="final-cta">
                         <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-consulting' ) ) ); ?>">
@@ -123,6 +131,7 @@ get_header(); ?>
      END: Interactive Gallery Section
      ========================================================================== -->
 
+<!-- Rest der Seite bleibt unverändert -->
 <!-- ==========================================================================
      START: UV Curing Benefits Summary
      ========================================================================== -->
@@ -153,13 +162,8 @@ get_header(); ?>
         </div>
     </div>
 </section>
-<!-- ==========================================================================
-     END: Benefits Summary Section
-     ========================================================================== -->
 
-<!-- ==========================================================================
-     START: Applications Sections
-     ========================================================================== -->
+<!-- Weitere Sektionen... -->
 <main>
     <!-- Coatings Applications -->
     <section id="applications-coatings" class="section applications-section precision-transition">
@@ -233,9 +237,6 @@ get_header(); ?>
         </div>
     </section>
 </main>
-<!-- ==========================================================================
-     END: Applications Sections
-     ========================================================================== -->
 
 <!-- ==========================================================================
      START: Process Optimization Section
@@ -267,9 +268,6 @@ get_header(); ?>
         </div>
     </div>
 </section>
-<!-- ==========================================================================
-     END: Process Optimization Section
-     ========================================================================== -->
 
 <!-- ==========================================================================
      START: Call-to-Action Section
@@ -284,8 +282,5 @@ get_header(); ?>
         </a>
     </div>
 </section>
-<!-- ==========================================================================
-     END: Call-to-Action Section
-     ========================================================================== -->
 
 <?php get_footer(); ?>
