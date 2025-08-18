@@ -681,3 +681,20 @@ Description: Anpassungen für das neue Hero-Layout auf der News-Seite.
         margin: 1.5rem 0;
     }
 }
+
+
+
+/* WICHTIGE Responsive Image Rules */
+.entry-content img,
+.single-uv_news-container img {
+    max-width: 100% !important;
+    height: auto !important;
+    width: auto !important;
+}
+
+.entry-content .content-image {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    margin: 0 auto !important;
+}
