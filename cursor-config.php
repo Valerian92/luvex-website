@@ -27,20 +27,20 @@ $luvex_cursor_sections = array(
     // Spezifische Heroes können andere Styles haben
     '.hero-spectrum-engine' => array(
         'style' => 'energy',        // Energy Ring für UV Knowledge
-        'enabled' => true,          // ✅ AKTIV
+        'enabled' => false,          // ✅ AKTIV
         'pages' => array('uv-knowledge')
     ),
     
     '.hero-curing' => array(
         'style' => 'precision',     // Crosshair für UV Curing
-        'enabled' => true,          // ✅ AKTIV
+        'enabled' => false,          // ✅ AKTIV
         'pages' => array('uv-curing')
     ),
     
     // === SIMULATOR SECTIONS ===
     '.uv-simulator-showcase' => array(
         'style' => 'precision',     // Crosshair für Präzision  
-        'enabled' => true,          // ✅ AKTIVIERT
+        'enabled' => false,          // ✅ AKTIVIERT
         'pages' => array('homepage')
     ),
     
