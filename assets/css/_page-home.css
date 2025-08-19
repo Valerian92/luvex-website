@@ -329,14 +329,9 @@ Last Update: 2025-08-19
 }
 
 /*
-==============================================================================
-HOMEPAGE HERO PYRAMIDEN-LAYOUT (FINAL)
-==============================================================================
-*/
-
 /*
 ==============================================================================
-HOMEPAGE HERO PYRAMIDEN-LAYOUT (KORRIGIERT)
+HOMEPAGE HERO PYRAMIDEN-LAYOUT (FINAL)
 ==============================================================================
 */
 
@@ -357,23 +352,23 @@ HOMEPAGE HERO PYRAMIDEN-LAYOUT (KORRIGIERT)
 
 /* --- ECHTE PYRAMIDEN-STRUKTUR: Container-Breiten bilden Pyramide --- */
 
-/* 1. DESCRIPTION (oben, BREITESTER Container - 2 gleichmäßige Zeilen) */
+/* 1. DESCRIPTION (oben, BREITESTER Container - 2 solide gleichlange Zeilen) */
 .home .luvex-hero__description {
-    max-width: 1800px !important; /* BREITESTER Container für 2 Zeilen */
-    font-size: 1.7rem !important; 
-    color: #ffffff !important; 
-    text-align: center !important; /* Gleichmäßige Zeilen, keine interne Pyramide */
-    line-height: 1.5 !important; 
+    max-width: 2200px !important; /* VIEL BREITER für 2 gleichlange Zeilen */
+    font-size: 1.5rem !important; /* Etwas kleiner */
+    color: var(--luvex-gray-300) !important; /* Grau statt weiß */
+    text-align: center !important; 
+    line-height: 1.4 !important; 
     margin-bottom: 4rem !important; /* GRÖßTER Abstand */
     order: 1;
 }
 
-/* 2. SUBTITLE (Mitte, MITTLERER Container - 1 Zeile) */
+/* 2. SUBTITLE (Mitte, MITTLERER Container - 1 Zeile, subtitle-style) */
 .home .luvex-hero__subtitle {  
-    max-width: 1200px !important; /* MITTLERER Container für 1 Zeile */
-    font-size: 2.2rem !important; 
-    color: #ffffff !important; 
-    font-weight: 500 !important;
+    max-width: 1200px !important; /* MITTLERER Container */
+    font-size: 1.9rem !important; /* Etwas kleiner */
+    color: var(--luvex-gray-300) !important; /* Grau wie Description */
+    font-weight: 400 !important; /* Weniger dick = mehr subtitle */
     text-align: center !important;
     line-height: 1.3 !important;
     margin-bottom: 3rem !important; /* MITTLERER Abstand */
@@ -383,11 +378,11 @@ HOMEPAGE HERO PYRAMIDEN-LAYOUT (KORRIGIERT)
 /* 3. TITLE (unten, SCHMALSTER Container - 2 zentrierte Zeilen) */
 .home .luvex-hero__title {
     max-width: 800px !important; /* SCHMALSTER Container */
-    font-size: 2.8rem !important; 
-    color: #ffffff !important; 
-    text-align: center !important; /* MITTIG im Container */
+    font-size: 2.5rem !important; /* Etwas kleiner */
+    color: #ffffff !important; /* Nur Title bleibt weiß */
+    text-align: center !important; 
     line-height: 1.1 !important; 
-    margin-bottom: 1.5rem !important; /* KLEINSTER Abstand */
+    margin-bottom: 1rem !important; /* KLEINERER Abstand zu Buttons */
     order: 3;
 }
 
@@ -395,12 +390,12 @@ HOMEPAGE HERO PYRAMIDEN-LAYOUT (KORRIGIERT)
 .home .luvex-hero__title .title-line-1 {
     display: block;
     margin-bottom: 0.3rem !important; 
-    text-align: center !important; /* Sicherstellen: mittig */
+    text-align: center !important;
 }
 
 .home .luvex-hero__title .title-line-2 {
     display: block;
-    text-align: center !important; /* Sicherstellen: mittig */
+    text-align: center !important;
 }
 
 .home .luvex-hero__title .text-highlight {
@@ -413,7 +408,7 @@ HOMEPAGE HERO PYRAMIDEN-LAYOUT (KORRIGIERT)
     flex-direction: column;
     align-items: center;
     gap: 1rem !important;
-    margin-top: 2rem !important;
+    margin-top: 1rem !important; /* Kleinerer Abstand vom Title */
     padding-top: 1rem;
     width: 100%;
 }
