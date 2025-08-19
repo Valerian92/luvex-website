@@ -255,6 +255,20 @@ function luvex_enqueue_assets() {
         }
     }
 
+    // === DEBUG SCRIPTS (NUR FÜR ENTWICKLER) ===
+    if (WP_DEBUG || current_user_can('administrator')) {
+        $debug_js_path = get_stylesheet_directory() . '/assets/js/debug-scripts.js';
+        if (file_exists($debug_js_path)) {
+            wp_enqueue_script(
+                'luvex-debug-scripts',
+                get_stylesheet_directory_uri() . '/assets/js/debug-scripts.js',
+                array('jquery'),
+                filemtime($debug_js_path),
+                true
+            );
+        }
+    }
+
     // Standard JS-Dateien
     $dependencies = array('jquery');
     $scripts_to_enqueue = [
