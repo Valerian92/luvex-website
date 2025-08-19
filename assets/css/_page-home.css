@@ -438,10 +438,10 @@ HERO CONTAINER FIX - Überschreibt mysteriöse 900px Regel
 
 /* === PYRAMIDEN-STRUKTUR FINAL === */
 .home .luvex-hero__description {
-    max-width: 2200px !important; /* BREITESTER Container für 2 Zeilen */
+    max-width: 1600px !important; /* BREITER als Subtitle für 2 gleichlange Zeilen */
     font-size: 1.5rem !important; 
     color: var(--luvex-gray-300) !important; /* Grau statt weiß */
-    margin-bottom: 4rem !important; /* GRÖßTER Abstand */
+    margin-bottom: 5rem !important; /* GRÖßTER Abstand (war 4rem) */
 }
 
 .home .luvex-hero__subtitle {  
@@ -449,19 +449,25 @@ HERO CONTAINER FIX - Überschreibt mysteriöse 900px Regel
     font-size: 1.9rem !important; 
     color: var(--luvex-gray-300) !important; /* Grau wie Description */
     font-weight: 400 !important; /* Weniger dick = mehr subtitle */
-    margin-bottom: 3rem !important; /* MITTLERER Abstand */
+    margin-bottom: 3.5rem !important; /* MITTLERER Abstand (war 3rem) */
 }
 
 .home .luvex-hero__title {
     max-width: 800px !important; /* SCHMALSTER Container */
     font-size: 2.5rem !important; 
-    margin-bottom: 1rem !important; /* KLEINERER Abstand zu Buttons */
+    margin-bottom: 1rem !important; /* KLEINSTER Abstand zu Buttons */
+}
+
+/* TITLE-ZEILEN ENGER ZUSAMMEN */
+.home .luvex-hero__title .title-line-1 {
+    display: block;
+    margin-bottom: 0.1rem !important; /* NOCH ENGER (war 0.3rem) */
+    text-align: center !important;
 }
 
 .home .luvex-hero__cta-container {
-    margin-top: 1rem !important; /* Kleinerer Abstand vom Title */
+    margin-top: 1rem !important; /* Kleinster Abstand vom Title */
 }
-
 /*
 ==============================================================================
 RESPONSIVE DESIGN
