@@ -79,52 +79,52 @@ $luvex_cursor_sections = array(
 $luvex_cursor_pages = array(
     'homepage' => array(
         'conditions' => array('is_front_page', 'is_home'),
-        'enabled' => true,           // ✅ Homepage aktiv
+        'enabled' => false,           // ✅ Homepage aktiv
         'default_style' => 'particles' // Particles für Homepage (Sterne-Animation)
     ),
     'about' => array(
         'conditions' => array('is_page:about'),
-        'enabled' => true,           // ✅ About aktiv  
+        'enabled' => false,           // ✅ About aktiv  
         'default_style' => 'quantum' // Elegant für About
     ),
     'uv-knowledge' => array(
         'conditions' => array('is_page:uv-knowledge'),
-        'enabled' => true,           // ✅ AKTIVIERT
+        'enabled' => false,           // ✅ AKTIVIERT
         'default_style' => 'energy'  // Futuristisch für Knowledge
     ),
     'uv-curing' => array(
         'conditions' => array('is_page:uv-curing'),
-        'enabled' => true,           // ✅ AKTIVIERT
+        'enabled' => false,           // ✅ AKTIVIERT
         'default_style' => 'precision' // Crosshair für Curing
     ),
     'uv-simulator' => array(
         'conditions' => array('is_page:uv-simulator'),
-        'enabled' => true,           // ✅ AKTIVIERT
+        'enabled' => false,           // ✅ AKTIVIERT
         'default_style' => 'precision' // Crosshair für Simulator
     ),
     'uv-consulting' => array(
         'conditions' => array('is_page:uv-consulting'),
-        'enabled' => true,           // ✅ AKTIVIERT  
+        'enabled' => false,           // ✅ AKTIVIERT  
         'default_style' => 'classic'  // Professionell für Consulting
     ),
     'contact' => array(
         'conditions' => array('is_page:contact'),
-        'enabled' => true,           // ✅ AKTIVIERT
+        'enabled' => false,           // ✅ AKTIVIERT
         'default_style' => 'beam'     // Freundlich für Contact
     ),
     'uv-c-disinfection' => array(
         'conditions' => array('is_page:uv-c-disinfection'),
-        'enabled' => true,           // ✅ AKTIVIERT
+        'enabled' => false,           // ✅ AKTIVIERT
         'default_style' => 'energy'  // Energy für UV-C
     ),
     'mercury-uv-lamps' => array(
         'conditions' => array('is_page:mercury-uv-lamps'),
-        'enabled' => true,           // ✅ AKTIVIERT
+        'enabled' => false,           // ✅ AKTIVIERT
         'default_style' => 'classic' // Klassisch für Mercury
     ),
     'led-uv-systems' => array(
         'conditions' => array('is_page:led-uv-systems', 'is_page:uv-led'),
-        'enabled' => true,           // ✅ AKTIVIERT
+        'enabled' => false,           // ✅ AKTIVIERT
         'default_style' => 'energy'  // Modern für LED
     )
 );
@@ -134,8 +134,8 @@ $luvex_cursor_settings = array(
     'debug_mode' => WP_DEBUG,       // Debug-Modus
     'mobile_enabled' => false,      // Cursor auf Mobile (nicht empfohlen)
     'trail_effects' => false,       // Trail-Partikel (Performance)
-    'hover_effects' => true,        // Lila Glow bei Buttons
-    'smooth_transitions' => true    // Weiche Übergänge zwischen Styles
+    'hover_effects' => false,        // Lila Glow bei Buttons
+    'smooth_transitions' => false    // Weiche Übergänge zwischen Styles
 );
 
 /**
