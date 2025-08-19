@@ -418,6 +418,50 @@ HOMEPAGE HERO PYRAMIDEN-LAYOUT (FINAL)
 .luvex-hero .luvex-cta-secondary {
     border-radius: 50px !important;
 }
+
+/*
+==============================================================================
+HERO CONTAINER FIX - Überschreibt mysteriöse 900px Regel
+==============================================================================
+*/
+
+/* === HERO CONTAINER BEFREIUNG === */
+.home .luvex-hero__container {
+    max-width: 100% !important; /* Entfernt Container-Limitierung */
+    width: 100% !important;
+}
+
+.home .luvex-hero__content {
+    max-width: 100% !important; /* Entfernt Content-Limitierung */
+    width: 100% !important;
+}
+
+/* === PYRAMIDEN-STRUKTUR FINAL === */
+.home .luvex-hero__description {
+    max-width: 2200px !important; /* BREITESTER Container für 2 Zeilen */
+    font-size: 1.5rem !important; 
+    color: var(--luvex-gray-300) !important; /* Grau statt weiß */
+    margin-bottom: 4rem !important; /* GRÖßTER Abstand */
+}
+
+.home .luvex-hero__subtitle {  
+    max-width: 1200px !important; /* MITTLERER Container für 1 Zeile */
+    font-size: 1.9rem !important; 
+    color: var(--luvex-gray-300) !important; /* Grau wie Description */
+    font-weight: 400 !important; /* Weniger dick = mehr subtitle */
+    margin-bottom: 3rem !important; /* MITTLERER Abstand */
+}
+
+.home .luvex-hero__title {
+    max-width: 800px !important; /* SCHMALSTER Container */
+    font-size: 2.5rem !important; 
+    margin-bottom: 1rem !important; /* KLEINERER Abstand zu Buttons */
+}
+
+.home .luvex-hero__cta-container {
+    margin-top: 1rem !important; /* Kleinerer Abstand vom Title */
+}
+
 /*
 ==============================================================================
 RESPONSIVE DESIGN
