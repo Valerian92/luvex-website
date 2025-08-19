@@ -2,7 +2,7 @@
 ==============================================================================
 LUVEX THEME v3.4 - HOMEPAGE (BEREINIGT)
 ==============================================================================
-Description: Saubere, konsolidierte Homepage-Styles ohne Duplikate
+Description: Saubere Homepage-Styles ohne !important Überladung
 Last Update: 2025-08-19
 ==============================================================================
 */
@@ -13,6 +13,7 @@ Last Update: 2025-08-19
     align-items: center;
     gap: 1.5rem;
 }
+
 .home .luvex-hero__cta.luvex-cta-primary:hover {
     color: var(--luvex-bright-cyan);
 }
@@ -22,6 +23,7 @@ Last Update: 2025-08-19
     text-align: center; 
     margin-bottom: 4rem; 
 }
+
 .knowledge-navigator-intro { 
     max-width: 650px; 
     margin: 1rem auto 0; 
@@ -89,11 +91,13 @@ Last Update: 2025-08-19
     text-align: center; 
     color: var(--luvex-white); 
 }
+
 .simulator-content h3 { 
     color: var(--luvex-white); 
     font-size: 2.5rem; 
     margin-bottom: 1.5rem; 
 }
+
 .simulator-description { 
     color: var(--luvex-text-muted-dark); 
     font-size: 1.2rem; 
@@ -102,6 +106,7 @@ Last Update: 2025-08-19
     margin-left: auto; 
     margin-right: auto; 
 }
+
 .simulator-features { 
     margin: 3rem auto; 
     display: grid; 
@@ -109,32 +114,39 @@ Last Update: 2025-08-19
     gap: 2rem; 
     max-width: 900px; 
 }
+
 .simulator-feature { 
     padding: 1.5rem; 
     background: rgba(255, 255, 255, 0.05); 
     border-radius: var(--radius-md); 
     transition: all 0.3s ease; 
 }
+
 .simulator-feature:hover { 
     background: rgba(255, 255, 255, 0.1); 
     transform: translateY(-4px); 
 }
+
 .simulator-feature:hover h4 { 
     color: var(--luvex-bright-cyan); 
 }
+
 .simulator-feature:hover p { 
     color: var(--luvex-white); 
 }
+
 .simulator-feature i { 
     font-size: 2.5rem; 
     margin-bottom: 1rem; 
     color: var(--luvex-bright-cyan); 
 }
+
 .simulator-feature h4 { 
     color: var(--luvex-white); 
     margin-bottom: 0.5rem; 
     transition: color 0.3s ease; 
 }
+
 .simulator-feature p { 
     color: var(--luvex-text-muted-dark); 
     transition: color 0.3s ease; 
@@ -146,7 +158,7 @@ Last Update: 2025-08-19
 
 /* --- 4. Global UV Expert Community Section --- */
 .homepage-community-section.section {
-    overflow: hidden !important;
+    overflow: hidden;
 }
 
 .homepage-community-section {
@@ -198,6 +210,7 @@ Last Update: 2025-08-19
     line-height: 1.2; 
     margin-bottom: 1.5rem; 
 }
+
 .homepage-community-description { 
     font-size: var(--text-lg); 
     color: var(--luvex-gray-300); 
@@ -205,6 +218,7 @@ Last Update: 2025-08-19
     line-height: 1.7; 
     margin-bottom: 2.5rem; 
 }
+
 .homepage-community-actions { 
     display: flex; 
     gap: 1rem; 
@@ -213,7 +227,7 @@ Last Update: 2025-08-19
 
 /* --- 5. Evidence-Based Expertise Section --- */
 .evidence-section.section {
-    overflow: visible !important;
+    overflow: visible;
 }
 
 .evidence-section {
@@ -231,6 +245,7 @@ Last Update: 2025-08-19
     font-size: clamp(2.2rem, 4vw, 3rem); 
     margin-bottom: 1.5rem; 
 }
+
 .evidence-description { 
     font-size: var(--text-lg); 
     margin-bottom: 3rem; 
@@ -241,79 +256,79 @@ Last Update: 2025-08-19
     position: relative;
     min-height: 350px;
     padding-top: 0;
-    overflow: visible !important;
+    overflow: visible;
 }
 
 .evidence-section .team-member--light {
-    background: var(--luvex-gray-100) !important;
-    color: var(--luvex-dark-blue) !important;
-    box-shadow: var(--shadow-lg) !important;
-    border: 1px solid var(--luvex-gray-200) !important;
-    padding: 2.5rem !important;
-    padding-top: 4.5rem !important;
-    margin-top: 0 !important;
-    position: relative !important;
-    text-align: center !important;
-    overflow: visible !important;
-    opacity: 1 !important;
-    display: block !important;
-    visibility: visible !important;
-    z-index: 10 !important;
-    transform: none !important;
+    background: var(--luvex-gray-100);
+    color: var(--luvex-dark-blue);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--luvex-gray-200);
+    padding: 2.5rem;
+    padding-top: 4.5rem;
+    margin-top: 0;
+    position: relative;
+    text-align: center;
+    overflow: visible;
+    opacity: 1;
+    display: block;
+    visibility: visible;
+    z-index: 10;
+    transform: none;
 }
 
 .evidence-section .team-member--light .team-member__photo {
-    position: absolute !important;
-    top: -4rem !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    width: 120px !important;
-    height: 120px !important;
-    border-radius: 50% !important;
-    border: 4px solid var(--luvex-white) !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
-    overflow: hidden !important;
-    z-index: 15 !important;
-    opacity: 1 !important;
-    display: block !important;
-    visibility: visible !important;
+    position: absolute;
+    top: -4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid var(--luvex-white);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    z-index: 15;
+    opacity: 1;
+    display: block;
+    visibility: visible;
 }
 
 .evidence-section .team-member--light .team-member__photo img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    display: block !important;
-    opacity: 1 !important;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 1;
 }
 
 .evidence-section .team-member--light .team-member__content h3,
 .evidence-section .team-member--light .team-member__quote p { 
-    color: var(--luvex-dark-blue) !important;
-    opacity: 1 !important;
+    color: var(--luvex-dark-blue);
+    opacity: 1;
 }
 
 .evidence-section .team-member--light .team-member__role { 
-    color: var(--luvex-vibrant-blue) !important;
-    opacity: 1 !important;
+    color: var(--luvex-vibrant-blue);
+    opacity: 1;
 }
 
 .evidence-section .team-member--light .team-member__content h3 {
-    font-size: 1.5rem !important;
-    margin-bottom: 0.5rem !important;
-    font-weight: 600 !important;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
 }
 
 .evidence-section .team-member--light .team-member__role {
-    font-size: 1rem !important;
-    margin-bottom: 1.5rem !important;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .evidence-section .team-member--light .team-member__quote p {
-    font-style: italic !important;
-    line-height: 1.6 !important;
-    font-size: 0.95rem !important;
-    margin: 0 !important;
+    font-style: italic;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin: 0;
 }
 
 /* --- 6. Final CTA Section --- */
@@ -321,6 +336,7 @@ Last Update: 2025-08-19
     background: linear-gradient(135deg, var(--luvex-accent-blue) 0%, var(--luvex-dark-blue) 100%); 
     color: var(--luvex-white); 
 }
+
 .section--final-cta .cta-section--dark { 
     background: transparent; 
     box-shadow: none; 
@@ -329,18 +345,17 @@ Last Update: 2025-08-19
 }
 
 /*
-/*
 ==============================================================================
-HOMEPAGE HERO PYRAMIDEN-LAYOUT (FINAL)
+HOMEPAGE HERO PYRAMIDEN-LAYOUT (BEREINIGT)
 ==============================================================================
 */
 
-/* --- CUSTOM CURSOR IM HERO --- */
+/* --- Custom Cursor im Hero --- */
 .luvex-hero { 
     cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="%236dd5ed" stroke="%2300bcd4" stroke-width="3" opacity="0.8"/><circle cx="12" cy="12" r="3" fill="%23ffffff" opacity="0.9"/></svg>') 12 12, auto;
 }
 
-/* --- HERO CONTENT CONTAINER --- */
+/* --- Hero Content Container --- */
 .home .luvex-hero__content {
     display: flex;
     flex-direction: column;
@@ -350,124 +365,86 @@ HOMEPAGE HERO PYRAMIDEN-LAYOUT (FINAL)
     margin-bottom: 2rem;
 }
 
-/* --- ECHTE PYRAMIDEN-STRUKTUR: Container-Breiten bilden Pyramide --- */
+/* --- Container Befreiung --- */
+.home .luvex-hero__container {
+    max-width: 100%;
+    width: 100%;
+}
 
-/* 1. DESCRIPTION (oben, BREITESTER Container - 2 solide gleichlange Zeilen) */
+.home .luvex-hero__content {
+    max-width: 100%;
+    width: 100%;
+}
+
+/* --- Pyramiden-Struktur: Container-Breiten bilden Pyramide --- */
+
+/* 1. DESCRIPTION (oben, BREITESTER Container - 2 gleichlange Zeilen) */
 .home .luvex-hero__description {
-    max-width: 2200px !important; /* VIEL BREITER für 2 gleichlange Zeilen */
-    font-size: 1.5rem !important; /* Etwas kleiner */
-    color: var(--luvex-gray-300) !important; /* Grau statt weiß */
-    text-align: center !important; 
-    line-height: 1.4 !important; 
-    margin-bottom: 4rem !important; /* GRÖßTER Abstand */
+    max-width: 1000px; /* REDUZIERT für 2 gleichlange Zeilen */
+    font-size: 1.5rem;
+    color: var(--luvex-gray-300); /* Grau statt weiß */
+    text-align: center;
+    line-height: 1.4;
+    margin-bottom: 5rem; /* GRÖSSTER Abstand */
     order: 1;
 }
 
-/* 2. SUBTITLE (Mitte, MITTLERER Container - 1 Zeile, subtitle-style) */
+/* 2. SUBTITLE (Mitte, MITTLERER Container - 1 Zeile) */
 .home .luvex-hero__subtitle {  
-    max-width: 1200px !important; /* MITTLERER Container */
-    font-size: 1.9rem !important; /* Etwas kleiner */
-    color: var(--luvex-gray-300) !important; /* Grau wie Description */
-    font-weight: 400 !important; /* Weniger dick = mehr subtitle */
-    text-align: center !important;
-    line-height: 1.3 !important;
-    margin-bottom: 3rem !important; /* MITTLERER Abstand */
+    max-width: 800px; /* MITTLERER Container */
+    font-size: 1.9rem;
+    color: var(--luvex-gray-300); /* Grau wie Description */
+    font-weight: 400; /* Weniger dick = mehr subtitle */
+    text-align: center;
+    line-height: 1.3;
+    margin-bottom: 3rem; /* MITTLERER Abstand */
     order: 2;
 }
 
 /* 3. TITLE (unten, SCHMALSTER Container - 2 zentrierte Zeilen) */
 .home .luvex-hero__title {
-    max-width: 800px !important; /* SCHMALSTER Container */
-    font-size: 2.5rem !important; /* Etwas kleiner */
-    color: #ffffff !important; /* Nur Title bleibt weiß */
-    text-align: center !important; 
-    line-height: 1.1 !important; 
-    margin-bottom: 1rem !important; /* KLEINERER Abstand zu Buttons */
+    max-width: 600px; /* SCHMALSTER Container */
+    font-size: 2.5rem;
+    color: #ffffff; /* Nur Title bleibt weiß */
+    text-align: center;
+    line-height: 1.1;
+    margin-bottom: 0.5rem; /* KLEINERER Abstand zu Buttons */
     order: 3;
 }
 
-/* TITLE-ZEILEN eng zusammen aber mittig */
+/* Title-Zeilen eng zusammen */
 .home .luvex-hero__title .title-line-1 {
     display: block;
-    margin-bottom: 0.3rem !important; 
-    text-align: center !important;
+    margin-bottom: 0.1rem; /* SEHR ENGER Zeilenabstand */
+    text-align: center;
 }
 
 .home .luvex-hero__title .title-line-2 {
     display: block;
-    text-align: center !important;
+    text-align: center;
 }
 
 .home .luvex-hero__title .text-highlight {
     color: var(--luvex-bright-cyan);
 }
 
-/* --- BUTTON CONTAINER --- */
+/* --- Button Container --- */
 .home .luvex-hero__cta-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem !important;
-    margin-top: 1rem !important; /* Kleinerer Abstand vom Title */
+    gap: 1rem;
+    margin-top: 0.5rem; /* KLEINSTER Abstand vom Title */
     padding-top: 1rem;
     width: 100%;
 }
 
-/* RUNDE BUTTONS */
+/* Runde Buttons */
 .luvex-hero .luvex-cta-primary,
 .luvex-hero .luvex-cta-secondary {
-    border-radius: 50px !important;
+    border-radius: 50px;
 }
 
-/*
-==============================================================================
-HERO CONTAINER FIX - Überschreibt mysteriöse 900px Regel
-==============================================================================
-*/
-
-/* === HERO CONTAINER BEFREIUNG === */
-.home .luvex-hero__container {
-    max-width: 100% !important; /* Entfernt Container-Limitierung */
-    width: 100% !important;
-}
-
-.home .luvex-hero__content {
-    max-width: 100% !important; /* Entfernt Content-Limitierung */
-    width: 100% !important;
-}
-
-/* === PYRAMIDEN-STRUKTUR FINAL === */
-.home .luvex-hero__description {
-    max-width: 1600px !important; /* BREITER als Subtitle für 2 gleichlange Zeilen */
-    font-size: 1.5rem !important; 
-    color: var(--luvex-gray-300) !important; /* Grau statt weiß */
-    margin-bottom: 5rem !important; /* GRÖßTER Abstand (war 4rem) */
-}
-
-.home .luvex-hero__subtitle {  
-    max-width: 1200px !important; /* MITTLERER Container für 1 Zeile */
-    font-size: 1.9rem !important; 
-    color: var(--luvex-gray-300) !important; /* Grau wie Description */
-    font-weight: 400 !important; /* Weniger dick = mehr subtitle */
-    margin-bottom: 3.5rem !important; /* MITTLERER Abstand (war 3rem) */
-}
-
-.home .luvex-hero__title {
-    max-width: 800px !important; /* SCHMALSTER Container */
-    font-size: 2.5rem !important; 
-    margin-bottom: 1rem !important; /* KLEINSTER Abstand zu Buttons */
-}
-
-/* TITLE-ZEILEN ENGER ZUSAMMEN */
-.home .luvex-hero__title .title-line-1 {
-    display: block;
-    margin-bottom: 0.1rem !important; /* NOCH ENGER (war 0.3rem) */
-    text-align: center !important;
-}
-
-.home .luvex-hero__cta-container {
-    margin-top: 1rem !important; /* Kleinster Abstand vom Title */
-}
 /*
 ==============================================================================
 RESPONSIVE DESIGN
@@ -480,29 +457,36 @@ RESPONSIVE DESIGN
         text-align: center;
         padding-top: 3rem;
     }
+    
     .homepage-community-content {
         margin-bottom: 3rem;
     }
+    
     .homepage-community-visual {
         min-height: 500px;
         width: 100%;
     }
+    
     .homepage-community-globe-wrapper {
         width: 100vw;
         height: 140%;
         transform: translate(-50%, -50%);
     }
+    
     .homepage-community-actions {
         justify-content: center;
     }
+    
     .evidence-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
+    
     .evidence-visual {
         order: -1;
         margin-bottom: 3rem;
     }
+    
     .evidence-content {
         text-align: center;
     }
@@ -512,9 +496,11 @@ RESPONSIVE DESIGN
     .simulator-features { 
         grid-template-columns: repeat(2, 1fr); 
     }
+    
     .evidence-section { 
         padding-top: 6rem; 
     }
+    
     .homepage-community-globe-wrapper {
         width: 100vw;
         height: 150%;
@@ -523,20 +509,20 @@ RESPONSIVE DESIGN
     
     /* Hero Responsive */
     .home .luvex-hero__description {
-        max-width: 95% !important;
-        font-size: 1.3rem !important;
-        margin-bottom: 3rem !important;
+        max-width: 95%;
+        font-size: 1.3rem;
+        margin-bottom: 3rem;
     }
     
     .home .luvex-hero__subtitle {
-        max-width: 90% !important;
-        font-size: 1.7rem !important;
-        margin-bottom: 2.5rem !important;
+        max-width: 90%;
+        font-size: 1.7rem;
+        margin-bottom: 2.5rem;
     }
     
     .home .luvex-hero__title {
-        max-width: 85% !important;
-        font-size: 2.3rem !important;
+        max-width: 85%;
+        font-size: 2.3rem;
     }
 }
 
@@ -547,23 +533,17 @@ RESPONSIVE DESIGN
     
     /* Hero Mobile */
     .home .luvex-hero__description {
-        max-width: 98% !important;
-        font-size: 1.1rem !important;
+        max-width: 98%;
+        font-size: 1.1rem;
     }
     
     .home .luvex-hero__subtitle {
-        max-width: 95% !important;
-        font-size: 1.5rem !important;
+        max-width: 95%;
+        font-size: 1.5rem;
     }
     
     .home .luvex-hero__title {
-        max-width: 90% !important;
-        font-size: 2rem !important;
+        max-width: 90%;
+        font-size: 2rem;
     }
-}
-
-/* === HERO CONTENT WIDTH FIX === */
-.home .luvex-hero__content {
-    width: 100% !important; /* Force content container full width */
-    max-width: none !important; /* Remove any max-width limits */
 }
