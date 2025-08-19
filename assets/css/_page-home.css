@@ -561,3 +561,9 @@ RESPONSIVE DESIGN
         font-size: 2rem !important;
     }
 }
+
+/* === HERO CONTENT WIDTH FIX === */
+.home .luvex-hero__content {
+    width: 100% !important; /* Force content container full width */
+    max-width: none !important; /* Remove any max-width limits */
+}
