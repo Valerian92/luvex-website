@@ -19,7 +19,7 @@ $luvex_cursor_sections = array(
     // === HERO SECTIONS (AKTIVIERT!) ===
     '.luvex-hero' => array(
         'style' => 'particles',     // Animierte Partikel (⭐ Hero-Standard)
-        'enabled' => true,          //  ✅AKTIV für alle Heroes
+        'enabled' => false,          //  ✅AKTIV für alle Heroes
         'pages' => array('all')     // Auf allen Seiten mit Hero
     ),
     
