@@ -269,6 +269,35 @@ function luvex_enqueue_assets() {
         }
     }
 
+    // === ANIMATION CONSOLE LOGS STUMM SCHALTEN (PRODUCTION) ===
+    if (!WP_DEBUG) {
+        wp_add_inline_script('luvex-debug-scripts', '
+            // Sichere Animation-Log-Filterung (nur spezifische Animation-Logs)
+            (function() {
+                const originalLog = console.log;
+                console.log = function(...args) {
+                    if (args[0] && typeof args[0] === "string") {
+                        const logText = args[0];
+                        // Nur LUVEX Animation-Logs stumm schalten
+                        if (logText.includes("Hero Sterne Script") ||
+                            logText.includes("Globe Animation") ||
+                            logText.includes("Canvas Größe") ||
+                            logText.includes("Target Button Position") ||
+                            logText.includes("UV Points generiert") ||
+                            logText.includes("Point Group") ||
+                            logText.includes("Globe Container") ||
+                            logText.includes("Scene hinzugefügt") ||
+                            logText.includes("Animation gestartet")) {
+                            return; // Stumm schalten
+                        }
+                    }
+                    // Alle anderen Logs normal ausgeben
+                    originalLog.apply(console, args);
+                };
+            })();
+        ');
+    }
+
     // Standard JS-Dateien
     $dependencies = array('jquery');
     $scripts_to_enqueue = [
