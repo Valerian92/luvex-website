@@ -376,46 +376,37 @@ HOMEPAGE HERO PYRAMIDEN-LAYOUT (BEREINIGT)
     width: 100%;
 }
 
-/* --- Pyramiden-Struktur: Container-Breiten bilden Pyramide --- */
+/* --- Pyramiden-Struktur: Neues Hero-Design --- */
 
-/* 1. DESCRIPTION (oben, BREITESTER Container - 2 gleichlange Zeilen) */
-.home .luvex-hero__description {
-    max-width: 1100px; /* VERGRÖSSERT für gleichlange Zeilen */
-    font-size: 1.5rem;
+/* 1. SUBTITLE (oben - Slogan) */
+.home .luvex-hero__subtitle {  
+    max-width: 1000px;
+    font-size: 1.5rem; /* text-xl/2xl */
     color: var(--luvex-gray-300);
+    font-weight: 300; /* font-light */
     text-align: center;
     line-height: 1.4;
-    margin-bottom: 6rem; /* GRÖSSTER Abstand (war 5rem) */
+    letter-spacing: 0.025em; /* tracking-wide */
+    margin-bottom: 3rem;
     order: 1;
 }
 
-/* 2. SUBTITLE (Mitte, für 1 komplette Zeile) */
-.home .luvex-hero__subtitle {  
-    max-width: 1200px; /* VERGRÖSSERT für 1 komplette Zeile */
-    font-size: 1.9rem;
-    color: var(--luvex-gray-300);
-    font-weight: 400;
+/* 2. TITLE (Mitte - Haupttitel mit Glow) */
+.home .luvex-hero__title {
+    max-width: 1200px;
+    font-size: 3.5rem; /* text-5xl/7xl */
+    color: #ffffff;
+    font-weight: 700; /* font-bold */
     text-align: center;
-    line-height: 1.3;
-    margin-bottom: 4rem; /* MITTLERER Abstand (war 3rem) */
+    line-height: 1.1;
+    margin-bottom: 3rem;
     order: 2;
 }
 
-/* 3. TITLE (unten, 2 Zeilen - obere länger) */
-.home .luvex-hero__title {
-    max-width: 800px; /* Für 2 ungleiche Zeilen */
-    font-size: 2.5rem;
-    color: #ffffff;
-    text-align: center;
-    line-height: 1.1;
-    margin-bottom: 2rem; /* MITTLERER Abstand zu Buttons (war 0.5rem) */
-    order: 3;
-}
-
-/* Title-Zeilen mit kleinem Abstand */
+/* Title-Zeilen */
 .home .luvex-hero__title .title-line-1 {
     display: block;
-    margin-bottom: 0.5rem; /* KLEINER Abstand zwischen Title-Zeilen */
+    margin-bottom: 0.2rem;
     text-align: center;
 }
 
@@ -424,8 +415,30 @@ HOMEPAGE HERO PYRAMIDEN-LAYOUT (BEREINIGT)
     text-align: center;
 }
 
+/* Glow-Effekt für "Light" */
 .home .luvex-hero__title .text-highlight {
+    color: #67e8f9; /* cyan-300 */
+    text-shadow: 
+        0 0 8px rgba(107, 205, 255, 0.5),
+        0 0 20px rgba(107, 205, 255, 0.3);
+}
+
+/* 3. DESCRIPTION (unten - Service-Liste) */
+.home .luvex-hero__description {
+    max-width: 800px;
+    font-size: 1.25rem; /* text-lg/xl */
+    color: var(--luvex-gray-400);
+    text-align: center;
+    line-height: 1.6;
+    letter-spacing: 0.05em; /* tracking-wider */
+    margin-bottom: 4rem;
+    order: 3;
+}
+
+/* Bullet-Points in Description */
+.home .luvex-hero__description .bullet {
     color: var(--luvex-bright-cyan);
+    margin: 0 0.5rem;
 }
 
 /* --- Button Container --- */
@@ -434,16 +447,48 @@ HOMEPAGE HERO PYRAMIDEN-LAYOUT (BEREINIGT)
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    margin-top: 0; /* Kein extra Abstand (Title margin-bottom regelt das) */
+    margin-top: 0;
     padding-top: 0;
     width: 100%;
+    order: 4;
 }
 
-/* Runde Buttons */
-.luvex-hero .luvex-cta-primary,
-.luvex-hero .luvex-cta-secondary {
+/* Button-Hierarchie */
+.luvex-hero .luvex-cta-primary {
+    padding: 1.25rem 2.5rem; /* Größer */
+    font-size: 1.125rem;
+    font-weight: 700;
     border-radius: 50px;
+    background: var(--luvex-bright-cyan);
+    color: #ffffff;
+    transition: all 0.3s ease;
 }
+
+.luvex-hero .luvex-cta-primary:hover {
+    background: #0891b2; /* cyan-600 */
+    transform: scale(1.05);
+}
+
+.luvex-hero .luvex-cta-secondary {
+    padding: 1rem 2rem; /* Kleiner */
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    border: 2px solid var(--luvex-bright-cyan);
+    background: transparent;
+    color: var(--luvex-bright-cyan);
+    transition: all 0.3s ease;
+}
+
+.luvex-hero .luvex-cta-secondary:hover {
+    background: var(--luvex-bright-cyan);
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
+
+
+
 
 /*
 ==============================================================================

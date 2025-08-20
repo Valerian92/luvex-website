@@ -13,21 +13,21 @@ get_header(); ?>
     <canvas id="homepage-hero-canvas"></canvas>
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
-            <!-- 1. Description (oben, schmal) -->
-            <p class="luvex-hero__description">
-                From area disinfection to precision curing - master UV technology with the world's leading specialists. Independent consulting, advanced simulations, and proven results.
-            </p>
-            
-            <!-- 2. Subtitle (Mitte) -->
+            <!-- 1. Subtitle (oben - Slogan) -->
             <h2 class="luvex-hero__subtitle">
-                Independent UV technology experts advancing global knowledge
+                Mastering UV Technology, from Area Disinfection to Precision Curing.
             </h2>
             
-            <!-- 3. Title (unten, breit, groß) - KORREKTE ZEILEN-AUFTEILUNG -->
+            <!-- 2. Title (Mitte - Haupttitel mit Glow) -->
             <h1 class="luvex-hero__title">
                 <span class="title-line-1">Excellence through Engineering.</span><br>
                 <span class="title-line-2">Precision through <span class="text-highlight">Light</span>.</span>
             </h1>
+            
+            <!-- 3. Description (unten - Service-Liste mit Bullets) -->
+            <p class="luvex-hero__description">
+                Independent Consulting <span class="bullet">•</span> Advanced Simulations <span class="bullet">•</span> Proven Results
+            </p>
         </div>
         <div class="luvex-hero__cta-container">
             <a href="/uv-simulator/" class="luvex-hero__cta luvex-cta-primary simulator-cta hero-button-active">
