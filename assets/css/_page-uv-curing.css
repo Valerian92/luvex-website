@@ -1,27 +1,23 @@
 /*
 ==============================================================================
-PAGE: UV CURING - LAYOUT & SECTIONS (FIXED)
+PAGE: UV CURING - LAYOUT & SECTIONS (REPAIRED)
 ==============================================================================
 Datei: _page-uv-curing.css
-Beschreibung: Komplettes Layout für UV Curing Seite mit Korrekturen für Hero
-              und Science Gallery.
-Dependencies: animations.css, _variables.css, _components.css
+Beschreibung: Bereinigtes Layout für die UV Curing Seite. Hero-Sektion
+              wurde auf ein Standard-Layout zurückgesetzt, um die
+              Canvas-Animation zu reparieren.
 ==============================================================================
 */
 
 /*
 ==============================================================================
-HERO SECTION - PYRAMID LAYOUT FIXES
+1. HERO SECTION - STANDARD LAYOUT
 ==============================================================================
 */
 
 .hero-curing {
-    min-height: 600px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    position: relative; /* Wichtig für die Positionierung des Canvas */
+    /* Die Höhe und das allgemeine Aussehen kommen von .luvex-hero in _components.css */
 }
 
 .hero-curing #curing-hero-canvas {
@@ -30,83 +26,44 @@ HERO SECTION - PYRAMID LAYOUT FIXES
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Canvas im Hintergrund */
+    z-index: 1; /* Stellt sicher, dass der Canvas im Hintergrund ist */
 }
 
 .hero-curing .luvex-hero__container {
     position: relative;
-    z-index: 2; /* Inhalt über dem Canvas */
-    pointer-events: none; /* Klicks gehen durch zum Canvas */
+    z-index: 2; /* Stellt sicher, dass der Inhalt über dem Canvas liegt */
+    pointer-events: none; /* Erlaubt Maus-Events, den Canvas zu erreichen */
 }
 
-.hero-curing .luvex-hero__cta,
-.hero-curing .luvex-hero__cta-secondary {
-    pointer-events: auto; /* Buttons bleiben klickbar */
-}
-
-/* --- PYRAMIDEN-STRUKTUR --- */
 .hero-curing .luvex-hero__content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: var(--space-xl) 0;
+    /* Die Zentrierung wird von .luvex-hero__content in _components.css gehandhabt */
+    /* Hier können spezifische Abstände angepasst werden */
+    gap: 1.5rem; /* Abstand zwischen den Elementen */
 }
 
-/* 1. TITLE - Pyramidenbasis */
 .hero-curing .luvex-hero__title {
-    font-size: clamp(3.5rem, 8vw, 6rem);
-    font-weight: 600;
-    color: var(--luvex-white);
-    margin: 0 0 var(--space-lg) 0;
-    line-height: 1.1;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    order: 1;
+    margin-bottom: 0; /* Standardabstand zurücksetzen */
 }
 
-.hero-curing .luvex-hero__title .text-highlight {
-    color: var(--luvex-bright-cyan);
-}
-
-/* 2. BUTTONS */
-.hero-curing .luvex-hero__cta-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.5rem;
-    margin: 0 0 var(--space-xl) 0;
-    width: 100%;
-    order: 2;
-}
-
-/* 3. SUBTITLE */
 .hero-curing .luvex-hero__subtitle {
-    font-size: clamp(1.4rem, 3.5vw, 2rem);
-    color: var(--luvex-gray-300);
-    font-weight: 400;
+    margin-bottom: 0;
     max-width: 750px;
-    margin: 0 0 var(--space-lg) 0;
-    line-height: 1.3;
-    order: 3;
 }
 
-/* 4. DESCRIPTION - Pyramidenspitze */
 .hero-curing .luvex-hero__description {
-    font-size: clamp(1rem, 2.2vw, 1.2rem);
-    color: var(--luvex-gray-300);
-    max-width: 600px;
-    line-height: 1.6;
-    margin: 0;
-    opacity: 0.9;
-    order: 4;
+    margin-bottom: 1rem; /* Etwas Abstand zu den Buttons */
+    max-width: 700px;
 }
+
+.hero-curing .luvex-hero__cta-container {
+    pointer-events: auto; /* Buttons wieder klickbar machen */
+    margin-top: 1rem;
+}
+
 
 /*
 ==============================================================================
-SCIENCE GALLERY SECTION - LAYOUT & ANIMATION FIXES
+2. SCIENCE GALLERY SECTION - LAYOUT FIXES
 ==============================================================================
 */
 
@@ -143,8 +100,8 @@ SCIENCE GALLERY SECTION - LAYOUT & ANIMATION FIXES
     border-radius: 16px;
     padding: 2rem;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    min-height: 600px; /* Feste Höhe für korrekte Ausrichtung */
-    align-items: stretch; /* Wichtig für gleiche Höhe */
+    min-height: 600px;
+    align-items: stretch;
 }
 
 /* --- ANIMATION PANEL --- */
@@ -185,7 +142,7 @@ SCIENCE GALLERY SECTION - LAYOUT & ANIMATION FIXES
     align-items: center;
     justify-content: center;
     position: relative;
-    min-height: 300px; /* Sicherstellen, dass der Bereich Höhe hat */
+    min-height: 300px;
 }
 
 #curing-animation-visual {
@@ -198,7 +155,7 @@ SCIENCE GALLERY SECTION - LAYOUT & ANIMATION FIXES
 .control-panel {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Text vertikal zentrieren */
+    justify-content: center;
     position: relative;
     padding: 1rem;
 }
@@ -215,7 +172,7 @@ SCIENCE GALLERY SECTION - LAYOUT & ANIMATION FIXES
 .step-content.active {
     opacity: 1;
     transform: translateX(0);
-    position: relative; /* Wichtig, um den Platz einzunehmen */
+    position: relative;
     pointer-events: auto;
 }
 
@@ -225,69 +182,34 @@ SCIENCE GALLERY SECTION - LAYOUT & ANIMATION FIXES
     transition-duration: 0.4s;
 }
 
-.step-content h3 {
-    font-size: 1.8rem;
-    color: var(--luvex-dark-blue);
-    margin: 0 0 1rem 0;
-}
-
-.step-content p {
-    font-size: 1.1rem;
-    color: var(--luvex-gray-700);
-    line-height: 1.7;
-    margin: 0 0 1.5rem 0;
-}
+.step-content h3 { font-size: 1.8rem; color: var(--luvex-dark-blue); margin: 0 0 1rem 0; }
+.step-content p { font-size: 1.1rem; color: var(--luvex-gray-700); line-height: 1.7; margin: 0 0 1.5rem 0; }
 
 /* --- NAVIGATION CONTROLS STYLING --- */
 .nav-arrow {
-    width: 40px;
-    height: 40px;
-    border: 2px solid var(--luvex-bright-cyan);
-    background: rgba(109, 213, 237, 0.1);
-    border-radius: 50%;
-    color: var(--luvex-bright-cyan);
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 40px; height: 40px; border: 2px solid var(--luvex-bright-cyan);
+    background: rgba(109, 213, 237, 0.1); border-radius: 50%; color: var(--luvex-bright-cyan);
+    font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease;
+    display: flex; align-items: center; justify-content: center;
 }
-
-.nav-arrow:hover {
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
-    transform: scale(1.1);
-}
+.nav-arrow:hover { background: var(--luvex-bright-cyan); color: var(--luvex-dark-blue); transform: scale(1.1); }
 
 .step-indicator {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    color: rgba(255, 255, 255, 0.8);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 35px; height: 35px; border-radius: 50%; background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3); color: rgba(255, 255, 255, 0.8);
+    cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem;
+    display: flex; align-items: center; justify-content: center;
 }
+.step-indicator.active { background: var(--luvex-bright-cyan); border-color: var(--luvex-bright-cyan); color: var(--luvex-dark-blue); transform: scale(1.1); }
+.step-indicator.completed { background: rgba(109, 213, 237, 0.3); border-color: var(--luvex-bright-cyan); }
 
-.step-indicator.active {
-    background: var(--luvex-bright-cyan);
-    border-color: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
-    transform: scale(1.1);
-}
 
-.step-indicator.completed {
-    background: rgba(109, 213, 237, 0.3);
-    border-color: var(--luvex-bright-cyan);
-}
+/*
+==============================================================================
+3. RESPONSIVE DESIGN
+==============================================================================
+*/
 
-/* --- RESPONSIVE DESIGN --- */
 @media (max-width: 992px) {
     .showcase-container {
         grid-template-columns: 1fr; /* Untereinander auf Tablets */
