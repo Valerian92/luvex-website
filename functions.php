@@ -352,10 +352,10 @@ function luvex_enqueue_assets() {
             wp_enqueue_script('luvex-hero-curing', get_stylesheet_directory_uri() . '/assets/js/hero-curing-interactive.js', array(), filemtime($curing_js_path), true);
         }
         
-        // UV-Curing Science Gallery Animation System (VOLLSTÄNDIG IMPLEMENTIERT)
-        $curing_science_js_path = get_stylesheet_directory() . '/assets/js/curing-science-gallery.js';
+        // UV-Curing Science Gallery Animation System (KORRIGIERTER DATEINAME)
+        $curing_science_js_path = get_stylesheet_directory() . '/assets/js/uv-curing-science-gallery.js';
         if (file_exists($curing_science_js_path)) {
-            wp_enqueue_script('luvex-curing-science-gallery', get_stylesheet_directory_uri() . '/assets/js/curing-science-gallery.js', array(), filemtime($curing_science_js_path), true);
+            wp_enqueue_script('luvex-curing-science-gallery', get_stylesheet_directory_uri() . '/assets/js/uv-curing-science-gallery.js', array(), filemtime($curing_science_js_path), true);
             
             // Debug-Information für JavaScript verfügbar machen
             wp_localize_script('luvex-curing-science-gallery', 'luvex_debug', array(
