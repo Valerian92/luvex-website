@@ -1,14 +1,11 @@
 /*
 ==============================================================================
-LUVEX THEME v2.2 - CORE STYLES
+LUVEX THEME v3.0 - CORE STYLES
 ==============================================================================
-
-Description: Core file combining base styles (typography), layout system 
-             (containers, sections, grid), and section background patterns.
-             This file replaces _base.css, _layout.css, and _section-patterns.css.
+Description: Enthält alle globalen Basis-Stile, das Layout-System (Container,
+             Grid, Sections) und wiederverwendbare Utility-Klassen.
 Dependencies: _variables.css
-Last Update: 2025-08-05
-
+Last Update: 2025-08-21
 ==============================================================================
 */
 
@@ -18,36 +15,32 @@ Last Update: 2025-08-05
 ==============================================================================
 */
 
-/* --- 1.1 Reset & Box-Sizing --- */
 * {
     box-sizing: border-box;
 }
 
-/* --- 1.2 Body Defaults & Scrollbar Handling --- */
 html, body {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;     /* Firefox */
-    overflow-x: hidden;      /* Prevent horizontal scrollbar globally */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-x: hidden;
 }
 
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, and Opera */
+    display: none;
 }
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     line-height: 1.6;
-    color: var(--color-dark);
+    color: var(--luvex-gray-900);
     margin: 0;
-    background: var(--color-white);
+    background: var(--luvex-white);
 }
 
-/* --- 1.3 Astra Theme Overrides --- */
 #ast-scroll-top {
     display: none !important;
 }
-
 
 /*
 ==============================================================================
@@ -55,50 +48,13 @@ body {
 ==============================================================================
 */
 
-h1 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 600;
-    line-height: 1.1;
-    margin: 0 0 var(--space-md) 0;
-    letter-spacing: -0.02em;
-}
-
-h2 {
-    font-size: clamp(1.8rem, 3vw, 2.5rem);
-    font-weight: 600;
-    line-height: 1.2;
-    margin: 0 0 var(--space-md) 0;
-    letter-spacing: -0.01em;
-}
-
-h3 {
-    font-size: var(--text-2xl);
-    font-weight: 600;
-    margin: 0 0 var(--space-sm) 0;
-}
-
-h4 {
-    font-size: var(--text-xl);
-    font-weight: 600;
-    margin: 0 0 var(--space-sm) 0;
-}
-
-p {
-    font-size: var(--text-lg);
-    color: var(--color-gray);
-    margin: 0 0 var(--space-md) 0;
-}
-
-a {
-    color: var(--color-primary);
-    text-decoration: none;
-    transition: var(--transition-normal);
-}
-
-a:hover {
-    color: var(--color-secondary);
-}
-
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 600; line-height: 1.1; margin: 0 0 var(--space-md) 0; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 600; line-height: 1.2; margin: 0 0 var(--space-md) 0; letter-spacing: -0.01em; }
+h3 { font-size: var(--text-2xl); font-weight: 600; margin: 0 0 var(--space-sm) 0; }
+h4 { font-size: var(--text-xl); font-weight: 600; margin: 0 0 var(--space-sm) 0; }
+p { font-size: var(--text-lg); color: var(--luvex-gray-700); margin: 0 0 var(--space-md) 0; }
+a { color: var(--luvex-vibrant-blue); text-decoration: none; transition: var(--transition-normal); }
+a:hover { color: var(--luvex-bright-cyan); }
 
 /*
 ==============================================================================
@@ -108,61 +64,30 @@ a:hover {
 
 /* --- 3.1 Container System --- */
 .container {
-    max-width: none;
-    margin: 0 auto;
-    padding: 0 3rem;
     width: 100%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 2rem; /* Standard-Padding für Container */
 }
 
-.container--narrow {
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.container--medium {
-    max-width: 1600px;
-    margin: 0 auto;
-}
-
-.container--wide {
-    max-width: 1800px;
-    margin: 0 auto;
-}
+.container--narrow { max-width: 1200px; }
+.container--medium { max-width: 1400px; }
+.container--wide { max-width: 1800px; }
 
 /* --- 3.2 Section Defaults --- */
 .section {
     padding: 6rem 0;
     position: relative;
-    overflow: hidden; /* Prevents horizontal scroll from dividers */
+    overflow: hidden;
 }
 
-.section--small {
-    padding: 4rem 0;
-}
-
-.section--large {
-    padding: 8rem 0;
-}
-
-/* Section-specific container usage */
-.section .container {
-    max-width: 1400px; /* Default constrained width for readability */
-}
-
-.section .container--narrow {
-    max-width: 1200px;
-}
+.section--small { padding: 4rem 0; }
+.section--large { padding: 8rem 0; }
 
 /* --- 3.3 Section Backgrounds --- */
-.section--turquoise {
-    background: linear-gradient(135deg, #a8e6f1 0%, #e8f9fc 100%);
-}
-
 .section--turquoise-light {
-    background: #F8FAFC; /* Fallback color */
     background: linear-gradient(180deg, rgba(109, 213, 237, 0.08) 0%, rgba(248, 250, 252, 0) 100%);
 }
-
 
 /*
 ==============================================================================
@@ -170,68 +95,14 @@ a:hover {
 ==============================================================================
 */
 
-/* --- 4.1 Grid System --- */
-.grid {
-    display: grid;
-    gap: var(--gap-default);
-}
-
-.grid-2 {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-}
-
-.grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2.5rem;
-}
-
-@media (max-width: 992px) {
-    .grid-3 {
-        grid-template-columns: 1fr;
-    }
-}
-
-.grid-4 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--gap-default);
-}
-
-/* --- 4.2 Flexbox System --- */
-.flex {
-    display: flex;
-    gap: var(--space-md);
-}
-
-.flex--center {
-    align-items: center;
-    justify-content: center;
-}
-
-.flex--between {
-    justify-content: space-between;
-    align-items: center;
-}
-
-.flex--column {
-    flex-direction: column;
-}
-
-/* --- 4.3 Special Grids --- */
-.grid-2-faq {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.5rem;
-}
+.grid { display: grid; gap: var(--gap-default); }
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.grid-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.grid-4 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
 
 @media (min-width: 768px) {
-  .grid-2-faq {
-    grid-template-columns: repeat(2, 1fr);
-    align-items: flex-start;
-  }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
 }
-
 
 /*
 ==============================================================================
@@ -239,7 +110,6 @@ a:hover {
 ==============================================================================
 */
 
-/* --- 5.1 SVG Shape Dividers --- */
 .section-divider {
     position: absolute;
     left: 0;
@@ -249,14 +119,8 @@ a:hover {
     z-index: 5;
 }
 
-.section-divider--bottom {
-    bottom: -1px;
-}
-
-.section-divider--top {
-    top: -1px;
-    transform: rotate(180deg);
-}
+.section-divider--bottom { bottom: -1px; }
+.section-divider--top { top: -1px; transform: rotate(180deg); }
 
 .section-divider svg {
     position: relative;
@@ -266,101 +130,8 @@ a:hover {
 }
 
 .section-divider .shape-fill {
-    fill: var(--luvex-white, #FFFFFF);
+    fill: var(--luvex-white);
 }
-
-/* --- 5.2 CSS Gradient Transitions (Cleaned up version) --- */
-.diagonal-transition {
-    position: relative;
-}
-
-.diagonal-transition::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 60px; /* Final value */
-    background: linear-gradient(135deg,
-        rgba(255, 255, 255, 0.4) 0%,
-        rgba(255, 255, 255, 0.2) 50%,
-        rgba(255, 255, 255, 0) 100%);
-    transform: skewY(-1.5deg); /* Final value */
-    transform-origin: bottom left;
-    z-index: 10;
-}
-
-.precision-transition {
-    position: relative;
-}
-
-.precision-transition::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg,
-        transparent 0%,
-        var(--luvex-bright-cyan) 20%,
-        #4fb3d9 50%,
-        var(--luvex-bright-cyan) 80%,
-        transparent 100%);
-    z-index: 10;
-}
-
-.precision-transition::before {
-    content: '';
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
-    height: 1px;
-    background: linear-gradient(90deg,
-        transparent 0%,
-        rgba(109, 213, 237, 0.5) 50%,
-        transparent 100%);
-    z-index: 10;
-}
-
-.curved-transition {
-    position: relative;
-}
-
-.curved-transition::before {
-    content: '';
-    position: absolute;
-    top: -1px; /* Overlap to prevent gaps */
-    left: 0;
-    right: 0;
-    height: 80px;
-    background: var(--luvex-dark-blue); /* Must match the section's own background */
-    border-bottom-left-radius: 50% 40px;
-    border-bottom-right-radius: 50% 40px;
-    z-index: 5;
-}
-
-.layered-transition {
-    position: relative;
-    z-index: 1; /* Ensure section is on top of the previous one */
-}
-
-.layered-transition::before {
-    content: '';
-    position: absolute;
-    top: -40px; /* Overlap amount */
-    left: 5%;
-    right: 5%;
-    height: 80px;
-    background: var(--luvex-white); /* Must match the section's own background */
-    border-radius: var(--radius-lg);
-    transform: skewY(-1deg);
-    z-index: -1; /* Sits behind the section's content */
-    box-shadow: 0 -10px 30px rgba(27, 42, 73, 0.07);
-}
-
 
 /*
 ==============================================================================
@@ -368,158 +139,6 @@ a:hover {
 ==============================================================================
 */
 
-/* --- 6.1 Text Utilities --- */
 .text-center { text-align: center; }
-.text-left { text-align: left; }
-.text-right { text-align: right; }
-.text-small { font-size: var(--text-sm); }
-.text-large { font-size: var(--text-lg); }
-.font-bold { font-weight: 600; }
-.font-normal { font-weight: 400; }
-
-/* --- 6.2 Color Utilities --- */
-.text-primary { color: var(--color-primary); }
-.text-secondary { color: var(--color-secondary); }
-.text-muted { color: var(--color-gray); }
-.bg-primary { background: var(--color-primary); }
-.bg-light { background: var(--color-light); }
-
-/* --- 6.3 Spacing Utilities --- */
-.mb-0 { margin-bottom: 0; }
-.mb-1 { margin-bottom: var(--space-sm); }
-.mb-2 { margin-bottom: var(--space-md); }
-.mb-3 { margin-bottom: var(--space-lg); }
-.mt-0 { margin-top: 0; }
-.mt-1 { margin-top: var(--space-sm); }
-.mt-2 { margin-top: var(--space-md); }
-.mt-3 { margin-top: var(--space-lg); }
-.p-1 { padding: var(--space-sm); }
-.p-2 { padding: var(--space-md); }
-.p-3 { padding: var(--space-lg); }
-
-/* --- 6.4 Display Utilities --- */
+.text-highlight { color: var(--luvex-bright-cyan); }
 .hidden { display: none; }
-.block { display: block; }
-.inline-block { display: inline-block; }
-.flex-utility { display: flex; }
-
-
-/*
-==============================================================================
-7. SECTION PATTERNS
-==============================================================================
-*/
-
-/* --- 7.1 Basic Section Patterns --- */
-.section-pattern-1 { background: var(--color-white); color: var(--color-dark); }
-.section-pattern-2 { background: var(--luvex-dark-blue-light); color: var(--luvex-white); }
-.section-pattern-3 { background: var(--color-white); color: var(--color-dark); }
-.section-pattern-4 { background: var(--luvex-dark-blue-medium); color: var(--luvex-white); }
-.section-pattern-5 { background: var(--luvex-dark-blue-dark); color: var(--luvex-white); }
-
-/* --- 7.2 Hero Patterns --- */
-.hero-pattern-primary { background: var(--luvex-dark-blue); color: var(--luvex-white); }
-.hero-pattern-gradient { background: linear-gradient(135deg, var(--luvex-dark-blue) 0%, var(--luvex-dark-blue-medium) 100%); color: var(--luvex-white); }
-
-.hero-pattern-primary,
-.hero-pattern-gradient {
-    position: relative;
-    overflow: hidden;
-}
-
-/* --- 7.3 Glassmorphism Patterns --- */
-.section-pattern-2 .glassmorphism,
-.section-pattern-4 .glassmorphism,
-.section-pattern-5 .glassmorphism,
-.hero-pattern-primary .glassmorphism,
-.hero-pattern-gradient .glassmorphism {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
-
-.section-pattern-1 .glassmorphism,
-.section-pattern-3 .glassmorphism {
-    background: rgba(27, 42, 73, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(27, 42, 73, 0.1);
-    box-shadow: 0 8px 32px rgba(27, 42, 73, 0.1);
-}
-
-/* --- 7.4 Text Highlight Patterns --- */
-.section-pattern-2 .text-highlight,
-.section-pattern-4 .text-highlight,
-.section-pattern-5 .text-highlight,
-.hero-pattern-primary .text-highlight,
-.hero-pattern-gradient .text-highlight {
-    color: var(--luvex-bright-cyan);
-}
-
-.section-pattern-1 .text-highlight,
-.section-pattern-3 .text-highlight {
-    color: var(--luvex-dark-blue);
-}
-
-/* --- 7.5 Background Grid Effects --- */
-.hero-pattern-primary::before,
-.hero-pattern-gradient::before,
-.section-pattern-2::before,
-.section-pattern-4::before,
-.section-pattern-5::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.hero-pattern-primary::before,
-.hero-pattern-gradient::before {
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="hero-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23hero-grid)"/></svg>');
-    opacity: 0.4;
-}
-
-.section-pattern-2::before,
-.section-pattern-4::before,
-.section-pattern-5::before {
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="section-grid" width="80" height="80" patternUnits="userSpaceOnUse"><path d="M 80 0 L 0 0 0 80" fill="none" stroke="rgba(109, 213, 237, 0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23section-grid)"/></svg>');
-    opacity: 0.6;
-}
-
-.section-pattern-2,
-.section-pattern-4,
-.section-pattern-5 {
-    position: relative;
-}
-
-.section-pattern-2 > *,
-.section-pattern-4 > *,
-.section-pattern-5 > *,
-.hero-pattern-primary > *,
-.hero-pattern-gradient > *:not(::before) {
-    position: relative;
-    z-index: 2;
-}
-
-/* --- 7.6 Utility Patterns --- */
-.section-pattern-1,
-.section-pattern-2,
-.section-pattern-3,
-.section-pattern-4,
-.section-pattern-5 {
-    padding: var(--space-xl) 0;
-}
-
-@media (max-width: 768px) {
-    .section-pattern-1,
-    .section-pattern-2,
-    .section-pattern-3,
-    .section-pattern-4,
-    .section-pattern-5 {
-        padding: var(--space-lg) 0;
-    }
-}

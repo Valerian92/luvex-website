@@ -1,36 +1,58 @@
 /*
 ==============================================================================
-LUVEX THEME v2.1 - [DATEINAME]
+LUVEX THEME v3.0 - DESIGN TOKENS (VARIABLES)
 ==============================================================================
-
-Description: [Kurze Beschreibung der Komponente]
-Dependencies: _variables.css
-Last Update: 2025-07-31
-
+Description: Zentrale Definition aller Design-Variablen (Farben, Abstände,
+             Typografie, Effekte etc.) für die gesamte Website.
+Last Update: 2025-08-21
 ==============================================================================
 */
 
-/* ===== [Section 1: DESIGN TOKENS ===== */
-
-/* 1. DESIGN TOKENS ================================================= */
-
 :root {
-    /* Colors */
-    --color-primary: #007BFF;
-    --color-secondary: #6dd5ed;
-    --color-dark: #1d1d1f;
-    --color-gray: #86868b;
-    --color-light: #f5f5f7;
-    --color-white: #ffffff;
-    
-    /* Spacing Scale */
+    /*
+    ==========================================================================
+    1. LUVEX BRAND COLORS
+    ==========================================================================
+    */
+    --luvex-dark-blue: #1B2A49;
+    --luvex-vibrant-blue: #007BFF;
+    --luvex-bright-cyan: #6dd5ed;
+    --luvex-special-cyan: #22d3ee; /* Helleres Cyan für Glow-Effekte */
+
+    /* Dark Blue Variations (für Hintergründe) */
+    --luvex-dark-blue-light: #2A3B5C;
+    --luvex-dark-blue-medium: #1F2F47;
+    --luvex-dark-blue-dark: #151F35;
+
+    /*
+    ==========================================================================
+    2. NEUTRAL & SYSTEM COLORS
+    ==========================================================================
+    */
+    --luvex-white: #ffffff;
+    --luvex-gray-100: #f8f9fa;
+    --luvex-gray-200: #e9ecef;
+    --luvex-gray-300: #dee2e6;
+    --luvex-gray-700: #495057;
+    --luvex-gray-900: #212529;
+    --luvex-accent-blue: #0066cc; /* Für sekundäre Aktionen */
+
+    /*
+    ==========================================================================
+    3. SPACING SCALE (Abstände)
+    ==========================================================================
+    */
     --space-xs: 0.5rem;    /* 8px */
     --space-sm: 1rem;      /* 16px */
     --space-md: 2rem;      /* 32px */
     --space-lg: 4rem;      /* 64px */
     --space-xl: 6rem;      /* 96px */
-    
-    /* Typography Scale */
+
+    /*
+    ==========================================================================
+    4. TYPOGRAPHY SCALE (Schriftgrößen)
+    ==========================================================================
+    */
     --text-xs: 0.75rem;    /* 12px */
     --text-sm: 0.875rem;   /* 14px */
     --text-base: 1rem;     /* 16px */
@@ -39,50 +61,42 @@ Last Update: 2025-07-31
     --text-2xl: 1.5rem;    /* 24px */
     --text-3xl: 2rem;      /* 32px */
     --text-4xl: 2.5rem;    /* 40px */
-    
-    /* Layout */
-    --container-max: 1800px;
+
+    /*
+    ==========================================================================
+    5. LAYOUT & GRID
+    ==========================================================================
+    */
+    --container-max-width: 1600px; /* Standardbreite für .container */
     --gap-default: var(--space-md);
     --gap-large: var(--space-lg);
-    
+
+    /*
+    ==========================================================================
+    6. EFFECTS & TRANSITIONS
+    ==========================================================================
+    */
     /* Shadows */
     --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
     --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
     --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
-    
-    /* Border Radius */
+
+    /* Glow Effect */
+    --luvex-glow-shadow: 0 0 8px rgba(34, 211, 238, 0.5), 0 0 20px rgba(34, 211, 238, 0.3);
+
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+
+    /*
+    ==========================================================================
+    7. BORDERS & RADII
+    ==========================================================================
+    */
     --radius-sm: 4px;
     --radius-md: 8px;
     --radius-lg: 16px;
     --radius-xl: 24px;
     --radius-full: 50px;
-    
-    /* Transitions */
-    --transition-fast: 0.15s ease;
-    --transition-normal: 0.3s ease;
-    --transition-slow: 0.5s ease;
 }
-
-
-/* --- 4.1 LUVEX BRAND TOKENS --- */
-:root {
-    /* LUVEX Brand Colors */
-    --luvex-dark-blue: #1B2A49;
-    --luvex-vibrant-blue: #007BFF; 
-    --luvex-bright-cyan: #6dd5ed;
-    --luvex-white: #ffffff;
-    --luvex-gray-100: #f8f9fa;
-    --luvex-gray-200: #e9ecef;
-    --luvex-gray-300: #dee2e6;
-    --luvex-gray-700: #495057;
-    --luvex-gray-900: #212529;
-    --luvex-accent-blue: #0066cc;
-            /* Dark Blue Variations für Section-Pattern */
-        --luvex-dark-blue-light: #2A3B5C;  /* Heller für alternierende Sections */
-        --luvex-dark-blue-dark: #151F35;   /* Dunkler für alternierende Sections */
-        --luvex-dark-blue-medium: #1F2F47; /* Zwischenton */
-    }
-
-
-
-/* ===== END [Section 1: DESIGN TOKENS] ===== */
