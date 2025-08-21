@@ -57,20 +57,17 @@ get_header(); ?>
         </div>
 
         <div class="showcase-container">
-            <!-- Animation Panel mit integrierter Navigation -->
+            <!-- Animation Panel -->
             <div class="animation-panel">
-                <!-- Navigation: Pfeile oben -->
-                <div class="navigation-arrows">
-                    <button class="nav-arrow" id="prev-btn" aria-label="Previous step">‹</button>
-                    <button class="nav-arrow" id="next-btn" aria-label="Next step">›</button>
+                <div class="navigation-controls">
+                    <div class="navigation-arrows">
+                        <button class="nav-arrow" id="prev-btn" aria-label="Previous step">‹</button>
+                        <button class="nav-arrow" id="next-btn" aria-label="Next step">›</button>
+                    </div>
+                    <div class="step-indicators" id="step-indicators">
+                        <!-- Wird per JavaScript generiert -->
+                    </div>
                 </div>
-                
-                <!-- Navigation: Nummern -->
-                <div class="step-indicators" id="step-indicators">
-                    <!-- Wird per JavaScript generiert -->
-                </div>
-                
-                <!-- Animation Display -->
                 <div class="animation-display">
                     <div class="animation-content">
                         <div class="animation-visual" id="curing-animation-visual">
@@ -80,36 +77,36 @@ get_header(); ?>
                 </div>
             </div>
 
-            <!-- Control Panel für Text-Content -->
+            <!-- Control Panel für Text-Content (jetzt daneben) -->
             <div class="control-panel">
                 <div class="step-content active" data-step="1">
                     <h3>1. Liquid Application</h3>
-                    <p>UV-reactive liquid (ink, coating, or adhesive) is precisely applied to substrate. Contains ~1.5% photoinitiators that remain inactive until UV exposure.</p>
+                    <p>UV-reactive liquid (ink, coating, or adhesive) is precisely applied to a substrate. It contains photoinitiators that remain inactive until exposed to UV light.</p>
                 </div>
 
                 <div class="step-content" data-step="2">
                     <h3>2. UV Irradiation</h3>
-                    <p>High-intensity UV light irradiates the liquid coating. Wavelength must match photoinitiator absorption spectrum for optimal efficiency and complete cure.</p>
+                    <p>High-intensity UV light irradiates the liquid coating. The specific wavelength must match the photoinitiator's absorption spectrum for an efficient and complete cure.</p>
                 </div>
 
                 <div class="step-content" data-step="3">
-                    <h3>3. Wavelength-Dependent Activation</h3>
-                    <p>Different wavelengths penetrate to different depths. 365nm activates surface photoinitiators strongly but has limited penetration. 405nm reaches deeper layers but with reduced intensity.</p>
+                    <h3>3. Photoinitiator Activation</h3>
+                    <p>Upon absorbing UV energy, photoinitiators split into highly reactive free radicals. This crucial step initiates the polymerization chain reaction.</p>
                 </div>
 
                 <div class="step-content" data-step="4">
                     <h3>4. Polymer Network Formation</h3>
-                    <p>Activated radicals trigger rapid polymerization. Polymer chains grow organically in random directions, forming crosslinked network structures that create the final material properties.</p>
+                    <p>The free radicals trigger rapid cross-linking of monomers and oligomers, forming a solid, durable polymer network in a fraction of a second.</p>
                 </div>
 
                 <div class="step-content" data-step="5">
                     <h3>5. Post-Cure Development</h3>
-                    <p>Initial cure is instant, but molecular crosslinking continues over time. Hardness, tackiness and adhesion develop gradually to optimal values.</p>
+                    <p>While the initial cure is instant, the material's final properties like hardness, chemical resistance, and adhesion continue to develop and optimize over time.</p>
                 </div>
 
                 <div class="step-content" data-step="6">
-                    <h3>6. UV-Substrate Benefits</h3>
-                    <p>UV-reactive substrates enable: on-demand curing, customized mechanical properties, biocompatibility for medical devices, and precise process control.</p>
+                    <h3>6. Final Cured State</h3>
+                    <p>The result is a fully cured, high-performance material with superior properties, achieved with minimal energy consumption and zero VOC emissions.</p>
                     <ul class="benefits-list">
                         <li><strong>Instant curing</strong> – seconds instead of hours</li>
                         <li><strong>Energy efficient</strong> – no heat required</li>
@@ -132,39 +129,35 @@ get_header(); ?>
      ========================================================================== -->
 
 <!-- Rest der Seite bleibt unverändert -->
-<!-- ==========================================================================
-     START: UV Curing Benefits Summary
-     ========================================================================== -->
-<section class="section benefits-section">
-    <div class="container">
-        <h2 class="text-center">Why Choose UV Curing?</h2>
-        <div class="grid-4">
-            <div class="benefit-card">
-                <div class="benefit-icon">⚡</div>
-                <h3>Instant Speed</h3>
-                <p>Cure times measured in seconds, not hours. Dramatically increase production throughput.</p>
-            </div>
-            <div class="benefit-card">
-                <div class="benefit-icon">🌱</div>
-                <h3>Eco-Friendly</h3>
-                <p>Solvent-free formulations with zero volatile organic compounds (VOCs). Sustainable production.</p>
-            </div>
-            <div class="benefit-card">
-                <div class="benefit-icon">💪</div>
-                <h3>Superior Properties</h3>
-                <p>Enhanced hardness, chemical resistance, and adhesion compared to thermal curing.</p>
-            </div>
-            <div class="benefit-card">
-                <div class="benefit-icon">💡</div>
-                <h3>Energy Efficient</h3>
-                <p>Lower energy consumption than oven curing. Reduced operational costs and carbon footprint.</p>
+<main>
+    <section class="section benefits-section">
+        <div class="container">
+            <h2 class="text-center">Why Choose UV Curing?</h2>
+            <div class="grid-4">
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚡</div>
+                    <h3>Instant Speed</h3>
+                    <p>Cure times measured in seconds, not hours. Dramatically increase production throughput.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🌱</div>
+                    <h3>Eco-Friendly</h3>
+                    <p>Solvent-free formulations with zero volatile organic compounds (VOCs). Sustainable production.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💪</div>
+                    <h3>Superior Properties</h3>
+                    <p>Enhanced hardness, chemical resistance, and adhesion compared to thermal curing.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💡</div>
+                    <h3>Energy Efficient</h3>
+                    <p>Lower energy consumption than oven curing. Reduced operational costs and carbon footprint.</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Weitere Sektionen... -->
-<main>
     <!-- Coatings Applications -->
     <section id="applications-coatings" class="section applications-section precision-transition">
         <div class="container">
