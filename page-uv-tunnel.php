@@ -39,15 +39,6 @@ get_header(); ?>
             Professional <span class="uv-highlight">UV-Tunnel</span> Systems
         </h1>
         
-        <p class="luvex-hero__subtitle">
-            Customized UV disinfection and curing solutions for industrial applications
-        </p>
-        
-        <p class="luvex-hero__description">
-            From technical consultation to turnkey installation - we develop UV-tunnel systems 
-            according to your specific requirements for optimal disinfection performance and productivity.
-        </p>
-        
         <div class="luvex-hero__cta-container">
             <a href="#consultation" class="luvex-hero__cta">
                 <i class="fa-solid fa-handshake"></i>
@@ -58,6 +49,15 @@ get_header(); ?>
                 <span>View Solutions</span>
             </a>
         </div>
+        
+        <p class="luvex-hero__subtitle">
+            Customized UV disinfection and curing solutions for industrial applications
+        </p>
+        
+        <p class="luvex-hero__description">
+            From technical consultation to turnkey installation - we develop UV-tunnel systems 
+            according to your specific requirements for optimal disinfection performance and productivity.
+        </p>
     </div>
     
     <!-- Professional Features Preview -->
