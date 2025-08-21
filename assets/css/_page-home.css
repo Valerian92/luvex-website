@@ -1,13 +1,15 @@
 /*
 ==============================================================================
-LUVEX THEME v3.4 - HOMEPAGE (BEREINIGT)
+LUVEX THEME v3.4 - HOMEPAGE (BEREINIGT & SPEZIFISCH)
 ==============================================================================
-Description: Saubere Homepage-Styles ohne !important Überladung
-Last Update: 2025-08-19
+Description: Nur Homepage-spezifische Styles. Wiederverwendbare Komponenten
+             wurden nach _components.css verschoben.
+Dependencies: _variables.css, _core.css, _components.css
+Last Update: 2025-08-21
 ==============================================================================
 */
 
-/* --- 1. Hero Section Specifics --- */
+/* --- 1. Hero Section Homepage-Specifics --- */
 .home .luvex-hero__cta-container {
     flex-direction: column;
     align-items: center;
@@ -18,70 +20,7 @@ Last Update: 2025-08-19
     color: var(--luvex-bright-cyan);
 }
 
-/* --- 2. Knowledge Navigator Section --- */
-.knowledge-navigator-header { 
-    text-align: center; 
-    margin-bottom: 4rem; 
-}
-
-.knowledge-navigator-intro { 
-    max-width: 650px; 
-    margin: 1rem auto 0; 
-    color: var(--luvex-gray-700); 
-    font-size: 1.125rem; 
-}
-
-.knowledge-card {
-    text-align: left;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
-}
-
-.knowledge-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-}
-
-.knowledge-card__header { 
-    display: flex; 
-    align-items: center; 
-    gap: 1.5rem; 
-    margin-bottom: 1.5rem;
-    justify-content: center;
-}
-
-.knowledge-card .card__icon {
-    margin: 0;
-    font-size: 2.2rem;
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, #e7f1ff, #f0f8ff);
-    color: var(--luvex-vibrant-blue);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.knowledge-card .card__title { 
-    margin-bottom: 0; 
-    font-size: 1.5rem; 
-    text-align: left; 
-}
-
-.knowledge-card .card__content {
-    text-align: left;
-    flex-grow: 1;
-    margin-bottom: 1.5rem;
-}
-
-.knowledge-card .btn {
-    margin-top: auto;
-    align-self: center;
-}
-
-/* --- 3. UV Simulator Showcase --- */
+/* --- 2. UV Simulator Showcase (Homepage-spezifisch) --- */
 .uv-simulator-showcase { 
     background: linear-gradient(135deg, var(--luvex-dark-blue), var(--luvex-accent-blue)); 
     border-radius: var(--radius-xl); 
@@ -107,56 +46,17 @@ Last Update: 2025-08-19
     margin-right: auto; 
 }
 
-.simulator-features { 
-    margin: 3rem auto; 
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 2rem; 
-    max-width: 900px; 
-}
-
-.simulator-feature { 
-    padding: 1.5rem; 
-    background: rgba(255, 255, 255, 0.05); 
-    border-radius: var(--radius-md); 
-    transition: all 0.3s ease; 
-}
-
-.simulator-feature:hover { 
-    background: rgba(255, 255, 255, 0.1); 
-    transform: translateY(-4px); 
-}
-
-.simulator-feature:hover h4 { 
-    color: var(--luvex-bright-cyan); 
-}
-
-.simulator-feature:hover p { 
-    color: var(--luvex-white); 
-}
-
-.simulator-feature i { 
-    font-size: 2.5rem; 
-    margin-bottom: 1rem; 
-    color: var(--luvex-bright-cyan); 
-}
-
-.simulator-feature h4 { 
-    color: var(--luvex-white); 
-    margin-bottom: 0.5rem; 
-    transition: color 0.3s ease; 
-}
-
-.simulator-feature p { 
-    color: var(--luvex-text-muted-dark); 
-    transition: color 0.3s ease; 
+/* Override für Simulator Features (nutzt generisches Feature Grid) */
+.uv-simulator-showcase .feature-grid {
+    margin: 3rem auto;
+    max-width: 900px;
 }
 
 .simulator-cta { 
     margin-top: 2rem; 
 }
 
-/* --- 4. Global UV Expert Community Section --- */
+/* --- 3. Global UV Expert Community Section (Homepage-spezifisch) --- */
 .homepage-community-section.section {
     overflow: hidden;
 }
@@ -225,7 +125,7 @@ Last Update: 2025-08-19
     flex-wrap: wrap; 
 }
 
-/* --- 5. Evidence-Based Expertise Section --- */
+/* --- 4. Evidence-Based Expertise Section (Homepage-spezifisch) --- */
 .evidence-section.section {
     overflow: visible;
 }
@@ -259,94 +159,15 @@ Last Update: 2025-08-19
     overflow: visible;
 }
 
+/* Team Member Override für Evidence Section */
 .evidence-section .team-member--light {
-    background: var(--luvex-gray-100);
-    color: var(--luvex-dark-blue);
-    box-shadow: var(--shadow-lg);
-    border: 1px solid var(--luvex-gray-200);
-    padding: 2.5rem;
-    padding-top: 4.5rem;
-    margin-top: 0;
-    position: relative;
-    text-align: center;
-    overflow: visible;
-    opacity: 1;
-    display: block;
-    visibility: visible;
-    z-index: 10;
-    transform: none;
-}
-
-.evidence-section .team-member--light .team-member__photo {
-    position: absolute;
-    top: -4rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 4px solid var(--luvex-white);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    overflow: hidden;
-    z-index: 15;
-    opacity: 1;
-    display: block;
-    visibility: visible;
-}
-
-.evidence-section .team-member--light .team-member__photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    opacity: 1;
-}
-
-.evidence-section .team-member--light .team-member__content h3,
-.evidence-section .team-member--light .team-member__quote p { 
-    color: var(--luvex-dark-blue);
-    opacity: 1;
-}
-
-.evidence-section .team-member--light .team-member__role { 
-    color: var(--luvex-vibrant-blue);
-    opacity: 1;
-}
-
-.evidence-section .team-member--light .team-member__content h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-}
-
-.evidence-section .team-member--light .team-member__role {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.evidence-section .team-member--light .team-member__quote p {
-    font-style: italic;
-    line-height: 1.6;
-    font-size: 0.95rem;
-    margin: 0;
-}
-
-/* --- 6. Final CTA Section --- */
-.section--final-cta { 
-    background: linear-gradient(135deg, var(--luvex-accent-blue) 0%, var(--luvex-dark-blue) 100%); 
-    color: var(--luvex-white); 
-}
-
-.section--final-cta .cta-section--dark { 
-    background: transparent; 
-    box-shadow: none; 
-    border: none; 
-    max-width: 900px; 
+    /* Nutzt die generische .team-member--light aus _components.css */
+    /* Nur spezifische Anpassungen hier */
 }
 
 /*
 ==============================================================================
-HOMEPAGE HERO PYRAMIDEN-LAYOUT (BEREINIGT)
+HOMEPAGE HERO PYRAMIDEN-LAYOUT (SPEZIFISCH)
 ==============================================================================
 */
 
@@ -453,7 +274,7 @@ HOMEPAGE HERO PYRAMIDEN-LAYOUT (BEREINIGT)
     order: 4;
 }
 
-/* Button-Hierarchie */
+/* Button-Hierarchie (nutzt generische Buttons aus _components.css) */
 .luvex-hero .luvex-cta-primary {
     padding: 1.25rem 2.5rem; /* Größer */
     font-size: 1.125rem;
@@ -486,13 +307,9 @@ HOMEPAGE HERO PYRAMIDEN-LAYOUT (BEREINIGT)
     transform: scale(1.05);
 }
 
-
-
-
-
 /*
 ==============================================================================
-RESPONSIVE DESIGN
+RESPONSIVE DESIGN (Homepage-spezifisch)
 ==============================================================================
 */
 
@@ -538,10 +355,6 @@ RESPONSIVE DESIGN
 }
 
 @media (max-width: 768px) {
-    .simulator-features { 
-        grid-template-columns: repeat(2, 1fr); 
-    }
-    
     .evidence-section { 
         padding-top: 6rem; 
     }
@@ -553,35 +366,27 @@ RESPONSIVE DESIGN
     }
     
     /* Hero Responsive */
-    .home .luvex-hero__description {
-        max-width: 95%;
-        font-size: 1.3rem;
-        margin-bottom: 3rem;
-    }
-    
     .home .luvex-hero__subtitle {
-        max-width: 90%;
-        font-size: 1.7rem;
-        margin-bottom: 2.5rem;
+        max-width: 95%;
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
     }
     
     .home .luvex-hero__title {
-        max-width: 85%;
-        font-size: 2.3rem;
+        max-width: 90%;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .home .luvex-hero__description {
+        max-width: 95%;
+        font-size: 1.125rem;
+        margin-bottom: 3rem;
     }
 }
 
 @media (max-width: 480px) {
-    .simulator-features { 
-        grid-template-columns: 1fr; 
-    }
-    
     /* Hero Mobile */
-    .home .luvex-hero__description {
-        max-width: 98%;
-        font-size: 1.1rem;
-    }
-    
     .home .luvex-hero__subtitle {
         max-width: 95%;
         font-size: 1.5rem;
@@ -590,5 +395,10 @@ RESPONSIVE DESIGN
     .home .luvex-hero__title {
         max-width: 90%;
         font-size: 2rem;
+    }
+    
+    .home .luvex-hero__description {
+        max-width: 98%;
+        font-size: 1.1rem;
     }
 }

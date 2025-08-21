@@ -1,9 +1,9 @@
 /*
 ==============================================================================
-LUVEX THEME v3.0 - UI COMPONENTS
+LUVEX THEME v3.0 - UI COMPONENTS (ERWEITERT)
 ==============================================================================
 Description: Enthält alle wiederverwendbaren UI-Komponenten wie Buttons,
-             Cards, Forms und den generischen Hero-Aufbau.
+             Cards, Forms, Hero-System, Knowledge Navigator, Team Members, etc.
 Dependencies: _variables.css, _core.css
 Last Update: 2025-08-21
 ==============================================================================
@@ -128,12 +128,56 @@ Last Update: 2025-08-21
     box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
 }
 
+/* --- 2.3 Generic CTA Buttons --- */
+.luvex-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    padding: 1.25rem 2.5rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    border-radius: 50px;
+    background: var(--luvex-bright-cyan);
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.luvex-cta-primary:hover {
+    background: #0891b2; /* cyan-600 */
+    transform: scale(1.05);
+}
+
+.luvex-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    border: 2px solid var(--luvex-bright-cyan);
+    background: transparent;
+    color: var(--luvex-bright-cyan);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.luvex-cta-secondary:hover {
+    background: var(--luvex-bright-cyan);
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
 /*
 ==============================================================================
-3. CARDS
+3. CARDS & CARD SYSTEMS
 ==============================================================================
 */
 
+/* --- 3.1 Basic Value Cards --- */
 .value-card {
     background: var(--luvex-white);
     border-radius: var(--radius-lg);
@@ -170,9 +214,273 @@ Last Update: 2025-08-21
     margin: 0;
 }
 
+/* --- 3.2 Knowledge Navigator Cards --- */
+.knowledge-navigator-header { 
+    text-align: center; 
+    margin-bottom: 4rem; 
+}
+
+.knowledge-navigator-intro { 
+    max-width: 650px; 
+    margin: 1rem auto 0; 
+    color: var(--luvex-gray-700); 
+    font-size: 1.125rem; 
+}
+
+.knowledge-card {
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.knowledge-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.knowledge-card__header { 
+    display: flex; 
+    align-items: center; 
+    gap: 1.5rem; 
+    margin-bottom: 1.5rem;
+    justify-content: center;
+}
+
+.knowledge-card .card__icon {
+    margin: 0;
+    font-size: 2.2rem;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #e7f1ff, #f0f8ff);
+    color: var(--luvex-vibrant-blue);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.knowledge-card .card__title { 
+    margin-bottom: 0; 
+    font-size: 1.5rem; 
+    text-align: left; 
+}
+
+.knowledge-card .card__content {
+    text-align: left;
+    flex-grow: 1;
+    margin-bottom: 1.5rem;
+}
+
+.knowledge-card .btn {
+    margin-top: auto;
+    align-self: center;
+}
+
+/* --- 3.3 Team Member Cards --- */
+.team-member--light {
+    background: var(--luvex-gray-100);
+    color: var(--luvex-dark-blue);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--luvex-gray-200);
+    padding: 2.5rem;
+    padding-top: 4.5rem;
+    margin-top: 0;
+    position: relative;
+    text-align: center;
+    overflow: visible;
+    opacity: 1;
+    display: block;
+    visibility: visible;
+    z-index: 10;
+    transform: none;
+}
+
+.team-member--light .team-member__photo {
+    position: absolute;
+    top: -4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid var(--luvex-white);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    z-index: 15;
+    opacity: 1;
+    display: block;
+    visibility: visible;
+}
+
+.team-member--light .team-member__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 1;
+}
+
+.team-member--light .team-member__content h3,
+.team-member--light .team-member__quote p { 
+    color: var(--luvex-dark-blue);
+    opacity: 1;
+}
+
+.team-member--light .team-member__role { 
+    color: var(--luvex-vibrant-blue);
+    opacity: 1;
+}
+
+.team-member--light .team-member__content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.team-member--light .team-member__role {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.team-member--light .team-member__quote p {
+    font-style: italic;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
 /*
 ==============================================================================
-4. FORMS
+4. FEATURE GRID SYSTEM (Wiederverwendbar)
+==============================================================================
+*/
+
+.feature-grid { 
+    margin: 3rem auto; 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 2rem; 
+    max-width: 900px; 
+}
+
+.feature-item { 
+    padding: 1.5rem; 
+    background: rgba(255, 255, 255, 0.05); 
+    border-radius: var(--radius-md); 
+    transition: all 0.3s ease; 
+    text-align: center;
+}
+
+.feature-item:hover { 
+    background: rgba(255, 255, 255, 0.1); 
+    transform: translateY(-4px); 
+}
+
+.feature-item:hover h4 { 
+    color: var(--luvex-bright-cyan); 
+}
+
+.feature-item:hover p { 
+    color: var(--luvex-white); 
+}
+
+.feature-item i { 
+    font-size: 2.5rem; 
+    margin-bottom: 1rem; 
+    color: var(--luvex-bright-cyan); 
+}
+
+.feature-item h4 { 
+    color: var(--luvex-white); 
+    margin-bottom: 0.5rem; 
+    transition: color 0.3s ease; 
+}
+
+.feature-item p { 
+    color: var(--luvex-text-muted-dark); 
+    transition: color 0.3s ease; 
+}
+
+/* Responsive Feature Grid */
+@media (max-width: 768px) {
+    .feature-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+@media (max-width: 480px) {
+    .feature-grid { 
+        grid-template-columns: 1fr; 
+    }
+}
+
+/*
+==============================================================================
+5. CTA SECTIONS
+==============================================================================
+*/
+
+.section--final-cta { 
+    background: linear-gradient(135deg, var(--luvex-accent-blue) 0%, var(--luvex-dark-blue) 100%); 
+    color: var(--luvex-white); 
+}
+
+.cta-section--dark { 
+    background: transparent; 
+    box-shadow: none; 
+    border: none; 
+    max-width: 900px; 
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+.cta-section--dark h3 {
+    color: var(--luvex-white);
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.cta-section--dark p {
+    color: var(--luvex-gray-300);
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    padding: 1rem 2rem;
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-normal);
+    font-size: var(--text-base);
+}
+
+.cta-button:hover {
+    background: var(--luvex-white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
+}
+
+/*
+==============================================================================
+6. FORMS
 ==============================================================================
 */
 
@@ -217,11 +525,11 @@ Last Update: 2025-08-21
 
 /*
 ==============================================================================
-5. MISC COMPONENTS
+7. MISC COMPONENTS
 ==============================================================================
 */
 
-/* --- 5.1 Scroll-to-Top Button --- */
+/* --- 7.1 Scroll-to-Top Button --- */
 #scrollToTopBtn {
     display: none;
     position: fixed;
