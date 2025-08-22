@@ -87,8 +87,8 @@ Last Update: 2025-08-21
     justify-content: center;
     gap: var(--space-xs);
     padding: 16px 32px;
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
+    background: linear-gradient(135deg, var(--luvex-vibrant-blue), var(--luvex-bright-cyan)); /* ← Lila-Cyan Gradient */
+    color: var(--luvex-white); /* ← Weiße Schrift */
     border-radius: var(--radius-full);
     text-decoration: none;
     font-weight: 600;
@@ -98,10 +98,10 @@ Last Update: 2025-08-21
 }
 
 .luvex-hero__cta:hover {
-    background: var(--luvex-white);
-    color: var(--luvex-dark-blue);
+    background: linear-gradient(135deg, #5a67d8, var(--luvex-vibrant-blue)); /* ← Dunklerer Lila-Gradient */
+    color: var(--luvex-white);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 25px rgba(90, 103, 216, 0.4); /* ← Lila Shadow */
 }
 
 /* --- 2.2 Secondary Hero CTA Button --- */
