@@ -359,10 +359,10 @@ Last Update: 2025-08-21
     align-self: center;
 }
 
-/* Card-Hover: Türkis wie Button-Rand */
+/* Card-Hover: Neue dunkle Cyan-Variable */
 .knowledge-card:hover .btn--knowledge {
     border-color: var(--luvex-bright-cyan);
-    color: var(--luvex-special-cyan); /* ← Türkis statt Vibrant Blue */
+    color: var(--luvex-cyan-dark); /* ← Neue Variable verwenden */
     font-weight: 600;
 }
 
