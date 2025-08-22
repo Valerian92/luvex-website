@@ -362,7 +362,7 @@ Last Update: 2025-08-21
 /* Card-Hover: Türkis wie Button-Rand */
 .knowledge-card:hover .btn--knowledge {
     border-color: var(--luvex-bright-cyan);
-    color: var(--luvex-bright-cyan); /* ← Türkis statt Vibrant Blue */
+    color: var(--luvex-special-cyan); /* ← Türkis statt Vibrant Blue */
     font-weight: 600;
 }
 
