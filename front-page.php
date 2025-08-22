@@ -20,7 +20,7 @@ get_header(); ?>
             
             <!-- 2. Title (Mitte - Haupttitel mit Glow) -->
             <h1 class="luvex-hero__title">
-                <span class="title-line-1">Excellence through Engineering.</span><br>
+                <span class="title-line-1">Excellence through Independence.</span><br>
                 <span class="title-line-2">Precision through <span class="text-highlight">Light</span>.</span>
             </h1>
             
