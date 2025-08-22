@@ -256,7 +256,7 @@ Dependencies: animations.css, _variables.css, _layout.css
     background: var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
     padding: 0.8rem 1.5rem;
-    border-radius: var(--radius-lg);
+    /*border-radius: var(--radius-lg);*/
     font-weight: 600;
     font-size: 0.95rem;
     text-decoration: none;
@@ -484,7 +484,7 @@ Dependencies: animations.css, _variables.css, _layout.css
     background: var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
     padding: 1rem 2rem;
-    border-radius: var(--radius-lg);
+    /*border-radius: var(--radius-lg);*/
     font-weight: 600;
     font-size: 1.1rem;
     text-decoration: none;

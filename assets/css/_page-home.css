@@ -13,7 +13,7 @@ Last Update: 2025-08-21
 .home .luvex-hero__cta-container {
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 2.5rem;
 }
 
 .home .luvex-hero__cta.luvex-cta-primary:hover {
@@ -274,24 +274,6 @@ HOMEPAGE HERO PYRAMIDEN-LAYOUT (SPEZIFISCH)
     order: 4;
 }
 
-/* Button-Hierarchie (nutzt generische Buttons aus _components.css) */
-/*
-.luvex-hero .luvex-cta-secondary {
-    padding: 1rem 2rem; /* Kleiner 
-    font-size: 1rem;
-    font-weight: 700;
-    border-radius: 50px;
-    border: 2px solid var(--luvex-bright-cyan);
-    background: transparent;
-    color: var(--luvex-bright-cyan);
-    transition: all 0.3s ease;
-}
-
-.luvex-hero .luvex-cta-secondary:hover {
-    background: var(--luvex-bright-cyan);
-    color: #ffffff;
-    transform: scale(1.05);
-}
 
 /*
 ==============================================================================
