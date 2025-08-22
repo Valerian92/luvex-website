@@ -334,8 +334,18 @@ Last Update: 2025-08-21
 
 .knowledge-card .btn {
     margin-top: auto;
-    align-self: flex-start; /* ← Links ausgerichtet */
+    align-self: center; /* ← Links ausgerichtet */
 }
+
+/* Button-Hover in Knowledge Cards */
+.knowledge-card .btn--outline:hover {
+    background-color: var(--luvex-bright-cyan); /* ← Cyan statt Blau */
+    border-color: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue); /* ← Dunkler Text auf hellem Grund */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3); /* ← Cyan Shadow */
+}
+
 
 /* --- 3.3 Team Member Cards --- */
 .team-member--light {
@@ -633,54 +643,39 @@ Last Update: 2025-08-21
 ==============================================================================
 */
 
-/* --- 6.1 Shine/Shiver Effect --- */
+/* --- 6.1 Shine/Shiver Effect (Improved) --- */
 .has-shine-effect {
     position: relative;
     overflow: hidden !important;
-    isolation: isolate; /* Verhindert z-index Probleme */
+    isolation: isolate;
 }
 
 .has-shine-effect::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: -150%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(90deg, 
+    top: -50%;
+    left: -100%;
+    width: 30%; /* ← Schmaler */
+    height: 200%; /* ← Höher für schrägen Effekt */
+    background: linear-gradient(45deg, /* ← Schräg! */
         transparent 0%, 
-        rgba(109, 213, 237, 0.1) 40%,
-        rgba(109, 213, 237, 0.15) 50%,
-        rgba(109, 213, 237, 0.1) 60%,
+        rgba(109, 213, 237, 0.06) 45%, /* ← Dezenter */
+        rgba(109, 213, 237, 0.12) 50%,
+        rgba(109, 213, 237, 0.06) 55%,
         transparent 100%
     );
     z-index: 1;
     pointer-events: none;
     transition: none;
+    transform: rotate(25deg); /* ← Schräger Winkel */
 }
 
 .has-shine-effect:hover::before {
-    left: 150%;
-    transition: left 0.8s ease-in-out;
+    left: 120%; /* ← Schneller durchlauf */
+    transition: left 0.5s ease-out; /* ← Schneller: 0.8s → 0.5s */
 }
 
 .has-shine-effect > * {
     position: relative;
     z-index: 2;
-}
-
-/* --- 6.2 Glow Effect --- */
-.has-glow-effect:hover {
-    box-shadow: var(--luvex-glow-shadow);
-    transition: box-shadow 0.3s ease;
-}
-
-/* --- 6.3 Lift Effect --- */
-.has-lift-effect {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.has-lift-effect:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
 }
