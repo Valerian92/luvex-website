@@ -193,8 +193,8 @@ Last Update: 2025-08-21
 /* --- 1.3 Outline Button (Fehlend) --- */
 .btn--outline {
     background-color: transparent;
-    border: 2px solid var(--luvex-vibrant-blue);
-    color: var(--luvex-vibrant-blue);
+    border: 2px solid var(--luvex-bright-cyan); /* ← Cyan statt Blau */
+    color: var(--luvex-bright-cyan); /* ← Cyan Text */
     padding: 12px 24px;
     border-radius: var(--radius-full);
     font-weight: 600;
@@ -206,14 +206,14 @@ Last Update: 2025-08-21
     gap: var(--space-xs);
 }
 
-.btn--outline:hover {
-    background-color: var(--luvex-vibrant-blue);
-    border-color: var(--luvex-vibrant-blue);
-    color: var(--luvex-white);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
-}
 
+.btn--outline:hover {
+    background-color: var(--luvex-bright-cyan);
+    border-color: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue); /* ← Dunkler Text auf hellem Grund */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3); /* ← Cyan Glow */
+}
 
 
 /*
@@ -313,7 +313,15 @@ Last Update: 2025-08-21
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    transition: var(--transition-normal);
 }
+
+.knowledge-card:hover .card__icon {
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    transform: scale(1.05);
+}
+
 
 .knowledge-card .card__title { 
     margin-bottom: 0; 
