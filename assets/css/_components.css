@@ -359,10 +359,10 @@ Last Update: 2025-08-21
     align-self: center;
 }
 
-/* Button beim Card-Hover (wie aktueller Card-Hover) */
+/* Card-Hover: Prägnanter aber nicht zu stark */
 .knowledge-card:hover .btn--knowledge {
     border-color: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
+    color: var(--luvex-vibrant-blue);
     font-weight: 600;
 }
 

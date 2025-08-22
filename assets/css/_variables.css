@@ -33,9 +33,10 @@ Last Update: 2025-08-21
     --luvex-gray-100: #f8f9fa;
     --luvex-gray-200: #e9ecef;
     --luvex-gray-300: #dee2e6;
+    --luvex-gray-500: #6c757d; /* ← HINZUFÜGEN */
     --luvex-gray-700: #495057;
     --luvex-gray-900: #212529;
-    --luvex-accent-blue: #0066cc; /* Für sekundäre Aktionen */
+    --luvex-accent-blue: #0066cc;
 
     /*
     ==========================================================================
