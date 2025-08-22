@@ -59,7 +59,7 @@ get_header(); ?>
                     <h3 class="card__title">UV Fundamentals</h3>
                 </div>
                 <p class="card__content">Master the core physics and engineering principles behind UV technology. We cover everything from the wavelength spectrum and its effects to critical dose calculations and international safety standards.</p>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--outline">Explore UV Science</a>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn--knowledge">Explore UV Science</a>
             </div>
             <div class="card knowledge-card has-shine-effect">
                 <div class="knowledge-card__header">
@@ -67,7 +67,7 @@ get_header(); ?>
                     <h3 class="card__title">Technology Platforms</h3>
                 </div>
                 <p class="card__content">Get an objective, data-driven comparison between conventional mercury lamps and cutting-edge LED UV systems. We analyze performance, efficiency, and operational costs to guide your selection.</p>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--outline">Compare Technologies</a>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn--knowledge">Compare Technologies</a>
             </div>
             <div class="card knowledge-card has-shine-effect">
                 <div class="knowledge-card__header">
@@ -75,7 +75,7 @@ get_header(); ?>
                     <h3 class="card__title">Applications Hub</h3>
                 </div>
                 <p class="card__content">Discover a wide range of proven UV solutions across various industries. Explore detailed case studies for water treatment, air purification, surface sterilization, and advanced material curing.</p>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn btn--outline">Explore Applications</a>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-knowledge' ) ) ); ?>" class="btn--knowledge">Explore Applications</a>
             </div>
         </div>
     </div>
