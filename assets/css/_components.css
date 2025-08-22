@@ -87,8 +87,8 @@ Last Update: 2025-08-21
     justify-content: center;
     gap: var(--space-xs);
     padding: 16px 32px;
-    background: linear-gradient(135deg, var(--luvex-vibrant-blue), var(--luvex-bright-cyan)); /* ← Lila-Cyan Gradient */
-    color: var(--luvex-white); /* ← Weiße Schrift */
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
     border-radius: var(--radius-full);
     text-decoration: none;
     font-weight: 600;
@@ -98,11 +98,30 @@ Last Update: 2025-08-21
 }
 
 .luvex-hero__cta:hover {
-    background: linear-gradient(135deg, #5a67d8, var(--luvex-vibrant-blue)); /* ← Dunklerer Lila-Gradient */
-    color: var(--luvex-white);
+    background: var(--luvex-white);
+    color: var(--luvex-dark-blue);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(90, 103, 216, 0.4); /* ← Lila Shadow */
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
 }
+
+.hero-button-active:hover {
+    background: linear-gradient(135deg, 
+        var(--luvex-bright-cyan) 0%, 
+        #8a2be2 50%, 
+        var(--luvex-bright-cyan) 100%);
+    background-size: 200% 200%;
+    animation: gradient-shift 2s ease-in-out infinite;
+    box-shadow: 
+        0 8px 25px rgba(109, 213, 237, 0.4),
+        0 0 20px rgba(138, 43, 226, 0.3);
+    color: var(--luvex-white) !important;
+}
+
+@keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
 
 /* --- 2.2 Secondary Hero CTA Button --- */
 .luvex-hero__cta-secondary {
@@ -214,7 +233,7 @@ Last Update: 2025-08-21
     margin: 0;
 }
 
-/* --- 3.2 Knowledge Navigator Cards --- */
+/* --- 3.2 Knowledge Navigator Cards (Restored) --- */
 .knowledge-navigator-header { 
     text-align: center; 
     margin-bottom: 4rem; 
@@ -228,14 +247,22 @@ Last Update: 2025-08-21
 }
 
 .knowledge-card {
+    background: var(--luvex-white);
+    border-radius: var(--radius-lg); /* ← Abgerundete Ecken zurück */
+    padding: 2rem; /* ← Padding zurück */
     text-align: left;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--luvex-gray-200);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .knowledge-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-lg);
+    border-color: var(--luvex-bright-cyan);
 }
 
 .knowledge-card__header { 
@@ -243,7 +270,7 @@ Last Update: 2025-08-21
     align-items: center; 
     gap: 1.5rem; 
     margin-bottom: 1.5rem;
-    justify-content: center;
+    justify-content: flex-start; /* ← Links ausgerichtet */
 }
 
 .knowledge-card .card__icon {
@@ -263,6 +290,8 @@ Last Update: 2025-08-21
 .knowledge-card .card__title { 
     margin-bottom: 0; 
     font-size: 1.5rem; 
+    font-weight: 600;
+    color: var(--luvex-dark-blue);
     text-align: left; 
 }
 
@@ -270,11 +299,14 @@ Last Update: 2025-08-21
     text-align: left;
     flex-grow: 1;
     margin-bottom: 1.5rem;
+    font-size: var(--text-base);
+    color: var(--luvex-gray-700);
+    line-height: 1.6;
 }
 
 .knowledge-card .btn {
     margin-top: auto;
-    align-self: center;
+    align-self: flex-start; /* ← Links ausgerichtet */
 }
 
 /* --- 3.3 Team Member Cards --- */
