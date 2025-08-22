@@ -340,14 +340,14 @@ Last Update: 2025-08-21
 }
 
 
-/* --- Knowledge Card Button (Separate from generic buttons) --- */
+/* Knowledge Card Button (Final Color Logic) */
 .knowledge-card .btn--knowledge {
     background-color: transparent;
-    border: 2px solid var(--luvex-vibrant-blue); /* ← Wie Icons: Dunkelblau */
-    color: var(--luvex-gray-600); /* ← Dezenter Text im Standard */
+    border: 2px solid #e7f1ff; /* ← Dezent: Wie Icon-Hintergrund */
+    color: var(--luvex-gray-500); /* ← Dezenter Text */
     padding: 12px 24px;
     border-radius: var(--radius-full);
-    font-weight: 500; /* ← Weniger fett im Standard */
+    font-weight: 500;
     transition: var(--transition-normal);
     text-decoration: none;
     display: inline-flex;
@@ -355,21 +355,22 @@ Last Update: 2025-08-21
     justify-content: center;
     gap: var(--space-xs);
     margin-top: auto;
+    margin-bottom: 1rem; /* ← Mehr Abstand zum Container-Ende */
     align-self: center;
 }
 
-/* Button-Hover beim Card-Hover */
+/* Button beim Card-Hover (wie aktueller Card-Hover) */
 .knowledge-card:hover .btn--knowledge {
     border-color: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue); /* ← Prägnanter beim Card-Hover */
-    font-weight: 600; /* ← Fetter beim Card-Hover */
+    color: var(--luvex-dark-blue);
+    font-weight: 600;
 }
 
-/* Button-Hover beim direkten Button-Hover */
+/* Button beim direkten Button-Hover (wie Icon-Farben beim Card-Hover) */
 .knowledge-card .btn--knowledge:hover {
-    background-color: var(--luvex-bright-cyan);
+    background-color: var(--luvex-bright-cyan); /* ← Cyan wie Icon */
     border-color: var(--luvex-bright-cyan);
-    color: var(--luvex-white); /* ← Weiß beim Button-Hover */
+    color: var(--luvex-dark-blue); /* ← Dunkelblau wie Icon-Text */
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
 }
