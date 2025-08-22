@@ -359,10 +359,10 @@ Last Update: 2025-08-21
     align-self: center;
 }
 
-/* Card-Hover: Prägnanter aber nicht zu stark */
+/* Card-Hover: Türkis wie Button-Rand */
 .knowledge-card:hover .btn--knowledge {
     border-color: var(--luvex-bright-cyan);
-    color: var(--luvex-vibrant-blue);
+    color: var(--luvex-bright-cyan); /* ← Türkis statt Vibrant Blue */
     font-weight: 600;
 }
 
