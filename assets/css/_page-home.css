@@ -5,22 +5,106 @@ LUVEX THEME v3.4 - HOMEPAGE (BEREINIGT & SPEZIFISCH)
 Description: Nur Homepage-spezifische Styles. Wiederverwendbare Komponenten
              wurden nach _components.css verschoben.
 Dependencies: _variables.css, _core.css, _components.css
-Last Update: 2025-08-21
+Last Update: 2025-08-22
 ==============================================================================
 */
 
 /* --- 1. Hero Section Homepage-Specifics --- */
 .home .luvex-hero__cta-container {
+    display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2.5rem;
+    gap: 2.5rem; /* ← VEREINT: Größerer Abstand */
+    margin-top: 0;
+    padding-top: 0;
+    width: 100%;
+    order: 4;
 }
 
 .home .luvex-hero__cta.luvex-cta-primary:hover {
     color: var(--luvex-bright-cyan);
 }
 
-/* --- 2. UV Simulator Showcase (Homepage-spezifisch) --- */
+/* --- 2. Hero Container & Content (VEREINT) --- */
+.home .luvex-hero__container {
+    max-width: 100%;
+    width: 100%;
+}
+
+.home .luvex-hero__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 2rem;
+}
+
+/* --- 3. Pyramiden-Struktur: Hero Text Elements --- */
+.home .luvex-hero__subtitle {  
+    max-width: 1000px;
+    font-size: 1.5rem;
+    color: var(--luvex-gray-300);
+    font-weight: 300;
+    text-align: center;
+    line-height: 1.4;
+    letter-spacing: 0.025em;
+    margin-bottom: 3rem;
+    order: 1;
+}
+
+.home .luvex-hero__title {
+    max-width: 1200px;
+    font-size: 3.5rem;
+    color: #ffffff;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.1;
+    margin-bottom: 3rem;
+    order: 2;
+}
+
+.home .luvex-hero__title .title-line-1 {
+    display: block;
+    margin-bottom: 0.2rem;
+    text-align: center;
+}
+
+.home .luvex-hero__title .title-line-2 {
+    display: block;
+    text-align: center;
+}
+
+.home .luvex-hero__title .text-highlight {
+    color: #67e8f9;
+    text-shadow: 
+        0 0 8px rgba(107, 205, 255, 0.5),
+        0 0 20px rgba(107, 205, 255, 0.3);
+}
+
+.home .luvex-hero__description {
+    max-width: 800px;
+    font-size: 1.25rem;
+    color: var(--luvex-gray-400);
+    text-align: center;
+    line-height: 1.6;
+    letter-spacing: 0.05em;
+    margin-bottom: 4rem;
+    order: 3;
+}
+
+.home .luvex-hero__description .bullet {
+    color: var(--luvex-bright-cyan);
+    margin: 0 0.5rem;
+}
+
+/* --- 4. Custom Cursor im Hero --- */
+.luvex-hero { 
+    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="%236dd5ed" stroke="%2300bcd4" stroke-width="3" opacity="0.8"/><circle cx="12" cy="12" r="3" fill="%23ffffff" opacity="0.9"/></svg>') 12 12, auto;
+}
+
+/* --- 5. UV Simulator Showcase (Homepage-spezifisch) --- */
 .uv-simulator-showcase { 
     background: linear-gradient(135deg, var(--luvex-dark-blue), var(--luvex-accent-blue)); 
     border-radius: var(--radius-xl); 
@@ -46,7 +130,6 @@ Last Update: 2025-08-21
     margin-right: auto; 
 }
 
-/* Override für Simulator Features (nutzt generisches Feature Grid) */
 .uv-simulator-showcase .feature-grid {
     margin: 3rem auto;
     max-width: 900px;
@@ -56,7 +139,7 @@ Last Update: 2025-08-21
     margin-top: 2rem; 
 }
 
-/* --- 3. Global UV Expert Community Section (Homepage-spezifisch) --- */
+/* --- 6. Global UV Expert Community Section (Homepage-spezifisch) --- */
 .homepage-community-section.section {
     overflow: hidden;
 }
@@ -125,7 +208,7 @@ Last Update: 2025-08-21
     flex-wrap: wrap; 
 }
 
-/* --- 4. Evidence-Based Expertise Section (Homepage-spezifisch) --- */
+/* --- 7. Evidence-Based Expertise Section (Homepage-spezifisch) --- */
 .evidence-section.section {
     overflow: visible;
 }
@@ -158,122 +241,6 @@ Last Update: 2025-08-21
     padding-top: 0;
     overflow: visible;
 }
-
-/* Team Member Override für Evidence Section */
-.evidence-section .team-member--light {
-    /* Nutzt die generische .team-member--light aus _components.css */
-    /* Nur spezifische Anpassungen hier */
-}
-
-/*
-==============================================================================
-HOMEPAGE HERO PYRAMIDEN-LAYOUT (SPEZIFISCH)
-==============================================================================
-*/
-
-/* --- Custom Cursor im Hero --- */
-.luvex-hero { 
-    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="%236dd5ed" stroke="%2300bcd4" stroke-width="3" opacity="0.8"/><circle cx="12" cy="12" r="3" fill="%23ffffff" opacity="0.9"/></svg>') 12 12, auto;
-}
-
-/* --- Hero Content Container --- */
-.home .luvex-hero__content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    margin-bottom: 2rem;
-}
-
-/* --- Container Befreiung --- */
-.home .luvex-hero__container {
-    max-width: 100%;
-    width: 100%;
-}
-
-.home .luvex-hero__content {
-    max-width: 100%;
-    width: 100%;
-}
-
-/* --- Pyramiden-Struktur: Neues Hero-Design --- */
-
-/* 1. SUBTITLE (oben - Slogan) */
-.home .luvex-hero__subtitle {  
-    max-width: 1000px;
-    font-size: 1.5rem; /* text-xl/2xl */
-    color: var(--luvex-gray-300);
-    font-weight: 300; /* font-light */
-    text-align: center;
-    line-height: 1.4;
-    letter-spacing: 0.025em; /* tracking-wide */
-    margin-bottom: 3rem;
-    order: 1;
-}
-
-/* 2. TITLE (Mitte - Haupttitel mit Glow) */
-.home .luvex-hero__title {
-    max-width: 1200px;
-    font-size: 3.5rem; /* text-5xl/7xl */
-    color: #ffffff;
-    font-weight: 700; /* font-bold */
-    text-align: center;
-    line-height: 1.1;
-    margin-bottom: 3rem;
-    order: 2;
-}
-
-/* Title-Zeilen */
-.home .luvex-hero__title .title-line-1 {
-    display: block;
-    margin-bottom: 0.2rem;
-    text-align: center;
-}
-
-.home .luvex-hero__title .title-line-2 {
-    display: block;
-    text-align: center;
-}
-
-/* Glow-Effekt für "Light" */
-.home .luvex-hero__title .text-highlight {
-    color: #67e8f9; /* cyan-300 */
-    text-shadow: 
-        0 0 8px rgba(107, 205, 255, 0.5),
-        0 0 20px rgba(107, 205, 255, 0.3);
-}
-
-/* 3. DESCRIPTION (unten - Service-Liste) */
-.home .luvex-hero__description {
-    max-width: 800px;
-    font-size: 1.25rem; /* text-lg/xl */
-    color: var(--luvex-gray-400);
-    text-align: center;
-    line-height: 1.6;
-    letter-spacing: 0.05em; /* tracking-wider */
-    margin-bottom: 4rem;
-    order: 3;
-}
-
-/* Bullet-Points in Description */
-.home .luvex-hero__description .bullet {
-    color: var(--luvex-bright-cyan);
-    margin: 0 0.5rem;
-}
-
-/* --- Button Container --- */
-.home .luvex-hero__cta-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 0;
-    padding-top: 0;
-    width: 100%;
-    order: 4;
-}
-
 
 /*
 ==============================================================================
