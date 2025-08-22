@@ -78,47 +78,49 @@ get_header(); ?>
 
             <!-- Control Panel für Text-Content -->
             <div class="control-panel">
-                <div class="step-content active" data-step="1">
-                    <h3>1. Liquid Application</h3>
-                    <p>UV-reactive liquid (ink, coating, or adhesive) is precisely applied to a substrate. It contains photoinitiators that remain inactive until exposed to UV light.</p>
-                </div>
+                <!-- ERSETZE in page-uv-curing.php die step-content Divs -->
 
-                <div class="step-content" data-step="2">
-                    <h3>2. UV Irradiation</h3>
-                    <p>High-intensity UV light irradiates the liquid coating. The specific wavelength must match the photoinitiator's absorption spectrum for an efficient and complete cure.</p>
-                </div>
+<div class="step-content active" data-step="1">
+    <h3>1. Liquid Application</h3>
+    <p>UV-reactive liquid (ink, coating, or adhesive) is precisely applied to surfaces or objects. The liquid contains photoinitiators that remain inactive until exposed to UV light.</p>
+</div>
 
-                <div class="step-content" data-step="3">
-                    <h3>3. Photoinitiator Activation</h3>
-                    <p>Upon absorbing UV energy, photoinitiators split into highly reactive free radicals. This crucial step initiates the polymerization chain reaction.</p>
-                </div>
+<div class="step-content" data-step="2">
+    <h3>2. UV Irradiation</h3>
+    <p>High-intensity UV light irradiates the liquid coating. The specific wavelength must match the photoinitiator's absorption spectrum for efficient crosslinking to occur throughout the layer.</p>
+</div>
 
-                <div class="step-content" data-step="4">
-                    <h3>4. Polymer Network Formation</h3>
-                    <p>The free radicals trigger rapid cross-linking of monomers and oligomers, forming a solid, durable polymer network in a fraction of a second.</p>
-                </div>
+<div class="step-content" data-step="3">
+    <h3>3. Wavelength Penetration</h3>
+    <p>Different UV wavelengths (365nm, 385nm, 405nm) penetrate to varying depths. Shorter wavelengths activate surface photoinitiators, while longer wavelengths reach deeper layers for complete curing.</p>
+</div>
 
-                <div class="step-content" data-step="5">
-                    <h3>5. Post-Cure Development</h3>
-                    <p>While the initial cure is instant, the material's final properties like hardness, chemical resistance, and adhesion continue to develop and optimize over time.</p>
-                </div>
+<div class="step-content" data-step="4">
+    <h3>4. Network Formation</h3>
+    <p>Activated photoinitiators create free radicals that trigger rapid crosslinking. Polymer chains form a three-dimensional crystal-like network, transforming the liquid into a solid material within seconds.</p>
+</div>
 
-                <div class="step-content" data-step="6">
-                    <h3>6. Final Cured State</h3>
-                    <p>The result is a fully cured, high-performance material with superior properties, achieved with minimal energy consumption and zero VOC emissions.</p>
-                    <ul class="benefits-list">
-                        <li><strong>Instant curing</strong> – seconds instead of hours</li>
-                        <li><strong>Energy efficient</strong> – no heat required</li>
-                        <li><strong>Solvent-free</strong> – environmentally friendly</li>
-                        <li><strong>Superior properties</strong> – enhanced performance</li>
-                    </ul>
-                    <div class="final-cta">
-                        <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-consulting' ) ) ); ?>">
-                            Optimize your process
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                        </a>
-                    </div>
-                </div>
+<div class="step-content" data-step="5">
+    <h3>5. Post-Cure Development</h3>
+    <p>While initial curing is instant, final properties like hardness, tackiness, adhesion, and chemical resistance continue developing over minutes to days, depending on the formulation and substrate.</p>
+</div>
+
+<div class="step-content" data-step="6">
+    <h3>6. Final Cured State</h3>
+    <p>The result is a fully cured, high-performance material with superior properties, achieved with minimal energy consumption and zero VOC emissions - the future of sustainable manufacturing.</p>
+    <ul class="benefits-list">
+        <li><strong>Instant curing</strong> – seconds instead of hours</li>
+        <li><strong>Energy efficient</strong> – no heat required</li>
+        <li><strong>Solvent-free</strong> – environmentally friendly</li>
+        <li><strong>Superior properties</strong> – enhanced performance</li>
+    </ul>
+    <div class="final-cta">
+        <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-consulting' ) ) ); ?>">
+            Optimize your process
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+    </div>
+</div>
             </div>
         </div>
     </div>
