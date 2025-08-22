@@ -275,9 +275,9 @@ HOMEPAGE HERO PYRAMIDEN-LAYOUT (SPEZIFISCH)
 }
 
 /* Button-Hierarchie (nutzt generische Buttons aus _components.css) */
-
+/*
 .luvex-hero .luvex-cta-secondary {
-    padding: 1rem 2rem; /* Kleiner */
+    padding: 1rem 2rem; /* Kleiner 
     font-size: 1rem;
     font-weight: 700;
     border-radius: 50px;
