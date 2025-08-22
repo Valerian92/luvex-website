@@ -275,20 +275,6 @@ HOMEPAGE HERO PYRAMIDEN-LAYOUT (SPEZIFISCH)
 }
 
 /* Button-Hierarchie (nutzt generische Buttons aus _components.css) */
-.luvex-hero .luvex-cta-primary {
-    padding: 1.25rem 2.5rem; /* Größer */
-    font-size: 1.125rem;
-    font-weight: 700;
-    border-radius: 50px;
-    background: var(--luvex-bright-cyan);
-    color: #ffffff;
-    transition: all 0.3s ease;
-}
-
-.luvex-hero .luvex-cta-primary:hover {
-    background: #0891b2; /* cyan-600 */
-    transform: scale(1.05);
-}
 
 .luvex-hero .luvex-cta-secondary {
     padding: 1rem 2rem; /* Kleiner */
