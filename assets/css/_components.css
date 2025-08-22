@@ -361,7 +361,7 @@ Last Update: 2025-08-21
 
 /* Card-Hover: Neue dunkle Cyan-Variable */
 .knowledge-card:hover .btn--knowledge {
-    border-color: var(--luvex-bright-cyan);
+    border-color: var(--luvex-cyan-dark);
     color: var(--luvex-cyan-dark); /* ← Neue Variable verwenden */
     font-weight: 600;
 }
