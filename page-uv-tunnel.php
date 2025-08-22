@@ -199,4 +199,58 @@ get_header(); ?>
     </div>
 </section>
 
+<!-- UV-Tunnel Order Fix Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Fix Hero Element Order for UV-Tunnel page
+    function fixUVTunnelHeroOrder() {
+        const heroContainer = document.querySelector('.luvex-hero--uv-tunnel .luvex-hero__container');
+        if (!heroContainer) return;
+        
+        const title = heroContainer.querySelector('.luvex-hero__title');
+        const cta = heroContainer.querySelector('.luvex-hero__cta-container');
+        const subtitle = heroContainer.querySelector('.luvex-hero__subtitle');
+        const description = heroContainer.querySelector('.luvex-hero__description');
+        
+        if (title) title.style.order = '0';
+        if (cta) cta.style.order = '1';
+        if (subtitle) subtitle.style.order = '2';
+        if (description) description.style.order = '3';
+        
+        console.log('✅ UV-Tunnel Hero order fixed');
+    }
+    
+    // Apply fix immediately and after any potential conflicts
+    fixUVTunnelHeroOrder();
+    
+    // Re-apply after 100ms to override any other scripts
+    setTimeout(fixUVTunnelHeroOrder, 100);
+    
+    // Monitor for any attempts to change order and re-fix
+    const heroContainer = document.querySelector('.luvex-hero--uv-tunnel .luvex-hero__container');
+    if (heroContainer) {
+        const observer = new MutationObserver(function(mutations) {
+            let needsFix = false;
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    const target = mutation.target;
+                    if (target.classList.contains('luvex-hero__title') && target.style.order !== '0') needsFix = true;
+                    if (target.classList.contains('luvex-hero__cta-container') && target.style.order !== '1') needsFix = true;
+                }
+            });
+            if (needsFix) {
+                console.log('🔄 Re-applying UV-Tunnel order fix');
+                fixUVTunnelHeroOrder();
+            }
+        });
+        
+        observer.observe(heroContainer, { 
+            attributes: true, 
+            subtree: true, 
+            attributeFilter: ['style'] 
+        });
+    }
+});
+</script>
+
 <?php get_footer(); ?>
