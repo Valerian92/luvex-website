@@ -431,6 +431,7 @@ Last Update: 2025-08-21
     box-shadow: none; 
     border: none; 
     max-width: 900px; 
+    margin: 0 auto; /* ← HINZUFÜGEN für Zentrierung */
     text-align: center;
     padding: 3rem 2rem;
 }
