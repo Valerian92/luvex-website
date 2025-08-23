@@ -11,13 +11,13 @@ get_header(); ?>
 
 <!-- 
 ==============================================================================
-NEUE HERO SECTION (Split Layout)
+FINALE HERO SECTION
 ==============================================================================
-- Die Klasse wurde zu `luvex-hero--split-compact` geändert.
-- Die innere Struktur nutzt nun Flexbox für eine Links/Rechts-Aufteilung.
+- Dem Container wurden die Klassen 'container' und 'container--narrow'
+  hinzugefügt, um die Breite an den Rest der Seite anzupassen.
 -->
 <section class="luvex-hero luvex-hero--split-compact">
-    <div class="luvex-hero__container">
+    <div class="luvex-hero__container container container--narrow">
         <!-- Linke Seite: Textinhalte -->
         <div class="luvex-hero__content">
             <h1 class="luvex-hero__title">
