@@ -1,22 +1,19 @@
 /*
 ==============================================================================
-LUVEX THEME v2.2 - HEADER (Corrected)
+LUVEX THEME v3.0 - HEADER (Optimized Dropdowns)
 ==============================================================================
 
 Description: Styling for the main site header and navigation system.
-             Restored horizontal dropdown layout and fixed Astra arrow issue.
+             Implements mixed-direction dropdowns (down, then right).
 Dependencies: _variables.css, _core.css
-Last Update: 2025-08-07
+Last Update: 2025-08-23
 
 ==============================================================================
 */
 
-/*
-==============================================================================
-1. HEADER CONTAINER & LAYOUT
-==============================================================================
-*/
-
+/* ==========================================================================
+   1. HEADER CONTAINER & LAYOUT (Unchanged)
+   ========================================================================== */
 .site-header {
     background: rgba(27, 42, 73, 0.95);
     backdrop-filter: blur(10px);
@@ -25,14 +22,12 @@ Last Update: 2025-08-07
     position: relative;
     z-index: 1000;
 }
-
 .site-header.fixed-header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
 }
-
 .header-container {
     max-width: 1600px;
     margin: 0 auto;
@@ -43,48 +38,35 @@ Last Update: 2025-08-07
     height: 80px;
 }
 
-/*
-==============================================================================
-2. SITE BRANDING (LOGO)
-==============================================================================
-*/
-
+/* ==========================================================================
+   2. SITE BRANDING (LOGO) (Unchanged)
+   ========================================================================== */
 .site-branding {
     flex-shrink: 0;
 }
-
 .site-branding .custom-logo {
     max-height: 40px;
     width: auto;
     display: block;
 }
 
-/*
-==============================================================================
-3. MAIN NAVIGATION
-==============================================================================
-*/
-
+/* ==========================================================================
+   3. MAIN NAVIGATION (Unchanged links, new structure for dropdowns)
+   ========================================================================== */
 .main-navigation {
     flex-grow: 1;
     display: flex;
     justify-content: center;
 }
-
 .main-navigation ul {
     display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
 }
-
 .main-navigation li {
     position: relative;
 }
-
-/* --- 3.1 Navigation Links --- */
-
-/* KORREKTUR: Regel nur für die oberste Ebene anwenden */
 .main-navigation > ul > li > a {
     color: var(--luvex-white);
     font-size: 1.05rem;
@@ -92,62 +74,46 @@ Last Update: 2025-08-07
     text-decoration: none;
     position: relative;
     transition: all 0.3s ease;
-    /* Hier den Abstand nur für die Haupt-Menüpunkte anpassen */
-    padding: 1rem 2.2rem; /* Oben/Unten | Links/Rechts (Wert von 1.8rem erhöht) */
+    padding: 1rem 2.2rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
-
 .main-navigation > ul > li > a:hover {
     color: var(--luvex-bright-cyan);
 }
-
-/* Animated line below link */
 .main-navigation > ul > li > a::after {
     content: '';
     position: absolute;
-    bottom: 8px; /* Adjust position relative to padding */
-    left: 2.2rem; /* Muss dem horizontalen Padding entsprechen */
-    width: calc(100% - 4.4rem); /* Gesamtbreite minus linkes und rechtes Padding */
+    bottom: 8px;
+    left: 2.2rem;
+    width: 0;
     height: 2px;
     background: var(--luvex-bright-cyan);
     transition: width 0.3s ease;
-    /* Startet mit Breite 0 */
-    width: 0;
 }
-
 .main-navigation > ul > li > a:hover::after {
-    width: calc(100% - 4.4rem); /* Volle Breite beim Hover */
+    width: calc(100% - 4.4rem);
 }
-
-
-/* --- 3.2 Custom Dropdown Arrow --- */
 .main-navigation .dropdown-arrow {
-    font-size: 0.7em; /* Make arrow slightly smaller */
+    font-size: 0.7em;
     transition: transform 0.3s ease;
 }
-
 .main-navigation .menu-item-has-children:hover > a .dropdown-arrow {
     transform: rotate(180deg);
 }
 
+/* ==========================================================================
+   4. DROPDOWN MENUS (SUB-MENUS) - NEW LOGIC
+   ========================================================================== */
 
-/*
-==============================================================================
-4. DROPDOWN MENUS (SUB-MENUS)
-==============================================================================
-*/
-
+/* --- 4.1 General Sub-Menu Styling --- */
 .main-navigation .sub-menu {
     position: absolute;
-    top: calc(100% + 8px);
-    left: 0;
-    display: flex;
-    flex-wrap: nowrap;
+    display: block; /* Changed from flex to block for vertical stacking */
     background: var(--luvex-dark-blue);
     width: max-content; 
-    min-width: 220px;
+    min-width: 240px; /* Increased min-width for better readability */
     z-index: 9999;
     opacity: 0;
     visibility: hidden;
@@ -155,7 +121,7 @@ Last Update: 2025-08-07
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(109, 213, 237, 0.2);
     transform: translateY(10px);
-    transition: all 0.3s ease;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
 }
 
 .main-navigation .menu-item-has-children:hover > .sub-menu {
@@ -164,67 +130,97 @@ Last Update: 2025-08-07
     transform: translateY(0);
 }
 
-/* --- 4.1 Dropdown Links --- */
-/* Diese Regel stellt sicher, dass die Untermenü-Links ihr ursprüngliches Padding behalten */
+/* --- 4.2 Level 2 Menu (Opens DOWN) --- */
+.main-navigation > ul > li > .sub-menu {
+    top: 100%;
+    left: 0;
+    margin-top: 8px; /* Creates a small gap from the parent */
+}
+
+/* --- 4.3 Level 3 Menu (Opens RIGHT by default) --- */
+.main-navigation .sub-menu .sub-menu {
+    top: 0;
+    left: 100%;
+    transform: translateY(0) translateX(10px); /* Animate from the left */
+    margin-left: 1px;
+}
+
+.main-navigation .sub-menu .menu-item-has-children:hover > .sub-menu {
+    transform: translateY(0) translateX(0);
+}
+
+/* --- 4.4 Level 4 Menu (Opens DOWN again) --- */
+/* This creates the alternating pattern */
+.main-navigation .sub-menu .sub-menu .sub-menu {
+    top: 100%;
+    left: 0;
+    transform: translateY(10px); /* Animate from top */
+}
+.main-navigation .sub-menu .sub-menu .menu-item-has-children:hover > .sub-menu {
+     transform: translateY(0);
+}
+
+
+/* --- 4.5 JS Helper Classes for Viewport Correction --- */
+/* This class is added by JS if a right-opening menu would go off-screen */
+.main-navigation .sub-menu.opens-left {
+    left: auto;
+    right: 100%;
+    margin-left: 0;
+    margin-right: 1px;
+    transform: translateY(0) translateX(-10px); /* Animate from the right */
+}
+.main-navigation .sub-menu .menu-item-has-children:hover > .sub-menu.opens-left {
+    transform: translateY(0) translateX(0);
+}
+
+/* This class is added by JS if a down-opening menu would go off-screen */
+.main-navigation .sub-menu.align-right {
+    left: auto;
+    right: 0;
+}
+
+
+/* --- 4.6 Dropdown Links Styling (Unchanged) --- */
 .main-navigation .sub-menu a {
-    padding: 0.75rem 1.5rem;
+    padding: 0.85rem 1.5rem; /* Adjusted padding */
     display: block;
     font-size: var(--text-sm);
     border-bottom: 1px solid rgba(109, 213, 237, 0.1);
     white-space: nowrap;
-    color: var(--luvex-white); /* Farbe explizit setzen, falls vererbt */
-    font-weight: 500; /* Gewicht explizit setzen */
+    color: var(--luvex-white);
+    font-weight: 500;
     transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between; /* Aligns arrow to the right */
+    align-items: center;
 }
-
 .main-navigation .sub-menu a:hover {
     background: rgba(109, 213, 237, 0.1);
     padding-left: 2rem;
-    color: var(--luvex-bright-cyan); /* Farbe beim Hover explizit setzen */
+    color: var(--luvex-bright-cyan);
 }
-
 .main-navigation .sub-menu li:last-child a {
     border-bottom: none;
 }
-
-/* --- 4.2 Sub-Sub-Menus --- */
-.main-navigation .sub-menu .menu-item-has-children {
-    position: relative;
+.main-navigation .sub-menu .dropdown-arrow {
+    transform: rotate(-90deg); /* Point arrows to the right */
 }
-
-.main-navigation .sub-menu .sub-menu {
-    position: absolute;
-    left: 100%;
-    top: 0; /* KORREKTUR: Auf 0 gesetzt, um Überblendung zu verhindern */
-    display: block; 
-    margin-left: 1px;
-    transform: translateY(10px);
+.main-navigation .sub-menu .menu-item-has-children:hover > a > .dropdown-arrow {
+     transform: rotate(-90deg) scale(1.2); /* Slight emphasis on hover */
 }
 
 
-.main-navigation .sub-menu .menu-item-has-children:hover > .sub-menu {
-    transform: translateY(0);
-}
-
-
-/*
-==============================================================================
-5. ASTRA OVERRIDES & MOBILE
-==============================================================================
-*/
-
-.main-navigation .ast-arrow-svg {
-    display: none !important;
-}
-
+/* ==========================================================================
+   5. ASTRA OVERRIDES & MOBILE (Unchanged)
+   ========================================================================== */
+.main-navigation .ast-arrow-svg,
 .main-navigation .ast-menu-toggle {
     display: none !important;
 }
-
 .header-cta {
     flex-shrink: 0;
 }
-
 .header-cta-button {
     background: var(--color-primary);
     color: var(--color-white);
@@ -236,16 +232,13 @@ Last Update: 2025-08-07
     transition: var(--transition-normal);
     text-decoration: none;
 }
-
 .header-cta-button:hover {
     background: #0056b3;
     color: var(--color-white);
 }
-
 .mobile-menu-toggle {
     display: none;
 }
-
 @media (max-width: 1024px) { 
     .main-navigation, .header-cta {
         display: none;
