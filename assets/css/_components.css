@@ -154,31 +154,31 @@ Last Update: 2025-08-21
     transform: scale(1.05);
 }
 
-/* NEUE Animation Modifier-Klasse - BEREINIGT */
+/* NEUE Animation Modifier-Klasse - KORRIGIERT */
 .luvex-cta--animated {
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; ← TEMPORÄR ENTFERNT für Test */
     transition: all 0.3s ease;
     border: 2px solid var(--luvex-bright-cyan);
-    background: transparent; /* Standard transparent */
+    background: transparent;
 }
 
 .luvex-cta--animated:hover {
-    background: linear-gradient(135deg,
+    background: linear-gradient(45deg,
         var(--luvex-bright-cyan) 0%,
-        #8a2be2 25%,
-        var(--luvex-bright-cyan) 50%,
-        #8a2be2 75%,
-        var(--luvex-bright-cyan) 100%) !important;
-    background-size: 400% 400% !important;
-    animation: gradient-shift-smooth 3s ease-in-out infinite !important;
+        #8a2be2 20%,
+        var(--luvex-bright-cyan) 40%,
+        #8a2be2 60%,
+        var(--luvex-bright-cyan) 80%,
+        #8a2be2 100%) !important;
+    background-size: 200% 200% !important; /* KLEINER für bessere Sichtbarkeit */
+    animation: gradient-shift-smooth 2s ease-in-out infinite !important;
     color: var(--luvex-white) !important;
     box-shadow:
         0 8px 25px rgba(109, 213, 237, 0.4),
         0 0 20px rgba(138, 43, 226, 0.3) !important;
     border-color: rgba(109, 213, 237, 0.8) !important;
 }
-
 
 .luvex-cta-secondary {
     display: inline-flex;

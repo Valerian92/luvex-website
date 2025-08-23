@@ -1,6 +1,6 @@
 /*
 ==============================================================================
-LUVEX THEME - HOMEPAGE HERO ANIMATION (VEREINFACHT)
+LUVEX THEME - HOMEPAGE HERO ANIMATION (BEREINIGT)
 ==============================================================================
 */
 
@@ -24,16 +24,16 @@ LUVEX THEME - HOMEPAGE HERO ANIMATION (VEREINFACHT)
     cursor: none;
 }
 
+.home .luvex-hero .luvex-cta--animated {
+    position: relative;
+    z-index: 2;
+}
+
 .home .luvex-hero .luvex-cta--animated:hover {
     transform: translateY(-2px) scale(1.05);
 }
 
-/* --- Energy Pulse Effect (Z-Index korrigiert) --- */
-.home .luvex-hero .luvex-cta--animated {
-    position: relative;
-    z-index: 2; /* Button-Container im Vordergrund */
-}
-
+/* --- Energy Pulse Effect --- */
 .home .luvex-hero .luvex-cta--animated::before {
     content: '';
     position: absolute;
@@ -45,23 +45,24 @@ LUVEX THEME - HOMEPAGE HERO ANIMATION (VEREINFACHT)
     border-radius: 50%;
     transform: translate(-50%, -50%);
     animation: energy-pulse 2s ease-out infinite;
-    z-index: -1; /* WICHTIG: Pulse HINTER dem Text */
+    z-index: -1;
     pointer-events: none;
 }
 
-/* Text explizit im Vordergrund */
+/* Text im Vordergrund */
 .home .luvex-hero .luvex-cta--animated span,
 .home .luvex-hero .luvex-cta--animated i {
     position: relative;
-    z-index: 3; /* Text über allem */
+    z-index: 3;
     color: var(--luvex-white) !important;
 }
 
-.home .luvex-hero .simulator-cta:hover::before {
+/* Pulse pausiert beim Hover */
+.home .luvex-hero .luvex-cta--animated:hover::before {
     animation-play-state: paused;
 }
 
-
+/* --- Keyframes --- */
 @keyframes energy-pulse {
     0% { 
         width: 0; 
