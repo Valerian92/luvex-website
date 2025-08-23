@@ -661,3 +661,22 @@ body.ast-separate-container .site-content {
     margin-top: 0 !important;
     padding-top: 0 !important;
 }
+
+
+
+/* FÜR _header.css HINZUFÜGEN: */
+
+/* Astra Menu-Toggle Buttons komplett ausblenden */
+.ast-menu-toggle,
+.ast-arrow-svg,
+button.ast-menu-toggle {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Astra Navigation System deaktivieren */
+.main-navigation .ast-menu-toggle,
+.main-navigation .ast-icon,
+.main-navigation .screen-reader-text {
+    display: none !important;
+}
