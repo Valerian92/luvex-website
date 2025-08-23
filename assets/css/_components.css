@@ -154,19 +154,27 @@ Last Update: 2025-08-21
     transform: scale(1.05);
 }
 
-/* NEUE Animation Modifier-Klasse - KORRIGIERT */
+/* NEUE Animation Modifier-Klasse - PERMANENTE TRANSITION */
+.luvex-cta--animated {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
 .luvex-cta--animated:hover {
     background: linear-gradient(135deg, 
         var(--luvex-bright-cyan) 0%, 
-        #8a2be2 50%, 
+        #8a2be2 25%, 
+        var(--luvex-bright-cyan) 50%, 
+        #8a2be2 75%, 
         var(--luvex-bright-cyan) 100%) !important;
-    background-size: 200% 200% !important;
-    animation: gradient-shift 2s ease-in-out infinite !important;
+    background-size: 400% 400% !important; /* Größer für smooth transition */
+    animation: gradient-shift-smooth 3s ease-in-out infinite !important;
     color: var(--luvex-white) !important;
     box-shadow: 
         0 8px 25px rgba(109, 213, 237, 0.4),
         0 0 20px rgba(138, 43, 226, 0.3) !important;
-    /* ENTFERNT: transform: scale(1.05); */
+    border-color: rgba(109, 213, 237, 0.8) !important;
 }
 
 /* Hero-spezifischer Override für transparenten Button */

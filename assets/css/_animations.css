@@ -167,7 +167,32 @@ Last Update: 2025-08-23 (Refactored)
 }
 
 
+/*
+==============================================================================
+5. BUTTON & HOVER KEYFRAMES (VERBESSERT)
+==============================================================================
+*/
 
+/* Smooth kontinuierliche Gradient-Animation */
+@keyframes gradient-shift-smooth {
+    0% { 
+        background-position: 0% 50%; 
+    }
+    25% { 
+        background-position: 100% 25%; 
+    }
+    50% { 
+        background-position: 200% 50%; 
+    }
+    75% { 
+        background-position: 300% 75%; 
+    }
+    100% { 
+        background-position: 400% 50%; 
+    }
+}
+
+/* Fallback für andere Verwendungen */
 @keyframes gradient-shift {
     0%, 100% { 
         background-position: 0% 50%; 
@@ -176,4 +201,3 @@ Last Update: 2025-08-23 (Refactored)
         background-position: 100% 50%; 
     }
 }
-
