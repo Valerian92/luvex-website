@@ -13,11 +13,11 @@ get_header(); ?>
 ==============================================================================
 FINALE HERO SECTION
 ==============================================================================
-- Dem Container wurden die Klassen 'container' und 'container--narrow'
-  hinzugefügt, um die Breite an den Rest der Seite anzupassen.
+- Der Container wurde auf den breiteren Standard `.container` umgestellt,
+  um mehr Abstand zwischen Titel und Buttons zu schaffen.
 -->
 <section class="luvex-hero luvex-hero--split-compact">
-    <div class="luvex-hero__container container container--narrow">
+    <div class="luvex-hero__container container">
         <!-- Linke Seite: Textinhalte -->
         <div class="luvex-hero__content">
             <h1 class="luvex-hero__title">
@@ -112,11 +112,11 @@ FINALE HERO SECTION
                                     <a href="<?php the_permalink(); ?>">
                                         <?php the_post_thumbnail('medium_large', ['class' => 'news-card__image']); ?>
                                     </a>
-                                <?php else : ?>
-                                    <a href="<?php the_permalink(); ?>">
-                                        <img src="https://placehold.co/600x400/1B2A49/6dd5ed?text=LUVEX+News" alt="Placeholder Image" class="news-card__image">
-                                    </a>
-                                <?php endif; ?>
+                                    <?php else : ?>
+                                        <a href="<?php the_permalink(); ?>">
+                                            <img src="https://placehold.co/600x400/1B2A49/6dd5ed?text=LUVEX+News" alt="Placeholder Image" class="news-card__image">
+                                        </a>
+                                    <?php endif; ?>
                                 
                                 <?php
                                 $categories = get_the_terms(get_the_ID(), 'uv_news_category');

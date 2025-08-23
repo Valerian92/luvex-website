@@ -1,12 +1,15 @@
 /*
 ==============================================================================
-LUVEX THEME v4.1 - HEADER (Horizontal Mega Menu - Repariert)
+LUVEX THEME v4.2 - HEADER NAVIGATION (KORRIGIERT)
 ==============================================================================
 
-Description: Repariert das Header-Layout und implementiert das waagerechte
-             Mega-Menü korrekt.
+Description: Korrekte Implementierung des 3-Level Navigation Systems
+- Level 1: Horizontal Hauptmenü
+- Level 2: Horizontal unterhalb der Level 1 Items (bei deren X-Position beginnend)  
+- Level 3: Vertikal nach unten von Level 2 Items
+
 Dependencies: _variables.css, _core.css
-Last Update: 2025-08-23
+Last Update: 2025-08-23 (Fixed)
 
 ==============================================================================
 */
@@ -18,9 +21,10 @@ Last Update: 2025-08-23
     background: rgba(27, 42, 73, 0.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(109, 213, 237, 0.2);
-    position: relative; /* Wichtig als Anker für das Untermenü */
+    position: relative;
     z-index: 1000;
 }
+
 .header-container {
     max-width: 1600px;
     margin: 0 auto;
@@ -30,25 +34,28 @@ Last Update: 2025-08-23
     justify-content: space-between;
     height: 80px;
 }
+
 .main-navigation {
     flex-grow: 1;
     display: flex;
     justify-content: center;
 }
+
 .main-navigation > ul {
     display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
+    position: relative; /* Wichtig für das Positioning-System */
 }
 
-/*
- * KORREKTUR: Der Hauptmenüpunkt wird auf 'static' gesetzt.
- * Dadurch sucht sein Kind (.sub-menu) nach dem nächsten Anker,
- * was der .site-header ist. Das bricht das Layout nicht.
-*/
+/* ==========================================================================
+   2. LEVEL 1 - HAUPTMENÜ ITEMS  
+   ========================================================================== */
+
+/* KORREKTUR: Level 1 Items brauchen 'position: relative' als Anker für Level 2 */
 .main-navigation > ul > li {
-    position: static;
+    position: relative; /* GEÄNDERT von 'static' zu 'relative' */
 }
 
 .main-navigation > ul > li > a {
@@ -58,52 +65,62 @@ Last Update: 2025-08-23
     text-decoration: none;
     position: relative;
     transition: all 0.3s ease;
-    padding: 29px 2.2rem; /* Höhe an 80px Header angepasst */
+    padding: 29px 2.2rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
+
 .main-navigation > ul > li > a:hover {
     color: var(--luvex-bright-cyan);
 }
 
 /* ==========================================================================
-   2. HORIZONTAL SUB-MENU (LEVEL 2)
+   3. LEVEL 2 - HORIZONTAL SUB-MENU (KORRIGIERT)
    ========================================================================== */
 
-/* --- 2.1 The Container for the horizontal menu --- */
 .main-navigation > ul > li > .sub-menu {
-    /* Positionierung & Aussehen */
+    /* KORREKTUR: Positionierung relativ zum Parent-Item, nicht zum Header */
     position: absolute;
-    top: 100%; /* Direkt unter dem Header */
-    left: 0;
-    right: 0; /* Spannt sich über die volle Breite des .site-header */
-    width: 100%;
+    top: 100%; /* Direkt unter dem Parent-Item */
+    left: 0;   /* Beginnt bei der linken Kante des Parent-Items */
+    
+    /* KORREKTUR: Entferne 'right: 0' und 'width: 100%' */
+    min-width: max-content; /* Passt sich dem Inhalt an */
+    white-space: nowrap;    /* Verhindert Umbrüche */
+    
     background: var(--luvex-dark-blue);
     box-shadow: var(--shadow-lg);
     border-top: 1px solid rgba(109, 213, 237, 0.2);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
     padding: 0;
     
-    /* Flexbox für waagerechte Anordnung */
+    /* Flexbox für horizontale Anordnung */
     display: flex;
-    justify-content: center; /* Zentriert die Menüpunkte */
-    gap: 1rem; /* Abstand zwischen den Punkten */
+    gap: 0; /* Kein Gap, Items liegen direkt aneinander */
 
     /* Animation & Sichtbarkeit */
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
     transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    
+    /* Z-Index um über andere Elemente zu liegen */
+    z-index: 1001;
 }
 
-/* --- 2.2 Show on hover --- */
+/* Show Level 2 on hover */
 .main-navigation > ul > li:hover > .sub-menu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
 
-/* --- 2.3 Styling for the horizontal menu items --- */
+/* Level 2 Menu Items */
+.main-navigation > ul > li > .sub-menu > li {
+    position: relative; /* Wichtig für Level 3 Positionierung */
+}
+
 .main-navigation > ul > li > .sub-menu > li > a {
     color: var(--luvex-white);
     font-weight: 500;
@@ -111,13 +128,15 @@ Last Update: 2025-08-23
     display: block;
     position: relative;
     transition: color 0.3s ease;
+    white-space: nowrap;
 }
 
 .main-navigation > ul > li > .sub-menu > li > a:hover {
     color: var(--luvex-bright-cyan);
+    background: rgba(109, 213, 237, 0.1);
 }
 
-/* --- 2.4 Underline effect for horizontal items --- */
+/* Underline effect für Level 2 Items */
 .main-navigation > ul > li > .sub-menu > li > a::after {
     content: '';
     position: absolute;
@@ -134,27 +153,24 @@ Last Update: 2025-08-23
     transform: scaleX(1);
 }
 
-
 /* ==========================================================================
-   3. VERTICAL SUB-SUB-MENU (LEVEL 3)
+   4. LEVEL 3 - VERTICAL SUB-SUB-MENU (KORREKT)
    ========================================================================== */
 
-/* --- 3.1 Positioning context for the vertical dropdown --- */
-.main-navigation .sub-menu > li.menu-item-has-children {
-    position: relative !important; /* Wichtig, um Astra zu überschreiben */
-}
-
-/* --- 3.2 The vertical dropdown itself --- */
+/* Level 3 Container */
 .main-navigation .sub-menu .sub-menu {
     position: absolute;
-    top: 100%;
-    left: 0;
+    top: 100%; /* Direkt unter dem Level 2 Item */
+    left: 0;   /* Beginnt bei der linken Kante des Level 2 Items */
     min-width: 240px;
+    
     background: var(--luvex-dark-blue);
     border-radius: 0 0 var(--radius-md) var(--radius-md);
     box-shadow: var(--shadow-md);
     border: 1px solid rgba(109, 213, 237, 0.2);
     border-top: none;
+    
+    /* Vertikale Anordnung (Standard Block-Layout) */
     display: block;
     padding: 0.5rem 0;
 
@@ -163,35 +179,140 @@ Last Update: 2025-08-23
     visibility: hidden;
     transform: translateY(10px);
     transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    
+    z-index: 1002; /* Höher als Level 2 */
 }
 
-/* --- 3.3 Show on hover --- */
-.main-navigation .sub-menu > li.menu-item-has-children:hover > .sub-menu {
+/* Show Level 3 on hover */
+.main-navigation .sub-menu > li:hover > .sub-menu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
 
-/* --- 3.4 Styling for vertical dropdown links --- */
+/* Level 3 Menu Items */
+.main-navigation .sub-menu .sub-menu li {
+    width: 100%;
+}
+
 .main-navigation .sub-menu .sub-menu a {
     padding: 0.75rem 1.5rem;
     color: var(--luvex-white);
     display: block;
+    transition: all 0.3s ease;
 }
+
 .main-navigation .sub-menu .sub-menu a:hover {
     background: rgba(109, 213, 237, 0.1);
     color: var(--luvex-bright-cyan);
+    padding-left: 2rem; /* Subtle Einrückung bei Hover */
 }
 
 /* ==========================================================================
-   4. ASTRA OVERRIDES & MOBILE (Unchanged)
+   5. DROPDOWN ARROWS & INDICATORS
    ========================================================================== */
+
+/* Pfeil für Level 1 Items mit Sub-Menu */
+.main-navigation > ul > li.menu-item-has-children > a .dropdown-arrow {
+    transition: transform 0.3s ease;
+}
+
+.main-navigation > ul > li.menu-item-has-children:hover > a .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* Pfeil für Level 2 Items mit Sub-Menu */
+.main-navigation .sub-menu > li.menu-item-has-children > a::after {
+    content: '▶';
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.main-navigation .sub-menu > li.menu-item-has-children:hover > a::after {
+    transform: translateY(-50%) rotate(90deg);
+}
+
+/* ==========================================================================
+   6. RESPONSIVE & ASTRA OVERRIDES
+   ========================================================================== */
+
+/* Verstecke Astra's Standard-Elemente */
 .main-navigation .ast-arrow-svg,
-.main-navigation .ast-menu-toggle {
+.main-navigation .ast-menu-toggle,
+.ast-desktop .ast-menu-toggle {
     display: none !important;
 }
+
+/* Mobile Breakpoint */
 @media (max-width: 1024px) { 
     .main-navigation {
         display: none;
     }
+    
+    /* Mobile Menu wird durch separates System behandelt */
+}
+
+/* ==========================================================================
+   7. DEBUG & QUALITY ASSURANCE (TEMPORÄR)
+   ========================================================================== */
+
+/* Nur für Development - entfernen in Production */
+[data-debug="true"] .main-navigation .sub-menu {
+    border: 2px solid red !important;
+}
+
+[data-debug="true"] .main-navigation .sub-menu .sub-menu {
+    border: 2px solid blue !important;
+}
+
+/* ==========================================================================
+   8. SMART POSITIONING CLASSES (FÜR JAVASCRIPT)
+   ========================================================================== */
+
+/* Positionierung für Level 2 Menüs die über den Viewport hinausgehen */
+.main-navigation .sub-menu.position-right {
+    left: auto;
+    right: 0;
+}
+
+.main-navigation .sub-menu.position-center {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.main-navigation .sub-menu.position-center.show {
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Positionierung für Level 3 Menüs die nach oben öffnen sollen */
+.main-navigation .sub-menu .sub-menu.position-up {
+    top: auto;
+    bottom: 100%;
+    transform: translateY(-10px);
+}
+
+.main-navigation .sub-menu > li:hover > .sub-menu.position-up {
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   9. HOVER-STATES & TRANSITIONS (VERBESSERT)
+   ========================================================================== */
+
+/* Sanftere Hover-Transitions für bessere UX */
+.main-navigation a {
+    transition: all 0.2s ease;
+}
+
+/* Hover-Delay für Level 3, um versehentliches Öffnen zu vermeiden */
+.main-navigation .sub-menu > li.menu-item-has-children .sub-menu {
+    transition-delay: 0.1s;
+}
+
+.main-navigation .sub-menu > li.menu-item-has-children:hover .sub-menu {
+    transition-delay: 0s;
 }
