@@ -9,19 +9,25 @@ get_header(); ?>
 
 <main id="main" class="site-main">
 
-<!-- Hero Section -->
-<section class="luvex-hero luvex-hero--compact">
+<!-- 
+==============================================================================
+NEUE HERO SECTION (Split Layout)
+==============================================================================
+- Die Klasse wurde zu `luvex-hero--split-compact` geändert.
+- Die innere Struktur nutzt nun Flexbox für eine Links/Rechts-Aufteilung.
+-->
+<section class="luvex-hero luvex-hero--split-compact">
     <div class="luvex-hero__container">
+        <!-- Linke Seite: Textinhalte -->
         <div class="luvex-hero__content">
-            <!-- REIHENFOLGE GEÄNDERT: Titel jetzt oben -->
             <h1 class="luvex-hero__title">
                 UV Technology <span class="text-highlight">News</span>
             </h1>
-            <!-- TEXT GEKÜRZT: Passt jetzt in eine Zeile -->
             <p class="luvex-hero__description">
                 The latest news and innovations in UV technology.
             </p>
         </div>
+        <!-- Rechte Seite: Buttons -->
         <div class="luvex-hero__cta-container">
             <a href="#latest-articles" class="luvex-hero__cta-secondary">
                 <i class="fas fa-newspaper"></i>
@@ -29,7 +35,7 @@ get_header(); ?>
             </a>
             <a href="#newsletter" class="luvex-hero__cta">
                 <i class="fas fa-envelope"></i>
-                <span>Subscribe Newsletter</span>
+                <span>Subscribe</span>
             </a>
         </div>
     </div>
@@ -39,7 +45,6 @@ get_header(); ?>
 <!-- Filter und Suche bleibt unverändert -->
 <section class="news-filter-section">
     <div class="news-filter-container">
-        <!-- Kategorie-Filter (dynamische Implementierung wäre ein nächster Schritt) -->
         <div class="news-filter-categories" role="group" aria-label="Article Categories">
             <button class="news-filter-btn active">All Topics</button>
             <button class="news-filter-btn">UV-C LEDs</button>
@@ -47,8 +52,6 @@ get_header(); ?>
             <button class="news-filter-btn">Air Purification</button>
             <button class="news-filter-btn">Research</button>
         </div>
-       
-        <!-- Suchleiste -->
         <form role="search" method="get" class="news-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
             <input type="search" class="news-search-input" placeholder="Search articles..." value="<?php echo get_search_query(); ?>" name="s" />
             <input type="hidden" name="post_type" value="uv_news" />
@@ -64,16 +67,13 @@ get_header(); ?>
             <?php if ( have_posts() ) : ?>
 
                 <?php
-                // Zähler, um den ersten Post als "Featured" zu behandeln
                 $post_counter = 0;
                 ?>
 
-                <!-- Der WordPress Loop -->
                 <?php while ( have_posts() ) : the_post(); ?>
 
-                    <?php if ( $post_counter === 0 && !is_paged() ) : // Nur der erste Post auf der ersten Seite ?>
+                    <?php if ( $post_counter === 0 && !is_paged() ) : ?>
                         
-                        <!-- Featured Artikel -->
                         <div class="featured-article-wrapper">
                             <article id="post-<?php the_ID(); ?>" <?php post_class('news-card featured-article'); ?>>
                                 <div class="news-card__image-container">
@@ -102,10 +102,9 @@ get_header(); ?>
                             </article>
                         </div>
                         
-                        <!-- Start des normalen Grids nach dem Featured Post -->
                         <div class="news-grid">
 
-                    <?php else : // Alle anderen Artikel ?>
+                    <?php else : ?>
 
                         <article id="post-<?php the_ID(); ?>" <?php post_class('news-card standard-article'); ?>>
                             <div class="news-card__image-container">
@@ -120,7 +119,7 @@ get_header(); ?>
                                 <?php endif; ?>
                                 
                                 <?php
-                                $categories = get_the_terms(get_the_ID(), 'uv_news_category'); // Annahme: Taxonomie heißt 'uv_news_category'
+                                $categories = get_the_terms(get_the_ID(), 'uv_news_category');
                                 if ($categories && !is_wp_error($categories)) :
                                     $category = $categories[0];
                                 ?>
@@ -147,7 +146,7 @@ get_header(); ?>
 
                 <?php endwhile; ?>
                 
-                <?php if ( $post_counter > 0 ) : // Schließt das Grid-Div, wenn Artikel vorhanden waren ?>
+                <?php if ( $post_counter > 0 ) : ?>
                     </div>
                 <?php endif; ?>
 
