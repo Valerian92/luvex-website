@@ -615,3 +615,49 @@ body {
     border-radius: var(--radius-md);
     z-index: 9999;
 }
+
+
+
+/*
+==============================================================================
+KORREKTER GAP FIX - FÜR _header.css (AM ENDE HINZUFÜGEN)
+==============================================================================
+*/
+
+/* 
+PROBLEM: Astra setzt body padding-top für transparent header
+LÖSUNG: Entferne body padding, setze eigenes für fixed header
+*/
+
+/* KORRIGIERE BODY PADDING-TOP FÜR FIXED HEADER */
+body {
+    padding-top: 80px !important; /* Force korrektes padding */
+}
+
+/* ALTERNATIVE: Astra body-Klassen spezifisch überschreiben */
+body.astra-hfb-header,
+body.ast-desktop,
+body.ast-header-break-point {
+    padding-top: 80px !important;
+}
+
+/* ZUSÄTZLICH: Erste Content-Section direkt positionieren */
+.site-content {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* ASTRA HEADER INTERFERENCE ENTFERNEN */
+.ast-header-break-point .ast-mobile-header-wrap {
+    display: none !important;
+}
+
+/* FALLS ASTRA ZUSÄTZLICHE CONTAINER HAT */
+body.astra-hfb-header .site-content {
+    margin-top: 0 !important;
+}
+
+body.ast-separate-container .site-content {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
