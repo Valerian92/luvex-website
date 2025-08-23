@@ -130,7 +130,7 @@ Last Update: 2025-08-21
     box-shadow: 
         0 8px 25px rgba(109, 213, 237, 0.4),
         0 0 20px rgba(138, 43, 226, 0.3);
-    color: var(--luvex-white) !important;
+    color: var(--luvex-white);
 }
 
 @keyframes gradient-shift {
