@@ -93,11 +93,9 @@ Last Update: 2025-08-21
     border-radius: var(--radius-full);
     text-decoration: none;
     font-weight: 600;
-    transition: all 0.3s ease;
     font-size: var(--text-base);
-    position: relative;
-    overflow: hidden;
 }
+
 
 .luvex-hero__cta:hover {
     background: var(--luvex-bright-cyan);
@@ -150,22 +148,16 @@ Last Update: 2025-08-21
 
 /* --- 2.3 Generic CTA Buttons --- */
 .luvex-cta-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-xs);
-    padding: 1.25rem 2.5rem;
-    font-size: 1.125rem;
-    font-weight: 700;
-    border-radius: 50px;
-    background: var(--luvex-bright-cyan);
-    color: #ffffff;
-    text-decoration: none;
-    transition: all 0.3s ease;
+    padding: 1.25rem 2.5rem; /* ← Größere Padding */
+    font-size: 1.125rem; /* ← Größere Schrift */
+    font-weight: 700; /* ← Stärkere Schrift */
+    border-radius: 50px; /* ← Andere Border-Radius */
+    transition: all 0.3s ease; /* ← Nur Primary hat Transition */
 }
 
 .luvex-cta-primary:hover {
-    background: #0891b2; /* cyan-600 */
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
     transform: scale(1.05);
 }
 
