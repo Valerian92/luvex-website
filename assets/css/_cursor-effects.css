@@ -294,6 +294,35 @@ HOVER EFFECTS - Lila Glow beim Hover über Buttons
         0 0 35px rgba(138, 43, 226, 0.6);
 }
 
+
+/* ==============================================================================
+NAVIGATION CURSOR OVERRIDE - Verhindert Doppel-Cursor
+==============================================================================
+*/
+.header-nav, 
+.header-nav *,
+.main-navigation,
+.main-navigation *,
+.nav-menu,
+.nav-menu *,
+.menu,
+.menu * {
+    cursor: auto !important;
+}
+
+body.custom-cursor-active .header-nav,
+body.custom-cursor-active .header-nav *,
+body.custom-cursor-active .main-navigation,
+body.custom-cursor-active .main-navigation *,
+body.custom-cursor-active .nav-menu,
+body.custom-cursor-active .nav-menu *,
+body.custom-cursor-active .menu,
+body.custom-cursor-active .menu * {
+    cursor: auto !important;
+}
+
+
+
 /* ==============================================================================
 RESPONSIVE & FALLBACK
 ==============================================================================
