@@ -1,90 +1,102 @@
 /**
- * LUVEX CURSOR EFFECTS - SIMPLIFIED SYSTEM (v2)
- * * Description: Creates a custom cursor.
- * Activation: This script only runs if the <body> tag has the class 'custom-cursor-active'.
- * This makes enabling/disabling the cursor system as easy as adding a class in PHP.
+ * LUVEX CURSOR EFFECTS - PERFORMANCE OPTIMIZED
  */
 document.addEventListener('DOMContentLoaded', function() {
     
-    // --- ACTIVATION CHECK ---
-    // Das Skript bricht sofort ab, wenn die Body-Klasse nicht vorhanden ist.
     if (!document.body.classList.contains('custom-cursor-active')) {
         console.log('🎯 Custom Cursor ist für diese Seite nicht aktiv.');
         return;
     }
 
-    console.log('🎯 LUVEX Cursor System wird initialisiert...');
-
-    // === CONFIGURATION (kann später erweitert werden) ===
-    const defaultStyle = 'quantum'; // Standard-Style, wenn nichts anderes definiert ist.
-
-    // === CURSOR STYLES ===
-    const CURSOR_STYLES = {
-        'classic': 'cursor-classic',
-        'energy': 'cursor-energy',
-        'precision': 'cursor-precision',
-        'particles': 'cursor-particles',
-        'quantum': 'cursor-quantum', // ⭐ LUVEX STANDARD
-        'beam': 'cursor-beam'
+    // DEBUGGING DETECTION
+    const isDebugging = () => {
+        return window.outerHeight - window.innerHeight > 200 || // DevTools offen
+               window.outerWidth - window.innerWidth > 200 ||
+               console.profile !== undefined; // Console API verfügbar
     };
 
-    let currentStyle = defaultStyle;
     let cursor = null;
     let mouseX = 0;
     let mouseY = 0;
-    let isHoveringButton = false;
+    let animationFrame = null;
+    let isVisible = false;
 
     function createCursor() {
         cursor = document.createElement('div');
-        // Fügt 'visible' hinzu, damit die CSS-Regel greift
-        cursor.className = `custom-cursor ${CURSOR_STYLES[currentStyle]} visible`; 
+        cursor.className = `custom-cursor cursor-quantum visible`;
+        
+        // FALLBACK für Debugging
+        if (isDebugging()) {
+            cursor.style.cssText = `
+                position: fixed;
+                width: 20px;
+                height: 20px;
+                background: rgba(109, 213, 237, 0.8);
+                border: 2px solid #fff;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                mix-blend-mode: normal;
+            `;
+            console.log('🐛 Debug-Modus: Vereinfachter Cursor aktiv');
+        }
+        
         document.body.appendChild(cursor);
     }
 
-    function updateCursorPosition() {
-        if (!cursor) return;
-        cursor.style.left = mouseX + 'px';
-        cursor.style.top = mouseY + 'px';
+    function updateCursor() {
+        if (!cursor || !isVisible) return;
+        
+        cursor.style.transform = `translate(${mouseX - 10}px, ${mouseY - 10}px)`;
+        
+        // Performance: Nur bei Bedarf updaten
+        if (isVisible) {
+            animationFrame = requestAnimationFrame(updateCursor);
+        }
     }
 
-    // === EVENT LISTENERS ===
+    // THROTTLED MOUSEMOVE (bessere Performance)
+    let lastUpdate = 0;
     document.addEventListener('mousemove', (e) => {
+        const now = Date.now();
+        if (now - lastUpdate < 16) return; // ~60fps limit
+        
         mouseX = e.clientX;
         mouseY = e.clientY;
+        lastUpdate = now;
         
         if (!cursor) {
             createCursor();
         }
         
-        // Fügt die 'active'-Klasse hinzu, um den Cursor einzublenden
-        cursor.classList.add('active');
-        updateCursorPosition();
-    });
-
-    document.addEventListener('mouseleave', () => {
-        if (cursor) {
-            cursor.classList.remove('active');
+        if (!isVisible) {
+            isVisible = true;
+            cursor.classList.add('active');
+            updateCursor();
         }
     });
 
-    // Button Hover Effects (global)
-    const interactiveElements = document.querySelectorAll('a, button, .btn, .luvex-cta-primary, .luvex-cta-secondary');
-    
-    interactiveElements.forEach(element => {
-        element.addEventListener('mouseenter', () => {
-            if (cursor) {
-                cursor.classList.add('hover');
-                isHoveringButton = true;
-            }
-        });
-
-        element.addEventListener('mouseleave', () => {
-            if (cursor) {
-                cursor.classList.remove('hover');
-                isHoveringButton = false;
-            }
-        });
+    document.addEventListener('mouseleave', () => {
+        isVisible = false;
+        if (cursor) cursor.classList.remove('active');
+        if (animationFrame) {
+            cancelAnimationFrame(animationFrame);
+            animationFrame = null;
+        }
     });
 
-    console.log(`✅ LUVEX Cursor System geladen. Style: ${currentStyle}`);
+    // Button Hover (vereinfacht)
+    document.addEventListener('mouseenter', (e) => {
+        if (e.target.matches('a, button, .btn, .luvex-cta-primary, .luvex-cta-secondary')) {
+            if (cursor) cursor.classList.add('hover');
+        }
+    }, true);
+
+    document.addEventListener('mouseleave', (e) => {
+        if (e.target.matches('a, button, .btn, .luvex-cta-primary, .luvex-cta-secondary')) {
+            if (cursor) cursor.classList.remove('hover');
+        }
+    }, true);
+
+    console.log('✅ LUVEX Cursor System geladen (Performance optimiert)');
 });

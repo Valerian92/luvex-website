@@ -154,7 +154,7 @@ Last Update: 2025-08-21
     transform: scale(1.05);
 }
 
-/* NEUE Animation Modifier-Klasse */
+/* NEUE Animation Modifier-Klasse - KORRIGIERT */
 .luvex-cta--animated:hover {
     background: linear-gradient(135deg, 
         var(--luvex-bright-cyan) 0%, 
@@ -165,8 +165,14 @@ Last Update: 2025-08-21
     color: var(--luvex-white) !important;
     box-shadow: 
         0 8px 25px rgba(109, 213, 237, 0.4),
-        0 0 20px rgba(138, 43, 226, 0.3);
-    transform: scale(1.05);
+        0 0 20px rgba(138, 43, 226, 0.3) !important;
+    /* ENTFERNT: transform: scale(1.05); */
+}
+
+/* Hero-spezifischer Override für transparenten Button */
+.luvex-hero__cta.luvex-cta--animated {
+    background: transparent !important;
+    border: 2px solid var(--luvex-bright-cyan);
 }
 
 

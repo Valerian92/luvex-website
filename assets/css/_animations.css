@@ -167,6 +167,7 @@ Last Update: 2025-08-23 (Refactored)
 }
 
 
+
 @keyframes gradient-shift {
     0%, 100% { 
         background-position: 0% 50%; 
@@ -175,8 +176,4 @@ Last Update: 2025-08-23 (Refactored)
         background-position: 100% 50%; 
     }
 }
-
-
-
-
 

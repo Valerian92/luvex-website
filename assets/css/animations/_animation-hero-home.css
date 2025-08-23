@@ -48,7 +48,7 @@ LUVEX THEME - HOMEPAGE HERO ANIMATION (VEREINFACHT)
     animation-play-state: paused;
 }
 
-/* Energy Pulse Keyframe */
+
 @keyframes energy-pulse {
     0% { 
         width: 0; 
