@@ -13,12 +13,14 @@ get_header(); ?>
 <section class="luvex-hero luvex-hero--compact">
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
-            <p class="luvex-hero__description">
-                The latest innovations, research findings, and industry updates in ultraviolet technology.
-            </p>
+            <!-- REIHENFOLGE GEÄNDERT: Titel jetzt oben -->
             <h1 class="luvex-hero__title">
                 UV Technology <span class="text-highlight">News</span>
             </h1>
+            <!-- TEXT GEKÜRZT: Passt jetzt in eine Zeile -->
+            <p class="luvex-hero__description">
+                The latest news and innovations in UV technology.
+            </p>
         </div>
         <div class="luvex-hero__cta-container">
             <a href="#latest-articles" class="luvex-hero__cta-secondary">

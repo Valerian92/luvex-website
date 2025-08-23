@@ -597,104 +597,12 @@ Last Update: 2025-08-01
     color: var(--luvex-accent-blue);
 }
 
-
-
 /*
 ==============================================================================
-LUVEX THEME - NEWS HERO REDESIGN (2025-08-14)
-==============================================================================
-Description: Anpassungen für das neue Hero-Layout auf der News-Seite.
+NEUE ANPASSUNG: Kompakter News Hero (2025-08-23)
 ==============================================================================
 */
-
-/* --- 1. Hero Section Layout anpassen --- */
-/* Wir machen aus der bestehenden Sektion einen Flex-Container,
-   um den Inhalt perfekt vertikal zu zentrieren. */
-.news-hero-section {
-    /*min-height: 70vh; * Eine gute Höhe für einen Header ohne Buttons */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-/* Der bestehende Content-Container wird zum Haupt-Wrapper. */
-.news-hero-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* Wir entfernen das fixe Padding, da die Sektion jetzt zentriert. */
-    padding: 3rem 1.5rem; 
-}
-
-
-/* --- 2. Typografie an das neue Design anpassen --- */
-
-/* Titel wird deutlich größer */
-.news-hero-content .title {
-    font-size: clamp(3rem, 6vw, 4.5rem); /* Entspricht text-4xl bis text-7xl */
-    font-weight: 800; /* Behalten wir bei, ist gut */
-    margin-bottom: 1.5rem; /* Mehr Abstand nach unten */
-}
-
-/* Subtitle wird ebenfalls größer und bekommt mehr Abstand */
-.news-hero-content .subtitle {
-    font-size: clamp(1.5rem, 3vw, 1.875rem); /* Entspricht text-2xl bis text-3xl */
-    color: var(--luvex-gray-300, #dee2e6); /* Ein helleres Grau für besseren Kontrast */
-    max-width: 50rem; /* 800px */
-    line-height: 1.5;
-}
-
-/* --- 4.3 Entry Content - Responsive Images --- */
-.entry-content img,
-.entry-content .content-image {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 2rem auto;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-}
-
-.entry-content .content-image-wrapper {
-    margin: 2rem 0;
-    text-align: center;
-}
-
-.entry-content .image-caption {
-    font-size: 0.875rem;
-    color: #64748b;
-    margin-top: 0.75rem;
-    font-style: italic;
-    text-align: center;
-}
-
-/* Mobile Optimierung */
-@media (max-width: 768px) {
-    .entry-content img,
-    .entry-content .content-image {
-        margin: 1.5rem auto;
-        border-radius: 0.25rem;
-    }
-    
-    .entry-content .content-image-wrapper {
-        margin: 1.5rem 0;
-    }
-}
-
-
-
-/* WICHTIGE Responsive Image Rules */
-.entry-content img,
-.single-uv_news-container img {
-    max-width: 100% !important;
-    height: auto !important;
-    width: auto !important;
-}
-
-.entry-content .content-image {
-    max-width: 100% !important;
-    height: auto !important;
-    display: block !important;
-    margin: 0 auto !important;
+.luvex-hero--compact {
+    min-height: 35vh; /* Noch geringere Höhe für schnelleren Content-Zugriff */
+    padding: var(--space-md) 2rem; /* Vertikales Padding reduziert */
 }
