@@ -12,29 +12,26 @@ Last Update: 2025-08-23
 
 /*
 ==============================================================================
-NEUES HERO LAYOUT: Split & Compact (ersetzt vorherige Anpassungen)
+FINALES HERO LAYOUT: Split & Compact
 ==============================================================================
 */
 
-/* Haupt-Section: Schmaler, linksbündig und mit Abstand nach oben */
+/* Haupt-Section: KORREKTUR - margin entfernt, padding-top erhöht */
 .luvex-hero--split-compact {
-    min-height: auto; /* Höhe automatisch an Inhalt anpassen */
-    padding: 2rem; /* Weniger vertikales Padding */
-    margin-top: 4rem; /* Größerer Abstand zum Menü */
+    min-height: auto;
+    padding: 6rem 0 3rem 0; /* Oben mehr Padding, unten etwas weniger */
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Inhalt links starten lassen */
+    justify-content: flex-start;
 }
 
-/* Container: Nutzt Flexbox für die Links/Rechts-Aufteilung */
+/* Container: KORREKTUR - Breiten-Definition entfernt, wird von .container übernommen */
 .luvex-hero--split-compact .luvex-hero__container {
     display: flex;
-    flex-direction: row; /* Nebeneinander auf Desktops */
-    justify-content: space-between; /* Maximaler Abstand zwischen Text und Buttons */
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    text-align: left; /* Text linksbündig */
-    width: 100%;
-    max-width: var(--container-max-width); /* Nutzt die volle Containerbreite */
+    text-align: left;
     gap: 2rem;
 }
 
@@ -46,34 +43,33 @@ NEUES HERO LAYOUT: Split & Compact (ersetzt vorherige Anpassungen)
 /* Rechte Seite (Buttons): Schrumpft nicht und bleibt kompakt */
 .luvex-hero--split-compact .luvex-hero__cta-container {
     flex-shrink: 0;
-    margin-top: 0; /* Oberen Abstand zurücksetzen */
-    gap: 1rem; /* Abstand zwischen den Buttons anpassen */
+    margin-top: 0;
+    gap: 1rem;
 }
 
 /* Responsive Anpassung für mobile Geräte */
 @media (max-width: 768px) {
     .luvex-hero--split-compact {
-        margin-top: 2rem;
-        padding: 2rem 1.5rem;
+        padding: 4rem 0 2rem 0; /* Padding für Mobile anpassen */
     }
 
     .luvex-hero--split-compact .luvex-hero__container {
-        flex-direction: column; /* Untereinander auf Mobilgeräten */
-        align-items: flex-start; /* Alles linksbündig starten */
+        flex-direction: column;
+        align-items: flex-start;
         text-align: left;
         gap: 1.5rem;
     }
 
     .luvex-hero--split-compact .luvex-hero__cta-container {
-        flex-direction: column; /* Buttons auch untereinander */
+        flex-direction: column;
         align-items: flex-start;
         width: 100%;
     }
 
     .luvex-hero--split-compact .luvex-hero__cta,
     .luvex-hero--split-compact .luvex-hero__cta-secondary {
-        width: 100%; /* Buttons nehmen die volle Breite ein */
-        justify-content: center; /* Text im Button zentrieren */
+        width: 100%;
+        justify-content: center;
     }
 }
 
