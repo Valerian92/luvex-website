@@ -1,10 +1,10 @@
 /*
 ==============================================================================
-LUVEX THEME v3.0 - HEADER (Optimized Dropdowns)
+LUVEX THEME v3.1 - HEADER (Swapped Dropdown Directions)
 ==============================================================================
 
-Description: Styling for the main site header and navigation system.
-             Implements mixed-direction dropdowns (down, then right).
+Description: Implements right-then-down dropdown navigation.
+             Level 2 opens right, Level 3 opens down.
 Dependencies: _variables.css, _core.css
 Last Update: 2025-08-23
 
@@ -51,7 +51,7 @@ Last Update: 2025-08-23
 }
 
 /* ==========================================================================
-   3. MAIN NAVIGATION (Unchanged links, new structure for dropdowns)
+   3. MAIN NAVIGATION (Unchanged)
    ========================================================================== */
 .main-navigation {
     flex-grow: 1;
@@ -104,65 +104,49 @@ Last Update: 2025-08-23
 }
 
 /* ==========================================================================
-   4. DROPDOWN MENUS (SUB-MENUS) - NEW LOGIC
+   4. DROPDOWN MENUS (SUB-MENUS) - REVERSED LOGIC
    ========================================================================== */
 
 /* --- 4.1 General Sub-Menu Styling --- */
 .main-navigation .sub-menu {
     position: absolute;
-    display: block; /* Changed from flex to block for vertical stacking */
+    display: block;
     background: var(--luvex-dark-blue);
     width: max-content; 
-    min-width: 240px; /* Increased min-width for better readability */
+    min-width: 240px;
     z-index: 9999;
     opacity: 0;
     visibility: hidden;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(109, 213, 237, 0.2);
-    transform: translateY(10px);
     transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
 }
 
 .main-navigation .menu-item-has-children:hover > .sub-menu {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translateY(0) translateX(0); /* Reset transform on hover */
 }
 
-/* --- 4.2 Level 2 Menu (Opens DOWN) --- */
+/* --- 4.2 Level 2 Menu (Opens RIGHT) --- */
 .main-navigation > ul > li > .sub-menu {
-    top: 100%;
-    left: 0;
-    margin-top: 8px; /* Creates a small gap from the parent */
-}
-
-/* --- 4.3 Level 3 Menu (Opens RIGHT by default) --- */
-.main-navigation .sub-menu .sub-menu {
     top: 0;
     left: 100%;
     transform: translateY(0) translateX(10px); /* Animate from the left */
     margin-left: 1px;
 }
 
-.main-navigation .sub-menu .menu-item-has-children:hover > .sub-menu {
-    transform: translateY(0) translateX(0);
-}
-
-/* --- 4.4 Level 4 Menu (Opens DOWN again) --- */
-/* This creates the alternating pattern */
-.main-navigation .sub-menu .sub-menu .sub-menu {
+/* --- 4.3 Level 3 Menu (Opens DOWN) --- */
+.main-navigation .sub-menu .sub-menu {
     top: 100%;
     left: 0;
     transform: translateY(10px); /* Animate from top */
-}
-.main-navigation .sub-menu .sub-menu .menu-item-has-children:hover > .sub-menu {
-     transform: translateY(0);
+    margin-top: 1px;
 }
 
-
-/* --- 4.5 JS Helper Classes for Viewport Correction --- */
-/* This class is added by JS if a right-opening menu would go off-screen */
+/* --- 4.4 JS Helper Classes for Viewport Correction --- */
+/* For menus opening to the side (Level 2) */
 .main-navigation .sub-menu.opens-left {
     left: auto;
     right: 100%;
@@ -170,20 +154,17 @@ Last Update: 2025-08-23
     margin-right: 1px;
     transform: translateY(0) translateX(-10px); /* Animate from the right */
 }
-.main-navigation .sub-menu .menu-item-has-children:hover > .sub-menu.opens-left {
-    transform: translateY(0) translateX(0);
-}
 
-/* This class is added by JS if a down-opening menu would go off-screen */
+/* For menus opening down (Level 3) */
 .main-navigation .sub-menu.align-right {
     left: auto;
     right: 0;
 }
 
 
-/* --- 4.6 Dropdown Links Styling (Unchanged) --- */
+/* --- 4.5 Dropdown Links Styling --- */
 .main-navigation .sub-menu a {
-    padding: 0.85rem 1.5rem; /* Adjusted padding */
+    padding: 0.85rem 1.5rem;
     display: block;
     font-size: var(--text-sm);
     border-bottom: 1px solid rgba(109, 213, 237, 0.1);
@@ -192,7 +173,7 @@ Last Update: 2025-08-23
     font-weight: 500;
     transition: all 0.3s ease;
     display: flex;
-    justify-content: space-between; /* Aligns arrow to the right */
+    justify-content: space-between;
     align-items: center;
 }
 .main-navigation .sub-menu a:hover {
@@ -203,11 +184,12 @@ Last Update: 2025-08-23
 .main-navigation .sub-menu li:last-child a {
     border-bottom: none;
 }
-.main-navigation .sub-menu .dropdown-arrow {
-    transform: rotate(-90deg); /* Point arrows to the right */
+/* Arrow for sub-menus that open DOWN (Level 3) */
+.main-navigation .sub-menu .sub-menu .dropdown-arrow {
+    transform: rotate(0deg);
 }
-.main-navigation .sub-menu .menu-item-has-children:hover > a > .dropdown-arrow {
-     transform: rotate(-90deg) scale(1.2); /* Slight emphasis on hover */
+.main-navigation .sub-menu .sub-menu .menu-item-has-children:hover > a > .dropdown-arrow {
+     transform: rotate(180deg);
 }
 
 
@@ -218,32 +200,8 @@ Last Update: 2025-08-23
 .main-navigation .ast-menu-toggle {
     display: none !important;
 }
-.header-cta {
-    flex-shrink: 0;
-}
-.header-cta-button {
-    background: var(--color-primary);
-    color: var(--color-white);
-    padding: 12px 24px;
-    border-radius: var(--radius-full);
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    transition: var(--transition-normal);
-    text-decoration: none;
-}
-.header-cta-button:hover {
-    background: #0056b3;
-    color: var(--color-white);
-}
-.mobile-menu-toggle {
-    display: none;
-}
 @media (max-width: 1024px) { 
-    .main-navigation, .header-cta {
+    .main-navigation {
         display: none;
-    }
-    .mobile-menu-toggle {
-        display: block;
     }
 }
