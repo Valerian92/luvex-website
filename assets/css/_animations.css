@@ -496,17 +496,16 @@ Last Update: 2025-08-05
         opacity: 0.8; 
     }
     50% { 
-        width: 60px; /* ← BEGRENZEN: statt 100px+ */
-        height: 60px; /* ← BEGRENZEN: statt 100px+ */
+        width: 120px; /* ← Größer: bis Buttonrand */
+        height: 120px;
         opacity: 0.4; 
     }
     100% { 
-        width: 80px; /* ← BEGRENZEN: statt 200px+ */
-        height: 80px; /* ← BEGRENZEN: statt 200px+ */
+        width: 160px; /* ← Größer: bis Buttonrand */
+        height: 160px;
         opacity: 0; 
     }
 }
-
 
 
 @keyframes focus-ring-pulse {

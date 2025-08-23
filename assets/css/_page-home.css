@@ -108,21 +108,24 @@ Last Update: 2025-08-22
 
 
 
-/* Nach .simulator-cta { margin-top: 2rem; } hinzufügen: */
-.simulator-cta.luvex-cta-primary {
-    background: rgba(27, 42, 73, 0.15); /* Leichter dunkler Hintergrund */
-    color: var(--luvex-white); /* Weiße Schrift für Kontrast */
-    font-weight: 700; /* Stärkere Schrift */
-}
-
-.simulator-cta.luvex-cta-primary:hover {
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
-}
-
 
 /* --- Ende Section 1 Hero --- */
 /* --- Ende Section 1 Hero --- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -136,6 +139,18 @@ Last Update: 2025-08-22
 
 /* --- Ende Section 2  --- */
 /* --- Ende Section 2  --- */
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

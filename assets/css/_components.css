@@ -168,10 +168,10 @@ Last Update: 2025-08-21
     background: linear-gradient(135deg, 
         var(--luvex-bright-cyan) 0%, 
         #8a2be2 50%, 
-        var(--luvex-bright-cyan) 100%);
+        var(--luvex-bright-cyan) 100%) !important; /* ← Notfall !important */
     background-size: 200% 200%;
     animation: gradient-shift 2s ease-in-out infinite;
-    color: var(--luvex-white);
+    color: var(--luvex-white) !important;
     transform: scale(1.05);
 }
 
