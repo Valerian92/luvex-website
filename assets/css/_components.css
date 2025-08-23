@@ -153,6 +153,7 @@ Last Update: 2025-08-21
     font-weight: 700; /* ← Stärkere Schrift */
     border-radius: 50px; /* ← Andere Border-Radius */
     transition: all 0.3s ease; /* ← Nur Primary hat Transition */
+    position: relative;
 }
 
 .luvex-cta-primary:hover {

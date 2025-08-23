@@ -9,6 +9,11 @@ Last Update: 2025-08-22
 ==============================================================================
 */
 
+
+/* --- Anfang Section 1 Hero --- */
+/* --- Anfang Section 1 Hero --- */
+
+
 /* --- 1. Hero Section Homepage-Specifics --- */
 .home .luvex-hero__cta-container {
     display: flex;
@@ -101,6 +106,49 @@ Last Update: 2025-08-22
     cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="%236dd5ed" stroke="%2300bcd4" stroke-width="3" opacity="0.8"/><circle cx="12" cy="12" r="3" fill="%23ffffff" opacity="0.9"/></svg>') 12 12, auto;
 }
 
+
+
+/* Nach .simulator-cta { margin-top: 2rem; } hinzufügen: */
+.simulator-cta.luvex-cta-primary {
+    background: rgba(27, 42, 73, 0.15); /* Leichter dunkler Hintergrund */
+    color: var(--luvex-white); /* Weiße Schrift für Kontrast */
+    font-weight: 700; /* Stärkere Schrift */
+}
+
+.simulator-cta.luvex-cta-primary:hover {
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+}
+
+
+/* --- Ende Section 1 Hero --- */
+/* --- Ende Section 1 Hero --- */
+
+
+
+
+
+
+
+/* --- Anfang Section 2  --- */
+/* --- Anfang Section 2  --- */
+
+
+/* --- Ende Section 2  --- */
+/* --- Ende Section 2  --- */
+
+
+
+
+
+
+
+
+
+
+/* --- Anfang Section 3  --- */
+/* --- Anfang Section 3  --- */
+
 /* --- 5. UV Simulator Showcase (Homepage-spezifisch) --- */
 .uv-simulator-showcase { 
     background: linear-gradient(135deg, var(--luvex-dark-blue), var(--luvex-accent-blue)); 
@@ -135,6 +183,27 @@ Last Update: 2025-08-22
 .simulator-cta { 
     margin-top: 2rem; 
 }
+
+
+
+/* --- Ende Section 3  --- */
+/* --- Ende Section 3  --- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Anfang Section 4 --- */
+/* --- Anfang Section 4 --- */
+
 
 /* --- 6. Global UV Expert Community Section (Homepage-spezifisch) --- */
 .homepage-community-section.section {
@@ -204,6 +273,22 @@ Last Update: 2025-08-22
     gap: 1rem; 
     flex-wrap: wrap; 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Anfang Section 5 --- */
+/* --- Anfang Section 5 --- */
 
 /* --- 7. Evidence-Based Expertise Section (Homepage-spezifisch) --- */
 .evidence-section.section {
