@@ -1,10 +1,10 @@
 /*
 ==============================================================================
-LUVEX THEME v3.2 - HEADER (Final Dropdown Fix)
+LUVEX THEME v3.3 - HEADER (Final Dropdown Fix with !important)
 ==============================================================================
 
 Description: Implements right-then-down dropdown navigation.
-             Fixes positioning context for Level 3+ menus.
+             Uses !important to override parent theme (Astra) conflicts.
 Dependencies: _variables.css, _core.css
 Last Update: 2025-08-23
 
@@ -130,12 +130,13 @@ Last Update: 2025-08-23
 }
 
 /*
- * KORREKTUR: Diese Regel ist entscheidend.
- * Sie stellt sicher, dass jeder Menüpunkt innerhalb eines Sub-Menüs
- * als Positionierungs-Anker für sein eigenes Kind-Menü dienen kann.
+ * =========================================================================
+ * HIER IST DIE ENDGÜLTIGE KORREKTUR
+ * Wir erzwingen die Positionierung mit !important, um Astra zu überschreiben.
+ * =========================================================================
 */
 .main-navigation .sub-menu > li {
-    position: relative;
+    position: relative !important;
 }
 
 /* --- 4.2 Level 2 Menu (Opens RIGHT) --- */
@@ -155,7 +156,6 @@ Last Update: 2025-08-23
 }
 
 /* --- 4.4 JS Helper Classes for Viewport Correction --- */
-/* For menus opening to the side (Level 2) */
 .main-navigation .sub-menu.opens-left {
     left: auto;
     right: 100%;
@@ -163,8 +163,6 @@ Last Update: 2025-08-23
     margin-right: 1px;
     transform: translateY(0) translateX(-10px); /* Animate from the right */
 }
-
-/* For menus opening down (Level 3) */
 .main-navigation .sub-menu.align-right {
     left: auto;
     right: 0;
@@ -193,7 +191,6 @@ Last Update: 2025-08-23
 .main-navigation .sub-menu li:last-child a {
     border-bottom: none;
 }
-/* Arrow for sub-menus that open DOWN (Level 3) */
 .main-navigation .sub-menu .sub-menu .dropdown-arrow {
     transform: rotate(0deg);
 }
