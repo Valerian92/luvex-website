@@ -1,10 +1,10 @@
 /*
 ==============================================================================
-LUVEX THEME v3.1 - HEADER (Swapped Dropdown Directions)
+LUVEX THEME v3.2 - HEADER (Final Dropdown Fix)
 ==============================================================================
 
 Description: Implements right-then-down dropdown navigation.
-             Level 2 opens right, Level 3 opens down.
+             Fixes positioning context for Level 3+ menus.
 Dependencies: _variables.css, _core.css
 Last Update: 2025-08-23
 
@@ -127,6 +127,15 @@ Last Update: 2025-08-23
     opacity: 1;
     visibility: visible;
     transform: translateY(0) translateX(0); /* Reset transform on hover */
+}
+
+/*
+ * KORREKTUR: Diese Regel ist entscheidend.
+ * Sie stellt sicher, dass jeder Menüpunkt innerhalb eines Sub-Menüs
+ * als Positionierungs-Anker für sein eigenes Kind-Menü dienen kann.
+*/
+.main-navigation .sub-menu > li {
+    position: relative;
 }
 
 /* --- 4.2 Level 2 Menu (Opens RIGHT) --- */

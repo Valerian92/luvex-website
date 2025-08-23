@@ -270,6 +270,25 @@ Last Update: 2025-08-21
     margin: 0;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* --- 3.2 Knowledge Navigator Cards (Restored) --- */
 .knowledge-navigator-header { 
     text-align: center; 
@@ -386,6 +405,37 @@ Last Update: 2025-08-21
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
 }
+
+.knowledge-navigator .value-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.knowledge-navigator.is-visible .value-card {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.knowledge-navigator.is-visible .value-card:nth-child(1) { transition-delay: 0.2s; }
+.knowledge-navigator.is-visible .value-card:nth-child(2) { transition-delay: 0.4s; }
+.knowledge-navigator.is-visible .value-card:nth-child(3) { transition-delay: 0.6s; }
+
+
+/* --- 3.2 Knowledge Navigator Cards (ENDE) --- */
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* --- 3.3 Team Member Cards --- */
