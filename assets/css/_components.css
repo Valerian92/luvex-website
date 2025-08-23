@@ -80,47 +80,33 @@ Last Update: 2025-08-21
 ==============================================================================
 */
 
-/* --- 2.1 Primary Hero CTA Button --- */
+/* --- 2.1 Primary Hero CTA Button (BEREINIGT) --- */
 .luvex-hero__cta {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: var(--space-xs);
     padding: 16px 32px;
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
+    background: transparent; /* ← Transparent wie Secondary */
+    color: var(--luvex-bright-cyan); /* ← Cyan Text */
+    border: 2px solid var(--luvex-bright-cyan); /* ← Cyan Border */
     border-radius: var(--radius-full);
     text-decoration: none;
     font-weight: 600;
     transition: var(--transition-normal);
     font-size: var(--text-base);
-    border: 2px solid transparent;
 }
 
+/* Standard Hover (ohne hero-button-active) */
 .luvex-hero__cta:hover {
-    background: var(--luvex-white);
-    color: var(--luvex-dark-blue); /* ← Dunkle Schrift auf weißem Hintergrund */
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
-}
-
-/* Hero Button mit Primary Class - Optimiert */
-.luvex-hero__cta.luvex-cta-primary {
     background: var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
-    font-weight: 700; /* Stärkere Schrift für bessere Lesbarkeit */
-}
-
-/* Spezifischer Override für Primary Button */
-.luvex-hero__cta.luvex-cta-primary:hover {
-    background: var(--luvex-white);
-    color: var(--luvex-dark-blue); /* ← Sicherstellen dass Text dunkel wird */
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(109, 213, 237, 0.3);
+    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
 }
 
-
-.hero-button-active:hover {
+/* Gradient Hover nur für hero-button-active */
+.luvex-hero__cta.hero-button-active:hover {
     background: linear-gradient(135deg, 
         var(--luvex-bright-cyan) 0%, 
         #8a2be2 50%, 
@@ -132,6 +118,7 @@ Last Update: 2025-08-21
         0 0 20px rgba(138, 43, 226, 0.3);
     color: var(--luvex-white);
 }
+
 
 @keyframes gradient-shift {
     0%, 100% { background-position: 0% 50%; }
