@@ -1,11 +1,10 @@
 /*
 ==============================================================================
-PAGE: UV CURING - LAYOUT & SECTIONS (REPAIRED)
+PAGE: UV CURING - LAYOUT & SECTIONS (LAYOUT-FIX)
 ==============================================================================
 Datei: _page-uv-curing.css
-Beschreibung: Bereinigtes Layout für die UV Curing Seite. Hero-Sektion
-              wurde auf ein Standard-Layout zurückgesetzt, um die
-              Canvas-Animation zu reparieren.
+Beschreibung: Bereinigtes Layout für die UV Curing Seite. 
+              TEXT-AUSRICHTUNG OBEN KORRIGIERT!
 ==============================================================================
 */
 
@@ -16,8 +15,7 @@ Beschreibung: Bereinigtes Layout für die UV Curing Seite. Hero-Sektion
 */
 
 .hero-curing {
-    position: relative; /* Wichtig für die Positionierung des Canvas */
-    /* Die Höhe und das allgemeine Aussehen kommen von .luvex-hero in _components.css */
+    position: relative;
 }
 
 .hero-curing #curing-hero-canvas {
@@ -26,23 +24,21 @@ Beschreibung: Bereinigtes Layout für die UV Curing Seite. Hero-Sektion
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Stellt sicher, dass der Canvas im Hintergrund ist */
+    z-index: 1;
 }
 
 .hero-curing .luvex-hero__container {
     position: relative;
-    z-index: 2; /* Stellt sicher, dass der Inhalt über dem Canvas liegt */
-    pointer-events: none; /* Erlaubt Maus-Events, den Canvas zu erreichen */
+    z-index: 2;
+    pointer-events: none;
 }
 
 .hero-curing .luvex-hero__content {
-    /* Die Zentrierung wird von .luvex-hero__content in _components.css gehandhabt */
-    /* Hier können spezifische Abstände angepasst werden */
-    gap: 1.5rem; /* Abstand zwischen den Elementen */
+    gap: 1.5rem;
 }
 
 .hero-curing .luvex-hero__title {
-    margin-bottom: 0; /* Standardabstand zurücksetzen */
+    margin-bottom: 0;
 }
 
 .hero-curing .luvex-hero__subtitle {
@@ -51,15 +47,14 @@ Beschreibung: Bereinigtes Layout für die UV Curing Seite. Hero-Sektion
 }
 
 .hero-curing .luvex-hero__description {
-    margin-bottom: 1rem; /* Etwas Abstand zu den Buttons */
+    margin-bottom: 1rem;
     max-width: 700px;
 }
 
 .hero-curing .luvex-hero__cta-container {
-    pointer-events: auto; /* Buttons wieder klickbar machen */
+    pointer-events: auto;
     margin-top: 1rem;
 }
-
 
 /*
 ==============================================================================
@@ -94,7 +89,7 @@ Beschreibung: Bereinigtes Layout für die UV Curing Seite. Hero-Sektion
     max-width: 1400px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Nebeneinander Layout */
+    grid-template-columns: 1fr 1fr;
     gap: 3rem;
     background-color: var(--luvex-white);
     border-radius: 16px;
@@ -104,7 +99,7 @@ Beschreibung: Bereinigtes Layout für die UV Curing Seite. Hero-Sektion
     align-items: stretch;
 }
 
-/* --- ANIMATION PANEL --- */
+/* --- ANIMATION PANEL (Links) --- */
 .animation-panel {
     background: linear-gradient(135deg, var(--luvex-dark-blue) 0%, #2D4A7C 100%);
     border-radius: 12px;
@@ -142,38 +137,49 @@ Beschreibung: Bereinigtes Layout für die UV Curing Seite. Hero-Sektion
     align-items: center;
     justify-content: center;
     position: relative;
-    min-height: 300px;
+    min-height: 400px; /* Größer für bessere Animationen */
 }
 
 #curing-animation-visual {
-    width: 300px;
-    height: 300px;
+    width: 380px; /* Vergrößert */
+    height: 380px; /* Vergrößert */
     position: relative;
+    overflow: visible;
 }
 
-/* --- CONTROL PANEL (TEXT) --- */
+/* --- CONTROL PANEL (Rechts) - TEXT-AUSRICHTUNG FIX --- */
 .control-panel {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     position: relative;
-    padding: 1rem;
+    padding: 2rem; /* Mehr Padding */
+    /* ENTFERNT: justify-content: center; <- Das war das Problem! */
 }
 
+/* FIX: Alle step-content sollen konsistent OBEN ausgerichtet sein */
 .step-content {
     opacity: 0;
     transform: translateX(30px);
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    position: absolute;
     pointer-events: none;
-    width: 100%;
+    
+    /* ALLE KONSISTENT POSITIONIERT */
+    position: absolute;
+    top: 0; /* Alle oben */
+    left: 0;
+    right: 0;
+    padding: 1rem;
 }
 
 .step-content.active {
     opacity: 1;
     transform: translateX(0);
-    position: relative;
     pointer-events: auto;
+    /* GLEICHE POSITIONIERUNG WIE INAKTIVE */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
 }
 
 .step-content.exiting {
@@ -182,8 +188,58 @@ Beschreibung: Bereinigtes Layout für die UV Curing Seite. Hero-Sektion
     transition-duration: 0.4s;
 }
 
-.step-content h3 { font-size: 1.8rem; color: var(--luvex-dark-blue); margin: 0 0 1rem 0; }
-.step-content p { font-size: 1.1rem; color: var(--luvex-gray-700); line-height: 1.7; margin: 0 0 1.5rem 0; }
+.step-content h3 { 
+    font-size: 1.8rem; 
+    color: var(--luvex-dark-blue); 
+    margin: 0 0 1rem 0; 
+}
+
+.step-content p { 
+    font-size: 1.1rem; 
+    color: var(--luvex-gray-700); 
+    line-height: 1.7; 
+    margin: 0 0 1.5rem 0; 
+}
+
+/* Benefits List für Step 6 */
+.benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.benefits-list li {
+    padding: 0.5rem 0;
+    color: var(--luvex-gray-700);
+    font-size: 1rem;
+}
+
+.benefits-list strong {
+    color: var(--luvex-dark-blue);
+}
+
+.final-cta {
+    margin-top: 1.5rem;
+}
+
+.final-cta a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-normal);
+}
+
+.final-cta a:hover {
+    background: var(--luvex-vibrant-blue);
+    color: var(--luvex-white);
+    transform: translateY(-2px);
+}
 
 /* --- NAVIGATION CONTROLS STYLING --- */
 .nav-arrow {
@@ -192,7 +248,11 @@ Beschreibung: Bereinigtes Layout für die UV Curing Seite. Hero-Sektion
     font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease;
     display: flex; align-items: center; justify-content: center;
 }
-.nav-arrow:hover { background: var(--luvex-bright-cyan); color: var(--luvex-dark-blue); transform: scale(1.1); }
+.nav-arrow:hover { 
+    background: var(--luvex-bright-cyan); 
+    color: var(--luvex-dark-blue); 
+    transform: scale(1.1); 
+}
 
 .step-indicator {
     width: 35px; height: 35px; border-radius: 50%; background: rgba(255, 255, 255, 0.2);
@@ -200,9 +260,16 @@ Beschreibung: Bereinigtes Layout für die UV Curing Seite. Hero-Sektion
     cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem;
     display: flex; align-items: center; justify-content: center;
 }
-.step-indicator.active { background: var(--luvex-bright-cyan); border-color: var(--luvex-bright-cyan); color: var(--luvex-dark-blue); transform: scale(1.1); }
-.step-indicator.completed { background: rgba(109, 213, 237, 0.3); border-color: var(--luvex-bright-cyan); }
-
+.step-indicator.active { 
+    background: var(--luvex-bright-cyan); 
+    border-color: var(--luvex-bright-cyan); 
+    color: var(--luvex-dark-blue); 
+    transform: scale(1.1); 
+}
+.step-indicator.completed { 
+    background: rgba(109, 213, 237, 0.3); 
+    border-color: var(--luvex-bright-cyan); 
+}
 
 /*
 ==============================================================================
@@ -212,7 +279,7 @@ Beschreibung: Bereinigtes Layout für die UV Curing Seite. Hero-Sektion
 
 @media (max-width: 992px) {
     .showcase-container {
-        grid-template-columns: 1fr; /* Untereinander auf Tablets */
+        grid-template-columns: 1fr;
         min-height: auto;
     }
     .animation-panel {
@@ -220,6 +287,11 @@ Beschreibung: Bereinigtes Layout für die UV Curing Seite. Hero-Sektion
     }
     .control-panel {
         text-align: center;
+        padding: 1rem;
+    }
+    #curing-animation-visual {
+        width: 320px;
+        height: 320px;
     }
 }
 
@@ -229,5 +301,15 @@ Beschreibung: Bereinigtes Layout für die UV Curing Seite. Hero-Sektion
     }
     .showcase-container {
         padding: 1.5rem;
+    }
+    #curing-animation-visual {
+        width: 280px;
+        height: 280px;
+    }
+    .step-content h3 {
+        font-size: 1.5rem;
+    }
+    .step-content p {
+        font-size: 1rem;
     }
 }
