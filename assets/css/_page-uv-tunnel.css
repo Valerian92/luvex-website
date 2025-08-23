@@ -27,9 +27,9 @@ Last Update: 2025-08-22
     margin-bottom: 0;
 }
 
-/* --- 1.3 Ensure proper spacing after buttons --- */
+/* --- 1.3 Ensure proper spacing after buttons (Increased Margin) --- */
 .luvex-hero--uv-tunnel .luvex-hero__subtitle {
-    margin-top: 1.5rem;
+    margin-top: 2.5rem; /* Erhöht von 1.5rem für mehr "Luft" */
 }
 
 /*

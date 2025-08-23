@@ -1,8 +1,7 @@
 <?php
 /**
  * Template Name: UV-Tunnel Systems
- * 
- * LUVEX UV-Tunnel Equipment Page
+ * * LUVEX UV-Tunnel Equipment Page
  * Uses existing hero components from _components.css + UV-specific animations
  */
 
@@ -54,10 +53,8 @@ get_header(); ?>
             Customized UV disinfection and curing solutions for industrial applications
         </p>
         
-        <p class="luvex-hero__description">
-            From technical consultation to turnkey installation - we develop UV-tunnel systems 
-            according to your specific requirements for optimal disinfection performance and productivity.
-        </p>
+        <!-- DESCRIPTION REMOVED FOR A CLEANER LOOK -->
+        
     </div>
     
     <!-- Professional Features Preview -->

@@ -5,7 +5,7 @@ LUVEX THEME - HOMEPAGE HERO ANIMATION
 Description: Alle Stile und Keyframes für die interaktive Photon-Animation
              und den animierten CTA-Button im Hero-Bereich der Startseite.
 Dependencies: Wird nur auf der Startseite geladen.
-Last Update: 2025-08-23
+Last Update: 2025-08-23 (Final Fixes)
 ==============================================================================
 */
 
@@ -26,10 +26,11 @@ Last Update: 2025-08-23
 
 /* --- 2. Animierter Button-Effekt --- */
 
-/* --- 2.1 Schriftfarbe & Hover-Effekt (NEU) --- */
-/* Stellt die weiße Schriftfarbe sicher und fügt die Farbverlauf-Animation hinzu */
+/* --- 2.1 Schriftfarbe & Hover-Effekt (FIXED) --- */
 .luvex-hero .simulator-cta {
-    color: var(--luvex-white) !important; /* Stellt sicher, dass der Text weiß ist */
+    color: var(--luvex-white) !important;
+    /* FIX: Verhindert, dass der Browser-Cursor (Hand) erscheint */
+    cursor: none;
 }
 
 .luvex-hero .simulator-cta:hover {
@@ -43,10 +44,11 @@ Last Update: 2025-08-23
     box-shadow: 
         0 8px 25px rgba(109, 213, 237, 0.4),
         0 0 20px rgba(138, 43, 226, 0.3);
+    /* FIX: Entfernt den Transition-Konflikt, damit die Animation läuft */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* --- 2.2 Hintergrund-Puls --- */
-/* Dieser ::before-Selektor erzeugt den pulsierenden Energie-Effekt */
 .luvex-hero .hero-button-active::before {
     content: '';
     position: absolute;
@@ -62,7 +64,6 @@ Last Update: 2025-08-23
     pointer-events: none;
 }
 
-/* Hält die Puls-Animation an, während der Mauszeiger darüber ist (NEU) */
 .luvex-hero .simulator-cta:hover::before {
     animation-play-state: paused;
 }
@@ -70,7 +71,7 @@ Last Update: 2025-08-23
 
 /* --- 3. Keyframes --- */
 
-/* Keyframe für den Button-Puls */
+/* Keyframe für den Button-Puls (FIXED: Größe erhöht) */
 @keyframes energy-pulse {
     0% { 
         width: 0; 
@@ -78,13 +79,13 @@ Last Update: 2025-08-23
         opacity: 0.8; 
     }
     50% { 
-        width: 240px;
-        height: 240px;
+        width: 400px;
+        height: 400px;
         opacity: 0.4; 
     }
     100% { 
-        width: 280px;
-        height: 280px;
+        width: 450px;
+        height: 450px;
         opacity: 0; 
     }
 }
