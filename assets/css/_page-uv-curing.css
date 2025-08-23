@@ -33,7 +33,12 @@ Beschreibung: Bereinigtes Layout für die UV Curing Seite.
     pointer-events: none;
 }
 
+/* NEU: Erzwingt die Zentrierung des Inhalts */
 .hero-curing .luvex-hero__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center; /* Stellt sicher, dass der Text zentriert ist */
     gap: 1.5rem;
 }
 

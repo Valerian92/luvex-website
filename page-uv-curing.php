@@ -6,7 +6,7 @@
 get_header(); ?>
 
 <!-- ==========================================================================
-     START: UV Curing Hero Section (Standard Layout)
+     START: UV Curing Hero Section (Angepasste Reihenfolge)
      ========================================================================== -->
 <section class="luvex-hero hero-curing">
     <canvas id="curing-hero-canvas"></canvas>
@@ -17,17 +17,7 @@ get_header(); ?>
                 UV <span class="text-highlight">Curing</span> Technology
             </h1>
 
-            <!-- 2. Subtitle -->
-            <h2 class="luvex-hero__subtitle">
-                Industrial UV curing for coatings, inks, and adhesives
-            </h2>
-
-            <!-- 3. Description -->
-            <p class="luvex-hero__description">
-                Optimize your UV curing processes for maximum efficiency and quality.
-            </p>
-            
-            <!-- 4. Buttons -->
+            <!-- 2. Buttons (NEUE POSITION) -->
             <div class="luvex-hero__cta-container">
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-hero__cta">
                     <i class="fas fa-comments"></i>
@@ -38,6 +28,17 @@ get_header(); ?>
                     <span>Explore UV Science</span>
                 </a>
             </div>
+
+            <!-- 3. Subtitle (NEUE POSITION) -->
+            <h2 class="luvex-hero__subtitle">
+                Industrial UV curing for coatings, inks, and adhesives
+            </h2>
+
+            <!-- 4. Description (NEUE POSITION) -->
+            <p class="luvex-hero__description">
+                Optimize your UV curing processes for maximum efficiency and quality.
+            </p>
+            
         </div>
     </div>
 </section>

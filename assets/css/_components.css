@@ -117,14 +117,7 @@ Last Update: 2025-08-21
     color: var(--luvex-white);
 }
 
-@keyframes gradient-shift {
-    0%, 100% { 
-        background-position: 0% 50%; 
-    }
-    50% { 
-        background-position: 100% 50%; 
-    }
-}
+
 /* --- 2.2 Secondary Hero CTA Button --- */
 .luvex-hero__cta-secondary {
     display: inline-flex;

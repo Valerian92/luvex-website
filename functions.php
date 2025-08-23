@@ -220,6 +220,12 @@ function luvex_enqueue_assets() {
         if (file_exists($curing_css_path)) {
             wp_enqueue_style('luvex-page-uv-curing', get_stylesheet_directory_uri() . '/assets/css/_page-uv-curing.css', array('luvex-main'), filemtime($curing_css_path));
         }
+        
+        // NEU: Spezifische Animationen für die Curing Gallery laden
+        $curing_gallery_css_path = get_stylesheet_directory() . '/assets/css/animations/_animation-uv-curing-gallery.css';
+        if (file_exists($curing_gallery_css_path)) {
+            wp_enqueue_style('luvex-animation-curing-gallery', get_stylesheet_directory_uri() . '/assets/css/animations/_animation-uv-curing-gallery.css', array('luvex-main'), filemtime($curing_gallery_css_path));
+        }
     }
 
     // UV-C Disinfection Page
@@ -227,6 +233,12 @@ function luvex_enqueue_assets() {
         $disinfection_css_path = get_stylesheet_directory() . '/assets/css/_page-uv-c-disinfection.css';
         if (file_exists($disinfection_css_path)) {
             wp_enqueue_style('luvex-page-uv-c-disinfection', get_stylesheet_directory_uri() . '/assets/css/_page-uv-c-disinfection.css', array('luvex-main'), filemtime($disinfection_css_path));
+        }
+
+        // NEU: Spezifische Animationen für die Disinfection Gallery laden
+        $disinfection_gallery_css_path = get_stylesheet_directory() . '/assets/css/animations/_animation-uv-disinfection-gallery.css';
+        if (file_exists($disinfection_gallery_css_path)) {
+            wp_enqueue_style('luvex-animation-disinfection-gallery', get_stylesheet_directory_uri() . '/assets/css/animations/_animation-uv-disinfection-gallery.css', array('luvex-main'), filemtime($disinfection_gallery_css_path));
         }
     }
 
