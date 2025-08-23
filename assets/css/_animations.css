@@ -40,6 +40,28 @@ Last Update: 2025-08-05
 }
 
 
+
+.luvex-hero .hero-button-active::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(138, 43, 226, 0.4) 0%, rgba(75, 0, 130, 0.6) 30%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: energy-pulse 2s ease-out infinite;
+    z-index: 0; /* ← ÄNDERN: von -1 auf 0 */
+    pointer-events: none;
+}
+
+/* Puls auch während Hover aktiv */
+.luvex-hero .hero-button-active:hover::before {
+    animation: energy-pulse 2s ease-out infinite; /* ← Explizit weiterführen */
+}
+
+
 /*
 ==============================================================================
 2. SCROLL-TRIGGERED ANIMATIONS
@@ -406,21 +428,7 @@ Last Update: 2025-08-05
 
 
 
-.luvex-hero .hero-button-active::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: radial-gradient(circle, rgba(138, 43, 226, 0.4) 0%, rgba(75, 0, 130, 0.6) 30%, transparent 70%);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    animation: energy-pulse 2s ease-out infinite;
-    z-index: 0; /* ← ÄNDERN: von -1 auf 0 */
-}
 
-/* ... other hero button styles ... */
 
 
 /*
