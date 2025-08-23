@@ -1,6 +1,6 @@
 <?php
 /**
- * The header for our theme - NAVIGATION DEBUG VERSION
+ * The header for our theme - COMPLETE WORKING VERSION
  * 
  * @package Luvex
  * @since 2.0.0
@@ -50,28 +50,29 @@
             }
             
             // Menü mit erweiterten Parametern
-          // header.php (ca. Zeile 51)
-                        $menu_output = wp_nav_menu(array(
-                            'theme_location' => 'primary',
-                            'menu_id'        => 'primary-menu',
-                            'container'      => false,
-                            'depth'          => 3, // <-- NEUER WERT
-                            'walker'         => new Luvex_Nav_Walker(),
-                            'echo'           => false
-                        ));
+            $menu_output = wp_nav_menu(array(
+                'theme_location' => 'primary',
+                'menu_id'        => 'primary-menu',
+                'container'      => false,
+                'depth'          => 3, // 3-Level Navigation
+                'walker'         => new Luvex_Nav_Walker(),
+                'echo'           => false
+            ));
 
-                        if (!empty($menu_output)) {
-                            echo $menu_output;
-                        } else {
-                            luvex_primary_menu_fallback();
-                        }
+            if (!empty($menu_output)) {
+                echo $menu_output;
+            } else {
+                luvex_primary_menu_fallback();
+            }
             ?>
         </nav>
 
         <!-- CTA Button -->
         <div class="header-cta">
             <?php if (is_user_logged_in()) : 
-                $current_user = wp_get_current_user(); ?>
+                $current_user = wp_get_current_user();
+                $first_name = !empty($current_user->first_name) ? $current_user->first_name : $current_user->display_name; // FIX: Variable definieren
+            ?>
                 <div class="user-section">
                 <div class="user-info" onclick="toggleUserDropdown()">
               <div class="user-avatar" id="userAvatar">
