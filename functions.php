@@ -482,19 +482,12 @@ function luvex_enqueue_assets() {
     }
 }
 
-// === BODY-KLASSE FÜR CURSOR HINZUFÜGEN ===
+// === BODY-KLASSE FÜR CURSOR HINZUFÜGEN (KORRIGIERT) ===
 add_filter('body_class', 'luvex_add_cursor_body_class');
 function luvex_add_cursor_body_class($classes) {
-    // Hier definierst du, auf welchen Seiten der Cursor aktiv sein soll.
-    // Beispiel: nur auf der Startseite.
-    if (is_front_page()) {
-        $classes[] = 'custom-cursor-active';
-    }
-    
-    // Beispiel: auf der Startseite UND der "About"-Seite
-    // if (is_front_page() || is_page('about')) {
-    //     $classes[] = 'custom-cursor-active';
-    // }
+    // **FIX:** Der Cursor wird jetzt auf ALLEN Seiten aktiviert, nicht nur auf der Startseite.
+    // Die bedingte Logik wurde entfernt, um den Cursor global zu aktivieren.
+    $classes[] = 'custom-cursor-active';
 
     return $classes;
 }
