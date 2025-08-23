@@ -1,11 +1,11 @@
 /*
 ==============================================================================
-LUVEX THEME v3.0 - CORE STYLES
+LUVEX THEME v3.1 - CORE STYLES
 ==============================================================================
 Description: Enthält alle globalen Basis-Stile, das Layout-System (Container,
              Grid, Sections) und wiederverwendbare Utility-Klassen.
 Dependencies: _variables.css
-Last Update: 2025-08-21
+Last Update: 2025-08-23 (Fixed Header Container Fix)
 ==============================================================================
 */
 
@@ -91,6 +91,65 @@ a:hover { color: var(--luvex-bright-cyan); }
 
 /*
 ==============================================================================
+3.5 FIXED HEADER CONTAINER SYSTEM (NEU)
+==============================================================================
+*/
+
+/* WordPress Standard-Container bereinigen für Fixed Header Layout */
+#content,
+.site-content {
+    margin: 0;
+    padding: 0;
+}
+
+#primary,
+.content-area {
+    margin: 0;
+    padding: 0;
+}
+
+.site-main {
+    margin: 0;
+    padding: 0;
+}
+
+/* Astra Theme spezifische Container bereinigen */
+.ast-container {
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.ast-separate-container .ast-container {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+/* Stelle sicher dass der erste Abschnitt direkt nach Header beginnt */
+.site-main > *:first-child,
+.content-area > *:first-child {
+    margin-top: 0;
+}
+
+/* Bereinige eventuelle Theme-spezifische Spacing-Klassen */
+.site-content .container:first-child {
+    padding-top: 0;
+}
+
+/* Extra Sicherheit für Astra Child Theme Overrides */
+body.custom-background .site-content,
+body.ast-header-break-point .site-content {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Full-width Sections (wie Hero) sollen nahtlos anschließen */
+.site-main > .section:first-child,
+.site-main > .luvex-hero:first-child {
+    margin-top: 0;
+}
+
+/*
+==============================================================================
 4. GRID & FLEXBOX SYSTEMS
 ==============================================================================
 */
@@ -142,3 +201,38 @@ a:hover { color: var(--luvex-bright-cyan); }
 .text-center { text-align: center; }
 .text-highlight { color: var(--luvex-bright-cyan); }
 .hidden { display: none; }
+
+/*
+==============================================================================
+7. RESPONSIVE LAYOUT FIXES
+==============================================================================
+*/
+
+/* Responsive Container-System für kleinere Bildschirme */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .section {
+        padding: 4rem 0;
+    }
+    
+    .section--small {
+        padding: 3rem 0;
+    }
+    
+    .section--large {
+        padding: 6rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .section {
+        padding: 3rem 0;
+    }
+}
