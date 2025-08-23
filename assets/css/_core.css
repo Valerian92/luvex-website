@@ -95,22 +95,27 @@ a:hover { color: var(--luvex-bright-cyan); }
 ==============================================================================
 */
 
+
 /* WordPress Standard-Container bereinigen für Fixed Header Layout */
 #content,
 .site-content {
     margin: 0;
     padding: 0;
+    padding-top: 0 !important; /* ÜBERSCHREIBT ASTRA THEME */
+    border-top: none !important;
 }
 
 #primary,
 .content-area {
     margin: 0;
     padding: 0;
+    padding-top: 0 !important;
 }
 
 .site-main {
     margin: 0;
     padding: 0;
+    padding-top: 0 !important;
 }
 
 /* Astra Theme spezifische Container bereinigen */
