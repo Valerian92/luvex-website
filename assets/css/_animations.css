@@ -3,18 +3,17 @@
 LUVEX THEME v2.2 - SCROLL & COMPONENT ANIMATIONS
 ==============================================================================
 
-Description: Contains all keyframes and classes for scroll-triggered, 
-             component-based, and loading animations.
-             This file now includes the complete content of _loading.css.
-Dependencies: Loaded via functions.php.
-Last Update: 2025-08-05
+Description: Enthält alle Keyframes und Klassen für scroll-getriggerte, 
+             komponentenbasierte und Lade-Animationen.
+Dependencies: Wird via functions.php geladen.
+Last Update: 2025-08-23
 
 ==============================================================================
 */
 
 /*
 ==============================================================================
-1. GENERAL ANIMATION SETUP & HELPERS
+1. ALLGEMEINES ANIMATIONS-SETUP & HELPER
 ==============================================================================
 */
 
@@ -23,8 +22,7 @@ Last Update: 2025-08-05
     transition: opacity 0.5s ease-out, transform 0.6s ease-out;
 }
 
-/* Fix for canvas elements inside animated heroes */
-.luvex-hero #homepage-hero-canvas,
+/* Fix für Canvas-Elemente in animierten Heroes (außer Homepage) */
 .luvex-hero #particle-canvas {
     position: absolute !important;
     top: 0 !important;
@@ -34,42 +32,9 @@ Last Update: 2025-08-05
     z-index: 0 !important;
 }
 
-.luvex-hero .luvex-hero__container {
-    position: relative;
-    z-index: 2;
-}
-
-
-
-.luvex-hero .hero-button-active::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: radial-gradient(circle, rgba(138, 43, 226, 0.4) 0%, rgba(75, 0, 130, 0.6) 30%, transparent 70%);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    animation: energy-pulse 2s ease-out infinite;
-    z-index: 0; /* ← ÄNDERN: von -1 auf 0 */
-    pointer-events: none;
-}
-
-/* Puls auch während Hover aktiv */
-.luvex-hero .hero-button-active:hover::before {
-    animation: energy-pulse 2s ease-out infinite !important; /* ← Explizit weiterführen */
-}
-
-/* Puls permanent aktiv - auch nach Hover */
-.luvex-hero .hero-button-active::before {
-    /* ... bestehende Properties ... */
-    animation: energy-pulse 2s ease-out infinite !important;
-}
-
 /*
 ==============================================================================
-2. SCROLL-TRIGGERED ANIMATIONS
+2. SCROLL-GETRIGGERTE ANIMATIONEN
 ==============================================================================
 */
 
@@ -135,11 +100,11 @@ Last Update: 2025-08-05
 
 /*
 ==============================================================================
-3. LOADING INDICATORS & SPINNERS (from _loading.css)
+3. LADE-INDIKATOREN & SPINNER
 ==============================================================================
 */
 
-/* --- 3.1 Generic Spinners --- */
+/* --- 3.1 Allgemeine Spinner --- */
 .spinner {
     border-radius: 50%;
     border: 3px solid rgba(0, 0, 0, 0.1);
@@ -191,7 +156,7 @@ Last Update: 2025-08-05
     animation: uv-beam-pulse 3s ease-in-out infinite;
 }
 
-/* --- 3.3 Progress Bars --- */
+/* --- 3.3 Ladebalken --- */
 .progress-bar {
     width: 100%;
     height: 8px;
@@ -215,86 +180,21 @@ Last Update: 2025-08-05
     animation: progress-shine 2s ease-in-out infinite;
 }
 
-.progress-bar--uv {
-    background: rgba(27, 42, 73, 0.1);
-}
-
-.progress-bar--uv .progress-bar__fill {
-    background: var(--luvex-bright-cyan);
-    box-shadow: 0 0 8px rgba(109, 213, 237, 0.4);
-}
-
-.progress-group {
-    margin-bottom: var(--space-md);
-}
-
-.progress-label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--space-xs);
-    font-size: var(--text-sm);
-    font-weight: 500;
-}
-
-/* --- 3.4 Loading Overlays --- */
+/* --- 3.4 Lade-Overlays --- */
 .loading-overlay {
     position: absolute;
     inset: 0;
     background: rgba(255, 255, 255, 0.9);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     border-radius: var(--radius-lg);
     z-index: 100;
 }
 
-.loading-overlay--dark {
-    background: rgba(27, 42, 73, 0.95);
-    color: var(--luvex-white);
-}
-
-.loading-overlay__content {
-    text-align: center;
-    max-width: 280px;
-}
-
-.loading-overlay__spinner { margin-bottom: var(--space-md); }
-.loading-overlay__title { font-size: var(--text-lg); font-weight: 600; margin-bottom: var(--space-xs); color: var(--luvex-dark-blue); }
-.loading-overlay--dark .loading-overlay__title { color: var(--luvex-white); }
-.loading-overlay__text { font-size: var(--text-sm); color: var(--luvex-gray-700); margin: 0; }
-.loading-overlay--dark .loading-overlay__text { color: rgba(255, 255, 255, 0.8); }
-
-/* --- 3.5 Button Loading State --- */
-.btn--loading {
-    position: relative;
-    pointer-events: none;
-    opacity: 0.8;
-}
-
-.btn--loading .btn-text {
-    opacity: 0;
-}
-
-.btn--loading::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 20px;
-    height: 20px;
-    border: 2px solid transparent;
-    border-top-color: currentColor;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-}
-
-
 /*
 ==============================================================================
-4. COMPLEX COMPONENT ANIMATIONS
+4. KOMPLEXE KOMPONENTEN-ANIMATIONEN
 ==============================================================================
 */
 
@@ -321,144 +221,7 @@ Last Update: 2025-08-05
     animation-play-state: paused;
 }
 
-.orbit-path {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 3px dashed var(--luvex-gray-300, #dee2e6);
-    border-radius: 50%;
-}
-
-.orbit-core {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 280px;
-    height: 280px;
-    background: var(--luvex-dark-blue, #0B1A3D);
-    color: var(--luvex-white, #FFFFFF);
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 2rem;
-    z-index: 10;
-    box-shadow: 0 0 60px rgba(11, 26, 61, 0.2);
-}
-
-.orbit-core i {
-    font-size: 3rem;
-    color: var(--luvex-bright-cyan, #6DD5ED);
-    margin-bottom: 1rem;
-}
-
-.orbit-core h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--luvex-white, #FFFFFF);
-    line-height: 1.3;
-}
-
-.orbit-satellite {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -60px; /* half of width/height */
-    width: 120px;
-    height: 120px;
-    animation: spin-reverse 150s linear infinite;
-}
-
-.orbit-container:hover .orbit-satellite {
-    animation-play-state: paused;
-}
-
-.satellite-card {
-    width: 100%;
-    height: 100%;
-    background: var(--luvex-white, #FFFFFF);
-    border-radius: var(--radius-lg, 0.75rem);
-    box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06));
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 1rem;
-    transition: all 0.3s ease-in-out;
-}
-
-.orbit-satellite:hover .satellite-card {
-    transform: scale(1.1);
-    box-shadow: 0 10px 30px rgba(109, 213, 237, 0.3);
-    z-index: 20;
-}
-
-.satellite-card i {
-    font-size: 2rem;
-    color: var(--luvex-vibrant-blue, #007BFF);
-    margin-bottom: 0.5rem;
-}
-
-.satellite-card h4 {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--luvex-dark-blue, #0B1A3D);
-    line-height: 1.2;
-    margin: 0;
-}
-
-.orbit-satellite:nth-child(1) { transform: rotate(0deg) translate(300px) rotate(0deg); }
-.orbit-satellite:nth-child(2) { transform: rotate(60deg) translate(300px) rotate(-60deg); }
-.orbit-satellite:nth-child(3) { transform: rotate(120deg) translate(300px) rotate(-120deg); }
-.orbit-satellite:nth-child(4) { transform: rotate(180deg) translate(300px) rotate(-180deg); }
-.orbit-satellite:nth-child(5) { transform: rotate(240deg) translate(300px) rotate(-240deg); }
-.orbit-satellite:nth-child(6) { transform: rotate(300deg) translate(300px) rotate(-300deg); }
-
-@media (max-width: 900px) {
-    .orbit-container {
-        display: none;
-    }
-    .linear-timeline-mobile {
-        display: block;
-    }
-}
-.linear-timeline-mobile {
-    display: none;
-}
-
-
-
-
-
-
-
-/*
-==============================================================================
-5. KEYFRAME DEFINITIONS
-==============================================================================
-*/
-
-
-
-
-
-
-/* ... and any other keyframes from your original files ... */
-
-/*
-==============================================================================
-LUVEX THEME - ERGÄNZUNG: HERO REDESIGN ANIMATIONS
-==============================================================================
-Description: Neue, dedizierte Animationen für die überarbeiteten Hero-Sektionen.
-Last Update: 2025-08-14
-==============================================================================
-*/
-
-
+/* --- 4.2 Allgemeine Hero-Hintergrundanimationen --- */
 .luvex-hero--animated-blueprint {
     background-image:
         linear-gradient(rgba(50, 130, 220, 0.2) 1px, transparent 1px),
@@ -475,11 +238,8 @@ Last Update: 2025-08-14
     height: 100%;
     background: linear-gradient(to top, transparent, rgba(100, 200, 255, 0.2), transparent);
     animation: luvex-hero-scan 7s linear infinite;
-    z-index: 1; /* Sitzt über dem Gitter, aber unter dem Inhalt */
+    z-index: 1;
 }
-
-/* --- 3. SCHWEBENDE WORTE (FÜR ABOUT-SEITE) --- */
-/* Die Keyframes 'float' sind in Ihrer Datei bereits vorhanden, wir können sie wiederverwenden! */
 
 .luvex-hero--animated-words .floating-word {
     position: absolute;
@@ -490,60 +250,7 @@ Last Update: 2025-08-14
     z-index: 1;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-==============================================================================
-LUVEX THEME - UV-C ANIMATIONS (animations.css)
-==============================================================================
-Beschreibung: Reine Animationen und visuelle Effekte für UV-C Disinfection
-Verwendet von: hero-disinfection.js + uvc-science-gallery.js
-==============================================================================
-*/
-
-/* --- HERO ANIMATION PARTICLES --- */
+/* --- 4.3 Partikel für Disinfection Hero --- */
 .pathogen-particle {
     position: absolute;
     width: 8px;
@@ -574,49 +281,13 @@ Verwendet von: hero-disinfection.js + uvc-science-gallery.js
     animation: expand-pulse 8s ease-out infinite;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
 ==============================================================================
-LUVEX THEME v3.0 - ZENTRALE KEYFRAMES
-==============================================================================
-Description: Alle Keyframe-Definitionen für das gesamte LUVEX Theme.
-             Bereinigt und kategorisiert für bessere Performance.
-Dependencies: Geladen vor allen anderen CSS-Dateien
-Last Update: 2025-08-23
+5. ALLGEMEINE KEYFRAME-DEFINITIONEN
 ==============================================================================
 */
 
-/*
-==============================================================================
-1. UNIVERSAL KEYFRAMES (Überall verwendet)
-==============================================================================
-*/
-
+/* --- Universelle Keyframes --- */
 @keyframes spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
@@ -655,12 +326,7 @@ Last Update: 2025-08-23
     50% { transform: scale(1.1); opacity: 1; }
 }
 
-/*
-==============================================================================
-2. LOADING & PROGRESS KEYFRAMES
-==============================================================================
-*/
-
+/* --- Lade- & Progress-Keyframes --- */
 @keyframes uv-beam-pulse {
     0%, 100% { 
         opacity: 0.3; 
@@ -677,12 +343,7 @@ Last Update: 2025-08-23
     100% { background-position: 200% 0; }
 }
 
-/*
-==============================================================================
-3. HERO BACKGROUND KEYFRAMES
-==============================================================================
-*/
-
+/* --- Hero-Hintergrund-Keyframes --- */
 @keyframes luvex-hero-flow {
     from { background-position-y: 0px; }
     to { background-position-y: -30px; }
@@ -692,32 +353,6 @@ Last Update: 2025-08-23
     0% { transform: translateY(-100%); }
     100% { transform: translateY(100%); }
 }
-
-@keyframes energy-pulse {
-    0% { 
-        width: 0; 
-        height: 0; 
-        opacity: 0.8; 
-    }
-    50% { 
-        width: 240px;
-        height: 240px;
-        opacity: 0.4; 
-    }
-    100% { 
-        width: 280px;
-        height: 280px;
-        opacity: 0; 
-    }
-}
-
-
-
-
-
-
-
-
 
 
 

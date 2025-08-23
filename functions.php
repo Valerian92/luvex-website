@@ -168,25 +168,51 @@ function luvex_enqueue_assets() {
     global $post;
     $current_page_slug = isset($post->post_name) ? $post->post_name : 'no-slug';
     
-    // Main CSS (globals only - no page-specific imports)
+    // Main CSS (globals)
     $main_css_path = get_stylesheet_directory() . '/assets/css/main.css';
-    $main_css_version = file_exists($main_css_path) ? filemtime($main_css_path) : '1.0.0';
-    wp_enqueue_style('luvex-main', get_stylesheet_directory_uri() . '/assets/css/main.css', array(), $main_css_version);
+    wp_enqueue_style('luvex-main', get_stylesheet_directory_uri() . '/assets/css/main.css', array(), filemtime($main_css_path));
 
-    // Animations CSS (global but loaded conditionally for performance)
+    // Allgemeine Animationen (global)
     $animations_css_path = get_stylesheet_directory() . '/assets/css/_animations.css';
-    if (file_exists($animations_css_path)) {
-        $animations_css_version = filemtime($animations_css_path);
-        wp_enqueue_style('luvex-animations', get_stylesheet_directory_uri() . '/assets/css/_animations.css', array('luvex-main'), $animations_css_version);
+    wp_enqueue_style('luvex-animations', get_stylesheet_directory_uri() . '/assets/css/_animations.css', array('luvex-main'), filemtime($animations_css_path));
+
+    // === VEREINFACHTES CURSOR SYSTEM (GLOBAL GELADEN) ===
+    $cursor_css_path = get_stylesheet_directory() . '/assets/css/_cursor-effects.css';
+    if (file_exists($cursor_css_path)) {
+        wp_enqueue_style('luvex-cursor-effects', get_stylesheet_directory_uri() . '/assets/css/_cursor-effects.css', array('luvex-main'), filemtime($cursor_css_path));
+    }
+    
+    $cursor_js_path = get_stylesheet_directory() . '/assets/js/cursor-effects.js';
+    if (file_exists($cursor_js_path)) {
+        wp_enqueue_script('luvex-cursor-effects', get_stylesheet_directory_uri() . '/assets/js/cursor-effects.js', array(), filemtime($cursor_js_path), true);
     }
 
-    // === PAGE-SPECIFIC CSS LOADING (CONDITIONAL) ===
+    // === SEITENSPEZIFISCHES CSS & JS ===
     
     // Homepage
     if (is_front_page() || is_home()) {
+        // CSS für Homepage-Layout
         $homepage_css_path = get_stylesheet_directory() . '/assets/css/_page-home.css';
         if (file_exists($homepage_css_path)) {
             wp_enqueue_style('luvex-page-home', get_stylesheet_directory_uri() . '/assets/css/_page-home.css', array('luvex-main'), filemtime($homepage_css_path));
+        }
+        
+        // NEU: CSS für Homepage Hero Animation
+        $hero_home_anim_path = get_stylesheet_directory() . '/assets/css/animations/_animation-hero-home.css';
+        if (file_exists($hero_home_anim_path)) {
+            wp_enqueue_style('luvex-hero-home-animation', get_stylesheet_directory_uri() . '/assets/css/animations/_animation-hero-home.css', array('luvex-main'), filemtime($hero_home_anim_path));
+        }
+
+        // JS für Homepage Animationen
+        $photons_js_path = get_stylesheet_directory() . '/assets/js/hero-photons.js';
+        if (file_exists($photons_js_path)) {
+            wp_enqueue_script('luvex-hero-photons', get_stylesheet_directory_uri() . '/assets/js/hero-photons.js', array(), filemtime($photons_js_path), true);
+        }
+        
+        wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), null, true);
+        $globe_js_path = get_stylesheet_directory() . '/assets/js/globe-animation.js';
+        if (file_exists($globe_js_path)) {
+            wp_enqueue_script('luvex-globe', get_stylesheet_directory_uri() . '/assets/js/globe-animation.js', array('three-js'), filemtime($globe_js_path), true);
         }
     }
     
@@ -221,7 +247,6 @@ function luvex_enqueue_assets() {
             wp_enqueue_style('luvex-page-uv-curing', get_stylesheet_directory_uri() . '/assets/css/_page-uv-curing.css', array('luvex-main'), filemtime($curing_css_path));
         }
         
-        // NEU: Spezifische Animationen für die Curing Gallery laden
         $curing_gallery_css_path = get_stylesheet_directory() . '/assets/css/animations/_animation-uv-curing-gallery.css';
         if (file_exists($curing_gallery_css_path)) {
             wp_enqueue_style('luvex-animation-curing-gallery', get_stylesheet_directory_uri() . '/assets/css/animations/_animation-uv-curing-gallery.css', array('luvex-main'), filemtime($curing_gallery_css_path));
@@ -235,7 +260,6 @@ function luvex_enqueue_assets() {
             wp_enqueue_style('luvex-page-uv-c-disinfection', get_stylesheet_directory_uri() . '/assets/css/_page-uv-c-disinfection.css', array('luvex-main'), filemtime($disinfection_css_path));
         }
 
-        // NEU: Spezifische Animationen für die Disinfection Gallery laden
         $disinfection_gallery_css_path = get_stylesheet_directory() . '/assets/css/animations/_animation-uv-disinfection-gallery.css';
         if (file_exists($disinfection_gallery_css_path)) {
             wp_enqueue_style('luvex-animation-disinfection-gallery', get_stylesheet_directory_uri() . '/assets/css/animations/_animation-uv-disinfection-gallery.css', array('luvex-main'), filemtime($disinfection_gallery_css_path));
@@ -306,80 +330,6 @@ function luvex_enqueue_assets() {
         }
     }
 
-    // === CURSOR EFFECTS - CONFIG-DATEI SYSTEM ===
-    $cursor_config_path = get_stylesheet_directory() . '/cursor-config.php';
-    if (file_exists($cursor_config_path)) {
-        include $cursor_config_path;
-    } else {
-        // Fallback wenn Config nicht existiert
-        $luvex_cursor_pages = array();
-        $luvex_cursor_sections = array();
-        $luvex_default_cursor = 'quantum';
-    }
-
-    // Prüfe welche Seite aktiv ist
-    $current_cursor_config = null;
-    $current_page_type = 'unknown';
-    
-    foreach ($luvex_cursor_pages as $page_type => $page_config) {
-        if (!$page_config['enabled']) continue;
-        
-        foreach ($page_config['conditions'] as $condition) {
-            $is_active = false;
-            
-            if ($condition === 'is_front_page' && is_front_page()) {
-                $is_active = true;
-            } elseif ($condition === 'is_home' && is_home()) {
-                $is_active = true;
-            } elseif (strpos($condition, 'is_page:') === 0) {
-                $page_slug = str_replace('is_page:', '', $condition);
-                if (is_page($page_slug)) {
-                    $is_active = true;
-                }
-            }
-            
-            if ($is_active) {
-                $current_cursor_config = $page_config;
-                $current_page_type = $page_type;
-                break 2;
-            }
-        }
-    }
-
-    // Cursor-System laden wenn Seite aktiv ist
-    if ($current_cursor_config) {
-        $cursor_css_path = get_stylesheet_directory() . '/assets/css/_cursor-effects.css';
-        if (file_exists($cursor_css_path)) {
-            $cursor_css_version = filemtime($cursor_css_path);
-            wp_enqueue_style('luvex-cursor-effects', get_stylesheet_directory_uri() . '/assets/css/_cursor-effects.css', array('luvex-main'), $cursor_css_version);
-        }
-        
-        $cursor_js_path = get_stylesheet_directory() . '/assets/js/cursor-effects.js';
-        if (file_exists($cursor_js_path)) {
-            $cursor_js_version = filemtime($cursor_js_path);
-            wp_enqueue_script('luvex-cursor-effects', get_stylesheet_directory_uri() . '/assets/js/cursor-effects.js', array(), $cursor_js_version, true);
-            
-            // Filtere Sections für aktuelle Seite
-            $active_sections = array();
-            foreach ($luvex_cursor_sections as $selector => $section_config) {
-                if (!$section_config['enabled']) continue;
-                if (in_array('all', $section_config['pages']) || in_array($current_page_type, $section_config['pages'])) {
-                    $active_sections[$selector] = $section_config['style'];
-                }
-            }
-            
-            // Konfiguration an JavaScript übergeben
-            wp_localize_script('luvex-cursor-effects', 'luvex_cursor_config', array(
-                'default_style' => $current_cursor_config['default_style'],
-                'luvex_standard' => $luvex_default_cursor,
-                'page_type' => $current_page_type,
-                'sections' => $active_sections,
-                'settings' => isset($luvex_cursor_settings) ? $luvex_cursor_settings : array(),
-                'debug_mode' => WP_DEBUG
-            ));
-        }
-    }
-
     // === DEBUG SCRIPTS (NUR FÜR ENTWICKLER) ===
     if (WP_DEBUG || current_user_can('administrator')) {
         $debug_js_path = get_stylesheet_directory() . '/assets/js/debug-scripts.js';
@@ -397,13 +347,11 @@ function luvex_enqueue_assets() {
     // === ANIMATION CONSOLE LOGS STUMM SCHALTEN (PRODUCTION) ===
     if (!WP_DEBUG) {
         wp_add_inline_script('luvex-debug-scripts', '
-            // Sichere Animation-Log-Filterung (nur spezifische Animation-Logs)
             (function() {
                 const originalLog = console.log;
                 console.log = function(...args) {
                     if (args[0] && typeof args[0] === "string") {
                         const logText = args[0];
-                        // Nur LUVEX Animation-Logs stumm schalten
                         if (logText.includes("Hero Sterne Script") ||
                             logText.includes("Globe Animation") ||
                             logText.includes("Canvas Größe") ||
@@ -413,10 +361,9 @@ function luvex_enqueue_assets() {
                             logText.includes("Globe Container") ||
                             logText.includes("Scene hinzugefügt") ||
                             logText.includes("Animation gestartet")) {
-                            return; // Stumm schalten
+                            return;
                         }
                     }
-                    // Alle anderen Logs normal ausgeben
                     originalLog.apply(console, args);
                 };
             })();
@@ -448,21 +395,8 @@ function luvex_enqueue_assets() {
     
     // === PAGE-SPECIFIC JAVASCRIPT LOADING ===
     
-    // Homepage Animations
-    if (is_front_page() || is_home()) {
-        $photons_js_path = get_stylesheet_directory() . '/assets/js/hero-photons.js';
-        if (file_exists($photons_js_path)) {
-            wp_enqueue_script('luvex-hero-photons', get_stylesheet_directory_uri() . '/assets/js/hero-photons.js', array(), filemtime($photons_js_path), true);
-        }
-        wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), null, true);
-        $globe_js_path = get_stylesheet_directory() . '/assets/js/globe-animation.js';
-        if (file_exists($globe_js_path)) {
-            wp_enqueue_script('luvex-globe', get_stylesheet_directory_uri() . '/assets/js/globe-animation.js', array('three-js'), filemtime($globe_js_path), true);
-        }
-    } 
-    
     // About Page
-    elseif (is_page('about')) {
+    if (is_page('about')) {
         $about_hero_js_path = get_stylesheet_directory() . '/assets/js/hero-about-interactive.js';
         if (file_exists($about_hero_js_path)) {
             wp_enqueue_script('luvex-hero-about', get_stylesheet_directory_uri() . '/assets/js/hero-about-interactive.js', array(), filemtime($about_hero_js_path), true);
@@ -471,49 +405,27 @@ function luvex_enqueue_assets() {
     
     // UV-Curing Page
     elseif (is_page('uv-curing')) {
-        // Hero Animation für UV Curing
         $curing_js_path = get_stylesheet_directory() . '/assets/js/hero-curing-interactive.js';
         if (file_exists($curing_js_path)) {
             wp_enqueue_script('luvex-hero-curing', get_stylesheet_directory_uri() . '/assets/js/hero-curing-interactive.js', array(), filemtime($curing_js_path), true);
         }
         
-        // UV-Curing Science Gallery Animation System
         $curing_science_js_path = get_stylesheet_directory() . '/assets/js/uv-curing-science-gallery.js';
         if (file_exists($curing_science_js_path)) {
             wp_enqueue_script('luvex-curing-science-gallery', get_stylesheet_directory_uri() . '/assets/js/uv-curing-science-gallery.js', array(), filemtime($curing_science_js_path), true);
-            
-            // Debug-Information für JavaScript verfügbar machen
-            wp_localize_script('luvex-curing-science-gallery', 'luvex_debug', array(
-                'debug_mode' => WP_DEBUG,
-                'theme_uri' => get_stylesheet_directory_uri(),
-                'page_slug' => $current_page_slug,
-                'css_version' => isset($animations_css_version) ? $animations_css_version : '1.0.0',
-                'js_version' => filemtime($curing_science_js_path)
-            ));
         }
     }
     
     // UV-C Disinfection Page 
     elseif (is_page('uv-c-disinfection')) {
-        // Hero Animation
         $disinfection_js_path = get_stylesheet_directory() . '/assets/js/hero-disinfection.js';
         if (file_exists($disinfection_js_path)) {
             wp_enqueue_script('luvex-hero-disinfection', get_stylesheet_directory_uri() . '/assets/js/hero-disinfection.js', array(), filemtime($disinfection_js_path), true);
         }
         
-        // UV-C Science Gallery Animation System
         $uvc_science_js_path = get_stylesheet_directory() . '/assets/js/uvc-science-gallery.js';
         if (file_exists($uvc_science_js_path)) {
             wp_enqueue_script('luvex-uvc-science-gallery', get_stylesheet_directory_uri() . '/assets/js/uvc-science-gallery.js', array(), filemtime($uvc_science_js_path), true);
-            
-            // Debug-Information für JavaScript verfügbar machen
-            wp_localize_script('luvex-uvc-science-gallery', 'luvex_debug', array(
-                'debug_mode' => WP_DEBUG,
-                'theme_uri' => get_stylesheet_directory_uri(),
-                'page_slug' => $current_page_slug,
-                'css_version' => isset($animations_css_version) ? $animations_css_version : '1.0.0',
-                'js_version' => filemtime($uvc_science_js_path)
-            ));
         }
     }
     
@@ -568,6 +480,23 @@ function luvex_enqueue_assets() {
             wp_enqueue_script('luvex-scroll-animations', get_stylesheet_directory_uri() . '/assets/js/scroll-animations.js', array(), filemtime($scroll_animations_js_path), true);
         }
     }
+}
+
+// === BODY-KLASSE FÜR CURSOR HINZUFÜGEN ===
+add_filter('body_class', 'luvex_add_cursor_body_class');
+function luvex_add_cursor_body_class($classes) {
+    // Hier definierst du, auf welchen Seiten der Cursor aktiv sein soll.
+    // Beispiel: nur auf der Startseite.
+    if (is_front_page()) {
+        $classes[] = 'custom-cursor-active';
+    }
+    
+    // Beispiel: auf der Startseite UND der "About"-Seite
+    // if (is_front_page() || is_page('about')) {
+    //     $classes[] = 'custom-cursor-active';
+    // }
+
+    return $classes;
 }
 
 // === AVATAR UPLOAD SYSTEM ===
