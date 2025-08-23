@@ -99,7 +99,7 @@ Last Update: 2025-08-21
 
 .luvex-hero__cta:hover {
     background: var(--luvex-white);
-    color: var(--luvex-dark-blue);
+    color: var(--luvex-dark-blue); /* ← Dunkle Schrift auf weißem Hintergrund */
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
 }
@@ -111,9 +111,10 @@ Last Update: 2025-08-21
     font-weight: 700; /* Stärkere Schrift für bessere Lesbarkeit */
 }
 
+/* Spezifischer Override für Primary Button */
 .luvex-hero__cta.luvex-cta-primary:hover {
     background: var(--luvex-white);
-    color: var(--luvex-dark-blue);
+    color: var(--luvex-dark-blue); /* ← Sicherstellen dass Text dunkel wird */
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(109, 213, 237, 0.3);
 }
