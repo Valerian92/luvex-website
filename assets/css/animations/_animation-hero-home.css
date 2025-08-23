@@ -1,15 +1,10 @@
 /*
 ==============================================================================
-LUVEX THEME - HOMEPAGE HERO ANIMATION
-==============================================================================
-Description: Alle Stile und Keyframes für die interaktive Photon-Animation
-             und den animierten CTA-Button im Hero-Bereich der Startseite.
-Dependencies: Wird nur auf der Startseite geladen.
-Last Update: 2025-08-23 (Refactored & Fixed)
+LUVEX THEME - HOMEPAGE HERO ANIMATION (VEREINFACHT)
 ==============================================================================
 */
 
-/* --- 1. Canvas Setup --- */
+/* --- Canvas Setup --- */
 .luvex-hero #homepage-hero-canvas {
     position: absolute !important;
     top: 0 !important;
@@ -24,37 +19,17 @@ Last Update: 2025-08-23 (Refactored & Fixed)
     z-index: 2;
 }
 
-/* --- 2. Animierter Button-Effekt --- */
-
-/* --- 2.1 Schriftfarbe & Transitions --- */
-.luvex-hero .simulator-cta {
-    color: var(--luvex-white) !important;
+/* --- Homepage-spezifische Button-Anpassungen --- */
+.home .luvex-hero .simulator-cta {
     cursor: none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* FIX: Dieser hochspezifische Selektor stellt sicher, dass unsere Animation
-alle anderen Hover-Regeln aus _components.css etc. überschreibt.
-!important ist hier notwendig, um generische :hover-Styles zu überstimmen.
-*/
-.home .luvex-hero .luvex-hero__cta.simulator-cta:hover {
-    color: var(--luvex-white) !important;
-    
-    background: linear-gradient(135deg, 
-        var(--luvex-bright-cyan) 0%, 
-        #8a2be2 50%, 
-        var(--luvex-bright-cyan) 100%) !important;
-    
-    background-size: 200% 200% !important;
-    animation: gradient-shift 2s ease-in-out infinite !important;
-    
-    box-shadow: 
-        0 8px 25px rgba(109, 213, 237, 0.4),
-        0 0 20px rgba(138, 43, 226, 0.3);
+.home .luvex-hero .luvex-cta--animated:hover {
+    transform: translateY(-2px) scale(1.05);
 }
 
-/* --- 2.2 Hintergrund-Puls --- */
-.luvex-hero .hero-button-active::before {
+/* --- Energy Pulse Effect --- */
+.home .luvex-hero .luvex-cta--animated::before {
     content: '';
     position: absolute;
     top: 50%;
@@ -69,14 +44,11 @@ alle anderen Hover-Regeln aus _components.css etc. überschreibt.
     pointer-events: none;
 }
 
-.luvex-hero .simulator-cta:hover::before {
+.home .luvex-hero .simulator-cta:hover::before {
     animation-play-state: paused;
 }
 
-
-/* --- 3. Keyframes (Hierher verschoben aus _animations.css) --- */
-
-/* Keyframe für den Button-Puls */
+/* Energy Pulse Keyframe */
 @keyframes energy-pulse {
     0% { 
         width: 0; 
@@ -92,15 +64,5 @@ alle anderen Hover-Regeln aus _components.css etc. überschreibt.
         width: 450px;
         height: 450px;
         opacity: 0; 
-    }
-}
-
-/* Keyframe für den Farbverlauf beim Hovern */
-@keyframes gradient-shift {
-    0%, 100% { 
-        background-position: 0% 50%; 
-    }
-    50% { 
-        background-position: 100% 50%; 
     }
 }

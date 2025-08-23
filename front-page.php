@@ -30,7 +30,7 @@ get_header(); ?>
             </p>
         </div>
         <div class="luvex-hero__cta-container">
-            <a href="/uv-simulator/" class="luvex-hero__cta luvex-cta-primary simulator-cta hero-button-active">
+            <a href="/uv-simulator/" class="luvex-hero__cta luvex-cta-primary simulator-cta luvex-cta--animated">
                 <i class="fas fa-cube"></i>
                 <span>Launch UV Simulator</span>
             </a>
@@ -97,7 +97,7 @@ get_header(); ?>
                     <div class="simulator-feature"><i class="fas fa-mouse-pointer"></i><h4>Intuitive Control</h4><p>User-friendly interface</p></div>
                 </div>
                 <!-- CHANGED: Added the 'hero-button-active' class to enable the animation -->
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="luvex-cta-primary simulator-cta hero-button-active"><i class="fas fa-play-circle"></i><span>Launch Interactive Simulator</span></a>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="luvex-cta-primary simulator-cta luvex-cta--animated"><i class="fas fa-play-circle"></i><span>Launch Interactive Simulator</span></a>
             </div>
         </div>
     </div>

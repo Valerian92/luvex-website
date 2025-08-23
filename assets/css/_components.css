@@ -104,18 +104,6 @@ Last Update: 2025-08-21
     box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
 }
 
-.luvex-hero__cta.hero-button-active:hover {
-    background: linear-gradient(135deg, 
-        var(--luvex-bright-cyan) 0%, 
-        #8a2be2 50%, 
-        var(--luvex-bright-cyan) 100%);
-    background-size: 200% 200%;
-    animation: gradient-shift 2s ease-in-out infinite;
-    box-shadow: 
-        0 8px 25px rgba(109, 213, 237, 0.4),
-        0 0 20px rgba(138, 43, 226, 0.3);
-    color: var(--luvex-white);
-}
 
 
 /* --- 2.2 Secondary Hero CTA Button --- */
@@ -143,33 +131,44 @@ Last Update: 2025-08-21
 }
 
 /* --- 2.3 Generic CTA Buttons --- */
+/* --- 2.3 Generic CTA Buttons --- */
 .luvex-cta-primary {
-    padding: 1.25rem 2.5rem; /* ← Größere Padding */
-    font-size: 1.125rem; /* ← Größere Schrift */
-    font-weight: 700; /* ← Stärkere Schrift */
-    border-radius: 50px; /* ← Andere Border-Radius */
-   /*  transition: all 0.3s ease; ← Nur Primary hat Transition */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    padding: 1.25rem 2.5rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    border-radius: 50px;
+    background: var(--luvex-bright-cyan);
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
 }
 
 .luvex-cta-primary:hover {
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
+    background: #0891b2; /* cyan-600 */
     transform: scale(1.05);
 }
 
-/* Hero Button Gradient Animation */
-.luvex-cta-primary.hero-button-active:hover {
+/* NEUE Animation Modifier-Klasse */
+.luvex-cta--animated:hover {
     background: linear-gradient(135deg, 
         var(--luvex-bright-cyan) 0%, 
         #8a2be2 50%, 
         var(--luvex-bright-cyan) 100%) !important;
-    background-size: 200% 200% !important; /* ← Muss groß bleiben für Animation */
+    background-size: 200% 200% !important;
     animation: gradient-shift 2s ease-in-out infinite !important;
     color: var(--luvex-white) !important;
+    box-shadow: 
+        0 8px 25px rgba(109, 213, 237, 0.4),
+        0 0 20px rgba(138, 43, 226, 0.3);
     transform: scale(1.05);
 }
+
 
 
 .luvex-cta-secondary {
