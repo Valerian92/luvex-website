@@ -118,10 +118,13 @@ Last Update: 2025-08-21
 }
 
 @keyframes gradient-shift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+    0%, 100% { 
+        background-position: 0% 50%; 
+    }
+    50% { 
+        background-position: 100% 50%; 
+    }
 }
-
 /* --- 2.2 Secondary Hero CTA Button --- */
 .luvex-hero__cta-secondary {
     display: inline-flex;
@@ -169,12 +172,11 @@ Last Update: 2025-08-21
         var(--luvex-bright-cyan) 0%, 
         #8a2be2 50%, 
         var(--luvex-bright-cyan) 100%) !important;
-    background-size: 200% 200% !important; /* ← !important hinzufügen */
+    background-size: 200% 200% !important; /* ← Muss groß bleiben für Animation */
     animation: gradient-shift 2s ease-in-out infinite !important;
     color: var(--luvex-white) !important;
     transform: scale(1.05);
 }
-
 
 
 .luvex-cta-secondary {

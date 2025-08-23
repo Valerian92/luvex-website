@@ -58,9 +58,14 @@ Last Update: 2025-08-05
 
 /* Puls auch während Hover aktiv */
 .luvex-hero .hero-button-active:hover::before {
-    animation: energy-pulse 2s ease-out infinite; /* ← Explizit weiterführen */
+    animation: energy-pulse 2s ease-out infinite !important; /* ← Explizit weiterführen */
 }
 
+/* Puls permanent aktiv - auch nach Hover */
+.luvex-hero .hero-button-active::before {
+    /* ... bestehende Properties ... */
+    animation: energy-pulse 2s ease-out infinite !important;
+}
 
 /*
 ==============================================================================
@@ -497,6 +502,7 @@ Last Update: 2025-08-05
     }
 }
 
+
 @keyframes energy-pulse {
     0% { 
         width: 0; 
@@ -504,13 +510,13 @@ Last Update: 2025-08-05
         opacity: 0.8; 
     }
     50% { 
-        width: 120px; /* ← Größer: bis Buttonrand */
-        height: 120px;
+        width: 200px; /* ← VIEL größer für langen Button */
+        height: 200px;
         opacity: 0.4; 
     }
     100% { 
-        width: 160px; /* ← Größer: bis Buttonrand */
-        height: 160px;
+        width: 240px; /* ← VIEL größer für langen Button */
+        height: 240px;
         opacity: 0; 
     }
 }
