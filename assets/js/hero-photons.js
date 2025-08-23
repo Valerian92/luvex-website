@@ -25,15 +25,13 @@ document.addEventListener('DOMContentLoaded', function() {
         isPaused: false // Sollen die Partikel stehenbleiben?
     };
 
-    // KOORDINATEN DES ZIELBUTTONS - MEHRERE SELEKTOREN PROBIEREN
+    // KOORDINATEN DES ZIELBUTTONS
     let targetButtonPosition = { x: null, y: null };
-    const targetButton = document.querySelector('.luvex-hero .simulator-cta') || 
-                        document.querySelector('.luvex-hero .luvex-cta-primary') ||
-                        document.querySelector('.simulator-cta');
+    const targetButton = document.querySelector('.luvex-hero .simulator-cta');
 
     // --- CONFIGURATION ---
-    const maxParticles = 300; // Erhöht auf 300 Partikel
-    const spawnRate = 5; // Erhöht die Spawning-Rate
+    const maxParticles = 300;
+    const spawnRate = 5;
     const particleColor = 'rgba(109, 213, 237, ';
 
     // --- UTILITY ---
@@ -43,9 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const heroRect = heroSection.getBoundingClientRect();
             targetButtonPosition.x = rect.left + rect.width / 2 - heroRect.left;
             targetButtonPosition.y = rect.top + rect.height / 2 - heroRect.top;
-            console.log('🎯 Target Button Position:', targetButtonPosition);
-        } else {
-            console.warn('⚠️ Target Button nicht gefunden!');
         }
     }
 
@@ -53,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (heroSection) {
             canvas.width = heroSection.offsetWidth;
             canvas.height = heroSection.offsetHeight;
-            console.log('📐 Canvas Größe:', canvas.width, 'x', canvas.height);
         }
     }
 
@@ -140,25 +134,12 @@ document.addEventListener('DOMContentLoaded', function() {
         for (let i = 0; i < spawnRate; i++) {
             if (particles.length < maxParticles) {
                 let x, y;
-                const side = Math.floor(Math.random() * 4); // Zufällige Seite
-                // Gleichmäßigere Verteilung der Startpunkte
+                const side = Math.floor(Math.random() * 4);
                 switch(side) {
-                    case 0: // top
-                        x = Math.random() * canvas.width;
-                        y = -10;
-                        break;
-                    case 1: // right
-                        x = canvas.width + 10;
-                        y = Math.random() * canvas.height;
-                        break;
-                    case 2: // bottom
-                        x = Math.random() * canvas.width;
-                        y = canvas.height + 10;
-                        break;
-                    case 3: // left
-                        x = -10;
-                        y = Math.random() * canvas.height;
-                        break;
+                    case 0: x = Math.random() * canvas.width; y = -10; break;
+                    case 1: x = canvas.width + 10; y = Math.random() * canvas.height; break;
+                    case 2: x = Math.random() * canvas.width; y = canvas.height + 10; break;
+                    case 3: x = -10; y = Math.random() * canvas.height; break;
                 }
                 particles.push(new Particle(x, y));
             }
@@ -185,30 +166,24 @@ document.addEventListener('DOMContentLoaded', function() {
             cancelAnimationFrame(animationFrameId);
         }
         resizeCanvas();
-        updateTargetButtonPosition(); // Aktualisiert die Button-Position
+        updateTargetButtonPosition();
         if (canvas.width > 0 && canvas.height > 0) {
             particles = [];
             animate();
-            console.log('✅ Sterne-Animation gestartet!');
         }
     }
 
-    // Fügt Event-Listener für das Pausieren der Animation über bestimmten Elementen hinzu
+    // Fügt Event-Listener für das Pausieren der Partikel-Animation hinzu
     function addHoverListeners() {
-        // Pausiert die Animation nur über Buttons
         const buttons = document.querySelectorAll('.luvex-hero .luvex-cta-primary, .luvex-hero .luvex-cta-secondary, .luvex-hero button, .luvex-hero .btn');
 
         buttons.forEach(button => {
             if (button) {
                 button.addEventListener('mouseenter', () => {
-                    mouse.isPaused = true;
-                    button.classList.add('hero-button-active'); // Für CSS-Animation
-                    console.log('🎯 Button hover - Animation paused:', button.className);
+                    mouse.isPaused = true; // Pausiert nur die Partikel
                 });
                 button.addEventListener('mouseleave', () => {
-                    mouse.isPaused = false;
-                    button.classList.remove('hero-button-active'); // CSS-Animation entfernen
-                    console.log('🎯 Button leave - Animation resumed');
+                    mouse.isPaused = false; // Setzt nur die Partikel fort
                 });
             }
         });
@@ -217,7 +192,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- EVENT LISTENERS ---
     window.addEventListener('resize', () => {
         setup();
-        updateTargetButtonPosition(); // Aktualisiert die Button-Position
     });
 
     heroSection.addEventListener('mousemove', (event) => {
