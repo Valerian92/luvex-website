@@ -5,7 +5,7 @@ LUVEX THEME - HOMEPAGE HERO ANIMATION
 Description: Alle Stile und Keyframes für die interaktive Photon-Animation
              und den animierten CTA-Button im Hero-Bereich der Startseite.
 Dependencies: Wird nur auf der Startseite geladen.
-Last Update: 2025-08-23 (Final Fixes)
+Last Update: 2025-08-23 (Final Fixes v2)
 ==============================================================================
 */
 
@@ -30,12 +30,16 @@ Last Update: 2025-08-23 (Final Fixes)
 .luvex-hero .simulator-cta {
     color: var(--luvex-white) !important;
     cursor: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.luvex-hero .simulator-cta:hover {
+/* FIX: Dieser hochspezifische Selektor stellt sicher, dass unsere Animation
+   alle anderen Hover-Regeln aus _components.css etc. überschreibt. */
+.luvex-hero .luvex-hero__cta.luvex-cta-primary.simulator-cta:hover {
     color: var(--luvex-white) !important;
     
-    /* FIX: !important erzwingt, dass die Animation Vorrang hat */
+    /* WICHTIG: !important ist hier notwendig, um die generischen Hover-Styles
+       aus anderen Dateien (z.B. .luvex-cta-primary:hover) zu überschreiben. */
     background: linear-gradient(135deg, 
         var(--luvex-bright-cyan) 0%, 
         #8a2be2 50%, 
@@ -47,8 +51,6 @@ Last Update: 2025-08-23 (Final Fixes)
     box-shadow: 
         0 8px 25px rgba(109, 213, 237, 0.4),
         0 0 20px rgba(138, 43, 226, 0.3);
-    
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* --- 2.2 Hintergrund-Puls --- */
