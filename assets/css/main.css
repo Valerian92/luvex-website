@@ -1,31 +1,29 @@
 /*
 ==============================================================================
-LUVEX THEME v2.1 - MAIN CSS
+LUVEX THEME v3.0 - MAIN CSS (CLEAN ARCHITECTURE)
 ==============================================================================
 
-Main CSS file that imports all component styles
-Import order is critical for cascade
+Main CSS file that imports only GLOBAL styles
+Page-specific styles are loaded conditionally via functions.php
 
-Last Update: 2025-07-31
+Last Update: 2025-08-22
 ==============================================================================
 */
 
 /* 1. DESIGN TOKENS (Variables first!) */
 @import '_variables.css';
-/*-------------------------*/
 
 /* 2. BASE STYLES */
 /* @import '_base.css';*/
 /* 3. LAYOUT SYSTEM */
 /*@import '_layout.css'; */
 
-
 /* NEU: CORE STYLES */
 /*@import '_section-patterns.css';*/
 @import '_core.css';
 /*-------------------------merged---*/
 
-/* 4. UI COMPONENTS */
+/* 4. UI COMPONENTS (GLOBAL - Available on all pages) */
 /*@import '_buttons.css';*/
 /*@import '_cards.css';*/
 /*@import '_forms.css';*/
@@ -43,40 +41,46 @@ Last Update: 2025-07-31
 @import '_footer.css';
 /*@import '_heroes.css'; --> gemerged in components */
 
-
-/* 5. RESPONSIVE  */
+/* 5. RESPONSIVE (GLOBAL) */
 @import '_responsive.css';
 
-/* 6. Multiple-PAGE-SPECIFIC */
+/* 6. GLOBAL CONTENT TYPES */
 @import '_404.css';
 @import '_auth.css';
 @import '_legal.css';
 @import '_news.css';
 @import '_resources.css';
 
+/*
+==============================================================================
+PAGE-SPECIFIC CSS REMOVED - NOW LOADED CONDITIONALLY VIA FUNCTIONS.PHP
+==============================================================================
 
+REMOVED FROM MAIN.CSS (performance + no conflicts):
+- _page-home.css
+- _page-about.css  
+- _page-contact.css
+- _page-booking.css
+- _page-uv-curing.css
+- _page-uv-led.css
+- _page-mercury-uv-lamps.css
+- _page-uv-c-disinfection.css
+- _page-uv-consulting.css
+- _page-uv-safety-equipment.css
+- _page-uv-process-equipment.css
+- _page-uv-tunnel.css
 
+ALSO REMOVED FROM MAIN.CSS (performance):
+- _animations.css (loaded conditionally)
 
-/* 5. PAGE-SPECIFIC (Last!) */
-@import '_page-home.css';
-@import '_page-about.css';
-@import '_page-contact.css';
-@import '_page-booking.css';
+This ensures:
+✅ Clean CSS loading per page
+✅ No cross-page CSS conflicts
+✅ Better performance (only relevant CSS loads)
+✅ Easier debugging and maintenance
 
-@import '_page-uv-curing.css';
-@import '_page-uv-led.css';
-@import '_page-mercury-uv-lamps.css';
-@import '_page-uv-c-disinfection.css';
-
-@import '_page-uv-consulting.css';
-
-@import '_page-uv-safety-equipment.css';
-@import '_page-uv-process-equipment.css';
-@import '_page-uv-testing-equipment.css';
-@import '_page-uv-tunnel.css';
-
-
-
+==============================================================================
+*/
 
 
 
