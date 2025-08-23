@@ -154,6 +154,7 @@ Last Update: 2025-08-21
     border-radius: 50px; /* ← Andere Border-Radius */
     transition: all 0.3s ease; /* ← Nur Primary hat Transition */
     position: relative;
+    overflow: hidden;
 }
 
 .luvex-cta-primary:hover {
@@ -161,6 +162,20 @@ Last Update: 2025-08-21
     color: var(--luvex-dark-blue);
     transform: scale(1.05);
 }
+
+/* Hero Button Gradient Animation */
+.luvex-cta-primary.hero-button-active:hover {
+    background: linear-gradient(135deg, 
+        var(--luvex-bright-cyan) 0%, 
+        #8a2be2 50%, 
+        var(--luvex-bright-cyan) 100%);
+    background-size: 200% 200%;
+    animation: gradient-shift 2s ease-in-out infinite;
+    color: var(--luvex-white);
+    transform: scale(1.05);
+}
+
+
 
 .luvex-cta-secondary {
     display: inline-flex;
