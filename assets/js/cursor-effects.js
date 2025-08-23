@@ -94,26 +94,50 @@ function createCursor() {
         rafId = requestAnimationFrame(updateCursor);
     }
 
-    // === EVENTS ===
+    // === EVENTS (VERBESSERT) ===
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
         
         if (!cursor) {
             createCursor();
-            updateCursor();
+        }
+        
+        cursor.classList.add('active');
+        updateCursor();
+    });
+
+    // NEUER FIX: Mouseenter für Fenster-Rückkehr
+    document.addEventListener('mouseenter', () => {
+        if (cursor) {
+            cursor.classList.add('active');
+            console.log('🎯 Maus ist zurück im Fenster');
         }
     });
 
+    // Mouse verlässt Browser-Fenster
     document.addEventListener('mouseleave', () => {
         if (cursor) {
             cursor.classList.remove('active');
-        }
-        if (rafId) {
-            cancelAnimationFrame(rafId);
-            rafId = null;
+            console.log('🎯 Maus hat Fenster verlassen');
         }
     });
+
+    // ZUSÄTZLICH: Focus-Events für Browser-Tabs
+    window.addEventListener('focus', () => {
+        if (cursor) {
+            cursor.classList.add('active');
+            console.log('🎯 Browser-Tab wieder aktiv');
+        }
+    });
+
+    window.addEventListener('blur', () => {
+        if (cursor) {
+            cursor.classList.remove('active');
+            console.log('🎯 Browser-Tab inaktiv');
+        }
+    });
+
 
     // HOVER EFFECTS (optimiert)
     document.addEventListener('mouseenter', (e) => {
