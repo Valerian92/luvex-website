@@ -1,101 +1,68 @@
 /**
- * LUVEX CURSOR EFFECTS - PERFORMANCE OPTIMIZED v3
+ * LUVEX CURSOR EFFECTS - KOMPATIBEL MIT VORHANDENER CSS
  */
 document.addEventListener('DOMContentLoaded', function() {
     
     if (!document.body.classList.contains('custom-cursor-active')) {
-        console.log('🎯 Custom Cursor: Nicht aktiv für diese Seite');
+        console.log('🎯 Custom Cursor: Nicht aktiv');
         return;
     }
 
     console.log('🎯 LUVEX Cursor System initialisiert...');
 
-    // === DEBUGGING DETECTION ===
-    const isDebugging = () => {
-        return window.outerHeight - window.innerHeight > 200 || 
-               window.outerWidth - window.innerWidth > 200;
-    };
-
     let cursor = null;
     let mouseX = 0;
     let mouseY = 0;
-    let rafId = null;
 
     function createCursor() {
         cursor = document.createElement('div');
-        cursor.className = 'custom-cursor cursor-quantum'; // Standard-Style
-        
-        // DEBUG FALLBACK für bessere Sichtbarkeit
-        if (isDebugging()) {
-            cursor.style.cssText = `
-                position: fixed;
-                width: 30px;
-                height: 30px;
-                background: rgba(109, 213, 237, 0.9);
-                border: 3px solid #fff;
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 9999;
-                transform: translate(-50%, -50%);
-                opacity: 1;
-                box-shadow: 0 0 20px rgba(109, 213, 237, 0.8);
-            `;
-            console.log('🐛 Debug-Cursor aktiviert (große Sichtbarkeit)');
-        }
-        
+        cursor.className = 'custom-cursor cursor-quantum'; // Nutzt deine vorhandene CSS
         document.body.appendChild(cursor);
         
-        // WICHTIG: Klassen nach DOM-Einfügung hinzufügen
-        setTimeout(() => {
-            cursor.classList.add('visible', 'active');
-        }, 10);
+        // WICHTIG: visible Klasse hinzufügen (wie in deiner CSS definiert)
+        cursor.classList.add('visible');
         
         console.log('✅ Cursor erstellt:', cursor.className);
+        return cursor;
     }
 
     function updateCursor() {
         if (!cursor) return;
-        
         cursor.style.left = mouseX + 'px';
         cursor.style.top = mouseY + 'px';
-        
-        rafId = requestAnimationFrame(updateCursor);
     }
 
-    // === EVENTS ===
+    // Mousemove Event
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
         
         if (!cursor) {
             createCursor();
-            updateCursor();
         }
+        
+        cursor.classList.add('active'); // Wie in deiner CSS definiert
+        updateCursor();
     });
 
     document.addEventListener('mouseleave', () => {
         if (cursor) {
             cursor.classList.remove('active');
         }
-        if (rafId) {
-            cancelAnimationFrame(rafId);
-            rafId = null;
-        }
     });
 
-    // HOVER EFFECTS (optimiert)
-    document.addEventListener('mouseenter', (e) => {
-        if (cursor && e.target.matches('a, button, .btn, .luvex-cta-primary, .luvex-cta-secondary, .luvex-cta--animated')) {
-            cursor.classList.add('hover');
-            console.log('🎯 Hover aktiviert auf:', e.target.tagName);
-        }
-    }, true);
+    // Button Hover Effects - nutzt deine vorhandene .hover CSS
+    const interactiveElements = document.querySelectorAll('a, button, .btn, .luvex-cta-primary, .luvex-cta-secondary');
+    
+    interactiveElements.forEach(element => {
+        element.addEventListener('mouseenter', () => {
+            if (cursor) cursor.classList.add('hover');
+        });
 
-    document.addEventListener('mouseleave', (e) => {
-        if (cursor && e.target.matches('a, button, .btn, .luvex-cta-primary, .luvex-cta-secondary, .luvex-cta--animated')) {
-            cursor.classList.remove('hover');
-        }
-    }, true);
+        element.addEventListener('mouseleave', () => {
+            if (cursor) cursor.classList.remove('hover');
+        });
+    });
 
     console.log('✅ LUVEX Cursor System geladen');
 });
