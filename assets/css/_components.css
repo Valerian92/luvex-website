@@ -80,24 +80,25 @@ Last Update: 2025-08-21
 ==============================================================================
 */
 
-/* --- 2.1 Primary Hero CTA Button (BEREINIGT) --- */
+/* --- 2.1 Primary Hero CTA Button (FINAL) --- */
 .luvex-hero__cta {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: var(--space-xs);
     padding: 16px 32px;
-    background: transparent; /* ← Transparent wie Secondary */
-    color: var(--luvex-bright-cyan); /* ← Cyan Text */
-    border: 2px solid var(--luvex-bright-cyan); /* ← Cyan Border */
+    background: transparent;
+    color: var(--luvex-bright-cyan);
+    border: 2px solid var(--luvex-bright-cyan);
     border-radius: var(--radius-full);
     text-decoration: none;
     font-weight: 600;
-    transition: var(--transition-normal);
+    transition: all 0.3s ease;
     font-size: var(--text-base);
+    position: relative;
+    overflow: hidden;
 }
 
-/* Standard Hover (ohne hero-button-active) */
 .luvex-hero__cta:hover {
     background: var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
@@ -105,7 +106,6 @@ Last Update: 2025-08-21
     box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
 }
 
-/* Gradient Hover nur für hero-button-active */
 .luvex-hero__cta.hero-button-active:hover {
     background: linear-gradient(135deg, 
         var(--luvex-bright-cyan) 0%, 
@@ -119,12 +119,10 @@ Last Update: 2025-08-21
     color: var(--luvex-white);
 }
 
-
 @keyframes gradient-shift {
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
 }
-
 
 /* --- 2.2 Secondary Hero CTA Button --- */
 .luvex-hero__cta-secondary {

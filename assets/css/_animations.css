@@ -405,13 +405,6 @@ Last Update: 2025-08-05
 
 
 
-/* --- 4.3 Hero Button Hover Effects --- */
-.luvex-hero .luvex-cta-primary,
-.luvex-hero .luvex-cta-secondary {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
 
 .luvex-hero .hero-button-active::before {
     content: '';
