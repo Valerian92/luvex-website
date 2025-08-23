@@ -104,6 +104,21 @@ Last Update: 2025-08-21
     box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
 }
 
+/* Hero Button mit Primary Class - Optimiert */
+.luvex-hero__cta.luvex-cta-primary {
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    font-weight: 700; /* Stärkere Schrift für bessere Lesbarkeit */
+}
+
+.luvex-hero__cta.luvex-cta-primary:hover {
+    background: var(--luvex-white);
+    color: var(--luvex-dark-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(109, 213, 237, 0.3);
+}
+
+
 .hero-button-active:hover {
     background: linear-gradient(135deg, 
         var(--luvex-bright-cyan) 0%, 
