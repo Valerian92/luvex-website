@@ -11,10 +11,10 @@ get_header(); ?>
 
 <!-- 
 ==============================================================================
-FINALE HERO SECTION
+FINALE HERO SECTION (Layout-Fix)
 ==============================================================================
-- Der Container wurde auf den breiteren Standard `.container` umgestellt,
-  um mehr Abstand zwischen Titel und Buttons zu schaffen.
+- Die Animations-Klasse wurde vom H1-Tag entfernt.
+- Das Layout wird nun ausschließlich über die _news.css gesteuert.
 -->
 <section class="luvex-hero luvex-hero--split-compact">
     <div class="luvex-hero__container container">
