@@ -1,19 +1,17 @@
 /*
 ==============================================================================
-LUVEX THEME v4.3 - COMPLETE HEADER SYSTEM
+LUVEX HEADER - PROFESSIONAL SCROLL EFFECTS
 ==============================================================================
-
-Description: Vollständige Header-Implementierung mit 3-Level Navigation,
-             Logo-System, User-Dropdown und Mobile Menu
-Dependencies: _variables.css, _core.css
-Last Update: 2025-08-23 (Complete)
-
+Description: Fügt professionelle Scroll-Effekte zum Header hinzu
+Location: Ende von _header.css (Section 12 ergänzen)
 ==============================================================================
 */
 
 /* ==========================================================================
-   1. HEADER & MAIN CONTAINER SETUP
+   SCROLL EFFECT CLASSES (für JavaScript)
    ========================================================================== */
+
+/* Standard State - Transparent im Hero */
 .site-header {
     background: transparent !important; 
     border-bottom: 1px solid rgba(109, 213, 237, 0.2);
@@ -23,725 +21,263 @@ Last Update: 2025-08-23 (Complete)
     right: 0;
     z-index: 1000;
     height: 80px;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth professional transition */
+    backdrop-filter: none;
+    box-shadow: none;
 }
 
-.header-container {
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 100%;
+/* Scrolled State - Solid Header mit Blur-Effect */
+.site-header.scrolled {
+    background: rgba(27, 42, 73, 0.95) !important; /* Semi-transparent dark blue */
+    backdrop-filter: blur(10px) saturate(180%); /* Modern glassmorphism effect */
+    -webkit-backdrop-filter: blur(10px) saturate(180%); /* Safari support */
+    border-bottom: 1px solid rgba(109, 213, 237, 0.4);
+    box-shadow: 
+        0 4px 20px rgba(27, 42, 73, 0.3),
+        0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* ==========================================================================
-   2. LOGO & BRANDING
-   ========================================================================== */
-.site-branding {
-    flex-shrink: 0;
-    z-index: 1001;
-}
-
-.site-branding a {
-    text-decoration: none;
-    display: block;
-}
-
-/* Custom Logo */
-.custom-logo {
-    height: 40px;
-    width: auto;
-    max-width: 200px;
-}
-
-/* Text Logo Fallback */
-.luvex-logo-text {
-    font-size: 1.8rem;
-    font-weight: 600;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 2px;
+/* Enhanced Logo Visibility when scrolled */
+.site-header.scrolled .luvex-logo-text {
     color: var(--luvex-white);
-    transition: all 0.3s ease;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.luvex-logo-text:hover {
+.site-header.scrolled .logo-l {
     color: var(--luvex-bright-cyan);
-    transform: scale(1.02);
+    text-shadow: 0 1px 3px rgba(109, 213, 237, 0.5);
 }
 
-.logo-l {
+/* Enhanced Navigation Links when scrolled */
+.site-header.scrolled .main-navigation > ul > li > a {
+    color: var(--luvex-white);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.site-header.scrolled .main-navigation > ul > li > a:hover {
     color: var(--luvex-bright-cyan);
-    font-weight: 700;
+    text-shadow: 0 1px 3px rgba(109, 213, 237, 0.4);
 }
 
-.logo-u {
-    color: var(--luvex-white);
-}
-
-.logo-vex {
-    color: var(--luvex-white);
-}
-
-.logo-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--luvex-bright-cyan);
-    border-radius: 50%;
-    margin-left: 2px;
-    display: inline-block;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.6; }
-}
-
-/* ==========================================================================
-   3. MAIN NAVIGATION SYSTEM
-   ========================================================================== */
-.main-navigation {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    margin: 0 2rem;
-}
-
-.main-navigation > ul {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    position: relative;
-}
-
-/* ==========================================================================
-   4. LEVEL 1 - HAUPTMENÜ ITEMS  
-   ========================================================================== */
-.main-navigation > ul > li {
-    position: relative;
-}
-
-.main-navigation > ul > li > a {
-    color: var(--luvex-white);
-    font-size: 1.05rem;
-    font-weight: 500;
-    text-decoration: none;
-    position: relative;
-    transition: all 0.3s ease;
-    padding: 29px 1.8rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    height: 80px;
-    box-sizing: border-box;
-}
-
-.main-navigation > ul > li > a:hover {
-    color: var(--luvex-bright-cyan);
-}
-
-/* ==========================================================================
-   5. LEVEL 2 - HORIZONTAL SUB-MENU
-   ========================================================================== */
-.main-navigation > ul > li > .sub-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: max-content;
-    white-space: nowrap;
-    
-    background: var(--luvex-dark-blue);
-    box-shadow: var(--shadow-lg);
-    border-top: 1px solid rgba(109, 213, 237, 0.2);
-    border-radius: 0 0 var(--radius-md) var(--radius-md);
-    padding: 0;
-    
-    display: flex;
-    gap: 0;
-
-    opacity: 0;
-    visibility: hidden;
-    /* KORREKTUR: Versatz entfernt, startet jetzt leicht nach oben verschoben für einen sanfteren Effekt */
-    transform: translateY(5px);
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-    
-    z-index: 1001;
-}
-
-.main-navigation > ul > li:hover > .sub-menu {
-    opacity: 1;
-    visibility: visible;
-    /* KORREKTUR: Endet an der exakten Position */
-    transform: translateY(0);
-}
-
-.main-navigation > ul > li > .sub-menu > li {
-    position: relative;
-}
-
-.main-navigation > ul > li > .sub-menu > li > a {
-    color: var(--luvex-white);
-    font-weight: 500;
-    padding: 1.2rem 1.5rem;
-    display: block;
-    position: relative;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    height: auto;
-}
-
-.main-navigation > ul > li > .sub-menu > li > a:hover {
-    color: var(--luvex-bright-cyan);
-    background: rgba(109, 213, 237, 0.1);
-}
-
-/* ==========================================================================
-   6. LEVEL 3 - VERTICAL SUB-SUB-MENU
-   ========================================================================== */
-.main-navigation .sub-menu .sub-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: 100%;
-    width: max-content;
-    
-    background: var(--luvex-dark-blue);
-    border-radius: 0 0 var(--radius-md) var(--radius-md);
-    box-shadow: var(--shadow-md);
-    border: 1px solid rgba(109, 213, 237, 0.2);
-    border-top: none;
-    
-    display: block;
-    padding: 0.5rem 0;
-
-    opacity: 0;
-    visibility: hidden;
-    /* KORREKTUR: Versatz entfernt */
-    transform: translateY(5px);
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-    
-    z-index: 1002;
-}
-
-.main-navigation .sub-menu > li:hover > .sub-menu {
-    opacity: 1;
-    visibility: visible;
-    /* KORREKTUR: Endet an der exakten Position */
-    transform: translateY(0);
-}
-
-.main-navigation .sub-menu .sub-menu li {
-    width: 100%;
-}
-
-.main-navigation .sub-menu .sub-menu a {
-    padding: 0.75rem 1.5rem;
-    color: var(--luvex-white);
-    display: block;
-    transition: all 0.3s ease;
-}
-
-.main-navigation .sub-menu .sub-menu a:hover {
-    background: rgba(109, 213, 237, 0.1);
-    color: var(--luvex-bright-cyan);
-    padding-left: 2rem;
-}
-
-/* ==========================================================================
-   7. DROPDOWN ARROWS & INDICATORS
-   ========================================================================== */
-.main-navigation > ul > li.menu-item-has-children > a .dropdown-arrow {
-    transition: transform 0.3s ease;
-    font-size: 0.8rem;
-}
-
-.main-navigation > ul > li.menu-item-has-children:hover > a .dropdown-arrow {
-    /* KORREKTUR: Pfeil dreht sich jetzt 45 Grad nach rechts unten */
-    transform: rotate(45deg);
-}
-
-.main-navigation .sub-menu > li.menu-item-has-children > a .dropdown-arrow {
-    transform: rotate(-90deg);
-    transition: transform 0.3s ease;
-}
-
-.main-navigation .sub-menu > li.menu-item-has-children:hover > a .dropdown-arrow {
-    /* Behält die Standard-Rotation für Level 3 bei */
-    transform: rotate(0deg);
-}
-
-/* ==========================================================================
-   8. HEADER CTA BUTTON & USER SYSTEM
-   ========================================================================== */
-.header-cta {
-    flex-shrink: 0;
-    position: relative;
-}
-
-/* Standard CTA Button (für nicht eingeloggte User) */
-.header-cta-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 12px 24px;
+/* Enhanced Header CTA when scrolled */
+.site-header.scrolled .header-cta-button {
     background: var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
-    border-radius: var(--radius-full);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
+    box-shadow: 
+        0 2px 10px rgba(109, 213, 237, 0.3),
+        0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.header-cta-button:hover {
+.site-header.scrolled .header-cta-button:hover {
     background: var(--luvex-white);
-    color: var(--luvex-dark-blue);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
+    box-shadow: 
+        0 4px 15px rgba(109, 213, 237, 0.4),
+        0 2px 6px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px) scale(1.02);
 }
 
-/* User Section (für eingeloggte User) */
-.user-section {
-    position: relative;
+/* Enhanced User Section when scrolled */
+.site-header.scrolled .user-info {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(109, 213, 237, 0.3);
+    backdrop-filter: blur(5px);
 }
 
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    cursor: pointer;
-    padding: 8px 12px;
-    border-radius: var(--radius-lg);
-    transition: all 0.3s ease;
+.site-header.scrolled .user-info:hover {
+    background: rgba(109, 213, 237, 0.15);
+    border-color: var(--luvex-bright-cyan);
+}
+
+/* Enhanced User Avatar when scrolled */
+.site-header.scrolled .user-avatar {
+    box-shadow: 0 2px 8px rgba(109, 213, 237, 0.3);
+}
+
+/* Mobile Menu Button Enhancement when scrolled */
+.site-header.scrolled .hamburger-button {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(109, 213, 237, 0.2);
 }
 
-.user-info:hover {
-    background: rgba(109, 213, 237, 0.1);
+.site-header.scrolled .hamburger-button:hover {
+    background: rgba(109, 213, 237, 0.15);
     border-color: var(--luvex-bright-cyan);
 }
 
-.user-avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: var(--luvex-bright-cyan);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--luvex-dark-blue);
-    font-weight: 600;
-    font-size: 0.9rem;
-    overflow: hidden;
+.site-header.scrolled .hamburger-lines span {
+    background: var(--luvex-white);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.user-details {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
+/* ==========================================================================
+   ALTERNATIVE: SHRINKING HEADER EFFECT (Optional)
+   ========================================================================== */
 
-.user-welcome {
-    font-size: 0.8rem;
-    color: var(--luvex-gray-300);
-    margin: 0;
-    line-height: 1;
-}
-
-.user-name {
-    font-size: 0.95rem;
-    color: var(--luvex-white);
-    font-weight: 500;
-    margin: 0;
-    line-height: 1;
-}
-
-.dropdown-arrow {
-    color: var(--luvex-gray-300);
-    font-size: 0.8rem;
-    transition: transform 0.3s ease;
-}
-
-.user-info:hover .dropdown-arrow {
-    transform: rotate(180deg);
-}
-
-/* User Dropdown Menu */
-.user-dropdown {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    min-width: 280px;
-    background: var(--luvex-dark-blue);
-    border: 1px solid rgba(109, 213, 237, 0.2);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-    padding: 0;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(5px);
-    transition: all 0.3s ease;
-    z-index: 1003;
-}
-
-.user-dropdown.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.dropdown-header {
-    padding: 1.5rem;
-    border-bottom: 1px solid rgba(109, 213, 237, 0.1);
-}
-
-.dropdown-user-info {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.dropdown-avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: var(--luvex-bright-cyan);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--luvex-dark-blue);
-    font-weight: 600;
-    font-size: 1.1rem;
-    overflow: hidden;
-}
-
-.dropdown-user-details h4 {
-    margin: 0 0 4px 0;
-    color: var(--luvex-white);
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
-.dropdown-user-details p {
-    margin: 0;
-    color: var(--luvex-gray-300);
-    font-size: 0.9rem;
-}
-
-.dropdown-menu {
+/* Uncomment this section if you want a shrinking effect instead */
+/*
+.site-header.scrolled {
+    height: 65px; 
     padding: 0.5rem 0;
 }
 
-.dropdown-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1.5rem;
-    color: var(--luvex-white);
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
+.site-header.scrolled .header-container {
+    height: 65px;
 }
 
-.dropdown-item:hover {
-    background: rgba(109, 213, 237, 0.1);
-    color: var(--luvex-bright-cyan);
+.site-header.scrolled .main-navigation > ul > li > a {
+    height: 65px;
+    padding: 22px 1.8rem;
+    font-size: 1rem;
 }
 
-.dropdown-item i {
-    width: 16px;
-    text-align: center;
-    opacity: 0.8;
+.site-header.scrolled .luvex-logo-text {
+    font-size: 1.6rem;
 }
 
-/* ==========================================================================
-   9. MOBILE MENU TOGGLE
-   ========================================================================== */
-.mobile-menu-toggle {
-    display: none;
-    flex-shrink: 0;
+.site-header.scrolled .custom-logo {
+    height: 35px;
 }
 
-.hamburger-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    border-radius: var(--radius-md);
-    transition: all 0.3s ease;
+.site-header.scrolled .user-avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
 }
-
-.hamburger-button:hover {
-    background: rgba(109, 213, 237, 0.1);
-}
-
-.hamburger-lines {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.hamburger-lines span {
-    width: 24px;
-    height: 2px;
-    background: var(--luvex-white);
-    transition: all 0.3s ease;
-    border-radius: 1px;
-}
-
-.hamburger-button.menu-open .hamburger-lines span:nth-child(1) {
-    transform: rotate(45deg) translate(6px, 6px);
-}
-
-.hamburger-button.menu-open .hamburger-lines span:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger-button.menu-open .hamburger-lines span:nth-child(3) {
-    transform: rotate(-45deg) translate(6px, -6px);
-}
+*/
 
 /* ==========================================================================
-   10. MOBILE NAVIGATION
+   SCROLL PROGRESS INDICATOR (Optional Feature)
    ========================================================================== */
-.mobile-navigation {
-    display: none;
+
+.header-scroll-indicator {
     position: absolute;
-    top: 100%;
+    bottom: 0;
     left: 0;
-    right: 0;
-    background: var(--luvex-dark-blue);
-    border-top: 1px solid rgba(109, 213, 237, 0.2);
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
+    height: 2px;
+    background: linear-gradient(90deg, var(--luvex-bright-cyan), #8ee3f5);
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 0.1s ease-out;
+    opacity: 0;
+    z-index: 1001;
 }
 
-.mobile-navigation[aria-hidden="false"] {
-    max-height: calc(100vh - 80px);
-}
-
-.mobile-menu-content {
-    padding: 1rem 0;
+.site-header.scrolled .header-scroll-indicator {
+    opacity: 1;
 }
 
 /* ==========================================================================
-   11. RESPONSIVE & BREAKPOINTS
+   DROPDOWN MENU ENHANCEMENTS WHEN SCROLLED
    ========================================================================== */
+
+.site-header.scrolled .main-navigation > ul > li > .sub-menu {
+    background: rgba(27, 42, 73, 0.98);
+    backdrop-filter: blur(15px) saturate(180%);
+    -webkit-backdrop-filter: blur(15px) saturate(180%);
+    box-shadow: 
+        0 8px 32px rgba(27, 42, 73, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(109, 213, 237, 0.3);
+}
+
+.site-header.scrolled .main-navigation .sub-menu .sub-menu {
+    background: rgba(27, 42, 73, 0.98);
+    backdrop-filter: blur(15px) saturate(180%);
+    -webkit-backdrop-filter: blur(15px) saturate(180%);
+    box-shadow: 
+        0 8px 24px rgba(27, 42, 73, 0.4),
+        0 2px 6px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(109, 213, 237, 0.3);
+}
+
+/* ==========================================================================
+   PERFORMANCE & ACCESSIBILITY
+   ========================================================================== */
+
+/* Reduce animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .site-header,
+    .site-header.scrolled,
+    .header-scroll-indicator {
+        transition: none;
+    }
+    
+    .site-header.scrolled .header-cta-button:hover {
+        transform: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .site-header.scrolled {
+        background: rgba(27, 42, 73, 1) !important;
+        backdrop-filter: none;
+        border-bottom: 2px solid var(--luvex-bright-cyan);
+    }
+}
+
+/* ==========================================================================
+   RESPONSIVE SCROLL EFFECTS
+   ========================================================================== */
+
 @media (max-width: 1024px) {
-    .main-navigation {
-        display: none;
-    }
-    
-    .mobile-menu-toggle {
-        display: block;
-    }
-    
-    .mobile-navigation {
-        display: block;
-    }
-    
-    .header-container {
-        padding: 0 1rem;
-    }
-    
-    .user-details {
-        display: none;
+    .site-header.scrolled .mobile-navigation {
+        background: rgba(27, 42, 73, 0.98);
+        backdrop-filter: blur(15px) saturate(180%);
+        -webkit-backdrop-filter: blur(15px) saturate(180%);
+        box-shadow: 0 4px 20px rgba(27, 42, 73, 0.3);
     }
 }
 
 @media (max-width: 768px) {
-    .site-header {
+    .site-header.scrolled {
         height: 70px;
     }
     
-    .header-container {
+    .site-header.scrolled .header-container {
         height: 70px;
     }
     
-    .main-navigation > ul > li > a {
+    .site-header.scrolled .main-navigation > ul > li > a {
         height: 70px;
         padding: 25px 1.5rem;
-    }
-    
-    .luvex-logo-text {
-        font-size: 1.5rem;
-    }
-    
-    .custom-logo {
-        height: 32px;
     }
 }
 
 /* ==========================================================================
-   12. ASTRA OVERRIDES & CLEANUP
+   BROWSER-SPECIFIC OPTIMIZATIONS
    ========================================================================== */
-.main-navigation .ast-arrow-svg,
-.main-navigation .ast-menu-toggle,
-.ast-desktop .ast-menu-toggle {
-    display: none !important;
+
+/* Safari-specific backdrop-filter fixes */
+@supports (-webkit-backdrop-filter: blur(10px)) and (not (backdrop-filter: blur(10px))) {
+    .site-header.scrolled {
+        -webkit-backdrop-filter: blur(10px) saturate(180%);
+        background: rgba(27, 42, 73, 0.9) !important; /* Slightly more opaque for Safari */
+    }
 }
 
-/* Skip Link Styling */
-.skip-link {
+/* Firefox fallback (backdrop-filter not fully supported) */
+@supports not (backdrop-filter: blur(10px)) {
+    .site-header.scrolled {
+        background: rgba(27, 42, 73, 0.92) !important;
+    }
+}
+
+/* ==========================================================================
+   DEBUG MODE (Development Only)
+   ========================================================================== */
+
+/* Add ?debug_header=1 to URL to see header state */
+body[data-debug-header="true"] .site-header::before {
+    content: attr(data-scroll-state);
     position: absolute;
-    left: -9999px;
-    top: auto;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-}
-
-.skip-link:focus {
-    position: absolute;
-    left: 6px;
-    top: 7px;
-    width: auto;
-    height: auto;
-    padding: 8px 16px;
-    background: var(--luvex-dark-blue);
-    color: var(--luvex-white);
-    text-decoration: none;
-    border-radius: var(--radius-md);
-    z-index: 9999;
-}
-
-/*
-==============================================================================
-LUVEX HEADER LANGUAGE SYSTEM - CSS EXTENSION
-==============================================================================
-*/
-
-/* --- Header CTA Group (for non-logged-in users) --- */
-.header-cta-group {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-/* --- Compact Language Switcher for Guests --- */
-.header-language-switcher {
-    position: relative;
-}
-
-.language-switcher-compact {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 8px 12px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(109, 213, 237, 0.3);
-    border-radius: var(--radius-md);
-    color: var(--luvex-white);
-    font-size: var(--text-sm);
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition-normal);
-    user-select: none;
-}
-
-.language-switcher-compact:hover {
-    background: rgba(109, 213, 237, 0.15);
-    border-color: var(--luvex-bright-cyan);
-    transform: translateY(-1px);
-}
-
-.language-switcher-compact .language-flag {
-    font-size: 1.1rem;
-}
-
-.language-switcher-compact .language-code {
+    top: 100%;
+    left: 1rem;
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    min-width: 20px;
+    border-radius: var(--radius-sm);
+    z-index: 1000;
 }
-
-.language-switcher-compact i {
-    font-size: 0.7rem;
-    color: var(--luvex-gray-300);
-    transition: var(--transition-normal);
-}
-
-.language-switcher-compact:hover i {
-    color: var(--luvex-bright-cyan);
-}
-
-/* --- Guest Language Dropdown --- */
-.guest-language-dropdown {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    min-width: 200px;
-    background: var(--luvex-dark-blue);
-    border: 1px solid rgba(109, 213, 237, 0.2);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-    padding: 0.5rem 0;
-    opacity: 0;
-    visibility: hidden;
-    /* KORREKTUR: Versatz entfernt */
-    transform: translateY(5px);
-    transition: all 0.3s ease;
-    z-index: 1003;
-}
-
-.guest-language-dropdown.visible {
-    opacity: 1;
-    visibility: visible;
-    /* KORREKTUR: Endet an der exakten Position */
-    transform: translateY(0);
-}
-
-.guest-language-dropdown .language-option {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    width: 100%;
-    padding: 0.75rem 1rem;
-    background: none;
-    border: none;
-    color: var(--luvex-white);
-    font-size: var(--text-sm);
-    cursor: pointer;
-    transition: var(--transition-normal);
-    text-align: left;
-}
-
-.guest-language-dropdown .language-option:hover:not(.current) {
-    background: rgba(109, 213, 237, 0.1);
-    color: var(--luvex-bright-cyan);
-}
-
-.guest-language-dropdown .language-option.current {
-    background: rgba(109, 213, 237, 0.15);
-    color: var(--luvex-bright-cyan);
-    cursor: default;
-}
-
-.guest-language-dropdown .language-option.current {
-    opacity: 0.7;
-}
-
-.guest-language-dropdown .language-flag {
-    font-size: 1rem;
-    width: 20px;
-    text-align: center;
-}
-
-.guest-language-dropdown .language-name {
-    flex: 1;
-    font-weight: 500;
-}
-
-.guest-language-dropdown .language-option i.fa-check {
-    font-size: 0.8rem;
-    color: var(--luvex-bright-cyan);
-}
-
-
