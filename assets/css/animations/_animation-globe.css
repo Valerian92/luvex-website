@@ -78,8 +78,8 @@ Last Update: 2025-08-24 (Kompakt-Update)
     color: var(--luvex-gray-300); 
     max-width: 600px; 
     line-height: 1.7; 
-    margin: 0 auto; /* NEU: Description auch zentriert für bessere Balance */
-    text-align: center; /* NEU: Text zentriert */
+    margin: 0; /* Kein Extra-Margin */
+    /* ENTFERNT: text-align: center und margin: 0 auto - Description bleibt linksbündig */
 }
 
 .homepage-community-actions { 

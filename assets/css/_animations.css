@@ -169,16 +169,39 @@ Last Update: 2025-08-24 (Refactored)
 
 /*
 ==============================================================================
-6. NEU: SCROLL-TO-TOP BUTTON ANIMATION (KONZEPT 6)
+6. NEU: SCROLL-TO-TOP BUTTON ANIMATION & POSITIONING (KONZEPT 6)
 ==============================================================================
 */
 
-/* Grundstil für den Button - passt sich an die Animation an */
+/* Positionierung und Grundstil für den Button */
 #scrollToTopBtn {
+    /* ANPASSUNG: Button höher positioniert für bessere Ausrichtung mit dem Footer-Text */
+    position: fixed;
+    bottom: 38px; /* Vorher ~30px */
+    right: 30px;
+    width: 50px;
+    height: 50px;
     background-color: #1f2937; /* Dunkler Hintergrund für besseren Kontrast */
     color: white;
     border: 3px solid #4b5563; /* Initialer, neutraler Rand */
-    transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.5s ease;
+    border-radius: 50%; /* Sicherstellen, dass der Button rund ist */
+    display: flex; /* Für die Zentrierung des Icons */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Stellt sicher, dass er über anderen Elementen liegt */
+    cursor: pointer;
+    /* Sichtbarkeits-Transitions */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease, border-color 0.5s ease;
+}
+
+/* Klasse für die Sichtbarkeit (wird per JS gesteuert) */
+#scrollToTopBtn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 /* Animationsklasse, die per JS hinzugefügt wird */
@@ -197,4 +220,19 @@ Last Update: 2025-08-24 (Refactored)
     66% {
         border-color: #FFCE00; /* Gold */
     }
+}
+
+/*
+==============================================================================
+7. NEU: FOOTER LAYOUT ANPASSUNGEN
+==============================================================================
+*/
+.footer-bottom {
+    /* ANPASSUNG: Etwas Padding unten, um Kollision zu vermeiden */
+    padding-bottom: 1rem; /* 16px */
+}
+
+.footer-bottom-right {
+    /* ANPASSUNG: Rechter Einzug für den Text, um Platz für den Button zu schaffen */
+    padding-right: 5rem; /* 80px */
 }

@@ -105,8 +105,7 @@
 		</div>
 
 		<!-- Footer Bottom -->
-        <!-- ANPASSUNG: Padding unten leicht reduziert -->
-		<div class="footer-bottom" style="padding-bottom: 1.5rem;">
+		<div class="footer-bottom">
     		<div class="footer-bottom-content">
         		<div class="footer-bottom-left">
 					<p class="footer-copyright">
@@ -126,8 +125,7 @@
 						?>
 					</nav>
 				</div>
-                <!-- ANPASSUNG: Rechter Container eingerückt, um Platz für den Button zu machen -->
-				<div class="footer-bottom-right" style="padding-right: 5rem;">
+				<div class="footer-bottom-right">
 					<p class="footer-location">
 						Made with precision in Germany 🇩🇪
 					</p>
