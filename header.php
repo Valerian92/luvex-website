@@ -1,9 +1,9 @@
 <?php
 /**
- * The header for our theme - COMPLETE WORKING VERSION
+ * The header for our theme - WITH LANGUAGE SYSTEM INTEGRATION
  * 
  * @package Luvex
- * @since 2.0.0
+ * @since 3.0.0
  */
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
@@ -39,17 +39,17 @@
             ?>
         </div>
 
-        <!-- Desktop Navigation - MIT DEBUG -->
+        <!-- Desktop Navigation -->
         <nav id="desktop-navigation" class="main-navigation">
             <?php
-            // Debug: Prüfen ob Menü existiert
+            // Debug: Check if menu exists
             if (current_user_can('administrator') && isset($_GET['debug_nav'])) {
                 echo '<!-- DEBUG: Navigation wird geladen -->';
                 $locations = get_theme_mod('nav_menu_locations');
                 echo '<!-- DEBUG: Primary Menu ID: ' . (isset($locations['primary']) ? $locations['primary'] : 'NICHT_ZUGEWIESEN') . ' -->';
             }
             
-            // Menü mit erweiterten Parametern
+            // Menu with enhanced parameters
             $menu_output = wp_nav_menu(array(
                 'theme_location' => 'primary',
                 'menu_id'        => 'primary-menu',
@@ -67,53 +67,138 @@
             ?>
         </nav>
 
-        <!-- CTA Button -->
+        <!-- CTA Button / User Section -->
         <div class="header-cta">
             <?php if (is_user_logged_in()) : 
                 $current_user = wp_get_current_user();
-                $first_name = !empty($current_user->first_name) ? $current_user->first_name : $current_user->display_name; // FIX: Variable definieren
+                $first_name = !empty($current_user->first_name) ? $current_user->first_name : $current_user->display_name;
             ?>
+                <!-- Logged-in User Section -->
                 <div class="user-section">
-                <div class="user-info" onclick="toggleUserDropdown()">
-              <div class="user-avatar" id="userAvatar">
-                    <?php echo luvex_get_user_avatar(); ?>
-                </div>
-                    <div class="user-details">
-                        <p class="user-welcome">Willkommen</p>
-                        <p class="user-name"><?php echo esc_html($first_name); ?></p>
+                    <div class="user-info" onclick="toggleUserDropdown()">
+                        <div class="user-avatar" id="userAvatar">
+                            <?php echo luvex_get_user_avatar(); ?>
+                        </div>
+                        <div class="user-details">
+                            <p class="user-welcome">Welcome</p>
+                            <p class="user-name"><?php echo esc_html($first_name); ?></p>
+                        </div>
+                        <span class="dropdown-arrow">▼</span>
                     </div>
-                    <span class="dropdown-arrow">▼</span>
-                </div>
-                
-                <div class="user-dropdown" id="userDropdown">
-                    <div class="dropdown-header">
-                        <div class="dropdown-user-info">
-                           <div class="dropdown-avatar" id="dropdownAvatar">
-                                <?php echo luvex_get_user_avatar(); ?>
-                            </div>
-                            <div class="dropdown-user-details">
-                                <h4><?php echo esc_html($current_user->display_name); ?></h4>
-                                <p><?php echo esc_html($current_user->user_email); ?></p>
+                    
+                    <div class="user-dropdown" id="userDropdown">
+                        <div class="dropdown-header">
+                            <div class="dropdown-user-info">
+                               <div class="dropdown-avatar" id="dropdownAvatar">
+                                    <?php echo luvex_get_user_avatar(); ?>
+                                </div>
+                                <div class="dropdown-user-details">
+                                    <h4><?php echo esc_html($current_user->display_name); ?></h4>
+                                    <p><?php echo esc_html($current_user->user_email); ?></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="dropdown-menu">
-                        <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'profile' ) ) ); ?>" class="dropdown-item">
-                            <i class="fa-solid fa-user"></i>
-                            Mein Profil
-                        </a>
-                        <a href="<?php echo wp_logout_url(home_url()); ?>" class="dropdown-item">
-                            <i class="fa-solid fa-sign-out-alt"></i>
-                            Abmelden
-                        </a>
+                        
+                        <div class="dropdown-menu">
+                            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'profile' ) ) ); ?>" class="dropdown-item">
+                                <i class="fa-solid fa-user"></i>
+                                My Profile
+                            </a>
+                            
+                            <?php if (function_exists('pll_the_languages')) : ?>
+                            <!-- Language Switcher Section -->
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-language-section">
+                                <div class="dropdown-item dropdown-item--header">
+                                    <i class="fa-solid fa-globe"></i>
+                                    Language
+                                </div>
+                                <?php 
+                                $current_lang = function_exists('luvex_get_current_language') ? luvex_get_current_language() : 'en';
+                                $supported_languages = function_exists('LuvexUserSystem::get_supported_languages') ? LuvexUserSystem::get_supported_languages() : [];
+                                $polylang_languages = pll_the_languages(['raw' => 1]);
+                                
+                                if ($polylang_languages && is_array($polylang_languages)) :
+                                    foreach ($polylang_languages as $lang_code => $lang_data) :
+                                        if (!isset($supported_languages[$lang_code])) continue;
+                                        $is_current = $lang_code === $current_lang;
+                                        $lang_info = $supported_languages[$lang_code];
+                                ?>
+                                    <button class="dropdown-item dropdown-language-item <?php echo $is_current ? 'current' : ''; ?>" 
+                                            onclick="switchLanguage('<?php echo esc_attr($lang_code); ?>')"
+                                            data-language="<?php echo esc_attr($lang_code); ?>"
+                                            <?php echo $is_current ? 'disabled' : ''; ?>>
+                                        <span class="language-flag"><?php echo $lang_info['flag']; ?></span>
+                                        <span class="language-name"><?php echo esc_html($lang_info['name']); ?></span>
+                                        <?php if ($is_current) : ?>
+                                            <i class="fa-solid fa-check language-check"></i>
+                                        <?php endif; ?>
+                                    </button>
+                                <?php 
+                                    endforeach;
+                                endif; 
+                                ?>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <?php endif; ?>
+                            
+                            <a href="<?php echo wp_logout_url(home_url()); ?>" class="dropdown-item">
+                                <i class="fa-solid fa-sign-out-alt"></i>
+                                Logout
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
             <?php else : ?>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="header-cta-button">
-                    <i class="fa-solid fa-comments"></i>
-                    <span>Get Consultation</span>
-                </a>
+                <!-- Non-logged-in: CTA Button + Language Switcher -->
+                <div class="header-cta-group">
+                    <?php if (function_exists('pll_the_languages')) : ?>
+                        <!-- Language Switcher for Guests -->
+                        <div class="header-language-switcher">
+                            <?php 
+                            $current_lang = function_exists('luvex_get_current_language') ? luvex_get_current_language() : 'en';
+                            $supported_languages = function_exists('LuvexUserSystem::get_supported_languages') ? LuvexUserSystem::get_supported_languages() : [];
+                            $current_lang_data = $supported_languages[$current_lang] ?? ['flag' => '🇺🇸', 'name' => 'English'];
+                            ?>
+                            <button class="language-switcher-compact" onclick="toggleGuestLanguageDropdown()">
+                                <span class="language-flag"><?php echo $current_lang_data['flag']; ?></span>
+                                <span class="language-code"><?php echo strtoupper($current_lang); ?></span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            
+                            <div class="guest-language-dropdown" id="guestLanguageDropdown">
+                                <?php 
+                                $polylang_languages = pll_the_languages(['raw' => 1]);
+                                if ($polylang_languages && is_array($polylang_languages)) :
+                                    foreach ($polylang_languages as $lang_code => $lang_data) :
+                                        if (!isset($supported_languages[$lang_code])) continue;
+                                        $is_current = $lang_code === $current_lang;
+                                        $lang_info = $supported_languages[$lang_code];
+                                ?>
+                                    <button class="language-option <?php echo $is_current ? 'current' : ''; ?>" 
+                                            onclick="switchLanguageGuest('<?php echo esc_attr($lang_code); ?>')"
+                                            data-language="<?php echo esc_attr($lang_code); ?>"
+                                            <?php echo $is_current ? 'disabled' : ''; ?>>
+                                        <span class="language-flag"><?php echo $lang_info['flag']; ?></span>
+                                        <span class="language-name"><?php echo esc_html($lang_info['name']); ?></span>
+                                        <?php if ($is_current) : ?>
+                                            <i class="fa-solid fa-check"></i>
+                                        <?php endif; ?>
+                                    </button>
+                                <?php 
+                                    endforeach;
+                                endif; 
+                                ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                    
+                    <!-- Main CTA Button -->
+                    <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="header-cta-button">
+                        <i class="fa-solid fa-comments"></i>
+                        <span>Get Consultation</span>
+                    </a>
+                </div>
             <?php endif; ?>
         </div>
 
@@ -141,6 +226,43 @@
                 'fallback_cb'    => 'luvex_primary_menu_fallback',
             ));
             ?>
+            
+            <?php if (function_exists('pll_the_languages') && !is_user_logged_in()) : ?>
+                <!-- Mobile Language Switcher for Guests -->
+                <div class="mobile-language-section">
+                    <h4 class="mobile-section-title">
+                        <i class="fa-solid fa-globe"></i>
+                        Language
+                    </h4>
+                    <div class="mobile-language-options">
+                        <?php 
+                        $current_lang = function_exists('luvex_get_current_language') ? luvex_get_current_language() : 'en';
+                        $supported_languages = function_exists('LuvexUserSystem::get_supported_languages') ? LuvexUserSystem::get_supported_languages() : [];
+                        $polylang_languages = pll_the_languages(['raw' => 1]);
+                        
+                        if ($polylang_languages && is_array($polylang_languages)) :
+                            foreach ($polylang_languages as $lang_code => $lang_data) :
+                                if (!isset($supported_languages[$lang_code])) continue;
+                                $is_current = $lang_code === $current_lang;
+                                $lang_info = $supported_languages[$lang_code];
+                        ?>
+                            <button class="mobile-language-option <?php echo $is_current ? 'current' : ''; ?>" 
+                                    onclick="switchLanguageGuest('<?php echo esc_attr($lang_code); ?>')"
+                                    data-language="<?php echo esc_attr($lang_code); ?>"
+                                    <?php echo $is_current ? 'disabled' : ''; ?>>
+                                <span class="language-flag"><?php echo $lang_info['flag']; ?></span>
+                                <span class="language-name"><?php echo esc_html($lang_info['name']); ?></span>
+                                <?php if ($is_current) : ?>
+                                    <i class="fa-solid fa-check"></i>
+                                <?php endif; ?>
+                            </button>
+                        <?php 
+                            endforeach;
+                        endif; 
+                        ?>
+                    </div>
+                </div>
+            <?php endif; ?>
         </div>
     </nav>
 </header>
@@ -150,14 +272,14 @@
         <main id="main" class="site-main">
 
 <?php
-// Fallback-Funktion für Navigation
+// Fallback function for navigation
 function luvex_primary_menu_fallback() {
     if (current_user_can('edit_theme_options')) {
         echo '<ul id="primary-menu">';
-        echo '<li><a href="' . admin_url('nav-menus.php') . '" style="color: red;">Menü einrichten →</a></li>';
+        echo '<li><a href="' . admin_url('nav-menus.php') . '" style="color: red;">Setup Menu →</a></li>';
         echo '</ul>';
     } else {
-        // Standard-Fallback für normale Besucher
+        // Standard fallback for normal visitors
         echo '<ul id="primary-menu">';
         echo '<li><a href="' . home_url('/about/') . '">About</a></li>';
         echo '<li><a href="' . home_url('/uv-technology/') . '">UV Technology</a></li>';

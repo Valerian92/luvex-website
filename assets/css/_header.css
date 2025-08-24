@@ -680,3 +680,389 @@ button.ast-menu-toggle {
 .main-navigation .screen-reader-text {
     display: none !important;
 }
+
+
+
+
+
+/*
+==============================================================================
+LUVEX HEADER LANGUAGE SYSTEM - CSS EXTENSION
+==============================================================================
+Description: Erweitert _header.css um Language-Switcher Styles
+Location: Append to _header.css (Section 8 - nach Header CTA)
+Dependencies: _header.css, _variables.css
+==============================================================================
+*/
+
+/* ==========================================================================
+   8.5 LANGUAGE SWITCHER SYSTEM
+   ========================================================================== */
+
+/* --- Header CTA Group (for non-logged-in users) --- */
+.header-cta-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* --- Compact Language Switcher for Guests --- */
+.header-language-switcher {
+    position: relative;
+}
+
+.language-switcher-compact {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(109, 213, 237, 0.3);
+    border-radius: var(--radius-md);
+    color: var(--luvex-white);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    user-select: none;
+}
+
+.language-switcher-compact:hover {
+    background: rgba(109, 213, 237, 0.15);
+    border-color: var(--luvex-bright-cyan);
+    transform: translateY(-1px);
+}
+
+.language-switcher-compact .language-flag {
+    font-size: 1.1rem;
+}
+
+.language-switcher-compact .language-code {
+    font-weight: 600;
+    min-width: 20px;
+}
+
+.language-switcher-compact i {
+    font-size: 0.7rem;
+    color: var(--luvex-gray-300);
+    transition: var(--transition-normal);
+}
+
+.language-switcher-compact:hover i {
+    color: var(--luvex-bright-cyan);
+}
+
+/* --- Guest Language Dropdown --- */
+.guest-language-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 200px;
+    background: var(--luvex-dark-blue);
+    border: 1px solid rgba(109, 213, 237, 0.2);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 0.5rem 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1003;
+}
+
+.guest-language-dropdown.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.guest-language-dropdown .language-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: none;
+    border: none;
+    color: var(--luvex-white);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    text-align: left;
+}
+
+.guest-language-dropdown .language-option:hover:not(.current) {
+    background: rgba(109, 213, 237, 0.1);
+    color: var(--luvex-bright-cyan);
+}
+
+.guest-language-dropdown .language-option.current {
+    background: rgba(109, 213, 237, 0.15);
+    color: var(--luvex-bright-cyan);
+    cursor: default;
+}
+
+.guest-language-dropdown .language-option.current {
+    opacity: 0.7;
+}
+
+.guest-language-dropdown .language-flag {
+    font-size: 1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.guest-language-dropdown .language-name {
+    flex: 1;
+    font-weight: 500;
+}
+
+.guest-language-dropdown .language-option i.fa-check {
+    font-size: 0.8rem;
+    color: var(--luvex-bright-cyan);
+}
+
+/* --- User Dropdown Language Section --- */
+.dropdown-divider {
+    height: 1px;
+    background: rgba(109, 213, 237, 0.1);
+    margin: 0.5rem 0;
+}
+
+.dropdown-language-section {
+    padding: 0.25rem 0;
+}
+
+.dropdown-item--header {
+    font-weight: 600;
+    color: var(--luvex-gray-300) !important;
+    cursor: default !important;
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.dropdown-item--header:hover {
+    background: none !important;
+    color: var(--luvex-gray-300) !important;
+}
+
+.dropdown-language-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 1rem;
+    color: var(--luvex-white);
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    font-size: var(--text-sm);
+}
+
+.dropdown-language-item:hover:not(.current) {
+    background: rgba(109, 213, 237, 0.1);
+    color: var(--luvex-bright-cyan);
+}
+
+.dropdown-language-item.current {
+    background: rgba(109, 213, 237, 0.15);
+    color: var(--luvex-bright-cyan);
+    cursor: default;
+    opacity: 0.8;
+}
+
+.dropdown-language-item .language-flag {
+    font-size: 1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.dropdown-language-item .language-name {
+    flex: 1;
+    font-weight: 500;
+}
+
+.dropdown-language-item .language-check {
+    font-size: 0.8rem;
+    color: var(--luvex-bright-cyan);
+}
+
+/* --- Mobile Language Section --- */
+.mobile-language-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(109, 213, 237, 0.2);
+}
+
+.mobile-section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--luvex-gray-300);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 1rem 0;
+    padding: 0 1rem;
+}
+
+.mobile-language-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.mobile-language-option {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: none;
+    border: none;
+    color: var(--luvex-white);
+    font-size: var(--text-base);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    text-align: left;
+    width: 100%;
+}
+
+.mobile-language-option:hover:not(.current) {
+    background: rgba(109, 213, 237, 0.1);
+    color: var(--luvex-bright-cyan);
+}
+
+.mobile-language-option.current {
+    background: rgba(109, 213, 237, 0.15);
+    color: var(--luvex-bright-cyan);
+    cursor: default;
+}
+
+.mobile-language-option .language-flag {
+    font-size: 1.2rem;
+    width: 24px;
+    text-align: center;
+}
+
+.mobile-language-option .language-name {
+    flex: 1;
+    font-weight: 500;
+}
+
+.mobile-language-option i.fa-check {
+    font-size: 1rem;
+    color: var(--luvex-bright-cyan);
+}
+
+/* ==========================================================================
+   8.6 LANGUAGE LOADING STATES
+   ========================================================================== */
+
+/* Loading states for language buttons */
+.language-option[disabled],
+.dropdown-language-item[disabled],
+.mobile-language-option[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.language-option .fa-spinner,
+.dropdown-language-item .fa-spinner,
+.mobile-language-option .fa-spinner {
+    color: var(--luvex-bright-cyan);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   8.7 RESPONSIVE LANGUAGE SWITCHER
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    /* Hide guest language switcher on mobile, show in mobile menu instead */
+    .header-language-switcher {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-language-option {
+        padding: 1rem;
+        font-size: var(--text-lg);
+    }
+    
+    .mobile-language-option .language-flag {
+        font-size: 1.4rem;
+        width: 28px;
+    }
+    
+    .guest-language-dropdown {
+        right: -10px;
+        left: -10px;
+        min-width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .guest-language-dropdown {
+        position: fixed;
+        top: 80px;
+        left: 10px;
+        right: 10px;
+        border-radius: var(--radius-md);
+    }
+}
+
+/* ==========================================================================
+   8.8 ACCESSIBILITY ENHANCEMENTS
+   ========================================================================== */
+
+/* Focus states for keyboard navigation */
+.language-switcher-compact:focus,
+.language-option:focus,
+.dropdown-language-item:focus,
+.mobile-language-option:focus {
+    outline: 2px solid var(--luvex-bright-cyan);
+    outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .language-switcher-compact,
+    .guest-language-dropdown,
+    .dropdown-language-item,
+    .mobile-language-option {
+        transition: none;
+    }
+    
+    .language-switcher-compact:hover {
+        transform: none;
+    }
+}
+
+/* High contrast support */
+@media (prefers-contrast: high) {
+    .language-switcher-compact {
+        border-color: var(--luvex-white);
+    }
+    
+    .guest-language-dropdown {
+        border-color: var(--luvex-white);
+    }
+    
+    .dropdown-language-item,
+    .language-option {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+}

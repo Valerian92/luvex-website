@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Profile Page
+Template Name: Profile Page - With Language System
 */
 
 // Redirect if not logged in
@@ -44,6 +44,35 @@ if ($_POST && isset($_POST['profile_nonce']) && wp_verify_nonce($_POST['profile_
         
         $success_message = "Community settings updated successfully!";
     }
+    
+    // Language Settings Update
+    if (isset($_POST['action']) && $_POST['action'] === 'update_language_settings') {
+        $preferred_language = sanitize_text_field($_POST['preferred_language']);
+        $auto_detect = isset($_POST['auto_detect_language']) ? 'yes' : 'no';
+        
+        // Validate language code
+        if (function_exists('LuvexUserSystem::get_supported_languages')) {
+            $supported_langs = LuvexUserSystem::get_supported_languages();
+            if ($preferred_language && !array_key_exists($preferred_language, $supported_langs)) {
+                $error_message = "Invalid language selected.";
+            } else {
+                update_user_meta($current_user->ID, 'preferred_language', $preferred_language);
+                update_user_meta($current_user->ID, 'auto_detect_language', $auto_detect);
+                
+                // Update cookie for immediate effect
+                if ($preferred_language) {
+                    setcookie('luvex_preferred_language', $preferred_language, time() + (30 * 24 * 3600), '/');
+                } else {
+                    // Clear cookie if auto-detect is selected
+                    setcookie('luvex_preferred_language', '', time() - 3600, '/');
+                }
+                
+                $success_message = "Language preferences updated successfully!";
+            }
+        } else {
+            $error_message = "Language system not available.";
+        }
+    }
 }
 
 // Get user meta data
@@ -58,6 +87,11 @@ $uv_news_notifications = get_user_meta($current_user->ID, 'uv_news_notifications
 $community_notifications = get_user_meta($current_user->ID, 'community_notifications', true);
 $profile_visibility = get_user_meta($current_user->ID, 'profile_visibility', true) ?: 'public';
 
+// Language settings
+$preferred_language = get_user_meta($current_user->ID, 'preferred_language', true);
+$auto_detect_language = get_user_meta($current_user->ID, 'auto_detect_language', true) ?: 'yes';
+$supported_languages = function_exists('LuvexUserSystem::get_supported_languages') ? LuvexUserSystem::get_supported_languages() : [];
+
 get_header(); ?>
 
 <!-- Hero Section with Wave Animation -->
@@ -65,7 +99,7 @@ get_header(); ?>
     <div class="luvex-hero__container container--narrow">
         <div class="luvex-hero__content">
             <h1 class="luvex-hero__title">Your Profile</h1>
-            <p class="luvex-hero__description">Manage your account settings, community preferences, and connect with the LUVEX community.</p>
+            <p class="luvex-hero__description">Manage your account settings, language preferences, community options, and connect with the LUVEX community.</p>
         </div>
     </div>
     
@@ -81,7 +115,7 @@ get_header(); ?>
 <section class="profile-dashboard">
     <div class="container">
         
-        <!-- Quick Actions - ORIGINAL ZURÜCK -->
+        <!-- Quick Actions -->
         <div class="profile-quick-actions">
             <h3 class="quick-actions__title">Quick Actions</h3>
             <div class="quick-actions-grid">
@@ -99,6 +133,11 @@ get_header(); ?>
                     <i class="fa-solid fa-microscope"></i>
                     <h4>Strip Analyzer</h4>
                     <p>Analyze UV dose measurement strips</p>
+                </a>
+                <a href="#language-settings" class="quick-action-card profile-nav-link" data-section="language-settings">
+                    <i class="fa-solid fa-globe"></i>
+                    <h4>Language</h4>
+                    <p>Set your language preferences</p>
                 </a>
                 <a href="#community-settings" class="quick-action-card profile-nav-link" data-section="community-settings">
                     <i class="fa-solid fa-users"></i>
@@ -122,6 +161,14 @@ get_header(); ?>
                                 Profile Information
                             </a>
                         </li>
+                        <?php if (function_exists('pll_the_languages') && !empty($supported_languages)) : ?>
+                        <li class="profile-nav__item">
+                            <a href="#language-settings" class="profile-nav__link profile-nav-link" data-section="language-settings">
+                                <i class="fa-solid fa-globe"></i>
+                                Language & Region
+                            </a>
+                        </li>
+                        <?php endif; ?>
                         <li class="profile-nav__item">
                             <a href="#community-settings" class="profile-nav__link profile-nav-link" data-section="community-settings">
                                 <i class="fa-solid fa-users"></i>
@@ -151,6 +198,13 @@ get_header(); ?>
                     <div class="auth-success-message">
                         <i class="fa-solid fa-check-circle"></i>
                         <p><?php echo $success_message; ?></p>
+                    </div>
+                <?php endif; ?>
+                
+                <?php if (isset($error_message)): ?>
+                    <div class="auth-error-message">
+                        <i class="fa-solid fa-exclamation-circle"></i>
+                        <p><?php echo $error_message; ?></p>
                     </div>
                 <?php endif; ?>
 
@@ -242,6 +296,98 @@ get_header(); ?>
                         </button>
                     </form>
                 </div>
+
+                <!-- Language & Region Settings Section -->
+                <?php if (function_exists('pll_the_languages') && !empty($supported_languages)) : ?>
+                <div id="language-settings" class="profile-section">
+                    <div class="profile-section__header">
+                        <div class="header-content">
+                            <h2>Language & Region Settings</h2>
+                            <p>Customize your language preferences and regional settings for the best experience.</p>
+                        </div>
+                    </div>
+
+                    <form method="post" class="profile-form">
+                        <?php wp_nonce_field('update_profile', 'profile_nonce'); ?>
+                        <input type="hidden" name="action" value="update_language_settings">
+                        
+                        <!-- Current Language Display -->
+                        <div class="profile-section__divider">
+                            <h4>Current Language</h4>
+                            <p>Your website is currently displayed in:</p>
+                        </div>
+                        
+                        <div class="language-status-card">
+                            <?php 
+                            $current_lang = function_exists('luvex_get_current_language') ? luvex_get_current_language() : 'en';
+                            $current_lang_data = $supported_languages[$current_lang] ?? ['name' => 'English', 'flag' => '🇺🇸'];
+                            ?>
+                            <div class="language-status-display">
+                                <span class="language-flag-large"><?php echo $current_lang_data['flag']; ?></span>
+                                <div class="language-info">
+                                    <h4><?php echo esc_html($current_lang_data['name']); ?></h4>
+                                    <p>Language Code: <strong><?php echo strtoupper($current_lang); ?></strong></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Language Preferences -->
+                        <div class="profile-section__divider">
+                            <h4>Language Preferences</h4>
+                            <p>Choose how the website should determine your language.</p>
+                        </div>
+
+                        <div class="form-checkbox">
+                            <input type="checkbox" id="auto_detect_language" name="auto_detect_language" <?php checked($auto_detect_language, 'yes'); ?>>
+                            <div class="form-checkbox__indicator">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <div class="form-checkbox__text">
+                                <strong>Auto-detect from browser</strong><br>
+                                Automatically set language based on your browser's language preference.
+                            </div>
+                        </div>
+
+                        <div class="floating-label-input">
+                            <select id="preferred_language" name="preferred_language">
+                                <option value="">Use auto-detection</option>
+                                <?php foreach ($supported_languages as $lang_code => $lang_data) : ?>
+                                    <option value="<?php echo esc_attr($lang_code); ?>" <?php selected($preferred_language, $lang_code); ?>>
+                                        <?php echo esc_html($lang_data['flag'] . ' ' . $lang_data['name']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                            <label for="preferred_language">Preferred Language Override</label>
+                        </div>
+
+                        <!-- Available Languages -->
+                        <div class="profile-section__divider">
+                            <h4>Available Languages</h4>
+                            <p>LUVEX is available in the following languages:</p>
+                        </div>
+
+                        <div class="available-languages-grid">
+                            <?php foreach ($supported_languages as $lang_code => $lang_data) : ?>
+                                <div class="language-card <?php echo $lang_code === $current_lang ? 'current' : ''; ?>">
+                                    <span class="language-flag"><?php echo $lang_data['flag']; ?></span>
+                                    <div class="language-details">
+                                        <h5><?php echo esc_html($lang_data['name']); ?></h5>
+                                        <p><?php echo strtoupper($lang_code); ?></p>
+                                    </div>
+                                    <?php if ($lang_code === $current_lang) : ?>
+                                        <i class="fa-solid fa-check language-current-indicator"></i>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+
+                        <button type="submit" class="form-submit form-submit--accent">
+                            <i class="fa-solid fa-globe"></i>
+                            Update Language Settings
+                        </button>
+                    </form>
+                </div>
+                <?php endif; ?>
 
                 <!-- Community Settings Section -->
                 <div id="community-settings" class="profile-section">
@@ -579,7 +725,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Handle URL hash navigation (if someone bookmarks #community-settings)
+    // Handle URL hash navigation (if someone bookmarks #language-settings)
     function handleHashNavigation() {
         const hash = window.location.hash.replace('#', '');
         if (hash && document.getElementById(hash)) {
@@ -606,6 +752,26 @@ document.addEventListener('DOMContentLoaded', function() {
         
         bioTextarea.addEventListener('input', updateCounter);
         updateCounter(); // Initial count
+    }
+    
+    // Auto-detect language checkbox logic
+    const autoDetectCheckbox = document.getElementById('auto_detect_language');
+    const languageSelect = document.getElementById('preferred_language');
+    
+    if (autoDetectCheckbox && languageSelect) {
+        function toggleLanguageSelect() {
+            if (autoDetectCheckbox.checked) {
+                languageSelect.disabled = true;
+                languageSelect.value = '';
+                languageSelect.style.opacity = '0.5';
+            } else {
+                languageSelect.disabled = false;
+                languageSelect.style.opacity = '1';
+            }
+        }
+        
+        autoDetectCheckbox.addEventListener('change', toggleLanguageSelect);
+        toggleLanguageSelect(); // Initial state
     }
 });
 </script>
