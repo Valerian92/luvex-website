@@ -52,9 +52,10 @@ Last Update: 2025-08-24 (Kompakt-Update)
 }
 
 .homepage-community-globe-wrapper {
-    /* ANGEPASST: Globe wieder größer, aber durch Section-Overflow abgeschnitten */
+    /* ANGEPASST: Canvas mindestens so hoch wie Section */
     width: 120vw; /* VERGRÖSSERT: Zurück zu großem Globe */
-    height: 120%; /* VERGRÖSSERT: Aber begrenzt */
+    height: 100vh; /* NEU: Canvas-Höhe = Vollbildhöhe, mindestens Section-Höhe */
+    min-height: 450px; /* NEU: Mindestens so hoch wie Section + Padding */
     position: absolute;
     left: 50%;
     top: 50%;
@@ -118,7 +119,8 @@ Last Update: 2025-08-24 (Kompakt-Update)
 
     .homepage-community-globe-wrapper {
         width: 110vw; /* ANGEPASST für Tablet - trotzdem groß */
-        height: 130%;
+        height: 80vh; /* ANGEPASST: Tablet-Höhe */
+        min-height: 350px; /* MINDESTHÖHE für Tablet */
         transform: translate(-40%, -50%); /* ANGEPASST: Mehr nach rechts */
     }
 
@@ -142,8 +144,9 @@ Last Update: 2025-08-24 (Kompakt-Update)
 
     .homepage-community-globe-wrapper {
         width: 120vw; /* GROß: Natürlich an Section-Rändern abgeschnitten */
-        height: 150%;
-        transform: translate(-35%, -40%); /* ANGEPASST: Optimal positioniert */
+        height: 60vh; /* MOBILE: Angepasste Höhe */
+        min-height: 300px; /* MINDESTHÖHE für Mobile */
+        transform: translate(-35%, -50%); /* ANGEPASST: Optimal positioniert */
     }
 
     .homepage-community-description {
