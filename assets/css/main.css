@@ -40,3 +40,5 @@ Last Update: 2025-08-24
 PAGE-SPECIFIC & ANIMATION CSS are loaded via functions.php
 ==============================================================================
 */
+
+@import 'global/_page-standard.css';
