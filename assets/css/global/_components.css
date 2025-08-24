@@ -176,7 +176,7 @@ Last Update: 2025-08-24
     box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
 }
 
-/* --- 2.3 Generic CTA Buttons --- */
+
 /* --- 2.3 Generic CTA Buttons --- */
 .luvex-cta-primary {
     display: inline-flex;
@@ -200,31 +200,50 @@ Last Update: 2025-08-24
     transform: scale(1.05);
 }
 
-/* NEUE Animation Modifier-Klasse - KORRIGIERT */
-.luvex-cta--animated {
+/* * ============================================================================
+ * FIX FÜR DEN ANIMIERTEN HERO-BUTTON
+ * ============================================================================
+ */
+
+/* Wir verwenden einen spezifischeren Selektor, um Konflikte zu vermeiden */
+.home .luvex-hero__cta.luvex-cta--animated {
     position: relative;
-    /* overflow: hidden; ← TEMPORÄR ENTFERNT für Test */
-    transition: all 0.3s ease;
-    border: 2px solid var(--luvex-bright-cyan);
-    background: transparent;
+    overflow: hidden;
+    
+    /* WICHTIG: Überschreibt andere 'background'-Regeln */
+    background: transparent; 
+    color: var(--luvex-white);
+    border-color: var(--luvex-bright-cyan);
+
+    /* ANWENDUNG DES PERMANENTEN PULS-EFFEKTS */
+    animation: pulse-purple-glow 2.5s infinite ease-in-out;
 }
 
-.luvex-cta--animated:hover {
+.home .luvex-hero__cta.luvex-cta--animated:hover {
+    /* HINTERGRUND-VERLAUF FÜR DIE HOVER-ANIMATION */
     background: linear-gradient(45deg,
-        var(--luvex-bright-cyan) 0%,
-        #8a2be2 20%,
-        var(--luvex-bright-cyan) 40%,
-        #8a2be2 60%,
-        var(--luvex-bright-cyan) 80%,
-        #8a2be2 100%) !important;
-    background-size: 200% 200% !important; /* KLEINER für bessere Sichtbarkeit */
-    animation: gradient-shift-smooth 2s ease-in-out infinite !important;
-    color: var(--luvex-white) !important;
-    box-shadow:
+        var(--luvex-bright-cyan),
+        #8a2be2, /* blueviolet */
+        var(--luvex-vibrant-blue),
+        #8a2be2,
+        var(--luvex-bright-cyan));
+    background-size: 400% 400%;
+
+    /* HINZUFÜGEN DER ZWEITEN ANIMATION BEIM HOVERN */
+    /* Der Puls läuft weiter, der Farbverlauf startet */
+    animation-name: pulse-purple-glow, gradient-shift-smooth;
+    animation-duration: 2.5s, 3s;
+    animation-timing-function: ease-in-out, ease-in-out;
+    animation-iteration-count: infinite, infinite;
+
+    /* Zusätzliche visuelle Effekte beim Hovern */
+    transform: translateY(-2px) scale(1.05);
+    border-color: rgba(109, 213, 237, 0.8);
+    box-shadow: 
         0 8px 25px rgba(109, 213, 237, 0.4),
-        0 0 20px rgba(138, 43, 226, 0.3) !important;
-    border-color: rgba(109, 213, 237, 0.8) !important;
+        0 0 20px rgba(138, 43, 226, 0.3);
 }
+
 
 .luvex-cta-secondary {
     display: inline-flex;
@@ -247,6 +266,7 @@ Last Update: 2025-08-24
     color: #ffffff;
     transform: scale(1.05);
 }
+
 
 /* --- 1.3 Outline Button (Better Visibility) --- */
 .btn--outline {
@@ -523,6 +543,29 @@ Last Update: 2025-08-24
     font-size: 0.95rem;
     margin: 0;
 }
+
+.team-member {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.team-section.is-visible .team-member {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.team-section.is-visible .team-member:nth-child(1) { transition-delay: 0.15s; }
+.team-section.is-visible .team-member:nth-child(2) { transition-delay: 0.30s; }
+.team-section.is-visible .team-member:nth-child(3) { transition-delay: 0.45s; }
+.team-section.is-visible .team-member:nth-child(4) { transition-delay: 0.60s; }
+
+.team-member:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(27, 42, 73, 0.15);
+}
+
+
 
 /*
 ==============================================================================

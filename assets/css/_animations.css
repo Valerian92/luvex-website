@@ -6,7 +6,7 @@ LUVEX THEME v3.0 - GENERAL & REUSABLE ANIMATIONS
 Description: Enthält allgemeine, wiederverwendbare Keyframes und Klassen für 
              scroll-getriggerte, komponentenbasierte und Lade-Animationen.
 Dependencies: Wird via functions.php geladen.
-Last Update: 2025-08-23 (Refactored)
+Last Update: 2025-08-24 (Refactored)
 
 ==============================================================================
 */
@@ -49,28 +49,6 @@ Last Update: 2025-08-23 (Refactored)
 
 .timeline-container.is-visible .timeline-progress-bar {
     height: 100%;
-}
-
-/* --- 2.3 About Page - Team Cards --- */
-.team-member {
-    opacity: 0;
-    transform: scale(0.95);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.team-section.is-visible .team-member {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.team-section.is-visible .team-member:nth-child(1) { transition-delay: 0.15s; }
-.team-section.is-visible .team-member:nth-child(2) { transition-delay: 0.30s; }
-.team-section.is-visible .team-member:nth-child(3) { transition-delay: 0.45s; }
-.team-section.is-visible .team-member:nth-child(4) { transition-delay: 0.60s; }
-
-.team-member:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 15px 30px rgba(27, 42, 73, 0.15);
 }
 
 
@@ -155,35 +133,36 @@ Last Update: 2025-08-23 (Refactored)
 
 /*
 ==============================================================================
-5. BUTTON & HOVER KEYFRAMES (VERBESSERT)
+5. BUTTON & HOVER KEYFRAMES (REPARIERT & ERWEITERT)
 ==============================================================================
 */
 
-/* Smooth kontinuierliche Gradient-Animation */
-@keyframes gradient-shift-smooth {
-    0% { 
-        background-position: 0% 50%; 
+/**
+ * NEU: Keyframe für den permanenten lila Puls-Effekt.
+ * Animiert den box-shadow für einen sanften Glow-Effekt.
+ */
+@keyframes pulse-purple-glow {
+    0%, 100% {
+        box-shadow: 0 0 12px rgba(138, 43, 226, 0.4), 0 0 4px rgba(109, 213, 237, 0.3);
     }
-    25% { 
-        background-position: 100% 25%; 
-    }
-    50% { 
-        background-position: 200% 50%; 
-    }
-    75% { 
-        background-position: 300% 75%; 
-    }
-    100% { 
-        background-position: 400% 50%; 
+    50% {
+        box-shadow: 0 0 24px rgba(138, 43, 226, 0.7), 0 0 12px rgba(109, 213, 237, 0.5);
     }
 }
 
-/* Fallback für andere Verwendungen */
-@keyframes gradient-shift {
-    0%, 100% { 
-        background-position: 0% 50%; 
+
+/**
+ * REPARIERT: Keyframe für die Hover-Farbverlauf-Animation.
+ * Vereinfacht für einen sauberen, unendlichen Loop.
+ */
+@keyframes gradient-shift-smooth {
+    0% {
+        background-position: 0% 50%;
     }
-    50% { 
-        background-position: 100% 50%; 
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
     }
 }
