@@ -39,7 +39,8 @@ Last Update: 2025-08-23
     text-align: center;
     width: 100%;
     max-width: 100%;
-    margin-bottom: 0; /* Zurückgesetzt, da Abstände individuell gesteuert werden */
+    margin-bottom: 0;
+    padding-top: 2rem; /* HINZUGEFÜGT: Erhöht den Abstand nach oben */
 }
 
 /* --- 1.3 Hero Text Elements (Finale Struktur) --- */
@@ -58,11 +59,11 @@ Last Update: 2025-08-23
 .home .luvex-hero__description {
     max-width: 800px;
     font-size: 1.25rem;
-    color: var(--luvex-white); /* GEÄNDERT: Reines Weiß für maximalen Kontrast */
+    color: var(--luvex-white); 
     text-align: center;
     line-height: 1.6;
     letter-spacing: 0.05em;
-    margin: 4rem 0; /* VERGRÖSSERT: Deutlich mehr Abstand für einen luftigeren Look */
+    margin: 4rem 0; 
 }
 
 .home .luvex-hero__description .bullet {

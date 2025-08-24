@@ -1,10 +1,10 @@
 /*
 ==============================================================================
-LUVEX THEME - UV News Styling
+LUVEX THEME - UV News Styling (Final Layout)
 ==============================================================================
 Description: Styles for the UV News archive and single post pages.
 Dependencies: _variables.css (for color variables)
-Last Update: 2025-08-23
+Last Update: 2025-08-24
 ==============================================================================
 */
 
@@ -12,13 +12,14 @@ Last Update: 2025-08-23
 
 /*
 ==============================================================================
-FINALES HERO LAYOUT: Split & Compact
+FINALES HERO LAYOUT: Split & Compact (REVISED LAYOUT)
 ==============================================================================
 */
+
 .luvex-hero--split-compact {
     min-height: auto;
-    /* KORREKTUR: Deutlich mehr Abstand nach oben, um Überlappung mit dem 80px Header zu verhindern */
-    padding: calc(80px + 5rem) 0 4rem 0;
+    /* KORREKTUR: Dein perfekter Abstand von 12rem (80px für den Header + 7rem) */
+    padding: calc(80px + 7rem) 0 4rem 0;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -29,14 +30,14 @@ FINALES HERO LAYOUT: Split & Compact
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    /* KORREKTUR: Stellt sicher, dass Titel und Buttons vertikal zentriert sind */
     align-items: center;
     text-align: left;
     gap: 2rem;
-    /* Breite an Artikel-Grid anpassen */
-    max-width: 1200px;
-    /* Stellt sicher, dass der Container auf der Seite zentriert ist */
+    /* KORREKTUR: Deine perfekte Breite von 1250px */
+    max-width: 1250px;
     margin: 0 auto;
+    /* Wichtig: Passt die seitliche Polsterung an die Artikel an */
+    padding: 0 1.5rem;
 }
 
 .luvex-hero--split-compact .luvex-hero__content {
@@ -58,7 +59,7 @@ FINALES HERO LAYOUT: Split & Compact
         flex-direction: column;
         align-items: flex-start;
         text-align: left;
-        gap: 2rem; /* Mehr Abstand zwischen Titel und Buttons auf Mobilgeräten */
+        gap: 2rem;
     }
 
     .luvex-hero--split-compact .luvex-hero__cta-container {
@@ -77,7 +78,7 @@ FINALES HERO LAYOUT: Split & Compact
 
 /*
 ==============================================================================
-Unveränderte Original-Styles (gekürzt zur Übersicht)
+FILTER & GRID CONTAINER ALIGNMENT
 ==============================================================================
 */
 
@@ -85,11 +86,16 @@ Unveränderte Original-Styles (gekürzt zur Übersicht)
     background-color: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(8px);
     position: sticky;
-    top: 0;
+    top: 80px;
     z-index: 30;
     border-bottom: 1px solid #e5e7eb;
 }
 
+body.admin-bar .news-filter-section {
+    top: 112px;
+}
+
+/* KORREKTUR: Breite an Hero-Container angepasst */
 .news-filter-container {
     display: flex;
     flex-direction: column;
@@ -97,7 +103,7 @@ Unveränderte Original-Styles (gekürzt zur Übersicht)
     align-items: center;
     gap: 1.5rem;
     padding: 1.25rem 1.5rem;
-    max-width: 1200px;
+    max-width: 1250px;
     margin: 0 auto;
 }
 
@@ -176,8 +182,9 @@ Unveränderte Original-Styles (gekürzt zur Übersicht)
     padding: 4rem 1.5rem;
 }
 
+/* KORREKTUR: Breite an Hero-Container angepasst */
 .news-grid-container {
-    max-width: 1200px;
+    max-width: 1250px;
     margin: 0 auto;
 }
 
