@@ -35,9 +35,15 @@ body {
     line-height: 1.6;
     color: var(--luvex-gray-900);
     margin: 0;
-    padding-top: 80px; /* Fixed header height - ONLY HERE */
+    padding-top: 80px; /* Standard für Besucher */
     background: var(--luvex-white);
 }
+
+/* WordPress Admin Bar Kompensation */
+body.admin-bar {
+    padding-top: 112px !important; /* 80px Header + 32px Admin Bar */
+}
+
 
 #ast-scroll-top {
     display: none !important;
