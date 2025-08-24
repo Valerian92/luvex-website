@@ -18,7 +18,8 @@ FINALES HERO LAYOUT: KORRIGIERTE STRUKTUR
 
 .luvex-hero--split-compact {
     min-height: auto;
-    padding: calc(80px + 8rem) 1.5rem 4rem 1.5rem;
+    /* KORREKTUR: Abstand nach oben reduziert für eine bessere Balance */
+    padding: calc(80px + 5rem) 1.5rem 4rem 1.5rem;
     display: flex;
     align-items: center;
 }
@@ -27,6 +28,7 @@ FINALES HERO LAYOUT: KORRIGIERTE STRUKTUR
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    /* KORREKTUR: 'align-items: center' positioniert die Buttons vertikal mittig zum gesamten Textblock */
     align-items: center;
     text-align: left;
     gap: 2rem;
@@ -40,7 +42,7 @@ FINALES HERO LAYOUT: KORRIGIERTE STRUKTUR
 }
 
 /*
- * NEU: Spezifische Regeln für die Textelemente im News-Hero.
+ * Spezifische Regeln für die Textelemente im News-Hero.
  * Diese überschreiben die globalen Styles aus _components.css.
 */
 .luvex-hero--split-compact .luvex-hero__title {
