@@ -33,41 +33,82 @@ function luvex_theme_setup() {
     add_theme_support('title-tag');
 }
 
-// 4. CSS & JAVASCRIPT LADEN (ERWEITERT)
+// 4. CSS & JAVASCRIPT LADEN (FINALE VERSION)
 add_action('wp_enqueue_scripts', 'luvex_enqueue_assets', 999);
 function luvex_enqueue_assets() {
     // Astra CSS entfernen
     wp_dequeue_style('astra-theme-css');
 
-    // Main CSS (global)
+    // Main CSS (global) - wird immer geladen
     $main_css_path = get_stylesheet_directory() . '/assets/css/main.css';
-    wp_enqueue_style('luvex-main', get_stylesheet_directory_uri() . '/assets/css/main.css', array(), filemtime($main_css_path));
+    if (file_exists($main_css_path)) {
+        wp_enqueue_style('luvex-main', get_stylesheet_directory_uri() . '/assets/css/main.css', array(), filemtime($main_css_path));
+    }
+
+    // Globale Animationen (überall geladen)
+    $animations_css_path = get_stylesheet_directory() . '/assets/css/_animations.css';
+    if (file_exists($animations_css_path)) {
+        wp_enqueue_style('luvex-animations', get_stylesheet_directory_uri() . '/assets/css/_animations.css', array('luvex-main'), filemtime($animations_css_path));
+    }
+
 
     // === SEITENSPEZIFISCHES CSS LADEN ===
-    
-    // Homepage
+    // Helfer-Funktion, um Code zu sparen. Kann jetzt ein Array von Dateinamen verarbeiten.
+    $enqueue_page_style = function($slug, $filenames) {
+        if (is_page($slug)) {
+            // Stelle sicher, dass $filenames immer ein Array ist
+            if (!is_array($filenames)) {
+                $filenames = [$filenames];
+            }
+            
+            foreach ($filenames as $filename) {
+                // Erstelle einen einzigartigen Handle für jede CSS-Datei
+                $handle = 'luvex-page-' . $slug . '-' . sanitize_title($filename);
+                $css_path = get_stylesheet_directory() . '/assets/css/' . $filename;
+                
+                if (file_exists($css_path)) {
+                    wp_enqueue_style($handle, get_stylesheet_directory_uri() . '/assets/css/' . $filename, array('luvex-main'), filemtime($css_path));
+                }
+            }
+        }
+    };
+
+    // Homepage (Sonderfall)
     if (is_front_page() || is_home()) {
-        $homepage_css_path = get_stylesheet_directory() . '/assets/css/_page-home.css';
-        if (file_exists($homepage_css_path)) {
-            wp_enqueue_style('luvex-page-home', get_stylesheet_directory_uri() . '/assets/css/_page-home.css', array('luvex-main'), filemtime($homepage_css_path));
+        // Lade Home-spezifisches CSS
+        $home_css_path = get_stylesheet_directory() . '/assets/css/_page-home.css';
+        if (file_exists($home_css_path)) {
+            wp_enqueue_style('luvex-page-home', get_stylesheet_directory_uri() . '/assets/css/_page-home.css', array('luvex-main'), filemtime($home_css_path));
+        }
+        // Lade Home-spezifische Animationen
+        $hero_anim_path = get_stylesheet_directory() . '/assets/css/animations/_animation-hero-home.css';
+        if (file_exists($hero_anim_path)) {
+            wp_enqueue_style('luvex-animation-hero-home', get_stylesheet_directory_uri() . '/assets/css/animations/_animation-hero-home.css', array('luvex-main'), filemtime($hero_anim_path));
         }
     }
-    
-    // About Page (NEU)
-    elseif (is_page('about')) {
-        $about_css_path = get_stylesheet_directory() . '/assets/css/_page-about.css';
-        if (file_exists($about_css_path)) {
-            wp_enqueue_style('luvex-page-about', get_stylesheet_directory_uri() . '/assets/css/_page-about.css', array('luvex-main'), filemtime($about_css_path));
-        }
-    }
-    
-    // Contact Page (NEU)
-    elseif (is_page('contact')) {
-        $contact_css_path = get_stylesheet_directory() . '/assets/css/_page-contact.css';
-        if (file_exists($contact_css_path)) {
-            wp_enqueue_style('luvex-page-contact', get_stylesheet_directory_uri() . '/assets/css/_page-contact.css', array('luvex-main'), filemtime($contact_css_path));
-        }
-    }
+
+    // Alle anderen Seiten basierend auf ihrem Slug
+    $enqueue_page_style('about', '_page-about.css');
+    $enqueue_page_style('booking', '_page-booking.css');
+    $enqueue_page_style('contact', '_page-contact.css');
+    $enqueue_page_style('mercury-uv-lamps', '_page-mercury-uv-lamps.css');
+    $enqueue_page_style('uv-consulting', '_page-uv-consulting.css');
+    $enqueue_page_style('uv-led', '_page-uv-led.css');
+    $enqueue_page_style('uv-process-equipment', '_page-uv-process-equipment.css');
+    $enqueue_page_style('uv-safety-equipment', '_page-uv-safety-equipment.css');
+    $enqueue_page_style('uv-testing-equipment', '_page-uv-testing-equipment.css');
+    $enqueue_page_style('uv-tunnel', '_page-uv-tunnel.css');
+
+    // Seiten mit zusätzlichen, spezifischen Animationen
+    $enqueue_page_style('uv-c-disinfection', [
+        '_page-uv-c-disinfection.css',
+        'animations/_animation-uv-disinfection-gallery.css'
+    ]);
+    $enqueue_page_style('uv-curing', [
+        '_page-uv-curing.css',
+        'animations/_animation-uv-curing-gallery.css'
+    ]);
+
 
     // === GLOBALE JAVASCRIPTS LADEN ===
     $dependencies = array('jquery');

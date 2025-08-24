@@ -165,7 +165,8 @@ Last Update: 2025-08-23 (Complete)
 
     opacity: 0;
     visibility: hidden;
-    transform: translateY(10px);
+    /* KORREKTUR: Versatz entfernt, startet jetzt leicht nach oben verschoben für einen sanfteren Effekt */
+    transform: translateY(5px);
     transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
     
     z-index: 1001;
@@ -174,6 +175,7 @@ Last Update: 2025-08-23 (Complete)
 .main-navigation > ul > li:hover > .sub-menu {
     opacity: 1;
     visibility: visible;
+    /* KORREKTUR: Endet an der exakten Position */
     transform: translateY(0);
 }
 
@@ -204,7 +206,6 @@ Last Update: 2025-08-23 (Complete)
     position: absolute;
     top: 100%;
     left: 0;
-    /* KORRIGIERT: Statt einer fixen Breite passt sich das Menü jetzt an. */
     min-width: 100%;
     width: max-content;
     
@@ -219,7 +220,8 @@ Last Update: 2025-08-23 (Complete)
 
     opacity: 0;
     visibility: hidden;
-    transform: translateY(10px);
+    /* KORREKTUR: Versatz entfernt */
+    transform: translateY(5px);
     transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
     
     z-index: 1002;
@@ -228,6 +230,7 @@ Last Update: 2025-08-23 (Complete)
 .main-navigation .sub-menu > li:hover > .sub-menu {
     opacity: 1;
     visibility: visible;
+    /* KORREKTUR: Endet an der exakten Position */
     transform: translateY(0);
 }
 
@@ -257,7 +260,8 @@ Last Update: 2025-08-23 (Complete)
 }
 
 .main-navigation > ul > li.menu-item-has-children:hover > a .dropdown-arrow {
-    transform: rotate(180deg);
+    /* KORREKTUR: Pfeil dreht sich jetzt 45 Grad nach rechts unten */
+    transform: rotate(45deg);
 }
 
 .main-navigation .sub-menu > li.menu-item-has-children > a .dropdown-arrow {
@@ -266,6 +270,7 @@ Last Update: 2025-08-23 (Complete)
 }
 
 .main-navigation .sub-menu > li.menu-item-has-children:hover > a .dropdown-arrow {
+    /* Behält die Standard-Rotation für Level 3 bei */
     transform: rotate(0deg);
 }
 
@@ -381,7 +386,7 @@ Last Update: 2025-08-23 (Complete)
     padding: 0;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(10px);
+    transform: translateY(5px);
     transition: all 0.3s ease;
     z-index: 1003;
 }
@@ -680,7 +685,8 @@ LUVEX HEADER LANGUAGE SYSTEM - CSS EXTENSION
     padding: 0.5rem 0;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
+    /* KORREKTUR: Versatz entfernt */
+    transform: translateY(5px);
     transition: all 0.3s ease;
     z-index: 1003;
 }
@@ -688,6 +694,7 @@ LUVEX HEADER LANGUAGE SYSTEM - CSS EXTENSION
 .guest-language-dropdown.visible {
     opacity: 1;
     visibility: visible;
+    /* KORREKTUR: Endet an der exakten Position */
     transform: translateY(0);
 }
 
