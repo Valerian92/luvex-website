@@ -52,16 +52,16 @@ Last Update: 2025-08-24 (Kompakt-Update)
 }
 
 .homepage-community-globe-wrapper {
-    /* ANGEPASST: Canvas mindestens so hoch wie Section */
-    width: 120vw; /* VERGRÖSSERT: Zurück zu großem Globe */
-    height: 100vh; /* NEU: Canvas-Höhe = Vollbildhöhe, mindestens Section-Höhe */
-    min-height: 450px; /* NEU: Mindestens so hoch wie Section + Padding */
+    /* ANGEPASST: Globe kleiner skalieren und weiter rechts */
+    width: 100vw; /* REDUZIERT: Von 120vw auf 100vw */
+    height: 100vh; /* Canvas-Höhe = Vollbildhöhe, mindestens Section-Höhe */
+    min-height: 450px; /* Mindestens so hoch wie Section + Padding */
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-20%, -50%); /* ANGEPASST: Globe nach rechts verschieben */
+    transform: translate(-5%, -50%); /* WEITER RECHTS: Von -20% auf -5% */
     z-index: 1;
-    margin-left: calc(-60vw + 50%); /* ANGEPASST: Neue Zentrierungslogik */
+    margin-left: calc(-50vw + 50%); /* ANGEPASST: Neue Zentrierungslogik */
 }
 
 .homepage-community-title { 
@@ -118,10 +118,10 @@ Last Update: 2025-08-24 (Kompakt-Update)
     }
 
     .homepage-community-globe-wrapper {
-        width: 110vw; /* ANGEPASST für Tablet - trotzdem groß */
-        height: 80vh; /* ANGEPASST: Tablet-Höhe */
+        width: 90vw; /* KLEINER: Von 110vw auf 90vw für Tablet */
+        height: 80vh; /* Canvas-Höhe */
         min-height: 350px; /* MINDESTHÖHE für Tablet */
-        transform: translate(-40%, -50%); /* ANGEPASST: Mehr nach rechts */
+        transform: translate(-25%, -50%); /* WEITER RECHTS: Von -40% auf -25% */
     }
 
     .homepage-community-actions {
@@ -143,10 +143,10 @@ Last Update: 2025-08-24 (Kompakt-Update)
     }
 
     .homepage-community-globe-wrapper {
-        width: 120vw; /* GROß: Natürlich an Section-Rändern abgeschnitten */
-        height: 60vh; /* MOBILE: Angepasste Höhe */
+        width: 100vw; /* KLEINER: Von 120vw auf 100vw für Mobile */
+        height: 60vh; /* MOBILE: Canvas-Höhe */
         min-height: 300px; /* MINDESTHÖHE für Mobile */
-        transform: translate(-35%, -50%); /* ANGEPASST: Optimal positioniert */
+        transform: translate(-20%, -50%); /* WEITER RECHTS: Von -35% auf -20% */
     }
 
     .homepage-community-description {
