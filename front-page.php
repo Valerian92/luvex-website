@@ -110,7 +110,7 @@ get_header(); ?>
 <section class="section homepage-community-section">
     <div class="homepage-community-container">
         <div class="homepage-community-content">
-            <h2 class="homepage-community-title">Building the Global <span class="text-highlight">UV Network</span></h2>
+            <h2 class="homepage-community-title">Building the Global <br><span class="text-highlight">UV Network</span></h2>
             <p class="homepage-community-description">
             Connect with UV engineers, researchers, and industry leaders from over 50 countries. Share cutting-edge research, solve complex technical challenges, and stay ahead of the latest innovations in UV-C disinfection, LED technology, and industrial applications. Together, we're advancing the science of light.
           </p>

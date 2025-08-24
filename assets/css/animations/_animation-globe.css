@@ -17,8 +17,8 @@ Last Update: 2025-08-24 (Kompakt-Update)
     position: relative;
     background-color: var(--luvex-dark-blue);
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(109, 213, 237, 0.08)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
-    /* REDUZIERT: Kompaktere Section */
-    padding: 4rem 0; /* Hinzugefügt für konsistente Abstände */
+    /* VERGRÖSSERT: Mehr Padding oben und unten */
+    padding: 6rem 0; /* ERHÖHT: Von 4rem auf 6rem */
 }
 
 .homepage-community-container {
@@ -82,7 +82,7 @@ Last Update: 2025-08-24 (Kompakt-Update)
 
 .homepage-community-actions { 
     display: flex; 
-    gap: 1rem; 
+    gap: 2rem; /* VERGRÖSSERT: Von 1rem auf 2rem für mehr Abstand */
     flex-wrap: wrap; 
 }
 
@@ -131,7 +131,7 @@ Last Update: 2025-08-24 (Kompakt-Update)
 
 @media (max-width: 768px) {
     .homepage-community-section {
-        padding: 3rem 0; /* REDUZIERT für Mobile */
+        padding: 5rem 0; /* ANGEPASST: Auch Mobile etwas mehr Padding */
     }
 
     .homepage-community-container {
