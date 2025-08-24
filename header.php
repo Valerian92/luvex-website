@@ -42,25 +42,30 @@
         <!-- Desktop Navigation -->
         <nav id="desktop-navigation" class="main-navigation">
             <?php
-            // Debug: Check if menu exists
-            if (current_user_can('administrator') && isset($_GET['debug_nav'])) {
-                echo '<!-- DEBUG: Navigation wird geladen -->';
-                $locations = get_theme_mod('nav_menu_locations');
-                echo '<!-- DEBUG: Primary Menu ID: ' . (isset($locations['primary']) ? $locations['primary'] : 'NICHT_ZUGEWIESEN') . ' -->';
+            // Prüfe ob Menu zugewiesen ist
+            if (has_nav_menu('primary')) {
+                wp_nav_menu(array(
+                    'theme_location' => 'primary',
+                    'menu_id'        => 'primary-menu',
+                    'container'      => false,
+                    'depth'          => 3,
+                    'walker'         => new Luvex_Nav_Walker(),
+                ));
+            } else {
+                // Fallback Menu für alle Besucher
+                echo '<ul id="primary-menu">';
+                echo '<li><a href="' . home_url('/about/') . '">About</a></li>';
+                echo '<li><a href="' . home_url('/uv-technology/') . '">UV Technology</a></li>';
+                echo '<li><a href="' . home_url('/contact/') . '">Contact</a></li>';
+                echo '</ul>';
+                
+                // Admin-Warnung nur für Administratoren
+                if (current_user_can('edit_theme_options')) {
+                    echo '<div style="background:red;color:white;padding:5px;border-radius:3px;margin-left:10px;">';
+                    echo '<a href="' . admin_url('nav-menus.php') . '" style="color:white;">⚠️ Menu Setup</a>';
+                    echo '</div>';
+                }
             }
-            
-            // Menu with enhanced parameters
-            $menu_output = wp_nav_menu(array(
-                'theme_location' => 'primary',
-                'menu_id'        => 'primary-menu',
-                'container'      => false,
-                'depth'          => 3, // 3-Level Navigation
-                'walker'         => new Luvex_Nav_Walker(),
-                'echo'           => false
-            ));
-
-            // Immer Fallback anzeigen für Debug
-            luvex_primary_menu_fallback();
             ?>
         </nav>
 

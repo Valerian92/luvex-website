@@ -80,6 +80,27 @@ body {
     background: var(--luvex-white);
 }
 
+/* WordPress Admin Bar Kompensation - ERWEITERT */
+body.admin-bar {
+    padding-top: 112px !important; /* 80px Header + 32px Admin Bar */
+}
+
+/* Sicherstellen dass Admin Bar über Header ist */
+#wpadminbar {
+    z-index: 99999 !important;
+}
+
+.site-header.fixed-header {
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+}
+
+/* Admin Bar angepasst für fixierten Header */
+body.admin-bar .site-header.fixed-header {
+    top: 32px !important; /* Admin Bar Höhe */
+}
+
 /* Astra Scroll-To-Top Button ausblenden */
 #ast-scroll-top {
     display: none !important;
