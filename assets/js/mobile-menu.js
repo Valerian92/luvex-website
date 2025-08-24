@@ -1,11 +1,10 @@
 /**
- * LUVEX THEME - SIMPLIFIED NAVIGATION SCRIPT
+ * LUVEX THEME - NAVIGATION & HEADER SCRIPT
  *
- * Description: Vereinfachtes Navigation-System das sich auf die essentiellen
- * Funktionen fokussiert: Mobile Menu Toggle und Smart Positioning.
- * 
- * Version: 3.0 (Simplified)
- * Last Update: 2025-08-23
+ * Description: Steuert das mobile Menü, die intelligente Positionierung
+ * von Dropdowns und den dynamischen Header-Effekt beim Scrollen.
+ * * Version: 3.1 (Scroll-Effekt hinzugefügt)
+ * Last Update: 2025-08-24
  */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -214,17 +213,33 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(`  ${index + 1}. "${title}" (${depth})`);
         });
     }
-});
 
-/**
- * ========================================================================
- * ADDITIONAL CSS CLASSES FOR SMART POSITIONING
- * ========================================================================
- * 
- * Diese Klassen werden im JavaScript gesetzt und müssen in der CSS definiert werden:
- * 
- * .position-right - Submenu wird rechts-aligned zum Parent
- * .position-center - Submenu wird zentriert
- * .position-up - Level 3 Menu öffnet nach oben statt nach unten
- * 
- */
+    /**
+     * ========================================================================
+     * 7. HEADER SCROLL EFFECT (NEU)
+     * ========================================================================
+     */
+    const siteHeader = document.getElementById('site-header');
+
+    if (siteHeader) {
+        // Die Anzahl der Pixel, die gescrollt werden müssen, bevor der Effekt eintritt
+        const scrollThreshold = 50; 
+
+        const handleHeaderScroll = () => {
+            // Prüft die aktuelle Scroll-Position
+            if (window.scrollY > scrollThreshold) {
+                // Fügt die .scrolled Klasse hinzu, wenn weiter als 50px gescrollt wurde
+                siteHeader.classList.add('scrolled');
+            } else {
+                // Entfernt die .scrolled Klasse, wenn man wieder ganz oben ist
+                siteHeader.classList.remove('scrolled');
+            }
+        };
+
+        // Event Listener für das Scroll-Ereignis hinzufügen
+        window.addEventListener('scroll', handleHeaderScroll, { passive: true });
+        
+        // Einmalige Prüfung beim Laden der Seite, falls sie nicht ganz oben geladen wird
+        handleHeaderScroll();
+    }
+});
