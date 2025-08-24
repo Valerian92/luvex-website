@@ -1,24 +1,23 @@
 <?php
 /**
- * LUVEX Theme Functions - Step 2: Disable Astra Theme conflicts
- * Added functions to remove Astra's header and CSS to prevent conflicts.
+ * LUVEX Theme Functions - Step 3: Add missing avatar function
+ * The function luvex_get_user_avatar() was missing, causing a fatal error.
  */
 
-// 1. ASTRA THEME DEAKTIVIERUNG (NEU)
-// Hiermit entfernen wir die Standard-Header-Komponenten von Astra.
+// 1. ASTRA THEME DEAKTIVIERUNG
 add_action('after_setup_theme', 'luvex_disable_astra_components', 30);
 function luvex_disable_astra_components() {
     remove_all_actions('astra_header');
     remove_all_actions('astra_masthead_content');
 }
 
-// 2. Admin Bar Fix (Behalten wir bei)
+// 2. Admin Bar Fix
 add_action('get_header', 'luvex_remove_admin_bar_bump');
 function luvex_remove_admin_bar_bump() {
     remove_action('wp_head', '_admin_bar_bump_cb');
 }
 
-// 3. Theme Setup (Behalten wir bei)
+// 3. Theme Setup
 add_action('after_setup_theme', 'luvex_theme_setup');
 function luvex_theme_setup() {
     register_nav_menus(array(
@@ -29,20 +28,16 @@ function luvex_theme_setup() {
     add_theme_support('title-tag');
 }
 
-// 4. CSS & JS laden (Aktualisiert)
-add_action('wp_enqueue_scripts', 'luvex_enqueue_assets', 999); // Eine hohe Priorität sorgt dafür, dass es nach Astra läuft
+// 4. CSS & JS laden
+add_action('wp_enqueue_scripts', 'luvex_enqueue_assets', 999);
 function luvex_enqueue_assets() {
-    // Wir entfernen Astras Stylesheet, um Konflikte zu vermeiden (NEU)
     wp_dequeue_style('astra-theme-css');
-
-    // Wir laden unser Haupt-Stylesheet
     $main_css_path = get_stylesheet_directory() . '/assets/css/main.css';
     $main_css_version = file_exists($main_css_path) ? filemtime($main_css_path) : '1.0.0';
     wp_enqueue_style('luvex-main', get_stylesheet_directory_uri() . '/assets/css/main.css', array(), $main_css_version);
 }
 
-// 5. NAV WALKER KLASSE (Behalten wir bei)
-// Diese Klasse wird in der header.php benötigt, um das Menü korrekt darzustellen.
+// 5. NAV WALKER KLASSE
 class Luvex_Nav_Walker extends Walker_Nav_Menu {
     public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
         $indent = ($depth) ? str_repeat("\t", $depth) : '';
@@ -60,13 +55,41 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
         $item_output = isset($args->before) ? $args->before : '';
         $item_output .= '<a' . $attributes . '>';
         $item_output .= (isset($args->link_before) ? $args->link_before : '') . apply_filters('the_title', $item->title, $item->ID) . (isset($args->link_after) ? $args->link_after : '');
-        // Fügt den Dropdown-Pfeil hinzu, wenn das Menü-Element Kinder hat
         if (in_array('menu-item-has-children', $classes)) {
             $item_output .= ' <i class="fa-solid fa-chevron-down dropdown-arrow"></i>';
         }
         $item_output .= '</a>';
         $item_output .= isset($args->after) ? $args->after : '';
         $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
+    }
+}
+
+// 6. FEHLENDE AVATAR FUNKTION (NEU)
+// Diese Funktion wird im Header aufgerufen und hat den fatalen Fehler verursacht.
+function luvex_get_user_avatar($user_id = null) {
+    if (!$user_id) {
+        $user_id = get_current_user_id();
+    }
+    
+    // Stellt sicher, dass die Funktion nur für eingeloggte User etwas tut
+    if (0 === $user_id) {
+        return '';
+    }
+
+    $avatar_url = get_user_meta($user_id, 'luvex_avatar_url', true);
+    
+    if ($avatar_url) {
+        return '<img src="' . esc_url($avatar_url) . '" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">';
+    } else {
+        // Fallback zu Initialen
+        $user = get_userdata($user_id);
+        if (!$user) {
+            return '?';
+        }
+        $first_name = $user->first_name ?: $user->display_name;
+        $last_name = $user->last_name ?: '';
+        $initials = strtoupper(substr($first_name, 0, 1) . substr($last_name, 0, 1));
+        return $initials ?: '?';
     }
 }
 
