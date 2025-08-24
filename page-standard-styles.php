@@ -3,8 +3,6 @@
  * Template Name: Standard Styles
  *
  * Description: Eine Seite zur Anzeige aller globalen Standard-Styles und UI-Komponenten.
- * Diese Seite lädt nur die globalen CSS-Dateien und eine minimale,
- * seitenspezifische CSS-Datei für das Layout.
  */
 
 get_header(); // Lädt den Standard-Header
@@ -12,27 +10,36 @@ get_header(); // Lädt den Standard-Header
 
 <main id="main" class="site-main">
 
-    <!-- Hero-Sektion, die den dunklen Hintergrund für den transparenten Header bereitstellt -->
+    <!-- Hero-Sektion mit der neuen Standard-Reihenfolge -->
     <section class="luvex-hero">
         <div class="luvex-hero__container">
             <div class="luvex-hero__content">
-                <h2 class="luvex-hero__subtitle">
-                    Standard Hero Untertitel
-                </h2>
+                
+                <!-- 1. Titel -->
                 <h1 class="luvex-hero__title">
                    Standard Hero Haupttitel
                 </h1>
+
+                <!-- 2. Buttons -->
+                <div class="luvex-hero__cta-container">
+                    <a href="#" class="luvex-hero__cta">
+                        Primärer Button
+                    </a>
+                    <a href="#" class="luvex-hero__cta-secondary">
+                        Sekundärer Button
+                    </a>
+                </div>
+
+                <!-- 3. Subtitle -->
+                <h2 class="luvex-hero__subtitle">
+                    Standard Hero Untertitel
+                </h2>
+                
+                <!-- 4. Description -->
                 <p class="luvex-hero__description">
                    Dies ist die Beschreibung des Standard-Heroes, um die Textformatierung und Abstände zu demonstrieren.
                 </p>
-            </div>
-            <div class="luvex-hero__cta-container">
-                <a href="#" class="luvex-hero__cta">
-                    Primärer Button
-                </a>
-                <a href="#" class="luvex-hero__cta-secondary">
-                    Sekundärer Button
-                </a>
+
             </div>
         </div>
     </section>
