@@ -11,6 +11,7 @@
 	</div><!-- #primary -->
 </div><!-- #content -->
 
+<!-- HINWEIS: Die ID 'colophon' wird vom neuen JavaScript verwendet, um die Animation zu triggern. -->
 <footer id="colophon" class="site-footer modern-footer">
 	<div class="footer-container">
 
@@ -104,7 +105,8 @@
 		</div>
 
 		<!-- Footer Bottom -->
-		<div class="footer-bottom">
+        <!-- NEU: Etwas mehr Padding unten (pb-8 statt pb-4 in Tailwind), um Platz für den Button zu schaffen -->
+		<div class="footer-bottom" style="padding-bottom: 2rem;">
     		<div class="footer-bottom-content">
         		<div class="footer-bottom-left">
 					<p class="footer-copyright">

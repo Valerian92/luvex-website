@@ -77,13 +77,15 @@ Last Update: 2025-08-24 (Kompakt-Update)
     color: var(--luvex-gray-300); 
     max-width: 600px; 
     line-height: 1.7; 
-    margin-bottom: 2.5rem; 
+    margin: 0; /* ANGEPASST: Kein Bottom-Margin, da Buttons jetzt oben sind */
 }
 
 .homepage-community-actions { 
     display: flex; 
-    gap: 2rem; /* VERGRÖSSERT: Von 1rem auf 2rem für mehr Abstand */
+    gap: 2rem; /* Größerer Abstand zwischen Buttons */
     flex-wrap: wrap; 
+    justify-content: center; /* ZENTRIERT: Buttons in der Mitte */
+    margin: 2rem 0; /* NEUER PLATZ: Abstand nach oben und unten */
 }
 
 /* UV-Thematik: Subtile Effekte */

@@ -106,18 +106,23 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- GLOBAL UV EXPERT COMMUNITY SECTION -->
+<!-- GLOBAL UV EXPERT COMMUNITY SECTION (OPTIMIERTE STRUKTUR) -->
 <section class="section homepage-community-section">
     <div class="homepage-community-container">
         <div class="homepage-community-content">
+            <!-- Title -->
             <h2 class="homepage-community-title">Building the Global <br><span class="text-highlight">UV Network</span></h2>
-            <p class="homepage-community-description">
-            Connect with UV engineers, researchers, and industry leaders from over 50 countries. Share cutting-edge research, solve complex technical challenges, and stay ahead of the latest innovations in UV-C disinfection, LED technology, and industrial applications. Together, we're advancing the science of light.
-          </p>
+            
+            <!-- Buttons direkt nach Title -->
             <div class="homepage-community-actions">
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'login' ) ) ); ?>" class="luvex-cta-primary">Join Community</a>
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="luvex-cta-secondary">Learn About Us</a>
             </div>
+            
+            <!-- Description nach den Buttons -->
+            <p class="homepage-community-description">
+                Connect with UV engineers, researchers, and industry leaders from over 50 countries. Share cutting-edge research, solve complex technical challenges, and stay ahead of the latest innovations in UV-C disinfection, LED technology, and industrial applications. Together, we're advancing the science of light.
+            </p>
         </div>
         <div class="homepage-community-visual">
             <div id="globe-container" class="homepage-community-globe-wrapper"></div>

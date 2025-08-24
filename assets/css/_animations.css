@@ -166,3 +166,35 @@ Last Update: 2025-08-24 (Refactored)
         background-position: 0% 50%;
     }
 }
+
+/*
+==============================================================================
+6. NEU: SCROLL-TO-TOP BUTTON ANIMATION (KONZEPT 6)
+==============================================================================
+*/
+
+/* Grundstil für den Button - passt sich an die Animation an */
+#scrollToTopBtn {
+    background-color: #1f2937; /* Dunkler Hintergrund für besseren Kontrast */
+    color: white;
+    border: 3px solid #4b5563; /* Initialer, neutraler Rand */
+    transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.5s ease;
+}
+
+/* Animationsklasse, die per JS hinzugefügt wird */
+#scrollToTopBtn.animate-border-flag {
+    animation: border-flag-colors 2s linear infinite;
+}
+
+/* Keyframe-Animation, die die Randfarbe durch die Deutschlandfarben wechselt */
+@keyframes border-flag-colors {
+    0%, 100% {
+        border-color: #000000; /* Schwarz */
+    }
+    33% {
+        border-color: #DD0000; /* Rot */
+    }
+    66% {
+        border-color: #FFCE00; /* Gold */
+    }
+}
