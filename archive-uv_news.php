@@ -11,16 +11,15 @@ get_header(); ?>
 
 <!-- 
 ==============================================================================
-FINALE HERO SECTION (Mit Animation)
+FINALE HERO SECTION (Ohne Animation)
 ==============================================================================
-- Die Klasse 'hero-title--animated' wurde zum H1-Tag hinzugefügt, um den
-  Licht-Effekt zu aktivieren.
+- Die Animations-Klasse wurde vom H1-Tag entfernt.
 -->
 <section class="luvex-hero luvex-hero--split-compact">
     <div class="luvex-hero__container container">
         <!-- Linke Seite: Textinhalte -->
         <div class="luvex-hero__content">
-            <h1 class="luvex-hero__title hero-title--animated">
+            <h1 class="luvex-hero__title">
                 UV Technology <span class="text-highlight">News</span>
             </h1>
             <p class="luvex-hero__description">
