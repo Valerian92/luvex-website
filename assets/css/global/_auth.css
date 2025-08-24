@@ -608,16 +608,6 @@ Last Update: 2025-08-11
     flex: 1;
 }
 
-.luvex-hero__content .luvex-hero__title,
-.luvex-hero__content .luvex-hero__description {
-    text-align: left !important;
-    margin: 0 !important;
-}
-
-.luvex-hero__content .luvex-hero__title {
-    font-size: clamp(2rem, 4vw, 2.5rem);
-    margin-bottom: 1rem !important;
-}
 
 .luvex-hero__profile {
     display: flex;
