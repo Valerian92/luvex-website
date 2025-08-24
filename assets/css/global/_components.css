@@ -1,22 +1,5 @@
 /*
 ==============================================================================
-LUVEX THEME v3.0 - UI COMPONENTS (ERWEITERT)
-==============================================================================
-Description: Enthält alle wiederverwendbaren UI-Komponenten wie Buttons,
-             Cards, Forms, Hero-System, Knowledge Navigator, Team Members, etc.
-Dependencies: _variables.css, _core.css
-Last Update: 2025-08-21
-==============================================================================
-*/
-
-/*
-==============================================================================
-1. HERO SECTIONS (Optimierter Standard)
-==============================================================================
-*/
-
-/*
-==============================================================================
 LUVEX THEME v3.2 - UI COMPONENTS (HERO-FIX)
 ==============================================================================
 Description: Enthält alle wiederverwendbaren UI-Komponenten.
@@ -569,7 +552,7 @@ Last Update: 2025-08-24
 
 /*
 ==============================================================================
-4. FEATURE GRID SYSTEM (Wiederverwendbar)
+4. FEATURE GRID SYSTEM (Wiederverwendbar & Optimiert)
 ==============================================================================
 */
 
@@ -583,15 +566,17 @@ Last Update: 2025-08-24
 
 .feature-item { 
     padding: 1.5rem; 
-    background: rgba(255, 255, 255, 0.05); 
+    background: rgba(255, 255, 255, 0.08); /* Etwas sichtbarer */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Rand für Card-Effekt */
     border-radius: var(--radius-md); 
     transition: all 0.3s ease; 
     text-align: center;
 }
 
 .feature-item:hover { 
-    background: rgba(255, 255, 255, 0.1); 
-    transform: translateY(-4px); 
+    background: rgba(255, 255, 255, 0.15); /* Deutlicherer Hover */
+    transform: translateY(-5px); /* Stärkerer Lift-Effekt */
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .feature-item:hover h4 { 
