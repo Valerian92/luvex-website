@@ -105,8 +105,8 @@
 		</div>
 
 		<!-- Footer Bottom -->
-        <!-- NEU: Etwas mehr Padding unten (pb-8 statt pb-4 in Tailwind), um Platz für den Button zu schaffen -->
-		<div class="footer-bottom" style="padding-bottom: 2rem;">
+        <!-- ANPASSUNG: Padding unten leicht reduziert -->
+		<div class="footer-bottom" style="padding-bottom: 1.5rem;">
     		<div class="footer-bottom-content">
         		<div class="footer-bottom-left">
 					<p class="footer-copyright">
@@ -126,7 +126,8 @@
 						?>
 					</nav>
 				</div>
-				<div class="footer-bottom-right">
+                <!-- ANPASSUNG: Rechter Container eingerückt, um Platz für den Button zu machen -->
+				<div class="footer-bottom-right" style="padding-right: 5rem;">
 					<p class="footer-location">
 						Made with precision in Germany 🇩🇪
 					</p>
