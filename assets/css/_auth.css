@@ -405,7 +405,7 @@ Last Update: 2025-08-11
 
 .user-name {
     font-size: 0.875rem;
-    color: var(--color-white);
+    color: var(--luvex-white);
     font-weight: 600;
     margin: 0;
     line-height: 1;
