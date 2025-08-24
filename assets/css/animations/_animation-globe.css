@@ -79,7 +79,8 @@ Last Update: 2025-08-24 (Kompakt-Update)
     max-width: 600px; 
     line-height: 1.7; 
     margin: 0; /* Kein Extra-Margin */
-    /* ENTFERNT: text-align: center und margin: 0 auto - Description bleibt linksbündig */
+    text-align: justify; /* BLOCKSATZ: Gleichmäßig verteilter Text */
+    text-justify: inter-word; /* OPTIMIERUNG: Bessere Wortverteilung */
 }
 
 .homepage-community-actions { 
