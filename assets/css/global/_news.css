@@ -21,6 +21,18 @@ FINALES HERO LAYOUT: KORRIGIERTE STRUKTUR
     padding: calc(80px + 5rem) 1.5rem 4rem 1.5rem;
     display: flex;
     align-items: center;
+    position: relative; /* Wichtig für die Positionierung des Canvas */
+    overflow: hidden; /* Verhindert, dass die Animation überläuft */
+}
+
+/* NEU: Styling für das Canvas-Element */
+.luvex-hero--split-compact #hero-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Liegt im Hintergrund */
 }
 
 .luvex-hero--split-compact .luvex-hero__container {
@@ -33,6 +45,8 @@ FINALES HERO LAYOUT: KORRIGIERTE STRUKTUR
     max-width: 1250px;
     margin: 0 auto;
     width: 100%;
+    position: relative; /* Stellt sicher, dass der Inhalt über dem Canvas liegt */
+    z-index: 2;
 }
 
 .luvex-hero--split-compact .luvex-hero__content {
@@ -57,7 +71,6 @@ FINALES HERO LAYOUT: KORRIGIERTE STRUKTUR
     flex-shrink: 0;
     margin-top: 0;
     gap: 1rem;
-    /* KORREKTUR: Buttons weiter nach unten verschoben */
     transform: translateY(2.5rem); 
 }
 

@@ -11,11 +11,12 @@ get_header(); ?>
 
 <!-- 
 ==============================================================================
-FINALE HERO SECTION (Ohne Animation)
+FINALE HERO SECTION (Mit Canvas-Animation)
 ==============================================================================
-- Die Animations-Klasse wurde vom H1-Tag entfernt.
+- Das <canvas> Element für die Hintergrundanimation wurde hinzugefügt.
 -->
 <section class="luvex-hero luvex-hero--split-compact">
+    <canvas id="hero-canvas"></canvas>
     <div class="luvex-hero__container container">
         <!-- Linke Seite: Textinhalte -->
         <div class="luvex-hero__content">
