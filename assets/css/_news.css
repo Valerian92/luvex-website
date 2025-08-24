@@ -1,6 +1,6 @@
 /*
 ==============================================================================
-LUVEX THEME - UV News Styling (Final Layout)
+LUVEX THEME - UV News Styling (Final Layout Correction)
 ==============================================================================
 Description: Styles for the UV News archive and single post pages.
 Dependencies: _variables.css (for color variables)
@@ -12,20 +12,19 @@ Last Update: 2025-08-24
 
 /*
 ==============================================================================
-FINALES HERO LAYOUT: Split & Compact (REVISED LAYOUT)
+FINALES HERO LAYOUT: KORRIGIERTE STRUKTUR
 ==============================================================================
 */
 
 .luvex-hero--split-compact {
     min-height: auto;
-    /* KORREKTUR: Dein perfekter Abstand von 12rem (80px für den Header + 7rem) */
-    padding: calc(80px + 7rem) 0 4rem 0;
+    /* KORREKTUR: Deutlich erhöhter Abstand nach oben, um Header-Überlappung zu beheben */
+    padding: calc(80px + 8rem) 1.5rem 4rem 1.5rem;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
 }
 
-/* FIX: Richtet den Hero-Container am Artikel-Grid aus */
+/* FIX: Der innere Container hat KEINE seitliche Polsterung mehr */
 .luvex-hero--split-compact .luvex-hero__container {
     display: flex;
     flex-direction: row;
@@ -33,11 +32,11 @@ FINALES HERO LAYOUT: Split & Compact (REVISED LAYOUT)
     align-items: center;
     text-align: left;
     gap: 2rem;
-    /* KORREKTUR: Deine perfekte Breite von 1250px */
+    /* KORREKTUR: Breite und Zentrierung bleiben erhalten */
     max-width: 1250px;
     margin: 0 auto;
-    /* Wichtig: Passt die seitliche Polsterung an die Artikel an */
-    padding: 0 1.5rem;
+    /* ENTFERNT: padding: 0 1.5rem; - Das war die Fehlerquelle */
+    width: 100%; /* Stellt sicher, dass der Container den Raum füllt */
 }
 
 .luvex-hero--split-compact .luvex-hero__content {
@@ -52,26 +51,18 @@ FINALES HERO LAYOUT: Split & Compact (REVISED LAYOUT)
 
 @media (max-width: 768px) {
     .luvex-hero--split-compact {
-        padding: calc(80px + 2rem) 0 2rem 0;
+        padding: calc(80px + 3rem) 1.5rem 3rem 1.5rem;
     }
 
     .luvex-hero--split-compact .luvex-hero__container {
         flex-direction: column;
         align-items: flex-start;
-        text-align: left;
-        gap: 2rem;
+        gap: 2.5rem;
     }
 
     .luvex-hero--split-compact .luvex-hero__cta-container {
         flex-direction: row;
-        align-items: flex-start;
         width: 100%;
-    }
-
-    .luvex-hero--split-compact .luvex-hero__cta,
-    .luvex-hero--split-compact .luvex-hero__cta-secondary {
-        width: auto;
-        justify-content: center;
     }
 }
 
@@ -89,27 +80,29 @@ FILTER & GRID CONTAINER ALIGNMENT
     top: 80px;
     z-index: 30;
     border-bottom: 1px solid #e5e7eb;
+    /* Wichtig: Seitliche Polsterung für die Sektion */
+    padding: 0 1.5rem;
 }
 
 body.admin-bar .news-filter-section {
     top: 112px;
 }
 
-/* KORREKTUR: Breite an Hero-Container angepasst */
+/* KORREKTUR: Container hat keine eigene Polsterung mehr */
 .news-filter-container {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     gap: 1.5rem;
-    padding: 1.25rem 1.5rem;
+    padding: 1.25rem 0; /* Nur noch vertikale Polsterung */
     max-width: 1250px;
     margin: 0 auto;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
     .news-filter-container {
-        flex-direction: row;
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
 
@@ -143,18 +136,13 @@ body.admin-bar .news-filter-section {
 
 .news-search-form {
     position: relative;
-    width: 100%;
-}
-
-@media (min-width: 768px) {
-    .news-search-form {
-        width: auto;
-    }
+    width: auto; /* Automatische Breite */
+    flex-shrink: 0; /* Verhindert, dass das Feld schrumpft */
 }
 
 .news-search-input {
     width: 100%;
-    min-width: 256px;
+    min-width: 280px; /* Etwas breiter für bessere Optik */
     padding: 0.5rem 1rem 0.5rem 2.5rem;
     border: 1px solid #d1d5db;
     border-radius: 9999px;
