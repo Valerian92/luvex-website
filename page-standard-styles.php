@@ -3,6 +3,7 @@
  * Template Name: Standard Styles
  *
  * Description: Eine Seite zur Anzeige aller globalen Standard-Styles und UI-Komponenten.
+ * KORRIGIERT: Jede Sektion hat jetzt ihren eigenen Container für ein konsistentes Layout.
  */
 
 get_header(); // Lädt den Standard-Header
@@ -10,51 +11,34 @@ get_header(); // Lädt den Standard-Header
 
 <main id="main" class="site-main">
 
-    <!-- Hero-Sektion mit der neuen Standard-Reihenfolge -->
+    <!-- Hero Section (bleibt unverändert) -->
     <section class="luvex-hero">
         <div class="luvex-hero__container">
             <div class="luvex-hero__content">
-                
-                <!-- 1. Titel -->
-                <h1 class="luvex-hero__title">
-                   Standard Hero Haupttitel
-                </h1>
-
-                <!-- 2. Buttons -->
+                <h1 class="luvex-hero__title">Standard Hero Haupttitel</h1>
                 <div class="luvex-hero__cta-container">
-                    <a href="#" class="luvex-hero__cta">
-                        Primärer Button
-                    </a>
-                    <a href="#" class="luvex-hero__cta-secondary">
-                        Sekundärer Button
-                    </a>
+                    <a href="#" class="luvex-hero__cta">Primärer Button</a>
+                    <a href="#" class="luvex-hero__cta-secondary">Sekundärer Button</a>
                 </div>
-
-                <!-- 3. Subtitle -->
-                <h2 class="luvex-hero__subtitle">
-                    Standard Hero Untertitel
-                </h2>
-                
-                <!-- 4. Description -->
-                <p class="luvex-hero__description">
-                   Dies ist die Beschreibung des Standard-Heroes, um die Textformatierung und Abstände zu demonstrieren.
-                </p>
-
+                <h2 class="luvex-hero__subtitle">Standard Hero Untertitel</h2>
+                <p class="luvex-hero__description">Dies ist die Beschreibung des Standard-Heroes, um die Textformatierung und Abstände zu demonstrieren.</p>
             </div>
         </div>
     </section>
 
     <div class="standard-styles-page">
-        <div class="container">
 
-            <!-- Seiten-Titel -->
-            <header class="page-hero">
+        <!-- Seiten-Titel -->
+        <header class="page-hero">
+            <div class="container"> <!-- KORREKTUR: Container ist jetzt hier drin -->
                 <h1>Standard Design & UI-Komponenten</h1>
                 <p class="subtitle">Dies ist eine Übersicht aller globalen Stile, die auf der gesamten Website verfügbar sind. Verwende diese Seite als Referenz, um ein konsistentes Design zu gewährleisten.</p>
-            </header>
+            </div>
+        </header>
 
-            <!-- Typografie -->
-            <section class="style-section">
+        <!-- Typografie -->
+        <section class="style-section">
+            <div class="container"> <!-- KORREKTUR: Container ist jetzt hier drin -->
                 <h2>Typografie</h2>
                 <div class="grid grid-2">
                     <div>
@@ -68,10 +52,12 @@ get_header(); // Lädt den Standard-Header
                         <blockquote>Dies ist ein Zitatblock. Er wird verwendet, um wichtige Aussagen oder Zitate hervorzuheben und sollte sich visuell vom normalen Fließtext abheben.</blockquote>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Buttons -->
-            <section class="style-section">
+        <!-- Buttons -->
+        <section class="style-section">
+            <div class="container"> <!-- KORREKTUR: Container ist jetzt hier drin -->
                 <h2>Buttons & CTAs</h2>
                 <div class="button-showcase">
                     <a href="#" class="luvex-cta-primary">Primärer CTA</a>
@@ -79,10 +65,12 @@ get_header(); // Lädt den Standard-Header
                     <a href="#" class="btn--outline">Outline Button</a>
                     <a href="#" class="header-cta-button">Header CTA Button</a>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Formularelemente -->
-            <section class="style-section">
+        <!-- Formularelemente -->
+        <section class="style-section">
+            <div class="container"> <!-- KORREKTUR: Container ist jetzt hier drin -->
                 <h2>Formularelemente</h2>
                 <form class="standard-form">
                     <div class="floating-label-input">
@@ -99,10 +87,12 @@ get_header(); // Lädt den Standard-Header
                     </div>
                     <button type="submit" class="luvex-cta-primary">Formular senden</button>
                 </form>
-            </section>
+            </div>
+        </section>
 
-            <!-- Karten (Cards) -->
-            <section class="style-section">
+        <!-- Karten (Cards) -->
+        <section class="style-section">
+            <div class="container"> <!-- KORREKTUR: Container ist jetzt hier drin -->
                 <h2>Karten (Cards)</h2>
                 <div class="grid grid-3">
                     <div class="value-card">
@@ -126,9 +116,9 @@ get_header(); // Lädt den Standard-Header
                         <p class="value-card__description">Konsistentes Design über alle Karten hinweg ist wichtig für die UI.</p>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-        </div>
     </div>
 
 </main>

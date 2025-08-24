@@ -1,12 +1,13 @@
 /*
 ==============================================================================
-LUVEX THEME v4.3 - COMPLETE HEADER SYSTEM
+LUVEX THEME v4.5 - COMPLETE HEADER SYSTEM
 ==============================================================================
 
 Description: Vollständige Header-Implementierung mit 3-Level Navigation,
-             Logo-System, User-Dropdown und Mobile Menu + Scroll Effects
+             Logo-System, User-Dropdown und Mobile Menu + Scroll Effects.
+             Kombinierter finaler Stand.
 Dependencies: _variables.css, _core.css
-Last Update: 2025-08-24 (Complete with Glassmorphism)
+Last Update: 2025-08-24 (Final Merged)
 
 ==============================================================================
 */
@@ -65,14 +66,12 @@ Last Update: 2025-08-24 (Complete with Glassmorphism)
     display: block;
 }
 
-/* Custom Logo */
 .custom-logo {
     height: 40px;
     width: auto;
     max-width: 200px;
 }
 
-/* Text Logo Fallback */
 .luvex-logo-text {
     font-size: 1.8rem;
     font-weight: 600;
@@ -104,11 +103,7 @@ Last Update: 2025-08-24 (Complete with Glassmorphism)
     text-shadow: 0 1px 3px rgba(109, 213, 237, 0.5);
 }
 
-.logo-u {
-    color: var(--luvex-white);
-}
-
-.logo-vex {
+.logo-u, .logo-vex {
     color: var(--luvex-white);
 }
 
@@ -197,9 +192,8 @@ Last Update: 2025-08-24 (Complete with Glassmorphism)
 .main-navigation > ul > li > .sub-menu {
     position: absolute;
     top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    min-width: max-content;
+    left: 0; /* Stellt sicher, dass das Menü linksbündig mit dem Elternelement beginnt */
+    min-width: 100%; /* Sorgt dafür, dass das Dropdown mindestens so breit ist wie der Parent */
     white-space: nowrap;
     
     background: rgba(20, 35, 60, 0.95);
@@ -214,7 +208,7 @@ Last Update: 2025-08-24 (Complete with Glassmorphism)
 
     opacity: 0;
     visibility: hidden;
-    transform: translateX(-50%) translateY(5px);
+    transform: translateY(5px);
     transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
     
     z-index: 1001;
@@ -233,7 +227,7 @@ Last Update: 2025-08-24 (Complete with Glassmorphism)
 .main-navigation > ul > li:hover > .sub-menu {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
 }
 
 .main-navigation > ul > li > .sub-menu > li {
@@ -360,7 +354,6 @@ Last Update: 2025-08-24 (Complete with Glassmorphism)
     position: relative;
 }
 
-/* Standard CTA Button */
 .header-cta-button {
     display: inline-flex;
     align-items: center;
@@ -400,7 +393,6 @@ Last Update: 2025-08-24 (Complete with Glassmorphism)
     transform: translateY(-2px) scale(1.02);
 }
 
-/* User Section */
 .user-section {
     position: relative;
 }
@@ -482,7 +474,6 @@ Last Update: 2025-08-24 (Complete with Glassmorphism)
     transform: rotate(180deg);
 }
 
-/* User Dropdown Menu */
 .user-dropdown {
     position: absolute;
     top: calc(100% + 8px);
@@ -689,11 +680,7 @@ Last Update: 2025-08-24 (Complete with Glassmorphism)
 }
 
 @media (max-width: 768px) {
-    .site-header {
-        height: 70px;
-    }
-    
-    .site-header.scrolled {
+    .site-header, .site-header.scrolled {
         height: 70px;
     }
     
@@ -701,16 +688,7 @@ Last Update: 2025-08-24 (Complete with Glassmorphism)
         height: 70px;
     }
     
-    .site-header.scrolled .header-container {
-        height: 70px;
-    }
-    
     .main-navigation > ul > li > a {
-        height: 70px;
-        padding: 25px 1.5rem;
-    }
-    
-    .site-header.scrolled .main-navigation > ul > li > a {
         height: 70px;
         padding: 25px 1.5rem;
     }
@@ -733,7 +711,6 @@ Last Update: 2025-08-24 (Complete with Glassmorphism)
     display: none !important;
 }
 
-/* Skip Link Styling */
 .skip-link {
     position: absolute;
     left: -9999px;

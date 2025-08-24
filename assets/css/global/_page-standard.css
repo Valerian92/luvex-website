@@ -3,15 +3,16 @@
 LUVEX THEME - STANDARD STYLES PAGE
 ==============================================================================
 Description: Minimale Styles nur für das Layout der Standard-Styles-Seite.
-             Alle Komponenten-Styles kommen aus den globalen CSS-Dateien.
+             Angepasst an die neue Container-Struktur.
 ==============================================================================
 */
 
 .standard-styles-page .page-hero {
-    padding: calc(80px + 4rem) 0 4rem 0;
+    /* KORREKTUR: Horizontales Padding entfernt, kommt jetzt vom .container */
+    padding-top: calc(80px + 4rem);
+    padding-bottom: 4rem;
     text-align: center;
     border-bottom: 1px solid var(--luvex-gray-200);
-    margin-bottom: 4rem;
 }
 
 .standard-styles-page .page-hero h1 {
@@ -26,7 +27,9 @@ Description: Minimale Styles nur für das Layout der Standard-Styles-Seite.
 }
 
 .standard-styles-page .style-section {
-    padding: 3rem 0;
+    /* KORREKTUR: Horizontales Padding entfernt, kommt jetzt vom .container */
+    padding-top: 4rem;
+    padding-bottom: 4rem;
     border-bottom: 1px solid var(--luvex-gray-200);
 }
 
