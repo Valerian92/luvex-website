@@ -1,40 +1,19 @@
 <?php
 /**
- * LUVEX Theme Functions and Definitions - HEADER FIXES IMPLEMENTIERT
+ * LUVEX Theme Functions and Definitions
  *
  * @package Luvex
  * @since 3.0.0
  */
 
-// === WORDPRESS ADMIN BAR FIX (HAUPTPROBLEM) ===
-add_action('get_header', 'luvex_remove_admin_bar_bump');
-function luvex_remove_admin_bar_bump() {
-    remove_action('wp_head', '_admin_bar_bump_cb');
-}
+// === ASTRA THEME DEAKTIVIERUNG UND LUVEX ÜBERNAHME ===
 
-// Alternative: Admin Bar CSS komplett entfernen
-add_theme_support( 'admin-bar', array( 'callback' => '__return_false' ) );
-
-// === ASTRA THEME DEAKTIVIERUNG UND LUVEX ÜBERNAHME (VERBESSERT) ===
 add_action('after_setup_theme', 'luvex_disable_astra_components', 30);
 function luvex_disable_astra_components() {
-    // Alle Astra Header/Navigation Hooks entfernen
     remove_all_actions('astra_header');
     remove_all_actions('astra_footer');
     remove_all_actions('astra_primary_navigation');
     remove_all_actions('astra_masthead_content');
-    
-    // Astra Header Builder Navigation deaktivieren
-    add_filter('astra_get_option_disable-primary-nav', '__return_true');
-    add_filter('astra_get_option_header-main-menu-label', '__return_empty_string');
-    
-    // Astra CSS für Navigation entfernen
-    add_action('wp_enqueue_scripts', 'luvex_remove_astra_navigation_css', 999);
-}
-
-function luvex_remove_astra_navigation_css() {
-    wp_dequeue_style('astra-theme-css');
-    wp_deregister_style('astra-theme-css');
 }
 
 add_action('after_setup_theme', 'luvex_theme_setup');
@@ -149,265 +128,6 @@ function luvex_register_uv_news_post_type() {
             'hierarchical' => false,
             'rewrite' => ['slug' => 'uv-news-tag']
         ]);
-    }
-}
-
-// === BODY-KLASSE FÜR CURSOR HINZUFÜGEN (KORRIGIERT) ===
-add_filter('body_class', 'luvex_add_cursor_body_class');
-function luvex_add_cursor_body_class($classes) {
-    // **FIX:** Der Cursor wird jetzt auf ALLEN Seiten aktiviert, nicht nur auf der Startseite.
-    // Die bedingte Logik wurde entfernt, um den Cursor global zu aktivieren.
-    $classes[] = 'custom-cursor-active';
-
-    return $classes;
-}
-
-// === AVATAR UPLOAD SYSTEM ===
-
-// AJAX handler for avatar upload
-add_action('wp_ajax_luvex_upload_avatar', 'luvex_handle_avatar_upload');
-
-function luvex_handle_avatar_upload() {
-    // Verify nonce
-    if (!wp_verify_nonce($_POST['nonce'], 'luvex_avatar_upload')) {
-        wp_send_json_error('Security check failed');
-    }
-    
-    if (!isset($_FILES['avatar_file'])) {
-        wp_send_json_error('No file uploaded');
-    }
-    
-    $uploaded_file = $_FILES['avatar_file'];
-    
-    // Validate file type
-    $allowed_types = array('image/jpeg', 'image/png', 'image/gif', 'image/webp');
-    if (!in_array($uploaded_file['type'], $allowed_types)) {
-        wp_send_json_error('Invalid file type. Please upload JPG, PNG, GIF or WebP images only.');
-    }
-    
-    // Validate file size (max 5MB)
-    if ($uploaded_file['size'] > 5 * 1024 * 1024) {
-        wp_send_json_error('File too large. Maximum size is 5MB.');
-    }
-    
-    // Handle the upload
-    $upload = wp_handle_upload($uploaded_file, array('test_form' => false));
-    
-    if (isset($upload['error'])) {
-        wp_send_json_error($upload['error']);
-    }
-    
-    // Save to user meta
-    $current_user = wp_get_current_user();
-    update_user_meta($current_user->ID, 'luvex_avatar_url', $upload['url']);
-    
-    wp_send_json_success(array('avatar_url' => $upload['url']));
-}
-
-// Function to get user avatar (fallback to initials)
-function luvex_get_user_avatar($user_id = null) {
-    if (!$user_id) {
-        $user_id = get_current_user_id();
-    }
-    
-    $avatar_url = get_user_meta($user_id, 'luvex_avatar_url', true);
-    
-    if ($avatar_url) {
-        return '<img src="' . esc_url($avatar_url) . '" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">';
-    } else {
-        // Fallback to initials
-        $user = get_userdata($user_id);
-        $first_name = $user->first_name ?: $user->display_name;
-        $last_name = $user->last_name ?: '';
-        $initials = strtoupper(substr($first_name, 0, 1) . substr($last_name, 0, 1));
-        return $initials ?: '?';
-    }
-}
-
-// === USER AUTHENTICATION HANDLERS ===
-
-add_action('after_setup_theme', 'luvex_add_auth_handlers');
-function luvex_add_auth_handlers() {
-    if (!is_admin()) {
-        add_action('init', 'luvex_handle_login_form');
-        add_action('init', 'luvex_handle_registration_form');
-        add_action('init', 'luvex_handle_profile_update_form');
-    }
-}
-
-function luvex_handle_login_form() {
-    if (!isset($_POST['luvex_login_submit']) || !wp_verify_nonce($_POST['_wpnonce'], 'luvex_login_form')) {
-        return;
-    }
-    
-    $credential = sanitize_text_field($_POST['user_login']);
-    $password = $_POST['user_password'];
-    $remember = isset($_POST['remember_me']);
-    $user = null;
-
-    if (is_email($credential)) {
-        $user = get_user_by('email', $credential);
-    } else {
-        $user = get_user_by('login', $credential);
-    }
-
-    if ($user) {
-        $creds = array(
-            'user_login'    => $user->user_login,
-            'user_password' => $password,
-            'remember'      => $remember,
-        );
-
-        $signon_user = wp_signon($creds, false);
-
-        if (is_wp_error($signon_user)) {
-            wp_redirect(add_query_arg('error', '1', home_url('/login/')));
-            exit;
-        } else {
-            // FIXED: Support für externe LUVEX Apps
-            $redirect_param = $_GET['redirect'] ?? '';
-            
-            // Liste der erlaubten externen LUVEX Apps
-            $external_apps = [
-                'analyzer.luvex.tech',
-                'simulator.luvex.tech'
-            ];
-            
-            // Prüfe ob Redirect zu externer LUVEX App
-            foreach ($external_apps as $app) {
-                if (strpos($redirect_param, $app) !== false) {
-                    // Externe App - vollständige URL verwenden
-                    wp_redirect(esc_url_raw($redirect_param));
-                    exit;
-                }
-            }
-            
-            // Standard interne Redirect-Logik
-            $redirect_url = isset($_GET['redirect']) ? home_url('/' . sanitize_key($_GET['redirect']) . '/') : home_url('/profile/');
-            wp_redirect($redirect_url);
-            exit;
-        }
-    } else {
-        wp_redirect(add_query_arg('error', '1', home_url('/login/')));
-        exit;
-    }
-}
-
-function luvex_handle_registration_form() {
-    if (isset($_POST['luvex_register_submit']) && wp_verify_nonce($_POST['_wpnonce'], 'luvex_register_form')) {
-        // Registration logic placeholder
-    }
-}
-
-function luvex_handle_profile_update_form() {
-    if (isset($_POST['luvex_profile_update_submit']) && wp_verify_nonce($_POST['_wpnonce'], 'luvex_profile_update')) {
-        // Profile update logic placeholder
-    }
-}
-
-// === CORS FIX FÜR UV STRIP ANALYZER ===
-
-add_action('wp_ajax_luvex_uvstrip_get_token', 'luvex_add_cors_headers', 1);
-add_action('wp_ajax_nopriv_luvex_uvstrip_get_token', 'luvex_add_cors_headers', 1);
-
-function luvex_add_cors_headers() {
-    $allowed_origins = [
-        'https://analyzer.luvex.tech',
-        'https://www.luvex.tech',
-        'https://luvex.tech'
-    ];
-    
-    $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
-    
-    if (in_array($origin, $allowed_origins)) {
-        header("Access-Control-Allow-Origin: $origin");
-        header('Access-Control-Allow-Credentials: true');
-        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
-        header('Access-Control-Allow-Headers: Content-Type, Authorization');
-    }
-    
-    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-        http_response_code(200);
-        exit;
-    }
-}
-
-add_action('init', 'luvex_handle_cors_preflight');
-function luvex_handle_cors_preflight() {
-    if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], 'admin-ajax.php') !== false) {
-        $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
-        $allowed_origins = [
-            'https://analyzer.luvex.tech',
-            'https://www.luvex.tech', 
-            'https://luvex.tech'
-        ];
-        
-        if (in_array($origin, $allowed_origins)) {
-            header("Access-Control-Allow-Origin: $origin");
-            header('Access-Control-Allow-Credentials: true');
-            header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
-            header('Access-Control-Allow-Headers: Content-Type, Authorization');
-        }
-        
-        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-            http_response_code(200);
-            exit;
-// === DEBUG FUNCTIONS (TEMPORÄR - NACH TESTING ENTFERNEN) ===
-
-if (WP_DEBUG) {
-    // Debug: Template Loading
-    add_filter('template_include', 'luvex_debug_template_loading');
-    function luvex_debug_template_loading($template) {
-        if (current_user_can('manage_options')) {
-            error_log('LUVEX DEBUG: Loading template: ' . $template);
-            error_log('LUVEX DEBUG: Post type: ' . get_post_type());
-            error_log('LUVEX DEBUG: Is singular uv_news: ' . (is_singular('uv_news') ? 'YES' : 'NO'));
-            error_log('LUVEX DEBUG: Is archive uv_news: ' . (is_post_type_archive('uv_news') ? 'YES' : 'NO'));
-        }
-        return $template;
-    }
-
-    // Debug: CSS Loading Check
-    add_action('wp_head', 'luvex_debug_css_info');
-    function luvex_debug_css_info() {
-        if (current_user_can('manage_options')) {
-            echo "<!-- LUVEX DEBUG INFO -->\n";
-            echo "<!-- Post Type: " . get_post_type() . " -->\n";
-            echo "<!-- Body Classes will be: single-" . get_post_type() . " -->\n";
-            echo "<!-- Expected Container Class: single-uv_news-container -->\n";
-            echo "<!-- Template: " . basename(get_page_template()) . " -->\n";
-            echo "<!-- /LUVEX DEBUG INFO -->\n";
-        }
-    }
-}
-
-
-// === DEBUG FUNCTIONS (TEMPORÄR - NACH TESTING ENTFERNEN) ===
-
-if (WP_DEBUG) {
-    // Debug: Template Loading
-    add_filter('template_include', 'luvex_debug_template_loading');
-    function luvex_debug_template_loading($template) {
-        if (current_user_can('manage_options')) {
-            error_log('LUVEX DEBUG: Loading template: ' . $template);
-            error_log('LUVEX DEBUG: Post type: ' . get_post_type());
-            error_log('LUVEX DEBUG: Is singular uv_news: ' . (is_singular('uv_news') ? 'YES' : 'NO'));
-            error_log('LUVEX DEBUG: Is archive uv_news: ' . (is_post_type_archive('uv_news') ? 'YES' : 'NO'));
-        }
-        return $template;
-    }
-
-    // Debug: CSS Loading Check
-    add_action('wp_head', 'luvex_debug_css_info');
-    function luvex_debug_css_info() {
-        if (current_user_can('manage_options')) {
-            echo "<!-- LUVEX DEBUG INFO -->\n";
-            echo "<!-- Post Type: " . get_post_type() . " -->\n";
-            echo "<!-- Body Classes will be: single-" . get_post_type() . " -->\n";
-            echo "<!-- Expected Container Class: single-uv_news-container -->\n";
-            echo "<!-- Template: " . basename(get_page_template()) . " -->\n";
-            echo "<!-- /LUVEX DEBUG INFO -->\n";
-        }
     }
 }
 
@@ -761,5 +481,238 @@ function luvex_enqueue_assets() {
         }
     }
 }
+
+// === BODY-KLASSE FÜR CURSOR HINZUFÜGEN (KORRIGIERT) ===
+add_filter('body_class', 'luvex_add_cursor_body_class');
+function luvex_add_cursor_body_class($classes) {
+    // **FIX:** Der Cursor wird jetzt auf ALLEN Seiten aktiviert, nicht nur auf der Startseite.
+    // Die bedingte Logik wurde entfernt, um den Cursor global zu aktivieren.
+    $classes[] = 'custom-cursor-active';
+
+    return $classes;
 }
+
+// === AVATAR UPLOAD SYSTEM ===
+
+// AJAX handler for avatar upload
+add_action('wp_ajax_luvex_upload_avatar', 'luvex_handle_avatar_upload');
+
+function luvex_handle_avatar_upload() {
+    // Verify nonce
+    if (!wp_verify_nonce($_POST['nonce'], 'luvex_avatar_upload')) {
+        wp_send_json_error('Security check failed');
+    }
+    
+    if (!isset($_FILES['avatar_file'])) {
+        wp_send_json_error('No file uploaded');
+    }
+    
+    $uploaded_file = $_FILES['avatar_file'];
+    
+    // Validate file type
+    $allowed_types = array('image/jpeg', 'image/png', 'image/gif', 'image/webp');
+    if (!in_array($uploaded_file['type'], $allowed_types)) {
+        wp_send_json_error('Invalid file type. Please upload JPG, PNG, GIF or WebP images only.');
+    }
+    
+    // Validate file size (max 5MB)
+    if ($uploaded_file['size'] > 5 * 1024 * 1024) {
+        wp_send_json_error('File too large. Maximum size is 5MB.');
+    }
+    
+    // Handle the upload
+    $upload = wp_handle_upload($uploaded_file, array('test_form' => false));
+    
+    if (isset($upload['error'])) {
+        wp_send_json_error($upload['error']);
+    }
+    
+    // Save to user meta
+    $current_user = wp_get_current_user();
+    update_user_meta($current_user->ID, 'luvex_avatar_url', $upload['url']);
+    
+    wp_send_json_success(array('avatar_url' => $upload['url']));
+}
+
+// Function to get user avatar (fallback to initials)
+function luvex_get_user_avatar($user_id = null) {
+    if (!$user_id) {
+        $user_id = get_current_user_id();
+    }
+    
+    $avatar_url = get_user_meta($user_id, 'luvex_avatar_url', true);
+    
+    if ($avatar_url) {
+        return '<img src="' . esc_url($avatar_url) . '" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">';
+    } else {
+        // Fallback to initials
+        $user = get_userdata($user_id);
+        $first_name = $user->first_name ?: $user->display_name;
+        $last_name = $user->last_name ?: '';
+        $initials = strtoupper(substr($first_name, 0, 1) . substr($last_name, 0, 1));
+        return $initials ?: '?';
+    }
+}
+
+// === USER AUTHENTICATION HANDLERS ===
+
+add_action('after_setup_theme', 'luvex_add_auth_handlers');
+function luvex_add_auth_handlers() {
+    if (!is_admin()) {
+        add_action('init', 'luvex_handle_login_form');
+        add_action('init', 'luvex_handle_registration_form');
+        add_action('init', 'luvex_handle_profile_update_form');
+    }
+}
+
+function luvex_handle_login_form() {
+    if (!isset($_POST['luvex_login_submit']) || !wp_verify_nonce($_POST['_wpnonce'], 'luvex_login_form')) {
+        return;
+    }
+    
+    $credential = sanitize_text_field($_POST['user_login']);
+    $password = $_POST['user_password'];
+    $remember = isset($_POST['remember_me']);
+    $user = null;
+
+    if (is_email($credential)) {
+        $user = get_user_by('email', $credential);
+    } else {
+        $user = get_user_by('login', $credential);
+    }
+
+    if ($user) {
+        $creds = array(
+            'user_login'    => $user->user_login,
+            'user_password' => $password,
+            'remember'      => $remember,
+        );
+
+        $signon_user = wp_signon($creds, false);
+
+        if (is_wp_error($signon_user)) {
+            wp_redirect(add_query_arg('error', '1', home_url('/login/')));
+            exit;
+        } else {
+            // FIXED: Support für externe LUVEX Apps
+            $redirect_param = $_GET['redirect'] ?? '';
+            
+            // Liste der erlaubten externen LUVEX Apps
+            $external_apps = [
+                'analyzer.luvex.tech',
+                'simulator.luvex.tech'
+            ];
+            
+            // Prüfe ob Redirect zu externer LUVEX App
+            foreach ($external_apps as $app) {
+                if (strpos($redirect_param, $app) !== false) {
+                    // Externe App - vollständige URL verwenden
+                    wp_redirect(esc_url_raw($redirect_param));
+                    exit;
+                }
+            }
+            
+            // Standard interne Redirect-Logik
+            $redirect_url = isset($_GET['redirect']) ? home_url('/' . sanitize_key($_GET['redirect']) . '/') : home_url('/profile/');
+            wp_redirect($redirect_url);
+            exit;
+        }
+    } else {
+        wp_redirect(add_query_arg('error', '1', home_url('/login/')));
+        exit;
+    }
+}
+
+function luvex_handle_registration_form() {
+    if (isset($_POST['luvex_register_submit']) && wp_verify_nonce($_POST['_wpnonce'], 'luvex_register_form')) {
+        // Registration logic placeholder
+    }
+}
+
+function luvex_handle_profile_update_form() {
+    if (isset($_POST['luvex_profile_update_submit']) && wp_verify_nonce($_POST['_wpnonce'], 'luvex_profile_update')) {
+        // Profile update logic placeholder
+    }
+}
+
+// === CORS FIX FÜR UV STRIP ANALYZER ===
+
+add_action('wp_ajax_luvex_uvstrip_get_token', 'luvex_add_cors_headers', 1);
+add_action('wp_ajax_nopriv_luvex_uvstrip_get_token', 'luvex_add_cors_headers', 1);
+
+function luvex_add_cors_headers() {
+    $allowed_origins = [
+        'https://analyzer.luvex.tech',
+        'https://www.luvex.tech',
+        'https://luvex.tech'
+    ];
+    
+    $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+    
+    if (in_array($origin, $allowed_origins)) {
+        header("Access-Control-Allow-Origin: $origin");
+        header('Access-Control-Allow-Credentials: true');
+        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization');
+    }
+    
+    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        http_response_code(200);
+        exit;
+    }
+}
+
+add_action('init', 'luvex_handle_cors_preflight');
+function luvex_handle_cors_preflight() {
+    if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], 'admin-ajax.php') !== false) {
+        $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+        $allowed_origins = [
+            'https://analyzer.luvex.tech',
+            'https://www.luvex.tech', 
+            'https://luvex.tech'
+        ];
+        
+        if (in_array($origin, $allowed_origins)) {
+            header("Access-Control-Allow-Origin: $origin");
+            header('Access-Control-Allow-Credentials: true');
+            header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+            header('Access-Control-Allow-Headers: Content-Type, Authorization');
+        }
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            http_response_code(200);
+            exit;
+        }
+    }
+}
+
+// === DEBUG FUNCTIONS (TEMPORÄR - NACH TESTING ENTFERNEN) ===
+
+if (WP_DEBUG) {
+    // Debug: Template Loading
+    add_filter('template_include', 'luvex_debug_template_loading');
+    function luvex_debug_template_loading($template) {
+        if (current_user_can('manage_options')) {
+            error_log('LUVEX DEBUG: Loading template: ' . $template);
+            error_log('LUVEX DEBUG: Post type: ' . get_post_type());
+            error_log('LUVEX DEBUG: Is singular uv_news: ' . (is_singular('uv_news') ? 'YES' : 'NO'));
+            error_log('LUVEX DEBUG: Is archive uv_news: ' . (is_post_type_archive('uv_news') ? 'YES' : 'NO'));
+        }
+        return $template;
+    }
+
+    // Debug: CSS Loading Check
+    add_action('wp_head', 'luvex_debug_css_info');
+    function luvex_debug_css_info() {
+        if (current_user_can('manage_options')) {
+            echo "<!-- LUVEX DEBUG INFO -->\n";
+            echo "<!-- Post Type: " . get_post_type() . " -->\n";
+            echo "<!-- Body Classes will be: single-" . get_post_type() . " -->\n";
+            echo "<!-- Expected Container Class: single-uv_news-container -->\n";
+            echo "<!-- Template: " . basename(get_page_template()) . " -->\n";
+            echo "<!-- /LUVEX DEBUG INFO -->\n";
+        }
+    }
+}
+
 ?>
