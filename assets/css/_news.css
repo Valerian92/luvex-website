@@ -18,13 +18,11 @@ FINALES HERO LAYOUT: KORRIGIERTE STRUKTUR
 
 .luvex-hero--split-compact {
     min-height: auto;
-    /* KORREKTUR: Deutlich erhöhter Abstand nach oben, um Header-Überlappung zu beheben */
     padding: calc(80px + 8rem) 1.5rem 4rem 1.5rem;
     display: flex;
     align-items: center;
 }
 
-/* FIX: Der innere Container hat KEINE seitliche Polsterung mehr */
 .luvex-hero--split-compact .luvex-hero__container {
     display: flex;
     flex-direction: row;
@@ -32,16 +30,29 @@ FINALES HERO LAYOUT: KORRIGIERTE STRUKTUR
     align-items: center;
     text-align: left;
     gap: 2rem;
-    /* KORREKTUR: Breite und Zentrierung bleiben erhalten */
     max-width: 1250px;
     margin: 0 auto;
-    /* ENTFERNT: padding: 0 1.5rem; - Das war die Fehlerquelle */
-    width: 100%; /* Stellt sicher, dass der Container den Raum füllt */
+    width: 100%;
 }
 
 .luvex-hero--split-compact .luvex-hero__content {
     flex-grow: 1;
 }
+
+/*
+ * NEU: Spezifische Regeln für die Textelemente im News-Hero.
+ * Diese überschreiben die globalen Styles aus _components.css.
+*/
+.luvex-hero--split-compact .luvex-hero__title {
+    text-align: left; /* FIX: Erzwingt die Linksbündigkeit */
+    margin: 0 0 1rem 0; /* Passt den Abstand nach unten an */
+    font-size: clamp(2.2rem, 4vw, 3rem); /* Etwas größer für mehr Wirkung */
+}
+
+.luvex-hero--split-compact .luvex-hero__description {
+    text-align: left; /* Stellt sicher, dass auch die Beschreibung linksbündig ist */
+}
+
 
 .luvex-hero--split-compact .luvex-hero__cta-container {
     flex-shrink: 0;
@@ -80,7 +91,6 @@ FILTER & GRID CONTAINER ALIGNMENT
     top: 80px;
     z-index: 30;
     border-bottom: 1px solid #e5e7eb;
-    /* Wichtig: Seitliche Polsterung für die Sektion */
     padding: 0 1.5rem;
 }
 
@@ -88,13 +98,12 @@ body.admin-bar .news-filter-section {
     top: 112px;
 }
 
-/* KORREKTUR: Container hat keine eigene Polsterung mehr */
 .news-filter-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1.5rem;
-    padding: 1.25rem 0; /* Nur noch vertikale Polsterung */
+    padding: 1.25rem 0;
     max-width: 1250px;
     margin: 0 auto;
 }
@@ -136,13 +145,13 @@ body.admin-bar .news-filter-section {
 
 .news-search-form {
     position: relative;
-    width: auto; /* Automatische Breite */
-    flex-shrink: 0; /* Verhindert, dass das Feld schrumpft */
+    width: auto;
+    flex-shrink: 0;
 }
 
 .news-search-input {
     width: 100%;
-    min-width: 280px; /* Etwas breiter für bessere Optik */
+    min-width: 280px;
     padding: 0.5rem 1rem 0.5rem 2.5rem;
     border: 1px solid #d1d5db;
     border-radius: 9999px;
@@ -170,7 +179,6 @@ body.admin-bar .news-filter-section {
     padding: 4rem 1.5rem;
 }
 
-/* KORREKTUR: Breite an Hero-Container angepasst */
 .news-grid-container {
     max-width: 1250px;
     margin: 0 auto;
