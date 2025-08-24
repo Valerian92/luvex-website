@@ -74,16 +74,17 @@ Last Update: 2025-08-24
     justify-content: center;
 }
 
-/* --- 1.3 Hero Text Elements (Neue Reihenfolge & Abstände) --- */
+/* --- 1.3 Hero Text Elements (Größere Abstände) --- */
 .luvex-hero__title {
-    /* KORREKTUR: Explizite Zentrierung und angepasste Styles */
     text-align: center;
     font-size: clamp(2rem, 4vw, 2.5rem);
-    margin: 0 0 1rem 0; /* Abstand nach unten, wie gewünscht */
+    /* ANPASSUNG: Größerer Abstand nach unten */
+    margin: 0 0 2rem 0; 
 }
 
 .luvex-hero__cta-container {
-    margin: 1rem 0 2rem 0;
+    /* ANPASSUNG: Größerer Abstand nach oben und unten */
+    margin: 1.5rem 0 2.5rem 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -91,7 +92,8 @@ Last Update: 2025-08-24
 }
 
 .luvex-hero__subtitle {
-    margin: 0 0 1rem 0;
+    /* ANPASSUNG: Größerer Abstand nach unten */
+    margin: 0 0 1.5rem 0;
     font-size: clamp(1.2rem, 3vw, 1.8rem);
     color: var(--luvex-gray-300);
     font-weight: 400;
@@ -107,7 +109,6 @@ Last Update: 2025-08-24
     line-height: 1.6;
     opacity: 0.9;
 }
-
 
 
 /* --- 1.4 Hero CTA Container --- */
