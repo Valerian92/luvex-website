@@ -1,13 +1,13 @@
 /*
 ==============================================================================
-LUVEX THEME v4.5 - COMPLETE HEADER SYSTEM
+LUVEX THEME v4.6 - COMPLETE HEADER SYSTEM (LANGUAGE SWITCHER UPDATE)
 ==============================================================================
 
 Description: Vollständige Header-Implementierung mit 3-Level Navigation,
-             Logo-System, User-Dropdown und Mobile Menu + Scroll Effects.
-             Kombinierter finaler Stand.
+             Logo-System, User-Dropdown, Mobile Menu, Scroll Effects und
+             NEUEM, EINHEITLICHEM Language Switcher.
 Dependencies: _variables.css, _core.css
-Last Update: 2025-08-24 (Final Merged)
+Last Update: 2025-08-24 (Language Switcher & CSS Cleanup)
 
 ==============================================================================
 */
@@ -192,8 +192,8 @@ Last Update: 2025-08-24 (Final Merged)
 .main-navigation > ul > li > .sub-menu {
     position: absolute;
     top: 100%;
-    left: 0; /* Stellt sicher, dass das Menü linksbündig mit dem Elternelement beginnt */
-    min-width: 100%; /* Sorgt dafür, dass das Dropdown mindestens so breit ist wie der Parent */
+    left: 0;
+    min-width: 100%;
     white-space: nowrap;
     
     background: rgba(20, 35, 60, 0.95);
@@ -347,11 +347,17 @@ Last Update: 2025-08-24 (Final Merged)
 }
 
 /* ==========================================================================
-   8. HEADER CTA BUTTON & USER SYSTEM
+   8. HEADER CTA, USER SYSTEM & LANGUAGE SWITCHER
    ========================================================================== */
 .header-cta {
     flex-shrink: 0;
     position: relative;
+}
+
+.header-actions-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Abstand zwischen Sprach-Switcher und User-Menü/CTA */
 }
 
 .header-cta-button {
@@ -393,6 +399,7 @@ Last Update: 2025-08-24 (Final Merged)
     transform: translateY(-2px) scale(1.02);
 }
 
+/* --- User Section (Logged In) --- */
 .user-section {
     position: relative;
 }
@@ -464,13 +471,13 @@ Last Update: 2025-08-24 (Final Merged)
     line-height: 1;
 }
 
-.dropdown-arrow {
+.user-info .dropdown-arrow {
     color: var(--luvex-gray-300);
     font-size: 0.8rem;
     transition: transform 0.3s ease;
 }
 
-.user-info:hover .dropdown-arrow {
+.user-info.open .dropdown-arrow {
     transform: rotate(180deg);
 }
 
@@ -560,6 +567,122 @@ Last Update: 2025-08-24 (Final Merged)
     text-align: center;
     opacity: 0.8;
 }
+
+/* --- NEW: Unified Language Switcher --- */
+.language-switcher-dropdown {
+    position: relative;
+}
+
+.language-switcher-trigger {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(109, 213, 237, 0.2);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--luvex-white);
+    font-size: 0.9rem;
+}
+
+.language-switcher-trigger:hover {
+    background: rgba(109, 213, 237, 0.1);
+    border-color: var(--luvex-bright-cyan);
+}
+
+.site-header.scrolled .language-switcher-trigger {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(109, 213, 237, 0.4);
+    backdrop-filter: blur(5px);
+}
+
+.site-header.scrolled .language-switcher-trigger:hover {
+    background: rgba(109, 213, 237, 0.15);
+    border-color: var(--luvex-bright-cyan);
+}
+
+.language-flag {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.language-code {
+    font-weight: 600;
+}
+
+.language-arrow {
+    font-size: 0.7rem;
+    transition: transform 0.3s ease;
+}
+
+.language-switcher-trigger.open .language-arrow {
+    transform: rotate(180deg);
+}
+
+.language-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 220px;
+    background: var(--luvex-dark-blue);
+    border: 1px solid rgba(109, 213, 237, 0.2);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(5px);
+    transition: all 0.3s ease;
+    z-index: 1003;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.language-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.language-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: var(--luvex-white);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border-radius: var(--radius-md);
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+}
+
+.language-option:hover:not(:disabled) {
+    background: rgba(109, 213, 237, 0.1);
+    color: var(--luvex-bright-cyan);
+}
+
+.language-option.current {
+    font-weight: 600;
+    color: var(--luvex-bright-cyan);
+}
+
+.language-option:disabled {
+    cursor: default;
+    opacity: 0.7;
+}
+
+.language-check {
+    margin-left: auto;
+}
+
 
 /* ==========================================================================
    9. MOBILE MENU TOGGLE
@@ -734,22 +857,6 @@ Last Update: 2025-08-24 (Final Merged)
     z-index: 9999;
 }
 
-/* Language Switcher Enhancements when scrolled */
-.header-language-switcher .language-switcher-compact {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(109, 213, 237, 0.3);
-}
-
-.site-header.scrolled .header-language-switcher .language-switcher-compact {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(109, 213, 237, 0.4);
-    backdrop-filter: blur(5px);
-}
-
-.site-header.scrolled .header-language-switcher .language-switcher-compact:hover {
-    background: rgba(109, 213, 237, 0.15);
-    border-color: var(--luvex-bright-cyan);
-}
 
 /* Browser Support & Performance */
 @supports (-webkit-backdrop-filter: blur(10px)) and (not (backdrop-filter: blur(10px))) {
