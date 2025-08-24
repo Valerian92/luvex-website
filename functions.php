@@ -1,7 +1,7 @@
 <?php
 /**
- * LUVEX Theme Functions - Step 3: Add missing avatar function
- * The function luvex_get_user_avatar() was missing, causing a fatal error.
+ * LUVEX Theme Functions - Step 5: Integrate page-specific CSS loading
+ * Added footer menu locations and started adding page-specific asset loading.
  */
 
 // 1. ASTRA THEME DEAKTIVIERUNG
@@ -17,25 +17,83 @@ function luvex_remove_admin_bar_bump() {
     remove_action('wp_head', '_admin_bar_bump_cb');
 }
 
-// 3. Theme Setup
+// 3. Theme Setup (ERWEITERT mit Footer-Menüs)
 add_action('after_setup_theme', 'luvex_theme_setup');
 function luvex_theme_setup() {
     register_nav_menus(array(
-        'primary' => __('Primary Navigation', 'luvex')
+        'primary' => __('Primary Navigation', 'luvex'),
+        'footer-services' => __('Footer Services Menu', 'luvex'),
+        'footer-technologies' => __('Footer Technologies Menu', 'luvex'),
+        'footer-resources' => __('Footer Resources Menu', 'luvex'),
+        'footer-company' => __('Footer Company Menu', 'luvex'),
+        'footer-legal' => __('Footer Legal Menu', 'luvex')
     ));
     add_theme_support('post-thumbnails');
     add_theme_support('custom-logo');
     add_theme_support('title-tag');
 }
 
-// 4. CSS & JS laden
+// 4. CSS & JAVASCRIPT LADEN (ERWEITERT)
 add_action('wp_enqueue_scripts', 'luvex_enqueue_assets', 999);
 function luvex_enqueue_assets() {
+    // Astra CSS entfernen
     wp_dequeue_style('astra-theme-css');
+
+    // Main CSS (global)
     $main_css_path = get_stylesheet_directory() . '/assets/css/main.css';
-    $main_css_version = file_exists($main_css_path) ? filemtime($main_css_path) : '1.0.0';
-    wp_enqueue_style('luvex-main', get_stylesheet_directory_uri() . '/assets/css/main.css', array(), $main_css_version);
+    wp_enqueue_style('luvex-main', get_stylesheet_directory_uri() . '/assets/css/main.css', array(), filemtime($main_css_path));
+
+    // === SEITENSPEZIFISCHES CSS LADEN ===
+    
+    // Homepage
+    if (is_front_page() || is_home()) {
+        $homepage_css_path = get_stylesheet_directory() . '/assets/css/_page-home.css';
+        if (file_exists($homepage_css_path)) {
+            wp_enqueue_style('luvex-page-home', get_stylesheet_directory_uri() . '/assets/css/_page-home.css', array('luvex-main'), filemtime($homepage_css_path));
+        }
+    }
+    
+    // About Page (NEU)
+    elseif (is_page('about')) {
+        $about_css_path = get_stylesheet_directory() . '/assets/css/_page-about.css';
+        if (file_exists($about_css_path)) {
+            wp_enqueue_style('luvex-page-about', get_stylesheet_directory_uri() . '/assets/css/_page-about.css', array('luvex-main'), filemtime($about_css_path));
+        }
+    }
+    
+    // Contact Page (NEU)
+    elseif (is_page('contact')) {
+        $contact_css_path = get_stylesheet_directory() . '/assets/css/_page-contact.css';
+        if (file_exists($contact_css_path)) {
+            wp_enqueue_style('luvex-page-contact', get_stylesheet_directory_uri() . '/assets/css/_page-contact.css', array('luvex-main'), filemtime($contact_css_path));
+        }
+    }
+
+    // === GLOBALE JAVASCRIPTS LADEN ===
+    $dependencies = array('jquery');
+    $scripts_to_enqueue = [
+        'luvex-mobile-menu' => '/assets/js/mobile-menu.js',
+        'luvex-profile-menu' => '/assets/js/profile-menu.js'
+    ];
+    foreach ($scripts_to_enqueue as $handle => $path) {
+        $full_path = get_stylesheet_directory() . $path;
+        if (file_exists($full_path)) {
+            $version = filemtime($full_path);
+            wp_enqueue_script($handle, get_stylesheet_directory_uri() . $path, $dependencies, $version, true);
+        }
+    }
+
+    // === SEITENSPEZIFISCHE JAVASCRIPTS LADEN ===
+    if (is_front_page() || is_home()) {
+        wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), null, true);
+        
+        $globe_js_path = get_stylesheet_directory() . '/assets/js/globe-animation.js';
+        if (file_exists($globe_js_path)) {
+            wp_enqueue_script('luvex-globe', get_stylesheet_directory_uri() . '/assets/js/globe-animation.js', array('three-js'), filemtime($globe_js_path), true);
+        }
+    }
 }
+
 
 // 5. NAV WALKER KLASSE
 class Luvex_Nav_Walker extends Walker_Nav_Menu {
@@ -64,14 +122,12 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
     }
 }
 
-// 6. FEHLENDE AVATAR FUNKTION (NEU)
-// Diese Funktion wird im Header aufgerufen und hat den fatalen Fehler verursacht.
+// 6. AVATAR FUNKTION
 function luvex_get_user_avatar($user_id = null) {
     if (!$user_id) {
         $user_id = get_current_user_id();
     }
     
-    // Stellt sicher, dass die Funktion nur für eingeloggte User etwas tut
     if (0 === $user_id) {
         return '';
     }
@@ -81,7 +137,6 @@ function luvex_get_user_avatar($user_id = null) {
     if ($avatar_url) {
         return '<img src="' . esc_url($avatar_url) . '" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">';
     } else {
-        // Fallback zu Initialen
         $user = get_userdata($user_id);
         if (!$user) {
             return '?';
