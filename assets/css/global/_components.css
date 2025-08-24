@@ -15,13 +15,30 @@ Last Update: 2025-08-21
 ==============================================================================
 */
 
+/*
+==============================================================================
+LUVEX THEME v3.2 - UI COMPONENTS (HERO-FIX)
+==============================================================================
+Description: Enthält alle wiederverwendbaren UI-Komponenten.
+             Der Hero-Titel wird jetzt korrekt zentriert und hat
+             angepasste Standard-Größen.
+Dependencies: _variables.css, _core.css
+Last Update: 2025-08-24
+==============================================================================
+*/
+
+/*
+==============================================================================
+1. HERO SECTIONS (Optimierter Standard)
+==============================================================================
+*/
+
 /* --- 1.1 Base Hero Layout --- */
 .luvex-hero {
     background: var(--luvex-dark-blue);
     color: var(--luvex-white);
     position: relative;
     overflow: hidden;
-    /* Dieser Padding-Top sorgt für den konstanten, großen Abstand zum Header */
     padding: calc(80px + var(--space-lg)) 2rem var(--space-lg) 2rem;
     min-height: 60vh;
     display: flex;
@@ -53,18 +70,19 @@ Last Update: 2025-08-21
     max-width: 900px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Zentriert alle Elemente horizontal */
+    align-items: center;
     justify-content: center;
 }
 
 /* --- 1.3 Hero Text Elements (Neue Reihenfolge & Abstände) --- */
 .luvex-hero__title {
-    /* (Erstes Element) Kein margin-top, aber Abstand nach unten */
-    margin: 0 0 1.5rem 0;
+    /* KORREKTUR: Explizite Zentrierung und angepasste Styles */
+    text-align: center;
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    margin: 0 0 1rem 0; /* Abstand nach unten, wie gewünscht */
 }
 
 .luvex-hero__cta-container {
-    /* (Zweites Element) Abstand nach oben und unten */
     margin: 1rem 0 2rem 0;
     display: flex;
     flex-wrap: wrap;
@@ -73,7 +91,6 @@ Last Update: 2025-08-21
 }
 
 .luvex-hero__subtitle {
-    /* (Drittes Element) Abstand nach oben und unten */
     margin: 0 0 1rem 0;
     font-size: clamp(1.2rem, 3vw, 1.8rem);
     color: var(--luvex-gray-300);
@@ -83,7 +100,6 @@ Last Update: 2025-08-21
 }
 
 .luvex-hero__description {
-    /* (Viertes Element) Nur Abstand nach oben */
     margin: 0;
     font-size: clamp(1rem, 2.2vw, 1.2rem);
     color: var(--luvex-gray-300);
