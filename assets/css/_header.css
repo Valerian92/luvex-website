@@ -1066,3 +1066,26 @@ Dependencies: _header.css, _variables.css
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 }
+
+
+/* ==========================================================================
+   ASTRA CHILD THEME EMERGENCY FIXES
+   ========================================================================== */
+
+/* Override Astra body classes */
+body.astra-hfb-header,
+body.ast-desktop,
+body.ast-separate-container,
+body[class*="ast-"] {
+    padding-top: 80px !important;
+    margin-top: 0 !important;
+}
+
+/* Force header positioning */
+.site-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
+}

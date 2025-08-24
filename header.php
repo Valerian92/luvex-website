@@ -59,11 +59,8 @@
                 'echo'           => false
             ));
 
-            if (!empty($menu_output)) {
-                echo $menu_output;
-            } else {
-                luvex_primary_menu_fallback();
-            }
+            // Immer Fallback anzeigen für Debug
+            luvex_primary_menu_fallback();
             ?>
         </nav>
 

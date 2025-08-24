@@ -1,11 +1,11 @@
 /*
 ==============================================================================
-LUVEX THEME v3.1 - CORE STYLES
+LUVEX THEME v3.2 - CORE STYLES (BEREINIGT)
 ==============================================================================
 Description: Enthält alle globalen Basis-Stile, das Layout-System (Container,
              Grid, Sections) und wiederverwendbare Utility-Klassen.
 Dependencies: _variables.css
-Last Update: 2025-08-23 (Fixed Header Container Fix)
+Last Update: 2025-08-24 (Gap Fix + Duplikate entfernt)
 ==============================================================================
 */
 
@@ -35,6 +35,7 @@ body {
     line-height: 1.6;
     color: var(--luvex-gray-900);
     margin: 0;
+    padding-top: 80px; /* Fixed header height - ONLY HERE */
     background: var(--luvex-white);
 }
 
@@ -67,7 +68,7 @@ a:hover { color: var(--luvex-bright-cyan); }
     width: 100%;
     max-width: var(--container-max-width);
     margin: 0 auto;
-    padding: 0 2rem; /* Standard-Padding für Container */
+    padding: 0 2rem;
 }
 
 .container--narrow { max-width: 1200px; }
@@ -91,66 +92,44 @@ a:hover { color: var(--luvex-bright-cyan); }
 
 /*
 ==============================================================================
-3.5 FIXED HEADER CONTAINER SYSTEM (NEU)
+3.4 FIXED HEADER LAYOUT SYSTEM - BEREINIGT
 ==============================================================================
 */
 
+/* Alle Container haben KEINE zusätzlichen Margins/Paddings */
+/* Body padding-top: 80px ist bereits oben definiert */
 
-/* WordPress Standard-Container bereinigen für Fixed Header Layout */
 #content,
-.site-content {
-    margin: 0;
-    padding: 0;
-    padding-top: 0 !important; /* ÜBERSCHREIBT ASTRA THEME */
+.site-content,
+.content-area,
+#primary,
+.site-main {
+    margin: 0 !important;
+    padding: 0 !important;
     border-top: none !important;
 }
 
-#primary,
-.content-area {
-    margin: 0;
-    padding: 0;
-    padding-top: 0 !important;
-}
-
-.site-main {
-    margin: 0;
-    padding: 0;
-    padding-top: 0 !important;
-}
-
-/* Astra Theme spezifische Container bereinigen */
-.ast-container {
-    padding-top: 0;
-    margin-top: 0;
-}
-
-.ast-separate-container .ast-container {
-    margin-top: 0;
-    padding-top: 0;
-}
-
-/* Stelle sicher dass der erste Abschnitt direkt nach Header beginnt */
+/* Erste Elemente sollen direkt beginnen */
 .site-main > *:first-child,
-.content-area > *:first-child {
-    margin-top: 0;
-}
-
-/* Bereinige eventuelle Theme-spezifische Spacing-Klassen */
-.site-content .container:first-child {
-    padding-top: 0;
-}
-
-/* Extra Sicherheit für Astra Child Theme Overrides */
-body.custom-background .site-content,
-body.ast-header-break-point .site-content {
+.content-area > *:first-child,
+.luvex-hero {
     margin-top: 0 !important;
     padding-top: 0 !important;
 }
 
-/* Full-width Sections (wie Hero) sollen nahtlos anschließen */
-.site-main > .section:first-child,
-.site-main > .luvex-hero:first-child {
-    margin-top: 0;
+/* Astra Theme Overrides */
+.ast-container,
+.ast-separate-container .ast-container {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* Astra Body-Klassen Override */
+body.custom-background .site-content,
+body.ast-header-break-point .site-content,
+body[class*="ast-"] .site-content {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
 }
 
 /*
@@ -213,7 +192,6 @@ body.ast-header-break-point .site-content {
 ==============================================================================
 */
 
-/* Responsive Container-System für kleinere Bildschirme */
 @media (max-width: 768px) {
     .container {
         padding: 0 1rem;
