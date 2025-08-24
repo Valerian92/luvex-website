@@ -21,7 +21,7 @@ Last Update: 2025-08-23
     flex-direction: column;
     align-items: center;
     gap: 2.5rem;
-    margin-top: 3.5rem; /* VERGRÖSSERT: Mehr Abstand nach oben */
+    margin-top: 3.5rem; 
     padding-top: 0;
     width: 100%;
 }
@@ -58,11 +58,11 @@ Last Update: 2025-08-23
 .home .luvex-hero__description {
     max-width: 800px;
     font-size: 1.25rem;
-    color: rgba(255, 255, 255, 0.9); /* GEÄNDERT: Helleres Grau für besseren Kontrast */
+    color: var(--luvex-white); /* GEÄNDERT: Reines Weiß für maximalen Kontrast */
     text-align: center;
     line-height: 1.6;
     letter-spacing: 0.05em;
-    margin: 2.5rem 0; /* VERGRÖSSERT: Abstand nach oben und unten */
+    margin: 4rem 0; /* VERGRÖSSERT: Deutlich mehr Abstand für einen luftigeren Look */
 }
 
 .home .luvex-hero__description .bullet {
@@ -248,6 +248,7 @@ Last Update: 2025-08-23
 
     .home .luvex-hero__description {
         font-size: 1.125rem;
+        margin: 3rem 0; /* Responsive Anpassung des Abstands */
     }
 }
 
@@ -260,5 +261,6 @@ Last Update: 2025-08-23
 
     .home .luvex-hero__description {
         font-size: 1rem;
+        margin: 2.5rem 0; /* Responsive Anpassung des Abstands */
     }
 }
