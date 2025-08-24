@@ -13,14 +13,19 @@ get_header(); ?>
     <canvas id="homepage-hero-canvas"></canvas>
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
-            <!-- 1. Subtitle (oben - Slogan) - NEU -->
-            <h2 class="luvex-hero__subtitle">
-                UV-Technologie, neu definiert.
-            </h2>
             
-            <!-- 2. Title (Mitte - Haupttitel mit Glow) - Angepasst -->
+            <!-- Titel Teil 1 -->
             <h1 class="luvex-hero__title">
                 <span class="title-line-1">Excellence through Engineering.</span>
+            </h1>
+            
+            <!-- Dazwischenliegende Beschreibung -->
+            <p class="luvex-hero__description">
+                Independent Consulting <span class="bullet">•</span> Proven Results <span class="bullet">•</span> Advanced Simulations
+            </p>
+            
+            <!-- Titel Teil 2 -->
+            <h1 class="luvex-hero__title">
                 <span class="title-line-2">Precision through <span class="text-highlight">Light</span>.</span>
             </h1>
             

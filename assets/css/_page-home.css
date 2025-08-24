@@ -11,7 +11,7 @@ Last Update: 2025-08-23
 
 /*
 ==============================================================================
-1. HERO SECTION (NEUE STRUKTUR)
+1. HERO SECTION (FINALE STRUKTUR)
 ==============================================================================
 */
 
@@ -21,10 +21,9 @@ Last Update: 2025-08-23
     flex-direction: column;
     align-items: center;
     gap: 2.5rem;
-    margin-top: 0;
+    margin-top: 3rem; /* Etwas mehr Abstand nach oben */
     padding-top: 0;
     width: 100%;
-    order: 3; /* Reihenfolge nach dem Titel */
 }
 
 /* --- 1.2 Hero Container & Content --- */
@@ -40,21 +39,11 @@ Last Update: 2025-08-23
     text-align: center;
     width: 100%;
     max-width: 100%;
-    margin-bottom: 2rem;
+    margin-bottom: 0; /* Zurückgesetzt, da Abstände individuell gesteuert werden */
 }
 
-/* --- 1.3 Pyramiden-Struktur: Hero Text Elements (Angepasst) --- */
-.home .luvex-hero__subtitle {  
-    max-width: 1000px;
-    font-size: 1.5rem;
-    color: var(--luvex-gray-300);
-    font-weight: 300;
-    text-align: center;
-    line-height: 1.4;
-    letter-spacing: 0.025em;
-    margin-bottom: 2.5rem; /* Abstand zum Haupttitel */
-    order: 1;
-}
+/* --- 1.3 Hero Text Elements (Finale Struktur) --- */
+/* Subtitle wurde entfernt */
 
 .home .luvex-hero__title {
     max-width: 1200px;
@@ -63,19 +52,22 @@ Last Update: 2025-08-23
     font-weight: 700;
     text-align: center;
     line-height: 1.1;
-    margin-bottom: 3.5rem; /* Abstand zu den CTA-Buttons */
-    order: 2;
+    margin: 0; /* Alle Außenabstände zurücksetzen */
 }
 
-.home .luvex-hero__title .title-line-1 {
-    display: block;
-    margin-bottom: 0.5rem; /* Abstand zwischen den Titelzeilen */
+.home .luvex-hero__description {
+    max-width: 800px;
+    font-size: 1.25rem;
+    color: var(--luvex-gray-300); /* Farbe angepasst für Lesbarkeit */
     text-align: center;
+    line-height: 1.6;
+    letter-spacing: 0.05em;
+    margin: 1.5rem 0; /* Abstand nach oben und unten */
 }
 
-.home .luvex-hero__title .title-line-2 {
-    display: block;
-    text-align: center;
+.home .luvex-hero__description .bullet {
+    color: var(--luvex-bright-cyan);
+    margin: 0 0.5rem;
 }
 
 .home .luvex-hero__title .text-highlight {
@@ -249,28 +241,24 @@ Last Update: 2025-08-23
     }
     
     /* Hero Responsive */
-    .home .luvex-hero__subtitle {
-        max-width: 95%;
-        font-size: 1.25rem;
-        margin-bottom: 2rem;
-    }
-    
     .home .luvex-hero__title {
         max-width: 90%;
         font-size: 2.5rem;
-        margin-bottom: 2.5rem; /* Angepasst */
+    }
+
+    .home .luvex-hero__description {
+        font-size: 1.125rem;
     }
 }
 
 @media (max-width: 480px) {
     /* Hero Mobile */
-    .home .luvex-hero__subtitle {
-        max-width: 95%;
-        font-size: 1.1rem; /* Angepasst für kleinere Screens */
-    }
-    
     .home .luvex-hero__title {
         max-width: 90%;
         font-size: 2rem;
+    }
+
+    .home .luvex-hero__description {
+        font-size: 1rem;
     }
 }
