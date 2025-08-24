@@ -11,7 +11,7 @@ Last Update: 2025-08-21
 
 /*
 ==============================================================================
-1. HERO SECTIONS (Base System)
+1. HERO SECTIONS (Base System) - UPDATED
 ==============================================================================
 */
 
@@ -21,13 +21,29 @@ Last Update: 2025-08-21
     color: var(--luvex-white);
     position: relative;
     overflow: hidden;
-    padding: var(--space-xl) 2rem;
+    /* NEU: Padding-Top berücksichtigt die 80px Header-Höhe + zusätzlichen Abstand */
+    padding: calc(80px + var(--space-lg)) 2rem var(--space-lg) 2rem;
     min-height: 60vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
 }
+
+/* --- NEU: Hintergrund-Grid (aus dem Footer übernommen) --- */
+.luvex-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="hero-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23hero-grid)"/></svg>');
+    opacity: 0.4; 
+    pointer-events: none;
+    z-index: 1;
+}
+
 
 /* --- 1.2 Hero Content Container --- */
 .luvex-hero__container {
@@ -270,25 +286,6 @@ Last Update: 2025-08-21
     margin: 0;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* --- 3.2 Knowledge Navigator Cards (Restored) --- */
 .knowledge-navigator-header { 
     text-align: center; 
@@ -423,20 +420,6 @@ Last Update: 2025-08-21
 
 
 /* --- 3.2 Knowledge Navigator Cards (ENDE) --- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* --- 3.3 Team Member Cards --- */
 .team-member--light {
@@ -724,9 +707,6 @@ Last Update: 2025-08-21
     background-color: var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
 }
-
-
-
 
 /*
 ==============================================================================
