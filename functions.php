@@ -1,16 +1,24 @@
 <?php
 /**
- * LUVEX Theme Functions - Step 1: Fix 500 Error
- * Added the missing Luvex_Nav_Walker class.
+ * LUVEX Theme Functions - Step 2: Disable Astra Theme conflicts
+ * Added functions to remove Astra's header and CSS to prevent conflicts.
  */
 
-// 1. Admin Bar Fix (Behalten wir bei)
+// 1. ASTRA THEME DEAKTIVIERUNG (NEU)
+// Hiermit entfernen wir die Standard-Header-Komponenten von Astra.
+add_action('after_setup_theme', 'luvex_disable_astra_components', 30);
+function luvex_disable_astra_components() {
+    remove_all_actions('astra_header');
+    remove_all_actions('astra_masthead_content');
+}
+
+// 2. Admin Bar Fix (Behalten wir bei)
 add_action('get_header', 'luvex_remove_admin_bar_bump');
 function luvex_remove_admin_bar_bump() {
     remove_action('wp_head', '_admin_bar_bump_cb');
 }
 
-// 2. Theme Setup (Behalten wir bei)
+// 3. Theme Setup (Behalten wir bei)
 add_action('after_setup_theme', 'luvex_theme_setup');
 function luvex_theme_setup() {
     register_nav_menus(array(
@@ -21,16 +29,19 @@ function luvex_theme_setup() {
     add_theme_support('title-tag');
 }
 
-// 3. CSS laden (Behalten wir vorerst bei)
-add_action('wp_enqueue_scripts', 'luvex_enqueue_assets');
+// 4. CSS & JS laden (Aktualisiert)
+add_action('wp_enqueue_scripts', 'luvex_enqueue_assets', 999); // Eine hohe Priorität sorgt dafür, dass es nach Astra läuft
 function luvex_enqueue_assets() {
-    // Wir verwenden filemtime() für automatisches Cache-Busting. Das ist besser als eine fixe Versionsnummer.
+    // Wir entfernen Astras Stylesheet, um Konflikte zu vermeiden (NEU)
+    wp_dequeue_style('astra-theme-css');
+
+    // Wir laden unser Haupt-Stylesheet
     $main_css_path = get_stylesheet_directory() . '/assets/css/main.css';
     $main_css_version = file_exists($main_css_path) ? filemtime($main_css_path) : '1.0.0';
     wp_enqueue_style('luvex-main', get_stylesheet_directory_uri() . '/assets/css/main.css', array(), $main_css_version);
 }
 
-// 4. FEHLENDE NAV WALKER KLASSE (Die wahrscheinliche Ursache für den Error 500)
+// 5. NAV WALKER KLASSE (Behalten wir bei)
 // Diese Klasse wird in der header.php benötigt, um das Menü korrekt darzustellen.
 class Luvex_Nav_Walker extends Walker_Nav_Menu {
     public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
