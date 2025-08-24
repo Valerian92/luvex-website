@@ -12,10 +12,35 @@ get_header(); // Lädt den Standard-Header
 
 <main id="main" class="site-main">
 
+    <!-- Hero-Sektion, die den dunklen Hintergrund für den transparenten Header bereitstellt -->
+    <section class="luvex-hero">
+        <div class="luvex-hero__container">
+            <div class="luvex-hero__content">
+                <h2 class="luvex-hero__subtitle">
+                    Standard Hero Untertitel
+                </h2>
+                <h1 class="luvex-hero__title">
+                   Standard Hero Haupttitel
+                </h1>
+                <p class="luvex-hero__description">
+                   Dies ist die Beschreibung des Standard-Heroes, um die Textformatierung und Abstände zu demonstrieren.
+                </p>
+            </div>
+            <div class="luvex-hero__cta-container">
+                <a href="#" class="luvex-hero__cta">
+                    Primärer Button
+                </a>
+                <a href="#" class="luvex-hero__cta-secondary">
+                    Sekundärer Button
+                </a>
+            </div>
+        </div>
+    </section>
+
     <div class="standard-styles-page">
         <div class="container">
 
-            <!-- Hero-Sektion, um den Header-Kontext zu simulieren -->
+            <!-- Seiten-Titel -->
             <header class="page-hero">
                 <h1>Standard Design & UI-Komponenten</h1>
                 <p class="subtitle">Dies ist eine Übersicht aller globalen Stile, die auf der gesamten Website verfügbar sind. Verwende diese Seite als Referenz, um ein konsistentes Design zu gewährleisten.</p>

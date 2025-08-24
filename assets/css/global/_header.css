@@ -29,7 +29,7 @@ Last Update: 2025-08-24 (Complete with Glassmorphism)
     overflow: visible !important;
 }
 
-/* Scrolled State - Shrinking Effect */
+/* Scrolled State - Glassmorphism Effect */
 .site-header.scrolled {
     background: rgba(27, 42, 73, 0.95) !important;
     backdrop-filter: blur(10px) saturate(180%);
@@ -38,7 +38,6 @@ Last Update: 2025-08-24 (Complete with Glassmorphism)
     box-shadow: 
         0 4px 20px rgba(27, 42, 73, 0.3),
         0 1px 3px rgba(0, 0, 0, 0.1);
-    height: 65px !important;
 }
 
 .header-container {
@@ -51,11 +50,6 @@ Last Update: 2025-08-24 (Complete with Glassmorphism)
     height: 100%;
     overflow: visible !important;
     position: relative;
-    transition: height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.site-header.scrolled .header-container {
-    height: 65px;
 }
 
 /* ==========================================================================
@@ -98,11 +92,6 @@ Last Update: 2025-08-24 (Complete with Glassmorphism)
 .site-header.scrolled .luvex-logo-text {
     color: var(--luvex-white);
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-    font-size: 1.6rem;
-}
-
-.site-header.scrolled .custom-logo {
-    height: 35px;
 }
 
 .logo-l {
@@ -188,12 +177,6 @@ Last Update: 2025-08-24 (Complete with Glassmorphism)
     box-sizing: border-box;
 }
 
-.site-header.scrolled .main-navigation > ul > li > a {
-    height: 65px;
-    padding: 22px 1.8rem;
-    font-size: 1rem;
-}
-
 .main-navigation > ul > li > a:hover {
     color: var(--luvex-bright-cyan);
 }
@@ -219,9 +202,9 @@ Last Update: 2025-08-24 (Complete with Glassmorphism)
     min-width: max-content;
     white-space: nowrap;
     
-    background: linear-gradient(135deg, var(--luvex-bright-cyan), #8ee3f5);
+    background: rgba(20, 35, 60, 0.95);
     box-shadow: var(--shadow-lg);
-    border-top: 1px solid rgba(109, 213, 237, 0.6);
+    border-top: 1px solid rgba(109, 213, 237, 0.3);
     border-radius: 0 0 var(--radius-md) var(--radius-md);
     padding: 0;
     
@@ -238,13 +221,13 @@ Last Update: 2025-08-24 (Complete with Glassmorphism)
 }
 
 .site-header.scrolled .main-navigation > ul > li > .sub-menu {
-    background: linear-gradient(135deg, var(--luvex-bright-cyan), #8ee3f5);
+    background: rgba(20, 35, 60, 0.98);
     backdrop-filter: blur(15px) saturate(180%);
     -webkit-backdrop-filter: blur(15px) saturate(180%);
     box-shadow: 
-        0 8px 32px rgba(109, 213, 237, 0.5),
+        0 8px 32px rgba(27, 42, 73, 0.4),
         0 2px 8px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(109, 213, 237, 0.8);
+    border: 1px solid rgba(109, 213, 237, 0.4);
 }
 
 .main-navigation > ul > li:hover > .sub-menu {
@@ -265,21 +248,19 @@ Last Update: 2025-08-24 (Complete with Glassmorphism)
 }
 
 .main-navigation > ul > li > .sub-menu > li > a {
-    color: var(--luvex-dark-blue);
-    font-weight: 600;
+    color: var(--luvex-white);
+    font-weight: 500;
     padding: 1.2rem 1.5rem;
     display: block;
     position: relative;
     transition: all 0.3s ease;
     white-space: nowrap;
     height: auto;
-    text-shadow: none;
 }
 
 .main-navigation > ul > li > .sub-menu > li > a:hover {
-    color: var(--luvex-white);
-    background: rgba(27, 42, 73, 0.8);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    color: var(--luvex-bright-cyan);
+    background: rgba(109, 213, 237, 0.1);
 }
 
 /* ==========================================================================
@@ -292,10 +273,10 @@ Last Update: 2025-08-24 (Complete with Glassmorphism)
     min-width: 100%;
     width: max-content;
     
-    background: linear-gradient(135deg, #8ee3f5, var(--luvex-bright-cyan));
+    background: rgba(15, 28, 48, 0.95);
     border-radius: 0 0 var(--radius-md) var(--radius-md);
     box-shadow: var(--shadow-md);
-    border: 1px solid rgba(109, 213, 237, 0.6);
+    border: 1px solid rgba(109, 213, 237, 0.3);
     border-top: none;
     
     display: block;
@@ -311,13 +292,13 @@ Last Update: 2025-08-24 (Complete with Glassmorphism)
 }
 
 .site-header.scrolled .main-navigation .sub-menu .sub-menu {
-    background: linear-gradient(135deg, #8ee3f5, var(--luvex-bright-cyan));
+    background: rgba(15, 28, 48, 0.98);
     backdrop-filter: blur(15px) saturate(180%);
     -webkit-backdrop-filter: blur(15px) saturate(180%);
     box-shadow: 
-        0 8px 24px rgba(109, 213, 237, 0.5),
+        0 8px 24px rgba(27, 42, 73, 0.4),
         0 2px 6px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(109, 213, 237, 0.8);
+    border: 1px solid rgba(109, 213, 237, 0.4);
 }
 
 .main-navigation .sub-menu > li:hover > .sub-menu {
@@ -339,18 +320,15 @@ Last Update: 2025-08-24 (Complete with Glassmorphism)
 
 .main-navigation .sub-menu .sub-menu a {
     padding: 0.75rem 1.5rem;
-    color: var(--luvex-dark-blue);
+    color: var(--luvex-white);
     display: block;
     transition: all 0.3s ease;
-    font-weight: 500;
-    text-shadow: none;
 }
 
 .main-navigation .sub-menu .sub-menu a:hover {
-    background: rgba(27, 42, 73, 0.8);
-    color: var(--luvex-white);
+    background: rgba(109, 213, 237, 0.1);
+    color: var(--luvex-bright-cyan);
     padding-left: 2rem;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* ==========================================================================
