@@ -21,7 +21,7 @@ Last Update: 2025-08-21
     color: var(--luvex-white);
     position: relative;
     overflow: hidden;
-    /* NEU: Padding-Top berücksichtigt die 80px Header-Höhe + zusätzlichen Abstand */
+    /* NEU: Padding-Top schafft Platz für den 80px hohen transparenten Header */
     padding: calc(80px + var(--space-lg)) 2rem var(--space-lg) 2rem;
     min-height: 60vh;
     display: flex;
@@ -30,7 +30,7 @@ Last Update: 2025-08-21
     text-align: center;
 }
 
-/* --- NEU: Hintergrund-Grid (aus dem Footer übernommen) --- */
+/* --- Hintergrund-Grid --- */
 .luvex-hero::before {
     content: '';
     position: absolute;

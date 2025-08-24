@@ -19,10 +19,6 @@ html {
     margin-top: 0 !important;
 }
 
-body.admin-bar {
-    padding-top: 112px !important; /* 80px Header + 32px Admin Bar */
-}
-
 /* 2. Astra Navigation System komplett ausblenden */
 .main-header-bar-navigation.ast-flex,
 .ast-main-header-bar-alignment,
@@ -40,8 +36,7 @@ body.admin-bar {
     left: 0;
     right: 0;
     z-index: 9999;
-    background: var(--luvex-deep-blue);
-    height: 80px;
+    /* Die Hintergrundfarbe wird jetzt in _header.css gesteuert */
 }
 
 /* 4. Body Content richtig positionieren */
@@ -76,13 +71,8 @@ body {
     line-height: 1.6;
     color: var(--luvex-gray-900);
     margin: 0;
-    padding-top: 80px; /* Standard für Besucher */
-    background: var(--luvex-white);
-}
-
-/* WordPress Admin Bar Kompensation - ERWEITERT */
-body.admin-bar {
-    padding-top: 112px !important; /* 80px Header + 32px Admin Bar */
+    /* ENTFERNT: padding-top: 80px; - Dies erzeugte den weißen Balken. Der Abstand wird jetzt im Hero-Container selbst gehandhabt. */
+    background: var(--luvex-white); /* Behalten wir als Standard-Seitenhintergrund bei. */
 }
 
 /* Sicherstellen dass Admin Bar über Header ist */
@@ -175,7 +165,6 @@ a:hover { color: var(--luvex-bright-cyan); }
 .content-area > *:first-child,
 .luvex-hero {
     margin-top: 0 !important;
-    padding-top: 0 !important;
 }
 
 /* Astra Theme Overrides - ERWEITERT */
@@ -283,8 +272,8 @@ body.ast-separate-container .site-content {
     }
     
     /* Mobile Admin Bar Fix */
-    body.admin-bar {
-        padding-top: 126px !important; /* 80px Header + 46px Mobile Admin Bar */
+    body.admin-bar .site-header.fixed-header {
+        top: 46px !important;
     }
 }
 
