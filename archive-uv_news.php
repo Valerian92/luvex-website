@@ -11,16 +11,16 @@ get_header(); ?>
 
 <!-- 
 ==============================================================================
-FINALE HERO SECTION (Layout-Fix)
+FINALE HERO SECTION (Mit Animation)
 ==============================================================================
-- Die Animations-Klasse wurde vom H1-Tag entfernt.
-- Das Layout wird nun ausschließlich über die _news.css gesteuert.
+- Die Klasse 'hero-title--animated' wurde zum H1-Tag hinzugefügt, um den
+  Licht-Effekt zu aktivieren.
 -->
 <section class="luvex-hero luvex-hero--split-compact">
     <div class="luvex-hero__container container">
         <!-- Linke Seite: Textinhalte -->
         <div class="luvex-hero__content">
-            <h1 class="luvex-hero__title">
+            <h1 class="luvex-hero__title hero-title--animated">
                 UV Technology <span class="text-highlight">News</span>
             </h1>
             <p class="luvex-hero__description">

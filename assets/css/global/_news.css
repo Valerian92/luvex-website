@@ -51,6 +51,36 @@ FINALES HERO LAYOUT: KORRIGIERTE STRUKTUR
     font-size: clamp(2.2rem, 4vw, 3rem); /* Etwas größer für mehr Wirkung */
 }
 
+/* NEU: "Light Sweep"-Animation für den Hero-Titel */
+.luvex-hero--split-compact .luvex-hero__title.hero-title--animated {
+    position: relative;
+    display: inline-block;
+    /* 1. Farbverlauf als Hintergrund erstellen */
+    background: linear-gradient(
+        90deg,
+        var(--luvex-white) 0%,
+        var(--luvex-white) 40%,
+        var(--luvex-bright-cyan) 50%,
+        var(--luvex-white) 60%,
+        var(--luvex-white) 100%
+    );
+    /* 2. Größe anpassen und Wiederholung verhindern */
+    background-size: 250% 100%;
+    background-repeat: no-repeat;
+    
+    /* 3. Hintergrund auf die Textform zuschneiden */
+    -webkit-background-clip: text;
+    background-clip: text;
+    
+    /* 4. Textfarbe transparent machen, um den Hintergrund zu zeigen */
+    color: transparent;
+    
+    /* 5. Animation aus _animations.css anwenden */
+    animation: progress-shine 6s ease-in-out infinite;
+    animation-delay: 2s; /* Startet mit einer kleinen Verzögerung */
+}
+
+
 .luvex-hero--split-compact .luvex-hero__description {
     text-align: left; /* Stellt sicher, dass auch die Beschreibung linksbündig ist */
 }
@@ -60,6 +90,8 @@ FINALES HERO LAYOUT: KORRIGIERTE STRUKTUR
     flex-shrink: 0;
     margin-top: 0;
     gap: 1rem;
+    /* KORREKTUR: Verschiebt die Buttons leicht nach unten für eine bessere visuelle Balance */
+    transform: translateY(1rem); /* 1rem = 16px */
 }
 
 @media (max-width: 768px) {
@@ -76,6 +108,7 @@ FINALES HERO LAYOUT: KORRIGIERTE STRUKTUR
     .luvex-hero--split-compact .luvex-hero__cta-container {
         flex-direction: row;
         width: 100%;
+        transform: none; /* Korrektur auf Mobilgeräten zurücksetzen */
     }
 }
 
