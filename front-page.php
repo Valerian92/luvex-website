@@ -85,7 +85,6 @@ get_header(); ?>
                 <h3>3D UV System Designer</h3>
                 <p class="simulator-description">Professional-grade simulation tools for UV system optimization and validation.</p>
                 
-                <!-- KORREKTUR: Klassen an das CSS-System angepasst -->
                 <div class="feature-grid">
                     <div class="feature-item"><i class="fas fa-shield-virus"></i><h4>UV Disinfection</h4><p>Pathogen inactivation modeling</p></div>
                     <div class="feature-item"><i class="fas fa-layer-group"></i><h4>Substrate Curing</h4><p>UV polymerization simulation</p></div>
@@ -95,7 +94,8 @@ get_header(); ?>
                     <div class="feature-item"><i class="fas fa-mouse-pointer"></i><h4>Intuitive Control</h4><p>User-friendly interface</p></div>
                 </div>
 
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="luvex-cta-primary simulator-cta luvex-cta--animated"><i class="fas fa-play-circle"></i><span>Launch Interactive Simulator</span></a>
+                <!-- ANPASSUNG: Button-Klassen für eigenen Stil bereinigt -->
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="simulator-cta"><i class="fas fa-play-circle"></i><span>Launch Interactive Simulator</span></a>
             </div>
         </div>
     </div>

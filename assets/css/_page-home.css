@@ -85,12 +85,9 @@ Last Update: 2025-08-23
         0 0 20px rgba(107, 205, 255, 0.3);
 }
 
-/* Die Klasse .luvex-hero__description wurde aus dem HTML entfernt und wird hier nicht mehr gestylt. */
-
-
 /*
 ==============================================================================
-2. UV SIMULATOR SHOWCASE
+2. UV SIMULATOR SHOWCASE (OPTIMIERT)
 ==============================================================================
 */
 
@@ -110,11 +107,12 @@ Last Update: 2025-08-23
     margin-bottom: 1.5rem; 
 }
 
+/* ANPASSUNG: max-width erhöht, um Umbruch zu vermeiden */
 .simulator-description { 
-    color: var(--luvex-text-muted-dark); 
+    color: var(--luvex-gray-300); /* Farbe leicht aufgehellt für besseren Kontrast */
     font-size: 1.2rem; 
     margin-bottom: 3rem; 
-    max-width: 600px; 
+    max-width: 800px; /* Erhöht von 600px */
     margin-left: auto; 
     margin-right: auto; 
 }
@@ -124,8 +122,33 @@ Last Update: 2025-08-23
     max-width: 900px;
 }
 
+/* NEU: Eigener Button-Stil für den Simulator-CTA */
 .simulator-cta { 
-    margin-top: 2rem; 
+    margin-top: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    
+    /* Standard-Zustand: Outline / "Ghost" */
+    background-color: transparent;
+    border: 2px solid var(--luvex-bright-cyan);
+    color: var(--luvex-white);
+}
+
+.simulator-cta:hover {
+    /* Hover-Zustand: Gefüllt */
+    background-color: var(--luvex-bright-cyan);
+    border-color: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(109, 213, 237, 0.3);
 }
 
 /*
