@@ -1,11 +1,11 @@
 /*
 ==============================================================================
-LUVEX THEME v2.2 - FOOTER
+LUVEX THEME v2.3 - FOOTER (MIT LIGHT-EFFECT-ANIMATION)
 ==============================================================================
 
 Description: Styling for the main site footer.
 Dependencies: _variables.css
-Last Update: 2025-08-05
+Last Update: 2025-08-24
 
 ==============================================================================
 */
@@ -47,7 +47,7 @@ Last Update: 2025-08-05
 .footer-content-grid {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-    gap: 4rem; /* Adjusted gap for better spacing */
+    gap: 4rem;
     position: relative;
     z-index: 2;
     max-width: 1800px;
@@ -166,7 +166,7 @@ Last Update: 2025-08-05
 */
 
 .footer-bottom {
-    border-top: 1px solid rgba(109, 213, 237, 0.2); /* Slightly more subtle */
+    border-top: 1px solid rgba(109, 213, 237, 0.2);
     padding-top: 2rem;
     margin-top: 2rem;
     position: relative;
@@ -175,7 +175,7 @@ Last Update: 2025-08-05
 
 .footer-bottom-content {
     display: grid;
-    grid-template-columns: 1fr auto 1fr; /* Center column takes auto width */
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     gap: 2rem;
     max-width: 1800px;
@@ -214,10 +214,67 @@ Last Update: 2025-08-05
     color: var(--luvex-bright-cyan);
 }
 
+/*
+==============================================================================
+5. NEU: LIGHT SWEEP ANIMATION
+==============================================================================
+*/
+
+/* --- 5.1 Initial State (Before Animation) --- */
+/* Alle Elemente, die animiert werden sollen, sind anfangs "unsichtbar" */
+.footer-content-grid > *, .footer-bottom-content > * {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* --- 5.2 The Light Beam --- */
+.modern-footer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -20%; /* Startet außerhalb des Bildschirms */
+    width: 15%; /* Breite des Lichtstrahls */
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(109, 213, 237, 0.2) 50%, 
+        transparent 100%
+    );
+    transform: skewX(-25deg); /* Schräger Winkel */
+    filter: blur(30px);
+    transition: left 1.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    z-index: 3;
+    opacity: 0;
+}
+
+/* --- 5.3 Triggering the Animation --- */
+/* Wenn die Klasse .animation-triggered hinzugefügt wird... */
+.modern-footer.animation-triggered::after {
+    /* ...bewegt sich der Lichtstrahl über den Bildschirm. */
+    left: 110%;
+    opacity: 1;
+}
+
+/* ...und die Elemente werden nacheinander sichtbar. */
+.modern-footer.animation-triggered .footer-content-grid > *,
+.modern-footer.animation-triggered .footer-bottom-content > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staffelung der Animation für einen schöneren Effekt */
+.modern-footer.animation-triggered .footer-company { transition-delay: 0.2s; }
+.modern-footer.animation-triggered .footer-section:nth-child(2) { transition-delay: 0.3s; }
+.modern-footer.animation-triggered .footer-section:nth-child(3) { transition-delay: 0.4s; }
+.modern-footer.animation-triggered .footer-section:nth-child(4) { transition-delay: 0.5s; }
+.modern-footer.animation-triggered .footer-section:nth-child(5) { transition-delay: 0.6s; }
+.modern-footer.animation-triggered .footer-bottom-content { transition-delay: 0.7s; }
+
 
 /*
 ==============================================================================
-5. RESPONSIVE STYLES
+6. RESPONSIVE STYLES
 ==============================================================================
 */
 
@@ -227,10 +284,9 @@ Last Update: 2025-08-05
         gap: 2.5rem;
     }
     
-    /* Stacks the last two menu columns under the first three */
     .footer-section:nth-child(4),
     .footer-section:nth-child(5) {
-        grid-column: span 3; /* Take full width */
+        grid-column: span 3;
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
