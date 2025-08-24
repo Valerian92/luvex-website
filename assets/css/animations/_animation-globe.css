@@ -47,21 +47,20 @@ Last Update: 2025-08-24 (Kompakt-Update)
     justify-content: center;
     /* REDUZIERT: Von 700px auf 350px */
     min-height: 350px;
-    max-height: 350px; /* NEU: Maximale Höhe begrenzen */
     position: relative;
-    overflow: hidden; /* NEU: Globe wird abgeschnitten */
+    /* ENTFERNT: overflow: hidden - Globe soll an Section-Rändern abgeschnitten werden */
 }
 
 .homepage-community-globe-wrapper {
-    /* ANGEPASST: Kleinerer, abgeschnittener Globe */
-    width: 80vw; /* REDUZIERT: Von 100vw */
-    height: 100%; /* ANGEPASST: Begrenzte Höhe */
+    /* ANGEPASST: Globe wieder größer, aber durch Section-Overflow abgeschnitten */
+    width: 120vw; /* VERGRÖSSERT: Zurück zu großem Globe */
+    height: 120%; /* VERGRÖSSERT: Aber begrenzt */
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-10%, -50%); /* ANGEPASST: Weniger Verschiebung */
+    transform: translate(-20%, -50%); /* ANGEPASST: Globe nach rechts verschieben */
     z-index: 1;
-    margin-left: calc(-40vw + 25%); /* ANGEPASST: Zentrierungslogik */
+    margin-left: calc(-60vw + 50%); /* ANGEPASST: Neue Zentrierungslogik */
 }
 
 .homepage-community-title { 
@@ -114,14 +113,13 @@ Last Update: 2025-08-24 (Kompakt-Update)
 
     .homepage-community-visual {
         min-height: 250px; /* REDUZIERT: Von 500px */
-        max-height: 250px;
         width: 100%;
     }
 
     .homepage-community-globe-wrapper {
-        width: 90vw; /* ANGEPASST für Tablet */
-        height: 120%;
-        transform: translate(-50%, -40%); /* ANGEPASST */
+        width: 110vw; /* ANGEPASST für Tablet - trotzdem groß */
+        height: 130%;
+        transform: translate(-40%, -50%); /* ANGEPASST: Mehr nach rechts */
     }
 
     .homepage-community-actions {
@@ -140,13 +138,12 @@ Last Update: 2025-08-24 (Kompakt-Update)
 
     .homepage-community-visual {
         min-height: 200px; /* REDUZIERT */
-        max-height: 200px;
     }
 
     .homepage-community-globe-wrapper {
-        width: 100vw;
-        height: 140%; /* REDUZIERT: Von 150% */
-        transform: translate(-50%, -35%); /* ANGEPASST */
+        width: 120vw; /* GROß: Natürlich an Section-Rändern abgeschnitten */
+        height: 150%;
+        transform: translate(-35%, -40%); /* ANGEPASST: Optimal positioniert */
     }
 
     .homepage-community-description {
