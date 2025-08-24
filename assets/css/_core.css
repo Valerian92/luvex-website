@@ -1,13 +1,54 @@
 /*
 ==============================================================================
-LUVEX THEME v3.2 - CORE STYLES (BEREINIGT)
+LUVEX THEME v3.2 - CORE STYLES - HEADER FIXES IMPLEMENTIERT
 ==============================================================================
 Description: Enthält alle globalen Basis-Stile, das Layout-System (Container,
              Grid, Sections) und wiederverwendbare Utility-Klassen.
+             + WORDPRESS ADMIN BAR & ASTRA HEADER FIXES
 Dependencies: _variables.css
-Last Update: 2025-08-24 (Gap Fix + Duplikate entfernt)
+Last Update: 2025-08-24 (Header-Probleme behoben)
 ==============================================================================
 */
+
+/* ========================================================================== 
+   WORDPRESS ADMIN BAR & ASTRA HEADER FIXES (HÖCHSTE PRIORITÄT)
+   ========================================================================== */
+
+/* 1. Admin Bar Margin-Top Problem lösen */
+html {
+    margin-top: 0 !important;
+}
+
+body.admin-bar {
+    padding-top: 112px !important; /* 80px Header + 32px Admin Bar */
+}
+
+/* 2. Astra Navigation System komplett ausblenden */
+.main-header-bar-navigation.ast-flex,
+.ast-main-header-bar-alignment,
+.main-navigation.ast-flex-grow-1,
+.ast-builder-menu-1,
+.ast-hfb-header .ast-builder-menu-1,
+.ast-header-break-point .ast-builder-menu-1 {
+    display: none !important;
+}
+
+/* 3. Fixed Header ohne Admin Bar Konflikte */
+.site-header.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: var(--luvex-deep-blue);
+    height: 80px;
+}
+
+/* 4. Body Content richtig positionieren */
+.site-content {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
 
 /*
 ==============================================================================
@@ -39,12 +80,7 @@ body {
     background: var(--luvex-white);
 }
 
-/* WordPress Admin Bar Kompensation */
-body.admin-bar {
-    padding-top: 112px !important; /* 80px Header + 32px Admin Bar */
-}
-
-
+/* Astra Scroll-To-Top Button ausblenden */
 #ast-scroll-top {
     display: none !important;
 }
@@ -98,13 +134,11 @@ a:hover { color: var(--luvex-bright-cyan); }
 
 /*
 ==============================================================================
-3.4 FIXED HEADER LAYOUT SYSTEM - BEREINIGT
+3.4 FIXED HEADER LAYOUT SYSTEM - BEREINIGT & ASTRA-FIX
 ==============================================================================
 */
 
 /* Alle Container haben KEINE zusätzlichen Margins/Paddings */
-/* Body padding-top: 80px ist bereits oben definiert */
-
 #content,
 .site-content,
 .content-area,
@@ -123,19 +157,31 @@ a:hover { color: var(--luvex-bright-cyan); }
     padding-top: 0 !important;
 }
 
-/* Astra Theme Overrides */
+/* Astra Theme Overrides - ERWEITERT */
 .ast-container,
-.ast-separate-container .ast-container {
+.ast-separate-container .ast-container,
+.ast-page-builder-template .ast-container {
     padding-top: 0 !important;
     margin-top: 0 !important;
 }
 
-/* Astra Body-Klassen Override */
+/* Astra Body-Klassen Override - ERWEITERT */
 body.custom-background .site-content,
 body.ast-header-break-point .site-content,
-body[class*="ast-"] .site-content {
+body[class*="ast-"] .site-content,
+body.ast-page-builder-template .site-content,
+body.ast-separate-container .site-content {
     margin-top: 0 !important;
     padding-top: 0 !important;
+}
+
+/* Astra Header Builder spezifische Fixes */
+.ast-hfb-header {
+    position: relative !important;
+}
+
+.ast-hfb-header .site-header {
+    position: fixed !important;
 }
 
 /*
@@ -213,6 +259,11 @@ body[class*="ast-"] .site-content {
     
     .section--large {
         padding: 6rem 0;
+    }
+    
+    /* Mobile Admin Bar Fix */
+    body.admin-bar {
+        padding-top: 126px !important; /* 80px Header + 46px Mobile Admin Bar */
     }
 }
 
