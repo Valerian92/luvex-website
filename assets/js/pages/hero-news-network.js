@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         update() {
-            // Sanfte Rückkehr zum "Heimatpunkt" gegen Lücken
+            // OPTIMIERUNG: Sanfte Rückkehr zum "Heimatpunkt" gegen Lückenbildung
             this.vx += (this.originX - this.x) * 0.0001;
             this.vy += (this.originY - this.y) * 0.0001;
 
