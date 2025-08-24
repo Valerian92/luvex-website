@@ -160,27 +160,57 @@ Last Update: 2025-08-24
 }
 
 
-/* --- 2.3 Generic CTA Buttons --- */
+/* --- 2.3 Generic CTA Buttons (REDESIGNED & OPTIMIZED) --- */
 .luvex-cta-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: var(--space-xs);
-    padding: 1.25rem 2.5rem;
-    font-size: 1.125rem;
-    font-weight: 700;
-    border-radius: 50px;
-    background: var(--luvex-bright-cyan);
-    color: #ffffff;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    color: var(--luvex-white);
     text-decoration: none;
+    border: none;
     transition: all 0.3s ease;
     position: relative;
-    overflow: hidden;
+    
+    /* REDESIGN: Gradient mit LUVEX Farben */
+    background: linear-gradient(45deg, var(--luvex-vibrant-blue), var(--luvex-special-cyan));
+    box-shadow: 0 4px 15px rgba(34, 211, 238, 0.2), 0 2px 5px rgba(0, 123, 255, 0.15);
 }
 
 .luvex-cta-primary:hover {
-    background: #0891b2; /* cyan-600 */
-    transform: scale(1.05);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(34, 211, 238, 0.3), 0 4px 10px rgba(0, 123, 255, 0.2);
+    color: var(--luvex-white); /* Sicherstellen dass Text weiß bleibt */
+}
+
+.luvex-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    
+    /* REDESIGN: Transparenter Outline-Style */
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: var(--luvex-white);
+}
+
+.luvex-cta-secondary:hover {
+    background: var(--luvex-white);
+    color: var(--luvex-dark-blue);
+    border-color: var(--luvex-white);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
 }
 
 /* * ============================================================================
@@ -227,28 +257,6 @@ Last Update: 2025-08-24
         0 0 20px rgba(138, 43, 226, 0.3);
 }
 
-
-.luvex-cta-secondary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-xs);
-    padding: 1rem 2rem;
-    font-size: 1rem;
-    font-weight: 700;
-    border-radius: 50px;
-    border: 2px solid var(--luvex-bright-cyan);
-    background: transparent;
-    color: var(--luvex-bright-cyan);
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.luvex-cta-secondary:hover {
-    background: var(--luvex-bright-cyan);
-    color: #ffffff;
-    transform: scale(1.05);
-}
 
 
 /* --- 1.3 Outline Button (Better Visibility) --- */
