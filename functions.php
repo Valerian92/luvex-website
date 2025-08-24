@@ -1,7 +1,8 @@
 <?php
 /**
- * LUVEX Theme Functions - Step 5: Integrate page-specific CSS loading
- * Added footer menu locations and started adding page-specific asset loading.
+ * LUVEX Theme Functions - Finale Version
+ * Description: Komplette Theme-Setup-, Navigations- und Asset-Lade-Logik.
+ * JS-Pfade für bessere Ordnerstruktur aktualisiert.
  */
 
 // 1. ASTRA THEME DEAKTIVIERUNG
@@ -17,7 +18,7 @@ function luvex_remove_admin_bar_bump() {
     remove_action('wp_head', '_admin_bar_bump_cb');
 }
 
-// 3. Theme Setup (ERWEITERT mit Footer-Menüs)
+// 3. Theme Setup
 add_action('after_setup_theme', 'luvex_theme_setup');
 function luvex_theme_setup() {
     register_nav_menus(array(
@@ -33,105 +34,133 @@ function luvex_theme_setup() {
     add_theme_support('title-tag');
 }
 
-// 4. CSS & JAVASCRIPT LADEN (FINALE VERSION)
+// 4. CSS & JAVASCRIPT LADEN (FINALE VERSION MIT ALLEN SCRIPTS & NEUER JS-STRUKTUR)
 add_action('wp_enqueue_scripts', 'luvex_enqueue_assets', 999);
 function luvex_enqueue_assets() {
+    // ========================================================================
+    // CSS LADEN
+    // ========================================================================
+
     // Astra CSS entfernen
     wp_dequeue_style('astra-theme-css');
 
-    // Main CSS (global) - wird immer geladen
-    $main_css_path = get_stylesheet_directory() . '/assets/css/main.css';
-    if (file_exists($main_css_path)) {
-        wp_enqueue_style('luvex-main', get_stylesheet_directory_uri() . '/assets/css/main.css', array(), filemtime($main_css_path));
+    // Globale Stylesheets
+    $global_styles = [
+        'luvex-main' => '/assets/css/main.css',
+        'luvex-animations' => '/assets/css/_animations.css',
+    ];
+    foreach ($global_styles as $handle => $path) {
+        $full_path = get_stylesheet_directory() . $path;
+        if (file_exists($full_path)) {
+            wp_enqueue_style($handle, get_stylesheet_directory_uri() . $path, array(), filemtime($full_path));
+        }
     }
 
-    // Globale Animationen (überall geladen)
-    $animations_css_path = get_stylesheet_directory() . '/assets/css/_animations.css';
-    if (file_exists($animations_css_path)) {
-        wp_enqueue_style('luvex-animations', get_stylesheet_directory_uri() . '/assets/css/_animations.css', array('luvex-main'), filemtime($animations_css_path));
-    }
+    // Seitenspezifische Stylesheets
+    $page_styles = [
+        'about' => ['_page-about.css'],
+        'booking' => ['_page-booking.css'],
+        'contact' => ['_page-contact.css'],
+        'mercury-uv-lamps' => ['_page-mercury-uv-lamps.css'],
+        'uv-consulting' => ['_page-uv-consulting.css'],
+        'uv-led' => ['_page-uv-led.css'],
+        'uv-process-equipment' => ['_page-uv-process-equipment.css'],
+        'uv-safety-equipment' => ['_page-uv-safety-equipment.css'],
+        'uv-testing-equipment' => ['_page-uv-testing-equipment.css'],
+        'uv-tunnel' => ['_page-uv-tunnel.css'],
+        'uv-c-disinfection' => ['_page-uv-c-disinfection.css', 'animations/_animation-uv-disinfection-gallery.css'],
+        'uv-curing' => ['_page-uv-curing.css', 'animations/_animation-uv-curing-gallery.css'],
+    ];
 
-
-    // === SEITENSPEZIFISCHES CSS LADEN ===
-    // Helfer-Funktion, um Code zu sparen. Kann jetzt ein Array von Dateinamen verarbeiten.
-    $enqueue_page_style = function($slug, $filenames) {
+    foreach ($page_styles as $slug => $files) {
         if (is_page($slug)) {
-            // Stelle sicher, dass $filenames immer ein Array ist
-            if (!is_array($filenames)) {
-                $filenames = [$filenames];
-            }
-            
-            foreach ($filenames as $filename) {
-                // Erstelle einen einzigartigen Handle für jede CSS-Datei
-                $handle = 'luvex-page-' . $slug . '-' . sanitize_title($filename);
-                $css_path = get_stylesheet_directory() . '/assets/css/' . $filename;
-                
-                if (file_exists($css_path)) {
-                    wp_enqueue_style($handle, get_stylesheet_directory_uri() . '/assets/css/' . $filename, array('luvex-main'), filemtime($css_path));
+            foreach ($files as $file) {
+                $handle = 'luvex-page-' . $slug . '-' . sanitize_title($file);
+                $path = '/assets/css/' . $file;
+                $full_path = get_stylesheet_directory() . $path;
+                if (file_exists($full_path)) {
+                    wp_enqueue_style($handle, get_stylesheet_directory_uri() . $path, ['luvex-main'], filemtime($full_path));
                 }
             }
         }
+    }
+
+    // Homepage Styles (Sonderfall)
+    if (is_front_page() || is_home()) {
+        $home_styles = [
+            'luvex-page-home' => '/assets/css/_page-home.css',
+            'luvex-animation-hero-home' => '/assets/css/animations/_animation-hero-home.css',
+        ];
+        foreach ($home_styles as $handle => $path) {
+            $full_path = get_stylesheet_directory() . $path;
+            if (file_exists($full_path)) {
+                wp_enqueue_style($handle, get_stylesheet_directory_uri() . $path, ['luvex-main'], filemtime($full_path));
+            }
+        }
+    }
+
+    // ========================================================================
+    // JAVASCRIPT LADEN
+    // ========================================================================
+    
+    $js_base_uri = get_stylesheet_directory_uri() . '/assets/js/';
+    $js_base_path = get_stylesheet_directory() . '/assets/js/';
+    $dependencies = array('jquery');
+
+    // Helfer-Funktion zum Einbinden von Scripts
+    $enqueue_script = function($handle, $path_inside_js_folder) use ($js_base_uri, $js_base_path, $dependencies) {
+        $full_path = $js_base_path . $path_inside_js_folder;
+        if (file_exists($full_path)) {
+            wp_enqueue_script($handle, $js_base_uri . $path_inside_js_folder, $dependencies, filemtime($full_path), true);
+        }
     };
 
-    // Homepage (Sonderfall)
-    if (is_front_page() || is_home()) {
-        // Lade Home-spezifisches CSS
-        $home_css_path = get_stylesheet_directory() . '/assets/css/_page-home.css';
-        if (file_exists($home_css_path)) {
-            wp_enqueue_style('luvex-page-home', get_stylesheet_directory_uri() . '/assets/css/_page-home.css', array('luvex-main'), filemtime($home_css_path));
-        }
-        // Lade Home-spezifische Animationen
-        $hero_anim_path = get_stylesheet_directory() . '/assets/css/animations/_animation-hero-home.css';
-        if (file_exists($hero_anim_path)) {
-            wp_enqueue_style('luvex-animation-hero-home', get_stylesheet_directory_uri() . '/assets/css/animations/_animation-hero-home.css', array('luvex-main'), filemtime($hero_anim_path));
-        }
-    }
-
-    // Alle anderen Seiten basierend auf ihrem Slug
-    $enqueue_page_style('about', '_page-about.css');
-    $enqueue_page_style('booking', '_page-booking.css');
-    $enqueue_page_style('contact', '_page-contact.css');
-    $enqueue_page_style('mercury-uv-lamps', '_page-mercury-uv-lamps.css');
-    $enqueue_page_style('uv-consulting', '_page-uv-consulting.css');
-    $enqueue_page_style('uv-led', '_page-uv-led.css');
-    $enqueue_page_style('uv-process-equipment', '_page-uv-process-equipment.css');
-    $enqueue_page_style('uv-safety-equipment', '_page-uv-safety-equipment.css');
-    $enqueue_page_style('uv-testing-equipment', '_page-uv-testing-equipment.css');
-    $enqueue_page_style('uv-tunnel', '_page-uv-tunnel.css');
-
-    // Seiten mit zusätzlichen, spezifischen Animationen
-    $enqueue_page_style('uv-c-disinfection', [
-        '_page-uv-c-disinfection.css',
-        'animations/_animation-uv-disinfection-gallery.css'
-    ]);
-    $enqueue_page_style('uv-curing', [
-        '_page-uv-curing.css',
-        'animations/_animation-uv-curing-gallery.css'
-    ]);
-
-
-    // === GLOBALE JAVASCRIPTS LADEN ===
-    $dependencies = array('jquery');
-    $scripts_to_enqueue = [
-        'luvex-mobile-menu' => '/assets/js/mobile-menu.js',
-        'luvex-profile-menu' => '/assets/js/profile-menu.js'
+    // Globale Scripts (auf jeder Seite geladen)
+    $global_scripts = [
+        'luvex-mobile-menu' => 'global/mobile-menu.js',
+        'luvex-profile-menu' => 'global/profile-menu.js',
+        'luvex-modal' => 'global/modal.js',
+        'luvex-scroll-animations' => 'global/scroll-animations.js',
+        'luvex-scroll-to-top' => 'global/scroll-to-top.js',
+        'luvex-cursor-effects' => 'global/cursor-effects.js',
+        'luvex-footer-light' => 'global/footer-light-effect.js',
+        'luvex-interactive-faq' => 'global/interactive-faq.js',
     ];
-    foreach ($scripts_to_enqueue as $handle => $path) {
-        $full_path = get_stylesheet_directory() . $path;
-        if (file_exists($full_path)) {
-            $version = filemtime($full_path);
-            wp_enqueue_script($handle, get_stylesheet_directory_uri() . $path, $dependencies, $version, true);
-        }
+    // Debug-Skript nur für eingeloggte Admins laden
+    if (is_user_logged_in() && current_user_can('manage_options')) {
+        $global_scripts['luvex-debug'] = 'global/debug-scripts.js';
+    }
+    foreach($global_scripts as $handle => $path) {
+        $enqueue_script($handle, $path);
     }
 
-    // === SEITENSPEZIFISCHE JAVASCRIPTS LADEN ===
+    // Seitenspezifische Scripts
     if (is_front_page() || is_home()) {
         wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), null, true);
-        
-        $globe_js_path = get_stylesheet_directory() . '/assets/js/globe-animation.js';
-        if (file_exists($globe_js_path)) {
-            wp_enqueue_script('luvex-globe', get_stylesheet_directory_uri() . '/assets/js/globe-animation.js', array('three-js'), filemtime($globe_js_path), true);
-        }
+        $enqueue_script('luvex-globe-animation', 'pages/globe-animation.js');
+        $enqueue_script('luvex-hero-photons', 'pages/hero-photons.js');
+        $enqueue_script('luvex-hero-spectrum', 'pages/hero-spectrum.js');
+        $enqueue_script('luvex-hero-hexagon', 'pages/hero-hexagon.js');
+    }
+    if (is_page('contact')) {
+        $enqueue_script('luvex-contact-hero', 'pages/contact-hero-animation.js');
+    }
+    if (is_page('about')) {
+        $enqueue_script('luvex-about-hero', 'pages/hero-about-interactive.js');
+    }
+    if (is_page('uv-curing')) {
+        $enqueue_script('luvex-curing-hero', 'pages/hero-curing-interactive.js');
+        $enqueue_script('luvex-curing-gallery', 'pages/uv-curing-science-gallery.js');
+    }
+    if (is_page('uv-c-disinfection')) {
+        $enqueue_script('luvex-disinfection-hero', 'pages/hero-disinfection.js');
+        $enqueue_script('luvex-disinfection-gallery', 'pages/uvc-science-gallery.js');
+    }
+    if (is_page('uv-led')) {
+        $enqueue_script('luvex-uv-led-hero', 'pages/hero-uv-led.js');
+    }
+    if (is_page('mercury-uv-lamps')) {
+        $enqueue_script('luvex-mercury-lamps-hero', 'pages/hero-mercury-lamps.js');
     }
 }
 

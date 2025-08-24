@@ -1,89 +1,42 @@
 /*
 ==============================================================================
-LUVEX THEME v3.0 - MAIN CSS (CLEAN ARCHITECTURE)
+LUVEX THEME v3.1 - MAIN CSS (CLEAN ARCHITECTURE)
 ==============================================================================
 
-Main CSS file that imports only GLOBAL styles
+Main CSS file that imports only GLOBAL styles from the /global/ subfolder.
 Page-specific styles are loaded conditionally via functions.php
 
-Last Update: 2025-08-22
+Last Update: 2025-08-24
 ==============================================================================
 */
 
 /* 1. DESIGN TOKENS (Variables first!) */
-@import '_variables.css';
+@import 'global/_variables.css';
 
-/* 2. BASE STYLES */
-/* @import '_base.css';*/
-/* 3. LAYOUT SYSTEM */
-/*@import '_layout.css'; */
+/* 2. CORE STYLES */
+@import 'global/_core.css';
 
-/* NEU: CORE STYLES */
-/*@import '_section-patterns.css';*/
-@import '_core.css';
-/*-------------------------merged---*/
+/* 3. UI COMPONENTS (GLOBAL - Available on all pages) */
+@import 'global/_components.css';
+@import 'global/_modals.css';
+@import 'global/_cursor-effects.css';
 
-/* 4. UI COMPONENTS (GLOBAL - Available on all pages) */
-/*@import '_buttons.css';*/
-/*@import '_cards.css';*/
-/*@import '_forms.css';*/
-/*@import '_cta.css';
-/*@import '_faq-accordion.css';*/
-/*@import '_timeline.css';*/
-
-@import '_components.css';
-@import '_modals.css';
-@import '_cursor-effects.css';
-
-/*-------------merged------------*/
-
-@import '_header.css';
-@import '_footer.css';
-/*@import '_heroes.css'; --> gemerged in components */
+/* 4. LAYOUT COMPONENTS (HEADER/FOOTER) */
+@import 'global/_header.css';
+@import 'global/_footer.css';
 
 /* 5. RESPONSIVE (GLOBAL) */
-@import '_responsive.css';
+@import 'global/_responsive.css';
 
-/* 6. GLOBAL CONTENT TYPES */
-@import '_404.css';
-@import '_auth.css';
-@import '_legal.css';
-@import '_news.css';
-@import '_resources.css';
+/* 6. GLOBAL CONTENT TYPES & TEMPLATES */
+@import 'global/_404.css';
+@import 'global/_auth.css';
+@import 'global/_legal.css';
+@import 'global/_news.css';
+@import 'global/_resources.css';
 
 /*
 ==============================================================================
-PAGE-SPECIFIC CSS REMOVED - NOW LOADED CONDITIONALLY VIA FUNCTIONS.PHP
-==============================================================================
-
-REMOVED FROM MAIN.CSS (performance + no conflicts):
-- _page-home.css
-- _page-about.css  
-- _page-contact.css
-- _page-booking.css
-- _page-uv-curing.css
-- _page-uv-led.css
-- _page-mercury-uv-lamps.css
-- _page-uv-c-disinfection.css
-- _page-uv-consulting.css
-- _page-uv-safety-equipment.css
-- _page-uv-process-equipment.css
-- _page-uv-tunnel.css
-
-ALSO REMOVED FROM MAIN.CSS (performance):
-- _animations.css (loaded conditionally)
-
-This ensures:
-✅ Clean CSS loading per page
-✅ No cross-page CSS conflicts
-✅ Better performance (only relevant CSS loads)
-✅ Easier debugging and maintenance
-
+PAGE-SPECIFIC & ANIMATION CSS are loaded via functions.php
 ==============================================================================
 */
-
-
-
-/* Besser Weg ist das Laden über functions --> schneller für Animations:
-@import '_animations.css'; */
-/* @import '_loading.css'; --> merged into animations */

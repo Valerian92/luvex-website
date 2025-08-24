@@ -26,7 +26,7 @@ get_header(); ?>
             
             <!-- 3. Description (unten - Service-Liste mit Bullets) -->
             <p class="luvex-hero__description">
-                Independent Consulting <span class="bullet">•</span> Advanced Simulations <span class="bullet">•</span> Proven Results
+                Independent Consulting <span class="bullet">•</span> Proven Results <span class="bullet">•</span> Advanced Simulations
             </p>
         </div>
         <div class="luvex-hero__cta-container">
