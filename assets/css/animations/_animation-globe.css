@@ -81,6 +81,8 @@ Last Update: 2025-08-24 (Kompakt-Update)
     margin: 0; /* Kein Extra-Margin */
     text-align: justify; /* BLOCKSATZ: Gleichmäßig verteilter Text */
     text-justify: inter-word; /* OPTIMIERUNG: Bessere Wortverteilung */
+    hyphens: none; /* VERHINDERT: Automatische Silbentrennung */
+    word-break: keep-all; /* VERHINDERT: Wortumbrüche in zusammengesetzten Wörtern */
 }
 
 .homepage-community-actions { 

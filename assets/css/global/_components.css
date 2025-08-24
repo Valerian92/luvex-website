@@ -213,6 +213,35 @@ Last Update: 2025-08-24
     box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
 }
 
+/* --- 2.4 Standard Button Aliases (für .btn Klassen) --- */
+.btn.btn--primary,
+.btn--primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    color: var(--luvex-white);
+    text-decoration: none;
+    border: none;
+    transition: all 0.3s ease;
+    
+    /* Gleicher Style wie luvex-cta-primary */
+    background: linear-gradient(45deg, var(--luvex-vibrant-blue), var(--luvex-special-cyan));
+    box-shadow: 0 4px 15px rgba(34, 211, 238, 0.2), 0 2px 5px rgba(0, 123, 255, 0.15);
+}
+
+.btn.btn--primary:hover,
+.btn--primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(34, 211, 238, 0.3), 0 4px 10px rgba(0, 123, 255, 0.2);
+    color: var(--luvex-white);
+}
+
+
 /* * ============================================================================
  * FIX FÜR DEN ANIMIERTEN HERO-BUTTON
  * ============================================================================
