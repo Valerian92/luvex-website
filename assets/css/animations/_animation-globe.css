@@ -1,22 +1,24 @@
 /*
 ==============================================================================
-LUVEX THEME - ANIMATION: HOMEPAGE GLOBE
+LUVEX THEME - ANIMATION: HOMEPAGE GLOBE (KOMPAKT & OPTIMIERT)
 ==============================================================================
 Description: Enthält alle Styles für die interaktive Globus-Sektion auf der
-             Homepage.
+             Homepage. OPTIMIERT: Reduzierte Höhe, abgeschnittener Globe.
 Dependencies: Wird auf der Homepage via functions.php geladen.
-Last Update: 2025-08-24
+Last Update: 2025-08-24 (Kompakt-Update)
 ==============================================================================
 */
 
 .homepage-community-section.section {
-    overflow: hidden;
+    overflow: hidden; /* Globe wird abgeschnitten */
 }
 
 .homepage-community-section {
     position: relative;
     background-color: var(--luvex-dark-blue);
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(109, 213, 237, 0.08)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+    /* REDUZIERT: Kompaktere Section */
+    padding: 4rem 0; /* Hinzugefügt für konsistente Abstände */
 }
 
 .homepage-community-container {
@@ -28,6 +30,8 @@ Last Update: 2025-08-24
     gap: var(--space-lg);
     position: relative;
     z-index: 2;
+    /* REDUZIERT: Kompaktere Container-Höhe */
+    min-height: 400px; /* Hinzugefügt: Definierte Mindesthöhe */
 }
 
 .homepage-community-content {
@@ -41,19 +45,23 @@ Last Update: 2025-08-24
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 700px;
+    /* REDUZIERT: Von 700px auf 350px */
+    min-height: 350px;
+    max-height: 350px; /* NEU: Maximale Höhe begrenzen */
     position: relative;
+    overflow: hidden; /* NEU: Globe wird abgeschnitten */
 }
 
 .homepage-community-globe-wrapper {
-    width: 100vw;
-    height: 130%;
+    /* ANGEPASST: Kleinerer, abgeschnittener Globe */
+    width: 80vw; /* REDUZIERT: Von 100vw */
+    height: 100%; /* ANGEPASST: Begrenzte Höhe */
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-5%, -50%);
+    transform: translate(-10%, -50%); /* ANGEPASST: Weniger Verschiebung */
     z-index: 1;
-    margin-left: calc(-50vw + 50%);
+    margin-left: calc(-40vw + 25%); /* ANGEPASST: Zentrierungslogik */
 }
 
 .homepage-community-title { 
@@ -64,7 +72,8 @@ Last Update: 2025-08-24
 }
 
 .homepage-community-description { 
-    font-size: var(--text-lg); 
+    /* VERGRÖSSERT: Mehr Text und größere Schrift */
+    font-size: 1.25rem; /* ERHÖHT: Von var(--text-lg) */
     color: var(--luvex-gray-300); 
     max-width: 600px; 
     line-height: 1.7; 
@@ -77,27 +86,42 @@ Last Update: 2025-08-24
     flex-wrap: wrap; 
 }
 
+/* UV-Thematik: Subtile Effekte */
+.homepage-community-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(34, 211, 238, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
 /* Responsive Anpassungen für die Globe Section */
 @media (max-width: 1024px) {
     .homepage-community-container {
         flex-direction: column;
         text-align: center;
-        padding-top: 3rem;
+        padding-top: 2rem; /* REDUZIERT: Von 3rem */
+        min-height: 300px; /* REDUZIERT */
     }
 
     .homepage-community-content {
-        margin-bottom: 3rem;
+        margin-bottom: 2rem; /* REDUZIERT: Von 3rem */
     }
 
     .homepage-community-visual {
-        min-height: 500px;
+        min-height: 250px; /* REDUZIERT: Von 500px */
+        max-height: 250px;
         width: 100%;
     }
 
     .homepage-community-globe-wrapper {
-        width: 100vw;
-        height: 140%;
-        transform: translate(-50%, -50%);
+        width: 90vw; /* ANGEPASST für Tablet */
+        height: 120%;
+        transform: translate(-50%, -40%); /* ANGEPASST */
     }
 
     .homepage-community-actions {
@@ -106,16 +130,26 @@ Last Update: 2025-08-24
 }
 
 @media (max-width: 768px) {
+    .homepage-community-section {
+        padding: 3rem 0; /* REDUZIERT für Mobile */
+    }
+
+    .homepage-community-container {
+        min-height: 280px; /* REDUZIERT */
+    }
+
+    .homepage-community-visual {
+        min-height: 200px; /* REDUZIERT */
+        max-height: 200px;
+    }
+
     .homepage-community-globe-wrapper {
         width: 100vw;
-        height: 150%;
-        transform: translate(-50%, -50%);
+        height: 140%; /* REDUZIERT: Von 150% */
+        transform: translate(-50%, -35%); /* ANGEPASST */
+    }
+
+    .homepage-community-description {
+        font-size: 1.125rem; /* Mobile-Anpassung */
     }
 }
-
-
-
-
-
-
-
