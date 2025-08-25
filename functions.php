@@ -90,7 +90,7 @@ function luvex_enqueue_assets() {
         $home_styles = [
             'luvex-page-home' => '/assets/css/_page-home.css',
             'luvex-animation-hero-home' => '/assets/css/animations/_animation-hero-home.css',
-            'luvex-animation-globe' => '/assets/css/animations/_animation-globe.css',
+            
         ];
         foreach ($home_styles as $handle => $path) {
             $full_path = get_stylesheet_directory() . $path;
