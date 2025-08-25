@@ -1,8 +1,8 @@
 <?php
 /**
- * LUVEX Theme Functions - Finale Version (FIXED)
+ * LUVEX Theme Functions - PFAD-KORRIGIERTE VERSION
  * Description: Komplette Theme-Setup-, Navigations- und Asset-Lade-Logik.
- * JS-Pfade für bessere Ordnerstruktur aktualisiert.
+ * WICHTIG: Korrigierte JS-Pfade für die tatsächlichen Dateinamen
  */
 
 // 1. ASTRA THEME DEAKTIVIERUNG
@@ -116,25 +116,32 @@ function luvex_enqueue_assets() {
     }
 
     // ========================================================================
-    // JAVASCRIPT LADEN
+    // JAVASCRIPT LADEN - KORRIGIERTE PFADE!
     // ========================================================================
     
     $js_base_uri = get_stylesheet_directory_uri() . '/assets/js/';
     $js_base_path = get_stylesheet_directory() . '/assets/js/';
     $dependencies = array('jquery');
 
-    // Helfer-Funktion zum Einbinden von Scripts
-    $enqueue_script = function($handle, $path_inside_js_folder) use ($js_base_uri, $js_base_path, $dependencies) {
+    // Helfer-Funktion zum Einbinden von Scripts mit Debug-Output
+    $enqueue_script = function($handle, $path_inside_js_folder, $debug_output = false) use ($js_base_uri, $js_base_path, $dependencies) {
         $full_path = $js_base_path . $path_inside_js_folder;
         if (file_exists($full_path)) {
             wp_enqueue_script($handle, $js_base_uri . $path_inside_js_folder, $dependencies, filemtime($full_path), true);
+            if ($debug_output && WP_DEBUG) {
+                error_log("✅ LUVEX JS loaded: " . $handle . " -> " . $path_inside_js_folder);
+            }
+        } else {
+            if (WP_DEBUG) {
+                error_log("❌ LUVEX JS missing: " . $handle . " -> " . $full_path);
+            }
         }
     };
 
-    // Globale Scripts (auf jeder Seite geladen)
+    // Globale Scripts (KORRIGIERTE DATEINAMEN!)
     $global_scripts = [
         'luvex-mobile-menu' => 'global/mobile-menu.js',
-        'luvex-profile-menu' => 'global/profile-menu.js',
+        'luvex-profile-menu' => 'global/profile-menu.js', // ⚠️ KORREKT: profile-menu.js (mit Bindestrich)
         'luvex-modal' => 'global/modal.js',
         'luvex-scroll-animations' => 'global/scroll-animations.js',
         'luvex-scroll-to-top' => 'global/scroll-to-top.js',
@@ -142,12 +149,14 @@ function luvex_enqueue_assets() {
         'luvex-footer-light' => 'global/footer-light-effect.js',
         'luvex-interactive-faq' => 'global/interactive-faq.js',
     ];
+    
     // Debug-Skript nur für eingeloggte Admins laden
     if (is_user_logged_in() && current_user_can('manage_options')) {
         $global_scripts['luvex-debug'] = 'global/debug-scripts.js';
     }
+    
     foreach($global_scripts as $handle => $path) {
-        $enqueue_script($handle, $path);
+        $enqueue_script($handle, $path, true); // Debug aktiviert
     }
 
     // Seitenspezifische Scripts
