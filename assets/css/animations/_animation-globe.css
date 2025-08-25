@@ -75,16 +75,15 @@ Last Update: 2025-08-24 (Kompakt-Update)
     text-align: center; /* NEU: Titel zentriert */
 }
 
-.homepage-community-description { 
-    /* VERGRÖSSERT: Mehr Text und größere Schrift */
-    font-size: 1.25rem; /* ERHÖHT: Von var(--text-lg) */
-    color: var(--luvex-gray-300); 
-    max-width: 600px; 
-    line-height: 1.7; 
-    margin: 0; /* Kein Extra-Margin */
-    text-align: justify; /* BLOCKSATZ: Gleichmäßig verteilter Text */
-    hyphens: none; /* VERHINDERT: Automatische Silbentrennung */
-    word-break: keep-all; /* VERHINDERT: Wortumbrüche in zusammengesetzten Wörtern */
+.homepage-community-description {
+    font-size: 1.25rem;
+    color: var(--luvex-gray-300);
+    max-width: 600px;
+    line-height: 1.7;
+    margin: 0;
+    text-align: justify;
+    hyphens: none;
+    word-break: keep-all;
     margin-right: 3rem;
 }
 

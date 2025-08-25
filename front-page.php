@@ -121,7 +121,7 @@ get_header(); ?>
             
             <!-- Description nach den Buttons -->
             <p class="homepage-community-description">
-                Connect with UV engineers, researchers, and industry leaders from over 50 countries. Share cutting-edge research, solve complex technical challenges, and stay ahead of the latest innovations in UV-C&nbsp;disinfection, LED&nbsp;technology, and industrial applications. Together, we're advancing the science of light.
+                Connect with UV engineers, researchers, and industry leaders from over 50 countries. Share cutting-edge research, solve complex technical challenges, and stay ahead of the latest innovations in "UV-C&nbsp;disinfection, LED&nbsp;technology", and industrial applications. Together, we're advancing the science of light.
             </p>
         </div>
         <div class="homepage-community-visual">
@@ -165,3 +165,5 @@ get_header(); ?>
 </section>
 
 <?php get_footer(); ?>
+
+
