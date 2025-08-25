@@ -60,23 +60,33 @@ Last Update: 2025-08-24
     max-width: 350px;
 }
 
+
+.footer-logo {
+    margin-bottom: 1.5rem; /* Reduziert von vorher */
+}
+
 .footer-logo .custom-logo {
     max-height: 40px;
     width: auto;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0; /* Entfernt */
 }
+
 
 .footer-tagline {
     color: #e9ecef;
     line-height: 1.6;
-    margin-bottom: 2rem;
+    margin: 0 0 2rem 0; /* Oben kein Margin mehr */
     font-size: 0.95rem;
+    order: 3;
 }
 
-.footer-tagline strong {
-    color: var(--luvex-white);
-    font-weight: 600;
+
+
+.footer-tagline strong::after {
+    content: "\A";
+    white-space: pre;
 }
+
 
 /*
 ==============================================================================
@@ -135,8 +145,10 @@ Last Update: 2025-08-24
 .footer-social {
     display: flex;
     gap: 1rem;
-    margin-top: 1.5rem;
+    margin: 1rem 0 1.5rem 0; /* Oben/unten Abstand */
+    order: 2; /* Falls Flexbox verwendet wird */
 }
+
 
 .social-link {
     width: 40px;
