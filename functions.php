@@ -224,4 +224,11 @@ function luvex_get_user_avatar($user_id = null) {
     }
 }
 
+
+// 7. USER SYSTEM LADEN
+$luvex_includes_path = get_stylesheet_directory() . '/includes/';
+
+if (file_exists($luvex_includes_path . '_user_system.php')) {
+    require_once $luvex_includes_path . '_user_system.php';
+}
 ?>
