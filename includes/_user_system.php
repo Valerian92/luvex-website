@@ -1,12 +1,10 @@
 <?php
 /**
  * LUVEX USER SYSTEM - COMPLETE BACKEND LOGIC
- * 
- * Features: Authentication, User Management, Language System, Avatar Upload
+ * * Features: Authentication, User Management, Language System, Avatar Upload
  * Location: /includes/_user-system.php
  * Dependencies: Polylang Plugin
- * 
- * @package Luvex
+ * * @package Luvex
  * @since 3.0.0
  */
 
@@ -561,6 +559,14 @@ class LuvexUserSystem {
      * Get language switcher HTML for header dropdown
      */
     public static function get_language_switcher_dropdown() {
+        // ================== DEBUG START ==================
+        // This will print the raw language data from Polylang at the top of the page.
+        // It helps us see if Polylang finds any available translations for the current page.
+        echo '<pre style="position: absolute; top: 100px; left: 20px; z-index: 99999; background: #fff; border: 2px solid red; padding: 10px;">';
+        var_dump(pll_the_languages(['raw' => 1]));
+        echo '</pre>';
+        // =================== DEBUG END ===================
+
         if (!function_exists('pll_the_languages')) {
             return '';
         }
