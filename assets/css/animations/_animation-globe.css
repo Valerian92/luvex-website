@@ -83,6 +83,7 @@ Last Update: 2025-08-24 (Kompakt-Update)
     text-justify: inter-word; /* OPTIMIERUNG: Bessere Wortverteilung */
     hyphens: none; /* VERHINDERT: Automatische Silbentrennung */
     word-break: keep-all; /* VERHINDERT: Wortumbrüche in zusammengesetzten Wörtern */
+    margin-right: 3rem;
 }
 
 .homepage-community-actions { 

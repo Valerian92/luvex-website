@@ -734,7 +734,7 @@ Last Update: 2025-08-24
 
 .cta-actions {
     display: flex;
-    gap: 1rem;
+    gap: 2.5rem;
     justify-content: center;
     flex-wrap: wrap;
 }
