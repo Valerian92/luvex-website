@@ -1,9 +1,7 @@
 <?php
 /**
- * The header for our theme - WITH UNIFIED LANGUAGE SYSTEM
- * * This version features a single, consistent language switcher for all users,
- * placed directly in the header for optimal accessibility and user experience.
- * * @package Luvex
+ * The header for our theme - POLYLANG-SAFE VERSION
+ * @package Luvex
  * @since 4.0.0
  */
 ?><!doctype html>
@@ -69,12 +67,11 @@
 
         <!-- CTA Button / User Section -->
         <div class="header-cta">
-            <div class="header-actions-group"> <!-- NEUER WRAPPER FÜR FLEXBOX -->
+            <div class="header-actions-group">
 
                 <?php 
-                // Einheitlicher Language Switcher für ALLE
-                // This function from _user-system.php now renders the switcher for guests and logged-in users.
-                if (function_exists('LuvexUserSystem::get_language_switcher_dropdown')) {
+                // SAFE: Language Switcher nur wenn Polylang UND Funktion existiert
+                if (function_exists('pll_the_languages') && function_exists('LuvexUserSystem::get_language_switcher_dropdown')) {
                     echo LuvexUserSystem::get_language_switcher_dropdown();
                 }
                 ?>
@@ -87,20 +84,33 @@
                     <div class="user-section">
                         <div class="user-info" onclick="toggleUserDropdown()">
                             <div class="user-avatar" id="userAvatar">
-                                <?php echo luvex_get_user_avatar(); ?>
+                                <?php 
+                                // SAFE: Avatar nur wenn Funktion existiert
+                                if (function_exists('luvex_get_user_avatar')) {
+                                    echo luvex_get_user_avatar(); 
+                                } else {
+                                    echo strtoupper(substr($first_name, 0, 1));
+                                }
+                                ?>
                             </div>
                             <div class="user-details">
                                 <p class="user-welcome">Welcome</p>
                                 <p class="user-name"><?php echo esc_html($first_name); ?></p>
                             </div>
-                            <i class="fa-solid fa-chevron-down dropdown-arrow"></i> <!-- Icon statt Text-Pfeil -->
+                            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
                         </div>
                         
                         <div class="user-dropdown" id="userDropdown">
                             <div class="dropdown-header">
                                 <div class="dropdown-user-info">
                                    <div class="dropdown-avatar" id="dropdownAvatar">
-                                        <?php echo luvex_get_user_avatar(); ?>
+                                        <?php 
+                                        if (function_exists('luvex_get_user_avatar')) {
+                                            echo luvex_get_user_avatar(); 
+                                        } else {
+                                            echo strtoupper(substr($first_name, 0, 1));
+                                        }
+                                        ?>
                                     </div>
                                     <div class="dropdown-user-details">
                                         <h4><?php echo esc_html($current_user->display_name); ?></h4>
@@ -114,8 +124,6 @@
                                     <i class="fa-solid fa-user"></i>
                                     My Profile
                                 </a>
-                                
-                                <!-- LANGUAGE SWITCHER WAS REMOVED FROM HERE FOR CONSISTENCY -->
                                 
                                 <a href="<?php echo wp_logout_url(home_url()); ?>" class="dropdown-item">
                                     <i class="fa-solid fa-sign-out-alt"></i>
@@ -132,7 +140,7 @@
                     </a>
                 <?php endif; ?>
 
-            </div> <!-- ENDE .header-actions-group -->
+            </div>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -160,8 +168,12 @@
             ));
             ?>
             
-            <?php if (function_exists('pll_the_languages') && !is_user_logged_in()) : ?>
-                <!-- Mobile Language Switcher for Guests -->
+            <?php 
+            // SAFE: Mobile Language Switcher nur wenn alles da ist
+            if (function_exists('pll_the_languages') && !is_user_logged_in()) : 
+                $polylang_languages = pll_the_languages(['raw' => 1]);
+                if ($polylang_languages && is_array($polylang_languages)) :
+            ?>
                 <div class="mobile-language-section">
                     <h4 class="mobile-section-title">
                         <i class="fa-solid fa-globe"></i>
@@ -169,18 +181,20 @@
                     </h4>
                     <div class="mobile-language-options">
                         <?php 
-                        $current_lang = function_exists('luvex_get_current_language') ? luvex_get_current_language() : 'en';
-                        $supported_languages = function_exists('LuvexUserSystem::get_supported_languages') ? LuvexUserSystem::get_supported_languages() : [];
-                        $polylang_languages = pll_the_languages(['raw' => 1]);
+                        // Einfache Fallback-Sprachen wenn UserSystem nicht da ist
+                        $simple_languages = [
+                            'en' => ['name' => 'English', 'flag' => '🇺🇸'],
+                            'de' => ['name' => 'Deutsch', 'flag' => '🇩🇪'],
+                        ];
                         
-                        if ($polylang_languages && is_array($polylang_languages)) :
-                            foreach ($polylang_languages as $lang_code => $lang_data) :
-                                if (!isset($supported_languages[$lang_code])) continue;
-                                $is_current = $lang_code === $current_lang;
-                                $lang_info = $supported_languages[$lang_code];
+                        $current_lang = function_exists('pll_current_language') ? pll_current_language() : 'en';
+                        
+                        foreach ($polylang_languages as $lang_code => $lang_data) :
+                            $is_current = $lang_code === $current_lang;
+                            $lang_info = $simple_languages[$lang_code] ?? ['name' => $lang_data['name'], 'flag' => '🌐'];
                         ?>
                             <button class="mobile-language-option <?php echo $is_current ? 'current' : ''; ?>" 
-                                    onclick="switchLanguageGuest('<?php echo esc_attr($lang_code); ?>')"
+                                    onclick="window.location.href='<?php echo esc_url($lang_data['url']); ?>'"
                                     data-language="<?php echo esc_attr($lang_code); ?>"
                                     <?php echo $is_current ? 'disabled' : ''; ?>>
                                 <span class="language-flag"><?php echo $lang_info['flag']; ?></span>
@@ -190,12 +204,14 @@
                                 <?php endif; ?>
                             </button>
                         <?php 
-                            endforeach;
-                        endif; 
+                        endforeach; 
                         ?>
                     </div>
                 </div>
-            <?php endif; ?>
+            <?php 
+                endif;
+            endif; 
+            ?>
         </div>
     </nav>
 </header>
@@ -212,7 +228,6 @@ function luvex_primary_menu_fallback() {
         echo '<li><a href="' . admin_url('nav-menus.php') . '" style="color: red;">Setup Menu →</a></li>';
         echo '</ul>';
     } else {
-        // Standard fallback for normal visitors
         echo '<ul id="primary-menu">';
         echo '<li><a href="' . home_url('/about/') . '">About</a></li>';
         echo '<li><a href="' . home_url('/uv-technology/') . '">UV Technology</a></li>';
