@@ -89,7 +89,7 @@ Last Update: 2025-08-24 (Kompakt-Update)
 
 .homepage-community-actions { 
     display: flex; 
-    gap: 2rem; /* Größerer Abstand zwischen Buttons */
+    gap: 3.5rem; /* Größerer Abstand zwischen Buttons */
     flex-wrap: wrap; 
     justify-content: center; /* Buttons zentriert */
     margin: 3rem 0 3rem 0; /* VERGRÖSSERT: Mehr Abstand oben UND unten */

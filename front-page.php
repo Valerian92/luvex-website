@@ -121,7 +121,7 @@ get_header(); ?>
             
             <!-- Description nach den Buttons -->
             <p class="homepage-community-description">
-                Connect with UV engineers, researchers, and industry leaders from over 50 countries. Share cutting-edge research, solve complex technical challenges, and stay ahead of the latest innovations in "UV-C&nbsp;disinfection, LED&nbsp;technology", and industrial applications. Together, we're advancing the science of light.
+                Connect with UV engineers, researchers, and industry leaders from over 50 countries. Share cutting-edge research, solve complex technical challenges, and stay ahead of the latest innovations in UV-C&nbsp;disinfection, LED&nbsp;technology, and industrial applications. Together, we're advancing the science of light.
             </p>
         </div>
         <div class="homepage-community-visual">
@@ -155,7 +155,7 @@ get_header(); ?>
     <div class="container">
         <div class="cta-section cta-section--dark">
             <h3>Ready to Master UV Technology?</h3>
-            <p>Join the global community of UV experts. Whether you need consultation, training, or technical support - start your journey with the world's leading UV specialists.</p>
+            <p>Join thousands of UV experts worldwide. Get consultation, training, or technical support from industry-leading specialists.</p>
             <div class="cta-actions">
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="cta-button"><i class="fas fa-comments"></i><span>Get Expert Consultation</span></a>
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="cta-button"><i class="fas fa-graduation-cap"></i><span>Start Learning</span></a>

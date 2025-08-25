@@ -162,25 +162,26 @@ Last Update: 2025-08-23
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    gap: 4rem;
+    gap: 6rem;
 }
 
 /* In _page-home.css - Section 4 Evidence */
 .evidence-content {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Zentriert Button */
+    align-items: flex-start; 
     text-align: left;
 }
 
 .evidence-title { 
     font-size: clamp(2.2rem, 4vw, 3rem); 
-    margin-bottom: 1.5rem; 
+    margin-bottom: 2rem; /* Erhöht von 1.5rem */
+    white-space: nowrap; /* Verhindert Umbruch bei "Evidence-Based" */
 }
 
 .evidence-description { 
     font-size: var(--text-lg); 
-    margin-bottom: 3rem; 
+    margin-bottom: 4rem; /* Erhöht von 3rem */ 
     max-width: 550px; 
 }
 

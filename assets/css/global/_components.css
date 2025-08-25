@@ -720,16 +720,17 @@ Last Update: 2025-08-24
 .cta-section--dark h3 {
     color: var(--luvex-white);
     font-size: 2.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.5rem; /* Erhöht von 1.5rem */
 }
 
 .cta-section--dark p {
     color: var(--luvex-gray-300);
     font-size: 1.2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem; /* Erhöht von 2rem */
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    line-height: 1.5;
 }
 
 .cta-actions {
