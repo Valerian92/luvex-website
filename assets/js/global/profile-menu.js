@@ -1,5 +1,5 @@
 /**
- * LUVEX Profile Menu & Language System - Frontend Logic
+ * LUVEX Profile Menu & Language System - Frontend Logic (FIXED)
  * Enhanced with Language Switching Capabilities
  * 
  * @since 3.0.0
@@ -9,63 +9,84 @@ document.addEventListener('DOMContentLoaded', function() {
     
     /**
      * ========================================================================
-     * USER DROPDOWN FUNCTIONALITY (EXISTING)
+     * USER DROPDOWN FUNCTIONALITY
      * ========================================================================
      */
     
     // Toggle user dropdown
     window.toggleUserDropdown = function() {
         const dropdown = document.getElementById('userDropdown');
-        const guestDropdown = document.getElementById('guestLanguageDropdown');
+        const languageDropdown = document.getElementById('languageDropdown');
         
         if (dropdown) {
             const isVisible = dropdown.classList.contains('visible');
             
             // Close other dropdowns
-            if (guestDropdown) {
-                guestDropdown.classList.remove('visible');
+            if (languageDropdown) {
+                languageDropdown.classList.remove('visible');
+                languageDropdown.classList.remove('show');
             }
             
             dropdown.classList.toggle('visible');
+            dropdown.classList.toggle('show');
             
             // Add ARIA attributes for accessibility
             dropdown.setAttribute('aria-hidden', isVisible ? 'true' : 'false');
         }
     };
     
-    // Toggle guest language dropdown
-    window.toggleGuestLanguageDropdown = function() {
-        const dropdown = document.getElementById('guestLanguageDropdown');
+    // NEW: Toggle language dropdown (unified function)
+    window.toggleLanguageDropdown = function() {
+        const dropdown = document.getElementById('languageDropdown');
         const userDropdown = document.getElementById('userDropdown');
+        const trigger = document.querySelector('.language-switcher-trigger');
         
         if (dropdown) {
-            const isVisible = dropdown.classList.contains('visible');
+            const isVisible = dropdown.classList.contains('visible') || dropdown.classList.contains('show');
             
             // Close user dropdown if open
             if (userDropdown) {
                 userDropdown.classList.remove('visible');
+                userDropdown.classList.remove('show');
             }
             
+            // Toggle language dropdown
             dropdown.classList.toggle('visible');
+            dropdown.classList.toggle('show');
             dropdown.setAttribute('aria-hidden', isVisible ? 'true' : 'false');
+            
+            // Toggle trigger visual state
+            if (trigger) {
+                trigger.classList.toggle('open');
+            }
         }
     };
     
     // Close dropdowns when clicking outside
     document.addEventListener('click', function(event) {
         const userSection = document.querySelector('.user-section');
-        const languageSection = document.querySelector('.header-language-switcher');
+        const languageSection = document.querySelector('.language-switcher-dropdown');
         const userDropdown = document.getElementById('userDropdown');
-        const guestDropdown = document.getElementById('guestLanguageDropdown');
+        const languageDropdown = document.getElementById('languageDropdown');
+        const languageTrigger = document.querySelector('.language-switcher-trigger');
        
         // Close user dropdown if clicking outside
         if (userSection && !userSection.contains(event.target)) {
-            userDropdown?.classList.remove('visible');
+            if (userDropdown) {
+                userDropdown.classList.remove('visible');
+                userDropdown.classList.remove('show');
+            }
         }
         
-        // Close guest language dropdown if clicking outside
+        // Close language dropdown if clicking outside
         if (languageSection && !languageSection.contains(event.target)) {
-            guestDropdown?.classList.remove('visible');
+            if (languageDropdown) {
+                languageDropdown.classList.remove('visible');
+                languageDropdown.classList.remove('show');
+            }
+            if (languageTrigger) {
+                languageTrigger.classList.remove('open');
+            }
         }
     });
 
@@ -193,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     /**
      * ========================================================================
-     * AVATAR UPLOAD SYSTEM (EXISTING - ENHANCED)
+     * AVATAR UPLOAD SYSTEM
      * ========================================================================
      */
     
@@ -394,24 +415,22 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('keydown', function(e) {
         // ESC key closes all dropdowns
         if (e.key === 'Escape') {
-            document.getElementById('userDropdown')?.classList.remove('visible');
-            document.getElementById('guestLanguageDropdown')?.classList.remove('visible');
+            document.getElementById('userDropdown')?.classList.remove('visible', 'show');
+            document.getElementById('languageDropdown')?.classList.remove('visible', 'show');
+            document.querySelector('.language-switcher-trigger')?.classList.remove('open');
         }
         
         // Enter/Space on language buttons
-        if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('dropdown-language-item')) {
-            e.preventDefault();
-            const languageCode = e.target.getAttribute('data-language');
-            if (languageCode && !e.target.disabled) {
-                switchLanguage(languageCode);
-            }
-        }
-        
         if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('language-option')) {
             e.preventDefault();
             const languageCode = e.target.getAttribute('data-language');
             if (languageCode && !e.target.disabled) {
-                switchLanguageGuest(languageCode);
+                const isLoggedIn = typeof luvexLanguage !== 'undefined' && luvexLanguage.user_logged_in;
+                if (isLoggedIn) {
+                    switchLanguage(languageCode);
+                } else {
+                    switchLanguageGuest(languageCode);
+                }
             }
         }
     });
@@ -424,7 +443,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize language system if data is available
     if (typeof luvexLanguage !== 'undefined') {
-        console.log('🌐 LUVEX Language System initialized');
+        console.log('🌍 LUVEX Language System initialized');
         console.log('Current language:', luvexLanguage.current_language);
         console.log('Supported languages:', Object.keys(luvexLanguage.supported_languages));
         
@@ -442,7 +461,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!langData) return;
         
         // Update compact language switcher
-        const compactSwitcher = document.querySelector('.language-switcher-compact');
+        const compactSwitcher = document.querySelector('.language-switcher-trigger');
         if (compactSwitcher) {
             const flag = compactSwitcher.querySelector('.language-flag');
             const code = compactSwitcher.querySelector('.language-code');

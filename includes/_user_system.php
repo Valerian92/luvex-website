@@ -1,10 +1,10 @@
 <?php
 /**
- * LUVEX USER SYSTEM - COMPLETE BACKEND LOGIC
- * * Features: Authentication, User Management, Language System, Avatar Upload
+ * LUVEX USER SYSTEM - COMPLETE BACKEND LOGIC (FIXED)
+ * Features: Authentication, User Management, Language System, Avatar Upload
  * Location: /includes/_user-system.php
  * Dependencies: Polylang Plugin
- * * @package Luvex
+ * @package Luvex
  * @since 3.0.0
  */
 
@@ -527,6 +527,12 @@ class LuvexUserSystem {
             'supported_languages' => self::get_supported_languages(),
             'user_logged_in' => is_user_logged_in()
         ]);
+        
+        // AJAX für Avatar Upload
+        wp_localize_script('luvex-profile-menu', 'luvex_ajax', [
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'nonce' => wp_create_nonce('luvex_avatar_upload')
+        ]);
     }
     
     /**
@@ -559,14 +565,6 @@ class LuvexUserSystem {
      * Get language switcher HTML for header dropdown
      */
     public static function get_language_switcher_dropdown() {
-        // ================== DEBUG START ==================
-        // This will print the raw language data from Polylang at the top of the page.
-        // It helps us see if Polylang finds any available translations for the current page.
-        echo '<pre style="position: absolute; top: 100px; left: 20px; z-index: 99999; background: #fff; border: 2px solid red; padding: 10px;">';
-        var_dump(pll_the_languages(['raw' => 1]));
-        echo '</pre>';
-        // =================== DEBUG END ===================
-
         if (!function_exists('pll_the_languages')) {
             return '';
         }
@@ -593,9 +591,11 @@ class LuvexUserSystem {
                 <?php foreach ($polylang_langs as $lang_code => $lang_data) : 
                     if (!isset($supported_langs[$lang_code])) continue;
                     $is_current = $lang_code === $current_lang;
+                    $function_name = is_user_logged_in() ? 'switchLanguage' : 'switchLanguageGuest';
                 ?>
                     <button class="language-option <?php echo $is_current ? 'current' : ''; ?>" 
-                            onclick="switchLanguage('<?php echo esc_attr($lang_code); ?>')"
+                            onclick="<?php echo $function_name; ?>('<?php echo esc_attr($lang_code); ?>')"
+                            data-language="<?php echo esc_attr($lang_code); ?>"
                             <?php echo $is_current ? 'disabled' : ''; ?>>
                         <span class="language-flag"><?php echo $supported_langs[$lang_code]['flag']; ?></span>
                         <span class="language-name"><?php echo esc_html($supported_langs[$lang_code]['name']); ?></span>

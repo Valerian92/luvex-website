@@ -1,6 +1,6 @@
 <?php
 /**
- * LUVEX Theme Functions - Finale Version
+ * LUVEX Theme Functions - Finale Version (FIXED)
  * Description: Komplette Theme-Setup-, Navigations- und Asset-Lade-Logik.
  * JS-Pfade für bessere Ordnerstruktur aktualisiert.
  */
@@ -34,7 +34,22 @@ function luvex_theme_setup() {
     add_theme_support('title-tag');
 }
 
-// 4. CSS & JAVASCRIPT LADEN (FINALE VERSION MIT ALLEN SCRIPTS & NEUER JS-STRUKTUR)
+// ========================================================================
+// 4. THEME LOGIC FILES ZUERST LADEN (WICHTIG: VOR CSS/JS!)
+// ========================================================================
+$luvex_includes_path = get_stylesheet_directory() . '/includes/';
+
+// User System (Authentication, Language, Avatars) - ZUERST LADEN
+if (file_exists($luvex_includes_path . '_user_system.php')) {
+    require_once $luvex_includes_path . '_user_system.php';
+}
+
+// CORS Fixes for external apps
+if (file_exists($luvex_includes_path . '_cors_fixes.php')) {
+    require_once $luvex_includes_path . '_cors_fixes.php';
+}
+
+// 5. CSS & JAVASCRIPT LADEN (NACH DEN INCLUDES!)
 add_action('wp_enqueue_scripts', 'luvex_enqueue_assets', 999);
 function luvex_enqueue_assets() {
     // ========================================================================
@@ -173,8 +188,7 @@ function luvex_enqueue_assets() {
     }
 }
 
-
-// 5. NAV WALKER KLASSE
+// 6. NAV WALKER KLASSE
 class Luvex_Nav_Walker extends Walker_Nav_Menu {
     public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
         $indent = ($depth) ? str_repeat("\t", $depth) : '';
@@ -201,50 +215,7 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
     }
 }
 
-// 6. AVATAR FUNKTION (Wird jetzt aus _user-system.php geladen, kann hier als Fallback bleiben oder entfernt werden)
-if (!function_exists('luvex_get_user_avatar')) {
-    function luvex_get_user_avatar($user_id = null) {
-        if (!$user_id) {
-            $user_id = get_current_user_id();
-        }
-        
-        if (0 === $user_id) {
-            return '';
-        }
-
-        $avatar_url = get_user_meta($user_id, 'luvex_avatar_url', true);
-        
-        if ($avatar_url) {
-            return '<img src="' . esc_url($avatar_url) . '" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">';
-        } else {
-            $user = get_userdata($user_id);
-            if (!$user) {
-                return '?';
-            }
-            $first_name = $user->first_name ?: $user->display_name;
-            $last_name = $user->last_name ?: '';
-            $initials = strtoupper(substr($first_name, 0, 1) . substr($last_name, 0, 1));
-            return $initials ?: '?';
-        }
-    }
-}
-
-
-// ========================================================================
-// 7. THEME LOGIC FILES (NEU HINZUGEFÜGT)
-// ========================================================================
-// This section includes all custom backend logic for the theme.
-
-$luvex_includes_path = get_stylesheet_directory() . '/includes/';
-
-// User System (Authentication, Language, Avatars)
-if (file_exists($luvex_includes_path . '_user_system.php')) {
-    require_once $luvex_includes_path . '_user_system.php';
-}
-
-// CORS Fixes for external apps
-if (file_exists($luvex_includes_path . '_cors_fixes.php')) {
-    require_once $luvex_includes_path . '_cors_fixes.php';
-}
+// Avatar-Funktion wird jetzt von _user_system.php bereitgestellt!
+// Keine doppelte Definition mehr nötig.
 
 ?>
