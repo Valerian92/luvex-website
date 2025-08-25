@@ -83,7 +83,6 @@ Last Update: 2025-08-24 (Kompakt-Update)
     line-height: 1.7; 
     margin: 0; /* Kein Extra-Margin */
     text-align: justify; /* BLOCKSATZ: Gleichmäßig verteilter Text */
-    text-justify: inter-word; /* OPTIMIERUNG: Bessere Wortverteilung */
     hyphens: none; /* VERHINDERT: Automatische Silbentrennung */
     word-break: keep-all; /* VERHINDERT: Wortumbrüche in zusammengesetzten Wörtern */
     margin-right: 3rem;
