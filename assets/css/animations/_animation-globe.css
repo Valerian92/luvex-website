@@ -24,14 +24,17 @@ Last Update: 2025-08-24 (Kompakt-Update)
 .homepage-community-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 var(--space-lg);
+    /* ENTFERNT: padding: 0 var(--space-lg); */
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 2rem; 
+    padding-right: 4rem; 
     display: flex;
     align-items: center;
     gap: var(--space-lg);
     position: relative;
     z-index: 2;
-    /* REDUZIERT: Kompaktere Container-Höhe */
-    min-height: 400px; /* Hinzugefügt: Definierte Mindesthöhe */
+    min-height: 400px;
 }
 
 .homepage-community-content {
