@@ -90,7 +90,7 @@ function luvex_enqueue_assets() {
         $home_styles = [
             'luvex-page-home' => '/assets/css/_page-home.css',
             'luvex-animation-hero-home' => '/assets/css/animations/_animation-hero-home.css',
-            
+            'luvex-animation-globe' => '/assets/css/animations/_animation-globe.css',
         ];
         foreach ($home_styles as $handle => $path) {
             $full_path = get_stylesheet_directory() . $path;
@@ -140,8 +140,6 @@ function luvex_enqueue_assets() {
         wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), null, true);
         $enqueue_script('luvex-globe-animation', 'pages/globe-animation.js');
         $enqueue_script('luvex-hero-photons', 'pages/hero-photons.js');
-        $enqueue_script('luvex-hero-spectrum', 'pages/hero-spectrum.js');
-        $enqueue_script('luvex-hero-hexagon', 'pages/hero-hexagon.js');
     }
     if (is_page('contact')) {
         $enqueue_script('luvex-contact-hero', 'pages/contact-hero-animation.js');
@@ -162,6 +160,13 @@ function luvex_enqueue_assets() {
     }
     if (is_page('mercury-uv-lamps')) {
         $enqueue_script('luvex-mercury-lamps-hero', 'pages/hero-mercury-lamps.js');
+    }
+    // NEU: Skripte den korrekten Seiten zugewiesen
+    if (is_page('uv-knowledge')) {
+        $enqueue_script('luvex-hero-spectrum', 'pages/hero-spectrum.js');
+    }
+    if (is_page('uv-consulting')) {
+        $enqueue_script('luvex-hero-hexagon', 'pages/hero-hexagon.js');
     }
 }
 
