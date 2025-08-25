@@ -6,9 +6,10 @@ LUVEX THEME - UV KNOWLEDGE PAGE
 
 /* Hero mit Spectrum Animation */
 .hero-spectrum-engine {
-    position: relative;
-    min-height: 60vh;
-    cursor: none; /* Standard-Cursor ausblenden */
+    min-height: 70vh; /* Erhöht für bessere Proportionen */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero-spectrum-engine canvas {
@@ -17,7 +18,6 @@ LUVEX THEME - UV KNOWLEDGE PAGE
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
 }
 
 .wavelength-indicator {
