@@ -247,7 +247,20 @@ body.ast-separate-container .site-content {
 .text-center { text-align: center; }
 .text-highlight { color: var(--luvex-bright-cyan); }
 .hidden { display: none; }
+.no-break {
+    white-space: nowrap;
+    display: inline-block;
+}
 
+.no-hyphen {
+    hyphens: none;
+    word-break: keep-all;
+}
+
+.keep-together {
+    white-space: nowrap;
+    display: inline;
+}
 /*
 ==============================================================================
 7. RESPONSIVE LAYOUT FIXES

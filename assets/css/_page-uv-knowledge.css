@@ -1,0 +1,54 @@
+/*
+==============================================================================
+LUVEX THEME - UV KNOWLEDGE PAGE
+==============================================================================
+*/
+
+/* Hero mit Spectrum Animation */
+.hero-spectrum-engine {
+    position: relative;
+    min-height: 60vh;
+    cursor: none; /* Standard-Cursor ausblenden */
+}
+
+.hero-spectrum-engine canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.wavelength-indicator {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(27, 42, 73, 0.8);
+    color: var(--luvex-bright-cyan);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    z-index: 10;
+}
+
+/* Standard Hero Content - über Animation */
+.hero-spectrum-engine .luvex-hero__container {
+    position: relative;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.hero-spectrum-engine .luvex-hero__cta {
+    pointer-events: auto;
+}
+
+/* Fallback Content ausblenden wenn JS lädt */
+.hero-content-fallback {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.hero-spectrum-engine.js-loaded .hero-content-fallback {
+    opacity: 1;
+}

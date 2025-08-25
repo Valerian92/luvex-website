@@ -5,26 +5,23 @@
  */
 get_header(); ?>
 
-<section 
-    class="luvex-hero hero-spectrum-engine" 
-    data-button-link="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>"
-    data-button-text="Explore Applications"
->
+<section class="luvex-hero hero-spectrum-engine">
     <canvas id="spectrum-canvas"></canvas>
     <div class="wavelength-indicator">400 nm</div>
     
-    <!-- KORREKTUR: Wrapper-Container hinzugefügt, damit das JS den Inhalt findet -->
-    <div class="luvex-hero__container" style="pointer-events: none; z-index: 5;">
-        <div class="hero-content-fallback">
+    <div class="luvex-hero__container">
+        <div class="luvex-hero__content hero-content-fallback">
             <h1 class="luvex-hero__title">
                 Mastering the <span class="text-highlight">UV Spectrum</span>
             </h1>
             <p class="luvex-hero__description">
                 Precision analysis and solutions with advanced UVC and UVA technology.
             </p>
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-hero__cta" style="pointer-events: auto;">
-                Explore Applications
-            </a>
+            <div class="luvex-hero__cta-container">
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-hero__cta">
+                    Explore Applications
+                </a>
+            </div>
         </div>
     </div>
 </section>

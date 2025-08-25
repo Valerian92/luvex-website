@@ -161,16 +161,19 @@ Last Update: 2025-08-23
 .evidence-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 6rem;
+    align-items: start; /* Statt center */
+    gap: 8rem; /* Erhöht von 6rem für mehr Abstand */
+    max-width: 1400px; /* Breiterer Container */
+    margin: 0 auto;
 }
 
 /* In _page-home.css - Section 4 Evidence */
 .evidence-content {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; 
-    text-align: left;
+    align-items: center; /* Button mittig */
+    text-align: center; /* Text mittig für bessere Balance */
+    padding-right: 2rem; /* Mehr Abstand zum rechten Element */
 }
 
 .evidence-title { 

@@ -162,8 +162,18 @@ function luvex_enqueue_assets() {
         $enqueue_script('luvex-mercury-lamps-hero', 'pages/hero-mercury-lamps.js');
     }
     // NEU: Skripte den korrekten Seiten zugewiesen
+    // UV Knowledge Page Styles
     if (is_page('uv-knowledge')) {
-        $enqueue_script('luvex-hero-spectrum', 'pages/hero-spectrum.js');
+        $uv_knowledge_styles = [
+            'luvex-page-uv-knowledge' => '/assets/css/_page-uv-knowledge.css',
+            'luvex-animation-spectrum' => '/assets/css/animations/_animation-spectrum.css',
+        ];
+        foreach ($uv_knowledge_styles as $handle => $path) {
+            $full_path = get_stylesheet_directory() . $path;
+            if (file_exists($full_path)) {
+                wp_enqueue_style($handle, get_stylesheet_directory_uri() . $path, ['luvex-main'], filemtime($full_path));
+            }
+        }
     }
     if (is_page('uv-consulting')) {
         $enqueue_script('luvex-hero-hexagon', 'pages/hero-hexagon.js');

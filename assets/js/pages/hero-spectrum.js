@@ -158,51 +158,8 @@ document.addEventListener('DOMContentLoaded', function() {
         ];
     }
 
-    function drawContent() {
-        ctx.save();
-       
-        // Title
-        ctx.font = "bold clamp(2.5rem, 5vw, 4rem) -apple-system, sans-serif";
-        ctx.fillStyle = "white";
-        ctx.textAlign = "center";
-        ctx.textBaseline = 'middle';
-        ctx.fillText("Mastering the UV Spectrum", width / 2, height / 2 - 90);
-        
-        // Description
-        ctx.font = "1.125rem -apple-system, sans-serif";
-        ctx.fillStyle = "rgba(206, 212, 218, 0.9)";
-        ctx.fillText("Precision analysis and solutions with advanced UVC and UVA technology.", width / 2, height / 2 - 30);
-        
-        // Button
-        button.x = width / 2 - button.width / 2;
-        button.y = height / 2 + 80;
-        
-        ctx.beginPath();
-        ctx.moveTo(button.x + button.radius, button.y);
-        ctx.lineTo(button.x + button.width - button.radius, button.y);
-        ctx.quadraticCurveTo(button.x + button.width, button.y, button.x + button.width, button.y + button.radius);
-        ctx.lineTo(button.x + button.width, button.y + button.height - button.radius);
-        ctx.quadraticCurveTo(button.x + button.width, button.y + button.height, button.x + button.width - button.radius, button.y + button.height);
-        ctx.lineTo(button.x + button.radius, button.y + button.height);
-        ctx.quadraticCurveTo(button.x, button.y + button.height, button.x, button.y + button.height - button.radius);
-        ctx.lineTo(button.x, button.y + button.radius);
-        ctx.quadraticCurveTo(button.x, button.y, button.x + button.radius, button.y);
-        ctx.closePath();
-        
-        if (isHoveringButton) {
-            ctx.fillStyle = "rgba(255, 255, 255, 1)";
-            ctx.fill();
-            ctx.fillStyle = "#0B1A3D";
-        } else {
-            ctx.fillStyle = `rgb(109, 213, 237)`;
-            ctx.fill();
-            ctx.fillStyle = "#0B1A3D";
-        }
-
-        // Button Text
-        ctx.font = "bold 1rem -apple-system, sans-serif";
-        ctx.fillText(button.text, width / 2, button.y + button.height / 2);
-        ctx.restore();
+ function drawContent() { 
+    
     }
 
     function drawAnimatedCursor() {
