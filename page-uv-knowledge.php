@@ -7,15 +7,14 @@ get_header(); ?>
 
 <!-- 
 ==============================================================================
-FIX: Standard Hero Content wieder eingefügt
-==============================================================================
-Der .luvex-hero__container wurde hinzugefügt, um den Titel und andere
-Textelemente im HTML darzustellen, anstatt sie im Canvas zu zeichnen.
-Dadurch wird der Inhalt suchmaschinenfreundlich und einfacher zu verwalten.
-Das Canvas dient jetzt nur noch als animierter Hintergrund.
+FIX:
+1. Die Klasse `luvex-hero` wurde entfernt, um das fehlerhafte Padding zu beheben.
+   Die Höhe wird jetzt nur noch durch die CSS-Regel in _page-uv-knowledge.css gesteuert.
+2. Der Standard-HTML-Container für den Titel und Untertitel wurde hinzugefügt.
+   Der Text kommt jetzt direkt aus dem HTML und ist suchmaschinenfreundlich.
 ==============================================================================
 -->
-<section class="luvex-hero hero-spectrum-engine">
+<section class="hero-spectrum-engine">
     <!-- Das Canvas für die Hintergrundanimation -->
     <canvas id="spectrum-canvas"></canvas>
     <div class="wavelength-indicator">400 nm</div>
@@ -26,12 +25,6 @@ Das Canvas dient jetzt nur noch als animierter Hintergrund.
         <p class="luvex-hero__subtitle">
             Your central resource for everything about UV technology.
         </p>
-        <!-- Ein Button kann hier bei Bedarf einfach wieder hinzugefügt werden -->
-        <!--
-        <div class="luvex-hero__cta-container">
-            <a href="#" class="luvex-hero__cta">Explore Now</a>
-        </div>
-        -->
     </div>
 </section>
 

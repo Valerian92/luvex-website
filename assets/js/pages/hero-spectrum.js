@@ -9,15 +9,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const ctx = canvas.getContext('2d');
     const indicator = document.querySelector('.wavelength-indicator');
     
-    const buttonLink = heroSection.dataset.buttonLink || '#';
-    const buttonText = heroSection.dataset.buttonText || 'Explore';
+    // ==========================================================================
+    // FIX: Alle Variablen und Funktionen zum Zeichnen von Text und Buttons
+    // wurden entfernt, da der Inhalt jetzt aus der HTML-Datei kommt.
+    // ==========================================================================
 
     let width, height;
     let particlesArray = [];
     let waves = [];
     let sparks = [];
     let increment = 0;
-    let isHoveringButton = false;
 
     const mouse = {
         targetX: window.innerWidth / 2,
@@ -34,32 +35,20 @@ document.addEventListener('DOMContentLoaded', function() {
         targetColor: { r: 109, g: 213, b: 237 }
     };
 
-    const button = {
-        x: 0, y: 0, width: 220, height: 50, radius: 8,
-        text: buttonText,
-        href: buttonLink
-    };
-
     const mapRange = (value, inMin, inMax, outMin, outMax) => (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
     const lerp = (start, end, amt) => (1 - amt) * start + amt * end;
     
     function onResize() {
         const rect = heroSection.getBoundingClientRect();
-        // KORREKTUR FÜR TEXTSCHÄRFE: Geräte-Pixel-Ratio holen
         const dpr = window.devicePixelRatio || 1;
 
         width = rect.width;
         height = rect.height;
 
-        // Canvas an die tatsächliche Pixel-Anzahl des Bildschirms anpassen
         canvas.width = width * dpr;
         canvas.height = height * dpr;
-
-        // Sicherstellen, dass das Canvas via CSS die korrekte Größe beibehält
         canvas.style.width = `${width}px`;
         canvas.style.height = `${height}px`;
-
-        // Den Zeichen-Kontext skalieren, damit unsere Koordinaten wieder stimmen
         ctx.scale(dpr, dpr);
 
         init();
@@ -78,12 +67,8 @@ document.addEventListener('DOMContentLoaded', function() {
         mouse.targetY = height / 2;
     });
 
-    canvas.addEventListener('click', () => {
-        if (isHoveringButton) {
-            window.location.href = button.href;
-        }
-    });
-
+    // Klick-Events für Buttons sind nicht mehr nötig, da sie normale HTML-Links wären
+    
     class Wave {
         constructor(config) {
             this.yPercent = config.yPercent; this.baseAmplitude = config.amplitude; this.speed = config.speed;
@@ -158,14 +143,13 @@ document.addEventListener('DOMContentLoaded', function() {
         ];
     }
 
- function drawContent() { 
-    
-    }
-
     function drawAnimatedCursor() {
         if (mouse.currentX === undefined) return;
         
-        if (isHoveringButton) {
+        // Da es keinen Button mehr im Canvas gibt, vereinfachen wir die Logik.
+        const isHovering = false; // Platzhalter, falls du später wieder interaktive Elemente hinzufügst
+
+        if (isHovering) {
             animatedCursor.targetRadius = 6 + Math.sin(increment * 15) * 2;
             animatedCursor.targetColor = { r: 190, g: 100, b: 255 };
             if (Math.random() > 0.8) {
@@ -181,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
         animatedCursor.color.g = lerp(animatedCursor.color.g, animatedCursor.targetColor.g, 0.2);
         animatedCursor.color.b = lerp(animatedCursor.color.b, animatedCursor.targetColor.b, 0.2);
 
-        let fillOpacity = isHoveringButton ? 0.8 + Math.sin(increment * 15) * 0.2 : 0.15;
+        let fillOpacity = isHovering ? 0.8 + Math.sin(increment * 15) * 0.2 : 0.15;
 
         const color = animatedCursor.color;
         ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${fillOpacity})`;
@@ -216,17 +200,10 @@ document.addEventListener('DOMContentLoaded', function() {
         return { r: Math.round(255 * R * factor), g: Math.round(255 * G * factor), b: Math.round(255 * B * factor) };
     }
 
-    let contentFadeIn = 0;
     function animate() {
         ctx.clearRect(0, 0, width, height);
         mouse.currentX = lerp(mouse.currentX, mouse.targetX, 0.2);
         mouse.currentY = lerp(mouse.currentY, mouse.targetY, 0.2);
-
-        isHoveringButton = 
-            mouse.currentX > button.x &&
-            mouse.currentX < button.x + button.width &&
-            mouse.currentY > button.y &&
-            mouse.currentY < button.y + button.height;
 
         const mouseXNormalized = mouse.currentX / width;
         const currentWavelength = mapRange(mouseXNormalized, 0, 1, 100, 780);
@@ -241,11 +218,9 @@ document.addEventListener('DOMContentLoaded', function() {
             wave.draw(increment, dynamicAmplitude, dynamicLength, dynamicColor);
         });
         
-        if(contentFadeIn < 1) contentFadeIn += 0.02;
-        ctx.save();
-        ctx.globalAlpha = contentFadeIn;
-        drawContent();
-        ctx.restore();
+        // ==========================================================================
+        // FIX: Der Aufruf von drawContent() wurde hier entfernt.
+        // ==========================================================================
         
         for (let i = sparks.length - 1; i >= 0; i--) {
             sparks[i].update();
