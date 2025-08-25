@@ -5,11 +5,34 @@
  */
 get_header(); ?>
 
-<!-- Hero mit Spectrum Animation - NUR Canvas -->
+<!-- 
+==============================================================================
+FIX: Standard Hero Content wieder eingefügt
+==============================================================================
+Der .luvex-hero__container wurde hinzugefügt, um den Titel und andere
+Textelemente im HTML darzustellen, anstatt sie im Canvas zu zeichnen.
+Dadurch wird der Inhalt suchmaschinenfreundlich und einfacher zu verwalten.
+Das Canvas dient jetzt nur noch als animierter Hintergrund.
+==============================================================================
+-->
 <section class="luvex-hero hero-spectrum-engine">
+    <!-- Das Canvas für die Hintergrundanimation -->
     <canvas id="spectrum-canvas"></canvas>
     <div class="wavelength-indicator">400 nm</div>
-    <!-- Kein HTML-Text hier - alles kommt aus JS -->
+
+    <!-- Der Standard Hero Content Container -->
+    <div class="luvex-hero__container">
+        <h1 class="luvex-hero__title">UV Knowledge Hub</h1>
+        <p class="luvex-hero__subtitle">
+            Your central resource for everything about UV technology.
+        </p>
+        <!-- Ein Button kann hier bei Bedarf einfach wieder hinzugefügt werden -->
+        <!--
+        <div class="luvex-hero__cta-container">
+            <a href="#" class="luvex-hero__cta">Explore Now</a>
+        </div>
+        -->
+    </div>
 </section>
 
 <!-- UV Technology Categories -->

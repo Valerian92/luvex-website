@@ -1,25 +1,56 @@
 /*
 ==============================================================================
-LUVEX THEME - UV KNOWLEDGE PAGE
+LUVEX THEME - UV KNOWLEDGE PAGE (FINAL & COMBINED)
+==============================================================================
+Description: Enthält alle spezifischen Styles für die UV Knowledge Seite,
+             inklusive der Hero-Animation und des Custom Cursors.
+             Die Datei _animation-spectrum.css wird nicht mehr benötigt.
 ==============================================================================
 */
 
-/* Hero mit Spectrum Animation */
+/* ==============================================================================
+Hero mit Spectrum Animation
+==============================================================================
+- .hero-spectrum-engine ist der Haupt-Wrapper.
+- `display: flex` zentriert den Text-Container vertikal und horizontal.
+- `position: relative` ist wichtig, damit das absolut positionierte 
+  Canvas darin enthalten bleibt.
+- `cursor: none` blendet den Standard-Mauszeiger im gesamten Hero-Bereich aus,
+  sodass nur der animierte Custom Cursor sichtbar ist.
+==============================================================================
+*/
 .hero-spectrum-engine {
-    min-height: 70vh; /* Erhöht für bessere Proportionen */
+    min-height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative; /* Wichtig für das Stacking */
+    overflow: hidden; /* Verhindert, dass Elemente überlaufen */
+    cursor: none !important; /* FIX: Blendet den normalen Cursor aus */
 }
 
+/* ==============================================================================
+Canvas (Hintergrundanimation)
+==============================================================================
+- `position: absolute` nimmt das Canvas aus dem normalen Layout-Fluss.
+- `z-index: 1` platziert es auf der untersten Ebene im Hero.
+==============================================================================
+*/
 .hero-spectrum-engine canvas {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: 1; /* Hintergrundebene */
 }
 
+/* ==============================================================================
+Wellenlängen-Anzeige
+==============================================================================
+- `z-index: 10` stellt sicher, dass sie immer sichtbar ist.
+==============================================================================
+*/
 .wavelength-indicator {
     position: absolute;
     top: 20px;
@@ -29,26 +60,46 @@ LUVEX THEME - UV KNOWLEDGE PAGE
     padding: 0.5rem 1rem;
     border-radius: var(--radius-md);
     font-weight: 600;
-    z-index: 10;
+    z-index: 10; /* Über allem, außer dem Cursor */
 }
 
-/* Standard Hero Content - über Animation */
+/* ==============================================================================
+Standard Hero Content (Text-Container)
+==============================================================================
+- `position: relative` und `z-index: 5` heben den Container über das Canvas.
+- `pointer-events: none` ist der Schlüssel: Der Text reagiert nicht auf
+  Mausklicks, sodass die Maus-Events zur Animation auf dem Canvas durchgehen.
+  Das erhält den interaktiven Effekt und den Custom Cursor.
+==============================================================================
+*/
 .hero-spectrum-engine .luvex-hero__container {
     position: relative;
-    z-index: 5;
-    pointer-events: none;
+    z-index: 5; /* Vordergrundebene */
+    pointer-events: none; /* Lässt Klicks zum Canvas durch */
+    text-align: center; /* Stellt sicher, dass der Text zentriert ist */
 }
 
+/*
+==============================================================================
+Anklickbare Elemente (z.B. Buttons)
+==============================================================================
+- Wenn du einen Button hinzufügst, überschreibt diese Regel die `pointer-events: none`
+  Regel vom Container, damit der Button wieder klickbar wird.
+==============================================================================
+*/
 .hero-spectrum-engine .luvex-hero__cta {
-    pointer-events: auto;
+    pointer-events: auto; /* Macht den Button wieder klickbar */
 }
 
-/* Fallback Content ausblenden wenn JS lädt */
-.hero-content-fallback {
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-.hero-spectrum-engine.js-loaded .hero-content-fallback {
-    opacity: 1;
+/* ==============================================================================
+Responsive Anpassungen (aus _animation-spectrum.css übernommen)
+==============================================================================
+*/
+@media (max-width: 768px) {
+    .wavelength-indicator {
+        top: 10px;
+        right: 10px;
+        font-size: 0.9rem;
+        padding: 0.25rem 0.75rem;
+    }
 }
