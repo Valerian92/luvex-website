@@ -69,16 +69,24 @@
         <div class="header-cta">
             <div class="header-actions-group">
 
-                <?php 
-                // TEST: Language Switcher
-                if (function_exists('pll_the_languages')) {
-                    echo '<div style="color:green;">POLYLANG AKTIV</div>';
-                }
-                if (class_exists('LuvexUserSystem')) {
-                    echo '<div style="color:blue;">USER SYSTEM GELADEN</div>';
+               <?php 
+                // Echter Language Switcher
+                if (function_exists('pll_the_languages') && class_exists('LuvexUserSystem')) {
+                    if (method_exists('LuvexUserSystem', 'get_language_switcher_dropdown')) {
+                        echo LuvexUserSystem::get_language_switcher_dropdown();
+                    } else {
+                        // Fallback: Einfache Polylang Links
+                        $languages = pll_the_languages(['raw' => 1]);
+                        if ($languages) {
+                            echo '<div class="simple-language-switcher">';
+                            foreach ($languages as $lang) {
+                                echo '<a href="' . esc_url($lang['url']) . '">' . esc_html($lang['name']) . '</a> ';
+                            }
+                            echo '</div>';
+                        }
+                    }
                 }
                 ?>
-
                 <?php if (is_user_logged_in()) : 
                     $current_user = wp_get_current_user();
                     $first_name = !empty($current_user->first_name) ? $current_user->first_name : $current_user->display_name;
