@@ -70,9 +70,12 @@
             <div class="header-actions-group">
 
                 <?php 
-                // SAFE: Language Switcher nur wenn Polylang UND Funktion existiert
-                if (function_exists('pll_the_languages') && function_exists('LuvexUserSystem::get_language_switcher_dropdown')) {
-                    echo LuvexUserSystem::get_language_switcher_dropdown();
+                // TEST: Language Switcher
+                if (function_exists('pll_the_languages')) {
+                    echo '<div style="color:green;">POLYLANG AKTIV</div>';
+                }
+                if (class_exists('LuvexUserSystem')) {
+                    echo '<div style="color:blue;">USER SYSTEM GELADEN</div>';
                 }
                 ?>
 
