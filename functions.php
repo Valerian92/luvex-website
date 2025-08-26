@@ -3,6 +3,7 @@
  * LUVEX Theme Functions - Finale Version
  * Description: Komplette Theme-Setup-, Navigations- und Asset-Lade-Logik.
  * JS-Pfade für bessere Ordnerstruktur aktualisiert.
+ * KORREKTUR: Lädt News-spezifische Assets jetzt korrekt.
  */
 
 // 1. ASTRA THEME DEAKTIVIERUNG
@@ -101,6 +102,18 @@ function luvex_enqueue_assets() {
     }
 
     // ========================================================================
+    // KORREKTUR: UV News Styles & Scripts (Sonderfall für Custom Post Type)
+    // ========================================================================
+    if (is_post_type_archive('uv_news') || is_singular('uv_news')) {
+        // Lade das CSS für die News-Seite
+        $news_css_path = get_stylesheet_directory() . '/assets/css/_news.css';
+        if (file_exists($news_css_path)) {
+            wp_enqueue_style('luvex-news-styles', get_stylesheet_directory_uri() . '/assets/css/_news.css', ['luvex-main'], filemtime($news_css_path));
+        }
+    }
+
+
+    // ========================================================================
     // JAVASCRIPT LADEN
     // ========================================================================
     
@@ -173,7 +186,13 @@ function luvex_enqueue_assets() {
     if (is_page('uv-solutions')) {
         $enqueue_script('luvex-hero-soltuions-animation', 'pages/hero-solutions-animation.js');
     }
-    if (is_page('uv_news')) {
+    
+    // ========================================================================
+    // KORREKTUR: Lade das Hero-Skript nur für den "uv_news" Post Type
+    // `is_post_type_archive('uv_news')` -> für die Archiv-Seite /uv_news/
+    // `is_singular('uv_news')` -> für einzelne News-Beiträge
+    // ========================================================================
+    if (is_post_type_archive('uv_news') || is_singular('uv_news')) {
         $enqueue_script('luvex-hero-news-animation', 'pages/hero-news-network.js');
     }
 
