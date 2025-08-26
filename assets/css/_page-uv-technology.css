@@ -55,8 +55,7 @@ Canvas (Hintergrundanimation)
 Wellenlängen-Anzeige
 ==============================================================================
 FIX:
-- `background` ist jetzt weiß für maximale Lesbarkeit.
-- `border` und `box-shadow` für eine saubere Abhebung.
+- `pointer-events: none` hinzugefügt, damit der Cursor darüber fahren kann.
 ==============================================================================
 */
 .wavelength-indicator {
@@ -64,17 +63,18 @@ FIX:
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.95); /* FIX: Weißer Hintergrund */
-    backdrop-filter: blur(4px); /* Leichter Blur-Effekt */
-    color: var(--luvex-dark-blue); /* Standardfarbe für den Text */
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(4px);
+    color: var(--luvex-dark-blue);
     padding: 0.5rem 1rem;
     border-radius: var(--radius-md);
     font-weight: 600;
     font-family: 'Courier New', Courier, monospace;
     z-index: 10;
-    border: 1px solid var(--luvex-gray-200); /* Heller Rand */
-    box-shadow: var(--shadow-sm); /* Leichter Schatten */
+    border: 1px solid var(--luvex-gray-200);
+    box-shadow: var(--shadow-sm);
     transition: color 0.2s ease;
+    pointer-events: none; /* FIX: Lässt Maus-Events durch */
 }
 
 /* ==============================================================================

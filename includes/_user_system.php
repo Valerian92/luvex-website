@@ -44,8 +44,8 @@ class LuvexUserSystem {
         add_action('wp_ajax_luvex_upload_avatar', [self::class, 'ajax_upload_avatar']);
         add_action('wp_ajax_luvex_update_profile', [self::class, 'ajax_update_profile']);
         
-        // Authentication hooks
-        add_action('init', [self::class, 'handle_auth_forms'], 5);
+        // KORREKTUR: Die Authentifizierungs-Hooks wurden entfernt, da sie von _luvex_security.php gehandhabt werden.
+        // add_action('init', [self::class, 'handle_auth_forms'], 5);
     }
     
     /**
@@ -358,110 +358,12 @@ class LuvexUserSystem {
     
     /**
      * ========================================================================
-     * AUTHENTICATION SYSTEM
+     * KORREKTUR: AUTHENTICATION SYSTEM ENTFERNT
+     * Dieser gesamte Block wurde entfernt, um Konflikte mit _luvex_security.php
+     * zu vermeiden. Die Logik für Login und Registrierung befindet sich jetzt
+     * ausschließlich in der _luvex_security.php Datei.
      * ========================================================================
      */
-    
-    /**
-     * Handle authentication forms
-     */
-    public static function handle_auth_forms() {
-        if (is_admin()) {
-            return;
-        }
-        
-        // Handle login
-        if (isset($_POST['luvex_login_submit'])) {
-            self::handle_login_form();
-        }
-        
-        // Handle registration
-        if (isset($_POST['luvex_register_submit'])) {
-            self::handle_registration_form();
-        }
-    }
-    
-    /**
-     * Handle login form submission
-     */
-    private static function handle_login_form() {
-        if (!wp_verify_nonce($_POST['_wpnonce'], 'luvex_login_form')) {
-            wp_redirect(add_query_arg('error', 'invalid_nonce', home_url('/login/')));
-            exit;
-        }
-        
-        $credential = sanitize_text_field($_POST['user_login']);
-        $password = $_POST['user_password'];
-        $remember = isset($_POST['remember_me']);
-        
-        // Determine if credential is email or username
-        $user = null;
-        if (is_email($credential)) {
-            $user = get_user_by('email', $credential);
-        } else {
-            $user = get_user_by('login', $credential);
-        }
-        
-        if (!$user) {
-            wp_redirect(add_query_arg('error', 'invalid_credentials', home_url('/login/')));
-            exit;
-        }
-        
-        $creds = [
-            'user_login'    => $user->user_login,
-            'user_password' => $password,
-            'remember'      => $remember,
-        ];
-        
-        $signon_user = wp_signon($creds, false);
-        
-        if (is_wp_error($signon_user)) {
-            wp_redirect(add_query_arg('error', 'login_failed', home_url('/login/')));
-            exit;
-        }
-        
-        // Successful login - handle redirect
-        $redirect_url = self::get_login_redirect_url();
-        wp_redirect($redirect_url);
-        exit;
-    }
-    
-    /**
-     * Get appropriate redirect URL after login
-     */
-    private static function get_login_redirect_url() {
-        $redirect_param = $_GET['redirect'] ?? '';
-        
-        // External LUVEX apps
-        $external_apps = [
-            'analyzer.luvex.tech',
-            'simulator.luvex.tech'
-        ];
-        
-        foreach ($external_apps as $app) {
-            if (strpos($redirect_param, $app) !== false) {
-                return esc_url_raw($redirect_param);
-            }
-        }
-        
-        // Internal redirect
-        if ($redirect_param) {
-            $internal_page = sanitize_key($redirect_param);
-            return home_url('/' . $internal_page . '/');
-        }
-        
-        // Default to profile
-        return home_url('/profile/');
-    }
-    
-    /**
-     * Handle registration form (placeholder)
-     */
-    private static function handle_registration_form() {
-        // Placeholder for future registration functionality
-        wp_redirect(add_query_arg('message', 'registration_coming_soon', home_url('/register/')));
-        exit;
-    }
     
     /**
      * ========================================================================

@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let width, height;
     let particlesArray = [];
     let waves = [];
-    let sparks = [];
+    // FIX: Die alten "sparks" werden durch "cursorParticles" für den neuen Effekt ersetzt.
+    let cursorParticles = [];
     let increment = 0;
 
     const mouse = {
@@ -20,15 +21,13 @@ document.addEventListener('DOMContentLoaded', function() {
         targetY: window.innerHeight / 2,
         currentX: window.innerWidth / 2,
         currentY: window.innerHeight / 2,
-        radius: 150
+        radius: 150,
+        // Hält die letzte Position fest, um die Bewegungsgeschwindigkeit zu berechnen
+        prevX: window.innerWidth / 2, 
+        prevY: window.innerHeight / 2
     };
 
-    const animatedCursor = {
-        currentRadius: 20,
-        targetRadius: 20,
-        color: { r: 109, g: 213, b: 237 },
-        targetColor: { r: 109, g: 213, b: 237 }
-    };
+    // Das alte 'animatedCursor' Objekt wird nicht mehr benötigt.
 
     const mapRange = (value, inMin, inMax, outMin, outMax) => (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
     const lerp = (start, end, amt) => (1 - amt) * start + amt * end;
@@ -103,22 +102,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    class Spark {
-        constructor(x, y) {
-            this.x = x; this.y = y;
-            const angle = Math.random() * Math.PI * 2;
-            const speed = Math.random() * 2 + 1;
-            this.vx = Math.cos(angle) * speed;
-            this.vy = Math.sin(angle) * speed;
-            this.lifespan = 100;
+    // FIX: Neue Klasse für die Cursor-Partikel
+    class CursorParticle {
+        constructor(x, y, color) {
+            this.x = x;
+            this.y = y;
+            this.color = color;
             this.size = Math.random() * 2 + 1;
+            this.lifespan = 1;
+            // Zufällige Bewegung für einen "glühenden" Effekt
+            this.vx = (Math.random() - 0.5) * 0.5;
+            this.vy = (Math.random() - 0.5) * 0.5;
         }
         update() {
-            this.x += this.vx; this.y += this.vy; this.lifespan--;
+            this.x += this.vx;
+            this.y += this.vy;
+            this.lifespan -= 0.02; // Partikel verblassen langsam
         }
         draw() {
-            ctx.fillStyle = `rgba(190, 100, 255, ${this.lifespan / 100})`;
-            ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+            ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.lifespan})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
         }
     }
 
@@ -136,46 +141,34 @@ document.addEventListener('DOMContentLoaded', function() {
         ];
     }
 
-    function drawAnimatedCursor() {
-        if (mouse.currentX === undefined) return;
-        
-        const isHovering = false; 
+    // FIX: Komplett neue Funktion für den Cursor-Effekt
+    function drawAnimatedCursor(dynamicColor) {
+        // Berechnet die Bewegungsgeschwindigkeit der Maus
+        const speed = Math.hypot(mouse.currentX - mouse.prevX, mouse.currentY - mouse.prevY);
 
-        if (isHovering) {
-            animatedCursor.targetRadius = 6 + Math.sin(increment * 15) * 2;
-            animatedCursor.targetColor = { r: 190, g: 100, b: 255 };
-            if (Math.random() > 0.8) {
-                sparks.push(new Spark(mouse.currentX, mouse.currentY));
+        // Erzeugt neue Partikel, wenn die Maus sich schnell genug bewegt
+        if (speed > 2) {
+            for (let i = 0; i < 2; i++) {
+                 cursorParticles.push(new CursorParticle(mouse.currentX, mouse.currentY, dynamicColor));
             }
-        } else {
-            animatedCursor.targetRadius = 20;
-            animatedCursor.targetColor = { r: 109, g: 213, b: 237 };
         }
 
-        animatedCursor.currentRadius = lerp(animatedCursor.currentRadius, animatedCursor.targetRadius, 0.2);
-        animatedCursor.color.r = lerp(animatedCursor.color.r, animatedCursor.targetColor.r, 0.2);
-        animatedCursor.color.g = lerp(animatedCursor.color.g, animatedCursor.targetColor.g, 0.2);
-        animatedCursor.color.b = lerp(animatedCursor.color.b, animatedCursor.targetColor.b, 0.2);
-
-        let fillOpacity = isHovering ? 0.8 + Math.sin(increment * 15) * 0.2 : 0.15;
-
-        const color = animatedCursor.color;
-        ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${fillOpacity})`;
-        ctx.strokeStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${Math.min(1, fillOpacity + 0.5)})`;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.arc(mouse.currentX, mouse.currentY, animatedCursor.currentRadius, 0, Math.PI * 2);
-        ctx.fill();
+        // Zeichnet und aktualisiert alle Cursor-Partikel
+        for (let i = cursorParticles.length - 1; i >= 0; i--) {
+            cursorParticles[i].update();
+            cursorParticles[i].draw();
+            if (cursorParticles[i].lifespan <= 0) {
+                cursorParticles.splice(i, 1);
+            }
+        }
         
-        if (animatedCursor.currentRadius > 10) {
-             ctx.stroke();
-        }
+        // Speichert die aktuelle Position für die nächste Frame-Berechnung
+        mouse.prevX = mouse.currentX;
+        mouse.prevY = mouse.currentY;
     }
 
-    // FIX: Die Funktion akzeptiert jetzt das Farbobjekt als zweiten Parameter.
     function updateWavelengthIndicator(wavelength, color) {
         indicator.textContent = `${wavelength.toFixed(0)} nm`;
-        // Setzt die Textfarbe des Indikators dynamisch.
         indicator.style.color = `rgb(${color.r}, ${color.g}, ${color.b})`;
     }
     
@@ -191,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (wavelength > 700) factor = 0.3 + 0.7 * (780 - wavelength) / (780 - 700);
         else if (wavelength < 420) factor = 0.3 + 0.7 * (wavelength - 380) / (420 - 380);
         else factor = 1.0;
-        if (wavelength < 380) { const uvFactor = mapRange(wavelength, 100, 380, 0.3, 1.0); return { r: 148 * uvFactor, g: 0, b: 211 * uvFactor }; }
+        if (wavelength < 380) { const uvFactor = mapRange(wavelength, 100, 380, 0.3, 1.0); return { r: Math.round(148 * uvFactor), g: 0, b: Math.round(211 * uvFactor) }; }
         return { r: Math.round(255 * R * factor), g: Math.round(255 * G * factor), b: Math.round(255 * B * factor) };
     }
 
@@ -213,17 +206,9 @@ document.addEventListener('DOMContentLoaded', function() {
             wave.draw(increment, dynamicAmplitude, dynamicLength, dynamicColor);
         });
         
-        for (let i = sparks.length - 1; i >= 0; i--) {
-            sparks[i].update();
-            sparks[i].draw();
-            if (sparks[i].lifespan <= 0) {
-                sparks.splice(i, 1);
-            }
-        }
+        // FIX: Ruft die neue Cursor-Funktion auf und übergibt die dynamische Farbe.
+        drawAnimatedCursor(dynamicColor);
         
-        drawAnimatedCursor();
-        
-        // FIX: Übergibt die dynamische Farbe an die Indikator-Funktion.
         updateWavelengthIndicator(currentWavelength, dynamicColor);
         increment += 0.02;
         requestAnimationFrame(animate);

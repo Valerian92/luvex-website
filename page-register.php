@@ -78,32 +78,32 @@ get_header(); ?>
                     <div class="auth-error-message auth-error-message--enhanced">
                         <i class="fa-solid fa-robot"></i>
                         <div>
-                            <p><strong>reCAPTCHA Required</strong></p>
-                            <p>Please complete the security verification to continue.</p>
+                            <p><strong>reCAPTCHA erforderlich</strong></p>
+                            <p>Bitte führen Sie die Sicherheitsüberprüfung durch, um fortzufahren.</p>
                         </div>
                     </div>
                 <?php elseif ($_GET['error'] === 'exists'): ?>
                     <div class="auth-error-message auth-error-message--enhanced">
                         <i class="fa-solid fa-user-check"></i>
                         <div>
-                            <p><strong>Account Already Exists</strong></p>
-                            <p>An account with this email already exists. <a href="<?php echo get_permalink(get_page_by_path('login')); ?>">Try logging in instead.</a></p>
+                            <p><strong>Konto existiert bereits</strong></p>
+                            <p>Ein Konto mit dieser E-Mail-Adresse existiert bereits. <a href="<?php echo get_permalink(get_page_by_path('login')); ?>">Versuchen Sie stattdessen, sich anzumelden.</a></p>
                         </div>
                     </div>
                 <?php elseif ($_GET['error'] === 'password_mismatch'): ?>
                     <div class="auth-error-message auth-error-message--enhanced">
                         <i class="fa-solid fa-key"></i>
                         <div>
-                            <p><strong>Passwords Don't Match</strong></p>
-                            <p>Please make sure both password fields contain the same password.</p>
+                            <p><strong>Passwörter stimmen nicht überein</strong></p>
+                            <p>Bitte stellen Sie sicher, dass beide Passwortfelder dasselbe Passwort enthalten.</p>
                         </div>
                     </div>
                 <?php else: ?>
                     <div class="auth-error-message auth-error-message--enhanced">
                         <i class="fa-solid fa-exclamation-triangle"></i>
                         <div>
-                            <p><strong>Registration Failed</strong></p>
-                            <p>Please check your information and try again.</p>
+                            <p><strong>Registrierung fehlgeschlagen</strong></p>
+                            <p>Bitte überprüfen Sie Ihre Angaben und versuchen Sie es erneut.</p>
                         </div>
                     </div>
                 <?php endif; ?>
@@ -116,30 +116,30 @@ get_header(); ?>
                 <div class="form-section" data-step="1">
                     <h3 class="form-section-title">
                         <i class="fa-solid fa-user"></i>
-                        Personal Information
+                        Persönliche Informationen
                     </h3>
                     
                     <div class="form-grid form-grid--2-cols">
                         <div class="floating-label-input floating-label-input--dark">
                             <input type="text" name="first_name" id="first_name" placeholder=" " required>
-                            <label for="first_name">First Name</label>
+                            <label for="first_name">Vorname</label>
                         </div>
                         
                         <div class="floating-label-input floating-label-input--dark">
                             <input type="text" name="last_name" id="last_name" placeholder=" " required>
-                            <label for="last_name">Last Name</label>
+                            <label for="last_name">Nachname</label>
                         </div>
                     </div>
                     
                     <div class="floating-label-input floating-label-input--dark">
                         <input type="email" name="user_email" id="user_email" placeholder=" " required>
-                        <label for="user_email">Email Address</label>
-                        <div class="input-help">We'll use this for your account and important updates</div>
+                        <label for="user_email">E-Mail-Adresse</label>
+                        <div class="input-help">Wir verwenden diese für Ihr Konto und wichtige Updates</div>
                     </div>
                     
                     <div class="floating-label-input floating-label-input--dark">
                         <input type="text" name="company" id="company" placeholder=" ">
-                        <label for="company">Company (Optional)</label>
+                        <label for="company">Firma (Optional)</label>
                     </div>
                 </div>
                 
@@ -147,40 +147,40 @@ get_header(); ?>
                 <div class="form-section" data-step="2">
                     <h3 class="form-section-title">
                         <i class="fa-solid fa-shield-halved"></i>
-                        Account Security
+                        Kontosicherheit
                     </h3>
                     
                     <div class="form-grid form-grid--2-cols">
                         <div class="floating-label-input floating-label-input--dark">
                             <input type="password" name="user_password" id="user_password" placeholder=" " required minlength="6">
-                            <label for="user_password">Password</label>
+                            <label for="user_password">Passwort</label>
                             <div class="password-strength" id="password-strength">
                                 <div class="strength-bar"></div>
-                                <span class="strength-text">Enter password</span>
+                                <span class="strength-text">Passwort eingeben</span>
                             </div>
                         </div>
                         
                         <div class="floating-label-input floating-label-input--dark">
                             <input type="password" name="confirm_password" id="confirm_password" placeholder=" " required>
-                            <label for="confirm_password">Confirm Password</label>
+                            <label for="confirm_password">Passwort bestätigen</label>
                             <div class="password-match" id="password-match"></div>
                         </div>
                     </div>
                     
                     <div class="password-requirements">
-                        <h4>Password Requirements:</h4>
+                        <h4>Passwortanforderungen:</h4>
                         <div class="requirement-list">
                             <div class="requirement" data-req="length">
                                 <i class="fa-solid fa-circle-check"></i>
-                                <span>At least 6 characters</span>
+                                <span>Mindestens 6 Zeichen</span>
                             </div>
                             <div class="requirement" data-req="letter">
                                 <i class="fa-solid fa-circle-check"></i>
-                                <span>Contains letters</span>
+                                <span>Enthält Buchstaben</span>
                             </div>
                             <div class="requirement" data-req="number">
                                 <i class="fa-solid fa-circle-check"></i>
-                                <span>Contains numbers (recommended)</span>
+                                <span>Enthält Zahlen (empfohlen)</span>
                             </div>
                         </div>
                     </div>
@@ -190,22 +190,22 @@ get_header(); ?>
                 <div class="form-section" data-step="3">
                     <h3 class="form-section-title">
                         <i class="fa-solid fa-lightbulb"></i>
-                        Your UV Interests
+                        Ihre UV-Interessen
                     </h3>
                     
                     <div class="floating-label-input floating-label-input--dark">
                         <select name="interest_area" id="interest_area">
-                            <option value="">Select your primary interest</option>
-                            <option value="water-treatment">💧 Water Treatment</option>
-                            <option value="air-purification">🌬️ Air Purification</option>
-                            <option value="uv-curing">⚡ UV Curing</option>
-                            <option value="led-uv">💡 LED UV Systems</option>
-                            <option value="mercury-uv">🔬 Mercury UV Lamps</option>
-                            <option value="research">🧪 Research & Development</option>
-                            <option value="consulting">👨‍💼 UV Consulting</option>
-                            <option value="other">🔧 Other</option>
+                            <option value="">Wählen Sie Ihr Hauptinteresse</option>
+                            <option value="water-treatment">💧 Wasseraufbereitung</option>
+                            <option value="air-purification">🌬️ Luftreinigung</option>
+                            <option value="uv-curing">⚡ UV-Härtung</option>
+                            <option value="led-uv">💡 LED-UV-Systeme</option>
+                            <option value="mercury-uv">🔬 Quecksilber-UV-Lampen</option>
+                            <option value="research">🧪 Forschung & Entwicklung</option>
+                            <option value="consulting">👨‍💼 UV-Beratung</option>
+                            <option value="other">🔧 Sonstiges</option>
                         </select>
-                        <label for="interest_area">Primary UV Interest</label>
+                        <label for="interest_area">Primäres UV-Interesse</label>
                     </div>
                 </div>
                 
@@ -217,9 +217,9 @@ get_header(); ?>
                             <i class="fa-solid fa-check"></i>
                         </span>
                         <div class="form-checkbox__content">
-                            <span class="form-checkbox__title">Terms & Privacy</span>
+                            <span class="form-checkbox__title">AGB & Datenschutz</span>
                             <span class="form-checkbox__text">
-                                I agree to the <a href="/terms" target="_blank">Terms of Service</a> and <a href="/privacy" target="_blank">Privacy Policy</a>
+                                Ich stimme den <a href="/terms" target="_blank">Nutzungsbedingungen</a> und der <a href="/privacy" target="_blank">Datenschutzerklärung</a> zu
                             </span>
                         </div>
                     </label>
@@ -230,9 +230,9 @@ get_header(); ?>
                             <i class="fa-solid fa-check"></i>
                         </span>
                         <div class="form-checkbox__content">
-                            <span class="form-checkbox__title">Newsletter Updates</span>
+                            <span class="form-checkbox__title">Newsletter-Updates</span>
                             <span class="form-checkbox__text">
-                                Send me UV technology updates, insights, and community highlights (optional)
+                                Senden Sie mir Updates zur UV-Technologie, Einblicke und Community-Highlights (optional)
                             </span>
                         </div>
                     </label>
@@ -242,21 +242,22 @@ get_header(); ?>
                 <div class="recaptcha-container">
                     <div class="recaptcha-label">
                         <i class="fa-solid fa-shield-check"></i>
-                        <span>Security Verification</span>
+                        <span>Sicherheitsüberprüfung</span>
                     </div>
+                    <!-- KORREKTUR: Der Platzhalter wurde durch die PHP-Konstante ersetzt, um den korrekten Site Key zu laden. -->
                     <div class="g-recaptcha" 
-                         data-sitekey="HIER_KOMMT_EUER_SITE_KEY" 
+                         data-sitekey="<?php echo LUVEX_RECAPTCHA_SITE_KEY; ?>" 
                          data-callback="recaptchaCallback"
                          data-theme="dark">
                     </div>
                     <div class="recaptcha-error" id="recaptcha-error">
-                        Please complete the security verification to continue.
+                        Bitte führen Sie die Sicherheitsüberprüfung durch, um fortzufahren.
                     </div>
                     <?php echo LuvexSecurity::get_security_fields(); ?>
                 </div>
                 
                 <button type="submit" name="luvex_register_submit" class="form-submit form-submit--enhanced">
-                    <span class="btn-text">Create My Account</span>
+                    <span class="btn-text">Mein Konto erstellen</span>
                     <span class="btn-icon">
                         <i class="fa-solid fa-user-plus"></i>
                     </span>
@@ -265,10 +266,10 @@ get_header(); ?>
             </form>
             
             <div class="auth-alternative">
-                <p>Already have an account?</p>
+                <p>Haben Sie bereits ein Konto?</p>
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'login' ) ) ); ?>" class="auth-cta-link">
                     <i class="fa-solid fa-arrow-right"></i>
-                    Sign In to LUVEX
+                    Bei LUVEX anmelden
                 </a>
             </div>
             
@@ -280,8 +281,8 @@ get_header(); ?>
 <section class="auth-benefits-section">
     <div class="container--narrow">
         <div class="benefits-header">
-            <h2>Why Join LUVEX?</h2>
-            <p>Join thousands of UV professionals who trust LUVEX for their daily work</p>
+            <h2>Warum LUVEX beitreten?</h2>
+            <p>Schließen Sie sich Tausenden von UV-Profis an, die LUVEX für ihre tägliche Arbeit vertrauen</p>
         </div>
         
         <div class="benefits-grid">
@@ -289,27 +290,27 @@ get_header(); ?>
                 <div class="benefit-icon">
                     <i class="fa-solid fa-sun"></i>
                 </div>
-                <h4>UV Simulator</h4>
-                <p>Advanced UV condition simulation with real-time weather data and protection recommendations.</p>
-                <div class="benefit-badge">Premium Tool</div>
+                <h4>UV-Simulator</h4>
+                <p>Fortschrittliche Simulation von UV-Bedingungen mit Echtzeit-Wetterdaten und Schutzempfehlungen.</p>
+                <div class="benefit-badge">Premium-Tool</div>
             </div>
             
             <div class="benefit-card">
                 <div class="benefit-icon">
                     <i class="fa-solid fa-microscope"></i>
                 </div>
-                <h4>Strip Analyzer</h4>
-                <p>Analyze UV dose measurement strips with precision using our AI-powered analysis tools.</p>
-                <div class="benefit-badge">AI Powered</div>
+                <h4>Streifen-Analysator</h4>
+                <p>Analysieren Sie UV-Dosismessstreifen präzise mit unseren KI-gestützten Analysewerkzeugen.</p>
+                <div class="benefit-badge">KI-gestützt</div>
             </div>
             
             <div class="benefit-card">
                 <div class="benefit-icon">
                     <i class="fa-solid fa-users"></i>
                 </div>
-                <h4>Global Community</h4>
-                <p>Connect with UV experts, share insights, and collaborate on projects worldwide.</p>
-                <div class="benefit-badge">2,500+ Members</div>
+                <h4>Globale Gemeinschaft</h4>
+                <p>Vernetzen Sie sich mit UV-Experten, tauschen Sie Erkenntnisse aus und arbeiten Sie weltweit an Projekten zusammen.</p>
+                <div class="benefit-badge">2.500+ Mitglieder</div>
             </div>
         </div>
     </div>
@@ -320,17 +321,17 @@ get_header(); ?>
     <div class="container--narrow">
         <div class="trust-content">
             <div class="trust-text">
-                <h3>Your Data is Safe</h3>
-                <p>We use industry-standard encryption and security measures to protect your information. Your privacy is our priority.</p>
+                <h3>Ihre Daten sind sicher</h3>
+                <p>Wir verwenden branchenübliche Verschlüsselungs- und Sicherheitsmaßnahmen, um Ihre Informationen zu schützen. Ihre Privatsphäre ist unsere Priorität.</p>
                 
                 <div class="security-features">
                     <div class="security-item">
                         <i class="fa-solid fa-lock"></i>
-                        <span>256-bit SSL Encryption</span>
+                        <span>256-Bit-SSL-Verschlüsselung</span>
                     </div>
                     <div class="security-item">
                         <i class="fa-solid fa-shield-check"></i>
-                        <span>GDPR Compliant</span>
+                        <span>DSGVO-konform</span>
                     </div>
                     <div class="security-item">
                         <i class="fa-solid fa-user-shield"></i>
@@ -343,8 +344,8 @@ get_header(); ?>
                 <div class="security-badge">
                     <i class="fa-solid fa-certificate"></i>
                     <div class="badge-content">
-                        <strong>Secure</strong>
-                        <span>Registration</span>
+                        <strong>Sichere</strong>
+                        <span>Registrierung</span>
                     </div>
                 </div>
             </div>
@@ -369,6 +370,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Form submission validation
     form.addEventListener('submit', function(e) {
+        // Überprüfen, ob grecaptcha und getResponse existieren, bevor sie aufgerufen werden
+        if (typeof grecaptcha === 'undefined' || !grecaptcha.getResponse) {
+            console.error('reCAPTCHA script not loaded yet.');
+            e.preventDefault();
+            return false;
+        }
+        
         const recaptchaResponse = grecaptcha.getResponse();
         
         if (!recaptchaResponse) {
@@ -382,7 +390,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Enhanced loading state
         submitBtn.disabled = true;
         submitBtn.classList.add('loading');
-        submitBtn.querySelector('.btn-text').textContent = 'Creating Account...';
+        submitBtn.querySelector('.btn-text').textContent = 'Konto wird erstellt...';
         submitBtn.querySelector('.btn-icon i').className = 'fa-solid fa-spinner fa-spin';
     });
     
@@ -417,16 +425,16 @@ document.addEventListener('DOMContentLoaded', function() {
         strengthBar.style.width = strength + '%';
         
         if (password.length === 0) {
-            strengthText.textContent = 'Enter password';
+            strengthText.textContent = 'Passwort eingeben';
             strengthBar.className = 'strength-bar';
         } else if (strength < 50) {
-            strengthText.textContent = 'Weak';
+            strengthText.textContent = 'Schwach';
             strengthBar.className = 'strength-bar strength-weak';
         } else if (strength < 75) {
-            strengthText.textContent = 'Good';
+            strengthText.textContent = 'Gut';
             strengthBar.className = 'strength-bar strength-good';
         } else {
-            strengthText.textContent = 'Strong';
+            strengthText.textContent = 'Stark';
             strengthBar.className = 'strength-bar strength-strong';
         }
     }
@@ -459,10 +467,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         if (password === confirmPassword) {
-            matchIndicator.textContent = 'Passwords match';
+            matchIndicator.textContent = 'Passwörter stimmen überein';
             matchIndicator.className = 'password-match password-match--success';
         } else {
-            matchIndicator.textContent = 'Passwords do not match';
+            matchIndicator.textContent = 'Passwörter stimmen nicht überein';
             matchIndicator.className = 'password-match password-match--error';
         }
     }
