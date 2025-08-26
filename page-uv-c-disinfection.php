@@ -132,135 +132,88 @@ get_header(); ?>
      END: Interactive Gallery Section
      ========================================================================== -->
 
-<!-- ==========================================================================
-     START: UV-C Benefits Summary
-     ========================================================================== -->
-<section class="section benefits-section">
-    <div class="container">
-        <h2 class="text-center">Why Choose UV-C Technology?</h2>
-        <div class="grid-4">
-            <div class="benefit-card">
-                <div class="benefit-icon">🧪</div>
-                <h3>Save Chemical Spendings</h3>
-                <p>Harmless physical process without toxic residues or expensive chemical handling requirements.</p>
-            </div>
-            <div class="benefit-card">
-                <div class="benefit-icon">🛡️</div>
-                <h3>Permanent Protection</h3>
-                <p>Continuous operation maintains sterile conditions and prevents biofilm formation.</p>
-            </div>
-            <div class="benefit-card">
-                <div class="benefit-icon">📈</div>
-                <h3>Extended Shelf Life</h3>
-                <p>Reduces spoilage and contamination, significantly extending product usability periods.</p>
-            </div>
-            <div class="benefit-card">
-                <div class="benefit-icon">💪</div>
-                <h3>Healthier Environment</h3>
-                <p>Improved air quality reduces employee sick time and increases workplace productivity.</p>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- ==========================================================================
-     END: Benefits Summary Section
-     ========================================================================== -->
-
-<!-- ==========================================================================
-     START: Applications Sections
-     ========================================================================== -->
 <main>
-    <!-- Air Disinfection Applications -->
-    <section id="applications-air" class="section applications-section precision-transition">
+    <!-- ==========================================================================
+         START: Core Advantages Section (Replaces "Why Choose")
+         ========================================================================== -->
+    <section class="section core-advantages-section section--turquoise-light">
         <div class="container">
-            <h2 class="text-center">
-                <i class="fa-solid fa-wind"></i>
-                Air Disinfection
-            </h2>
-            <div class="grid-3">
-                <div class="value-card">
-                    <h3 class="value-card__title">In-Duct Systems</h3>
-                    <p class="value-card__description">Integration into HVAC systems for continuous disinfection of circulating air.</p>
+            <div class="section-header">
+                <h2>Core Advantages of UV-C Disinfection</h2>
+                <p>Leverage a chemical-free, physical process for ultimate safety.</p>
+            </div>
+            <div class="grid grid-4">
+                <!-- Card 1: Chemical-Free -->
+                <div class="value-card has-shine-effect">
+                    <div class="value-card__icon"><i class="fas fa-flask-slash"></i></div>
+                    <h3 class="value-card__title">Chemical-Free</h3>
+                    <p class="value-card__description">A purely physical process that leaves no toxic residues, tastes, or odors, ensuring product and environmental safety.</p>
                 </div>
-                <div class="value-card">
-                    <h3 class="value-card__title">Upper-Room GUV</h3>
-                    <p class="value-card__description">Fixtures installed high in a room to safely disinfect upper air layers.</p>
+                <!-- Card 2: Highly Effective -->
+                <div class="value-card has-shine-effect">
+                    <div class="value-card__icon"><i class="fas fa-shield-virus"></i></div>
+                    <h3 class="value-card__title">Highly Effective</h3>
+                    <p class="value-card__description">Extremely effective against all microorganisms, including chlorine-resistant pathogens like Cryptosporidium and Giardia.</p>
                 </div>
-                <div class="value-card">
-                    <h3 class="value-card__title">Mobile Air Purifiers</h3>
-                    <p class="value-card__description">Standalone units for flexible and targeted air cleaning in any room.</p>
+                <!-- Card 3: No Resistance -->
+                <div class="value-card has-shine-effect">
+                    <div class="value-card__icon"><i class="fas fa-dna"></i></div>
+                    <h3 class="value-card__title">No Resistance</h3>
+                    <p class="value-card__description">Microorganisms cannot develop immunity to UV-C light, ensuring reliable and permanent disinfection performance over time.</p>
+                </div>
+                <!-- Card 4: Cost-Efficient -->
+                <div class="value-card has-shine-effect">
+                    <div class="value-card__icon"><i class="fas fa-euro-sign"></i></div>
+                    <h3 class="value-card__title">Cost-Efficient</h3>
+                    <p class="value-card__description">Lower operational and maintenance costs compared to chemical disinfection, with no need for storage of hazardous materials.</p>
                 </div>
             </div>
         </div>
     </section>
+    <!-- ==========================================================================
+         END: Core Advantages Section
+         ========================================================================== -->
 
-    <!-- Surface Treatment Applications -->
-    <section id="applications-surface" class="section diagonal-transition">
+    <!-- ==========================================================================
+         START: FAQ Section
+         ========================================================================== -->
+    <section class="section faq-section">
         <div class="container">
-            <h2 class="text-center">
-                <i class="fa-solid fa-layer-group"></i>
-                Surface Treatment
-            </h2>
-            <div class="grid-3">
-                <div class="value-card">
-                    <h3 class="value-card__title">Mobile Robots</h3>
-                    <p class="value-card__description">Autonomous devices for high-intensity disinfection of unoccupied rooms.</p>
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Key insights into UV-C Disinfection technology.</p>
+            </div>
+            <div class="faq-container-tabs">
+                <div class="faq-questions">
+                    <button class="faq-question-btn active" data-answer="answer-uvc-1">What is germicidal ultraviolet (GUV)?</button>
+                    <button class="faq-question-btn" data-answer="answer-uvc-2">How does UV-C inactivate microorganisms?</button>
+                    <button class="faq-question-btn" data-answer="answer-uvc-3">Is UV-C light visible?</button>
+                    <button class="faq-question-btn" data-answer="answer-uvc-4">Can UV-C damage materials?</button>
                 </div>
-                <div class="value-card">
-                    <h3 class="value-card__title">Conveyor Belts</h3>
-                    <p class="value-card__description">UV-C modules for disinfecting products and packaging in food processing.</p>
-                </div>
-                <div class="value-card">
-                    <h3 class="value-card__title">Handheld Devices</h3>
-                    <p class="value-card__description">Portable units for targeted disinfection of high-touch surfaces and equipment.</p>
+                <div class="faq-answers">
+                    <div class="faq-answer-panel active" id="answer-uvc-1">
+                        <h3>What is germicidal ultraviolet (GUV)?</h3>
+                        <p>Germicidal Ultraviolet (GUV) refers to the use of ultraviolet energy (specifically UV-C) to inactivate or kill microorganisms like bacteria, viruses, and fungi. It's a well-established, non-chemical method of disinfection used for air, water, and surfaces.</p>
+                    </div>
+                    <div class="faq-answer-panel" id="answer-uvc-2">
+                        <h3>How does UV-C inactivate microorganisms?</h3>
+                        <p>UV-C light at a wavelength of 254nm penetrates the cell wall of a microorganism and is absorbed by its genetic material (DNA and RNA). This absorption causes irreparable damage, specifically forming thymine dimers, which prevents the microorganism from replicating or causing infection.</p>
+                    </div>
+                    <div class="faq-answer-panel" id="answer-uvc-3">
+                        <h3>Is UV-C light visible?</h3>
+                        <p>No, UV-C light is invisible to the human eye. Some UV-C sources may emit a faint blue glow, but this is typically a byproduct of the technology (like in mercury lamps) and not the germicidal UV-C energy itself. Proper safety measures are essential as you cannot see the radiation.</p>
+                    </div>
+                    <div class="faq-answer-panel" id="answer-uvc-4">
+                        <h3>Can UV-C damage materials?</h3>
+                        <p>Prolonged, high-intensity exposure to UV-C can degrade certain materials, particularly plastics and polymers, causing them to become brittle or discolored. Material compatibility is a key consideration in system design, and we select robust components to ensure long-term durability.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Water Purification Applications -->
-    <section id="applications-water" class="section applications-section precision-transition">
-        <div class="container">
-            <h2 class="text-center">
-                <i class="fa-solid fa-droplet"></i>
-                Water Purification
-            </h2>
-            <div class="grid-3">
-                <div class="value-card">
-                    <h3 class="value-card__title">Drinking Water</h3>
-                    <p class="value-card__description">Point-of-Entry or Point-of-Use systems for safe, chemical-free water.</p>
-                </div>
-                <div class="value-card">
-                    <h3 class="value-card__title">Process Water</h3>
-                    <p class="value-card__description">Ensuring high-purity, sterile water for industrial and pharma applications.</p>
-                </div>
-                <div class="value-card">
-                    <h3 class="value-card__title">Wastewater Treatment</h3>
-                    <p class="value-card__description">An effective final disinfection step before water is discharged.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- ==========================================================================
+         END: FAQ Section
+         ========================================================================== -->
 </main>
-<!-- ==========================================================================
-     END: Applications Sections
-     ========================================================================== -->
-
-<!-- ==========================================================================
-     START: Call-to-Action Section
-     ========================================================================== -->
-<section class="section cta-section">
-    <div class="container">
-        <h3>Have a specific requirement?</h3>
-        <p>Every application is unique. Our team of experts analyzes your processes and develops a custom UV-C solution tailored precisely to your needs.</p>
-        <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-cta-primary">
-            <i class="fa-solid fa-flask-vial"></i>
-            <span>Discuss Your Project</span>
-        </a>
-    </div>
-</section>
-<!-- ==========================================================================
-     END: Call-to-Action Section
-     ========================================================================== -->
 
 <?php get_footer(); ?>

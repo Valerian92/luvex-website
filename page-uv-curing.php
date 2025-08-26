@@ -180,28 +180,28 @@ get_header(); ?>
                 <h2>Frequently Asked Questions</h2>
                 <p>Your common questions about UV Curing Technology answered.</p>
             </div>
-            <div class="faq-container">
-                <div class="faq-item">
-                    <h3 class="faq-question">What is the main difference between UV Curing and traditional methods?</h3>
-                    <div class="faq-answer">
+            <div class="faq-container-tabs">
+                <div class="faq-questions">
+                    <button class="faq-question-btn active" data-answer="answer-curing-1">UV Curing vs. Traditional Methods?</button>
+                    <button class="faq-question-btn" data-answer="answer-curing-2">Is UV Curing safe?</button>
+                    <button class="faq-question-btn" data-answer="answer-curing-3">Use on heat-sensitive materials?</button>
+                    <button class="faq-question-btn" data-answer="answer-curing-4">What are the environmental benefits?</button>
+                </div>
+                <div class="faq-answers">
+                    <div class="faq-answer-panel active" id="answer-curing-1">
+                        <h3>What is the main difference between UV Curing and traditional methods?</h3>
                         <p>The primary difference is speed and mechanism. UV curing uses light to trigger a photochemical reaction that solidifies materials in seconds. Traditional methods rely on heat to evaporate solvents, which can take minutes or hours and releases volatile organic compounds (VOCs).</p>
                     </div>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">Is UV Curing safe for operators?</h3>
-                    <div class="faq-answer">
+                    <div class="faq-answer-panel" id="answer-curing-2">
+                        <h3>Is UV Curing safe for operators?</h3>
                         <p>Yes, when implemented correctly. Modern UV curing systems are fully enclosed and shielded to prevent any UV light exposure. We also provide comprehensive safety equipment and training to ensure all processes meet the highest safety standards.</p>
                     </div>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">Can UV Curing be used on heat-sensitive materials?</h3>
-                    <div class="faq-answer">
+                    <div class="faq-answer-panel" id="answer-curing-3">
+                        <h3>Can UV Curing be used on heat-sensitive materials?</h3>
                         <p>Absolutely. Since UV curing is a "cold" process that doesn't rely on high temperatures, it's ideal for heat-sensitive substrates like plastics, films, and electronics without causing warping or damage.</p>
                     </div>
-                </div>
-                 <div class="faq-item">
-                    <h3 class="faq-question">What are the environmental benefits?</h3>
-                    <div class="faq-answer">
+                    <div class="faq-answer-panel" id="answer-curing-4">
+                        <h3>What are the environmental benefits?</h3>
                         <p>UV curing formulations are typically 100% solids and contain no solvents, which means they do not emit harmful VOCs. This makes it a much cleaner, more environmentally friendly technology. Additionally, the process is highly energy-efficient compared to thermal drying ovens.</p>
                     </div>
                 </div>

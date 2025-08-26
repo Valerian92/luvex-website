@@ -384,129 +384,117 @@ Dependencies: animations.css, _variables.css, _layout.css
 }
 
 /* ==============================================================================
-3. APPLICATIONS & OTHER SECTIONS
+3. CORE ADVANTAGES & FAQ SECTIONS
 ==============================================================================
 */
 
-.applications-section h2 {
-    font-size: clamp(1.8rem, 3.5vw, 2.25rem);
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    justify-content: center;
-    margin-bottom: 3rem;
-    color: var(--luvex-dark-blue);
+.core-advantages-section .value-card__icon i {
+    font-size: 2.5rem;
+    color: var(--luvex-vibrant-blue);
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.applications-section h2 i {
+.core-advantages-section .value-card:hover .value-card__icon i {
+    color: var(--luvex-bright-cyan);
+    transform: scale(1.1);
+}
+
+.faq-section {
+    padding: 4rem 2rem 6rem 2rem;
+}
+
+.faq-container-tabs {
+    max-width: 1100px;
+    margin: 2rem auto 0;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+}
+
+.faq-questions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.faq-question-btn {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-align: left;
+    border: 1px solid var(--luvex-gray-200);
+    background: var(--luvex-white);
+    color: var(--luvex-dark-blue);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-right: 3rem;
+}
+
+.faq-question-btn::after {
+    content: '›';
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: var(--luvex-gray-300);
+    transition: color 0.3s ease;
+}
+
+.faq-question-btn:hover {
+    background-color: var(--luvex-gray-100);
+    border-color: var(--luvex-gray-300);
     color: var(--luvex-vibrant-blue);
 }
 
-.benefits-section {
-    background: linear-gradient(135deg, #f8fafc 0%, #e8f4f8 100%);
-    padding: 4rem 0;
-}
-
-.benefits-section h2 {
-    font-size: clamp(2rem, 4vw, 2.5rem);
-    color: var(--luvex-dark-blue);
-    margin-bottom: 3rem;
-}
-
-.benefit-card {
-    background: var(--luvex-white);
-    border-radius: var(--radius-lg);
-    padding: 2rem;
-    text-align: center;
-    box-shadow: 0 4px 20px rgba(27, 42, 73, 0.08);
-    border: 1px solid rgba(109, 213, 237, 0.1);
-    transition: all 0.3s ease;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.benefit-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(27, 42, 73, 0.15);
-    border-color: var(--luvex-bright-cyan);
-}
-
-.benefit-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.benefit-card h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--luvex-dark-blue);
-    margin: 0 0 1rem 0;
-}
-
-.benefit-card p {
-    color: var(--luvex-gray-700);
-    line-height: 1.6;
-    margin: 0;
-    flex: 1;
-}
-
-.cta-section {
-    background: var(--luvex-dark-blue);
+.faq-question-btn.active {
+    background-color: var(--luvex-dark-blue);
     color: var(--luvex-white);
-    text-align: center;
-    padding: 4rem 0;
+    border-color: var(--luvex-dark-blue);
 }
 
-.cta-section h3 {
-    color: var(--luvex-white);
-    font-size: 2rem;
+.faq-question-btn.active::after {
+    color: var(--luvex-bright-cyan);
+}
+
+.faq-answers {
+    position: relative;
+}
+
+.faq-answer-panel {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, visibility 0s 0.4s, transform 0.4s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.faq-answer-panel.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.4s 0.2s ease, visibility 0s 0.2s, transform 0.4s 0.2s ease;
+    position: relative;
+}
+
+.faq-answer-panel h3 {
+    font-size: 1.8rem;
+    color: var(--luvex-dark-blue);
     margin-bottom: 1rem;
 }
 
-.cta-section p {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.2rem;
-    max-width: 600px;
-    margin: 0 auto 2rem auto;
-}
-
-.luvex-cta-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
-    padding: 1rem 2rem;
-    border-radius: var(--radius-full);
-    font-weight: 600;
+.faq-answer-panel p {
     font-size: 1.1rem;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
+    line-height: 1.7;
+    color: var(--luvex-gray-700);
 }
 
-.luvex-cta-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(109, 213, 237, 0.4);
-    background: #5ccde6;
-}
-
-.luvex-cta-primary i {
-    font-size: 1.2rem;
-}
-
-.precision-transition {
-    background: var(--luvex-white);
-}
-
-.diagonal-transition {
-    background: linear-gradient(135deg, #f8fafc 0%, #e8f4f8 100%);
-}
 
 /* ==============================================================================
 4. RESPONSIVE DESIGN
@@ -540,6 +528,11 @@ Dependencies: animations.css, _variables.css, _layout.css
     }
     
     .grid-3 {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .faq-container-tabs {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
