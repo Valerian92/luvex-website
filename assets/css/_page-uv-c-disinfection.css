@@ -2,10 +2,6 @@
 ==============================================================================
 PAGE: UV-C DISINFECTION - LAYOUT & SECTIONS
 ==============================================================================
-Datei: _page-uv-c-disinfection.css
-Beschreibung: Komplettes Layout für UV-C Disinfection Seite
-Dependencies: animations.css, _variables.css, _layout.css
-==============================================================================
 */
 
 /* ==============================================================================
@@ -28,20 +24,19 @@ Dependencies: animations.css, _variables.css, _layout.css
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: 1; /* Hinter dem Content */
+    z-index: 1;
 }
 
 .uvc-hero .luvex-hero__container {
     position: relative;
-    z-index: 2; /* Vor der Animation */
+    z-index: 2;
 }
 
-/* Hero Content Layout */
 .uvc-hero .luvex-hero__content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem; /* Abstand zwischen Elementen */
+    gap: 1.5rem;
 }
 
 .uvc-hero .luvex-hero__description {
@@ -52,7 +47,6 @@ Dependencies: animations.css, _variables.css, _layout.css
     font-size: 1.1rem;
 }
 
-/* --- FIX: Animations-Stile --- */
 .pulse {
     position: absolute;
     top: 50%;
@@ -85,16 +79,8 @@ Dependencies: animations.css, _variables.css, _layout.css
 }
 
 @keyframes expand-pulse {
-    0% {
-        width: 0;
-        height: 0;
-        opacity: 0.5;
-    }
-    100% {
-        width: 250vmax;
-        height: 250vmax;
-        opacity: 0;
-    }
+    0% { width: 0; height: 0; opacity: 0.5; }
+    100% { width: 250vmax; height: 250vmax; opacity: 0; }
 }
 
 @keyframes float {
@@ -105,7 +91,6 @@ Dependencies: animations.css, _variables.css, _layout.css
     100% { transform: translate(0, 0); }
 }
 
-
 /* ==============================================================================
 2. SCIENCE GALLERY SECTION
 ==============================================================================
@@ -114,10 +99,6 @@ Dependencies: animations.css, _variables.css, _layout.css
     background-color: #f8fafc;
     padding: 4rem 2rem;
     position: relative;
-    min-height: 85vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
 .section-header {
@@ -148,12 +129,10 @@ Dependencies: animations.css, _variables.css, _layout.css
     border-radius: 16px;
     padding: 3rem;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    height: 80vh;
-    max-height: 650px;
+    min-height: 600px;
     align-items: center;
 }
 
-/* --- ANIMATION PANEL LAYOUT --- */
 .animation-panel {
     background: linear-gradient(135deg, var(--luvex-dark-blue) 0%, #2D4A7C 100%);
     border-radius: 12px;
@@ -169,9 +148,6 @@ Dependencies: animations.css, _variables.css, _layout.css
     display: flex;
     gap: 1rem;
     justify-content: center;
-    position: relative;
-    z-index: 1001;
-    pointer-events: auto;
     margin-bottom: 1rem;
 }
 
@@ -179,9 +155,6 @@ Dependencies: animations.css, _variables.css, _layout.css
     display: flex;
     gap: 0.5rem;
     justify-content: center;
-    position: relative;
-    z-index: 1001;
-    pointer-events: auto;
     margin-bottom: 1rem;
 }
 
@@ -190,47 +163,21 @@ Dependencies: animations.css, _variables.css, _layout.css
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
 }
 
-.animation-content {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-.animation-visual {
-    width: 300px;
-    height: 300px;
-    margin: 0 auto;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* --- CONTROL PANEL --- */
 .control-panel {
-    padding: 2rem 0;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     position: relative;
-    z-index: 1;
 }
 
 .step-content {
     opacity: 0;
     transform: translateX(50px);
-    transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
     pointer-events: none;
 }
 
@@ -244,151 +191,14 @@ Dependencies: animations.css, _variables.css, _layout.css
 .step-content.exiting {
     opacity: 0;
     transform: translateX(-50px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.step-content h3 {
-    font-size: 1.8rem;
-    color: var(--luvex-dark-blue);
-    margin: 0 0 1rem 0;
-}
-
-.step-content p {
-    font-size: 1.1rem;
-    color: var(--luvex-gray-700);
-    margin: 0 0 2rem 0;
-}
-
-/* Benefits List für Step 6 */
-.step-content .benefits-list {
-    margin: 1rem 0;
-    padding: 0;
-    list-style: none;
-}
-
-.step-content .benefits-list li {
-    padding: 0.5rem 0;
-    font-size: 0.95rem;
-    color: var(--luvex-gray-700);
-    display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
-}
-
-.step-content .benefits-list li::before {
-    content: '✓';
-    color: var(--luvex-bright-cyan);
-    font-weight: bold;
-    font-size: 1rem;
-    margin-top: 0.1rem;
-    flex-shrink: 0;
-}
-
-.step-content .benefits-list strong {
-    color: var(--luvex-dark-blue);
-}
-
-.final-cta a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
-    padding: 0.8rem 1.5rem;
-    border-radius: var(--radius-full);
-    font-weight: 600;
-    font-size: 0.95rem;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
-    border: 2px solid var(--luvex-bright-cyan);
-}
-
-.final-cta a:hover {
-    background: var(--luvex-white);
-    color: var(--luvex-bright-cyan);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(109, 213, 237, 0.4);
-}
-
-.final-cta a svg {
-    transition: transform 0.3s ease;
-}
-
-.final-cta a:hover svg {
-    transform: translateX(3px);
-}
-
-/* --- NAVIGATION CONTROLS (IN ANIMATION PANEL) --- */
-.nav-arrow {
-    width: 40px;
-    height: 40px;
-    border: 2px solid var(--luvex-bright-cyan);
-    background: rgba(109, 213, 237, 0.1);
-    border-radius: 50%;
-    color: var(--luvex-bright-cyan);
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    position: relative;
-    z-index: 1002;
-    pointer-events: auto;
-}
-
-.nav-arrow:hover {
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
-    transform: scale(1.1);
-}
-
-.nav-arrow:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-    transform: none;
-}
-
-.step-indicator {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    color: rgba(255, 255, 255, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    z-index: 1002;
-    pointer-events: auto;
-    font-size: 0.9rem;
-}
-
-.step-indicator.active {
-    background: var(--luvex-bright-cyan);
-    border-color: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
-    transform: scale(1.1);
-}
-
-.step-indicator.completed {
-    background: rgba(109, 213, 237, 0.3);
-    border-color: var(--luvex-bright-cyan);
-    color: var(--luvex-bright-cyan);
 }
 
 /* ==============================================================================
-3. CORE ADVANTAGES & FAQ SECTIONS
+3. CORE ADVANTAGES & APPLICATIONS
 ==============================================================================
 */
-
-.core-advantages-section .value-card__icon i {
+.core-advantages-section .value-card__icon i,
+.applications-section .section-header i {
     font-size: 2.5rem;
     color: var(--luvex-vibrant-blue);
     transition: color 0.3s ease, transform 0.3s ease;
@@ -399,102 +209,12 @@ Dependencies: animations.css, _variables.css, _layout.css
     transform: scale(1.1);
 }
 
-.faq-section {
-    padding: 4rem 2rem 6rem 2rem;
-}
-
-.faq-container-tabs {
-    max-width: 1100px;
-    margin: 2rem auto 0;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 3rem;
-}
-
-.faq-questions {
+.applications-section .section-header h2 {
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
 }
-
-.faq-question-btn {
-    width: 100%;
-    padding: 1rem 1.5rem;
-    font-size: 1.05rem;
-    font-weight: 600;
-    text-align: left;
-    border: 1px solid var(--luvex-gray-200);
-    background: var(--luvex-white);
-    color: var(--luvex-dark-blue);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    padding-right: 3rem;
-}
-
-.faq-question-btn::after {
-    content: '›';
-    position: absolute;
-    right: 1.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.5rem;
-    color: var(--luvex-gray-300);
-    transition: color 0.3s ease;
-}
-
-.faq-question-btn:hover {
-    background-color: var(--luvex-gray-100);
-    border-color: var(--luvex-gray-300);
-    color: var(--luvex-vibrant-blue);
-}
-
-.faq-question-btn.active {
-    background-color: var(--luvex-dark-blue);
-    color: var(--luvex-white);
-    border-color: var(--luvex-dark-blue);
-}
-
-.faq-question-btn.active::after {
-    color: var(--luvex-bright-cyan);
-}
-
-.faq-answers {
-    position: relative;
-}
-
-.faq-answer-panel {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-    transition: opacity 0.4s ease, visibility 0s 0.4s, transform 0.4s ease;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-}
-
-.faq-answer-panel.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    transition: opacity 0.4s 0.2s ease, visibility 0s 0.2s, transform 0.4s 0.2s ease;
-    position: relative;
-}
-
-.faq-answer-panel h3 {
-    font-size: 1.8rem;
-    color: var(--luvex-dark-blue);
-    margin-bottom: 1rem;
-}
-
-.faq-answer-panel p {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: var(--luvex-gray-700);
-}
-
 
 /* ==============================================================================
 4. RESPONSIVE DESIGN
@@ -505,93 +225,17 @@ Dependencies: animations.css, _variables.css, _layout.css
         grid-template-columns: 1fr;
         gap: 2rem;
         height: auto;
-        max-height: none;
+        min-height: auto;
+        padding: 2rem;
     }
-    
     .animation-panel {
         height: 400px;
         order: -1;
     }
-    
     .control-panel {
-        height: auto;
         min-height: 300px;
     }
-    
-    .animation-visual {
-        width: 250px;
-        height: 250px;
-    }
-    
     .luvex-hero__description br {
         display: none;
-    }
-    
-    .grid-3 {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    .faq-container-tabs {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .showcase-container {
-        padding: 2rem;
-    }
-    
-    .science-section {
-        padding: 2rem 1rem;
-        min-height: auto;
-    }
-    
-    .section-header h2 {
-        font-size: 2rem;
-    }
-    
-    .step-content h3 {
-        font-size: 1.5rem;
-    }
-    
-    .step-content p {
-        font-size: 1rem;
-    }
-    
-    .benefits-section {
-        padding: 3rem 0;
-    }
-}
-
-@media (max-width: 576px) {
-    .grid-4 {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .benefit-card {
-        padding: 1.5rem;
-    }
-    
-    .benefit-icon {
-        font-size: 2.5rem;
-        height: 50px;
-    }
-    
-    .animation-visual {
-        width: 240px;
-        height: 240px;
-    }
-    
-    .luvex-cta-primary {
-        padding: 0.8rem 1.5rem;
-        font-size: 1rem;
-    }
-    
-    .final-cta a {
-        padding: 0.7rem 1.2rem;
-        font-size: 0.9rem;
     }
 }

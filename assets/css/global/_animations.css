@@ -137,10 +137,6 @@ Last Update: 2025-08-24 (Refactored)
 ==============================================================================
 */
 
-/**
- * NEU: Keyframe für den permanenten lila Puls-Effekt.
- * Animiert den box-shadow für einen sanften Glow-Effekt.
- */
 @keyframes pulse-purple-glow {
     0%, 100% {
         box-shadow: 0 0 12px rgba(138, 43, 226, 0.4), 0 0 4px rgba(109, 213, 237, 0.3);
@@ -150,11 +146,6 @@ Last Update: 2025-08-24 (Refactored)
     }
 }
 
-
-/**
- * REPARIERT: Keyframe für die Hover-Farbverlauf-Animation.
- * Vereinfacht für einen sauberen, unendlichen Loop.
- */
 @keyframes gradient-shift-smooth {
     0% {
         background-position: 0% 50%;
@@ -169,47 +160,41 @@ Last Update: 2025-08-24 (Refactored)
 
 /*
 ==============================================================================
-6. NEU: SCROLL-TO-TOP BUTTON ANIMATION & POSITIONING (KONZEPT 6)
+6. SCROLL-TO-TOP BUTTON ANIMATION & POSITIONING
 ==============================================================================
 */
 
-/* Positionierung und Grundstil für den Button */
 #scrollToTopBtn {
-    /* ANPASSUNG: Button höher positioniert für bessere Ausrichtung mit dem Footer-Text */
     position: fixed;
-    bottom: 38px; /* Vorher ~30px */
+    bottom: 38px;
     right: 30px;
     width: 50px;
     height: 50px;
-    background-color: #1f2937; /* Dunkler Hintergrund für besseren Kontrast */
+    background-color: #1f2937;
     color: white;
-    border: 3px solid #4b5563; /* Initialer, neutraler Rand */
-    border-radius: 50%; /* Sicherstellen, dass der Button rund ist */
-    display: flex; /* Für die Zentrierung des Icons */
+    border: 3px solid #4b5563;
+    border-radius: 50%;
+    display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000; /* Stellt sicher, dass er über anderen Elementen liegt */
+    z-index: 1000;
     cursor: pointer;
-    /* Sichtbarkeits-Transitions */
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px);
     transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease, border-color 0.5s ease;
 }
 
-/* Klasse für die Sichtbarkeit (wird per JS gesteuert) */
 #scrollToTopBtn.visible {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
 
-/* Animationsklasse, die per JS hinzugefügt wird */
 #scrollToTopBtn.animate-border-flag {
     animation: border-flag-colors 2s linear infinite;
 }
 
-/* Keyframe-Animation, die die Randfarbe durch die Deutschlandfarben wechselt */
 @keyframes border-flag-colors {
     0%, 100% {
         border-color: #000000; /* Schwarz */
@@ -224,15 +209,108 @@ Last Update: 2025-08-24 (Refactored)
 
 /*
 ==============================================================================
-7. NEU: FOOTER LAYOUT ANPASSUNGEN
+7. GLOBAL FAQ COMPONENT STYLES
 ==============================================================================
 */
-.footer-bottom {
-    /* ANPASSUNG: Etwas Padding unten, um Kollision zu vermeiden */
-    padding-bottom: 1rem; /* 16px */
+.faq-section {
+    padding: 4rem 2rem 6rem 2rem;
 }
 
-.footer-bottom-right {
-    /* ANPASSUNG: Rechter Einzug für den Text, um Platz für den Button zu schaffen */
-    padding-right: 5rem; /* 80px */
+.faq-container-tabs {
+    max-width: 1100px;
+    margin: 2rem auto 0;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+}
+
+.faq-questions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.faq-question-btn {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-align: left;
+    border: 1px solid var(--luvex-gray-200);
+    background: var(--luvex-white);
+    color: var(--luvex-dark-blue);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-right: 3rem;
+}
+
+.faq-question-btn::after {
+    content: '›';
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: var(--luvex-gray-300);
+    transition: color 0.3s ease;
+}
+
+.faq-question-btn:hover {
+    background-color: var(--luvex-gray-100);
+    border-color: var(--luvex-gray-300);
+    color: var(--luvex-vibrant-blue);
+}
+
+.faq-question-btn.active {
+    background-color: var(--luvex-dark-blue);
+    color: var(--luvex-white);
+    border-color: var(--luvex-dark-blue);
+}
+
+.faq-question-btn.active::after {
+    color: var(--luvex-bright-cyan);
+}
+
+.faq-answers {
+    position: relative;
+}
+
+.faq-answer-panel {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, visibility 0s 0.4s, transform 0.4s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.faq-answer-panel.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.4s 0.2s ease, visibility 0s 0.2s, transform 0.4s 0.2s ease;
+    position: relative;
+}
+
+.faq-answer-panel h3 {
+    font-size: 1.8rem;
+    color: var(--luvex-dark-blue);
+    margin-bottom: 1rem;
+}
+
+.faq-answer-panel p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--luvex-gray-700);
+}
+
+@media (max-width: 992px) {
+    .faq-container-tabs {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
 }

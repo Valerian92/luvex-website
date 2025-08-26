@@ -9,7 +9,6 @@ get_header(); ?>
      START: UV-C Disinfection Hero Section
      ========================================================================== -->
 <section class="luvex-hero uvc-hero">
-    <!-- FIX: Container für die JS-Animation -->
     <div class="animation-background" id="disinfection-animation-container">
         <div class="pulse"></div>
     </div>
@@ -21,7 +20,6 @@ get_header(); ?>
             <h2 class="luvex-hero__subtitle">
                 Advanced germicidal solutions for water, air, and surface treatment
             </h2>
-             <!-- FIX: Button-Container mit Standard-Komponenten-Klassen -->
             <div class="luvex-hero__cta-container">
                 <a href="#applications-air" class="luvex-hero__cta-secondary">
                     <i class="fa-solid fa-wind"></i>
@@ -58,65 +56,42 @@ get_header(); ?>
         </div>
 
         <div class="showcase-container">
-            <!-- Animation Panel mit integrierter Navigation -->
             <div class="animation-panel">
-                <!-- Navigation: Pfeile oben -->
                 <div class="navigation-arrows">
                     <button class="nav-arrow" id="prev-btn" aria-label="Previous step">‹</button>
                     <button class="nav-arrow" id="next-btn" aria-label="Next step">›</button>
                 </div>
-                
-                <!-- Navigation: Nummern -->
-                <div class="step-indicators" id="step-indicators">
-                    <!-- Wird per JavaScript generiert -->
-                </div>
-                
-                <!-- Animation Display -->
+                <div class="step-indicators" id="step-indicators"></div>
                 <div class="animation-display">
                     <div class="animation-content">
-                        <div class="animation-visual" id="animation-visual">
-                            <!-- Content wird per JavaScript generiert -->
-                        </div>
+                        <div class="animation-visual" id="animation-visual"></div>
                     </div>
                 </div>
             </div>
-
-            <!-- Control Panel nur für Text-Content -->
             <div class="control-panel">
                 <div class="step-content active" data-step="1">
                     <h3>1. Contamination</h3>
                     <p>Active microorganisms populate the environment. They replicate continuously and increase contamination levels, creating ongoing health and safety risks.</p>
                 </div>
-
                 <div class="step-content" data-step="2">
                     <h3>2. UV-C Irradiation</h3>
                     <p>A high-energy UV-C light field is generated. The light penetrates a microorganism and targets the sensitive DNA helix in its core with precise wavelengths.</p>
                 </div>
-
                 <div class="step-content" data-step="3">
                     <h3>3. DNA Damage</h3>
                     <p>UV-C energy is absorbed, breaking hydrogen bonds and forcing adjacent thymine bases into a permanent, irreparable "thymine dimer" fusion that corrupts the genetic code.</p>
                 </div>
-
                 <div class="step-content" data-step="4">
                     <h3>4. Replication Failure</h3>
                     <p>The dimer lesion makes the genetic code unreadable. The cell's replication machinery stops at the damaged site and completely halts the reproduction process.</p>
                 </div>
-
                 <div class="step-content" data-step="5">
                     <h3>5. Population Collapse</h3>
                     <p>Unable to reproduce, microorganisms become inactivated. The entire population gradually collapses, leading to complete inactivation without resistance development.</p>
                 </div>
-
                 <div class="step-content" data-step="6">
                     <h3>6. Permanent Protection</h3>
                     <p>Continuous UV-C irradiation maintains a disinfected state and prevents formation of new colonies and biofilms. <strong>Integration into various applications</strong> enables comprehensive protection for water treatment, air purification, and surface disinfection systems.</p>
-                    <ul class="benefits-list">
-                        <li><strong>Save chemical spendings</strong> – purely physical process</li>
-                        <li><strong>Immediate effectiveness</strong> – no contact time needed</li>
-                        <li><strong>Broad spectrum</strong> – effective against all microorganisms</li>
-                        <li><strong>Longer shelf-life</strong> – extended product durability</li>
-                    </ul>
                     <div class="final-cta">
                         <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-consulting' ) ) ); ?>">
                             Explore beneficial applications
@@ -134,34 +109,30 @@ get_header(); ?>
 
 <main>
     <!-- ==========================================================================
-         START: Core Advantages Section (Replaces "Why Choose")
+         START: Core Advantages Section (Replaces "Benefits")
          ========================================================================== -->
     <section class="section core-advantages-section section--turquoise-light">
         <div class="container">
             <div class="section-header">
                 <h2>Core Advantages of UV-C Disinfection</h2>
-                <p>Leverage a chemical-free, physical process for ultimate safety.</p>
+                <p>Leverage a chemical-free, physical process for ultimate safety and efficiency.</p>
             </div>
             <div class="grid grid-4">
-                <!-- Card 1: Chemical-Free -->
                 <div class="value-card has-shine-effect">
                     <div class="value-card__icon"><i class="fas fa-flask-slash"></i></div>
                     <h3 class="value-card__title">Chemical-Free</h3>
                     <p class="value-card__description">A purely physical process that leaves no toxic residues, tastes, or odors, ensuring product and environmental safety.</p>
                 </div>
-                <!-- Card 2: Highly Effective -->
                 <div class="value-card has-shine-effect">
                     <div class="value-card__icon"><i class="fas fa-shield-virus"></i></div>
                     <h3 class="value-card__title">Highly Effective</h3>
                     <p class="value-card__description">Extremely effective against all microorganisms, including chlorine-resistant pathogens like Cryptosporidium and Giardia.</p>
                 </div>
-                <!-- Card 3: No Resistance -->
                 <div class="value-card has-shine-effect">
                     <div class="value-card__icon"><i class="fas fa-dna"></i></div>
                     <h3 class="value-card__title">No Resistance</h3>
                     <p class="value-card__description">Microorganisms cannot develop immunity to UV-C light, ensuring reliable and permanent disinfection performance over time.</p>
                 </div>
-                <!-- Card 4: Cost-Efficient -->
                 <div class="value-card has-shine-effect">
                     <div class="value-card__icon"><i class="fas fa-euro-sign"></i></div>
                     <h3 class="value-card__title">Cost-Efficient</h3>
@@ -175,9 +146,84 @@ get_header(); ?>
          ========================================================================== -->
 
     <!-- ==========================================================================
+         START: Applications Sections
+         ========================================================================== -->
+    <section id="applications-air" class="section applications-section">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-wind"></i> Air Disinfection Applications</h2>
+                <p>Ensure clean and safe air in any environment.</p>
+            </div>
+            <div class="grid-3">
+                <div class="value-card">
+                    <h3 class="value-card__title">In-Duct Systems</h3>
+                    <p class="value-card__description">Integration into HVAC systems for continuous disinfection of circulating air.</p>
+                </div>
+                <div class="value-card">
+                    <h3 class="value-card__title">Upper-Room GUV</h3>
+                    <p class="value-card__description">Fixtures installed high in a room to safely disinfect upper air layers.</p>
+                </div>
+                <div class="value-card">
+                    <h3 class="value-card__title">Mobile Air Purifiers</h3>
+                    <p class="value-card__description">Standalone units for flexible and targeted air cleaning in any room.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="applications-surface" class="section applications-section section--turquoise-light">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-layer-group"></i> Surface Treatment Applications</h2>
+                <p>Disinfect high-touch surfaces without chemicals.</p>
+            </div>
+            <div class="grid-3">
+                <div class="value-card">
+                    <h3 class="value-card__title">Mobile Robots</h3>
+                    <p class="value-card__description">Autonomous devices for high-intensity disinfection of unoccupied rooms.</p>
+                </div>
+                <div class="value-card">
+                    <h3 class="value-card__title">Conveyor Belts</h3>
+                    <p class="value-card__description">UV-C modules for disinfecting products and packaging in food processing.</p>
+                </div>
+                <div class="value-card">
+                    <h3 class="value-card__title">Handheld Devices</h3>
+                    <p class="value-card__description">Portable units for targeted disinfection of high-touch surfaces and equipment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="applications-water" class="section applications-section">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-droplet"></i> Water Purification Applications</h2>
+                <p>Provide safe, purified water for any application.</p>
+            </div>
+            <div class="grid-3">
+                <div class="value-card">
+                    <h3 class="value-card__title">Drinking Water</h3>
+                    <p class="value-card__description">Point-of-Entry or Point-of-Use systems for safe, chemical-free water.</p>
+                </div>
+                <div class="value-card">
+                    <h3 class="value-card__title">Process Water</h3>
+                    <p class="value-card__description">Ensuring high-purity, sterile water for industrial and pharma applications.</p>
+                </div>
+                <div class="value-card">
+                    <h3 class="value-card__title">Wastewater Treatment</h3>
+                    <p class="value-card__description">An effective final disinfection step before water is discharged.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ==========================================================================
+         END: Applications Sections
+         ========================================================================== -->
+
+    <!-- ==========================================================================
          START: FAQ Section
          ========================================================================== -->
-    <section class="section faq-section">
+    <section class="section faq-section section--turquoise-light">
         <div class="container">
             <div class="section-header">
                 <h2>Frequently Asked Questions</h2>

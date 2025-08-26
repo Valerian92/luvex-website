@@ -12,17 +12,12 @@ Beschreibung: Bereinigtes Layout für die UV Curing Seite.
 ==============================================================================
 CUSTOM CURSOR FIX
 ==============================================================================
-Beschreibung: Blendet den Standard-Mauszeiger im Hero-Bereich und im
-              transparenten Header aus, da ein benutzerdefinierter Cursor
-              verwendet wird.
-==============================================================================
 */
 .hero-curing,
-.site-header:not(.scrolled) { /* Wir nehmen an, dass der Header beim Scrollen die Klasse .scrolled erhält */
+.site-header:not(.scrolled) {
     cursor: none;
 }
 
-/* Dies stellt sicher, dass auch über Links und Buttons der Standard-Cursor verborgen bleibt. */
 .hero-curing a,
 .hero-curing button,
 .site-header:not(.scrolled) a,
@@ -56,12 +51,11 @@ Beschreibung: Blendet den Standard-Mauszeiger im Hero-Bereich und im
     pointer-events: none;
 }
 
-/* NEU: Erzwingt die Zentrierung des Inhalts */
 .hero-curing .luvex-hero__content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center; /* Stellt sicher, dass der Text zentriert ist */
+    text-align: center;
     gap: 1.5rem;
 }
 
@@ -127,7 +121,6 @@ Beschreibung: Blendet den Standard-Mauszeiger im Hero-Bereich und im
     align-items: stretch;
 }
 
-/* --- ANIMATION PANEL (Links) --- */
 .animation-panel {
     background: linear-gradient(135deg, var(--luvex-dark-blue) 0%, #2D4A7C 100%);
     border-radius: 12px;
@@ -165,22 +158,21 @@ Beschreibung: Blendet den Standard-Mauszeiger im Hero-Bereich und im
     align-items: center;
     justify-content: center;
     position: relative;
-    min-height: 400px; /* Größer für bessere Animationen */
+    min-height: 400px;
 }
 
 #curing-animation-visual {
-    width: 380px; /* Vergrößert */
-    height: 380px; /* Vergrößert */
+    width: 380px;
+    height: 380px;
     position: relative;
     overflow: visible;
 }
 
-/* --- CONTROL PANEL (Rechts) - TEXT-AUSRICHTUNG FIX --- */
 .control-panel {
     display: flex;
     flex-direction: column;
     position: relative;
-    padding: 2rem; /* Mehr Padding */
+    padding: 2rem;
 }
 
 .step-content {
@@ -294,7 +286,23 @@ Beschreibung: Blendet den Standard-Mauszeiger im Hero-Bereich und im
 
 /*
 ==============================================================================
-3. RESPONSIVE DESIGN
+3. CORE ADVANTAGES SECTION
+==============================================================================
+*/
+.core-advantages-section .value-card__icon i {
+    font-size: 2.5rem;
+    color: var(--luvex-vibrant-blue);
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.core-advantages-section .value-card:hover .value-card__icon i {
+    color: var(--luvex-bright-cyan);
+    transform: scale(1.1);
+}
+
+/*
+==============================================================================
+4. RESPONSIVE DESIGN
 ==============================================================================
 */
 
@@ -333,92 +341,4 @@ Beschreibung: Blendet den Standard-Mauszeiger im Hero-Bereich und im
     .step-content p {
         font-size: 1rem;
     }
-}
-
-/*
-==============================================================================
-4. CORE ADVANTAGES SECTION
-==============================================================================
-*/
-.core-advantages-section .value-card__icon i {
-    font-size: 2.5rem;
-    color: var(--luvex-vibrant-blue);
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.core-advantages-section .value-card:hover .value-card__icon i {
-    color: var(--luvex-bright-cyan);
-    transform: scale(1.1);
-}
-
-/*
-==============================================================================
-5. FAQ SECTION
-==============================================================================
-*/
-.faq-section {
-    padding: 4rem 2rem 6rem 2rem;
-    background-color: var(--luvex-white);
-}
-
-.faq-container {
-    max-width: 850px;
-    margin: 0 auto;
-}
-
-.faq-item {
-    border-bottom: 1px solid var(--luvex-gray-200);
-    padding: 1.5rem 0;
-}
-
-.faq-question {
-    font-size: 1.25rem;
-    color: var(--luvex-dark-blue);
-    margin: 0;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: 600;
-    transition: color 0.3s ease;
-}
-
-.faq-question:hover {
-    color: var(--luvex-vibrant-blue);
-}
-
-.faq-question::after {
-    content: '+';
-    font-size: 1.8rem;
-    color: var(--luvex-gray-500);
-    transition: transform 0.3s ease, color 0.3s ease;
-    font-weight: 300;
-}
-
-.faq-item.active .faq-question {
-    color: var(--luvex-vibrant-blue);
-}
-
-.faq-item.active .faq-question::after {
-    transform: rotate(45deg);
-    color: var(--luvex-vibrant-blue);
-}
-
-.faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out, padding-top 0.4s ease-out;
-}
-
-.faq-answer p {
-    padding-top: 0;
-    margin: 0;
-    font-size: 1.05rem;
-    color: var(--luvex-gray-700);
-    line-height: 1.7;
-}
-
-.faq-item.active .faq-answer {
-    max-height: 200px; /* Genug Platz für die Antwort */
-    padding-top: 1.5rem;
 }
