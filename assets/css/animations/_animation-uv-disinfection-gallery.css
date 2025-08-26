@@ -1,3 +1,38 @@
+/*
+==============================================================================
+LUVEX THEME - UV DISINFECTION GALLERY ANIMATIONS
+==============================================================================
+*/
+
+/* --- NAVIGATION CONTROLS (Pfeile & Nummern) --- */
+.nav-arrow {
+    width: 40px; height: 40px; border: 2px solid var(--luvex-bright-cyan);
+    background: rgba(109, 213, 237, 0.1); border-radius: 50%; color: var(--luvex-bright-cyan);
+    font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease;
+    display: flex; align-items: center; justify-content: center;
+}
+.nav-arrow:hover { 
+    background: var(--luvex-bright-cyan); 
+    color: var(--luvex-dark-blue); 
+    transform: scale(1.1); 
+}
+
+.step-indicator {
+    width: 35px; height: 35px; border-radius: 50%; background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3); color: rgba(255, 255, 255, 0.8);
+    cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem;
+    display: flex; align-items: center; justify-content: center;
+}
+.step-indicator.active { 
+    background: var(--luvex-bright-cyan); 
+    border-color: var(--luvex-bright-cyan); 
+    color: var(--luvex-dark-blue); 
+    transform: scale(1.1); 
+}
+.step-indicator.completed { 
+    background: rgba(109, 213, 237, 0.3); 
+    border-color: var(--luvex-bright-cyan); 
+}
 
 /* --- SCIENCE GALLERY STEP ANIMATIONS --- */
 
