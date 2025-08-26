@@ -1,5 +1,5 @@
 /**
- * LUVEX Theme - Process Equipment Hero Animation (V25 - 3D Parallax & Interactive Title)
+ * LUVEX Theme - Process Equipment Hero Animation (V26 - Final Positioning)
  *
  * Description: A complete overhaul of the hero animation. This version introduces:
  * - A true 3D perspective with a parallax effect that responds to mouse movement.
@@ -9,6 +9,7 @@
  * as the animation cycles complete, visually linking the canvas animation
  * to the DOM content.
  * - The entire animation is repositioned vertically to perfectly frame the title.
+ * - FIX: Recalibrated all 3D node positions for a balanced and aesthetic composition.
  *
  * @package Luvex
  */
@@ -38,14 +39,15 @@ document.addEventListener('DOMContentLoaded', () => {
         baseOpacity: 0.4,
         activeOpacity: 1.0,
         fontFamily: 'Inter, sans-serif',
-        phaseDuration: 50, // Faster cycling
+        phaseDuration: 50,
         flowDuration: 70,
         easingFactor: 0.08,
-        parallaxStrength: 0.2, // Increased for more noticeable 3D effect
-        fov: 700, // Field of View for 3D projection
+        parallaxStrength: 0.2,
+        fov: 700,
         fadeDecay: 4000,
         particleCount: 250,
-        verticalOffset: 0.15, // Moves the whole animation down by 15% of screen height
+        // KORREKTUR: Der vertikale Versatz wurde reduziert, um die Animation anzuheben.
+        verticalOffset: 0.08, 
     };
 
     let nodes = {};
@@ -55,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let phase = 0;
     let phaseTimer = 0;
     let isInitialized = false;
-    let heroTitleCharge = 0; // Tracks the energy level for the title
+    let heroTitleCharge = 0;
     const mouse = { x: 0.5, y: 0.5 };
 
     const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
@@ -80,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
             const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
 
-            // 3D Rotation based on mouse position
             let tempZ = this.pos3d.z * cosY - this.pos3d.x * sinY;
             let tempX = this.pos3d.z * sinY + this.pos3d.x * cosY;
             let tempY = this.pos3d.y * cosX - tempZ * sinX;
@@ -88,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             this.scale = config.fov / (config.fov + tempZ);
             this.x = width / 2 + tempX * this.scale;
-            // Apply vertical offset to move the whole animation down
             this.y = height / 2 + tempY * this.scale + (height * config.verticalOffset);
         }
 
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.particles = [];
             this.life = 0;
             this.isFinished = false;
-            const numParticles = 25; // More particles for a denser stream
+            const numParticles = 25;
             for (let i = 0; i < numParticles; i++) {
                 this.particles.push(new PulseParticle(path, i * 0.025));
             }
@@ -166,10 +166,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             this.isFinished = allFinished;
 
-            // When the pulse reaches its destination, activate the node and charge the title
             if (this.life >= config.flowDuration) {
                 this.path.end.lastActivationTime = Date.now();
-                // Increment charge, maxing out at the number of nodes
                 heroTitleCharge = Math.min(processPathIds.length, heroTitleCharge + 1);
             }
         }
@@ -239,7 +237,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    const processPathIds = ['contact', 'concept', 'simulation', 'design', 'result', 'partnership'];
+    // KORREKTUR: Die Reihenfolge der IDs bestimmt die Zeichenreihenfolge der Linien.
+    const processPathIds = ['contact', 'partnership', 'integration', 'design', 'simulation', 'concept'];
 
     function setup() {
         width = canvas.clientWidth;
@@ -254,29 +253,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function init() {
-        const radius = Math.min(width, height) * 0.4;
-        nodes = {}; // Clear existing nodes
+        const radius = Math.min(width, height) * 0.45; // Etwas größerer Radius für mehr Breite
+        nodes = {};
 
-        // Define the 8 points of the 3D shape
+        // ========================================================================
+        // KORREKTUR: Völlig neue 3D-Koordinaten für eine ausgewogene Komposition.
+        // Die Winkel sind jetzt harmonischer verteilt und die Y-Werte heben die
+        // unteren Punkte an, um eine "Schale" zu formen.
+        // ========================================================================
         const points = [
-            { id: 'contact', text: 'Contact & Analysis', angle: -105, r: 1.1, z: 50 },
-            { id: 'concept', text: 'Concept', angle: -35, r: 1.1, z: 50 },
-            { id: 'simulation', text: 'Simulation', angle: 35, r: 1.1, z: -50 },
-            { id: 'design', text: 'System Design', angle: 90, r: 1.0, z: -100 },
-            { id: 'result', text: 'Integration', angle: 145, r: 1.1, z: -50 },
-            { id: 'partnership', text: 'Partnership', angle: 215, r: 1.1, z: 50 },
+            { id: 'contact',     text: 'Contact & Analysis', x: -0.8, y: 0.1,  z: 40  },
+            { id: 'partnership', text: 'Partnership',        x: -0.5, y: 0.6,  z: -30 },
+            { id: 'integration', text: 'Integration',        x: 0.0,  y: 0.85, z: -80 },
+            { id: 'design',      text: 'System Design',      x: 0.5,  y: 0.6,  z: -30 },
+            { id: 'simulation',  text: 'Simulation',         x: 0.8,  y: 0.1,  z: 40  },
+            { id: 'concept',     text: 'Concept',            x: 0.0,  y: -0.2, z: 100 },
         ];
 
         points.forEach(p => {
-            const angleRad = p.angle * (Math.PI / 180);
-            const x = radius * p.r * Math.cos(angleRad);
-            const y = radius * p.r * Math.sin(angleRad) * 0.8; // Make it slightly wider than tall
+            const xPos = p.x * radius;
+            const yPos = p.y * radius;
             
             let align = 'center';
-            if (x > 10) align = 'left';
-            if (x < -10) align = 'right';
+            if (p.x > 0.1) align = 'left';
+            if (p.x < -0.1) align = 'right';
 
-            nodes[p.id] = new Node(p.text, new Point3D(x, y, p.z), 16, p.id, align);
+            nodes[p.id] = new Node(p.text, new Point3D(xPos, yPos, p.z), 16, p.id, align);
         });
 
         paths = [];
@@ -294,7 +296,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function nextPhase() {
         phase = (phase + 1) % paths.length;
-        // When a full cycle completes, reset the title charge
         if (phase === 0) {
             heroTitleCharge = 0;
         }
@@ -305,7 +306,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const maxCharge = processPathIds.length;
         const chargeRatio = heroTitleCharge / maxCharge;
 
-        // Interpolate color from white to brightCyan
         const r = Math.round(255 * (1 - chargeRatio) + 109 * chargeRatio);
         const g = Math.round(255 * (1 - chargeRatio) + 213 * chargeRatio);
         const b = Math.round(255 * (1 - chargeRatio) + 237 * chargeRatio);
@@ -335,7 +335,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         Object.values(nodes).sort((a, b) => a.scale - b.scale).forEach(n => n.draw());
         
-        updateHeroTitleStyle(); // Update the title style on each frame
+        updateHeroTitleStyle();
 
         animationFrameId = requestAnimationFrame(animate);
     }
