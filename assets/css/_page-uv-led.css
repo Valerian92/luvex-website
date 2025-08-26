@@ -6,15 +6,16 @@ LUVEX THEME - UV LED PAGE STYLES (OVERHAULED)
 
 /* --- 1. Hero & Canvas Styles --- */
 .uv-led-hero {
-    position: relative;
-    height: 75vh; /* Defined height to prevent infinite growth */
+    position: relative; /* This is the anchor for all absolute children */
+    height: 75vh;
     min-height: 600px;
     max-height: 800px;
-    display: flex; /* Use flexbox for alignment */
+    overflow: hidden;
+    cursor: none;
+    /* We use the container itself for centering, not flexbox on the hero */
+    display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    cursor: none; /* Hide default mouse cursor */
 }
 
 .uv-led-hero #uv-led-canvas {
@@ -23,15 +24,16 @@ LUVEX THEME - UV LED PAGE STYLES (OVERHAULED)
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 1; /* Lowest layer */
     background-color: #0B1A3D;
 }
 
 .uv-led-hero .luvex-hero__container {
-    position: relative;
-    z-index: 3; /* Above controls and canvas */
+    position: relative; /* Changed from absolute to be part of the flow */
+    z-index: 3; /* Highest layer for text content */
     text-align: center;
-    pointer-events: none; /* Container itself is not interactive */
+    pointer-events: none;
+    padding: 2rem; /* Add some padding */
 }
 
 .uv-led-hero .luvex-hero__content {
@@ -41,7 +43,6 @@ LUVEX THEME - UV LED PAGE STYLES (OVERHAULED)
     gap: 1rem;
 }
 
-
 .uv-led-hero .luvex-hero__title,
 .uv-led-hero .luvex-hero__subtitle,
 .uv-led-hero .luvex-hero__description {
@@ -49,7 +50,7 @@ LUVEX THEME - UV LED PAGE STYLES (OVERHAULED)
 }
 
 .uv-led-hero .luvex-hero__cta-container {
-    pointer-events: auto; /* Buttons are interactive */
+    pointer-events: auto;
     margin-top: 1.5rem;
 }
 
@@ -57,16 +58,16 @@ LUVEX THEME - UV LED PAGE STYLES (OVERHAULED)
 #integrated-controls-container {
     position: absolute;
     top: 50%;
-    left: 3rem; /* Positioned to the far left */
+    left: 3rem;
     transform: translateY(-50%);
-    z-index: 2; /* Below text, above canvas */
+    z-index: 2; /* Sits between canvas and text */
     pointer-events: auto;
 }
 
 .hud-controls {
     display: flex;
-    flex-direction: column; /* Vertical layout */
-    align-items: flex-start; /* Align items to the left */
+    flex-direction: column;
+    align-items: flex-start;
     gap: 1.5rem;
     background: rgba(11, 26, 61, 0.7);
     backdrop-filter: blur(10px);
@@ -96,7 +97,7 @@ LUVEX THEME - UV LED PAGE STYLES (OVERHAULED)
     font-size: 0.9rem;
     color: #FFF;
     font-weight: 600;
-    min-width: 55px; /* Adjusted width */
+    min-width: 55px;
     text-align: left;
 }
 
@@ -190,26 +191,25 @@ LUVEX THEME - UV LED PAGE STYLES (OVERHAULED)
 /* --- 4. Responsive Design --- */
 @media (max-width: 992px) {
     #integrated-controls-container {
-        left: 1.5rem; /* Move closer to edge on tablets */
+        left: 1.5rem;
     }
 }
 
-
 @media (max-width: 768px) {
     .uv-led-hero {
-        height: 85vh; /* Taller hero on mobile */
+        height: 85vh;
     }
     
     #integrated-controls-container {
-        top: auto; /* Unset top positioning */
-        bottom: 2rem; /* Position at the bottom */
+        top: auto;
+        bottom: 2rem;
         left: 50%;
         transform: translateX(-50%);
         width: 90%;
     }
 
     .hud-controls {
-        flex-direction: row; /* Horizontal on mobile for space */
+        flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
         padding: 0.75rem 1rem;

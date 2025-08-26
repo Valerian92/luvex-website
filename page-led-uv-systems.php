@@ -9,11 +9,13 @@ get_header(); ?>
      START: LED UV Systems Hero Section
      ========================================================================== -->
 <section class="luvex-hero uv-led-hero">
+    <!-- Canvas is now a true background element -->
     <canvas id="uv-led-canvas"></canvas>
     
-    <!-- Container for the integrated HUD controls -->
+    <!-- Controls are positioned absolutely within the hero -->
     <div id="integrated-controls-container"></div>
 
+    <!-- Hero content is also positioned absolutely to overlay the canvas -->
     <div class="luvex-hero__container">
         <div class="luvex-hero__content">
             <h1 class="luvex-hero__title">
