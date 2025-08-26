@@ -183,11 +183,12 @@ class UVLEDConvergence {
         return { h: hue < 0 ? hue + 360 : hue, s: saturation, l: lightness };
     }
 
-    drawMouseFocus(x, y, time, color) {
+     drawMouseFocus(x, y, time, color) {
         const pulse = (Math.sin(time * 0.002) + 1) / 2;
         const radius = 15 + pulse * 5;
         const glowRadius = radius * 3;
 
+        // Hauptfokus (bestehend)
         const gradient = this.ctx.createRadialGradient(x, y, 0, x, y, glowRadius);
         gradient.addColorStop(0, `hsla(${color.h}, ${color.s}%, ${color.l}%, 0.4)`);
         gradient.addColorStop(0.5, `hsla(${color.h}, ${color.s}%, ${color.l}%, 0.2)`);
@@ -197,6 +198,37 @@ class UVLEDConvergence {
         this.ctx.beginPath();
         this.ctx.arc(x, y, glowRadius, 0, Math.PI * 2);
         this.ctx.fill();
+
+        // NEUER FOKUSKREIS: Präziser Mauszeiger
+        const focusRadius = 8 + pulse * 2;
+        const focusPulse = (Math.sin(time * 0.004) + 1) / 2;
+        
+        // Äußerer Ring
+        this.ctx.strokeStyle = `hsla(${color.h}, ${color.s}%, ${color.l}%, ${0.8 + focusPulse * 0.2})`;
+        this.ctx.lineWidth = 2;
+        this.ctx.beginPath();
+        this.ctx.arc(x, y, focusRadius, 0, Math.PI * 2);
+        this.ctx.stroke();
+
+        // Innerer Punkt
+        this.ctx.fillStyle = `hsla(${color.h}, ${color.s}%, ${color.l}%, ${0.9 + focusPulse * 0.1})`;
+        this.ctx.beginPath();
+        this.ctx.arc(x, y, 3, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // Crosshair für Präzision
+        this.ctx.strokeStyle = `hsla(${color.h}, ${color.s}%, ${color.l}%, 0.6)`;
+        this.ctx.lineWidth = 1;
+        this.ctx.beginPath();
+        this.ctx.moveTo(x - 12, y);
+        this.ctx.lineTo(x - 6, y);
+        this.ctx.moveTo(x + 6, y);
+        this.ctx.lineTo(x + 12, y);
+        this.ctx.moveTo(x, y - 12);
+        this.ctx.lineTo(x, y - 6);
+        this.ctx.moveTo(x, y + 6);
+        this.ctx.lineTo(x, y + 12);
+        this.ctx.stroke();
     }
 
     draw(time) {
