@@ -55,13 +55,20 @@ Last Update: 2025-08-24 (Language Switcher & CSS Cleanup)
 
 .header-language-switcher {
     flex-shrink: 0;
-    margin-left: 1rem; /* Abstand zum Logo */
+    margin-right: 1rem;
+    transform: translateY(-2px);
+}
+
+.header-language-switcher .language-switcher-trigger {
+    padding: 8px 16px !important;
+    min-height: 38px !important;
+    border-radius: 6px !important;
 }
 
 .header-language-switcher .language-dropdown {
-    left: 0; /* Dropdown links ausrichten statt rechts */
+    left: auto !important;
+    right: 0 !important;
 }
-
 
 /* ==========================================================================
    2. LOGO & BRANDING

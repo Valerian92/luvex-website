@@ -48,7 +48,7 @@
 				</div>
 				
 				<p class="footer-description">
-					Independent UV technology experts delivering cutting-edge solutions.
+					Independent UV technology experts<br>delivering cutting-edge solutions.
 				</p>
 			</div>
 

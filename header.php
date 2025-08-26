@@ -23,22 +23,7 @@
 <header id="site-header" class="site-header fixed-header">
     <div class="header-container">
         
-    <!-- Logo -->
-    <div class="site-branding">
-        <?php
-        if ( has_custom_logo() ) {
-            the_custom_logo();
-        } else {
-            ?>
-            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="luvex-logo-text">
-                <span class="logo-l">L</span><span class="logo-u">u</span><span class="logo-vex">vex</span><span class="logo-dot"></span>
-            </a>
-            <?php
-        }
-        ?>
-    </div>
-
-    <!-- Language Switcher rechts neben Logo -->
+    <!-- Language Switcher links vom Logo -->
     <div class="header-language-switcher">
         <?php 
         if (function_exists('pll_the_languages') && class_exists('LuvexUserSystem')) {
@@ -55,6 +40,21 @@
                     echo '</div>';
                 }
             }
+        }
+        ?>
+    </div>
+
+    <!-- Logo -->
+    <div class="site-branding">
+        <?php
+        if ( has_custom_logo() ) {
+            the_custom_logo();
+        } else {
+            ?>
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="luvex-logo-text">
+                <span class="logo-l">L</span><span class="logo-u">u</span><span class="logo-vex">vex</span><span class="logo-dot"></span>
+            </a>
+            <?php
         }
         ?>
     </div>
