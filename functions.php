@@ -155,7 +155,7 @@ function luvex_enqueue_assets() {
         $enqueue_script('luvex-disinfection-hero', 'pages/hero-disinfection.js');
         $enqueue_script('luvex-disinfection-gallery', 'pages/uvc-science-gallery.js');
     }
-    if (is_page('uv-led')) {
+    if (is_page('led-uv-systems')) {
         $enqueue_script('luvex-uv-led-hero', 'pages/hero-uv-led.js');
     }
     if (is_page('mercury-uv-lamps')) {
