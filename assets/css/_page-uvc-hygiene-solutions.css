@@ -1,0 +1,320 @@
+/*
+==============================================================================
+LUVEX THEME - CURING SYSTEMS PAGE
+==============================================================================
+Description: Styles für die Curing Systems Seite mit Fokus auf industrielle
+             Anwendungen und Systemkomponenten
+Dependencies: _variables.css, _core.css, _components.css, _animations.css
+Last Update: 2025-08-27
+==============================================================================
+*/
+
+/*
+==============================================================================
+1. HERO SECTION ANIMATIONS
+==============================================================================
+*/
+
+/* Hero Canvas Animation für Curing Systems */
+.hero-curing-systems {
+    position: relative;
+}
+
+/* Animated particles für industrielle Atmosphäre */
+@keyframes curing-particles {
+    0% { 
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% { 
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.curing-particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--luvex-bright-cyan);
+    border-radius: 50%;
+    animation: curing-particles 8s linear infinite;
+}
+
+/* Mehrere Partikel mit verschiedenen Delays */
+.curing-particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+.curing-particle:nth-child(2) { left: 20%; animation-delay: 1.6s; }
+.curing-particle:nth-child(3) { left: 30%; animation-delay: 3.2s; }
+.curing-particle:nth-child(4) { left: 40%; animation-delay: 4.8s; }
+.curing-particle:nth-child(5) { left: 50%; animation-delay: 6.4s; }
+
+/*
+==============================================================================
+2. APPLICATIONS SECTION
+==============================================================================
+*/
+
+.applications-section {
+    padding: 6rem 0;
+}
+
+.applications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 2.5rem;
+    margin-top: 4rem;
+}
+
+.application-card {
+    background: var(--luvex-white);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    border: 1px solid var(--luvex-gray-200);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.application-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border-color: var(--luvex-bright-cyan);
+}
+
+.application-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--luvex-vibrant-blue), var(--luvex-bright-cyan));
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.application-card:hover .application-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.application-icon i {
+    font-size: 2.2rem;
+    color: var(--luvex-white);
+}
+
+.application-content h3 {
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    color: var(--luvex-dark-blue);
+    margin-bottom: 1rem;
+}
+
+.application-content p {
+    color: var(--luvex-gray-700);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.application-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+}
+
+.application-benefits li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--luvex-gray-600);
+    font-size: var(--text-sm);
+}
+
+.application-benefits li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--luvex-vibrant-blue);
+    font-weight: bold;
+}
+
+.application-specs {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: auto;
+}
+
+.spec-badge {
+    background: rgba(109, 213, 237, 0.1);
+    color: var(--luvex-vibrant-blue);
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    border: 1px solid rgba(109, 213, 237, 0.2);
+}
+
+/* Scroll Animation für Application Cards */
+.application-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.applications-section.is-visible .application-card {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.applications-section.is-visible .application-card:nth-child(1) { transition-delay: 0.1s; }
+.applications-section.is-visible .application-card:nth-child(2) { transition-delay: 0.2s; }
+.applications-section.is-visible .application-card:nth-child(3) { transition-delay: 0.3s; }
+.applications-section.is-visible .application-card:nth-child(4) { transition-delay: 0.4s; }
+.applications-section.is-visible .application-card:nth-child(5) { transition-delay: 0.5s; }
+.applications-section.is-visible .application-card:nth-child(6) { transition-delay: 0.6s; }
+
+/*
+==============================================================================
+3. COMPONENTS SECTION
+==============================================================================
+*/
+
+.components-section {
+    padding: 6rem 0;
+}
+
+.components-showcase {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 4rem;
+    margin-top: 4rem;
+}
+
+.component-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.component-item {
+    background: var(--luvex-white);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    border: 1px solid var(--luvex-gray-200);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.component-item:hover {
+    transform: translateX(10px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--luvex-bright-cyan);
+}
+
+.component-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, 
+        rgba(109, 213, 237, 0.1), 
+        rgba(0, 123, 255, 0.1));
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.component-item:hover .component-icon {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, var(--luvex-vibrant-blue), var(--luvex-bright-cyan));
+}
+
+.component-icon i {
+    font-size: 1.5rem;
+    color: var(--luvex-vibrant-blue);
+    transition: color 0.3s ease;
+}
+
+.component-item:hover .component-icon i {
+    color: var(--luvex-white);
+}
+
+.component-item h4 {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--luvex-dark-blue);
+    margin-bottom: 0.5rem;
+}
+
+.component-item p {
+    color: var(--luvex-gray-700);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Component Animation */
+.component-item {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.components-section.is-visible .component-item {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.components-section.is-visible .component-group:nth-child(1) .component-item:nth-child(1) { transition-delay: 0.1s; }
+.components-section.is-visible .component-group:nth-child(1) .component-item:nth-child(2) { transition-delay: 0.2s; }
+.components-section.is-visible .component-group:nth-child(1) .component-item:nth-child(3) { transition-delay: 0.3s; }
+.components-section.is-visible .component-group:nth-child(2) .component-item:nth-child(1) { transition-delay: 0.4s; }
+.components-section.is-visible .component-group:nth-child(2) .component-item:nth-child(2) { transition-delay: 0.5s; }
+.components-section.is-visible .component-group:nth-child(2) .component-item:nth-child(3) { transition-delay: 0.6s; }
+
+/*
+==============================================================================
+4. RESPONSIVE DESIGN
+==============================================================================
+*/
+
+@media (max-width: 1024px) {
+    .applications-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+    }
+    
+    .components-showcase {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .applications-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .application-card {
+        padding: 2rem;
+    }
+    
+    .component-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .component-item:hover {
+        transform: translateY(-5px);
+    }
+}

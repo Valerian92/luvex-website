@@ -73,6 +73,9 @@ function luvex_enqueue_assets() {
         'uv-curing' => ['_page-uv-curing.css', 'animations/_animation-uv-curing-gallery.css'],
         'register' => ['_page-register.css', '_auth.css'],
         'login' => ['_page-login.css', '_auth.css'],
+        'forgot-password' => ['_page-forgot-password.css', '_auth.css'],
+        'curing-systems' => ['_page-curing-systems.css'],
+        'uvc-hygiene-solutions' => ['_page-uvc-hygiene-solutions.css'],
     ];
 
     foreach ($page_styles as $slug => $files) {
