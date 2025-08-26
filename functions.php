@@ -61,6 +61,7 @@ function luvex_enqueue_assets() {
         'about' => ['_page-about.css'],
         'booking' => ['_page-booking.css'],
         'contact' => ['_page-contact.css'],
+        'uv-knowledge' => ['_page-uv-knowledge.css'],
         'mercury-uv-lamps' => ['_page-mercury-uv-lamps.css'],
         'uv-consulting' => ['_page-uv-consulting.css'],
         'uv-led' => ['_page-uv-led.css'],
