@@ -13,6 +13,8 @@ Last Update: 2025-08-04
 .uv-led-hero {
     position: relative;
     min-height: 600px;
+    max-height: 700px;
+    height: 60vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,6 +23,7 @@ Last Update: 2025-08-04
 
 .uv-led-hero #uv-led-canvas {
     position: absolute !important;
+    max-height: 700px;
     top: 0 !important;
     left: 0 !important;
     width: 100% !important;
