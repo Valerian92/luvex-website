@@ -173,6 +173,9 @@ function luvex_enqueue_assets() {
     if (is_page('uv-solutions')) {
         $enqueue_script('luvex-hero-soltuions-animation', 'pages/hero-solutions-animation.js');
     }
+    if (is_page('uv_news')) {
+        $enqueue_script('luvex-hero-news-animation', 'pages/hero-news-network.js');
+    }
 
 }
 
