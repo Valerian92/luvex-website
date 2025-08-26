@@ -170,7 +170,9 @@ function luvex_enqueue_assets() {
        if (is_page('uv-safety-equipment')) {
         $enqueue_script('luvex-hero-safety-animation-script', 'pages/hero-safety-animation.js');
     }
-
+    if (is_page('uv-process-equipment')) {
+        $enqueue_script('luvex-hero-consulting-animation', 'pages/hero-consulting-animation.js');
+    }
 
 }
 
