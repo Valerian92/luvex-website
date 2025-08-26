@@ -71,6 +71,8 @@ function luvex_enqueue_assets() {
         'uv-tunnel' => ['_page-uv-tunnel.css'],
         'uv-c-disinfection' => ['_page-uv-c-disinfection.css', 'animations/_animation-uv-disinfection-gallery.css'],
         'uv-curing' => ['_page-uv-curing.css', 'animations/_animation-uv-curing-gallery.css'],
+        'register' => ['_page-register.css', '_auth.css'],
+        'login' => ['_page-login.css', '_auth.css'],
     ];
 
     foreach ($page_styles as $slug => $files) {
