@@ -1,21 +1,15 @@
 /*
 ==============================================================================
-LUVEX THEME - UV KNOWLEDGE PAGE (REPAIRED)
+LUVEX THEME - UV KNOWLEDGE PAGE (FINAL)
 ==============================================================================
 Description: Enthält alle spezifischen Styles für die UV Knowledge Seite.
-             Der Hero hat jetzt einen dunklen Hintergrund, um den Header
-             sichtbar zu machen, und der Indikator wurde neu positioniert.
+             Der Hero hat einen dunklen Hintergrund, und der Indikator
+             hat jetzt einen weißen Hintergrund für maximale Lesbarkeit.
 ==============================================================================
 */
 
 /* ==============================================================================
 Hero mit Spectrum Animation
-==============================================================================
-FIX:
-- `background-color` wurde auf `--luvex-dark-blue` gesetzt, um den Header
-  sichtbar zu machen und den Standard-Hero-Look zu imitieren.
-- Ein `::before` Pseudo-Element wurde hinzugefügt, um das konsistente
-  Hintergrund-Grid aus _components.css zu übernehmen.
 ==============================================================================
 */
 .hero-spectrum-engine {
@@ -26,8 +20,8 @@ FIX:
     position: relative;
     overflow: hidden;
     cursor: none !important;
-    background-color: var(--luvex-dark-blue); /* FIX: Blauer Hintergrund */
-    color: var(--luvex-white); /* Stellt sicher, dass Text weiß ist */
+    background-color: var(--luvex-dark-blue);
+    color: var(--luvex-white);
 }
 
 /* Hintergrund-Grid für einen konsistenten Look */
@@ -47,8 +41,6 @@ FIX:
 /* ==============================================================================
 Canvas (Hintergrundanimation)
 ==============================================================================
-- `z-index: 2` platziert es über dem Grid aber unter dem Text.
-==============================================================================
 */
 .hero-spectrum-engine canvas {
     position: absolute;
@@ -63,37 +55,35 @@ Canvas (Hintergrundanimation)
 Wellenlängen-Anzeige
 ==============================================================================
 FIX:
-- Position nach unten mittig verschoben.
-- `transform` sorgt für die exakte Zentrierung.
+- `background` ist jetzt weiß für maximale Lesbarkeit.
+- `border` und `box-shadow` für eine saubere Abhebung.
 ==============================================================================
 */
 .wavelength-indicator {
     position: absolute;
     bottom: 2rem;
     left: 50%;
-    transform: translateX(-50%); /* Zentriert das Element exakt */
-    background: rgba(0, 0, 0, 0.3);
-    color: var(--luvex-bright-cyan); /* Standardfarbe */
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95); /* FIX: Weißer Hintergrund */
+    backdrop-filter: blur(4px); /* Leichter Blur-Effekt */
+    color: var(--luvex-dark-blue); /* Standardfarbe für den Text */
     padding: 0.5rem 1rem;
     border-radius: var(--radius-md);
     font-weight: 600;
     font-family: 'Courier New', Courier, monospace;
     z-index: 10;
-    border: 1px solid rgba(109, 213, 237, 0.2);
-    transition: color 0.2s ease; /* Sanfter Farbübergang */
+    border: 1px solid var(--luvex-gray-200); /* Heller Rand */
+    box-shadow: var(--shadow-sm); /* Leichter Schatten */
+    transition: color 0.2s ease;
 }
 
 /* ==============================================================================
 Standard Hero Content (Text-Container)
 ==============================================================================
-- `z-index: 5` hebt den Container über das Canvas.
-- `pointer-events: none` ist der Schlüssel: Der Text reagiert nicht auf
-  Mausklicks, sodass die Maus-Events zur Animation auf dem Canvas durchgehen.
-==============================================================================
 */
 .hero-spectrum-engine .luvex-hero__container {
     position: relative;
-    z-index: 5; /* Vordergrundebene */
+    z-index: 5;
     pointer-events: none;
     text-align: center;
 }
@@ -102,11 +92,9 @@ Standard Hero Content (Text-Container)
 ==============================================================================
 Anklickbare Elemente (z.B. Buttons)
 ==============================================================================
-- Diese Regel stellt sicher, dass eventuelle Buttons im Hero klickbar bleiben.
-==============================================================================
 */
 .hero-spectrum-engine .luvex-hero__cta {
-    pointer-events: auto; /* Macht den Button wieder klickbar */
+    pointer-events: auto;
 }
 
 /* ==============================================================================
