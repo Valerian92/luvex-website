@@ -16,6 +16,18 @@ LUVEX THEME - UV LED PAGE STYLES (FINAL LAYOUT FIX)
     display: block !important;
 }
 
+/* --- FIX: Cursor behavior for interactive elements --- */
+.uv-led-hero .luvex-hero__cta-container a,
+.uv-led-hero .luvex-hero__cta-container a:hover {
+    cursor: none; /* Ensure custom cursor is not replaced by pointer hand */
+}
+
+#integrated-controls-container,
+#integrated-controls-container input {
+    cursor: auto; /* Restore default cursor for usability on controls */
+}
+
+
 .uv-led-hero #uv-led-canvas {
     position: absolute;
     top: 0;

@@ -1,12 +1,6 @@
 /*
 ==============================================================================
-LUVEX THEME - PAGE: MERCURY UV LAMPS
-==============================================================================
-
-Description: Page-specific styles for the Mercury UV Lamps knowledge page.
-Dependencies: _core.css, _components.css
-Last Update: 2025-08-16 (Layout and Button Fixes)
-
+LUVEX THEME - PAGE: MERCURY UV LAMPS (OVERHAULED)
 ==============================================================================
 */
 
@@ -21,10 +15,25 @@ Last Update: 2025-08-16 (Layout and Button Fixes)
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    min-height: 700px;
+    height: 75vh; /* Use viewport height for responsiveness */
+    min-height: 500px;
+    max-height: 700px; /* Max height constraint */
     overflow: hidden;
     text-align: center;
+}
+
+/* Add the global hero grid background */
+.mercury-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="hero-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23hero-grid)"/></svg>');
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 2; /* Above canvas, below content */
 }
 
 #mercury-animation-container {
@@ -33,166 +42,68 @@ Last Update: 2025-08-16 (Layout and Button Fixes)
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 1; /* Animation is the base layer */
 }
 
 .mercury-hero .luvex-hero__container {
     position: relative;
-    z-index: 2;
+    z-index: 3; /* Content is the top layer */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-/*
-==============================================================================
-2. PAGE-SPECIFIC HERO LAYOUT & BUTTON STYLES
-==============================================================================
-*/
+/* Increased vertical spacing for hero content */
+.mercury-hero .luvex-hero__title {
+    margin-bottom: 2.5rem; /* More space below title */
+}
 
-/* --- 2.1 Abstände für die neue Inhaltsreihenfolge --- */
 .mercury-hero .luvex-hero__cta-container {
-    margin-top: 2.5rem; /* Abstand zwischen Titel und Buttons */
+    margin-bottom: 2rem; /* More space below buttons */
 }
 
 .mercury-hero .luvex-hero__description {
-    margin-top: 2rem; /* Abstand zwischen Buttons und Beschreibung */
-    margin-bottom: 0;
-    max-width: 700px; /* Etwas breiter für besseren Look */
+    max-width: 700px;
 }
-
-/* --- 2.2 Einheitliche Button-Größen NUR für diese Seite --- */
-.mercury-hero .luvex-hero__cta,
-.mercury-hero .luvex-hero__cta-secondary {
-    padding: 16px 32px; /* Einheitlicher Innenabstand */
-    border-radius: var(--radius-full); /* Einheitlich runde Ecken */
-    border-width: 2px; /* Stellt sicher, dass die Border-Dicke gleich ist */
-    border-style: solid;
-    line-height: 1; /* Verhindert Höhenunterschiede durch Textumbruch */
-}
-
 
 /*
 ==============================================================================
-3. COMPARISON TABLE
+2. PAGE-SPECIFIC COMPONENT STYLES
 ==============================================================================
 */
-
-.comparison-wrapper {
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.detailed-comparison {
+.comparison-table {
     width: 100%;
-    background: var(--luvex-white);
+    border-collapse: collapse;
+    background: white;
+    box-shadow: var(--shadow-md);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: var(--shadow-md);
-    border-collapse: collapse;
 }
 
-.detailed-comparison th,
-.detailed-comparison td {
+.comparison-table th,
+.comparison-table td {
     padding: 1rem 1.5rem;
     text-align: left;
     border-bottom: 1px solid var(--luvex-gray-200);
 }
 
-.detailed-comparison th {
-    background: var(--luvex-dark-blue-medium);
-    color: var(--luvex-white);
+.comparison-table th {
+    background: var(--luvex-dark-blue);
+    color: white;
     font-weight: 600;
 }
 
-.detailed-comparison th.recommended {
+.comparison-table th.highlight {
     background: var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
 }
 
-.detailed-comparison tbody tr:last-child td {
-    border-bottom: none;
-}
-
-.detailed-comparison .positive {
-    color: #10b981;
+.comparison-table td.highlight {
     font-weight: 600;
+    color: var(--luvex-dark-blue);
 }
 
-.detailed-comparison .negative {
-    color: #ef4444;
-}
-
-.detailed-comparison .positive::before {
-    content: '✓ ';
-}
-
-.detailed-comparison .negative::before {
-    content: '✗ ';
-}
-
-
-/*
-==============================================================================
-4. FAQ SECTION
-==============================================================================
-*/
-
-.faq-accordion {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.faq-item {
-    background-color: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: var(--radius-md);
-    margin-bottom: 1rem;
-    transition: background-color 0.3s ease;
-}
-
-.faq-item.active {
-    background-color: rgba(109, 213, 237, 0.05);
-    border-color: rgba(109, 213, 237, 0.3);
-}
-
-.faq-question {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.25rem;
-    font-weight: 600;
-    font-size: var(--text-lg);
-    color: var(--luvex-white);
-    cursor: pointer;
-    background: none;
-    border: none;
-    text-align: left;
-}
-
-.faq-question i {
-    transition: transform 0.3s ease;
-    flex-shrink: 0;
-    margin-left: 1rem;
-}
-
-.faq-item.active .faq-question i {
-    transform: rotate(45deg);
-    color: var(--luvex-bright-cyan);
-}
-
-.faq-answer {
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.4s ease-in-out, padding 0.4s ease;
-    padding: 0 1.25rem;
-}
-
-.faq-answer p {
-    color: var(--luvex-gray-300);
-    padding-bottom: 1.25rem;
-    margin: 0;
-    line-height: 1.7;
+.comparison-table strong {
+    color: var(--luvex-dark-blue);
 }
