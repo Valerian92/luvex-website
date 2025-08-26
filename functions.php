@@ -284,8 +284,8 @@ if (file_exists($luvex_includes_path . '_user_system.php')) {
 require_once get_stylesheet_directory() . '/includes/_luvex_security.php';
 
 // Nur die reCAPTCHA Keys behalten
-define('LUVEX_RECAPTCHA_SITE_KEY', 'dein_site_key');
-define('LUVEX_RECAPTCHA_SECRET_KEY', 'dein_secret_key');
+define('LUVEX_RECAPTCHA_SITE_KEY', '6LcOX7MrAAAAAESRSq-2Y0i66cbmUvxMu8mgaE-M');
+define('LUVEX_RECAPTCHA_SECRET_KEY', '6LcOX7MrAAAAAG1iRiHd1B0_BtumXKIWikzqpHsI');
 
 // Minimale reCAPTCHA Funktion
 function luvex_verify_recaptcha($response) {
