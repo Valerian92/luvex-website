@@ -63,22 +63,24 @@ Canvas (Hintergrundanimation)
 Wellenlängen-Anzeige
 ==============================================================================
 FIX:
-- Position von oben rechts nach unten links geändert.
-- Hintergrund leicht angepasst für besseren Kontrast auf dunklem Grund.
+- Position nach unten mittig verschoben.
+- `transform` sorgt für die exakte Zentrierung.
 ==============================================================================
 */
 .wavelength-indicator {
     position: absolute;
-    bottom: 2rem; /* FIX: Position unten */
-    left: 2rem;   /* FIX: Position links */
-    background: rgba(0, 0, 0, 0.3); /* Angepasster Hintergrund */
-    color: var(--luvex-bright-cyan);
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%); /* Zentriert das Element exakt */
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--luvex-bright-cyan); /* Standardfarbe */
     padding: 0.5rem 1rem;
     border-radius: var(--radius-md);
     font-weight: 600;
-    font-family: 'Courier New', Courier, monospace; /* Technischer Look */
+    font-family: 'Courier New', Courier, monospace;
     z-index: 10;
     border: 1px solid rgba(109, 213, 237, 0.2);
+    transition: color 0.2s ease; /* Sanfter Farbübergang */
 }
 
 /* ==============================================================================
@@ -114,7 +116,6 @@ Responsive Anpassungen
 @media (max-width: 768px) {
     .wavelength-indicator {
         bottom: 1rem;
-        left: 1rem;
         font-size: 0.9rem;
         padding: 0.25rem 0.75rem;
     }

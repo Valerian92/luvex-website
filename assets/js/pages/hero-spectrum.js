@@ -9,9 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const ctx = canvas.getContext('2d');
     const indicator = document.querySelector('.wavelength-indicator');
     
-    // HINWEIS: Sehr gut, dass alle Funktionen zum Zeichnen von Text 
-    // und Buttons bereits entfernt wurden.
-    
     let width, height;
     let particlesArray = [];
     let waves = [];
@@ -175,8 +172,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function updateWavelengthIndicator(wavelength) {
+    // FIX: Die Funktion akzeptiert jetzt das Farbobjekt als zweiten Parameter.
+    function updateWavelengthIndicator(wavelength, color) {
         indicator.textContent = `${wavelength.toFixed(0)} nm`;
+        // Setzt die Textfarbe des Indikators dynamisch.
+        indicator.style.color = `rgb(${color.r}, ${color.g}, ${color.b})`;
     }
     
     function wavelengthToRgb(wavelength) {
@@ -223,7 +223,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         drawAnimatedCursor();
         
-        updateWavelengthIndicator(currentWavelength);
+        // FIX: Übergibt die dynamische Farbe an die Indikator-Funktion.
+        updateWavelengthIndicator(currentWavelength, dynamicColor);
         increment += 0.02;
         requestAnimationFrame(animate);
     }
