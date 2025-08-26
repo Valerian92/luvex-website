@@ -8,10 +8,17 @@ Dependencies: animations.css, _variables.css, _layout.css
 ==============================================================================
 */
 
-/* --- HERO SECTION LAYOUT --- */
+/* ==============================================================================
+1. HERO SECTION & ANIMATION
+==============================================================================
+*/
+
 .uvc-hero {
     min-height: 600px;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .uvc-hero .animation-background {
@@ -21,56 +28,88 @@ Dependencies: animations.css, _variables.css, _layout.css
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: 0;
+    z-index: 1; /* Hinter dem Content */
 }
 
-/* Hero Layout Optimierungen - Neue Reihenfolge OHNE ORDER */
-.luvex-hero__title {
-    margin-bottom: var(--space-md);
-    order: 1; /* Title zuerst */
+.uvc-hero .luvex-hero__container {
+    position: relative;
+    z-index: 2; /* Vor der Animation */
 }
 
-.hero-navigation {
-    margin-bottom: var(--space-md);
-    order: 2; /* Navigation nach Title */
-}
-
-.luvex-hero__subtitle {
-    margin-bottom: var(--space-sm);
-    order: 3; /* Subtitle nach Navigation */
-}
-
-.luvex-hero__description {
-    max-width: 650px;
-    margin: 0 auto var(--space-lg) auto;
-    text-align: center;
-    line-height: 1.6;
-    font-size: 1.1rem;
-    order: 4; /* Description zuletzt */
-}
-
-/* Hero Container als Flexbox mit korrekter Reihenfolge */
-.luvex-hero__content {
+/* Hero Content Layout */
+.uvc-hero .luvex-hero__content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    gap: 1.5rem; /* Abstand zwischen Elementen */
 }
 
-/* Überschreibe alle anderen Hero Order-Regeln */
-.luvex-hero__cta-secondary {
-    order: unset !important;
+.uvc-hero .luvex-hero__description {
+    max-width: 650px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 1.6;
+    font-size: 1.1rem;
 }
 
-.luvex-hero__cta {
-    order: unset !important;
+/* --- FIX: Animations-Stile --- */
+.pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1px;
+    height: 1px;
+    background: rgba(109, 213, 237, 0.3);
+    border-radius: 50%;
+    animation: expand-pulse 8s infinite linear;
+    z-index: 1;
 }
 
-.luvex-hero__cta-container {
-    order: unset !important;
+.pathogen-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--luvex-bright-cyan);
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: float 20s infinite ease-in-out;
+    transition: background-color 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+    z-index: 2;
 }
 
-/* --- SCIENCE GALLERY SECTION LAYOUT --- */
+.pathogen-particle.inactive {
+    background-color: var(--luvex-gray-500);
+    opacity: 0.2;
+    transform: scale(0.8);
+}
+
+@keyframes expand-pulse {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.5;
+    }
+    100% {
+        width: 250vmax;
+        height: 250vmax;
+        opacity: 0;
+    }
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-20px, 20px); }
+    50% { transform: translate(0, -20px); }
+    75% { transform: translate(20px, 20px); }
+    100% { transform: translate(0, 0); }
+}
+
+
+/* ==============================================================================
+2. SCIENCE GALLERY SECTION
+==============================================================================
+*/
 .science-section {
     background-color: #f8fafc;
     padding: 4rem 2rem;
@@ -256,7 +295,7 @@ Dependencies: animations.css, _variables.css, _layout.css
     background: var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
     padding: 0.8rem 1.5rem;
-    /*border-radius: var(--radius-lg);*/
+    border-radius: var(--radius-full);
     font-weight: 600;
     font-size: 0.95rem;
     text-decoration: none;
@@ -281,49 +320,6 @@ Dependencies: animations.css, _variables.css, _layout.css
 }
 
 /* --- NAVIGATION CONTROLS (IN ANIMATION PANEL) --- */
-.navigation-controls {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    pointer-events: none;
-    z-index: 1000;
-}
-
-.navigation-arrows {
-    display: flex;
-    gap: 1rem;
-    order: 1;
-    position: relative;
-    z-index: 1001;
-    pointer-events: auto;
-    margin-top: 0.5rem;
-}
-
-.step-indicators {
-    display: flex;
-    gap: 0.5rem;
-    order: 2;
-    position: relative;
-    z-index: 1001;
-    pointer-events: auto;
-}
-
-.animation-display {
-    order: 3;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
 .nav-arrow {
     width: 40px;
     height: 40px;
@@ -387,7 +383,11 @@ Dependencies: animations.css, _variables.css, _layout.css
     color: var(--luvex-bright-cyan);
 }
 
-/* --- APPLICATIONS SECTIONS --- */
+/* ==============================================================================
+3. APPLICATIONS & OTHER SECTIONS
+==============================================================================
+*/
+
 .applications-section h2 {
     font-size: clamp(1.8rem, 3.5vw, 2.25rem);
     display: flex;
@@ -402,7 +402,6 @@ Dependencies: animations.css, _variables.css, _layout.css
     color: var(--luvex-vibrant-blue);
 }
 
-/* --- BENEFITS SECTION --- */
 .benefits-section {
     background: linear-gradient(135deg, #f8fafc 0%, #e8f4f8 100%);
     padding: 4rem 0;
@@ -456,7 +455,6 @@ Dependencies: animations.css, _variables.css, _layout.css
     flex: 1;
 }
 
-/* --- CTA SECTION --- */
 .cta-section {
     background: var(--luvex-dark-blue);
     color: var(--luvex-white);
@@ -484,7 +482,7 @@ Dependencies: animations.css, _variables.css, _layout.css
     background: var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
     padding: 1rem 2rem;
-    /*border-radius: var(--radius-lg);*/
+    border-radius: var(--radius-full);
     font-weight: 600;
     font-size: 1.1rem;
     text-decoration: none;
@@ -502,7 +500,6 @@ Dependencies: animations.css, _variables.css, _layout.css
     font-size: 1.2rem;
 }
 
-/* --- SECTION TRANSITIONS (von Standard LUVEX) --- */
 .precision-transition {
     background: var(--luvex-white);
 }
@@ -511,7 +508,10 @@ Dependencies: animations.css, _variables.css, _layout.css
     background: linear-gradient(135deg, #f8fafc 0%, #e8f4f8 100%);
 }
 
-/* --- RESPONSIVE DESIGN --- */
+/* ==============================================================================
+4. RESPONSIVE DESIGN
+==============================================================================
+*/
 @media (max-width: 992px) {
     .showcase-container {
         grid-template-columns: 1fr;
@@ -528,31 +528,6 @@ Dependencies: animations.css, _variables.css, _layout.css
     .control-panel {
         height: auto;
         min-height: 300px;
-    }
-    
-    .navigation-controls {
-        gap: 1.5rem;
-        margin-top: 2rem;
-    }
-    
-    .navigation-arrows {
-        gap: 0.75rem;
-    }
-    
-    .nav-arrow {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
-    }
-    
-    .step-indicators {
-        gap: 0.4rem;
-    }
-    
-    .step-indicator {
-        width: 35px;
-        height: 35px;
-        font-size: 0.9rem;
     }
     
     .animation-visual {

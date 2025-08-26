@@ -129,35 +129,88 @@ get_header(); ?>
      END: Interactive Gallery Section
      ========================================================================== -->
 
-<!-- Rest der Seite bleibt unverändert -->
 <main>
-    <section class="section benefits-section">
+    <!-- ==========================================================================
+         START: Core Advantages Section (Replaces "Why Choose")
+         ========================================================================== -->
+    <section class="section core-advantages-section section--turquoise-light">
         <div class="container">
-            <h2 class="text-center">Why Choose UV Curing?</h2>
-            <div class="grid-4">
-                <div class="benefit-card">
-                    <div class="benefit-icon">⚡</div>
-                    <h3>Instant Speed</h3>
-                    <p>Cure times measured in seconds, not hours. Dramatically increase production throughput.</p>
+            <div class="section-header">
+                <h2>Core Advantages of UV Curing</h2>
+                <p>Harness the power of light for superior manufacturing results.</p>
+            </div>
+            <div class="grid grid-4">
+                <!-- Card 1: Speed -->
+                <div class="value-card has-shine-effect">
+                    <div class="value-card__icon"><i class="fas fa-rocket"></i></div>
+                    <h3 class="value-card__title">Instant Speed</h3>
+                    <p class="value-card__description">Cure times measured in seconds, not hours. Dramatically increase your production throughput and reduce bottlenecks.</p>
                 </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">🌱</div>
-                    <h3>Eco-Friendly</h3>
-                    <p>Solvent-free formulations with zero volatile organic compounds (VOCs). Sustainable production.</p>
+                <!-- Card 2: Eco-Friendly -->
+                <div class="value-card has-shine-effect">
+                    <div class="value-card__icon"><i class="fas fa-leaf"></i></div>
+                    <h3 class="value-card__title">Eco-Friendly</h3>
+                    <p class="value-card__description">Solvent-free formulations with zero volatile organic compounds (VOCs). A truly sustainable and green production method.</p>
                 </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">💪</div>
-                    <h3>Superior Properties</h3>
-                    <p>Enhanced hardness, chemical resistance, and adhesion compared to thermal curing.</p>
+                <!-- Card 3: Superior Properties -->
+                <div class="value-card has-shine-effect">
+                    <div class="value-card__icon"><i class="fas fa-gem"></i></div>
+                    <h3 class="value-card__title">Superior Properties</h3>
+                    <p class="value-card__description">Achieve enhanced hardness, chemical resistance, and adhesion compared to traditional thermal curing methods.</p>
                 </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">💡</div>
-                    <h3>Energy Efficient</h3>
-                    <p>Lower energy consumption than oven curing. Reduced operational costs and carbon footprint.</p>
+                <!-- Card 4: Energy Efficient -->
+                <div class="value-card has-shine-effect">
+                    <div class="value-card__icon"><i class="fas fa-plug"></i></div>
+                    <h3 class="value-card__title">Energy Efficient</h3>
+                    <p class="value-card__description">Significantly lower energy consumption than oven curing. Reduce operational costs and your carbon footprint.</p>
                 </div>
             </div>
         </div>
     </section>
+    <!-- ==========================================================================
+         END: Core Advantages Section
+         ========================================================================== -->
+
+    <!-- ==========================================================================
+         START: FAQ Section
+         ========================================================================== -->
+    <section class="section faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Your common questions about UV Curing Technology answered.</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <h3 class="faq-question">What is the main difference between UV Curing and traditional methods?</h3>
+                    <div class="faq-answer">
+                        <p>The primary difference is speed and mechanism. UV curing uses light to trigger a photochemical reaction that solidifies materials in seconds. Traditional methods rely on heat to evaporate solvents, which can take minutes or hours and releases volatile organic compounds (VOCs).</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Is UV Curing safe for operators?</h3>
+                    <div class="faq-answer">
+                        <p>Yes, when implemented correctly. Modern UV curing systems are fully enclosed and shielded to prevent any UV light exposure. We also provide comprehensive safety equipment and training to ensure all processes meet the highest safety standards.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Can UV Curing be used on heat-sensitive materials?</h3>
+                    <div class="faq-answer">
+                        <p>Absolutely. Since UV curing is a "cold" process that doesn't rely on high temperatures, it's ideal for heat-sensitive substrates like plastics, films, and electronics without causing warping or damage.</p>
+                    </div>
+                </div>
+                 <div class="faq-item">
+                    <h3 class="faq-question">What are the environmental benefits?</h3>
+                    <div class="faq-answer">
+                        <p>UV curing formulations are typically 100% solids and contain no solvents, which means they do not emit harmful VOCs. This makes it a much cleaner, more environmentally friendly technology. Additionally, the process is highly energy-efficient compared to thermal drying ovens.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ==========================================================================
+         END: FAQ Section
+         ========================================================================== -->
 </main>
 
 <?php get_footer(); ?>

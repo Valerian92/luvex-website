@@ -9,6 +9,7 @@ get_header(); ?>
      START: UV-C Disinfection Hero Section
      ========================================================================== -->
 <section class="luvex-hero uvc-hero">
+    <!-- FIX: Container für die JS-Animation -->
     <div class="animation-background" id="disinfection-animation-container">
         <div class="pulse"></div>
     </div>
@@ -17,23 +18,24 @@ get_header(); ?>
             <h1 class="luvex-hero__title">
                 <span class="text-highlight">UV-C</span> Disinfection Technology
             </h1>
-            <nav class="hero-navigation">
-                <a href="#applications-air" class="hero-navigation__link">
-                    <i class="fa-solid fa-wind"></i>
-                    <span>Air Disinfection</span>
-                </a>
-                <a href="#applications-surface" class="hero-navigation__link">
-                    <i class="fa-solid fa-layer-group"></i>
-                    <span>Surface Treatment</span>
-                </a>
-                <a href="#applications-water" class="hero-navigation__link">
-                    <i class="fa-solid fa-droplet"></i>
-                    <span>Water Purification</span>
-                </a>
-            </nav>
             <h2 class="luvex-hero__subtitle">
                 Advanced germicidal solutions for water, air, and surface treatment
             </h2>
+             <!-- FIX: Button-Container mit Standard-Komponenten-Klassen -->
+            <div class="luvex-hero__cta-container">
+                <a href="#applications-air" class="luvex-hero__cta-secondary">
+                    <i class="fa-solid fa-wind"></i>
+                    <span>Air Disinfection</span>
+                </a>
+                <a href="#applications-surface" class="luvex-hero__cta-secondary">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span>Surface Treatment</span>
+                </a>
+                <a href="#applications-water" class="luvex-hero__cta-secondary">
+                    <i class="fa-solid fa-droplet"></i>
+                    <span>Water Purification</span>
+                </a>
+            </div>
             <p class="luvex-hero__description">
                 Navigate through our core applications to find<br>
                 the perfect UV-C solution for your specific needs.

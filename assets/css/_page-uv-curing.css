@@ -181,19 +181,15 @@ Beschreibung: Blendet den Standard-Mauszeiger im Hero-Bereich und im
     flex-direction: column;
     position: relative;
     padding: 2rem; /* Mehr Padding */
-    /* ENTFERNT: justify-content: center; <- Das war das Problem! */
 }
 
-/* FIX: Alle step-content sollen konsistent OBEN ausgerichtet sein */
 .step-content {
     opacity: 0;
     transform: translateX(30px);
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
-    
-    /* ALLE KONSISTENT POSITIONIERT */
     position: absolute;
-    top: 0; /* Alle oben */
+    top: 0;
     left: 0;
     right: 0;
     padding: 1rem;
@@ -203,7 +199,6 @@ Beschreibung: Blendet den Standard-Mauszeiger im Hero-Bereich und im
     opacity: 1;
     transform: translateX(0);
     pointer-events: auto;
-    /* GLEICHE POSITIONIERUNG WIE INAKTIVE */
     position: absolute;
     top: 0;
     left: 0;
@@ -229,7 +224,6 @@ Beschreibung: Blendet den Standard-Mauszeiger im Hero-Bereich und im
     margin: 0 0 1.5rem 0; 
 }
 
-/* Benefits List für Step 6 */
 .benefits-list {
     list-style: none;
     padding: 0;
@@ -269,7 +263,6 @@ Beschreibung: Blendet den Standard-Mauszeiger im Hero-Bereich und im
     transform: translateY(-2px);
 }
 
-/* --- NAVIGATION CONTROLS STYLING --- */
 .nav-arrow {
     width: 40px; height: 40px; border: 2px solid var(--luvex-bright-cyan);
     background: rgba(109, 213, 237, 0.1); border-radius: 50%; color: var(--luvex-bright-cyan);
@@ -340,4 +333,92 @@ Beschreibung: Blendet den Standard-Mauszeiger im Hero-Bereich und im
     .step-content p {
         font-size: 1rem;
     }
+}
+
+/*
+==============================================================================
+4. CORE ADVANTAGES SECTION
+==============================================================================
+*/
+.core-advantages-section .value-card__icon i {
+    font-size: 2.5rem;
+    color: var(--luvex-vibrant-blue);
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.core-advantages-section .value-card:hover .value-card__icon i {
+    color: var(--luvex-bright-cyan);
+    transform: scale(1.1);
+}
+
+/*
+==============================================================================
+5. FAQ SECTION
+==============================================================================
+*/
+.faq-section {
+    padding: 4rem 2rem 6rem 2rem;
+    background-color: var(--luvex-white);
+}
+
+.faq-container {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    border-bottom: 1px solid var(--luvex-gray-200);
+    padding: 1.5rem 0;
+}
+
+.faq-question {
+    font-size: 1.25rem;
+    color: var(--luvex-dark-blue);
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.faq-question:hover {
+    color: var(--luvex-vibrant-blue);
+}
+
+.faq-question::after {
+    content: '+';
+    font-size: 1.8rem;
+    color: var(--luvex-gray-500);
+    transition: transform 0.3s ease, color 0.3s ease;
+    font-weight: 300;
+}
+
+.faq-item.active .faq-question {
+    color: var(--luvex-vibrant-blue);
+}
+
+.faq-item.active .faq-question::after {
+    transform: rotate(45deg);
+    color: var(--luvex-vibrant-blue);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding-top 0.4s ease-out;
+}
+
+.faq-answer p {
+    padding-top: 0;
+    margin: 0;
+    font-size: 1.05rem;
+    color: var(--luvex-gray-700);
+    line-height: 1.7;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 200px; /* Genug Platz für die Antwort */
+    padding-top: 1.5rem;
 }

@@ -47,7 +47,7 @@ function luvex_enqueue_assets() {
     // Globale Stylesheets
     $global_styles = [
         'luvex-main' => '/assets/css/main.css',
-        'luvex-animations' => '/assets/css/_animations.css',
+        'luvex-animations' => '/assets/css/global/_animations.css',
     ];
     foreach ($global_styles as $handle => $path) {
         $full_path = get_stylesheet_directory() . $path;
