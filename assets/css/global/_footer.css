@@ -73,12 +73,13 @@ Last Update: 2025-08-24
 
 
 .footer-tagline {
-    color: #e9ecef;
-    line-height: 1.6;
-    margin: 0 0 2rem 0; /* Oben kein Margin mehr */
-    font-size: 0.95rem;
+    color: var(--luvex-white);
+    line-height: 1.4;
+    margin: 1.5rem 0 1rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    width: fit-content; /* Begrenzt Breite auf Text */
 }
-
 
 
 .footer-tagline strong::after {
@@ -140,13 +141,14 @@ Last Update: 2025-08-24
     transform: translateX(5px);
 }
 
-/* --- 3.1 Social Links --- */
 .footer-social {
     display: flex;
-    gap: 1.5rem;
-    margin: 1.5rem 0; /* Entfernt margin-top */
+    gap: 1rem;
+    margin: 0 0 1.5rem 0;
+    width: 100%;
+    max-width: 350px; /* Entspricht "Excellence through Engineering" */
+    justify-content: space-between; /* Gleichmäßige Verteilung */
 }
-
 
 .social-link {
     width: 48px;
@@ -168,6 +170,13 @@ Last Update: 2025-08-24
     color: var(--luvex-dark-blue);
     transform: translateY(-3px);
     box-shadow: 0 4px 12px rgba(109, 213, 237, 0.4);
+}
+
+.footer-description {
+    color: #e9ecef;
+    line-height: 1.6;
+    margin: 0;
+    font-size: 0.95rem;
 }
 
 /*

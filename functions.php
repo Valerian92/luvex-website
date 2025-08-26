@@ -23,10 +23,10 @@ add_action('after_setup_theme', 'luvex_theme_setup');
 function luvex_theme_setup() {
     register_nav_menus(array(
         'primary' => __('Primary Navigation', 'luvex'),
-        'footer-services' => __('Footer Services Menu', 'luvex'),
-        'footer-technologies' => __('Footer Technologies Menu', 'luvex'),
-        'footer-resources' => __('Footer Resources Menu', 'luvex'),
-        'footer-company' => __('Footer Company Menu', 'luvex'),
+        'footer-menu-1-luvex' => __('Footer Menu 1 Solutions', 'luvex'),
+        'footer-menu-2-luvex' => __('Footer Menu 2 Knowledge-Technology', 'luvex'),
+        'footer-menu-3-luvex' => __('Footer Menu 3 Support', 'luvex'),
+        'footer-menu-4-luvex' => __('Footer Menu 4 Company-Community', 'luvex'),
         'footer-legal' => __('Footer Legal Menu', 'luvex')
     ));
     add_theme_support('post-thumbnails');
