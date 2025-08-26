@@ -7,7 +7,8 @@
  * @package Luvex
  */
 document.addEventListener('DOMContentLoaded', () => {
-    const canvas = document.getElementById('luvex-hero-canvas'); // ID an das Theme angepasst
+    // KORREKTUR: Die ID wurde zur besseren Eindeutigkeit auf 'hero-solutions-canvas' geändert.
+    const canvas = document.getElementById('hero-solutions-canvas'); 
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
@@ -189,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const easedProgress = easeInOutCubic(this.progress);
             const pos = this.path.getPoint(easedProgress);
-            const scale = this.path.start.scale + (this.path.end.scale - this.path.start.scale) * easedProgress;
+            const scale = this.path.start.scale + (this.path.end.scale - this.path.end.scale) * easedProgress;
             
             const opacityFactor = Math.sin(this.progress * Math.PI);
 
@@ -327,5 +328,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.addEventListener('resize', startAnimation);
+    canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = (e.clientX - rect.left) / width;
+        mouse.y = (e.clientY - rect.top) / height;
+    });
+
     startAnimation();
 });

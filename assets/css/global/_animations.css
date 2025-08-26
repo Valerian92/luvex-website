@@ -3,10 +3,21 @@
 LUVEX THEME v3.0 - GENERAL & REUSABLE ANIMATIONS
 ==============================================================================
 
-Description: Enthält allgemeine, wiederverwendbare Keyframes und Klassen für 
+Description: Enthält allgemeine, wiederverwendbare Keyframes und Klassen für
              scroll-getriggerte, komponentenbasierte und Lade-Animationen.
-Dependencies: Wird via functions.php geladen.
-Last Update: 2025-08-24 (Refactored)
+
+Last Update: 2025-08-26 (Refactored & Centralized)
+
+TABLE OF CONTENTS
+-----------------
+1.  ALLGEMEINES ANIMATIONS-SETUP & HELPER
+2.  HINTERGRUND-ANIMATIONEN (z.B. Particles)
+3.  SCROLL-GETRIGGERTE ANIMATIONEN
+4.  LADE-INDIKATOREN & SPINNER
+5.  ALLGEMEINE KEYFRAME-DEFINITIONEN
+6.  BUTTON & HOVER KEYFRAMES
+7.  SCROLL-TO-TOP BUTTON
+8.  GLOBAL FAQ COMPONENT STYLES
 
 ==============================================================================
 */
@@ -24,13 +35,42 @@ Last Update: 2025-08-24 (Refactored)
 
 /*
 ==============================================================================
-2. SCROLL-GETRIGGERTE ANIMATIONEN
+2. HINTERGRUND-ANIMATIONEN (z.B. Particles)
 ==============================================================================
 */
 
-/* --- 2.1 Homepage - Knowledge Navigator --- */
+.hero-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
 
-/* --- 2.2 UV Consulting - Timeline --- */
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--luvex-bright-cyan);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: float 6s ease-in-out infinite;
+}
+
+.particle-1 { top: 20%; left: 10%; animation-delay: 0s; }
+.particle-2 { top: 60%; left: 85%; animation-delay: 2s; }
+.particle-3 { top: 80%; left: 20%; animation-delay: 4s; }
+.particle-4 { top: 30%; left: 70%; animation-delay: 1s; }
+
+/*
+==============================================================================
+3. SCROLL-GETRIGGERTE ANIMATIONEN
+==============================================================================
+*/
+
+/* --- 3.1 UV Consulting - Timeline --- */
 .timeline-step {
     opacity: 0;
     transform: translateX(-50px);
@@ -54,11 +94,11 @@ Last Update: 2025-08-24 (Refactored)
 
 /*
 ==============================================================================
-3. LADE-INDIKATOREN & SPINNER
+4. LADE-INDIKATOREN & SPINNER
 ==============================================================================
 */
 
-/* --- 3.1 Allgemeine Spinner --- */
+/* --- 4.1 Allgemeine Spinner --- */
 .spinner {
     border-radius: 50%;
     border: 3px solid rgba(0, 0, 0, 0.1);
@@ -70,7 +110,7 @@ Last Update: 2025-08-24 (Refactored)
 .spinner--medium { width: 48px; height: 48px; border-width: 4px; }
 .spinner--large { width: 64px; height: 64px; border-width: 4px; }
 
-/* --- 3.2 Ladebalken --- */
+/* --- 4.2 Ladebalken --- */
 .progress-bar {
     width: 100%;
     height: 8px;
@@ -96,11 +136,10 @@ Last Update: 2025-08-24 (Refactored)
 
 /*
 ==============================================================================
-4. ALLGEMEINE KEYFRAME-DEFINITIONEN
+5. ALLGEMEINE KEYFRAME-DEFINITIONEN
 ==============================================================================
 */
 
-/* --- Universelle Keyframes --- */
 @keyframes spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
@@ -116,6 +155,7 @@ Last Update: 2025-08-24 (Refactored)
     50% { opacity: 1; }
 }
 
+/* This is now the master version from the original _animations.css */
 @keyframes float {
     0% { transform: translateY(0px) translateX(0px); }
     25% { transform: translateY(-15px) translateX(10px); }
@@ -124,7 +164,6 @@ Last Update: 2025-08-24 (Refactored)
     100% { transform: translateY(0px) translateX(0px); }
 }
 
-/* --- Lade- & Progress-Keyframes --- */
 @keyframes progress-shine {
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }
@@ -133,7 +172,7 @@ Last Update: 2025-08-24 (Refactored)
 
 /*
 ==============================================================================
-5. BUTTON & HOVER KEYFRAMES (REPARIERT & ERWEITERT)
+6. BUTTON & HOVER KEYFRAMES
 ==============================================================================
 */
 
@@ -147,20 +186,14 @@ Last Update: 2025-08-24 (Refactored)
 }
 
 @keyframes gradient-shift-smooth {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /*
 ==============================================================================
-6. SCROLL-TO-TOP BUTTON ANIMATION & POSITIONING
+7. SCROLL-TO-TOP BUTTON
 ==============================================================================
 */
 
@@ -196,20 +229,14 @@ Last Update: 2025-08-24 (Refactored)
 }
 
 @keyframes border-flag-colors {
-    0%, 100% {
-        border-color: #000000; /* Schwarz */
-    }
-    33% {
-        border-color: #DD0000; /* Rot */
-    }
-    66% {
-        border-color: #FFCE00; /* Gold */
-    }
+    0%, 100% { border-color: #000000; /* Schwarz */ }
+    33% { border-color: #DD0000; /* Rot */ }
+    66% { border-color: #FFCE00; /* Gold */ }
 }
 
 /*
 ==============================================================================
-7. GLOBAL FAQ COMPONENT STYLES
+8. GLOBAL FAQ COMPONENT STYLES
 ==============================================================================
 */
 .faq-section {

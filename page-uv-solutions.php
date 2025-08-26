@@ -1,146 +1,126 @@
 <?php
 /**
- * UV Process Equipment Hub
+ * Template Name: UV Solutions Overview
+ *
  * @package Luvex
  */
 get_header(); ?>
 
-<!-- NEUER HERO-BEREICH FÜR DIE ANIMATION -->
-<section class="luvex-hero luvex-hero--process-equipment luvex-hero--animated-consulting">
-    <canvas id="luvex-hero-canvas"></canvas>
-    <!-- Der Inhalt wird durch das Canvas-Script gezeichnet -->
-</section>
+<main id="main" class="site-main">
 
+    <!-- 
+    ==============================================================================
+    HERO SECTION FÜR UV SOLUTIONS
+    ==============================================================================
+    - Das Canvas-Element für die Hintergrundanimation bleibt erhalten.
+    - Ein Container für den Text wurde hinzugefügt, um Titel und Subtitel
+      über der Animation anzuzeigen.
+    -->
+    <section class="luvex-hero luvex-hero--solutions">
+        <canvas id="hero-solutions-canvas"></canvas>
+        <div class="luvex-hero__container container">
+            <h1 class="luvex-hero__title">
+                End-to-End <span class="text-highlight">UV Solutions</span>
+            </h1>
+            <p class="luvex-hero__description">
+                From custom-engineered systems to certified safety equipment, we provide comprehensive solutions for professional UV applications.
+            </p>
+        </div>
+    </section>
 
-<section class="section" id="equipment-categories">
-    <div class="container">
-        <h2 class="text-center mb-2">Equipment Categories</h2>
-        <p class="text-center text-muted mb-3" style="max-width: 800px; margin-left: auto; margin-right: auto;">
-            Professional UV equipment curated by independent experts
-        </p>
-        
-        <div class="grid-4">
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fa-solid fa-shield-alt"></i>
-                </div>
-                <h3 class="value-card__title">Safety Equipment</h3>
-                <p class="value-card__description">
-                    UV-protective eyewear, gloves, and safety accessories for UV professionals.
+    <!-- 
+    ==============================================================================
+    ÜBERSICHT DER LÖSUNGSKATEGORIEN
+    ==============================================================================
+    - Nutzt ein Grid-Layout, um die verschiedenen Lösungsbereiche vorzustellen.
+    - Jede Kachel verlinkt idealerweise zur entsprechenden Unterseite.
+    - Die Klassen `value-card` und `btn` stammen aus deinen globalen Styles.
+    -->
+    <section class="section" id="solution-categories">
+        <div class="container">
+            <div class="section-header text-center" style="max-width: 800px; margin: 0 auto 4rem auto;">
+                <h2>Our Areas of Expertise</h2>
+                <p style="font-size: var(--text-lg); color: var(--luvex-gray-700);">
+                    We deliver integrated UV technology across the entire process chain. Explore our specialized categories to find the perfect solution for your needs.
                 </p>
-                <ul class="knowledge-list">
-                    <li><i class="fa-solid fa-glasses"></i>UV Safety Glasses</li>
-                    <li><i class="fa-solid fa-hand-paper"></i>UV-Protective Gloves</li>
-                    <li><i class="fa-solid fa-tshirt"></i>UV-Blocking Clothing</li>
-                </ul>
-                <a href="/uv-process-equipment/safety-equipment/" class="btn btn--primary btn--small">Shop Safety</a>
             </div>
             
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fa-solid fa-vial"></i>
-                </div>
-                <h3 class="value-card__title">Testing Equipment</h3>
-                <p class="value-card__description">
-                    UV measurement tools, test strips, and validation equipment.
-                </p>
-                <ul class="knowledge-list">
-                    <li><i class="fa-solid fa-ruler"></i>UV Test Strips</li>
-                    <li><i class="fa-solid fa-microscope"></i>UV Dosimeters</li>
-                    <li><i class="fa-solid fa-chart-line"></i>UV Meters</li>
-                </ul>
-                <a href="/uv-process-equipment/testing-equipment/" class="btn btn--primary btn--small">Shop Testing</a>
-            </div>
-            
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fa-solid fa-cube"></i>
-                </div>
-                <h3 class="value-card__title">Protective Materials</h3>
-                <p class="value-card__description">
-                    UV-blocking materials and protective components for installations.
-                </p>
-                <ul class="knowledge-list">
-                    <li><i class="fa-solid fa-square"></i>UV-Blocking Plexiglas</li>
-                    <li><i class="fa-solid fa-layer-group"></i>PTFE Coated Materials</li>
-                    <li><i class="fa-solid fa-tools"></i>Installation Components</li>
-                </ul>
-                <a href="/uv-process-equipment/protective-materials/" class="btn btn--primary btn--small">Shop Materials</a>
-            </div>
-            
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fa-solid fa-cogs"></i>
-                </div>
-                <h3 class="value-card__title">System Components</h3>
-                <p class="value-card__description">
-                    Professional UV system components and replacement parts.
-                </p>
-                <ul class="knowledge-list">
-                    <li><i class="fa-solid fa-lightbulb"></i>UV Lamps & LEDs</li>
-                    <li><i class="fa-solid fa-microchip"></i>Control Systems</li>
-                    <li><i class="fa-solid fa-wrench"></i>Mounting Hardware</li>
-                </ul>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="btn btn--secondary btn--small">Get Quote</a>
+            <div class="solutions-grid">
+                
+                <a href="#" class="solution-card has-shine-effect">
+                    <div class="solution-card__icon"><i class="fa-solid fa-drafting-compass"></i></div>
+                    <h3 class="solution-card__title">Custom Systems</h3>
+                    <p class="solution-card__description">Tailor-made UV systems designed and engineered to your exact process specifications.</p>
+                    <span class="solution-card__link">Learn More <i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+                
+                <a href="#" class="solution-card has-shine-effect">
+                    <div class="solution-card__icon"><i class="fa-solid fa-person-shelter"></i></div>
+                    <h3 class="solution-card__title">UV Tunnel Systems</h3>
+                    <p class="solution-card__description">High-performance conveyor and tunnel systems for reliable and consistent UV exposure.</p>
+                    <span class="solution-card__link">Learn More <i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+
+                <a href="#" class="solution-card has-shine-effect">
+                    <div class="solution-card__icon"><i class="fa-solid fa-layer-group"></i></div>
+                    <h3 class="solution-card__title">Curing Systems</h3>
+                    <p class="solution-card__description">Advanced solutions for UV curing of inks, coatings, adhesives, and other materials.</p>
+                    <span class="solution-card__link">Learn More <i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+
+                <a href="#" class="solution-card has-shine-effect">
+                    <div class="solution-card__icon"><i class="fa-solid fa-shield-virus"></i></div>
+                    <h3 class="solution-card__title">UVC Hygiene Solutions</h3>
+                    <p class="solution-card__description">Validated UVC disinfection systems for air, water, and surface sterilization.</p>
+                    <span class="solution-card__link">Learn More <i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+
+                <a href="#" class="solution-card has-shine-effect">
+                    <div class="solution-card__icon"><i class="fa-solid fa-hard-hat"></i></div>
+                    <h3 class="solution-card__title">Safety Equipment</h3>
+                    <p class="solution-card__description">Certified protective gear, including eyewear, face shields, and sensors.</p>
+                    <span class="solution-card__link">Learn More <i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+
+                <a href="#" class="solution-card has-shine-effect">
+                    <div class="solution-card__icon"><i class="fa-solid fa-vial-virus"></i></div>
+                    <h3 class="solution-card__title">Testing Tools</h3>
+                    <p class="solution-card__description">Professional radiometers, dosimeters, and test strips for process validation.</p>
+                    <span class="solution-card__link">Learn More <i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+
+                <a href="#" class="solution-card has-shine-effect">
+                    <div class="solution-card__icon"><i class="fa-solid fa-lightbulb"></i></div>
+                    <h3 class="solution-card__title">Replacement Lamps</h3>
+                    <p class="solution-card__description">A wide range of high-quality replacement UV lamps and LED modules.</p>
+                    <span class="solution-card__link">Learn More <i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="section section--turquoise-light">
-    <div class="container">
-        <h2 class="text-center mb-2">Why Buy Through LUVEX?</h2>
-        <div class="grid-3">
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fa-solid fa-balance-scale"></i>
-                </div>
-                <h3 class="value-card__title">Independent Selection</h3>
-                <p class="value-card__description">
-                    Products chosen based on performance and value, not vendor relationships.
+    <!-- 
+    ==============================================================================
+    CALL TO ACTION SECTION
+    ==============================================================================
+    - Ein einfacher CTA, um Nutzer zur Kontaktaufnahme für Beratung zu bewegen.
+    -->
+    <section class="section section--turquoise-light">
+        <div class="container">
+            <div class="cta-section--dark" style="background: none; text-align: center; max-width: 850px;">
+                <h3>Have a Complex Challenge?</h3>
+                <p style="font-size: 1.2rem; color: var(--luvex-gray-700);">
+                    Our engineering team specializes in developing innovative solutions for unique and demanding UV applications. Let's discuss how we can turn your concept into reality.
                 </p>
-            </div>
-            
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fa-solid fa-user-graduate"></i>
-                </div>
-                <h3 class="value-card__title">Expert Support</h3>
-                <p class="value-card__description">
-                    Technical support from UV experts, not just sales representatives.
-                </p>
-            </div>
-            
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fa-solid fa-shipping-fast"></i>
-                </div>
-                <h3 class="value-card__title">Professional Service</h3>
-                <p class="value-card__description">
-                    Fast shipping, proper documentation, and application guidance included.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="section">
-    <div class="container">
-        <div class="cta-section">
-            <h3>Need Help Selecting Equipment?</h3>
-            <p>Not sure which UV equipment is right for your application? Our experts provide free consultation to help you choose the optimal solution.</p>
-            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="luvex-cta-primary">
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'start-uv-project' ) ) ); ?>" class="cta-button">
                     <i class="fa-solid fa-comments"></i>
-                    Free Equipment Consultation
-                </a>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>" class="luvex-cta-secondary">
-                    <i class="fa-solid fa-envelope"></i>
-                    Request Quote
+                    Start Your Custom Project
                 </a>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
+</main>
 
 <?php get_footer(); ?>

@@ -9,7 +9,6 @@ get_header(); ?>
      START: LED UV Systems Hero Section
      ========================================================================== -->
 <section class="luvex-hero uv-led-hero">
-    <!-- Canvas is now a true background element -->
     <canvas id="uv-led-canvas"></canvas>
     
     <!-- Controls are positioned absolutely within the hero -->
@@ -50,7 +49,7 @@ get_header(); ?>
          ========================================================================== -->
     <section id="advantages" class="section section--turquoise-light">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header text-center">
                 <h2>The LED UV Advantage</h2>
                 <p>Discover the revolutionary benefits that make LED UV the superior choice for modern curing applications.</p>
             </div>
@@ -91,7 +90,7 @@ get_header(); ?>
          ========================================================================== -->
     <section id="comparison" class="section">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header text-center">
                 <h2>Technology at a Glance</h2>
                 <p>A direct comparison between modern LED UV systems and traditional mercury arc lamps.</p>
             </div>
@@ -150,7 +149,8 @@ get_header(); ?>
          ========================================================================== -->
     <section class="section faq-section section--turquoise-light">
         <div class="container">
-            <div class="section-header">
+            <!-- FIX: Added text-center class -->
+            <div class="section-header text-center">
                 <h2>Frequently Asked Questions</h2>
                 <p>Your key questions about implementing LED UV technology answered.</p>
             </div>

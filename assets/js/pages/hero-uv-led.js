@@ -114,15 +114,14 @@ class UVLEDConvergence {
     bindEvents() {
         window.addEventListener('resize', () => this.resizeCanvas());
         
-        this.canvas.addEventListener('mousemove', (e) => {
+        // Listen on the parent element to track mouse movement over the entire hero section
+        this.canvas.parentElement.addEventListener('mousemove', (e) => {
             const rect = this.canvas.getBoundingClientRect();
             this.mouse.x = e.clientX - rect.left;
             this.mouse.y = e.clientY - rect.top;
         });
-        this.canvas.addEventListener('mouseleave', () => {
-             this.mouse.x = this.canvas.width / 2;
-             this.mouse.y = this.canvas.height / 3;
-        });
+        
+        // FIX: Removed the 'mouseleave' event listener that caused the jump
     }
 
     startAnimation() {

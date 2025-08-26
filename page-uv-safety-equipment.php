@@ -1,175 +1,147 @@
 <?php
 /**
- * Template Name: Safety Equipment
- * UV Safety Equipment Store Page
+ * Template Name: UV Safety Equipment (Overhauled)
  * @package Luvex
  */
 get_header(); ?>
 
-<!-- NEUER ANIMIERTER HERO-BEREICH -->
+<!-- ==========================================================================
+     START: Animated Hero Section
+     ========================================================================== -->
 <section class="hero-animated-safety">
-    <!-- Die Animation wird im Hintergrund platziert -->
     <canvas id="hero-canvas-final"></canvas>
 
-    <!-- Der Inhalt liegt über der Animation -->
     <div class="overlay-content">
-        <h1 class="text-4xl md:text-6xl font-bold mb-8 text-shadow title-cyan">Safety<br>Equipment</h1>
+        <h1 class="hero-title">UV Safety Equipment</h1>
         
-        <!-- Button Container -->
-        <div class="mb-8 flex flex-wrap justify-center gap-6">
-            <a href="#products" class="luvex-cta">Discover Products</a>
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>" class="luvex-cta">Contact Us</a>
+        <p class="hero-subtitle">Advanced protection against invisible threats. Your safety is non-negotiable.</p>
+
+        <div class="hero-cta-container">
+            <a href="#products" class="luvex-hero__cta">Discover Products</a>
+            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>" class="luvex-hero__cta-secondary">Get Safety Advice</a>
         </div>
 
-        <p class="text-xl md:text-2xl max-w-3xl text-shadow-sm mb-10 text-gray-300">Advanced protection against external threats.</p>
-
-        <!-- Key Points -->
-        <div class="flex flex-wrap justify-center gap-10 md:gap-16">
+        <div class="key-points-container">
             <div class="key-point">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M12 2v2"/><path d="M12 22v-2"/><path d="m17 20.66-1-1.73"/><path d="M11 10.27 7 3.34"/><path d="m20.66 17-1.73-1"/><path d="m3.34 7 1.73 1"/><path d="M14 12h8"/><path d="M2 12h2"/><path d="m20.66 7-1.73 1"/><path d="m3.34 17 1.73-1"/><path d="m17 3.34-1 1.73"/><path d="m11 13.73-4 6.93"/></svg>
-                <span>Reliable</span>
+                <i class="fas fa-check-circle"></i>
+                <span>Certified Protection</span>
             </div>
             <div class="key-point">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908Z" transform="scale(0.24)"/><path d="M12 1v22"/><path d="m17 5-10 7"/><path d="m17 19-10-7"/></svg>
-                <span>100% Protection</span>
+                <i class="fas fa-user-shield"></i>
+                <span>Maximum Reliability</span>
             </div>
             <div class="key-point">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                <span>Certified</span>
+                <i class="fas fa-award"></i>
+                <span>Industry Compliant</span>
             </div>
         </div>
     </div>
 </section>
+<!-- ==========================================================================
+     END: Hero Section
+     ========================================================================== -->
 
-
-<!-- Section for UV Safety Glasses with FAQ -->
-<section class="section" id="uv-safety-glasses">
-    <div class="container">
-        <h2 class="text-center" style="margin-bottom: var(--space-lg);">Top Product: UV Safety Glasses</h2>
-        
-        <!-- New 2-column grid for product and FAQ -->
-        <div class="grid-2-faq">
-            
-            <!-- Left Column: Product Card -->
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fa-solid fa-glasses"></i>
-                </div>
-                <h3 class="value-card__title">UV Safety Glasses</h3>
-                <p class="value-card__description">
-                    Professional UV-blocking eyewear for all UV wavelengths (100-400nm).
-                </p>
-                <ul class="knowledge-list">
-                    <li><i class="fa-solid fa-check"></i>99.9% UV protection (UV400)</li>
-                    <li><i class="fa-solid fa-check"></i>Anti-fog coating</li>
-                    <li><i class="fa-solid fa-check"></i>Adjustable temples</li>
-                    <li><i class="fa-solid fa-check"></i>CE certified per EN 166 & EN 170</li>
-                </ul>
-                <div style="text-align: center; margin: 1.5rem 0;">
-                    <span style="font-size: 1.5rem; font-weight: 600; color: var(--luvex-dark-blue);">€89.00</span>
-                </div>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>" class="btn btn--primary">Order Now</a>
+<main>
+    <!-- ==========================================================================
+         START: Why Safety Matters Section
+         ========================================================================== -->
+    <section id="why-safety" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why UV Safety is Non-Negotiable</h2>
+                <p>UV radiation is invisible but poses significant risks to eyes and skin. Proper protection is essential to prevent both short-term and long-term health damage in industrial environments.</p>
             </div>
-
-            <!-- Right Column: FAQ Accordion -->
-            <div class="faq-accordion">
-                <h3 class="faq-accordion__title" style="margin-bottom: var(--space-md);">Häufig gestellte Fragen</h3>
-                <div class="faq-accordion__list">
-                    
-                    <details class="faq-accordion__item">
-                        <summary class="faq-accordion__question">
-                            <span>Welche Normen sind für diese Schutzbrille relevant?</span>
-                            <i class="fa-solid fa-chevron-down faq-accordion__chevron"></i>
-                        </summary>
-                        <div class="faq-accordion__answer">
-                            <p>Unsere Schutzbrille erfüllt alle wichtigen europäischen Normen. Die grundlegende Norm für persönlichen Augenschutz ist die <strong>EN 166</strong>. Speziell für den Schutz vor ultravioletter Strahlung ist sie nach <strong>EN 170</strong> zertifiziert. Die Kennzeichnung <strong>UV400</strong> garantiert dabei den höchstmöglichen Schutz.</p>
-                        </div>
-                    </details>
-
-                    <details class="faq-accordion__item">
-                        <summary class="faq-accordion__question">
-                            <span>Was bedeutet UV400 und schützt die Brille auch vor UVC?</span>
-                            <i class="fa-solid fa-chevron-down faq-accordion__chevron"></i>
-                        </summary>
-                        <div class="faq-accordion__answer">
-                            <p><strong>Ja, absolut.</strong> Die Kennzeichnung UV400 bedeutet, dass alle Lichtstrahlen mit einer Wellenlänge bis zu 400 Nanometern blockiert werden. Dies schließt den gesamten UV-Bereich vollständig mit ein:</p>
-                            <ul>
-                                <li><strong>UVA-Strahlen</strong> (315–400 nm)</li>
-                                <li><strong>UVB-Strahlen</strong> (280–315 nm)</li>
-                                <li><strong>UVC-Strahlen</strong> (100–280 nm)</li>
-                            </ul>
-                            <p>Sie sind somit auch vor der besonders energiereichen UVC-Strahlung, die bei industriellen Prozessen wie dem Schweißen entsteht, bestens geschützt.</p>
-                        </div>
-                    </details>
-
-                    <details class="faq-accordion__item">
-                        <summary class="faq-accordion__question">
-                            <span>Warum ist ein vollständiger UV-Schutz so wichtig?</span>
-                            <i class="fa-solid fa-chevron-down faq-accordion__chevron"></i>
-                        </summary>
-                        <div class="faq-accordion__answer">
-                            <p>Ein unvollständiger UV-Schutz ist gefährlich. Besonders bei getönten Gläsern weiten sich die Pupillen. Besitzt die Brille dann keinen vollen UV400-Schutz, kann sogar mehr schädliche Strahlung ins Auge gelangen als ohne Brille. Dies kann zu schweren und teils irreparablen Augenschäden wie Hornhautentzündungen oder Grauem Star führen.</p>
-                        </div>
-                    </details>
-
+            <div class="grid-3">
+                <div class="value-card has-shine-effect">
+                    <div class="value-card__icon"><i class="fas fa-eye"></i></div>
+                    <h3 class="value-card__title">Eye Protection</h3>
+                    <p class="value-card__description">Prevents painful conditions like photokeratitis (welder's flash) and long-term damage such as cataracts and retinal damage.</p>
+                </div>
+                <div class="value-card has-shine-effect">
+                    <div class="value-card__icon"><i class="fas fa-hand-paper"></i></div>
+                    <h3 class="value-card__title">Skin Protection</h3>
+                    <p class="value-card__description">Shields skin from UV burns, premature aging, and reduces the risk of developing skin cancer from occupational exposure.</p>
+                </div>
+                <div class="value-card has-shine-effect">
+                    <div class="value-card__icon"><i class="fas fa-clipboard-check"></i></div>
+                    <h3 class="value-card__title">Regulatory Compliance</h3>
+                    <p class="value-card__description">Ensures your operations meet stringent health and safety standards, protecting your workforce and your business from liability.</p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+    <!-- ==========================================================================
+         END: Why Safety Matters Section
+         ========================================================================== -->
 
-<!-- Section for other products -->
-<section class="section" style="background-color: var(--luvex-gray-100);" id="products">
-    <div class="container">
-        <h2 class="text-center" style="margin-bottom: var(--space-lg);">Weitere Sicherheitsprodukte</h2>
-        
-        <div class="grid-3">
-            <!-- UV Protective Gloves -->
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fa-solid fa-hand-paper"></i>
-                </div>
-                <h3 class="value-card__title">UV Protective Gloves</h3>
-                <p class="value-card__description">
-                    Chemical-resistant gloves with UV protection for handling UV processes.
-                </p>
-                <div style="text-align: center; margin: 1.5rem 0;">
-                    <span style="font-size: 1.5rem; font-weight: 600; color: var(--luvex-dark-blue);">€24.50</span>
-                </div>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>" class="btn btn--primary">Order Now</a>
+    <!-- ==========================================================================
+         START: Products Section
+         ========================================================================== -->
+    <section id="products" class="section section--turquoise-light">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Product Range</h2>
+                <p>A curated selection of certified equipment designed for complete UV protection.</p>
             </div>
             
-            <!-- UV Face Shield -->
-            <div class="value-card">
-                <div class="value-card__icon">
-                    <i class="fa-solid fa-mask"></i>
+            <div class="grid-3">
+                <div class="value-card">
+                    <div class="value-card__icon"><i class="fas fa-glasses"></i></div>
+                    <h3 class="value-card__title">UV Safety Glasses (UV400)</h3>
+                    <p class="value-card__description">Full-spectrum protection blocking 99.9% of all UVA, UVB, and UVC radiation up to 400nm. Certified EN 166 & EN 170.</p>
                 </div>
-                <h3 class="value-card__title">UV Face Shield</h3>
-                <p class="value-card__description">
-                    Full-face protection for high-intensity UV applications.
-                </p>
-                 <div style="text-align: center; margin: 1.5rem 0;">
-                    <span style="font-size: 1.5rem; font-weight: 600; color: var(--luvex-dark-blue);">€145.00</span>
+                <div class="value-card">
+                    <div class="value-card__icon"><i class="fas fa-user-shield"></i></div>
+                    <h3 class="value-card__title">UV Face Shields</h3>
+                    <p class="value-card__description">Maximum facial coverage for high-intensity applications, protecting against direct and reflected UV exposure.</p>
                 </div>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>" class="btn btn--primary">Order Now</a>
-            </div>
-            
-            <!-- Complete Safety Kit -->
-            <div class="value-card has-shine-effect">
-                <div class="value-card__icon">
-                    <i class="fa-solid fa-box"></i>
+                <div class="value-card">
+                    <div class="value-card__icon"><i class="fas fa-mitten"></i></div>
+                    <h3 class="value-card__title">UV Protective Gloves</h3>
+                    <p class="value-card__description">Durable, chemical-resistant gloves that provide complete UV protection for hands during material handling.</p>
                 </div>
-                <h3 class="value-card__title">Complete Safety Kit</h3>
-                <p class="value-card__description">
-                    Everything you need for safe UV operations - significant savings.
-                </p>
-                <div style="text-align: center; margin: 1.5rem 0;">
-                    <span style="font-size: 1.8rem; font-weight: 600; color: var(--luvex-dark-blue);">€199.00</span>
-                </div>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>" class="btn btn--primary">Order Complete Kit</a>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+    <!-- ==========================================================================
+         END: Products Section
+         ========================================================================== -->
+
+    <!-- ==========================================================================
+         START: FAQ Section
+         ========================================================================== -->
+    <section class="section faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Your safety questions, answered by our experts.</p>
+            </div>
+            <div class="faq-container-tabs">
+                <div class="faq-questions">
+                    <button class="faq-question-btn active" data-answer="answer-safety-1">What does the UV400 rating mean?</button>
+                    <button class="faq-question-btn" data-answer="answer-safety-2">Do I need protection from reflected UV light?</button>
+                    <button class="faq-question-btn" data-answer="answer-safety-3">How often should I replace my safety gear?</button>
+                </div>
+                <div class="faq-answers">
+                    <div class="faq-answer-panel active" id="answer-safety-1">
+                        <h3>What does the UV400 rating mean?</h3>
+                        <p>UV400 protection is the highest level of protection for eyewear. It means the lenses are capable of blocking nearly 100 percent of UV rays, including UVA, UVB, and UVC radiation with wavelengths up to 400 nanometers. This ensures your eyes are completely shielded from harmful radiation.</p>
+                    </div>
+                    <div class="faq-answer-panel" id="answer-safety-2">
+                        <h3>Do I need protection from reflected UV light?</h3>
+                        <p>Yes, absolutely. Many surfaces, especially metals like aluminum and stainless steel, can reflect a significant amount of UV radiation. This reflected light can be just as harmful as direct exposure. This is why full-coverage gear like face shields and proper workplace design are critical.</p>
+                    </div>
+                    <div class="faq-answer-panel" id="answer-safety-3">
+                        <h3>How often should I replace my safety gear?</h3>
+                        <p>Safety equipment should be replaced immediately if any damage, such as deep scratches on glasses or cracks in a face shield, is visible. Even without visible damage, materials can degrade over time with prolonged UV exposure. We recommend a scheduled replacement every 12-24 months for gear used regularly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ==========================================================================
+         END: FAQ Section
+         ========================================================================== -->
+</main>
 
 <?php get_footer(); ?>

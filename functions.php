@@ -259,4 +259,48 @@ $luvex_includes_path = get_stylesheet_directory() . '/includes/';
 if (file_exists($luvex_includes_path . '_user_system.php')) {
     require_once $luvex_includes_path . '_user_system.php';
 }
-?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Security System laden
+require_once get_stylesheet_directory() . '/includes/_luvex_security.php';
+
+// Nur die reCAPTCHA Keys behalten
+define('LUVEX_RECAPTCHA_SITE_KEY', 'dein_site_key');
+define('LUVEX_RECAPTCHA_SECRET_KEY', 'dein_secret_key');
+
+// Minimale reCAPTCHA Funktion
+function luvex_verify_recaptcha($response) {
+    if (empty($response)) return false;
+    
+    $result = wp_remote_post('https://www.google.com/recaptcha/api/siteverify', [
+        'body' => [
+            'secret' => LUVEX_RECAPTCHA_SECRET_KEY,
+            'response' => $response,
+            'remoteip' => $_SERVER['REMOTE_ADDR']
+        ]
+    ]);
+    
+    if (is_wp_error($result)) return false;
+    
+    $data = json_decode(wp_remote_retrieve_body($result), true);
+    return $data['success'] === true;
+}

@@ -1,120 +1,131 @@
 /*
 ==============================================================================
-LUVEX THEME - UV KNOWLEDGE PAGE (FINAL FIX)
+LUVEX THEME - PAGE: UV SOLUTIONS
 ==============================================================================
-Description: Behebt Hintergrund, Textfarbe und Positionierung der
-             Wellenlängen-Anzeige.
+Description: Styles for the main UV Solutions overview page, including the
+             hero animation fix and the new solutions grid layout.
 ==============================================================================
 */
 
-/* ==============================================================================
-Hero mit Spectrum Animation
+/*
 ==============================================================================
-- FIX: `background` und `color` hinzugefügt, um den Standard-Hero-Look
-  wiederherzustellen.
-- FIX: `position: relative` ist entscheidend, damit sich die absolut
-  positionierten Kind-Elemente (Canvas, Indicator) daran ausrichten.
-- `cursor: none` blendet den Standard-Mauszeiger aus.
+1. HERO SECTION & ANIMATION FIX
 ==============================================================================
 */
-.hero-spectrum-engine {
-    background: var(--luvex-dark-blue); /* FIX: Standard-Hintergrundfarbe hinzugefügt */
-    color: var(--luvex-white); /* FIX: Macht den HTML-Text sichtbar */
-    position: relative; /* FIX: Wichtig für die Positionierung der Kind-Elemente */
-    min-height: 70vh;
+
+/* * Stellt sicher, dass der Hero-Container die volle Höhe hat und als
+ * relativer Ankerpunkt für das absolut positionierte Canvas dient.
+*/
+.luvex-hero--solutions {
+    position: relative;
+    min-height: 65vh; /* Höhe des Hero-Bereichs */
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    cursor: none !important;
+    background-color: var(--luvex-dark-blue); /* Fallback-Farbe */
 }
 
-/* ==============================================================================
-Hintergrund-Gitter (aus _components.css übernommen)
-==============================================================================
-- Fügt das subtile Gittermuster zum Hintergrund hinzu, genau wie
-  beim Standard-Hero.
-==============================================================================
+/* * FIX: Positioniert das Canvas absolut, damit es den gesamten
+ * Hero-Container ausfüllt. Ohne dies hat das Canvas eine Größe von 0x0.
 */
-.hero-spectrum-engine::before {
-    content: '';
+.luvex-hero--solutions #hero-solutions-canvas {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="hero-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23hero-grid)"/></svg>');
-    opacity: 0.4; 
-    pointer-events: none;
-    z-index: 1;
+    z-index: 1; /* Liegt hinter dem Text */
 }
 
-/* ==============================================================================
-Canvas (Hintergrundanimation)
-==============================================================================
+/* * Stellt sicher, dass der Text-Container über der Animation liegt.
 */
-.hero-spectrum-engine canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2; /* Liegt über dem Gitter, aber unter dem Text */
-}
-
-/* ==============================================================================
-Wellenlängen-Anzeige
-==============================================================================
-- FIX: Die Positionierung (top/right) funktioniert jetzt korrekt, da
-  `.hero-spectrum-engine` als relativer Ankerpunkt dient.
-  Die Werte wurden für einen besseren Abstand angepasst.
-==============================================================================
-*/
-.wavelength-indicator {
-    position: absolute;
-    top: 2rem; /* FIX: Besserer Abstand von oben */
-    right: 2rem; /* FIX: Besserer Abstand von rechts */
-    background: rgba(27, 42, 73, 0.8);
-    color: var(--luvex-bright-cyan);
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius-md);
-    font-weight: 600;
-    z-index: 10;
-}
-
-/* ==============================================================================
-Standard Hero Content (Text-Container)
-==============================================================================
-- Der Text-Container liegt mit z-index: 5 über der Animation.
-- `pointer-events: none` sorgt dafür, dass die Mausinteraktion für die
-  Animation erhalten bleibt.
-==============================================================================
-*/
-.hero-spectrum-engine .luvex-hero__container {
+.luvex-hero--solutions .luvex-hero__container {
     position: relative;
-    z-index: 5;
-    pointer-events: none;
+    z-index: 2;
     text-align: center;
 }
 
-/*
-==============================================================================
-Anklickbare Elemente (z.B. Buttons)
-==============================================================================
-*/
-.hero-spectrum-engine .luvex-hero__cta {
-    pointer-events: auto;
+.luvex-hero--solutions .luvex-hero__title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
 }
 
-/* ==============================================================================
-Responsive Anpassungen
+.luvex-hero--solutions .luvex-hero__description {
+    max-width: 700px;
+    margin: 1rem auto 0;
+    font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+    color: var(--luvex-gray-300);
+}
+
+
+/*
+==============================================================================
+2. SOLUTIONS GRID
 ==============================================================================
 */
-@media (max-width: 768px) {
-    .wavelength-indicator {
-        top: 1rem;
-        right: 1rem;
-        font-size: 0.9rem;
-        padding: 0.25rem 0.75rem;
-    }
+.solutions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.solution-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--luvex-white);
+    border: 1px solid var(--luvex-gray-200);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.solution-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--luvex-bright-cyan);
+}
+
+.solution-card__icon {
+    font-size: 2.5rem;
+    color: var(--luvex-vibrant-blue);
+    margin-bottom: 1.5rem;
+    line-height: 1;
+}
+
+.solution-card__title {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--luvex-dark-blue);
+    margin-bottom: 0.75rem;
+}
+
+.solution-card__description {
+    font-size: var(--text-base);
+    color: var(--luvex-gray-700);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex-grow: 1; /* Sorgt dafür, dass der Button unten bleibt */
+}
+
+.solution-card__link {
+    font-weight: 600;
+    color: var(--luvex-vibrant-blue);
+    margin-top: auto; /* Drückt den Link nach unten */
+    transition: color 0.3s ease;
+}
+
+.solution-card:hover .solution-card__link {
+    color: var(--luvex-cyan-dark);
+}
+
+.solution-card__link .fa-arrow-right {
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.solution-card:hover .solution-card__link .fa-arrow-right {
+    transform: translateX(4px);
 }
