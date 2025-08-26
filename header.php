@@ -1,6 +1,6 @@
 <?php
 /**
- * The header for our theme - POLYLANG-SAFE VERSION
+ * The header for our theme - Language Switcher neben Logo
  * @package Luvex
  * @since 4.0.0
  */
@@ -23,8 +23,9 @@
 <header id="site-header" class="site-header fixed-header">
     <div class="header-container">
         
-        <!-- Logo -->
+        <!-- Logo + Language Switcher -->
         <div class="site-branding">
+            <!-- Logo -->
             <?php
             if ( has_custom_logo() ) {
                 the_custom_logo();
@@ -34,6 +35,25 @@
                     <span class="logo-l">L</span><span class="logo-u">u</span><span class="logo-vex">vex</span><span class="logo-dot"></span>
                 </a>
                 <?php
+            }
+            ?>
+            
+            <!-- Language Switcher neben Logo -->
+            <?php 
+            if (function_exists('pll_the_languages') && class_exists('LuvexUserSystem')) {
+                if (method_exists('LuvexUserSystem', 'get_language_switcher_dropdown')) {
+                    echo LuvexUserSystem::get_language_switcher_dropdown();
+                } else {
+                    // Fallback: Einfache Polylang Links
+                    $languages = pll_the_languages(['raw' => 1]);
+                    if ($languages) {
+                        echo '<div class="simple-language-switcher">';
+                        foreach ($languages as $lang) {
+                            echo '<a href="' . esc_url($lang['url']) . '">' . esc_html($lang['name']) . '</a> ';
+                        }
+                        echo '</div>';
+                    }
+                }
             }
             ?>
         </div>
@@ -58,7 +78,7 @@
                 
                 if (current_user_can('edit_theme_options')) {
                     echo '<div style="background:red;color:white;padding:5px;border-radius:3px;margin-left:10px;">';
-                    echo '<a href="' . admin_url('nav-menus.php') . '" style="color:white;">⚠️ Menu Setup</a>';
+                    echo '<a href="' . admin_url('nav-menus.php') . '" style="color:white;">Menu Setup</a>';
                     echo '</div>';
                 }
             }
@@ -69,24 +89,6 @@
         <div class="header-cta">
             <div class="header-actions-group">
 
-               <?php 
-                // Echter Language Switcher
-                if (function_exists('pll_the_languages') && class_exists('LuvexUserSystem')) {
-                    if (method_exists('LuvexUserSystem', 'get_language_switcher_dropdown')) {
-                        echo LuvexUserSystem::get_language_switcher_dropdown();
-                    } else {
-                        // Fallback: Einfache Polylang Links
-                        $languages = pll_the_languages(['raw' => 1]);
-                        if ($languages) {
-                            echo '<div class="simple-language-switcher">';
-                            foreach ($languages as $lang) {
-                                echo '<a href="' . esc_url($lang['url']) . '">' . esc_html($lang['name']) . '</a> ';
-                            }
-                            echo '</div>';
-                        }
-                    }
-                }
-                ?>
                 <?php if (is_user_logged_in()) : 
                     $current_user = wp_get_current_user();
                     $first_name = !empty($current_user->first_name) ? $current_user->first_name : $current_user->display_name;
@@ -96,7 +98,6 @@
                         <div class="user-info" onclick="toggleUserDropdown()">
                             <div class="user-avatar" id="userAvatar">
                                 <?php 
-                                // SAFE: Avatar nur wenn Funktion existiert
                                 if (function_exists('luvex_get_user_avatar')) {
                                     echo luvex_get_user_avatar(); 
                                 } else {
@@ -180,7 +181,7 @@
             ?>
             
             <?php 
-            // SAFE: Mobile Language Switcher nur wenn alles da ist
+            // Mobile Language Switcher nur für nicht-eingeloggte User
             if (function_exists('pll_the_languages') && !is_user_logged_in()) : 
                 $polylang_languages = pll_the_languages(['raw' => 1]);
                 if ($polylang_languages && is_array($polylang_languages)) :
@@ -192,10 +193,18 @@
                     </h4>
                     <div class="mobile-language-options">
                         <?php 
-                        // Einfache Fallback-Sprachen wenn UserSystem nicht da ist
                         $simple_languages = [
                             'en' => ['name' => 'English', 'flag' => '🇺🇸'],
                             'de' => ['name' => 'Deutsch', 'flag' => '🇩🇪'],
+                            'es' => ['name' => 'Español', 'flag' => '🇪🇸'],
+                            'fr' => ['name' => 'Français', 'flag' => '🇫🇷'],
+                            'it' => ['name' => 'Italiano', 'flag' => '🇮🇹'],
+                            'pl' => ['name' => 'Polski', 'flag' => '🇵🇱'],
+                            'pt' => ['name' => 'Português', 'flag' => '🇵🇹'],
+                            'tr' => ['name' => 'Türkçe', 'flag' => '🇹🇷'],
+                            'th' => ['name' => 'ไทย', 'flag' => '🇹🇭'],
+                            'zh' => ['name' => '中文', 'flag' => '🇨🇳'],
+                            'ja' => ['name' => '日本語', 'flag' => '🇯🇵']
                         ];
                         
                         $current_lang = function_exists('pll_current_language') ? pll_current_language() : 'en';
@@ -232,7 +241,6 @@
         <main id="main" class="site-main">
 
 <?php
-// Fallback function for navigation
 function luvex_primary_menu_fallback() {
     if (current_user_can('edit_theme_options')) {
         echo '<ul id="primary-menu">';
