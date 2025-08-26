@@ -10,6 +10,29 @@ Beschreibung: Bereinigtes Layout für die UV Curing Seite.
 
 /*
 ==============================================================================
+CUSTOM CURSOR FIX
+==============================================================================
+Beschreibung: Blendet den Standard-Mauszeiger im Hero-Bereich und im
+              transparenten Header aus, da ein benutzerdefinierter Cursor
+              verwendet wird.
+==============================================================================
+*/
+.hero-curing,
+.site-header:not(.scrolled) { /* Wir nehmen an, dass der Header beim Scrollen die Klasse .scrolled erhält */
+    cursor: none;
+}
+
+/* Dies stellt sicher, dass auch über Links und Buttons der Standard-Cursor verborgen bleibt. */
+.hero-curing a,
+.hero-curing button,
+.site-header:not(.scrolled) a,
+.site-header:not(.scrolled) button {
+    cursor: none;
+}
+
+
+/*
+==============================================================================
 1. HERO SECTION - STANDARD LAYOUT
 ==============================================================================
 */
