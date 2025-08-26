@@ -9,11 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const ctx = canvas.getContext('2d');
     const indicator = document.querySelector('.wavelength-indicator');
     
-    // ==========================================================================
-    // FIX: Alle Variablen und Funktionen zum Zeichnen von Text und Buttons
-    // wurden entfernt, da der Inhalt jetzt aus der HTML-Datei kommt.
-    // ==========================================================================
-
+    // HINWEIS: Sehr gut, dass alle Funktionen zum Zeichnen von Text 
+    // und Buttons bereits entfernt wurden.
+    
     let width, height;
     let particlesArray = [];
     let waves = [];
@@ -66,8 +64,6 @@ document.addEventListener('DOMContentLoaded', function() {
         mouse.targetX = width / 2;
         mouse.targetY = height / 2;
     });
-
-    // Klick-Events für Buttons sind nicht mehr nötig, da sie normale HTML-Links wären
     
     class Wave {
         constructor(config) {
@@ -146,8 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function drawAnimatedCursor() {
         if (mouse.currentX === undefined) return;
         
-        // Da es keinen Button mehr im Canvas gibt, vereinfachen wir die Logik.
-        const isHovering = false; // Platzhalter, falls du später wieder interaktive Elemente hinzufügst
+        const isHovering = false; 
 
         if (isHovering) {
             animatedCursor.targetRadius = 6 + Math.sin(increment * 15) * 2;
@@ -217,10 +212,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const dynamicLength = mapRange(mouseXNormalized, 0, 1, 0.02, 0.005);
             wave.draw(increment, dynamicAmplitude, dynamicLength, dynamicColor);
         });
-        
-        // ==========================================================================
-        // FIX: Der Aufruf von drawContent() wurde hier entfernt.
-        // ==========================================================================
         
         for (let i = sparks.length - 1; i >= 0; i--) {
             sparks[i].update();

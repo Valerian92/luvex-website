@@ -7,11 +7,10 @@ get_header(); ?>
 
 <!-- 
 ==============================================================================
-FIX:
-1. Die Klasse `luvex-hero` wurde entfernt, um das fehlerhafte Padding zu beheben.
-   Die Höhe wird jetzt nur noch durch die CSS-Regel in _page-uv-knowledge.css gesteuert.
-2. Der Standard-HTML-Container für den Titel und Untertitel wurde hinzugefügt.
-   Der Text kommt jetzt direkt aus dem HTML und ist suchmaschinenfreundlich.
+HINWEIS:
+Die HTML-Struktur ist bereits korrekt. Der .hero-spectrum-engine dient als
+Wrapper für die Animation, während der .luvex-hero__container den
+suchmaschinenfreundlichen Text enthält. Die Magie passiert im CSS.
 ==============================================================================
 -->
 <section class="hero-spectrum-engine">

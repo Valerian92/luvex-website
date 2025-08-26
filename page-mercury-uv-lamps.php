@@ -38,7 +38,7 @@ get_header(); ?>
          ========================================================================== -->
     <section id="technology" class="section">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header text-center">
                 <h2>The Broadband Powerhouse</h2>
                 <p>Mercury vapor lamps generate a wide range of UV wavelengths by passing an electric arc through vaporized mercury. This process creates intense spectral lines ideal for applications requiring deep and powerful curing.</p>
             </div>
@@ -73,7 +73,7 @@ get_header(); ?>
          ========================================================================== -->
     <section class="section section--turquoise-light">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header text-center">
                 <h2>Mercury vs. LED: A Clear Comparison</h2>
                 <p>While powerful, traditional mercury lamps face challenges in a modern, efficiency-focused world. Here's how they stack up against UV LED technology.</p>
             </div>
@@ -127,7 +127,7 @@ get_header(); ?>
          ========================================================================== -->
     <section class="section faq-section">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header text-center">
                 <h2>Frequently Asked Questions</h2>
                 <p>Key information about the use and future of mercury vapor lamp technology.</p>
             </div>
