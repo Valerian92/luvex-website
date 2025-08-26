@@ -1,123 +1,45 @@
 /*
 ==============================================================================
-LUVEX THEME - PAGE: UV SAFETY EQUIPMENT (PYRAMIDEN-HERO FIX 2025-08-15)
+LUVEX THEME - PAGE: UV SAFETY EQUIPMENT
 ==============================================================================
+Description: Enthält alle spezifischen Styles für die Inhalte der
+             UV Safety Equipment Seite, exklusive des animierten Heros.
 */
 
-/* --- 1. Hero Section Layout (Pyramiden-Struktur) --- */
-.luvex-hero--safety-equipment {
-    min-height: 70vh;
+/* --- 1. Grid-Layout für Produkt & FAQ --- */
+.grid-2-faq {
+    display: grid;
+    gap: var(--gap-default);
 }
 
-.luvex-hero--safety-equipment .luvex-hero__content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    flex-grow: 1;
-    width: 100%;
-    padding-top: 6rem;
-    gap: 2rem;
+@media (min-width: 768px) {
+    .grid-2-faq {
+        grid-template-columns: repeat(2, 1fr);
+        align-items: start; /* Stellt sicher, dass die Spalten oben bündig sind */
+    }
 }
 
-/* REIHENFOLGE: Title → Buttons → Subtitle → Description (jetzt im HTML korrekt) */
-
-/* 1. Title (oben, schmalster Container) */
-.luvex-hero--safety-equipment .luvex-hero__title {
-    font-size: clamp(3.2rem, 7vw, 5rem);
-    font-weight: 600;
-    color: var(--luvex-white);
-    margin: 0;
-    line-height: 1.1;
-    max-width: 600px; /* Schmalster Container */
-    text-align: center;
-}
-
-/* 2. Buttons (gleichgroß) */
-.luvex-hero--safety-equipment .luvex-hero__cta-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.5rem;
-    margin: 0;
+/* --- 2. Feature-Liste in der Produkt-Card --- */
+.knowledge-list {
+    list-style: none;
     padding: 0;
-    width: 100%;
+    margin: 1.5rem 0;
+    text-align: left;
 }
 
-/* Buttons gleichgroß machen */
-.luvex-hero--safety-equipment .luvex-hero__cta,
-.luvex-hero--safety-equipment .luvex-hero__cta-secondary {
-    flex: 0 0 auto;
-    min-width: 200px;
-    padding: 16px 24px;
-    text-align: center;
+.knowledge-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    color: var(--luvex-gray-700);
 }
 
-/* 3. Subtitle (800px für eine Zeile) */
-.luvex-hero--safety-equipment .luvex-hero__subtitle {
-    font-size: clamp(1.4rem, 3.5vw, 2rem);
-    color: var(--luvex-gray-300);
-    font-weight: 400;
-    max-width: 800px; /* Größer für eine Zeile ohne Umbruch */
-    margin: 0;
-    line-height: 1.3;
-    text-align: center;
+.knowledge-list .fa-check {
+    color: var(--luvex-vibrant-blue);
 }
 
-/* 4. Description (900px, breitester Container, 2 Zeilen) */
-.luvex-hero--safety-equipment .luvex-hero__description {
-    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-    color: var(--luvex-gray-300);
-    max-width: 900px; /* Breitester Container */
-    line-height: 1.6;
-    text-align: center;
-    margin: 0;
-    opacity: 0.9;
-    /* Für 2-Zeilen-Begrenzung */
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-/* --- 2. Responsive Anpassungen --- */
-
-/* WICHTIG: Override der globalen order-Properties aus _heroes.css */
-.luvex-hero--safety-equipment .luvex-hero__cta,
-.luvex-hero--safety-equipment .luvex-hero__cta-secondary {
-    order: unset !important; /* Überschreibt globale order-Properties */
-}
-
-@media (max-width: 768px) {
-    .luvex-hero--safety-equipment .luvex-hero__content {
-        padding-top: 4rem;
-        gap: 1.5rem;
-    }
-    
-    .luvex-hero--safety-equipment .luvex-hero__title {
-        font-size: clamp(2.8rem, 8vw, 4rem);
-        max-width: 95%;
-    }
-    
-    .luvex-hero--safety-equipment .luvex-hero__subtitle {
-        font-size: clamp(1.2rem, 4vw, 1.7rem);
-        max-width: 90%;
-    }
-    
-    .luvex-hero--safety-equipment .luvex-hero__description {
-        font-size: clamp(1rem, 3vw, 1.2rem);
-        max-width: 95%;
-    }
-    
-    .luvex-hero--safety-equipment .luvex-hero__cta-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-    
-    .luvex-hero--safety-equipment .luvex-hero__cta,
-    .luvex-hero--safety-equipment .luvex-hero__cta-secondary {
-        width: 100%;
-        max-width: 280px;
-    }
+/* --- 3. Hintergrundfarbe für die "Weitere Produkte"-Sektion --- */
+#products.section {
+    background-color: var(--luvex-gray-100);
 }
