@@ -23,40 +23,41 @@
 <header id="site-header" class="site-header fixed-header">
     <div class="header-container">
         
-        <!-- Logo + Language Switcher -->
-        <div class="site-branding">
-            <!-- Logo -->
-            <?php
-            if ( has_custom_logo() ) {
-                the_custom_logo();
-            } else {
-                ?>
-                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="luvex-logo-text">
-                    <span class="logo-l">L</span><span class="logo-u">u</span><span class="logo-vex">vex</span><span class="logo-dot"></span>
-                </a>
-                <?php
-            }
+    <!-- Logo -->
+    <div class="site-branding">
+        <?php
+        if ( has_custom_logo() ) {
+            the_custom_logo();
+        } else {
             ?>
-            
-            <!-- Language Switcher neben Logo -->
-            <?php 
-            if (function_exists('pll_the_languages') && class_exists('LuvexUserSystem')) {
-                if (method_exists('LuvexUserSystem', 'get_language_switcher_dropdown')) {
-                    echo LuvexUserSystem::get_language_switcher_dropdown();
-                } else {
-                    // Fallback: Einfache Polylang Links
-                    $languages = pll_the_languages(['raw' => 1]);
-                    if ($languages) {
-                        echo '<div class="simple-language-switcher">';
-                        foreach ($languages as $lang) {
-                            echo '<a href="' . esc_url($lang['url']) . '">' . esc_html($lang['name']) . '</a> ';
-                        }
-                        echo '</div>';
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="luvex-logo-text">
+                <span class="logo-l">L</span><span class="logo-u">u</span><span class="logo-vex">vex</span><span class="logo-dot"></span>
+            </a>
+            <?php
+        }
+        ?>
+    </div>
+
+    <!-- Language Switcher rechts neben Logo -->
+    <div class="header-language-switcher">
+        <?php 
+        if (function_exists('pll_the_languages') && class_exists('LuvexUserSystem')) {
+            if (method_exists('LuvexUserSystem', 'get_language_switcher_dropdown')) {
+                echo LuvexUserSystem::get_language_switcher_dropdown();
+            } else {
+                // Fallback: Einfache Polylang Links
+                $languages = pll_the_languages(['raw' => 1]);
+                if ($languages) {
+                    echo '<div class="simple-language-switcher">';
+                    foreach ($languages as $lang) {
+                        echo '<a href="' . esc_url($lang['url']) . '">' . esc_html($lang['name']) . '</a> ';
                     }
+                    echo '</div>';
                 }
             }
-            ?>
-        </div>
+        }
+        ?>
+    </div>
 
         <!-- Desktop Navigation -->
         <nav id="desktop-navigation" class="main-navigation">

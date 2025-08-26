@@ -53,6 +53,16 @@ Last Update: 2025-08-24 (Language Switcher & CSS Cleanup)
     position: relative;
 }
 
+.header-language-switcher {
+    flex-shrink: 0;
+    margin-left: 1rem; /* Abstand zum Logo */
+}
+
+.header-language-switcher .language-dropdown {
+    left: 0; /* Dropdown links ausrichten statt rechts */
+}
+
+
 /* ==========================================================================
    2. LOGO & BRANDING
    ========================================================================== */
