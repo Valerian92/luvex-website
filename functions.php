@@ -65,7 +65,7 @@ function luvex_enqueue_assets() {
         'uv-consulting' => ['_page-uv-consulting.css'],
         'uv-led' => ['_page-uv-led.css'],
         'uv-process-equipment' => ['_page-uv-process-equipment.css'],
-        'uv-safety-equipment' => ['_page-uv-safety-equipment.css'],
+        'uv-safety-equipment' => ['_page-uv-safety-equipment.css', 'animations/_animation-hero-safety.css'], 
         'uv-testing-equipment' => ['_page-uv-testing-equipment.css'],
         'uv-tunnel' => ['_page-uv-tunnel.css'],
         'uv-c-disinfection' => ['_page-uv-c-disinfection.css', 'animations/_animation-uv-disinfection-gallery.css'],
@@ -161,23 +161,17 @@ function luvex_enqueue_assets() {
     if (is_page('mercury-uv-lamps')) {
         $enqueue_script('luvex-mercury-lamps-hero', 'pages/hero-mercury-lamps.js');
     }
-  if (is_page('uv-knowledge')) {
-    // Nur noch die eine, seiten-spezifische CSS-Datei laden
-    $uv_knowledge_styles = [
-        'luvex-page-uv-knowledge' => '/assets/css/_page-uv-knowledge.css',
-    ];
-    foreach ($uv_knowledge_styles as $handle => $path) {
-        $full_path = get_stylesheet_directory() . $path;
-        if (file_exists($full_path)) {
-            wp_enqueue_style($handle, get_stylesheet_directory_uri() . $path, ['luvex-main'], filemtime($full_path));
-        }
-    }
-    // Das JavaScript für die Animation wird weiterhin gebraucht
-    $enqueue_script('luvex-hero-spectrum', 'pages/hero-spectrum.js');
+    if (is_page('uv-knowledge')) {
+        $enqueue_script('luvex-hero-spectrum', 'pages/hero-spectrum.js');
     }
     if (is_page('uv-consulting')) {
         $enqueue_script('luvex-hero-hexagon', 'pages/hero-hexagon.js');
     }
+       if (is_page('uv-safety-equipment')) {
+        $enqueue_script('luvex-hero-safety-animation-script', 'pages/hero-safety-animation.js');
+    }
+
+
 }
 
 

@@ -6,35 +6,37 @@
  */
 get_header(); ?>
 
-<section class="luvex-hero luvex-hero--safety-equipment">
-    <div class="luvex-hero__container">
-        <div class="luvex-hero__content">
-            <!-- 1. Title ganz oben -->
-            <h1 class="luvex-hero__title">
-                <span class="text-highlight">UV Safety</span> Equipment
-            </h1>
-            
-            <!-- 2. Buttons (gleichgroß) -->
-            <div class="luvex-hero__cta-container">
-                <a href="#safety-guide" class="luvex-hero__cta-secondary">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>Safety Guidelines</span>
-                </a>
-                <a href="#products" class="luvex-hero__cta">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span>Shop Safety Gear</span>
-                </a>
+<!-- NEUER ANIMIERTER HERO-BEREICH -->
+<section class="hero-animated-safety">
+    <!-- Die Animation wird im Hintergrund platziert -->
+    <canvas id="hero-canvas-final"></canvas>
+
+    <!-- Der Inhalt liegt über der Animation -->
+    <div class="overlay-content">
+        <h1 class="text-4xl md:text-6xl font-bold mb-8 text-shadow title-cyan">Safety<br>Equipment</h1>
+        
+        <!-- Button Container -->
+        <div class="mb-8 flex flex-wrap justify-center gap-6">
+            <a href="#products" class="luvex-cta">Discover Products</a>
+            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>" class="luvex-cta">Contact Us</a>
+        </div>
+
+        <p class="text-xl md:text-2xl max-w-3xl text-shadow-sm mb-10 text-gray-300">Advanced protection against external threats.</p>
+
+        <!-- Key Points -->
+        <div class="flex flex-wrap justify-center gap-10 md:gap-16">
+            <div class="key-point">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M12 2v2"/><path d="M12 22v-2"/><path d="m17 20.66-1-1.73"/><path d="M11 10.27 7 3.34"/><path d="m20.66 17-1.73-1"/><path d="m3.34 7 1.73 1"/><path d="M14 12h8"/><path d="M2 12h2"/><path d="m20.66 7-1.73 1"/><path d="m3.34 17 1.73-1"/><path d="m17 3.34-1 1.73"/><path d="m11 13.73-4 6.93"/></svg>
+                <span>Reliable</span>
             </div>
-            
-            <!-- 3. Subtitle -->
-            <h2 class="luvex-hero__subtitle">
-                Professional-grade protection for UV work environments
-            </h2>
-            
-            <!-- 4. Description ganz unten -->
-            <p class="luvex-hero__description">
-                Protect yourself and your team with high-quality UV safety equipment. From UV-blocking eyewear to protective clothing - ensure safe UV operations.
-            </p>
+            <div class="key-point">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908Z" transform="scale(0.24)"/><path d="M12 1v22"/><path d="m17 5-10 7"/><path d="m17 19-10-7"/></svg>
+                <span>100% Protection</span>
+            </div>
+            <div class="key-point">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <span>Certified</span>
+            </div>
         </div>
     </div>
 </section>
@@ -43,7 +45,7 @@ get_header(); ?>
 <!-- Section for UV Safety Glasses with FAQ -->
 <section class="section" id="uv-safety-glasses">
     <div class="container">
-        <h2 class="text-center mb-3">Top Product: UV Safety Glasses</h2>
+        <h2 class="text-center" style="margin-bottom: var(--space-lg);">Top Product: UV Safety Glasses</h2>
         
         <!-- New 2-column grid for product and FAQ -->
         <div class="grid-2-faq">
@@ -71,7 +73,7 @@ get_header(); ?>
 
             <!-- Right Column: FAQ Accordion -->
             <div class="faq-accordion">
-                <h3 class="faq-accordion__title">Häufig gestellte Fragen</h3>
+                <h3 class="faq-accordion__title" style="margin-bottom: var(--space-md);">Häufig gestellte Fragen</h3>
                 <div class="faq-accordion__list">
                     
                     <details class="faq-accordion__item">
@@ -117,9 +119,9 @@ get_header(); ?>
 </section>
 
 <!-- Section for other products -->
-<section class="section bg-light" id="products">
+<section class="section" style="background-color: var(--luvex-gray-100);" id="products">
     <div class="container">
-        <h2 class="text-center mb-3">Weitere Sicherheitsprodukte</h2>
+        <h2 class="text-center" style="margin-bottom: var(--space-lg);">Weitere Sicherheitsprodukte</h2>
         
         <div class="grid-3">
             <!-- UV Protective Gloves -->
@@ -153,7 +155,7 @@ get_header(); ?>
             </div>
             
             <!-- Complete Safety Kit -->
-            <div class="value-card value-card--turquoise">
+            <div class="value-card has-shine-effect">
                 <div class="value-card__icon">
                     <i class="fa-solid fa-box"></i>
                 </div>

@@ -1,0 +1,45 @@
+/*
+==============================================================================
+LUVEX THEME - PAGE: UV SAFETY EQUIPMENT
+==============================================================================
+Description: Enthält alle spezifischen Styles für die Inhalte der
+             UV Safety Equipment Seite, exklusive des animierten Heros.
+*/
+
+/* --- 1. Grid-Layout für Produkt & FAQ --- */
+.grid-2-faq {
+    display: grid;
+    gap: var(--gap-default);
+}
+
+@media (min-width: 768px) {
+    .grid-2-faq {
+        grid-template-columns: repeat(2, 1fr);
+        align-items: start; /* Stellt sicher, dass die Spalten oben bündig sind */
+    }
+}
+
+/* --- 2. Feature-Liste in der Produkt-Card --- */
+.knowledge-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    text-align: left;
+}
+
+.knowledge-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    color: var(--luvex-gray-700);
+}
+
+.knowledge-list .fa-check {
+    color: var(--luvex-vibrant-blue);
+}
+
+/* --- 3. Hintergrundfarbe für die "Weitere Produkte"-Sektion --- */
+#products.section {
+    background-color: var(--luvex-gray-100);
+}
