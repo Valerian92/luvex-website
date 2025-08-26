@@ -19,32 +19,35 @@
 		<div class="footer-content-grid">
 			
 			<!-- Company Info -->
-			<div class="footer-section footer-company">
-				<div class="footer-logo">
-					<?php if ( has_custom_logo() ) : ?>
-						<?php the_custom_logo(); ?>
-					<?php else : ?>
-						<div class="luvex-logo-text">
-							<span class="logo-l">L</span><span class="logo-u">u</span><span class="logo-vex">vex</span><span class="logo-dot"></span>
-						</div>
-					<?php endif; ?>
+	<div class="footer-section footer-company">
+		<div class="footer-logo">
+			<?php if ( has_custom_logo() ) : ?>
+				<?php the_custom_logo(); ?>
+			<?php else : ?>
+				<div class="luvex-logo-text">
+					<span class="logo-l">L</span><span class="logo-u">u</span><span class="logo-vex">vex</span><span class="logo-dot"></span>
 				</div>
-				<p class="footer-tagline">
-					<strong>Precision through Light. Excellence through Engineering.</strong><br>
-					Independent UV technology experts advancing global knowledge and delivering cutting-edge solutions.
-				</p>
-				<div class="footer-social">
-					<a href="#" aria-label="LinkedIn" class="social-link">
-						<i class="fab fa-linkedin"></i>
-					</a>
-					<a href="/booking/" aria-label="Book Consultation" class="social-link">
-    					<i class="fa-solid fa-calendar-days"></i>
-					</a>
-					<a href="mailto:support@luvex.tech" aria-label="Email" class="social-link">
-						<i class="fas fa-envelope"></i>
-					</a>
-				</div>
-			</div>
+			<?php endif; ?>
+		</div>
+		
+		<!-- Social Links NACH Logo, VOR Tagline -->
+		<div class="footer-social">
+			<a href="#" aria-label="LinkedIn" class="social-link">
+				<i class="fab fa-linkedin"></i>
+			</a>
+			<a href="/booking/" aria-label="Book Consultation" class="social-link">
+				<i class="fa-solid fa-calendar-days"></i>
+			</a>
+			<a href="mailto:support@luvex.tech" aria-label="Email" class="social-link">
+				<i class="fas fa-envelope"></i>
+			</a>
+		</div>
+		
+		<p class="footer-tagline">
+			<strong>Precision through Light.<br>Excellence through Engineering.</strong><br>
+			Independent UV technology experts advancing global knowledge and delivering cutting-edge solutions.
+		</p>
+	</div>
 
 			<!-- Services Menu -->
 			<div class="footer-section">

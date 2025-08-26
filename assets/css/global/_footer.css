@@ -77,7 +77,6 @@ Last Update: 2025-08-24
     line-height: 1.6;
     margin: 0 0 2rem 0; /* Oben kein Margin mehr */
     font-size: 0.95rem;
-    order: 3;
 }
 
 
@@ -144,15 +143,15 @@ Last Update: 2025-08-24
 /* --- 3.1 Social Links --- */
 .footer-social {
     display: flex;
-    gap: 1rem;
-    margin: 1rem 0 1.5rem 0; /* Oben/unten Abstand */
-    order: 2; /* Falls Flexbox verwendet wird */
+    gap: 1.5rem;
+    margin: 1.5rem 0; /* Entfernt margin-top */
 }
 
 
 .social-link {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
+    font-size: 1.3rem;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     display: flex;

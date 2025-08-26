@@ -1,8 +1,8 @@
 <?php
 /**
- * Contact Page Template
+ * Contact Page Template - Consolidated
  * @package Luvex
- * @since 2.9.0 (Interactive Hero Update)
+ * @since 2.9.0
  */
 
 get_header(); ?>
@@ -27,7 +27,34 @@ get_header(); ?>
     </div>
 </section>
 
-<section class="contact-methods section section--turquoise-light">
+<!-- Core Competencies Section (from UV Consulting) -->
+<section class="section section--turquoise-light">
+    <div class="container container--wide">
+        <div class="text-center mb-3">
+            <h2 class="section__title">Our Expertise</h2>
+            <p class="section__subtitle">We provide end-to-end expertise for your UV applications, ensuring efficiency, safety, and compliance.</p>
+        </div>
+        <div class="grid-3">
+            <div class="value-card">
+                <div class="value-card__icon"><i class="fa-solid fa-flask-vial"></i></div>
+                <h3 class="value-card__title">System & Process Analysis</h3>
+                <p class="value-card__description">We evaluate your existing UV systems and processes to identify bottlenecks and opportunities for improvement.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-card__icon"><i class="fa-solid fa-chart-line"></i></div>
+                <h3 class="value-card__title">Performance Optimization</h3>
+                <p class="value-card__description">We fine-tune your UV applications for maximum efficiency, dose delivery, and energy savings.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-card__icon"><i class="fa-solid fa-clipboard-check"></i></div>
+                <h3 class="value-card__title">Validation & Compliance</h3>
+                <p class="value-card__description">We ensure your systems meet industry standards and regulatory requirements (e.g., DVGW, ÖNORM).</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="contact-methods section">
     <div class="container container--medium">
         <div class="grid grid-3">
             <div class="card card--highlight has-shine-effect">
@@ -35,7 +62,7 @@ get_header(); ?>
                 <h3 class="card__title">Schedule Free Consultation</h3>
                 <p class="card__content">Get 30 minutes of expert UV technology guidance - completely free, no sales pressure.</p>
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="btn btn--primary" style="margin-top: auto;">
-                    <span>Book Now</span><i class="fa-solid fa-arrow-right"></i>
+                    <span>Start Your UV Project</span><i class="fa-solid fa-arrow-right"></i>
                 </a>
             </div>
             <div class="card has-shine-effect">
@@ -50,6 +77,41 @@ get_header(); ?>
                 <p class="card__content">Use our contact form below for specific requests or quick questions.</p>
                 <a href="#contact-form-v2" class="btn btn--outline" style="margin-top: auto;">Use Contact Form</a>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section (from Booking) -->
+<section class="team-section section section--turquoise-light">
+    <div class="container container--wide">
+        <div class="team-section__header">
+            <h2 class="team-section__title">Meet Your UV Experts</h2>
+            <p class="team-section__description">Learn more about the specialists who will guide you.</p>
+        </div>
+        <div class="team-section__grid">
+            
+            <div class="expert-card">
+                <div class="expert-card__photo">
+                    <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Bewerbungsbild_Valerian-Huber.jpg" alt="Valerian Huber">
+                </div>
+                <div class="expert-card__content">
+                    <h3>Valerian Huber</h3>
+                    <p class="expert-card__role">CEO & UV Technology Lead</p>
+                    <p class="expert-card__bio">With a deep focus on UV-C systems, LEDs, and process validation, Valerian brings clarity and precision into every UV application, empowering clients with actionable knowledge.</p>
+                </div>
+            </div>
+
+            <div class="expert-card">
+                <div class="expert-card__photo">
+                    <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Matthias.jpg" alt="Matthias Slapka">
+                </div>
+                <div class="expert-card__content">
+                    <h3>Matthias Slapka</h3>
+                    <p class="expert-card__role">Automation & Integration Expert</p>
+                    <p class="expert-card__bio">As a specialist for system integration and E-PLAN documentation, Matthias ensures that every solution is not just effective, but also flawlessly integrated and reliably documented for long-term success.</p>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
@@ -133,7 +195,6 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- UPDATE: Changed container to container--wide for full-width layout -->
 <section class="what-to-expect-section section">
     <div class="container container--wide">
         <div class="text-center">

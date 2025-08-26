@@ -59,13 +59,12 @@ function luvex_enqueue_assets() {
     // Seitenspezifische Stylesheets
     $page_styles = [
         'about' => ['_page-about.css'],
-        'booking' => ['_page-booking.css'],
+        'start-your-uv-project' => ['_page-start-your-uv-project.css'],
         'contact' => ['_page-contact.css'],
-        'uv-knowledge' => ['_page-uv-knowledge.css'],
+        'uv-technology' => ['_page-uv-technology.css'],
         'mercury-uv-lamps' => ['_page-mercury-uv-lamps.css'],
-        'uv-consulting' => ['_page-uv-consulting.css'],
         'uv-led' => ['_page-uv-led.css'],
-        'uv-process-equipment' => ['_page-uv-process-equipment.css'],
+        'uv-solutions' => ['_page-uv-solutions.css'],
         'uv-safety-equipment' => ['_page-uv-safety-equipment.css', 'animations/_animation-hero-safety.css'], 
         'uv-testing-equipment' => ['_page-uv-testing-equipment.css'],
         'uv-tunnel' => ['_page-uv-tunnel.css'],
@@ -162,17 +161,17 @@ function luvex_enqueue_assets() {
     if (is_page('mercury-uv-lamps')) {
         $enqueue_script('luvex-mercury-lamps-hero', 'pages/hero-mercury-lamps.js');
     }
-    if (is_page('uv-knowledge')) {
+    if (is_page('uv-technology')) {
         $enqueue_script('luvex-hero-spectrum', 'pages/hero-spectrum.js');
     }
-    if (is_page('uv-consulting')) {
+    if (is_page('start-your-uv-project')) {
         $enqueue_script('luvex-hero-hexagon', 'pages/hero-hexagon.js');
     }
        if (is_page('uv-safety-equipment')) {
         $enqueue_script('luvex-hero-safety-animation-script', 'pages/hero-safety-animation.js');
     }
-    if (is_page('uv-process-equipment')) {
-        $enqueue_script('luvex-hero-consulting-animation', 'pages/hero-consulting-animation.js');
+    if (is_page('uv-solutions')) {
+        $enqueue_script('luvex-hero-soltuions-animation', 'pages/hero-solutions-animation.js');
     }
 
 }
