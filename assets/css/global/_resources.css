@@ -12,7 +12,34 @@ Last Update: 2025-08-01
 /* Reuse all UV News styles - same class names for consistent design */
 /* This file imports the existing _news.css styles */
 
-@import '_news.css';
+
+
+
+
+
+
+
+
+/* Use Styles from News: 
+
+
+@import '_news.css'; */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* 
 Additional specific customizations for resources if needed 
