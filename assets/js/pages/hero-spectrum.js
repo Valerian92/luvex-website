@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let width, height;
     let particlesArray = [];
     let waves = [];
-    // FIX: Die alten "sparks" werden durch "cursorParticles" für den neuen Effekt ersetzt.
     let cursorParticles = [];
     let increment = 0;
 
@@ -22,12 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
         currentX: window.innerWidth / 2,
         currentY: window.innerHeight / 2,
         radius: 150,
-        // Hält die letzte Position fest, um die Bewegungsgeschwindigkeit zu berechnen
         prevX: window.innerWidth / 2, 
         prevY: window.innerHeight / 2
     };
-
-    // Das alte 'animatedCursor' Objekt wird nicht mehr benötigt.
 
     const mapRange = (value, inMin, inMax, outMin, outMax) => (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
     const lerp = (start, end, amt) => (1 - amt) * start + amt * end;
@@ -102,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // FIX: Neue Klasse für die Cursor-Partikel
     class CursorParticle {
         constructor(x, y, color) {
             this.x = x;
@@ -110,14 +105,13 @@ document.addEventListener('DOMContentLoaded', function() {
             this.color = color;
             this.size = Math.random() * 2 + 1;
             this.lifespan = 1;
-            // Zufällige Bewegung für einen "glühenden" Effekt
             this.vx = (Math.random() - 0.5) * 0.5;
             this.vy = (Math.random() - 0.5) * 0.5;
         }
         update() {
             this.x += this.vx;
             this.y += this.vy;
-            this.lifespan -= 0.02; // Partikel verblassen langsam
+            this.lifespan -= 0.02; 
         }
         draw() {
             ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.lifespan})`;
@@ -141,19 +135,22 @@ document.addEventListener('DOMContentLoaded', function() {
         ];
     }
 
-    // FIX: Komplett neue Funktion für den Cursor-Effekt
     function drawAnimatedCursor(dynamicColor) {
-        // Berechnet die Bewegungsgeschwindigkeit der Maus
+        // === FIX: Zeichnet einen kleinen, soliden Punkt als Anker ===
+        ctx.fillStyle = `rgb(${dynamicColor.r}, ${dynamicColor.g}, ${dynamicColor.b})`;
+        ctx.beginPath();
+        ctx.arc(mouse.currentX, mouse.currentY, 3, 0, Math.PI * 2); // 3px Radius
+        ctx.fill();
+        // === ENDE FIX ===
+
         const speed = Math.hypot(mouse.currentX - mouse.prevX, mouse.currentY - mouse.prevY);
 
-        // Erzeugt neue Partikel, wenn die Maus sich schnell genug bewegt
         if (speed > 2) {
             for (let i = 0; i < 2; i++) {
                  cursorParticles.push(new CursorParticle(mouse.currentX, mouse.currentY, dynamicColor));
             }
         }
 
-        // Zeichnet und aktualisiert alle Cursor-Partikel
         for (let i = cursorParticles.length - 1; i >= 0; i--) {
             cursorParticles[i].update();
             cursorParticles[i].draw();
@@ -162,7 +159,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        // Speichert die aktuelle Position für die nächste Frame-Berechnung
         mouse.prevX = mouse.currentX;
         mouse.prevY = mouse.currentY;
     }
@@ -206,7 +202,6 @@ document.addEventListener('DOMContentLoaded', function() {
             wave.draw(increment, dynamicAmplitude, dynamicLength, dynamicColor);
         });
         
-        // FIX: Ruft die neue Cursor-Funktion auf und übergibt die dynamische Farbe.
         drawAnimatedCursor(dynamicColor);
         
         updateWavelengthIndicator(currentWavelength, dynamicColor);
