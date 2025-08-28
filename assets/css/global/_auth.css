@@ -1,30 +1,23 @@
 /*
 ==============================================================================
-LUVEX THEME v2.5 - AUTH SHARED STYLES (CLEANED)
+LUVEX THEME v2.6 - AUTH SHARED STYLES (English Version)
 ==============================================================================
-Description: Enthält die geteilten Basis-Styles für alle Auth-Formulare
-             (Login, Register, Passwort vergessen etc.).
-Last Update: 2025-08-26
+Description: Contains shared base styles for all auth forms.
+Last Update: 2025-08-29
 ==============================================================================
 */
 
-/* ==========================================================================
-   1. AUTH FORMULAR BASIS-STILE
-   ========================================================================== */
-
-/* --- Container & Tabs --- */
+/* --- Main Form Container & Tabs --- */
 .auth-form-container {
     background: var(--luvex-dark-blue);
     border-radius: var(--radius-xl);
     border: 1px solid rgba(109, 213, 237, 0.3);
     margin: 0 auto;
 }
-
 .auth-tabs {
     display: flex;
     border-bottom: 1px solid rgba(109, 213, 237, 0.2);
 }
-
 .auth-tab {
     flex: 1;
     padding: 1.25rem 1rem;
@@ -35,225 +28,126 @@ Last Update: 2025-08-26
     cursor: pointer;
     transition: var(--transition-normal);
     border-bottom: 3px solid transparent;
-    text-decoration: none;
     background: none;
     border-top: none;
     border-left: none;
     border-right: none;
 }
-
 .auth-tab:hover {
     color: var(--luvex-white);
     background: rgba(109, 213, 237, 0.05);
 }
-
 .auth-tab.active {
     color: var(--luvex-bright-cyan);
     border-bottom-color: var(--luvex-bright-cyan);
 }
+.auth-tab-content { display: none; }
+.auth-tab-content.active { display: block; }
 
-.auth-tab-content {
-    display: none;
-}
-
-.auth-tab-content.active {
-    display: block;
-}
-
-/* --- Formular Abschnitte & Felder --- */
-.form-section {
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(109, 213, 237, 0.1);
-}
-.form-section:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-
+/* --- Form Fields & Layout --- */
 .form-grid-2-cols {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
 }
-
-.floating-label-input--dark input,
-.floating-label-input--dark textarea,
-.floating-label-input--dark select {
+.floating-label-input--dark input {
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(109, 213, 237, 0.3);
     color: var(--luvex-white);
 }
-
-.floating-label-input--dark input:focus,
-.floating-label-input--dark textarea:focus,
-.floating-label-input--dark select:focus {
+.floating-label-input--dark input:focus {
     border-color: var(--luvex-bright-cyan);
     background: rgba(255, 255, 255, 0.08);
     box-shadow: 0 0 0 1px var(--luvex-bright-cyan);
 }
-
 .floating-label-input--dark label {
     color: var(--luvex-gray-300);
 }
-
 .floating-label-input--dark input:focus ~ label,
-.floating-label-input--dark input:not(:placeholder-shown) ~ label,
-.floating-label-input--dark select:not(:placeholder-shown) ~ label {
+.floating-label-input--dark input:not(:placeholder-shown) ~ label {
     color: var(--luvex-bright-cyan);
 }
 
-/* --- Passwort-Stärke & Anforderungen --- */
-.password-strength {
-    margin-top: 0.5rem;
+/* --- Login Form Options (Checkbox & Forgot Link) --- */
+.auth-options {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 0.5rem;
+    margin: 1.5rem 0; /* Increased margin */
 }
-
-.strength-bar {
-    height: 4px;
-    width: 100%;
-    background: var(--luvex-gray-600);
-    border-radius: 2px;
-    transition: all 0.3s ease;
+.auth-options .form-checkbox--enhanced {
+    margin-bottom: 0; /* Remove bottom margin when inside auth-options */
 }
-.strength-bar.strength-weak { background: #ef4444; width: 30%; }
-.strength-bar.strength-good { background: #f59e0b; width: 70%; }
-.strength-bar.strength-strong { background: #10b981; width: 100%; }
-
-.strength-text {
-    font-size: var(--text-xs);
+.auth-link {
     color: var(--luvex-gray-300);
-    min-width: 80px;
-}
-
-.password-requirements {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(109, 213, 237, 0.1);
-    border-radius: var(--radius-md);
-    padding: 1rem;
-    margin-top: 1rem;
-}
-
-.password-requirements h4 {
-    color: var(--luvex-white);
     font-size: var(--text-sm);
-    margin: 0 0 0.75rem 0;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.auth-link:hover {
+    color: var(--luvex-bright-cyan);
 }
 
-.requirement-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.requirement {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: var(--text-xs);
-    color: var(--luvex-gray-300);
-}
-
-.requirement i {
-    color: var(--luvex-gray-500);
-    font-size: 0.875rem;
-}
-
-.requirement--met { color: var(--luvex-white); }
-.requirement--met i { color: #10b981; }
-
-.password-match {
-    margin-top: 0.5rem;
-    font-size: var(--text-xs);
-    font-weight: 500;
-}
-.password-match--success { color: #10b981; }
-.password-match--error { color: #ef4444; }
-
-
-/* --- Checkbox & Consent --- */
-.auth-consent {
-    margin: 1.5rem 0;
-}
-
+/* --- Checkbox Styling --- */
 .form-checkbox--enhanced {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(109, 213, 237, 0.2);
-    padding: 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
     cursor: pointer;
-    border-radius: var(--radius-md);
-    transition: var(--transition-normal);
-    margin-bottom: 1rem;
 }
-
-.form-checkbox--enhanced:hover {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(109, 213, 237, 0.4);
+.form-checkbox--enhanced input[type="checkbox"] {
+    display: none; /* Hide default checkbox */
 }
-
-.form-checkbox__content { flex: 1; }
-
-.form-checkbox__title {
-    display: block;
+.form-checkbox__indicator {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(109, 213, 237, 0.4);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+.form-checkbox__indicator i {
     color: var(--luvex-white);
-    font-weight: 600;
-    font-size: var(--text-sm);
-    margin-bottom: 0.25rem;
+    font-size: 12px;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.2s ease;
 }
-
+.form-checkbox--enhanced input:checked + .form-checkbox__indicator {
+    background-color: var(--luvex-bright-cyan);
+    border-color: var(--luvex-bright-cyan);
+}
+.form-checkbox--enhanced input:checked + .form-checkbox__indicator i {
+    opacity: 1;
+    transform: scale(1);
+}
 .form-checkbox__text {
     color: var(--luvex-gray-300);
     font-size: var(--text-sm);
-    line-height: 1.4;
 }
 
-.form-checkbox__text a {
-    color: var(--luvex-bright-cyan);
-    text-decoration: underline;
-}
-
-/* --- reCAPTCHA --- */
+/* --- reCAPTCHA Container --- */
 .recaptcha-container {
     margin: 2rem 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
 }
-
 .g-recaptcha {
     border-radius: var(--radius-md);
     overflow: hidden;
-    border: 1px solid rgba(109, 213, 237, 0.4);
 }
 
-/* --- Buttons & Links --- */
+/* --- Submit Button --- */
 .form-submit--enhanced {
     width: 100%;
     padding: 1rem 2rem;
     font-size: var(--text-lg);
 }
 
-.auth-alternative {
-    text-align: center;
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(109, 213, 237, 0.3);
-    color: var(--luvex-gray-300);
-}
-
-.auth-alternative a {
-    color: var(--luvex-bright-cyan);
-    font-weight: 600;
-}
-
-/* --- Fehlermeldungen --- */
+/* --- Messages (Error/Success) --- */
 .auth-error-message--enhanced,
 .auth-success-message--enhanced {
     display: flex;
@@ -263,65 +157,38 @@ Last Update: 2025-08-26
     border-radius: var(--radius-md);
     margin-bottom: 2rem;
 }
-
 .auth-error-message--enhanced {
     background: rgba(239, 68, 68, 0.1);
     border: 1px solid #ef4444;
 }
-
 .auth-success-message--enhanced {
     background: rgba(16, 185, 129, 0.1);
     border: 1px solid #10b981;
 }
-
-.auth-error-message--enhanced i {
-    color: #ef4444;
-    font-size: 1.25rem;
-    margin-top: 0.125rem;
-}
-
+.auth-error-message--enhanced i,
 .auth-success-message--enhanced i {
-    color: #10b981;
     font-size: 1.25rem;
     margin-top: 0.125rem;
 }
-
+.auth-error-message--enhanced i { color: #ef4444; }
+.auth-success-message--enhanced i { color: #10b981; }
 .auth-error-message--enhanced p,
 .auth-success-message--enhanced p {
     margin: 0;
-}
-
-.auth-error-message--enhanced p:first-child,
-.auth-success-message--enhanced p:first-child {
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-    color: var(--luvex-white);
-}
-
-.auth-error-message--enhanced p:last-child {
     color: #f8b4b4;
 }
+.auth-success-message--enhanced p { color: #a7f3d0; }
 
-.auth-success-message--enhanced p:last-child {
-    color: #a7f3d0;
+/* --- Clickable Interest Tags --- */
+.form-section {
+    margin-bottom: 1.5rem;
 }
-
-/* --- Klickbare Interessen-Tags --- */
 .interest-tags-container {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
     margin-top: 0.5rem;
-    padding: 0.5rem;
-    border: 1px solid transparent;
-    border-radius: var(--radius-md);
-    transition: border-color 0.3s ease;
 }
-
-.interest-tags-container.error {
-    border-color: #ef4444;
-}
-
 .interest-tag {
     background-color: rgba(255, 255, 255, 0.1);
     color: var(--luvex-gray-300);
@@ -332,13 +199,11 @@ Last Update: 2025-08-26
     border: 1px solid rgba(109, 213, 237, 0.2);
     font-size: var(--text-sm);
 }
-
 .interest-tag:hover {
     background-color: rgba(109, 213, 237, 0.2);
     color: var(--luvex-white);
     transform: translateY(-2px);
 }
-
 .interest-tag.selected {
     background-color: var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
@@ -346,8 +211,7 @@ Last Update: 2025-08-26
     border-color: var(--luvex-bright-cyan);
 }
 
-
-/* --- Responsivität --- */
+/* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
     .form-grid-2-cols {
         grid-template-columns: 1fr;

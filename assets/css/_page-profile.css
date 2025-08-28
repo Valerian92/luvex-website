@@ -3,7 +3,6 @@
 LUVEX THEME - PAGE-SPECIFIC STYLES: PROFILE
 ==============================================================================
 Description: Enthält alle spezifischen Styles für das User Profile Dashboard.
-             Extrahiert aus der ursprünglichen _auth.css.
 Last Update: 2025-08-27
 ==============================================================================
 */
@@ -32,7 +31,7 @@ Last Update: 2025-08-27
 
 .profile-sidebar {
     position: sticky;
-    top: 120px;
+    top: 120px; /* Adjust based on your header height */
 }
 
 .profile-nav {
@@ -94,88 +93,6 @@ Last Update: 2025-08-27
     color: var(--luvex-bright-cyan);
 }
 
-/* --- Quick Actions --- */
-.profile-quick-actions {
-    background: linear-gradient(135deg, var(--luvex-white) 0%, rgba(248, 250, 252, 0.9) 100%);
-    border: 1px solid rgba(109, 213, 237, 0.1);
-    box-shadow: 0 4px 25px rgba(27, 42, 73, 0.08);
-    border-radius: var(--radius-lg);
-    padding: 2rem;
-    margin-bottom: 3rem;
-}
-
-.quick-actions__title {
-    font-size: var(--text-xl);
-    font-weight: 600;
-    color: var(--luvex-dark-blue);
-    margin: 0 0 1.5rem 0;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--luvex-gray-200);
-}
-
-.quick-actions-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-    align-items: start;
-}
-
-.quick-action-card {
-    background: var(--luvex-gray-100);
-    padding: 1.5rem;
-    border-radius: var(--radius-md);
-    text-align: center;
-    text-decoration: none;
-    transition: var(--transition-normal);
-    border: 1px solid var(--luvex-gray-300);
-    color: var(--luvex-dark-blue);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-height: 120px;
-    justify-content: center;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.quick-action-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--luvex-bright-cyan);
-    background: var(--luvex-dark-blue);
-    color: var(--luvex-white);
-}
-
-.quick-action-card i {
-    font-size: 2rem;
-    color: var(--luvex-vibrant-blue);
-    margin-bottom: 1rem;
-    display: block;
-    transition: var(--transition-normal);
-}
-
-.quick-action-card:hover i {
-    color: var(--luvex-bright-cyan);
-}
-
-.quick-action-card h4 {
-    margin: 0 0 0.25rem 0;
-    font-size: var(--text-base);
-    font-weight: 600;
-}
-
-.quick-action-card p {
-    margin: 0;
-    font-size: var(--text-sm);
-    color: var(--luvex-gray-700);
-    transition: var(--transition-normal);
-    flex-grow: 1;
-}
-
-.quick-action-card:hover p {
-    color: var(--luvex-gray-300);
-}
-
 /* --- Content Sections & Headers --- */
 .profile-content {
     background: linear-gradient(135deg, var(--luvex-white) 0%, rgba(248, 250, 252, 0.95) 100%);
@@ -201,11 +118,11 @@ Last Update: 2025-08-27
 .profile-section__header::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -1px; /* Correct position */
     left: 0;
     width: 60px;
     height: 2px;
-    background: linear-gradient(90deg, var(--luvex-bright-cyan), transparent);
+    background: var(--luvex-bright-cyan);
 }
 
 .header-content { flex: 1; }
@@ -226,58 +143,40 @@ Last Update: 2025-08-27
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--luvex-bright-cyan), #8ee3f5);
+    background: var(--luvex-dark-blue);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: 600;
-    color: var(--luvex-dark-blue);
+    color: var(--luvex-white);
     position: relative;
     cursor: pointer;
     transition: transform 0.2s ease;
-    border: 3px solid rgba(109, 213, 237, 0.3);
+    border: 3px solid var(--luvex-white);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     flex-shrink: 0;
 }
 .header-avatar:hover { transform: scale(1.05); }
 
 .header-avatar .avatar-plus {
     position: absolute;
-    bottom: -2px;
-    right: -2px;
-    width: 20px;
-    height: 20px;
+    bottom: 0px;
+    right: 0px;
+    width: 24px;
+    height: 24px;
     background: var(--luvex-bright-cyan);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--luvex-dark-blue);
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: bold;
     border: 2px solid var(--luvex-white);
 }
 
-.profile-section__divider {
-    margin: 2.5rem 0 2rem 0;
-    padding-top: 2rem;
-    border-top: 1px solid var(--luvex-gray-200);
-}
-
-.profile-section__divider h4 {
-    color: var(--luvex-dark-blue);
-    font-size: var(--text-lg);
-    font-weight: 600;
-    margin: 0 0 0.5rem 0;
-}
-
-.profile-section__divider p {
-    color: var(--luvex-gray-700);
-    font-size: var(--text-sm);
-    margin: 0;
-}
-
-/* --- Form Elements (Grids, Checkboxes, Buttons) --- */
+/* --- Form Elements --- */
 .profile-form {
     display: flex;
     flex-direction: column;
@@ -288,40 +187,6 @@ Last Update: 2025-08-27
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.character-counter {
-    position: absolute;
-    bottom: 8px;
-    right: 12px;
-    font-size: var(--text-xs);
-    color: var(--luvex-gray-700);
-    background: var(--luvex-white);
-    padding: 0.25rem 0.5rem;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--luvex-gray-200);
-}
-
-.form-checkbox {
-    background: var(--luvex-gray-50);
-    padding: 1rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--luvex-gray-200);
-    transition: var(--transition-normal);
-    margin-bottom: 1rem;
-}
-
-.form-checkbox:hover {
-    background: var(--luvex-gray-100);
-    border-color: var(--luvex-gray-300);
-}
-
-.form-checkbox__text strong {
-    color: var(--luvex-dark-blue);
-    font-weight: 600;
-    display: block;
-    margin-bottom: 0.25rem;
 }
 
 .form-submit {
@@ -337,147 +202,6 @@ Last Update: 2025-08-27
     min-width: 200px;
 }
 .form-submit i { font-size: 0.9rem; }
-
-/* --- Language & Region Settings --- */
-.language-status-card {
-    background: linear-gradient(135deg, var(--luvex-dark-blue), rgba(27, 42, 73, 0.9));
-    border: 1px solid rgba(109, 213, 237, 0.3);
-    border-radius: var(--radius-lg);
-    padding: 2rem;
-    margin: 1.5rem 0 2.5rem 0;
-    box-shadow: var(--shadow-md);
-}
-
-.language-status-display {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.language-flag-large {
-    font-size: 3rem;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(109, 213, 237, 0.1);
-    border-radius: var(--radius-md);
-    border: 2px solid rgba(109, 213, 237, 0.3);
-    flex-shrink: 0;
-}
-
-.language-info h4 {
-    color: var(--luvex-white);
-    font-size: var(--text-xl);
-    font-weight: 600;
-    margin: 0 0 0.5rem 0;
-}
-
-.language-info p {
-    color: var(--luvex-gray-300);
-    font-size: var(--text-sm);
-    margin: 0;
-    opacity: 0.8;
-}
-
-.language-info strong {
-    color: var(--luvex-bright-cyan);
-    font-weight: 600;
-}
-
-.available-languages-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin: 1.5rem 0 2.5rem 0;
-}
-
-.language-card {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    background: var(--luvex-gray-50);
-    border: 1px solid var(--luvex-gray-200);
-    border-radius: var(--radius-md);
-    transition: var(--transition-normal);
-    position: relative;
-}
-
-.language-card:hover {
-    background: var(--luvex-gray-100);
-    border-color: var(--luvex-bright-cyan);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-}
-
-.language-card.current {
-    background: linear-gradient(135deg, var(--luvex-dark-blue), rgba(27, 42, 73, 0.95));
-    border-color: var(--luvex-bright-cyan);
-    color: var(--luvex-white);
-    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
-}
-
-.language-card.current:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(109, 213, 237, 0.4);
-}
-
-.language-card .language-flag {
-    font-size: 1.5rem;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(109, 213, 237, 0.1);
-    border-radius: var(--radius-sm);
-    flex-shrink: 0;
-}
-
-.language-card.current .language-flag {
-    background: rgba(109, 213, 237, 0.2);
-}
-
-.language-details h5 {
-    font-size: var(--text-base);
-    font-weight: 600;
-    color: var(--luvex-dark-blue);
-    margin: 0 0 0.25rem 0;
-}
-
-.language-card.current .language-details h5 {
-    color: var(--luvex-white);
-}
-
-.language-details p {
-    font-size: var(--text-xs);
-    color: var(--luvex-gray-600);
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-weight: 500;
-}
-
-.language-card.current .language-details p {
-    color: var(--luvex-gray-300);
-}
-
-.language-current-indicator {
-    position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
-    color: var(--luvex-bright-cyan);
-    font-size: 1rem;
-    background: rgba(109, 213, 237, 0.2);
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
 /* ==========================================================================
    2. RESPONSIVE DESIGN
@@ -496,18 +220,14 @@ Last Update: 2025-08-27
         flex-direction: row;
         overflow-x: auto;
         padding-bottom: 1rem;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+    .profile-nav__list::-webkit-scrollbar {
+        display: none; /* Chrome, Safari */
     }
     .profile-nav__link {
         white-space: nowrap;
-    }
-    .available-languages-grid {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 0.75rem;
-    }
-    .language-status-display {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
     }
 }
 
@@ -515,14 +235,9 @@ Last Update: 2025-08-27
     .profile-content {
         padding: 1.5rem;
     }
-    .quick-actions-grid {
-        grid-template-columns: 1fr;
-    }
-    .language-status-card {
-        padding: 1.5rem;
-    }
-    .available-languages-grid {
-        grid-template-columns: 1fr;
+    .profile-section__header {
+        flex-direction: column;
+        gap: 1.5rem;
     }
     .form-grid--2-cols {
         grid-template-columns: 1fr;
