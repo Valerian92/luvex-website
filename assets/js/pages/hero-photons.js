@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('❌ Canvas or Hero section not found for animations!');
         // We might still want the cursor, so we don't return here unless necessary.
     } else {
-        const ctx = canvas.getContext('d');
+        // FIX: Corrected 'd' to '2d' to get the correct rendering context.
+        const ctx = canvas.getContext('2d');
         let particles = [];
         let animationFrameId;
 
@@ -93,6 +94,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             draw() {
+                // This check prevents errors if ctx is somehow still null
+                if (!ctx) return;
                 for (let i = 0; i < this.trail.length; i++) {
                     const point = this.trail[i];
                     const alpha = (i / this.trail.length) * point.life * 0.3;
@@ -132,6 +135,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         function animate() {
+            // This check prevents errors if ctx is somehow still null
+            if (!ctx) return;
             ctx.fillStyle = 'rgba(27, 42, 73, 0.1)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             spawnParticles();
