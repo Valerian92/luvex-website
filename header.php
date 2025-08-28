@@ -146,11 +146,11 @@
                         </div>
                     </div>
                 <?php else : ?>
-                    <!-- Non-logged-in: Main CTA Button -->
-                    <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="header-cta-button">
-                        <i class="fa-solid fa-comments"></i>
-                        <span>Get Consultation</span>
-                    </a>
+                    <!-- Non-logged-in: Login/Register Button -->
+                    <button onclick="openAuthModal('login')" class="header-cta-button">
+                        <i class="fa-solid fa-user-circle"></i>
+                        <span>Login / Register</span>
+                    </button>
                 <?php endif; ?>
 
             </div>

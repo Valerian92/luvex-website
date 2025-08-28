@@ -30,7 +30,7 @@ Last Update: 2025-08-24
 
 /* 6. GLOBAL CONTENT TYPES & TEMPLATES */
 @import 'global/_404.css';
-/* @import 'global/_auth.css';*/  /* ersetzt durch pagespezifisch */
+@import 'global/_auth.css';
 @import 'global/_legal.css';
 @import 'global/_resources.css';
 

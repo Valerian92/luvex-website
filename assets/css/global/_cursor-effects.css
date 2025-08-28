@@ -1,6 +1,6 @@
 /*
 ==============================================================================
-LUVEX CURSOR EFFECTS - COMPLETE SYSTEM (v2)
+LUVEX CURSOR EFFECTS - COMPLETE SYSTEM (v2.1 - with Precision Style)
 ==============================================================================
 Description: Alle Cursor-Styles. Wird nur aktiv, wenn der body die Klasse
              'custom-cursor-active' besitzt.
@@ -17,9 +17,9 @@ body.custom-cursor-active {
 .custom-cursor {
     position: fixed;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 10000; /* Increased z-index */
     transform: translate(-50%, -50%);
-    transition: all 0.1s ease;
+    transition: opacity 0.3s ease, transform 0.1s ease-out; /* Adjusted transition */
     opacity: 0;
     /* WICHTIG: Standardmäßig versteckt, bis JS ihn aktiviert */
     display: none; 
@@ -260,13 +260,63 @@ body.custom-cursor-active .custom-cursor.visible {
     }
 }
 
+
 /* ==============================================================================
-HOVER EFFECTS - Lila Glow beim Hover über Buttons
+#7 NEW: PRECISION STYLE (Dual Circle)
+==============================================================================
+*/
+.cursor-precision-style {
+    /* This main element will act as the container */
+    width: 1px;
+    height: 1px;
+    background: transparent;
+}
+
+.cursor-precision-style .cursor-circle-outer,
+.cursor-precision-style .cursor-dot-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.cursor-precision-style .cursor-circle-outer {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--luvex-bright-cyan);
+    transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+}
+
+.cursor-precision-style .cursor-dot-inner {
+    width: 8px;
+    height: 8px;
+    background-color: var(--luvex-bright-cyan);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+
+/* ==============================================================================
+HOVER EFFECTS
 ==============================================================================
 */
 .custom-cursor.hover {
     animation-duration: 0.6s !important;
 }
+
+/* Precision Style Hover */
+.cursor-precision-style.hover .cursor-circle-outer {
+    width: 60px;
+    height: 60px;
+    border-width: 3px;
+    border-color: #8a2be2; /* Lila-Farbton beim Hover */
+}
+
+.cursor-precision-style.hover .cursor-dot-inner {
+    transform: translate(-50%, -50%) scale(1.5);
+    background-color: #8a2be2;
+}
+
 
 .cursor-classic.hover {
     background: linear-gradient(45deg, #8a2be2, #6dd5ed);

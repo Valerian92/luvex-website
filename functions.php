@@ -79,9 +79,9 @@ function luvex_enqueue_assets() {
         'uv-tunnel' => ['_page-uv-tunnel.css'],
         'uv-c-disinfection' => ['_page-uv-c-disinfection.css', 'animations/_animation-uv-disinfection-gallery.css'],
         'uv-curing' => ['_page-uv-curing.css', 'animations/_animation-uv-curing-gallery.css'],
-        'register' => ['_page-register.css', '_auth.css'],
-        'login' => ['_page-login.css', '_auth.css'],
-        'forgot-password' => ['_page-forgot-password.css', '_auth.css'],
+        'register' => ['_page-register.css'],
+        'login' => ['_page-login.css'],
+        'forgot-password' => ['_page-forgot-password.css'],
         'curing-systems' => ['_page-curing-systems.css'],
         'uvc-hygiene-solutions' => ['_page-uvc-hygiene-solutions.css'],
     ];
@@ -145,7 +145,7 @@ function luvex_enqueue_assets() {
     $global_scripts = [
         'luvex-mobile-menu' => 'global/mobile-menu.js',
         'luvex-profile-menu' => 'global/profile-menu.js',
-        'luvex-modal' => 'global/modal.js',
+        'luvex-avatar-modal-handler' => 'global/avatar-modal-handler.js',
         'luvex-scroll-animations' => 'global/scroll-animations.js',
         'luvex-scroll-to-top' => 'global/scroll-to-top.js',
         'luvex-cursor-effects' => 'global/cursor-effects.js',

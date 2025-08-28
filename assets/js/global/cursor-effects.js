@@ -1,157 +1,112 @@
 /**
- * LUVEX CURSOR EFFECTS - PERFORMANCE OPTIMIZED v3
+ * LUVEX CURSOR EFFECTS - PERFORMANCE OPTIMIZED v3.1
+ * Integrates the new dual-circle precision style and refines the logic.
  */
 document.addEventListener('DOMContentLoaded', function() {
-    
+
+    // Only run if the body has the activation class.
     if (!document.body.classList.contains('custom-cursor-active')) {
-        console.log('🎯 Custom Cursor: Nicht aktiv für diese Seite');
+        console.log('🎯 Custom Cursor: Not active for this page.');
+        return;
+    }
+    
+    // Do not run on touch devices.
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        console.log('🎯 Custom Cursor: Disabled on touch device.');
         return;
     }
 
-    console.log('🎯 LUVEX Cursor System initialisiert...');
-
-  // === DEBUGGING DETECTION VERBESSERT ===
-const isDebugging = () => {
-    return window.outerHeight - window.innerHeight > 300 || // DevTools offen
-           window.outerWidth - window.innerWidth > 300 ||   // DevTools seitlich
-           document.querySelector('[data-inspect]') ||      // Element Inspector
-           console.profile !== undefined;                   // Console API
-};
-
-function createCursor() {
-    cursor = document.createElement('div');
-    cursor.className = 'custom-cursor cursor-quantum';
-    
-    // VERBESSERTE DEBUG-SICHTBARKEIT
-    if (isDebugging()) {
-        cursor.style.cssText = `
-            position: fixed;
-            width: 40px !important;
-            height: 40px !important;
-            background: rgba(255, 0, 255, 0.8) !important;
-            border: 4px solid #fff !important;
-            border-radius: 50% !important;
-            pointer-events: none !important;
-            z-index: 99999 !important;
-            transform: translate(-50%, -50%) !important;
-            opacity: 1 !important;
-            mix-blend-mode: normal !important;
-        `;
-        console.log('🐛 Debug-Cursor: PINK für maximale Sichtbarkeit');
-    }
-    
-    document.body.appendChild(cursor);
-    cursor.classList.add('visible');
-    console.log('✅ Cursor erstellt:', cursor.className);
-    return cursor;
-}
-
-
+    console.log('🎯 LUVEX Cursor System Initializing...');
 
     let cursor = null;
     let mouseX = 0;
     let mouseY = 0;
+    let outerX = 0;
+    let outerY = 0;
+    const easing = 0.2;
     let rafId = null;
 
     function createCursor() {
         cursor = document.createElement('div');
-        cursor.className = 'custom-cursor cursor-quantum'; // Standard-Style
-        
-        // DEBUG FALLBACK für bessere Sichtbarkeit
-        if (isDebugging()) {
-            cursor.style.cssText = `
-                position: fixed;
-                width: 30px;
-                height: 30px;
-                background: rgba(109, 213, 237, 0.9);
-                border: 3px solid #fff;
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 9999;
-                transform: translate(-50%, -50%);
-                opacity: 1;
-                box-shadow: 0 0 20px rgba(109, 213, 237, 0.8);
-            `;
-            console.log('🐛 Debug-Cursor aktiviert (große Sichtbarkeit)');
+        // IMPORTANT: Set the desired default cursor style here
+        cursor.className = 'custom-cursor cursor-precision-style'; // Set to the new precision style
+
+        // For the precision style, we need inner elements
+        if (cursor.classList.contains('cursor-precision-style')) {
+            const outer = document.createElement('div');
+            outer.className = 'cursor-circle-outer';
+            const inner = document.createElement('div');
+            inner.className = 'cursor-dot-inner';
+            cursor.appendChild(outer);
+            cursor.appendChild(inner);
         }
-        
+
         document.body.appendChild(cursor);
-        
-        // WICHTIG: Klassen nach DOM-Einfügung hinzufügen
+
+        // Make it visible after a short delay to allow rendering
         setTimeout(() => {
             cursor.classList.add('visible', 'active');
         }, 10);
-        
-        console.log('✅ Cursor erstellt:', cursor.className);
+
+        console.log('✅ Cursor created with style:', cursor.className);
     }
 
     function updateCursor() {
         if (!cursor) return;
-        
-        cursor.style.left = mouseX + 'px';
-        cursor.style.top = mouseY + 'px';
+
+        // Smooth trailing effect for the main container (outer circle)
+        let dx = mouseX - outerX;
+        let dy = mouseY - outerY;
+        outerX += dx * easing;
+        outerY += dy * easing;
+
+        // Apply transformations
+        cursor.style.transform = `translate3d(${outerX}px, ${outerY}px, 0)`;
         
         rafId = requestAnimationFrame(updateCursor);
     }
 
-    // === EVENTS (VERBESSERT) ===
+    // --- Event Listeners (Optimized) ---
+
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
-        
+
         if (!cursor) {
             createCursor();
+            // Start animation loop only once
+            if (!rafId) {
+                updateCursor();
+            }
         }
-        
         cursor.classList.add('active');
-        updateCursor();
     });
 
-    // NEUER FIX: Mouseenter für Fenster-Rückkehr
-    document.addEventListener('mouseenter', () => {
-        if (cursor) {
-            cursor.classList.add('active');
-            console.log('🎯 Maus ist zurück im Fenster');
-        }
-    });
-
-    // Mouse verlässt Browser-Fenster
     document.addEventListener('mouseleave', () => {
-        if (cursor) {
-            cursor.classList.remove('active');
-            console.log('🎯 Maus hat Fenster verlassen');
-        }
+        if (cursor) cursor.classList.remove('active');
     });
-
-    // ZUSÄTZLICH: Focus-Events für Browser-Tabs
-    window.addEventListener('focus', () => {
-        if (cursor) {
-            cursor.classList.add('active');
-            console.log('🎯 Browser-Tab wieder aktiv');
-        }
-    });
-
+    
     window.addEventListener('blur', () => {
-        if (cursor) {
-            cursor.classList.remove('active');
-            console.log('🎯 Browser-Tab inaktiv');
-        }
+        if (cursor) cursor.classList.remove('active');
+    });
+    
+    window.addEventListener('focus', () => {
+        if (cursor) cursor.classList.add('active');
     });
 
 
-    // HOVER EFFECTS (optimiert)
-    document.addEventListener('mouseenter', (e) => {
-        if (cursor && e.target.matches('a, button, .btn, .luvex-cta-primary, .luvex-cta-secondary, .luvex-cta--animated')) {
+    // Hover Effects using event delegation for performance
+    document.addEventListener('mouseover', (e) => {
+        if (cursor && e.target.closest('a, button, .btn, [role="button"]')) {
             cursor.classList.add('hover');
-            console.log('🎯 Hover aktiviert auf:', e.target.tagName);
         }
-    }, true);
+    });
 
-    document.addEventListener('mouseleave', (e) => {
-        if (cursor && e.target.matches('a, button, .btn, .luvex-cta-primary, .luvex-cta-secondary, .luvex-cta--animated')) {
+    document.addEventListener('mouseout', (e) => {
+        if (cursor && e.target.closest('a, button, .btn, [role="button"]')) {
             cursor.classList.remove('hover');
         }
-    }, true);
+    });
 
-    console.log('✅ LUVEX Cursor System geladen');
+    console.log('✅ LUVEX Cursor System Loaded');
 });

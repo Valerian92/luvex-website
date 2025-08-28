@@ -4,6 +4,7 @@
  *
  * @package Luvex
  * @since 1.7.0
+ * Last Update: 2025-08-28 23:25
  */
 ?>
 
@@ -219,7 +220,11 @@ function luvex_footer_legal_fallback() {
     <i class="fa-solid fa-arrow-up"></i>
 </button>
 
-
+<?php 
+// HINWEIS: Das Auth-Modal wird hier als wiederverwendbares Template eingebunden.
+// Es bleibt standardmäßig verborgen und wird bei Bedarf per JavaScript sichtbar gemacht.
+get_template_part('includes/auth-modal');
+?>
 
 <?php wp_footer(); ?>
 
