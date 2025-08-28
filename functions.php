@@ -1,6 +1,6 @@
 <?php
 /**
- * LUVEX Theme Functions - Finale Version
+ * LUVEX Theme Functions - Finale Version (Sicherheitskorrekturen)
  * Description: Komplette Theme-Setup-, Navigations- und Asset-Lade-Logik.
  * JS-Pfade für bessere Ordnerstruktur aktualisiert.
  * KORREKTUR: Lädt News-spezifische Assets jetzt korrekt.
@@ -30,8 +30,16 @@ function luvex_theme_setup() {
         'footer-menu-4-luvex' => __('Footer Menu 4 Company-Community', 'luvex'),
         'footer-legal' => __('Footer Legal Menu', 'luvex')
     ));
+    // Korrektur: explizite Größenbegrenzungen für Thumbnails
     add_theme_support('post-thumbnails');
-    add_theme_support('custom-logo');
+    set_post_thumbnail_size(150, 150, true);
+    // Korrektur: explizite Größenbegrenzungen für custom-logo
+    add_theme_support('custom-logo', array(
+        'height'      => 100,
+        'width'       => 400,
+        'flex-height' => true,
+        'flex-width'  => true,
+    ));
     add_theme_support('title-tag');
 }
 
@@ -117,7 +125,6 @@ function luvex_enqueue_assets() {
         }
     }
 
-
     // ========================================================================
     // JAVASCRIPT LADEN
     // ========================================================================
@@ -155,7 +162,18 @@ function luvex_enqueue_assets() {
 
     // Seitenspezifische Scripts
     if (is_front_page() || is_home()) {
-        wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), null, true);
+        // Korrektur: Integrity-Check für externes CDN-Skript hinzugefügt
+        wp_enqueue_script(
+            'three-js',
+            'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',
+            [], 
+            null, 
+            [
+                'strategy' => 'defer',
+                'integrity' => 'sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ9sA==',
+                'crossorigin' => 'anonymous',
+            ]
+        );
         $enqueue_script('luvex-globe-animation', 'pages/globe-animation.js');
         $enqueue_script('luvex-hero-photons', 'pages/hero-photons.js');
     }
@@ -185,7 +203,7 @@ function luvex_enqueue_assets() {
     if (is_page('start-uv-project')) {
         $enqueue_script('luvex-hero-hexagon', 'pages/hero-hexagon.js');
     }
-       if (is_page('uv-safety-equipment')) {
+    if (is_page('uv-safety-equipment')) {
         $enqueue_script('luvex-hero-safety-animation-script', 'pages/hero-safety-animation.js');
     }
     if (is_page('uv-solutions')) {
@@ -265,36 +283,19 @@ if (file_exists($luvex_includes_path . '_user_system.php')) {
     require_once $luvex_includes_path . '_user_system.php';
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Security System laden
 require_once get_stylesheet_directory() . '/includes/_luvex_security.php';
 
-// Nur die reCAPTCHA Keys behalten
-define('LUVEX_RECAPTCHA_SITE_KEY', '6LcOX7MrAAAAAESRSq-2Y0i66cbmUvxMu8mgaE-M');
-define('LUVEX_RECAPTCHA_SECRET_KEY', '6LcOX7MrAAAAAG1iRiHd1B0_BtumXKIWikzqpHsI');
+// Korrektur: reCAPTCHA Keys aus functions.php entfernt.
+// Sie sollten nun in wp-config.php definiert werden:
+// define('LUVEX_RECAPTCHA_SITE_KEY', 'dein_site_key');
+// define('LUVEX_RECAPTCHA_SECRET_KEY', 'dein_secret_key');
 
 // Minimale reCAPTCHA Funktion
 function luvex_verify_recaptcha($response) {
-    if (empty($response)) return false;
+    if (empty($response) || !defined('LUVEX_RECAPTCHA_SECRET_KEY')) {
+        return false;
+    }
     
     $result = wp_remote_post('https://www.google.com/recaptcha/api/siteverify', [
         'body' => [
@@ -304,7 +305,9 @@ function luvex_verify_recaptcha($response) {
         ]
     ]);
     
-    if (is_wp_error($result)) return false;
+    if (is_wp_error($result)) {
+        return false;
+    }
     
     $data = json_decode(wp_remote_retrieve_body($result), true);
     return $data['success'] === true;
