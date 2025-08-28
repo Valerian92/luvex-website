@@ -14,7 +14,6 @@ Last Update: 2025-08-29
 ==============================================================================
 */
 
-/* Dieses Overlay wird von beiden Systemen genutzt, aber mit unterschiedlichen Triggern */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -33,7 +32,6 @@ Last Update: 2025-08-29
     transition: var(--transition-normal);
 }
 
-/* Sichtbarkeits-Trigger für das generische Modal */
 .modal-overlay.active {
     opacity: 1;
     visibility: visible;
@@ -104,24 +102,22 @@ Last Update: 2025-08-29
 ==============================================================================
 */
 
-/* Sichtbarkeits-Trigger für das Auth-Modal */
 .modal-overlay.visible {
     opacity: 1;
     visibility: visible;
 }
 
-/* Der .modal-content Container wird für BEIDE Systeme verwendet.
-   Die Styles hier sind spezifisch für das Auth-Modal, da es keinen .modal-container hat. */
 .modal-overlay .modal-content {
     position: relative;
-    max-width: 90%;
+    /* KORREKTUR: Feste Breite, damit der Inhalt Platz hat */
+    width: 100%;
+    max-width: 520px; /* Genug Platz für das Formular */
     max-height: 90vh;
     overflow-y: auto;
     border-radius: var(--radius-xl);
     transform: scale(0.95) translateY(20px);
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-    /* Für das generische Modal sind Padding etc. in .modal-container definiert. */
 }
 
 .modal-overlay.visible .modal-content {
@@ -145,7 +141,6 @@ Last Update: 2025-08-29
     color: var(--luvex-white);
 }
 
-/* Deaktiviert das Scrollen des Bodys, wenn irgendein Modal offen ist */
 body.modal-open {
     overflow: hidden;
 }
