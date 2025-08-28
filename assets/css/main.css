@@ -19,7 +19,7 @@ Last Update: 2025-08-24
 /* 3. UI COMPONENTS (GLOBAL - Available on all pages) */
 @import 'global/_components.css';
 @import 'global/_modals.css';
-@import 'global/_cursor-effects.css';
+/*@import 'global/_cursor-effects.css'; */
 
 /* 4. LAYOUT COMPONENTS (HEADER/FOOTER) */
 @import 'global/_header.css';

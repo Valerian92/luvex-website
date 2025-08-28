@@ -148,7 +148,6 @@ function luvex_enqueue_assets() {
         'luvex-avatar-modal-handler' => 'global/avatar-modal-handler.js',
         'luvex-scroll-animations' => 'global/scroll-animations.js',
         'luvex-scroll-to-top' => 'global/scroll-to-top.js',
-        'luvex-cursor-effects' => 'global/cursor-effects.js',
         'luvex-footer-light' => 'global/footer-light-effect.js',
         'luvex-interactive-faq' => 'global/interactive-faq.js',
     ];

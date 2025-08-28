@@ -266,3 +266,74 @@ Last Update: 2025-08-23
         margin: 2.5rem 0; /* Responsive Anpassung des Abstands */
     }
 }
+
+/*
+==============================================================================
+6. HOMEPAGE-SPECIFIC CUSTOM CURSOR STYLES
+==============================================================================
+*/
+
+/* Hide default cursor when our custom one is active */
+body.homepage-cursor-active {
+    cursor: none;
+}
+
+/* Main cursor container */
+.homepage-custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.homepage-custom-cursor.visible {
+    opacity: 1;
+}
+
+/* Outer circle - the trailing element */
+.cursor-circle-outer {
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, border-width 0.3s ease;
+}
+
+/* Inner dot - the main pointer */
+.cursor-dot-inner {
+    width: 8px;
+    height: 8px;
+    background-color: var(--luvex-white);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Active state colors */
+body.homepage-cursor-active .cursor-circle-outer {
+    border-color: var(--luvex-bright-cyan);
+}
+
+body.homepage-cursor-active .cursor-dot-inner {
+    background-color: var(--luvex-bright-cyan);
+}
+
+/* Hover effect on interactive elements */
+.cursor-circle-outer.hover-effect {
+    width: 60px;
+    height: 60px;
+    border-width: 3px;
+}
+
+.cursor-dot-inner.hover-effect {
+    transform: translate(-50%, -50%) scale(1.5);
+}
