@@ -4,11 +4,11 @@
  * AJAX-basiertes Login/Register-Modal mit dynamischer Interessenauswahl.
  */
 
-if (!defined('ABSPATH')) {
-    exit;
-}
+if (!defined('ABSPATH')) exit;
+
 $recaptcha_site_key = defined('LUVEX_RECAPTCHA_SITE_KEY') ? LUVEX_RECAPTCHA_SITE_KEY : '';
 $ajax_nonce = wp_create_nonce('luvex_ajax_nonce');
+$icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_library() : [];
 ?>
 
 <!-- Das Modal-Overlay -->
@@ -27,14 +27,8 @@ $ajax_nonce = wp_create_nonce('luvex_ajax_nonce');
                 <div class="auth-tab-content active" id="login-content">
                     <form id="luvex-login-form" class="luvex-auth-form" method="post">
                         <div class="form-grid-2-cols">
-                            <div class="floating-label-input floating-label-input--dark">
-                                <input type="email" name="user_login" id="user_login" placeholder=" " required autocomplete="email">
-                                <label for="user_login">Email Address</label>
-                            </div>
-                            <div class="floating-label-input floating-label-input--dark">
-                                <input type="password" name="user_password" id="user_password_login" placeholder=" " required autocomplete="current-password">
-                                <label for="user_password_login">Password</label>
-                            </div>
+                            <input type="email" name="user_login" id="user_login" placeholder="Email Address" required autocomplete="email">
+                            <input type="password" name="user_password" id="user_password_login" placeholder="Password" required autocomplete="current-password">
                         </div>
 
                         <div class="auth-options">
@@ -58,57 +52,51 @@ $ajax_nonce = wp_create_nonce('luvex_ajax_nonce');
                 <!-- Registration Form -->
                 <div class="auth-tab-content" id="register-content">
                     <form id="luvex-register-form" class="luvex-auth-form" method="post">
+                        <!-- Personal & Company Info -->
                         <div class="form-grid-2-cols">
-                            <div class="floating-label-input floating-label-input--dark">
-                                <input type="text" name="first_name" id="first_name" placeholder=" " required autocomplete="given-name">
-                                <label for="first_name">First Name</label>
-                            </div>
-                            <div class="floating-label-input floating-label-input--dark">
-                                <input type="text" name="last_name" id="last_name" placeholder=" " required autocomplete="family-name">
-                                <label for="last_name">Last Name</label>
-                            </div>
-                            <div class="floating-label-input floating-label-input--dark">
-                                <input type="email" name="user_email" id="user_email_register" placeholder=" " required autocomplete="email">
-                                <label for="user_email_register">Email Address</label>
-                            </div>
-                            <div class="floating-label-input floating-label-input--dark">
-                                <input type="text" name="company" id="company" placeholder=" " autocomplete="organization">
-                                <label for="company">Company (Optional)</label>
-                            </div>
-                            <div class="floating-label-input floating-label-input--dark">
-                                <input type="password" name="user_password" id="user_password_register" placeholder=" " required autocomplete="new-password">
-                                <label for="user_password_register">Password</label>
-                            </div>
-                            <div class="floating-label-input floating-label-input--dark">
-                                <input type="password" name="confirm_password" id="confirm_password" placeholder=" " required autocomplete="new-password">
-                                <label for="confirm_password">Confirm Password</label>
+                            <input type="text" name="first_name" id="first_name" placeholder="First Name" required autocomplete="given-name">
+                            <input type="text" name="last_name" id="last_name" placeholder="Last Name" required autocomplete="family-name">
+                            <input type="email" name="user_email" id="user_email_register" placeholder="Email Address" required autocomplete="email">
+                            <input type="text" name="company" id="company" placeholder="Company (Optional)" autocomplete="organization">
+                            <input type="password" name="user_password" id="user_password_register" placeholder="Password" required autocomplete="new-password">
+                            <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" required autocomplete="new-password">
+                        </div>
+
+                        <!-- Industries Section -->
+                        <div class="form-section">
+                            <h4 class="form-section-title">Your Industry (Optional)</h4>
+                            <div class="interests-grid-industries">
+                                <?php if (isset($icon_library['Industries'])): ?>
+                                    <?php foreach ($icon_library['Industries'] as $key => $details): ?>
+                                        <button type="button" class="interest-tag" data-interest="<?= esc_attr($key) ?>">
+                                            <?= get_luvex_icon($key) ?>
+                                            <span><?= esc_html($details['label']) ?></span>
+                                        </button>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </div>
                         </div>
 
                         <!-- Interests Section -->
-                        <div class="form-section interests-section">
-                            <h4 class="interests-title">Select Your Interests (Optional)</h4>
-                            <div class="interests-grid-container">
-                                <?php
-                                if (function_exists('get_luvex_icon_library')) {
-                                    $icon_library = get_luvex_icon_library();
-                                    foreach ($icon_library as $category_name => $icons) {
-                                        if ($category_name === 'Nicht zugewiesen (Inspiration)') continue;
-                                        echo '<div class="interest-category">';
-                                        echo '<h5 class="interest-category-title">' . esc_html($category_name) . '</h5>';
-                                        foreach ($icons as $key => $details) {
-                                            echo '<button type="button" class="interest-tag" data-interest="' . esc_attr($key) . '">';
-                                            echo get_luvex_icon($key);
-                                            echo '<span>' . esc_html($details['label']) . '</span>';
-                                            echo '</button>';
-                                        }
-                                        echo '</div>';
-                                    }
-                                }
-                                ?>
+                        <div class="form-section">
+                            <h4 class="form-section-title">Your Interests (Optional)</h4>
+                            <div class="interests-columns-container">
+                                <?php foreach (['Technology', 'UV Solutions', 'LUVEX Services'] as $category_name): ?>
+                                    <?php if (isset($icon_library[$category_name])): ?>
+                                    <div class="interest-column">
+                                        <h5 class="interest-column-title"><?= esc_html($category_name) ?></h5>
+                                        <?php foreach ($icon_library[$category_name] as $key => $details): ?>
+                                            <button type="button" class="interest-tag" data-interest="<?= esc_attr($key) ?>">
+                                                <?= get_luvex_icon($key) ?>
+                                                <span><?= esc_html($details['label']) ?></span>
+                                            </button>
+                                        <?php endforeach; ?>
+                                    </div>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
                             </div>
-                            <input type="hidden" name="interest_area" id="interest_area_hidden" value="">
                         </div>
+                        <input type="hidden" name="interest_area" id="interest_area_hidden" value="">
 
                         <div class="recaptcha-container" id="register-recaptcha-container"></div>
                         
@@ -136,6 +124,8 @@ $ajax_nonce = wp_create_nonce('luvex_ajax_nonce');
 (function() {
     // --- GLOBALE VARIABLEN FÜR DAS MODAL ---
     const modal = document.getElementById('authModal');
+    if (!modal) return; // Skript beenden, wenn das Modal nicht auf der Seite ist
+
     const feedbackContainer = document.getElementById('auth-feedback');
     let recaptchaLoginWidget, recaptchaRegisterWidget;
     let isRecaptchaScriptLoaded = false;
@@ -154,11 +144,11 @@ $ajax_nonce = wp_create_nonce('luvex_ajax_nonce');
         const registerTab = document.getElementById('register-content');
 
         try {
-            if (loginTab.classList.contains('active') && !recaptchaLoginWidget) {
+            if (loginTab.classList.contains('active') && recaptchaLoginWidget === undefined) {
                 const el = document.getElementById('login-recaptcha-container');
                 if (el) recaptchaLoginWidget = grecaptcha.render(el, { 'sitekey': siteKey, 'theme': 'dark' });
             }
-            if (registerTab.classList.contains('active') && !recaptchaRegisterWidget) {
+            if (registerTab.classList.contains('active') && recaptchaRegisterWidget === undefined) {
                 const el = document.getElementById('register-recaptcha-container');
                 if (el) recaptchaRegisterWidget = grecaptcha.render(el, { 'sitekey': siteKey, 'theme': 'dark' });
             }
@@ -298,48 +288,45 @@ $ajax_nonce = wp_create_nonce('luvex_ajax_nonce');
     }
 
     // --- EVENT LISTENERS INITIALISIEREN ---
-    document.addEventListener('DOMContentLoaded', function() {
-        // Formulare an AJAX binden
-        const loginForm = document.getElementById('luvex-login-form');
-        const registerForm = document.getElementById('luvex-register-form');
-        if (loginForm) handleFormSubmit(loginForm, 'luvex_ajax_login');
-        if (registerForm) handleFormSubmit(registerForm, 'luvex_ajax_register');
+    const loginForm = document.getElementById('luvex-login-form');
+    const registerForm = document.getElementById('luvex-register-form');
+    if (loginForm) handleFormSubmit(loginForm, 'luvex_ajax_login');
+    if (registerForm) handleFormSubmit(registerForm, 'luvex_ajax_register');
 
-        // Formulardaten beim Tippen speichern
-        if (registerForm) {
-            registerForm.addEventListener('input', saveFormData);
-        }
-        
-        // Logik für Interessen-Tags
-        document.querySelectorAll('.interest-tag').forEach(tag => {
-            tag.addEventListener('click', function() {
-                this.classList.toggle('selected');
-                const selectedInterests = Array.from(document.querySelectorAll('.interest-tag.selected'))
-                                             .map(t => t.dataset.interest);
-                document.getElementById('interest_area_hidden').value = selectedInterests.join(',');
-                saveFormData(); 
-            });
+    // Formulardaten beim Tippen speichern
+    if (registerForm) {
+        registerForm.addEventListener('input', saveFormData);
+    }
+    
+    // Logik für Interessen-Tags
+    document.querySelectorAll('.interest-tag').forEach(tag => {
+        tag.addEventListener('click', function() {
+            this.classList.toggle('selected');
+            const selectedInterests = Array.from(document.querySelectorAll('.interest-tag.selected'))
+                                         .map(t => t.dataset.interest);
+            document.getElementById('interest_area_hidden').value = selectedInterests.join(',');
+            saveFormData(); 
         });
-
-        // Modal bei Klick auf Overlay schließen
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                closeAuthModal();
-            }
-        });
-        
-        // Google reCAPTCHA Skript laden, wenn Modal geöffnet wird
-        const originalOpenAuthModal = window.openAuthModal;
-        window.openAuthModal = function(mode = 'login') {
-            if (!document.querySelector('script[src*="recaptcha/api.js"]')) {
-                const script = document.createElement('script');
-                script.src = 'https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoadCallback&render=explicit';
-                script.async = true;
-                script.defer = true;
-                document.head.appendChild(script);
-            }
-            originalOpenAuthModal(mode);
-        };
     });
+
+    // Modal bei Klick auf Overlay schließen
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeAuthModal();
+        }
+    });
+    
+    // Google reCAPTCHA Skript bei Bedarf laden
+    const originalOpenAuthModal = window.openAuthModal;
+    window.openAuthModal = function(mode = 'login') {
+        if (!document.querySelector('script[src*="recaptcha/api.js"]')) {
+            const script = document.createElement('script');
+            script.src = 'https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoadCallback&render=explicit';
+            script.async = true;
+            script.defer = true;
+            document.head.appendChild(script);
+        }
+        originalOpenAuthModal(mode);
+    };
 })();
 </script>

@@ -4,7 +4,7 @@
  * Enthält die zentrale Icon-Bibliothek.
  *
  * @package Luvex
- * @since 3.2.0
+ * @since 3.3.0
  */
 
 if (!defined('ABSPATH')) {
@@ -12,34 +12,13 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Gibt den HTML-Code für ein einzelnes, vordefiniertes LUVEX Icon zurück.
+ * Gibt die gesamte LUVEX Icon-Bibliothek zurück, strukturiert nach Kategorien.
  *
- * @param string $name Der Name des Icons (z.B. 'uv-curing').
- * @return string Den vollständigen <i>-Tag oder einen leeren String.
- */
-if (!function_exists('get_luvex_icon')) {
-    function get_luvex_icon($name) {
-        $icons = get_luvex_icon_library(true); // Ruft die flache Liste aller Icons ab
-        if (isset($icons[$name])) {
-            return '<i class="' . esc_attr($icons[$name]) . '"></i>';
-        }
-        return ''; // Fallback
-    }
-}
-
-/**
- * Gibt die gesamte LUVEX Icon-Bibliothek zurück.
- * Kann entweder strukturiert nach Kategorien oder als flache Liste zurückgegeben werden.
- *
- * @param bool $flat Wenn true, wird eine flache Liste [name => klasse] zurückgegeben.
  * @return array Die Icon-Bibliothek.
  */
 if (!function_exists('get_luvex_icon_library')) {
-    function get_luvex_icon_library($flat = false) {
-        // ====================================================================
-        // DIE ZENTRALE LUVEX ICON-BIBLIOTHEK (SINGLE SOURCE OF TRUTH)
-        // ====================================================================
-        $structured_icons = [
+    function get_luvex_icon_library() {
+        return [
             'Technology' => [
                 'uv-curing'        => ['label' => 'UV Curing', 'class' => 'fa-solid fa-layer-group'],
                 'uvc-disinfection' => ['label' => 'UVC Disinfection', 'class' => 'fa-solid fa-shield-virus'],
@@ -62,19 +41,12 @@ if (!function_exists('get_luvex_icon_library')) {
                 'strip-analyzer'   => ['label' => 'UV Strip Analyzer', 'class' => 'fa-solid fa-chart-simple'],
                 'partnership'      => ['label' => 'Partnership', 'class' => 'fa-solid fa-handshake-angle'],
             ],
-            'Applications' => [
-                'water-disinfection' => ['label' => 'Water Disinfection', 'class' => 'fa-solid fa-droplet'],
-                'air-disinfection'   => ['label' => 'Air Disinfection', 'class' => 'fa-solid fa-wind'],
-                'surface-disinfection' => ['label' => 'Surface Disinfection', 'class' => 'fa-solid fa-border-all'],
-                'uv-print'         => ['label' => 'UV-Print', 'class' => 'fa-solid fa-print'],
-                'ink'              => ['label' => 'Ink', 'class' => 'fa-solid fa-fill-drip'],
-                'adhesives'        => ['label' => 'Adhesives', 'class' => 'fa-solid fa-link'],
-                'coatings'         => ['label' => 'Coatings', 'class' => 'fa-solid fa-clone'],
-            ],
-            'Industries' => [
+             'Industries' => [
                 'electronics'      => ['label' => 'Electronics', 'class' => 'fa-solid fa-microchip'],
                 'pharmaceutical'   => ['label' => 'Pharmaceutical', 'class' => 'fa-solid fa-pills'],
                 'optics'           => ['label' => 'Optics', 'class' => 'fa-solid fa-eye'],
+                'automotive'       => ['label' => 'Automotive', 'class' => 'fa-solid fa-car'],
+                'engineering'      => ['label' => 'Mechanical Engineering', 'class' => 'fa-solid fa-gears'],
                 'hotel'            => ['label' => 'Hotel', 'class' => 'fa-solid fa-building-user'],
                 'fresh-food'       => ['label' => 'Fresh Food / Greenhouse', 'class' => 'fa-solid fa-seedling'],
                 'meat-poultry'     => ['label' => 'Meat & Poultry', 'class' => 'fa-solid fa-drumstick-bite'],
@@ -100,19 +72,23 @@ if (!function_exists('get_luvex_icon_library')) {
                 'industrial-plant' => ['label' => 'Industrial Plant', 'class' => 'fa-solid fa-industry'],
             ]
         ];
-
-        if (!$flat) {
-            return $structured_icons;
-        }
-
-        // Erstellt eine flache Liste für die get_luvex_icon Funktion
-        $flat_icons = [];
-        foreach ($structured_icons as $category) {
-            foreach ($category as $key => $details) {
-                $flat_icons[$key] = $details['class'];
-            }
-        }
-        return $flat_icons;
     }
 }
 
+/**
+ * Gibt den HTML-Code für ein einzelnes, vordefiniertes LUVEX Icon zurück.
+ *
+ * @param string $name Der Name des Icons (z.B. 'uv-curing').
+ * @return string Den vollständigen <i>-Tag oder einen leeren String.
+ */
+if (!function_exists('get_luvex_icon')) {
+    function get_luvex_icon($name) {
+        $library = get_luvex_icon_library();
+        foreach ($library as $category) {
+            if (isset($category[$name])) {
+                return '<i class="' . esc_attr($category[$name]['class']) . '"></i>';
+            }
+        }
+        return ''; // Fallback
+    }
+}

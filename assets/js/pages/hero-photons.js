@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // ========================================================================
-    // Part 2: CSS Cursor Trigger
+    // Part 2: CSS Cursor Trigger (FIXED for initial visibility)
     // ========================================================================
     
     if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
@@ -188,13 +188,29 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
     
+    const triggerAreas = [heroSection, header];
+    
     const handleMouseEnter = () => document.body.classList.add('homepage-cursor-active');
     const handleMouseLeave = () => document.body.classList.remove('homepage-cursor-active');
 
-    heroSection.addEventListener('mouseenter', handleMouseEnter);
-    heroSection.addEventListener('mouseleave', handleMouseLeave);
-    header.addEventListener('mouseenter', handleMouseEnter);
-    header.addEventListener('mouseleave', handleMouseLeave);
+    triggerAreas.forEach(area => {
+        area.addEventListener('mouseenter', handleMouseEnter);
+        area.addEventListener('mouseleave', handleMouseLeave);
+    });
+
+    // FIX: Check initial mouse position on load
+    const initialCheck = (e) => {
+        const isInTriggerArea = triggerAreas.some(area => {
+            const rect = area.getBoundingClientRect();
+            return e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
+        });
+        if (isInTriggerArea) {
+            handleMouseEnter();
+        }
+        // Remove this listener after the first check
+        document.removeEventListener('mousemove', initialCheck);
+    };
+    document.addEventListener('mousemove', initialCheck);
     
     console.log('✅ Homepage Effects Script Loaded');
 });
