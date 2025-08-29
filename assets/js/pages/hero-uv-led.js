@@ -1,7 +1,7 @@
 /**
  * UV LED Convergence Animation & CSS Cursor Trigger
- * Description: Implements a high-performance, CSS-only custom cursor by removing
- * all JS-based cursor drawing and instead toggling a body class.
+ * Description: Simplified to only handle the canvas animation and toggle a body
+ * class for the high-performance CSS cursor. Layering is now handled by CSS.
  * @package Luvex
  */
 
@@ -12,25 +12,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- High-Performance CSS Cursor Trigger ---
-    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-        return; // Don't run cursor logic on touch devices
-    }
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
 
     const heroSection = document.querySelector('.uv-led-hero');
     const header = document.querySelector('.site-header');
+    const triggerAreas = [heroSection, header].filter(Boolean);
 
-    if (!heroSection || !header) {
-        console.error("Cursor trigger failed: Hero or Header not found.");
-        return;
+    if (triggerAreas.length > 0) {
+        const isMouseInArea = (e) => triggerAreas.some(area => {
+            const rect = area.getBoundingClientRect();
+            return e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
+        });
+
+        const updateCursorState = (isActive) => {
+            document.body.classList.toggle('led-uv-cursor-active', isActive);
+        };
+
+        const initialMouseMoveHandler = (e) => {
+            if (isMouseInArea(e)) {
+                updateCursorState(true);
+            }
+            document.removeEventListener('mousemove', initialMouseMoveHandler);
+        };
+        document.addEventListener('mousemove', initialMouseMoveHandler);
+
+        triggerAreas.forEach(area => {
+            area.addEventListener('mouseenter', () => updateCursorState(true));
+            area.addEventListener('mouseleave', () => updateCursorState(false));
+        });
     }
-    
-    const handleMouseEnter = () => document.body.classList.add('led-uv-cursor-active');
-    const handleMouseLeave = () => document.body.classList.remove('led-uv-cursor-active');
-
-    heroSection.addEventListener('mouseenter', handleMouseEnter);
-    heroSection.addEventListener('mouseleave', handleMouseLeave);
-    header.addEventListener('mouseenter', handleMouseEnter);
-    header.addEventListener('mouseleave', handleMouseLeave);
 });
 
 class UVLEDConvergence {
@@ -85,10 +95,7 @@ class UVLEDConvergence {
             const x = centerX + Math.cos(angle) * radius;
             const y = centerY + Math.sin(angle) * radius;
             
-            this.leds.push({
-                x, y, originX: x, originY: y,
-                phase: Math.random() * Math.PI * 2,
-            });
+            this.leds.push({ x, y, originX: x, originY: y, phase: Math.random() * Math.PI * 2 });
         }
     }
 
@@ -134,6 +141,7 @@ class UVLEDConvergence {
 
     bindEvents() {
         window.addEventListener('resize', () => this.resizeCanvas());
+        // Use the hero section for mouse tracking to cover the whole area
         this.canvas.parentElement.addEventListener('mousemove', (e) => {
             const rect = this.canvas.getBoundingClientRect();
             this.mouse.x = e.clientX - rect.left;
@@ -165,8 +173,6 @@ class UVLEDConvergence {
         const targetX = mouseFollow ? this.mouse.x : this.canvas.width / 2;
         const targetY = mouseFollow ? this.mouse.y : this.canvas.height / 2;
         const dynamicColor = this.wavelengthToHSL(wavelength);
-
-        // The JS cursor drawing has been removed. The new CSS cursor is now active.
 
         this.ctx.globalCompositeOperation = 'lighter';
 

@@ -1,124 +1,129 @@
 <?php
 /**
- * Auth-Modal-Template (AJAX Version with Data Persistence)
- * Provides Login and Registration forms in a popup.
+ * Auth-Modal-Template (FINAL)
+ * AJAX-basiertes Login/Register-Modal mit dynamischer Interessenauswahl.
  */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
 $recaptcha_site_key = defined('LUVEX_RECAPTCHA_SITE_KEY') ? LUVEX_RECAPTCHA_SITE_KEY : '';
 $ajax_nonce = wp_create_nonce('luvex_ajax_nonce');
 ?>
 
-<!-- The Modal Overlay -->
+<!-- Das Modal-Overlay -->
 <div id="authModal" class="modal-overlay">
     <div class="modal-content">
+        <!-- Der eigentliche Formular-Container -->
         <div class="auth-form-container">
+            <div id="auth-feedback" class="auth-feedback-message"></div>
             <div class="auth-tabs">
                 <button class="auth-tab active" id="login-tab-link" onclick="showAuthForm('login')">Login</button>
                 <button class="auth-tab" id="register-tab-link" onclick="showAuthForm('register')">Register</button>
             </div>
 
-            <div id="auth-tab-content">
-                <div id="auth-message-container" style="padding: 0 2.5rem;"></div>
-
+            <div id="auth-tab-content-wrapper">
                 <!-- Login Form -->
-                <div class="auth-tab-content active" id="login-content" style="padding: 2.5rem;">
+                <div class="auth-tab-content active" id="login-content">
                     <form id="luvex-login-form" class="luvex-auth-form" method="post">
-                        <div class="floating-label-input floating-label-input--dark">
-                            <input type="text" name="user_login" id="user_login" placeholder=" " required>
-                            <label for="user_login">Email or Username</label>
+                        <div class="form-grid-2-cols">
+                            <div class="floating-label-input floating-label-input--dark">
+                                <input type="email" name="user_login" id="user_login" placeholder=" " required autocomplete="email">
+                                <label for="user_login">Email Address</label>
+                            </div>
+                            <div class="floating-label-input floating-label-input--dark">
+                                <input type="password" name="user_password" id="user_password_login" placeholder=" " required autocomplete="current-password">
+                                <label for="user_password_login">Password</label>
+                            </div>
                         </div>
-                        <div class="floating-label-input floating-label-input--dark">
-                            <input type="password" name="user_password" id="user_password_login" placeholder=" " required>
-                            <label for="user_password_login">Password</label>
-                        </div>
-                        <div class="recaptcha-container">
-                            <div id="recaptcha-login" class="g-recaptcha"></div>
-                        </div>
+
                         <div class="auth-options">
-                            <label class="form-checkbox form-checkbox--enhanced">
+                            <label class="form-checkbox">
                                 <input type="checkbox" name="remember_me">
                                 <span class="form-checkbox__indicator"><i class="fa-solid fa-check"></i></span>
-                                <span class="form-checkbox__text">Stay logged in</span>
+                                <span class="form-checkbox__text">Remember me</span>
                             </label>
-                            <a href="<?php echo wp_lostpassword_url(); ?>" class="auth-link">Forgot password?</a>
+                            <a href="<?php echo esc_url(wp_lostpassword_url()); ?>" class="auth-link">Forgot password?</a>
                         </div>
-                        <button type="submit" class="btn--primary form-submit--enhanced">Login</button>
+
+                        <div class="recaptcha-container" id="login-recaptcha-container"></div>
+
+                        <button type="submit" name="luvex_login_submit" class="btn--primary form-submit--enhanced">
+                            <span class="btn-text">Login</span>
+                            <i class="fa-solid fa-spinner fa-spin btn-loader" style="display: none;"></i>
+                        </button>
                     </form>
                 </div>
-                
+
                 <!-- Registration Form -->
-                <div class="auth-tab-content" id="register-content" style="padding: 2.5rem;">
+                <div class="auth-tab-content" id="register-content">
                     <form id="luvex-register-form" class="luvex-auth-form" method="post">
                         <div class="form-grid-2-cols">
-                            <div>
-                                <div class="floating-label-input floating-label-input--dark">
-                                    <input type="text" name="first_name" placeholder=" " required>
-                                    <label>First Name</label>
-                                </div>
-                                <div class="floating-label-input floating-label-input--dark">
-                                    <input type="text" name="last_name" placeholder=" " required>
-                                    <label>Last Name</label>
-                                </div>
+                            <div class="floating-label-input floating-label-input--dark">
+                                <input type="text" name="first_name" id="first_name" placeholder=" " required autocomplete="given-name">
+                                <label for="first_name">First Name</label>
                             </div>
-                            <div>
-                                <div class="floating-label-input floating-label-input--dark">
-                                    <input type="password" name="user_password" placeholder=" " required minlength="6">
-                                    <label>Password</label>
-                                </div>
-                                <div class="floating-label-input floating-label-input--dark">
-                                    <input type="password" name="confirm_password" placeholder=" " required>
-                                    <label>Confirm Password</label>
-                                </div>
+                            <div class="floating-label-input floating-label-input--dark">
+                                <input type="text" name="last_name" id="last_name" placeholder=" " required autocomplete="family-name">
+                                <label for="last_name">Last Name</label>
                             </div>
-                        </div>
-                        <div class="form-section">
-                             <div class="form-grid-2-cols">
-                                <div class="floating-label-input floating-label-input--dark">
-                                    <input type="email" name="user_email" placeholder=" " required>
-                                    <label>Email Address</label>
-                                </div>
-                                <div class="floating-label-input floating-label-input--dark">
-                                    <input type="text" name="company" placeholder=" ">
-                                    <label>Company (Optional)</label>
-                                </div>
+                            <div class="floating-label-input floating-label-input--dark">
+                                <input type="email" name="user_email" id="user_email_register" placeholder=" " required autocomplete="email">
+                                <label for="user_email_register">Email Address</label>
+                            </div>
+                            <div class="floating-label-input floating-label-input--dark">
+                                <input type="text" name="company" id="company" placeholder=" " autocomplete="organization">
+                                <label for="company">Company (Optional)</label>
+                            </div>
+                            <div class="floating-label-input floating-label-input--dark">
+                                <input type="password" name="user_password" id="user_password_register" placeholder=" " required autocomplete="new-password">
+                                <label for="user_password_register">Password</label>
+                            </div>
+                            <div class="floating-label-input floating-label-input--dark">
+                                <input type="password" name="confirm_password" id="confirm_password" placeholder=" " required autocomplete="new-password">
+                                <label for="confirm_password">Confirm Password</label>
                             </div>
                         </div>
 
-                        <div class="form-section">
-                            <label class="interest-section-title">Select Your Interests</label>
-                            <div class="interest-columns-container">
-                                <!-- Column 1: Technology -->
-                                <div class="interest-column">
-                                    <h4 class="interest-column-title">Technology</h4>
-                                    <span class="interest-tag" data-interest="uv-curing"><?php echo get_luvex_icon('uv-curing'); ?> UV Curing</span>
-                                    <span class="interest-tag" data-interest="uvc-disinfection"><?php echo get_luvex_icon('uvc-disinfection'); ?> UVC Disinfection</span>
-                                    <span class="interest-tag" data-interest="uv-led-systems"><?php echo get_luvex_icon('uv-led-systems'); ?> UV LED Systems</span>
-                                    <span class="interest-tag" data-interest="uv-mercury-lamps"><?php echo get_luvex_icon('uv-mercury-lamps'); ?> UV Mercury Lamps</span>
-                                </div>
-                                <!-- Column 2: UV Solutions -->
-                                <div class="interest-column">
-                                    <h4 class="interest-column-title">UV Solutions</h4>
-                                    <span class="interest-tag" data-interest="uv-systems"><?php echo get_luvex_icon('uv-systems'); ?> UV Systems</span>
-                                    <span class="interest-tag" data-interest="uv-safety"><?php echo get_luvex_icon('uv-safety'); ?> UV Safety</span>
-                                    <span class="interest-tag" data-interest="uv-tunnel"><?php echo get_luvex_icon('uv-tunnel'); ?> UV Tunnel</span>
-                                    <span class="interest-tag" data-interest="uv-measurement"><?php echo get_luvex_icon('uv-measurement'); ?> UV Measurement</span>
-                                </div>
-                                <!-- Column 3: LUVEX Services -->
-                                <div class="interest-column">
-                                    <h4 class="interest-column-title">LUVEX Services</h4>
-                                    <span class="interest-tag" data-interest="uv-simulator"><?php echo get_luvex_icon('uv-simulator'); ?> UV Simulator</span>
-                                    <span class="interest-tag" data-interest="project-support"><?php echo get_luvex_icon('project-support'); ?> Project Support</span>
-                                    <span class="interest-tag" data-interest="uv-news"><?php echo get_luvex_icon('uv-news'); ?> UV News</span>
-                                    <span class="interest-tag" data-interest="uv-newsletter"><?php echo get_luvex_icon('uv-newsletter'); ?> UV Newsletter</span>
-                                    <span class="interest-tag" data-interest="strip-analyzer"><?php echo get_luvex_icon('strip-analyzer'); ?> UV Strip Analyzer <small>(coming)</small></span>
-                                </div>
+                        <!-- Interests Section -->
+                        <div class="form-section interests-section">
+                            <h4 class="interests-title">Select Your Interests (Optional)</h4>
+                            <div class="interests-grid-container">
+                                <?php
+                                if (function_exists('get_luvex_icon_library')) {
+                                    $icon_library = get_luvex_icon_library();
+                                    foreach ($icon_library as $category_name => $icons) {
+                                        if ($category_name === 'Nicht zugewiesen (Inspiration)') continue;
+                                        echo '<div class="interest-category">';
+                                        echo '<h5 class="interest-category-title">' . esc_html($category_name) . '</h5>';
+                                        foreach ($icons as $key => $details) {
+                                            echo '<button type="button" class="interest-tag" data-interest="' . esc_attr($key) . '">';
+                                            echo get_luvex_icon($key);
+                                            echo '<span>' . esc_html($details['label']) . '</span>';
+                                            echo '</button>';
+                                        }
+                                        echo '</div>';
+                                    }
+                                }
+                                ?>
                             </div>
-                            <input type="hidden" name="interest_area" id="interest_area_hidden">
+                            <input type="hidden" name="interest_area" id="interest_area_hidden" value="">
                         </div>
 
-                        <div class="recaptcha-container">
-                             <div id="recaptcha-register" class="g-recaptcha"></div>
+                        <div class="recaptcha-container" id="register-recaptcha-container"></div>
+                        
+                        <div class="auth-consent">
+                             <label class="form-checkbox">
+                                <input type="checkbox" name="terms_consent" required>
+                                <span class="form-checkbox__indicator"><i class="fa-solid fa-check"></i></span>
+                                <span class="form-checkbox__text">I agree to the <a href="/terms" target="_blank">Terms of Service</a> and <a href="/privacy" target="_blank">Privacy Policy</a>.</span>
+                            </label>
                         </div>
-                        <button type="submit" class="btn--primary form-submit--enhanced">Create Account</button>
+
+                        <button type="submit" name="luvex_register_submit" class="btn--primary form-submit--enhanced">
+                             <span class="btn-text">Create Account</span>
+                            <i class="fa-solid fa-spinner fa-spin btn-loader" style="display: none;"></i>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -126,163 +131,215 @@ $ajax_nonce = wp_create_nonce('luvex_ajax_nonce');
     </div>
 </div>
 
-<script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
 <script>
-// --- reCAPTCHA LOGIC (FIXED) ---
-let recaptchaLoginId, recaptchaRegisterId;
-let isRecaptchaLoaded = false;
-window.onRecaptchaLoad = function() {
-    isRecaptchaLoaded = true;
-    renderVisibleRecaptcha();
-};
-function renderVisibleRecaptcha() {
-    if (!isRecaptchaLoaded) return;
+// JavaScript bleibt hier, da es spezifisch für dieses Modal ist.
+(function() {
+    // --- GLOBALE VARIABLEN FÜR DAS MODAL ---
+    const modal = document.getElementById('authModal');
+    const feedbackContainer = document.getElementById('auth-feedback');
+    let recaptchaLoginWidget, recaptchaRegisterWidget;
+    let isRecaptchaScriptLoaded = false;
     const siteKey = "<?php echo esc_js($recaptcha_site_key); ?>";
-    if (!siteKey) {
-        console.error("reCAPTCHA Site Key is not set.");
-        return;
-    }
-    try {
-        const loginContent = document.getElementById('login-content');
-        if (loginContent.style.display !== 'none' && typeof recaptchaLoginId === 'undefined') {
-            const el = document.getElementById('recaptcha-login');
-            if (el) recaptchaLoginId = grecaptcha.render(el, { 'sitekey': siteKey, 'theme': 'dark' });
-        }
-        const registerContent = document.getElementById('register-content');
-        if (registerContent.style.display !== 'none' && typeof recaptchaRegisterId === 'undefined') {
-            const el = document.getElementById('recaptcha-register');
-            if (el) recaptchaRegisterId = grecaptcha.render(el, { 'sitekey': siteKey, 'theme': 'dark' });
-        }
-    } catch (error) {
-        console.error("Error rendering reCAPTCHA:", error);
-    }
-}
 
-// --- MODAL VISIBILITY LOGIC ---
-window.openAuthModal = function(mode = 'login') {
-    document.getElementById('authModal').classList.add('visible');
-    document.body.classList.add('modal-open');
-    loadFormData();
-    showAuthForm(mode);
-};
-window.closeAuthModal = function() {
-    document.getElementById('authModal').classList.remove('visible');
-    document.body.classList.remove('modal-open');
-    document.getElementById('auth-message-container').innerHTML = '';
-};
-window.showAuthForm = function(mode) {
-    const isLogin = mode === 'login';
-    document.getElementById('login-tab-link').classList.toggle('active', isLogin);
-    document.getElementById('register-tab-link').classList.toggle('active', !isLogin);
-    document.getElementById('login-content').style.display = isLogin ? 'block' : 'none';
-    document.getElementById('register-content').style.display = !isLogin ? 'block' : 'none';
-    document.getElementById('auth-message-container').innerHTML = '';
-    renderVisibleRecaptcha();
-};
-
-// --- DYNAMIC MESSAGES ---
-function showAuthMessage(message, type = 'error') {
-    const container = document.getElementById('auth-message-container');
-    const msgClass = type === 'success' ? 'auth-success-message--enhanced' : 'auth-error-message--enhanced';
-    const iconClass = type === 'success' ? 'fa-solid fa-check-circle' : 'fa-solid fa-exclamation-triangle';
-    container.innerHTML = `<div class="${msgClass}"><i class="${iconClass}"></i><div><p>${message}</p></div></div>`;
-}
-
-// --- FORM DATA PERSISTENCE ---
-const formStorageKey = 'luvexRegisterFormData';
-function saveFormData() {
-    const form = document.getElementById('luvex-register-form');
-    const data = {
-        first_name: form.querySelector('[name="first_name"]').value,
-        last_name: form.querySelector('[name="last_name"]').value,
-        user_email: form.querySelector('[name="user_email"]').value,
-        company: form.querySelector('[name="company"]').value,
-        interest_area: form.querySelector('[name="interest_area"]').value,
+    // --- reCAPTCHA LOGIK ---
+    window.onRecaptchaLoadCallback = function() {
+        isRecaptchaScriptLoaded = true;
+        renderVisibleRecaptcha();
     };
-    sessionStorage.setItem(formStorageKey, JSON.stringify(data));
-}
-function loadFormData() {
-    const data = JSON.parse(sessionStorage.getItem(formStorageKey));
-    if (data) {
-        const form = document.getElementById('luvex-register-form');
-        form.querySelector('[name="first_name"]').value = data.first_name || '';
-        form.querySelector('[name="last_name"]').value = data.last_name || '';
-        form.querySelector('[name="user_email"]').value = data.user_email || '';
-        form.querySelector('[name="company"]').value = data.company || '';
-        
-        const interests = data.interest_area ? data.interest_area.split(',') : [];
-        if (interests.length > 0) {
-            form.querySelector('[name="interest_area"]').value = data.interest_area;
-            const selectedInterests = new Set(interests);
-            document.querySelectorAll('.interest-tag').forEach(tag => {
-                if (selectedInterests.has(tag.dataset.interest)) {
-                    tag.classList.add('selected');
-                }
-            });
+
+    function renderVisibleRecaptcha() {
+        if (!isRecaptchaScriptLoaded || !siteKey) return;
+
+        const loginTab = document.getElementById('login-content');
+        const registerTab = document.getElementById('register-content');
+
+        try {
+            if (loginTab.classList.contains('active') && !recaptchaLoginWidget) {
+                const el = document.getElementById('login-recaptcha-container');
+                if (el) recaptchaLoginWidget = grecaptcha.render(el, { 'sitekey': siteKey, 'theme': 'dark' });
+            }
+            if (registerTab.classList.contains('active') && !recaptchaRegisterWidget) {
+                const el = document.getElementById('register-recaptcha-container');
+                if (el) recaptchaRegisterWidget = grecaptcha.render(el, { 'sitekey': siteKey, 'theme': 'dark' });
+            }
+        } catch (error) {
+            console.error("Fehler beim Rendern von reCAPTCHA:", error);
         }
     }
-}
-function clearFormData() {
-    sessionStorage.removeItem(formStorageKey);
-}
+    
+    // --- MODAL SICHTBARKEIT & TAB-WECHSEL ---
+    window.openAuthModal = function(mode = 'login') {
+        modal.classList.add('visible');
+        document.body.classList.add('modal-open');
+        loadFormData();
+        showAuthForm(mode);
+    };
 
-// --- EVENT LISTENERS ---
-document.addEventListener('DOMContentLoaded', function() {
-    // AJAX FORM SUBMISSION
+    window.closeAuthModal = function() {
+        modal.classList.remove('visible');
+        document.body.classList.remove('modal-open');
+        feedbackContainer.innerHTML = '';
+        feedbackContainer.className = 'auth-feedback-message';
+    };
+
+    window.showAuthForm = function(mode) {
+        const isLogin = mode === 'login';
+        document.getElementById('login-tab-link').classList.toggle('active', isLogin);
+        document.getElementById('register-tab-link').classList.toggle('active', !isLogin);
+        document.getElementById('login-content').classList.toggle('active', isLogin);
+        document.getElementById('register-content').classList.toggle('active', !isLogin);
+        
+        feedbackContainer.innerHTML = '';
+        feedbackContainer.className = 'auth-feedback-message';
+        
+        renderVisibleRecaptcha();
+    };
+
+    // --- DYNAMISCHE NACHRICHTENANZEIGE ---
+    function showAuthMessage(message, type = 'error') {
+        feedbackContainer.className = `auth-feedback-message ${type}`;
+        feedbackContainer.innerHTML = message;
+        feedbackContainer.style.display = 'block';
+    }
+
+    // --- FORMULARDATEN SPEICHERN & LADEN (SESSION STORAGE) ---
+    const formStorageKey = 'luvexRegisterFormData';
+    function saveFormData() {
+        const form = document.getElementById('luvex-register-form');
+        const interests = Array.from(form.querySelectorAll('.interest-tag.selected')).map(tag => tag.dataset.interest);
+        const data = {
+            first_name: form.querySelector('[name="first_name"]').value,
+            last_name: form.querySelector('[name="last_name"]').value,
+            user_email: form.querySelector('[name="user_email"]').value,
+            company: form.querySelector('[name="company"]').value,
+            interests: interests
+        };
+        sessionStorage.setItem(formStorageKey, JSON.stringify(data));
+    }
+
+    function loadFormData() {
+        const storedData = sessionStorage.getItem(formStorageKey);
+        if (storedData) {
+            const data = JSON.parse(storedData);
+            const form = document.getElementById('luvex-register-form');
+            form.querySelector('[name="first_name"]').value = data.first_name || '';
+            form.querySelector('[name="last_name"]').value = data.last_name || '';
+            form.querySelector('[name="user_email"]').value = data.user_email || '';
+            form.querySelector('[name="company"]').value = data.company || '';
+            
+            document.querySelectorAll('.interest-tag').forEach(tag => tag.classList.remove('selected'));
+            if(data.interests && data.interests.length > 0) {
+                data.interests.forEach(interestKey => {
+                    const tag = form.querySelector(`.interest-tag[data-interest="${interestKey}"]`);
+                    if (tag) tag.classList.add('selected');
+                });
+            }
+            document.getElementById('interest_area_hidden').value = data.interests.join(',');
+        }
+    }
+    
+    function clearFormData() {
+        sessionStorage.removeItem(formStorageKey);
+    }
+
+    // --- AJAX FORMULARVERARBEITUNG ---
     function handleFormSubmit(form, action) {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             const button = form.querySelector('button[type="submit"]');
+            const buttonText = button.querySelector('.btn-text');
+            const loader = button.querySelector('.btn-loader');
+            
             button.disabled = true;
-            button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+            buttonText.style.display = 'none';
+            loader.style.display = 'inline-block';
+            
             const formData = new FormData(form);
             formData.append('action', action);
             formData.append('nonce', '<?php echo $ajax_nonce; ?>');
-
-            fetch('<?php echo admin_url('admin-ajax.php'); ?>', { method: 'POST', body: formData })
+            
+            fetch("<?php echo admin_url('admin-ajax.php'); ?>", {
+                method: 'POST',
+                body: formData
+            })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
+                    showAuthMessage(data.data.message, 'success');
                     if (action === 'luvex_ajax_register') clearFormData();
-                    showAuthMessage(data.data.message || 'Success! Redirecting...', 'success');
-                    if (data.data.redirect_url) window.location.href = data.data.redirect_url;
-                    else if (data.data.switch_to_login) setTimeout(() => showAuthForm('login'), 2000);
+                    
+                    if (data.data.redirect_url) {
+                        setTimeout(() => window.location.href = data.data.redirect_url, 1500);
+                    } else if (data.data.switch_to_login) {
+                        setTimeout(() => {
+                           showAuthForm('login');
+                           const loginForm = document.getElementById('luvex-login-form');
+                           loginForm.querySelector('#user_login').value = formData.get('user_email');
+                        }, 2000);
+                    }
                 } else {
-                    showAuthMessage(data.data.message || 'An unknown error occurred.', 'error');
+                    showAuthMessage(data.data.message, 'error');
                     if (typeof grecaptcha !== 'undefined') {
-                        const recaptchaId = (action === 'luvex_ajax_login') ? recaptchaLoginId : recaptchaRegisterId;
-                        grecaptcha.reset(recaptchaId);
+                        const widgetId = (action === 'luvex_ajax_login') ? recaptchaLoginWidget : recaptchaRegisterWidget;
+                        if(widgetId !== undefined) grecaptcha.reset(widgetId);
                     }
                 }
             })
-            .catch(() => showAuthMessage('A network error occurred. Please try again.', 'error'))
+            .catch(error => {
+                console.error('Fetch-Fehler:', error);
+                showAuthMessage('Ein Netzwerkfehler ist aufgetreten. Bitte versuchen Sie es erneut.', 'error');
+            })
             .finally(() => {
                 button.disabled = false;
-                button.innerHTML = (action === 'luvex_ajax_login') ? 'Login' : 'Create Account';
+                buttonText.style.display = 'inline-block';
+                loader.style.display = 'none';
             });
         });
     }
-    handleFormSubmit(document.getElementById('luvex-login-form'), 'luvex_ajax_login');
-    handleFormSubmit(document.getElementById('luvex-register-form'), 'luvex_ajax_register');
 
-    // SAVE FORM DATA ON INPUT
-    document.getElementById('luvex-register-form').addEventListener('input', saveFormData);
+    // --- EVENT LISTENERS INITIALISIEREN ---
+    document.addEventListener('DOMContentLoaded', function() {
+        // Formulare an AJAX binden
+        const loginForm = document.getElementById('luvex-login-form');
+        const registerForm = document.getElementById('luvex-register-form');
+        if (loginForm) handleFormSubmit(loginForm, 'luvex_ajax_login');
+        if (registerForm) handleFormSubmit(registerForm, 'luvex_ajax_register');
 
-    // INTEREST TAGS LOGIC
-    const interestHiddenInput = document.getElementById('interest_area_hidden');
-    document.querySelectorAll('.interest-tag').forEach(tag => {
-        tag.addEventListener('click', function() {
-            this.classList.toggle('selected');
-            const selectedInterests = Array.from(document.querySelectorAll('.interest-tag.selected'))
-                                         .map(t => t.dataset.interest);
-            interestHiddenInput.value = selectedInterests.join(',');
-            saveFormData();
+        // Formulardaten beim Tippen speichern
+        if (registerForm) {
+            registerForm.addEventListener('input', saveFormData);
+        }
+        
+        // Logik für Interessen-Tags
+        document.querySelectorAll('.interest-tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                this.classList.toggle('selected');
+                const selectedInterests = Array.from(document.querySelectorAll('.interest-tag.selected'))
+                                             .map(t => t.dataset.interest);
+                document.getElementById('interest_area_hidden').value = selectedInterests.join(',');
+                saveFormData(); 
+            });
         });
-    });
 
-    // CLOSE MODAL ON OVERLAY CLICK
-    document.getElementById('authModal').addEventListener('click', e => {
-        if (e.target.id === 'authModal') closeAuthModal();
+        // Modal bei Klick auf Overlay schließen
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeAuthModal();
+            }
+        });
+        
+        // Google reCAPTCHA Skript laden, wenn Modal geöffnet wird
+        const originalOpenAuthModal = window.openAuthModal;
+        window.openAuthModal = function(mode = 'login') {
+            if (!document.querySelector('script[src*="recaptcha/api.js"]')) {
+                const script = document.createElement('script');
+                script.src = 'https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoadCallback&render=explicit';
+                script.async = true;
+                script.defer = true;
+                document.head.appendChild(script);
+            }
+            originalOpenAuthModal(mode);
+        };
     });
-});
+})();
 </script>
