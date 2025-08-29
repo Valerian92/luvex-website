@@ -279,6 +279,7 @@ function luvex_get_user_avatar($user_id = null) {
 // 7. SYSTEM-DATEIEN LADEN
 $luvex_includes_path = get_stylesheet_directory() . '/includes/';
 
+// Fix: Correct filename reference
 if (file_exists($luvex_includes_path . '_user_system.php')) {
     require_once $luvex_includes_path . '_user_system.php';
 }
@@ -291,6 +292,11 @@ if (file_exists($luvex_includes_path . '_luvex_security.php')) {
 // LUVEX Helper Funktionen laden (z.B. für Icons)
 if (file_exists($luvex_includes_path . '_luvex-helpers.php')) {
     require_once $luvex_includes_path . '_luvex-helpers.php';
+}
+
+// CORS fixes laden
+if (file_exists($luvex_includes_path . '_cors_fixes.php')) {
+    require_once $luvex_includes_path . '_cors_fixes.php';
 }
 
 // 8. reCAPTCHA FUNKTION

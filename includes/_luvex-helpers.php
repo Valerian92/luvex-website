@@ -64,9 +64,7 @@ if (!function_exists('get_luvex_icon_library')) {
                 'cooling-houses'   => ['label' => 'Cooling Houses', 'class' => 'fa-solid fa-temperature-low'],
                 'laboratories'     => ['label' => 'Laboratories', 'class' => 'fa-solid fa-microscope'],
                 'other-industry'   => ['label' => 'Other', 'class' => 'fa-solid fa-ellipsis'],
-            ]
-        
-
+            ],
             'Nicht zugewiesen (Inspiration)' => [
                 'dna-biology'      => ['label' => 'Wissenschaft / DNA', 'class' => 'fa-solid fa-dna'],
                 'research-lab'     => ['label' => 'Forschung / Labor', 'class' => 'fa-solid fa-microscope'],
@@ -100,4 +98,3 @@ if (!function_exists('get_luvex_icon')) {
         return ''; // Fallback
     }
 }
-
