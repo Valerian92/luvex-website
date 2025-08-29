@@ -1,18 +1,18 @@
 /**
- * LUVEX Theme - Process Equipment Hero Animation (V31 - Perspective & Positioning FIX)
+ * LUVEX Theme - Process Equipment Hero Animation (V32 - Final Positioning & Bugfix)
  *
  * Description: The final, completely reworked version of the hero animation.
- * This version is built around a central, symbolic energy orb.
  *
  * Key Features:
- * - DYNAMIC LAYOUT: The outer nodes are procedurally positioned around the HTML hero content.
+ * - DYNAMIC LAYOUT: Outer nodes are positioned around the HTML hero content.
  * - CENTRAL ENERGY ORB: A multi-layered, pseudo-3D energy orb.
  * - CHARGE-UP MECHANIC: The orb's intensity increases with each energy pulse.
  * - 3D PARALLAX: The entire scene reacts to mouse movement.
- * - FIX V31:
- * - BIRD'S-EYE VIEW: A base tilt is added to the entire scene for a more dynamic, top-down perspective.
- * - RECALIBRATED POSITIONS: All 3D coordinates have been completely reworked to create a higher, wider,
- * and more aesthetically pleasing pyramid/shield shape that properly frames the hero text.
+ * - FIX V32:
+ * - ANIMATION BUGFIX: Corrected a rendering error that prevented energy pulses from being drawn.
+ * - RECALIBRATED POSITIONS: The entire pyramid has been moved significantly higher to sit
+ * correctly under the hero text and is now fully visible.
+ * - BIRD'S-EYE VIEW: The top-down perspective is maintained and refined.
  *
  * @package Luvex
  */
@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const luvexColors = {
         brightCyan: '#6dd5ed',
         specialCyan: '#22d3ee',
-        vibrantBlue: '#007BFF',
     };
 
     const config = {
@@ -43,10 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
         fontFamily: 'Inter, sans-serif',
         phaseDuration: 60,
         flowDuration: 80,
-        parallaxStrength: 0.3, // Slightly increased parallax for more depth
+        parallaxStrength: 0.3,
         fov: 800,
         particleCount: 200,
-        baseTilt: -0.4, // Neigt die gesamte Szene nach vorne (Vogelperspektive)
+        baseTilt: -0.5, // Steilere Vogelperspektive
     };
 
     // --- STATE VARIABLES ---
@@ -76,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         project() {
-            // Apply base tilt for bird's-eye view, then add mouse parallax
             const rotX = config.baseTilt + (mouse.easedY - 0.5) * config.parallaxStrength;
             const rotY = (mouse.easedX - 0.5) * config.parallaxStrength;
             const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
@@ -119,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
         constructor(pos3d) {
             this.pos3d = pos3d;
             this.x = 0; this.y = 0; this.scale = 1;
-            this.charge = 0; // 0.0 to 1.0
+            this.charge = 0;
             this.rotation = 0;
             this.surfaceParticles = Array.from({ length: 50 }, () => ({
                 angle: Math.random() * Math.PI * 2,
@@ -157,7 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.save();
             ctx.translate(this.x, this.y);
 
-            // 1. Volumetric Aura
             const auraSize = baseRadius * 4;
             const auraGradient = ctx.createRadialGradient(0, 0, baseRadius, 0, 0, auraSize);
             auraGradient.addColorStop(0, `rgba(0, 123, 255, ${lerp(0.05, 0.2, this.charge)})`);
@@ -167,7 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.arc(0, 0, auraSize, 0, Math.PI * 2);
             ctx.fill();
 
-            // 2. Main Glow
             const glowSize = baseRadius * 2.5;
             const glowGradient = ctx.createRadialGradient(0, 0, baseRadius * 0.8, 0, 0, glowSize);
             glowGradient.addColorStop(0, `rgba(109, 213, 237, ${lerp(0.2, 0.5, this.charge)})`);
@@ -177,7 +173,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.arc(0, 0, glowSize, 0, Math.PI * 2);
             ctx.fill();
 
-            // 3. Rotating Surface Particles
             ctx.globalAlpha = lerp(0.3, 1, this.charge);
             this.surfaceParticles.forEach(p => {
                 const x = Math.cos(p.angle + this.rotation) * Math.sqrt(1 - p.yFactor * p.yFactor) * baseRadius;
@@ -192,7 +187,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             ctx.globalAlpha = 1;
 
-            // 4. Bright Core
             const coreSize = baseRadius * lerp(0.8, 0.5, this.charge);
             const coreGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, coreSize);
             coreGradient.addColorStop(0, `rgba(255, 255, 255, ${lerp(0.8, 1.0, this.charge)})`);
@@ -266,7 +260,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.shadowColor = config.glowColor;
                     ctx.shadowBlur = 10 * scale * opacity;
                     ctx.beginPath();
-                    ctx.arc(pos.x, y, 2 * scale, 0, Math.PI * 2);
+                    // BUGFIX: The 'y' variable was undefined here. Corrected to pos.y
+                    ctx.arc(pos.x, pos.y, 2 * scale, 0, Math.PI * 2);
                     ctx.fill();
                     ctx.restore();
                 }
@@ -329,27 +324,28 @@ document.addEventListener('DOMContentLoaded', () => {
             bottom: contentRect.bottom - canvasRect.top,
         };
 
-        // KORREKTUR: Orb wird höher positioniert, näher am Text
-        const orbYPosition = safeZone.bottom + Math.max(50, height * 0.08);
+        // KORREKTUR: Orb position is now higher and acts as the pyramid's peak.
+        const orbYPosition = safeZone.bottom + Math.max(80, height * 0.12);
         centralOrb = new Orb(new Point3D(0, orbYPosition - height / 2, -50));
         
         nodes = {};
-        const radius = Math.max(width * 0.4, 400);
+        const radius = Math.max(width * 0.45, 450);
 
-        // KORREKTUR: Komplett neue Koordinaten für eine breite "Schale" aus der Vogelperspektive
+        // KORREKTUR: New coordinates forming a wide pyramid with the orb as its peak.
+        // All points are higher on the screen.
         const points = [
-            { id: 'contact',     text: 'Contact',     x: -0.9, y: -0.1, z: 80 },
-            { id: 'concept',     text: 'Concept',     x: 0.9,  y: -0.1, z: 80 },
-            { id: 'simulation',  text: 'Simulation',  x: 0.6,  y: 0.5,  z: 0 },
-            { id: 'design',      text: 'Design',      x: 0.0,  y: 0.7,  z: -50 },
-            { id: 'integration', text: 'Integration', x: -0.6, y: 0.5,  z: 0 },
-            { id: 'partnership', text: 'Partnership', x: 0.0,  y: -0.5, z: 120 },
+            { id: 'contact',     text: 'Contact',     x: -0.9, y: 0.3, z: 50 },
+            { id: 'concept',     text: 'Concept',     x: -0.5, y: 0.8, z: 0 },
+            { id: 'simulation',  text: 'Simulation',  x: 0.0,  y: 1.0, z: -50 },
+            { id: 'design',      text: 'Design',      x: 0.5,  y: 0.8, z: 0 },
+            { id: 'integration', text: 'Integration', x: 0.9,  y: 0.3, z: 50 },
+            { id: 'partnership', text: 'Partnership', x: 0.0,  y: -0.8, z: 150 }, // This point is now the visual tip, but the orb is the functional peak
         ];
 
         points.forEach(p => {
             const xPos = p.x * radius;
-            // Die Y-Position wird relativ zur Orb-Position berechnet, um die Form anzuheben
-            const yPos = (p.y * radius * 0.8) + (orbYPosition - height / 2);
+            // The Y-position is relative to the Orb's position, lifting the whole shape.
+            const yPos = (p.y * radius * 0.6) + (orbYPosition - height / 2);
             
             let align = 'center';
             if (p.x > 0.1) align = 'left';
@@ -357,26 +353,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
             nodes[p.id] = new Node(p.text, new Point3D(xPos, yPos, p.z), 16, p.id, align);
         });
+        
+        // The 'Partnership' node is treated as the visual peak of the pyramid base.
+        // The Orb is the functional peak where energy converges.
+        nodes['partnership'].pos3d.y -= 100; // Lift the partnership node to form the peak
 
         paths = { outer: [], toCenter: [] };
-        for (let i = 0; i < processPathIds.length; i++) {
-            const startNode = nodes[processPathIds[i]];
-            const endNode = nodes[processPathIds[(i + 1) % processPathIds.length]];
-            paths.outer.push(new Path(startNode, endNode));
-            paths.toCenter.push(new Path(startNode, centralOrb));
+        // Create a closed loop for the outer path
+        const outerPathOrder = ['contact', 'concept', 'simulation', 'design', 'integration', 'contact'];
+        for (let i = 0; i < outerPathOrder.length -1; i++) {
+             paths.outer.push(new Path(nodes[outerPathOrder[i]], nodes[outerPathOrder[i+1]]));
         }
+
+        processPathIds.forEach(id => {
+            paths.toCenter.push(new Path(nodes[id], centralOrb));
+        });
+
 
         particles = Array.from({ length: config.particleCount }, () => new BackgroundParticle());
         phase = -1; phaseTimer = 0; flows = [];
     }
     
     function nextPhase() {
-        phase = (phase + 1) % paths.outer.length;
+        phase = (phase + 1) % (paths.outer.length);
         if (phase === 0) {
             centralOrb.charge = 0;
         }
+        // Send a pulse along the outer edge
         flows.push(new EnergyPulse(paths.outer[phase]));
-        flows.push(new EnergyPulse(paths.toCenter[phase]));
+
+        // Send a pulse from the starting node of the outer pulse to the center
+        const startNodeId = processPathIds[phase];
+        const correspondingToCenterPath = paths.toCenter.find(p => p.start.id === startNodeId);
+        if(correspondingToCenterPath) {
+            flows.push(new EnergyPulse(correspondingToCenterPath));
+        }
     }
 
     function animate() {
@@ -386,7 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mouse.easedX = lerp(mouse.easedX, mouse.x, 0.05);
         mouse.easedY = lerp(mouse.easedY, mouse.y, 0.05);
 
-        if (phaseTimer > config.phaseDuration && flows.length === 0) {
+        if (phaseTimer > config.phaseDuration && flows.length < 2) { // Allow up to two pulses at once
             phaseTimer = 0;
             nextPhase();
         }

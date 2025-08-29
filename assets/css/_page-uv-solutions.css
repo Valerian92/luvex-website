@@ -1,9 +1,6 @@
 /*
 ==============================================================================
-LUVEX THEME - PAGE: UV SOLUTIONS (V2 - 3D HERO)
-==============================================================================
-Description: Styles for the main UV Solutions overview page, including the
-             new 3D hero layout and the solutions grid.
+LUVEX THEME - PAGE: UV SOLUTIONS (V3 - Final Layout)
 ==============================================================================
 */
 
@@ -12,22 +9,16 @@ Description: Styles for the main UV Solutions overview page, including the
 1. 3D HERO SECTION & ANIMATION
 ==============================================================================
 */
-
-/* * Hero gets more vertical space for a more impressive look.
- * * The flexbox properties are adjusted to position the title container at the top.
-*/
 .luvex-hero--solutions {
     position: relative;
-    min-height: 85vh; /* Increased height for more impact */
+    min-height: 85vh;
     display: flex;
-    align-items: flex-start; /* Aligns title container to the top */
+    align-items: flex-start;
     justify-content: center;
     overflow: hidden;
     background-color: var(--luvex-dark-blue);
 }
 
-/* * The canvas for the 3D animation, positioned to fill the entire hero.
-*/
 .luvex-hero--solutions #hero-solutions-canvas {
     position: absolute;
     top: 0;
@@ -37,37 +28,28 @@ Description: Styles for the main UV Solutions overview page, including the
     z-index: 1;
 }
 
-/* * The text container is positioned above the canvas and given top padding
- * to create the necessary space between the title and the animation.
-*/
 .luvex-hero--solutions .luvex-hero__container {
     position: relative;
     z-index: 2;
     text-align: center;
-    padding-top: 12vh; /* Pushes the title down from the top edge */
+    padding-top: 12vh;
     width: 100%;
 }
 
-/* * The hero title is prepared for the JavaScript animation.
- * * A transition is added for smooth changes to color and text-shadow.
- * * An initial subtle shadow ensures readability from the start.
-*/
 .luvex-hero--solutions .luvex-hero__title {
     font-size: clamp(2.8rem, 6vw, 4.5rem);
     font-weight: 700;
-    color: var(--luvex-white); /* Initial color */
-    text-shadow: 0 0 5px rgba(109, 213, 237, 0.2); /* Subtle initial glow */
-    transition: color 0.8s ease-out, text-shadow 0.8s ease-out; /* Smooth transitions */
+    color: var(--luvex-white);
 }
 
+/* KORREKTUR: Größerer Abstand zwischen Titel und Untertitel */
 .luvex-hero--solutions .luvex-hero__description {
     max-width: 750px;
-    margin: 1.5rem auto 0;
+    margin: 2.5rem auto 0; /* Vergrößerter margin-top */
     font-size: clamp(1.1rem, 2.5vw, 1.3rem);
     color: var(--luvex-gray-300);
     line-height: 1.6;
 }
-
 
 /*
 ==============================================================================

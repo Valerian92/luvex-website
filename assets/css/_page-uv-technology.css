@@ -1,15 +1,31 @@
 /*
 ==============================================================================
-LUVEX THEME - UV KNOWLEDGE PAGE (FINAL)
-==============================================================================
-Description: Enthält alle spezifischen Styles für die UV Knowledge Seite.
-             Der Hero hat einen dunklen Hintergrund, und der Indikator
-             hat jetzt einen weißen Hintergrund für maximale Lesbarkeit.
+LUVEX THEME - UV KNOWLEDGE PAGE (FINAL BUGBIXES)
 ==============================================================================
 */
 
 /* ==============================================================================
-Hero mit Spectrum Animation
+FIX: Globaler Cursor & Canvas-Positionierung
+==============================================================================
+*/
+/* Blendet den Standard-Cursor auf der gesamten Seite aus */
+body.page-id-uv-technology {
+    cursor: none;
+}
+
+/* Positioniert das Canvas im Hintergrund über den gesamten Viewport */
+.hero-spectrum-engine canvas {
+    position: fixed; /* Bleibt beim Scrollen im Hintergrund */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Füllt die gesamte Bildschirmhöhe */
+    z-index: 1;
+    pointer-events: none; /* Lässt alle Klicks durch zum HTML */
+}
+
+/* ==============================================================================
+Hero Section
 ==============================================================================
 */
 .hero-spectrum-engine {
@@ -19,7 +35,6 @@ Hero mit Spectrum Animation
     justify-content: center;
     position: relative;
     overflow: hidden;
-    cursor: none !important;
     background-color: var(--luvex-dark-blue);
     color: var(--luvex-white);
 }
@@ -34,16 +49,7 @@ Hero mit Spectrum Animation
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="hero-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23hero-grid)"/></svg>');
     opacity: 0.4; 
     pointer-events: none;
-    z-index: 1;
-}
-
-.hero-spectrum-engine canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
+    z-index: 2; /* Über dem Canvas */
 }
 
 .wavelength-indicator {
@@ -67,25 +73,21 @@ Hero mit Spectrum Animation
 
 .hero-spectrum-engine .luvex-hero__container {
     position: relative;
-    z-index: 5;
+    z-index: 5; /* Über dem Grid und Canvas */
     pointer-events: none;
     text-align: center;
-    display: flex; /* Stellt sicher, dass die Buttons korrekt ausgerichtet sind */
+    display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* ==============================================================================
-FIX: Neue Buttons im Hero
-==============================================================================
-*/
 .hero-spectrum-actions {
-    margin-top: 2.5rem; /* Abstand zum Subtitle */
+    margin-top: 2.5rem;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
     justify-content: center;
-    pointer-events: auto; /* Macht den Container für die Maus "sichtbar" */
+    pointer-events: auto;
 }
 
 .spectrum-action-btn {
@@ -98,10 +100,10 @@ FIX: Neue Buttons im Hero
     font-weight: 500;
     transition: all 0.3s ease;
     backdrop-filter: blur(5px);
+    position: relative; /* Wichtig für z-index */
+    z-index: 10;
 }
 
-/* Der Hover-Effekt wird durch den animierten Cursor im JS gesteuert,
-   aber ein Fallback ist gut. */
 .spectrum-action-btn:hover {
     background: rgba(109, 213, 237, 0.2);
     border-color: var(--luvex-bright-cyan);
@@ -109,11 +111,6 @@ FIX: Neue Buttons im Hero
     transform: translateY(-2px);
 }
 
-
-/* ==============================================================================
-Responsive Anpassungen
-==============================================================================
-*/
 @media (max-width: 768px) {
     .wavelength-indicator {
         bottom: 1rem;

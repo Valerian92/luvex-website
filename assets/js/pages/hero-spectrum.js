@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let width, height;
     let particlesArray = [];
     let waves = [];
-    let cursorParticles = [];
+    let cursorParticles = []; // Für den Schweif
+    let sparks = []; // FIX: Für den neuen Sparkle-Effekt
     let increment = 0;
 
     const mouse = {
@@ -23,53 +24,33 @@ document.addEventListener('DOMContentLoaded', function() {
         radius: 150,
         prevX: window.innerWidth / 2, 
         prevY: window.innerHeight / 2,
-        isHoveringLink: false // FIX: Neuer Status für Link-Hover
+        isHoveringLink: false
     };
 
     const mapRange = (value, inMin, inMax, outMin, outMax) => (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
     const lerp = (start, end, amt) => (1 - amt) * start + amt * end;
     
     function onResize() {
-        const rect = heroSection.getBoundingClientRect();
-        const dpr = window.devicePixelRatio || 1;
-
-        width = rect.width;
-        height = rect.height;
-
-        canvas.width = width * dpr;
-        canvas.height = height * dpr;
-        canvas.style.width = `${width}px`;
-        canvas.style.height = `${height}px`;
-        ctx.scale(dpr, dpr);
-
+        // Die Canvas-Größe wird jetzt im animate-Loop gesetzt, um global zu sein.
+        width = heroSection.offsetWidth;
+        height = heroSection.offsetHeight;
         init();
     }
 
     window.addEventListener('resize', onResize);
     
-    // Bewegt den Cursor innerhalb des Canvas
-    canvas.addEventListener('mousemove', e => {
-        const rect = canvas.getBoundingClientRect();
-        mouse.targetX = e.clientX - rect.left;
-        mouse.targetY = e.clientY - rect.top;
-    });
-     canvas.addEventListener('mouseleave', () => {
-        mouse.targetX = width / 2;
-        mouse.targetY = height / 2;
-    });
-
     // === FIX: Event Listener für alle Links (Header + neue Buttons) ===
     const links = document.querySelectorAll('.site-header a, .spectrum-action-btn');
     links.forEach(link => {
         link.addEventListener('mouseenter', () => mouse.isHoveringLink = true);
         link.addEventListener('mouseleave', () => mouse.isHoveringLink = false);
     });
-    // Globaler Mousemove, um den Cursor auch außerhalb des Canvas zu bewegen
+
+    // FIX: Globaler Mousemove, um den Cursor immer korrekt zu verfolgen
     window.addEventListener('mousemove', e => {
         mouse.targetX = e.clientX;
         mouse.targetY = e.clientY;
     });
-
 
     class Wave {
         constructor(config) {
@@ -97,8 +78,9 @@ document.addEventListener('DOMContentLoaded', function() {
             ctx.fillStyle = 'rgba(109, 213, 237, 0.6)';
             ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
         }
-        update() {
-            let dx = mouse.currentX - this.x; let dy = mouse.currentY - this.y;
+        update(heroTop) {
+            let dx = mouse.currentX - this.x; 
+            let dy = (mouse.currentY - heroTop) - this.y;
             let distance = Math.sqrt(dx * dx + dy * dy);
             if (distance < mouse.radius) {
                 const force = (mouse.radius - distance) / mouse.radius;
@@ -127,6 +109,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // FIX: Sparkle-Klasse für den Hover-Effekt
+    class Spark {
+        constructor(x, y, color) {
+            this.x = x; this.y = y; this.color = color;
+            const angle = Math.random() * Math.PI * 2;
+            const speed = Math.random() * 3 + 1;
+            this.vx = Math.cos(angle) * speed;
+            this.vy = Math.sin(angle) * speed;
+            this.lifespan = 1;
+            this.size = Math.random() * 2 + 1;
+        }
+        update() {
+            this.x += this.vx; this.y += this.vy; this.lifespan -= 0.04;
+        }
+        draw() {
+            ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.lifespan})`;
+            ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+        }
+    }
+
     function init() {
         particlesArray = [];
         let num = (width * height) / 9000;
@@ -143,13 +145,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function drawAnimatedCursor(dynamicColor) {
         if (mouse.isHoveringLink) {
-            // Spezielle Animation für Links
-            const radius = 8 + Math.sin(increment * 5) * 2;
-            ctx.strokeStyle = `rgba(${dynamicColor.r}, ${dynamicColor.g}, ${dynamicColor.b}, 0.8)`;
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            ctx.arc(mouse.currentX, mouse.currentY, radius, 0, Math.PI * 2);
-            ctx.stroke();
+            // FIX: Sparkle-Effekt bei Link-Hover
+            if (Math.random() > 0.5) { // Erzeugt eine moderate Menge an Partikeln
+                sparks.push(new Spark(mouse.currentX, mouse.currentY, dynamicColor));
+            }
         } else {
             // Standard-Animation (Punkt + Schweif)
             ctx.fillStyle = `rgb(${dynamicColor.r}, ${dynamicColor.g}, ${dynamicColor.b})`;
@@ -164,14 +163,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         }
-
-        for (let i = cursorParticles.length - 1; i >= 0; i--) {
-            cursorParticles[i].update();
-            cursorParticles[i].draw();
-            if (cursorParticles[i].lifespan <= 0) {
-                cursorParticles.splice(i, 1);
+        
+        // Update und zeichne alle Effekte
+        [...cursorParticles, ...sparks].forEach((p, index, arr) => {
+            p.update();
+            p.draw();
+            if (p.lifespan <= 0) {
+                arr.splice(index, 1);
             }
-        }
+        });
         
         mouse.prevX = mouse.currentX;
         mouse.prevY = mouse.currentY;
@@ -199,30 +199,25 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function animate() {
-        // Der Canvas wird jetzt über den gesamten Viewport gezeichnet, aber nur im Hero-Bereich sichtbar sein.
         const dpr = window.devicePixelRatio || 1;
         canvas.width = window.innerWidth * dpr;
         canvas.height = window.innerHeight * dpr;
         ctx.scale(dpr, dpr);
         
-        // Die Animation der Wellen und Partikel passiert nur, wenn der Hero im sichtbaren Bereich ist.
         const heroRect = heroSection.getBoundingClientRect();
         const isHeroVisible = heroRect.bottom > 0 && heroRect.top < window.innerHeight;
 
         if(isHeroVisible) {
-            // Transformation, um die Animation nur im Hero-Bereich zu zeichnen
             ctx.save();
-            ctx.translate(0, -heroRect.top);
+            ctx.translate(0, -heroRect.top); // Verschiebt den Zeichenursprung
 
             const mouseXNormalized = (mouse.currentX - heroRect.left) / heroRect.width;
             const currentWavelength = mapRange(mouseXNormalized, 0, 1, 100, 780);
-            
-            particlesArray.forEach(p => p.update());
-            
-            const energyFactor = 1 - mouseXNormalized;
             const dynamicColor = wavelengthToRgb(currentWavelength);
+
+            particlesArray.forEach(p => p.update(heroRect.top));
             waves.forEach(wave => {
-                const dynamicAmplitude = wave.baseAmplitude * (0.5 + energyFactor * 1.5);
+                const dynamicAmplitude = wave.baseAmplitude * (0.5 + (1 - mouseXNormalized) * 1.5);
                 const dynamicLength = mapRange(mouseXNormalized, 0, 1, 0.02, 0.005);
                 wave.draw(increment, dynamicAmplitude, dynamicLength, dynamicColor);
             });
@@ -231,10 +226,10 @@ document.addEventListener('DOMContentLoaded', function() {
             ctx.restore();
         }
         
-        // Der Cursor wird immer gezeichnet
-        const dynamicColorForCursor = wavelengthToRgb(mapRange(mouse.currentX / window.innerWidth, 0, 1, 100, 780));
         mouse.currentX = lerp(mouse.currentX, mouse.targetX, 0.2);
         mouse.currentY = lerp(mouse.currentY, mouse.targetY, 0.2);
+        
+        const dynamicColorForCursor = wavelengthToRgb(mapRange(mouse.currentX / window.innerWidth, 0, 1, 100, 780));
         drawAnimatedCursor(dynamicColorForCursor);
         
         increment += 0.02;

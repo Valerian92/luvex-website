@@ -287,6 +287,10 @@ Last Update: 2025-08-23
 /* For all interactive elements within the active areas, use the pointer version */
 .homepage-cursor-active a,
 .homepage-cursor-active button,
-.homepage-cursor-active [role="button"] {
+.homepage-cursor-active [role="button"],
+/* FIX: Also apply to the :active state to prevent the default cursor on click */
+.homepage-cursor-active a:active,
+.homepage-cursor-active button:active,
+.homepage-cursor-active [role="button"]:active {
     cursor: var(--cursor-pointer) 20 20, auto;
 }

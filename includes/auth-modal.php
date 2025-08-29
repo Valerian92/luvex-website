@@ -10,8 +10,6 @@ $ajax_nonce = wp_create_nonce('luvex_ajax_nonce');
 <!-- The Modal Overlay -->
 <div id="authModal" class="modal-overlay">
     <div class="modal-content">
-        <!-- Close button removed as requested -->
-
         <div class="auth-form-container">
             <div class="auth-tabs">
                 <button class="auth-tab active" id="login-tab-link" onclick="showAuthForm('login')">Login</button>
@@ -78,22 +76,40 @@ $ajax_nonce = wp_create_nonce('luvex_ajax_nonce');
                                 <label>Email Address</label>
                             </div>
                         </div>
+
+                        <!-- NEW 3-COLUMN INTEREST SECTION -->
                         <div class="form-section">
-                            <label>Solution Categories</label>
-                            <div class="interest-tags-container">
-                                <span class="interest-tag" data-interest="uv-curing"><i class="fa-solid fa-layer-group"></i> UV Curing Solutions</span>
-                                <span class="interest-tag" data-interest="uvc-disinfection"><i class="fa-solid fa-shield-virus"></i> UVC Disinfection</span>
-                                <span class="interest-tag" data-interest="uv-led-systems"><i class="fa-solid fa-lightbulb"></i> UV LED Systems</span>
-                                <span class="interest-tag" data-interest="uv-mercury-lamps"><i class="fa-solid fa-flask-vial"></i> UV Mercury Lamps</span>
-                                <span class="interest-tag" data-interest="uv-tunnel"><i class="fa-solid fa-industry"></i> UV Tunnel Solutions</span>
-                                <span class="interest-tag" data-interest="uv-safety"><i class="fa-solid fa-user-shield"></i> UV Safety Equipment</span>
-                                <span class="interest-tag" data-interest="uv-measurement"><i class="fa-solid fa-ruler-combined"></i> UV Measurement</span>
-                                <span class="interest-tag" data-interest="uv-simulator"><i class="fa-solid fa-cubes"></i> UV Simulator</span>
-                                <span class="interest-tag" data-interest="project-support"><i class="fa-solid fa-headset"></i> Project Support</span>
-                                <span class="interest-tag" data-interest="custom-solution"><i class="fa-solid fa-gears"></i> Customized Solution</span>
+                            <label class="interest-section-title">Interested in... let us know the right content for you</label>
+                            <div class="interest-columns-container">
+                                <!-- Column 1: Technology -->
+                                <div class="interest-column">
+                                    <h4 class="interest-column-title">Technology</h4>
+                                    <span class="interest-tag" data-interest="uv-curing"><i class="fa-solid fa-layer-group"></i> UV Curing</span>
+                                    <span class="interest-tag" data-interest="uvc-disinfection"><i class="fa-solid fa-shield-virus"></i> UVC Disinfection</span>
+                                    <span class="interest-tag" data-interest="uv-led-systems"><i class="fa-solid fa-lightbulb"></i> UV LED Systems</span>
+                                    <span class="interest-tag" data-interest="uv-mercury-lamps"><i class="fa-solid fa-flask-vial"></i> UV Mercury Lamps</span>
+                                </div>
+                                <!-- Column 2: UV Solutions -->
+                                <div class="interest-column">
+                                    <h4 class="interest-column-title">UV Solutions</h4>
+                                    <span class="interest-tag" data-interest="uv-systems"><i class="fa-solid fa-industry"></i> UV Systems</span>
+                                    <span class="interest-tag" data-interest="uv-safety"><i class="fa-solid fa-user-shield"></i> UV Safety</span>
+                                    <span class="interest-tag" data-interest="uv-tunnel"><i class="fa-solid fa-person-shelter"></i> UV Tunnel</span>
+                                    <span class="interest-tag" data-interest="uv-measurement"><i class="fa-solid fa-ruler-combined"></i> UV Measurement</span>
+                                </div>
+                                <!-- Column 3: LUVEX Services -->
+                                <div class="interest-column">
+                                    <h4 class="interest-column-title">LUVEX Services</h4>
+                                    <span class="interest-tag" data-interest="uv-simulator"><i class="fa-solid fa-cubes"></i> UV Simulator</span>
+                                    <span class="interest-tag" data-interest="project-support"><i class="fa-solid fa-headset"></i> Project Support</span>
+                                    <span class="interest-tag" data-interest="uv-news"><i class="fa-solid fa-newspaper"></i> UV News</span>
+                                    <span class="interest-tag" data-interest="uv-newsletter"><i class="fa-solid fa-envelope-open-text"></i> UV Newsletter</span>
+                                    <span class="interest-tag" data-interest="strip-analyzer"><i class="fa-solid fa-chart-simple"></i> UV Strip Analyzer <small>(coming)</small></span>
+                                </div>
                             </div>
                             <input type="hidden" name="interest_area" id="interest_area_hidden">
                         </div>
+
                         <div class="recaptcha-container">
                              <div id="recaptcha-register" class="g-recaptcha"></div>
                         </div>
