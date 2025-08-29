@@ -11,7 +11,7 @@ LUVEX THEME - AUTH STYLES (FINAL)
     border: 1px solid rgba(109, 213, 237, 0.3);
     margin: 0 auto;
     width: 100%;
-    max-width: 1300px; /* Increased width */
+    max-width: 1300px; /* FINALE BREITE */
     overflow: hidden;
 }
 
@@ -54,8 +54,7 @@ LUVEX THEME - AUTH STYLES (FINAL)
     padding-top: 2rem;
     border-top: 1px solid rgba(109, 213, 237, 0.1);
 }
-.form-section-title,
-.interest-column-title {
+.form-section-title {
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -65,16 +64,8 @@ LUVEX THEME - AUTH STYLES (FINAL)
     margin-bottom: 1.5rem;
     text-align: left;
 }
-.interest-column-title {
-    font-size: var(--text-base);
-    color: var(--luvex-bright-cyan);
-    margin-bottom: 0.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(109, 213, 237, 0.2);
-}
 
-.form-section-title i,
-.interest-column-title i {
+.form-section-title i {
     font-size: 1.1em;
     color: var(--luvex-bright-cyan);
     width: 24px;
@@ -116,8 +107,9 @@ input:focus {
 
 /* --- INTERESTS & INDUSTRIES GRID --- */
 .interests-grid-industries {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    /* Erzeugt Spalten von min. 200px, die sich den Platz teilen */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 0.75rem;
 }
 
@@ -130,6 +122,16 @@ input:focus {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+}
+.interest-column-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: var(--text-base);
+    color: var(--luvex-bright-cyan);
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(109, 213, 237, 0.2);
 }
 
 .interest-tag {

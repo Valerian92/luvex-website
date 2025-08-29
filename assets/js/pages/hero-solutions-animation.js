@@ -184,11 +184,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     class CustomCursor {
-        draw() { /* ... same as before ... */ }
+        draw() {
+            if (!mouse.isOverCanvas) return;
+            
+            ctx.save();
+            // Outer glow
+            const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 20);
+            gradient.addColorStop(0, 'rgba(109, 213, 237, 0.3)');
+            gradient.addColorStop(1, 'rgba(109, 213, 237, 0)');
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(mouse.x, mouse.y, 20, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Core dot
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.beginPath();
+            ctx.arc(mouse.x, mouse.y, 3, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
     }
     let customCursor = new CustomCursor();
     
-    function setup() { /* ... same as before, calls init ... */ }
+    function setup() {
+        width = canvas.clientWidth;
+        height = canvas.clientHeight;
+        dpr = window.devicePixelRatio || 1;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        ctx.scale(dpr, dpr);
+        init();
+    }
 
     function init() {
         const centerY = height / 2;
@@ -281,3 +310,4 @@ document.addEventListener('DOMContentLoaded', () => {
     setup();
     animate();
 });
+

@@ -66,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
     
-    // FIX: Listener für verschiedene Elementtypen
     document.querySelectorAll('.site-header a').forEach(el => {
         el.addEventListener('mouseenter', () => mouse.hoveredElementType = 'menu');
         el.addEventListener('mouseleave', () => mouse.hoveredElementType = null);
@@ -101,23 +100,23 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateIndicator(wl, color) {
         indicator.textContent = `${wl.toFixed(0)} nm`;
         
-        // FIX: Dynamischer Hintergrund mit LUVEX Farben
+        // FIX: Neue Logik für Hintergrund und Textfarbe
         const cyan = { r: 109, g: 213, b: 237 };
         const darkBlue = { r: 27, g: 42, b: 73 };
         let bgColor;
 
-        if (wl < 420) {
+        if (wl < 440) { // Bis ins tiefe Blau bleibt der Hintergrund Cyan
             bgColor = cyan;
-        } else if (wl >= 420 && wl <= 600) {
-            const amount = mapRange(wl, 420, 600, 0, 1);
+        } else if (wl >= 440 && wl <= 520) { // Sanfter Übergang von Blau zu Grün
+            const amount = mapRange(wl, 440, 520, 0, 1);
             bgColor = lerpColor(cyan, darkBlue, amount);
-        } else {
+        } else { // Ab Grün ist der Hintergrund dunkelblau für maximalen Kontrast
             bgColor = darkBlue;
         }
         indicator.style.backgroundColor = `rgb(${bgColor.r}, ${bgColor.g}, ${bgColor.b})`;
         
-        const brightness = (bgColor.r * 299 + bgColor.g * 587 + bgColor.b * 114) / 1000;
-        indicator.style.color = brightness < 125 ? 'white' : `rgb(${color.r}, ${color.g}, ${color.b})`;
+        // FIX: Textfarbe ist IMMER die Farbe der Welle
+        indicator.style.color = `rgb(${color.r}, ${color.g}, ${color.b})`;
     }
 
     function drawCursor(ctx, color) {
@@ -183,5 +182,6 @@ document.addEventListener('DOMContentLoaded', function() {
     setupCanvases();
     animate();
 });
+
 
 

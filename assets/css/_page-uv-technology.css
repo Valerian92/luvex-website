@@ -88,13 +88,14 @@ Hero Section Layout
 
 .hero-content-wrapper {
     margin-top: 8rem; /* Abstand von oben */
+    margin-bottom: 4rem; /* FIX: Größerer Abstand zu den Buttons */
 }
 
 .hero-spectrum-actions {
-    margin-bottom: 8rem; /* FIX: Deutlich mehr Abstand von unten */
+    margin-bottom: 6rem; /* Abstand von unten */
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 1.5rem; /* FIX: Buttons weiter auseinander */
     justify-content: center;
 }
 
