@@ -11,8 +11,12 @@ LUVEX THEME - AUTH STYLES (FINAL)
     border: 1px solid rgba(109, 213, 237, 0.3);
     margin: 0 auto;
     width: 100%;
-    max-width: 1300px; /* Finale, breitere Form */
-    padding: 0;
+    max-width: 1300px; /* Increased width */
+    overflow: hidden;
+}
+
+#auth-tab-content-wrapper {
+    padding: 2.5rem;
 }
 
 .auth-tabs {
@@ -23,15 +27,15 @@ LUVEX THEME - AUTH STYLES (FINAL)
 .auth-tab {
     flex: 1;
     padding: 1.25rem 1rem;
-    background: transparent;
-    border: none;
-    border-bottom: 3px solid transparent;
     text-align: center;
     color: var(--luvex-gray-300);
     font-weight: 600;
     font-size: var(--text-lg);
     cursor: pointer;
     transition: var(--transition-normal);
+    border: none;
+    background: none;
+    border-bottom: 3px solid transparent;
 }
 .auth-tab:hover {
     color: var(--luvex-white);
@@ -41,7 +45,7 @@ LUVEX THEME - AUTH STYLES (FINAL)
     color: var(--luvex-bright-cyan);
     border-bottom-color: var(--luvex-bright-cyan);
 }
-.auth-tab-content { display: none; padding: 2.5rem; }
+.auth-tab-content { display: none; }
 .auth-tab-content.active { display: block; }
 
 /* --- FORM SECTIONS & GRIDS --- */
@@ -51,47 +55,53 @@ LUVEX THEME - AUTH STYLES (FINAL)
     border-top: 1px solid rgba(109, 213, 237, 0.1);
 }
 .form-section-title {
-    font-size: 1.25rem;
+    display: block;
+    font-size: var(--text-lg);
     font-weight: 600;
     color: var(--luvex-white);
-    margin: 0 0 1.5rem 0;
-    text-align: center;
+    margin-bottom: 1.5rem;
+    text-align: left;
 }
 .form-grid-2-cols {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
     margin-bottom: 1.5rem;
 }
-.form-grid-2-cols input {
+
+/* --- General Input Fields --- */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
     width: 100%;
-    padding: 1rem;
+    height: 56px;
+    padding: 0 1rem;
+    font-size: var(--text-base);
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(109, 213, 237, 0.3);
-    color: var(--luvex-white);
     border-radius: var(--radius-md);
-    font-size: var(--text-base);
+    color: var(--luvex-white);
+    transition: var(--transition-normal);
 }
-.form-grid-2-cols input::placeholder {
+input::placeholder {
     color: var(--luvex-gray-300);
     opacity: 0.7;
 }
-.form-grid-2-cols input:focus {
-    outline: none;
+input:focus {
     border-color: var(--luvex-bright-cyan);
     background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 0 1px var(--luvex-bright-cyan);
+    box-shadow: 0 0 0 2px rgba(109, 213, 237, 0.5);
+    outline: none;
 }
 
 
-/* --- INDUSTRIES GRID --- */
+/* --- INTERESTS & INDUSTRIES GRID --- */
 .interests-grid-industries {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 0.75rem;
 }
 
-/* --- INTERESTS COLUMNS (Technology, Solutions, etc.) --- */
 .interests-columns-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -109,7 +119,6 @@ LUVEX THEME - AUTH STYLES (FINAL)
     margin: 0 0 0.5rem 0;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid rgba(109, 213, 237, 0.2);
-    text-align: center;
 }
 .interest-tag {
     display: flex;
@@ -124,7 +133,6 @@ LUVEX THEME - AUTH STYLES (FINAL)
     transition: var(--transition-normal);
     font-size: var(--text-sm);
     text-align: left;
-    width: 100%;
 }
 .interest-tag:hover {
     background: rgba(109, 213, 237, 0.1);
@@ -141,19 +149,19 @@ LUVEX THEME - AUTH STYLES (FINAL)
     font-size: 1rem;
     width: 20px;
     text-align: center;
+    transition: color 0.2s ease;
 }
 .interest-tag.selected i {
     color: var(--luvex-dark-blue);
 }
 
-/* --- LOGIN OPTIONS & CONSENT --- */
-.auth-options, .auth-consent {
+/* --- LOGIN OPTIONS (CHECKBOX & FORGOT LINK) --- */
+.auth-options {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 1.5rem 0;
+    margin-top: 1.5rem;
     gap: 1rem;
-    flex-wrap: wrap;
 }
 .auth-link {
     color: var(--luvex-gray-300);
@@ -172,7 +180,6 @@ LUVEX THEME - AUTH STYLES (FINAL)
     cursor: pointer;
     margin: 0;
 }
-.form-checkbox input { display: none; }
 .form-checkbox__indicator {
     width: 20px;
     height: 20px;
@@ -182,15 +189,15 @@ LUVEX THEME - AUTH STYLES (FINAL)
     align-items: center;
     justify-content: center;
     transition: var(--transition-normal);
-    flex-shrink: 0;
 }
 .form-checkbox__indicator i {
     font-size: 0.8rem;
-    color: var(--luvex-white);
+    color: var(--luvex-dark-blue);
     opacity: 0;
     transform: scale(0.5);
     transition: var(--transition-normal);
 }
+.form-checkbox input { display: none; }
 .form-checkbox input:checked + .form-checkbox__indicator {
     background: var(--luvex-bright-cyan);
     border-color: var(--luvex-bright-cyan);
@@ -203,16 +210,23 @@ LUVEX THEME - AUTH STYLES (FINAL)
     color: var(--luvex-gray-300);
     font-size: var(--text-sm);
 }
-.form-checkbox__text a {
+.auth-consent {
+    margin: 2rem 0;
+}
+.auth-consent .form-checkbox__text a {
     color: var(--luvex-bright-cyan);
-    font-weight: 500;
+    text-decoration: underline;
 }
 
 /* --- reCAPTCHA --- */
 .recaptcha-container {
-    margin: 2rem 0;
+    margin: 2rem auto;
     display: flex;
     justify-content: center;
+}
+.g-recaptcha {
+    border-radius: var(--radius-sm);
+    overflow: hidden;
 }
 
 /* --- BUTTONS --- */
@@ -220,25 +234,28 @@ LUVEX THEME - AUTH STYLES (FINAL)
     width: 100%;
     padding: 1rem 2rem;
     font-size: var(--text-lg);
-    display: inline-flex;
+    margin-top: 1.5rem;
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* --- FEEDBACK MESSAGES --- */
+/* --- DYNAMIC FEEDBACK MESSAGE --- */
 .auth-feedback-message {
-    padding: 1.25rem 2.5rem;
-    margin: 0;
     display: none;
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 2rem;
+    font-size: var(--text-sm);
     color: var(--luvex-white);
-}
-.auth-feedback-message.success {
-    background: rgba(16, 185, 129, 0.2);
-    display: block;
 }
 .auth-feedback-message.error {
     background: rgba(239, 68, 68, 0.2);
-    display: block;
+    border: 1px solid #ef4444;
+}
+.auth-feedback-message.success {
+    background: rgba(16, 185, 129, 0.2);
+    border: 1px solid #10b981;
 }
 
 /* --- RESPONSIVE ADJUSTMENTS --- */
@@ -248,5 +265,14 @@ LUVEX THEME - AUTH STYLES (FINAL)
     }
 }
 @media (max-width: 768px) {
-    .auth-tab-content { padding: 1.5rem; }
+    .form-grid-2-cols {
+        grid-template-columns: 1fr;
+    }
+    .auth-form-container {
+        max-width: 100%;
+    }
+    #auth-tab-content-wrapper {
+        padding: 1.5rem;
+    }
 }
+
