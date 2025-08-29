@@ -1,18 +1,19 @@
 /**
- * LUVEX Theme - Process Equipment Hero Animation (V32 - Final Positioning & Bugfix)
+ * LUVEX Theme - Process Equipment Hero Animation (V40 - Elegant 2D "Umbrella")
  *
- * Description: The final, completely reworked version of the hero animation.
+ * Description: A complete return to a high-quality 2D animation, focusing on
+ * elegance, clarity, and perfect, dynamic positioning.
  *
  * Key Features:
- * - DYNAMIC LAYOUT: Outer nodes are positioned around the HTML hero content.
- * - CENTRAL ENERGY ORB: A multi-layered, pseudo-3D energy orb.
- * - CHARGE-UP MECHANIC: The orb's intensity increases with each energy pulse.
- * - 3D PARALLAX: The entire scene reacts to mouse movement.
- * - FIX V32:
- * - ANIMATION BUGFIX: Corrected a rendering error that prevented energy pulses from being drawn.
- * - RECALIBRATED POSITIONS: The entire pyramid has been moved significantly higher to sit
- * correctly under the hero text and is now fully visible.
- * - BIRD'S-EYE VIEW: The top-down perspective is maintained and refined.
+ * - INTELLIGENT 2D LAYOUT: The animation automatically detects the hero text
+ * and dynamically positions the "umbrella" nodes around it, ensuring a
+ * perfect, responsive composition with no overlaps.
+ * - ELEGANT AESTHETICS: Clean lines, a beautifully rendered pulsing central orb,
+ * and sophisticated particle-based energy pulses.
+ * - SUBTLE INTERACTIVITY: Nodes near the mouse cursor gently glow, adding a
+ * layer of refined interactivity without distracting 3D effects.
+ * - STABILITY & PERFORMANCE: A lightweight and stable 2D implementation that
+ * delivers a consistently professional look.
  *
  * @package Luvex
  */
@@ -36,77 +37,63 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const config = {
-        lineColor: `rgba(109, 213, 237, 0.2)`,
+        lineColor: `rgba(109, 213, 237, 0.25)`,
         flowColor: luvexColors.brightCyan,
         glowColor: luvexColors.specialCyan,
         fontFamily: 'Inter, sans-serif',
-        phaseDuration: 60,
-        flowDuration: 80,
-        parallaxStrength: 0.3,
-        fov: 800,
-        particleCount: 200,
-        baseTilt: -0.5, // Steilere Vogelperspektive
+        phaseDuration: 70,
+        flowDuration: 90,
+        mouseInfluenceRadius: 150,
     };
 
     // --- STATE VARIABLES ---
     let nodes = {};
     let flows = [];
     let paths = {};
-    let particles = [];
     let centralOrb;
     let phase = 0;
     let phaseTimer = 0;
-    const mouse = { x: 0.5, y: 0.5, easedX: 0.5, easedY: 0.5 };
+    const mouse = { x: -1000, y: -1000 }; // Start mouse off-screen
 
     // --- HELPER FUNCTIONS ---
     const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     const lerp = (a, b, t) => a * (1 - t) + b * t;
 
     // --- CLASSES ---
-    class Point3D {
-        constructor(x, y, z) { this.x = x; this.y = y; this.z = z; }
-    }
-
     class Node {
-        constructor(text, pos3d, size, id, align = 'center') {
-            this.text = text; this.pos3d = pos3d; this.size = size; this.id = id; this.align = align;
-            this.x = 0; this.y = 0; this.scale = 1; this.opacity = 0;
-            this.activation = 0; this.lastActivationTime = -Infinity;
-        }
-
-        project() {
-            const rotX = config.baseTilt + (mouse.easedY - 0.5) * config.parallaxStrength;
-            const rotY = (mouse.easedX - 0.5) * config.parallaxStrength;
-            const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
-            const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
-
-            let tempZ = this.pos3d.z * cosY - this.pos3d.x * sinY;
-            let tempX = this.pos3d.z * sinY + this.pos3d.x * cosY;
-            let tempY = this.pos3d.y * cosX - tempZ * sinX;
-            tempZ = this.pos3d.y * sinX + tempZ * cosX;
-
-            this.scale = config.fov / (config.fov + tempZ);
-            this.x = width / 2 + tempX * this.scale;
-            this.y = height / 2 + tempY * this.scale;
+        constructor(text, x, y, size, id) {
+            this.text = text;
+            this.x = x; this.y = y;
+            this.size = size; this.id = id;
+            this.opacity = 0.4;
+            this.activation = 0;
+            this.lastActivationTime = -Infinity;
         }
 
         update() {
-            this.project();
+            // Update activation based on last pulse
             const age = Date.now() - this.lastActivationTime;
-            this.activation = Math.exp(-age / 3000);
-            this.opacity = 0.4 + this.activation * 0.6;
+            this.activation = Math.exp(-age / 2000);
+
+            // Update opacity based on mouse proximity
+            const dx = this.x - mouse.x;
+            const dy = this.y - mouse.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            const mouseInfluence = Math.max(0, 1 - dist / config.mouseInfluenceRadius);
+            
+            this.opacity = lerp(0.5, 1.0, this.activation + mouseInfluence);
         }
 
         draw() {
-            if (this.opacity < 0.01) return;
             ctx.save();
             ctx.globalAlpha = this.opacity;
             ctx.shadowColor = config.glowColor;
-            ctx.shadowBlur = this.activation * 15 * this.scale;
-            const fontSize = this.size * this.scale;
+            ctx.shadowBlur = this.opacity * 10;
+
+            const fontSize = this.size;
             ctx.font = `500 ${fontSize}px ${config.fontFamily}`;
             ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-            ctx.textAlign = this.align;
+            ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText(this.text, this.x, this.y);
             ctx.restore();
@@ -114,86 +101,44 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     class Orb {
-        constructor(pos3d) {
-            this.pos3d = pos3d;
-            this.x = 0; this.y = 0; this.scale = 1;
+        constructor(x, y) {
+            this.x = x; this.y = y;
             this.charge = 0;
-            this.rotation = 0;
-            this.surfaceParticles = Array.from({ length: 50 }, () => ({
-                angle: Math.random() * Math.PI * 2,
-                yFactor: (Math.random() - 0.5) * 2,
-                speed: (Math.random() - 0.5) * 0.01,
-                size: Math.random() * 1.5 + 0.5,
-            }));
-        }
-
-        project() {
-            const rotX = config.baseTilt + (mouse.easedY - 0.5) * config.parallaxStrength;
-            const rotY = (mouse.easedX - 0.5) * config.parallaxStrength;
-            const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
-            const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
-            let tempZ = this.pos3d.z * cosY - this.pos3d.x * sinY;
-            let tempX = this.pos3d.z * sinY + this.pos3d.x * cosY;
-            let tempY = this.pos3d.y * cosX - tempZ * sinX;
-            tempZ = this.pos3d.y * sinX + tempZ * cosX;
-            this.scale = config.fov / (config.fov + tempZ);
-            this.x = width / 2 + tempX * this.scale;
-            this.y = height / 2 + tempY * this.scale;
+            this.pulse = 0;
         }
 
         update() {
-            this.project();
-            const targetRotationSpeed = lerp(0.001, 0.005, this.charge);
-            this.rotation += targetRotationSpeed;
-            this.surfaceParticles.forEach(p => p.angle += p.speed * lerp(0.5, 1.5, this.charge));
+            this.pulse = (this.pulse + 0.02) % (Math.PI * 2);
         }
 
         draw() {
-            const baseRadius = lerp(15, 45, this.charge) * this.scale;
+            const baseRadius = lerp(10, 25, this.charge);
             if (baseRadius < 1) return;
+
+            const pulseOffset = (Math.sin(this.pulse) + 1) / 2; // a value between 0 and 1
 
             ctx.save();
             ctx.translate(this.x, this.y);
 
-            const auraSize = baseRadius * 4;
-            const auraGradient = ctx.createRadialGradient(0, 0, baseRadius, 0, 0, auraSize);
-            auraGradient.addColorStop(0, `rgba(0, 123, 255, ${lerp(0.05, 0.2, this.charge)})`);
-            auraGradient.addColorStop(1, 'rgba(0, 123, 255, 0)');
-            ctx.fillStyle = auraGradient;
-            ctx.beginPath();
-            ctx.arc(0, 0, auraSize, 0, Math.PI * 2);
-            ctx.fill();
-
-            const glowSize = baseRadius * 2.5;
-            const glowGradient = ctx.createRadialGradient(0, 0, baseRadius * 0.8, 0, 0, glowSize);
-            glowGradient.addColorStop(0, `rgba(109, 213, 237, ${lerp(0.2, 0.5, this.charge)})`);
+            // Outer Glow
+            const glowSize = baseRadius * lerp(2.5, 3.5, pulseOffset);
+            const glowGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, glowSize);
+            glowGradient.addColorStop(0, `rgba(109, 213, 237, ${lerp(0.3, 0.1, pulseOffset)})`);
             glowGradient.addColorStop(1, 'rgba(109, 213, 237, 0)');
             ctx.fillStyle = glowGradient;
             ctx.beginPath();
             ctx.arc(0, 0, glowSize, 0, Math.PI * 2);
             ctx.fill();
 
-            ctx.globalAlpha = lerp(0.3, 1, this.charge);
-            this.surfaceParticles.forEach(p => {
-                const x = Math.cos(p.angle + this.rotation) * Math.sqrt(1 - p.yFactor * p.yFactor) * baseRadius;
-                const y = p.yFactor * baseRadius;
-                const z = Math.sin(p.angle + this.rotation) * Math.sqrt(1 - p.yFactor * p.yFactor);
-                if (z > -0.3) {
-                    ctx.fillStyle = `rgba(255, 255, 255, ${z * 0.5 + 0.5})`;
-                    ctx.beginPath();
-                    ctx.arc(x, y, p.size * this.scale * (z * 0.5 + 0.5), 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            });
-            ctx.globalAlpha = 1;
-
-            const coreSize = baseRadius * lerp(0.8, 0.5, this.charge);
-            const coreGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, coreSize);
-            coreGradient.addColorStop(0, `rgba(255, 255, 255, ${lerp(0.8, 1.0, this.charge)})`);
-            coreGradient.addColorStop(1, `rgba(109, 213, 237, ${lerp(0.5, 0.8, this.charge)})`);
+            // Core
+            const coreRadius = baseRadius;
+            const coreGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, coreRadius);
+            coreGradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+            coreGradient.addColorStop(0.8, luvexColors.brightCyan);
+            coreGradient.addColorStop(1, `rgba(109, 213, 237, 0.5)`);
             ctx.fillStyle = coreGradient;
             ctx.beginPath();
-            ctx.arc(0, 0, coreSize, 0, Math.PI * 2);
+            ctx.arc(0, 0, coreRadius, 0, Math.PI * 2);
             ctx.fill();
 
             ctx.restore();
@@ -202,16 +147,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     class Path {
         constructor(start, end) { this.start = start; this.end = end; }
-        getPoint(t) {
-            return { x: lerp(this.start.x, this.end.x, t), y: lerp(this.start.y, this.end.y, t) };
-        }
         draw() {
-            const opacity = this.start.id === 'orb' ? this.end.opacity : this.start.opacity;
-            if (opacity < 0.01) return;
+            const opacity = (this.start.opacity + this.end.opacity) / 2;
+            if (opacity < 0.1) return;
             ctx.save();
             ctx.globalAlpha = opacity * 0.5;
             ctx.strokeStyle = config.lineColor;
-            ctx.lineWidth = 1.5 * Math.min(this.start.scale, this.end.scale);
+            ctx.lineWidth = 1.5;
             ctx.beginPath();
             ctx.moveTo(this.start.x, this.start.y);
             ctx.lineTo(this.end.x, this.end.y);
@@ -225,9 +167,8 @@ document.addEventListener('DOMContentLoaded', () => {
             this.path = path;
             this.life = 0;
             this.isFinished = false;
-            this.particles = Array.from({ length: 30 }, (_, i) => ({
-                progress: -i * 0.03,
-                offset: (Math.random() - 0.5) * 10
+            this.particles = Array.from({ length: 25 }, (_, i) => ({
+                progress: -i * 0.04,
             }));
         }
         update() {
@@ -251,58 +192,25 @@ document.addEventListener('DOMContentLoaded', () => {
             this.particles.forEach(p => {
                 if (p.progress > 0 && p.progress < 1) {
                     const easedProgress = easeInOutCubic(p.progress);
-                    const pos = this.path.getPoint(easedProgress);
-                    const scale = lerp(this.path.start.scale, this.path.end.scale, easedProgress);
+                    const pos = {
+                        x: lerp(this.path.start.x, this.path.end.x, easedProgress),
+                        y: lerp(this.path.start.y, this.path.end.y, easedProgress)
+                    };
                     const opacity = Math.sin(p.progress * Math.PI);
                     ctx.save();
                     ctx.globalAlpha = opacity;
                     ctx.fillStyle = config.flowColor;
                     ctx.shadowColor = config.glowColor;
-                    ctx.shadowBlur = 10 * scale * opacity;
+                    ctx.shadowBlur = 10 * opacity;
                     ctx.beginPath();
-                    // BUGFIX: The 'y' variable was undefined here. Corrected to pos.y
-                    ctx.arc(pos.x, pos.y, 2 * scale, 0, Math.PI * 2);
+                    ctx.arc(pos.x, pos.y, 2, 0, Math.PI * 2);
                     ctx.fill();
                     ctx.restore();
                 }
             });
         }
     }
-
-    class BackgroundParticle {
-        constructor() {
-            this.pos3d = new Point3D(
-                (Math.random() - 0.5) * width * 2,
-                (Math.random() - 0.5) * height * 2,
-                (Math.random() - 0.5) * 1200
-            );
-            this.size = Math.random() * 1.5 + 0.5;
-            this.opacity = Math.random() * 0.25 + 0.1;
-        }
-        project() {
-            const rotX = config.baseTilt + (mouse.easedY - 0.5) * config.parallaxStrength * 0.5;
-            const rotY = (mouse.easedX - 0.5) * config.parallaxStrength * 0.5;
-            const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
-            const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
-            let tempZ = this.pos3d.z * cosY - this.pos3d.x * sinY;
-            let tempX = this.pos3d.z * sinY + this.pos3d.x * cosY;
-            let tempY = this.pos3d.y * cosX - tempZ * sinX;
-            tempZ = this.pos3d.y * sinX + tempZ * cosX;
-            const scale = config.fov / (config.fov + tempZ);
-            const x = width / 2 + tempX * scale;
-            const y = height / 2 + tempY * scale;
-            return { x, y, scale };
-        }
-        draw() {
-            const { x, y, scale } = this.project();
-            if (x < 0 || x > width || y < 0 || y > height || scale < 0) return;
-            ctx.fillStyle = `rgba(109, 213, 237, ${this.opacity * scale})`;
-            ctx.beginPath();
-            ctx.arc(x, y, this.size * scale, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
-
+    
     const processPathIds = ['contact', 'concept', 'simulation', 'design', 'integration', 'partnership'];
 
     function setup() {
@@ -324,44 +232,32 @@ document.addEventListener('DOMContentLoaded', () => {
             bottom: contentRect.bottom - canvasRect.top,
         };
 
-        // KORREKTUR: Orb position is now higher and acts as the pyramid's peak.
-        const orbYPosition = safeZone.bottom + Math.max(80, height * 0.12);
-        centralOrb = new Orb(new Point3D(0, orbYPosition - height / 2, -50));
+        const orbY = safeZone.bottom + Math.max(100, height * 0.15);
+        centralOrb = new Orb(width / 2, orbY);
         
         nodes = {};
-        const radius = Math.max(width * 0.45, 450);
+        const radiusX = Math.min(width * 0.45, 600);
+        const radiusY = radiusX * 0.4; // Create an elliptical "umbrella" shape
 
-        // KORREKTUR: New coordinates forming a wide pyramid with the orb as its peak.
-        // All points are higher on the screen.
         const points = [
-            { id: 'contact',     text: 'Contact',     x: -0.9, y: 0.3, z: 50 },
-            { id: 'concept',     text: 'Concept',     x: -0.5, y: 0.8, z: 0 },
-            { id: 'simulation',  text: 'Simulation',  x: 0.0,  y: 1.0, z: -50 },
-            { id: 'design',      text: 'Design',      x: 0.5,  y: 0.8, z: 0 },
-            { id: 'integration', text: 'Integration', x: 0.9,  y: 0.3, z: 50 },
-            { id: 'partnership', text: 'Partnership', x: 0.0,  y: -0.8, z: 150 }, // This point is now the visual tip, but the orb is the functional peak
+            { id: 'partnership', text: 'Partnership', angle: -Math.PI / 2, yOffset: -30 },
+            { id: 'contact',     text: 'Contact',     angle: -Math.PI / 2 + (Math.PI / 3), yOffset: 0 },
+            { id: 'concept',     text: 'Concept',     angle: -Math.PI / 2 + (Math.PI / 3) * 2, yOffset: 0 },
+            { id: 'simulation',  text: 'Simulation',  angle: Math.PI / 2 + (Math.PI / 3) * 2, yOffset: 20 },
+            { id: 'design',      text: 'Design',      angle: Math.PI / 2 + (Math.PI / 3), yOffset: 20 },
+            { id: 'integration', text: 'Integration', angle: Math.PI / 2, yOffset: 20 },
         ];
 
         points.forEach(p => {
-            const xPos = p.x * radius;
-            // The Y-position is relative to the Orb's position, lifting the whole shape.
-            const yPos = (p.y * radius * 0.6) + (orbYPosition - height / 2);
-            
-            let align = 'center';
-            if (p.x > 0.1) align = 'left';
-            if (p.x < -0.1) align = 'right';
-
-            nodes[p.id] = new Node(p.text, new Point3D(xPos, yPos, p.z), 16, p.id, align);
+            const x = width / 2 + Math.cos(p.angle) * radiusX;
+            const y = orbY + Math.sin(p.angle) * radiusY + p.yOffset;
+            nodes[p.id] = new Node(p.text, x, y, 16, p.id);
         });
         
-        // The 'Partnership' node is treated as the visual peak of the pyramid base.
-        // The Orb is the functional peak where energy converges.
-        nodes['partnership'].pos3d.y -= 100; // Lift the partnership node to form the peak
-
         paths = { outer: [], toCenter: [] };
-        // Create a closed loop for the outer path
-        const outerPathOrder = ['contact', 'concept', 'simulation', 'design', 'integration', 'contact'];
-        for (let i = 0; i < outerPathOrder.length -1; i++) {
+        const outerPathOrder = ['partnership', 'contact', 'concept', 'integration', 'design', 'simulation', 'partnership'];
+
+        for (let i = 0; i < outerPathOrder.length - 1; i++) {
              paths.outer.push(new Path(nodes[outerPathOrder[i]], nodes[outerPathOrder[i+1]]));
         }
 
@@ -369,21 +265,18 @@ document.addEventListener('DOMContentLoaded', () => {
             paths.toCenter.push(new Path(nodes[id], centralOrb));
         });
 
-
-        particles = Array.from({ length: config.particleCount }, () => new BackgroundParticle());
         phase = -1; phaseTimer = 0; flows = [];
     }
     
     function nextPhase() {
-        phase = (phase + 1) % (paths.outer.length);
+        phase = (phase + 1) % paths.outer.length;
         if (phase === 0) {
             centralOrb.charge = 0;
         }
-        // Send a pulse along the outer edge
+        
         flows.push(new EnergyPulse(paths.outer[phase]));
 
-        // Send a pulse from the starting node of the outer pulse to the center
-        const startNodeId = processPathIds[phase];
+        const startNodeId = outerPathOrder[phase];
         const correspondingToCenterPath = paths.toCenter.find(p => p.start.id === startNodeId);
         if(correspondingToCenterPath) {
             flows.push(new EnergyPulse(correspondingToCenterPath));
@@ -394,15 +287,10 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         phaseTimer++;
 
-        mouse.easedX = lerp(mouse.easedX, mouse.x, 0.05);
-        mouse.easedY = lerp(mouse.easedY, mouse.y, 0.05);
-
-        if (phaseTimer > config.phaseDuration && flows.length < 2) { // Allow up to two pulses at once
+        if (phaseTimer > config.phaseDuration && flows.length < 2) {
             phaseTimer = 0;
             nextPhase();
         }
-        
-        particles.forEach(p => p.draw());
         
         Object.values(nodes).forEach(n => n.update());
         centralOrb.update();
@@ -414,8 +302,8 @@ document.addEventListener('DOMContentLoaded', () => {
         flows.forEach(f => f.update());
         
         flows.forEach(f => f.draw());
-        centralOrb.draw();
-        Object.values(nodes).sort((a, b) => a.scale - b.scale).forEach(n => n.draw());
+        Object.values(nodes).forEach(n => n.draw());
+        centralOrb.draw(); // Draw orb on top of nodes
         
         animationFrameId = requestAnimationFrame(animate);
     }
@@ -429,8 +317,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     canvas.addEventListener('mousemove', (e) => {
         const rect = canvas.getBoundingClientRect();
-        mouse.x = (e.clientX - rect.left) / width;
-        mouse.y = (e.clientY - rect.top) / height;
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+    });
+     canvas.addEventListener('mouseleave', () => {
+        mouse.x = -1000;
+        mouse.y = -1000;
     });
     
     setup();

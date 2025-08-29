@@ -1,25 +1,24 @@
 /*
 ==============================================================================
-LUVEX THEME v2.9 - AUTH SHARED STYLES (Wider Layout)
-==============================================================================
-Description: Contains shared base styles for all auth forms.
-Last Update: 2025-08-29
+LUVEX THEME - AUTH STYLES (FINAL)
 ==============================================================================
 */
 
-/* --- Main Form Container & Tabs --- */
+/* --- MAIN CONTAINER & TABS --- */
 .auth-form-container {
     background: var(--luvex-dark-blue);
     border-radius: var(--radius-xl);
     border: 1px solid rgba(109, 213, 237, 0.3);
     margin: 0 auto;
     width: 100%;
-    max-width: 1100px; /* Increased width for wider layout */
+    max-width: 1100px; /* Increased width */
 }
+
 .auth-tabs {
     display: flex;
     border-bottom: 1px solid rgba(109, 213, 237, 0.2);
 }
+
 .auth-tab {
     flex: 1;
     padding: 1.25rem 1rem;
@@ -30,10 +29,7 @@ Last Update: 2025-08-29
     cursor: pointer;
     transition: var(--transition-normal);
     border-bottom: 3px solid transparent;
-    background: none;
-    border-top: none;
-    border-left: none;
-    border-right: none;
+    text-decoration: none;
 }
 .auth-tab:hover {
     color: var(--luvex-white);
@@ -46,18 +42,34 @@ Last Update: 2025-08-29
 .auth-tab-content { display: none; }
 .auth-tab-content.active { display: block; }
 
-/* --- Form Fields & Layout --- */
+/* --- FORM SECTIONS & GRIDS --- */
+.form-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(109, 213, 237, 0.1);
+}
+.form-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
 .form-grid-2-cols {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
 }
-.floating-label-input--dark input {
+
+/* --- FLOATING LABEL INPUTS (DARK THEME) --- */
+.floating-label-input--dark input,
+.floating-label-input--dark textarea,
+.floating-label-input--dark select {
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(109, 213, 237, 0.3);
     color: var(--luvex-white);
 }
-.floating-label-input--dark input:focus {
+.floating-label-input--dark input:focus,
+.floating-label-input--dark textarea:focus,
+.floating-label-input--dark select:focus {
     border-color: var(--luvex-bright-cyan);
     background: rgba(255, 255, 255, 0.08);
     box-shadow: 0 0 0 1px var(--luvex-bright-cyan);
@@ -66,59 +78,117 @@ Last Update: 2025-08-29
     color: var(--luvex-gray-300);
 }
 .floating-label-input--dark input:focus ~ label,
-.floating-label-input--dark input:not(:placeholder-shown) ~ label {
+.floating-label-input--dark input:not(:placeholder-shown) ~ label,
+.floating-label-input--dark select:not(:placeholder-shown) ~ label {
     color: var(--luvex-bright-cyan);
 }
 
-/* --- Login Form Options (Checkbox & Forgot Link) --- */
+/* --- INTERESTS SECTION --- */
+.interest-section-title {
+    display: block;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--luvex-white);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.interest-columns-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+.interest-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.interest-column-title {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--luvex-bright-cyan);
+    margin: 0 0 0.5rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(109, 213, 237, 0.2);
+    text-align: center; /* Centered title */
+}
+.interest-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(109, 213, 237, 0.3);
+    color: var(--luvex-gray-300);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    font-size: var(--text-sm);
+}
+.interest-tag:hover {
+    background: rgba(109, 213, 237, 0.1);
+    border-color: var(--luvex-bright-cyan);
+    color: var(--luvex-white);
+}
+.interest-tag.selected {
+    background: var(--luvex-bright-cyan);
+    border-color: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    font-weight: 600;
+}
+.interest-tag i {
+    font-size: 1rem;
+    width: 20px;
+    text-align: center;
+}
+.interest-tag.selected i {
+    color: var(--luvex-dark-blue);
+}
+
+/* --- LOGIN OPTIONS (CHECKBOX & FORGOT LINK) --- */
 .auth-options {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 1.5rem 0;
-}
-.auth-options .form-checkbox--enhanced {
-    margin-bottom: 0;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
 }
 .auth-link {
     color: var(--luvex-gray-300);
     font-size: var(--text-sm);
     text-decoration: none;
-    transition: color 0.2s ease;
+    white-space: nowrap;
 }
 .auth-link:hover {
     color: var(--luvex-bright-cyan);
+    text-decoration: underline;
 }
-
-/* --- Checkbox Styling --- */
 .form-checkbox--enhanced {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 0.75rem;
     cursor: pointer;
-}
-.form-checkbox--enhanced input[type="checkbox"] {
-    display: none;
+    margin: 0;
 }
 .form-checkbox__indicator {
     width: 20px;
     height: 20px;
-    border: 2px solid rgba(109, 213, 237, 0.4);
+    border: 2px solid rgba(109, 213, 237, 0.5);
     border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
+    transition: var(--transition-normal);
 }
 .form-checkbox__indicator i {
+    font-size: 0.8rem;
     color: var(--luvex-white);
-    font-size: 12px;
     opacity: 0;
     transform: scale(0.5);
-    transition: all 0.2s ease;
+    transition: var(--transition-normal);
 }
+.form-checkbox--enhanced input { display: none; }
 .form-checkbox--enhanced input:checked + .form-checkbox__indicator {
-    background-color: var(--luvex-bright-cyan);
+    background: var(--luvex-bright-cyan);
     border-color: var(--luvex-bright-cyan);
 }
 .form-checkbox--enhanced input:checked + .form-checkbox__indicator i {
@@ -130,26 +200,25 @@ Last Update: 2025-08-29
     font-size: var(--text-sm);
 }
 
-/* --- reCAPTCHA Container --- */
+/* --- reCAPTCHA --- */
 .recaptcha-container {
     margin: 2rem 0;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 .g-recaptcha {
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-sm);
     overflow: hidden;
 }
 
-/* --- Submit Button --- */
+/* --- BUTTONS --- */
 .form-submit--enhanced {
     width: 100%;
     padding: 1rem 2rem;
     font-size: var(--text-lg);
 }
 
-/* --- Messages (Error/Success) --- */
+/* --- DYNAMIC MESSAGES --- */
 .auth-error-message--enhanced,
 .auth-success-message--enhanced {
     display: flex;
@@ -177,90 +246,13 @@ Last Update: 2025-08-29
 .auth-error-message--enhanced p,
 .auth-success-message--enhanced p {
     margin: 0;
-    color: #f8b4b4;
-}
-.auth-success-message--enhanced p { color: #a7f3d0; }
-
-/* --- 3-Column Interest Section --- */
-.form-section {
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(109, 213, 237, 0.1);
-}
-.form-section:last-of-type {
-    border-bottom: none;
-}
-.interest-section-title {
-    display: block;
-    color: var(--luvex-white);
-    font-size: var(--text-lg);
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-.interest-columns-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-}
-.interest-column {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-.interest-column-title {
-    color: var(--luvex-bright-cyan);
-    font-size: var(--text-base);
-    font-weight: 600;
-    margin: 0 0 0.5rem 0;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(109, 213, 237, 0.2);
-    text-align: center; /* Centered column titles */
-}
-.interest-tag {
-    background-color: rgba(255, 255, 255, 0.05);
-    color: var(--luvex-gray-300);
-    padding: 0.75rem 1rem;
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    border: 1px solid rgba(109, 213, 237, 0.2);
-    font-size: var(--text-sm);
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-.interest-tag i {
-    color: rgba(109, 213, 237, 0.7);
-    transition: all 0.2s ease-in-out;
-    font-size: 1rem;
-    width: 20px;
-    text-align: center;
-}
-.interest-tag small {
-    font-size: 0.7rem;
-    opacity: 0.7;
-    margin-left: auto;
-}
-.interest-tag:hover {
-    background-color: rgba(109, 213, 237, 0.1);
-    color: var(--luvex-white);
-    border-color: rgba(109, 213, 237, 0.5);
-}
-.interest-tag.selected {
-    background-color: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
-    font-weight: 600;
-    border-color: var(--luvex-bright-cyan);
-}
-.interest-tag.selected i {
-    color: var(--luvex-dark-blue);
+    color: var(--luvex-gray-200);
 }
 
-/* --- Responsive Adjustments --- */
-@media (max-width: 1024px) {
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 992px) {
     .interest-columns-container {
-        grid-template-columns: 1fr 1fr; /* 2 columns on tablets */
+        grid-template-columns: 1fr;
     }
 }
 @media (max-width: 768px) {
@@ -269,8 +261,5 @@ Last Update: 2025-08-29
     }
     .auth-form-container {
         max-width: 100%;
-    }
-    .interest-columns-container {
-        grid-template-columns: 1fr; /* 1 column on mobile */
     }
 }

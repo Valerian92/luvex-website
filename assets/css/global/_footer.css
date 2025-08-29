@@ -144,8 +144,8 @@ Last Update: 2025-08-24
 
 .footer-social {
     display: flex;
-    gap: 3rem; /* Enger zusammen - war 1rem */
-    margin: 0 0 1.5rem 0;
+    gap: 1.8rem; /* Enger zusammen - war 1rem */
+    margin: 0.5rem 1rem 0.5rem 1rem;
     width: fit-content; /* Nur so breit wie nötig */
 }
 

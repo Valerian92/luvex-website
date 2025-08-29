@@ -1,7 +1,7 @@
 /**
- * UV LED Convergence Animation - Overhauled Version
- * Description: Implements a smaller, more focused mouse cursor,
- * and fixes layout/control issues.
+ * UV LED Convergence Animation & CSS Cursor Trigger
+ * Description: Implements a high-performance, CSS-only custom cursor by removing
+ * all JS-based cursor drawing and instead toggling a body class.
  * @package Luvex
  */
 
@@ -10,6 +10,27 @@ document.addEventListener('DOMContentLoaded', () => {
     if (canvas) {
         new UVLEDConvergence(canvas);
     }
+
+    // --- High-Performance CSS Cursor Trigger ---
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        return; // Don't run cursor logic on touch devices
+    }
+
+    const heroSection = document.querySelector('.uv-led-hero');
+    const header = document.querySelector('.site-header');
+
+    if (!heroSection || !header) {
+        console.error("Cursor trigger failed: Hero or Header not found.");
+        return;
+    }
+    
+    const handleMouseEnter = () => document.body.classList.add('led-uv-cursor-active');
+    const handleMouseLeave = () => document.body.classList.remove('led-uv-cursor-active');
+
+    heroSection.addEventListener('mouseenter', handleMouseEnter);
+    heroSection.addEventListener('mouseleave', handleMouseLeave);
+    header.addEventListener('mouseenter', handleMouseEnter);
+    header.addEventListener('mouseleave', handleMouseLeave);
 });
 
 class UVLEDConvergence {
@@ -27,7 +48,7 @@ class UVLEDConvergence {
             mouseFollow: true,
             beamWidth: 1.5,
             mouseRepulsionRadius: 80,
-            wavelength: 395, // Default to a common UV-A wavelength
+            wavelength: 395,
         };
 
         this.init();
@@ -113,15 +134,11 @@ class UVLEDConvergence {
 
     bindEvents() {
         window.addEventListener('resize', () => this.resizeCanvas());
-        
-        // Listen on the parent element to track mouse movement over the entire hero section
         this.canvas.parentElement.addEventListener('mousemove', (e) => {
             const rect = this.canvas.getBoundingClientRect();
             this.mouse.x = e.clientX - rect.left;
             this.mouse.y = e.clientY - rect.top;
         });
-        
-        // FIX: Removed the 'mouseleave' event listener that caused the jump
     }
 
     startAnimation() {
@@ -137,55 +154,11 @@ class UVLEDConvergence {
 
     wavelengthToHSL(nm) {
         let hue;
-        if (nm <= 380) { // UV-A -> Violet
-            hue = 270;
-        } else if (nm <= 395) { // Violet -> Blue-Violet
-            hue = 260;
-        } else { // 405nm -> Blue-Violet
-            hue = 250;
-        }
+        if (nm <= 380) { hue = 270; } 
+        else if (nm <= 395) { hue = 260; } 
+        else { hue = 250; }
         return { h: hue, s: 95, l: 60 };
     }
-
-    drawMouseFocus(x, y, time, color) {
-        const pulse = (Math.sin(time * 0.003) + 1) / 2; // Slower pulse
-
-        // 1. Subtle outer glow (larger, softer)
-        const glowRadius = 40 + pulse * 10;
-        const gradient = this.ctx.createRadialGradient(x, y, 0, x, y, glowRadius);
-        gradient.addColorStop(0, `hsla(${color.h}, ${color.s}%, ${color.l}%, 0.2)`);
-        gradient.addColorStop(0.7, `hsla(${color.h}, ${color.s}%, ${color.l}%, 0.05)`);
-        gradient.addColorStop(1, `hsla(${color.h}, ${color.s}%, ${color.l}%, 0)`);
-        this.ctx.fillStyle = gradient;
-        this.ctx.beginPath();
-        this.ctx.arc(x, y, glowRadius, 0, Math.PI * 2);
-        this.ctx.fill();
-
-        // 2. NEW: Small, sharp focus point
-        const focusRadius = 8 + pulse * 2;
-        
-        // Outer ring of the focus point
-        this.ctx.strokeStyle = `hsla(${color.h}, ${color.s}%, ${color.l}%, 0.8)`;
-        this.ctx.lineWidth = 1.5;
-        this.ctx.beginPath();
-        this.ctx.arc(x, y, focusRadius, 0, Math.PI * 2);
-        this.ctx.stroke();
-
-        // Crosshair for precision
-        this.ctx.strokeStyle = `hsla(${color.h}, ${color.s}%, ${color.l}%, 0.6)`;
-        this.ctx.lineWidth = 1;
-        this.ctx.beginPath();
-        this.ctx.moveTo(x - focusRadius - 5, y);
-        this.ctx.lineTo(x - focusRadius + 5, y);
-        this.ctx.moveTo(x + focusRadius - 5, y);
-        this.ctx.lineTo(x + focusRadius + 5, y);
-        this.ctx.moveTo(x, y - focusRadius - 5);
-        this.ctx.lineTo(x, y - focusRadius + 5);
-        this.ctx.moveTo(x, y + focusRadius - 5);
-        this.ctx.lineTo(x, y + focusRadius + 5);
-        this.ctx.stroke();
-    }
-
 
     draw(time) {
         const { intensity, mouseFollow, beamWidth, mouseRepulsionRadius, wavelength } = this.config;
@@ -193,10 +166,8 @@ class UVLEDConvergence {
         const targetY = mouseFollow ? this.mouse.y : this.canvas.height / 2;
         const dynamicColor = this.wavelengthToHSL(wavelength);
 
-        if (mouseFollow) {
-            this.drawMouseFocus(targetX, targetY, time, dynamicColor);
-        }
-        
+        // The JS cursor drawing has been removed. The new CSS cursor is now active.
+
         this.ctx.globalCompositeOperation = 'lighter';
 
         this.leds.forEach(led => {
@@ -216,13 +187,7 @@ class UVLEDConvergence {
 
             const phase = time * 0.001 * this.config.speed + led.phase;
             const pulse = (Math.sin(phase) + 1) / 2;
-            const alpha = pulse * intensity * 0.8; // Slightly reduced base alpha
-
-            const currentColor = `hsl(${dynamicColor.h}, ${dynamicColor.s}%, ${dynamicColor.l}%)`;
-
-            this.ctx.beginPath();
-            this.ctx.moveTo(led.x, led.y);
-            this.ctx.lineTo(targetX, targetY);
+            const alpha = pulse * intensity * 0.8;
 
             const gradient = this.ctx.createLinearGradient(led.x, led.y, targetX, targetY);
             gradient.addColorStop(0, `hsla(${dynamicColor.h}, ${dynamicColor.s}%, ${dynamicColor.l}%, 0)`);

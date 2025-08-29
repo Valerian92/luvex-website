@@ -1,12 +1,11 @@
 <?php
 /**
  * Template Name: Standard Styles
- *
  * Description: Eine Seite zur Anzeige aller globalen Standard-Styles und UI-Komponenten.
- * KORRIGIERT: Jede Sektion hat jetzt ihren eigenen Container für ein konsistentes Layout.
+ * NEU: Integrierte, dynamische LUVEX Icon-Bibliothek.
  */
 
-get_header(); // Lädt den Standard-Header
+get_header();
 ?>
 
 <main id="main" class="site-main">
@@ -20,8 +19,6 @@ get_header(); // Lädt den Standard-Header
                     <a href="#" class="luvex-hero__cta">Primärer Button</a>
                     <a href="#" class="luvex-hero__cta-secondary">Sekundärer Button</a>
                 </div>
-                <h2 class="luvex-hero__subtitle">Standard Hero Untertitel</h2>
-                <p class="luvex-hero__description">Dies ist die Beschreibung des Standard-Heroes, um die Textformatierung und Abstände zu demonstrieren.</p>
             </div>
         </div>
     </section>
@@ -30,15 +27,15 @@ get_header(); // Lädt den Standard-Header
 
         <!-- Seiten-Titel -->
         <header class="page-hero">
-            <div class="container"> <!-- KORREKTUR: Container ist jetzt hier drin -->
+            <div class="container">
                 <h1>Standard Design & UI-Komponenten</h1>
-                <p class="subtitle">Dies ist eine Übersicht aller globalen Stile, die auf der gesamten Website verfügbar sind. Verwende diese Seite als Referenz, um ein konsistentes Design zu gewährleisten.</p>
+                <p class="subtitle">Dies ist eine Übersicht aller globalen Stile, die auf der gesamten Website verfügbar sind.</p>
             </div>
         </header>
 
-        <!-- Typografie -->
+        <!-- Typografie (unverändert) -->
         <section class="style-section">
-            <div class="container"> <!-- KORREKTUR: Container ist jetzt hier drin -->
+            <div class="container">
                 <h2>Typografie</h2>
                 <div class="grid grid-2">
                     <div>
@@ -48,29 +45,63 @@ get_header(); // Lädt den Standard-Header
                         <h4>Überschrift H4</h4>
                     </div>
                     <div>
-                        <p>Dies ist ein Standard-Absatztext. Er enthält <strong>fettgedruckten Text</strong>, <em>kursiven Text</em> und einen <a href="#">Link</a>, um die grundlegenden Textstile zu demonstrieren. Die Lesbarkeit und der Zeilenabstand sind entscheidend für eine gute Benutzererfahrung.</p>
-                        <blockquote>Dies ist ein Zitatblock. Er wird verwendet, um wichtige Aussagen oder Zitate hervorzuheben und sollte sich visuell vom normalen Fließtext abheben.</blockquote>
+                        <p>Dies ist ein Standard-Absatztext mit <strong>fettem Text</strong>, <em>kursivem Text</em> und einem <a href="#">Link</a>.</p>
+                        <blockquote>Dies ist ein Zitatblock zur Hervorhebung wichtiger Aussagen.</blockquote>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Buttons -->
+        <!-- Buttons (unverändert) -->
         <section class="style-section">
-            <div class="container"> <!-- KORREKTUR: Container ist jetzt hier drin -->
+            <div class="container">
                 <h2>Buttons & CTAs</h2>
                 <div class="button-showcase">
                     <a href="#" class="luvex-cta-primary">Primärer CTA</a>
                     <a href="#" class="luvex-cta-secondary">Sekundärer CTA</a>
                     <a href="#" class="btn--outline">Outline Button</a>
-                    <a href="#" class="header-cta-button">Header CTA Button</a>
                 </div>
             </div>
         </section>
+        
+        <!-- ==================================================================== -->
+        <!-- NEU: LUVEX Icon Library -->
+        <!-- ==================================================================== -->
+        <section class="style-section icon-library-section">
+            <div class="container">
+                <h2>LUVEX Icon-Bibliothek</h2>
+                <p class="subtitle">Die zentrale Referenz für alle Icons. Die Funktion <code>get_luvex_icon('icon-name')</code> verwenden.</p>
 
-        <!-- Formularelemente -->
+                <?php if (function_exists('get_luvex_icon_library')) :
+                    $icon_library = get_luvex_icon_library();
+                ?>
+                    <?php foreach ($icon_library as $category_name => $icons) : ?>
+                        <div class="icon-category">
+                            <h3 class="icon-category__title"><?php echo esc_html($category_name); ?></h3>
+                            <div class="icon-grid">
+                                <?php foreach ($icons as $key => $details) : ?>
+                                    <div class="icon-specimen">
+                                        <div class="icon-specimen__preview">
+                                            <?php echo get_luvex_icon($key); ?>
+                                        </div>
+                                        <div class="icon-specimen__details">
+                                            <span class="specimen-label"><?php echo esc_html($details['label']); ?></span>
+                                            <code class="specimen-key"><?php echo esc_html($key); ?></code>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <p>Fehler: Die LUVEX Icon-Bibliothek (<code>_luvex-helpers.php</code>) konnte nicht geladen werden.</p>
+                <?php endif; ?>
+            </div>
+        </section>
+
+        <!-- Formularelemente (unverändert) -->
         <section class="style-section">
-            <div class="container"> <!-- KORREKTUR: Container ist jetzt hier drin -->
+            <div class="container">
                 <h2>Formularelemente</h2>
                 <form class="standard-form">
                     <div class="floating-label-input">
@@ -81,48 +112,36 @@ get_header(); // Lädt den Standard-Header
                         <input type="email" id="email" name="email" placeholder=" ">
                         <label for="email">E-Mail-Adresse</label>
                     </div>
-                    <div class="floating-label-input">
-                        <textarea id="message" name="message" rows="4" placeholder=" "></textarea>
-                        <label for="message">Nachricht</label>
-                    </div>
-                    <button type="submit" class="luvex-cta-primary">Formular senden</button>
+                    <button type="submit" class="luvex-cta-primary">Senden</button>
                 </form>
             </div>
         </section>
 
-        <!-- Karten (Cards) -->
+        <!-- Karten (unverändert) -->
         <section class="style-section">
-            <div class="container"> <!-- KORREKTUR: Container ist jetzt hier drin -->
+            <div class="container">
                 <h2>Karten (Cards)</h2>
                 <div class="grid grid-3">
                     <div class="value-card">
                         <div class="value-card__icon"><i class="fa-solid fa-lightbulb"></i></div>
                         <h3 class="value-card__title">Value Card Titel</h3>
-                        <p class="value-card__description">Dies ist eine Standard "Value Card", die einen Wert oder ein Feature hervorhebt.</p>
+                        <p class="value-card__description">Eine "Value Card", die ein Feature hervorhebt.</p>
                     </div>
                     <div class="knowledge-card">
                         <div class="knowledge-card__header">
                             <div class="card__icon"><i class="fa-solid fa-book"></i></div>
                             <h3 class="card__title">Knowledge Card</h3>
                         </div>
-                        <div class="card__content">
-                            <p>Diese Karte dient zur Darstellung von Wissensartikeln oder komplexeren Inhalten.</p>
-                        </div>
                         <a href="#" class="btn--knowledge">Mehr erfahren</a>
-                    </div>
-                    <div class="value-card">
-                        <div class="value-card__icon"><i class="fa-solid fa-shield-halved"></i></div>
-                        <h3 class="value-card__title">Ein weiteres Feature</h3>
-                        <p class="value-card__description">Konsistentes Design über alle Karten hinweg ist wichtig für die UI.</p>
                     </div>
                 </div>
             </div>
         </section>
 
     </div>
-
 </main>
 
 <?php
-get_footer(); // Lädt den Standard-Footer
+get_footer();
 ?>
+

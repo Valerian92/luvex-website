@@ -83,7 +83,6 @@ $ajax_nonce = wp_create_nonce('luvex_ajax_nonce');
                             </div>
                         </div>
 
-                        <!-- UPDATED 3-COLUMN INTEREST SECTION WITH HELPER FUNCTION -->
                         <div class="form-section">
                             <label class="interest-section-title">Select Your Interests</label>
                             <div class="interest-columns-container">

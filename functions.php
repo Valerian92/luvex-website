@@ -67,12 +67,13 @@ function luvex_enqueue_assets() {
 
     // Seitenspezifische Stylesheets
     $page_styles = [
+        'standard-styles-luvex' => ['_page-standard-styles-luvex.css'],
         'about' => ['_page-about.css'],
         'start-uv-project' => ['_page-start-uv-project.css'],
         'contact' => ['_page-contact.css'],
         'uv-technology' => ['_page-uv-technology.css'],
         'mercury-uv-lamps' => ['_page-mercury-uv-lamps.css'],
-        'led-uv-systems' => ['_page-uv-led.css'],
+        'led-uv-systems' => ['_page-led-uv-systems.css'],
         'uv-solutions' => ['_page-uv-solutions.css'],
         'uv-safety-equipment' => ['_page-uv-safety-equipment.css', 'animations/_animation-hero-safety.css'], 
         'uv-testing-equipment' => ['_page-uv-testing-equipment.css'],

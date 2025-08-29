@@ -1,0 +1,129 @@
+/*
+==============================================================================
+LUVEX THEME - STANDARD STYLES PAGE
+==============================================================================
+*/
+
+.standard-styles-page .page-hero {
+    padding-top: calc(80px + 4rem);
+    padding-bottom: 4rem;
+    text-align: center;
+    border-bottom: 1px solid var(--luvex-gray-200);
+}
+
+.standard-styles-page .page-hero h1 {
+    color: var(--luvex-dark-blue);
+}
+
+.standard-styles-page .page-hero .subtitle,
+.standard-styles-page .style-section .subtitle {
+    font-size: 1.25rem;
+    color: var(--luvex-gray-700);
+    max-width: 800px;
+    margin: 1rem auto 0;
+}
+
+.standard-styles-page .style-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid var(--luvex-gray-200);
+}
+
+.standard-styles-page .style-section:last-of-type {
+    border-bottom: none;
+    padding-bottom: 6rem;
+}
+
+.standard-styles-page .style-section h2 {
+    color: var(--luvex-dark-blue);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.standard-styles-page .button-showcase {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.standard-styles-page .standard-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/*
+==============================================================================
+NEU: STYLES FÜR DIE LUVEX ICON-BIBLIOTHEK
+==============================================================================
+*/
+.icon-library-section .subtitle {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+.icon-library-section .subtitle code {
+    background: var(--luvex-gray-200);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    color: var(--luvex-dark-blue);
+    font-size: 1rem;
+}
+
+.icon-category {
+    margin-bottom: 3rem;
+}
+
+.icon-category__title {
+    font-size: 1.5rem;
+    color: var(--luvex-dark-blue);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--luvex-gray-200);
+}
+
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.icon-specimen {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--luvex-gray-50);
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--luvex-gray-200);
+    transition: all 0.2s ease-in-out;
+}
+.icon-specimen:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--luvex-bright-cyan);
+}
+
+.icon-specimen__preview {
+    font-size: 1.75rem;
+    color: var(--luvex-dark-blue);
+    width: 40px;
+    text-align: center;
+}
+
+.icon-specimen__details {
+    display: flex;
+    flex-direction: column;
+}
+
+.specimen-label {
+    font-weight: 500;
+    color: var(--luvex-dark-blue);
+}
+
+.specimen-key {
+    font-size: 0.8rem;
+    color: var(--luvex-gray-700);
+    background: transparent;
+}
+
