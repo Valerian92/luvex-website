@@ -5,14 +5,6 @@
  */
 get_header(); ?>
 
-<!-- 
-==============================================================================
-HINWEIS:
-Die HTML-Struktur ist bereits korrekt. Der .hero-spectrum-engine dient als
-Wrapper für die Animation, während der .luvex-hero__container den
-suchmaschinenfreundlichen Text enthält. Die Magie passiert im CSS.
-==============================================================================
--->
 <section class="hero-spectrum-engine">
     <!-- Das Canvas für die Hintergrundanimation -->
     <canvas id="spectrum-canvas"></canvas>
@@ -24,6 +16,16 @@ suchmaschinenfreundlichen Text enthält. Die Magie passiert im CSS.
         <p class="luvex-hero__subtitle">
             Your central resource for everything about UV technology.
         </p>
+
+        <!-- ======================================================================
+        FIX: Neue Buttons für schnellen Zugriff auf die Kategorien
+        ====================================================================== -->
+        <div class="hero-spectrum-actions">
+            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-curing' ) ) ); ?>" class="spectrum-action-btn">UV Curing</a>
+            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-c-disinfection' ) ) ); ?>" class="spectrum-action-btn">UV-C Disinfection</a>
+            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'mercury-uv-lamps' ) ) ); ?>" class="spectrum-action-btn">Mercury Lamps</a>
+            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'led-uv-systems' ) ) ); ?>" class="spectrum-action-btn">LED Systems</a>
+        </div>
     </div>
 </section>
 

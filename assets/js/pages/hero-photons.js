@@ -1,16 +1,16 @@
 /**
- * LUVEX Theme - Homepage Hero Photon Animation & Custom Cursor
+ * LUVEX Theme - Homepage Hero Photon Animation & CSS Cursor Trigger
  *
- * This file now controls two effects for the homepage hero:
- * 1. Photon particles that fly towards the simulator button or follow the mouse.
- * 2. A custom "precision" dual-circle cursor that activates over the hero and header.
+ * This script now ONLY handles the particle animation and adds a class
+ * to the body to trigger the high-performance CSS-only custom cursor.
+ * All JS-based cursor logic has been removed to fix performance issues.
  */
 document.addEventListener('DOMContentLoaded', function() {
 
     // ========================================================================
     // Part 1: Hero Photon Animation
     // ========================================================================
-    console.log('🌟 Hero Effects Script loading...');
+    console.log('🌟 Hero Effects Script loading (Performance Mode)...');
 
     const canvas = document.getElementById('homepage-hero-canvas');
     const heroSection = document.querySelector('.luvex-hero');
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let particles = [];
         let animationFrameId;
 
-        let particleMouse = { // Renamed to avoid conflict
+        let particleMouse = {
             x: null,
             y: null,
             isHoveringCanvas: false,
@@ -176,60 +176,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // ========================================================================
-    // Part 2: Homepage Custom Cursor
+    // Part 2: CSS Cursor Trigger
     // ========================================================================
     
     if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-        console.log('🎯 Custom Cursor: Disabled on touch device.');
-        return;
+        return; // Don't run cursor logic on touch devices
     }
 
     const header = document.querySelector('.site-header');
     if (!heroSection || !header) {
-        console.error('❌ Hero or Header not found for custom cursor.');
         return;
     }
     
-    console.log('🎯 Homepage Custom Cursor Initializing...');
-
-    const cursorContainer = document.createElement('div');
-    cursorContainer.className = 'homepage-custom-cursor';
-
-    const cursorOuter = document.createElement('div');
-    cursorOuter.className = 'cursor-circle-outer';
-
-    const cursorInner = document.createElement('div');
-    cursorInner.className = 'cursor-dot-inner';
-
-    cursorContainer.appendChild(cursorOuter);
-    cursorContainer.appendChild(cursorInner);
-    document.body.appendChild(cursorContainer);
-
-    let cursorMouseX = 0, cursorMouseY = 0; // Renamed to avoid conflict
-    let outerX = 0, outerY = 0;
-    const easing = 0.2;
-    let rafIdCursor = null;
-
-    function updateCursor() {
-        let dx = cursorMouseX - outerX;
-        let dy = cursorMouseY - outerY;
-        outerX += dx * easing;
-        outerY += dy * easing;
-        cursorContainer.style.transform = `translate3d(${outerX}px, ${outerY}px, 0)`;
-        rafIdCursor = requestAnimationFrame(updateCursor);
-    }
-
-    document.addEventListener('mousemove', e => {
-        cursorMouseX = e.clientX;
-        cursorMouseY = e.clientY;
-        if (!cursorContainer.classList.contains('visible')) {
-            cursorContainer.classList.add('visible');
-        }
-        if (!rafIdCursor) {
-            updateCursor();
-        }
-    });
-
     const handleMouseEnter = () => document.body.classList.add('homepage-cursor-active');
     const handleMouseLeave = () => document.body.classList.remove('homepage-cursor-active');
 
@@ -237,20 +195,6 @@ document.addEventListener('DOMContentLoaded', function() {
     heroSection.addEventListener('mouseleave', handleMouseLeave);
     header.addEventListener('mouseenter', handleMouseEnter);
     header.addEventListener('mouseleave', handleMouseLeave);
-
-    const interactiveCursorElements = document.querySelectorAll('.luvex-hero a, .luvex-hero button, .site-header a, .site-header button');
-    interactiveCursorElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            if (document.body.classList.contains('homepage-cursor-active')) {
-                cursorOuter.classList.add('hover-effect');
-                cursorInner.classList.add('hover-effect');
-            }
-        });
-        el.addEventListener('mouseleave', () => {
-            cursorOuter.classList.remove('hover-effect');
-            cursorInner.classList.remove('hover-effect');
-        });
-    });
     
     console.log('✅ Homepage Effects Script Loaded');
 });

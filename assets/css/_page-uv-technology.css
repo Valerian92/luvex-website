@@ -24,7 +24,6 @@ Hero mit Spectrum Animation
     color: var(--luvex-white);
 }
 
-/* Hintergrund-Grid für einen konsistenten Look */
 .hero-spectrum-engine::before {
     content: '';
     position: absolute;
@@ -38,26 +37,15 @@ Hero mit Spectrum Animation
     z-index: 1;
 }
 
-/* ==============================================================================
-Canvas (Hintergrundanimation)
-==============================================================================
-*/
 .hero-spectrum-engine canvas {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 2; /* Über dem Grid */
+    z-index: 2;
 }
 
-/* ==============================================================================
-Wellenlängen-Anzeige
-==============================================================================
-FIX:
-- `pointer-events: none` hinzugefügt, damit der Cursor darüber fahren kann.
-==============================================================================
-*/
 .wavelength-indicator {
     position: absolute;
     bottom: 2rem;
@@ -74,28 +62,53 @@ FIX:
     border: 1px solid var(--luvex-gray-200);
     box-shadow: var(--shadow-sm);
     transition: color 0.2s ease;
-    pointer-events: none; /* FIX: Lässt Maus-Events durch */
+    pointer-events: none;
 }
 
-/* ==============================================================================
-Standard Hero Content (Text-Container)
-==============================================================================
-*/
 .hero-spectrum-engine .luvex-hero__container {
     position: relative;
     z-index: 5;
     pointer-events: none;
     text-align: center;
+    display: flex; /* Stellt sicher, dass die Buttons korrekt ausgerichtet sind */
+    flex-direction: column;
+    align-items: center;
 }
 
-/*
-==============================================================================
-Anklickbare Elemente (z.B. Buttons)
+/* ==============================================================================
+FIX: Neue Buttons im Hero
 ==============================================================================
 */
-.hero-spectrum-engine .luvex-hero__cta {
-    pointer-events: auto;
+.hero-spectrum-actions {
+    margin-top: 2.5rem; /* Abstand zum Subtitle */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    pointer-events: auto; /* Macht den Container für die Maus "sichtbar" */
 }
+
+.spectrum-action-btn {
+    background: rgba(109, 213, 237, 0.1);
+    border: 1px solid rgba(109, 213, 237, 0.2);
+    color: var(--luvex-bright-cyan);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+/* Der Hover-Effekt wird durch den animierten Cursor im JS gesteuert,
+   aber ein Fallback ist gut. */
+.spectrum-action-btn:hover {
+    background: rgba(109, 213, 237, 0.2);
+    border-color: var(--luvex-bright-cyan);
+    color: var(--luvex-white);
+    transform: translateY(-2px);
+}
+
 
 /* ==============================================================================
 Responsive Anpassungen
@@ -106,5 +119,13 @@ Responsive Anpassungen
         bottom: 1rem;
         font-size: 0.9rem;
         padding: 0.25rem 0.75rem;
+    }
+    .hero-spectrum-actions {
+        margin-top: 2rem;
+        gap: 0.75rem;
+    }
+    .spectrum-action-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
     }
 }
