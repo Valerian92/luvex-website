@@ -71,40 +71,46 @@ $ajax_nonce = wp_create_nonce('luvex_ajax_nonce');
                             </div>
                         </div>
                         <div class="form-section">
-                             <div class="floating-label-input floating-label-input--dark">
-                                <input type="email" name="user_email" placeholder=" " required>
-                                <label>Email Address</label>
+                             <div class="form-grid-2-cols">
+                                <div class="floating-label-input floating-label-input--dark">
+                                    <input type="email" name="user_email" placeholder=" " required>
+                                    <label>Email Address</label>
+                                </div>
+                                <div class="floating-label-input floating-label-input--dark">
+                                    <input type="text" name="company" placeholder=" ">
+                                    <label>Company (Optional)</label>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- NEW 3-COLUMN INTEREST SECTION -->
+                        <!-- UPDATED 3-COLUMN INTEREST SECTION WITH HELPER FUNCTION -->
                         <div class="form-section">
-                            <label class="interest-section-title">Interested in... let us know the right content for you</label>
+                            <label class="interest-section-title">Select Your Interests</label>
                             <div class="interest-columns-container">
                                 <!-- Column 1: Technology -->
                                 <div class="interest-column">
                                     <h4 class="interest-column-title">Technology</h4>
-                                    <span class="interest-tag" data-interest="uv-curing"><i class="fa-solid fa-layer-group"></i> UV Curing</span>
-                                    <span class="interest-tag" data-interest="uvc-disinfection"><i class="fa-solid fa-shield-virus"></i> UVC Disinfection</span>
-                                    <span class="interest-tag" data-interest="uv-led-systems"><i class="fa-solid fa-lightbulb"></i> UV LED Systems</span>
-                                    <span class="interest-tag" data-interest="uv-mercury-lamps"><i class="fa-solid fa-flask-vial"></i> UV Mercury Lamps</span>
+                                    <span class="interest-tag" data-interest="uv-curing"><?php echo get_luvex_icon('uv-curing'); ?> UV Curing</span>
+                                    <span class="interest-tag" data-interest="uvc-disinfection"><?php echo get_luvex_icon('uvc-disinfection'); ?> UVC Disinfection</span>
+                                    <span class="interest-tag" data-interest="uv-led-systems"><?php echo get_luvex_icon('uv-led-systems'); ?> UV LED Systems</span>
+                                    <span class="interest-tag" data-interest="uv-mercury-lamps"><?php echo get_luvex_icon('uv-mercury-lamps'); ?> UV Mercury Lamps</span>
                                 </div>
                                 <!-- Column 2: UV Solutions -->
                                 <div class="interest-column">
                                     <h4 class="interest-column-title">UV Solutions</h4>
-                                    <span class="interest-tag" data-interest="uv-systems"><i class="fa-solid fa-industry"></i> UV Systems</span>
-                                    <span class="interest-tag" data-interest="uv-safety"><i class="fa-solid fa-user-shield"></i> UV Safety</span>
-                                    <span class="interest-tag" data-interest="uv-tunnel"><i class="fa-solid fa-person-shelter"></i> UV Tunnel</span>
-                                    <span class="interest-tag" data-interest="uv-measurement"><i class="fa-solid fa-ruler-combined"></i> UV Measurement</span>
+                                    <span class="interest-tag" data-interest="uv-systems"><?php echo get_luvex_icon('uv-systems'); ?> UV Systems</span>
+                                    <span class="interest-tag" data-interest="uv-safety"><?php echo get_luvex_icon('uv-safety'); ?> UV Safety</span>
+                                    <span class="interest-tag" data-interest="uv-tunnel"><?php echo get_luvex_icon('uv-tunnel'); ?> UV Tunnel</span>
+                                    <span class="interest-tag" data-interest="uv-measurement"><?php echo get_luvex_icon('uv-measurement'); ?> UV Measurement</span>
                                 </div>
                                 <!-- Column 3: LUVEX Services -->
                                 <div class="interest-column">
                                     <h4 class="interest-column-title">LUVEX Services</h4>
-                                    <span class="interest-tag" data-interest="uv-simulator"><i class="fa-solid fa-cubes"></i> UV Simulator</span>
-                                    <span class="interest-tag" data-interest="project-support"><i class="fa-solid fa-headset"></i> Project Support</span>
-                                    <span class="interest-tag" data-interest="uv-news"><i class="fa-solid fa-newspaper"></i> UV News</span>
-                                    <span class="interest-tag" data-interest="uv-newsletter"><i class="fa-solid fa-envelope-open-text"></i> UV Newsletter</span>
-                                    <span class="interest-tag" data-interest="strip-analyzer"><i class="fa-solid fa-chart-simple"></i> UV Strip Analyzer <small>(coming)</small></span>
+                                    <span class="interest-tag" data-interest="uv-simulator"><?php echo get_luvex_icon('uv-simulator'); ?> UV Simulator</span>
+                                    <span class="interest-tag" data-interest="project-support"><?php echo get_luvex_icon('project-support'); ?> Project Support</span>
+                                    <span class="interest-tag" data-interest="uv-news"><?php echo get_luvex_icon('uv-news'); ?> UV News</span>
+                                    <span class="interest-tag" data-interest="uv-newsletter"><?php echo get_luvex_icon('uv-newsletter'); ?> UV Newsletter</span>
+                                    <span class="interest-tag" data-interest="strip-analyzer"><?php echo get_luvex_icon('strip-analyzer'); ?> UV Strip Analyzer <small>(coming)</small></span>
                                 </div>
                             </div>
                             <input type="hidden" name="interest_area" id="interest_area_hidden">
@@ -122,7 +128,6 @@ $ajax_nonce = wp_create_nonce('luvex_ajax_nonce');
 </div>
 
 <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
-
 <script>
 // --- reCAPTCHA LOGIC (FIXED) ---
 let recaptchaLoginId, recaptchaRegisterId;
@@ -186,9 +191,41 @@ function showAuthMessage(message, type = 'error') {
 
 // --- FORM DATA PERSISTENCE ---
 const formStorageKey = 'luvexRegisterFormData';
-function saveFormData() { /* ... (unverändert) ... */ }
-function loadFormData() { /* ... (unverändert) ... */ }
-function clearFormData() { /* ... (unverändert) ... */ }
+function saveFormData() {
+    const form = document.getElementById('luvex-register-form');
+    const data = {
+        first_name: form.querySelector('[name="first_name"]').value,
+        last_name: form.querySelector('[name="last_name"]').value,
+        user_email: form.querySelector('[name="user_email"]').value,
+        company: form.querySelector('[name="company"]').value,
+        interest_area: form.querySelector('[name="interest_area"]').value,
+    };
+    sessionStorage.setItem(formStorageKey, JSON.stringify(data));
+}
+function loadFormData() {
+    const data = JSON.parse(sessionStorage.getItem(formStorageKey));
+    if (data) {
+        const form = document.getElementById('luvex-register-form');
+        form.querySelector('[name="first_name"]').value = data.first_name || '';
+        form.querySelector('[name="last_name"]').value = data.last_name || '';
+        form.querySelector('[name="user_email"]').value = data.user_email || '';
+        form.querySelector('[name="company"]').value = data.company || '';
+        
+        const interests = data.interest_area ? data.interest_area.split(',') : [];
+        if (interests.length > 0) {
+            form.querySelector('[name="interest_area"]').value = data.interest_area;
+            const selectedInterests = new Set(interests);
+            document.querySelectorAll('.interest-tag').forEach(tag => {
+                if (selectedInterests.has(tag.dataset.interest)) {
+                    tag.classList.add('selected');
+                }
+            });
+        }
+    }
+}
+function clearFormData() {
+    sessionStorage.removeItem(formStorageKey);
+}
 
 // --- EVENT LISTENERS ---
 document.addEventListener('DOMContentLoaded', function() {

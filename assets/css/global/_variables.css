@@ -102,3 +102,55 @@ Last Update: 2025-08-21
     --radius-xl: 24px;
     --radius-full: 50px;
 }
+
+
+
+
+
+/*
+==============================================================================
+LUVEX THEME v3.1 - DESIGN TOKENS (VARIABLES)
+==============================================================================
+Description: Zentrale Definition aller Design-Variablen.
+Last Update: 2025-08-29
+==============================================================================
+*/
+
+
+
+/*
+==============================================================================
+8. LUVEX ICON DICTIONARY (Font Awesome 6 - Solid)
+==============================================================================
+Description: Eine zentrale Referenz für konsistente Ikonographie.
+             CSS-Klasse: <i class="fa-solid fa-[icon-name]"></i>
+==============================================================================
+*/
+
+/* --- TECHNOLOGY --- */
+/* .fa-layer-group      -> UV Curing / Surfaces */
+/* .fa-shield-virus     -> UVC Disinfection */
+/* .fa-lightbulb         -> UV LED Systems */
+/* .fa-flask-vial        -> UV Mercury Lamps */
+
+/* --- UV SOLUTIONS --- */
+/* .fa-industry         -> UV Systems (General) */
+/* .fa-user-shield       -> UV Safety */
+/* .fa-person-shelter    -> UV Tunnel */
+/* .fa-ruler-combined    -> UV Measurement */
+
+/* --- LUVEX SERVICES --- */
+/* .fa-cubes             -> UV Simulator */
+/* .fa-headset           -> Project Support */
+/* .fa-newspaper         -> UV News */
+/* .fa-envelope-open-text-> UV Newsletter */
+/* .fa-chart-simple      -> UV Strip Analyzer */
+/* .fa-gears             -> Customized Solution */
+
+/* --- GENERAL UI --- */
+/* .fa-user-circle      -> User / Login */
+/* .fa-shield-halved     -> Security */
+/* .fa-globe             -> Language */
+/* .fa-save              -> Save Changes */
+/* .fa-key               -> Password / Key */
+/* .fa-pencil            -> Edit */

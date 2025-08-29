@@ -275,7 +275,7 @@ function luvex_get_user_avatar($user_id = null) {
 }
 
 
-// 7. USER SYSTEM LADEN
+// 7. SYSTEM-DATEIEN LADEN
 $luvex_includes_path = get_stylesheet_directory() . '/includes/';
 
 if (file_exists($luvex_includes_path . '_user_system.php')) {
@@ -283,14 +283,16 @@ if (file_exists($luvex_includes_path . '_user_system.php')) {
 }
 
 // Security System laden
-require_once get_stylesheet_directory() . '/includes/_luvex_security.php';
+if (file_exists($luvex_includes_path . '_luvex_security.php')) {
+    require_once $luvex_includes_path . '_luvex_security.php';
+}
 
-// Korrektur: reCAPTCHA Keys aus functions.php entfernt.
-// Sie sollten nun in wp-config.php definiert werden:
-// define('LUVEX_RECAPTCHA_SITE_KEY', 'dein_site_key');
-// define('LUVEX_RECAPTCHA_SECRET_KEY', 'dein_secret_key');
+// LUVEX Helper Funktionen laden (z.B. für Icons)
+if (file_exists($luvex_includes_path . '_luvex-helpers.php')) {
+    require_once $luvex_includes_path . '_luvex-helpers.php';
+}
 
-// Minimale reCAPTCHA Funktion
+// 8. reCAPTCHA FUNKTION
 function luvex_verify_recaptcha($response) {
     if (empty($response) || !defined('LUVEX_RECAPTCHA_SECRET_KEY')) {
         return false;

@@ -1,6 +1,6 @@
 /*
 ==============================================================================
-LUVEX THEME v2.8 - AUTH SHARED STYLES (3-Column Layout)
+LUVEX THEME v2.9 - AUTH SHARED STYLES (Wider Layout)
 ==============================================================================
 Description: Contains shared base styles for all auth forms.
 Last Update: 2025-08-29
@@ -14,7 +14,7 @@ Last Update: 2025-08-29
     border: 1px solid rgba(109, 213, 237, 0.3);
     margin: 0 auto;
     width: 100%;
-    max-width: 960px; /* Increased width for 3-column layout */
+    max-width: 1100px; /* Increased width for wider layout */
 }
 .auth-tabs {
     display: flex;
@@ -215,6 +215,7 @@ Last Update: 2025-08-29
     margin: 0 0 0.5rem 0;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid rgba(109, 213, 237, 0.2);
+    text-align: center; /* Centered column titles */
 }
 .interest-tag {
     background-color: rgba(255, 255, 255, 0.05);
@@ -257,10 +258,9 @@ Last Update: 2025-08-29
 }
 
 /* --- Responsive Adjustments --- */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
     .interest-columns-container {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+        grid-template-columns: 1fr 1fr; /* 2 columns on tablets */
     }
 }
 @media (max-width: 768px) {
@@ -269,5 +269,8 @@ Last Update: 2025-08-29
     }
     .auth-form-container {
         max-width: 100%;
+    }
+    .interest-columns-container {
+        grid-template-columns: 1fr; /* 1 column on mobile */
     }
 }
