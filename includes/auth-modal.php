@@ -1,6 +1,6 @@
 <?php
 /**
- * Auth-Modal-Template (FINAL - Integriertes Design)
+ * Auth-Modal-Template (FINAL - Integriertes Design & Fehlerkorrektur)
  * AJAX-basiertes Login/Register-Modal mit dynamischer Interessenauswahl und neuem Design.
  */
 
@@ -47,7 +47,7 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
                     </form>
                 </div>
 
-                <!-- Registration Form (NEUES DESIGN INTEGRIERT) -->
+                <!-- Registration Form (NEUES DESIGN INTEGRIERT & FEHLER KORRIGIERT) -->
                 <div class="auth-tab-content" id="register-content">
                     <form id="luvex-register-form" class="luvex-auth-form" method="post">
                         
@@ -79,7 +79,7 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
                                     foreach ($icon_library['Industries'] as $key => $details): 
                                         $is_hidden = $count >= $visible_limit;
                                         ?>
-                                        <button type="button" class="interest-tag <?php echo $is_hidden ? 'hidden' : ''; ?>" data-interest="<?= esc_attr($key) ?>">
+                                        <button type="button" class="interest-tag <?php echo $is_hidden ? 'hidden' : ''; ?>" data-type="industry" data-interest="<?= esc_attr($key) ?>">
                                             <?= get_luvex_icon($key) ?>
                                             <span><?= esc_html($details['label']) ?></span>
                                         </button>
@@ -113,7 +113,7 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
                                             <span><?= esc_html($category_name) ?></span>
                                         </h5>
                                         <?php foreach ($icon_library[$category_name] as $key => $details): ?>
-                                            <button type="button" class="interest-tag" data-interest="<?= esc_attr($key) ?>">
+                                            <button type="button" class="interest-tag" data-type="interest" data-interest="<?= esc_attr($key) ?>">
                                                 <?= get_luvex_icon($key) ?>
                                                 <span><?= esc_html($details['label']) ?></span>
                                             </button>
@@ -124,8 +124,9 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
                             </div>
                         </div>
                         
-                        <!-- Ein einziges verstecktes Feld für alle Interessen, wie von der JS-Logik erwartet -->
-                        <input type="hidden" name="interest_area" id="interest_area_hidden" value="">
+                        <!-- KORREKTUR: Zwei getrennte, versteckte Felder für eine saubere Datenübergabe -->
+                        <input type="hidden" name="selected_industry" id="selected_industry_hidden" value="">
+                        <input type="hidden" name="selected_interests" id="selected_interests_hidden" value="">
 
                         <!-- Abschnitt 4: reCAPTCHA -->
                         <div class="recaptcha-container" id="register-recaptcha-container"></div>
@@ -151,7 +152,6 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
 </div>
 
 <script>
-// JavaScript bleibt hier, da es spezifisch für dieses Modal ist.
 (function() {
     // --- GLOBALE VARIABLEN FÜR DAS MODAL ---
     const modal = document.getElementById('authModal');
@@ -227,13 +227,16 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
     const formStorageKey = 'luvexRegisterFormData';
     function saveFormData() {
         const form = document.getElementById('luvex-register-form');
-        const interests = Array.from(form.querySelectorAll('.interest-tag.selected')).map(tag => tag.dataset.interest);
+        const selectedIndustry = form.querySelector('.interest-tag[data-type="industry"].selected');
+        const selectedInterests = Array.from(form.querySelectorAll('.interest-tag[data-type="interest"].selected')).map(tag => tag.dataset.interest);
+        
         const data = {
             first_name: form.querySelector('[name="first_name"]').value,
             last_name: form.querySelector('[name="last_name"]').value,
             user_email: form.querySelector('[name="user_email"]').value,
             company: form.querySelector('[name="company"]').value,
-            interests: interests
+            industry: selectedIndustry ? selectedIndustry.dataset.interest : null,
+            interests: selectedInterests
         };
         sessionStorage.setItem(formStorageKey, JSON.stringify(data));
     }
@@ -249,13 +252,18 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
             form.querySelector('[name="company"]').value = data.company || '';
             
             document.querySelectorAll('.interest-tag').forEach(tag => tag.classList.remove('selected'));
+
+            if(data.industry) {
+                 const industryTag = form.querySelector(`.interest-tag[data-interest="${data.industry}"]`);
+                 if (industryTag) industryTag.classList.add('selected');
+            }
             if(data.interests && data.interests.length > 0) {
                 data.interests.forEach(interestKey => {
-                    const tag = form.querySelector(`.interest-tag[data-interest="${interestKey}"]`);
-                    if (tag) tag.classList.add('selected');
+                    const interestTag = form.querySelector(`.interest-tag[data-interest="${interestKey}"]`);
+                    if (interestTag) interestTag.classList.add('selected');
                 });
             }
-            document.getElementById('interest_area_hidden').value = data.interests.join(',');
+            updateHiddenFields();
         }
     }
     
@@ -328,14 +336,40 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
         registerForm.addEventListener('input', saveFormData);
     }
     
-    // Logik für Interessen-Tags
-    document.querySelectorAll('.interest-tag').forEach(tag => {
+    // KORREKTUR: Getrennte Logik für Branchen (single-select) und Interessen (multi-select)
+    const industryTags = document.querySelectorAll('.interest-tag[data-type="industry"]');
+    const interestTags = document.querySelectorAll('.interest-tag[data-type="interest"]');
+
+    function updateHiddenFields() {
+        const selectedIndustry = document.querySelector('.interest-tag[data-type="industry"].selected');
+        const selectedInterests = Array.from(document.querySelectorAll('.interest-tag[data-type="interest"].selected'))
+                                     .map(t => t.dataset.interest);
+        
+        document.getElementById('selected_industry_hidden').value = selectedIndustry ? selectedIndustry.dataset.interest : '';
+        document.getElementById('selected_interests_hidden').value = selectedInterests.join(',');
+    }
+
+    industryTags.forEach(tag => {
         tag.addEventListener('click', function() {
+            // Alle anderen Branchen deselektieren
+            industryTags.forEach(otherTag => {
+                if (otherTag !== this) {
+                    otherTag.classList.remove('selected');
+                }
+            });
+            // Aktuelle Branche togglen
             this.classList.toggle('selected');
-            const selectedInterests = Array.from(document.querySelectorAll('.interest-tag.selected'))
-                                         .map(t => t.dataset.interest);
-            document.getElementById('interest_area_hidden').value = selectedInterests.join(',');
-            saveFormData(); 
+            updateHiddenFields();
+            saveFormData();
+        });
+    });
+
+    interestTags.forEach(tag => {
+        tag.addEventListener('click', function() {
+            // Einfach togglen für Mehrfachauswahl
+            this.classList.toggle('selected');
+            updateHiddenFields();
+            saveFormData();
         });
     });
 
@@ -374,3 +408,4 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
     };
 })();
 </script>
+

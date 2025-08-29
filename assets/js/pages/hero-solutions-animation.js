@@ -4,8 +4,8 @@
  * Description: The definitive, final version incorporating all refinement requests.
  *
  * Key Features:
- * - DYNAMIC LAYOUT PERFECTION: Subtitle is moved down, hero height is maximized (100vh),
- * and the umbrella shape is now perfectly proportioned, dynamically filling the space.
+ * - DYNAMIC LAYOUT PERFECTION: Subtitle is moved down, hero height is set to 90vh,
+ * and the umbrella shape is now perfectly proportioned, dynamically centered and scaled.
  * - NEW GLOW ORB CURSOR: Replaces the ring with a soft, glowing orb effect.
  * - INTERACTIVE CURSOR HOVER: The cursor provides feedback by pulsing when
  * hovering over clickable elements (links, buttons).
@@ -56,7 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
             this.element = this.createCursorElement();
             this.x = -1000;
             this.y = -1000;
-            this.isHoveringLink = false;
             this.size = 15;
             this.targetSize = 15;
             this.attachEventListeners();
@@ -140,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const age = Date.now() - this.lastActivationTime;
             this.activation = Math.exp(-age / 1500);
         }
-        draw() { // Drawing logic remains the same, but is now driven by new glow values
+        draw() {
             const combinedGlow = Math.min(1, this.glow + this.activation);
             ctx.save();
             if (combinedGlow > 0.01) {
@@ -162,9 +161,9 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.restore();
         }
     }
-    class Orb extends Node { /* Unchanged */ constructor(x, y, size, id) { super('', x, y, size, id); this.charge = 0; } draw() { const combinedGlow = Math.min(1, this.glow + this.activation + this.charge * 0.5); const baseRadius = 8 + combinedGlow * 12; ctx.save(); const glowSize = baseRadius * 3; const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, glowSize); gradient.addColorStop(0, `rgba(109, 213, 237, ${combinedGlow * 0.3})`); gradient.addColorStop(1, `rgba(109, 213, 237, 0)`); ctx.fillStyle = gradient; ctx.beginPath(); ctx.arc(this.x, this.y, glowSize, 0, Math.PI * 2); ctx.fill(); ctx.fillStyle = 'rgba(255, 255, 255, 1)'; ctx.shadowColor = config.glowColor; ctx.shadowBlur = combinedGlow * 20; ctx.beginPath(); ctx.arc(this.x, this.y, baseRadius, 0, Math.PI * 2); ctx.fill(); ctx.restore(); } }
-    class Path { /* Unchanged */ constructor(start, end) { this.start = start; this.end = end; } draw() { const combinedGlow = Math.min(1, this.start.glow + this.end.glow + this.start.activation + this.end.activation); const opacity = 0.2 + combinedGlow * 0.4; ctx.save(); ctx.globalAlpha = opacity; ctx.strokeStyle = config.lineColor; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(this.start.x, this.start.y); ctx.lineTo(this.end.x, this.end.y); ctx.stroke(); ctx.restore(); } }
-    class EnergyPulse { /* Unchanged */ constructor(path) { this.path = path; this.progress = 0; this.isFinished = false; } update() { this.progress += 1 / config.flowDuration; if (this.progress >= 1) { this.isFinished = true; this.path.end.lastActivationTime = Date.now(); if (centralOrb) { centralOrb.charge = Math.min(1, centralOrb.charge + 0.125); } } } draw() { if (this.isFinished) return; const easedProgress = easeInOutCubic(this.progress); const pos = { x: lerp(this.path.start.x, this.path.end.x, easedProgress), y: lerp(this.path.start.y, this.path.end.y, easedProgress) }; const opacity = Math.sin(this.progress * Math.PI); ctx.save(); ctx.fillStyle = 'rgba(255, 255, 255, 0.9)'; ctx.shadowColor = config.glowColor; ctx.shadowBlur = 15 * opacity; ctx.beginPath(); ctx.arc(pos.x, pos.y, 3, 0, Math.PI * 2); ctx.fill(); ctx.restore(); } }
+    class Orb extends Node { constructor(x, y, size, id) { super('', x, y, size, id); this.charge = 0; } draw() { const combinedGlow = Math.min(1, this.glow + this.activation + this.charge * 0.5); const baseRadius = 8 + combinedGlow * 12; ctx.save(); const glowSize = baseRadius * 3; const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, glowSize); gradient.addColorStop(0, `rgba(109, 213, 237, ${combinedGlow * 0.3})`); gradient.addColorStop(1, `rgba(109, 213, 237, 0)`); ctx.fillStyle = gradient; ctx.beginPath(); ctx.arc(this.x, this.y, glowSize, 0, Math.PI * 2); ctx.fill(); ctx.fillStyle = 'rgba(255, 255, 255, 1)'; ctx.shadowColor = config.glowColor; ctx.shadowBlur = combinedGlow * 20; ctx.beginPath(); ctx.arc(this.x, this.y, baseRadius, 0, Math.PI * 2); ctx.fill(); ctx.restore(); } }
+    class Path { constructor(start, end) { this.start = start; this.end = end; } draw() { const combinedGlow = Math.min(1, this.start.glow + this.end.glow + this.start.activation + this.end.activation); const opacity = 0.2 + combinedGlow * 0.4; ctx.save(); ctx.globalAlpha = opacity; ctx.strokeStyle = config.lineColor; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(this.start.x, this.start.y); ctx.lineTo(this.end.x, this.end.y); ctx.stroke(); ctx.restore(); } }
+    class EnergyPulse { constructor(path) { this.path = path; this.progress = 0; this.isFinished = false; } update() { this.progress += 1 / config.flowDuration; if (this.progress >= 1) { this.isFinished = true; this.path.end.lastActivationTime = Date.now(); if (centralOrb) { centralOrb.charge = Math.min(1, centralOrb.charge + 0.125); } } } draw() { if (this.isFinished) return; const easedProgress = easeInOutCubic(this.progress); const pos = { x: lerp(this.path.start.x, this.path.end.x, easedProgress), y: lerp(this.path.start.y, this.path.end.y, easedProgress) }; const opacity = Math.sin(this.progress * Math.PI); ctx.save(); ctx.fillStyle = 'rgba(255, 255, 255, 0.9)'; ctx.shadowColor = config.glowColor; ctx.shadowBlur = 15 * opacity; ctx.beginPath(); ctx.arc(pos.x, pos.y, 3, 0, Math.PI * 2); ctx.fill(); ctx.restore(); } }
 
     function setup() {
         width = canvas.clientWidth;
@@ -179,27 +178,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function init() {
-        const centerY = height / 2;
         const centerX = width / 2;
         
         // --- FINAL LAYOUT CALCULATION ---
         const headerHeight = document.querySelector('.site-header')?.offsetHeight || 80;
-        const padding = 80; // Increased padding for more space at edges
+        const verticalPadding = 40; // Reduced top/bottom padding to push shape to edges
 
-        // Use the smaller of the two dimensions to define the base radius, ensuring a perfect circle
-        const availableHeight = height - headerHeight - (padding * 2);
-        const availableWidth = width - (padding * 2);
+        const availableHeight = height - verticalPadding * 2;
+        const availableWidth = width - verticalPadding * 2;
         const radius = Math.min(availableWidth, availableHeight) / 2;
         
-        // Center the orb slightly lower to balance the composition with the text above
-        const orbCenterY = centerY + 40;
+        // Center the orb vertically in the exact middle of the canvas
+        const orbCenterY = height / 2;
 
         centralOrb = new Orb(centerX, orbCenterY, 0, 'center');
         
-        const nodeData = [ /* Unchanged */ { id: 'contact', text: 'Contact' }, { id: 'concept', text: 'Concept' }, { id: 'simulation', text: 'Simulation' }, { id: 'design', text: 'Design' }, { id: 'integration', text: 'Integration' }, { id: 'partnership', text: 'Partnership' }, { id: 'support', text: 'Support' }, { id: 'analysis', text: 'Analysis' }];
+        const nodeData = [ { id: 'contact', text: 'Contact' }, { id: 'concept', text: 'Concept' }, { id: 'simulation', text: 'Simulation' }, { id: 'design', text: 'Design' }, { id: 'integration', text: 'Integration' }, { id: 'partnership', text: 'Partnership' }, { id: 'support', text: 'Support' }, { id: 'analysis', text: 'Analysis' }];
         
         nodes = nodeData.map((d, i) => {
             const angle = (Math.PI / 4) * i - Math.PI / 2;
+            // The top point's Y-coordinate will be (height/2 - radius), which is `verticalPadding`. Perfect.
             const x = centerX + Math.cos(angle) * radius;
             const y = orbCenterY + Math.sin(angle) * radius;
             return new Node(d.text, x, y, 15, d.id);
