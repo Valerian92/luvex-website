@@ -70,16 +70,18 @@ Hero Section Layout
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(109, 213, 237, 0.95);
-    backdrop-filter: blur(4px);
+    /* FIX: Neuer "Frosted Glass" Hintergrund */
+    background: rgba(34, 211, 238, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(109, 213, 237, 0.3);
+    /* --- */
     padding: 0.5rem 1rem;
     border-radius: var(--radius-md);
     font-weight: 600;
     font-family: 'Courier New', Courier, monospace;
     z-index: 10;
-    border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: var(--shadow-sm);
-    transition: color 0.4s ease, background-color 0.4s ease;
+    transition: color 0.4s ease; /* Hintergrund-Transition entfernt */
     pointer-events: none;
 }
 
