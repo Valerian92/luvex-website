@@ -5,13 +5,11 @@ LUVEX THEME - UV KNOWLEDGE PAGE (FINALE VERSION)
 */
 
 /* ==============================================================================
-FIX: Globaler Cursor & Canvas-Struktur
+FIX: Performance & Cursor-Steuerung
+- Der Standard-Cursor wird nur ausgeblendet, wenn der animierte aktiv ist.
+- Das Cursor-Canvas wird standardmäßig ausgeblendet.
 ==============================================================================
 */
-body, a, button, .spectrum-action-btn {
-    cursor: none !important;
-}
-
 #cursor-canvas {
     position: fixed;
     top: 0;
@@ -20,7 +18,19 @@ body, a, button, .spectrum-action-btn {
     height: 100vh;
     z-index: 99999;
     pointer-events: none;
+    display: none; /* Standardmäßig ausblenden */
 }
+
+body.custom-cursor-active #cursor-canvas {
+    display: block; /* Nur anzeigen, wenn aktiv */
+}
+
+body.custom-cursor-active,
+body.custom-cursor-active a,
+body.custom-cursor-active button {
+    cursor: none !important;
+}
+
 
 #spectrum-canvas {
     position: absolute;
@@ -79,7 +89,7 @@ Hero Section Layout
     text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Wichtig für die Positionierung */
+    justify-content: space-between;
     align-items: center;
     height: 100%;
     width: 100%;
@@ -87,15 +97,15 @@ Hero Section Layout
 }
 
 .hero-content-wrapper {
-    margin-top: 8rem; /* Abstand von oben */
-    margin-bottom: 4rem; /* FIX: Größerer Abstand zu den Buttons */
+    margin-top: 8rem;
+    margin-bottom: 4rem;
 }
 
 .hero-spectrum-actions {
-    margin-bottom: 6rem; /* Abstand von unten */
+    margin-bottom: 6rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem; /* FIX: Buttons weiter auseinander */
+    gap: 2.5rem;
     justify-content: center;
 }
 

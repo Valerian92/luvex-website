@@ -1,37 +1,16 @@
 /*
 ==============================================================================
-LUVEX THEME - MODAL STYLES (Kombiniert)
-==============================================================================
-Description: Enthält alle Styles für die verschiedenen Modal-Fenster der Seite.
-Last Update: 2025-08-29
+LUVEX THEME - MODAL STYLES (Kombiniert & Final)
 ==============================================================================
 */
 
 /*
 ==============================================================================
 1. Generic Modal (für Avatar-Upload etc.)
-   -> Gesteuert durch avatar-modal-handler.js via [data-modal]
+   -> Wird durch avatar-modal-handler.js (via data-modal) getriggert.
+   -> Nutzt .modal-overlay.active und .modal-container
 ==============================================================================
 */
-
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(27, 42, 73, 0.8);
-    backdrop-filter: blur(8px);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    opacity: 0;
-    visibility: hidden;
-    transition: var(--transition-normal);
-}
-
 .modal-overlay.active {
     opacity: 1;
     visibility: visible;
@@ -42,7 +21,7 @@ Last Update: 2025-08-29
     border-radius: var(--radius-xl);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     width: 100%;
-    max-width: 600px;
+    max-width: 600px; /* Breite für generische Modals wie Avatar-Upload */
     max-height: 90vh;
     overflow: hidden;
     transform: scale(0.9) translateY(20px);
@@ -54,6 +33,7 @@ Last Update: 2025-08-29
     transform: scale(1) translateY(0);
 }
 
+/* Header, Content, Footer für generische Modals... */
 .modal-header {
     background: linear-gradient(135deg, var(--luvex-dark-blue), rgba(27, 42, 73, 0.9));
     padding: 1.5rem;
@@ -62,30 +42,25 @@ Last Update: 2025-08-29
     justify-content: space-between;
     border-bottom: 1px solid rgba(109, 213, 237, 0.3);
 }
-
 .modal-header__title {
     color: var(--luvex-white);
     font-size: var(--text-lg);
     font-weight: 600;
     margin: 0;
 }
-
 .modal-header__action {
     color: #cbd5e1;
     background: none;
     border: none;
     cursor: pointer;
     padding: 0.5rem;
-    border-radius: var(--radius-sm);
-    transition: var(--transition-normal);
-    font-size: 1rem;
+    font-size: 1.2rem;
 }
-
-.modal-header__action:hover {
-    color: var(--luvex-white);
-    background: rgba(255, 255, 255, 0.1);
+.modal-content {
+    padding: 2rem;
+    max-height: 60vh;
+    overflow-y: auto;
 }
-
 .modal-footer {
     padding: 1.5rem 2rem;
     background: var(--luvex-gray-100);
@@ -95,52 +70,75 @@ Last Update: 2025-08-29
     gap: 1rem;
 }
 
+
 /*
 ==============================================================================
-2. Auth Modal (für Login/Register)
-   -> Gesteuert durch auth-modal.php
+2. Auth Modal (für Login/Register) - FINALE KORREKTUR
+   -> Nutzt .modal-overlay.visible und .modal-content (spezifische Regeln hier)
 ==============================================================================
 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(27, 42, 73, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    padding: 2rem; /* Fügt einen Sicherheitsabstand an den Rändern hinzu */
+}
 
 .modal-overlay.visible {
     opacity: 1;
     visibility: visible;
 }
 
-.modal-overlay .modal-content {
+/* Dies ist der Container für das Auth-Formular */
+#authModal .modal-content {
     position: relative;
-    /* KORREKTUR: Feste Breite, damit der Inhalt Platz hat */
-    width: 100%;
-    max-width: 520px; /* Genug Platz für das Formular */
-    max-height: 90vh;
-    overflow-y: auto;
+    /* KORREKTUR: max-width entfernt, damit der Inhalt (.auth-form-container) die Breite bestimmen kann */
+    width: auto; 
+    max-height: 95vh;
+    overflow-y: auto; /* Scrollbar nur wenn nötig */
     border-radius: var(--radius-xl);
     transform: scale(0.95) translateY(20px);
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    /* WICHTIG: Padding wird vom .auth-form-container gesteuert, nicht hier */
+    padding: 0; 
 }
 
-.modal-overlay.visible .modal-content {
+/* Scrollbar-Styling für den Modal-Inhalt */
+#authModal .modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+#authModal .modal-content::-webkit-scrollbar-track {
+    background: var(--luvex-dark-blue);
+    border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+}
+#authModal .modal-content::-webkit-scrollbar-thumb {
+    background-color: var(--luvex-bright-cyan);
+    border-radius: 4px;
+}
+
+.modal-overlay.visible #authModal .modal-content {
     transform: scale(1) translateY(0);
-}
-
-.modal-close-btn {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: var(--luvex-gray-300);
-    cursor: pointer;
-    z-index: 1000;
-    transition: color 0.2s ease;
-}
-
-.modal-close-btn:hover {
-    color: var(--luvex-white);
 }
 
 body.modal-open {
     overflow: hidden;
 }
+
+@media (max-width: 768px) {
+    .modal-overlay {
+        padding: 0.5rem;
+    }
+}
+

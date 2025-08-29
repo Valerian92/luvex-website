@@ -2,10 +2,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const cursorCanvas = document.getElementById('cursor-canvas');
     const heroSection = document.querySelector('.hero-spectrum-engine');
+    const header = document.querySelector('.site-header'); // Header Element holen
     const spectrumCanvas = document.getElementById('spectrum-canvas');
     const indicator = document.querySelector('.wavelength-indicator');
 
-    if (!cursorCanvas || !heroSection || !spectrumCanvas) return;
+    if (!cursorCanvas || !heroSection || !spectrumCanvas || !header) return;
 
     const cursorCtx = cursorCanvas.getContext('2d');
     const spectrumCtx = spectrumCanvas.getContext('2d');
@@ -13,13 +14,15 @@ document.addEventListener('DOMContentLoaded', function() {
     let mouse = {
         x: window.innerWidth / 2,
         y: window.innerHeight / 2,
-        hoveredElementType: null // 'menu', 'button', or null
+        hoveredElementType: null
     };
     let smoothedMouse = { ...mouse };
     let sparks = [], cursorParticles = [];
     let waves = [], particlesArray = [];
     let increment = 0;
     let heroRect;
+    let isCursorActive = false; // FIX: Status für den animierten Cursor
+    let animationFrameId; // FIX: ID für requestAnimationFrame
 
     const mapRange = (v, inMin, inMax, outMin, outMax) => (v - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
     const lerp = (start, end, amt) => (1 - amt) * start + amt * end;
@@ -44,37 +47,12 @@ document.addEventListener('DOMContentLoaded', function() {
         return { r: Math.round(255 * r * factor), g: Math.round(255 * g * factor), b: Math.round(255 * b * factor) };
     };
 
-    class Spark {
-        constructor(x, y, color) { this.x=x; this.y=y; this.color=color; const a=Math.random()*Math.PI*2, s=Math.random()*3+1; this.vx=Math.cos(a)*s; this.vy=Math.sin(a)*s; this.lifespan=1; this.size=Math.random()*2+1; }
-        update() { this.x+=this.vx; this.y+=this.vy; this.lifespan-=0.04; }
-        draw(ctx) { ctx.fillStyle=`rgba(${this.color.r},${this.color.g},${this.color.b},${this.lifespan})`; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); }
-    }
-    class CursorParticle {
-        constructor(x, y, color) { this.x=x; this.y=y; this.color=color; this.size=Math.random()*2+1; this.lifespan=1; this.vx=(Math.random()-.5)*.5; this.vy=(Math.random()-.5)*.5; }
-        update() { this.x+=this.vx; this.y+=this.vy; this.lifespan-=0.02; }
-        draw(ctx) { ctx.fillStyle=`rgba(${this.color.r},${this.color.g},${this.color.b},${this.lifespan})`; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); }
-    }
-    class Wave {
-        constructor(c) { this.yP=c.yP; this.amp=c.amp; this.spd=c.spd; this.w=c.w; this.o=c.o; this.off=Math.random()*Math.PI*2; }
-        draw(ctx,i,dA,dL,dC) { const y=heroRect.height*this.yP; ctx.beginPath(); ctx.moveTo(0,y); for(let x=0;x<heroRect.width;x++){const wY=y+Math.sin(x*dL+i*this.spd+this.off)*dA*Math.sin(i*.1);ctx.lineTo(x,wY);} ctx.strokeStyle=`rgba(${dC.r},${dC.g},${dC.b},${this.o})`;ctx.lineWidth=this.w;ctx.stroke();}
-    }
-    class Particle {
-        constructor(x,y,s){this.x=x;this.y=y;this.bX=this.x;this.bY=this.y;this.s=s;this.d=Math.random()*30+10;}
-        update(ctx,m){let dx=(m.x-heroRect.left)-this.x,dy=(m.y-heroRect.top)-this.y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<150){const f=(150-dist)/150;this.x-=(dx/dist)*f*this.d;this.y-=(dy/dist)*f*this.d;}else{if(this.x!==this.bX)this.x=lerp(this.x,this.bX,.1);if(this.y!==this.bY)this.y=lerp(this.y,this.bY,.1);} this.draw(ctx);}
-        draw(ctx){ctx.fillStyle='rgba(109,213,237,.6)';ctx.beginPath();ctx.arc(this.x,this.y,this.s,0,Math.PI*2);ctx.fill();}
-    }
+    // Klassen für Partikel und Wellen bleiben unverändert...
+    class Spark { constructor(x,y,c){this.x=x;this.y=y;this.color=c;const a=Math.random()*Math.PI*2,s=Math.random()*3+1;this.vx=Math.cos(a)*s;this.vy=Math.sin(a)*s;this.lifespan=1;this.size=Math.random()*2+1} update(){this.x+=this.vx;this.y+=this.vy;this.lifespan-=.04} draw(c){c.fillStyle=`rgba(${this.color.r},${this.color.g},${this.color.b},${this.lifespan})`;c.beginPath();c.arc(this.x,this.y,this.size,0,Math.PI*2);c.fill()} }
+    class CursorParticle { constructor(x,y,c){this.x=x;this.y=y;this.color=c;this.size=Math.random()*2+1;this.lifespan=1;this.vx=(Math.random()-.5)*.5;this.vy=(Math.random()-.5)*.5} update(){this.x+=this.vx;this.y+=this.vy;this.lifespan-=.02} draw(c){c.fillStyle=`rgba(${this.color.r},${this.color.g},${this.color.b},${this.lifespan})`;c.beginPath();c.arc(this.x,this.y,this.size,0,Math.PI*2);c.fill()} }
+    class Wave { constructor(c){this.yP=c.yP;this.amp=c.amp;this.spd=c.spd;this.w=c.w;this.o=c.o;this.off=Math.random()*Math.PI*2} draw(c,i,dA,dL,dC){const y=heroRect.height*this.yP;c.beginPath();c.moveTo(0,y);for(let x=0;x<heroRect.width;x++){const wY=y+Math.sin(x*dL+i*this.spd+this.off)*dA*Math.sin(i*.1);c.lineTo(x,wY)}c.strokeStyle=`rgba(${dC.r},${dC.g},${dC.b},${this.o})`;c.lineWidth=this.w;c.stroke()} }
+    class Particle { constructor(x,y,s){this.x=x;this.y=y;this.bX=this.x;this.bY=this.y;this.s=s;this.d=Math.random()*30+10} update(c,m){let dx=(m.x-heroRect.left)-this.x,dy=(m.y-heroRect.top)-this.y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<150){const f=(150-dist)/150;this.x-=(dx/dist)*f*this.d;this.y-=(dy/dist)*f*this.d}else{if(this.x!==this.bX)this.x=lerp(this.x,this.bX,.1);if(this.y!==this.bY)this.y=lerp(this.y,this.bY,.1)}this.draw(c)} draw(c){c.fillStyle='rgba(109,213,237,.6)';c.beginPath();c.arc(this.x,this.y,this.s,0,Math.PI*2);c.fill()} }
 
-    window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-    
-    document.querySelectorAll('.site-header a').forEach(el => {
-        el.addEventListener('mouseenter', () => mouse.hoveredElementType = 'menu');
-        el.addEventListener('mouseleave', () => mouse.hoveredElementType = null);
-    });
-    document.querySelectorAll('.spectrum-action-btn').forEach(el => {
-        el.addEventListener('mouseenter', () => mouse.hoveredElementType = 'button');
-        el.addEventListener('mouseleave', () => mouse.hoveredElementType = null);
-    });
-    
     function setupCanvases() {
         const dpr = window.devicePixelRatio || 1;
         cursorCanvas.width = window.innerWidth * dpr;
@@ -95,61 +73,81 @@ document.addEventListener('DOMContentLoaded', function() {
         let num = (heroRect.width * heroRect.height) / 9000;
         for(let i=0; i<num; i++) particlesArray.push(new Particle(Math.random()*heroRect.width, Math.random()*heroRect.height, Math.random()*1.5+1));
     }
+    
     window.addEventListener('resize', setupCanvases);
+
+    // Event Listeners für Hover-Effekte bleiben gleich
+    document.querySelectorAll('.site-header a, .spectrum-action-btn').forEach(el => {
+        el.addEventListener('mouseenter', (e) => {
+            if (e.currentTarget.matches('.site-header a')) mouse.hoveredElementType = 'menu';
+            else mouse.hoveredElementType = 'button';
+        });
+        el.addEventListener('mouseleave', () => mouse.hoveredElementType = null);
+    });
+
+    // FIX: Neue Logik zum Starten/Stoppen der Animation
+    function manageCursorAnimation(e) {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+
+        const headerRect = header.getBoundingClientRect();
+        heroRect = heroSection.getBoundingClientRect();
+
+        const inHeader = mouse.y >= headerRect.top && mouse.y <= headerRect.bottom;
+        const inHero = mouse.y >= heroRect.top && mouse.y <= heroRect.bottom;
+
+        if (inHeader || inHero) {
+            if (!isCursorActive) {
+                isCursorActive = true;
+                document.body.classList.add('custom-cursor-active');
+                animate(); // Starte die Animation
+            }
+        } else {
+            if (isCursorActive) {
+                isCursorActive = false;
+                document.body.classList.remove('custom-cursor-active');
+                cancelAnimationFrame(animationFrameId); // Stoppe die Animation
+                cursorCtx.clearRect(0, 0, cursorCanvas.width, cursorCanvas.height); // Canvas leeren
+            }
+        }
+    }
+    window.addEventListener('mousemove', manageCursorAnimation);
+
 
     function updateIndicator(wl, color) {
         indicator.textContent = `${wl.toFixed(0)} nm`;
-        
-        // FIX: Neue Logik für Hintergrund und Textfarbe
-        const cyan = { r: 109, g: 213, b: 237 };
-        const darkBlue = { r: 27, g: 42, b: 73 };
+        const white = { r: 255, g: 255, b: 255 };
+        const purple = { r: 138, g: 43, b: 226 };
         let bgColor;
-
-        if (wl < 440) { // Bis ins tiefe Blau bleibt der Hintergrund Cyan
-            bgColor = cyan;
-        } else if (wl >= 440 && wl <= 520) { // Sanfter Übergang von Blau zu Grün
-            const amount = mapRange(wl, 440, 520, 0, 1);
-            bgColor = lerpColor(cyan, darkBlue, amount);
-        } else { // Ab Grün ist der Hintergrund dunkelblau für maximalen Kontrast
-            bgColor = darkBlue;
+        if (wl < 400) {
+            bgColor = white;
+        } else {
+            const amount = mapRange(wl, 400, 780, 0, 1);
+            bgColor = lerpColor(white, purple, amount);
         }
-        indicator.style.backgroundColor = `rgb(${bgColor.r}, ${bgColor.g}, ${bgColor.b})`;
-        
-        // FIX: Textfarbe ist IMMER die Farbe der Welle
+        indicator.style.backgroundColor = `rgba(${bgColor.r}, ${bgColor.g}, ${bgColor.b}, 0.9)`;
         indicator.style.color = `rgb(${color.r}, ${color.g}, ${color.b})`;
     }
 
     function drawCursor(ctx, color) {
+        // ... (Die Logik zum Zeichnen des Cursors bleibt identisch)
         switch (mouse.hoveredElementType) {
             case 'menu':
-                const baseRadius = 8;
-                const pulse = Math.sin(increment * 10) * 2;
-                ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},0.2)`;
-                ctx.beginPath();
-                ctx.arc(smoothedMouse.x, smoothedMouse.y, baseRadius + pulse + 4, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.fillStyle = `rgba(${color.r},${color.g},${color.b},0.8)`;
-                ctx.beginPath();
-                ctx.arc(smoothedMouse.x, smoothedMouse.y, baseRadius + pulse, 0, Math.PI * 2);
-                ctx.fill();
+                const baseRadius=8,pulse=Math.sin(increment*10)*2;ctx.fillStyle=`rgba(${color.r},${color.g},${color.b},0.2)`;ctx.beginPath();ctx.arc(smoothedMouse.x,smoothedMouse.y,baseRadius+pulse+4,0,Math.PI*2);ctx.fill();ctx.fillStyle=`rgba(${color.r},${color.g},${color.b},0.8)`;ctx.beginPath();ctx.arc(smoothedMouse.x,smoothedMouse.y,baseRadius+pulse,0,Math.PI*2);ctx.fill();
                 break;
             case 'button':
-                if (Math.random() > 0.5) sparks.push(new Spark(smoothedMouse.x, smoothedMouse.y, color));
+                if(Math.random()>.5)sparks.push(new Spark(smoothedMouse.x,smoothedMouse.y,color));
                 break;
             default:
-                ctx.fillStyle = `rgb(${color.r},${color.g},${color.b})`;
-                ctx.beginPath();
-                ctx.arc(smoothedMouse.x, smoothedMouse.y, 3, 0, Math.PI * 2);
-                ctx.fill();
-                if (Math.hypot(smoothedMouse.x - mouse.x, smoothedMouse.y - mouse.y) > 1) {
-                    cursorParticles.push(new CursorParticle(smoothedMouse.x, smoothedMouse.y, color));
-                }
+                ctx.fillStyle=`rgb(${color.r},${color.g},${color.b})`;ctx.beginPath();ctx.arc(smoothedMouse.x,smoothedMouse.y,3,0,Math.PI*2);ctx.fill();if(Math.hypot(smoothedMouse.x-mouse.x,smoothedMouse.y-mouse.y)>1){cursorParticles.push(new CursorParticle(smoothedMouse.x,smoothedMouse.y,color))}
                 break;
         }
-        [...sparks, ...cursorParticles].forEach((p, i, arr) => { p.update(); p.draw(ctx); if (p.lifespan <= 0) arr.splice(i, 1); });
+        [...sparks,...cursorParticles].forEach((p,i,a)=>{p.update();p.draw(ctx);if(p.lifespan<=0)a.splice(i,1)});
     }
 
     function animate() {
+        if (!isCursorActive) return; // Stoppe, wenn inaktiv
+
         smoothedMouse.x = lerp(smoothedMouse.x, mouse.x, 0.2);
         smoothedMouse.y = lerp(smoothedMouse.y, mouse.y, 0.2);
 
@@ -176,12 +174,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         increment += 0.02;
-        requestAnimationFrame(animate);
+        animationFrameId = requestAnimationFrame(animate);
     }
 
     setupCanvases();
-    animate();
+    // Initialer Aufruf entfernt, wird jetzt durch mousemove gesteuert
 });
-
 
 

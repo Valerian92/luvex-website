@@ -41,19 +41,6 @@ LUVEX THEME - STANDARD STYLES PAGE
     text-align: center;
 }
 
-.standard-styles-page .button-showcase {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    justify-content: center;
-    align-items: center;
-}
-
-.standard-styles-page .standard-form {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
 /* --- Icon Library Styles --- */
 .icon-library-section .subtitle {
     margin-bottom: 3rem;
@@ -66,11 +53,19 @@ LUVEX THEME - STANDARD STYLES PAGE
 }
 
 .icon-category-title {
+    display: flex; /* NEU */
+    align-items: center; /* NEU */
+    gap: 0.75rem; /* NEU */
     font-size: 1.5rem;
     color: var(--luvex-dark-blue);
     margin-bottom: 1.5rem;
     padding-bottom: 0.75rem;
     border-bottom: 1px solid var(--luvex-gray-300);
+}
+
+.icon-category-title i { /* NEU */
+    color: var(--luvex-vibrant-blue);
+    font-size: 1.2em;
 }
 
 .icon-list {
@@ -114,4 +109,3 @@ LUVEX THEME - STANDARD STYLES PAGE
     padding: 0.1rem 0.4rem;
     border-radius: 4px;
 }
-

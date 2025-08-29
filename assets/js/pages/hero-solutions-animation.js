@@ -1,18 +1,16 @@
 /**
- * LUVEX Theme - Process Equipment Hero Animation (V60 - Final "Umbrella" Concept)
+ * LUVEX Theme - Process Equipment Hero Animation (V70 - Final Polished Version)
  *
- * Description: The definitive version, combining the best concepts into a single,
- * polished animation.
+ * Description: The definitive, polished version with a wider, responsive layout
+ * and a new global, symbolic custom cursor.
  *
  * Key Features:
- * - UMBRELLA LAYOUT: Nodes are perfectly arranged in an iconic octagonal shape,
- * viewed from a top-down perspective, converging on a central orb.
- * - PASSIVE ENERGY PULSE: A continuous, wandering light pulse travels between
- * nodes, ensuring the hero is always alive with subtle motion.
- * - ENHANCED PROXIMITY GLOW: The interactive mouse-glow effect has a much larger
- * trigger zone, making it more responsive and noticeable.
- * - REFINED AESTHETICS: Clean, stable 2D graphics with a custom cursor and
- * sophisticated, multi-layered glow effects.
+ * - WIDER UMBRELLA LAYOUT: The shape is now significantly wider, dynamically
+ * adapting to the screen width for a panoramic and impressive look.
+ * - GLOBAL CUSTOM CURSOR: A new, site-wide custom cursor with a rotating
+ * ring effect that persists over the header and all other elements.
+ * - ALL PREVIOUS FEATURES RETAINED: The passive energy pulse and the enhanced
+ * proximity glow for nodes remain active.
  *
  * @package Luvex
  */
@@ -26,6 +24,73 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    // --- GLOBAL CURSOR SETUP ---
+    // Create a single global cursor element and inject its styles
+    let customCursorElement = document.getElementById('luvex-custom-cursor');
+    if (!customCursorElement) {
+        customCursorElement = document.createElement('div');
+        customCursorElement.id = 'luvex-custom-cursor';
+        document.body.appendChild(customCursorElement);
+
+        const style = document.createElement('style');
+        style.innerHTML = `
+            #luvex-custom-cursor {
+                position: fixed;
+                top: 0; left: 0;
+                width: 30px;
+                height: 30px;
+                border: 1.5px solid rgba(109, 213, 237, 0.7);
+                border-radius: 50%;
+                pointer-events: none;
+                transform: translate(-50%, -50%) scale(0);
+                transition: transform 0.3s ease-out;
+                z-index: 99999;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: rotate-cursor 8s linear infinite;
+            }
+            #luvex-custom-cursor::before {
+                content: '';
+                width: 6px;
+                height: 6px;
+                background-color: rgba(255, 255, 255, 0.9);
+                border-radius: 50%;
+                box-shadow: 0 0 10px rgba(109, 213, 237, 0.8);
+            }
+            @keyframes rotate-cursor {
+                from { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+                to { transform: translate(-50%, -50%) scale(1) rotate(360deg); }
+            }
+            /* WICHTIGE ÄNDERUNG: Cursor wird nur bei aktiver Klasse versteckt */
+            body.custom-cursor-active,
+            body.custom-cursor-active a,
+            body.custom-cursor-active button {
+                cursor: none;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Listener zum Positionieren des Cursors
+        document.addEventListener('mousemove', (e) => {
+            customCursorElement.style.left = `${e.clientX}px`;
+            customCursorElement.style.top = `${e.clientY}px`;
+        });
+        
+        // NEUE LOGIK: Prüft, über welchem Element sich die Maus befindet
+        document.addEventListener('mouseover', (e) => {
+            // Aktiviert den Custom Cursor nur über dem Header oder der Hero Section
+            if (e.target.closest('.site-header') || e.target.closest('.luvex-hero--solutions')) {
+                document.body.classList.add('custom-cursor-active');
+                customCursorElement.style.transform = 'translate(-50%, -50%) scale(1)';
+            } else {
+                document.body.classList.remove('custom-cursor-active');
+                customCursorElement.style.transform = 'translate(-50%, -50%) scale(0)';
+            }
+        });
+    }
+
+
     const ctx = canvas.getContext('2d');
     let width, height, dpr, animationFrameId;
 
@@ -34,9 +99,9 @@ document.addEventListener('DOMContentLoaded', () => {
         lineColor: `rgba(109, 213, 237, 0.2)`,
         glowColor: `rgba(109, 213, 237, 0.8)`,
         fontFamily: 'Inter, sans-serif',
-        mouseRadius: 250, // Increased radius for a larger trigger zone
-        phaseDuration: 120, // Time between passive pulses
-        flowDuration: 100, // Duration of the passive pulse travel
+        mouseRadius: 250,
+        phaseDuration: 120,
+        flowDuration: 100,
     };
 
     // --- STATE VARIABLES ---
@@ -52,8 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const lerp = (a, b, t) => a * (1 - t) + b * t;
     const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-
-    // --- CLASSES ---
+    // --- CLASSES (Node, Orb, Path, EnergyPulse) ---
+    // These classes remain unchanged from the previous version
     class Node {
         constructor(text, x, y, size, id) {
             this.text = text; this.x = x; this.y = y; this.size = size; this.id = id;
@@ -61,14 +126,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         update() {
-            // Mouse proximity glow
             const dx = this.x - mouse.x;
             const dy = this.y - mouse.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
             const targetGlow = mouse.isOverCanvas ? Math.max(0, 1 - dist / config.mouseRadius) : 0;
             this.glow = lerp(this.glow, targetGlow, 0.08);
 
-            // Passive activation glow
             const age = Date.now() - this.lastActivationTime;
             this.activation = Math.exp(-age / 1500);
         }
@@ -76,7 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
         draw() {
             const combinedGlow = Math.min(1, this.glow + this.activation);
             ctx.save();
-            
             if (combinedGlow > 0.01) {
                 const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, combinedGlow * 50);
                 gradient.addColorStop(0, `rgba(109, 213, 237, ${combinedGlow * 0.4})`);
@@ -86,7 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.arc(this.x, this.y, combinedGlow * 50, 0, Math.PI * 2);
                 ctx.fill();
             }
-
             const textOpacity = 0.6 + combinedGlow * 0.4;
             ctx.globalAlpha = textOpacity;
             ctx.font = `500 ${this.size}px ${config.fontFamily}`;
@@ -103,13 +164,10 @@ document.addEventListener('DOMContentLoaded', () => {
             super('', x, y, size, id);
             this.charge = 0;
          }
-
          draw() {
             const combinedGlow = Math.min(1, this.glow + this.activation + this.charge * 0.5);
             const baseRadius = 8 + combinedGlow * 12;
-
             ctx.save();
-            // Outer glow
             const glowSize = baseRadius * 3;
             const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, glowSize);
             gradient.addColorStop(0, `rgba(109, 213, 237, ${combinedGlow * 0.3})`);
@@ -118,8 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.beginPath();
             ctx.arc(this.x, this.y, glowSize, 0, Math.PI * 2);
             ctx.fill();
-
-            // Core
             ctx.fillStyle = 'rgba(255, 255, 255, 1)';
             ctx.shadowColor = config.glowColor;
             ctx.shadowBlur = combinedGlow * 20;
@@ -171,7 +227,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 y: lerp(this.path.start.y, this.path.end.y, easedProgress)
             };
             const opacity = Math.sin(this.progress * Math.PI);
-
             ctx.save();
             ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
             ctx.shadowColor = config.glowColor;
@@ -183,30 +238,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    class CustomCursor {
-        draw() {
-            if (!mouse.isOverCanvas) return;
-            
-            ctx.save();
-            // Outer glow
-            const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 20);
-            gradient.addColorStop(0, 'rgba(109, 213, 237, 0.3)');
-            gradient.addColorStop(1, 'rgba(109, 213, 237, 0)');
-            ctx.fillStyle = gradient;
-            ctx.beginPath();
-            ctx.arc(mouse.x, mouse.y, 20, 0, Math.PI * 2);
-            ctx.fill();
-            
-            // Core dot
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-            ctx.beginPath();
-            ctx.arc(mouse.x, mouse.y, 3, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.restore();
-        }
-    }
-    let customCursor = new CustomCursor();
-    
     function setup() {
         width = canvas.clientWidth;
         height = canvas.clientHeight;
@@ -222,12 +253,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function init() {
         const centerY = height / 2;
         const centerX = width / 2;
-        const radius = Math.min(width, height) * 0.35;
+        
+        // --- KEY CHANGE: WIDER SHAPE ---
+        // The horizontal radius is now a larger fraction of the width,
+        // creating a wider, more panoramic "umbrella".
+        const radiusX = Math.min(width * 0.45, 600); // Use 45% of width, max 600px
+        const radiusY = radiusX * 0.55; // Keep Y radius smaller for the wide look
 
-        // Central Orb
         centralOrb = new Orb(centerX, centerY, 0, 'center');
         
-        // Umbrella Nodes
         const nodeData = [
             { id: 'contact', text: 'Contact' }, { id: 'concept', text: 'Concept' },
             { id: 'simulation', text: 'Simulation' }, { id: 'design', text: 'Design' },
@@ -237,12 +271,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
         nodes = nodeData.map((d, i) => {
             const angle = (Math.PI / 4) * i - Math.PI / 2;
-            const x = centerX + Math.cos(angle) * radius;
-            const y = centerY + Math.sin(angle) * radius;
+            const x = centerX + Math.cos(angle) * radiusX;
+            const y = centerY + Math.sin(angle) * radiusY;
             return new Node(d.text, x, y, 15, d.id);
         });
 
-        // Paths
         paths = { outer: [], toCenter: [] };
         for (let i = 0; i < nodes.length; i++) {
             paths.outer.push(new Path(nodes[i], nodes[(i + 1) % nodes.length]));
@@ -254,11 +287,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function nextPhase() {
         phase = (phase + 1) % nodes.length;
-        if (phase === 0) centralOrb.charge = 0; // Reset charge on new cycle
-
-        // Create pulse on outer path
+        if (phase === 0) centralOrb.charge = 0;
         flows.push(new EnergyPulse(paths.outer[phase]));
-        // Create pulse to center
         flows.push(new EnergyPulse(paths.toCenter[phase]));
     }
 
@@ -267,28 +297,24 @@ document.addEventListener('DOMContentLoaded', () => {
         phaseTimer++;
         if (phaseTimer >= config.phaseDuration) {
             phaseTimer = 0;
-            if(flows.length < 4) nextPhase(); // Limit concurrent flows
+            if(flows.length < 4) nextPhase();
         }
 
-        // Update
         flows = flows.filter(f => !f.isFinished);
         flows.forEach(f => f.update());
         nodes.forEach(n => n.update());
         centralOrb.update();
 
-        // Draw
         paths.outer.forEach(p => p.draw());
         paths.toCenter.forEach(p => p.draw());
         nodes.forEach(n => n.draw());
         centralOrb.draw();
         flows.forEach(f => f.draw());
-        customCursor.draw();
         
         animationFrameId = requestAnimationFrame(animate);
     }
     
     // --- EVENT LISTENERS & INITIALIZATION ---
-    // (Same as the last simplified version)
     const resizeObserver = new ResizeObserver(entries => {
         if (animationFrameId) cancelAnimationFrame(animationFrameId);
         setup();
@@ -296,6 +322,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     resizeObserver.observe(canvas);
 
+    // This listener now only tracks if the mouse is over the canvas
+    // for the node proximity effect. The cursor itself is global.
     heroSection.addEventListener('mousemove', (e) => {
         const rect = canvas.getBoundingClientRect();
         mouse.x = e.clientX - rect.left;
@@ -310,4 +338,5 @@ document.addEventListener('DOMContentLoaded', () => {
     setup();
     animate();
 });
+
 
