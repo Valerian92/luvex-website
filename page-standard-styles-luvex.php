@@ -2,15 +2,14 @@
 /**
  * Template Name: Standard Styles
  * Description: Eine Seite zur Anzeige aller globalen Standard-Styles und UI-Komponenten.
- * NEU: Integrierte, dynamische LUVEX Icon-Bibliothek.
  */
 
-get_header();
+get_header(); 
 ?>
 
 <main id="main" class="site-main">
 
-    <!-- Hero Section (bleibt unverändert) -->
+    <!-- Hero Section -->
     <section class="luvex-hero">
         <div class="luvex-hero__container">
             <div class="luvex-hero__content">
@@ -33,7 +32,7 @@ get_header();
             </div>
         </header>
 
-        <!-- Typografie (unverändert) -->
+        <!-- Typografie -->
         <section class="style-section">
             <div class="container">
                 <h2>Typografie</h2>
@@ -45,14 +44,49 @@ get_header();
                         <h4>Überschrift H4</h4>
                     </div>
                     <div>
-                        <p>Dies ist ein Standard-Absatztext mit <strong>fettem Text</strong>, <em>kursivem Text</em> und einem <a href="#">Link</a>.</p>
-                        <blockquote>Dies ist ein Zitatblock zur Hervorhebung wichtiger Aussagen.</blockquote>
+                        <p>Dies ist ein Standard-Absatztext. Er enthält <strong>fettgedruckten Text</strong>, <em>kursiven Text</em> und einen <a href="#">Link</a>.</p>
+                        <blockquote>Dies ist ein Zitatblock. Er wird verwendet, um wichtige Aussagen hervorzuheben.</blockquote>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Buttons (unverändert) -->
+        <!-- LUVEX Icon Library (NEU) -->
+        <section class="style-section icon-library-section">
+            <div class="container">
+                <h2>LUVEX Icon Library</h2>
+                <p class="subtitle">Die zentrale Bibliothek für alle Icons. Wird dynamisch aus <code>_luvex-helpers.php</code> geladen.</p>
+                
+                <?php if (function_exists('get_luvex_icon_library')): ?>
+                    <?php $icon_library = get_luvex_icon_library(); ?>
+                    
+                    <div class="icon-categories-container">
+                        <?php foreach ($icon_library as $category_name => $icons): ?>
+                            <div class="icon-category">
+                                <h3 class="icon-category-title"><?php echo esc_html($category_name); ?></h3>
+                                <div class="icon-list">
+                                    <?php foreach ($icons as $key => $details): ?>
+                                        <div class="icon-item">
+                                            <div class="icon-preview">
+                                                <i class="<?php echo esc_attr($details['class']); ?>"></i>
+                                            </div>
+                                            <div class="icon-details">
+                                                <span class="icon-label"><?php echo esc_html($details['label']); ?></span>
+                                                <code class="icon-key"><?php echo esc_html($key); ?></code>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php else: ?>
+                    <p><em>Icon-Bibliothek konnte nicht geladen werden.</em></p>
+                <?php endif; ?>
+            </div>
+        </section>
+
+        <!-- Buttons -->
         <section class="style-section">
             <div class="container">
                 <h2>Buttons & CTAs</h2>
@@ -63,43 +97,8 @@ get_header();
                 </div>
             </div>
         </section>
-        
-        <!-- ==================================================================== -->
-        <!-- NEU: LUVEX Icon Library -->
-        <!-- ==================================================================== -->
-        <section class="style-section icon-library-section">
-            <div class="container">
-                <h2>LUVEX Icon-Bibliothek</h2>
-                <p class="subtitle">Die zentrale Referenz für alle Icons. Die Funktion <code>get_luvex_icon('icon-name')</code> verwenden.</p>
 
-                <?php if (function_exists('get_luvex_icon_library')) :
-                    $icon_library = get_luvex_icon_library();
-                ?>
-                    <?php foreach ($icon_library as $category_name => $icons) : ?>
-                        <div class="icon-category">
-                            <h3 class="icon-category__title"><?php echo esc_html($category_name); ?></h3>
-                            <div class="icon-grid">
-                                <?php foreach ($icons as $key => $details) : ?>
-                                    <div class="icon-specimen">
-                                        <div class="icon-specimen__preview">
-                                            <?php echo get_luvex_icon($key); ?>
-                                        </div>
-                                        <div class="icon-specimen__details">
-                                            <span class="specimen-label"><?php echo esc_html($details['label']); ?></span>
-                                            <code class="specimen-key"><?php echo esc_html($key); ?></code>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else : ?>
-                    <p>Fehler: Die LUVEX Icon-Bibliothek (<code>_luvex-helpers.php</code>) konnte nicht geladen werden.</p>
-                <?php endif; ?>
-            </div>
-        </section>
-
-        <!-- Formularelemente (unverändert) -->
+        <!-- Formularelemente -->
         <section class="style-section">
             <div class="container">
                 <h2>Formularelemente</h2>
@@ -117,7 +116,7 @@ get_header();
             </div>
         </section>
 
-        <!-- Karten (unverändert) -->
+        <!-- Karten (Cards) -->
         <section class="style-section">
             <div class="container">
                 <h2>Karten (Cards)</h2>
@@ -125,12 +124,15 @@ get_header();
                     <div class="value-card">
                         <div class="value-card__icon"><i class="fa-solid fa-lightbulb"></i></div>
                         <h3 class="value-card__title">Value Card Titel</h3>
-                        <p class="value-card__description">Eine "Value Card", die ein Feature hervorhebt.</p>
+                        <p class="value-card__description">Dies ist eine Standard "Value Card".</p>
                     </div>
                     <div class="knowledge-card">
                         <div class="knowledge-card__header">
                             <div class="card__icon"><i class="fa-solid fa-book"></i></div>
                             <h3 class="card__title">Knowledge Card</h3>
+                        </div>
+                        <div class="card__content">
+                            <p>Diese Karte dient zur Darstellung von Wissensartikeln.</p>
                         </div>
                         <a href="#" class="btn--knowledge">Mehr erfahren</a>
                     </div>
@@ -144,4 +146,3 @@ get_header();
 <?php
 get_footer();
 ?>
-

@@ -32,11 +32,11 @@ get_header(); ?>
         </div>
         <div class="luvex-hero__cta-container">
             <a href="/uv-simulator/" class="luvex-hero__cta luvex-cta-primary simulator-cta luvex-cta--animated">
-                <i class="fas fa-cube"></i>
+                <?php if (function_exists('get_luvex_icon')) echo get_luvex_icon('uv-simulator'); ?>
                 <span>Launch UV Simulator</span>
             </a>
             <a href="/about/" class="luvex-hero__cta-secondary">
-                <i class="fas fa-atom"></i>
+                <?php if (function_exists('get_luvex_icon')) echo get_luvex_icon('uv-technology'); ?>
                 <span>Explore UV Science</span>
             </a>
         </div>
@@ -99,7 +99,6 @@ get_header(); ?>
                     <div class="feature-item"><i class="fas fa-mouse-pointer"></i><h4>Intuitive Control</h4><p>User-friendly interface</p></div>
                 </div>
 
-                <!-- ANPASSUNG: Button-Klassen für eigenen Stil bereinigt -->
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="simulator-cta"><i class="fas fa-play-circle"></i><span>Launch Interactive Simulator</span></a>
             </div>
         </div>
@@ -110,16 +109,13 @@ get_header(); ?>
 <section class="section homepage-community-section">
     <div class="homepage-community-container">
         <div class="homepage-community-content">
-            <!-- Title -->
             <h2 class="homepage-community-title">Building the Global <br><span class="text-highlight">UV Network</span></h2>
             
-            <!-- Buttons direkt nach Title -->
             <div class="homepage-community-actions">
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'login' ) ) ); ?>" class="luvex-cta-primary">Join Community</a>
                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>" class="luvex-cta-secondary">Learn About Us</a>
             </div>
             
-            <!-- Description nach den Buttons -->
             <p class="homepage-community-description">
                 Connect with UV engineers, researchers, and industry leaders from over 50 countries. Share cutting-edge research, solve complex technical challenges, and stay ahead of the latest innovations in <span class="keep-together">UV-C disinfection</span>, <span class="keep-together">LED technology</span>, and industrial applications. Together, we're advancing the science of light.
             </p>
@@ -165,5 +161,3 @@ get_header(); ?>
 </section>
 
 <?php get_footer(); ?>
-
-

@@ -21,6 +21,7 @@ LUVEX THEME - STANDARD STYLES PAGE
     color: var(--luvex-gray-700);
     max-width: 800px;
     margin: 1rem auto 0;
+    text-align: center;
 }
 
 .standard-styles-page .style-section {
@@ -53,77 +54,63 @@ LUVEX THEME - STANDARD STYLES PAGE
     margin: 0 auto;
 }
 
-/*
-==============================================================================
-NEU: STYLES FÜR DIE LUVEX ICON-BIBLIOTHEK
-==============================================================================
-*/
+/* --- Icon Library Styles --- */
 .icon-library-section .subtitle {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-.icon-library-section .subtitle code {
-    background: var(--luvex-gray-200);
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    color: var(--luvex-dark-blue);
-    font-size: 1rem;
-}
-
-.icon-category {
     margin-bottom: 3rem;
 }
 
-.icon-category__title {
+.icon-categories-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.icon-category-title {
     font-size: 1.5rem;
     color: var(--luvex-dark-blue);
     margin-bottom: 1.5rem;
     padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--luvex-gray-200);
+    border-bottom: 1px solid var(--luvex-gray-300);
 }
 
-.icon-grid {
+.icon-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
 }
 
-.icon-specimen {
+.icon-item {
     display: flex;
     align-items: center;
     gap: 1rem;
-    background: var(--luvex-gray-50);
     padding: 1rem;
+    background: var(--luvex-gray-100);
     border-radius: var(--radius-md);
     border: 1px solid var(--luvex-gray-200);
-    transition: all 0.2s ease-in-out;
-}
-.icon-specimen:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
-    border-color: var(--luvex-bright-cyan);
 }
 
-.icon-specimen__preview {
+.icon-preview {
     font-size: 1.75rem;
-    color: var(--luvex-dark-blue);
+    color: var(--luvex-vibrant-blue);
     width: 40px;
     text-align: center;
 }
 
-.icon-specimen__details {
+.icon-details {
     display: flex;
     flex-direction: column;
 }
 
-.specimen-label {
+.icon-label {
     font-weight: 500;
     color: var(--luvex-dark-blue);
 }
 
-.specimen-key {
+.icon-key {
+    font-family: monospace;
     font-size: 0.8rem;
     color: var(--luvex-gray-700);
-    background: transparent;
+    background: var(--luvex-gray-200);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
 }
-

@@ -20,6 +20,7 @@ if (!function_exists('get_luvex_icon_library')) {
     function get_luvex_icon_library() {
         return [
             'Technology' => [
+                'uv-technology'    => ['label' => 'UV Technology', 'class' => 'fa-solid fa-atom'],
                 'uv-curing'        => ['label' => 'UV Curing', 'class' => 'fa-solid fa-layer-group'],
                 'uvc-disinfection' => ['label' => 'UVC Disinfection', 'class' => 'fa-solid fa-shield-virus'],
                 'uv-led-systems'   => ['label' => 'UV LED Systems', 'class' => 'fa-solid fa-arrows-to-dot'],
@@ -41,7 +42,17 @@ if (!function_exists('get_luvex_icon_library')) {
                 'strip-analyzer'   => ['label' => 'UV Strip Analyzer', 'class' => 'fa-solid fa-chart-simple'],
                 'partnership'      => ['label' => 'Partnership', 'class' => 'fa-solid fa-handshake-angle'],
             ],
-             'Industries' => [
+            'Applications' => [
+                'water-disinfection' => ['label' => 'Water Disinfection', 'class' => 'fa-solid fa-droplet'],
+                'air-disinfection'   => ['label' => 'Air Disinfection', 'class' => 'fa-solid fa-wind'],
+                'surface-disinfection' => ['label' => 'Surface Disinfection', 'class' => 'fa-solid fa-border-all'],
+                'material-testing' => ['label' => 'Material Testing', 'class' => 'fa-solid fa-vials'],
+                'uv-print'         => ['label' => 'UV-Print', 'class' => 'fa-solid fa-print'],
+                'ink'              => ['label' => 'Ink', 'class' => 'fa-solid fa-fill-drip'],
+                'adhesives'        => ['label' => 'Adhesives', 'class' => 'fa-solid fa-link'],
+                'coatings'         => ['label' => 'Coatings', 'class' => 'fa-solid fa-clone'],
+            ],
+            'Industries' => [
                 'electronics'      => ['label' => 'Electronics', 'class' => 'fa-solid fa-microchip'],
                 'pharmaceutical'   => ['label' => 'Pharmaceutical', 'class' => 'fa-solid fa-pills'],
                 'optics'           => ['label' => 'Optics', 'class' => 'fa-solid fa-eye'],
@@ -59,7 +70,6 @@ if (!function_exists('get_luvex_icon_library')) {
                 'other-industry'   => ['label' => 'Other', 'class' => 'fa-solid fa-ellipsis'],
             ],
             'Nicht zugewiesen (Inspiration)' => [
-                'atom-photon'      => ['label' => 'Atom / Photon', 'class' => 'fa-solid fa-atom'],
                 'dna-biology'      => ['label' => 'DNA / Biology', 'class' => 'fa-solid fa-dna'],
                 'molecules-bonds'  => ['label' => 'Molecules / Bonds', 'class' => 'fa-solid fa-circle-nodes'],
                 'spectrum-colors'  => ['label' => 'Spectrum / Colors', 'class' => 'fa-solid fa-swatchbook'],
@@ -92,3 +102,4 @@ if (!function_exists('get_luvex_icon')) {
         return ''; // Fallback
     }
 }
+

@@ -1,29 +1,26 @@
 /**
- * LUVEX Theme - Process Equipment Hero Animation (V40 - Elegant 2D "Umbrella")
+ * LUVEX Theme - Process Equipment Hero Animation (V50 - Final Simplified 2D Concept)
  *
- * Description: A complete return to a high-quality 2D animation, focusing on
- * elegance, clarity, and perfect, dynamic positioning.
+ * Description: A completely new, simplified, and elegant 2D animation.
+ * This version focuses on perfect positioning, stability, and refined interactivity.
  *
  * Key Features:
- * - INTELLIGENT 2D LAYOUT: The animation automatically detects the hero text
- * and dynamically positions the "umbrella" nodes around it, ensuring a
- * perfect, responsive composition with no overlaps.
- * - ELEGANT AESTHETICS: Clean lines, a beautifully rendered pulsing central orb,
- * and sophisticated particle-based energy pulses.
- * - SUBTLE INTERACTIVITY: Nodes near the mouse cursor gently glow, adding a
- * layer of refined interactivity without distracting 3D effects.
- * - STABILITY & PERFORMANCE: A lightweight and stable 2D implementation that
- * delivers a consistently professional look.
+ * - STABLE 2D CORE: All 3D and parallax effects have been removed to ensure stability and clarity.
+ * - PERFECT CENTERING: The animation is now dynamically and perfectly centered within the hero viewport.
+ * - CUSTOM CURSOR: A custom, glowing cursor enhances the high-tech aesthetic.
+ * - PROXIMITY GLOW: Nodes interactively glow brighter as the mouse approaches, inviting user engagement.
+ * - ELEGANT & MINIMALIST: A professional design that frames the content without overwhelming it.
  *
  * @package Luvex
  */
 document.addEventListener('DOMContentLoaded', () => {
     // --- ELEMENT SELECTORS ---
     const canvas = document.getElementById('hero-solutions-canvas');
+    const heroSection = document.querySelector('.luvex-hero--solutions');
     const heroContainer = document.querySelector('.luvex-hero--solutions .luvex-hero__container');
 
-    if (!canvas || !heroContainer) {
-        console.error('Hero canvas or container element not found.');
+    if (!canvas || !heroSection || !heroContainer) {
+        console.error('Required hero elements for animation not found.');
         return;
     }
 
@@ -31,127 +28,78 @@ document.addEventListener('DOMContentLoaded', () => {
     let width, height, dpr, animationFrameId;
 
     // --- CONFIGURATION ---
-    const luvexColors = {
-        brightCyan: '#6dd5ed',
-        specialCyan: '#22d3ee',
-    };
-
     const config = {
-        lineColor: `rgba(109, 213, 237, 0.25)`,
-        flowColor: luvexColors.brightCyan,
-        glowColor: luvexColors.specialCyan,
+        lineColor: `rgba(109, 213, 237, 0.2)`,
+        nodeColor: `rgba(255, 255, 255, 0.7)`,
+        glowColor: `rgba(109, 213, 237, 0.8)`,
         fontFamily: 'Inter, sans-serif',
-        phaseDuration: 70,
-        flowDuration: 90,
-        mouseInfluenceRadius: 150,
+        mouseRadius: 150, // The radius of influence for the mouse glow effect
     };
 
     // --- STATE VARIABLES ---
-    let nodes = {};
-    let flows = [];
-    let paths = {};
-    let centralOrb;
-    let phase = 0;
-    let phaseTimer = 0;
-    const mouse = { x: -1000, y: -1000 }; // Start mouse off-screen
+    let nodes = [];
+    let paths = [];
+    const mouse = { x: -1000, y: -1000, isOverCanvas: false };
 
     // --- HELPER FUNCTIONS ---
-    const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     const lerp = (a, b, t) => a * (1 - t) + b * t;
 
     // --- CLASSES ---
     class Node {
-        constructor(text, x, y, size, id) {
+        constructor(text, x, y, size) {
             this.text = text;
+            this.baseX = x; this.baseY = y;
             this.x = x; this.y = y;
-            this.size = size; this.id = id;
-            this.opacity = 0.4;
-            this.activation = 0;
-            this.lastActivationTime = -Infinity;
+            this.size = size;
+            this.glow = 0;
         }
 
         update() {
-            // Update activation based on last pulse
-            const age = Date.now() - this.lastActivationTime;
-            this.activation = Math.exp(-age / 2000);
-
-            // Update opacity based on mouse proximity
             const dx = this.x - mouse.x;
             const dy = this.y - mouse.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            const mouseInfluence = Math.max(0, 1 - dist / config.mouseInfluenceRadius);
             
-            this.opacity = lerp(0.5, 1.0, this.activation + mouseInfluence);
+            // Calculate glow based on mouse proximity
+            const targetGlow = mouse.isOverCanvas ? Math.max(0, 1 - dist / config.mouseRadius) : 0;
+            this.glow = lerp(this.glow, targetGlow, 0.1);
         }
 
         draw() {
             ctx.save();
-            ctx.globalAlpha = this.opacity;
-            ctx.shadowColor = config.glowColor;
-            ctx.shadowBlur = this.opacity * 10;
+            
+            // Draw the glow effect
+            if (this.glow > 0.01) {
+                const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.glow * 40);
+                gradient.addColorStop(0, `rgba(109, 213, 237, ${this.glow * 0.5})`);
+                gradient.addColorStop(1, 'rgba(109, 213, 237, 0)');
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.glow * 40, 0, Math.PI * 2);
+                ctx.fill();
+            }
 
-            const fontSize = this.size;
-            ctx.font = `500 ${fontSize}px ${config.fontFamily}`;
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            // Draw the text
+            const textOpacity = 0.6 + this.glow * 0.4;
+            ctx.globalAlpha = textOpacity;
+            ctx.font = `500 ${this.size}px ${config.fontFamily}`;
+            ctx.fillStyle = config.nodeColor;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText(this.text, this.x, this.y);
-            ctx.restore();
-        }
-    }
-
-    class Orb {
-        constructor(x, y) {
-            this.x = x; this.y = y;
-            this.charge = 0;
-            this.pulse = 0;
-        }
-
-        update() {
-            this.pulse = (this.pulse + 0.02) % (Math.PI * 2);
-        }
-
-        draw() {
-            const baseRadius = lerp(10, 25, this.charge);
-            if (baseRadius < 1) return;
-
-            const pulseOffset = (Math.sin(this.pulse) + 1) / 2; // a value between 0 and 1
-
-            ctx.save();
-            ctx.translate(this.x, this.y);
-
-            // Outer Glow
-            const glowSize = baseRadius * lerp(2.5, 3.5, pulseOffset);
-            const glowGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, glowSize);
-            glowGradient.addColorStop(0, `rgba(109, 213, 237, ${lerp(0.3, 0.1, pulseOffset)})`);
-            glowGradient.addColorStop(1, 'rgba(109, 213, 237, 0)');
-            ctx.fillStyle = glowGradient;
-            ctx.beginPath();
-            ctx.arc(0, 0, glowSize, 0, Math.PI * 2);
-            ctx.fill();
-
-            // Core
-            const coreRadius = baseRadius;
-            const coreGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, coreRadius);
-            coreGradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-            coreGradient.addColorStop(0.8, luvexColors.brightCyan);
-            coreGradient.addColorStop(1, `rgba(109, 213, 237, 0.5)`);
-            ctx.fillStyle = coreGradient;
-            ctx.beginPath();
-            ctx.arc(0, 0, coreRadius, 0, Math.PI * 2);
-            ctx.fill();
 
             ctx.restore();
         }
     }
 
     class Path {
-        constructor(start, end) { this.start = start; this.end = end; }
+        constructor(start, end) {
+            this.start = start;
+            this.end = end;
+        }
         draw() {
-            const opacity = (this.start.opacity + this.end.opacity) / 2;
-            if (opacity < 0.1) return;
+            const opacity = 0.3 + (this.start.glow + this.end.glow) * 0.35;
             ctx.save();
-            ctx.globalAlpha = opacity * 0.5;
+            ctx.globalAlpha = opacity;
             ctx.strokeStyle = config.lineColor;
             ctx.lineWidth = 1.5;
             ctx.beginPath();
@@ -161,57 +109,31 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.restore();
         }
     }
-
-    class EnergyPulse {
-       constructor(path) {
-            this.path = path;
-            this.life = 0;
-            this.isFinished = false;
-            this.particles = Array.from({ length: 25 }, (_, i) => ({
-                progress: -i * 0.04,
-            }));
-        }
-        update() {
-            this.life++;
-            this.isFinished = true;
-            this.particles.forEach(p => {
-                if (p.progress < 1) {
-                    p.progress += 1 / config.flowDuration;
-                    this.isFinished = false;
-                }
-            });
-            if (this.life >= config.flowDuration) {
-                this.path.end.lastActivationTime = Date.now();
-                if (this.path.end instanceof Orb) {
-                    const chargeStep = 1 / processPathIds.length;
-                    centralOrb.charge = Math.min(1, centralOrb.charge + chargeStep);
-                }
-            }
-        }
+    
+    class CustomCursor {
         draw() {
-            this.particles.forEach(p => {
-                if (p.progress > 0 && p.progress < 1) {
-                    const easedProgress = easeInOutCubic(p.progress);
-                    const pos = {
-                        x: lerp(this.path.start.x, this.path.end.x, easedProgress),
-                        y: lerp(this.path.start.y, this.path.end.y, easedProgress)
-                    };
-                    const opacity = Math.sin(p.progress * Math.PI);
-                    ctx.save();
-                    ctx.globalAlpha = opacity;
-                    ctx.fillStyle = config.flowColor;
-                    ctx.shadowColor = config.glowColor;
-                    ctx.shadowBlur = 10 * opacity;
-                    ctx.beginPath();
-                    ctx.arc(pos.x, pos.y, 2, 0, Math.PI * 2);
-                    ctx.fill();
-                    ctx.restore();
-                }
-            });
+            if (!mouse.isOverCanvas) return;
+            
+            ctx.save();
+            // Outer glow
+            const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 20);
+            gradient.addColorStop(0, 'rgba(109, 213, 237, 0.3)');
+            gradient.addColorStop(1, 'rgba(109, 213, 237, 0)');
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(mouse.x, mouse.y, 20, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Core dot
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.beginPath();
+            ctx.arc(mouse.x, mouse.y, 3, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
         }
     }
     
-    const processPathIds = ['contact', 'concept', 'simulation', 'design', 'integration', 'partnership'];
+    let customCursor = new CustomCursor();
 
     function setup() {
         width = canvas.clientWidth;
@@ -228,86 +150,52 @@ document.addEventListener('DOMContentLoaded', () => {
     function init() {
         const contentRect = heroContainer.getBoundingClientRect();
         const canvasRect = canvas.getBoundingClientRect();
-        const safeZone = {
-            bottom: contentRect.bottom - canvasRect.top,
-        };
 
-        const orbY = safeZone.bottom + Math.max(100, height * 0.15);
-        centralOrb = new Orb(width / 2, orbY);
-        
-        nodes = {};
-        const radiusX = Math.min(width * 0.45, 600);
-        const radiusY = radiusX * 0.4; // Create an elliptical "umbrella" shape
+        // Calculate the vertical center of the available space in the hero section
+        const centerY = height / 2;
+        const centerX = width / 2;
 
-        const points = [
+        const radiusX = Math.min(width * 0.4, 500);
+        const radiusY = radiusX * 0.5;
+
+        const nodeData = [
             { id: 'partnership', text: 'Partnership', angle: -Math.PI / 2, yOffset: -30 },
-            { id: 'contact',     text: 'Contact',     angle: -Math.PI / 2 + (Math.PI / 3), yOffset: 0 },
-            { id: 'concept',     text: 'Concept',     angle: -Math.PI / 2 + (Math.PI / 3) * 2, yOffset: 0 },
-            { id: 'simulation',  text: 'Simulation',  angle: Math.PI / 2 + (Math.PI / 3) * 2, yOffset: 20 },
-            { id: 'design',      text: 'Design',      angle: Math.PI / 2 + (Math.PI / 3), yOffset: 20 },
-            { id: 'integration', text: 'Integration', angle: Math.PI / 2, yOffset: 20 },
+            { id: 'contact',     text: 'Contact & Analysis', angle: -Math.PI / 2 + (Math.PI / 2.5), yOffset: 0 },
+            { id: 'concept',     text: 'Concept',     angle: -Math.PI / 2 + (Math.PI / 2.5) * 2, yOffset: 10 },
+            { id: 'simulation',  text: 'Simulation',  angle: Math.PI / 2 + (Math.PI / 2.5) * 2, yOffset: 20 },
+            { id: 'design',      text: 'System Design',      angle: Math.PI / 2 + (Math.PI / 2.5), yOffset: 20 },
+            { id: 'integration', text: 'Integration', angle: Math.PI / 2, yOffset: 10 },
         ];
-
-        points.forEach(p => {
-            const x = width / 2 + Math.cos(p.angle) * radiusX;
-            const y = orbY + Math.sin(p.angle) * radiusY + p.yOffset;
-            nodes[p.id] = new Node(p.text, x, y, 16, p.id);
-        });
         
-        paths = { outer: [], toCenter: [] };
-        const outerPathOrder = ['partnership', 'contact', 'concept', 'integration', 'design', 'simulation', 'partnership'];
+        nodes = nodeData.map(d => {
+            const x = centerX + Math.cos(d.angle) * radiusX;
+            const y = centerY + Math.sin(d.angle) * radiusY + d.yOffset;
+            return new Node(d.text, x, y, 16);
+        });
+
+        paths = [];
+        const outerPathOrder = [0, 1, 2, 5, 4, 3, 0]; // Order by index
 
         for (let i = 0; i < outerPathOrder.length - 1; i++) {
-             paths.outer.push(new Path(nodes[outerPathOrder[i]], nodes[outerPathOrder[i+1]]));
+             paths.push(new Path(nodes[outerPathOrder[i]], nodes[outerPathOrder[i+1]]));
         }
-
-        processPathIds.forEach(id => {
-            paths.toCenter.push(new Path(nodes[id], centralOrb));
-        });
-
-        phase = -1; phaseTimer = 0; flows = [];
     }
     
-    function nextPhase() {
-        phase = (phase + 1) % paths.outer.length;
-        if (phase === 0) {
-            centralOrb.charge = 0;
-        }
-        
-        flows.push(new EnergyPulse(paths.outer[phase]));
-
-        const startNodeId = outerPathOrder[phase];
-        const correspondingToCenterPath = paths.toCenter.find(p => p.start.id === startNodeId);
-        if(correspondingToCenterPath) {
-            flows.push(new EnergyPulse(correspondingToCenterPath));
-        }
-    }
-
     function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        phaseTimer++;
-
-        if (phaseTimer > config.phaseDuration && flows.length < 2) {
-            phaseTimer = 0;
-            nextPhase();
-        }
+        ctx.clearRect(0, 0, width, height);
         
-        Object.values(nodes).forEach(n => n.update());
-        centralOrb.update();
+        paths.forEach(p => p.draw());
+        nodes.forEach(n => {
+            n.update();
+            n.draw();
+        });
         
-        paths.outer.forEach(p => p.draw());
-        paths.toCenter.forEach(p => p.draw());
-
-        flows = flows.filter(f => !f.isFinished);
-        flows.forEach(f => f.update());
-        
-        flows.forEach(f => f.draw());
-        Object.values(nodes).forEach(n => n.draw());
-        centralOrb.draw(); // Draw orb on top of nodes
+        customCursor.draw();
         
         animationFrameId = requestAnimationFrame(animate);
     }
     
+    // --- EVENT LISTENERS ---
     const resizeObserver = new ResizeObserver(entries => {
         if (animationFrameId) cancelAnimationFrame(animationFrameId);
         setup();
@@ -315,16 +203,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     resizeObserver.observe(canvas);
 
-    canvas.addEventListener('mousemove', (e) => {
+    heroSection.addEventListener('mousemove', (e) => {
         const rect = canvas.getBoundingClientRect();
         mouse.x = e.clientX - rect.left;
         mouse.y = e.clientY - rect.top;
+        mouse.isOverCanvas = true;
     });
-     canvas.addEventListener('mouseleave', () => {
-        mouse.x = -1000;
-        mouse.y = -1000;
+
+    heroSection.addEventListener('mouseleave', () => {
+        mouse.isOverCanvas = false;
     });
     
+    // --- INITIALIZATION ---
     setup();
     animate();
 });

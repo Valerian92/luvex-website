@@ -1,25 +1,28 @@
 <?php
 /**
- * UV Technology Hub Page (Standard Styles)
+ * UV Technology Hub Page (Finale Version)
  * @package Luvex
  */
 get_header(); ?>
 
+<!-- ======================================================================
+FIX: Globaler Canvas für den Mauszeiger. Liegt über der gesamten Seite.
+====================================================================== -->
+<canvas id="cursor-canvas"></canvas>
+
 <section class="hero-spectrum-engine">
-    <!-- Das Canvas für die Hintergrundanimation -->
+    <!-- Canvas nur für die Wellen-Animation -->
     <canvas id="spectrum-canvas"></canvas>
     <div class="wavelength-indicator">400 nm</div>
 
-    <!-- Der Standard Hero Content Container -->
     <div class="luvex-hero__container">
-        <h1 class="luvex-hero__title">UV Knowledge Hub</h1>
-        <p class="luvex-hero__subtitle">
-            Your central resource for everything about UV technology.
-        </p>
+        <div class="hero-content-wrapper">
+            <h1 class="luvex-hero__title">UV Knowledge Hub</h1>
+            <p class="luvex-hero__subtitle">
+                Your central resource for everything about UV technology.
+            </p>
+        </div>
 
-        <!-- ======================================================================
-        FIX: Neue Buttons für schnellen Zugriff auf die Kategorien
-        ====================================================================== -->
         <div class="hero-spectrum-actions">
             <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-curing' ) ) ); ?>" class="spectrum-action-btn">UV Curing</a>
             <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-c-disinfection' ) ) ); ?>" class="spectrum-action-btn">UV-C Disinfection</a>

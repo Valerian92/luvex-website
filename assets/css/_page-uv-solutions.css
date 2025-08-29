@@ -1,22 +1,25 @@
 /*
 ==============================================================================
-LUVEX THEME - PAGE: UV SOLUTIONS (V3 - Final Layout)
+LUVEX THEME - PAGE: UV SOLUTIONS (V4 - Final 2D Layout)
 ==============================================================================
 */
 
 /*
 ==============================================================================
-1. 3D HERO SECTION & ANIMATION
+1. HERO SECTION & ANIMATION
 ==============================================================================
 */
 .luvex-hero--solutions {
     position: relative;
-    min-height: 85vh;
+    min-height: 90vh; /* Increased height for more space */
     display: flex;
-    align-items: flex-start;
+    /* Vertically center the text container */
+    align-items: center; 
     justify-content: center;
     overflow: hidden;
     background-color: var(--luvex-dark-blue);
+    /* Hide the default cursor to show the custom one from the canvas */
+    cursor: none;
 }
 
 .luvex-hero--solutions #hero-solutions-canvas {
@@ -32,8 +35,9 @@ LUVEX THEME - PAGE: UV SOLUTIONS (V3 - Final Layout)
     position: relative;
     z-index: 2;
     text-align: center;
-    padding-top: 12vh;
     width: 100%;
+    /* Remove top padding, as centering is now handled by flexbox */
+    padding-top: 0; 
 }
 
 .luvex-hero--solutions .luvex-hero__title {
@@ -42,10 +46,9 @@ LUVEX THEME - PAGE: UV SOLUTIONS (V3 - Final Layout)
     color: var(--luvex-white);
 }
 
-/* KORREKTUR: Größerer Abstand zwischen Titel und Untertitel */
 .luvex-hero--solutions .luvex-hero__description {
     max-width: 750px;
-    margin: 2.5rem auto 0; /* Vergrößerter margin-top */
+    margin: 2rem auto 0;
     font-size: clamp(1.1rem, 2.5vw, 1.3rem);
     color: var(--luvex-gray-300);
     line-height: 1.6;
