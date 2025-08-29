@@ -1,11 +1,12 @@
 <?php
 /**
- * Auth-Modal-Template (FINAL)
- * AJAX-basiertes Login/Register-Modal mit dynamischer Interessenauswahl.
+ * Auth-Modal-Template (FINAL - Integriertes Design)
+ * AJAX-basiertes Login/Register-Modal mit dynamischer Interessenauswahl und neuem Design.
  */
 
 if (!defined('ABSPATH')) exit;
 
+// reCAPTCHA Site-Key aus wp-config.php holen
 $recaptcha_site_key = defined('LUVEX_RECAPTCHA_SITE_KEY') ? LUVEX_RECAPTCHA_SITE_KEY : '';
 $ajax_nonce = wp_create_nonce('luvex_ajax_nonce');
 $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_library() : [];
@@ -23,14 +24,13 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
             </div>
 
             <div id="auth-tab-content-wrapper">
-                <!-- Login Form -->
+                <!-- Login Form (unverändert) -->
                 <div class="auth-tab-content active" id="login-content">
                     <form id="luvex-login-form" class="luvex-auth-form" method="post">
                         <div class="form-grid-2-cols">
                             <input type="email" name="user_login" id="user_login" placeholder="Email Address" required autocomplete="email">
                             <input type="password" name="user_password" id="user_password_login" placeholder="Password" required autocomplete="current-password">
                         </div>
-
                         <div class="auth-options">
                             <label class="form-checkbox">
                                 <input type="checkbox" name="remember_me">
@@ -39,9 +39,7 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
                             </label>
                             <a href="<?php echo esc_url(wp_lostpassword_url()); ?>" class="auth-link">Forgot password?</a>
                         </div>
-
                         <div class="recaptcha-container" id="login-recaptcha-container"></div>
-
                         <button type="submit" name="luvex_login_submit" class="btn--primary form-submit--enhanced">
                             <span class="btn-text">Login</span>
                             <i class="fa-solid fa-spinner fa-spin btn-loader" style="display: none;"></i>
@@ -49,43 +47,60 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
                     </form>
                 </div>
 
-                <!-- Registration Form -->
+                <!-- Registration Form (NEUES DESIGN INTEGRIERT) -->
                 <div class="auth-tab-content" id="register-content">
                     <form id="luvex-register-form" class="luvex-auth-form" method="post">
-                        <!-- Personal & Company Info -->
-                        <div class="form-grid-2-cols">
-                            <input type="text" name="first_name" id="first_name" placeholder="First Name" required autocomplete="given-name">
-                            <input type="text" name="last_name" id="last_name" placeholder="Last Name" required autocomplete="family-name">
-                            <input type="email" name="user_email" id="user_email_register" placeholder="Email Address" required autocomplete="email">
-                            <input type="text" name="company" id="company" placeholder="Company (Optional)" autocomplete="organization">
-                            <input type="password" name="user_password" id="user_password_register" placeholder="Password" required autocomplete="new-password">
-                            <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" required autocomplete="new-password">
+                        
+                        <div class="form-header" style="text-align: center; margin-bottom: 2.5rem;">
+                            <h2 style="font-size: 2rem; font-weight: 600; color: var(--luvex-white); margin: 0 0 0.5rem 0;">Create Your LUVEX Account</h2>
+                            <p style="font-size: var(--text-lg); color: var(--luvex-gray-300); margin: 0;">Already have an account? <a href="#" onclick="event.preventDefault(); showAuthForm('login');" style="color: var(--luvex-bright-cyan); text-decoration: none; font-weight: 500;">Log in</a></p>
                         </div>
 
-                        <!-- Industries Section -->
+                        <!-- Abschnitt 1: Persönliche Daten & Account-Info -->
                         <div class="form-section">
-                            <h4 class="form-section-title">
-                                <?php echo get_luvex_icon('category-industries'); ?>
-                                <span>Your Industry (Optional)</span>
-                            </h4>
-                            <div class="interests-grid-industries">
-                                <?php if (isset($icon_library['Industries'])): ?>
-                                    <?php foreach ($icon_library['Industries'] as $key => $details): ?>
-                                        <button type="button" class="interest-tag" data-interest="<?= esc_attr($key) ?>">
-                                            <?= get_luvex_icon($key) ?>
-                                            <span><?= esc_html($details['label']) ?></span>
-                                        </button>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
+                            <h4 class="form-section-title"><i class="fa-solid fa-user-circle"></i> <span>Account Details</span></h4>
+                            <div class="form-grid">
+                                <input type="text" name="first_name" placeholder="First Name" required autocomplete="given-name">
+                                <input type="text" name="last_name" placeholder="Last Name" required autocomplete="family-name">
+                                <input type="email" name="user_email" placeholder="Email Address" required autocomplete="email">
+                                <input type="text" name="company" placeholder="Company (Optional)" autocomplete="organization">
+                                <input type="password" name="user_password" placeholder="Password" required autocomplete="new-password">
+                                <input type="password" name="confirm_password" placeholder="Confirm Password" required autocomplete="new-password">
                             </div>
                         </div>
 
-                        <!-- Interests Section -->
+                        <!-- Abschnitt 2: Branchenauswahl (Dynamisch) -->
                         <div class="form-section">
-                             <h4 class="form-section-title">
-                                <?php echo get_luvex_icon('category-applications'); ?>
-                                <span>Your Interests (Optional)</span>
-                            </h4>
+                            <h4 class="form-section-title"><?php echo get_luvex_icon('category-industries'); ?> <span>Your Industry (Choose one)</span></h4>
+                            <div class="interests-grid-industries">
+                                <?php if (isset($icon_library['Industries'])): 
+                                    $count = 0;
+                                    $visible_limit = 8;
+                                    foreach ($icon_library['Industries'] as $key => $details): 
+                                        $is_hidden = $count >= $visible_limit;
+                                        ?>
+                                        <button type="button" class="interest-tag <?php echo $is_hidden ? 'hidden' : ''; ?>" data-interest="<?= esc_attr($key) ?>">
+                                            <?= get_luvex_icon($key) ?>
+                                            <span><?= esc_html($details['label']) ?></span>
+                                        </button>
+                                    <?php 
+                                    $count++;
+                                    endforeach; 
+                                endif; ?>
+                            </div>
+                            <?php 
+                            $hidden_count = isset($icon_library['Industries']) ? count($icon_library['Industries']) - $visible_limit : 0;
+                            if ($hidden_count > 0): ?>
+                                <button type="button" id="industry-toggle-btn" class="show-more-btn">
+                                    <span class="btn-text">Show <?php echo $hidden_count; ?> more...</span>
+                                    <i class="fa-solid fa-chevron-down icon-toggle"></i>
+                                </button>
+                            <?php endif; ?>
+                        </div>
+
+                        <!-- Abschnitt 3: Interessenauswahl (Dynamisch & 3-spaltig) -->
+                        <div class="form-section">
+                             <h4 class="form-section-title"><?php echo get_luvex_icon('category-luvex-services'); ?> <span>Your Interests (Choose as many as you like)</span></h4>
                             <div class="interests-columns-container">
                                 <?php foreach (['Technology', 'UV Solutions', 'LUVEX Services'] as $category_name): ?>
                                     <?php if (isset($icon_library[$category_name])): ?>
@@ -108,11 +123,15 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
                                 <?php endforeach; ?>
                             </div>
                         </div>
+                        
+                        <!-- Ein einziges verstecktes Feld für alle Interessen, wie von der JS-Logik erwartet -->
                         <input type="hidden" name="interest_area" id="interest_area_hidden" value="">
 
+                        <!-- Abschnitt 4: reCAPTCHA -->
                         <div class="recaptcha-container" id="register-recaptcha-container"></div>
                         
-                        <div class="auth-consent">
+                        <!-- Abschnitt 5: Zustimmung & Absenden -->
+                        <div class="form-consent">
                              <label class="form-checkbox">
                                 <input type="checkbox" name="terms_consent" required>
                                 <span class="form-checkbox__indicator"><i class="fa-solid fa-check"></i></span>
@@ -253,8 +272,8 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
             const loader = button.querySelector('.btn-loader');
             
             button.disabled = true;
-            buttonText.style.display = 'none';
-            loader.style.display = 'inline-block';
+            if(buttonText) buttonText.style.display = 'none';
+            if(loader) loader.style.display = 'inline-block';
             
             const formData = new FormData(form);
             formData.append('action', action);
@@ -293,8 +312,8 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
             })
             .finally(() => {
                 button.disabled = false;
-                buttonText.style.display = 'inline-block';
-                loader.style.display = 'none';
+                if(buttonText) buttonText.style.display = 'inline-block';
+                if(loader) loader.style.display = 'none';
             });
         });
     }
@@ -305,7 +324,6 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
     if (loginForm) handleFormSubmit(loginForm, 'luvex_ajax_login');
     if (registerForm) handleFormSubmit(registerForm, 'luvex_ajax_register');
 
-    // Formulardaten beim Tippen speichern
     if (registerForm) {
         registerForm.addEventListener('input', saveFormData);
     }
@@ -321,14 +339,28 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
         });
     });
 
-    // Modal bei Klick auf Overlay schließen
+    // Logik für "Mehr anzeigen" Button
+    const industryToggleBtn = document.getElementById('industry-toggle-btn');
+    if (industryToggleBtn) {
+        industryToggleBtn.addEventListener('click', () => {
+            const isExpanded = industryToggleBtn.classList.toggle('expanded');
+            const hiddenTags = registerForm.querySelectorAll('.interests-grid-industries .interest-tag.hidden');
+            
+            hiddenTags.forEach(tag => {
+                tag.style.display = isExpanded ? 'flex' : 'none';
+            });
+            
+            const btnText = industryToggleBtn.querySelector('.btn-text');
+            btnText.textContent = isExpanded ? 'Show fewer industries' : `Show ${hiddenTags.length} more...`;
+        });
+    }
+
     modal.addEventListener('click', function(e) {
         if (e.target === modal) {
             closeAuthModal();
         }
     });
     
-    // Google reCAPTCHA Skript bei Bedarf laden
     const originalOpenAuthModal = window.openAuthModal;
     window.openAuthModal = function(mode = 'login') {
         if (!document.querySelector('script[src*="recaptcha/api.js"]')) {
@@ -342,4 +374,3 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
     };
 })();
 </script>
-

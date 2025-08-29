@@ -10,24 +10,6 @@ Beschreibung: Bereinigtes Layout für die UV Curing Seite.
 
 /*
 ==============================================================================
-CUSTOM CURSOR FIX
-==============================================================================
-*/
-.hero-curing,
-.site-header:not(.scrolled) {
-    cursor: none;
-}
-
-.hero-curing a,
-.hero-curing button,
-.site-header:not(.scrolled) a,
-.site-header:not(.scrolled) button {
-    cursor: none;
-}
-
-
-/*
-==============================================================================
 1. HERO SECTION - STANDARD LAYOUT
 ==============================================================================
 */
@@ -341,4 +323,72 @@ CUSTOM CURSOR FIX
     .step-content p {
         font-size: 1rem;
     }
+}
+
+/*
+==============================================================================
+5. CUSTOM CURSOR STYLES (NEU)
+==============================================================================
+*/
+
+/* Initiales Ausblenden des Standard-Cursors in den Zielbereichen. */
+.hero-curing,
+.site-header:not(.scrolled) {
+    cursor: none;
+}
+
+.hero-curing a,
+.hero-curing button,
+.site-header:not(.scrolled) a,
+.site-header:not(.scrolled) button {
+    cursor: none;
+}
+
+/* Haupt-Container für den Custom Cursor. */
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 99999;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    will-change: transform;
+}
+
+/* Der äußere Ring des Cursors. */
+.custom-cursor__ring {
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--luvex-bright-cyan);
+    border-radius: 50%;
+    transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Zustand: Aktiv (sichtbar im Hero oder Header) */
+.custom-cursor.is-active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Zustand: Hover über einem interaktiven Element (Standard) */
+.custom-cursor.is-hovering .custom-cursor__ring {
+    transform: scale(1.8);
+    background-color: rgba(109, 213, 237, 0.2);
+    border-color: transparent;
+}
+
+/* Zustand: Spezieller Hover-Effekt für den Header */
+.custom-cursor.is-header-hover .custom-cursor__ring {
+    transform: scale(2.2);
+    border-width: 1px;
+    background-color: rgba(109, 213, 237, 0.1);
+    border-color: var(--luvex-bright-cyan);
+}
+
+/* Zustand: Klick wird ausgeführt */
+.custom-cursor.is-clicking .custom-cursor__ring {
+    transform: scale(1.5);
+    background-color: rgba(109, 213, 237, 0.4);
 }

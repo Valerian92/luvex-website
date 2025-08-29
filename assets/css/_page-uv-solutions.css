@@ -1,6 +1,6 @@
 /*
 ==============================================================================
-LUVEX THEME - UV SOLUTIONS PAGE (V70 - Final Polished Version)
+LUVEX THEME - UV SOLUTIONS PAGE (V90 - Final Perfection)
 ==============================================================================
 */
 
@@ -10,8 +10,8 @@ LUVEX THEME - UV SOLUTIONS PAGE (V70 - Final Polished Version)
     color: var(--luvex-white);
     position: relative;
     width: 100%;
-    height: 90vh; /* Fills a large portion of the viewport height */
-    min-height: 700px; /* Ensures a good minimum height on large screens */
+    /* KEY CHANGE: Use full viewport height */
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -49,14 +49,14 @@ LUVEX THEME - UV SOLUTIONS PAGE (V70 - Final Polished Version)
     max-width: 900px;
     padding: 0 1rem;
     
-    /* KEY CHANGE: Move the title container up */
-    transform: translateY(-40px);
+    /* Move the whole text block up to make space for the orb */
+    transform: translateY(-8vh);
 }
 
 .luvex-hero--solutions .luvex-hero__title {
     font-size: clamp(2.5rem, 5vw, 4rem);
     text-shadow: 0 0 20px rgba(109, 213, 237, 0.5);
-    margin-bottom: 1.5rem; /* Increased margin */
+    margin-bottom: 1.5rem;
 }
 
 .luvex-hero--solutions .luvex-hero__subtitle {
@@ -65,6 +65,9 @@ LUVEX THEME - UV SOLUTIONS PAGE (V70 - Final Polished Version)
     max-width: 650px;
     margin: 0 auto;
     line-height: 1.6;
+    
+    /* KEY CHANGE: Move subtitle down significantly */
+    margin-top: 18vh;
 }
 
 
