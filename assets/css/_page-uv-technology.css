@@ -8,23 +8,20 @@ LUVEX THEME - UV KNOWLEDGE PAGE (FINALE VERSION)
 FIX: Globaler Cursor & Canvas-Struktur
 ==============================================================================
 */
-/* Blendet den Standard-Cursor auf der gesamten Seite aus */
 body, a, button, .spectrum-action-btn {
     cursor: none !important;
 }
 
-/* Globaler Canvas für den Mauszeiger */
 #cursor-canvas {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 99999; /* Immer ganz oben */
-    pointer-events: none; /* Lässt Klicks durch */
+    z-index: 99999;
+    pointer-events: none;
 }
 
-/* Canvas für die Wellen-Animation im Hero */
 #spectrum-canvas {
     position: absolute;
     top: 0;
@@ -63,16 +60,16 @@ Hero Section Layout
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(109, 213, 237, 0.95);
     backdrop-filter: blur(4px);
     padding: 0.5rem 1rem;
     border-radius: var(--radius-md);
     font-weight: 600;
     font-family: 'Courier New', Courier, monospace;
     z-index: 10;
-    border: 1px solid var(--luvex-gray-200);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: var(--shadow-sm);
-    transition: color 0.3s ease, background-color 0.3s ease;
+    transition: color 0.4s ease, background-color 0.4s ease;
     pointer-events: none;
 }
 
@@ -82,19 +79,19 @@ Hero Section Layout
     text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-between; /* Wichtig für die Positionierung */
     align-items: center;
     height: 100%;
     width: 100%;
-    padding: 4rem 1rem;
+    padding: 1rem;
 }
 
 .hero-content-wrapper {
-    margin-top: 4rem;
+    margin-top: 8rem; /* Abstand von oben */
 }
 
 .hero-spectrum-actions {
-    margin-bottom: 4rem;
+    margin-bottom: 8rem; /* FIX: Deutlich mehr Abstand von unten */
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
@@ -119,3 +116,4 @@ Hero Section Layout
     color: var(--luvex-white);
     transform: translateY(-2px);
 }
+

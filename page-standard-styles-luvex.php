@@ -1,6 +1,7 @@
 <?php
 /**
  * Template Name: Standard Styles
+ *
  * Description: Eine Seite zur Anzeige aller globalen Standard-Styles und UI-Komponenten.
  */
 
@@ -51,7 +52,7 @@ get_header();
             </div>
         </section>
 
-        <!-- LUVEX Icon Library (NEU) -->
+        <!-- LUVEX Icon Library (NEU & DYNAMISCH) -->
         <section class="style-section icon-library-section">
             <div class="container">
                 <h2>LUVEX Icon Library</h2>
@@ -81,7 +82,7 @@ get_header();
                         <?php endforeach; ?>
                     </div>
                 <?php else: ?>
-                    <p><em>Icon-Bibliothek konnte nicht geladen werden.</em></p>
+                    <p><em>Icon-Bibliothek konnte nicht geladen werden. Bitte stellen Sie sicher, dass <code>_luvex-helpers.php</code> in <code>functions.php</code> eingebunden ist.</em></p>
                 <?php endif; ?>
             </div>
         </section>
@@ -146,3 +147,4 @@ get_header();
 <?php
 get_footer();
 ?>
+

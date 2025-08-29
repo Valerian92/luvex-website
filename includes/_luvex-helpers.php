@@ -4,7 +4,7 @@
  * Enthält die zentrale Icon-Bibliothek.
  *
  * @package Luvex
- * @since 3.3.0
+ * @since 3.4.0
  */
 
 if (!defined('ABSPATH')) {
@@ -19,6 +19,14 @@ if (!defined('ABSPATH')) {
 if (!function_exists('get_luvex_icon_library')) {
     function get_luvex_icon_library() {
         return [
+            // NEU: Icons für die Kategorientitel selbst
+            'Category Titles' => [
+                'category-technology'   => ['label' => 'Technology', 'class' => 'fa-solid fa-atom'],
+                'category-uv-solutions' => ['label' => 'UV Solutions', 'class' => 'fa-solid fa-toolbox'],
+                'category-luvex-services' => ['label' => 'LUVEX Services', 'class' => 'fa-solid fa-globe'],
+                'category-applications' => ['label' => 'Applications', 'class' => 'fa-solid fa-star'],
+                'category-industries'   => ['label' => 'Industries', 'class' => 'fa-solid fa-industry'],
+            ],
             'Technology' => [
                 'uv-technology'    => ['label' => 'UV Technology', 'class' => 'fa-solid fa-atom'],
                 'uv-curing'        => ['label' => 'UV Curing', 'class' => 'fa-solid fa-layer-group'],
@@ -42,17 +50,7 @@ if (!function_exists('get_luvex_icon_library')) {
                 'strip-analyzer'   => ['label' => 'UV Strip Analyzer', 'class' => 'fa-solid fa-chart-simple'],
                 'partnership'      => ['label' => 'Partnership', 'class' => 'fa-solid fa-handshake-angle'],
             ],
-            'Applications' => [
-                'water-disinfection' => ['label' => 'Water Disinfection', 'class' => 'fa-solid fa-droplet'],
-                'air-disinfection'   => ['label' => 'Air Disinfection', 'class' => 'fa-solid fa-wind'],
-                'surface-disinfection' => ['label' => 'Surface Disinfection', 'class' => 'fa-solid fa-border-all'],
-                'material-testing' => ['label' => 'Material Testing', 'class' => 'fa-solid fa-vials'],
-                'uv-print'         => ['label' => 'UV-Print', 'class' => 'fa-solid fa-print'],
-                'ink'              => ['label' => 'Ink', 'class' => 'fa-solid fa-fill-drip'],
-                'adhesives'        => ['label' => 'Adhesives', 'class' => 'fa-solid fa-link'],
-                'coatings'         => ['label' => 'Coatings', 'class' => 'fa-solid fa-clone'],
-            ],
-            'Industries' => [
+             'Industries' => [
                 'electronics'      => ['label' => 'Electronics', 'class' => 'fa-solid fa-microchip'],
                 'pharmaceutical'   => ['label' => 'Pharmaceutical', 'class' => 'fa-solid fa-pills'],
                 'optics'           => ['label' => 'Optics', 'class' => 'fa-solid fa-eye'],
@@ -69,17 +67,27 @@ if (!function_exists('get_luvex_icon_library')) {
                 'laboratories'     => ['label' => 'Laboratories', 'class' => 'fa-solid fa-microscope'],
                 'other-industry'   => ['label' => 'Other', 'class' => 'fa-solid fa-ellipsis'],
             ],
+            'Applications' => [
+                'water-disinfection' => ['label' => 'Water Disinfection', 'class' => 'fa-solid fa-droplet'],
+                'air-disinfection'   => ['label' => 'Air Disinfection', 'class' => 'fa-solid fa-wind'],
+                'surface-disinfection' => ['label' => 'Surface Disinfection', 'class' => 'fa-solid fa-border-all'],
+                'material-testing' => ['label' => 'Material Testing', 'class' => 'fa-solid fa-vials'],
+                'uv-print'         => ['label' => 'UV-Print', 'class' => 'fa-solid fa-print'],
+                'ink'              => ['label' => 'Ink', 'class' => 'fa-solid fa-fill-drip'],
+                'adhesives'        => ['label' => 'Adhesives', 'class' => 'fa-solid fa-link'],
+                'coatings'         => ['label' => 'Coatings', 'class' => 'fa-solid fa-clone'],
+            ],
             'Nicht zugewiesen (Inspiration)' => [
-                'dna-biology'      => ['label' => 'DNA / Biology', 'class' => 'fa-solid fa-dna'],
-                'molecules-bonds'  => ['label' => 'Molecules / Bonds', 'class' => 'fa-solid fa-circle-nodes'],
-                'spectrum-colors'  => ['label' => 'Spectrum / Colors', 'class' => 'fa-solid fa-swatchbook'],
-                'wavelength-graph' => ['label' => 'Wavelength / Graph', 'class' => 'fa-solid fa-chart-line'],
-                'data-analysis'    => ['label' => 'Data Analysis', 'class' => 'fa-solid fa-magnifying-glass-chart'],
-                'lab-test'         => ['label' => 'Lab Test / Verified', 'class' => 'fa-solid fa-vial-circle-check'],
-                'intensity-power'  => ['label' => 'Intensity / Power', 'class' => 'fa-solid fa-tachometer-alt-fast'],
-                'precision-target' => ['label' => 'Precision / Target', 'class' => 'fa-solid fa-crosshairs'],
-                'automation'       => ['label' => 'Automation', 'class' => 'fa-solid fa-robot'],
-                'industrial-plant' => ['label' => 'Industrial Plant', 'class' => 'fa-solid fa-industry'],
+                'dna-biology'      => ['label' => 'Wissenschaft / DNA', 'class' => 'fa-solid fa-dna'],
+                'research-lab'     => ['label' => 'Forschung / Labor', 'class' => 'fa-solid fa-microscope'],
+                'product-archive'  => ['label' => 'Produkt-Archiv', 'class' => 'fa-solid fa-box-archive'],
+                'modules'          => ['label' => 'Module / Bausteine', 'class' => 'fa-solid fa-shapes'],
+                'partnership-main' => ['label' => 'Partnerschaft', 'class' => 'fa-solid fa-handshake-angle'],
+                'support-consulting' => ['label' => 'Support / Beratung', 'class' => 'fa-solid fa-headset'],
+                'project-start'    => ['label' => 'Projektstart', 'class' => 'fa-solid fa-rocket'],
+                'application-test' => ['label' => 'Anwendung / Test', 'class' => 'fa-solid fa-vials'],
+                'application-spectrum' => ['label' => 'Anwendungs-Spektrum', 'class' => 'fa-solid fa-swatchbook'],
+                'industry-tags'    => ['label' => 'Branchen-Tags', 'class' => 'fa-solid fa-tags'],
             ]
         ];
     }

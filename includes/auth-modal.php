@@ -64,7 +64,10 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
 
                         <!-- Industries Section -->
                         <div class="form-section">
-                            <h4 class="form-section-title">Your Industry (Optional)</h4>
+                            <h4 class="form-section-title">
+                                <?php echo get_luvex_icon('category-industries'); ?>
+                                <span>Your Industry (Optional)</span>
+                            </h4>
                             <div class="interests-grid-industries">
                                 <?php if (isset($icon_library['Industries'])): ?>
                                     <?php foreach ($icon_library['Industries'] as $key => $details): ?>
@@ -79,12 +82,21 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
 
                         <!-- Interests Section -->
                         <div class="form-section">
-                            <h4 class="form-section-title">Your Interests (Optional)</h4>
+                             <h4 class="form-section-title">
+                                <?php echo get_luvex_icon('category-applications'); ?>
+                                <span>Your Interests (Optional)</span>
+                            </h4>
                             <div class="interests-columns-container">
                                 <?php foreach (['Technology', 'UV Solutions', 'LUVEX Services'] as $category_name): ?>
                                     <?php if (isset($icon_library[$category_name])): ?>
                                     <div class="interest-column">
-                                        <h5 class="interest-column-title"><?= esc_html($category_name) ?></h5>
+                                        <h5 class="interest-column-title">
+                                            <?php
+                                                $cat_key = 'category-' . strtolower(str_replace(' ', '-', $category_name));
+                                                echo get_luvex_icon($cat_key);
+                                            ?>
+                                            <span><?= esc_html($category_name) ?></span>
+                                        </h5>
                                         <?php foreach ($icon_library[$category_name] as $key => $details): ?>
                                             <button type="button" class="interest-tag" data-interest="<?= esc_attr($key) ?>">
                                                 <?= get_luvex_icon($key) ?>

@@ -1,12 +1,11 @@
 /**
  * LUVEX Theme - Homepage Hero Photon Animation & CSS Cursor Trigger
  *
- * VERSION 4: Implements an idle timer. If the mouse is inactive for 3 seconds,
- * particles stop following the mouse and revert to their default target.
- * Mouse movement instantly resumes tracking.
+ * VERSION 5: Re-implements the particle pause effect on button hover
+ * and includes the 3-second idle timer.
  */
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🌟 Hero Effects Script loading (v4)...');
+    console.log('🌟 Hero Effects Script loading (v5)...');
 
     const canvas = document.getElementById('homepage-hero-canvas');
     const heroSection = document.querySelector('.luvex-hero');
@@ -23,8 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
         x: null,
         y: null,
         isHoveringCanvas: false,
-        isPaused: false,
-        isIdle: false // Status for mouse inactivity
+        isPaused: false, // For pausing on button hover
+        isIdle: false // For 3-second inactivity
     };
 
     // Idle-Timer Logic
@@ -36,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
         clearTimeout(idleTimer);
         idleTimer = setTimeout(() => {
             particleMouse.isIdle = true;
-            console.log('Mouse idle, particles reverting to default target.');
         }, IDLE_TIMEOUT);
     }
 
@@ -75,12 +73,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         update() {
+            // If paused, do nothing but keep the particle alive
             if (particleMouse.isPaused) return true;
 
             this.trail.push({ x: this.x, y: this.y, life: this.life });
             if (this.trail.length > this.maxTrailLength) this.trail.shift();
 
-            // Target now depends on the idle state
+            // Target depends on idle state
             let targetX = (particleMouse.isHoveringCanvas && !particleMouse.isIdle && particleMouse.x != null) ? particleMouse.x : targetButtonPosition.x;
             let targetY = (particleMouse.isHoveringCanvas && !particleMouse.isIdle && particleMouse.y != null) ? particleMouse.y : targetButtonPosition.y;
 
@@ -146,6 +145,21 @@ document.addEventListener('DOMContentLoaded', function() {
         animationFrameId = requestAnimationFrame(animate);
     }
 
+    /**
+     * KORRIGIERT: Fügt die Event-Listener für den Pause-Effekt hinzu.
+     */
+    function addHoverPauseListeners() {
+        const interactiveElements = document.querySelectorAll('.luvex-hero__cta-container a');
+        interactiveElements.forEach(elem => {
+            elem.addEventListener('mouseenter', () => {
+                particleMouse.isPaused = true;
+            });
+            elem.addEventListener('mouseleave', () => {
+                particleMouse.isPaused = false;
+            });
+        });
+    }
+
     function setupPhotonAnimation() {
         if (animationFrameId) cancelAnimationFrame(animationFrameId);
         resizeCanvas();
@@ -153,7 +167,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (canvas.width > 0 && canvas.height > 0) {
             particles = [];
             animate();
-            resetIdleTimer(); // Start the idle timer
+            resetIdleTimer();
+            addHoverPauseListeners(); // Stellt sicher, dass die Listener aktiv sind.
         }
     }
 
@@ -162,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
         particleMouse.x = event.clientX - rect.left;
         particleMouse.y = event.clientY - rect.top;
         particleMouse.isHoveringCanvas = true;
-        resetIdleTimer(); // Reset timer on every move
+        resetIdleTimer();
     });
 
     heroSection.addEventListener('mouseleave', () => {
@@ -172,6 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.addEventListener('resize', setupPhotonAnimation);
     setupPhotonAnimation();
+
 
     // --- CSS Cursor Trigger Logic ---
     if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
@@ -195,3 +211,4 @@ document.addEventListener('DOMContentLoaded', function() {
         document.addEventListener('mousemove', initialCheck);
     }
 });
+

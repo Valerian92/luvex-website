@@ -54,14 +54,33 @@ LUVEX THEME - AUTH STYLES (FINAL)
     padding-top: 2rem;
     border-top: 1px solid rgba(109, 213, 237, 0.1);
 }
-.form-section-title {
-    display: block;
+.form-section-title,
+.interest-column-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
     font-size: var(--text-lg);
     font-weight: 600;
     color: var(--luvex-white);
     margin-bottom: 1.5rem;
     text-align: left;
 }
+.interest-column-title {
+    font-size: var(--text-base);
+    color: var(--luvex-bright-cyan);
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(109, 213, 237, 0.2);
+}
+
+.form-section-title i,
+.interest-column-title i {
+    font-size: 1.1em;
+    color: var(--luvex-bright-cyan);
+    width: 24px;
+    text-align: center;
+}
+
 .form-grid-2-cols {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -112,14 +131,7 @@ input:focus {
     flex-direction: column;
     gap: 0.75rem;
 }
-.interest-column-title {
-    font-size: var(--text-base);
-    font-weight: 600;
-    color: var(--luvex-bright-cyan);
-    margin: 0 0 0.5rem 0;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(109, 213, 237, 0.2);
-}
+
 .interest-tag {
     display: flex;
     align-items: center;
