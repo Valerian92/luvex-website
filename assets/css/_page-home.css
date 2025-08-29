@@ -269,12 +269,15 @@ Last Update: 2025-08-23
 
 /*
 ==============================================================================
-6. HOMEPAGE-SPECIFIC CUSTOM CURSOR STYLES
+6. HOMEPAGE-SPECIFIC CUSTOM CURSOR STYLES (REFINED)
 ==============================================================================
 */
 
 /* Hide default cursor when our custom one is active */
-body.homepage-cursor-active {
+body.homepage-cursor-active,
+/* FIX: Hide default cursor on all interactive elements in active areas */
+body.homepage-cursor-active .luvex-hero *,
+body.homepage-cursor-active .site-header * {
     cursor: none;
 }
 
@@ -293,11 +296,11 @@ body.homepage-cursor-active {
     opacity: 1;
 }
 
-/* Outer circle - the trailing element */
+/* Outer circle - the trailing element (Refined Style) */
 .cursor-circle-outer {
-    width: 40px;
-    height: 40px;
-    border: 2px solid rgba(255, 255, 255, 0.5);
+    width: 30px; /* Smaller */
+    height: 30px; /* Smaller */
+    border: 1px solid var(--luvex-bright-cyan); /* Thinner */
     border-radius: 50%;
     position: absolute;
     top: 0;
@@ -305,11 +308,11 @@ body.homepage-cursor-active {
     transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, border-width 0.3s ease;
 }
 
-/* Inner dot - the main pointer */
+/* Inner dot - the main pointer (Refined Style) */
 .cursor-dot-inner {
-    width: 8px;
-    height: 8px;
-    background-color: var(--luvex-white);
+    width: 5px; /* Smaller */
+    height: 5px; /* Smaller */
+    background-color: var(--luvex-bright-cyan);
     border-radius: 50%;
     position: absolute;
     top: 50%;
@@ -318,22 +321,13 @@ body.homepage-cursor-active {
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Active state colors */
-body.homepage-cursor-active .cursor-circle-outer {
-    border-color: var(--luvex-bright-cyan);
-}
-
-body.homepage-cursor-active .cursor-dot-inner {
-    background-color: var(--luvex-bright-cyan);
-}
-
-/* Hover effect on interactive elements */
+/* Hover effect on interactive elements (Refined Style) */
 .cursor-circle-outer.hover-effect {
-    width: 60px;
-    height: 60px;
-    border-width: 3px;
+    width: 45px; /* Adjusted size */
+    height: 45px; /* Adjusted size */
+    border-width: 2px;
 }
 
 .cursor-dot-inner.hover-effect {
-    transform: translate(-50%, -50%) scale(1.5);
+    transform: translate(-50%, -50%) scale(1.2);
 }

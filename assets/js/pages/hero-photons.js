@@ -16,14 +16,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const heroSection = document.querySelector('.luvex-hero');
     if (!canvas || !heroSection) {
         console.error('❌ Canvas or Hero section not found for animations!');
-        // We might still want the cursor, so we don't return here unless necessary.
     } else {
-        // FIX: Corrected 'd' to '2d' to get the correct rendering context.
         const ctx = canvas.getContext('2d');
         let particles = [];
         let animationFrameId;
 
-        let mouse = {
+        let particleMouse = { // Renamed to avoid conflict
             x: null,
             y: null,
             isHoveringCanvas: false,
@@ -60,14 +58,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.size = Math.random() * 2 + 1;
                 this.life = 1.0;
                 this.speed = Math.random() * 1.5 + 0.5;
-                this.dx = (Math.random() - 0.5) * 0.5;
-                this.dy = (Math.random() - 0.5) * 0.5;
                 this.trail = [];
                 this.maxTrailLength = 8;
             }
 
             update() {
-                if (mouse.isPaused) {
+                if (particleMouse.isPaused) {
                     this.trail.push({ x: this.x, y: this.y, life: this.life });
                     if (this.trail.length > this.maxTrailLength) this.trail.shift();
                     return true;
@@ -76,8 +72,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.trail.push({ x: this.x, y: this.y, life: this.life });
                 if (this.trail.length > this.maxTrailLength) this.trail.shift();
 
-                let targetX = mouse.isHoveringCanvas && mouse.x != null ? mouse.x : targetButtonPosition.x;
-                let targetY = mouse.isHoveringCanvas && mouse.y != null ? mouse.y : targetButtonPosition.y;
+                let targetX = particleMouse.isHoveringCanvas && particleMouse.x != null ? particleMouse.x : targetButtonPosition.x;
+                let targetY = particleMouse.isHoveringCanvas && particleMouse.y != null ? particleMouse.y : targetButtonPosition.y;
 
                 let dx = targetX - this.x;
                 let dy = targetY - this.y;
@@ -94,7 +90,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             draw() {
-                // This check prevents errors if ctx is somehow still null
                 if (!ctx) return;
                 for (let i = 0; i < this.trail.length; i++) {
                     const point = this.trail[i];
@@ -135,7 +130,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         function animate() {
-            // This check prevents errors if ctx is somehow still null
             if (!ctx) return;
             ctx.fillStyle = 'rgba(27, 42, 73, 0.1)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -160,20 +154,20 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const interactivePhotonElements = document.querySelectorAll('.luvex-hero .luvex-cta-primary, .luvex-hero .luvex-cta-secondary, .luvex-hero button, .luvex-hero .btn');
         interactivePhotonElements.forEach(button => {
-            button.addEventListener('mouseenter', () => { mouse.isPaused = true; });
-            button.addEventListener('mouseleave', () => { mouse.isPaused = false; });
+            button.addEventListener('mouseenter', () => { particleMouse.isPaused = true; });
+            button.addEventListener('mouseleave', () => { particleMouse.isPaused = false; });
         });
 
         heroSection.addEventListener('mousemove', (event) => {
             const rect = heroSection.getBoundingClientRect();
-            mouse.x = event.clientX - rect.left;
-            mouse.y = event.clientY - rect.top;
-            mouse.isHoveringCanvas = true;
+            particleMouse.x = event.clientX - rect.left;
+            particleMouse.y = event.clientY - rect.top;
+            particleMouse.isHoveringCanvas = true;
         });
         heroSection.addEventListener('mouseleave', () => {
-            mouse.x = null;
-            mouse.y = null;
-            mouse.isHoveringCanvas = false;
+            particleMouse.x = null;
+            particleMouse.y = null;
+            particleMouse.isHoveringCanvas = false;
         });
         
         window.addEventListener('resize', setupPhotonAnimation);
@@ -185,14 +179,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Part 2: Homepage Custom Cursor
     // ========================================================================
     
-    // Do not run on touch devices.
     if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
         console.log('🎯 Custom Cursor: Disabled on touch device.');
         return;
     }
 
     const header = document.querySelector('.site-header');
-    // We already have heroSection from Part 1.
     if (!heroSection || !header) {
         console.error('❌ Hero or Header not found for custom cursor.');
         return;
@@ -213,14 +205,14 @@ document.addEventListener('DOMContentLoaded', function() {
     cursorContainer.appendChild(cursorInner);
     document.body.appendChild(cursorContainer);
 
-    let mouseX = 0, mouseY = 0;
+    let cursorMouseX = 0, cursorMouseY = 0; // Renamed to avoid conflict
     let outerX = 0, outerY = 0;
     const easing = 0.2;
     let rafIdCursor = null;
 
     function updateCursor() {
-        let dx = mouseX - outerX;
-        let dy = mouseY - outerY;
+        let dx = cursorMouseX - outerX;
+        let dy = cursorMouseY - outerY;
         outerX += dx * easing;
         outerY += dy * easing;
         cursorContainer.style.transform = `translate3d(${outerX}px, ${outerY}px, 0)`;
@@ -228,8 +220,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     document.addEventListener('mousemove', e => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+        cursorMouseX = e.clientX;
+        cursorMouseY = e.clientY;
         if (!cursorContainer.classList.contains('visible')) {
             cursorContainer.classList.add('visible');
         }
