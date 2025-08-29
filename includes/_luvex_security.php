@@ -1,6 +1,6 @@
 <?php
 /**
- * LUVEX Security System - Kompakt & Effizient mit AJAX (Fehlerkorrektur)
+ * LUVEX Security System - Kompakt & Effizient mit AJAX (Mehrfachauswahl für alle)
  * @package Luvex
  * @since 3.0.0
  */
@@ -54,7 +54,7 @@ class LuvexSecurity {
         }
     }
 
-    // AJAX Registration Handler (KORRIGIERT)
+    // AJAX Registration Handler (KORRIGIERT FÜR EIN EINZIGES FELD)
     public static function ajax_handle_registration() {
         check_ajax_referer('luvex_ajax_nonce', 'nonce');
 
@@ -98,9 +98,8 @@ class LuvexSecurity {
         
         if (!empty($_POST['company'])) update_user_meta($user_id, 'company', sanitize_text_field($_POST['company']));
         
-        // KORREKTUR: Speichert die getrennten Felder in separaten Meta-Keys
-        if (!empty($_POST['selected_industry'])) update_user_meta($user_id, 'luvex_industry', sanitize_text_field($_POST['selected_industry']));
-        if (!empty($_POST['selected_interests'])) update_user_meta($user_id, 'luvex_interests', sanitize_text_field($_POST['selected_interests']));
+        // KORREKTUR: Speichert den kombinierten String aus dem einzigen Feld
+        if (!empty($_POST['interest_area'])) update_user_meta($user_id, 'luvex_interests', sanitize_text_field($_POST['interest_area']));
         
         wp_new_user_notification($user_id, null, 'user');
         
