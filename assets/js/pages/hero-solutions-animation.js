@@ -1,13 +1,14 @@
 /**
- * LUVEX Theme - Process Equipment Hero Animation (V102 - Final Polishing)
+ * LUVEX Theme - Process Equipment Hero Animation (V103 - Final Version)
  *
  * Description: The definitive, final version incorporating all refinement requests.
  *
  * Key Features:
- * - LAYOUT PERFECTION: Title and Subtitle positions are fine-tuned via CSS.
- * - ANIMATION FIX & ENHANCEMENT: The passive animation loop is repaired. The proximity
- * glow is now exponential for a more natural falloff.
- * - NEW SHOOTING STARS: A subtle shooting star background is added for more visual depth.
+ * - FINAL LAYOUT: Title and Subtitle positions are fine-tuned via CSS margins.
+ * - INTERACTIVE STARFIELD: The background now features static stars that glow on mouse proximity, replacing shooting stars.
+ * - PERFECTED PROXIMITY GLOW: All nodes now glow based on cursor proximity with a smooth
+ * exponential falloff, creating a "spotlight" effect from the cursor. The passive
+ * animation remains for ambient movement.
  *
  * @package Luvex
  */
@@ -29,11 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
         lineColor: `rgba(109, 213, 237, 0.2)`,
         glowColor: `rgba(109, 213, 237, 0.8)`,
         fontFamily: 'Inter, sans-serif',
-        mouseRadius: 400,
+        mouseRadius: 450, // Larger radius for a wider glow effect
         phaseDuration: 120,
         flowDuration: 100,
-        shootingStarBaseSpeed: 0.5,
-        shootingStarSpawnRate: 0.02
+        starCount: 150,
+        starGlowRadius: 200,
     };
 
     // --- STATE VARIABLES ---
@@ -41,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let paths = { outer: [], toCenter: [] };
     let centralOrb;
     let flows = [];
-    let shootingStars = [];
+    let backgroundStars = [];
     let phase = 0;
     let phaseTimer = 0;
     const mouse = { x: -1000, y: -1000, isOverCanvas: false };
@@ -54,13 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
     class CustomCursor {
         constructor() {
             this.element = this.createCursorElement();
-            this.x = -1000;
-            this.y = -1000;
-            this.size = 15;
-            this.targetSize = 15;
+            this.x = -1000; this.y = -1000; this.size = 15; this.targetSize = 15;
             this.attachEventListeners();
         }
-
         createCursorElement() {
             let cursor = document.getElementById('luvex-glow-cursor');
             if (cursor) return cursor;
@@ -70,12 +67,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const style = document.createElement('style');
             style.innerHTML = `
                 #luvex-glow-cursor {
-                    position: fixed; top: 0; left: 0;
-                    width: 30px; height: 30px; border-radius: 50%;
+                    position: fixed; top: 0; left: 0; width: 30px; height: 30px; border-radius: 50%;
                     pointer-events: none; transform: translate(-50%, -50%) scale(0);
                     transition: transform 0.3s ease-out, width 0.2s ease, height 0.2s ease;
-                    z-index: 99999;
-                    background: radial-gradient(circle, rgba(109, 213, 237, 0.5) 0%, rgba(109, 213, 237, 0) 60%);
+                    z-index: 99999; background: radial-gradient(circle, rgba(109, 213, 237, 0.5) 0%, rgba(109, 213, 237, 0) 60%);
                 }
                 body.custom-cursor-active { cursor: none; }
                 body.custom-cursor-active a, body.custom-cursor-active button, body.custom-cursor-active [role="button"] { cursor: none; }
@@ -83,13 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
             document.head.appendChild(style);
             return cursor;
         }
-
         attachEventListeners() {
             document.addEventListener('mousemove', (e) => {
-                this.x = e.clientX;
-                this.y = e.clientY;
-                this.element.style.left = `${this.x}px`;
-                this.element.style.top = `${this.y}px`;
+                this.x = e.clientX; this.y = e.clientY; this.element.style.left = `${this.x}px`; this.element.style.top = `${this.y}px`;
                 const isInteractive = e.target.closest('a, button, [role="button"]');
                 this.targetSize = isInteractive ? 25 : 15;
             });
@@ -105,24 +96,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         update() {
             this.size = lerp(this.size, this.targetSize, 0.15);
-            this.element.style.width = `${this.size * 2}px`;
-            this.element.style.height = `${this.size * 2}px`;
+            this.element.style.width = `${this.size * 2}px`; this.element.style.height = `${this.size * 2}px`;
         }
     }
     const customCursor = new CustomCursor();
 
     // --- ANIMATION CLASSES ---
+    class BackgroundStar {
+        constructor() {
+            this.x = Math.random() * width; this.y = Math.random() * height;
+            this.size = Math.random() * 1.5 + 0.5; this.baseOpacity = Math.random() * 0.2 + 0.1;
+            this.glow = 0;
+        }
+        update() {
+            const dx = this.x - mouse.x; const dy = this.y - mouse.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            const proximity = Math.max(0, 1 - dist / config.starGlowRadius);
+            const targetGlow = mouse.isOverCanvas ? Math.pow(proximity, 2) : 0;
+            this.glow = lerp(this.glow, targetGlow, 0.1);
+        }
+        draw() {
+            const opacity = this.baseOpacity + this.glow * 0.5;
+            ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
     class Node {
         constructor(text, x, y, size, id) {
             this.text = text; this.x = x; this.y = y; this.size = size; this.id = id;
             this.glow = 0; this.activation = 0; this.lastActivationTime = -Infinity;
         }
         update() {
-            const dx = this.x - mouse.x;
-            const dy = this.y - mouse.y;
+            const dx = this.x - mouse.x; const dy = this.y - mouse.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
             const proximity = Math.max(0, 1 - dist / config.mouseRadius);
-            const targetGlow = mouse.isOverCanvas ? Math.pow(proximity, 3) : 0; // Cubic falloff for smoother effect
+            const targetGlow = mouse.isOverCanvas ? Math.pow(proximity, 3) : 0;
             this.glow = lerp(this.glow, targetGlow, 0.08);
             const age = Date.now() - this.lastActivationTime;
             this.activation = Math.exp(-age / 1500);
@@ -143,8 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.globalAlpha = textOpacity;
             ctx.font = `500 ${this.size}px ${config.fontFamily}`;
             ctx.fillStyle = `rgba(255, 255, 255, 0.8)`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
+            ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
             ctx.fillText(this.text, this.x, this.y);
             ctx.restore();
         }
@@ -162,44 +171,11 @@ document.addEventListener('DOMContentLoaded', () => {
         update() { this.progress += 1 / config.flowDuration; if (this.progress >= 1) { this.isFinished = true; this.path.end.lastActivationTime = Date.now(); if (this.path.end.id === 'center') { centralOrb.charge = Math.min(1, centralOrb.charge + 0.125); } } }
         draw() { if (this.isFinished) return; const easedProgress = easeInOutCubic(this.progress); const pos = { x: lerp(this.path.start.x, this.path.end.x, easedProgress), y: lerp(this.path.start.y, this.path.end.y, easedProgress) }; const opacity = Math.sin(this.progress * Math.PI); ctx.save(); ctx.fillStyle = 'rgba(255, 255, 255, 0.9)'; ctx.shadowColor = config.glowColor; ctx.shadowBlur = 15 * opacity; ctx.beginPath(); ctx.arc(pos.x, pos.y, 3, 0, Math.PI * 2); ctx.fill(); ctx.restore(); }
     }
-    class ShootingStar {
-        constructor() { this.reset(); }
-        reset() {
-            this.x = Math.random() * width;
-            this.y = -10;
-            this.len = Math.random() * 200 + 100;
-            this.speed = (Math.random() * 0.5 + config.shootingStarBaseSpeed) * dpr;
-            this.angle = Math.PI * 0.35; // Fixed angle for consistency
-            this.opacity = Math.random() * 0.5 + 0.3;
-        }
-        update() {
-            this.x += Math.cos(this.angle) * this.speed;
-            this.y += Math.sin(this.angle) * this.speed;
-            if (this.y > height + this.len * Math.sin(this.angle)) { this.reset(); }
-        }
-        draw() {
-            ctx.save();
-            const gradient = ctx.createLinearGradient(this.x, this.y, this.x - this.len * Math.cos(this.angle), this.y - this.len * Math.sin(this.angle));
-            gradient.addColorStop(0, `rgba(255, 255, 255, ${this.opacity})`);
-            gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-            ctx.strokeStyle = gradient;
-            ctx.lineWidth = 1.5;
-            ctx.beginPath();
-            ctx.moveTo(this.x, this.y);
-            ctx.lineTo(this.x - this.len * Math.cos(this.angle), this.y - this.len * Math.sin(this.angle));
-            ctx.stroke();
-            ctx.restore();
-        }
-    }
 
     function setup() {
-        width = canvas.clientWidth;
-        height = canvas.clientHeight;
-        dpr = window.devicePixelRatio || 1;
-        canvas.width = width * dpr;
-        canvas.height = height * dpr;
-        canvas.style.width = `${width}px`;
-        canvas.style.height = `${height}px`;
+        width = canvas.clientWidth; height = canvas.clientHeight; dpr = window.devicePixelRatio || 1;
+        canvas.width = width * dpr; canvas.height = height * dpr;
+        canvas.style.width = `${width}px`; canvas.style.height = `${height}px`;
         ctx.scale(dpr, dpr);
         init();
     }
@@ -207,8 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function init() {
         const centerX = width / 2;
         const headerHeight = document.querySelector('.site-header')?.offsetHeight || 80;
-        const topOffset = headerHeight + 60; // Increased space below header
-        const bottomPadding = 50;
+        const topOffset = headerHeight + 60; const bottomPadding = 50;
         const availableHeight = height - topOffset - bottomPadding;
         const availableWidth = width - (bottomPadding * 2);
         const radius = Math.min(availableWidth, availableHeight) / 2;
@@ -218,8 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const nodeData = [{ id: 'contact', text: 'Contact' }, { id: 'concept', text: 'Concept' }, { id: 'simulation', text: 'Simulation' }, { id: 'design', text: 'Design' }, { id: 'integration', text: 'Integration' }, { id: 'partnership', text: 'Partnership' }, { id: 'support', text: 'Support' }, { id: 'analysis', text: 'Analysis' }];
         nodes = nodeData.map((d, i) => {
             const angle = (Math.PI / 4) * i - Math.PI / 2;
-            const x = centerX + Math.cos(angle) * radius;
-            const y = orbCenterY + Math.sin(angle) * radius;
+            const x = centerX + Math.cos(angle) * radius; const y = orbCenterY + Math.sin(angle) * radius;
             return new Node(d.text, x, y, 15, d.id);
         });
 
@@ -229,7 +203,10 @@ document.addEventListener('DOMContentLoaded', () => {
             paths.toCenter.push(new Path(nodes[i], centralOrb));
         }
 
-        shootingStars = [new ShootingStar(), new ShootingStar(), new ShootingStar()];
+        backgroundStars = [];
+        for (let i = 0; i < config.starCount; i++) {
+            backgroundStars.push(new BackgroundStar());
+        }
         phase = -1; phaseTimer = 0; flows = [];
     }
 
@@ -243,12 +220,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function animate() {
         ctx.clearRect(0, 0, width, height);
         phaseTimer++;
-        if (phaseTimer >= config.phaseDuration) {
-            phaseTimer = 0;
-            if (flows.length < 4) nextPhase();
-        }
-        
-        shootingStars.forEach(s => { s.update(); s.draw(); });
+        if (phaseTimer >= config.phaseDuration) { phaseTimer = 0; if (flows.length < 4) nextPhase(); }
+
+        backgroundStars.forEach(s => { s.update(); s.draw(); });
         customCursor.update();
         flows = flows.filter(f => !f.isFinished);
         flows.forEach(f => f.update());
@@ -265,21 +239,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const resizeObserver = new ResizeObserver(() => {
         if (animationFrameId) cancelAnimationFrame(animationFrameId);
-        setup();
-        animate();
+        setup(); animate();
     });
     resizeObserver.observe(heroSection);
     heroSection.addEventListener('mousemove', (e) => {
         const rect = canvas.getBoundingClientRect();
-        mouse.x = e.clientX - rect.left;
-        mouse.y = e.clientY - rect.top;
+        mouse.x = e.clientX - rect.left; mouse.y = e.clientY - rect.top;
         mouse.isOverCanvas = true;
     });
-    heroSection.addEventListener('mouseleave', () => {
-        mouse.isOverCanvas = false;
-    });
-
-    setup();
-    animate();
+    heroSection.addEventListener('mouseleave', () => { mouse.isOverCanvas = false; });
+    setup(); animate();
 });
 

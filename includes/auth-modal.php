@@ -92,11 +92,12 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
                                         </button>
                                     <?php endforeach; ?>
                                     
-                                    <!-- Others Field (immer sichtbar) -->
+                                    <!-- Others Field (verbessert) -->
                                     <button type="button" class="interest-tag others-input" data-interest="other-industry-custom">
                                         <i class="fa-solid fa-ellipsis"></i>
                                         <span class="interest-text">Others...</span>
-                                        <input type="text" placeholder="Specify industry">
+                                        <span class="interest-subtitle">Specify your Industry</span>
+                                        <input type="text" placeholder="Enter your industry">
                                     </button>
                                 <?php endif; ?>
                             </div>
