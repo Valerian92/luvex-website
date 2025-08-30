@@ -3,8 +3,8 @@
  *
  * Description: Steuert die "Spectral Aurora"-Canvas-Animation im Hero-Bereich,
  * den Custom Cursor und die Funktionalität des FAQ-Akkordeons.
- * Version: 2.1 (Layout, Cursor & Animation-Fix integriert)
- * Last Update: 2025-08-30
+ * Version: 2.4 (Finales Layout mit perfekter Zentrierung)
+ * Last Update: 2025-08-31
  */
 
 // ==========================================================================
@@ -16,8 +16,7 @@ class MercuryVaporAnimation {
         this.ctx = this.canvas.getContext('2d');
         this.waves = [];
         this.animationFrameId = null;
-
-        this.titleElement = document.querySelector('.luvex-hero__title');
+        
         this.centerY = 0;
 
         this.config = {
@@ -45,13 +44,9 @@ class MercuryVaporAnimation {
     }
 
     updateCenterY() {
-        if (this.titleElement) {
-            const titleRect = this.titleElement.getBoundingClientRect();
-            const canvasRect = this.canvas.getBoundingClientRect();
-            this.centerY = (titleRect.top - canvasRect.top) + (titleRect.height / 2);
-        } else {
-            this.centerY = this.canvas.height * 0.4; // Fallback
-        }
+        // Die Animation wird jetzt leicht unterhalb der Mitte positioniert (55%)
+        // für eine bessere visuelle Balance mit dem Titel.
+        this.centerY = this.canvas.height * 0.55;
     }
 
     resizeCanvas() {
@@ -171,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // --- NEU: Custom Cursor Logic ---
+    // --- Custom Cursor Logic ---
     if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
 
     if (!document.querySelector('.mercury-cursor')) {
@@ -227,3 +222,4 @@ document.addEventListener('DOMContentLoaded', () => {
         animateCursor();
     }
 });
+

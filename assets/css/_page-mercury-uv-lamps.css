@@ -13,15 +13,15 @@ LUVEX THEME - PAGE: MERCURY UV LAMPS (OVERHAULED)
 .mercury-hero {
     position: relative;
     display: flex;
-    flex-direction: column; /* Content vertikal anordnen */
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 80vh; /* Etwas mehr Höhe für das neue Layout */
+    justify-content: center; /* Zentriert den Container vertikal */
+    height: 80vh;
     min-height: 600px;
     max-height: 800px;
     overflow: hidden;
     text-align: center;
-    padding: 2rem; /* Padding für mobile Ansichten */
+    padding: 2rem;
 }
 
 /* Add the global hero grid background */
@@ -49,25 +49,35 @@ LUVEX THEME - PAGE: MERCURY UV LAMPS (OVERHAULED)
 
 .mercury-hero .luvex-hero__container {
     position: relative;
-    z-index: 3; /* Content is the top layer */
+    z-index: 3;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100%;
+    width: 100%;
 }
 
-/* Layout-Anpassung: Titel nach oben verschieben und Platz für die Animation schaffen */
-.mercury-hero .luvex-hero__title {
-    margin-bottom: 25vh; /* Großer Abstand, um Buttons nach unten zu schieben */
+.mercury-hero .luvex-hero__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8vh; /* Kontrollierter, responsiver Abstand zwischen den Elementen */
+    max-width: 900px;
 }
 
-.mercury-hero .luvex-hero__cta-container {
-    margin-bottom: 2rem;
+/* Alle Margins zurücksetzen, da Flexbox die Positionierung übernimmt */
+.mercury-hero .luvex-hero__title,
+.mercury-hero .luvex-hero__cta-container,
+.mercury-hero .luvex-hero__description {
+    margin: 0;
 }
 
 .mercury-hero .luvex-hero__description {
     max-width: 700px;
 }
+
 
 /*
 ==============================================================================
@@ -178,3 +188,4 @@ LUVEX THEME - PAGE: MERCURY UV LAMPS (OVERHAULED)
 .comparison-table strong {
     color: var(--luvex-dark-blue);
 }
+
