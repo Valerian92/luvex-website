@@ -13,13 +13,15 @@ LUVEX THEME - PAGE: MERCURY UV LAMPS (OVERHAULED)
 .mercury-hero {
     position: relative;
     display: flex;
+    flex-direction: column; /* Content vertikal anordnen */
     align-items: center;
     justify-content: center;
-    height: 75vh; /* Use viewport height for responsiveness */
-    min-height: 500px;
-    max-height: 700px; /* Max height constraint */
+    height: 80vh; /* Etwas mehr Höhe für das neue Layout */
+    min-height: 600px;
+    max-height: 800px;
     overflow: hidden;
     text-align: center;
+    padding: 2rem; /* Padding für mobile Ansichten */
 }
 
 /* Add the global hero grid background */
@@ -54,13 +56,13 @@ LUVEX THEME - PAGE: MERCURY UV LAMPS (OVERHAULED)
     align-items: center;
 }
 
-/* Increased vertical spacing for hero content */
+/* Layout-Anpassung: Titel nach oben verschieben und Platz für die Animation schaffen */
 .mercury-hero .luvex-hero__title {
-    margin-bottom: 2.5rem; /* More space below title */
+    margin-bottom: 25vh; /* Großer Abstand, um Buttons nach unten zu schieben */
 }
 
 .mercury-hero .luvex-hero__cta-container {
-    margin-bottom: 2rem; /* More space below buttons */
+    margin-bottom: 2rem;
 }
 
 .mercury-hero .luvex-hero__description {
@@ -69,7 +71,76 @@ LUVEX THEME - PAGE: MERCURY UV LAMPS (OVERHAULED)
 
 /*
 ==============================================================================
-2. PAGE-SPECIFIC COMPONENT STYLES
+2. CUSTOM CURSOR
+==============================================================================
+*/
+
+/* Standard-Cursor in den aktiven Zonen ausblenden */
+.mercury-hero,
+.site-header:not(.scrolled) {
+    cursor: none;
+}
+
+.mercury-hero a,
+.mercury-hero button,
+.site-header:not(.scrolled) a,
+.site-header:not(.scrolled) button {
+    cursor: none;
+}
+
+/* Container für den Custom Cursor */
+.mercury-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 99999;
+    opacity: 0;
+    transform: translate(-50%, -50%); /* Zentriert das Element auf der Mausposition */
+    transition: opacity 0.3s ease;
+    will-change: transform;
+}
+
+/* Der sichtbare Teil des Cursors (der leuchtende Punkt) */
+.mercury-cursor__dot {
+    width: 8px;
+    height: 8px;
+    background-color: #a17de0; /* Violett, passend zur Animation */
+    border-radius: 50%;
+    transition: all 0.2s ease-out;
+    box-shadow: 0 0 10px #a17de0, 0 0 20px #a17de0, 0 0 30px #a17de0;
+}
+
+/* Zustand: Aktiv (sichtbar) */
+.mercury-cursor.is-active {
+    opacity: 1;
+}
+
+/* Zustand: Hover über einem interaktiven Element */
+.mercury-cursor.is-hovering .mercury-cursor__dot {
+    transform: scale(4);
+    background-color: rgba(161, 125, 224, 0.2); /* Transparenter violetter Kreis */
+    box-shadow: none;
+}
+
+/* Zustand: Spezieller Hover-Effekt für den Header */
+.mercury-cursor.is-header-hover .mercury-cursor__dot {
+    transform: scale(2.5);
+    background-color: transparent;
+    border: 2px solid #a17de0;
+    box-shadow: 0 0 15px #a17de0;
+}
+
+/* Zustand: Klick wird ausgeführt */
+.mercury-cursor.is-clicking .mercury-cursor__dot {
+    transform: scale(3.5);
+    background-color: rgba(161, 125, 224, 0.4);
+}
+
+
+/*
+==============================================================================
+3. PAGE-SPECIFIC COMPONENT STYLES
 ==============================================================================
 */
 .comparison-table {
