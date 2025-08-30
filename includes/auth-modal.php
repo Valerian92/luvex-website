@@ -1,7 +1,7 @@
 <?php
 /**
- * Auth-Modal-Template (FINAL - Mehrfachauswahl für alle)
- * AJAX-basiertes Login/Register-Modal mit dynamischer Interessenauswahl und neuem Design.
+ * Auth-Modal-Template (VERBESSERT - Neue Grid-Struktur)
+ * AJAX-basiertes Login/Register-Modal mit verbessertem Layout.
  */
 
 if (!defined('ABSPATH')) exit;
@@ -47,7 +47,7 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
                     </form>
                 </div>
 
-                <!-- Registration Form (NEUES DESIGN & MEHRFACHAUSWAHL FÜR ALLE) -->
+                <!-- Registration Form (NEUES LAYOUT) -->
                 <div class="auth-tab-content" id="register-content">
                     <form id="luvex-register-form" class="luvex-auth-form" method="post">
                         
@@ -56,49 +56,75 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
                             <p style="font-size: var(--text-lg); color: var(--luvex-gray-300); margin: 0;">Already have an account? <a href="#" onclick="event.preventDefault(); showAuthForm('login');" style="color: var(--luvex-bright-cyan); text-decoration: none; font-weight: 500;">Log in</a></p>
                         </div>
 
-                        <!-- Abschnitt 1: Persönliche Daten & Account-Info -->
+                        <!-- Abschnitt 1: Account Details (NEUE GRID-STRUKTUR) -->
                         <div class="form-section">
                             <h4 class="form-section-title"><i class="fa-solid fa-user-circle"></i> <span>Account Details</span></h4>
-                            <div class="form-grid">
-                                <input type="text" name="first_name" placeholder="First Name" required autocomplete="given-name">
-                                <input type="text" name="last_name" placeholder="Last Name" required autocomplete="family-name">
-                                <input type="email" name="user_email" placeholder="Email Address" required autocomplete="email">
-                                <input type="text" name="company" placeholder="Company (Optional)" autocomplete="organization">
-                                <input type="password" name="user_password" placeholder="Password" required autocomplete="new-password">
-                                <input type="password" name="confirm_password" placeholder="Confirm Password" required autocomplete="new-password">
+                            <div class="form-grid-account-details">
+                                <!-- Linke Spalte: Required -->
+                                <div class="account-column-required">
+                                    <h5>Required Information</h5>
+                                    <input type="text" name="profile_nickname" placeholder="Profile/Nickname *" required autocomplete="nickname">
+                                    <input type="email" name="user_email" placeholder="Email Address *" required autocomplete="email">
+                                    <input type="password" name="user_password" placeholder="Password *" required autocomplete="new-password">
+                                    <input type="password" name="confirm_password" placeholder="Confirm Password *" required autocomplete="new-password">
+                                </div>
+                                <!-- Rechte Spalte: Optional -->
+                                <div class="account-column-optional">
+                                    <h5>Optional Information</h5>
+                                    <input type="text" name="first_name" placeholder="First Name" autocomplete="given-name">
+                                    <input type="text" name="last_name" placeholder="Last Name" autocomplete="family-name">
+                                    <input type="tel" name="phone" placeholder="Phone Number" autocomplete="tel">
+                                    <input type="text" name="company" placeholder="Company" autocomplete="organization">
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Abschnitt 2: Branchenauswahl (Dynamisch) -->
+                        <!-- Abschnitt 2: Industries (5x2 Grid + Others) -->
                         <div class="form-section">
                             <h4 class="form-section-title"><?php echo get_luvex_icon('category-industries'); ?> <span>Your Industry (Optional)</span></h4>
                             <div class="interests-grid-industries">
                                 <?php if (isset($icon_library['Industries'])): 
+                                    $industries = $icon_library['Industries'];
+                                    $visible_limit = 10; // 5x2 = 10
                                     $count = 0;
-                                    $visible_limit = 8;
-                                    foreach ($icon_library['Industries'] as $key => $details): 
-                                        $is_hidden = $count >= $visible_limit;
+                                    foreach ($industries as $key => $details): 
+                                        if ($count < $visible_limit):
                                         ?>
-                                        <button type="button" class="interest-tag <?php echo $is_hidden ? 'hidden' : ''; ?>" data-interest="<?= esc_attr($key) ?>">
-                                            <?= get_luvex_icon($key) ?>
-                                            <span><?= esc_html($details['label']) ?></span>
-                                        </button>
-                                    <?php 
-                                    $count++;
-                                    endforeach; 
-                                endif; ?>
+                                            <button type="button" class="interest-tag" data-interest="<?= esc_attr($key) ?>">
+                                                <?= get_luvex_icon($key) ?>
+                                                <span><?= esc_html($details['label']) ?></span>
+                                            </button>
+                                        <?php 
+                                        else: ?>
+                                            <button type="button" class="interest-tag hidden" data-interest="<?= esc_attr($key) ?>">
+                                                <?= get_luvex_icon($key) ?>
+                                                <span><?= esc_html($details['label']) ?></span>
+                                            </button>
+                                        <?php endif;
+                                        $count++;
+                                    endforeach; ?>
+                                    
+                                    <!-- Others Field -->
+                                    <button type="button" class="interest-tag others-input" data-interest="other-industry-custom">
+                                        <i class="fa-solid fa-ellipsis"></i>
+                                        <span class="interest-text">Others...</span>
+                                        <input type="text" placeholder="Specify industry" style="display: none;">
+                                    </button>
+                                <?php endif; ?>
                             </div>
+                            
                             <?php 
-                            $hidden_count = isset($icon_library['Industries']) ? count($icon_library['Industries']) - $visible_limit : 0;
+                            $total_industries = isset($icon_library['Industries']) ? count($icon_library['Industries']) : 0;
+                            $hidden_count = max(0, $total_industries - $visible_limit);
                             if ($hidden_count > 0): ?>
                                 <button type="button" id="industry-toggle-btn" class="show-more-btn">
-                                    <span class="btn-text">Show <?php echo $hidden_count; ?> more...</span>
+                                    <span class="btn-text">Show All Industries</span>
                                     <i class="fa-solid fa-chevron-down icon-toggle"></i>
                                 </button>
                             <?php endif; ?>
                         </div>
 
-                        <!-- Abschnitt 3: Interessenauswahl (Dynamisch & 3-spaltig) -->
+                        <!-- Abschnitt 3: Interests (Zentriert) -->
                         <div class="form-section">
                              <h4 class="form-section-title"><?php echo get_luvex_icon('category-luvex-services'); ?> <span>Your Interests (Optional)</span></h4>
                             <div class="interests-columns-container">
@@ -124,13 +150,13 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
                             </div>
                         </div>
                         
-                        <!-- KORREKTUR: Zurück zu einem einzigen versteckten Feld für alle Auswahlen -->
+                        <!-- Hidden Field für alle Auswahlen -->
                         <input type="hidden" name="interest_area" id="interest_area_hidden" value="">
 
-                        <!-- Abschnitt 4: reCAPTCHA -->
+                        <!-- reCAPTCHA -->
                         <div class="recaptcha-container" id="register-recaptcha-container"></div>
                         
-                        <!-- Abschnitt 5: Zustimmung & Absenden -->
+                        <!-- Consent & Submit -->
                         <div class="form-consent">
                              <label class="form-checkbox">
                                 <input type="checkbox" name="terms_consent" required>
@@ -152,9 +178,9 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
 
 <script>
 (function() {
-    // --- GLOBALE VARIABLEN FÜR DAS MODAL ---
+    // --- GLOBALE VARIABLEN ---
     const modal = document.getElementById('authModal');
-    if (!modal) return; // Skript beenden, wenn das Modal nicht auf der Seite ist
+    if (!modal) return;
 
     const feedbackContainer = document.getElementById('auth-feedback');
     let recaptchaLoginWidget, recaptchaRegisterWidget;
@@ -169,10 +195,8 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
 
     function renderVisibleRecaptcha() {
         if (!isRecaptchaScriptLoaded || !siteKey) return;
-
         const loginTab = document.getElementById('login-content');
         const registerTab = document.getElementById('register-content');
-
         try {
             if (loginTab.classList.contains('active') && recaptchaLoginWidget === undefined) {
                 const el = document.getElementById('login-recaptcha-container');
@@ -187,7 +211,7 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
         }
     }
     
-    // --- MODAL SICHTBARKEIT & TAB-WECHSEL ---
+    // --- MODAL SICHTBARKEIT ---
     window.openAuthModal = function(mode = 'login') {
         modal.classList.add('visible');
         document.body.classList.add('modal-open');
@@ -211,28 +235,33 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
         
         feedbackContainer.innerHTML = '';
         feedbackContainer.className = 'auth-feedback-message';
-        
         renderVisibleRecaptcha();
     };
 
-    // --- DYNAMISCHE NACHRICHTENANZEIGE ---
+    // --- NACHRICHTEN ---
     function showAuthMessage(message, type = 'error') {
         feedbackContainer.className = `auth-feedback-message ${type}`;
         feedbackContainer.innerHTML = message;
         feedbackContainer.style.display = 'block';
     }
 
-    // --- FORMULARDATEN SPEICHERN & LADEN (SESSION STORAGE) ---
+    // --- FORMULARDATEN SPEICHERN & LADEN ---
     const formStorageKey = 'luvexRegisterFormData';
     function saveFormData() {
         const form = document.getElementById('luvex-register-form');
         const interests = Array.from(form.querySelectorAll('.interest-tag.selected')).map(tag => tag.dataset.interest);
+        const othersInput = form.querySelector('.others-input.selected input');
+        const othersValue = othersInput ? othersInput.value : '';
+        
         const data = {
+            profile_nickname: form.querySelector('[name="profile_nickname"]').value,
             first_name: form.querySelector('[name="first_name"]').value,
             last_name: form.querySelector('[name="last_name"]').value,
             user_email: form.querySelector('[name="user_email"]').value,
+            phone: form.querySelector('[name="phone"]').value,
             company: form.querySelector('[name="company"]').value,
-            interests: interests
+            interests: interests,
+            others_industry: othersValue
         };
         sessionStorage.setItem(formStorageKey, JSON.stringify(data));
     }
@@ -242,11 +271,16 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
         if (storedData) {
             const data = JSON.parse(storedData);
             const form = document.getElementById('luvex-register-form');
-            form.querySelector('[name="first_name"]').value = data.first_name || '';
-            form.querySelector('[name="last_name"]').value = data.last_name || '';
-            form.querySelector('[name="user_email"]').value = data.user_email || '';
-            form.querySelector('[name="company"]').value = data.company || '';
             
+            // Lade gespeicherte Werte
+            Object.keys(data).forEach(key => {
+                if (key !== 'interests' && key !== 'others_industry') {
+                    const field = form.querySelector(`[name="${key}"]`);
+                    if (field) field.value = data[key] || '';
+                }
+            });
+            
+            // Lade Interessen
             document.querySelectorAll('.interest-tag').forEach(tag => tag.classList.remove('selected'));
             if(data.interests && data.interests.length > 0) {
                 data.interests.forEach(interestKey => {
@@ -254,6 +288,17 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
                     if (tag) tag.classList.add('selected');
                 });
             }
+            
+            // Lade Others-Feld
+            if (data.others_industry) {
+                const othersTag = form.querySelector('.others-input');
+                if (othersTag) {
+                    othersTag.classList.add('selected');
+                    const input = othersTag.querySelector('input');
+                    if (input) input.value = data.others_industry;
+                }
+            }
+            
             updateHiddenField();
         }
     }
@@ -264,7 +309,14 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
     
     function updateHiddenField() {
         const selectedInterests = Array.from(document.querySelectorAll('.interest-tag.selected'))
-                                     .map(t => t.dataset.interest);
+                                     .map(t => {
+                                         if (t.classList.contains('others-input')) {
+                                             const input = t.querySelector('input');
+                                             return input && input.value ? `other-industry:${input.value}` : '';
+                                         }
+                                         return t.dataset.interest;
+                                     })
+                                     .filter(Boolean);
         document.getElementById('interest_area_hidden').value = selectedInterests.join(',');
     }
 
@@ -323,7 +375,7 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
         });
     }
 
-    // --- EVENT LISTENERS INITIALISIEREN ---
+    // --- EVENT LISTENERS ---
     const loginForm = document.getElementById('luvex-login-form');
     const registerForm = document.getElementById('luvex-register-form');
     if (loginForm) handleFormSubmit(loginForm, 'luvex_ajax_login');
@@ -333,8 +385,8 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
         registerForm.addEventListener('input', saveFormData);
     }
     
-    // KORREKTUR: Vereinfachte Logik für alle Interessen-Tags (Mehrfachauswahl)
-    document.querySelectorAll('.interest-tag').forEach(tag => {
+    // Interest Tags (alle außer Others)
+    document.querySelectorAll('.interest-tag:not(.others-input)').forEach(tag => {
         tag.addEventListener('click', function() {
             this.classList.toggle('selected');
             updateHiddenField();
@@ -342,7 +394,41 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
         });
     });
 
-    // Logik für "Mehr anzeigen" Button
+    // Others Input Feld
+    const othersTag = document.querySelector('.others-input');
+    if (othersTag) {
+        othersTag.addEventListener('click', function() {
+            if (!this.classList.contains('selected')) {
+                this.classList.add('selected');
+                const input = this.querySelector('input');
+                if (input) {
+                    input.style.display = 'block';
+                    input.focus();
+                }
+                updateHiddenField();
+                saveFormData();
+            }
+        });
+
+        const othersInput = othersTag.querySelector('input');
+        if (othersInput) {
+            othersInput.addEventListener('blur', function() {
+                if (!this.value.trim()) {
+                    othersTag.classList.remove('selected');
+                    this.style.display = 'none';
+                    updateHiddenField();
+                    saveFormData();
+                }
+            });
+
+            othersInput.addEventListener('input', function() {
+                updateHiddenField();
+                saveFormData();
+            });
+        }
+    }
+
+    // Industry Toggle Button
     const industryToggleBtn = document.getElementById('industry-toggle-btn');
     if (industryToggleBtn) {
         industryToggleBtn.addEventListener('click', () => {
@@ -350,20 +436,26 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
             const hiddenTags = registerForm.querySelectorAll('.interests-grid-industries .interest-tag.hidden');
             
             hiddenTags.forEach(tag => {
-                tag.style.display = isExpanded ? 'flex' : 'none';
+                if (isExpanded) {
+                    tag.classList.remove('hidden');
+                } else {
+                    tag.classList.add('hidden');
+                }
             });
             
             const btnText = industryToggleBtn.querySelector('.btn-text');
-            btnText.textContent = isExpanded ? 'Show fewer industries' : `Show ${hiddenTags.length} more...`;
+            btnText.textContent = isExpanded ? 'Show Less Industries' : 'Show All Industries';
         });
     }
 
+    // Modal Close Event
     modal.addEventListener('click', function(e) {
         if (e.target === modal) {
             closeAuthModal();
         }
     });
     
+    // reCAPTCHA Script Loader
     const originalOpenAuthModal = window.openAuthModal;
     window.openAuthModal = function(mode = 'login') {
         if (!document.querySelector('script[src*="recaptcha/api.js"]')) {
@@ -377,4 +469,3 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
     };
 })();
 </script>
-
