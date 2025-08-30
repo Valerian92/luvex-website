@@ -1,9 +1,9 @@
 <?php
 /**
- * LUVEX CORS FIXES - External App Integration
+ * LUVEX CORS FIXES - External App Integration (KORRIGIERT)
  * 
  * Handles CORS headers for LUVEX external applications
- * Location: /includes/_cors-fixes.php
+ * Location: /includes/_cors_fixes.php
  * 
  * @package Luvex
  * @since 3.0.0
@@ -21,9 +21,9 @@ if (!defined('ABSPATH')) {
 class LuvexCORSManager {
     
     /**
-     * Allowed origins for CORS
+     * Allowed origins for CORS (als static property statt const)
      */
-    const ALLOWED_ORIGINS = [
+    private static $allowed_origins = [
         'https://analyzer.luvex.tech',
         'https://simulator.luvex.tech',
         'https://www.luvex.tech',
@@ -94,15 +94,15 @@ class LuvexCORSManager {
      * Check if origin is in allowed list
      */
     private static function is_origin_allowed($origin) {
-        return in_array($origin, self::ALLOWED_ORIGINS);
+        return in_array($origin, self::$allowed_origins);
     }
     
     /**
-     * Add new allowed origin (for future expansion)
+     * Add new allowed origin (for future expansion) - KORRIGIERT
      */
     public static function add_allowed_origin($origin) {
-        if (!in_array($origin, self::ALLOWED_ORIGINS)) {
-            self::ALLOWED_ORIGINS[] = $origin;
+        if (!in_array($origin, self::$allowed_origins)) {
+            self::$allowed_origins[] = $origin;
         }
     }
     
@@ -110,7 +110,7 @@ class LuvexCORSManager {
      * Get all allowed origins
      */
     public static function get_allowed_origins() {
-        return self::ALLOWED_ORIGINS;
+        return self::$allowed_origins;
     }
 }
 
