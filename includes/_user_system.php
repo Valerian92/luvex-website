@@ -1,11 +1,14 @@
 <?php
 /**
- * LUVEX USER SYSTEM - COMPLETE BACKEND LOGIC (FIXED)
- * Features: Authentication, User Management, Language System, Avatar Upload
- * Location: /includes/_user-system.php
+ * LUVEX USER SYSTEM - Core User Management Logic (AJAX registrations removed)
+ * 
+ * Features: User Management, Language System, Avatar Management
+ * AJAX handlers are now registered centrally via LuvexAjaxManager
+ * 
+ * Location: /includes/_user_system.php
  * Dependencies: Polylang Plugin
  * @package Luvex
- * @since 3.0.0
+ * @since 3.1.0
  */
 
 if (!defined('ABSPATH')) {
@@ -30,7 +33,6 @@ class LuvexUserSystem {
         // Core hooks
         add_action('after_setup_theme', [self::class, 'setup_hooks']);
         add_action('init', [self::class, 'handle_language_detection']);
-        add_action('wp_enqueue_scripts', [self::class, 'enqueue_language_scripts']);
         
         // User profile hooks
         add_action('show_user_profile', [self::class, 'add_language_profile_fields']);
@@ -38,14 +40,8 @@ class LuvexUserSystem {
         add_action('personal_options_update', [self::class, 'save_language_profile_fields']);
         add_action('edit_user_profile_update', [self::class, 'save_language_profile_fields']);
         
-        // AJAX handlers
-        add_action('wp_ajax_luvex_set_language', [self::class, 'ajax_set_language']);
-        add_action('wp_ajax_nopriv_luvex_set_language', [self::class, 'ajax_set_language']);
-        add_action('wp_ajax_luvex_upload_avatar', [self::class, 'ajax_upload_avatar']);
-        add_action('wp_ajax_luvex_update_profile', [self::class, 'ajax_update_profile']);
-        
-        // KORREKTUR: Die Authentifizierungs-Hooks wurden entfernt, da sie von _luvex_security.php gehandhabt werden.
-        // add_action('init', [self::class, 'handle_auth_forms'], 5);
+        // NOTE: AJAX handlers are NO LONGER registered here!
+        // They are now managed centrally by LuvexAjaxManager
     }
     
     /**
@@ -202,19 +198,15 @@ class LuvexUserSystem {
     
     /**
      * ========================================================================
-     * AJAX HANDLERS
+     * AJAX HANDLER METHODS (called by LuvexAjaxManager)
      * ========================================================================
      */
     
     /**
      * AJAX: Set user language preference
+     * NOTE: This method is now called by LuvexAjaxManager, not directly registered
      */
     public static function ajax_set_language() {
-        // Verify nonce
-        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'luvex_language_nonce')) {
-            wp_send_json_error('Security check failed');
-        }
-        
         $language = isset($_POST['language']) ? sanitize_text_field($_POST['language']) : '';
         
         if (!$language || !self::is_language_supported($language)) {
@@ -244,18 +236,9 @@ class LuvexUserSystem {
     
     /**
      * AJAX: Upload avatar
+     * NOTE: This method is now called by LuvexAjaxManager, not directly registered
      */
     public static function ajax_upload_avatar() {
-        // Verify user is logged in
-        if (!is_user_logged_in()) {
-            wp_send_json_error('User not logged in');
-        }
-        
-        // Verify nonce
-        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'luvex_avatar_upload')) {
-            wp_send_json_error('Security check failed');
-        }
-        
         if (!isset($_FILES['avatar_file'])) {
             wp_send_json_error('No file uploaded');
         }
@@ -264,7 +247,6 @@ class LuvexUserSystem {
         
         // Validate file type
         $allowed_types = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-        $file_type = wp_check_filetype($uploaded_file['name']);
         
         if (!in_array($uploaded_file['type'], $allowed_types)) {
             wp_send_json_error('Invalid file type. Please upload JPG, PNG, GIF or WebP images only.');
@@ -358,15 +340,6 @@ class LuvexUserSystem {
     
     /**
      * ========================================================================
-     * KORREKTUR: AUTHENTICATION SYSTEM ENTFERNT
-     * Dieser gesamte Block wurde entfernt, um Konflikte mit _luvex_security.php
-     * zu vermeiden. Die Logik für Login und Registrierung befindet sich jetzt
-     * ausschließlich in der _luvex_security.php Datei.
-     * ========================================================================
-     */
-    
-    /**
-     * ========================================================================
      * AVATAR SYSTEM
      * ========================================================================
      */
@@ -414,30 +387,6 @@ class LuvexUserSystem {
      */
     
     /**
-     * Enqueue language scripts
-     */
-    public static function enqueue_language_scripts() {
-        // Only enqueue if we have language functionality
-        if (!function_exists('pll_the_languages')) {
-            return;
-        }
-        
-        wp_localize_script('luvex-profile-menu', 'luvexLanguage', [
-            'ajax_url' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('luvex_language_nonce'),
-            'current_language' => self::get_user_language(),
-            'supported_languages' => self::get_supported_languages(),
-            'user_logged_in' => is_user_logged_in()
-        ]);
-        
-        // AJAX für Avatar Upload
-        wp_localize_script('luvex-profile-menu', 'luvex_ajax', [
-            'ajax_url' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('luvex_avatar_upload')
-        ]);
-    }
-    
-    /**
      * Add language data to footer for JavaScript access
      */
     public static function add_language_data_to_footer() {
@@ -456,12 +405,6 @@ class LuvexUserSystem {
         ]);
         echo '</script>';
     }
-    
-    /**
-     * ========================================================================
-     * UTILITY FUNCTIONS
-     * ========================================================================
-     */
     
     /**
      * Get language switcher HTML for header dropdown

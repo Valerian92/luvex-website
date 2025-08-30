@@ -1,8 +1,12 @@
 <?php
 /**
- * LUVEX Security System - Kompakt & Effizient mit AJAX (Mehrfachauswahl für alle)
+ * LUVEX Security System - Core Authentication Logic (AJAX handlers removed)
+ * 
+ * This file now contains only the core authentication methods.
+ * AJAX registration has been moved to LuvexAjaxManager.
+ * 
  * @package Luvex
- * @since 3.0.0
+ * @since 3.1.0
  */
 if (!defined('ABSPATH')) exit;
 
@@ -55,18 +59,16 @@ class LuvexSecurity {
         return $output;
     }
     
-    // --- AJAX HANDLERS ---
+    /**
+     * ========================================================================
+     * AUTHENTICATION METHODS (used by AJAX handlers)
+     * ========================================================================
+     */
 
     /**
-     * AJAX Login Handler
+     * Core Login Logic - called by AJAX handler in LuvexAjaxManager
      */
     public static function ajax_handle_login() {
-        // Check nonce
-        if (!check_ajax_referer('luvex_ajax_nonce', 'nonce', false)) {
-            wp_send_json_error(['message' => 'Security check failed.']);
-            return;
-        }
-        
         // Rate limiting
         if (!self::check_rate_limit('login', 5, 900)) {
             wp_send_json_error(['message' => 'Too many login attempts. Please try again later.']);
@@ -97,20 +99,17 @@ class LuvexSecurity {
         if (is_wp_error($user)) {
             wp_send_json_error(['message' => 'Invalid email or password.']);
         } else {
-            wp_send_json_success(['redirect_url' => home_url('/profile')]);
+            wp_send_json_success([
+                'redirect_url' => home_url('/profile'),
+                'message' => 'Login successful!'
+            ]);
         }
     }
 
     /**
-     * AJAX Registration Handler
+     * Core Registration Logic - called by AJAX handler in LuvexAjaxManager
      */
     public static function ajax_handle_registration() {
-        // Check nonce
-        if (!check_ajax_referer('luvex_ajax_nonce', 'nonce', false)) {
-            wp_send_json_error(['message' => 'Security check failed.']);
-            return;
-        }
-        
         // Rate limiting
         if (!self::check_rate_limit('register', 3, 3600)) {
             wp_send_json_error(['message' => 'Too many registration attempts. Please try again later.']);
@@ -165,8 +164,13 @@ class LuvexSecurity {
             'display_name' => $first_name . ' ' . $last_name
         ]);
         
+        // Save additional fields
         if (!empty($_POST['company'])) {
             update_user_meta($user_id, 'company', sanitize_text_field($_POST['company']));
+        }
+        
+        if (!empty($_POST['phone'])) {
+            update_user_meta($user_id, 'phone', sanitize_text_field($_POST['phone']));
         }
         
         // Save interests
@@ -181,21 +185,51 @@ class LuvexSecurity {
             'switch_to_login' => true
         ]);
     }
+    
+    /**
+     * ========================================================================
+     * LEGACY FORM HANDLERS (for non-AJAX fallback)
+     * ========================================================================
+     */
+    
+    /**
+     * Handle page-based form submissions (fallback)
+     */
+    public static function handle_page_forms() {
+        if (isset($_POST['luvex_register_submit_page'])) {
+            self::handle_page_registration();
+        }
+        
+        if (isset($_POST['luvex_login_submit_page'])) {
+            self::handle_page_login();
+        }
+    }
+    
+    private static function handle_page_registration() {
+        // Similar to ajax_handle_registration but with redirects instead of JSON responses
+        if (!wp_verify_nonce($_POST['luvex_nonce'] ?? '', 'luvex_registration_nonce')) {
+            wp_die('Security check failed');
+        }
+        
+        // Process registration...
+        // On success: wp_redirect()
+        // On error: wp_redirect() with error parameter
+    }
+    
+    private static function handle_page_login() {
+        // Similar to ajax_handle_login but with redirects instead of JSON responses
+        if (!wp_verify_nonce($_POST['luvex_nonce'] ?? '', 'luvex_login_nonce')) {
+            wp_die('Security check failed');
+        }
+        
+        // Process login...
+        // On success: wp_redirect()
+        // On error: wp_redirect() with error parameter
+    }
 }
 
-// Handler Integration
-add_action('init', function() {
-    // Fallback handlers for page reload (if needed)
-    if (isset($_POST['luvex_register_submit_page'])) {
-        // Could implement page-based handlers here
-    }
-    if (isset($_POST['luvex_login_submit_page'])) {
-        // Could implement page-based handlers here
-    }
-});
+// Initialize form handling
+add_action('init', [LuvexSecurity::class, 'handle_page_forms'], 5);
 
-// AJAX Actions for WordPress
-add_action('wp_ajax_nopriv_luvex_ajax_login', ['LuvexSecurity', 'ajax_handle_login']);
-add_action('wp_ajax_nopriv_luvex_ajax_register', ['LuvexSecurity', 'ajax_handle_registration']);
-add_action('wp_ajax_luvex_ajax_login', ['LuvexSecurity', 'ajax_handle_login']);
-add_action('wp_ajax_luvex_ajax_register', ['LuvexSecurity', 'ajax_handle_registration']);
+// NOTE: AJAX handlers are no longer registered here!
+// They are now managed centrally by LuvexAjaxManager in _luvex_ajax.php

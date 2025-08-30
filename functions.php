@@ -1,9 +1,9 @@
 <?php
 /**
- * LUVEX Theme Functions - Finale Version (Sicherheitskorrekturen)
+ * LUVEX Theme Functions - Updated for Centralized AJAX System
  * Description: Komplette Theme-Setup-, Navigations- und Asset-Lade-Logik.
  * JS-Pfade für bessere Ordnerstruktur aktualisiert.
- * KORREKTUR: Lädt News-spezifische Assets jetzt korrekt.
+ * UPDATED: Integriert neues zentrales AJAX-System
  */
 
 // 1. ASTRA THEME DEAKTIVIERUNG
@@ -115,11 +115,8 @@ function luvex_enqueue_assets() {
         }
     }
 
-    // ========================================================================
-    // KORREKTUR: UV News Styles & Scripts (Sonderfall für Custom Post Type)
-    // ========================================================================
+    // UV News Styles & Scripts (Sonderfall für Custom Post Type)
     if (is_post_type_archive('uv_news') || is_singular('uv_news')) {
-        // Lade das CSS für die News-Seite
         $news_css_path = get_stylesheet_directory() . '/assets/css/_news.css';
         if (file_exists($news_css_path)) {
             wp_enqueue_style('luvex-news-styles', get_stylesheet_directory_uri() . '/assets/css/_news.css', ['luvex-main'], filemtime($news_css_path));
@@ -162,7 +159,6 @@ function luvex_enqueue_assets() {
 
     // Seitenspezifische Scripts
     if (is_front_page() || is_home()) {
-        // Korrektur: Integrity-Check für externes CDN-Skript hinzugefügt
         wp_enqueue_script(
             'three-js',
             'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',
@@ -207,20 +203,14 @@ function luvex_enqueue_assets() {
         $enqueue_script('luvex-hero-safety-animation-script', 'pages/hero-safety-animation.js');
     }
     if (is_page('uv-solutions')) {
-        $enqueue_script('luvex-hero-soltuions-animation', 'pages/hero-solutions-animation.js');
+        $enqueue_script('luvex-hero-solutions-animation', 'pages/hero-solutions-animation.js');
     }
     
-    // ========================================================================
-    // KORREKTUR: Lade das Hero-Skript nur für den "uv_news" Post Type
-    // `is_post_type_archive('uv_news')` -> für die Archiv-Seite /uv_news/
-    // `is_singular('uv_news')` -> für einzelne News-Beiträge
-    // ========================================================================
+    // Lade das Hero-Skript für den "uv_news" Post Type
     if (is_post_type_archive('uv_news') || is_singular('uv_news')) {
         $enqueue_script('luvex-hero-news-animation', 'pages/hero-news-network.js');
     }
-
 }
-
 
 // 5. NAV WALKER KLASSE
 class Luvex_Nav_Walker extends Walker_Nav_Menu {
@@ -249,7 +239,7 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
     }
 }
 
-// 6. AVATAR FUNKTION
+// 6. AVATAR FUNKTION (Legacy - wird durch LuvexUserSystem ersetzt)
 function luvex_get_user_avatar($user_id = null) {
     if (!$user_id) {
         $user_id = get_current_user_id();
@@ -275,16 +265,20 @@ function luvex_get_user_avatar($user_id = null) {
     }
 }
 
-
-// 7. SYSTEM-DATEIEN LADEN
+// 7. SYSTEM-DATEIEN LADEN (UPDATED: Neue AJAX-Datei hinzugefügt)
 $luvex_includes_path = get_stylesheet_directory() . '/includes/';
 
-// Fix: Correct filename reference
+// WICHTIG: AJAX System ZUERST laden (benötigt von anderen Systemen)
+if (file_exists($luvex_includes_path . '_luvex_ajax.php')) {
+    require_once $luvex_includes_path . '_luvex_ajax.php';
+}
+
+// User System laden (AJAX-Registrierungen entfernt)
 if (file_exists($luvex_includes_path . '_user_system.php')) {
     require_once $luvex_includes_path . '_user_system.php';
 }
 
-// Security System laden
+// Security System laden (AJAX-Registrierungen entfernt)
 if (file_exists($luvex_includes_path . '_luvex_security.php')) {
     require_once $luvex_includes_path . '_luvex_security.php';
 }
@@ -299,7 +293,7 @@ if (file_exists($luvex_includes_path . '_cors_fixes.php')) {
     require_once $luvex_includes_path . '_cors_fixes.php';
 }
 
-// 8. reCAPTCHA FUNKTION
+// 8. reCAPTCHA FUNKTION (Unchanged)
 function luvex_verify_recaptcha($response) {
     if (empty($response) || !defined('LUVEX_RECAPTCHA_SECRET_KEY')) {
         return false;
@@ -319,4 +313,34 @@ function luvex_verify_recaptcha($response) {
     
     $data = json_decode(wp_remote_retrieve_body($result), true);
     return $data['success'] === true;
+}
+
+// 9. DEBUGGING FÜR ENTWICKLUNG (nur für Admins)
+if (WP_DEBUG && current_user_can('manage_options')) {
+    add_action('wp_footer', 'luvex_debug_ajax_system');
+}
+
+function luvex_debug_ajax_system() {
+    if (!class_exists('LuvexAjaxManager')) {
+        return;
+    }
+    
+    $status = LuvexAjaxManager::get_system_status();
+    if (!$status) {
+        return;
+    }
+    
+    ?>
+    <div style="position: fixed; bottom: 20px; left: 20px; background: #000; color: #00ff00; padding: 10px; font-family: monospace; font-size: 11px; z-index: 9999; max-width: 300px; border-radius: 5px;">
+        <div style="font-weight: bold; margin-bottom: 5px;">🔧 LUVEX AJAX System Status</div>
+        <div>Nonce: <?php echo esc_html($status['nonce_name']); ?></div>
+        <div>Handlers: <?php echo count($status['registered_handlers']); ?></div>
+        <div>Dependencies:</div>
+        <?php foreach ($status['dependencies'] as $dep => $loaded): ?>
+            <div style="margin-left: 10px; color: <?php echo $loaded ? '#00ff00' : '#ff4444'; ?>">
+                <?php echo $loaded ? '✓' : '✗'; ?> <?php echo esc_html($dep); ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <?php
 }

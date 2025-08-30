@@ -1,14 +1,17 @@
 <?php
 /**
- * Auth-Modal-Template (VERBESSERT - Neue Grid-Struktur)
- * AJAX-basiertes Login/Register-Modal mit verbessertem Layout.
+ * Auth-Modal-Template (UPDATED - Uses Centralized AJAX System)
+ * AJAX-basiertes Login/Register-Modal mit neuer einheitlicher Nonce-Verwaltung.
  */
 
 if (!defined('ABSPATH')) exit;
 
 // reCAPTCHA Site-Key aus wp-config.php holen
 $recaptcha_site_key = defined('LUVEX_RECAPTCHA_SITE_KEY') ? LUVEX_RECAPTCHA_SITE_KEY : '';
-$ajax_nonce = wp_create_nonce('luvex_ajax_nonce');
+
+// UPDATED: Verwende zentralen AJAX-Nonce
+$ajax_nonce = function_exists('luvex_ajax_nonce') ? luvex_ajax_nonce() : wp_create_nonce('luvex_ajax_nonce');
+
 $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_library() : [];
 ?>
 
@@ -171,6 +174,10 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
     let isRecaptchaScriptLoaded = false;
     const siteKey = "<?php echo esc_js($recaptcha_site_key); ?>";
 
+    // UPDATED: Verwende globale AJAX-Daten wenn verfügbar
+    const ajaxUrl = (typeof luvexAjax !== 'undefined') ? luvexAjax.ajax_url : "<?php echo admin_url('admin-ajax.php'); ?>";
+    const ajaxNonce = (typeof luvexAjax !== 'undefined') ? luvexAjax.nonce : "<?php echo $ajax_nonce; ?>";
+
     // --- reCAPTCHA LOGIK ---
     window.onRecaptchaLoadCallback = function() {
         isRecaptchaScriptLoaded = true;
@@ -318,9 +325,9 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
             
             const formData = new FormData(form);
             formData.append('action', action);
-            formData.append('nonce', '<?php echo $ajax_nonce; ?>');
+            formData.append('nonce', ajaxNonce); // UPDATED: Verwende zentralen Nonce
             
-            fetch("<?php echo admin_url('admin-ajax.php'); ?>", {
+            fetch(ajaxUrl, {
                 method: 'POST',
                 body: formData
             })
@@ -340,7 +347,7 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
                         }, 2000);
                     }
                 } else {
-                    showAuthMessage(data.data.message, 'error');
+                    showAuthMessage(data.data.message || data.data || 'An error occurred', 'error');
                     if (typeof grecaptcha !== 'undefined') {
                         const widgetId = (action === 'luvex_ajax_login') ? recaptchaLoginWidget : recaptchaRegisterWidget;
                         if(widgetId !== undefined) grecaptcha.reset(widgetId);
@@ -462,5 +469,13 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
         }
         originalOpenAuthModal(mode);
     };
+
+    // UPDATED: Debug-Ausgabe für Entwicklung
+    if (typeof window.console !== 'undefined' && window.console.log) {
+        console.log('🔐 LUVEX Auth Modal initialized');
+        console.log('AJAX URL:', ajaxUrl);
+        console.log('Nonce available:', !!ajaxNonce);
+        console.log('Global AJAX object:', typeof luvexAjax !== 'undefined');
+    }
 })();
 </script>
