@@ -141,8 +141,9 @@ class UVLEDConvergence {
 
     bindEvents() {
         window.addEventListener('resize', () => this.resizeCanvas());
-        // Use the hero section for mouse tracking to cover the whole area
-        this.canvas.parentElement.addEventListener('mousemove', (e) => {
+        // FIX: Changed event listener from 'this.canvas.parentElement' to 'window'
+        // to track the mouse across the entire page, including the header.
+        window.addEventListener('mousemove', (e) => {
             const rect = this.canvas.getBoundingClientRect();
             this.mouse.x = e.clientX - rect.left;
             this.mouse.y = e.clientY - rect.top;
@@ -200,7 +201,6 @@ class UVLEDConvergence {
             gradient.addColorStop(0.5, `hsla(${dynamicColor.h}, ${dynamicColor.s}%, ${dynamicColor.l}%, 0.5)`);
             gradient.addColorStop(1, `hsla(${dynamicColor.h}, ${dynamicColor.s}%, ${dynamicColor.l}%, 0)`);
             
-            // FIX: Added the missing path definition before stroking.
             this.ctx.beginPath();
             this.ctx.moveTo(led.x, led.y);
             this.ctx.lineTo(targetX, targetY);
@@ -214,3 +214,4 @@ class UVLEDConvergence {
         this.ctx.globalAlpha = 1.0;
     }
 }
+

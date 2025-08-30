@@ -1,16 +1,13 @@
 /**
- * LUVEX Theme - Process Equipment Hero Animation (V101 - Final Polishing)
+ * LUVEX Theme - Process Equipment Hero Animation (V102 - Final Polishing)
  *
  * Description: The definitive, final version incorporating all refinement requests.
  *
  * Key Features:
- * - FINAL LAYOUT PERFECTION: An explicit topOffset is added to the calculation,
- * ensuring the top node never overlaps with the site header. The subtitle
- * is pushed down via CSS for a clean composition.
- * - ANIMATION FIX: The passive animation loop is repaired and now functions correctly.
- * - EXPONENTIAL PROXIMITY GLOW: All nodes now glow based on cursor proximity,
- * with an exponential falloff for a more natural and focused lighting effect.
- * - All other refined features (Glow Orb Cursor, etc.) are retained.
+ * - LAYOUT PERFECTION: Title and Subtitle positions are fine-tuned via CSS.
+ * - ANIMATION FIX & ENHANCEMENT: The passive animation loop is repaired. The proximity
+ * glow is now exponential for a more natural falloff.
+ * - NEW SHOOTING STARS: A subtle shooting star background is added for more visual depth.
  *
  * @package Luvex
  */
@@ -32,9 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
         lineColor: `rgba(109, 213, 237, 0.2)`,
         glowColor: `rgba(109, 213, 237, 0.8)`,
         fontFamily: 'Inter, sans-serif',
-        mouseRadius: 400, // Increased radius for a softer glow effect
+        mouseRadius: 400,
         phaseDuration: 120,
         flowDuration: 100,
+        shootingStarBaseSpeed: 0.5,
+        shootingStarSpawnRate: 0.02
     };
 
     // --- STATE VARIABLES ---
@@ -42,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let paths = { outer: [], toCenter: [] };
     let centralOrb;
     let flows = [];
+    let shootingStars = [];
     let phase = 0;
     let phaseTimer = 0;
     const mouse = { x: -1000, y: -1000, isOverCanvas: false };
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- HELPER FUNCTIONS ---
     const lerp = (a, b, t) => a * (1 - t) + b * t;
     const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    
+
     // --- CUSTOM CURSOR CLASS ---
     class CustomCursor {
         constructor() {
@@ -64,43 +64,35 @@ document.addEventListener('DOMContentLoaded', () => {
         createCursorElement() {
             let cursor = document.getElementById('luvex-glow-cursor');
             if (cursor) return cursor;
-
             cursor = document.createElement('div');
             cursor.id = 'luvex-glow-cursor';
             document.body.appendChild(cursor);
-
             const style = document.createElement('style');
             style.innerHTML = `
                 #luvex-glow-cursor {
                     position: fixed; top: 0; left: 0;
-                    width: 30px; height: 30px;
-                    border-radius: 50%;
-                    pointer-events: none;
-                    transform: translate(-50%, -50%) scale(0);
+                    width: 30px; height: 30px; border-radius: 50%;
+                    pointer-events: none; transform: translate(-50%, -50%) scale(0);
                     transition: transform 0.3s ease-out, width 0.2s ease, height 0.2s ease;
                     z-index: 99999;
                     background: radial-gradient(circle, rgba(109, 213, 237, 0.5) 0%, rgba(109, 213, 237, 0) 60%);
                 }
                 body.custom-cursor-active { cursor: none; }
-                body.custom-cursor-active a, 
-                body.custom-cursor-active button, 
-                body.custom-cursor-active [role="button"] { cursor: none; }
+                body.custom-cursor-active a, body.custom-cursor-active button, body.custom-cursor-active [role="button"] { cursor: none; }
             `;
             document.head.appendChild(style);
             return cursor;
         }
-        
+
         attachEventListeners() {
             document.addEventListener('mousemove', (e) => {
                 this.x = e.clientX;
                 this.y = e.clientY;
                 this.element.style.left = `${this.x}px`;
                 this.element.style.top = `${this.y}px`;
-                
                 const isInteractive = e.target.closest('a, button, [role="button"]');
                 this.targetSize = isInteractive ? 25 : 15;
             });
-            
             document.addEventListener('mouseover', (e) => {
                 if (e.target.closest('.site-header') || e.target.closest('.luvex-hero--solutions')) {
                     document.body.classList.add('custom-cursor-active');
@@ -111,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
-        
         update() {
             this.size = lerp(this.size, this.targetSize, 0.15);
             this.element.style.width = `${this.size * 2}px`;
@@ -120,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const customCursor = new CustomCursor();
 
-    // --- CLASSES ---
+    // --- ANIMATION CLASSES ---
     class Node {
         constructor(text, x, y, size, id) {
             this.text = text; this.x = x; this.y = y; this.size = size; this.id = id;
@@ -130,13 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const dx = this.x - mouse.x;
             const dy = this.y - mouse.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            
-            // KEY CHANGE: Exponential glow for all nodes
             const proximity = Math.max(0, 1 - dist / config.mouseRadius);
-            const targetGlow = mouse.isOverCanvas ? Math.pow(proximity, 2) : 0; // Quadratic falloff
-
+            const targetGlow = mouse.isOverCanvas ? Math.pow(proximity, 3) : 0; // Cubic falloff for smoother effect
             this.glow = lerp(this.glow, targetGlow, 0.08);
-            
             const age = Date.now() - this.lastActivationTime;
             this.activation = Math.exp(-age / 1500);
         }
@@ -162,9 +149,48 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.restore();
         }
     }
-    class Orb extends Node { constructor(x, y, size, id) { super('', x, y, size, id); this.charge = 0; } draw() { const combinedGlow = Math.min(1, this.glow + this.activation + this.charge * 0.5); const baseRadius = 8 + combinedGlow * 12; ctx.save(); const glowSize = baseRadius * 3; const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, glowSize); gradient.addColorStop(0, `rgba(109, 213, 237, ${combinedGlow * 0.3})`); gradient.addColorStop(1, `rgba(109, 213, 237, 0)`); ctx.fillStyle = gradient; ctx.beginPath(); ctx.arc(this.x, this.y, glowSize, 0, Math.PI * 2); ctx.fill(); ctx.fillStyle = 'rgba(255, 255, 255, 1)'; ctx.shadowColor = config.glowColor; ctx.shadowBlur = combinedGlow * 20; ctx.beginPath(); ctx.arc(this.x, this.y, baseRadius, 0, Math.PI * 2); ctx.fill(); ctx.restore(); } }
-    class Path { constructor(start, end) { this.start = start; this.end = end; } draw() { const combinedGlow = Math.min(1, this.start.glow + this.end.glow + this.start.activation + this.end.activation); const opacity = 0.2 + combinedGlow * 0.4; ctx.save(); ctx.globalAlpha = opacity; ctx.strokeStyle = config.lineColor; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(this.start.x, this.start.y); ctx.lineTo(this.end.x, this.end.y); ctx.stroke(); ctx.restore(); } }
-    class EnergyPulse { constructor(path) { this.path = path; this.progress = 0; this.isFinished = false; } update() { this.progress += 1 / config.flowDuration; if (this.progress >= 1) { this.isFinished = true; this.path.end.lastActivationTime = Date.now(); if (centralOrb) { centralOrb.charge = Math.min(1, centralOrb.charge + 0.125); } } } draw() { if (this.isFinished) return; const easedProgress = easeInOutCubic(this.progress); const pos = { x: lerp(this.path.start.x, this.path.end.x, easedProgress), y: lerp(this.path.start.y, this.path.end.y, easedProgress) }; const opacity = Math.sin(this.progress * Math.PI); ctx.save(); ctx.fillStyle = 'rgba(255, 255, 255, 0.9)'; ctx.shadowColor = config.glowColor; ctx.shadowBlur = 15 * opacity; ctx.beginPath(); ctx.arc(pos.x, pos.y, 3, 0, Math.PI * 2); ctx.fill(); ctx.restore(); } }
+    class Orb extends Node {
+        constructor(x, y, size, id) { super('', x, y, size, id); this.charge = 0; }
+        draw() { const combinedGlow = Math.min(1, this.glow + this.activation + this.charge * 0.5); const baseRadius = 8 + combinedGlow * 12; ctx.save(); const glowSize = baseRadius * 3; const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, glowSize); gradient.addColorStop(0, `rgba(109, 213, 237, ${combinedGlow * 0.3})`); gradient.addColorStop(1, `rgba(109, 213, 237, 0)`); ctx.fillStyle = gradient; ctx.beginPath(); ctx.arc(this.x, this.y, glowSize, 0, Math.PI * 2); ctx.fill(); ctx.fillStyle = 'rgba(255, 255, 255, 1)'; ctx.shadowColor = config.glowColor; ctx.shadowBlur = combinedGlow * 20; ctx.beginPath(); ctx.arc(this.x, this.y, baseRadius, 0, Math.PI * 2); ctx.fill(); ctx.restore(); }
+    }
+    class Path {
+        constructor(start, end) { this.start = start; this.end = end; }
+        draw() { const combinedGlow = Math.min(1, this.start.glow + this.end.glow + this.start.activation + this.end.activation); const opacity = 0.2 + combinedGlow * 0.4; ctx.save(); ctx.globalAlpha = opacity; ctx.strokeStyle = config.lineColor; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(this.start.x, this.start.y); ctx.lineTo(this.end.x, this.end.y); ctx.stroke(); ctx.restore(); }
+    }
+    class EnergyPulse {
+        constructor(path) { this.path = path; this.progress = 0; this.isFinished = false; }
+        update() { this.progress += 1 / config.flowDuration; if (this.progress >= 1) { this.isFinished = true; this.path.end.lastActivationTime = Date.now(); if (this.path.end.id === 'center') { centralOrb.charge = Math.min(1, centralOrb.charge + 0.125); } } }
+        draw() { if (this.isFinished) return; const easedProgress = easeInOutCubic(this.progress); const pos = { x: lerp(this.path.start.x, this.path.end.x, easedProgress), y: lerp(this.path.start.y, this.path.end.y, easedProgress) }; const opacity = Math.sin(this.progress * Math.PI); ctx.save(); ctx.fillStyle = 'rgba(255, 255, 255, 0.9)'; ctx.shadowColor = config.glowColor; ctx.shadowBlur = 15 * opacity; ctx.beginPath(); ctx.arc(pos.x, pos.y, 3, 0, Math.PI * 2); ctx.fill(); ctx.restore(); }
+    }
+    class ShootingStar {
+        constructor() { this.reset(); }
+        reset() {
+            this.x = Math.random() * width;
+            this.y = -10;
+            this.len = Math.random() * 200 + 100;
+            this.speed = (Math.random() * 0.5 + config.shootingStarBaseSpeed) * dpr;
+            this.angle = Math.PI * 0.35; // Fixed angle for consistency
+            this.opacity = Math.random() * 0.5 + 0.3;
+        }
+        update() {
+            this.x += Math.cos(this.angle) * this.speed;
+            this.y += Math.sin(this.angle) * this.speed;
+            if (this.y > height + this.len * Math.sin(this.angle)) { this.reset(); }
+        }
+        draw() {
+            ctx.save();
+            const gradient = ctx.createLinearGradient(this.x, this.y, this.x - this.len * Math.cos(this.angle), this.y - this.len * Math.sin(this.angle));
+            gradient.addColorStop(0, `rgba(255, 255, 255, ${this.opacity})`);
+            gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(this.x, this.y);
+            ctx.lineTo(this.x - this.len * Math.cos(this.angle), this.y - this.len * Math.sin(this.angle));
+            ctx.stroke();
+            ctx.restore();
+        }
+    }
 
     function setup() {
         width = canvas.clientWidth;
@@ -180,23 +206,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function init() {
         const centerX = width / 2;
-        
-        // --- FINAL LAYOUT CALCULATION ---
         const headerHeight = document.querySelector('.site-header')?.offsetHeight || 80;
-        const topOffset = headerHeight + 50; // Increased space below header
+        const topOffset = headerHeight + 60; // Increased space below header
         const bottomPadding = 50;
-
         const availableHeight = height - topOffset - bottomPadding;
         const availableWidth = width - (bottomPadding * 2);
-        
         const radius = Math.min(availableWidth, availableHeight) / 2;
-        
         const orbCenterY = topOffset + radius;
 
         centralOrb = new Orb(centerX, orbCenterY, 0, 'center');
-        
-        const nodeData = [ { id: 'contact', text: 'Contact' }, { id: 'concept', text: 'Concept' }, { id: 'simulation', text: 'Simulation' }, { id: 'design', text: 'Design' }, { id: 'integration', text: 'Integration' }, { id: 'partnership', text: 'Partnership' }, { id: 'support', text: 'Support' }, { id: 'analysis', text: 'Analysis' }];
-        
+        const nodeData = [{ id: 'contact', text: 'Contact' }, { id: 'concept', text: 'Concept' }, { id: 'simulation', text: 'Simulation' }, { id: 'design', text: 'Design' }, { id: 'integration', text: 'Integration' }, { id: 'partnership', text: 'Partnership' }, { id: 'support', text: 'Support' }, { id: 'analysis', text: 'Analysis' }];
         nodes = nodeData.map((d, i) => {
             const angle = (Math.PI / 4) * i - Math.PI / 2;
             const x = centerX + Math.cos(angle) * radius;
@@ -210,17 +229,15 @@ document.addEventListener('DOMContentLoaded', () => {
             paths.toCenter.push(new Path(nodes[i], centralOrb));
         }
 
-        phase = -1;
-        phaseTimer = 0;
-        flows = [];
+        shootingStars = [new ShootingStar(), new ShootingStar(), new ShootingStar()];
+        phase = -1; phaseTimer = 0; flows = [];
     }
-    
-    // --- ANIMATION LOOP & PHASE MANAGEMENT ---
+
     function nextPhase() {
         phase = (phase + 1) % nodes.length;
-        if (phase === 0) centralOrb.charge = 0;
-        flows.push(new EnergyPulse(paths.outer[phase]));
-        flows.push(new EnergyPulse(paths.toCenter[phase]));
+        if (phase === 0 && centralOrb) centralOrb.charge = 0;
+        if (paths.outer[phase]) flows.push(new EnergyPulse(paths.outer[phase]));
+        if (paths.toCenter[phase]) flows.push(new EnergyPulse(paths.toCenter[phase]));
     }
 
     function animate() {
@@ -228,19 +245,15 @@ document.addEventListener('DOMContentLoaded', () => {
         phaseTimer++;
         if (phaseTimer >= config.phaseDuration) {
             phaseTimer = 0;
-            // Ensure the loop continues creating pulses
-            if(flows.length < 4) nextPhase();
+            if (flows.length < 4) nextPhase();
         }
         
+        shootingStars.forEach(s => { s.update(); s.draw(); });
         customCursor.update();
         flows = flows.filter(f => !f.isFinished);
         flows.forEach(f => f.update());
-        
-        // Update all nodes
         nodes.forEach(n => n.update());
         if (centralOrb) centralOrb.update();
-
-        // Draw everything
         paths.outer.forEach(p => p.draw());
         paths.toCenter.forEach(p => p.draw());
         nodes.forEach(n => n.draw());
@@ -249,8 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         animationFrameId = requestAnimationFrame(animate);
     }
-    
-    // --- EVENT LISTENERS & INITIALIZATION ---
+
     const resizeObserver = new ResizeObserver(() => {
         if (animationFrameId) cancelAnimationFrame(animationFrameId);
         setup();
@@ -266,7 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
     heroSection.addEventListener('mouseleave', () => {
         mouse.isOverCanvas = false;
     });
-    
+
     setup();
     animate();
 });

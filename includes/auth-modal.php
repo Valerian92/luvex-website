@@ -368,8 +368,21 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
         registerForm.addEventListener('input', saveFormData);
     }
     
-    // Interest Tags (alle außer Others)
-    document.querySelectorAll('.interest-tag:not(.others-input)').forEach(tag => {
+    // Interest Tags (alle außer Others) - Event Delegation für dynamische Elemente
+    const industryGrid = document.querySelector('.interests-grid-industries');
+    if (industryGrid) {
+        industryGrid.addEventListener('click', function(e) {
+            const tag = e.target.closest('.interest-tag:not(.others-input)');
+            if (tag) {
+                tag.classList.toggle('selected');
+                updateHiddenField();
+                saveFormData();
+            }
+        });
+    }
+
+    // Your Interests Tags (statische Elemente)
+    document.querySelectorAll('.interests-columns-container .interest-tag').forEach(tag => {
         tag.addEventListener('click', function() {
             this.classList.toggle('selected');
             updateHiddenField();
@@ -411,14 +424,13 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
         }
     }
 
-    // Industry Toggle Button - Korrigiert
+    // Industry Toggle Button - Vereinfacht
     const industryToggleBtn = document.getElementById('industry-toggle-btn');
     if (industryToggleBtn) {
         industryToggleBtn.addEventListener('click', () => {
             const isExpanded = industryToggleBtn.classList.toggle('expanded');
             const industryGrid = document.querySelector('.interests-grid-industries');
             
-            // Toggle zwischen CSS-Klassen für bessere Performance
             if (isExpanded) {
                 industryGrid.classList.add('expanded');
             } else {
@@ -427,21 +439,6 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
             
             const btnText = industryToggleBtn.querySelector('.btn-text');
             btnText.textContent = isExpanded ? 'Show Less Industries' : 'Show All Industries';
-            
-            // Event Listeners für neu angezeigte Tags hinzufügen
-            if (isExpanded) {
-                const newlyVisibleTags = industryGrid.querySelectorAll('.interest-tag:nth-child(n+11):not(.others-input)');
-                newlyVisibleTags.forEach(tag => {
-                    if (!tag.hasEventListener) {
-                        tag.addEventListener('click', function() {
-                            this.classList.toggle('selected');
-                            updateHiddenField();
-                            saveFormData();
-                        });
-                        tag.hasEventListener = true;
-                    }
-                });
-            }
         });
     }
 

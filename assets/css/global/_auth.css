@@ -150,16 +150,24 @@ input:focus {
     line-height: 1.2;
 }
 
-/* Others Input Field - Verbessert */
+/* Others Input Field - Komplett überarbeitet */
 .interest-tag.others-input {
     position: relative;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(109, 213, 237, 0.3);
+    color: var(--luvex-gray-300);
+}
+
+.interest-tag.others-input:hover {
+    background: rgba(109, 213, 237, 0.1);
+    border-color: var(--luvex-bright-cyan);
+    color: var(--luvex-white);
 }
 
 .interest-tag.others-input.selected {
-    background: rgba(109, 213, 237, 0.1);
+    background: rgba(109, 213, 237, 0.15);
     border-color: var(--luvex-bright-cyan);
+    color: var(--luvex-white);
 }
 
 .interest-tag.others-input input {
@@ -173,18 +181,25 @@ input:focus {
     margin-top: 0.5rem;
     outline: none;
     padding: 0.25rem;
+    font-weight: normal;
 }
 
 .interest-tag.others-input.selected input {
     display: block;
+    color: var(--luvex-white);
 }
 
 .interest-tag.others-input.selected .interest-text {
     display: none;
 }
 
+.interest-tag.others-input.selected i {
+    color: var(--luvex-white);
+}
+
 .interest-tag.others-input input::placeholder {
     color: var(--luvex-gray-400);
+    font-weight: normal;
 }
 
 /* Show More/Less Button - Verbessert */
