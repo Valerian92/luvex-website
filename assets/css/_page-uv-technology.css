@@ -5,33 +5,53 @@ LUVEX THEME - UV KNOWLEDGE PAGE (FINALE VERSION)
 */
 
 /* ==============================================================================
-FIX: Globaler Cursor & Canvas-Positionierung
+FIX: Header-Hintergrund auf dieser Seite erzwingen
 ==============================================================================
 */
-/* Blendet den Standard-Cursor auf der gesamten Seite und bei Links aus */
-body.page-id-uv-technology,
-body.page-id-uv-technology a,
-body.page-id-uv-technology button {
-    cursor: none !important;
-}
-
-/* FIX: Canvas ist absolut positioniert, um Scroll-Bug zu beheben */
-.hero-spectrum-engine canvas {
-    position: absolute; /* Bleibt im Hero-Container */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%; /* Füllt den Hero-Container */
-    z-index: 1;
-    pointer-events: none;
+body.page-id-uv-technology .site-header {
+    background-color: transparent !important;
 }
 
 /* ==============================================================================
-Hero Section
+FIX: Performance & Cursor-Steuerung
+==============================================================================
+*/
+#cursor-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999;
+    pointer-events: none;
+    display: none; 
+}
+
+body.custom-cursor-active #cursor-canvas {
+    display: block; 
+}
+
+body.custom-cursor-active,
+body.custom-cursor-active a,
+body.custom-cursor-active button {
+    cursor: none !important;
+}
+
+#spectrum-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* ==============================================================================
+Hero Section Layout
 ==============================================================================
 */
 .hero-spectrum-engine {
-    min-height: 80vh; /* Etwas höher für mehr Platz */
+    min-height: 85vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,14 +64,10 @@ Hero Section
 .hero-spectrum-engine::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0; width: 100%; height: 100%;
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="hero-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23hero-grid)"/></svg>');
     opacity: 0.4; 
-    pointer-events: none;
-    z-index: 2; /* Über dem Canvas */
+    z-index: 2;
 }
 
 .wavelength-indicator {
@@ -59,41 +75,47 @@ Hero Section
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(4px);
-    color: var(--luvex-dark-blue);
+    background: rgba(34, 211, 238, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(109, 213, 237, 0.3);
     padding: 0.5rem 1rem;
     border-radius: var(--radius-md);
     font-weight: 600;
     font-family: 'Courier New', Courier, monospace;
     z-index: 10;
-    border: 1px solid var(--luvex-gray-200);
     box-shadow: var(--shadow-sm);
-    transition: color 0.2s ease, background-color 0.2s ease;
+    transition: color 0.4s ease;
     pointer-events: none;
 }
 
 .hero-spectrum-engine .luvex-hero__container {
     position: relative;
     z-index: 5;
-    pointer-events: none;
     text-align: center;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start; /* Geändert für neue Abstände */
     align-items: center;
-    justify-content: space-between; /* Verteilt den Inhalt */
     height: 100%;
-    padding: 6rem 0 0 0; /* Platz oben für Titel */
+    width: 100%;
+    padding: 1rem;
+    padding-top: 12rem; /* Abstand für den Titel von oben */
+}
+
+.hero-content-wrapper {
+    width: 100%;
+}
+
+.luvex-hero__container .luvex-hero__title {
+    margin-bottom: 6rem; /* Großer Abstand zum Subtitle */
 }
 
 .hero-spectrum-actions {
-    margin-top: 6rem; /* FIX: Buttons weiter nach unten */
-    margin-bottom: 2rem; /* Abstand zum Indikator */
+    margin-top: 6rem; /* Großer Abstand vom Subtitle */
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 2.5rem;
     justify-content: center;
-    pointer-events: auto;
 }
 
 .spectrum-action-btn {
@@ -106,30 +128,11 @@ Hero Section
     font-weight: 500;
     transition: all 0.3s ease;
     backdrop-filter: blur(5px);
-    position: relative;
-    z-index: 10;
 }
 
 .spectrum-action-btn:hover {
-    background: rgba(109, 213, 237, 0.2);
+    background: rgba(109, 213, 237, 0.25);
     border-color: var(--luvex-bright-cyan);
     color: var(--luvex-white);
     transform: translateY(-2px);
 }
-
-@media (max-width: 768px) {
-    .wavelength-indicator {
-        bottom: 1rem;
-        font-size: 0.9rem;
-        padding: 0.25rem 0.75rem;
-    }
-    .hero-spectrum-actions {
-        margin-top: 4rem;
-        gap: 0.75rem;
-    }
-    .spectrum-action-btn {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
-    }
-}
-

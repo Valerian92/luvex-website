@@ -1,6 +1,6 @@
 /*
 ==============================================================================
-LUVEX THEME - UV SOLUTIONS PAGE (V100 - Final Polished)
+LUVEX THEME - UV SOLUTIONS PAGE (V101 - Final Polishing)
 ==============================================================================
 */
 
@@ -49,25 +49,28 @@ LUVEX THEME - UV SOLUTIONS PAGE (V100 - Final Polished)
     max-width: 900px;
     padding: 0 1rem;
     
-    /* Move the whole text block up to make space for the orb */
-    transform: translateY(-13vh);
+    /* Center the title block vertically first */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .luvex-hero--solutions .luvex-hero__title {
     font-size: clamp(2.5rem, 5vw, 4rem);
     text-shadow: 0 0 20px rgba(109, 213, 237, 0.5);
-    margin-bottom: 1.5rem;
+    /* Positioned above the center */
+    transform: translateY(-15vh);
 }
 
 .luvex-hero--solutions .luvex-hero__subtitle {
-    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-size: clamp(1rem, 1.8vw, 1.1rem);
     color: var(--luvex-gray-300);
-    max-width: 650px;
+    max-width: 600px;
     margin: 0 auto;
     line-height: 1.6;
     
-    /* KEY CHANGE: Move subtitle down significantly to be below the orb */
-    margin-top: 38vh;
+    /* Positioned below the center */
+    transform: translateY(20vh);
 }
 
 

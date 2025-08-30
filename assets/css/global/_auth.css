@@ -150,51 +150,67 @@ input:focus {
     line-height: 1.2;
 }
 
-/* Others Input Field */
+/* Others Input Field - Verbessert */
 .interest-tag.others-input {
     position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(109, 213, 237, 0.3);
 }
 
-.interest-tag.others-input.active input {
-    display: block;
-    width: 100%;
-    background: transparent;
-    border: none;
-    color: var(--luvex-dark-blue);
-    font-size: var(--text-xs);
-    text-align: center;
-    margin-top: 0.5rem;
+.interest-tag.others-input.selected {
+    background: rgba(109, 213, 237, 0.1);
+    border-color: var(--luvex-bright-cyan);
 }
 
 .interest-tag.others-input input {
     display: none;
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--luvex-white);
+    font-size: var(--text-xs);
+    text-align: center;
+    margin-top: 0.5rem;
+    outline: none;
+    padding: 0.25rem;
 }
 
-.interest-tag.others-input.active .interest-text {
+.interest-tag.others-input.selected input {
+    display: block;
+}
+
+.interest-tag.others-input.selected .interest-text {
     display: none;
 }
 
-/* Show More/Less Button */
+.interest-tag.others-input input::placeholder {
+    color: var(--luvex-gray-400);
+}
+
+/* Show More/Less Button - Verbessert */
 .show-more-btn {
-    background: rgba(109, 213, 237, 0.1);
-    border: 1px solid rgba(109, 213, 237, 0.3);
-    color: var(--luvex-gray-300);
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, rgba(109, 213, 237, 0.15), rgba(109, 213, 237, 0.05));
+    border: 1px solid rgba(109, 213, 237, 0.4);
+    color: var(--luvex-white);
+    padding: 0.875rem 2rem;
+    border-radius: var(--radius-lg);
     cursor: pointer;
-    transition: var(--transition-normal);
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    margin: 1rem auto 0;
-    max-width: 200px;
+    gap: 0.75rem;
+    margin: 1.5rem auto 0;
+    max-width: 250px;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(109, 213, 237, 0.1);
 }
 
 .show-more-btn:hover {
-    background: rgba(109, 213, 237, 0.2);
+    background: linear-gradient(135deg, rgba(109, 213, 237, 0.25), rgba(109, 213, 237, 0.15));
     border-color: var(--luvex-bright-cyan);
-    color: var(--luvex-white);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(109, 213, 237, 0.2);
 }
 
 .show-more-btn.expanded .icon-toggle {
@@ -203,15 +219,16 @@ input:focus {
 
 .icon-toggle {
     transition: transform 0.3s ease;
+    font-size: 0.9rem;
 }
 
-/* Hidden Industries */
-.interests-grid-industries .interest-tag.hidden {
+/* Industries Layout - Nur 2 Reihen initial */
+.interests-grid-industries .interest-tag:nth-child(n+11) {
     display: none;
 }
 
-.show-more-btn.expanded ~ .interests-grid-industries .interest-tag.hidden,
-.show-more-btn.expanded + * .interest-tag.hidden {
+.show-more-btn.expanded ~ .interests-grid-industries .interest-tag:nth-child(n+11),
+.interests-grid-industries.expanded .interest-tag:nth-child(n+11) {
     display: flex;
 }
 

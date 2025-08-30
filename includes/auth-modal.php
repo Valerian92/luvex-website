@@ -50,11 +50,6 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
                 <!-- Registration Form (NEUES LAYOUT) -->
                 <div class="auth-tab-content" id="register-content">
                     <form id="luvex-register-form" class="luvex-auth-form" method="post">
-                        
-                        <div class="form-header" style="text-align: center; margin-bottom: 2.5rem;">
-                            <h2 style="font-size: 2rem; font-weight: 600; color: var(--luvex-white); margin: 0 0 0.5rem 0;">Create Your LUVEX Account</h2>
-                            <p style="font-size: var(--text-lg); color: var(--luvex-gray-300); margin: 0;">Already have an account? <a href="#" onclick="event.preventDefault(); showAuthForm('login');" style="color: var(--luvex-bright-cyan); text-decoration: none; font-weight: 500;">Log in</a></p>
-                        </div>
 
                         <!-- Abschnitt 1: Account Details (NEUE GRID-STRUKTUR) -->
                         <div class="form-section">
@@ -85,43 +80,31 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
                             <div class="interests-grid-industries">
                                 <?php if (isset($icon_library['Industries'])): 
                                     $industries = $icon_library['Industries'];
-                                    $visible_limit = 10; // 5x2 = 10
                                     $count = 0;
                                     foreach ($industries as $key => $details): 
-                                        if ($count < $visible_limit):
-                                        ?>
-                                            <button type="button" class="interest-tag" data-interest="<?= esc_attr($key) ?>">
-                                                <?= get_luvex_icon($key) ?>
-                                                <span><?= esc_html($details['label']) ?></span>
-                                            </button>
-                                        <?php 
-                                        else: ?>
-                                            <button type="button" class="interest-tag hidden" data-interest="<?= esc_attr($key) ?>">
-                                                <?= get_luvex_icon($key) ?>
-                                                <span><?= esc_html($details['label']) ?></span>
-                                            </button>
-                                        <?php endif;
+                                        // Überspringe 'other-industry' da wir ein eigenes Others-Feld haben
+                                        if ($key === 'other-industry') continue;
                                         $count++;
-                                    endforeach; ?>
+                                        ?>
+                                        <button type="button" class="interest-tag" data-interest="<?= esc_attr($key) ?>">
+                                            <?= get_luvex_icon($key) ?>
+                                            <span><?= esc_html($details['label']) ?></span>
+                                        </button>
+                                    <?php endforeach; ?>
                                     
-                                    <!-- Others Field -->
+                                    <!-- Others Field (immer sichtbar) -->
                                     <button type="button" class="interest-tag others-input" data-interest="other-industry-custom">
                                         <i class="fa-solid fa-ellipsis"></i>
                                         <span class="interest-text">Others...</span>
-                                        <input type="text" placeholder="Specify industry" style="display: none;">
+                                        <input type="text" placeholder="Specify industry">
                                     </button>
                                 <?php endif; ?>
                             </div>
                             
-                            <?php 
-                            $total_industries = isset($icon_library['Industries']) ? count($icon_library['Industries']) : 0;
-                            $hidden_count = max(0, $total_industries - $visible_limit);
-                            if ($hidden_count > 0): ?>
-                                <button type="button" id="industry-toggle-btn" class="show-more-btn">
-                                    <span class="btn-text">Show All Industries</span>
-                                    <i class="fa-solid fa-chevron-down icon-toggle"></i>
-                                </button>
-                            <?php endif; ?>
+                            <button type="button" id="industry-toggle-btn" class="show-more-btn">
+                                <span class="btn-text">Show All Industries</span>
+                                <i class="fa-solid fa-chevron-down icon-toggle"></i>
+                            </button>
                         </div>
 
                         <!-- Abschnitt 3: Interests (Zentriert) -->
@@ -428,23 +411,37 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
         }
     }
 
-    // Industry Toggle Button
+    // Industry Toggle Button - Korrigiert
     const industryToggleBtn = document.getElementById('industry-toggle-btn');
     if (industryToggleBtn) {
         industryToggleBtn.addEventListener('click', () => {
             const isExpanded = industryToggleBtn.classList.toggle('expanded');
-            const hiddenTags = registerForm.querySelectorAll('.interests-grid-industries .interest-tag.hidden');
+            const industryGrid = document.querySelector('.interests-grid-industries');
             
-            hiddenTags.forEach(tag => {
-                if (isExpanded) {
-                    tag.classList.remove('hidden');
-                } else {
-                    tag.classList.add('hidden');
-                }
-            });
+            // Toggle zwischen CSS-Klassen für bessere Performance
+            if (isExpanded) {
+                industryGrid.classList.add('expanded');
+            } else {
+                industryGrid.classList.remove('expanded');
+            }
             
             const btnText = industryToggleBtn.querySelector('.btn-text');
             btnText.textContent = isExpanded ? 'Show Less Industries' : 'Show All Industries';
+            
+            // Event Listeners für neu angezeigte Tags hinzufügen
+            if (isExpanded) {
+                const newlyVisibleTags = industryGrid.querySelectorAll('.interest-tag:nth-child(n+11):not(.others-input)');
+                newlyVisibleTags.forEach(tag => {
+                    if (!tag.hasEventListener) {
+                        tag.addEventListener('click', function() {
+                            this.classList.toggle('selected');
+                            updateHiddenField();
+                            saveFormData();
+                        });
+                        tag.hasEventListener = true;
+                    }
+                });
+            }
         });
     }
 

@@ -199,6 +199,11 @@ class UVLEDConvergence {
             gradient.addColorStop(0, `hsla(${dynamicColor.h}, ${dynamicColor.s}%, ${dynamicColor.l}%, 0)`);
             gradient.addColorStop(0.5, `hsla(${dynamicColor.h}, ${dynamicColor.s}%, ${dynamicColor.l}%, 0.5)`);
             gradient.addColorStop(1, `hsla(${dynamicColor.h}, ${dynamicColor.s}%, ${dynamicColor.l}%, 0)`);
+            
+            // FIX: Added the missing path definition before stroking.
+            this.ctx.beginPath();
+            this.ctx.moveTo(led.x, led.y);
+            this.ctx.lineTo(targetX, targetY);
 
             this.ctx.strokeStyle = gradient;
             this.ctx.lineWidth = beamWidth * pulse;
