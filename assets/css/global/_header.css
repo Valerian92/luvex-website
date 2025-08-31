@@ -1,12 +1,13 @@
 /*
 ==============================================================================
-LUVEX THEME v5.0 - COMPLETE HEADER SYSTEM (FINAL LAYOUT)
+LUVEX THEME v4.7 - COMPLETE HEADER SYSTEM (FINAL LAYOUT)
 ==============================================================================
 
-Description: Vollständige Header-Implementierung mit vertikalem Icon-Layout,
-             Scroll-Effekt, User-System und allen Untermenüs.
+Description: Vollständige Header-Implementierung mit 3-Level Navigation,
+             Logo-System, User-Dropdown, Mobile Menu, Scroll Effects und
+             finalem Icon-Layout.
 Dependencies: _variables.css, _core.css
-Last Update: 2025-08-31
+Last Update: 2025-08-31 (Final Spacing & Layout Adjustments)
 
 ==============================================================================
 */
@@ -23,19 +24,21 @@ Last Update: 2025-08-31
     right: 0;
     z-index: 1000;
     height: 80px;
-    transition: background-color 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
-    backdrop-filter: blur(0px); /* Startet ohne Blur */
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    backdrop-filter: none;
     box-shadow: none;
     overflow: visible !important;
 }
 
 /* Scrolled State - Glassmorphism Effect */
 .site-header.scrolled {
-    background: rgba(27, 42, 73, 0.85) !important; /* Dunkelblauer Hintergrund mit Transparenz */
-    backdrop-filter: blur(10px) saturate(150%);
-    -webkit-backdrop-filter: blur(10px) saturate(150%);
-    border-bottom-color: rgba(109, 213, 237, 0.4);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    background: rgba(27, 42, 73, 0.95) !important;
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
+    border-bottom: 1px solid rgba(109, 213, 237, 0.4);
+    box-shadow: 
+        0 4px 20px rgba(27, 42, 73, 0.3),
+        0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .header-container {
@@ -165,7 +168,7 @@ Last Update: 2025-08-31
 }
 
 /* ==========================================================================
-   4. LEVEL 1 - HAUPTMENÜ ITEMS  (MODIFIED FOR NEW LAYOUT)
+   4. LEVEL 1 - HAUPTMENÜ ITEMS (NEUES LAYOUT)
    ========================================================================== */
 .main-navigation > ul > li {
     position: relative;
@@ -173,50 +176,61 @@ Last Update: 2025-08-31
 
 .main-navigation > ul > li > a {
     color: var(--luvex-white);
-    font-size: 0.9rem; /* Text slightly smaller to create space */
-    font-weight: 500;
     text-decoration: none;
     position: relative;
     transition: all 0.3s ease;
-    padding: 0.75rem 1rem; /* Adjusted padding for vertical layout */
+    padding: 0 1.6rem; /* FINALER ABSTAND */
     display: flex;
-    flex-direction: column; /* THIS IS THE KEY CHANGE: Stacks items vertically */
-    justify-content: center; /* Centers content vertically */
-    align-items: center; /* Centers content horizontally */
+    flex-direction: column; /* Icon unter Text */
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem; /* Abstand zwischen Text und Icon */
     height: 80px;
     box-sizing: border-box;
-    gap: 0.25rem; /* Small gap between text and icon */
-    white-space: nowrap;
+}
+
+.main-navigation > ul > li > a .menu-item-text {
+    font-size: 1.05rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
 }
 
 .main-navigation > ul > li > a .menu-item-icon {
-    font-size: 1.1rem; /* Smaller icon size */
-    line-height: 1; /* Ensures icon has no extra vertical space */
+    font-size: 1rem; /* Kleinere Icons */
     opacity: 0.8;
     transition: all 0.3s ease;
 }
 
-.main-navigation > ul > li > a:hover {
+.main-navigation > ul > li > a:hover .menu-item-text {
     color: var(--luvex-bright-cyan);
 }
 
 .main-navigation > ul > li > a:hover .menu-item-icon {
+    color: var(--luvex-bright-cyan);
     opacity: 1;
     transform: scale(1.1);
 }
 
 .site-header.scrolled .main-navigation > ul > li > a {
     color: var(--luvex-white);
+}
+
+.site-header.scrolled .main-navigation > ul > li > a .menu-item-text {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.site-header.scrolled .main-navigation > ul > li > a:hover {
+.site-header.scrolled .main-navigation > ul > li > a:hover .menu-item-text {
     color: var(--luvex-bright-cyan);
     text-shadow: 0 1px 3px rgba(109, 213, 237, 0.4);
 }
 
+/* Pfeil für Dropdowns ausblenden, da Layout vertikal ist */
+.main-navigation > ul > li.menu-item-has-children > a .dropdown-arrow {
+    display: none;
+}
+
 /* ==========================================================================
-   5. LEVEL 2 - HORIZONTAL SUB-MENU
+   5. LEVEL 2 - HORIZONTAL SUB-MENU (ALTE LOGIK BEIBEHALTEN)
    ========================================================================== */
 .main-navigation > ul > li > .sub-menu {
     position: absolute;
@@ -274,9 +288,10 @@ Last Update: 2025-08-31
     color: var(--luvex-white);
     font-weight: 500;
     padding: 1.2rem 1.5rem;
-    display: flex; 
-    align-items: center; 
-    gap: 0.75rem; 
+    display: flex; /* Flexbox für Icon + Text */
+    flex-direction: row; /* Wichtig: Sub-Menü bleibt horizontal */
+    align-items: center;
+    gap: 0.75rem; /* Abstand zwischen Icon und Text */
     position: relative;
     transition: all 0.3s ease;
     white-space: nowrap;
@@ -346,7 +361,9 @@ Last Update: 2025-08-31
 .main-navigation .sub-menu .sub-menu a {
     padding: 0.75rem 1.5rem;
     color: var(--luvex-white);
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
     transition: all 0.3s ease;
 }
 
@@ -359,26 +376,8 @@ Last Update: 2025-08-31
 /* ==========================================================================
    7. DROPDOWN ARROWS & INDICATORS
    ========================================================================== */
-.main-navigation > ul > li.menu-item-has-children > a .dropdown-arrow {
-    transition: transform 0.3s ease;
-    font-size: 0.8rem;
-    position: absolute; /* Position arrow for vertical layout */
-    bottom: 8px;
-    opacity: 0.6;
-}
-
-.main-navigation > ul > li.menu-item-has-children:hover > a .dropdown-arrow {
-    transform: rotate(180deg);
-    opacity: 1;
-}
-
-.main-navigation .sub-menu > li.menu-item-has-children > a {
-    justify-content: space-between;
-}
-
 .main-navigation .sub-menu > li.menu-item-has-children > a .dropdown-arrow {
-    font-size: 0.8rem;
-    position: static; /* Reset position for sub-menus */
+    margin-left: auto;
     transform: rotate(-90deg);
     transition: transform 0.3s ease;
 }
@@ -390,18 +389,13 @@ Last Update: 2025-08-31
 /* ==========================================================================
    8. HEADER CTA, USER SYSTEM & LANGUAGE SWITCHER
    ========================================================================== */
-.header-cta {
-    flex-shrink: 0;
-    position: relative;
-}
-
 .header-actions-group {
     display: flex;
     align-items: center;
-    gap: 1rem; /* Abstand zwischen Sprach-Switcher und User-Menü/CTA */
+    gap: 1rem;
 }
 
-.header-cta-button {
+.header-cta a.header-cta-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -417,14 +411,14 @@ Last Update: 2025-08-31
     border: 2px solid transparent;
 }
 
-.header-cta-button:hover {
+.header-cta a.header-cta-button:hover {
     background: var(--luvex-white);
     color: var(--luvex-dark-blue);
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
 }
 
-.site-header.scrolled .header-cta-button {
+.site-header.scrolled .header-cta a.header-cta-button {
     background: var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
     box-shadow: 
@@ -432,7 +426,7 @@ Last Update: 2025-08-31
         0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.site-header.scrolled .header-cta-button:hover {
+.site-header.scrolled .header-cta a.header-cta-button:hover {
     background: var(--luvex-white);
     box-shadow: 
         0 4px 15px rgba(109, 213, 237, 0.4),
@@ -516,7 +510,6 @@ Last Update: 2025-08-31
     color: var(--luvex-gray-300);
     font-size: 0.8rem;
     transition: transform 0.3s ease;
-    position: static;
 }
 
 .user-info.open .dropdown-arrow {
@@ -610,7 +603,7 @@ Last Update: 2025-08-31
     opacity: 0.8;
 }
 
-/* --- NEW: Unified Language Switcher --- */
+/* --- Language Switcher --- */
 .language-switcher-dropdown {
     position: relative;
 }
@@ -920,8 +913,22 @@ Last Update: 2025-08-31
         transition: none;
     }
     
-    .site-header.scrolled .header-cta-button:hover {
+    .site-header.scrolled .header-cta a.header-cta-button:hover {
         transform: none;
     }
+}
+
+/* Scroll Progress Bar */
+.header-scroll-indicator {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background: var(--luvex-bright-cyan);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.1s linear;
+    z-index: 1001;
 }
 

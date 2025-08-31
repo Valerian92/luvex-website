@@ -57,11 +57,9 @@ function luvex_enqueue_assets() {
     // CSS LADEN (REORGANISIERT UND VEREINFACHT)
     // ========================================================================
 
-    // Astra CSS entfernen
     wp_dequeue_style('astra-theme-css');
     wp_deregister_style('astra-theme-css');
 
-    // Hilfsfunktion zum Einbinden von Stylesheets
     $enqueue_style_helper = function($handle, $path_inside_assets, $dependencies = []) {
         $full_path = get_stylesheet_directory() . '/assets/' . $path_inside_assets;
         $uri = get_stylesheet_directory_uri() . '/assets/' . $path_inside_assets;
@@ -70,12 +68,8 @@ function luvex_enqueue_assets() {
         }
     };
 
-    // Globale Stylesheets
     $enqueue_style_helper('luvex-main', 'css/main.css');
-    // HINWEIS: _components.css (mit Animationen) und _modals.css werden über main.css importiert.
-    // _animations.css wird nicht mehr separat geladen.
-
-    // Seitenspezifische Stylesheets
+    
     $page_styles_map = [
         'standard-styles-luvex' => ['css/_page-standard-styles-luvex.css'],
         'about' => ['css/_page-about.css'],
@@ -107,18 +101,15 @@ function luvex_enqueue_assets() {
         }
     }
     
-    // Homepage Styles (Sonderfall)
     if (is_front_page() || is_home()) {
         $enqueue_style_helper('luvex-page-home', 'css/_page-home.css', ['luvex-main']);
         $enqueue_style_helper('luvex-animation-hero-home', 'css/animations/_animation-hero-home.css', ['luvex-page-home']);
         $enqueue_style_helper('luvex-animation-globe', 'css/animations/_animation-globe.css', ['luvex-page-home']);
     }
 
-    // UV News Styles (Sonderfall für Custom Post Type)
     if (is_post_type_archive('uv_news') || is_singular('uv_news')) {
         $enqueue_style_helper('luvex-news-styles', 'css/_news.css', ['luvex-main']);
     }
-
 
     // ========================================================================
     // JAVASCRIPT LADEN
@@ -128,7 +119,6 @@ function luvex_enqueue_assets() {
     $js_base_path = get_stylesheet_directory() . '/assets/js/';
     $dependencies = array('jquery');
 
-    // Helfer-Funktion zum Einbinden von Scripts
     $enqueue_script = function($handle, $path_inside_js_folder, $deps = null) use ($js_base_uri, $js_base_path, $dependencies) {
         $full_path = $js_base_path . $path_inside_js_folder;
         if (file_exists($full_path)) {
@@ -138,7 +128,7 @@ function luvex_enqueue_assets() {
 
     // Globale Scripts
     $global_scripts = [
-        'luvex-header-effects' => 'global/header-scroll-effects.js',
+        'luvex-header-effects' => 'global/luvex-header-effects.js',
         'luvex-profile-menu' => 'global/profile-menu.js',
         'luvex-scroll-animations' => 'global/scroll-animations.js',
         'luvex-scroll-to-top' => 'global/scroll-to-top.js',
@@ -194,18 +184,27 @@ function luvex_enqueue_assets() {
         }
     }
     
-    // UV News Scripts
     if (is_post_type_archive('uv_news') || is_singular('uv_news')) {
         $enqueue_script('luvex-hero-news-animation', 'pages/hero-news-network.js');
     }
 }
 
-// 5. NAV WALKER KLASSE (Unverändert)
+// 5. NAV WALKER KLASSE (MODIFIED FOR NEW ICON LAYOUT)
 class Luvex_Nav_Walker extends Walker_Nav_Menu {
     public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
         $indent = ($depth) ? str_repeat("\t", $depth) : '';
         $classes = empty($item->classes) ? array() : (array) $item->classes;
         $classes[] = 'menu-item-' . $item->ID;
+
+        $icon_key = '';
+        foreach($classes as $class){
+            if(strpos($class, 'icon-menu-') === 0){
+                $icon_key = str_replace('icon-menu-', '', $class);
+                break;
+            }
+        }
+        $icon_html = function_exists('get_luvex_icon') ? get_luvex_icon($icon_key) : '';
+
         $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
         $class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
         $id = apply_filters('nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args);
@@ -218,23 +217,16 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
         
         $item_output = isset($args->before) ? $args->before : '';
         $item_output .= '<a' . $attributes . '>';
+        
+        $title = apply_filters('the_title', $item->title, $item->ID);
 
-        // Icon Logik
-        if (!empty($item->classes) && function_exists('get_luvex_icon')) {
-            foreach ($item->classes as $class) {
-                if (strpos($class, 'icon-') === 0) {
-                    $icon_name = substr($class, 5); // Entfernt 'icon-'
-                    $icon_html = get_luvex_icon($icon_name);
-                    if ($icon_html) {
-                        $item_output .= '<span class="menu-icon">' . $icon_html . '</span>';
-                    }
-                    break; 
-                }
-            }
+        if ($depth === 0 && !empty($icon_html)) {
+            $item_output .= '<span class="menu-item-text">' . $title . '</span>';
+            $item_output .= str_replace('<i class="', '<i class="menu-item-icon ', $icon_html);
+        } else {
+            $item_output .= $icon_html . '<span class="menu-item-text">' . $title . '</span>';
         }
 
-        $item_output .= (isset($args->link_before) ? $args->link_before : '') . apply_filters('the_title', $item->title, $item->ID) . (isset($args->link_after) ? $args->link_after : '');
-        
         if (in_array('menu-item-has-children', $classes)) {
             $item_output .= ' <i class="fa-solid fa-chevron-down dropdown-arrow"></i>';
         }
@@ -244,7 +236,64 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
     }
 }
 
-// 6. AVATAR FUNKTION (Wird durch LuvexUserSystem ersetzt, aber als Fallback beibehalten)
+
+// 6. LOGIN/LOGOUT BUTTON & USER PROFILE IN MENU (WIEDERHERGESTELLT)
+add_filter('wp_nav_menu_items', 'luvex_add_header_actions', 10, 2);
+function luvex_add_header_actions($items, $args) {
+    if ($args->theme_location == 'primary') {
+        
+        $header_actions_items = '';
+        
+        if (is_user_logged_in()) {
+            $user = wp_get_current_user();
+            $user_id = $user->ID;
+            $first_name = $user->first_name ?: $user->display_name;
+            $profile_page_url = get_permalink(get_page_by_path('profile'));
+
+            $header_actions_items .= '<li class="user-section menu-item">';
+            $header_actions_items .= '<div class="user-info" onclick="toggleUserDropdown()" aria-haspopup="true" aria-expanded="false">';
+            $header_actions_items .= '<div class="user-avatar">' . luvex_get_user_avatar($user_id) . '</div>';
+            if ($first_name) {
+                 $header_actions_items .= '<div class="user-details">';
+                 $header_actions_items .= '<p class="user-welcome">Welcome</p>';
+                 $header_actions_items .= '<p class="user-name">' . esc_html($first_name) . '</p>';
+                 $header_actions_items .= '</div>';
+            }
+            $header_actions_items .= '<i class="fa-solid fa-chevron-down dropdown-arrow"></i>';
+            $header_actions_items .= '</div>';
+            
+            $header_actions_items .= '<div id="userDropdown" class="user-dropdown" aria-hidden="true">';
+            $header_actions_items .= '<div class="dropdown-header">';
+            $header_actions_items .= '<div class="dropdown-user-info">';
+            $header_actions_items .= '<div class="dropdown-avatar">' . luvex_get_user_avatar($user_id) . '</div>';
+            $header_actions_items .= '<div class="dropdown-user-details">';
+            $header_actions_items .= '<h4>' . esc_html($first_name) . '</h4>';
+            $header_actions_items .= '<p>' . esc_html($user->user_email) . '</p>';
+            $header_actions_items .= '</div></div></div>';
+            $header_actions_items .= '<div class="dropdown-menu">';
+            if ($profile_page_url) {
+                $header_actions_items .= '<a href="' . esc_url($profile_page_url) . '" class="dropdown-item"><i class="fa-solid fa-user-circle"></i> My Profile</a>';
+            }
+            $header_actions_items .= '<a href="' . esc_url(wp_logout_url(home_url())) . '" class="dropdown-item"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>';
+            $header_actions_items .= '</div></div></li>';
+
+        } else {
+            $login_page = get_page_by_path('login');
+            $login_page_url = $login_page ? get_permalink($login_page) : wp_login_url();
+
+            $header_actions_items .= '<li class="header-cta menu-item">';
+            $header_actions_items .= '<a href="' . esc_url($login_page_url) . '" class="header-cta-button"><i class="fa-solid fa-right-to-bracket"></i> Login / Register</a>';
+            $header_actions_items .= '</li>';
+        }
+        
+        // Wrap header actions to group them
+        $items .= '<div class="header-actions-group">' . $header_actions_items . '</div>';
+    }
+    return $items;
+}
+
+
+// 7. AVATAR FUNKTION
 if (!function_exists('luvex_get_user_avatar')) {
     function luvex_get_user_avatar($user_id = null) {
         if (function_exists('LuvexUserSystem::get_user_avatar')) {
@@ -256,7 +305,7 @@ if (!function_exists('luvex_get_user_avatar')) {
 
         $avatar_url = get_user_meta($user_id, 'luvex_avatar_url', true);
         if ($avatar_url) {
-            return '<img src="' . esc_url($avatar_url) . '" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">';
+            return '<img src="' . esc_url($avatar_url) . '" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;" alt="User Avatar">';
         } else {
             $user = get_userdata($user_id);
             if (!$user) return '?';
@@ -268,10 +317,10 @@ if (!function_exists('luvex_get_user_avatar')) {
     }
 }
 
-// 7. SYSTEM-DATEIEN LADEN
+// 8. SYSTEM-DATEIEN LADEN
 $luvex_includes_path = get_stylesheet_directory() . '/includes/';
 $luvex_includes_files = [
-    '_luvex_ajax.php',    // ZUERST laden, da es von anderen benötigt wird
+    '_luvex_ajax.php',
     '_user_system.php',
     '_luvex-helpers.php',
 ];
@@ -282,9 +331,8 @@ foreach ($luvex_includes_files as $file) {
         require_once $full_path;
     }
 }
-// HINWEIS: _luvex_security.php wurde in _luvex_ajax.php integriert und wird nicht mehr geladen.
 
-// 8. reCAPTCHA FUNKTION (Unverändert)
+// 9. reCAPTCHA FUNKTION (Unverändert)
 function luvex_verify_recaptcha($response) {
     if (empty($response) || !defined('LUVEX_RECAPTCHA_SECRET_KEY')) {
         return false;
@@ -307,7 +355,7 @@ function luvex_verify_recaptcha($response) {
     return isset($data['success']) && $data['success'] === true;
 }
 
-// 9. DEBUGGING FÜR ENTWICKLUNG (nur für Admins)
+// 10. DEBUGGING FÜR ENTWICKLUNG (nur für Admins)
 if (defined('WP_DEBUG') && WP_DEBUG) {
     add_action('wp_footer', function() {
         if (!current_user_can('manage_options') || !class_exists('LuvexAjaxManager')) return;
@@ -334,18 +382,17 @@ if (defined('WP_DEBUG') && WP_DEBUG) {
     });
 }
 
-// 10. ZUSÄTZLICHE HELPER FÜR CSS-STRUKTUR
+// 11. ZUSÄTZLICHE HELPER FÜR CSS-STRUKTUR
 add_filter('body_class', 'luvex_add_context_classes');
 function luvex_add_context_classes($classes) {
-    // Light-Theme für bestimmte Seiten
     if (is_page(['profile', 'contact', 'about']) || is_front_page()) {
         $classes[] = 'luvex-light-context';
     }
     
-    // Spezifische Klasse für die Profilseite
     if (is_page('profile')) {
         $classes[] = 'luvex-profile-page';
     }
     
     return $classes;
 }
+

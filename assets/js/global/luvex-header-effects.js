@@ -285,7 +285,6 @@ document.addEventListener('DOMContentLoaded', function() {
      * ========================================================================
      */
     
-    // [Existing mobile menu code remains the same...]
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     
@@ -301,7 +300,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // [Rest of existing mobile menu code...]
     const mobileMenuItems = document.querySelectorAll('.mobile-navigation .menu-item-has-children > a');
     
     mobileMenuItems.forEach(item => {
@@ -320,3 +318,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
