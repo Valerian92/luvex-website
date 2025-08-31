@@ -172,7 +172,7 @@ function luvex_enqueue_assets() {
         'led-uv-systems' => ['luvex-uv-led-hero' => 'pages/hero-uv-led.js'],
         'mercury-uv-lamps' => ['luvex-mercury-lamps-hero' => 'pages/hero-mercury-lamps.js'],
         'uv-technology' => ['luvex-hero-spectrum' => 'pages/hero-spectrum.js'],
-        'start-uv-project' => ['luvex-hero-hexagon' => 'pages/hero-hexagon.js'],
+        'start-uv-project' => ['luvex-consultation-hero-animation' => 'pages/hero-consultation-animation.js'],
         'uv-safety-equipment' => ['luvex-hero-safety-animation-script' => 'pages/hero-safety-animation.js'],
         'uv-solutions' => ['luvex-hero-solutions-animation' => 'pages/hero-solutions-animation.js'],
     ];
@@ -339,4 +339,3 @@ function luvex_add_context_classes($classes) {
     
     return $classes;
 }
-

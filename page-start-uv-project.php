@@ -3,26 +3,57 @@
  * Template Name: Start Your UV Project
  * Streamlined booking page focused on calendar integration
  * @package Luvex
- * @since 2.5.0
+ * @since 2.6.0
  */
 
 get_header(); ?>
 
 <div class="booking-page">
     
-    <!-- HERO SECTION -->
-    <section class="luvex-hero booking-hero diagonal-transition">
-        <div class="booking-hero__container container--wide">
-            <div class="booking-hero__content">
-                <h1 class="booking-hero__title">
-                    Start Your <span class="text-highlight">UV Project</span><br>Today
-                </h1>
-                <h2 class="booking-hero__subtitle">
-                    Expert guidance, independent advice, proven results
-                </h2>
-                <p class="booking-hero__description">
-                    Ready to optimize your UV processes? Schedule a free 30-minute consultation with our UV technology experts. No sales pitch – just honest, practical guidance tailored to your specific challenges.
-                </p>
+    <!-- HERO SECTION (OPTIMIZED) -->
+    <section class="luvex-hero booking-hero">
+        <!-- Canvas für die Hintergrundanimation -->
+        <canvas id="hero-animation-canvas"></canvas>
+
+        <div class="luvex-hero__container container--wide">
+            <div class="booking-hero__grid">
+                
+                <!-- Linke Spalte: Text & CTA -->
+                <div class="booking-hero__text-content">
+                    <h1 class="luvex-hero__title">
+                        Start Your <span class="text-highlight">UV Project</span> Today
+                    </h1>
+                    <h2 class="luvex-hero__subtitle">
+                        Expert guidance, independent advice, proven results.
+                    </h2>
+                    <p class="luvex-hero__description">
+                        Ready to optimize your UV processes? Schedule a free 30-minute consultation with our UV technology experts. No sales pitch – just honest, practical guidance tailored to your specific challenges.
+                    </p>
+                    
+                    <!-- Call-to-Action Button -->
+                    <div class="booking-hero__cta-container">
+                        <a href="#schedule" class="btn--primary hero-scroll-button">
+                            <span>Schedule Free Consultation</span>
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </a>
+                    </div>
+
+                    <!-- Social Proof (Platzhalter) -->
+                    <div class="hero-social-proof">
+                        <p>Trusted by leading companies in the industry</p>
+                        <!-- Hier könnten Logos platziert werden -->
+                    </div>
+                </div>
+
+                <!-- Rechte Spalte: Bild des Experten -->
+                <div class="booking-hero__image-content">
+                    <div class="expert-image-wrapper">
+                         <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Bewerbungsbild_Valerian-Huber.jpg" 
+                             alt="Valerian Huber, LUVEX UV Technology Expert" 
+                             class="booking-hero__image">
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -139,11 +170,11 @@ get_header(); ?>
                 <h2 class="booking-alternative__title">Prefer to Contact Us Directly?</h2>
                 <p class="booking-alternative__description">If the calendar doesn't work for you or you have specific questions, feel free to reach out directly.</p>
                 <div class="booking-alternative__actions">
-                    <a href="mailto:support@luvex.tech" class="luvex-cta-secondary">
+                    <a href="mailto:support@luvex.tech" class="btn--outline">
                         <i class="fa-solid fa-envelope"></i>
                         <span>Send Email</span>
                     </a>
-                    <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>" class="luvex-cta-secondary">
+                    <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>" class="btn--outline">
                         <i class="fa-solid fa-message"></i>
                         <span>Contact Form</span>
                     </a>
@@ -155,3 +186,4 @@ get_header(); ?>
 </div>
 
 <?php get_footer(); ?>
+
