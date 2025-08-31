@@ -99,11 +99,26 @@ Last Update: 2025-08-31 (Button-Animation repariert)
 }
 
 @keyframes gradient-shift-smooth {
-    0% { background-position: 0% 50%; }
-    25% { background-position: 100% 50%; }
-    50% { background-position: 100% 100%; }
-    75% { background-position: 0% 100%; }
-    100% { background-position: 0% 50%; }
+    0% { 
+        background-position: 0% 50%; 
+        background: linear-gradient(45deg, #6dd5ed, #8a2be2, #007BFF, #8a2be2, #6dd5ed);
+    }
+    25% { 
+        background-position: 100% 50%; 
+        background: linear-gradient(135deg, #8a2be2, #007BFF, #6dd5ed, #007BFF, #8a2be2);
+    }
+    50% { 
+        background-position: 100% 100%; 
+        background: linear-gradient(225deg, #007BFF, #6dd5ed, #8a2be2, #6dd5ed, #007BFF);
+    }
+    75% { 
+        background-position: 0% 100%; 
+        background: linear-gradient(315deg, #6dd5ed, #8a2be2, #007BFF, #8a2be2, #6dd5ed);
+    }
+    100% { 
+        background-position: 0% 50%; 
+        background: linear-gradient(45deg, #6dd5ed, #8a2be2, #007BFF, #8a2be2, #6dd5ed);
+    }
 }
 
 /* HÖCHSTE SPEZIFITÄT: Überschreibt alle anderen Button-Styles */
