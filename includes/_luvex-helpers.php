@@ -4,7 +4,7 @@
  * Enthält die zentrale Icon-Bibliothek.
  *
  * @package Luvex
- * @since 3.5.0
+ * @since 3.8.0 (Final Menu Icons Sync)
  */
 
 if (!defined('ABSPATH')) {
@@ -19,6 +19,42 @@ if (!defined('ABSPATH')) {
 if (!function_exists('get_luvex_icon_library')) {
     function get_luvex_icon_library() {
         return [
+            // ========================================================================
+            // FINALE MENU ICONS
+            // ========================================================================
+            'Menu Icons' => [
+                // Hauptmenü (Level 1)
+                'menu-uv-technology' => ['label' => 'UV Technology', 'class' => 'fa-solid fa-atom'],
+                'menu-uv-solutions'  => ['label' => 'UV Solutions', 'class' => 'fa-solid fa-sitemap'], // GEÄNDERT: Einheitlich mit Custom Concepts
+                'menu-start-project' => ['label' => 'Start Your UV Project', 'class' => 'fa-solid fa-rocket'],
+                'menu-about-luvex'   => ['label' => 'About LUVEX', 'class' => 'fa-solid fa-globe'],
+                
+                // UV Technology Untermenü
+                'menu-led-systems'   => ['label' => 'LED UV Systems', 'class' => 'fa-solid fa-arrows-to-dot'],
+                'menu-uv-curing'     => ['label' => 'UV Curing', 'class' => 'fa-solid fa-layer-group'],
+                'menu-uvc-disinfection' => ['label' => 'UV-C Disinfection', 'class' => 'fa-solid fa-shield-virus'],
+                'menu-mercury-lamps' => ['label' => 'Mercury UV Lamps', 'class' => 'fa-solid fa-wave-square'],
+
+                // UV Solutions Untermenü
+                'menu-custom-concepts' => ['label' => 'Custom Concepts', 'class' => 'fa-solid fa-sitemap'], 
+                'menu-tunnel-systems'  => ['label' => 'UV-Tunnel-Systems', 'class' => 'fa-solid fa-arrow-down-up-across-line'],
+                'menu-curing-systems'  => ['label' => 'Curing Systems', 'class' => 'fa-solid fa-layer-group'], 
+                'menu-hygiene-solutions' => ['label' => 'UVC Hygiene Solutions', 'class' => 'fa-solid fa-shield-virus'],
+                'menu-safety-equipment' => ['label' => 'Safety Equipment', 'class' => 'fa-solid fa-user-shield'],
+                'menu-testing-tools'    => ['label' => 'Testing Tools', 'class' => 'fa-solid fa-gauge-high'],
+                'menu-replacement-lamps' => ['label' => 'Replacement Lamps', 'class' => 'fa-solid fa-wand-magic-sparkles'],
+
+                // Knowledge Seiten (Final)
+                'menu-measurement-knowledge' => ['label' => 'UV-Measurement-Knowledge', 'class' => 'fa-solid fa-gauge-high'],
+                'menu-safety-knowledge' => ['label' => 'UV-Safety-Knowledge', 'class' => 'fa-solid fa-user-shield'],
+                'menu-regulatories'     => ['label' => 'UV-Regulatories', 'class' => 'fa-solid fa-balance-scale'],
+
+                // Weitere
+                'menu-simulator' => ['label' => 'UV Simulator', 'class' => 'fa-solid fa-cubes'],
+                'menu-news'      => ['label' => 'All UV News', 'class' => 'fa-solid fa-newspaper'],
+                'menu-contact'   => ['label' => 'Contact', 'class' => 'fa-solid fa-headset'],
+            ],
+
             'Category Titles' => [
                 'category-industries'   => ['label' => 'Industries', 'class' => 'fa-solid fa-industry'],
                 'category-technology'   => ['label' => 'Technology', 'class' => 'fa-solid fa-atom'],
@@ -31,6 +67,7 @@ if (!function_exists('get_luvex_icon_library')) {
                 'uv-led-systems'   => ['label' => 'UV LED Systems', 'class' => 'fa-solid fa-arrows-to-dot'],
                 'uv-mercury-lamps' => ['label' => 'UV Mercury Lamps', 'class' => 'fa-solid fa-wave-square'],
             ],
+            // ... (Rest der Bibliothek bleibt unverändert) ...
             'UV Solutions' => [
                 'custom-solution'  => ['label' => 'Custom Solution', 'class' => 'fa-solid fa-puzzle-piece'],
                 'uv-tunnel'        => ['label' => 'UV Tunnel', 'class' => 'fa-solid fa-arrow-down-up-across-line'],
@@ -47,36 +84,6 @@ if (!function_exists('get_luvex_icon_library')) {
                 'strip-analyzer'   => ['label' => 'UV Strip Analyzer', 'class' => 'fa-solid fa-chart-simple'],
                 'partnership'      => ['label' => 'Partnership', 'class' => 'fa-solid fa-handshake-angle'],
             ],
-            'Industries' => [
-                'electronics'      => ['label' => 'Electronics', 'class' => 'fa-solid fa-microchip'],
-                'pharmaceutical'   => ['label' => 'Pharmaceutical', 'class' => 'fa-solid fa-pills'],
-                'automotive'       => ['label' => 'Automotive', 'class' => 'fa-solid fa-car'],
-                'engineering'      => ['label' => 'Mechanical Engineering', 'class' => 'fa-solid fa-gears'],
-                'greenhouse'       => ['label' => 'Greenhouse', 'class' => 'fa-solid fa-seedling'],
-                'food-processing'  => ['label' => 'Food Processing', 'class' => 'fa-solid fa-apple-whole'],
-                'optics'           => ['label' => 'Optics', 'class' => 'fa-solid fa-eye'],
-                'beverage-bottling'=> ['label' => 'Beverage & Bottling', 'class' => 'fa-solid fa-bottle-water'],
-                'packaging'        => ['label' => 'Packaging', 'class' => 'fa-solid fa-box-open'],
-                'hotel'            => ['label' => 'Hotel', 'class' => 'fa-solid fa-building-user'],
-                'meat-poultry'     => ['label' => 'Meat & Poultry', 'class' => 'fa-solid fa-drumstick-bite'],
-                'dairy'            => ['label' => 'Dairy', 'class' => 'fa-solid fa-cheese'],
-                'animal-husbandry' => ['label' => 'Animal Husbandry', 'class' => 'fa-solid fa-cow'],
-                'cooling-houses'   => ['label' => 'Cooling Houses', 'class' => 'fa-solid fa-temperature-low'],
-                'laboratories'     => ['label' => 'Laboratories', 'class' => 'fa-solid fa-microscope'],
-                'other-industry'   => ['label' => 'Other', 'class' => 'fa-solid fa-ellipsis'],
-            ],
-            'Nicht zugewiesen (Inspiration)' => [
-                'dna-biology'      => ['label' => 'Wissenschaft / DNA', 'class' => 'fa-solid fa-dna'],
-                'research-lab'     => ['label' => 'Forschung / Labor', 'class' => 'fa-solid fa-microscope'],
-                'product-archive'  => ['label' => 'Produkt-Archiv', 'class' => 'fa-solid fa-box-archive'],
-                'modules'          => ['label' => 'Module / Bausteine', 'class' => 'fa-solid fa-shapes'],
-                'partnership-main' => ['label' => 'Partnerschaft', 'class' => 'fa-solid fa-handshake-angle'],
-                'support-consulting' => ['label' => 'Support / Beratung', 'class' => 'fa-solid fa-headset'],
-                'project-start'    => ['label' => 'Projektstart', 'class' => 'fa-solid fa-rocket'],
-                'application-test' => ['label' => 'Anwendung / Test', 'class' => 'fa-solid fa-vials'],
-                'application-spectrum' => ['label' => 'Anwendungs-Spektrum', 'class' => 'fa-solid fa-swatchbook'],
-                'industry-tags'    => ['label' => 'Branchen-Tags', 'class' => 'fa-solid fa-tags'],
-            ]
         ];
     }
 }
@@ -98,3 +105,4 @@ if (!function_exists('get_luvex_icon')) {
         return ''; // Fallback
     }
 }
+

@@ -1,14 +1,16 @@
 /**
- * LUVEX Theme - Process Equipment Hero Animation (V103 - Final Version)
+ * LUVEX Theme - Process Equipment Hero Animation (V104 - Interaktive Überarbeitung)
  *
- * Description: The definitive, final version incorporating all refinement requests.
+ * Description: Überarbeitete Version mit verbessertem interaktivem Feedback und Layout.
  *
  * Key Features:
- * - FINAL LAYOUT: Title and Subtitle positions are fine-tuned via CSS margins.
- * - INTERACTIVE STARFIELD: The background now features static stars that glow on mouse proximity, replacing shooting stars.
- * - PERFECTED PROXIMITY GLOW: All nodes now glow based on cursor proximity with a smooth
- * exponential falloff, creating a "spotlight" effect from the cursor. The passive
- * animation remains for ambient movement.
+ * - REFINED LAYOUT: Titel und Subtitle via CSS für bessere Positionierung angepasst.
+ * - GLOBAL PROXIMITY GLOW: Alle Knotenpunkte leuchten basierend auf Mausnähe mit einem
+ * sanfteren, exponentiellen Abfall. Ein Aktivierungsradius verhindert Leuchten,
+ * wenn die Maus zu weit von der Animation entfernt ist.
+ * - CENTER LOCK EFFECT: Wenn die Maus über den zentralen Punkt fährt, wird ein
+ * permanenter Leuchteffekt ausgelöst: Alle Knoten und radialen Linien leuchten
+ * auf und bleiben hell, während die passive Puls-Animation stoppt.
  *
  * @package Luvex
  */
@@ -30,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lineColor: `rgba(109, 213, 237, 0.2)`,
         glowColor: `rgba(109, 213, 237, 0.8)`,
         fontFamily: 'Inter, sans-serif',
-        mouseRadius: 450, // Larger radius for a wider glow effect
+        mouseRadius: 450,
         phaseDuration: 120,
         flowDuration: 100,
         starCount: 150,
@@ -46,6 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let phase = 0;
     let phaseTimer = 0;
     const mouse = { x: -1000, y: -1000, isOverCanvas: false };
+    // NEU: State für den Center-Lock-Effekt und den Radius der Animation
+    let centerLockEffect = { active: false, glow: 0 };
+    let mainRadius = 0;
 
     // --- HELPER FUNCTIONS ---
     const lerp = (a, b, t) => a * (1 - t) + b * t;
@@ -129,11 +134,26 @@ document.addEventListener('DOMContentLoaded', () => {
             this.glow = 0; this.activation = 0; this.lastActivationTime = -Infinity;
         }
         update() {
-            const dx = this.x - mouse.x; const dy = this.y - mouse.y;
+            // NEU: Wenn der Lock-Effekt aktiv ist, werden alle Nodes von diesem Effekt gesteuert.
+            if (centerLockEffect.active) {
+                this.glow = centerLockEffect.glow;
+                this.activation = 0; // Passive Pulse deaktivieren
+                return;
+            }
+
+            // NEU: Trigger-Schwelle. Effekt nur aktiv, wenn Maus in der Nähe der Animation ist.
+            const distMouseFromCenter = Math.sqrt(Math.pow(mouse.x - centralOrb.x, 2) + Math.pow(mouse.y - centralOrb.y, 2));
+            const isMouseInsideAnimation = mouse.isOverCanvas && distMouseFromCenter < mainRadius + 50; // 50px Puffer
+
+            const dx = this.x - mouse.x;
+            const dy = this.y - mouse.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
             const proximity = Math.max(0, 1 - dist / config.mouseRadius);
-            const targetGlow = mouse.isOverCanvas ? Math.pow(proximity, 3) : 0;
+            
+            // NEU: Sanfterer Abfall (pow^2 statt pow^3) und Aktivierung nur innerhalb der Schwelle.
+            const targetGlow = isMouseInsideAnimation ? Math.pow(proximity, 2) : 0;
             this.glow = lerp(this.glow, targetGlow, 0.08);
+
             const age = Date.now() - this.lastActivationTime;
             this.activation = Math.exp(-age / 1500);
         }
@@ -160,11 +180,57 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     class Orb extends Node {
         constructor(x, y, size, id) { super('', x, y, size, id); this.charge = 0; }
-        draw() { const combinedGlow = Math.min(1, this.glow + this.activation + this.charge * 0.5); const baseRadius = 8 + combinedGlow * 12; ctx.save(); const glowSize = baseRadius * 3; const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, glowSize); gradient.addColorStop(0, `rgba(109, 213, 237, ${combinedGlow * 0.3})`); gradient.addColorStop(1, `rgba(109, 213, 237, 0)`); ctx.fillStyle = gradient; ctx.beginPath(); ctx.arc(this.x, this.y, glowSize, 0, Math.PI * 2); ctx.fill(); ctx.fillStyle = 'rgba(255, 255, 255, 1)'; ctx.shadowColor = config.glowColor; ctx.shadowBlur = combinedGlow * 20; ctx.beginPath(); ctx.arc(this.x, this.y, baseRadius, 0, Math.PI * 2); ctx.fill(); ctx.restore(); }
+        draw() { 
+            const finalGlow = Math.min(1, this.glow + this.activation + this.charge * 0.5);
+            const baseRadius = 8 + finalGlow * 12; 
+            ctx.save(); 
+            const glowSize = baseRadius * 3; 
+            const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, glowSize); 
+            gradient.addColorStop(0, `rgba(109, 213, 237, ${finalGlow * 0.3})`); 
+            gradient.addColorStop(1, `rgba(109, 213, 237, 0)`); 
+            ctx.fillStyle = gradient; 
+            ctx.beginPath(); 
+            ctx.arc(this.x, this.y, glowSize, 0, Math.PI * 2); 
+            ctx.fill(); 
+            ctx.fillStyle = 'rgba(255, 255, 255, 1)'; 
+            ctx.shadowColor = config.glowColor; 
+            ctx.shadowBlur = finalGlow * 20; 
+            ctx.beginPath(); 
+            ctx.arc(this.x, this.y, baseRadius, 0, Math.PI * 2); 
+            ctx.fill(); 
+            ctx.restore(); 
+        }
     }
     class Path {
         constructor(start, end) { this.start = start; this.end = end; }
-        draw() { const combinedGlow = Math.min(1, this.start.glow + this.end.glow + this.start.activation + this.end.activation); const opacity = 0.2 + combinedGlow * 0.4; ctx.save(); ctx.globalAlpha = opacity; ctx.strokeStyle = config.lineColor; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(this.start.x, this.start.y); ctx.lineTo(this.end.x, this.end.y); ctx.stroke(); ctx.restore(); }
+        draw() {
+            const isRadial = (this.start.id === 'center' || this.end.id === 'center');
+            let combinedGlow = Math.min(1, this.start.glow + this.end.glow + this.start.activation + this.end.activation);
+
+            // NEU: Wenn der Lock-Effekt aktiv ist, werden radiale Pfade speziell behandelt.
+            if (isRadial && centerLockEffect.active) {
+                combinedGlow = Math.max(combinedGlow, centerLockEffect.glow);
+            }
+
+            const opacity = 0.2 + combinedGlow * 0.6; // Multiplikator erhöht für hellere Linien
+            ctx.save();
+            ctx.globalAlpha = opacity;
+            
+            // NEU: Mache die radialen Linien im Lock-Zustand heller und dicker.
+            if (isRadial && centerLockEffect.active) {
+                ctx.strokeStyle = `rgba(109, 213, 237, ${0.3 + centerLockEffect.glow * 0.5})`;
+                ctx.lineWidth = 1.5 + centerLockEffect.glow * 0.5;
+            } else {
+                ctx.strokeStyle = config.lineColor;
+                ctx.lineWidth = 1.5;
+            }
+
+            ctx.beginPath();
+            ctx.moveTo(this.start.x, this.start.y);
+            ctx.lineTo(this.end.x, this.end.y);
+            ctx.stroke();
+            ctx.restore();
+        }
     }
     class EnergyPulse {
         constructor(path) { this.path = path; this.progress = 0; this.isFinished = false; }
@@ -187,6 +253,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const availableHeight = height - topOffset - bottomPadding;
         const availableWidth = width - (bottomPadding * 2);
         const radius = Math.min(availableWidth, availableHeight) / 2;
+        // NEU: Hauptradius für die Trigger-Schwelle speichern.
+        mainRadius = radius;
         const orbCenterY = topOffset + radius;
 
         centralOrb = new Orb(centerX, orbCenterY, 0, 'center');
@@ -219,8 +287,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function animate() {
         ctx.clearRect(0, 0, width, height);
+        
+        // NEU: Logik für den Center-Lock-Effekt
+        if (centralOrb) {
+            const distToCenter = Math.sqrt(Math.pow(mouse.x - centralOrb.x, 2) + Math.pow(mouse.y - centralOrb.y, 2));
+            if (!centerLockEffect.active && distToCenter < 25) { // 25px Aktivierungsradius
+                centerLockEffect.active = true;
+            }
+        }
+        if (centerLockEffect.active) {
+            centerLockEffect.glow = lerp(centerLockEffect.glow, 1, 0.04); // Glow langsam auf 1 erhöhen
+        }
+
+        // NEU: Passive Animation nur starten, wenn Lock-Effekt NICHT aktiv ist.
         phaseTimer++;
-        if (phaseTimer >= config.phaseDuration) { phaseTimer = 0; if (flows.length < 4) nextPhase(); }
+        if (!centerLockEffect.active && phaseTimer >= config.phaseDuration) {
+            phaseTimer = 0;
+            if (flows.length < 4) nextPhase();
+        }
+
+        // NEU: Bestehende Pulse entfernen, sobald der Lock-Effekt startet.
+        if (centerLockEffect.active && flows.length > 0) {
+            flows = [];
+        }
 
         backgroundStars.forEach(s => { s.update(); s.draw(); });
         customCursor.update();
@@ -250,4 +339,3 @@ document.addEventListener('DOMContentLoaded', () => {
     heroSection.addEventListener('mouseleave', () => { mouse.isOverCanvas = false; });
     setup(); animate();
 });
-

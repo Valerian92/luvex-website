@@ -1,6 +1,6 @@
 /*
 ==============================================================================
-LUVEX THEME - UV SOLUTIONS PAGE (V103 - Final Version)
+LUVEX THEME - UV SOLUTIONS PAGE (V104 - Überarbeitet)
 ==============================================================================
 */
 
@@ -13,7 +13,7 @@ LUVEX THEME - UV SOLUTIONS PAGE (V103 - Final Version)
     height: 100vh;
     max-height: 90vh;
     display: flex;
-    align-items: flex-start; /* Align to the top for margin control */
+    align-items: flex-start; /* Beibehaltung für präzise Margin-Steuerung von oben */
     justify-content: center;
     overflow: hidden;
 }
@@ -41,13 +41,14 @@ LUVEX THEME - UV SOLUTIONS PAGE (V103 - Final Version)
     max-width: 900px;
     padding: 0 1rem;
     width: 100%;
+    pointer-events: none; /* Verhindert, dass der Textcontainer Maus-Events abfängt */
 }
 
 .luvex-hero--solutions .luvex-hero__title {
     font-size: clamp(2.5rem, 5vw, 4rem);
     text-shadow: 0 0 20px rgba(109, 213, 237, 0.5);
-    /* PRECISE MARGIN for positioning */
-    margin: 8rem 0 0 0;
+    /* GEÄNDERT: Margin angepasst, um den Titel näher zur Mitte zu rücken */
+    margin: 10rem 0 0 0;
 }
 
 .luvex-hero--solutions .luvex-hero__subtitle {
@@ -55,8 +56,8 @@ LUVEX THEME - UV SOLUTIONS PAGE (V103 - Final Version)
     color: var(--luvex-gray-300);
     max-width: 600px;
     line-height: 1.6;
-    /* PRECISE MARGIN for positioning */
-    margin: 3rem auto 0 auto;
+    /* GEÄNDERT: Margin stark erhöht, um den Subtitle unter die Mitte zu positionieren */
+    margin: 35rem auto 0 auto;
 }
 
 
@@ -140,4 +141,3 @@ LUVEX THEME - UV SOLUTIONS PAGE (V103 - Final Version)
 .solution-card__link:hover .fa-arrow-right {
     transform: translateX(4px);
 }
-

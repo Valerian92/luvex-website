@@ -214,6 +214,7 @@ function luvex_enqueue_assets() {
     }
 }
 
+// 5. NAV WALKER KLASSE (MODIFIZIERT FÜR ICONS)
 // 5. NAV WALKER KLASSE (Unverändert)
 class Luvex_Nav_Walker extends Walker_Nav_Menu {
     public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
@@ -229,9 +230,29 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
         $attributes .= ! empty($item->target)     ? ' target="' . esc_attr($item->target     ) .'"' : '';
         $attributes .= ! empty($item->xfn)        ? ' rel="'    . esc_attr($item->xfn        ) .'"' : '';
         $attributes .= ! empty($item->url)        ? ' href="'   . esc_attr($item->url        ) .'"' : '';
+        
         $item_output = isset($args->before) ? $args->before : '';
         $item_output .= '<a' . $attributes . '>';
+
+        // --- NEUE ICON LOGIK ---
+        $icon_html = '';
+        if (!empty($item->classes) && function_exists('get_luvex_icon')) {
+            foreach ($item->classes as $class) {
+                if (strpos($class, 'icon-') === 0) {
+                    $icon_name = substr($class, 5); // Entfernt 'icon-'
+                    $icon_html = get_luvex_icon($icon_name);
+                    if ($icon_html) {
+                        // Icon gefunden, in Span einpacken für Styling
+                        $item_output .= '<span class="menu-icon">' . $icon_html . '</span>';
+                    }
+                    break; // Nur die erste 'icon-' Klasse verwenden
+                }
+            }
+        }
+        // --- ENDE ICON LOGIK ---
+
         $item_output .= (isset($args->link_before) ? $args->link_before : '') . apply_filters('the_title', $item->title, $item->ID) . (isset($args->link_after) ? $args->link_after : '');
+        
         if (in_array('menu-item-has-children', $classes)) {
             $item_output .= ' <i class="fa-solid fa-chevron-down dropdown-arrow"></i>';
         }
@@ -368,3 +389,4 @@ function luvex_add_context_classes($classes) {
     
     return $classes;
 }
+

@@ -10,11 +10,10 @@ get_header(); ?>
 
     <!-- 
     ==============================================================================
-    HERO SECTION FÜR UV SOLUTIONS
+    HERO SECTION FÜR UV SOLUTIONS (ÜBERARBEITET)
     ==============================================================================
-    - Das Canvas-Element für die Hintergrundanimation bleibt erhalten.
-    - Ein Container für den Text wurde hinzugefügt, um Titel und Subtitel
-      über der Animation anzuzeigen.
+    - Das <p> Element für die Beschreibung wurde zur Klasse .luvex-hero__subtitle geändert,
+      um es semantisch korrekt als Untertitel zu behandeln und separat zu stylen.
     -->
     <section class="luvex-hero luvex-hero--solutions">
         <canvas id="hero-solutions-canvas"></canvas>
@@ -22,7 +21,8 @@ get_header(); ?>
             <h1 class="luvex-hero__title">
                 End-to-End <span class="text-highlight">UV Solutions</span>
             </h1>
-            <p class="luvex-hero__description">
+            <!-- GEÄNDERT: Klasse von __description zu __subtitle geändert -->
+            <p class="luvex-hero__subtitle">
                 From custom-engineered systems to certified safety equipment, we provide comprehensive solutions for professional UV applications.
             </p>
         </div>
@@ -45,7 +45,7 @@ get_header(); ?>
                 </p>
             </div>
             
-            <div class="solutions-grid">
+            <div class="solution-grid">
                 
                 <a href="#" class="solution-card has-shine-effect">
                     <div class="solution-card__icon"><i class="fa-solid fa-drafting-compass"></i></div>

@@ -1,13 +1,13 @@
 /*
 ==============================================================================
-LUVEX THEME v4.6 - COMPLETE HEADER SYSTEM (LANGUAGE SWITCHER UPDATE)
+LUVEX THEME v4.8 - COMPLETE HEADER SYSTEM (SCROLL-FIX UPDATE)
 ==============================================================================
 
 Description: Vollständige Header-Implementierung mit 3-Level Navigation,
              Logo-System, User-Dropdown, Mobile Menu, Scroll Effects und
              NEUEM, EINHEITLICHEM Language Switcher.
 Dependencies: _variables.css, _core.css
-Last Update: 2025-08-24 (Language Switcher & CSS Cleanup)
+Last Update: 2025-08-31 (Scroll-Fix)
 
 ==============================================================================
 */
@@ -24,21 +24,19 @@ Last Update: 2025-08-24 (Language Switcher & CSS Cleanup)
     right: 0;
     z-index: 1000;
     height: 80px;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    backdrop-filter: none;
+    transition: background-color 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    backdrop-filter: blur(0px); /* Startet ohne Blur */
     box-shadow: none;
     overflow: visible !important;
 }
 
 /* Scrolled State - Glassmorphism Effect */
 .site-header.scrolled {
-    background: rgba(27, 42, 73, 0.95) !important;
-    backdrop-filter: blur(10px) saturate(180%);
-    -webkit-backdrop-filter: blur(10px) saturate(180%);
-    border-bottom: 1px solid rgba(109, 213, 237, 0.4);
-    box-shadow: 
-        0 4px 20px rgba(27, 42, 73, 0.3),
-        0 1px 3px rgba(0, 0, 0, 0.1);
+    background: rgba(27, 42, 73, 0.85) !important; /* Dunkelblauer Hintergrund mit Transparenz */
+    backdrop-filter: blur(10px) saturate(150%);
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
+    border-bottom-color: rgba(109, 213, 237, 0.4);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .header-container {
@@ -184,9 +182,16 @@ Last Update: 2025-08-24 (Language Switcher & CSS Cleanup)
     padding: 29px 1.8rem;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
     height: 80px;
     box-sizing: border-box;
+}
+
+.main-navigation .menu-icon {
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+    transition: color 0.3s ease;
 }
 
 .main-navigation > ul > li > a:hover {
@@ -262,7 +267,9 @@ Last Update: 2025-08-24 (Language Switcher & CSS Cleanup)
     color: var(--luvex-white);
     font-weight: 500;
     padding: 1.2rem 1.5rem;
-    display: block;
+    display: flex; /* Geändert für Icon-Alignment */
+    align-items: center; /* Geändert für Icon-Alignment */
+    gap: 0.75rem; /* Gap für Icon */
     position: relative;
     transition: all 0.3s ease;
     white-space: nowrap;
@@ -332,7 +339,9 @@ Last Update: 2025-08-24 (Language Switcher & CSS Cleanup)
 .main-navigation .sub-menu .sub-menu a {
     padding: 0.75rem 1.5rem;
     color: var(--luvex-white);
-    display: block;
+    display: flex; /* Geändert für Icon-Alignment */
+    align-items: center; /* Geändert für Icon-Alignment */
+    gap: 0.75rem; /* Gap für Icon */
     transition: all 0.3s ease;
 }
 
@@ -348,6 +357,7 @@ Last Update: 2025-08-24 (Language Switcher & CSS Cleanup)
 .main-navigation > ul > li.menu-item-has-children > a .dropdown-arrow {
     transition: transform 0.3s ease;
     font-size: 0.8rem;
+    margin-left: auto; /* Sorgt dafür, dass der Pfeil rechts bleibt */
 }
 
 .main-navigation > ul > li.menu-item-has-children:hover > a .dropdown-arrow {
@@ -899,3 +909,5 @@ Last Update: 2025-08-24 (Language Switcher & CSS Cleanup)
         transform: none;
     }
 }
+
+
