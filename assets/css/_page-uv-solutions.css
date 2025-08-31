@@ -1,6 +1,6 @@
 /*
 ==============================================================================
-LUVEX THEME - UV SOLUTIONS PAGE (V105 - Überarbeitet)
+LUVEX THEME - UV SOLUTIONS PAGE (V108 - Final Positions Confirmed)
 ==============================================================================
 */
 
@@ -47,16 +47,20 @@ LUVEX THEME - UV SOLUTIONS PAGE (V105 - Überarbeitet)
 .luvex-hero--solutions .luvex-hero__title {
     font-size: clamp(2.5rem, 5vw, 4rem);
     text-shadow: 0 0 20px rgba(109, 213, 237, 0.5);
-    margin: 10rem 0 0 0;
+    /* FINALE POSITION */
+    margin: 12rem 0 0 0;
 }
 
 .luvex-hero--solutions .luvex-hero__subtitle {
-    font-size: clamp(1rem, 1.8vw, 1.1rem);
-    color: var(--luvex-gray-300);
-    max-width: 600px;
+    /* FINALE ANPASSUNGEN */
+    font-size: clamp(1.1rem, 2.2vw, 1.4rem); /* Schrift vergrößert */
+    font-weight: 500; /* Schriftstärke erhöht */
+    color: var(--luvex-gray-200);
+    max-width: 700px; /* Breite angepasst für besseren Umbruch */
     line-height: 1.6;
-    /* GEÄNDERT: Finale Anpassung der vertikalen Position */
-    margin: 18rem auto 0 auto;
+    text-shadow: 0 0 10px rgba(109, 213, 237, 0.3); /* Dezenter Leuchteffekt */
+    /* FINALE POSITION */
+    margin: 11rem auto 0 auto;
 }
 
 
@@ -140,5 +144,4 @@ LUVEX THEME - UV SOLUTIONS PAGE (V105 - Überarbeitet)
 .solution-card__link:hover .fa-arrow-right {
     transform: translateX(4px);
 }
-
 
