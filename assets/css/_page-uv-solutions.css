@@ -1,6 +1,6 @@
 /*
 ==============================================================================
-LUVEX THEME - UV SOLUTIONS PAGE (V104 - Überarbeitet)
+LUVEX THEME - UV SOLUTIONS PAGE (V105 - Überarbeitet)
 ==============================================================================
 */
 
@@ -47,7 +47,6 @@ LUVEX THEME - UV SOLUTIONS PAGE (V104 - Überarbeitet)
 .luvex-hero--solutions .luvex-hero__title {
     font-size: clamp(2.5rem, 5vw, 4rem);
     text-shadow: 0 0 20px rgba(109, 213, 237, 0.5);
-    /* GEÄNDERT: Margin angepasst, um den Titel näher zur Mitte zu rücken */
     margin: 10rem 0 0 0;
 }
 
@@ -56,8 +55,8 @@ LUVEX THEME - UV SOLUTIONS PAGE (V104 - Überarbeitet)
     color: var(--luvex-gray-300);
     max-width: 600px;
     line-height: 1.6;
-    /* GEÄNDERT: Margin stark erhöht, um den Subtitle unter die Mitte zu positionieren */
-    margin: 35rem auto 0 auto;
+    /* GEÄNDERT: Margin korrigiert, um den Subtitle sichtbar zu machen */
+    margin: 22rem auto 0 auto;
 }
 
 
@@ -141,3 +140,4 @@ LUVEX THEME - UV SOLUTIONS PAGE (V104 - Überarbeitet)
 .solution-card__link:hover .fa-arrow-right {
     transform: translateX(4px);
 }
+
