@@ -1,17 +1,17 @@
 /*
 ==============================================================================
-LUVEX THEME v3.2 - UI COMPONENTS (ERWEITERT UM FORM-KOMPONENTEN)
+LUVEX THEME v3.2 - UI COMPONENTS (Komplett mit Animationen)
 ==============================================================================
-Description: EnthÃ¤lt alle wiederverwendbaren UI-Komponenten inkl. universeller
-             Form-Elemente aus der ehemaligen _auth.css
+Description: Enthält alle wiederverwendbaren UI-Komponenten, universelle
+             Form-Elemente UND alle Animationen (gemerged aus _animations.css)
 Dependencies: _variables.css, _core.css
-Last Update: 2025-08-31
+Last Update: 2025-08-31 - Animations integriert
 ==============================================================================
 */
 
 /*
 ==============================================================================
-1. HERO SECTIONS (Optimierter Standard)
+1. HERO SECTIONS 
 ==============================================================================
 */
 
@@ -502,7 +502,7 @@ Last Update: 2025-08-31
 
 /*
 ==============================================================================
-5. UNIVERSAL FORM COMPONENTS (Aus _auth.css übertragen & optimiert)
+5. UNIVERSAL FORM COMPONENTS
 ==============================================================================
 */
 
@@ -825,11 +825,265 @@ input[type="tel"]:focus {
 
 /*
 ==============================================================================
-7. VISUAL EFFECTS
+7. ANIMATIONS (Gemerged aus _animations.css)
 ==============================================================================
 */
 
-/* --- 7.1 Shine/Shiver Effect --- */
+/* --- 7.1 Scroll Reveal Animations --- */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* --- 7.2 Loading & Spinner Animations --- */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 53%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40%, 43% {
+        transform: translateY(-30px);
+    }
+    70% {
+        transform: translateY(-15px);
+    }
+    90% {
+        transform: translateY(-4px);
+    }
+}
+
+/* --- 7.3 Glow & Shimmer Effects --- */
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(109, 213, 237, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(109, 213, 237, 0.8), 0 0 30px rgba(109, 213, 237, 0.6);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% center;
+    }
+    100% {
+        background-position: 200% center;
+    }
+}
+
+/* --- 7.4 Animation Utility Classes --- */
+.animate-slide-up {
+    animation: slideInUp 0.6s ease-out forwards;
+}
+
+.animate-slide-left {
+    animation: slideInLeft 0.6s ease-out forwards;
+}
+
+.animate-slide-right {
+    animation: slideInRight 0.6s ease-out forwards;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+.animate-pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-bounce {
+    animation: bounce 1s ease infinite;
+}
+
+.animate-glow {
+    animation: glow 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s ease-in-out infinite;
+}
+
+/* --- 7.5 Scroll-Triggered Animation Base Classes --- */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-reveal-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.scroll-reveal-left.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.scroll-reveal-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.scroll-reveal-right.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.scroll-reveal-scale {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.scroll-reveal-scale.is-visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* --- 7.6 Staggered Animations für Listen/Grids --- */
+.stagger-children > * {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.stagger-children.is-visible > *:nth-child(1) { transition-delay: 0.1s; }
+.stagger-children.is-visible > *:nth-child(2) { transition-delay: 0.2s; }
+.stagger-children.is-visible > *:nth-child(3) { transition-delay: 0.3s; }
+.stagger-children.is-visible > *:nth-child(4) { transition-delay: 0.4s; }
+.stagger-children.is-visible > *:nth-child(5) { transition-delay: 0.5s; }
+.stagger-children.is-visible > *:nth-child(6) { transition-delay: 0.6s; }
+
+.stagger-children.is-visible > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- 7.7 Hover-Animation Classes --- */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.hover-scale {
+    transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+.hover-glow {
+    transition: box-shadow 0.3s ease;
+}
+
+.hover-glow:hover {
+    box-shadow: 0 0 20px rgba(109, 213, 237, 0.5);
+}
+
+/*
+==============================================================================
+8. VISUAL EFFECTS
+==============================================================================
+*/
+
+/* --- 8.1 Shine/Shiver Effect --- */
 .has-shine-effect {
     position: relative;
     overflow: hidden !important;
@@ -866,7 +1120,7 @@ input[type="tel"]:focus {
     z-index: 2;
 }
 
-/* --- 7.2 Scroll-to-Top Button --- */
+/* --- 8.2 Scroll-to-Top Button --- */
 #scrollToTopBtn {
     display: none;
     position: fixed;
@@ -902,7 +1156,7 @@ input[type="tel"]:focus {
 
 /*
 ==============================================================================
-8. RESPONSIVE BREAKPOINTS FÜR FORM COMPONENTS
+9. RESPONSIVE BREAKPOINTS FÜR FORM COMPONENTS
 ==============================================================================
 */
 

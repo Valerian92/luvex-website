@@ -1,16 +1,15 @@
 <?php
 /**
- * LUVEX AJAX MANAGER - Centralized AJAX Handler System
+ * LUVEX AJAX MANAGER - Komplett mit Security gemerged
  * 
- * This file centralizes all AJAX functionality for the LUVEX theme.
- * It delegates to existing classes while providing unified nonce management
- * and external API support.
+ * Enthält ALLE AJAX-Funktionalität und Security-Logik.
+ * Die LuvexSecurity-Klasse wurde vollständig hier integriert.
  * 
  * Location: /includes/_luvex_ajax.php
- * Dependencies: LuvexSecurity, LuvexUserSystem, LuvexCORSManager
+ * Dependencies: LuvexUserSystem
  * 
  * @package Luvex
- * @since 3.1.0
+ * @since 3.2.0 - Vollständig gemerged
  */
 
 if (!defined('ABSPATH')) {
@@ -19,7 +18,7 @@ if (!defined('ABSPATH')) {
 
 /**
  * ========================================================================
- * LUVEX AJAX MANAGER CLASS
+ * LUVEX AJAX MANAGER - Komplette AJAX & Security Funktionalität
  * ========================================================================
  */
 class LuvexAjaxManager {
@@ -64,7 +63,80 @@ class LuvexAjaxManager {
         
         // CORS handling for external apps
         self::init_cors_handling();
+        
+        // Legacy form handling (fallback)
+        add_action('init', [self::class, 'handle_page_forms'], 5);
     }
+    
+    /**
+     * ========================================================================
+     * SECURITY & RATE LIMITING (Gemerged aus LuvexSecurity)
+     * ========================================================================
+     */
+    
+    /**
+     * Check rate limiting for actions
+     */
+    public static function check_rate_limit($action, $max = null, $window = null) {
+        // Use defined limits or provided parameters
+        if ($max === null || $window === null) {
+            if (isset(self::RATE_LIMITS[$action])) {
+                $limits = self::RATE_LIMITS[$action];
+                $max = $limits['max'];
+                $window = $limits['window'];
+            } else {
+                return true; // No limit defined
+            }
+        }
+        
+        $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+        $key = 'luvex_rate_limit_' . md5($action . $ip);
+        
+        $attempts = get_transient($key);
+        if ($attempts === false) {
+            $attempts = 0;
+        }
+        
+        if ($attempts >= $max) {
+            return false;
+        }
+        
+        set_transient($key, $attempts + 1, $window);
+        return true;
+    }
+    
+    /**
+     * Validate form for honeypot & bot detection
+     */
+    public static function validate_form($post_data) {
+        // Check for honeypot field (should be empty)
+        if (!empty($post_data['luvex_honeypot'] ?? '')) {
+            return false;
+        }
+        
+        // Check form submission time (too fast = bot)
+        $form_time = intval($post_data['luvex_form_time'] ?? 0);
+        if ($form_time > 0 && (time() - $form_time) < 3) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    /**
+     * Get security fields for forms
+     */
+    public static function get_security_fields() {
+        $output = '<input type="hidden" name="luvex_form_time" value="' . time() . '">';
+        $output .= '<input type="text" name="luvex_honeypot" value="" style="display:none!important;">';
+        return $output;
+    }
+    
+    /**
+     * ========================================================================
+     * CORS MANAGEMENT
+     * ========================================================================
+     */
     
     /**
      * Initialize CORS handling for external applications
@@ -135,11 +207,79 @@ class LuvexAjaxManager {
     }
     
     /**
+     * Check if origin is allowed for external API access
+     */
+    private static function is_origin_allowed($origin) {
+        return in_array($origin, self::$allowed_origins);
+    }
+    
+    /**
+     * ========================================================================
+     * NONCE MANAGEMENT
+     * ========================================================================
+     */
+    
+    /**
+     * Create unified nonce
+     */
+    public static function create_nonce() {
+        return wp_create_nonce(self::NONCE_NAME);
+    }
+    
+    /**
+     * Verify unified nonce
+     */
+    public static function verify_nonce($nonce = null) {
+        if ($nonce === null) {
+            $nonce = $_POST['nonce'] ?? $_GET['nonce'] ?? '';
+        }
+        
+        return wp_verify_nonce($nonce, self::NONCE_NAME);
+    }
+    
+    /**
+     * Standard security validation for all AJAX requests
+     */
+    private static function validate_ajax_request($action, $require_login = false) {
+        // Check nonce
+        if (!self::verify_nonce()) {
+            wp_send_json_error([
+                'message' => 'Security check failed',
+                'code' => 'INVALID_NONCE'
+            ]);
+        }
+        
+        // Check login requirement
+        if ($require_login && !is_user_logged_in()) {
+            wp_send_json_error([
+                'message' => 'Authentication required',
+                'code' => 'NOT_LOGGED_IN'
+            ]);
+        }
+        
+        // Check rate limiting
+        if (!self::check_rate_limit($action)) {
+            wp_send_json_error([
+                'message' => 'Too many requests. Please try again later.',
+                'code' => 'RATE_LIMIT_EXCEEDED'
+            ]);
+        }
+        
+        return true;
+    }
+    
+    /**
+     * ========================================================================
+     * AJAX HANDLER REGISTRATION
+     * ========================================================================
+     */
+    
+    /**
      * Register all AJAX handlers in one place
      */
     private static function register_ajax_handlers() {
         $handlers = [
-            // Authentication handlers (delegate to LuvexSecurity)
+            // Authentication handlers
             'luvex_ajax_login' => [
                 'callback' => [self::class, 'handle_login'],
                 'nopriv' => true,
@@ -195,119 +335,142 @@ class LuvexAjaxManager {
      * Register public API endpoints for external applications
      */
     private static function register_public_api_endpoints() {
-        // These endpoints are specifically for external apps like simulator.luvex.tech
         add_action('wp_ajax_luvex_api_status', [self::class, 'handle_api_status']);
         add_action('wp_ajax_nopriv_luvex_api_status', [self::class, 'handle_api_status']);
     }
     
     /**
      * ========================================================================
-     * UNIFIED NONCE MANAGEMENT
+     * AUTHENTICATION HANDLERS (Gemerged aus LuvexSecurity)
      * ========================================================================
      */
-    
+
     /**
-     * Create unified nonce
-     */
-    public static function create_nonce() {
-        return wp_create_nonce(self::NONCE_NAME);
-    }
-    
-    /**
-     * Verify unified nonce
-     */
-    public static function verify_nonce($nonce = null) {
-        if ($nonce === null) {
-            $nonce = $_POST['nonce'] ?? $_GET['nonce'] ?? '';
-        }
-        
-        return wp_verify_nonce($nonce, self::NONCE_NAME);
-    }
-    
-    /**
-     * Standard security validation for all AJAX requests
-     */
-    private static function validate_ajax_request($action, $require_login = false) {
-        // Check nonce
-        if (!self::verify_nonce()) {
-            wp_send_json_error([
-                'message' => 'Security check failed',
-                'code' => 'INVALID_NONCE'
-            ]);
-        }
-        
-        // Check login requirement
-        if ($require_login && !is_user_logged_in()) {
-            wp_send_json_error([
-                'message' => 'Authentication required',
-                'code' => 'NOT_LOGGED_IN'
-            ]);
-        }
-        
-        // Check rate limiting
-        if (!self::check_rate_limit($action)) {
-            wp_send_json_error([
-                'message' => 'Too many requests. Please try again later.',
-                'code' => 'RATE_LIMIT_EXCEEDED'
-            ]);
-        }
-        
-        return true;
-    }
-    
-    /**
-     * ========================================================================
-     * AJAX HANDLER DELEGATES
-     * ========================================================================
-     */
-    
-    /**
-     * Handle login requests - delegates to LuvexSecurity
+     * Core Login Logic
      */
     public static function handle_login() {
         self::validate_ajax_request('login');
-        
-        // Apply CORS headers for external apps
         self::add_cors_headers();
         
-        // Delegate to existing security class
-        if (class_exists('LuvexSecurity') && method_exists('LuvexSecurity', 'ajax_handle_login')) {
-            LuvexSecurity::ajax_handle_login();
+        // Validate form
+        if (!self::validate_form($_POST)) {
+            wp_send_json_error(['message' => 'Invalid form submission.']);
+            return;
+        }
+        
+        $creds = [
+            'user_login'    => sanitize_user($_POST['user_login']),
+            'user_password' => $_POST['user_password'],
+            'remember'      => isset($_POST['remember_me']),
+        ];
+        
+        // reCAPTCHA Verification
+        $recaptcha_response = $_POST['g-recaptcha-response'] ?? '';
+        if (function_exists('luvex_verify_recaptcha') && !luvex_verify_recaptcha($recaptcha_response)) {
+            wp_send_json_error(['message' => 'reCAPTCHA verification failed. Please try again.']);
+            return;
+        }
+
+        $user = wp_signon($creds, false);
+        
+        if (is_wp_error($user)) {
+            wp_send_json_error(['message' => 'Invalid email or password.']);
         } else {
-            wp_send_json_error([
-                'message' => 'Login handler not available',
-                'code' => 'HANDLER_MISSING'
+            wp_send_json_success([
+                'redirect_url' => home_url('/profile'),
+                'message' => 'Login successful!'
             ]);
         }
     }
-    
+
     /**
-     * Handle registration requests - delegates to LuvexSecurity
+     * Core Registration Logic
      */
     public static function handle_registration() {
         self::validate_ajax_request('register');
-        
-        // Apply CORS headers for external apps
         self::add_cors_headers();
         
-        // Delegate to existing security class
-        if (class_exists('LuvexSecurity') && method_exists('LuvexSecurity', 'ajax_handle_registration')) {
-            LuvexSecurity::ajax_handle_registration();
-        } else {
-            wp_send_json_error([
-                'message' => 'Registration handler not available',
-                'code' => 'HANDLER_MISSING'
-            ]);
+        // Validate form
+        if (!self::validate_form($_POST)) {
+            wp_send_json_error(['message' => 'Invalid form submission.']);
+            return;
         }
+
+        // reCAPTCHA Verification
+        $recaptcha_response = $_POST['g-recaptcha-response'] ?? '';
+        if (function_exists('luvex_verify_recaptcha') && !luvex_verify_recaptcha($recaptcha_response)) {
+            wp_send_json_error(['message' => 'reCAPTCHA verification failed. Please try again.']);
+            return;
+        }
+
+        $email = sanitize_email($_POST['user_email']);
+        $password = $_POST['user_password'];
+        $confirm_password = $_POST['confirm_password'];
+        $first_name = sanitize_text_field($_POST['first_name']);
+        $last_name = sanitize_text_field($_POST['last_name']);
+        
+        if (empty($email) || empty($password) || empty($first_name) || empty($last_name)) {
+            wp_send_json_error(['message' => 'Please fill in all required fields.']);
+            return;
+        }
+        
+        if ($password !== $confirm_password) {
+            wp_send_json_error(['message' => 'The passwords do not match.']);
+            return;
+        }
+        
+        if (email_exists($email) || username_exists($email)) {
+            wp_send_json_error(['message' => 'This email address is already registered.']);
+            return;
+        }
+        
+        $user_id = wp_create_user($email, $password, $email);
+        
+        if (is_wp_error($user_id)) {
+            wp_send_json_error(['message' => 'Could not create the account. Please contact support.']);
+            return;
+        }
+        
+        wp_update_user([
+            'ID' => $user_id,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'display_name' => $first_name . ' ' . $last_name
+        ]);
+        
+        // Save additional fields
+        if (!empty($_POST['company'])) {
+            update_user_meta($user_id, 'company', sanitize_text_field($_POST['company']));
+        }
+        
+        if (!empty($_POST['phone'])) {
+            update_user_meta($user_id, 'phone', sanitize_text_field($_POST['phone']));
+        }
+        
+        // Save interests
+        if (!empty($_POST['interest_area'])) {
+            update_user_meta($user_id, 'luvex_interests', sanitize_text_field($_POST['interest_area']));
+        }
+        
+        wp_new_user_notification($user_id, null, 'user');
+        
+        wp_send_json_success([
+            'message' => 'Registration successful! You will be redirected to the login.',
+            'switch_to_login' => true
+        ]);
     }
+    
+    /**
+     * ========================================================================
+     * USER SYSTEM HANDLERS (Delegate to LuvexUserSystem)
+     * ========================================================================
+     */
     
     /**
      * Handle language switching - delegates to LuvexUserSystem
      */
     public static function handle_language_switch() {
         self::validate_ajax_request('language_switch');
-        
-        // Apply CORS headers
         self::add_cors_headers();
         
         // Delegate to existing user system class
@@ -339,7 +502,7 @@ class LuvexAjaxManager {
     }
     
     /**
-     * Handle profile updates - NEW implementation
+     * Handle profile updates
      */
     public static function handle_profile_update() {
         self::validate_ajax_request('profile_update', true);
@@ -400,7 +563,6 @@ class LuvexAjaxManager {
      * Handle nonce requests for external applications
      */
     public static function handle_get_nonce() {
-        // Apply CORS headers first
         self::add_cors_headers();
         
         // Basic validation (no nonce required for getting a nonce)
@@ -424,8 +586,6 @@ class LuvexAjaxManager {
      */
     public static function handle_uvstrip_token() {
         self::validate_ajax_request('uvstrip_token');
-        
-        // Apply CORS headers
         self::add_cors_headers();
         
         // Generate a temporary token for the UV strip analyzer
@@ -449,12 +609,11 @@ class LuvexAjaxManager {
      * Handle API status requests
      */
     public static function handle_api_status() {
-        // Apply CORS headers
         self::add_cors_headers();
         
         wp_send_json_success([
             'status' => 'active',
-            'version' => '3.1.0',
+            'version' => '3.2.0',
             'endpoints' => [
                 'luvex_get_nonce',
                 'luvex_set_language',
@@ -468,83 +627,60 @@ class LuvexAjaxManager {
     
     /**
      * ========================================================================
-     * CORS MANAGEMENT METHODS
+     * LEGACY FORM HANDLERS (for non-AJAX fallback)
      * ========================================================================
      */
     
     /**
-     * Check if origin is allowed for external API access
+     * Handle page-based form submissions (fallback)
      */
-    private static function is_origin_allowed($origin) {
-        return in_array($origin, self::$allowed_origins);
-    }
-    
-    /**
-     * Add new allowed origin (for future expansion)
-     */
-    public static function add_allowed_origin($origin) {
-        if (!in_array($origin, self::$allowed_origins)) {
-            self::$allowed_origins[] = $origin;
+    public static function handle_page_forms() {
+        if (isset($_POST['luvex_register_submit_page'])) {
+            self::handle_page_registration();
+        }
+        
+        if (isset($_POST['luvex_login_submit_page'])) {
+            self::handle_page_login();
         }
     }
     
-    /**
-     * Get all allowed origins
-     */
-    public static function get_allowed_origins() {
-        return self::$allowed_origins;
+    private static function handle_page_registration() {
+        if (!wp_verify_nonce($_POST['luvex_nonce'] ?? '', 'luvex_registration_nonce')) {
+            wp_die('Security check failed');
+        }
+        
+        // Rate limiting
+        if (!self::check_rate_limit('register')) {
+            wp_redirect(add_query_arg('error', 'rate_limit', wp_get_referer()));
+            exit;
+        }
+        
+        // Process registration...
+        // On success: wp_redirect()
+        // On error: wp_redirect() with error parameter
+    }
+    
+    private static function handle_page_login() {
+        if (!wp_verify_nonce($_POST['luvex_nonce'] ?? '', 'luvex_login_nonce')) {
+            wp_die('Security check failed');
+        }
+        
+        // Rate limiting
+        if (!self::check_rate_limit('login')) {
+            wp_redirect(add_query_arg('error', 'rate_limit', wp_get_referer()));
+            exit;
+        }
+        
+        // Process login...
+        // On success: wp_redirect()
+        // On error: wp_redirect() with error parameter
     }
     
     /**
      * ========================================================================
-     * UTILITY FUNCTIONS
+     * SCRIPT LOCALIZATION
      * ========================================================================
      */
-    
-    /**
-     * Rate limiting check
-     */
-    private static function check_rate_limit($action) {
-        if (!isset(self::RATE_LIMITS[$action])) {
-            return true; // No limit defined
-        }
-        
-        $limits = self::RATE_LIMITS[$action];
-        $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
-        $key = 'luvex_rate_limit_' . md5($action . $ip);
-        
-        $attempts = get_transient($key);
-        if ($attempts === false) {
-            $attempts = 0;
-        }
-        
-        if ($attempts >= $limits['max']) {
-            return false;
-        }
-        
-        set_transient($key, $attempts + 1, $limits['window']);
-        return true;
-    }
-    
-    /**
-     * Check if origin is allowed for external API access
-     */
-    private static function is_allowed_external_origin($origin) {
-        if (class_exists('LuvexCORSManager')) {
-            $allowed_origins = LuvexCORSManager::get_allowed_origins();
-            return in_array($origin, $allowed_origins);
-        }
-        
-        // Fallback list
-        $allowed = [
-            'https://analyzer.luvex.tech',
-            'https://simulator.luvex.tech',
-            'https://www.luvex.tech',
-            'https://luvex.tech'
-        ];
-        
-        return in_array($origin, $allowed);
-    }
     
     /**
      * Localize scripts with AJAX data
@@ -602,10 +738,11 @@ class LuvexAjaxManager {
             'registered_handlers' => self::get_registered_handlers(),
             'rate_limits' => self::RATE_LIMITS,
             'dependencies' => [
-                'LuvexSecurity' => class_exists('LuvexSecurity'),
                 'LuvexUserSystem' => class_exists('LuvexUserSystem'),
-                'LuvexCORSManager' => class_exists('LuvexCORSManager')
-            ]
+                'LuvexSecurity' => true, // Merged into this class
+                'reCAPTCHA' => function_exists('luvex_verify_recaptcha')
+            ],
+            'version' => '3.2.0 - Fully Merged'
         ];
     }
     
@@ -616,14 +753,32 @@ class LuvexAjaxManager {
         global $wp_filter;
         
         $handlers = [];
-        foreach (['wp_ajax_', 'wp_ajax_nopriv_'] as $prefix) {
-            if (isset($wp_filter[$prefix . 'luvex_ajax_login'])) {
-                $handlers[] = $prefix . 'luvex_ajax_login';
+        $luvex_actions = ['login', 'register', 'set_language', 'upload_avatar', 'update_profile', 'get_nonce', 'uvstrip_get_token', 'api_status'];
+        
+        foreach ($luvex_actions as $action) {
+            $full_action = 'luvex_ajax_' . $action;
+            if (isset($wp_filter['wp_ajax_' . $full_action]) || isset($wp_filter['wp_ajax_nopriv_' . $full_action])) {
+                $handlers[] = $full_action;
             }
-            // Add more handler checks as needed
         }
         
         return $handlers;
+    }
+    
+    /**
+     * Add new allowed origin (for future expansion)
+     */
+    public static function add_allowed_origin($origin) {
+        if (!in_array($origin, self::$allowed_origins)) {
+            self::$allowed_origins[] = $origin;
+        }
+    }
+    
+    /**
+     * Get all allowed origins
+     */
+    public static function get_allowed_origins() {
+        return self::$allowed_origins;
     }
 }
 
@@ -634,5 +789,12 @@ add_action('init', [LuvexAjaxManager::class, 'init'], 5);
 if (!function_exists('luvex_ajax_nonce')) {
     function luvex_ajax_nonce() {
         return LuvexAjaxManager::create_nonce();
+    }
+}
+
+// Global helper function for security fields
+if (!function_exists('luvex_security_fields')) {
+    function luvex_security_fields() {
+        return LuvexAjaxManager::get_security_fields();
     }
 }

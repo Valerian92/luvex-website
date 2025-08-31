@@ -2,8 +2,14 @@
 /**
  * LUVEX Theme Functions - Updated for Reorganized CSS System
  * Description: Komplette Theme-Setup-, Navigations- und Asset-Lade-Logik.
- * UPDATED: Angepasst für neue CSS-Struktur (_auth.css entfernt, _components.css erweitert)
+ * UPDATED: Angepasst für neue CSS-Struktur (animations.css entfernt, Logik verbessert)
+ * @package Luvex
+ * @version 3.2.1
  */
+
+if (!defined('ABSPATH')) {
+    exit; // Prevent direct access
+}
 
 // 1. ASTRA THEME DEAKTIVIERUNG
 add_action('after_setup_theme', 'luvex_disable_astra_components', 30);
@@ -15,7 +21,9 @@ function luvex_disable_astra_components() {
 // 2. Admin Bar Fix
 add_action('get_header', 'luvex_remove_admin_bar_bump');
 function luvex_remove_admin_bar_bump() {
-    remove_action('wp_head', '_admin_bar_bump_cb');
+    if (is_admin_bar_showing()) {
+        remove_action('wp_head', '_admin_bar_bump_cb');
+    }
 }
 
 // 3. Theme Setup
@@ -46,86 +54,74 @@ function luvex_theme_setup() {
 add_action('wp_enqueue_scripts', 'luvex_enqueue_assets', 999);
 function luvex_enqueue_assets() {
     // ========================================================================
-    // CSS LADEN (REORGANISIERT)
+    // CSS LADEN (REORGANISIERT UND VEREINFACHT)
     // ========================================================================
 
     // Astra CSS entfernen
     wp_dequeue_style('astra-theme-css');
+    wp_deregister_style('astra-theme-css');
 
-    // Globale Stylesheets (ERWEITERT)
-    $global_styles = [
-        'luvex-main' => '/assets/css/main.css',
-        'luvex-animations' => '/assets/css/global/_animations.css',
-        // HINWEIS: _components.css und _modals.css werden über main.css geladen
-    ];
-    foreach ($global_styles as $handle => $path) {
-        $full_path = get_stylesheet_directory() . $path;
+    // Hilfsfunktion zum Einbinden von Stylesheets
+    $enqueue_style_helper = function($handle, $path_inside_assets, $dependencies = []) {
+        $full_path = get_stylesheet_directory() . '/assets/' . $path_inside_assets;
+        $uri = get_stylesheet_directory_uri() . '/assets/' . $path_inside_assets;
         if (file_exists($full_path)) {
-            wp_enqueue_style($handle, get_stylesheet_directory_uri() . $path, array(), filemtime($full_path));
+            wp_enqueue_style($handle, $uri, $dependencies, filemtime($full_path));
         }
-    }
+    };
 
-    // Seitenspezifische Stylesheets (ANGEPASST - _auth.css entfernt)
-    $page_styles = [
-        'standard-styles-luvex' => ['_page-standard-styles-luvex.css'],
-        'about' => ['_page-about.css'],
-        'start-uv-project' => ['_page-start-uv-project.css'],
-        'contact' => ['_page-contact.css'],
-        'uv-technology' => ['_page-uv-technology.css'],
-        'mercury-uv-lamps' => ['_page-mercury-uv-lamps.css'],
-        'led-uv-systems' => ['_page-led-uv-systems.css'],
-        'uv-solutions' => ['_page-uv-solutions.css'],
-        'uv-safety-equipment' => ['_page-uv-safety-equipment.css', 'animations/_animation-hero-safety.css'], 
-        'uv-testing-equipment' => ['_page-uv-testing-equipment.css'],
-        'uv-tunnel' => ['_page-uv-tunnel.css'],
-        'uv-c-disinfection' => ['_page-uv-c-disinfection.css', 'animations/_animation-uv-disinfection-gallery.css'],
-        'uv-curing' => ['_page-uv-curing.css', 'animations/_animation-uv-curing-gallery.css'],
-        'register' => ['_page-register.css'],
-        'login' => ['_page-login.css'],
-        'forgot-password' => ['_page-forgot-password.css'],
-        'profile' => ['_page-profile.css'], // Profile-Seite nutzt jetzt universelle Komponenten
-        'curing-systems' => ['_page-curing-systems.css'],
-        'uvc-hygiene-solutions' => ['_page-uvc-hygiene-solutions.css'],
+    // Globale Stylesheets
+    $enqueue_style_helper('luvex-main', 'css/main.css');
+    // HINWEIS: _components.css (mit Animationen) und _modals.css werden über main.css importiert.
+    // _animations.css wird nicht mehr separat geladen.
+
+    // Seitenspezifische Stylesheets
+    $page_styles_map = [
+        'standard-styles-luvex' => ['css/_page-standard-styles-luvex.css'],
+        'about' => ['css/_page-about.css'],
+        'start-uv-project' => ['css/_page-start-uv-project.css'],
+        'contact' => ['css/_page-contact.css'],
+        'uv-technology' => ['css/_page-uv-technology.css'],
+        'mercury-uv-lamps' => ['css/_page-mercury-uv-lamps.css'],
+        'led-uv-systems' => ['css/_page-led-uv-systems.css'],
+        'uv-solutions' => ['css/_page-uv-solutions.css'],
+        'uv-safety-equipment' => ['css/_page-uv-safety-equipment.css', 'css/animations/_animation-hero-safety.css'],
+        'uv-testing-equipment' => ['css/_page-uv-testing-equipment.css'],
+        'uv-tunnel' => ['css/_page-uv-tunnel.css'],
+        'uv-c-disinfection' => ['css/_page-uv-c-disinfection.css', 'css/animations/_animation-uv-disinfection-gallery.css'],
+        'uv-curing' => ['css/_page-uv-curing.css', 'css/animations/_animation-uv-curing-gallery.css'],
+        'register' => ['css/_page-register.css'],
+        'login' => ['css/_page-login.css'],
+        'forgot-password' => ['css/_page-forgot-password.css'],
+        'profile' => ['css/_page-profile.css'],
+        'curing-systems' => ['css/_page-curing-systems.css'],
+        'uvc-hygiene-solutions' => ['css/_page-uvc-hygiene-solutions.css'],
     ];
 
-    foreach ($page_styles as $slug => $files) {
+    foreach ($page_styles_map as $slug => $files) {
         if (is_page($slug)) {
             foreach ($files as $file) {
                 $handle = 'luvex-page-' . $slug . '-' . sanitize_title($file);
-                $path = '/assets/css/' . $file;
-                $full_path = get_stylesheet_directory() . $path;
-                if (file_exists($full_path)) {
-                    wp_enqueue_style($handle, get_stylesheet_directory_uri() . $path, ['luvex-main'], filemtime($full_path));
-                }
+                $enqueue_style_helper($handle, $file, ['luvex-main']);
             }
         }
     }
-
+    
     // Homepage Styles (Sonderfall)
     if (is_front_page() || is_home()) {
-        $home_styles = [
-            'luvex-page-home' => '/assets/css/_page-home.css',
-            'luvex-animation-hero-home' => '/assets/css/animations/_animation-hero-home.css',
-            'luvex-animation-globe' => '/assets/css/animations/_animation-globe.css',
-        ];
-        foreach ($home_styles as $handle => $path) {
-            $full_path = get_stylesheet_directory() . $path;
-            if (file_exists($full_path)) {
-                wp_enqueue_style($handle, get_stylesheet_directory_uri() . $path, ['luvex-main'], filemtime($full_path));
-            }
-        }
+        $enqueue_style_helper('luvex-page-home', 'css/_page-home.css', ['luvex-main']);
+        $enqueue_style_helper('luvex-animation-hero-home', 'css/animations/_animation-hero-home.css', ['luvex-page-home']);
+        $enqueue_style_helper('luvex-animation-globe', 'css/animations/_animation-globe.css', ['luvex-page-home']);
     }
 
-    // UV News Styles & Scripts (Sonderfall für Custom Post Type)
+    // UV News Styles (Sonderfall für Custom Post Type)
     if (is_post_type_archive('uv_news') || is_singular('uv_news')) {
-        $news_css_path = get_stylesheet_directory() . '/assets/css/_news.css';
-        if (file_exists($news_css_path)) {
-            wp_enqueue_style('luvex-news-styles', get_stylesheet_directory_uri() . '/assets/css/_news.css', ['luvex-main'], filemtime($news_css_path));
-        }
+        $enqueue_style_helper('luvex-news-styles', 'css/_news.css', ['luvex-main']);
     }
+
 
     // ========================================================================
-    // JAVASCRIPT LADEN (Unverändert)
+    // JAVASCRIPT LADEN
     // ========================================================================
     
     $js_base_uri = get_stylesheet_directory_uri() . '/assets/js/';
@@ -133,14 +129,14 @@ function luvex_enqueue_assets() {
     $dependencies = array('jquery');
 
     // Helfer-Funktion zum Einbinden von Scripts
-    $enqueue_script = function($handle, $path_inside_js_folder) use ($js_base_uri, $js_base_path, $dependencies) {
+    $enqueue_script = function($handle, $path_inside_js_folder, $deps = null) use ($js_base_uri, $js_base_path, $dependencies) {
         $full_path = $js_base_path . $path_inside_js_folder;
         if (file_exists($full_path)) {
-            wp_enqueue_script($handle, $js_base_uri . $path_inside_js_folder, $dependencies, filemtime($full_path), true);
+            wp_enqueue_script($handle, $js_base_uri . $path_inside_js_folder, $deps ?? $dependencies, filemtime($full_path), true);
         }
     };
 
-    // Globale Scripts (auf jeder Seite geladen)
+    // Globale Scripts
     $global_scripts = [
         'luvex-header-effects' => 'global/header-scroll-effects.js',
         'luvex-profile-menu' => 'global/profile-menu.js',
@@ -150,7 +146,6 @@ function luvex_enqueue_assets() {
         'luvex-interactive-faq' => 'global/interactive-faq.js',
     ];
     
-    // Debug-Skript nur für eingeloggte Admins laden
     if (is_user_logged_in() && current_user_can('manage_options')) {
         $global_scripts['luvex-debug'] = 'global/debug-scripts.js';
     }
@@ -166,46 +161,37 @@ function luvex_enqueue_assets() {
             'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',
             [], 
             null, 
-            [
-                'strategy' => 'defer',
-                'integrity' => 'sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ9sA==',
-                'crossorigin' => 'anonymous',
-            ]
+            true
         );
-        $enqueue_script('luvex-globe-animation', 'pages/globe-animation.js');
+        $enqueue_script('luvex-globe-animation', 'pages/globe-animation.js', ['three-js']);
         $enqueue_script('luvex-hero-photons', 'pages/hero-photons.js');
     }
-    if (is_page('contact')) {
-        $enqueue_script('luvex-contact-hero', 'pages/contact-hero-animation.js');
-    }
-    if (is_page('about')) {
-        $enqueue_script('luvex-about-hero', 'pages/hero-about-interactive.js');
-    }
-    if (is_page('uv-curing')) {
-        $enqueue_script('luvex-curing-hero', 'pages/hero-curing-interactive.js');
-        $enqueue_script('luvex-curing-gallery', 'pages/uv-curing-science-gallery.js');
-    }
-    if (is_page('uv-c-disinfection')) {
-        $enqueue_script('luvex-disinfection-hero', 'pages/hero-disinfection.js');
-        $enqueue_script('luvex-disinfection-gallery', 'pages/uvc-science-gallery.js');
-    }
-    if (is_page('led-uv-systems')) {
-        $enqueue_script('luvex-uv-led-hero', 'pages/hero-uv-led.js');
-    }
-    if (is_page('mercury-uv-lamps')) {
-        $enqueue_script('luvex-mercury-lamps-hero', 'pages/hero-mercury-lamps.js');
-    }
-    if (is_page('uv-technology')) {
-        $enqueue_script('luvex-hero-spectrum', 'pages/hero-spectrum.js');
-    }
-    if (is_page('start-uv-project')) {
-        $enqueue_script('luvex-hero-hexagon', 'pages/hero-hexagon.js');
-    }
-    if (is_page('uv-safety-equipment')) {
-        $enqueue_script('luvex-hero-safety-animation-script', 'pages/hero-safety-animation.js');
-    }
-    if (is_page('uv-solutions')) {
-        $enqueue_script('luvex-hero-solutions-animation', 'pages/hero-solutions-animation.js');
+
+    $page_script_map = [
+        'contact' => ['luvex-contact-hero' => 'pages/contact-hero-animation.js'],
+        'about' => ['luvex-about-hero' => 'pages/hero-about-interactive.js'],
+        'uv-curing' => [
+            'luvex-curing-hero' => 'pages/hero-curing-interactive.js',
+            'luvex-curing-gallery' => 'pages/uv-curing-science-gallery.js',
+        ],
+        'uv-c-disinfection' => [
+            'luvex-disinfection-hero' => 'pages/hero-disinfection.js',
+            'luvex-disinfection-gallery' => 'pages/uvc-science-gallery.js',
+        ],
+        'led-uv-systems' => ['luvex-uv-led-hero' => 'pages/hero-uv-led.js'],
+        'mercury-uv-lamps' => ['luvex-mercury-lamps-hero' => 'pages/hero-mercury-lamps.js'],
+        'uv-technology' => ['luvex-hero-spectrum' => 'pages/hero-spectrum.js'],
+        'start-uv-project' => ['luvex-hero-hexagon' => 'pages/hero-hexagon.js'],
+        'uv-safety-equipment' => ['luvex-hero-safety-animation-script' => 'pages/hero-safety-animation.js'],
+        'uv-solutions' => ['luvex-hero-solutions-animation' => 'pages/hero-solutions-animation.js'],
+    ];
+
+    foreach ($page_script_map as $slug => $scripts) {
+        if (is_page($slug)) {
+            foreach($scripts as $handle => $path) {
+                $enqueue_script($handle, $path);
+            }
+        }
     }
     
     // UV News Scripts
@@ -214,7 +200,6 @@ function luvex_enqueue_assets() {
     }
 }
 
-// 5. NAV WALKER KLASSE (MODIFIZIERT FÜR ICONS)
 // 5. NAV WALKER KLASSE (Unverändert)
 class Luvex_Nav_Walker extends Walker_Nav_Menu {
     public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
@@ -234,22 +219,19 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
         $item_output = isset($args->before) ? $args->before : '';
         $item_output .= '<a' . $attributes . '>';
 
-        // --- NEUE ICON LOGIK ---
-        $icon_html = '';
+        // Icon Logik
         if (!empty($item->classes) && function_exists('get_luvex_icon')) {
             foreach ($item->classes as $class) {
                 if (strpos($class, 'icon-') === 0) {
                     $icon_name = substr($class, 5); // Entfernt 'icon-'
                     $icon_html = get_luvex_icon($icon_name);
                     if ($icon_html) {
-                        // Icon gefunden, in Span einpacken für Styling
                         $item_output .= '<span class="menu-icon">' . $icon_html . '</span>';
                     }
-                    break; // Nur die erste 'icon-' Klasse verwenden
+                    break; 
                 }
             }
         }
-        // --- ENDE ICON LOGIK ---
 
         $item_output .= (isset($args->link_before) ? $args->link_before : '') . apply_filters('the_title', $item->title, $item->ID) . (isset($args->link_after) ? $args->link_after : '');
         
@@ -262,54 +244,45 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
     }
 }
 
-// 6. AVATAR FUNKTION (Legacy - wird durch LuvexUserSystem ersetzt)
-function luvex_get_user_avatar($user_id = null) {
-    if (!$user_id) {
-        $user_id = get_current_user_id();
-    }
-    
-    if (0 === $user_id) {
-        return '';
-    }
-
-    $avatar_url = get_user_meta($user_id, 'luvex_avatar_url', true);
-    
-    if ($avatar_url) {
-        return '<img src="' . esc_url($avatar_url) . '" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">';
-    } else {
-        $user = get_userdata($user_id);
-        if (!$user) {
-            return '?';
+// 6. AVATAR FUNKTION (Wird durch LuvexUserSystem ersetzt, aber als Fallback beibehalten)
+if (!function_exists('luvex_get_user_avatar')) {
+    function luvex_get_user_avatar($user_id = null) {
+        if (function_exists('LuvexUserSystem::get_user_avatar')) {
+            return LuvexUserSystem::get_user_avatar($user_id);
         }
-        $first_name = $user->first_name ?: $user->display_name;
-        $last_name = $user->last_name ?: '';
-        $initials = strtoupper(substr($first_name, 0, 1) . substr($last_name, 0, 1));
-        return $initials ?: '?';
+        
+        if (!$user_id) $user_id = get_current_user_id();
+        if (0 === $user_id) return '';
+
+        $avatar_url = get_user_meta($user_id, 'luvex_avatar_url', true);
+        if ($avatar_url) {
+            return '<img src="' . esc_url($avatar_url) . '" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">';
+        } else {
+            $user = get_userdata($user_id);
+            if (!$user) return '?';
+            $first_name = $user->first_name ?: $user->display_name;
+            $last_name = $user->last_name ?: '';
+            $initials = strtoupper(substr($first_name, 0, 1) . substr($last_name, 0, 1));
+            return $initials ?: '?';
+        }
     }
 }
 
-// 7. SYSTEM-DATEIEN LADEN (Unverändert)
+// 7. SYSTEM-DATEIEN LADEN
 $luvex_includes_path = get_stylesheet_directory() . '/includes/';
+$luvex_includes_files = [
+    '_luvex_ajax.php',    // ZUERST laden, da es von anderen benötigt wird
+    '_user_system.php',
+    '_luvex-helpers.php',
+];
 
-// WICHTIG: AJAX System ZUERST laden (benötigt von anderen Systemen)
-if (file_exists($luvex_includes_path . '_luvex_ajax.php')) {
-    require_once $luvex_includes_path . '_luvex_ajax.php';
+foreach ($luvex_includes_files as $file) {
+    $full_path = $luvex_includes_path . $file;
+    if (file_exists($full_path)) {
+        require_once $full_path;
+    }
 }
-
-// User System laden
-if (file_exists($luvex_includes_path . '_user_system.php')) {
-    require_once $luvex_includes_path . '_user_system.php';
-}
-
-// Security System laden
-if (file_exists($luvex_includes_path . '_luvex_security.php')) {
-    require_once $luvex_includes_path . '_luvex_security.php';
-}
-
-// LUVEX Helper Funktionen laden
-if (file_exists($luvex_includes_path . '_luvex-helpers.php')) {
-    require_once $luvex_includes_path . '_luvex-helpers.php';
-}
+// HINWEIS: _luvex_security.php wurde in _luvex_ajax.php integriert und wird nicht mehr geladen.
 
 // 8. reCAPTCHA FUNKTION (Unverändert)
 function luvex_verify_recaptcha($response) {
@@ -326,67 +299,53 @@ function luvex_verify_recaptcha($response) {
     ]);
     
     if (is_wp_error($result)) {
+        error_log('reCAPTCHA API Error: ' . $result->get_error_message());
         return false;
     }
     
     $data = json_decode(wp_remote_retrieve_body($result), true);
-    return $data['success'] === true;
+    return isset($data['success']) && $data['success'] === true;
 }
 
 // 9. DEBUGGING FÜR ENTWICKLUNG (nur für Admins)
-if (WP_DEBUG && current_user_can('manage_options')) {
-    add_action('wp_footer', 'luvex_debug_ajax_system');
-}
-
-function luvex_debug_ajax_system() {
-    if (!class_exists('LuvexAjaxManager')) {
-        return;
-    }
-    
-    $status = LuvexAjaxManager::get_system_status();
-    if (!$status) {
-        return;
-    }
-    
-    ?>
-    <div style="position: fixed; bottom: 20px; left: 20px; background: #000; color: #00ff00; padding: 10px; font-family: monospace; font-size: 11px; z-index: 9999; max-width: 300px; border-radius: 5px;">
-        <div style="font-weight: bold; margin-bottom: 5px;">🔧 LUVEX AJAX System Status</div>
-        <div>Nonce: <?php echo esc_html($status['nonce_name']); ?></div>
-        <div>Handlers: <?php echo count($status['registered_handlers']); ?></div>
-        <div>Dependencies:</div>
-        <?php foreach ($status['dependencies'] as $dep => $loaded): ?>
-            <div style="margin-left: 10px; color: <?php echo $loaded ? '#00ff00' : '#ff4444'; ?>">
-                <?php echo $loaded ? '✓' : '✗'; ?> <?php echo esc_html($dep); ?>
+if (defined('WP_DEBUG') && WP_DEBUG) {
+    add_action('wp_footer', function() {
+        if (!current_user_can('manage_options') || !class_exists('LuvexAjaxManager')) return;
+        
+        $status = LuvexAjaxManager::get_system_status();
+        if (!$status) return;
+        
+        ?>
+        <div style="position: fixed; bottom: 20px; left: 20px; background: #000; color: #00ff00; padding: 10px; font-family: monospace; font-size: 11px; z-index: 9999; max-width: 300px; border-radius: 5px; opacity: 0.8;">
+            <div style="font-weight: bold; margin-bottom: 5px;">🔧 LUVEX AJAX System Status</div>
+            <div>Nonce: <?php echo esc_html($status['nonce_name']); ?></div>
+            <div>Handlers: <?php echo count($status['registered_handlers']); ?></div>
+            <div>Dependencies:</div>
+            <?php foreach ($status['dependencies'] as $dep => $loaded): ?>
+                <div style="margin-left: 10px; color: <?php echo $loaded ? '#00ff00' : '#ff4444'; ?>">
+                    <?php echo $loaded ? '✓' : '✗'; ?> <?php echo esc_html($dep); ?>
+                </div>
+            <?php endforeach; ?>
+            <div style="margin-top: 5px; font-size: 10px; color: #888;">
+                CSS: Animations merged into Components
             </div>
-        <?php endforeach; ?>
-        <div style="margin-top: 5px; font-size: 10px; color: #888;">
-            CSS: Components + Modals loaded | Auth.css removed
         </div>
-    </div>
-    <?php
+        <?php
+    });
 }
 
-// 10. ZUSÄTZLICHE HELPER FÜR NEUE CSS-STRUKTUR
-/**
- * Hilfsfunktion: Prüft ob eine Seite Light-Theme-Komponenten benötigt
- */
-function luvex_needs_light_theme() {
-    return is_page(['profile', 'contact', 'about']) || is_front_page();
-}
-
-/**
- * Hilfsfunktion: Fügt body-class für CSS-Context hinzu
- */
+// 10. ZUSÄTZLICHE HELPER FÜR CSS-STRUKTUR
 add_filter('body_class', 'luvex_add_context_classes');
 function luvex_add_context_classes($classes) {
-    if (luvex_needs_light_theme()) {
+    // Light-Theme für bestimmte Seiten
+    if (is_page(['profile', 'contact', 'about']) || is_front_page()) {
         $classes[] = 'luvex-light-context';
     }
     
+    // Spezifische Klasse für die Profilseite
     if (is_page('profile')) {
         $classes[] = 'luvex-profile-page';
     }
     
     return $classes;
 }
-
