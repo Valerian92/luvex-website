@@ -2,23 +2,20 @@
 /**
  * Template Name: Start Your UV Project
  * Streamlined booking page focused on calendar integration
+ * UPDATED: Integrated the new 'Tech-Style' Accordion component for FAQs.
  * @package Luvex
- * @since 2.6.0
+ * @since 3.3.0
  */
 
 get_header(); ?>
 
 <div class="booking-page">
     
-    <!-- HERO SECTION (FINAL ENGLISH TEXTS) -->
+    <!-- HERO SECTION -->
     <section class="luvex-hero booking-hero">
-        <!-- Canvas für die Hintergrundanimation -->
         <canvas id="hero-animation-canvas"></canvas>
-
         <div class="luvex-hero__container container--wide">
             <div class="booking-hero__grid">
-                
-                <!-- Linke Spalte: Text & CTA -->
                 <div class="booking-hero__text-content">
                     <h1 class="luvex-hero__title">
                         Your Direct Path to <span class="text-highlight">Superior UV Results</span>
@@ -29,22 +26,16 @@ get_header(); ?>
                     <p class="luvex-hero__description">
                         Whether you need to improve curing quality, maximize disinfection rates, or reduce operating costs – the first step is a solid analysis. Speak with an independent expert for 30 minutes, free of charge, and get a clear action plan for your next project.
                     </p>
-                    
-                    <!-- Call-to-Action Button -->
                     <div class="booking-hero__cta-container">
                         <a href="#schedule" class="btn--primary hero-scroll-button">
                             <span>Schedule My Free Strategy Session</span>
                             <i class="fa-solid fa-arrow-down"></i>
                         </a>
                     </div>
-
-                    <!-- Social Proof -->
                     <div class="hero-social-proof">
                         <p>Trusted by leading companies in the industry</p>
                     </div>
                 </div>
-
-                <!-- Rechte Spalte: Bild des Experten -->
                 <div class="booking-hero__image-content">
                     <div class="expert-image-wrapper">
                          <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Bewerbungsbild_Valerian-Huber.jpg" 
@@ -52,7 +43,6 @@ get_header(); ?>
                              class="booking-hero__image">
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -112,53 +102,69 @@ get_header(); ?>
         </section>
     </div>
 
-    <!-- FAQ SECTION -->
+    <!-- FAQ SECTION (UPDATED WITH NEW ACCORDION COMPONENT) -->
     <section class="booking-faq section">
-        <div class="container container--narrow" style="max-width: 900px;">
-            <h2 class="text-center mb-2">Frequently Asked Questions</h2>
-            <div class="faq-accordion">
-                <div class="faq-accordion__list">
-                    <details class="faq-accordion__item">
-                        <summary class="faq-accordion__question">
-                            How long is the consultation?
-                            <i class="faq-accordion__chevron fa-solid fa-chevron-down"></i>
-                        </summary>
-                        <div class="faq-accordion__answer">
+        <div class="container">
+            <h2 class="booking-faq__title">Frequently Asked Questions</h2>
+            
+            <!-- Accordion Component Integration -->
+            <div class="accordion-container accordion--tech">
+
+                <!-- Accordion Element 1 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <h4>How long is the consultation?</h4>
+                        <i class="fas fa-plus accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
                             <p>Most consultations last 30-45 minutes, giving us enough time to understand your challenges and provide meaningful guidance.</p>
                         </div>
-                    </details>
-                    
-                    <details class="faq-accordion__item">
-                        <summary class="faq-accordion__question">
-                            Is there really no cost?
-                            <i class="faq-accordion__chevron fa-solid fa-chevron-down"></i>
-                        </summary>
-                        <div class="faq-accordion__answer">
+                    </div>
+                </div>
+
+                <!-- Accordion Element 2 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <h4>Is there really no cost?</h4>
+                        <i class="fas fa-plus accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
                             <p>Absolutely. The initial consultation is completely free. We believe in providing value first and building relationships based on trust.</p>
                         </div>
-                    </details>
-                    
-                    <details class="faq-accordion__item">
-                        <summary class="faq-accordion__question">
-                            What should I prepare?
-                            <i class="faq-accordion__chevron fa-solid fa-chevron-down"></i>
-                        </summary>
-                        <div class="faq-accordion__answer">
+                    </div>
+                </div>
+                
+                <!-- Accordion Element 3 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <h4>What should I prepare?</h4>
+                        <i class="fas fa-plus accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
                             <p>Just bring your specific challenges or questions. If you have process documentation or current setup details, that's helpful but not required.</p>
                         </div>
-                    </details>
-                    
-                    <details class="faq-accordion__item">
-                        <summary class="faq-accordion__question">
-                            Will you try to sell me something?
-                            <i class="faq-accordion__chevron fa-solid fa-chevron-down"></i>
-                        </summary>
-                        <div class="faq-accordion__answer">
+                    </div>
+                </div>
+                
+                <!-- Accordion Element 4 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <h4>Will you try to sell me something?</h4>
+                        <i class="fas fa-plus accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
                             <p>No. We're independent consultants, not equipment vendors. Our goal is to help you optimize your processes, regardless of your current setup.</p>
                         </div>
-                    </details>
+                    </div>
                 </div>
+
             </div>
+            <!-- End Accordion Component -->
+
         </div>
     </section>
 
@@ -185,4 +191,3 @@ get_header(); ?>
 </div>
 
 <?php get_footer(); ?>
-

@@ -3,7 +3,7 @@
 LUVEX THEME v2.6 - BOOKING PAGE (Optimized Hero)
 ==============================================================================
 Description: Styles for the booking page with a new, optimized hero section.
-Last Update: 2025-08-31
+Last Update: 2025-09-01 (FAQ Section Added)
 ==============================================================================
 */
 
@@ -213,7 +213,22 @@ Last Update: 2025-08-31
     margin: 0; 
 }
 
-/* --- 5. Alternative Contact Section --- */
+/* ==============================================================================
+5. FAQ SECTION STYLES
+==============================================================================
+*/
+.booking-faq {
+    background-color: var(--luvex-dark-blue-dark);
+}
+
+.booking-faq__title {
+    text-align: center;
+    color: var(--luvex-white);
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    margin-bottom: 3rem;
+}
+
+/* --- 6. Alternative Contact Section --- */
 .booking-alternative { 
     text-align: center; 
     background: var(--luvex-white); 
@@ -241,7 +256,7 @@ Last Update: 2025-08-31
     gap: 1rem; 
 }
 
-/* --- 6. Responsive Overrides --- */
+/* --- 7. Responsive Overrides --- */
 @media (min-width: 992px) {
     .booking-hero__grid {
         grid-template-columns: 1.1fr 1fr; /* Text content gets slightly more space */
@@ -274,4 +289,3 @@ Last Update: 2025-08-31
         grid-template-columns: 1fr; 
     }
 }
-
