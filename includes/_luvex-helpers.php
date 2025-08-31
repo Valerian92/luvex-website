@@ -21,36 +21,36 @@ if (!function_exists('get_luvex_icon_library')) {
         return [
             'Menu Icons' => [
                 // Hauptmenü
-                'menu-uv-technology'    => ['label' => 'UV Technology', 'class' => 'fa-solid fa-atom'],
-                'menu-uv-solutions'     => ['label' => 'UV Solutions', 'class' => 'fa-solid fa-sitemap'],
-                'menu-start-project'    => ['label' => 'Start Your UV Project', 'class' => 'fa-solid fa-rocket'],
-                'menu-about-luvex'      => ['label' => 'About LUVEX', 'class' => 'fa-solid fa-globe'],
+                'uv-technology'    => ['label' => 'UV Technology', 'class' => 'fa-solid fa-atom'],
+                'uv-solutions'     => ['label' => 'UV Solutions', 'class' => 'fa-solid fa-sitemap'],
+                'start-project'    => ['label' => 'Start Your UV Project', 'class' => 'fa-solid fa-rocket'],
+                'about-luvex'      => ['label' => 'About LUVEX', 'class' => 'fa-solid fa-globe'],
                 
                 // Sub-Menü Technology
-                'menu-led-systems'      => ['label' => 'LED UV Systems', 'class' => 'fa-solid fa-arrows-to-dot'],
-                'menu-uv-curing'        => ['label' => 'UV Curing', 'class' => 'fa-solid fa-layer-group'],
-                'menu-uvc-disinfection' => ['label' => 'UV-C Disinfection', 'class' => 'fa-solid fa-shield-virus'],
-                'menu-mercury-lamps'    => ['label' => 'Mercury UV Lamps', 'class' => 'fa-solid fa-wand-magic-sparkles'], // GEÄNDERT
+                'led-systems'      => ['label' => 'LED UV Systems', 'class' => 'fa-solid fa-arrows-to-dot'],
+                'uv-curing'        => ['label' => 'UV Curing', 'class' => 'fa-solid fa-layer-group'],
+                'uvc-disinfection' => ['label' => 'UV-C Disinfection', 'class' => 'fa-solid fa-shield-virus'],
+                'mercury-lamps'    => ['label' => 'Mercury UV Lamps', 'class' => 'fa-solid fa-wand-magic-sparkles'],
 
                 // Sub-Menü Solutions
-                'menu-custom-concepts'  => ['label' => 'Custom Concepts', 'class' => 'fa-solid fa-sitemap'],
-                'menu-tunnel-systems'   => ['label' => 'UV-Tunnel-Systems', 'class' => 'fa-solid fa-arrow-down-up-across-line'],
-                'menu-curing-systems'   => ['label' => 'Curing Systems', 'class' => 'fa-solid fa-layer-group'],
-                'menu-hygiene-solutions'=> ['label' => 'UVC Hygiene Solutions', 'class' => 'fa-solid fa-shield-virus'],
-                'menu-safety-equipment' => ['label' => 'Safety Equipment', 'class' => 'fa-solid fa-user-shield'],
-                'menu-testing-tools'    => ['label' => 'Testing Tools', 'class' => 'fa-solid fa-gauge-high'],
-                'menu-replacement-lamps'=> ['label' => 'Replacement Lamps', 'class' => 'fa-solid fa-wand-magic-sparkles'],
+                'custom-concepts'  => ['label' => 'Custom Concepts', 'class' => 'fa-solid fa-sitemap'],
+                'tunnel-systems'   => ['label' => 'UV-Tunnel-Systems', 'class' => 'fa-solid fa-arrow-down-up-across-line'],
+                'curing-systems'   => ['label' => 'Curing Systems', 'class' => 'fa-solid fa-layer-group'],
+                'hygiene-solutions'=> ['label' => 'UVC Hygiene Solutions', 'class' => 'fa-solid fa-shield-virus'],
+                'safety-equipment' => ['label' => 'Safety Equipment', 'class' => 'fa-solid fa-user-shield'],
+                'testing-tools'    => ['label' => 'Testing Tools', 'class' => 'fa-solid fa-gauge-high'],
+                'replacement-lamps'=> ['label' => 'Replacement Lamps', 'class' => 'fa-solid fa-wand-magic-sparkles'],
 
                 // Knowledge Seiten
-                'menu-measurement-knowledge' => ['label' => 'UV-Measurement-Knowledge', 'class' => 'fa-solid fa-gauge-high'],
-                'menu-safety-knowledge' => ['label' => 'UV-Safety-Knowledge', 'class' => 'fa-solid fa-user-shield'],
-                'menu-regulatories'     => ['label' => 'UV-Regulatories', 'class' => 'fa-solid fa-balance-scale'],
+                'measurement-knowledge' => ['label' => 'UV-Measurement-Knowledge', 'class' => 'fa-solid fa-gauge-high'],
+                'safety-knowledge' => ['label' => 'UV-Safety-Knowledge', 'class' => 'fa-solid fa-user-shield'],
+                'regulatories'     => ['label' => 'UV-Regulatories', 'class' => 'fa-solid fa-balance-scale'],
                 
                 // Weitere
-                'menu-simulator'        => ['label' => 'UV Simulator', 'class' => 'fa-solid fa-cubes'],
-                'menu-news'             => ['label' => 'All UV News', 'class' => 'fa-solid fa-newspaper'],
-                'menu-contact'          => ['label' => 'Contact', 'class' => 'fa-solid fa-headset'],
-                'menu-schedule-consultation' => ['label' => 'Schedule Consultation', 'class' => 'fa-solid fa-calendar-check'],
+                'simulator'        => ['label' => 'UV Simulator', 'class' => 'fa-solid fa-cubes'],
+                'news'             => ['label' => 'All UV News', 'class' => 'fa-solid fa-newspaper'],
+                'contact'          => ['label' => 'Contact', 'class' => 'fa-solid fa-headset'],
+                'schedule-consultation' => ['label' => 'Schedule Consultation', 'class' => 'fa-solid fa-calendar-check'],
             ],
             
             'Category Titles' => [

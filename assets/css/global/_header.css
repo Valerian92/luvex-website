@@ -1,13 +1,12 @@
 /*
 ==============================================================================
-LUVEX THEME v4.8 - COMPLETE HEADER SYSTEM (SCROLL-FIX UPDATE)
+LUVEX THEME v5.0 - COMPLETE HEADER SYSTEM (FINAL LAYOUT)
 ==============================================================================
 
-Description: Vollständige Header-Implementierung mit 3-Level Navigation,
-             Logo-System, User-Dropdown, Mobile Menu, Scroll Effects und
-             NEUEM, EINHEITLICHEM Language Switcher.
+Description: Vollständige Header-Implementierung mit vertikalem Icon-Layout,
+             Scroll-Effekt, User-System und allen Untermenüs.
 Dependencies: _variables.css, _core.css
-Last Update: 2025-08-31 (Scroll-Fix)
+Last Update: 2025-08-31
 
 ==============================================================================
 */
@@ -166,7 +165,7 @@ Last Update: 2025-08-31 (Scroll-Fix)
 }
 
 /* ==========================================================================
-   4. LEVEL 1 - HAUPTMENÜ ITEMS  
+   4. LEVEL 1 - HAUPTMENÜ ITEMS  (MODIFIED FOR NEW LAYOUT)
    ========================================================================== */
 .main-navigation > ul > li {
     position: relative;
@@ -174,22 +173,36 @@ Last Update: 2025-08-31 (Scroll-Fix)
 
 .main-navigation > ul > li > a {
     color: var(--luvex-white);
-    font-size: 1.05rem;
+    font-size: 0.9rem; /* Text slightly smaller to create space */
     font-weight: 500;
     text-decoration: none;
     position: relative;
     transition: all 0.3s ease;
-    padding: 29px 1.1rem; /* GEÄNDERT: Padding weiter reduziert, um Umbruch zu fixen */
+    padding: 0.75rem 1rem; /* Adjusted padding for vertical layout */
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    flex-direction: column; /* THIS IS THE KEY CHANGE: Stacks items vertically */
+    justify-content: center; /* Centers content vertically */
+    align-items: center; /* Centers content horizontally */
     height: 80px;
     box-sizing: border-box;
-    white-space: nowrap; /* NEU: Verhindert den Umbruch innerhalb eines Menüpunkts */
+    gap: 0.25rem; /* Small gap between text and icon */
+    white-space: nowrap;
+}
+
+.main-navigation > ul > li > a .menu-item-icon {
+    font-size: 1.1rem; /* Smaller icon size */
+    line-height: 1; /* Ensures icon has no extra vertical space */
+    opacity: 0.8;
+    transition: all 0.3s ease;
 }
 
 .main-navigation > ul > li > a:hover {
     color: var(--luvex-bright-cyan);
+}
+
+.main-navigation > ul > li > a:hover .menu-item-icon {
+    opacity: 1;
+    transform: scale(1.1);
 }
 
 .site-header.scrolled .main-navigation > ul > li > a {
@@ -261,9 +274,9 @@ Last Update: 2025-08-31 (Scroll-Fix)
     color: var(--luvex-white);
     font-weight: 500;
     padding: 1.2rem 1.5rem;
-    display: flex; /* Geändert für Icon-Alignment */
-    align-items: center; /* Geändert für Icon-Alignment */
-    gap: 0.75rem; /* Gap für Icon */
+    display: flex; 
+    align-items: center; 
+    gap: 0.75rem; 
     position: relative;
     transition: all 0.3s ease;
     white-space: nowrap;
@@ -333,9 +346,7 @@ Last Update: 2025-08-31 (Scroll-Fix)
 .main-navigation .sub-menu .sub-menu a {
     padding: 0.75rem 1.5rem;
     color: var(--luvex-white);
-    display: flex; /* Geändert für Icon-Alignment */
-    align-items: center; /* Geändert für Icon-Alignment */
-    gap: 0.75rem; /* Gap für Icon */
+    display: block;
     transition: all 0.3s ease;
 }
 
@@ -351,14 +362,23 @@ Last Update: 2025-08-31 (Scroll-Fix)
 .main-navigation > ul > li.menu-item-has-children > a .dropdown-arrow {
     transition: transform 0.3s ease;
     font-size: 0.8rem;
-    margin-left: auto; /* Sorgt dafür, dass der Pfeil rechts bleibt */
+    position: absolute; /* Position arrow for vertical layout */
+    bottom: 8px;
+    opacity: 0.6;
 }
 
 .main-navigation > ul > li.menu-item-has-children:hover > a .dropdown-arrow {
-    transform: rotate(45deg);
+    transform: rotate(180deg);
+    opacity: 1;
+}
+
+.main-navigation .sub-menu > li.menu-item-has-children > a {
+    justify-content: space-between;
 }
 
 .main-navigation .sub-menu > li.menu-item-has-children > a .dropdown-arrow {
+    font-size: 0.8rem;
+    position: static; /* Reset position for sub-menus */
     transform: rotate(-90deg);
     transition: transform 0.3s ease;
 }
@@ -496,6 +516,7 @@ Last Update: 2025-08-31 (Scroll-Fix)
     color: var(--luvex-gray-300);
     font-size: 0.8rem;
     transition: transform 0.3s ease;
+    position: static;
 }
 
 .user-info.open .dropdown-arrow {
