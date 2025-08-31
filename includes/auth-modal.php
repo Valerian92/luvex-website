@@ -1,7 +1,8 @@
 <?php
 /**
- * Auth-Modal-Template (UPDATED - Uses Centralized AJAX System)
- * AJAX-basiertes Login/Register-Modal mit neuer einheitlicher Nonce-Verwaltung.
+ * Auth-Modal-Template (UPDATED für neue CSS-Struktur)
+ * AJAX-basiertes Login/Register-Modal mit optimiertem Layout und universellen Komponenten.
+ * Verwendet jetzt .auth-scrollable-content für professionelle Scrollbar-Lösung.
  */
 
 if (!defined('ABSPATH')) exit;
@@ -9,7 +10,7 @@ if (!defined('ABSPATH')) exit;
 // reCAPTCHA Site-Key aus wp-config.php holen
 $recaptcha_site_key = defined('LUVEX_RECAPTCHA_SITE_KEY') ? LUVEX_RECAPTCHA_SITE_KEY : '';
 
-// UPDATED: Verwende zentralen AJAX-Nonce
+// Verwende zentralen AJAX-Nonce
 $ajax_nonce = function_exists('luvex_ajax_nonce') ? luvex_ajax_nonce() : wp_create_nonce('luvex_ajax_nonce');
 
 $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_library() : [];
@@ -18,76 +19,96 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
 <!-- Das Modal-Overlay -->
 <div id="authModal" class="modal-overlay">
     <div class="modal-content">
-        <!-- Der eigentliche Formular-Container -->
-        <div class="auth-form-container">
-            <div id="auth-feedback" class="auth-feedback-message"></div>
+        <!-- NEU: Scrollbarer Bereich für professionelle Scrollbar-Behandlung -->
+        <div class="auth-scrollable-content">
+            
+            <!-- Feedback-Container -->
+            <div id="auth-feedback" class="luvex-feedback-message"></div>
+            
+            <!-- Tabs System -->
             <div class="auth-tabs">
                 <button class="auth-tab active" id="login-tab-link" onclick="showAuthForm('login')">Login</button>
                 <button class="auth-tab" id="register-tab-link" onclick="showAuthForm('register')">Register</button>
             </div>
 
+            <!-- Tab Content Wrapper -->
             <div id="auth-tab-content-wrapper">
-                <!-- Login Form (unverändert) -->
+                
+                <!-- ============================================================ -->
+                <!-- LOGIN FORM -->
+                <!-- ============================================================ -->
                 <div class="auth-tab-content active" id="login-content">
                     <form id="luvex-login-form" class="luvex-auth-form" method="post">
                         <div class="form-grid-2-cols">
-                            <input type="email" name="user_login" id="user_login" placeholder="Email Address" required autocomplete="email">
-                            <input type="password" name="user_password" id="user_password_login" placeholder="Password" required autocomplete="current-password">
+                            <input type="email" name="user_login" id="user_login" placeholder="Email Address" required autocomplete="email" class="luvex-input">
+                            <input type="password" name="user_password" id="user_password_login" placeholder="Password" required autocomplete="current-password" class="luvex-input">
                         </div>
+                        
                         <div class="auth-options">
-                            <label class="form-checkbox">
+                            <label class="luvex-checkbox">
                                 <input type="checkbox" name="remember_me">
-                                <span class="form-checkbox__indicator"><i class="fa-solid fa-check"></i></span>
-                                <span class="form-checkbox__text">Remember me</span>
+                                <span class="luvex-checkbox__indicator"><i class="fa-solid fa-check"></i></span>
+                                <span class="luvex-checkbox__text">Remember me</span>
                             </label>
                             <a href="<?php echo esc_url(wp_lostpassword_url()); ?>" class="auth-link">Forgot password?</a>
                         </div>
+                        
                         <div class="recaptcha-container" id="login-recaptcha-container"></div>
-                        <button type="submit" name="luvex_login_submit" class="btn--primary form-submit--enhanced">
+                        
+                        <button type="submit" name="luvex_login_submit" class="luvex-form-submit form-submit--enhanced">
                             <span class="btn-text">Login</span>
                             <i class="fa-solid fa-spinner fa-spin btn-loader" style="display: none;"></i>
                         </button>
                     </form>
                 </div>
 
-                <!-- Registration Form (NEUES LAYOUT) -->
+                <!-- ============================================================ -->
+                <!-- REGISTRATION FORM (Mit allen Styling-Optimierungen) -->
+                <!-- ============================================================ -->
                 <div class="auth-tab-content" id="register-content">
                     <form id="luvex-register-form" class="luvex-auth-form" method="post">
 
-                        <!-- Abschnitt 1: Account Details (NEUE GRID-STRUKTUR) -->
-                        <div class="form-section">
-                            <h4 class="form-section-title"><i class="fa-solid fa-user-circle"></i> <span>Account Details</span></h4>
-                            <div class="form-grid-account-details">
-                                <!-- Linke Spalte: Required -->
-                                <div class="account-column-required">
+                        <!-- Account Details Section -->
+                        <div class="luvex-form-section">
+                            <h4 class="luvex-form-section-title">
+                                <i class="fa-solid fa-user-circle"></i> 
+                                <span>Account Details</span>
+                            </h4>
+                            
+                            <div class="luvex-form-grid-account">
+                                <!-- Required Information Column -->
+                                <div class="luvex-form-column account-column-required">
                                     <h5>Required Information</h5>
-                                    <input type="text" name="profile_nickname" placeholder="Profile/Nickname *" required autocomplete="nickname">
-                                    <input type="email" name="user_email" placeholder="Email Address *" required autocomplete="email">
-                                    <input type="password" name="user_password" placeholder="Password *" required autocomplete="new-password">
-                                    <input type="password" name="confirm_password" placeholder="Confirm Password *" required autocomplete="new-password">
+                                    <input type="text" name="profile_nickname" placeholder="Profile/Nickname *" required autocomplete="nickname" class="luvex-input">
+                                    <input type="email" name="user_email" placeholder="Email Address *" required autocomplete="email" class="luvex-input">
+                                    <input type="password" name="user_password" placeholder="Password *" required autocomplete="new-password" class="luvex-input">
+                                    <input type="password" name="confirm_password" placeholder="Confirm Password *" required autocomplete="new-password" class="luvex-input">
                                 </div>
-                                <!-- Rechte Spalte: Optional -->
-                                <div class="account-column-optional">
+                                
+                                <!-- Optional Information Column -->
+                                <div class="luvex-form-column account-column-optional">
                                     <h5>Optional Information</h5>
-                                    <input type="text" name="first_name" placeholder="First Name" autocomplete="given-name">
-                                    <input type="text" name="last_name" placeholder="Last Name" autocomplete="family-name">
-                                    <input type="tel" name="phone" placeholder="Phone Number" autocomplete="tel">
-                                    <input type="text" name="company" placeholder="Company" autocomplete="organization">
+                                    <input type="text" name="first_name" placeholder="First Name" autocomplete="given-name" class="luvex-input">
+                                    <input type="text" name="last_name" placeholder="Last Name" autocomplete="family-name" class="luvex-input">
+                                    <input type="tel" name="phone" placeholder="Phone Number" autocomplete="tel" class="luvex-input">
+                                    <input type="text" name="company" placeholder="Company" autocomplete="organization" class="luvex-input">
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Abschnitt 2: Industries (5x2 Grid + Others) -->
-                        <div class="form-section">
-                            <h4 class="form-section-title"><?php echo get_luvex_icon('category-industries'); ?> <span>Your Industry (Optional)</span></h4>
+                        <!-- Industries Section (4 Spalten Layout) -->
+                        <div class="luvex-form-section">
+                            <h4 class="luvex-form-section-title">
+                                <?php echo get_luvex_icon('category-industries'); ?> 
+                                <span>Your Industry (Optional)</span>
+                            </h4>
+                            
                             <div class="interests-grid-industries">
                                 <?php if (isset($icon_library['Industries'])): 
                                     $industries = $icon_library['Industries'];
-                                    $count = 0;
                                     foreach ($industries as $key => $details): 
                                         // Überspringe 'other-industry' da wir ein eigenes Others-Feld haben
                                         if ($key === 'other-industry') continue;
-                                        $count++;
                                         ?>
                                         <button type="button" class="interest-tag" data-interest="<?= esc_attr($key) ?>">
                                             <?= get_luvex_icon($key) ?>
@@ -111,9 +132,13 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
                             </button>
                         </div>
 
-                        <!-- Abschnitt 3: Interests (Zentriert) -->
-                        <div class="form-section">
-                             <h4 class="form-section-title"><?php echo get_luvex_icon('category-luvex-services'); ?> <span>Your Interests (Optional)</span></h4>
+                        <!-- Your Interests Section (Einheitliche Feldgrößen) -->
+                        <div class="luvex-form-section">
+                            <h4 class="luvex-form-section-title">
+                                <?php echo get_luvex_icon('category-luvex-services'); ?> 
+                                <span>Your Interests (Optional)</span>
+                            </h4>
+                            
                             <div class="interests-columns-container">
                                 <?php foreach (['Technology', 'UV Solutions', 'LUVEX Services'] as $category_name): ?>
                                     <?php if (isset($icon_library[$category_name])): ?>
@@ -140,26 +165,30 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
                         <!-- Hidden Field für alle Auswahlen -->
                         <input type="hidden" name="interest_area" id="interest_area_hidden" value="">
 
-                        <!-- reCAPTCHA -->
+                        <!-- reCAPTCHA (Engerer Rahmen) -->
                         <div class="recaptcha-container" id="register-recaptcha-container"></div>
                         
-                        <!-- Consent & Submit -->
+                        <!-- Consent Checkbox -->
                         <div class="form-consent">
-                             <label class="form-checkbox">
+                            <label class="luvex-checkbox">
                                 <input type="checkbox" name="terms_consent" required>
-                                <span class="form-checkbox__indicator"><i class="fa-solid fa-check"></i></span>
-                                <span class="form-checkbox__text">I agree to the <a href="/terms" target="_blank">Terms of Service</a> and <a href="/privacy" target="_blank">Privacy Policy</a>.</span>
+                                <span class="luvex-checkbox__indicator"><i class="fa-solid fa-check"></i></span>
+                                <span class="luvex-checkbox__text">
+                                    I agree to the <a href="/terms" target="_blank">Terms of Service</a> and <a href="/privacy" target="_blank">Privacy Policy</a>.
+                                </span>
                             </label>
                         </div>
 
-                        <button type="submit" name="luvex_register_submit" class="btn--primary form-submit--enhanced">
-                             <span class="btn-text">Create Account</span>
+                        <!-- Submit Button -->
+                        <button type="submit" name="luvex_register_submit" class="luvex-form-submit form-submit--enhanced">
+                            <span class="btn-text">Create Account</span>
                             <i class="fa-solid fa-spinner fa-spin btn-loader" style="display: none;"></i>
                         </button>
                     </form>
                 </div>
             </div>
-        </div>
+            
+        </div> <!-- Ende .auth-scrollable-content -->
     </div>
 </div>
 
@@ -174,7 +203,7 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
     let isRecaptchaScriptLoaded = false;
     const siteKey = "<?php echo esc_js($recaptcha_site_key); ?>";
 
-    // UPDATED: Verwende globale AJAX-Daten wenn verfügbar
+    // Verwende globale AJAX-Daten wenn verfügbar
     const ajaxUrl = (typeof luvexAjax !== 'undefined') ? luvexAjax.ajax_url : "<?php echo admin_url('admin-ajax.php'); ?>";
     const ajaxNonce = (typeof luvexAjax !== 'undefined') ? luvexAjax.nonce : "<?php echo $ajax_nonce; ?>";
 
@@ -214,7 +243,7 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
         modal.classList.remove('visible');
         document.body.classList.remove('modal-open');
         feedbackContainer.innerHTML = '';
-        feedbackContainer.className = 'auth-feedback-message';
+        feedbackContainer.className = 'luvex-feedback-message';
     };
 
     window.showAuthForm = function(mode) {
@@ -225,19 +254,20 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
         document.getElementById('register-content').classList.toggle('active', !isLogin);
         
         feedbackContainer.innerHTML = '';
-        feedbackContainer.className = 'auth-feedback-message';
+        feedbackContainer.className = 'luvex-feedback-message';
         renderVisibleRecaptcha();
     };
 
     // --- NACHRICHTEN ---
     function showAuthMessage(message, type = 'error') {
-        feedbackContainer.className = `auth-feedback-message ${type}`;
+        feedbackContainer.className = `luvex-feedback-message ${type} visible`;
         feedbackContainer.innerHTML = message;
         feedbackContainer.style.display = 'block';
     }
 
     // --- FORMULARDATEN SPEICHERN & LADEN ---
     const formStorageKey = 'luvexRegisterFormData';
+    
     function saveFormData() {
         const form = document.getElementById('luvex-register-form');
         const interests = Array.from(form.querySelectorAll('.interest-tag.selected')).map(tag => tag.dataset.interest);
@@ -325,7 +355,7 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
             
             const formData = new FormData(form);
             formData.append('action', action);
-            formData.append('nonce', ajaxNonce); // UPDATED: Verwende zentralen Nonce
+            formData.append('nonce', ajaxNonce);
             
             fetch(ajaxUrl, {
                 method: 'POST',
@@ -376,7 +406,7 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
         registerForm.addEventListener('input', saveFormData);
     }
     
-    // Interest Tags (alle außer Others) - Event Delegation für dynamische Elemente
+    // Interest Tags (Industries) - Event Delegation für dynamische Elemente
     const industryGrid = document.querySelector('.interests-grid-industries');
     if (industryGrid) {
         industryGrid.addEventListener('click', function(e) {
@@ -432,7 +462,7 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
         }
     }
 
-    // Industry Toggle Button - Vereinfacht
+    // Industry Toggle Button
     const industryToggleBtn = document.getElementById('industry-toggle-btn');
     if (industryToggleBtn) {
         industryToggleBtn.addEventListener('click', () => {
@@ -470,12 +500,13 @@ $icon_library = function_exists('get_luvex_icon_library') ? get_luvex_icon_libra
         originalOpenAuthModal(mode);
     };
 
-    // UPDATED: Debug-Ausgabe für Entwicklung
+    // Debug-Ausgabe für Entwicklung
     if (typeof window.console !== 'undefined' && window.console.log) {
-        console.log('🔐 LUVEX Auth Modal initialized');
+        console.log('🔧 LUVEX Auth Modal initialized (New CSS Structure)');
         console.log('AJAX URL:', ajaxUrl);
         console.log('Nonce available:', !!ajaxNonce);
         console.log('Global AJAX object:', typeof luvexAjax !== 'undefined');
+        console.log('Modal Structure: auth-scrollable-content wrapper added');
     }
 })();
 </script>

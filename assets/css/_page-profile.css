@@ -1,15 +1,19 @@
 /*
 ==============================================================================
-LUVEX THEME - PAGE-SPECIFIC STYLES: PROFILE
+LUVEX THEME - PAGE-SPECIFIC STYLES: PROFILE (AKTUALISIERT)
 ==============================================================================
-Description: Enthält alle spezifischen Styles für das User Profile Dashboard.
-Last Update: 2025-08-27
+Description: EnthÃ¤lt alle spezifischen Styles fÃ¼r das User Profile Dashboard.
+             Nutzt jetzt universelle Form-Komponenten aus _components.css.
+Dependencies: _components.css (für universelle Form-Komponenten)
+Last Update: 2025-08-31
 ==============================================================================
 */
 
-/* ==========================================================================
-   1. PROFILE PAGE DASHBOARD
-   ========================================================================== */
+/*
+==============================================================================
+1. PROFILE PAGE DASHBOARD LAYOUT
+==============================================================================
+*/
 
 /* --- Main Layout & Sidebar --- */
 .profile-dashboard {
@@ -33,6 +37,12 @@ Last Update: 2025-08-27
     position: sticky;
     top: 120px; /* Adjust based on your header height */
 }
+
+/*
+==============================================================================
+2. PROFILE NAVIGATION
+==============================================================================
+*/
 
 .profile-nav {
     background: linear-gradient(135deg, var(--luvex-white) 0%, rgba(248, 250, 252, 0.9) 100%);
@@ -93,7 +103,12 @@ Last Update: 2025-08-27
     color: var(--luvex-bright-cyan);
 }
 
-/* --- Content Sections & Headers --- */
+/*
+==============================================================================
+3. PROFILE CONTENT SECTIONS
+==============================================================================
+*/
+
 .profile-content {
     background: linear-gradient(135deg, var(--luvex-white) 0%, rgba(248, 250, 252, 0.95) 100%);
     border: 1px solid rgba(109, 213, 237, 0.1);
@@ -102,8 +117,13 @@ Last Update: 2025-08-27
     padding: 2.5rem;
 }
 
-.profile-section { display: none; }
-.profile-section--active { display: block; }
+.profile-section { 
+    display: none; 
+}
+
+.profile-section--active { 
+    display: block; 
+}
 
 .profile-section__header {
     display: flex;
@@ -118,14 +138,16 @@ Last Update: 2025-08-27
 .profile-section__header::after {
     content: '';
     position: absolute;
-    bottom: -1px; /* Correct position */
+    bottom: -1px;
     left: 0;
     width: 60px;
     height: 2px;
     background: var(--luvex-bright-cyan);
 }
 
-.header-content { flex: 1; }
+.header-content { 
+    flex: 1; 
+}
 
 .profile-section__header h2 {
     color: var(--luvex-dark-blue);
@@ -138,6 +160,12 @@ Last Update: 2025-08-27
     margin: 0;
     font-size: var(--text-base);
 }
+
+/*
+==============================================================================
+4. PROFILE AVATAR COMPONENT
+==============================================================================
+*/
 
 .header-avatar {
     width: 70px;
@@ -157,7 +185,10 @@ Last Update: 2025-08-27
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     flex-shrink: 0;
 }
-.header-avatar:hover { transform: scale(1.05); }
+
+.header-avatar:hover { 
+    transform: scale(1.05); 
+}
 
 .header-avatar .avatar-plus {
     position: absolute;
@@ -176,46 +207,259 @@ Last Update: 2025-08-27
     border: 2px solid var(--luvex-white);
 }
 
-/* --- Form Elements --- */
+/*
+==============================================================================
+5. PROFILE FORMS - Nutzt universelle Komponenten
+==============================================================================
+*/
+
+/* Profile Form Layout */
 .profile-form {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
 
-.form-grid--2-cols {
+/* Light Theme Context für Profile-Seite */
+.profile-content {
+    /* Aktiviert Light-Theme-Styles für universelle Komponenten */
+    /* .section--light Klasse wird via JavaScript oder Template hinzugefügt */
+}
+
+/* Profile-spezifische Anpassungen für universelle Form-Komponenten */
+.profile-form .luvex-input {
+    background: var(--luvex-white);
+    color: var(--luvex-dark-blue);
+    border-color: var(--luvex-gray-300);
+}
+
+.profile-form .luvex-input::placeholder {
+    color: var(--luvex-gray-500);
+    opacity: 0.8;
+}
+
+.profile-form .luvex-input:focus {
+    border-color: var(--luvex-vibrant-blue);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+.profile-form .luvex-form-section {
+    border-top-color: rgba(0, 0, 0, 0.1);
+}
+
+.profile-form .luvex-form-section-title {
+    color: var(--luvex-dark-blue);
+}
+
+.profile-form .luvex-form-section-title i {
+    color: var(--luvex-vibrant-blue);
+}
+
+.profile-form .luvex-checkbox__indicator {
+    border-color: var(--luvex-gray-400);
+}
+
+.profile-form .luvex-checkbox__text {
+    color: var(--luvex-gray-700);
+}
+
+.profile-form .luvex-feedback-message {
+    color: var(--luvex-dark-blue);
+}
+
+.profile-form .luvex-feedback-message.error {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+}
+
+.profile-form .luvex-feedback-message.success {
+    background: rgba(16, 185, 129, 0.1);
+    color: #059669;
+}
+
+/* Profile-spezifische Grid-Layouts */
+.profile-form .luvex-form-grid-2 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
 }
 
-.form-submit {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-size: var(--text-base);
-    font-weight: 600;
-    padding: 14px 28px;
-    margin-top: 1rem;
+/* Profile Submit Button */
+.profile-form .luvex-form-submit {
     align-self: flex-start;
     min-width: 200px;
+    margin-top: 1rem;
+    background: linear-gradient(45deg, var(--luvex-vibrant-blue), var(--luvex-special-cyan));
+    color: var(--luvex-white);
 }
-.form-submit i { font-size: 0.9rem; }
 
-/* ==========================================================================
-   2. RESPONSIVE DESIGN
-   ========================================================================== */
+.profile-form .luvex-form-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(34, 211, 238, 0.3);
+}
+
+/*
+==============================================================================
+6. PROFILE-SPEZIFISCHE FORM SECTIONS
+==============================================================================
+*/
+
+/* Account Details Section */
+.profile-account-section .luvex-form-grid-account {
+    margin-bottom: 2rem;
+}
+
+.profile-account-section .luvex-form-column h5 {
+    color: var(--luvex-vibrant-blue);
+    border-bottom-color: rgba(0, 123, 255, 0.2);
+}
+
+/* Security Section */
+.profile-security-section .security-info {
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.1), rgba(34, 211, 238, 0.05));
+    border: 1px solid rgba(0, 123, 255, 0.2);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.profile-security-section .security-info h4 {
+    color: var(--luvex-vibrant-blue);
+    margin: 0 0 0.5rem 0;
+}
+
+.profile-security-section .security-info p {
+    color: var(--luvex-gray-700);
+    margin: 0;
+}
+
+/* Preferences Section */
+.profile-preferences-section .preference-group {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(248, 250, 252, 0.8);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--luvex-gray-200);
+}
+
+.profile-preferences-section .preference-group h4 {
+    color: var(--luvex-dark-blue);
+    margin: 0 0 1rem 0;
+    font-size: var(--text-lg);
+}
+
+/*
+==============================================================================
+7. PROFILE STATS & DASHBOARD ELEMENTS
+==============================================================================
+*/
+
+.profile-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.profile-stat-card {
+    background: linear-gradient(135deg, var(--luvex-white) 0%, rgba(248, 250, 252, 0.9) 100%);
+    border: 1px solid rgba(109, 213, 237, 0.1);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    text-align: center;
+    transition: var(--transition-normal);
+}
+
+.profile-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(27, 42, 73, 0.1);
+}
+
+.profile-stat-card__value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--luvex-vibrant-blue);
+    margin-bottom: 0.5rem;
+}
+
+.profile-stat-card__label {
+    color: var(--luvex-gray-700);
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/*
+==============================================================================
+8. ACTIVITY TIMELINE (Falls benötigt)
+==============================================================================
+*/
+
+.profile-activity {
+    margin-top: 2rem;
+}
+
+.activity-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--luvex-gray-200);
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--luvex-vibrant-blue), var(--luvex-special-cyan));
+    color: var(--luvex-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.activity-content h5 {
+    color: var(--luvex-dark-blue);
+    margin: 0 0 0.25rem 0;
+    font-size: var(--text-base);
+}
+
+.activity-content p {
+    color: var(--luvex-gray-600);
+    margin: 0;
+    font-size: var(--text-sm);
+}
+
+.activity-time {
+    color: var(--luvex-gray-500);
+    font-size: var(--text-xs);
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+/*
+==============================================================================
+9. RESPONSIVE DESIGN
+==============================================================================
+*/
 
 @media (max-width: 992px) {
     .profile-layout {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
+    
     .profile-sidebar {
         position: static;
         top: auto;
     }
+    
     .profile-nav__list {
         flex-direction: row;
         overflow-x: auto;
@@ -223,11 +467,18 @@ Last Update: 2025-08-27
         -ms-overflow-style: none;  /* IE and Edge */
         scrollbar-width: none;  /* Firefox */
     }
+    
     .profile-nav__list::-webkit-scrollbar {
         display: none; /* Chrome, Safari */
     }
+    
     .profile-nav__link {
         white-space: nowrap;
+    }
+    
+    .profile-stats {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
     }
 }
 
@@ -235,11 +486,51 @@ Last Update: 2025-08-27
     .profile-content {
         padding: 1.5rem;
     }
+    
     .profile-section__header {
         flex-direction: column;
         gap: 1.5rem;
     }
-    .form-grid--2-cols {
+    
+    .profile-form .luvex-form-grid-2 {
         grid-template-columns: 1fr;
+    }
+    
+    .profile-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .activity-item {
+        gap: 0.75rem;
+    }
+    
+    .activity-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-dashboard {
+        padding: var(--space-md) 0;
+    }
+    
+    .profile-nav {
+        padding: 1rem;
+    }
+    
+    .profile-content {
+        padding: 1rem;
+    }
+    
+    .profile-section__header {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+    }
+    
+    .profile-form .luvex-form-submit {
+        width: 100%;
+        max-width: none;
     }
 }

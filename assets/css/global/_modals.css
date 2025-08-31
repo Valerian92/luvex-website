@@ -1,82 +1,19 @@
 /*
 ==============================================================================
-LUVEX THEME - MODAL STYLES (Kombiniert & Final)
+LUVEX THEME - MODAL STYLES (Komplett mit Auth-Funktionalität)
+==============================================================================
+Description: Enthält alle Modal-Stile inkl. generischer Modals und 
+             Auth-Modal-spezifische Layouts und Komponenten.
+Last Update: 2025-08-31
 ==============================================================================
 */
 
 /*
 ==============================================================================
-1. Generic Modal (für Avatar-Upload etc.)
-   -> Wird durch avatar-modal-handler.js (via data-modal) getriggert.
-   -> Nutzt .modal-overlay.active und .modal-container
+1. GENERISCHE MODAL-BASIS (für Avatar-Upload, Confirmations etc.)
 ==============================================================================
 */
-.modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
 
-.modal-container {
-    background: var(--luvex-white);
-    border-radius: var(--radius-xl);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    width: 100%;
-    max-width: 600px; /* Breite für generische Modals wie Avatar-Upload */
-    max-height: 90vh;
-    overflow: hidden;
-    transform: scale(0.9) translateY(20px);
-    transition: var(--transition-normal);
-    border: 1px solid rgba(109, 213, 237, 0.2);
-}
-
-.modal-overlay.active .modal-container {
-    transform: scale(1) translateY(0);
-}
-
-/* Header, Content, Footer für generische Modals... */
-.modal-header {
-    background: linear-gradient(135deg, var(--luvex-dark-blue), rgba(27, 42, 73, 0.9));
-    padding: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid rgba(109, 213, 237, 0.3);
-}
-.modal-header__title {
-    color: var(--luvex-white);
-    font-size: var(--text-lg);
-    font-weight: 600;
-    margin: 0;
-}
-.modal-header__action {
-    color: #cbd5e1;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    font-size: 1.2rem;
-}
-.modal-content {
-    padding: 2rem;
-    max-height: 60vh;
-    overflow-y: auto;
-}
-.modal-footer {
-    padding: 1.5rem 2rem;
-    background: var(--luvex-gray-100);
-    border-top: 1px solid var(--luvex-gray-200);
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-}
-
-
-/*
-==============================================================================
-2. Auth Modal (für Login/Register) - FINALE KORREKTUR
-   -> Nutzt .modal-overlay.visible und .modal-content (spezifische Regeln hier)
-==============================================================================
-*/
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -92,7 +29,12 @@ LUVEX THEME - MODAL STYLES (Kombiniert & Final)
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-    padding: 2rem; /* Fügt einen Sicherheitsabstand an den Rändern hinzu */
+    padding: 1rem;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
 }
 
 .modal-overlay.visible {
@@ -100,45 +42,573 @@ LUVEX THEME - MODAL STYLES (Kombiniert & Final)
     visibility: visible;
 }
 
-/* Dies ist der Container für das Auth-Formular */
+/* Generischer Modal-Container (für Standard-Modals) */
+.modal-container {
+    background: var(--luvex-white);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow: hidden;
+    transform: scale(0.9) translateY(20px);
+    transition: var(--transition-normal);
+    border: 1px solid rgba(109, 213, 237, 0.2);
+}
+
+.modal-overlay.active .modal-container {
+    transform: scale(1) translateY(0);
+}
+
+/* Generische Modal-Komponenten */
+.modal-header {
+    background: linear-gradient(135deg, var(--luvex-dark-blue), rgba(27, 42, 73, 0.9));
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(109, 213, 237, 0.3);
+}
+
+.modal-header__title {
+    color: var(--luvex-white);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin: 0;
+}
+
+.modal-header__action {
+    color: #cbd5e1;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.modal-content {
+    padding: 2rem;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.modal-footer {
+    padding: 1.5rem 2rem;
+    background: var(--luvex-gray-100);
+    border-top: 1px solid var(--luvex-gray-200);
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+/* Modal-Close bei Klick außerhalb */
+body.modal-open {
+    overflow: hidden;
+}
+
+/*
+==============================================================================
+2. AUTH MODAL SPEZIFISCH (Login/Register)
+==============================================================================
+*/
+
+/* Auth Modal Container - Spezielle Behandlung */
 #authModal .modal-content {
     position: relative;
-    /* KORREKTUR: max-width entfernt, damit der Inhalt (.auth-form-container) die Breite bestimmen kann */
-    width: auto; 
-    max-height: 95vh;
-    overflow-y: auto; /* Scrollbar nur wenn nötig */
+    width: 100%;
+    max-width: 1100px; /* GEÄNDERT: Verschmälert von 1300px */
+    max-height: 90vh;
     border-radius: var(--radius-xl);
     transform: scale(0.95) translateY(20px);
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-    /* WICHTIG: Padding wird vom .auth-form-container gesteuert, nicht hier */
-    padding: 0; 
-}
-
-/* Scrollbar-Styling für den Modal-Inhalt */
-#authModal .modal-content::-webkit-scrollbar {
-    width: 8px;
-}
-#authModal .modal-content::-webkit-scrollbar-track {
+    
+    /* Auth Modal Background */
     background: var(--luvex-dark-blue);
-    border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
-}
-#authModal .modal-content::-webkit-scrollbar-thumb {
-    background-color: var(--luvex-bright-cyan);
-    border-radius: 4px;
+    border: 1px solid rgba(109, 213, 237, 0.3);
+    overflow: hidden;
+    padding: 0; /* Kein Padding hier - wird in Scrollable-Content gehandhabt */
 }
 
 .modal-overlay.visible #authModal .modal-content {
     transform: scale(1) translateY(0);
 }
 
-body.modal-open {
-    overflow: hidden;
+/* LÖSUNG: Professioneller scrollbarer Bereich für Auth Modal */
+.auth-scrollable-content {
+    max-height: 85vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    
+    /* Professionelle Scrollbar für gerundete Container */
+    scrollbar-width: thin;
+    scrollbar-color: var(--luvex-bright-cyan) transparent;
+    
+    /* Padding für Scrollbar-Bereich (verhindert Überschneidung mit Border) */
+    padding-right: 8px;
+    margin-right: -8px;
+}
+
+/* Custom Webkit Scrollbar (Professionelle Lösung für gerundete Ecken) */
+.auth-scrollable-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.auth-scrollable-content::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 12px 0; /* Respektiert Container-Rundung */
+}
+
+.auth-scrollable-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--luvex-bright-cyan), rgba(109, 213, 237, 0.7));
+    border-radius: 6px;
+    border: 1px solid var(--luvex-dark-blue);
+}
+
+.auth-scrollable-content::-webkit-scrollbar-thumb:hover {
+    background: var(--luvex-bright-cyan);
+}
+
+/* Auth Content Wrapper */
+#auth-tab-content-wrapper {
+    padding: 2rem; /* GEÄNDERT: Reduziert von 2.5rem */
+}
+
+/*
+==============================================================================
+3. AUTH TABS SYSTEM
+==============================================================================
+*/
+
+.auth-tabs {
+    display: flex;
+    border-bottom: 1px solid rgba(109, 213, 237, 0.2);
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 1.25rem 1rem;
+    text-align: center;
+    color: var(--luvex-gray-300);
+    font-weight: 600;
+    font-size: var(--text-lg);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    border: none;
+    background: none;
+    border-bottom: 3px solid transparent;
+}
+
+.auth-tab:hover {
+    color: var(--luvex-white);
+    background: rgba(109, 213, 237, 0.05);
+}
+
+.auth-tab.active {
+    color: var(--luvex-bright-cyan);
+    border-bottom-color: var(--luvex-bright-cyan);
+}
+
+.auth-tab-content { 
+    display: none; 
+}
+
+.auth-tab-content.active { 
+    display: block; 
+}
+
+/*
+==============================================================================
+4. AUTH FORM LAYOUTS - Mit allen Styling-Wünschen
+==============================================================================
+*/
+
+/* Form verwendet jetzt universelle Komponenten aus _components.css */
+.luvex-auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* GEÄNDERT: Näher zusammenrücken von 2rem */
+}
+
+/* Login spezifisch */
+.form-grid-2-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.auth-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    gap: 1rem;
+}
+
+.auth-link {
+    color: var(--luvex-gray-300);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.auth-link:hover {
+    color: var(--luvex-bright-cyan);
+    text-decoration: underline;
+}
+
+/*
+==============================================================================
+5. INDUSTRIES GRID - 4 Spalten Layout (Styling-Wunsch erfüllt)
+==============================================================================
+*/
+
+.interests-grid-industries {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* GEÄNDERT: 5 → 4 Spalten */
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.interests-grid-industries .interest-tag {
+    min-height: 60px;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem;
+}
+
+.interests-grid-industries .interest-tag span {
+    font-size: var(--text-xs);
+    line-height: 1.2;
+}
+
+/* Show More Button für Industries */
+.show-more-btn {
+    background: linear-gradient(135deg, rgba(109, 213, 237, 0.15), rgba(109, 213, 237, 0.05));
+    border: 1px solid rgba(109, 213, 237, 0.4);
+    color: var(--luvex-white);
+    padding: 0.75rem 1.5rem; /* GEÄNDERT: Kompakter */
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 1rem auto 0; /* GEÄNDERT: Reduziert von 1.5rem */
+    max-width: 220px; /* GEÄNDERT: Schmaler */
+    font-weight: 500;
+    font-size: var(--text-sm);
+}
+
+.show-more-btn:hover {
+    background: linear-gradient(135deg, rgba(109, 213, 237, 0.25), rgba(109, 213, 237, 0.15));
+    border-color: var(--luvex-bright-cyan);
+    transform: translateY(-1px);
+}
+
+.show-more-btn.expanded .icon-toggle {
+    transform: rotate(180deg);
+}
+
+.icon-toggle {
+    transition: transform 0.3s ease;
+    font-size: 0.9rem;
+}
+
+/* Industries Toggle Logic - Nur erste 8 Items zeigen (2 Reihen à 4) */
+.interests-grid-industries .interest-tag:nth-child(n+9) {
+    display: none;
+}
+
+.interests-grid-industries.expanded .interest-tag:nth-child(n+9) {
+    display: flex;
+}
+
+/*
+==============================================================================
+6. YOUR INTERESTS - Einheitliche Feldgrößen (Styling-Wunsch erfüllt)
+==============================================================================
+*/
+
+.interests-columns-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; /* GEÄNDERT: Reduziert von 2rem */
+    justify-content: center;
+}
+
+.interest-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch; /* LÖSUNG: Alle Felder nehmen volle Spaltenbreite */
+}
+
+.interest-column-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-size: var(--text-base);
+    color: var(--luvex-bright-cyan);
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(109, 213, 237, 0.2);
+    width: 100%;
+}
+
+.interest-column .interest-tag {
+    justify-content: flex-start;
+    text-align: left;
+    width: 100%; /* LÖSUNG: Einheitliche Breite für alle Felder */
+    min-height: 44px; /* Einheitliche Mindesthöhe */
+    padding: 0.75rem;
+}
+
+/*
+==============================================================================
+7. INTEREST TAGS (Universal für alle Bereiche)
+==============================================================================
+*/
+
+.interest-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(109, 213, 237, 0.3);
+    color: var(--luvex-gray-300);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    font-size: var(--text-sm);
+    text-align: left;
+}
+
+.interest-tag:hover {
+    background: rgba(109, 213, 237, 0.1);
+    border-color: var(--luvex-bright-cyan);
+    color: var(--luvex-white);
+}
+
+.interest-tag.selected {
+    background: var(--luvex-bright-cyan);
+    border-color: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    font-weight: 600;
+}
+
+.interest-tag i {
+    font-size: 1rem;
+    width: 20px;
+    text-align: center;
+    transition: color 0.2s ease;
+    flex-shrink: 0;
+}
+
+.interest-tag.selected i {
+    color: var(--luvex-dark-blue);
+}
+
+/* Others Input Spezial-Behandlung */
+.interest-tag.others-input {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(109, 213, 237, 0.3);
+    color: var(--luvex-gray-300);
+}
+
+.interest-tag.others-input:hover {
+    background: rgba(109, 213, 237, 0.1);
+    border-color: var(--luvex-bright-cyan);
+    color: var(--luvex-white);
+}
+
+.interest-tag.others-input.selected {
+    background: rgba(109, 213, 237, 0.15);
+    border-color: var(--luvex-bright-cyan);
+    color: var(--luvex-white);
+}
+
+.interest-tag.others-input input {
+    display: none;
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--luvex-white);
+    font-size: var(--text-xs);
+    text-align: center;
+    margin-top: 0.5rem;
+    outline: none;
+    padding: 0.25rem;
+    font-weight: normal;
+}
+
+.interest-tag.others-input.selected input {
+    display: block;
+    color: var(--luvex-white);
+}
+
+.interest-tag.others-input.selected .interest-text {
+    display: none;
+}
+
+.interest-tag.others-input input::placeholder {
+    color: var(--luvex-gray-400);
+    font-weight: normal;
+}
+
+/*
+==============================================================================
+8. reCAPTCHA - Engerer Rahmen (Styling-Wunsch erfüllt)
+==============================================================================
+*/
+
+.recaptcha-container {
+    margin: 1.5rem auto; /* GEÄNDERT: Reduziert von 2rem */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px; /* GEÄNDERT: Reduziert von 8px */
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(109, 213, 237, 0.25);
+    border-radius: 6px;
+    width: 310px; /* GEÄNDERT: Enger von 320px */
+    height: 88px; /* GEÄNDERT: Niedriger von 94px */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recaptcha-container .g-recaptcha {
+    border-radius: 4px;
+}
+
+/*
+==============================================================================
+9. CONSENT & SUBMIT BEREICH
+==============================================================================
+*/
+
+.form-consent {
+    margin: 1.5rem 0; /* GEÄNDERT: Reduziert von 2rem */
+    padding-left: 1.5rem; /* GEÄNDERT: Reduziert von 2rem */
+}
+
+.form-consent .luvex-checkbox__text a {
+    color: var(--luvex-bright-cyan);
+    text-decoration: underline;
+}
+
+/* Submit Button verwendet jetzt .luvex-form-submit aus _components.css */
+.form-submit--enhanced {
+    width: auto;
+    min-width: 200px;
+    max-width: 300px;
+    padding: 1rem 2rem;
+    font-size: var(--text-base);
+    margin: 1rem auto 0; /* GEÄNDERT: Reduziert von 1.5rem */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: linear-gradient(45deg, var(--luvex-vibrant-blue), var(--luvex-special-cyan));
+    color: var(--luvex-white);
+    border: none;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(34, 211, 238, 0.2);
+}
+
+.form-submit--enhanced:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(34, 211, 238, 0.3);
+}
+
+.form-submit--enhanced:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.form-submit--enhanced .btn-text {
+    display: inline-block;
+}
+
+.form-submit--enhanced .btn-loader {
+    display: none;
+}
+
+.form-submit--enhanced i { 
+    font-size: 0.9rem; 
+}
+
+/*
+==============================================================================
+10. RESPONSIVE DESIGN FÜR MODALS
+==============================================================================
+*/
+
+@media (max-width: 1200px) {
+    #authModal .modal-content {
+        max-width: 950px;
+    }
+    
+    .interests-grid-industries {
+        grid-template-columns: repeat(3, 1fr); /* 4 → 3 auf kleineren Bildschirmen */
+    }
+}
+
+@media (max-width: 992px) {
+    .interests-columns-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .interests-grid-industries {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    #authModal .modal-content {
+        margin: 0.5rem;
+        max-width: calc(100vw - 1rem);
+    }
 }
 
 @media (max-width: 768px) {
     .modal-overlay {
         padding: 0.5rem;
     }
+    
+    #auth-tab-content-wrapper {
+        padding: 1.5rem 1rem;
+    }
+    
+    .form-grid-2-cols {
+        grid-template-columns: 1fr;
+    }
+    
+    .interests-grid-industries {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .recaptcha-container {
+        width: 100%;
+        max-width: 310px;
+    }
 }
 
+@media (max-width: 480px) {
+    .interests-grid-industries {
+        grid-template-columns: 1fr;
+    }
+    
+    .show-more-btn {
+        max-width: 100%;
+    }
+}

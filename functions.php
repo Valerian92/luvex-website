@@ -1,9 +1,8 @@
 <?php
 /**
- * LUVEX Theme Functions - Updated for Centralized AJAX System
+ * LUVEX Theme Functions - Updated for Reorganized CSS System
  * Description: Komplette Theme-Setup-, Navigations- und Asset-Lade-Logik.
- * JS-Pfade für bessere Ordnerstruktur aktualisiert.
- * UPDATED: Integriert neues zentrales AJAX-System
+ * UPDATED: Angepasst für neue CSS-Struktur (_auth.css entfernt, _components.css erweitert)
  */
 
 // 1. ASTRA THEME DEAKTIVIERUNG
@@ -30,10 +29,10 @@ function luvex_theme_setup() {
         'footer-menu-4-luvex' => __('Footer Menu 4 Company-Community', 'luvex'),
         'footer-legal' => __('Footer Legal Menu', 'luvex')
     ));
-    // Korrektur: explizite Größenbegrenzungen für Thumbnails
+    
     add_theme_support('post-thumbnails');
     set_post_thumbnail_size(150, 150, true);
-    // Korrektur: explizite Größenbegrenzungen für custom-logo
+    
     add_theme_support('custom-logo', array(
         'height'      => 100,
         'width'       => 400,
@@ -43,20 +42,21 @@ function luvex_theme_setup() {
     add_theme_support('title-tag');
 }
 
-// 4. CSS & JAVASCRIPT LADEN (FINALE VERSION MIT ALLEN SCRIPTS & NEUER JS-STRUKTUR)
+// 4. CSS & JAVASCRIPT LADEN (ANGEPASST FÜR NEUE CSS-STRUKTUR)
 add_action('wp_enqueue_scripts', 'luvex_enqueue_assets', 999);
 function luvex_enqueue_assets() {
     // ========================================================================
-    // CSS LADEN
+    // CSS LADEN (REORGANISIERT)
     // ========================================================================
 
     // Astra CSS entfernen
     wp_dequeue_style('astra-theme-css');
 
-    // Globale Stylesheets
+    // Globale Stylesheets (ERWEITERT)
     $global_styles = [
         'luvex-main' => '/assets/css/main.css',
         'luvex-animations' => '/assets/css/global/_animations.css',
+        // HINWEIS: _components.css und _modals.css werden über main.css geladen
     ];
     foreach ($global_styles as $handle => $path) {
         $full_path = get_stylesheet_directory() . $path;
@@ -65,7 +65,7 @@ function luvex_enqueue_assets() {
         }
     }
 
-    // Seitenspezifische Stylesheets
+    // Seitenspezifische Stylesheets (ANGEPASST - _auth.css entfernt)
     $page_styles = [
         'standard-styles-luvex' => ['_page-standard-styles-luvex.css'],
         'about' => ['_page-about.css'],
@@ -83,6 +83,7 @@ function luvex_enqueue_assets() {
         'register' => ['_page-register.css'],
         'login' => ['_page-login.css'],
         'forgot-password' => ['_page-forgot-password.css'],
+        'profile' => ['_page-profile.css'], // Profile-Seite nutzt jetzt universelle Komponenten
         'curing-systems' => ['_page-curing-systems.css'],
         'uvc-hygiene-solutions' => ['_page-uvc-hygiene-solutions.css'],
     ];
@@ -124,7 +125,7 @@ function luvex_enqueue_assets() {
     }
 
     // ========================================================================
-    // JAVASCRIPT LADEN
+    // JAVASCRIPT LADEN (Unverändert)
     // ========================================================================
     
     $js_base_uri = get_stylesheet_directory_uri() . '/assets/js/';
@@ -148,10 +149,12 @@ function luvex_enqueue_assets() {
         'luvex-footer-light' => 'global/footer-light-effect.js',
         'luvex-interactive-faq' => 'global/interactive-faq.js',
     ];
+    
     // Debug-Skript nur für eingeloggte Admins laden
     if (is_user_logged_in() && current_user_can('manage_options')) {
         $global_scripts['luvex-debug'] = 'global/debug-scripts.js';
     }
+    
     foreach($global_scripts as $handle => $path) {
         $enqueue_script($handle, $path);
     }
@@ -205,13 +208,13 @@ function luvex_enqueue_assets() {
         $enqueue_script('luvex-hero-solutions-animation', 'pages/hero-solutions-animation.js');
     }
     
-    // Lade das Hero-Skript für den "uv_news" Post Type
+    // UV News Scripts
     if (is_post_type_archive('uv_news') || is_singular('uv_news')) {
         $enqueue_script('luvex-hero-news-animation', 'pages/hero-news-network.js');
     }
 }
 
-// 5. NAV WALKER KLASSE
+// 5. NAV WALKER KLASSE (Unverändert)
 class Luvex_Nav_Walker extends Walker_Nav_Menu {
     public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
         $indent = ($depth) ? str_repeat("\t", $depth) : '';
@@ -264,7 +267,7 @@ function luvex_get_user_avatar($user_id = null) {
     }
 }
 
-// 7. SYSTEM-DATEIEN LADEN (UPDATED: Neue AJAX-Datei hinzugefügt)
+// 7. SYSTEM-DATEIEN LADEN (Unverändert)
 $luvex_includes_path = get_stylesheet_directory() . '/includes/';
 
 // WICHTIG: AJAX System ZUERST laden (benötigt von anderen Systemen)
@@ -272,24 +275,22 @@ if (file_exists($luvex_includes_path . '_luvex_ajax.php')) {
     require_once $luvex_includes_path . '_luvex_ajax.php';
 }
 
-// User System laden (AJAX-Registrierungen entfernt)
+// User System laden
 if (file_exists($luvex_includes_path . '_user_system.php')) {
     require_once $luvex_includes_path . '_user_system.php';
 }
 
-// Security System laden (AJAX-Registrierungen entfernt)
+// Security System laden
 if (file_exists($luvex_includes_path . '_luvex_security.php')) {
     require_once $luvex_includes_path . '_luvex_security.php';
 }
 
-// LUVEX Helper Funktionen laden (z.B. für Icons)
+// LUVEX Helper Funktionen laden
 if (file_exists($luvex_includes_path . '_luvex-helpers.php')) {
     require_once $luvex_includes_path . '_luvex-helpers.php';
 }
 
-// HINWEIS: _cors_fixes.php wird nicht mehr benötigt - CORS ist jetzt in LuvexAjaxManager integriert
-
-// 8. reCAPTCHA FUNKTION (Unchanged)
+// 8. reCAPTCHA FUNKTION (Unverändert)
 function luvex_verify_recaptcha($response) {
     if (empty($response) || !defined('LUVEX_RECAPTCHA_SECRET_KEY')) {
         return false;
@@ -337,6 +338,33 @@ function luvex_debug_ajax_system() {
                 <?php echo $loaded ? '✓' : '✗'; ?> <?php echo esc_html($dep); ?>
             </div>
         <?php endforeach; ?>
+        <div style="margin-top: 5px; font-size: 10px; color: #888;">
+            CSS: Components + Modals loaded | Auth.css removed
+        </div>
     </div>
     <?php
+}
+
+// 10. ZUSÄTZLICHE HELPER FÜR NEUE CSS-STRUKTUR
+/**
+ * Hilfsfunktion: Prüft ob eine Seite Light-Theme-Komponenten benötigt
+ */
+function luvex_needs_light_theme() {
+    return is_page(['profile', 'contact', 'about']) || is_front_page();
+}
+
+/**
+ * Hilfsfunktion: Fügt body-class für CSS-Context hinzu
+ */
+add_filter('body_class', 'luvex_add_context_classes');
+function luvex_add_context_classes($classes) {
+    if (luvex_needs_light_theme()) {
+        $classes[] = 'luvex-light-context';
+    }
+    
+    if (is_page('profile')) {
+        $classes[] = 'luvex-profile-page';
+    }
+    
+    return $classes;
 }

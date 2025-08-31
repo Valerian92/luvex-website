@@ -1,12 +1,11 @@
 /*
 ==============================================================================
-LUVEX THEME v3.2 - UI COMPONENTS (HERO-FIX)
+LUVEX THEME v3.2 - UI COMPONENTS (ERWEITERT UM FORM-KOMPONENTEN)
 ==============================================================================
-Description: Enthält alle wiederverwendbaren UI-Komponenten.
-             Der Hero-Titel wird jetzt korrekt zentriert und hat
-             angepasste Standard-Größen.
+Description: EnthÃ¤lt alle wiederverwendbaren UI-Komponenten inkl. universeller
+             Form-Elemente aus der ehemaligen _auth.css
 Dependencies: _variables.css, _core.css
-Last Update: 2025-08-24
+Last Update: 2025-08-31
 ==============================================================================
 */
 
@@ -44,7 +43,6 @@ Last Update: 2025-08-24
     z-index: 1;
 }
 
-
 /* --- 1.2 Hero Content Container --- */
 .luvex-hero__container {
     position: relative;
@@ -57,16 +55,14 @@ Last Update: 2025-08-24
     justify-content: center;
 }
 
-/* --- 1.3 Hero Text Elements (Größere Abstände) --- */
+/* --- 1.3 Hero Text Elements --- */
 .luvex-hero__title {
     text-align: center;
     font-size: clamp(2rem, 4vw, 2.5rem);
-    /* ANPASSUNG: Größerer Abstand nach unten */
     margin: 0 0 2rem 0; 
 }
 
 .luvex-hero__cta-container {
-    /* ANPASSUNG: Größerer Abstand nach oben und unten */
     margin: 1.5rem 0 2.5rem 0;
     display: flex;
     flex-wrap: wrap;
@@ -75,7 +71,6 @@ Last Update: 2025-08-24
 }
 
 .luvex-hero__subtitle {
-    /* ANPASSUNG: Größerer Abstand nach unten */
     margin: 0 0 1.5rem 0;
     font-size: clamp(1.2rem, 3vw, 1.8rem);
     color: var(--luvex-gray-300);
@@ -93,23 +88,13 @@ Last Update: 2025-08-24
     opacity: 0.9;
 }
 
-
-/* --- 1.4 Hero CTA Container --- */
-.luvex-hero__cta-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-top: 1.5rem; /* Abstand nach oben */
-}
-
 /*
 ==============================================================================
 2. BUTTONS
 ==============================================================================
 */
 
-/* --- 2.1 Primary Hero CTA Button (FINAL) --- */
+/* --- 2.1 Primary Hero CTA Button --- */
 .luvex-hero__cta {
     display: inline-flex;
     align-items: center;
@@ -125,15 +110,12 @@ Last Update: 2025-08-24
     font-size: var(--text-base);
 }
 
-
 .luvex-hero__cta:hover {
     background: var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
 }
-
-
 
 /* --- 2.2 Secondary Hero CTA Button --- */
 .luvex-hero__cta-secondary {
@@ -159,8 +141,7 @@ Last Update: 2025-08-24
     box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
 }
 
-
-/* --- 2.3 Generic CTA Buttons (REDESIGNED & OPTIMIZED) --- */
+/* --- 2.3 Generic CTA Buttons --- */
 .luvex-cta-primary {
     display: inline-flex;
     align-items: center;
@@ -175,8 +156,6 @@ Last Update: 2025-08-24
     border: none;
     transition: all 0.3s ease;
     position: relative;
-    
-    /* REDESIGN: Gradient mit LUVEX Farben */
     background: linear-gradient(45deg, var(--luvex-vibrant-blue), var(--luvex-special-cyan));
     box-shadow: 0 4px 15px rgba(34, 211, 238, 0.2), 0 2px 5px rgba(0, 123, 255, 0.15);
 }
@@ -184,7 +163,7 @@ Last Update: 2025-08-24
 .luvex-cta-primary:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(34, 211, 238, 0.3), 0 4px 10px rgba(0, 123, 255, 0.2);
-    color: var(--luvex-white); /* Sicherstellen dass Text weiß bleibt */
+    color: var(--luvex-white);
 }
 
 .luvex-cta-secondary {
@@ -198,8 +177,6 @@ Last Update: 2025-08-24
     border-radius: var(--radius-full);
     text-decoration: none;
     transition: all 0.3s ease;
-    
-    /* REDESIGN: Transparenter Outline-Style */
     background: transparent;
     border: 2px solid rgba(255, 255, 255, 0.5);
     color: var(--luvex-white);
@@ -213,7 +190,7 @@ Last Update: 2025-08-24
     box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
 }
 
-/* --- 2.4 Standard Button Aliases (für .btn Klassen) --- */
+/* --- 2.4 Standard Button Aliases --- */
 .btn.btn--primary,
 .btn--primary {
     display: inline-flex;
@@ -228,8 +205,6 @@ Last Update: 2025-08-24
     text-decoration: none;
     border: none;
     transition: all 0.3s ease;
-    
-    /* Gleicher Style wie luvex-cta-primary */
     background: linear-gradient(45deg, var(--luvex-vibrant-blue), var(--luvex-special-cyan));
     box-shadow: 0 4px 15px rgba(34, 211, 238, 0.2), 0 2px 5px rgba(0, 123, 255, 0.15);
 }
@@ -241,7 +216,7 @@ Last Update: 2025-08-24
     color: var(--luvex-white);
 }
 
-/* --- 2.5 Universal CTA Button (für finale CTA Sections) --- */
+/* --- 2.5 Universal CTA Button --- */
 .cta-button {
     display: inline-flex;
     align-items: center;
@@ -255,8 +230,6 @@ Last Update: 2025-08-24
     text-decoration: none;
     border: none;
     transition: all 0.3s ease;
-    
-    /* Standard: Gleicher Gradient wie Primary */
     background: linear-gradient(45deg, var(--luvex-vibrant-blue), var(--luvex-special-cyan));
     box-shadow: 0 4px 15px rgba(34, 211, 238, 0.2), 0 2px 5px rgba(0, 123, 255, 0.15);
 }
@@ -267,7 +240,7 @@ Last Update: 2025-08-24
     color: var(--luvex-white);
 }
 
-/* Override für dunkle Sections (wie ursprünglich) */
+/* Override für dunkle Sections */
 .section--final-cta .cta-button,
 .cta-section--dark .cta-button {
     background: var(--luvex-bright-cyan);
@@ -277,64 +250,17 @@ Last Update: 2025-08-24
 
 .section--final-cta .cta-button:hover,
 .cta-section--dark .cta-button:hover {
-    background: var(--luvex-dark-blue-dark); /* ANGEPASST: Leichtes Grau statt Weiß */
-    color: var(--luvex-bright-cyan); /* ANGEPASST: Dunkler Text für guten Kontrast */
+    background: var(--luvex-dark-blue-dark);
+    color: var(--luvex-bright-cyan);
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(248, 250, 252, 0.25); /* Angepasster Schatten */
+    box-shadow: 0 8px 25px rgba(248, 250, 252, 0.25);
 }
 
-
-/* * ============================================================================
- * FIX FÜR DEN ANIMIERTEN HERO-BUTTON
- * ============================================================================
- */
-
-/* Wir verwenden einen spezifischeren Selektor, um Konflikte zu vermeiden */
-.home .luvex-hero__cta.luvex-cta--animated {
-    position: relative;
-    overflow: hidden;
-    
-    /* WICHTIG: Überschreibt andere 'background'-Regeln */
-    background: transparent; 
-    color: var(--luvex-white);
-    border-color: var(--luvex-bright-cyan);
-
-    /* ANWENDUNG DES PERMANENTEN PULS-EFFEKTS */
-    animation: pulse-purple-glow 2.5s infinite ease-in-out;
-}
-
-.home .luvex-hero__cta.luvex-cta--animated:hover {
-    /* HINTERGRUND-VERLAUF FÜR DIE HOVER-ANIMATION */
-    background: linear-gradient(45deg,
-        var(--luvex-bright-cyan),
-        #8a2be2, /* blueviolet */
-        var(--luvex-vibrant-blue),
-        #8a2be2,
-        var(--luvex-bright-cyan));
-    background-size: 400% 400%;
-
-    /* HINZUFÜGEN DER ZWEITEN ANIMATION BEIM HOVERN */
-    /* Der Puls läuft weiter, der Farbverlauf startet */
-    animation-name: pulse-purple-glow, gradient-shift-smooth;
-    animation-duration: 2.5s, 3s;
-    animation-timing-function: ease-in-out, ease-in-out;
-    animation-iteration-count: infinite, infinite;
-
-    /* Zusätzliche visuelle Effekte beim Hovern */
-    transform: translateY(-2px) scale(1.05);
-    border-color: rgba(109, 213, 237, 0.8);
-    box-shadow: 
-        0 8px 25px rgba(109, 213, 237, 0.4),
-        0 0 20px rgba(138, 43, 226, 0.3);
-}
-
-
-
-/* --- 1.3 Outline Button (Better Visibility) --- */
+/* --- 2.6 Outline Button --- */
 .btn--outline {
     background-color: transparent;
     border: 2px solid var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue); /* ← Dunkler Text für bessere Sichtbarkeit */
+    color: var(--luvex-dark-blue);
     padding: 12px 24px;
     border-radius: var(--radius-full);
     font-weight: 600;
@@ -349,11 +275,10 @@ Last Update: 2025-08-24
 .btn--outline:hover {
     background-color: var(--luvex-bright-cyan);
     border-color: var(--luvex-bright-cyan);
-    color: var(--luvex-white); /* ← Weißer Text auf Cyan */
+    color: var(--luvex-white);
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
 }
-
 
 /*
 ==============================================================================
@@ -398,7 +323,7 @@ Last Update: 2025-08-24
     margin: 0;
 }
 
-/* --- 3.2 Knowledge Navigator Cards (Restored) --- */
+/* --- 3.2 Knowledge Navigator Cards --- */
 .knowledge-navigator-header { 
     text-align: center; 
     margin-bottom: 4rem; 
@@ -413,8 +338,8 @@ Last Update: 2025-08-24
 
 .knowledge-card {
     background: var(--luvex-white);
-    border-radius: var(--radius-lg); /* ← Abgerundete Ecken zurück */
-    padding: 2rem; /* ← Padding zurück */
+    border-radius: var(--radius-lg);
+    padding: 2rem;
     text-align: left;
     box-shadow: var(--shadow-md);
     border: 1px solid var(--luvex-gray-200);
@@ -424,7 +349,6 @@ Last Update: 2025-08-24
     flex-direction: column;
     position: relative;
 }
-
 
 .knowledge-card:hover {
     transform: translateY(-5px);
@@ -437,7 +361,7 @@ Last Update: 2025-08-24
     align-items: center; 
     gap: 1.5rem; 
     margin-bottom: 2rem;
-    justify-content: flex-start; /* ← Links ausgerichtet */
+    justify-content: flex-start;
 }
 
 .knowledge-card .card__icon {
@@ -461,7 +385,6 @@ Last Update: 2025-08-24
     transform: scale(1.05);
 }
 
-
 .knowledge-card .card__title { 
     margin-bottom: 0; 
     font-size: 1.5rem; 
@@ -473,18 +396,16 @@ Last Update: 2025-08-24
 .knowledge-card .card__content {
     text-align: left;
     flex-grow: 1;
-    margin-bottom: 2rem; /* ← Erhöht von 1.5rem auf 2rem */
+    margin-bottom: 2rem;
     font-size: var(--text-base);
     color: var(--luvex-gray-700);
     line-height: 1.6;
 }
 
-
-/* Knowledge Card Button (Final Color Logic) */
 .knowledge-card .btn--knowledge {
     background-color: transparent;
-    border: 2px solid #e7f1ff; /* ← Dezent: Wie Icon-Hintergrund */
-    color: var(--luvex-gray-500); /* ← Dezenter Text */
+    border: 2px solid #e7f1ff;
+    color: var(--luvex-gray-500);
     padding: 12px 24px;
     border-radius: var(--radius-full);
     font-weight: 500;
@@ -495,143 +416,27 @@ Last Update: 2025-08-24
     justify-content: center;
     gap: var(--space-xs);
     margin-top: auto;
-    margin-bottom: 1rem; /* ← Mehr Abstand zum Container-Ende */
+    margin-bottom: 1rem;
     align-self: center;
 }
 
-/* Card-Hover: Neue dunkle Cyan-Variable */
 .knowledge-card:hover .btn--knowledge {
     border-color: var(--luvex-cyan-dark);
-    color: var(--luvex-cyan-dark); /* ← Neue Variable verwenden */
+    color: var(--luvex-cyan-dark);
     font-weight: 600;
 }
 
-/* Button beim direkten Button-Hover (wie Icon-Farben beim Card-Hover) */
 .knowledge-card .btn--knowledge:hover {
-    background-color: var(--luvex-bright-cyan); /* ← Cyan wie Icon */
+    background-color: var(--luvex-bright-cyan);
     border-color: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue); /* ← Dunkelblau wie Icon-Text */
+    color: var(--luvex-dark-blue);
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
 }
 
-.knowledge-navigator .value-card {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.knowledge-navigator.is-visible .value-card {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.knowledge-navigator.is-visible .value-card:nth-child(1) { transition-delay: 0.2s; }
-.knowledge-navigator.is-visible .value-card:nth-child(2) { transition-delay: 0.4s; }
-.knowledge-navigator.is-visible .value-card:nth-child(3) { transition-delay: 0.6s; }
-
-
-/* --- 3.2 Knowledge Navigator Cards (ENDE) --- */
-
-/* --- 3.3 Team Member Cards --- */
-.team-member--light {
-    background: var(--luvex-gray-100);
-    color: var(--luvex-dark-blue);
-    box-shadow: var(--shadow-lg);
-    border: 1px solid var(--luvex-gray-200);
-    padding: 2.5rem;
-    padding-top: 4.5rem;
-    margin-top: 0;
-    position: relative;
-    text-align: center;
-    overflow: visible;
-    opacity: 1;
-    display: block;
-    visibility: visible;
-    z-index: 10;
-    transform: none;
-}
-
-.team-member--light .team-member__photo {
-    position: absolute;
-    top: -4rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 4px solid var(--luvex-white);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    overflow: hidden;
-    z-index: 15;
-    opacity: 1;
-    display: block;
-    visibility: visible;
-}
-
-.team-member--light .team-member__photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    opacity: 1;
-}
-
-.team-member--light .team-member__content h3,
-.team-member--light .team-member__quote p { 
-    color: var(--luvex-dark-blue);
-    opacity: 1;
-}
-
-.team-member--light .team-member__role { 
-    color: var(--luvex-vibrant-blue);
-    opacity: 1;
-}
-
-.team-member--light .team-member__content h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-}
-
-.team-member--light .team-member__role {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.team-member--light .team-member__quote p {
-    font-style: italic;
-    line-height: 1.6;
-    font-size: 0.95rem;
-    margin: 0;
-}
-
-.team-member {
-    opacity: 0;
-    transform: scale(0.95);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.team-section.is-visible .team-member {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.team-section.is-visible .team-member:nth-child(1) { transition-delay: 0.15s; }
-.team-section.is-visible .team-member:nth-child(2) { transition-delay: 0.30s; }
-.team-section.is-visible .team-member:nth-child(3) { transition-delay: 0.45s; }
-.team-section.is-visible .team-member:nth-child(4) { transition-delay: 0.60s; }
-
-.team-member:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 15px 30px rgba(27, 42, 73, 0.15);
-}
-
-
-
 /*
 ==============================================================================
-4. FEATURE GRID SYSTEM (Wiederverwendbar & Optimiert)
+4. FEATURE GRID SYSTEM
 ==============================================================================
 */
 
@@ -645,16 +450,16 @@ Last Update: 2025-08-24
 
 .feature-item { 
     padding: 1.5rem; 
-    background: rgba(255, 255, 255, 0.08); /* Etwas sichtbarer */
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Rand für Card-Effekt */
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-md); 
     transition: all 0.3s ease; 
     text-align: center;
 }
 
 .feature-item:hover { 
-    background: rgba(255, 255, 255, 0.15); /* Deutlicherer Hover */
-    transform: translateY(-5px); /* Stärkerer Lift-Effekt */
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px);
     border-color: rgba(255, 255, 255, 0.2);
 }
 
@@ -683,7 +488,6 @@ Last Update: 2025-08-24
     transition: color 0.3s ease; 
 }
 
-/* Responsive Feature Grid */
 @media (max-width: 768px) {
     .feature-grid { 
         grid-template-columns: repeat(2, 1fr); 
@@ -698,7 +502,286 @@ Last Update: 2025-08-24
 
 /*
 ==============================================================================
-5. CTA SECTIONS
+5. UNIVERSAL FORM COMPONENTS (Aus _auth.css übertragen & optimiert)
+==============================================================================
+*/
+
+/* --- 5.1 Universal Input Styles --- */
+.luvex-input,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+    width: 100%;
+    height: 56px;
+    padding: 0 1rem;
+    font-size: var(--text-base);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(109, 213, 237, 0.3);
+    border-radius: var(--radius-md);
+    color: var(--luvex-white);
+    transition: var(--transition-normal);
+}
+
+.luvex-input::placeholder,
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="tel"]::placeholder {
+    color: var(--luvex-gray-300);
+    opacity: 0.7;
+}
+
+.luvex-input:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus {
+    border-color: var(--luvex-bright-cyan);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 2px rgba(109, 213, 237, 0.5);
+    outline: none;
+}
+
+/* Light theme override für helle Seiten */
+.section--light .luvex-input,
+.section--light input[type="text"],
+.section--light input[type="email"],
+.section--light input[type="password"],
+.section--light input[type="tel"] {
+    background: var(--luvex-white);
+    color: var(--luvex-dark-blue);
+    border-color: var(--luvex-gray-300);
+}
+
+.section--light .luvex-input::placeholder,
+.section--light input[type="text"]::placeholder,
+.section--light input[type="email"]::placeholder,
+.section--light input[type="password"]::placeholder,
+.section--light input[type="tel"]::placeholder {
+    color: var(--luvex-gray-500);
+    opacity: 0.8;
+}
+
+.section--light .luvex-input:focus,
+.section--light input[type="text"]:focus,
+.section--light input[type="email"]:focus,
+.section--light input[type="password"]:focus,
+.section--light input[type="tel"]:focus {
+    border-color: var(--luvex-vibrant-blue);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+/* --- 5.2 Universal Checkbox Component --- */
+.luvex-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    margin: 0;
+}
+
+.luvex-checkbox__indicator {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(109, 213, 237, 0.5);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-normal);
+    flex-shrink: 0;
+}
+
+.luvex-checkbox__indicator i {
+    font-size: 0.8rem;
+    color: var(--luvex-dark-blue);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: var(--transition-normal);
+}
+
+.luvex-checkbox input { 
+    display: none; 
+}
+
+.luvex-checkbox input:checked + .luvex-checkbox__indicator {
+    background: var(--luvex-bright-cyan);
+    border-color: var(--luvex-bright-cyan);
+}
+
+.luvex-checkbox input:checked + .luvex-checkbox__indicator i {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.luvex-checkbox__text {
+    color: var(--luvex-gray-300);
+    font-size: var(--text-sm);
+}
+
+/* Light theme override */
+.section--light .luvex-checkbox__indicator {
+    border-color: var(--luvex-gray-400);
+}
+
+.section--light .luvex-checkbox__text {
+    color: var(--luvex-gray-700);
+}
+
+/* --- 5.3 Universal Form Sections --- */
+.luvex-form-section {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(109, 213, 237, 0.1);
+}
+
+.luvex-form-section:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+
+.luvex-form-section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--luvex-white);
+    margin-bottom: 1.25rem;
+    text-align: left;
+}
+
+.luvex-form-section-title i {
+    font-size: 1.1em;
+    color: var(--luvex-bright-cyan);
+    width: 24px;
+    text-align: center;
+}
+
+/* Light theme override */
+.section--light .luvex-form-section {
+    border-top-color: rgba(0, 0, 0, 0.1);
+}
+
+.section--light .luvex-form-section-title {
+    color: var(--luvex-dark-blue);
+}
+
+/* --- 5.4 Universal Form Grids --- */
+.luvex-form-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.luvex-form-grid-account {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.luvex-form-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.luvex-form-column h5 {
+    color: var(--luvex-bright-cyan);
+    font-size: var(--text-base);
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(109, 213, 237, 0.2);
+}
+
+/* Light theme override */
+.section--light .luvex-form-column h5 {
+    color: var(--luvex-vibrant-blue);
+    border-bottom-color: rgba(0, 123, 255, 0.2);
+}
+
+/* --- 5.5 Universal Feedback Messages --- */
+.luvex-feedback-message {
+    display: none;
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 2rem;
+    font-size: var(--text-sm);
+    color: var(--luvex-white);
+}
+
+.luvex-feedback-message.error {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid #ef4444;
+}
+
+.luvex-feedback-message.success {
+    background: rgba(16, 185, 129, 0.2);
+    border: 1px solid #10b981;
+}
+
+.luvex-feedback-message.visible {
+    display: block;
+}
+
+/* Light theme override */
+.section--light .luvex-feedback-message {
+    color: var(--luvex-dark-blue);
+}
+
+.section--light .luvex-feedback-message.error {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+}
+
+.section--light .luvex-feedback-message.success {
+    background: rgba(16, 185, 129, 0.1);
+    color: #059669;
+}
+
+/* --- 5.6 Universal Submit Button --- */
+.luvex-form-submit {
+    width: auto;
+    min-width: 200px;
+    max-width: 300px;
+    padding: 1rem 2rem;
+    font-size: var(--text-base);
+    margin: 1rem auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: linear-gradient(45deg, var(--luvex-vibrant-blue), var(--luvex-special-cyan));
+    color: var(--luvex-white);
+    border: none;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(34, 211, 238, 0.2);
+}
+
+.luvex-form-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(34, 211, 238, 0.3);
+}
+
+.luvex-form-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.luvex-form-submit i { 
+    font-size: 0.9rem; 
+}
+
+/*
+==============================================================================
+6. CTA SECTIONS
 ==============================================================================
 */
 
@@ -712,7 +795,7 @@ Last Update: 2025-08-24
     box-shadow: none; 
     border: none; 
     max-width: 900px; 
-    margin: 0 auto; /* ← HINZUFÜGEN für Zentrierung */
+    margin: 0 auto;
     text-align: center;
     padding: 3rem 2rem;
 }
@@ -720,13 +803,13 @@ Last Update: 2025-08-24
 .cta-section--dark h3 {
     color: var(--luvex-white);
     font-size: 2.5rem;
-    margin-bottom: 2.5rem; /* Erhöht von 1.5rem */
+    margin-bottom: 2.5rem;
 }
 
 .cta-section--dark p {
     color: var(--luvex-gray-300);
     font-size: 1.2rem;
-    margin-bottom: 3rem; /* Erhöht von 2rem */
+    margin-bottom: 3rem;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
@@ -740,79 +823,50 @@ Last Update: 2025-08-24
     flex-wrap: wrap;
 }
 
-.cta-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-xs);
-    padding: 1rem 2rem;
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
-    border-radius: var(--radius-full);
-    text-decoration: none;
-    font-weight: 600;
-    transition: var(--transition-normal);
-    font-size: var(--text-base);
-}
-
-.cta-button:hover {
-    background: var(--luvex-white);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
-}
-
 /*
 ==============================================================================
-6. FORMS
+7. VISUAL EFFECTS
 ==============================================================================
 */
 
-.floating-label-input {
+/* --- 7.1 Shine/Shiver Effect --- */
+.has-shine-effect {
     position: relative;
-    margin-bottom: 1.5rem;
+    overflow: hidden !important;
+    isolation: isolate;
 }
 
-.floating-label-input input,
-.floating-label-input textarea {
-    width: 100%;
-    height: 56px;
-    border: 1px solid var(--luvex-gray-300);
-    border-radius: var(--radius-md);
-    padding: 24px 16px 8px 16px;
-    font-size: var(--text-base);
-    background: var(--luvex-white);
-    transition: var(--transition-normal);
-}
-
-.floating-label-input label {
+.has-shine-effect::before {
+    content: '';
     position: absolute;
-    top: 18px;
-    left: 16px;
-    color: var(--luvex-gray-700);
+    top: -50%;
+    left: -100%;
+    width: 30%;
+    height: 200%;
+    background: linear-gradient(45deg,
+        transparent 0%, 
+        rgba(109, 213, 237, 0.06) 45%,
+        rgba(109, 213, 237, 0.12) 50%,
+        rgba(109, 213, 237, 0.06) 55%,
+        transparent 100%
+    );
+    z-index: 1;
     pointer-events: none;
-    transition: var(--transition-normal);
+    transition: none;
+    transform: rotate(25deg);
 }
 
-.floating-label-input input:focus {
-    border-color: var(--luvex-vibrant-blue);
-    box-shadow: 0 0 0 1px var(--luvex-vibrant-blue);
-    outline: none;
+.has-shine-effect:hover::before {
+    left: 120%;
+    transition: left 0.5s ease-out;
 }
 
-.floating-label-input input:focus ~ label,
-.floating-label-input input:not(:placeholder-shown) ~ label {
-    top: 8px;
-    font-size: var(--text-xs);
-    color: var(--luvex-vibrant-blue);
+.has-shine-effect > * {
+    position: relative;
+    z-index: 2;
 }
 
-/*
-==============================================================================
-7. MISC COMPONENTS
-==============================================================================
-*/
-
-/* --- 7.1 Scroll-to-Top Button --- */
+/* --- 7.2 Scroll-to-Top Button --- */
 #scrollToTopBtn {
     display: none;
     position: fixed;
@@ -848,45 +902,31 @@ Last Update: 2025-08-24
 
 /*
 ==============================================================================
-6. VISUAL EFFECTS (Universal Effects)
+8. RESPONSIVE BREAKPOINTS FÜR FORM COMPONENTS
 ==============================================================================
 */
 
-/* --- 6.1 Shine/Shiver Effect (Improved) --- */
-.has-shine-effect {
-    position: relative;
-    overflow: hidden !important;
-    isolation: isolate;
+@media (max-width: 992px) {
+    .luvex-form-grid-2,
+    .luvex-form-grid-account {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
 }
 
-.has-shine-effect::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -100%;
-    width: 30%; /* ← Schmaler */
-    height: 200%; /* ← Höher für schrägen Effekt */
-    background: linear-gradient(45deg, /* ← Schräg! */
-        transparent 0%, 
-        rgba(109, 213, 237, 0.06) 45%, /* ← Dezenter */
-        rgba(109, 213, 237, 0.12) 50%,
-        rgba(109, 213, 237, 0.06) 55%,
-        transparent 100%
-    );
-    z-index: 1;
-    pointer-events: none;
-    transition: none;
-    transform: rotate(25deg); /* ← Schräger Winkel */
+@media (max-width: 768px) {
+    .luvex-form-section {
+        margin-top: 1rem;
+        padding-top: 1rem;
+    }
+    
+    .luvex-form-section-title {
+        margin-bottom: 1rem;
+    }
+    
+    .luvex-form-submit {
+        min-width: auto;
+        max-width: none;
+        width: 100%;
+    }
 }
-
-.has-shine-effect:hover::before {
-    left: 120%; /* ← Schneller durchlauf */
-    transition: left 0.5s ease-out; /* ← Schneller: 0.8s → 0.5s */
-}
-
-.has-shine-effect > * {
-    position: relative;
-    z-index: 2;
-}
-
-
