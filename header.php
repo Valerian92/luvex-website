@@ -29,16 +29,6 @@
         if (function_exists('pll_the_languages') && class_exists('LuvexUserSystem')) {
             if (method_exists('LuvexUserSystem', 'get_language_switcher_dropdown')) {
                 echo LuvexUserSystem::get_language_switcher_dropdown();
-            } else {
-                // Fallback: Einfache Polylang Links
-                $languages = pll_the_languages(['raw' => 1]);
-                if ($languages) {
-                    echo '<div class="simple-language-switcher">';
-                    foreach ($languages as $lang) {
-                        echo '<a href="' . esc_url($lang['url']) . '">' . esc_html($lang['name']) . '</a> ';
-                    }
-                    echo '</div>';
-                }
             }
         }
         ?>
@@ -70,18 +60,6 @@
                     'depth'          => 3,
                     'walker'         => new Luvex_Nav_Walker(),
                 ));
-            } else {
-                echo '<ul id="primary-menu">';
-                echo '<li><a href="' . home_url('/about/') . '">About</a></li>';
-                echo '<li><a href="' . home_url('/uv-technology/') . '">UV Technology</a></li>';
-                echo '<li><a href="' . home_url('/contact/') . '">Contact</a></li>';
-                echo '</ul>';
-                
-                if (current_user_can('edit_theme_options')) {
-                    echo '<div style="background:red;color:white;padding:5px;border-radius:3px;margin-left:10px;">';
-                    echo '<a href="' . admin_url('nav-menus.php') . '" style="color:white;">Menu Setup</a>';
-                    echo '</div>';
-                }
             }
             ?>
         </nav>
@@ -101,8 +79,6 @@
                                 <?php 
                                 if (function_exists('luvex_get_user_avatar')) {
                                     echo luvex_get_user_avatar(); 
-                                } else {
-                                    echo strtoupper(substr($first_name, 0, 1));
                                 }
                                 ?>
                             </div>
@@ -120,8 +96,6 @@
                                         <?php 
                                         if (function_exists('luvex_get_user_avatar')) {
                                             echo luvex_get_user_avatar(); 
-                                        } else {
-                                            echo strtoupper(substr($first_name, 0, 1));
                                         }
                                         ?>
                                     </div>
@@ -177,61 +151,7 @@
                 'theme_location' => 'primary',
                 'menu_id'        => 'mobile-menu-list',
                 'container'      => false,
-                'fallback_cb'    => 'luvex_primary_menu_fallback',
             ));
-            ?>
-            
-            <?php 
-            // Mobile Language Switcher nur für nicht-eingeloggte User
-            if (function_exists('pll_the_languages') && !is_user_logged_in()) : 
-                $polylang_languages = pll_the_languages(['raw' => 1]);
-                if ($polylang_languages && is_array($polylang_languages)) :
-            ?>
-                <div class="mobile-language-section">
-                    <h4 class="mobile-section-title">
-                        <i class="fa-solid fa-globe"></i>
-                        Language
-                    </h4>
-                    <div class="mobile-language-options">
-                        <?php 
-                        $simple_languages = [
-                            'en' => ['name' => 'English', 'flag' => '🇺🇸'],
-                            'de' => ['name' => 'Deutsch', 'flag' => '🇩🇪'],
-                            'es' => ['name' => 'Español', 'flag' => '🇪🇸'],
-                            'fr' => ['name' => 'Français', 'flag' => '🇫🇷'],
-                            'it' => ['name' => 'Italiano', 'flag' => '🇮🇹'],
-                            'pl' => ['name' => 'Polski', 'flag' => '🇵🇱'],
-                            'pt' => ['name' => 'Português', 'flag' => '🇵🇹'],
-                            'tr' => ['name' => 'Türkçe', 'flag' => '🇹🇷'],
-                            'th' => ['name' => 'ไทย', 'flag' => '🇹🇭'],
-                            'zh' => ['name' => '中文', 'flag' => '🇨🇳'],
-                            'ja' => ['name' => '日本語', 'flag' => '🇯🇵']
-                        ];
-                        
-                        $current_lang = function_exists('pll_current_language') ? pll_current_language() : 'en';
-                        
-                        foreach ($polylang_languages as $lang_code => $lang_data) :
-                            $is_current = $lang_code === $current_lang;
-                            $lang_info = $simple_languages[$lang_code] ?? ['name' => $lang_data['name'], 'flag' => '🌐'];
-                        ?>
-                            <button class="mobile-language-option <?php echo $is_current ? 'current' : ''; ?>" 
-                                    onclick="window.location.href='<?php echo esc_url($lang_data['url']); ?>'"
-                                    data-language="<?php echo esc_attr($lang_code); ?>"
-                                    <?php echo $is_current ? 'disabled' : ''; ?>>
-                                <span class="language-flag"><?php echo $lang_info['flag']; ?></span>
-                                <span class="language-name"><?php echo esc_html($lang_info['name']); ?></span>
-                                <?php if ($is_current) : ?>
-                                    <i class="fa-solid fa-check"></i>
-                                <?php endif; ?>
-                            </button>
-                        <?php 
-                        endforeach; 
-                        ?>
-                    </div>
-                </div>
-            <?php 
-                endif;
-            endif; 
             ?>
         </div>
     </nav>
@@ -240,19 +160,3 @@
 <div id="content" class="site-content">
     <div id="primary" class="content-area">
         <main id="main" class="site-main">
-
-<?php
-function luvex_primary_menu_fallback() {
-    if (current_user_can('edit_theme_options')) {
-        echo '<ul id="primary-menu">';
-        echo '<li><a href="' . admin_url('nav-menus.php') . '" style="color: red;">Setup Menu →</a></li>';
-        echo '</ul>';
-    } else {
-        echo '<ul id="primary-menu">';
-        echo '<li><a href="' . home_url('/about/') . '">About</a></li>';
-        echo '<li><a href="' . home_url('/uv-technology/') . '">UV Technology</a></li>';
-        echo '<li><a href="' . home_url('/contact/') . '">Contact</a></li>';
-        echo '</ul>';
-    }
-}
-?>

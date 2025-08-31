@@ -179,7 +179,7 @@ Last Update: 2025-08-31 (Final Spacing & Layout Adjustments)
     text-decoration: none;
     position: relative;
     transition: all 0.3s ease;
-    padding: 0 1.6rem; /* FINALER ABSTAND */
+    padding: 0 1.5rem; /* OPTIMIERTER ABSTAND */
     display: flex;
     flex-direction: column; /* Icon unter Text */
     align-items: center;
@@ -288,10 +288,10 @@ Last Update: 2025-08-31 (Final Spacing & Layout Adjustments)
     color: var(--luvex-white);
     font-weight: 500;
     padding: 1.2rem 1.5rem;
-    display: flex; /* Flexbox für Icon + Text */
-    flex-direction: row; /* Wichtig: Sub-Menü bleibt horizontal */
+    display: flex;
+    flex-direction: row;
     align-items: center;
-    gap: 0.75rem; /* Abstand zwischen Icon und Text */
+    gap: 0.75rem;
     position: relative;
     transition: all 0.3s ease;
     white-space: nowrap;

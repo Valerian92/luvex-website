@@ -4,7 +4,7 @@
  *
  * @package Luvex
  * @since 1.7.0
- * Last Update: 2025-08-28 23:25
+ * Last Update: 2025-08-31 - Re-added Auth Modal include
  */
 ?>
 
@@ -221,7 +221,7 @@ function luvex_footer_legal_fallback() {
 </button>
 
 <?php 
-// HINWEIS: Das Auth-Modal wird hier als wiederverwendbares Template eingebunden.
+// KORREKTUR: Das Auth-Modal wird hier wieder als Template eingebunden.
 // Es bleibt standardmäßig verborgen und wird bei Bedarf per JavaScript sichtbar gemacht.
 get_template_part('includes/auth-modal');
 ?>

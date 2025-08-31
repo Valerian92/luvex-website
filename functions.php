@@ -236,64 +236,7 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
     }
 }
 
-
-// 6. LOGIN/LOGOUT BUTTON & USER PROFILE IN MENU (WIEDERHERGESTELLT)
-add_filter('wp_nav_menu_items', 'luvex_add_header_actions', 10, 2);
-function luvex_add_header_actions($items, $args) {
-    if ($args->theme_location == 'primary') {
-        
-        $header_actions_items = '';
-        
-        if (is_user_logged_in()) {
-            $user = wp_get_current_user();
-            $user_id = $user->ID;
-            $first_name = $user->first_name ?: $user->display_name;
-            $profile_page_url = get_permalink(get_page_by_path('profile'));
-
-            $header_actions_items .= '<li class="user-section menu-item">';
-            $header_actions_items .= '<div class="user-info" onclick="toggleUserDropdown()" aria-haspopup="true" aria-expanded="false">';
-            $header_actions_items .= '<div class="user-avatar">' . luvex_get_user_avatar($user_id) . '</div>';
-            if ($first_name) {
-                 $header_actions_items .= '<div class="user-details">';
-                 $header_actions_items .= '<p class="user-welcome">Welcome</p>';
-                 $header_actions_items .= '<p class="user-name">' . esc_html($first_name) . '</p>';
-                 $header_actions_items .= '</div>';
-            }
-            $header_actions_items .= '<i class="fa-solid fa-chevron-down dropdown-arrow"></i>';
-            $header_actions_items .= '</div>';
-            
-            $header_actions_items .= '<div id="userDropdown" class="user-dropdown" aria-hidden="true">';
-            $header_actions_items .= '<div class="dropdown-header">';
-            $header_actions_items .= '<div class="dropdown-user-info">';
-            $header_actions_items .= '<div class="dropdown-avatar">' . luvex_get_user_avatar($user_id) . '</div>';
-            $header_actions_items .= '<div class="dropdown-user-details">';
-            $header_actions_items .= '<h4>' . esc_html($first_name) . '</h4>';
-            $header_actions_items .= '<p>' . esc_html($user->user_email) . '</p>';
-            $header_actions_items .= '</div></div></div>';
-            $header_actions_items .= '<div class="dropdown-menu">';
-            if ($profile_page_url) {
-                $header_actions_items .= '<a href="' . esc_url($profile_page_url) . '" class="dropdown-item"><i class="fa-solid fa-user-circle"></i> My Profile</a>';
-            }
-            $header_actions_items .= '<a href="' . esc_url(wp_logout_url(home_url())) . '" class="dropdown-item"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>';
-            $header_actions_items .= '</div></div></li>';
-
-        } else {
-            $login_page = get_page_by_path('login');
-            $login_page_url = $login_page ? get_permalink($login_page) : wp_login_url();
-
-            $header_actions_items .= '<li class="header-cta menu-item">';
-            $header_actions_items .= '<a href="' . esc_url($login_page_url) . '" class="header-cta-button"><i class="fa-solid fa-right-to-bracket"></i> Login / Register</a>';
-            $header_actions_items .= '</li>';
-        }
-        
-        // Wrap header actions to group them
-        $items .= '<div class="header-actions-group">' . $header_actions_items . '</div>';
-    }
-    return $items;
-}
-
-
-// 7. AVATAR FUNKTION
+// 6. AVATAR FUNKTION
 if (!function_exists('luvex_get_user_avatar')) {
     function luvex_get_user_avatar($user_id = null) {
         if (function_exists('LuvexUserSystem::get_user_avatar')) {
@@ -317,7 +260,7 @@ if (!function_exists('luvex_get_user_avatar')) {
     }
 }
 
-// 8. SYSTEM-DATEIEN LADEN
+// 7. SYSTEM-DATEIEN LADEN
 $luvex_includes_path = get_stylesheet_directory() . '/includes/';
 $luvex_includes_files = [
     '_luvex_ajax.php',
@@ -332,7 +275,7 @@ foreach ($luvex_includes_files as $file) {
     }
 }
 
-// 9. reCAPTCHA FUNKTION (Unverändert)
+// 8. reCAPTCHA FUNKTION (Unverändert)
 function luvex_verify_recaptcha($response) {
     if (empty($response) || !defined('LUVEX_RECAPTCHA_SECRET_KEY')) {
         return false;
@@ -355,7 +298,7 @@ function luvex_verify_recaptcha($response) {
     return isset($data['success']) && $data['success'] === true;
 }
 
-// 10. DEBUGGING FÜR ENTWICKLUNG (nur für Admins)
+// 9. DEBUGGING FÜR ENTWICKLUNG (nur für Admins)
 if (defined('WP_DEBUG') && WP_DEBUG) {
     add_action('wp_footer', function() {
         if (!current_user_can('manage_options') || !class_exists('LuvexAjaxManager')) return;
@@ -382,7 +325,7 @@ if (defined('WP_DEBUG') && WP_DEBUG) {
     });
 }
 
-// 11. ZUSÄTZLICHE HELPER FÜR CSS-STRUKTUR
+// 10. ZUSÄTZLICHE HELPER FÜR CSS-STRUKTUR
 add_filter('body_class', 'luvex_add_context_classes');
 function luvex_add_context_classes($classes) {
     if (is_page(['profile', 'contact', 'about']) || is_front_page()) {
