@@ -4,7 +4,7 @@
  * Description: Komplette Theme-Setup-, Navigations- und Asset-Lade-Logik.
  * UPDATED: Angepasst für neue CSS-Struktur (animations.css entfernt, Logik verbessert)
  * @package Luvex
- * @version 3.2.1
+ * @version 3.2.2
  */
 
 if (!defined('ABSPATH')) {
@@ -128,12 +128,13 @@ function luvex_enqueue_assets() {
 
     // Globale Scripts
     $global_scripts = [
-        'luvex-header-effects' => 'global/luvex-header-effects.js',
-        'luvex-profile-menu' => 'global/profile-menu.js',
+        'luvex-auth-modal'        => 'global/auth-modal.js', // KORREKTUR: Die neue, saubere Modal-Logik
+        'luvex-header-effects'    => 'global/luvex-header-effects.js',
+        'luvex-profile-menu'      => 'global/profile-menu.js',
         'luvex-scroll-animations' => 'global/scroll-animations.js',
-        'luvex-scroll-to-top' => 'global/scroll-to-top.js',
-        'luvex-footer-light' => 'global/footer-light-effect.js',
-        'luvex-interactive-faq' => 'global/interactive-faq.js',
+        'luvex-scroll-to-top'     => 'global/scroll-to-top.js',
+        'luvex-footer-light'      => 'global/footer-light-effect.js',
+        'luvex-interactive-faq'   => 'global/interactive-faq.js',
     ];
     
     if (is_user_logged_in() && current_user_can('manage_options')) {

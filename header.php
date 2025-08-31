@@ -23,31 +23,34 @@
 <header id="site-header" class="site-header fixed-header">
     <div class="header-container">
         
-    <!-- Language Switcher links vom Logo -->
-    <div class="header-language-switcher">
-        <?php 
-        if (function_exists('pll_the_languages') && class_exists('LuvexUserSystem')) {
-            if (method_exists('LuvexUserSystem', 'get_language_switcher_dropdown')) {
-                echo LuvexUserSystem::get_language_switcher_dropdown();
-            }
-        }
-        ?>
-    </div>
+        <!-- KORREKTUR: Linke Elemente gruppiert für besseres Flexbox-Layout -->
+        <div class="header-left-group">
+            <!-- Language Switcher links vom Logo -->
+            <div class="header-language-switcher">
+                <?php 
+                if (function_exists('pll_the_languages') && class_exists('LuvexUserSystem')) {
+                    if (method_exists('LuvexUserSystem', 'get_language_switcher_dropdown')) {
+                        echo LuvexUserSystem::get_language_switcher_dropdown();
+                    }
+                }
+                ?>
+            </div>
 
-    <!-- Logo -->
-    <div class="site-branding">
-        <?php
-        if ( has_custom_logo() ) {
-            the_custom_logo();
-        } else {
-            ?>
-            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="luvex-logo-text">
-                <span class="logo-l">L</span><span class="logo-u">u</span><span class="logo-vex">vex</span><span class="logo-dot"></span>
-            </a>
-            <?php
-        }
-        ?>
-    </div>
+            <!-- Logo -->
+            <div class="site-branding">
+                <?php
+                if ( has_custom_logo() ) {
+                    the_custom_logo();
+                } else {
+                    ?>
+                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="luvex-logo-text">
+                        <span class="logo-l">L</span><span class="logo-u">u</span><span class="logo-vex">vex</span><span class="logo-dot"></span>
+                    </a>
+                    <?php
+                }
+                ?>
+            </div>
+        </div>
 
         <!-- Desktop Navigation -->
         <nav id="desktop-navigation" class="main-navigation">

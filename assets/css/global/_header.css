@@ -53,9 +53,16 @@ Last Update: 2025-08-31 (Final Spacing & Layout Adjustments)
     position: relative;
 }
 
+/* KORREKTUR: Gruppe für linke Elemente für stabiles Layout */
+.header-left-group {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Abstand zwischen Logo und Sprachwahl */
+    flex-shrink: 0; /* Verhindert, dass die Gruppe schrumpft */
+}
+
 .header-language-switcher {
     flex-shrink: 0;
-    margin-right: 1rem;
     transform: translateY(-2px);
 }
 
@@ -143,9 +150,9 @@ Last Update: 2025-08-31 (Final Spacing & Layout Adjustments)
    3. MAIN NAVIGATION SYSTEM
    ========================================================================== */
 .main-navigation {
-    flex-grow: 1;
+    flex-grow: 1; /* KORREKTUR: Nimmt den freien Platz in der Mitte ein */
     display: flex;
-    justify-content: center;
+    justify-content: center; /* KORREKTUR: Zentriert das Menü */
     margin: 0 2rem;
     overflow: visible !important;
     position: relative;
@@ -228,6 +235,16 @@ Last Update: 2025-08-31 (Final Spacing & Layout Adjustments)
 .main-navigation > ul > li.menu-item-has-children > a .dropdown-arrow {
     display: none;
 }
+
+/* ==========================================================================
+   FIX: Versteckt den duplizierten, ungestylten Login-Button
+========================================================================== */
+.main-navigation ul > li > a[href*="login"],
+.main-navigation ul > li > a[href*="wp-login.php"],
+.main-navigation ul > li > a[href*="register"] {
+    display: none !important;
+}
+
 
 /* ==========================================================================
    5. LEVEL 2 - HORIZONTAL SUB-MENU (ALTE LOGIK BEIBEHALTEN)
@@ -389,13 +406,17 @@ Last Update: 2025-08-31 (Final Spacing & Layout Adjustments)
 /* ==========================================================================
    8. HEADER CTA, USER SYSTEM & LANGUAGE SWITCHER
    ========================================================================== */
+.header-cta {
+    flex-shrink: 0; /* KORREKTUR: Verhindert, dass der CTA-Bereich schrumpft */
+}
+
 .header-actions-group {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-.header-cta a.header-cta-button {
+.header-cta-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -409,30 +430,16 @@ Last Update: 2025-08-31 (Final Spacing & Layout Adjustments)
     font-size: 0.95rem;
     transition: all 0.3s ease;
     border: 2px solid transparent;
+    cursor: pointer;
 }
 
-.header-cta a.header-cta-button:hover {
+.header-cta-button:hover {
     background: var(--luvex-white);
     color: var(--luvex-dark-blue);
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
 }
 
-.site-header.scrolled .header-cta a.header-cta-button {
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
-    box-shadow: 
-        0 2px 10px rgba(109, 213, 237, 0.3),
-        0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.site-header.scrolled .header-cta a.header-cta-button:hover {
-    background: var(--luvex-white);
-    box-shadow: 
-        0 4px 15px rgba(109, 213, 237, 0.4),
-        0 2px 6px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px) scale(1.02);
-}
 
 /* --- User Section (Logged In) --- */
 .user-section {
