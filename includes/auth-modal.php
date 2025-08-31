@@ -1,43 +1,36 @@
 <?php
 /**
- * Auth-Modal-Template (Vollständige Version 3.6.0)
- * AJAX-basiertes Login/Register-Modal mit neuem Layout, sticky Header und optimierten Formular-Komponenten.
- * Die vorherige Struktur und Logik sind vollständig erhalten und wurden nur verbessert.
+ * Auth-Modal-Template (Vollständig überarbeitet V4.1)
+ * Stellt die komplette Funktionalität wieder her:
+ * - Lädt Industrien & Interessen aus luvex-helpers.php
+ * - Stellt das 2-spaltige Layout für Account-Details wieder her
+ * - Fügt Telefon- & Länderfelder hinzu
+ * - Integriert reCAPTCHA und Interests-Sektion
+ * - Stellt korrekte Button-Styles sicher
  */
 
 if (!defined('ABSPATH')) exit;
 
 // Hole alle notwendigen Konfigurationen und Daten
 $recaptcha_site_key = defined('LUVEX_RECAPTCHA_SITE_KEY') ? LUVEX_RECAPTCHA_SITE_KEY : '';
-$ajax_nonce = function_exists('luvex_ajax_nonce') ? luvex_ajax_nonce() : wp_create_nonce('luvex_ajax_nonce');
 
-// Industrien für das Registrierungsformular
-$industries = [
-    'Automotive & Aerospace' => 'fa-car', 'Electronics & Semiconductors' => 'fa-microchip',
-    'Printing & Graphics' => 'fa-print', 'Wood & Furniture' => 'fa-chair',
-    'Medical & Pharma' => 'fa-pills', 'Plastics & Polymers' => 'fa-shapes',
-    'Metal & Glass' => 'fa-gem', 'Textile & Leather' => 'fa-shirt',
-    'Water & Air Purification' => 'fa-tint', 'Food & Beverage' => 'fa-utensils',
-    'Research & Laboratory' => 'fa-flask', 'Other' => 'fa-ellipsis-h'
-];
+// Lade Industrien, Interessen und Länder aus den Helper-Funktionen
+$industries = function_exists('luvex_get_industries') ? luvex_get_industries() : [];
+$interests = function_exists('luvex_get_interests') ? luvex_get_interests() : [];
+$countries = function_exists('luvex_get_countries') ? luvex_get_countries() : [];
+
 ?>
-
-<!-- Das Modal-Overlay -->
 <div id="authModal" class="modal-overlay">
     <div class="modal-content">
 
-        <!-- NEU: Fester Header für Tabs und Benachrichtigungen -->
         <div class="auth-modal-header">
-            <!-- Tabs System -->
             <div class="auth-tabs">
                 <button class="auth-tab active" id="login-tab-link" onclick="showAuthForm('login')">Login</button>
                 <button class="auth-tab" id="register-tab-link" onclick="showAuthForm('register')">Register</button>
             </div>
-            <!-- Feedback-Container (jetzt im festen Header) -->
             <div id="auth-feedback" class="luvex-feedback-message"></div>
         </div>
 
-        <!-- Scrollbarer Inhaltsbereich -->
         <div class="auth-scrollable-content">
             <div id="auth-tab-content-wrapper">
 
@@ -62,9 +55,13 @@ $industries = [
                             </label>
                             <a href="#" class="forgot-password-link" onclick="showAuthForm('forgot-password')">Forgot Password?</a>
                         </div>
-                        <button type="submit" id="login-submit-btn" class="form-submit--enhanced">
+                        <div class="recaptcha-wrapper" style="margin-top: 1rem;">
+                            <?php if (!empty($recaptcha_site_key)): ?>
+                                <div class="g-recaptcha" data-sitekey="<?php echo esc_attr($recaptcha_site_key); ?>"></div>
+                            <?php endif; ?>
+                        </div>
+                        <button type="submit" id="login-submit-btn" class="luvex-form-submit">
                             <span class="btn-text">Login</span>
-                            <span class="btn-loader"><i class="fa-solid fa-spinner fa-spin"></i></span>
                         </button>
                     </form>
                 </div>
@@ -72,21 +69,36 @@ $industries = [
                 <!-- Register Form -->
                 <div id="register-form-container" class="auth-form-container" style="display:none;">
                     <form id="luvex-register-form" class="auth-form" method="post">
-                        <!-- Account Details -->
+                        <!-- Account Details (Required & Optional) -->
                         <div class="luvex-form-section">
                             <h4 class="luvex-form-section-title"><i class="fa-solid fa-user-circle"></i> Account Details</h4>
                             <div class="luvex-form-grid-2">
-                                <input type="text" name="first_name" placeholder="First Name" required class="luvex-input">
-                                <input type="text" name="last_name" placeholder="Last Name" required class="luvex-input">
-                                <input type="email" name="user_email" placeholder="Email Address" required class="luvex-input">
-                                <input type="text" name="company_name" placeholder="Company Name" class="luvex-input">
-                                <div class="password-wrapper">
-                                    <input type="password" name="user_pass" id="reg_user_pass" placeholder="Password" required class="luvex-input">
-                                    <i class="fa-regular fa-eye-slash toggle-password"></i>
+                                <!-- Required Fields -->
+                                <div class="luvex-form-column">
+                                    <h5>Required</h5>
+                                    <input type="text" name="first_name" placeholder="First Name*" required class="luvex-input">
+                                    <input type="text" name="last_name" placeholder="Last Name*" required class="luvex-input">
+                                    <input type="email" name="user_email" placeholder="Email Address*" required class="luvex-input">
+                                    <div class="password-wrapper">
+                                        <input type="password" name="user_pass" id="reg_user_pass" placeholder="Password*" required class="luvex-input" minlength="8">
+                                        <i class="fa-regular fa-eye-slash toggle-password"></i>
+                                    </div>
+                                    <div class="password-wrapper">
+                                        <input type="password" name="user_pass_confirm" id="reg_user_pass_confirm" placeholder="Confirm Password*" required class="luvex-input">
+                                        <i class="fa-regular fa-eye-slash toggle-password"></i>
+                                    </div>
                                 </div>
-                                <div class="password-wrapper">
-                                    <input type="password" name="user_pass_confirm" id="reg_user_pass_confirm" placeholder="Confirm Password" required class="luvex-input">
-                                    <i class="fa-regular fa-eye-slash toggle-password"></i>
+                                <!-- Optional Fields -->
+                                <div class="luvex-form-column">
+                                    <h5>Optional</h5>
+                                    <input type="text" name="company_name" placeholder="Company Name" class="luvex-input">
+                                    <input type="tel" name="phone_number" placeholder="Phone Number" class="luvex-input">
+                                    <select name="country" class="luvex-input">
+                                        <option value="" disabled selected>Select your Country</option>
+                                        <?php foreach ($countries as $code => $name): ?>
+                                            <option value="<?php echo esc_attr($code); ?>"><?php echo esc_html($name); ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -94,31 +106,28 @@ $industries = [
                         <!-- Industry Selection -->
                         <div class="luvex-form-section">
                             <h4 class="luvex-form-section-title"><i class="fa-solid fa-industry"></i> Your Industry</h4>
-                             <!-- NEU: Grid mit Toggle-Funktion -->
                             <div id="industry-grid-container" class="interests-grid-industries">
-                                <?php foreach ($industries as $name => $icon): ?>
-                                    <?php if ($name !== 'Other'): ?>
-                                        <label class="interest-checkbox">
-                                            <input type="checkbox" name="user_industry[]" value="<?php echo esc_attr($name); ?>">
-                                            <div class="interest-checkbox-content">
-                                                <i class="fa-solid <?php echo esc_attr($icon); ?>"></i>
-                                                <span><?php echo esc_html($name); ?></span>
-                                            </div>
-                                        </label>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
+                                <?php $i = 0; foreach ($industries as $name => $icon): if ($name === 'Other') continue; ?>
+                                    <label class="interest-checkbox">
+                                        <input type="checkbox" name="user_industry[]" value="<?php echo esc_attr($name); ?>">
+                                        <div class="interest-checkbox-content">
+                                            <i class="fa-solid <?php echo esc_attr($icon); ?>"></i>
+                                            <span><?php echo esc_html($name); ?></span>
+                                        </div>
+                                    </label>
+                                <?php $i++; endforeach; ?>
                             </div>
+                            <?php if (count($industries) > 8): ?>
                             <button type="button" id="industry-toggle-btn" class="btn--text-icon">
                                 <span class="btn-text">Show More Industries</span>
                                 <i class="fa-solid fa-chevron-down"></i>
                             </button>
-
-                            <!-- Feld für "Other" -->
+                            <?php endif; ?>
                             <div class="other-industry-container">
                                 <label class="interest-checkbox">
                                     <input type="checkbox" name="user_industry[]" value="Other" id="industry_other_checkbox">
                                     <div class="interest-checkbox-content">
-                                        <i class="fa-solid fa-ellipsis-h"></i>
+                                        <i class="fa-solid <?php echo esc_attr($industries['Other'] ?? 'fa-ellipsis-h'); ?>"></i>
                                         <span>Other</span>
                                     </div>
                                 </label>
@@ -126,10 +135,30 @@ $industries = [
                             </div>
                         </div>
                         
+                        <!-- Interests Selection -->
+                        <div class="luvex-form-section">
+                            <h4 class="luvex-form-section-title"><i class="fa-solid fa-lightbulb"></i> Your Interests</h4>
+                            <div class="interests-grid">
+                                <?php foreach ($interests as $name => $icon): ?>
+                                <label class="interest-checkbox">
+                                    <input type="checkbox" name="user_interests[]" value="<?php echo esc_attr($name); ?>">
+                                    <div class="interest-checkbox-content">
+                                        <i class="fa-solid <?php echo esc_attr($icon); ?>"></i>
+                                        <span><?php echo esc_html($name); ?></span>
+                                    </div>
+                                </label>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+
                         <!-- Final Steps -->
                         <div class="luvex-form-section">
                              <div class="recaptcha-wrapper">
-                                <div class="g-recaptcha" data-sitekey="<?php echo esc_attr($recaptcha_site_key); ?>"></div>
+                                <?php if (!empty($recaptcha_site_key)): ?>
+                                    <div class="g-recaptcha" data-sitekey="<?php echo esc_attr($recaptcha_site_key); ?>"></div>
+                                <?php else: ?>
+                                    <p style="color: #ffc107; font-size: 12px; text-align: center;">reCAPTCHA is not configured.</p>
+                                <?php endif; ?>
                             </div>
                             <div class="auth-form-footer-register">
                                 <label class="luvex-checkbox">
@@ -145,9 +174,8 @@ $industries = [
                             </div>
                         </div>
 
-                        <button type="submit" id="register-submit-btn" class="form-submit--enhanced">
-                            <span class="btn-text">Create Account</span>
-                            <span class="btn-loader"><i class="fa-solid fa-spinner fa-spin"></i></span>
+                        <button type="submit" id="register-submit-btn" class="luvex-form-submit">
+                           <span class="btn-text">Create Account</span>
                         </button>
                     </form>
                 </div>
@@ -162,9 +190,8 @@ $industries = [
                                 <input type="email" name="user_email_reset" class="luvex-input" placeholder="Your Email Address" required>
                              </div>
                         </div>
-                         <button type="submit" id="forgot-password-submit-btn" class="form-submit--enhanced">
+                         <button type="submit" id="forgot-password-submit-btn" class="luvex-form-submit">
                             <span class="btn-text">Send Reset Link</span>
-                            <span class="btn-loader"><i class="fa-solid fa-spinner fa-spin"></i></span>
                         </button>
                         <a href="#" class="back-to-login-link" onclick="showAuthForm('login')"><i class="fa-solid fa-arrow-left"></i> Back to Login</a>
                      </form>
@@ -174,8 +201,8 @@ $industries = [
     </div>
 </div>
 
+<!-- Local JS for Modal Interactions -->
 <script>
-// JavaScript für "Show More" Button und "Other" Feld
 document.addEventListener('DOMContentLoaded', function() {
     const industryGrid = document.getElementById('industry-grid-container');
     const industryToggleBtn = document.getElementById('industry-toggle-btn');
@@ -184,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const scrollableContent = document.querySelector('#authModal .auth-scrollable-content');
     const header = document.querySelector('#authModal .auth-modal-header');
 
-    if (industryToggleBtn) {
+    if (industryToggleBtn && industryGrid) {
         industryToggleBtn.addEventListener('click', function() {
             industryGrid.classList.toggle('expanded');
             const isExpanded = industryGrid.classList.contains('expanded');
@@ -202,7 +229,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Scroll-Indikator für Header
     if (scrollableContent && header) {
         scrollableContent.addEventListener('scroll', function() {
             if (this.scrollTop > 10) {
@@ -212,6 +238,21 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    document.querySelectorAll('.toggle-password').forEach(toggle => {
+        toggle.addEventListener('click', function() {
+            const passwordInput = this.previousElementSibling;
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
+            } else {
+                passwordInput.type = 'password';
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
+            }
+        });
+    });
 });
 </script>
 

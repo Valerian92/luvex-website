@@ -160,11 +160,10 @@ Last Update: 2025-08-31 (Button-Animation repariert)
     
     color: var(--luvex-white) !important;
 
-    /* ZWEI ANIMATIONEN GLEICHZEITIG */
-    animation-name: pulse-purple-glow, gradient-shift-smooth !important;
-    animation-duration: 2.5s, 3s !important;
-    animation-timing-function: ease-in-out, ease-in-out !important;
-    animation-iteration-count: infinite, infinite !important;
+    /* ZWEI ANIMATIONEN GLEICHZEITIG - JETZT ALS SHORTHAND, UM ÜBERSCHREIBUNGEN ZU VERHINDERN */
+    animation: 
+        pulse-purple-glow 2.5s infinite ease-in-out, 
+        gradient-shift-smooth 3s infinite ease-in-out !important;
 
     /* Zusätzliche visuelle Effekte */
     transform: translateY(-2px) scale(1.05) !important;
