@@ -1129,14 +1129,14 @@ input[type="tel"]:focus {
     z-index: 999;
     background-color: var(--luvex-vibrant-blue);
     color: white;
-    border: none;
+    border: 3px solid transparent;
     border-radius: 50%;
     width: 50px;
     height: 50px;
     font-size: 1.2rem;
     cursor: pointer;
     box-shadow: var(--shadow-md);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
     opacity: 0;
     transform: translateY(10px);
 }
@@ -1153,6 +1153,28 @@ input[type="tel"]:focus {
     background-color: var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
 }
+
+/* KORREKTUR: Wiederhergestellte Deutschland-Flaggen-Animation */
+@keyframes border-flag-de {
+    0%, 100% {
+        border-color: #000000; /* Schwarz */
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    }
+    33% {
+        border-color: #DD0000; /* Rot */
+        box-shadow: 0 0 15px rgba(221, 0, 0, 0.5);
+    }
+    66% {
+        border-color: #FFCE00; /* Gold */
+        box-shadow: 0 0 15px rgba(255, 206, 0, 0.5);
+    }
+}
+
+/* Klasse, die die Animation auf den Button anwendet (wird per JS getoggelt) */
+#scrollToTopBtn.animate-border-flag {
+    animation: border-flag-de 2.5s linear infinite;
+}
+
 
 /*
 ==============================================================================

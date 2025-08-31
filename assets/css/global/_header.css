@@ -42,10 +42,8 @@ Last Update: 2025-08-31 (Final Spacing & Layout Adjustments)
 }
 
 .header-container {
-    /* KORREKTUR: Breite an Footer angepasst für besseren Platz */
     max-width: 1800px;
     margin: 0 auto;
-    /* KORREKTUR: Padding an die neue Breite angepasst */
     padding: 0 3rem;
     display: flex;
     align-items: center;
@@ -188,7 +186,8 @@ Last Update: 2025-08-31 (Final Spacing & Layout Adjustments)
     text-decoration: none;
     position: relative;
     transition: all 0.3s ease;
-    padding: 0 2.6rem; /* OPTIMIERTER ABSTAND */
+    /* KORREKTUR: Abstand zwischen Menüpunkten weiter vergrößert */
+    padding: 0 3rem; 
     display: flex;
     flex-direction: column; /* Icon unter Text */
     align-items: center;

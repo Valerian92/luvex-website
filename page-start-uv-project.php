@@ -10,7 +10,7 @@ get_header(); ?>
 
 <div class="booking-page">
     
-    <!-- HERO SECTION (OPTIMIZED) -->
+    <!-- HERO SECTION (FINAL ENGLISH TEXTS) -->
     <section class="luvex-hero booking-hero">
         <!-- Canvas für die Hintergrundanimation -->
         <canvas id="hero-animation-canvas"></canvas>
@@ -21,27 +21,26 @@ get_header(); ?>
                 <!-- Linke Spalte: Text & CTA -->
                 <div class="booking-hero__text-content">
                     <h1 class="luvex-hero__title">
-                        Start Your <span class="text-highlight">UV Project</span> Today
+                        Your Direct Path to <span class="text-highlight">Superior UV Results</span>
                     </h1>
                     <h2 class="luvex-hero__subtitle">
-                        Expert guidance, independent advice, proven results.
+                        Book a free strategy session and secure measurable outcomes.
                     </h2>
                     <p class="luvex-hero__description">
-                        Ready to optimize your UV processes? Schedule a free 30-minute consultation with our UV technology experts. No sales pitch – just honest, practical guidance tailored to your specific challenges.
+                        Whether you need to improve curing quality, maximize disinfection rates, or reduce operating costs – the first step is a solid analysis. Speak with an independent expert for 30 minutes, free of charge, and get a clear action plan for your next project.
                     </p>
                     
                     <!-- Call-to-Action Button -->
                     <div class="booking-hero__cta-container">
                         <a href="#schedule" class="btn--primary hero-scroll-button">
-                            <span>Schedule Free Consultation</span>
+                            <span>Schedule My Free Strategy Session</span>
                             <i class="fa-solid fa-arrow-down"></i>
                         </a>
                     </div>
 
-                    <!-- Social Proof (Platzhalter) -->
+                    <!-- Social Proof -->
                     <div class="hero-social-proof">
                         <p>Trusted by leading companies in the industry</p>
-                        <!-- Hier könnten Logos platziert werden -->
                     </div>
                 </div>
 
