@@ -288,10 +288,7 @@ if (file_exists($luvex_includes_path . '_luvex-helpers.php')) {
     require_once $luvex_includes_path . '_luvex-helpers.php';
 }
 
-// CORS fixes laden
-if (file_exists($luvex_includes_path . '_cors_fixes.php')) {
-    require_once $luvex_includes_path . '_cors_fixes.php';
-}
+// HINWEIS: _cors_fixes.php wird nicht mehr benötigt - CORS ist jetzt in LuvexAjaxManager integriert
 
 // 8. reCAPTCHA FUNKTION (Unchanged)
 function luvex_verify_recaptcha($response) {

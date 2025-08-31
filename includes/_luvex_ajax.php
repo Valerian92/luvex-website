@@ -40,6 +40,16 @@ class LuvexAjaxManager {
     ];
     
     /**
+     * Allowed origins for CORS (external apps)
+     */
+    private static $allowed_origins = [
+        'https://analyzer.luvex.tech',
+        'https://simulator.luvex.tech',
+        'https://www.luvex.tech',
+        'https://luvex.tech'
+    ];
+    
+    /**
      * Initialize AJAX system
      */
     public static function init() {
@@ -51,6 +61,77 @@ class LuvexAjaxManager {
         
         // Public API endpoints for external apps
         self::register_public_api_endpoints();
+        
+        // CORS handling for external apps
+        self::init_cors_handling();
+    }
+    
+    /**
+     * Initialize CORS handling for external applications
+     */
+    private static function init_cors_handling() {
+        // Add CORS headers to all LUVEX AJAX endpoints
+        $ajax_actions = [
+            'luvex_ajax_login',
+            'luvex_ajax_register', 
+            'luvex_set_language',
+            'luvex_upload_avatar',
+            'luvex_get_nonce',
+            'luvex_uvstrip_get_token',
+            'luvex_api_status'
+        ];
+        
+        foreach ($ajax_actions as $action) {
+            add_action("wp_ajax_{$action}", [self::class, 'add_cors_headers'], 1);
+            add_action("wp_ajax_nopriv_{$action}", [self::class, 'add_cors_headers'], 1);
+        }
+        
+        // Global CORS preflight handling
+        add_action('init', [self::class, 'handle_cors_preflight']);
+    }
+    
+    /**
+     * Add CORS headers for allowed origins
+     */
+    public static function add_cors_headers() {
+        $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+        
+        if (self::is_origin_allowed($origin)) {
+            header("Access-Control-Allow-Origin: $origin");
+            header('Access-Control-Allow-Credentials: true');
+            header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+            header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+        }
+        
+        // Handle preflight requests
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            http_response_code(200);
+            exit;
+        }
+    }
+    
+    /**
+     * Handle CORS preflight requests globally
+     */
+    public static function handle_cors_preflight() {
+        // Only handle admin-ajax.php requests
+        if (!isset($_SERVER['REQUEST_URI']) || strpos($_SERVER['REQUEST_URI'], 'admin-ajax.php') === false) {
+            return;
+        }
+        
+        $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+        
+        if (self::is_origin_allowed($origin)) {
+            header("Access-Control-Allow-Origin: $origin");
+            header('Access-Control-Allow-Credentials: true');
+            header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+            header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+        }
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            http_response_code(200);
+            exit;
+        }
     }
     
     /**
@@ -187,9 +268,7 @@ class LuvexAjaxManager {
         self::validate_ajax_request('login');
         
         // Apply CORS headers for external apps
-        if (class_exists('LuvexCORSManager')) {
-            LuvexCORSManager::add_cors_headers();
-        }
+        self::add_cors_headers();
         
         // Delegate to existing security class
         if (class_exists('LuvexSecurity') && method_exists('LuvexSecurity', 'ajax_handle_login')) {
@@ -209,9 +288,7 @@ class LuvexAjaxManager {
         self::validate_ajax_request('register');
         
         // Apply CORS headers for external apps
-        if (class_exists('LuvexCORSManager')) {
-            LuvexCORSManager::add_cors_headers();
-        }
+        self::add_cors_headers();
         
         // Delegate to existing security class
         if (class_exists('LuvexSecurity') && method_exists('LuvexSecurity', 'ajax_handle_registration')) {
@@ -231,9 +308,7 @@ class LuvexAjaxManager {
         self::validate_ajax_request('language_switch');
         
         // Apply CORS headers
-        if (class_exists('LuvexCORSManager')) {
-            LuvexCORSManager::add_cors_headers();
-        }
+        self::add_cors_headers();
         
         // Delegate to existing user system class
         if (class_exists('LuvexUserSystem') && method_exists('LuvexUserSystem', 'ajax_set_language')) {
@@ -326,13 +401,11 @@ class LuvexAjaxManager {
      */
     public static function handle_get_nonce() {
         // Apply CORS headers first
-        if (class_exists('LuvexCORSManager')) {
-            LuvexCORSManager::add_cors_headers();
-        }
+        self::add_cors_headers();
         
         // Basic validation (no nonce required for getting a nonce)
         $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
-        if (!self::is_allowed_external_origin($origin)) {
+        if (!self::is_origin_allowed($origin)) {
             wp_send_json_error([
                 'message' => 'Origin not allowed',
                 'code' => 'INVALID_ORIGIN'
@@ -353,9 +426,7 @@ class LuvexAjaxManager {
         self::validate_ajax_request('uvstrip_token');
         
         // Apply CORS headers
-        if (class_exists('LuvexCORSManager')) {
-            LuvexCORSManager::add_cors_headers();
-        }
+        self::add_cors_headers();
         
         // Generate a temporary token for the UV strip analyzer
         $token_data = [
@@ -379,9 +450,7 @@ class LuvexAjaxManager {
      */
     public static function handle_api_status() {
         // Apply CORS headers
-        if (class_exists('LuvexCORSManager')) {
-            LuvexCORSManager::add_cors_headers();
-        }
+        self::add_cors_headers();
         
         wp_send_json_success([
             'status' => 'active',
@@ -395,6 +464,35 @@ class LuvexAjaxManager {
             ],
             'timestamp' => time()
         ]);
+    }
+    
+    /**
+     * ========================================================================
+     * CORS MANAGEMENT METHODS
+     * ========================================================================
+     */
+    
+    /**
+     * Check if origin is allowed for external API access
+     */
+    private static function is_origin_allowed($origin) {
+        return in_array($origin, self::$allowed_origins);
+    }
+    
+    /**
+     * Add new allowed origin (for future expansion)
+     */
+    public static function add_allowed_origin($origin) {
+        if (!in_array($origin, self::$allowed_origins)) {
+            self::$allowed_origins[] = $origin;
+        }
+    }
+    
+    /**
+     * Get all allowed origins
+     */
+    public static function get_allowed_origins() {
+        return self::$allowed_origins;
     }
     
     /**
