@@ -511,7 +511,8 @@ Last Update: 2025-08-31 - Animations integriert
 input[type="text"],
 input[type="email"],
 input[type="password"],
-input[type="tel"] {
+input[type="tel"],
+select {
     width: 100%;
     height: 56px;
     padding: 0 1rem;
@@ -521,6 +522,15 @@ input[type="tel"] {
     border-radius: var(--radius-md);
     color: var(--luvex-white);
     transition: var(--transition-normal);
+}
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236dd5ed'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.5em;
+    padding-right: 3rem;
 }
 
 .luvex-input::placeholder,
@@ -536,7 +546,8 @@ input[type="tel"]::placeholder {
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
-input[type="tel"]:focus {
+input[type="tel"]:focus,
+select:focus {
     border-color: var(--luvex-bright-cyan);
     background: rgba(255, 255, 255, 0.08);
     box-shadow: 0 0 0 2px rgba(109, 213, 237, 0.5);
@@ -744,16 +755,14 @@ input[type="tel"]:focus {
 
 /* --- 5.6 Universal Submit Button --- */
 .luvex-form-submit {
-    width: auto;
-    min-width: 200px;
-    max-width: 300px;
+    width: 100%;
     padding: 1rem 2rem;
-    font-size: var(--text-base);
-    margin: 1rem auto 0;
+    font-size: var(--text-lg);
+    margin-top: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
     background: linear-gradient(45deg, var(--luvex-vibrant-blue), var(--luvex-special-cyan));
     color: var(--luvex-white);
     border: none;
@@ -775,8 +784,16 @@ input[type="tel"]:focus {
     transform: none;
 }
 
-.luvex-form-submit i { 
-    font-size: 0.9rem; 
+.luvex-form-submit .btn-loader {
+    display: none;
+}
+
+.luvex-form-submit.loading .btn-text {
+    display: none;
+}
+
+.luvex-form-submit.loading .btn-loader {
+    display: inline-block;
 }
 
 /*
@@ -831,251 +848,102 @@ input[type="tel"]:focus {
 
 /* --- 7.1 Scroll Reveal Animations --- */
 @keyframes slideInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @keyframes scaleIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 /* --- 7.2 Loading & Spinner Animations --- */
 @keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 @keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.05);
-        opacity: 0.8;
-    }
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
 }
 
 @keyframes bounce {
-    0%, 20%, 53%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40%, 43% {
-        transform: translateY(-30px);
-    }
-    70% {
-        transform: translateY(-15px);
-    }
-    90% {
-        transform: translateY(-4px);
-    }
+    0%, 20%, 53%, 80%, 100% { transform: translateY(0); }
+    40%, 43% { transform: translateY(-30px); }
+    70% { transform: translateY(-15px); }
+    90% { transform: translateY(-4px); }
 }
 
 /* --- 7.3 Glow & Shimmer Effects --- */
 @keyframes glow {
-    0%, 100% {
-        box-shadow: 0 0 5px rgba(109, 213, 237, 0.5);
-    }
-    50% {
-        box-shadow: 0 0 20px rgba(109, 213, 237, 0.8), 0 0 30px rgba(109, 213, 237, 0.6);
-    }
+    0%, 100% { box-shadow: 0 0 5px rgba(109, 213, 237, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(109, 213, 237, 0.8), 0 0 30px rgba(109, 213, 237, 0.6); }
 }
 
 @keyframes shimmer {
-    0% {
-        background-position: -200% center;
-    }
-    100% {
-        background-position: 200% center;
-    }
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
 }
 
 /* --- 7.4 Animation Utility Classes --- */
-.animate-slide-up {
-    animation: slideInUp 0.6s ease-out forwards;
-}
-
-.animate-slide-left {
-    animation: slideInLeft 0.6s ease-out forwards;
-}
-
-.animate-slide-right {
-    animation: slideInRight 0.6s ease-out forwards;
-}
-
-.animate-fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
-}
-
-.animate-scale-in {
-    animation: scaleIn 0.5s ease-out forwards;
-}
-
-.animate-spin {
-    animation: spin 1s linear infinite;
-}
-
-.animate-pulse {
-    animation: pulse 2s ease-in-out infinite;
-}
-
-.animate-bounce {
-    animation: bounce 1s ease infinite;
-}
-
-.animate-glow {
-    animation: glow 2s ease-in-out infinite;
-}
-
+.animate-slide-up { animation: slideInUp 0.6s ease-out forwards; }
+.animate-slide-left { animation: slideInLeft 0.6s ease-out forwards; }
+.animate-slide-right { animation: slideInRight 0.6s ease-out forwards; }
+.animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
+.animate-scale-in { animation: scaleIn 0.5s ease-out forwards; }
+.animate-spin { animation: spin 1s linear infinite; }
+.animate-pulse { animation: pulse 2s ease-in-out infinite; }
+.animate-bounce { animation: bounce 1s ease infinite; }
+.animate-glow { animation: glow 2s ease-in-out infinite; }
 .animate-shimmer {
-    background: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.1) 50%,
-        rgba(255, 255, 255, 0) 100%
-    );
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
     background-size: 200% 100%;
     animation: shimmer 2s ease-in-out infinite;
 }
 
 /* --- 7.5 Scroll-Triggered Animation Base Classes --- */
-.scroll-reveal {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.scroll-reveal.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.scroll-reveal-left {
-    opacity: 0;
-    transform: translateX(-50px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.scroll-reveal-left.is-visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.scroll-reveal-right {
-    opacity: 0;
-    transform: translateX(50px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.scroll-reveal-right.is-visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.scroll-reveal-scale {
-    opacity: 0;
-    transform: scale(0.8);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.scroll-reveal-scale.is-visible {
-    opacity: 1;
-    transform: scale(1);
-}
+.scroll-reveal { opacity: 0; transform: translateY(50px); transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.scroll-reveal.is-visible { opacity: 1; transform: translateY(0); }
+.scroll-reveal-left { opacity: 0; transform: translateX(-50px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+.scroll-reveal-left.is-visible { opacity: 1; transform: translateX(0); }
+.scroll-reveal-right { opacity: 0; transform: translateX(50px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+.scroll-reveal-right.is-visible { opacity: 1; transform: translateX(0); }
+.scroll-reveal-scale { opacity: 0; transform: scale(0.8); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+.scroll-reveal-scale.is-visible { opacity: 1; transform: scale(1); }
 
 /* --- 7.6 Staggered Animations für Listen/Grids --- */
-.stagger-children > * {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
+.stagger-children > * { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
 .stagger-children.is-visible > *:nth-child(1) { transition-delay: 0.1s; }
 .stagger-children.is-visible > *:nth-child(2) { transition-delay: 0.2s; }
 .stagger-children.is-visible > *:nth-child(3) { transition-delay: 0.3s; }
 .stagger-children.is-visible > *:nth-child(4) { transition-delay: 0.4s; }
 .stagger-children.is-visible > *:nth-child(5) { transition-delay: 0.5s; }
 .stagger-children.is-visible > *:nth-child(6) { transition-delay: 0.6s; }
-
-.stagger-children.is-visible > * {
-    opacity: 1;
-    transform: translateY(0);
-}
+.stagger-children.is-visible > * { opacity: 1; transform: translateY(0); }
 
 /* --- 7.7 Hover-Animation Classes --- */
-.hover-lift {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.hover-lift:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-.hover-scale {
-    transition: transform 0.3s ease;
-}
-
-.hover-scale:hover {
-    transform: scale(1.05);
-}
-
-.hover-glow {
-    transition: box-shadow 0.3s ease;
-}
-
-.hover-glow:hover {
-    box-shadow: 0 0 20px rgba(109, 213, 237, 0.5);
-}
+.hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.hover-lift:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); }
+.hover-scale { transition: transform 0.3s ease; }
+.hover-scale:hover { transform: scale(1.05); }
+.hover-glow { transition: box-shadow 0.3s ease; }
+.hover-glow:hover { box-shadow: 0 0 20px rgba(109, 213, 237, 0.5); }
 
 /*
 ==============================================================================
@@ -1084,41 +952,10 @@ input[type="tel"]:focus {
 */
 
 /* --- 8.1 Shine/Shiver Effect --- */
-.has-shine-effect {
-    position: relative;
-    overflow: hidden !important;
-    isolation: isolate;
-}
-
-.has-shine-effect::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -100%;
-    width: 30%;
-    height: 200%;
-    background: linear-gradient(45deg,
-        transparent 0%, 
-        rgba(109, 213, 237, 0.06) 45%,
-        rgba(109, 213, 237, 0.12) 50%,
-        rgba(109, 213, 237, 0.06) 55%,
-        transparent 100%
-    );
-    z-index: 1;
-    pointer-events: none;
-    transition: none;
-    transform: rotate(25deg);
-}
-
-.has-shine-effect:hover::before {
-    left: 120%;
-    transition: left 0.5s ease-out;
-}
-
-.has-shine-effect > * {
-    position: relative;
-    z-index: 2;
-}
+.has-shine-effect { position: relative; overflow: hidden !important; isolation: isolate; }
+.has-shine-effect::before { content: ''; position: absolute; top: -50%; left: -100%; width: 30%; height: 200%; background: linear-gradient(45deg, transparent 0%, rgba(109, 213, 237, 0.06) 45%, rgba(109, 213, 237, 0.12) 50%, rgba(109, 213, 237, 0.06) 55%, transparent 100%); z-index: 1; pointer-events: none; transition: none; transform: rotate(25deg); }
+.has-shine-effect:hover::before { left: 120%; transition: left 0.5s ease-out; }
+.has-shine-effect > * { position: relative; z-index: 2; }
 
 /* --- 8.2 Scroll-to-Top Button --- */
 #scrollToTopBtn {
@@ -1154,27 +991,15 @@ input[type="tel"]:focus {
     color: var(--luvex-dark-blue);
 }
 
-/* KORREKTUR: Wiederhergestellte Deutschland-Flaggen-Animation */
 @keyframes border-flag-de {
-    0%, 100% {
-        border-color: #000000; /* Schwarz */
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-    }
-    33% {
-        border-color: #DD0000; /* Rot */
-        box-shadow: 0 0 15px rgba(221, 0, 0, 0.5);
-    }
-    66% {
-        border-color: #FFCE00; /* Gold */
-        box-shadow: 0 0 15px rgba(255, 206, 0, 0.5);
-    }
+    0%, 100% { border-color: #000000; box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); }
+    33% { border-color: #DD0000; box-shadow: 0 0 15px rgba(221, 0, 0, 0.5); }
+    66% { border-color: #FFCE00; box-shadow: 0 0 15px rgba(255, 206, 0, 0.5); }
 }
 
-/* Klasse, die die Animation auf den Button anwendet (wird per JS getoggelt) */
 #scrollToTopBtn.animate-border-flag {
     animation: border-flag-de 2.5s linear infinite;
 }
-
 
 /*
 ==============================================================================
@@ -1191,19 +1016,8 @@ input[type="tel"]:focus {
 }
 
 @media (max-width: 768px) {
-    .luvex-form-section {
-        margin-top: 1rem;
-        padding-top: 1rem;
-    }
-    
-    .luvex-form-section-title {
-        margin-bottom: 1rem;
-    }
-    
-    .luvex-form-submit {
-        min-width: auto;
-        max-width: none;
-        width: 100%;
-    }
+    .luvex-form-section { margin-top: 1rem; padding-top: 1rem; }
+    .luvex-form-section-title { margin-bottom: 1rem; }
+    .luvex-form-submit { min-width: auto; max-width: none; width: 100%; }
 }
 

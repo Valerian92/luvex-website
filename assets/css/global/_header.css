@@ -186,8 +186,7 @@ Last Update: 2025-08-31 (Final Spacing & Layout Adjustments)
     text-decoration: none;
     position: relative;
     transition: all 0.3s ease;
-    /* KORREKTUR: Abstand zwischen Menüpunkten weiter vergrößert */
-    padding: 0 3rem; 
+    padding: 0 3.5rem; 
     display: flex;
     flex-direction: column; /* Icon unter Text */
     align-items: center;
@@ -824,7 +823,6 @@ Last Update: 2025-08-31 (Final Spacing & Layout Adjustments)
    11. RESPONSIVE & BREAKPOINTS
    ========================================================================== */
 @media (max-width: 1200px) {
-    /* Engere Abstände für kleinere Desktops */
     .main-navigation > ul > li > a {
         padding: 0 1.8rem;
     }
