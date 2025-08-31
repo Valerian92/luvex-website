@@ -141,9 +141,8 @@ function luvex_enqueue_assets() {
 
     // Globale Scripts (auf jeder Seite geladen)
     $global_scripts = [
-        'luvex-mobile-menu' => 'global/mobile-menu.js',
+        'luvex-header-effects' => 'global/header-scroll-effects.js',
         'luvex-profile-menu' => 'global/profile-menu.js',
-        'luvex-avatar-modal-handler' => 'global/avatar-modal-handler.js',
         'luvex-scroll-animations' => 'global/scroll-animations.js',
         'luvex-scroll-to-top' => 'global/scroll-to-top.js',
         'luvex-footer-light' => 'global/footer-light-effect.js',
