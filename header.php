@@ -2,7 +2,7 @@
 /**
  * The header for our theme - Language Switcher neben Logo
  * @package Luvex
- * @since 4.0.0
+ * @since 4.0.1
  */
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
@@ -23,9 +23,7 @@
 <header id="site-header" class="site-header fixed-header">
     <div class="header-container">
         
-        <!-- KORREKTUR: Linke Elemente gruppiert für besseres Flexbox-Layout -->
         <div class="header-left-group">
-            <!-- Language Switcher links vom Logo -->
             <div class="header-language-switcher">
                 <?php 
                 if (function_exists('pll_the_languages') && class_exists('LuvexUserSystem')) {
@@ -36,7 +34,6 @@
                 ?>
             </div>
 
-            <!-- Logo -->
             <div class="site-branding">
                 <?php
                 if ( has_custom_logo() ) {
@@ -52,7 +49,6 @@
             </div>
         </div>
 
-        <!-- Desktop Navigation -->
         <nav id="desktop-navigation" class="main-navigation">
             <?php
             if (has_nav_menu('primary')) {
@@ -67,7 +63,6 @@
             ?>
         </nav>
 
-        <!-- CTA Button / User Section -->
         <div class="header-cta">
             <div class="header-actions-group">
 
@@ -75,7 +70,6 @@
                     $current_user = wp_get_current_user();
                     $first_name = !empty($current_user->first_name) ? $current_user->first_name : $current_user->display_name;
                 ?>
-                    <!-- Logged-in User Section -->
                     <div class="user-section">
                         <div class="user-info" onclick="toggleUserDropdown()">
                             <div class="user-avatar" id="userAvatar">
@@ -123,8 +117,8 @@
                         </div>
                     </div>
                 <?php else : ?>
-                    <!-- Non-logged-in: Login/Register Button -->
-                    <button onclick="openAuthModal('login')" class="header-cta-button">
+                    <!-- KORREKTUR: onclick-Attribut entfernt und eine ID hinzugefügt -->
+                    <button id="auth-modal-trigger" class="header-cta-button">
                         <i class="fa-solid fa-user-circle"></i>
                         <span>Login / Register</span>
                     </button>
@@ -133,7 +127,6 @@
             </div>
         </div>
 
-        <!-- Mobile Menu Button -->
         <div class="mobile-menu-toggle">
             <button id="mobile-menu-button" class="hamburger-button" aria-controls="mobile-menu" aria-expanded="false">
                 <span class="screen-reader-text">Open Menu</span>
@@ -146,7 +139,6 @@
         </div>
     </div>
 
-    <!-- Mobile Navigation Menu -->
     <nav id="mobile-menu" class="mobile-navigation" aria-hidden="true">
         <div class="mobile-menu-content">
             <?php
@@ -163,3 +155,4 @@
 <div id="content" class="site-content">
     <div id="primary" class="content-area">
         <main id="main" class="site-main">
+

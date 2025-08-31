@@ -1,6 +1,6 @@
 /*
 ==============================================================================
-LUVEX THEME v4.7 - COMPLETE HEADER SYSTEM (FINAL LAYOUT)
+LUVEX THEME v4.9 - COMPLETE HEADER SYSTEM (FINAL LAYOUT & WIDE ALIGNMENT)
 ==============================================================================
 
 Description: Vollständige Header-Implementierung mit 3-Level Navigation,
@@ -42,9 +42,11 @@ Last Update: 2025-08-31 (Final Spacing & Layout Adjustments)
 }
 
 .header-container {
-    max-width: 1600px;
+    /* KORREKTUR: Breite an Footer angepasst für besseren Platz */
+    max-width: 1800px;
     margin: 0 auto;
-    padding: 0 2rem;
+    /* KORREKTUR: Padding an die neue Breite angepasst */
+    padding: 0 3rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -186,7 +188,7 @@ Last Update: 2025-08-31 (Final Spacing & Layout Adjustments)
     text-decoration: none;
     position: relative;
     transition: all 0.3s ease;
-    padding: 0 1.5rem; /* OPTIMIERTER ABSTAND */
+    padding: 0 2.6rem; /* OPTIMIERTER ABSTAND */
     display: flex;
     flex-direction: column; /* Icon unter Text */
     align-items: center;
@@ -822,6 +824,13 @@ Last Update: 2025-08-31 (Final Spacing & Layout Adjustments)
 /* ==========================================================================
    11. RESPONSIVE & BREAKPOINTS
    ========================================================================== */
+@media (max-width: 1200px) {
+    /* Engere Abstände für kleinere Desktops */
+    .main-navigation > ul > li > a {
+        padding: 0 1.8rem;
+    }
+}
+
 @media (max-width: 1024px) {
     .main-navigation {
         display: none;

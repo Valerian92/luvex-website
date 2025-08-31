@@ -128,7 +128,7 @@ function luvex_enqueue_assets() {
 
     // Globale Scripts
     $global_scripts = [
-        'luvex-auth-modal'        => 'global/auth-modal.js', // KORREKTUR: Die neue, saubere Modal-Logik
+        'luvex-auth-modal'        => 'global/auth-modal.js',
         'luvex-header-effects'    => 'global/luvex-header-effects.js',
         'luvex-profile-menu'      => 'global/profile-menu.js',
         'luvex-scroll-animations' => 'global/scroll-animations.js',
