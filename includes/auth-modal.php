@@ -1,9 +1,9 @@
 <?php
 /**
- * Auth-Modal-Template (v4.3 - Angepasst für neues CSS und volle Funktionalität)
- * - Enthält die "Your Industry"-Sektion wieder.
- * - Verwendet neue CSS-Klassen für das 2-Spalten- und 4-Spalten-Layout.
- * - Stellt korrekte `name`-Attribute für die AJAX-Verarbeitung sicher.
+ * Auth-Modal-Template (v4.5 - Synchronisiert mit originalen Helpern)
+ * - Lädt die originalen, strukturierten Interessen-Daten.
+ * - Stellt sicher, dass das reCAPTCHA korrekt eingebunden wird.
+ * - Nutzt die originalen Industrie-Definitionen.
  */
 
 if (!defined('ABSPATH')) exit;
@@ -11,14 +11,13 @@ if (!defined('ABSPATH')) exit;
 // Hole alle notwendigen Konfigurationen und Daten
 $recaptcha_site_key = defined('LUVEX_RECAPTCHA_SITE_KEY') ? LUVEX_RECAPTCHA_SITE_KEY : '';
 
-// Lade Industrien, Interessen und Länder aus den Helper-Funktionen
+// Lade Industrien, Interessen und Länder aus den wiederhergestellten Helper-Funktionen
 $industries = function_exists('luvex_get_industries') ? luvex_get_industries() : [];
-$interests = function_exists('luvex_get_interests') ? luvex_get_interests() : [];
+$interests_structured = function_exists('luvex_get_interests') ? luvex_get_interests() : [];
 $countries = function_exists('luvex_get_countries') ? luvex_get_countries() : [];
 ?>
 <div id="authModal" class="modal-overlay">
     <div class="modal-content">
-
         <div class="auth-modal-header">
             <div class="auth-tabs">
                 <button class="auth-tab active" id="login-tab-link" onclick="showAuthForm('login')">Login</button>
@@ -29,31 +28,32 @@ $countries = function_exists('luvex_get_countries') ? luvex_get_countries() : []
 
         <div class="auth-scrollable-content">
             <div id="auth-tab-content-wrapper">
-
                 <!-- Login Form -->
                 <div id="login-form-container" class="auth-form-container">
                     <form id="luvex-login-form" class="auth-form" method="post">
                         <div class="luvex-form-section">
-                            <h4 class="luvex-form-section-title"><i class="fa-solid fa-right-to-bracket"></i> Sign In to Your Account</h4>
-                            <div class="luvex-form-column">
-                                <input type="email" name="user_login" class="luvex-input" placeholder="Email Address" required>
-                                <div class="password-wrapper">
-                                    <input type="password" name="user_password" class="luvex-input" placeholder="Password" required>
-                                    <i class="fa-regular fa-eye-slash toggle-password"></i>
-                                </div>
-                            </div>
+                             <h4 class="luvex-form-section-title"><i class="fa-solid fa-right-to-bracket"></i> Sign In to Your Account</h4>
+                             <div class="luvex-form-column">
+                                 <input type="email" name="user_login" class="luvex-input" placeholder="Email Address" required>
+                                 <div class="password-wrapper">
+                                     <input type="password" name="user_password" class="luvex-input" placeholder="Password" required>
+                                     <i class="fa-regular fa-eye-slash toggle-password"></i>
+                                 </div>
+                             </div>
                         </div>
-                        <div class="auth-form-footer">
-                            <label class="luvex-checkbox">
-                                <input type="checkbox" name="remember_me" value="forever">
-                                <span class="luvex-checkbox__indicator"><i class="fa-solid fa-check"></i></span>
-                                <span class="luvex-checkbox__text">Remember Me</span>
-                            </label>
-                            <a href="#" class="forgot-password-link" onclick="showAuthForm('forgot-password')">Forgot Password?</a>
+                         <div class="auth-form-footer">
+                             <label class="luvex-checkbox">
+                                 <input type="checkbox" name="remember_me" value="forever">
+                                 <span class="luvex-checkbox__indicator"><i class="fa-solid fa-check"></i></span>
+                                 <span class="luvex-checkbox__text">Remember Me</span>
+                             </label>
+                             <a href="#" class="forgot-password-link" onclick="showAuthForm('forgot-password')">Forgot Password?</a>
                         </div>
                         <div class="recaptcha-wrapper">
                             <?php if (!empty($recaptcha_site_key)): ?>
                                 <div class="g-recaptcha" data-sitekey="<?php echo esc_attr($recaptcha_site_key); ?>"></div>
+                            <?php else: ?>
+                                <p class="recaptcha-notice">reCAPTCHA not configured.</p>
                             <?php endif; ?>
                         </div>
                         <button type="submit" id="login-submit-btn" class="luvex-form-submit">
@@ -70,7 +70,6 @@ $countries = function_exists('luvex_get_countries') ? luvex_get_countries() : []
                         <div class="luvex-form-section">
                             <h4 class="luvex-form-section-title"><i class="fa-solid fa-user-circle"></i> Account Details</h4>
                             <div class="luvex-form-grid-2">
-                                <!-- Required Fields -->
                                 <div class="luvex-form-column">
                                     <h5>Required</h5>
                                     <input type="text" name="first_name" placeholder="First Name*" required class="luvex-input">
@@ -85,7 +84,6 @@ $countries = function_exists('luvex_get_countries') ? luvex_get_countries() : []
                                         <i class="fa-regular fa-eye-slash toggle-password"></i>
                                     </div>
                                 </div>
-                                <!-- Optional Fields -->
                                 <div class="luvex-form-column">
                                     <h5>Optional</h5>
                                     <input type="text" name="company" placeholder="Company Name" class="luvex-input">
@@ -132,18 +130,28 @@ $countries = function_exists('luvex_get_countries') ? luvex_get_countries() : []
                             </div>
                         </div>
                         
-                        <!-- Interests Selection -->
+                        <!-- Interests Selection (mit original 3-Spalten-Struktur) -->
                         <div class="luvex-form-section">
                             <h4 class="luvex-form-section-title"><i class="fa-solid fa-lightbulb"></i> Your Interests</h4>
-                            <div class="selection-grid">
-                                <?php foreach ($interests as $name => $icon): ?>
-                                <label class="selection-checkbox">
-                                    <input type="checkbox" name="user_interests[]" value="<?php echo esc_attr($name); ?>">
-                                    <div class="selection-checkbox-content">
-                                        <i class="fa-solid <?php echo esc_attr($icon); ?>"></i>
-                                        <span><?php echo esc_html($name); ?></span>
+                            <div class="interests-structured-grid">
+                                <?php foreach ($interests_structured as $category_name => $category_data): ?>
+                                    <div class="interest-category">
+                                        <h5 class="interest-category-title">
+                                            <i class="fa-solid <?php echo esc_attr($category_data['icon']); ?>"></i>
+                                            <?php echo esc_html($category_name); ?>
+                                        </h5>
+                                        <div class="selection-grid-interest-items">
+                                            <?php foreach ($category_data['items'] as $item_name => $item_data): ?>
+                                                <label class="selection-checkbox">
+                                                    <input type="checkbox" name="user_interests[]" value="<?php echo esc_attr($item_data['label']); ?>">
+                                                    <div class="selection-checkbox-content">
+                                                        <i class="fa-solid <?php echo esc_attr($item_data['class']); ?>"></i>
+                                                        <span><?php echo esc_html($item_data['label']); ?></span>
+                                                    </div>
+                                                </label>
+                                            <?php endforeach; ?>
+                                        </div>
                                     </div>
-                                </label>
                                 <?php endforeach; ?>
                             </div>
                         </div>
@@ -153,6 +161,8 @@ $countries = function_exists('luvex_get_countries') ? luvex_get_countries() : []
                             <div class="recaptcha-wrapper">
                                 <?php if (!empty($recaptcha_site_key)): ?>
                                     <div class="g-recaptcha" data-sitekey="<?php echo esc_attr($recaptcha_site_key); ?>"></div>
+                                <?php else: ?>
+                                    <p class="recaptcha-notice">reCAPTCHA needs to be configured by the site administrator.</p>
                                 <?php endif; ?>
                             </div>
                             <div class="auth-form-footer-register">
@@ -227,3 +237,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
