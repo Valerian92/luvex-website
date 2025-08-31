@@ -1,16 +1,17 @@
 /*
 ==============================================================================
-LUVEX THEME - MODAL STYLES (v3.6.0 - Komplett mit generischen & Auth-Modals)
+LUVEX THEME - MODAL STYLES (v4.0.0 - Komplettüberarbeitung)
 ==============================================================================
-Description: Enthält Stile für generische Modals (Confirm, Avatar) UND das
-             optimierte Auth-Modal mit sticky Header und besserer Responsivität.
-Last Update: 2025-08-31
+Description: Neu strukturiertes und optimiertes Stylesheet für alle Modals.
+             Fokus auf modernes Layout (Flexbox, Grid), Responsivität und
+             eine saubere User Experience für das Auth-Modal.
+Last Update: 2025-09-01
 ==============================================================================
 */
 
 /*
 ==============================================================================
-1. GENERISCHE MODAL-BASIS (WIEDERHERGESTELLT)
+1. MODAL-BASIS & OVERLAY
 ==============================================================================
 */
 .modal-overlay {
@@ -19,7 +20,7 @@ Last Update: 2025-08-31
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(15, 23, 42, 0.8);
+    background-color: rgba(15, 23, 42, 0.8); /* Dunkelblau mit Transparenz */
     backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
@@ -27,250 +28,287 @@ Last Update: 2025-08-31
     z-index: 99999;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.3s ease, visibility 0s 0.3s;
     padding: 1rem;
 }
 
 .modal-overlay.active {
     opacity: 1;
     visibility: visible;
-}
-
-/* Generischer Modal-Container (für Standard-Modals wie Confirm) */
-.modal-container {
-    background: var(--luvex-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-    width: 100%;
-    max-width: 500px;
-    color: var(--luvex-dark-blue);
-    transform: scale(0.95);
-    transition: transform 0.3s ease;
-}
-
-.modal-overlay.active .modal-container {
-    transform: scale(1);
-}
-
-.modal-header {
-    padding: 1.5rem;
-    border-bottom: 1px solid var(--luvex-gray-200);
-}
-
-.modal-header h3 {
-    margin: 0;
-    font-size: var(--text-xl);
-}
-
-.modal-body {
-    padding: 1.5rem;
-    font-size: var(--text-base);
-    line-height: 1.6;
-}
-
-.modal-footer {
-    padding: 1.5rem;
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-    background: var(--luvex-gray-100);
-    border-top: 1px solid var(--luvex-gray-200);
-    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    transition: opacity 0.3s ease;
 }
 
 /*
 ==============================================================================
-2. AUTH MODAL - HAUPT-LAYOUT (OPTIMIERT)
+2. AUTH MODAL - LAYOUT & CONTAINER
 ==============================================================================
 */
 #authModal .modal-content {
     background: var(--luvex-dark-blue);
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-xl, 16px);
     border: 1px solid rgba(109, 213, 237, 0.2);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     width: 100%;
-    max-width: 880px; 
+    max-width: 880px; /* Breite für das 2-Spalten-Layout */
     max-height: 90vh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    transform: scale(0.95);
-    transition: transform 0.3s ease;
+    color: var(--luvex-white);
+    transform: scale(0.95) translateY(10px);
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .modal-overlay.active #authModal .modal-content {
-    transform: scale(1);
+    transform: scale(1) translateY(0);
 }
 
 /*
 ==============================================================================
-3. AUTH MODAL - STICKY HEADER (NEU)
+3. AUTH MODAL - HEADER, TABS & SCROLLING
 ==============================================================================
 */
 .auth-modal-header {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background: var(--luvex-dark-blue);
     padding: 1.5rem 2rem 1rem 2rem;
     flex-shrink: 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0); 
+    background: var(--luvex-dark-blue);
+    z-index: 10;
     transition: box-shadow 0.3s ease;
 }
 
 .auth-modal-header.scrolled {
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/*
-==============================================================================
-4. AUTH MODAL - SCROLLBAR & INHALT (NEU)
-==============================================================================
-*/
-.auth-scrollable-content {
-    overflow-y: auto;
-    padding: 1rem 2rem 2rem 2rem;
-    -webkit-overflow-scrolling: touch;
-}
-
-.auth-scrollable-content::-webkit-scrollbar { width: 8px; }
-.auth-scrollable-content::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); border-radius: 10px; }
-.auth-scrollable-content::-webkit-scrollbar-thumb { background: var(--luvex-bright-cyan); border-radius: 10px; border: 2px solid var(--luvex-dark-blue); }
-.auth-scrollable-content::-webkit-scrollbar-thumb:hover { background: var(--luvex-special-cyan); }
-
-/*
-==============================================================================
-5. AUTH MODAL - TABS & FEEDBACK (OPTIMIERT)
-==============================================================================
-*/
 .auth-tabs {
     display: flex;
     background-color: rgba(109, 213, 237, 0.05);
-    border-radius: var(--radius-full);
+    border-radius: var(--radius-full, 99px);
     padding: 6px;
     margin-bottom: 1.5rem;
 }
 
 .auth-tab {
-    flex: 1; padding: 0.75rem 1rem; background: transparent; border: none;
-    color: var(--luvex-gray-300); font-size: var(--text-base); font-weight: 600;
-    border-radius: var(--radius-full); cursor: pointer; transition: all 0.3s ease;
-}
-.auth-tab:hover { background: rgba(109, 213, 237, 0.1); color: var(--luvex-white); }
-.auth-tab.active { background: var(--luvex-bright-cyan); color: var(--luvex-dark-blue); box-shadow: 0 2px 8px rgba(109, 213, 237, 0.3); }
-#auth-feedback { margin: 0; }
-
-/*
-==============================================================================
-6. AUTH MODAL - FORMULARE (OPTIMIERT)
-==============================================================================
-*/
-.auth-form { display: flex; flex-direction: column; gap: 1.5rem; }
-.form-description { color: var(--luvex-gray-300); text-align: center; margin: -1rem 0 0.5rem 0; }
-.back-to-login-link { color: var(--luvex-bright-cyan); text-decoration: none; text-align: center; margin-top: 1rem; font-weight: 500; }
-.back-to-login-link:hover { text-decoration: underline; }
-
-/* Password visibility toggle */
-.password-wrapper { position: relative; }
-.toggle-password { position: absolute; top: 50%; right: 1rem; transform: translateY(-50%); color: var(--luvex-gray-300); cursor: pointer; }
-
-/*
-==============================================================================
-7. AVATAR UPLOAD MODAL (WIEDERHERGESTELLT)
-==============================================================================
-*/
-#avatar-upload-modal .modal-container {
-    max-width: 600px;
-}
-#avatar-upload-area {
-    border: 2px dashed var(--luvex-gray-300);
-    border-radius: var(--radius-lg);
-    padding: 3rem 1rem;
-    text-align: center;
+    flex: 1;
+    padding: 0.75rem 1rem;
+    background: transparent;
+    border: none;
+    color: var(--luvex-gray-300);
+    font-size: var(--text-base, 16px);
+    font-weight: 600;
+    border-radius: var(--radius-full, 99px);
     cursor: pointer;
     transition: all 0.3s ease;
-    background-color: var(--luvex-gray-100);
 }
-#avatar-upload-area.is-dragging {
-    border-color: var(--luvex-vibrant-blue);
-    background-color: #e7f1ff;
+
+.auth-tab:hover {
+    background: rgba(109, 213, 237, 0.1);
+    color: var(--luvex-white);
 }
-#avatar-upload-area i {
-    font-size: 2.5rem;
-    color: var(--luvex-gray-400);
-    margin-bottom: 1rem;
+
+.auth-tab.active {
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    box-shadow: 0 2px 8px rgba(109, 213, 237, 0.3);
 }
-#avatar-preview-container {
-    display: none;
+
+.auth-scrollable-content {
+    overflow-y: auto;
+    padding: 1rem 2rem 2rem 2rem;
+}
+
+/* Custom Scrollbar */
+.auth-scrollable-content::-webkit-scrollbar { width: 8px; }
+.auth-scrollable-content::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); border-radius: 10px; }
+.auth-scrollable-content::-webkit-scrollbar-thumb { background: var(--luvex-bright-cyan); border-radius: 10px; border: 2px solid var(--luvex-dark-blue); }
+.auth-scrollable-content::-webkit-scrollbar-thumb:hover { background: var(--luvex-special-cyan); }
+
+
+/*
+==============================================================================
+4. FORMULAR-STYLING (ALLGEMEIN)
+==============================================================================
+*/
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Mehr Abstand zwischen den Sektionen */
+}
+
+.luvex-form-section-title {
+    color: var(--luvex-white);
+    font-size: var(--text-lg, 18px);
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-bottom: 1px solid rgba(109, 213, 237, 0.2);
+    padding-bottom: 0.75rem;
+}
+
+.luvex-form-section-title i {
+    color: var(--luvex-bright-cyan);
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    color: var(--luvex-gray-300);
+    cursor: pointer;
+}
+
+.form-description {
+    color: var(--luvex-gray-300);
     text-align: center;
+    margin: -1rem 0 0.5rem 0;
 }
-#avatar-preview {
-    max-width: 150px;
-    max-height: 150px;
-    border-radius: 50%;
-    margin: 1rem auto;
-    border: 3px solid var(--luvex-gray-200);
+
+.back-to-login-link {
+    color: var(--luvex-bright-cyan);
+    text-decoration: none;
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: 500;
+}
+.back-to-login-link:hover { text-decoration: underline; }
+
+/*
+==============================================================================
+5. ZWEI-SPALTEN-LAYOUT FÜR ACCOUNT DETAILS
+==============================================================================
+*/
+.luvex-form-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem 2rem; /* Zeilen- und Spaltenabstand */
+}
+
+.luvex-form-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Abstand zwischen den Feldern in einer Spalte */
+}
+
+.luvex-form-column h5 {
+    font-size: 0.9rem;
+    color: var(--luvex-gray-300);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 0.5rem 0;
 }
 
 /*
 ==============================================================================
-8. AUTH MODAL - INDUSTRY SELECTION (OPTIMIERT)
+6. 4-SPALTEN-GRID FÜR INDUSTRIE & INTERESSEN
 ==============================================================================
 */
-.interests-grid-industries {
+.selection-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
+    grid-template-columns: repeat(4, 1fr);
     gap: 0.75rem;
-    max-height: 120px; /* Höhe für 2 Reihen */
+}
+
+.selection-grid.industry-grid {
+    max-height: 125px; /* Höhe für 2 Reihen */
     overflow: hidden;
     transition: max-height 0.5s ease-in-out;
 }
-.interests-grid-industries.expanded {
-    max-height: 500px;
+
+.selection-grid.industry-grid.expanded {
+    max-height: 500px; /* Genug Platz für alle Elemente */
 }
-.interest-checkbox input { display: none; }
-.interest-checkbox-content {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 0.5rem; padding: 1rem 0.5rem; text-align: center;
+
+.selection-checkbox input[type="checkbox"] {
+    display: none; /* Verstecke die Standard-Checkbox */
+}
+
+.selection-checkbox-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 0.5rem;
+    text-align: center;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(109, 213, 237, 0.2);
-    border-radius: var(--radius-md);
-    cursor: pointer; transition: all 0.3s ease;
+    border-radius: var(--radius-md, 8px);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 100%; /* Wichtig für gleiche Höhe */
 }
-.interest-checkbox-content i { font-size: 1.5rem; color: var(--luvex-bright-cyan); }
-.interest-checkbox-content span { font-size: 0.8rem; font-weight: 500; color: var(--luvex-gray-300); line-height: 1.3; }
-.interest-checkbox input:checked + .interest-checkbox-content {
+
+.selection-checkbox-content i {
+    font-size: 1.75rem;
+    color: var(--luvex-bright-cyan);
+    transition: transform 0.3s ease;
+}
+
+.selection-checkbox-content span {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--luvex-gray-300);
+    line-height: 1.3;
+}
+
+.selection-checkbox input[type="checkbox"]:hover + .selection-checkbox-content {
+    border-color: var(--luvex-bright-cyan);
+    transform: translateY(-3px);
+}
+
+.selection-checkbox input[type="checkbox"]:checked + .selection-checkbox-content {
     background: var(--luvex-bright-cyan);
     border-color: var(--luvex-bright-cyan);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(109, 213, 237, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.25);
 }
-.interest-checkbox input:checked + .interest-checkbox-content i,
-.interest-checkbox input:checked + .interest-checkbox-content span {
+
+.selection-checkbox input[type="checkbox"]:checked + .selection-checkbox-content i,
+.selection-checkbox input[type="checkbox"]:checked + .selection-checkbox-content span {
     color: var(--luvex-dark-blue);
 }
 
+.selection-checkbox input[type="checkbox"]:checked + .selection-checkbox-content i {
+    transform: scale(1.1);
+}
+
 #industry-toggle-btn {
-    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-    width: 100%; margin: 1rem auto 0; padding: 0.75rem;
-    background: rgba(109, 213, 237, 0.1); border: none;
-    color: var(--luvex-bright-cyan); border-radius: var(--radius-md);
-    cursor: pointer; font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    margin: 1rem auto 0;
+    padding: 0.75rem;
+    background: rgba(109, 213, 237, 0.1);
+    border: none;
+    color: var(--luvex-bright-cyan);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 600;
 }
 #industry-toggle-btn i { transition: transform 0.3s ease; }
 .other-industry-container { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
-#industry_other_text { margin-left: 0; }
 
 /*
 ==============================================================================
-9. AUTH MODAL - FOOTER, RECAPTCHA & CHECKBOXES (OPTIMIERT)
+7. FOOTER, BUTTONS & FEEDBACK
 ==============================================================================
 */
 .recaptcha-wrapper {
-    display: flex; justify-content: center; padding: 0.5rem; 
-    background: rgba(0,0,0,0.1); border-radius: var(--radius-md);
-    transform: scale(1.0); transform-origin: center;
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: var(--radius-md);
 }
+
 .auth-form-footer { display: flex; justify-content: space-between; align-items: center; }
 .auth-form-footer-register { display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem; }
 .auth-form-footer-register .luvex-checkbox { align-items: flex-start; }
@@ -278,30 +316,132 @@ Last Update: 2025-08-31
 .auth-form-footer-register .luvex-checkbox__text a { color: var(--luvex-bright-cyan); text-decoration: none; }
 .auth-form-footer-register .luvex-checkbox__text a:hover { text-decoration: underline; }
 
+/* --- SUBMIT BUTTON MIT LADE-ANIMATION --- */
+.luvex-form-submit {
+    position: relative;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--luvex-dark-blue);
+    background: var(--luvex-bright-cyan);
+    border: none;
+    border-radius: var(--radius-md, 8px);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.2);
+}
+
+.luvex-form-submit:hover:not(:disabled) {
+    background: var(--luvex-special-cyan);
+    box-shadow: 0 6px 20px rgba(109, 213, 237, 0.3);
+    transform: translateY(-2px);
+}
+
+.luvex-form-submit:disabled {
+    background: var(--luvex-gray-400);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.luvex-form-submit.loading .btn-text {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.luvex-form-submit .btn-loader {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(15, 23, 42, 0.3);
+    border-top-color: var(--luvex-dark-blue);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.luvex-form-submit.loading .btn-loader {
+    visibility: visible;
+    opacity: 1;
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Feedback Message */
+#auth-feedback {
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    text-align: center;
+    font-weight: 500;
+    display: none; /* Wird per JS gesteuert */
+    margin-top: 1rem;
+}
+
+#auth-feedback.success {
+    background-color: rgba(22, 163, 74, 0.2);
+    color: #4ade80;
+    border: 1px solid #22c55e;
+}
+
+#auth-feedback.error {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+    border: 1px solid #ef4444;
+}
+
 /*
 ==============================================================================
-10. RESPONSIVE DESIGN (KOMBINIERT)
+8. RESPONSIVE DESIGN
 ==============================================================================
 */
 @media (max-width: 992px) {
     #authModal .modal-content { max-width: 600px; }
-    .interests-grid-industries { grid-template-columns: repeat(3, 1fr); max-height: 165px; }
+    .luvex-form-grid-2 { grid-template-columns: 1fr; }
+    .selection-grid { grid-template-columns: repeat(3, 1fr); }
+    .selection-grid.industry-grid { max-height: 175px; } /* Höhe für 2 Reihen bei 3 Spalten */
 }
 
 @media (max-width: 768px) {
-    .modal-overlay { padding: 0; align-items: flex-end; }
+    .modal-overlay {
+        padding: 0;
+        align-items: flex-end; /* Modal kommt von unten */
+    }
+
     #authModal .modal-content {
-        width: 100vw; height: 95vh; max-height: 95vh; margin: 0;
+        width: 100vw;
+        height: 95vh;
+        max-height: 95vh;
+        margin: 0;
         border-radius: var(--radius-xl) var(--radius-xl) 0 0;
         transform: translateY(100%);
+        transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     }
-    .modal-overlay.active #authModal .modal-content { transform: translateY(0); }
-    .auth-modal-header { padding: 1rem 1.5rem; }
-    .auth-scrollable-content { padding: 0.5rem 1.5rem 1.5rem 1.5rem; }
-    .luvex-form-grid-2 { grid-template-columns: 1fr; }
-    .interests-grid-industries { grid-template-columns: repeat(2, 1fr); max-height: 240px; }
-    .auth-form-footer { flex-direction: column; align-items: flex-start; gap: 1rem; }
-    .recaptcha-wrapper { transform: scale(0.9); }
-    .modal-container { max-width: calc(100% - 2rem); margin: 1rem; }
-}
 
+    .modal-overlay.active #authModal .modal-content {
+        transform: translateY(0);
+    }
+
+    .auth-modal-header { padding: 1.5rem 1.5rem 1rem; }
+    .auth-scrollable-content { padding: 0.5rem 1.5rem 1.5rem 1.5rem; }
+
+    .selection-grid { grid-template-columns: repeat(2, 1fr); }
+    .selection-grid.industry-grid { max-height: 250px; } /* Höhe für 2 Reihen bei 2 Spalten */
+
+    .auth-form-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .forgot-password-link { align-self: flex-end; }
+}

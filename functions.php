@@ -1,10 +1,10 @@
 <?php
 /**
- * LUVEX Theme Functions - Updated for Reorganized CSS System
+ * LUVEX Theme Functions - Updated for Accordion Component
  * Description: Komplette Theme-Setup-, Navigations- und Asset-Lade-Logik.
- * UPDATED: Angepasst für neue CSS-Struktur (animations.css entfernt, Logik verbessert)
+ * UPDATED: Neue Accordion-Komponente (_component-accordion.css & interactive-accordion.js) implementiert.
  * @package Luvex
- * @version 3.2.2
+ * @version 3.3.0
  */
 
 if (!defined('ABSPATH')) {
@@ -50,11 +50,11 @@ function luvex_theme_setup() {
     add_theme_support('title-tag');
 }
 
-// 4. CSS & JAVASCRIPT LADEN (ANGEPASST FÜR NEUE CSS-STRUKTUR)
+// 4. CSS & JAVASCRIPT LADEN (AKTUALISIERT FÜR ACCORDION-KOMPONENTE)
 add_action('wp_enqueue_scripts', 'luvex_enqueue_assets', 999);
 function luvex_enqueue_assets() {
     // ========================================================================
-    // CSS LADEN (REORGANISIERT UND VEREINFACHT)
+    // CSS LADEN
     // ========================================================================
 
     wp_dequeue_style('astra-theme-css');
@@ -68,8 +68,13 @@ function luvex_enqueue_assets() {
         }
     };
 
+    // Globale Basis-Styles
     $enqueue_style_helper('luvex-main', 'css/main.css');
+
+    // NEU: Globale Accordion-Komponente laden
+    $enqueue_style_helper('luvex-component-accordion', 'global/_component-accordion.css', ['luvex-main']);
     
+    // Seitenspezifische Styles
     $page_styles_map = [
         'standard-styles-luvex' => ['css/_page-standard-styles-luvex.css'],
         'about' => ['css/_page-about.css'],
@@ -134,7 +139,7 @@ function luvex_enqueue_assets() {
         'luvex-scroll-animations' => 'global/scroll-animations.js',
         'luvex-scroll-to-top'     => 'global/scroll-to-top.js',
         'luvex-footer-light'      => 'global/footer-light-effect.js',
-        'luvex-interactive-faq'   => 'global/interactive-faq.js',
+        'luvex-accordion'         => 'global/interactive-accordion.js', // AKTUALISIERT: von interactive-faq.js
     ];
     
     if (is_user_logged_in() && current_user_can('manage_options')) {
@@ -190,7 +195,7 @@ function luvex_enqueue_assets() {
     }
 }
 
-// 5. NAV WALKER KLASSE (MODIFIED FOR NEW ICON LAYOUT)
+// 5. NAV WALKER KLASSE (Unverändert)
 class Luvex_Nav_Walker extends Walker_Nav_Menu {
     public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
         $indent = ($depth) ? str_repeat("\t", $depth) : '';
@@ -237,7 +242,7 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
     }
 }
 
-// 6. AVATAR FUNKTION
+// 6. AVATAR FUNKTION (Unverändert)
 if (!function_exists('luvex_get_user_avatar')) {
     function luvex_get_user_avatar($user_id = null) {
         if (function_exists('LuvexUserSystem::get_user_avatar')) {
@@ -261,7 +266,7 @@ if (!function_exists('luvex_get_user_avatar')) {
     }
 }
 
-// 7. SYSTEM-DATEIEN LADEN
+// 7. SYSTEM-DATEIEN LADEN (Unverändert)
 $luvex_includes_path = get_stylesheet_directory() . '/includes/';
 $luvex_includes_files = [
     '_luvex_ajax.php',
@@ -299,7 +304,7 @@ function luvex_verify_recaptcha($response) {
     return isset($data['success']) && $data['success'] === true;
 }
 
-// 9. DEBUGGING FÜR ENTWICKLUNG (nur für Admins)
+// 9. DEBUGGING FÜR ENTWICKLUNG (Unverändert)
 if (defined('WP_DEBUG') && WP_DEBUG) {
     add_action('wp_footer', function() {
         if (!current_user_can('manage_options') || !class_exists('LuvexAjaxManager')) return;
@@ -326,7 +331,7 @@ if (defined('WP_DEBUG') && WP_DEBUG) {
     });
 }
 
-// 10. ZUSÄTZLICHE HELPER FÜR CSS-STRUKTUR
+// 10. ZUSÄTZLICHE HELPER FÜR CSS-STRUKTUR (Unverändert)
 add_filter('body_class', 'luvex_add_context_classes');
 function luvex_add_context_classes($classes) {
     if (is_page(['profile', 'contact', 'about']) || is_front_page()) {
@@ -335,6 +340,17 @@ function luvex_add_context_classes($classes) {
     
     if (is_page('profile')) {
         $classes[] = 'luvex-profile-page';
+    }
+    
+    // NEU: Fügt eine 'theme-dark' Klasse hinzu, wenn der Header-Typ 'dark' ist
+    // Dies hilft, das Accordion-Theme automatisch zu steuern.
+    // HINWEIS: Dies ist eine Annahme. Die Logik muss ggf. an eure
+    //           tatsächliche Theme-Switching-Logik angepasst werden.
+    $header_type = get_post_meta(get_the_ID(), 'luvex_header_type', true);
+    if ($header_type === 'dark' || is_front_page()) { // Beispiel-Logik
+        $classes[] = 'theme-dark';
+    } else {
+        $classes[] = 'theme-light';
     }
     
     return $classes;

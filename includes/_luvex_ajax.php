@@ -1,14 +1,11 @@
 <?php
 /**
  * LUVEX AJAX MANAGER - Komplett mit Security gemerged
- * 
- * Enthält ALLE AJAX-Funktionalität und Security-Logik.
+ * * Enthält ALLE AJAX-Funktionalität und Security-Logik.
  * Die LuvexSecurity-Klasse wurde vollständig hier integriert.
- * 
- * Location: /includes/_luvex_ajax.php
+ * * Location: /includes/_luvex_ajax.php
  * Dependencies: LuvexUserSystem
- * 
- * @package Luvex
+ * * @package Luvex
  * @since 3.2.0 - Vollständig gemerged
  */
 
@@ -384,19 +381,17 @@ class LuvexAjaxManager {
     }
 
     /**
-     * Core Registration Logic
+     * Core Registration Logic - ERGÄNZT UM INDUSTRIE & INTERESSEN
      */
     public static function handle_registration() {
         self::validate_ajax_request('register');
         self::add_cors_headers();
         
-        // Validate form
         if (!self::validate_form($_POST)) {
             wp_send_json_error(['message' => 'Invalid form submission.']);
             return;
         }
 
-        // reCAPTCHA Verification
         $recaptcha_response = $_POST['g-recaptcha-response'] ?? '';
         if (function_exists('luvex_verify_recaptcha') && !luvex_verify_recaptcha($recaptcha_response)) {
             wp_send_json_error(['message' => 'reCAPTCHA verification failed. Please try again.']);
@@ -442,14 +437,30 @@ class LuvexAjaxManager {
         if (!empty($_POST['company'])) {
             update_user_meta($user_id, 'company', sanitize_text_field($_POST['company']));
         }
-        
         if (!empty($_POST['phone'])) {
             update_user_meta($user_id, 'phone', sanitize_text_field($_POST['phone']));
         }
+        if (!empty($_POST['country'])) {
+            update_user_meta($user_id, 'country', sanitize_text_field($_POST['country']));
+        }
         
-        // Save interests
-        if (!empty($_POST['interest_area'])) {
-            update_user_meta($user_id, 'luvex_interests', sanitize_text_field($_POST['interest_area']));
+        // NEU: Speichere Interessen
+        if (!empty($_POST['user_interests']) && is_array($_POST['user_interests'])) {
+            $interests = array_map('sanitize_text_field', $_POST['user_interests']);
+            update_user_meta($user_id, 'luvex_interests', implode(', ', $interests));
+        }
+
+        // NEU: Speichere Industrie
+        if (!empty($_POST['user_industry']) && is_array($_POST['user_industry'])) {
+            $industries_raw = array_map('sanitize_text_field', $_POST['user_industry']);
+            $industry_string = implode(', ', $industries_raw);
+
+            // Füge den "Other"-Text hinzu, falls vorhanden
+            if (in_array('Other', $industries_raw) && !empty($_POST['industry_other_text'])) {
+                $other_text = sanitize_text_field($_POST['industry_other_text']);
+                $industry_string .= ' (Other: ' . $other_text . ')';
+            }
+            update_user_meta($user_id, 'luvex_industry', $industry_string);
         }
         
         wp_new_user_notification($user_id, null, 'user');
@@ -798,3 +809,4 @@ if (!function_exists('luvex_security_fields')) {
         return LuvexAjaxManager::get_security_fields();
     }
 }
+
