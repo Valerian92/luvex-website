@@ -179,19 +179,13 @@ Last Update: 2025-08-31 (Scroll-Fix)
     text-decoration: none;
     position: relative;
     transition: all 0.3s ease;
-    padding: 29px 1.8rem;
+    padding: 29px 1.2rem; /* GEÄNDERT: Padding reduziert für mehr Platz */
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.5rem;
     height: 80px;
     box-sizing: border-box;
-}
-
-.main-navigation .menu-icon {
-    font-size: 1.1rem;
-    width: 20px;
-    text-align: center;
-    transition: color 0.3s ease;
+    white-space: nowrap; /* NEU: Verhindert den Umbruch innerhalb eines Menüpunkts */
 }
 
 .main-navigation > ul > li > a:hover {
@@ -909,5 +903,6 @@ Last Update: 2025-08-31 (Scroll-Fix)
         transform: none;
     }
 }
+
 
 

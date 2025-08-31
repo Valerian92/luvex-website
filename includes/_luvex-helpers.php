@@ -4,7 +4,7 @@
  * Enthält die zentrale Icon-Bibliothek für Menüs und UI-Komponenten.
  *
  * @package Luvex
- * @since 4.0.0
+ * @since 4.1.0
  */
 
 if (!defined('ABSPATH')) {
@@ -13,14 +13,12 @@ if (!defined('ABSPATH')) {
 
 /**
  * Gibt die gesamte LUVEX Icon-Bibliothek zurück.
- * NEU: Umstrukturiert für Menü-spezifische Keys und allgemeine Icons.
  *
  * @return array Die Icon-Bibliothek.
  */
 if (!function_exists('get_luvex_icon_library')) {
     function get_luvex_icon_library() {
         return [
-            // Icons, die primär im Menü verwendet werden
             'Menu Icons' => [
                 // Hauptmenü
                 'menu-uv-technology'    => ['label' => 'UV Technology', 'class' => 'fa-solid fa-atom'],
@@ -32,7 +30,7 @@ if (!function_exists('get_luvex_icon_library')) {
                 'menu-led-systems'      => ['label' => 'LED UV Systems', 'class' => 'fa-solid fa-arrows-to-dot'],
                 'menu-uv-curing'        => ['label' => 'UV Curing', 'class' => 'fa-solid fa-layer-group'],
                 'menu-uvc-disinfection' => ['label' => 'UV-C Disinfection', 'class' => 'fa-solid fa-shield-virus'],
-                'menu-mercury-lamps'    => ['label' => 'Mercury UV Lamps', 'class' => 'fa-solid fa-wave-square'],
+                'menu-mercury-lamps'    => ['label' => 'Mercury UV Lamps', 'class' => 'fa-solid fa-wand-magic-sparkles'], // GEÄNDERT
 
                 // Sub-Menü Solutions
                 'menu-custom-concepts'  => ['label' => 'Custom Concepts', 'class' => 'fa-solid fa-sitemap'],
