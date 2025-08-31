@@ -179,7 +179,7 @@ Last Update: 2025-08-31 (Scroll-Fix)
     text-decoration: none;
     position: relative;
     transition: all 0.3s ease;
-    padding: 29px 1.2rem; /* GEÄNDERT: Padding reduziert für mehr Platz */
+    padding: 29px 1.1rem; /* GEÄNDERT: Padding weiter reduziert, um Umbruch zu fixen */
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -903,6 +903,4 @@ Last Update: 2025-08-31 (Scroll-Fix)
         transform: none;
     }
 }
-
-
 

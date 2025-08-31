@@ -55,8 +55,8 @@ LUVEX THEME - UV SOLUTIONS PAGE (V105 - Überarbeitet)
     color: var(--luvex-gray-300);
     max-width: 600px;
     line-height: 1.6;
-    /* GEÄNDERT: Margin korrigiert, um den Subtitle sichtbar zu machen */
-    margin: 22rem auto 0 auto;
+    /* GEÄNDERT: Finale Anpassung der vertikalen Position */
+    margin: 18rem auto 0 auto;
 }
 
 
@@ -140,4 +140,5 @@ LUVEX THEME - UV SOLUTIONS PAGE (V105 - Überarbeitet)
 .solution-card__link:hover .fa-arrow-right {
     transform: translateX(4px);
 }
+
 

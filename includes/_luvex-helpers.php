@@ -4,7 +4,7 @@
  * Enthält die zentrale Icon-Bibliothek für Menüs und UI-Komponenten.
  *
  * @package Luvex
- * @since 4.1.0
+ * @since 4.2.0
  */
 
 if (!defined('ABSPATH')) {
