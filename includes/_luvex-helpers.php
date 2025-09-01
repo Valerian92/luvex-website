@@ -2,7 +2,7 @@
 /**
  * LUVEX Theme Helper Functions
  * Enthält die zentrale Icon-Bibliothek und wiederverwendbare Datenfunktionen.
- * VERSION: 4.7.0 - Icon-Bibliothek konsolidiert und Redundanzen entfernt.
+ * VERSION: 4.8.0 - Project-Talk-Icon und neue UI-Icon-Kategorie hinzugefügt.
  *
  * @package Luvex
  * @since 4.7.0
@@ -14,7 +14,6 @@ if (!defined('ABSPATH')) {
 
 /**
  * Gibt die gesamte LUVEX Icon-Bibliothek zurück, strukturiert nach Kategorien.
- * Die thematischen Sektionen (Technology, UV Solutions, etc.) dienen als "Single Source of Truth".
  */
 if (!function_exists('get_luvex_icon_library')) {
     function get_luvex_icon_library() {
@@ -23,11 +22,8 @@ if (!function_exists('get_luvex_icon_library')) {
             // ICONS FÜR KATEGORIE-TITEL
             // ========================================================================
             'Category Titles' => [
-                // Schlüssel 'category-technology' wird für den Titel der "Technology"-Sektion verwendet.
                 'category-technology'   => ['label' => 'Technology', 'class' => 'fa-solid fa-atom'],
-                // Schlüssel 'category-uv-solutions' wird für den Titel der "UV Solutions"-Sektion verwendet.
                 'category-uv-solutions' => ['label' => 'UV Solutions', 'class' => 'fa-solid fa-toolbox'],
-                 // Schlüssel 'category-luvex-services' wird für den Titel der "LUVEX Services"-Sektion verwendet.
                 'category-luvex-services' => ['label' => 'LUVEX Services', 'class' => 'fa-solid fa-globe'],
             ],
 
@@ -36,14 +32,14 @@ if (!function_exists('get_luvex_icon_library')) {
             // ========================================================================
             'Menu Icons' => [
                 'menu-uv-technology' => ['label' => 'UV Technology', 'class' => 'fa-solid fa-atom'],
-                'menu-uv-solutions'  => ['label' => 'UV Solutions', 'class' => 'fa-solid fa-toolbox'], // KORRIGIERT
+                'menu-uv-solutions'  => ['label' => 'UV Solutions', 'class' => 'fa-solid fa-toolbox'],
                 'menu-start-project' => ['label' => 'Start Your UV Project', 'class' => 'fa-solid fa-rocket'],
                 'menu-about-luvex'   => ['label' => 'About LUVEX', 'class' => 'fa-solid fa-globe'],
                 'menu-led-systems'   => ['label' => 'LED UV Systems', 'class' => 'fa-solid fa-arrows-to-dot'],
                 'menu-uv-curing'     => ['label' => 'UV Curing', 'class' => 'fa-solid fa-layer-group'],
                 'menu-uvc-disinfection' => ['label' => 'UV-C Disinfection', 'class' => 'fa-solid fa-shield-virus'],
                 'menu-mercury-lamps' => ['label' => 'Mercury UV Lamps', 'class' => 'fa-solid fa-wave-square'],
-                'menu-custom-concepts' => ['label' => 'Custom Concepts', 'class' => 'fa-solid fa-puzzle-piece'], // KORRIGIERT
+                'menu-custom-concepts' => ['label' => 'Custom Concepts', 'class' => 'fa-solid fa-puzzle-piece'],
                 'menu-tunnel-systems'  => ['label' => 'UV-Tunnel-Systems', 'class' => 'fa-solid fa-arrow-down-up-across-line'],
                 'menu-curing-systems'  => ['label' => 'Curing Systems', 'class' => 'fa-solid fa-layer-group'], 
                 'menu-hygiene-solutions' => ['label' => 'UVC Hygiene Solutions', 'class' => 'fa-solid fa-shield-virus'],
@@ -56,6 +52,7 @@ if (!function_exists('get_luvex_icon_library')) {
                 'menu-simulator' => ['label' => 'UV Simulator', 'class' => 'fa-solid fa-cubes'],
                 'menu-news'      => ['label' => 'All UV News', 'class' => 'fa-solid fa-newspaper'],
                 'menu-contact'   => ['label' => 'Contact', 'class' => 'fa-solid fa-headset'],
+                'menu-project-talk' => ['label' => 'Project Talk', 'class' => 'fa-solid fa-calendar-days'], // NEU
             ],
 
             // ========================================================================
@@ -82,6 +79,22 @@ if (!function_exists('get_luvex_icon_library')) {
                 'uv-newsletter'    => ['label' => 'UV Newsletter', 'class' => 'fa-solid fa-envelope-open-text'],
                 'strip-analyzer'   => ['label' => 'UV Strip Analyzer', 'class' => 'fa-solid fa-chart-simple'],
                 'partnership'      => ['label' => 'Partnership', 'class' => 'fa-solid fa-handshake-angle'],
+            ],
+
+            // ========================================================================
+            // NEU: UNKATEGORISIERTE / ALLGEMEINE UI ICONS
+            // ========================================================================
+            'Uncategorized / UI Icons' => [
+                'ui-check'          => ['label' => 'Checkmark / Success', 'class' => 'fa-solid fa-check-circle'],
+                'ui-cross'          => ['label' => 'Cross / Error', 'class' => 'fa-solid fa-times-circle'],
+                'ui-info'           => ['label' => 'Information', 'class' => 'fa-solid fa-info-circle'],
+                'ui-question'       => ['label' => 'Question / Help', 'class' => 'fa-solid fa-question-circle'],
+                'ui-settings'       => ['label' => 'Settings / Gear', 'class' => 'fa-solid fa-cog'],
+                'ui-download'       => ['label' => 'Download', 'class' => 'fa-solid fa-download'],
+                'ui-upload'         => ['label' => 'Upload', 'class' => 'fa-solid fa-upload'],
+                'ui-external-link'  => ['label' => 'External Link', 'class' => 'fa-solid fa-external-link-alt'],
+                'ui-user'           => ['label' => 'User / Profile', 'class' => 'fa-solid fa-user'],
+                'ui-lock'           => ['label' => 'Lock / Security', 'class' => 'fa-solid fa-lock'],
             ],
         ];
     }
@@ -154,11 +167,9 @@ if (!function_exists('luvex_get_interests')) {
 
 /**
  * Gibt eine umfassende, strukturierte Liste von Ländern mit Namen, ISO-Code, Flagge und Telefonvorwahl zurück.
- * @return array Eine Liste von Ländern.
  */
 if (!function_exists('luvex_get_country_data')) {
     function luvex_get_country_data() {
-        // Diese Liste ist jetzt die "Single Source of Truth" für alle Länderdaten in deinem System.
         return [
             'DE' => ['name' => 'Germany', 'flag' => '🇩🇪', 'dial_code' => '+49'],
             'AT' => ['name' => 'Austria', 'flag' => '🇦🇹', 'dial_code' => '+43'],
@@ -289,4 +300,3 @@ if (!function_exists('luvex_get_country_data')) {
         ];
     }
 }
-

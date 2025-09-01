@@ -60,7 +60,7 @@ $luvex_colors = [
                             <label for="country-selector-input" class="luvex-form-label">Country / Region</label>
                             <div id="luvex-country-selector" class="luvex-country-selector">
                                 <div class="selector-input-wrapper">
-                                    <input type="text" id="country-selector-input" class="luvex-input country-selector-input" placeholder="Select your country...">
+                                    <input type="text" id="country-selector-input" class="luvex-input country-selector-input" placeholder="Select your country..." readonly>
                                     <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
                                     <span class="selected-country-flag"></span>
                                 </div>
