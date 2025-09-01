@@ -1,9 +1,11 @@
 /*
 ==============================================================================
-LUVEX THEME v3.3 - UI COMPONENTS - GLOBAL REFINEMENTS
+LUVEX THEME v3.2 - UI COMPONENTS (Komplett mit Animationen)
 ==============================================================================
-Description: Enthält alle wiederverwendbaren UI-Komponenten.
-UPDATED: Diverse Anpassungen an die neuen Core-Styles (Blocksatz-Ausnahmen).
+Description: Enthält alle wiederverwendbaren UI-Komponenten, universelle
+             Form-Elemente UND alle Animationen (gemerged aus _animations.css)
+Dependencies: _variables.css, _core.css
+Last Update: 2025-08-31 - Animations integriert
 ==============================================================================
 */
 
@@ -13,6 +15,7 @@ UPDATED: Diverse Anpassungen an die neuen Core-Styles (Blocksatz-Ausnahmen).
 ==============================================================================
 */
 
+/* --- 1.1 Base Hero Layout --- */
 .luvex-hero {
     background: var(--luvex-dark-blue);
     color: var(--luvex-white);
@@ -26,6 +29,7 @@ UPDATED: Diverse Anpassungen an die neuen Core-Styles (Blocksatz-Ausnahmen).
     text-align: center;
 }
 
+/* --- Hintergrund-Grid --- */
 .luvex-hero::before {
     content: '';
     position: absolute;
@@ -39,6 +43,7 @@ UPDATED: Diverse Anpassungen an die neuen Core-Styles (Blocksatz-Ausnahmen).
     z-index: 1;
 }
 
+/* --- 1.2 Hero Content Container --- */
 .luvex-hero__container {
     position: relative;
     z-index: 2;
@@ -50,6 +55,7 @@ UPDATED: Diverse Anpassungen an die neuen Core-Styles (Blocksatz-Ausnahmen).
     justify-content: center;
 }
 
+/* --- 1.3 Hero Text Elements --- */
 .luvex-hero__title {
     text-align: center;
     font-size: clamp(2rem, 4vw, 2.5rem);
@@ -71,8 +77,6 @@ UPDATED: Diverse Anpassungen an die neuen Core-Styles (Blocksatz-Ausnahmen).
     font-weight: 400;
     max-width: 750px;
     line-height: 1.4;
-    text-align: center;
-    hyphens: none;
 }
 
 .luvex-hero__description {
@@ -82,8 +86,6 @@ UPDATED: Diverse Anpassungen an die neuen Core-Styles (Blocksatz-Ausnahmen).
     max-width: 700px;
     line-height: 1.6;
     opacity: 0.9;
-    text-align: center;
-    hyphens: none;
 }
 
 /*
@@ -92,34 +94,46 @@ UPDATED: Diverse Anpassungen an die neuen Core-Styles (Blocksatz-Ausnahmen).
 ==============================================================================
 */
 
-.luvex-hero__cta,
-.luvex-hero__cta-secondary,
-.luvex-cta-primary,
-.luvex-cta-secondary,
-.btn.btn--primary,
-.btn--primary,
-.cta-button,
-.btn--outline {
+/* --- 2.1 Primary Hero CTA Button --- */
+.luvex-hero__cta {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: var(--space-xs);
-    border-radius: var(--radius-full);
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.luvex-hero__cta,
-.luvex-hero__cta-secondary {
     padding: 16px 32px;
     background: transparent;
     color: var(--luvex-bright-cyan);
     border: 2px solid var(--luvex-bright-cyan);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: 600;
     font-size: var(--text-base);
 }
 
-.luvex-hero__cta:hover,
+.luvex-hero__cta:hover {
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
+}
+
+/* --- 2.2 Secondary Hero CTA Button --- */
+.luvex-hero__cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    padding: 16px 32px;
+    background: transparent;
+    color: var(--luvex-bright-cyan);
+    border: 2px solid var(--luvex-bright-cyan);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-normal);
+    font-size: var(--text-base);
+}
+
 .luvex-hero__cta-secondary:hover {
     background: var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
@@ -127,30 +141,42 @@ UPDATED: Diverse Anpassungen an die neuen Core-Styles (Blocksatz-Ausnahmen).
     box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
 }
 
-.luvex-cta-primary,
-.btn.btn--primary,
-.btn--primary,
-.cta-button {
+/* --- 2.3 Generic CTA Buttons --- */
+.luvex-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
     padding: 1rem 2.5rem;
     font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
     color: var(--luvex-white);
+    text-decoration: none;
     border: none;
+    transition: all 0.3s ease;
+    position: relative;
     background: linear-gradient(45deg, var(--luvex-vibrant-blue), var(--luvex-special-cyan));
     box-shadow: 0 4px 15px rgba(34, 211, 238, 0.2), 0 2px 5px rgba(0, 123, 255, 0.15);
 }
 
-.luvex-cta-primary:hover,
-.btn.btn--primary:hover,
-.btn--primary:hover,
-.cta-button:hover {
+.luvex-cta-primary:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(34, 211, 238, 0.3), 0 4px 10px rgba(0, 123, 255, 0.2);
     color: var(--luvex-white);
 }
 
 .luvex-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
     padding: 1rem 2.5rem;
     font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: all 0.3s ease;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, 0.5);
     color: var(--luvex-white);
@@ -164,6 +190,57 @@ UPDATED: Diverse Anpassungen an die neuen Core-Styles (Blocksatz-Ausnahmen).
     box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
 }
 
+/* --- 2.4 Standard Button Aliases --- */
+.btn.btn--primary,
+.btn--primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    color: var(--luvex-white);
+    text-decoration: none;
+    border: none;
+    transition: all 0.3s ease;
+    background: linear-gradient(45deg, var(--luvex-vibrant-blue), var(--luvex-special-cyan));
+    box-shadow: 0 4px 15px rgba(34, 211, 238, 0.2), 0 2px 5px rgba(0, 123, 255, 0.15);
+}
+
+.btn.btn--primary:hover,
+.btn--primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(34, 211, 238, 0.3), 0 4px 10px rgba(0, 123, 255, 0.2);
+    color: var(--luvex-white);
+}
+
+/* --- 2.5 Universal CTA Button --- */
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    color: var(--luvex-white);
+    text-decoration: none;
+    border: none;
+    transition: all 0.3s ease;
+    background: linear-gradient(45deg, var(--luvex-vibrant-blue), var(--luvex-special-cyan));
+    box-shadow: 0 4px 15px rgba(34, 211, 238, 0.2), 0 2px 5px rgba(0, 123, 255, 0.15);
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(34, 211, 238, 0.3), 0 4px 10px rgba(0, 123, 255, 0.2);
+    color: var(--luvex-white);
+}
+
+/* Override für dunkle Sections */
 .section--final-cta .cta-button,
 .cta-section--dark .cta-button {
     background: var(--luvex-bright-cyan);
@@ -179,11 +256,20 @@ UPDATED: Diverse Anpassungen an die neuen Core-Styles (Blocksatz-Ausnahmen).
     box-shadow: 0 8px 25px rgba(248, 250, 252, 0.25);
 }
 
+/* --- 2.6 Outline Button --- */
 .btn--outline {
     background-color: transparent;
     border: 2px solid var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
     padding: 12px 24px;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    transition: var(--transition-normal);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
 }
 
 .btn--outline:hover {
@@ -200,6 +286,7 @@ UPDATED: Diverse Anpassungen an die neuen Core-Styles (Blocksatz-Ausnahmen).
 ==============================================================================
 */
 
+/* --- 3.1 Basic Value Cards --- */
 .value-card {
     background: var(--luvex-white);
     border-radius: var(--radius-lg);
@@ -234,10 +321,9 @@ UPDATED: Diverse Anpassungen an die neuen Core-Styles (Blocksatz-Ausnahmen).
     color: var(--luvex-gray-700);
     line-height: 1.6;
     margin: 0;
-    text-align: center;
-    hyphens: none;
 }
 
+/* --- 3.2 Knowledge Navigator Cards --- */
 .knowledge-navigator-header { 
     text-align: center; 
     margin-bottom: 4rem; 
@@ -248,8 +334,6 @@ UPDATED: Diverse Anpassungen an die neuen Core-Styles (Blocksatz-Ausnahmen).
     margin: 1rem auto 0; 
     color: var(--luvex-gray-700); 
     font-size: 1.125rem; 
-    text-align: center;
-    hyphens: none;
 }
 
 .knowledge-card {
@@ -316,11 +400,6 @@ UPDATED: Diverse Anpassungen an die neuen Core-Styles (Blocksatz-Ausnahmen).
     font-size: var(--text-base);
     color: var(--luvex-gray-700);
     line-height: 1.6;
-}
-
-.knowledge-card .card__content p {
-    text-align: justify;
-    hyphens: auto;
 }
 
 .knowledge-card .btn--knowledge {
@@ -407,8 +486,6 @@ UPDATED: Diverse Anpassungen an die neuen Core-Styles (Blocksatz-Ausnahmen).
 .feature-item p { 
     color: var(--luvex-text-muted-dark); 
     transition: color 0.3s ease; 
-    text-align: center;
-    hyphens: none;
 }
 
 @media (max-width: 768px) {
@@ -429,6 +506,7 @@ UPDATED: Diverse Anpassungen an die neuen Core-Styles (Blocksatz-Ausnahmen).
 ==============================================================================
 */
 
+/* --- 5.1 Universal Input Styles --- */
 .luvex-input,
 input[type="text"],
 input[type="email"],
@@ -465,6 +543,7 @@ input[type="tel"]:focus {
     outline: none;
 }
 
+/* Light theme override für helle Seiten */
 .section--light .luvex-input,
 .section--light input[type="text"],
 .section--light input[type="email"],
@@ -493,6 +572,7 @@ input[type="tel"]:focus {
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
 }
 
+/* --- 5.2 Universal Checkbox Component --- */
 .luvex-checkbox {
     display: flex;
     align-items: center;
@@ -540,6 +620,7 @@ input[type="tel"]:focus {
     font-size: var(--text-sm);
 }
 
+/* Light theme override */
 .section--light .luvex-checkbox__indicator {
     border-color: var(--luvex-gray-400);
 }
@@ -548,6 +629,7 @@ input[type="tel"]:focus {
     color: var(--luvex-gray-700);
 }
 
+/* --- 5.3 Universal Form Sections --- */
 .luvex-form-section {
     margin-top: 1.5rem;
     padding-top: 1.5rem;
@@ -578,6 +660,7 @@ input[type="tel"]:focus {
     text-align: center;
 }
 
+/* Light theme override */
 .section--light .luvex-form-section {
     border-top-color: rgba(0, 0, 0, 0.1);
 }
@@ -586,7 +669,13 @@ input[type="tel"]:focus {
     color: var(--luvex-dark-blue);
 }
 
-.luvex-form-grid-2,
+/* --- 5.4 Universal Form Grids --- */
+.luvex-form-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
 .luvex-form-grid-account {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -608,11 +697,13 @@ input[type="tel"]:focus {
     border-bottom: 1px solid rgba(109, 213, 237, 0.2);
 }
 
+/* Light theme override */
 .section--light .luvex-form-column h5 {
     color: var(--luvex-vibrant-blue);
     border-bottom-color: rgba(0, 123, 255, 0.2);
 }
 
+/* --- 5.5 Universal Feedback Messages --- */
 .luvex-feedback-message {
     display: none;
     padding: 1.25rem;
@@ -636,6 +727,7 @@ input[type="tel"]:focus {
     display: block;
 }
 
+/* Light theme override */
 .section--light .luvex-feedback-message {
     color: var(--luvex-dark-blue);
 }
@@ -650,6 +742,7 @@ input[type="tel"]:focus {
     color: #059669;
 }
 
+/* --- 5.6 Universal Submit Button --- */
 .luvex-form-submit {
     width: auto;
     min-width: 200px;
@@ -721,8 +814,6 @@ input[type="tel"]:focus {
     margin-left: auto;
     margin-right: auto;
     line-height: 1.5;
-    text-align: center;
-    hyphens: none;
 }
 
 .cta-actions {
@@ -738,48 +829,253 @@ input[type="tel"]:focus {
 ==============================================================================
 */
 
-@keyframes slideInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes slideInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
-@keyframes slideInRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-@keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.05); opacity: 0.8; } }
-@keyframes bounce { 0%, 20%, 53%, 80%, 100% { transform: translateY(0); } 40%, 43% { transform: translateY(-30px); } 70% { transform: translateY(-15px); } 90% { transform: translateY(-4px); } }
-@keyframes glow { 0%, 100% { box-shadow: 0 0 5px rgba(109, 213, 237, 0.5); } 50% { box-shadow: 0 0 20px rgba(109, 213, 237, 0.8), 0 0 30px rgba(109, 213, 237, 0.6); } }
-@keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
-.animate-slide-up { animation: slideInUp 0.6s ease-out forwards; }
-.animate-slide-left { animation: slideInLeft 0.6s ease-out forwards; }
-.animate-slide-right { animation: slideInRight 0.6s ease-out forwards; }
-.animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
-.animate-scale-in { animation: scaleIn 0.5s ease-out forwards; }
-.animate-spin { animation: spin 1s linear infinite; }
-.animate-pulse { animation: pulse 2s ease-in-out infinite; }
-.animate-bounce { animation: bounce 1s ease infinite; }
-.animate-glow { animation: glow 2s ease-in-out infinite; }
-.animate-shimmer { background: linear-gradient( 90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100% ); background-size: 200% 100%; animation: shimmer 2s ease-in-out infinite; }
-.scroll-reveal { opacity: 0; transform: translateY(50px); transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-.scroll-reveal.is-visible { opacity: 1; transform: translateY(0); }
-.scroll-reveal-left { opacity: 0; transform: translateX(-50px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-.scroll-reveal-left.is-visible { opacity: 1; transform: translateX(0); }
-.scroll-reveal-right { opacity: 0; transform: translateX(50px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-.scroll-reveal-right.is-visible { opacity: 1; transform: translateX(0); }
-.scroll-reveal-scale { opacity: 0; transform: scale(0.8); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-.scroll-reveal-scale.is-visible { opacity: 1; transform: scale(1); }
-.stagger-children > * { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+/* --- 7.1 Scroll Reveal Animations --- */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* --- 7.2 Loading & Spinner Animations --- */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 53%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40%, 43% {
+        transform: translateY(-30px);
+    }
+    70% {
+        transform: translateY(-15px);
+    }
+    90% {
+        transform: translateY(-4px);
+    }
+}
+
+/* --- 7.3 Glow & Shimmer Effects --- */
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(109, 213, 237, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(109, 213, 237, 0.8), 0 0 30px rgba(109, 213, 237, 0.6);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% center;
+    }
+    100% {
+        background-position: 200% center;
+    }
+}
+
+/* --- 7.4 Animation Utility Classes --- */
+.animate-slide-up {
+    animation: slideInUp 0.6s ease-out forwards;
+}
+
+.animate-slide-left {
+    animation: slideInLeft 0.6s ease-out forwards;
+}
+
+.animate-slide-right {
+    animation: slideInRight 0.6s ease-out forwards;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+.animate-pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-bounce {
+    animation: bounce 1s ease infinite;
+}
+
+.animate-glow {
+    animation: glow 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s ease-in-out infinite;
+}
+
+/* --- 7.5 Scroll-Triggered Animation Base Classes --- */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-reveal-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.scroll-reveal-left.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.scroll-reveal-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.scroll-reveal-right.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.scroll-reveal-scale {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.scroll-reveal-scale.is-visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* --- 7.6 Staggered Animations für Listen/Grids --- */
+.stagger-children > * {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
 .stagger-children.is-visible > *:nth-child(1) { transition-delay: 0.1s; }
 .stagger-children.is-visible > *:nth-child(2) { transition-delay: 0.2s; }
 .stagger-children.is-visible > *:nth-child(3) { transition-delay: 0.3s; }
 .stagger-children.is-visible > *:nth-child(4) { transition-delay: 0.4s; }
 .stagger-children.is-visible > *:nth-child(5) { transition-delay: 0.5s; }
 .stagger-children.is-visible > *:nth-child(6) { transition-delay: 0.6s; }
-.stagger-children.is-visible > * { opacity: 1; transform: translateY(0); }
-.hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.hover-lift:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); }
-.hover-scale { transition: transform 0.3s ease; }
-.hover-scale:hover { transform: scale(1.05); }
-.hover-glow { transition: box-shadow 0.3s ease; }
-.hover-glow:hover { box-shadow: 0 0 20px rgba(109, 213, 237, 0.5); }
+
+.stagger-children.is-visible > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- 7.7 Hover-Animation Classes --- */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.hover-scale {
+    transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+.hover-glow {
+    transition: box-shadow 0.3s ease;
+}
+
+.hover-glow:hover {
+    box-shadow: 0 0 20px rgba(109, 213, 237, 0.5);
+}
 
 /*
 ==============================================================================
@@ -787,13 +1083,76 @@ input[type="tel"]:focus {
 ==============================================================================
 */
 
-.has-shine-effect { position: relative; overflow: hidden !important; isolation: isolate; }
-.has-shine-effect::before { content: ''; position: absolute; top: -50%; left: -100%; width: 30%; height: 200%; background: linear-gradient(45deg, transparent 0%, rgba(109, 213, 237, 0.06) 45%, rgba(109, 213, 237, 0.12) 50%, rgba(109, 213, 237, 0.06) 55%, transparent 100% ); z-index: 1; pointer-events: none; transition: none; transform: rotate(25deg); }
-.has-shine-effect:hover::before { left: 120%; transition: left 0.5s ease-out; }
-.has-shine-effect > * { position: relative; z-index: 2; }
-#scrollToTopBtn { display: none; position: fixed; bottom: 30px; right: 30px; z-index: 999; background-color: var(--luvex-vibrant-blue); color: white; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 1.2rem; cursor: pointer; box-shadow: var(--shadow-md); transition: opacity 0.3s ease, transform 0.3s ease; opacity: 0; transform: translateY(10px); }
-#scrollToTopBtn.visible { display: flex; align-items: center; justify-content: center; opacity: 1; transform: translateY(0); }
-#scrollToTopBtn:hover { background-color: var(--luvex-bright-cyan); color: var(--luvex-dark-blue); }
+/* --- 8.1 Shine/Shiver Effect --- */
+.has-shine-effect {
+    position: relative;
+    overflow: hidden !important;
+    isolation: isolate;
+}
+
+.has-shine-effect::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -100%;
+    width: 30%;
+    height: 200%;
+    background: linear-gradient(45deg,
+        transparent 0%, 
+        rgba(109, 213, 237, 0.06) 45%,
+        rgba(109, 213, 237, 0.12) 50%,
+        rgba(109, 213, 237, 0.06) 55%,
+        transparent 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+    transition: none;
+    transform: rotate(25deg);
+}
+
+.has-shine-effect:hover::before {
+    left: 120%;
+    transition: left 0.5s ease-out;
+}
+
+.has-shine-effect > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* --- 8.2 Scroll-to-Top Button --- */
+#scrollToTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    background-color: var(--luvex-vibrant-blue);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+#scrollToTopBtn.visible {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#scrollToTopBtn:hover {
+    background-color: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+}
 
 /*
 ==============================================================================
@@ -801,6 +1160,27 @@ input[type="tel"]:focus {
 ==============================================================================
 */
 
-@media (max-width: 992px) { .luvex-form-grid-2, .luvex-form-grid-account { grid-template-columns: 1fr; gap: 1rem; } }
-@media (max-width: 768px) { .luvex-form-section { margin-top: 1rem; padding-top: 1rem; } .luvex-form-section-title { margin-bottom: 1rem; } .luvex-form-submit { min-width: auto; max-width: none; width: 100%; } }
+@media (max-width: 992px) {
+    .luvex-form-grid-2,
+    .luvex-form-grid-account {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
 
+@media (max-width: 768px) {
+    .luvex-form-section {
+        margin-top: 1rem;
+        padding-top: 1rem;
+    }
+    
+    .luvex-form-section-title {
+        margin-bottom: 1rem;
+    }
+    
+    .luvex-form-submit {
+        min-width: auto;
+        max-width: none;
+        width: 100%;
+    }
+}

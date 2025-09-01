@@ -1,11 +1,12 @@
 /*
 ==============================================================================
-LUVEX THEME v3.3 - CORE STYLES - GLOBAL REFINEMENTS
+LUVEX THEME v3.2 - CORE STYLES - HEADER FIXES IMPLEMENTIERT
 ==============================================================================
-Description: Enthält alle globalen Basis-Stile, das Layout-System und
-             wiederverwendbare Utility-Klassen.
-UPDATED: Standard-Absätze als Blocksatz; Container zentrieren ihre
-         Inhalte (wie Buttons) jetzt standardmässig.
+Description: Enthält alle globalen Basis-Stile, das Layout-System (Container,
+             Grid, Sections) und wiederverwendbare Utility-Klassen.
+             + WORDPRESS ADMIN BAR & ASTRA HEADER FIXES
+Dependencies: _variables.css
+Last Update: 2025-08-24 (Header-Probleme behoben)
 ==============================================================================
 */
 
@@ -35,6 +36,7 @@ html {
     left: 0;
     right: 0;
     z-index: 9999;
+    /* Die Hintergrundfarbe wird jetzt in _header.css gesteuert */
 }
 
 /* 4. Body Content richtig positionieren */
@@ -69,17 +71,27 @@ body {
     line-height: 1.6;
     color: var(--luvex-gray-900);
     margin: 0;
-    background: var(--luvex-white);
+    /* ENTFERNT: padding-top: 80px; - Dies erzeugte den weißen Balken. Der Abstand wird jetzt im Hero-Container selbst gehandhabt. */
+    background: var(--luvex-white); /* Behalten wir als Standard-Seitenhintergrund bei. */
 }
 
+/* Sicherstellen dass Admin Bar über Header ist */
 #wpadminbar {
     z-index: 99999 !important;
 }
 
-body.admin-bar .site-header.fixed-header {
-    top: 32px !important;
+.site-header.fixed-header {
+    position: fixed;
+    top: 0;
+    z-index: 9999;
 }
 
+/* Admin Bar angepasst für fixierten Header */
+body.admin-bar .site-header.fixed-header {
+    top: 32px !important; /* Admin Bar Höhe */
+}
+
+/* Astra Scroll-To-Top Button ausblenden */
 #ast-scroll-top {
     display: none !important;
 }
@@ -94,29 +106,7 @@ h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 600; line-height: 1.1; ma
 h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 600; line-height: 1.2; margin: 0 0 var(--space-md) 0; letter-spacing: -0.01em; }
 h3 { font-size: var(--text-2xl); font-weight: 600; margin: 0 0 var(--space-sm) 0; }
 h4 { font-size: var(--text-xl); font-weight: 600; margin: 0 0 var(--space-sm) 0; }
-
-/*
- * UPDATE: Standard-Absätze sind jetzt Blocksatz mit Silbentrennung für ein
- * professionelleres und besser lesbares Layout.
- */
-p {
-    font-size: var(--text-lg);
-    color: var(--luvex-gray-700);
-    margin: 0 0 var(--space-md) 0;
-    text-align: justify; /* NEU: Blocksatz als Standard */
-    hyphens: auto;      /* NEU: Automatische Silbentrennung */
-    max-width: 800px;   /* Sorgt für optimale Lesbarkeit bei breiten Containern */
-}
-
-/* Ausnahme: Zentrierte Absätze sollen nicht im Blocksatz sein */
-.text-center p,
-p.text-center {
-    text-align: center;
-    hyphens: none;
-    margin-left: auto;
-    margin-right: auto;
-}
-
+p { font-size: var(--text-lg); color: var(--luvex-gray-700); margin: 0 0 var(--space-md) 0; }
 a { color: var(--luvex-vibrant-blue); text-decoration: none; transition: var(--transition-normal); }
 a:hover { color: var(--luvex-bright-cyan); }
 
@@ -126,46 +116,83 @@ a:hover { color: var(--luvex-bright-cyan); }
 ==============================================================================
 */
 
-/*
- * UPDATE: Container zentriert jetzt seine direkten Kind-Elemente (wie Buttons),
- * die nicht die volle Breite einnehmen.
- */
+/* --- 3.1 Container System --- */
 .container {
     width: 100%;
     max-width: var(--container-max-width);
     margin: 0 auto;
     padding: 0 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* Sorgen dafür, dass block-level Elemente weiterhin die volle Breite nutzen und links starten */
-.container > h1,
-.container > h2,
-.container > h3,
-.container > p,
-.container > .grid,
-.container > div:not([class*="btn"]):not(.cta-actions) { /* Alle Divs, die keine Buttons oder Button-Wrapper sind */
-    width: 100%;
 }
 
 .container--narrow { max-width: 1200px; }
 .container--medium { max-width: 1400px; }
 .container--wide { max-width: 1800px; }
 
-.section { padding: 6rem 0; position: relative; overflow: hidden; }
+/* --- 3.2 Section Defaults --- */
+.section {
+    padding: 6rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
 .section--small { padding: 4rem 0; }
 .section--large { padding: 8rem 0; }
-.section--turquoise-light { background: linear-gradient(180deg, rgba(109, 213, 237, 0.08) 0%, rgba(248, 250, 252, 0) 100%); }
 
-/* --- 3.4 FIXED HEADER LAYOUT SYSTEM - BEREINIGT & ASTRA-FIX --- */
-#content, .site-content, .content-area, #primary, .site-main { margin: 0 !important; padding: 0 !important; border-top: none !important; }
-.site-main > *:first-child, .content-area > *:first-child, .luvex-hero { margin-top: 0 !important; }
-.ast-container, .ast-separate-container .ast-container, .ast-page-builder-template .ast-container { padding-top: 0 !important; margin-top: 0 !important; }
-body.custom-background .site-content, body.ast-header-break-point .site-content, body[class*="ast-"] .site-content, body.ast-page-builder-template .site-content, body.ast-separate-container .site-content { margin-top: 0 !important; padding-top: 0 !important; }
-.ast-hfb-header { position: relative !important; }
-.ast-hfb-header .site-header { position: fixed !important; }
+/* --- 3.3 Section Backgrounds --- */
+.section--turquoise-light {
+    background: linear-gradient(180deg, rgba(109, 213, 237, 0.08) 0%, rgba(248, 250, 252, 0) 100%);
+}
+
+/*
+==============================================================================
+3.4 FIXED HEADER LAYOUT SYSTEM - BEREINIGT & ASTRA-FIX
+==============================================================================
+*/
+
+/* Alle Container haben KEINE zusätzlichen Margins/Paddings */
+#content,
+.site-content,
+.content-area,
+#primary,
+.site-main {
+    margin: 0 !important;
+    padding: 0 !important;
+    border-top: none !important;
+}
+
+/* Erste Elemente sollen direkt beginnen */
+.site-main > *:first-child,
+.content-area > *:first-child,
+.luvex-hero {
+    margin-top: 0 !important;
+}
+
+/* Astra Theme Overrides - ERWEITERT */
+.ast-container,
+.ast-separate-container .ast-container,
+.ast-page-builder-template .ast-container {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* Astra Body-Klassen Override - ERWEITERT */
+body.custom-background .site-content,
+body.ast-header-break-point .site-content,
+body[class*="ast-"] .site-content,
+body.ast-page-builder-template .site-content,
+body.ast-separate-container .site-content {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Astra Header Builder spezifische Fixes */
+.ast-hfb-header {
+    position: relative !important;
+}
+
+.ast-hfb-header .site-header {
+    position: fixed !important;
+}
 
 /*
 ==============================================================================
@@ -188,11 +215,28 @@ body.custom-background .site-content, body.ast-header-break-point .site-content,
 ==============================================================================
 */
 
-.section-divider { position: absolute; left: 0; width: 100%; overflow: hidden; line-height: 0; z-index: 5; }
+.section-divider {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    z-index: 5;
+}
+
 .section-divider--bottom { bottom: -1px; }
 .section-divider--top { top: -1px; transform: rotate(180deg); }
-.section-divider svg { position: relative; display: block; width: calc(100% + 1.3px); height: 90px; }
-.section-divider .shape-fill { fill: var(--luvex-white); }
+
+.section-divider svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 90px;
+}
+
+.section-divider .shape-fill {
+    fill: var(--luvex-white);
+}
 
 /*
 ==============================================================================
@@ -203,10 +247,20 @@ body.custom-background .site-content, body.ast-header-break-point .site-content,
 .text-center { text-align: center; }
 .text-highlight { color: var(--luvex-bright-cyan); }
 .hidden { display: none; }
-.no-break { white-space: nowrap; display: inline-block; }
-.no-hyphen { hyphens: none; word-break: keep-all; }
-.keep-together { white-space: nowrap; display: inline; }
+.no-break {
+    white-space: nowrap;
+    display: inline-block;
+}
 
+.no-hyphen {
+    hyphens: none;
+    word-break: keep-all;
+}
+
+.keep-together {
+    white-space: nowrap;
+    display: inline;
+}
 /*
 ==============================================================================
 7. RESPONSIVE LAYOUT FIXES
@@ -214,15 +268,34 @@ body.custom-background .site-content, body.ast-header-break-point .site-content,
 */
 
 @media (max-width: 768px) {
-    .container { padding: 0 1rem; }
-    .section { padding: 4rem 0; }
-    .section--small { padding: 3rem 0; }
-    .section--large { padding: 6rem 0; }
-    body.admin-bar .site-header.fixed-header { top: 46px !important; }
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .section {
+        padding: 4rem 0;
+    }
+    
+    .section--small {
+        padding: 3rem 0;
+    }
+    
+    .section--large {
+        padding: 6rem 0;
+    }
+    
+    /* Mobile Admin Bar Fix */
+    body.admin-bar .site-header.fixed-header {
+        top: 46px !important;
+    }
 }
 
 @media (max-width: 480px) {
-    .container { padding: 0 1rem; }
-    .section { padding: 3rem 0; }
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .section {
+        padding: 3rem 0;
+    }
 }
-
