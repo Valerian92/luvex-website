@@ -2,9 +2,9 @@
 /**
  * Template Name: Start Your UV Project
  * Streamlined booking page focused on calendar integration
- * UPDATED: Integrated the new 'Tech-Style' Accordion component for FAQs.
+ * UPDATED: Re-integrated Hero Layout and added Canvas Animation Script.
  * @package Luvex
- * @since 3.5.0
+ * @since 3.6.0
  */
 
 get_header(); ?>
@@ -201,6 +201,110 @@ get_header(); ?>
     </section>
 
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const canvas = document.getElementById('hero-animation-canvas');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        const setCanvasSize = () => {
+            const heroSection = document.querySelector('.booking-hero');
+            if(heroSection) {
+                canvas.width = heroSection.offsetWidth;
+                canvas.height = heroSection.offsetHeight;
+            }
+        };
+
+        class Particle {
+            constructor(x, y, size, color, speed) {
+                this.x = x;
+                this.y = y;
+                this.size = size;
+                this.color = color;
+                this.speed = speed;
+                this.angle = Math.random() * 360;
+                this.vx = Math.cos(this.angle) * this.speed;
+                this.vy = Math.sin(this.angle) * this.speed;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+                    // Reset particle to a new random position
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                }
+            }
+        }
+
+        const createParticles = () => {
+            particles = [];
+            const particleCount = Math.floor((canvas.width * canvas.height) / 10000); 
+            for (let i = 0; i < particleCount; i++) {
+                const size = Math.random() * 2 + 0.5;
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const speed = Math.random() * 0.3 + 0.1;
+                const color = 'rgba(109, 213, 237, 0.4)';
+                particles.push(new Particle(x, y, size, color, speed));
+            }
+        };
+
+        const animate = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+            }
+
+            // Connect nearby particles
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 120) {
+                        ctx.strokeStyle = `rgba(109, 213, 237, ${1 - distance / 120})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animate);
+        };
+
+        const init = () => {
+            setCanvasSize();
+            createParticles();
+            animate();
+        };
+
+        init();
+
+        window.addEventListener('resize', () => {
+           setCanvasSize();
+           createParticles();
+        });
+    }
+});
+</script>
 
 <?php get_footer(); ?>
 
