@@ -1,8 +1,8 @@
 <?php
 /**
- * LUVEX Theme Functions - FINAL MERGED VERSION
- * Description: Komplette Theme-Setup-, Navigations- und Asset-Lade-Logik.
- * VERSION: 3.4.1 - Admin menu filter corrected.
+ * LUVEX Theme Functions - COMPLETE WITH PRIORITY SYSTEM
+ * Description: Komplette Theme-Setup-, Navigations- und Asset-Lade-Logik mit CSS Priority Loading.
+ * VERSION: 4.0 - CSS Priority System implementiert
  * @package Luvex
  */
 
@@ -49,11 +49,11 @@ function luvex_theme_setup() {
     add_theme_support('title-tag');
 }
 
-// 4. CSS & JAVASCRIPT LADEN (FINAL MERGED)
+// 4. CSS & JAVASCRIPT LADEN (PRIORITY SYSTEM IMPLEMENTIERT)
 add_action('wp_enqueue_scripts', 'luvex_enqueue_assets', 999);
 function luvex_enqueue_assets() {
     // ========================================================================
-    // CSS LADEN
+    // CSS LADEN - FIXED PRIORITY SYSTEM (Base -> Specific -> Page)
     // ========================================================================
 
     wp_dequeue_style('astra-theme-css');
@@ -67,11 +67,27 @@ function luvex_enqueue_assets() {
         }
     };
 
-    // Globale und Basis-Styles
-    $enqueue_style_helper('luvex-main', 'css/main.css');
-    $enqueue_style_helper('luvex-accordion-component', 'global/_component-accordion.css', ['luvex-main']);
+    // LEVEL 1: Base Variables & Core (Laden zuerst - Priority 10)
+    $enqueue_style_helper('luvex-variables', 'css/global/_variables.css', []);
+    $enqueue_style_helper('luvex-core', 'css/global/_core.css', ['luvex-variables']);
+
+    // LEVEL 2: Global Components (Priority 20) 
+    $enqueue_style_helper('luvex-components', 'css/global/_components.css', ['luvex-core']);
+    $enqueue_style_helper('luvex-modals', 'css/global/_modals.css', ['luvex-components']);
+
+    // LEVEL 3: Layout Components (Priority 30)
+    $enqueue_style_helper('luvex-header', 'css/global/_header.css', ['luvex-components']);
+    $enqueue_style_helper('luvex-footer', 'css/global/_footer.css', ['luvex-components']);
+
+    // LEVEL 4: Global Content & Responsive (Priority 40)
+    $enqueue_style_helper('luvex-responsive', 'css/global/_responsive.css', ['luvex-header', 'luvex-footer']);
+    $enqueue_style_helper('luvex-404', 'css/global/_404.css', ['luvex-components']);
+    $enqueue_style_helper('luvex-legal', 'css/global/_legal.css', ['luvex-components']);
+
+    // Additional global components
+    $enqueue_style_helper('luvex-accordion-component', 'css/global/_component-accordion.css', ['luvex-components']);
     
-    // Seitenspezifische Styles
+    // LEVEL 5: Page-Specific Styles (Priority 50) - DIESE ÜBERSCHREIBEN GLOBALS
     $page_styles_map = [
         'standard-styles-luvex' => ['css/_page-standard-styles-luvex.css'],
         'about' => ['css/_page-about.css'],
@@ -98,21 +114,24 @@ function luvex_enqueue_assets() {
         if (is_page($slug)) {
             foreach ($files as $file) {
                 $handle = 'luvex-page-' . $slug . '-' . sanitize_title($file);
-                $enqueue_style_helper($handle, $file, ['luvex-main']);
+                // FIXED: Page-specific styles depend on ALL global styles and load LAST
+                $enqueue_style_helper($handle, $file, ['luvex-responsive']);
             }
         }
     }
     
+    // Homepage gets special treatment
     if (is_front_page() || is_home()) {
-        $enqueue_style_helper('luvex-page-home', 'css/_page-home.css', ['luvex-main']);
+        $enqueue_style_helper('luvex-page-home', 'css/_page-home.css', ['luvex-responsive']);
     }
 
+    // News styles
     if (is_post_type_archive('uv_news') || is_singular('uv_news')) {
-        $enqueue_style_helper('luvex-news-styles', 'css/_news.css', ['luvex-main']);
+        $enqueue_style_helper('luvex-news-styles', 'css/_news.css', ['luvex-responsive']);
     }
 
     // ========================================================================
-    // JAVASCRIPT LADEN
+    // JAVASCRIPT LADEN (UNVERÄNDERT)
     // ========================================================================
     
     $js_base_uri = get_stylesheet_directory_uri() . '/assets/js/';
@@ -156,8 +175,7 @@ function luvex_enqueue_assets() {
         $enqueue_script('luvex-hero-safety-animation', 'pages/hero-safety-animation.js');
     }
 
-    // JavaScript für den interaktiven Country Selector laden, wenn die Standard-Styles-Seite angezeigt wird.
-    // Du solltest dies auch für Seiten aktivieren, auf denen die Komponente verwendet wird, z.B. 'register' oder 'profile'
+    // JavaScript für den interaktiven Country Selector laden
     if (is_page('standard-styles-luvex') || is_page('register') || is_page('profile')) {
         $enqueue_script('luvex-country-selector', 'luvex-country-selector.js', []);
     }
@@ -244,13 +262,15 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
         $title = apply_filters('the_title', $item->title, $item->ID);
         
         if ($depth === 0 && !empty($icon_html)) {
-            $item_output .= '<span class="menu-item-text">' . $title . '</span>';
+            // Level 0: Icons oben, Text unten (vertikal)
             $item_output .= str_replace('<i class="', '<i class="menu-item-icon ', $icon_html);
+            $item_output .= '<span class="menu-item-text">' . $title . '</span>';
         } else {
+            // Level 1+: Icons links, Text rechts (horizontal)
             $item_output .= $icon_html . '<span class="menu-item-text">' . $title . '</span>';
         }
         
-        if (in_array('menu-item-has-children', $classes)) {
+        if (in_array('menu-item-has-children', $classes) && $depth > 0) {
             $item_output .= ' <i class="fa-solid fa-chevron-down dropdown-arrow"></i>';
         }
         $item_output .= '</a>';
@@ -317,6 +337,7 @@ if (defined('WP_DEBUG') && WP_DEBUG) {
                     <?php echo $loaded ? '✓' : '✗'; ?> <?php echo esc_html($dep); ?>
                 </div>
             <?php endforeach; ?>
+            <div style="margin-top: 5px; font-size: 10px; color: #888;">CSS Priority System: Active</div>
         </div>
         <?php
     });
@@ -343,21 +364,20 @@ function luvex_filter_admin_menu_items($sorted_menu_items, $args) {
     }
 
     // WICHTIG: Der exakte "Slug" der Seite, die versteckt werden soll.
-    // Abgeleitet von der URL: https://www.luvex.tech/standard-styles-luvex/
     $admin_only_slugs = [
         'standard-styles-luvex', 
     ];
     
     $ids_to_hide = [];
     
-    // Finde alle Menüpunkte, die versteckt werden sollen (und deren eventuelle Unterpunkte)
+    // Finde alle Menüpunkte, die versteckt werden sollen
     foreach ($sorted_menu_items as $item) {
         if (isset($item->post_name) && in_array($item->post_name, $admin_only_slugs) || in_array($item->menu_item_parent, $ids_to_hide)) {
             $ids_to_hide[] = $item->ID;
         }
     }
     
-    // Filtere die markierten Menüpunkte aus dem Array, bevor das Menü gerendert wird.
+    // Filtere die markierten Menüpunkte aus dem Array
     if (!empty($ids_to_hide)) {
         $sorted_menu_items = array_filter($sorted_menu_items, function($item) use ($ids_to_hide) {
             return !in_array($item->ID, $ids_to_hide);
@@ -366,4 +386,3 @@ function luvex_filter_admin_menu_items($sorted_menu_items, $args) {
     
     return $sorted_menu_items;
 }
-

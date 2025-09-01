@@ -1,13 +1,13 @@
 /*
 ==============================================================================
-LUVEX THEME v4.9 - COMPLETE HEADER SYSTEM (FINAL LAYOUT & WIDE ALIGNMENT)
+LUVEX THEME v4.10 - COMPLETE HEADER SYSTEM + NAVIGATION ARROWS
 ==============================================================================
 
 Description: Vollständige Header-Implementierung mit 3-Level Navigation,
              Logo-System, User-Dropdown, Mobile Menu, Scroll Effects und
-             finalem Icon-Layout.
+             Pfeil-Animationen für Dropdowns.
 Dependencies: _variables.css, _core.css
-Last Update: 2025-08-31 (Final Spacing & Layout Adjustments)
+Last Update: 2025-09-01 (Navigation Arrows + Icons above text)
 
 ==============================================================================
 */
@@ -175,7 +175,7 @@ Last Update: 2025-08-31 (Final Spacing & Layout Adjustments)
 }
 
 /* ==========================================================================
-   4. LEVEL 1 - HAUPTMENÜ ITEMS (NEUES LAYOUT)
+   4. LEVEL 1 - HAUPTMENÜ ITEMS (ICONS OBEN + PFEIL-EFFEKT)
    ========================================================================== */
 .main-navigation > ul > li {
     position: relative;
@@ -188,34 +188,36 @@ Last Update: 2025-08-31 (Final Spacing & Layout Adjustments)
     transition: all 0.3s ease;
     padding: 0 3.5rem; 
     display: flex;
-    flex-direction: column; /* Icon unter Text */
+    flex-direction: column; /* KORRIGIERT: Icons oben */
     align-items: center;
     justify-content: center;
-    gap: 0.3rem; /* Abstand zwischen Text und Icon */
+    gap: 0.3rem; /* Abstand zwischen Icon und Text */
     height: 80px;
     box-sizing: border-box;
 }
 
+.main-navigation > ul > li > a .menu-item-icon {
+    font-size: 1.1rem; /* Etwas größer */
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    order: -1; /* Icons immer zuerst */
+}
+
 .main-navigation > ul > li > a .menu-item-text {
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 500;
     transition: color 0.3s ease;
-}
-
-.main-navigation > ul > li > a .menu-item-icon {
-    font-size: 1rem; /* Kleinere Icons */
-    opacity: 0.8;
-    transition: all 0.3s ease;
-}
-
-.main-navigation > ul > li > a:hover .menu-item-text {
-    color: var(--luvex-bright-cyan);
+    order: 1; /* Text nach Icons */
 }
 
 .main-navigation > ul > li > a:hover .menu-item-icon {
     color: var(--luvex-bright-cyan);
     opacity: 1;
-    transform: scale(1.1);
+    transform: scale(1.1) translateY(-1px);
+}
+
+.main-navigation > ul > li > a:hover .menu-item-text {
+    color: var(--luvex-bright-cyan);
 }
 
 .site-header.scrolled .main-navigation > ul > li > a {
@@ -231,7 +233,32 @@ Last Update: 2025-08-31 (Final Spacing & Layout Adjustments)
     text-shadow: 0 1px 3px rgba(109, 213, 237, 0.4);
 }
 
-/* Pfeil für Dropdowns ausblenden, da Layout vertikal ist */
+/* ==========================================================================
+   PFEIL-EFFEKT FÜR DROPDOWN-NAVIGATION
+   ========================================================================== */
+
+/* PFEIL FÜR DROPDOWN - Neu hinzugefügt */
+.main-navigation > ul > li.menu-item-has-children > a::after {
+    content: '\f107'; /* fa-chevron-down */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 0.8rem;
+    color: var(--luvex-gray-300);
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+/* Pfeil-Animation beim Hover */
+.main-navigation > ul > li.menu-item-has-children:hover > a::after {
+    color: var(--luvex-bright-cyan);
+    transform: translateY(-50%) rotate(-135deg); /* Nach unten-links */
+}
+
+/* Alte Pfeil-Logik ausblenden */
 .main-navigation > ul > li.menu-item-has-children > a .dropdown-arrow {
     display: none;
 }
@@ -944,4 +971,3 @@ Last Update: 2025-08-31 (Final Spacing & Layout Adjustments)
     transition: transform 0.1s linear;
     z-index: 1001;
 }
-
