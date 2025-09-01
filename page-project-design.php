@@ -4,7 +4,7 @@
  * Streamlined booking page focused on calendar integration
  * UPDATED: Integrated the new 'Tech-Style' Accordion component for FAQs.
  * @package Luvex
- * @since 3.3.0
+ * @since 3.4.0
  */
 
 get_header(); ?>
@@ -114,7 +114,10 @@ get_header(); ?>
                 <div class="accordion-item">
                     <button class="accordion-header">
                         <h4>How long is the consultation?</h4>
-                        <i class="fas fa-plus accordion-icon"></i>
+                        <div class="accordion-icon-wrapper">
+                           <i class="fas fa-plus icon-open"></i>
+                           <i class="fas fa-minus icon-close"></i>
+                        </div>
                     </button>
                     <div class="accordion-content">
                         <div class="accordion-body">
@@ -127,7 +130,10 @@ get_header(); ?>
                 <div class="accordion-item">
                     <button class="accordion-header">
                         <h4>Is there really no cost?</h4>
-                        <i class="fas fa-plus accordion-icon"></i>
+                        <div class="accordion-icon-wrapper">
+                           <i class="fas fa-plus icon-open"></i>
+                           <i class="fas fa-minus icon-close"></i>
+                        </div>
                     </button>
                     <div class="accordion-content">
                         <div class="accordion-body">
@@ -140,7 +146,10 @@ get_header(); ?>
                 <div class="accordion-item">
                     <button class="accordion-header">
                         <h4>What should I prepare?</h4>
-                        <i class="fas fa-plus accordion-icon"></i>
+                        <div class="accordion-icon-wrapper">
+                           <i class="fas fa-plus icon-open"></i>
+                           <i class="fas fa-minus icon-close"></i>
+                        </div>
                     </button>
                     <div class="accordion-content">
                         <div class="accordion-body">
@@ -153,7 +162,10 @@ get_header(); ?>
                 <div class="accordion-item">
                     <button class="accordion-header">
                         <h4>Will you try to sell me something?</h4>
-                        <i class="fas fa-plus accordion-icon"></i>
+                        <div class="accordion-icon-wrapper">
+                           <i class="fas fa-plus icon-open"></i>
+                           <i class="fas fa-minus icon-close"></i>
+                        </div>
                     </button>
                     <div class="accordion-content">
                         <div class="accordion-body">

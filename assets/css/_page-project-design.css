@@ -1,9 +1,9 @@
 /*
 ==============================================================================
-LUVEX THEME v2.6 - BOOKING PAGE (Optimized Hero)
+LUVEX THEME v2.7 - BOOKING PAGE (Optimized Calendar & FAQ)
 ==============================================================================
 Description: Styles for the booking page with a new, optimized hero section.
-Last Update: 2025-09-01 (FAQ Section Added)
+Last Update: 2025-09-01 (Calendar & FAQ Section Updated)
 ==============================================================================
 */
 
@@ -114,9 +114,12 @@ Last Update: 2025-09-01 (FAQ Section Added)
     z-index: 2;
 }
 
-/* --- 2. Calendar Section --- */
+/* ==============================================================================
+2. Calendar Section (OPTIMIZED)
+==============================================================================
+*/
 .booking-calendar { 
-    background: linear-gradient(180deg, rgba(109, 213, 237, 0.05) 0%, rgba(255, 255, 255, 0) 50%); 
+    background: linear-gradient(180deg, var(--luvex-white) 0%, #F8FAFC 100%);
 }
 
 .booking-calendar__header { 
@@ -139,18 +142,26 @@ Last Update: 2025-09-01 (FAQ Section Added)
 }
 
 .google-calendar-wrapper--optimized { 
-    border-radius: var(--radius-lg, 12px); 
+    border-radius: var(--radius-xl, 24px); 
     overflow: hidden; 
-    box-shadow: 0 10px 30px rgba(27, 42, 73, 0.08), 0 4px 10px rgba(27, 42, 73, 0.05); 
+    box-shadow: 0 0 15px rgba(109, 213, 237, 0.3), var(--shadow-lg); 
     margin: 0 auto; 
     max-width: 1000px; 
-    border: 1px solid var(--luvex-bright-cyan); 
+    border: 2px solid transparent;
+    background: linear-gradient(var(--luvex-white), var(--luvex-white)) padding-box,
+                linear-gradient(145deg, var(--luvex-bright-cyan), var(--luvex-vibrant-blue)) border-box;
+    transition: var(--transition-normal);
+}
+
+.google-calendar-wrapper--optimized:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(109, 213, 237, 0.5), var(--shadow-lg); 
 }
 
 .google-calendar-iframe { 
     display: block; 
     width: 100%; 
-    height: 800px; 
+    height: 950px; /* INCREASED HEIGHT to prevent scrolling */
     border: none; 
 }
 
@@ -180,11 +191,12 @@ Last Update: 2025-09-01 (FAQ Section Added)
     display: flex; 
     align-items: flex-start; 
     gap: 1.5rem; 
-    transition: box-shadow 0.3s ease; 
+    transition: box-shadow 0.3s ease, transform 0.3s ease; 
 }
 
 .benefit-card:hover { 
     box-shadow: var(--shadow-md); 
+    transform: translateY(-4px);
 }
 
 .benefit-card__icon { 
@@ -214,7 +226,7 @@ Last Update: 2025-09-01 (FAQ Section Added)
 }
 
 /* ==============================================================================
-5. FAQ SECTION STYLES
+5. FAQ SECTION STYLES (ESTABLISHED)
 ==============================================================================
 */
 .booking-faq {
@@ -283,9 +295,11 @@ Last Update: 2025-09-01 (FAQ Section Added)
     }
 }
 
-
 @media (max-width: 768px) {
     .benefits-grid { 
         grid-template-columns: 1fr; 
+    }
+    .google-calendar-iframe {
+        height: 800px; /* Adjust height for smaller screens if needed */
     }
 }

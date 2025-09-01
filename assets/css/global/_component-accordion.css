@@ -3,7 +3,7 @@
 LUVEX THEME - COMPONENT: ACCORDION (TECH & FUTURISTIC)
 ==============================================================================
 Description: Finale CSS-Datei für die Accordion-Komponente im Tech-Stil.
-             Inklusive Light & Dark Theme Support.
+             Inklusive Light & Dark Theme Support und optimierten Icons.
 Dependencies: _variables.css
 Last Update: 2025-09-01
 ==============================================================================
@@ -47,10 +47,28 @@ Last Update: 2025-09-01
     font-size: var(--text-xl);
 }
 
-.accordion-icon {
+/* UPDATED ICON STYLES */
+.accordion-icon-wrapper {
     font-size: 1.2rem;
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     flex-shrink: 0;
+    color: var(--luvex-bright-cyan);
+    position: relative;
+    width: 1.2em;
+    height: 1.2em;
+}
+
+.accordion-icon-wrapper .icon-open,
+.accordion-icon-wrapper .icon-close {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.accordion-icon-wrapper .icon-close {
+    opacity: 0;
+    transform: rotate(-90deg);
 }
 
 .accordion-content {
@@ -81,6 +99,7 @@ Last Update: 2025-09-01
     border-radius: var(--radius-md);
     background-clip: padding-box; /* Wichtig für den Gradient-Border-Effekt */
     position: relative;
+    background-color: var(--luvex-dark-blue-medium);
 }
 
 .accordion--tech .accordion-item::before {
@@ -91,23 +110,20 @@ Last Update: 2025-09-01
     margin: -1px; /* Grösse des Borders */
     border-radius: inherit; /* Nimmt den Radius vom Parent */
     background: linear-gradient(120deg, var(--luvex-dark-blue-light), var(--luvex-dark-blue-medium));
-    transition: background 0.4s ease;
+    transition: background 0.4s ease, opacity 0.4s ease;
+    opacity: 1;
 }
 
 .accordion--tech .accordion-header h4 {
     color: var(--luvex-gray-200);
 }
 
-.accordion--tech .accordion-icon {
-    color: var(--luvex-bright-cyan);
-}
-
 .accordion--tech .accordion-body {
     color: var(--luvex-gray-300);
 }
 
-.accordion--tech .accordion-item:hover {
-    box-shadow: 0 0 15px rgba(109, 213, 237, 0.3);
+.accordion--tech .accordion-item:hover::before {
+    opacity: 0.5;
 }
 
 /* --- Aktiver Zustand --- */
@@ -117,25 +133,27 @@ Last Update: 2025-09-01
 
 .accordion--tech .accordion-item.active::before {
     background: linear-gradient(120deg, var(--luvex-special-cyan), var(--luvex-vibrant-blue));
+    opacity: 1;
 }
 
 .accordion--tech .accordion-item.active .accordion-header h4 {
     color: var(--luvex-white);
 }
 
-.accordion--tech .accordion-item.active .accordion-icon {
-    transform: rotate(45deg);
+/* UPDATED ACTIVE ICON STATE */
+.accordion--tech .accordion-item.active .accordion-icon-wrapper .icon-open {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+.accordion--tech .accordion-item.active .accordion-icon-wrapper .icon-close {
+    opacity: 1;
+    transform: rotate(0deg);
 }
 
-/* --- THEME-SPEZIFISCHE ANPASSUNGEN --- */
+/* --- THEME-SPEZIFISCHE ANPASSUNGEN (Beispiel, falls benötigt) --- */
 
 /* Light Theme: Hintergrund der Karten */
 .theme-light .accordion--tech .accordion-item {
-    background-color: var(--luvex-dark-blue);
+    background-color: var(--luvex-white);
+    /* Ggf. weitere Anpassungen für hellen Hintergrund */
 }
-
-/* Dark Theme: Hintergrund der Karten */
-.theme-dark .accordion--tech .accordion-item {
-    background-color: var(--luvex-dark-blue-medium);
-}
-
