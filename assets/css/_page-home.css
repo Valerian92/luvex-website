@@ -1,21 +1,40 @@
 /*
 ==============================================================================
-LUVEX THEME v3.4 - HOMEPAGE (BEREINIGT & SPEZIFISCH)
+LUVEX THEME v4.0 - HOMEPAGE (KOMPLETT MIT INTEGRIERTEN ANIMATIONEN)
 ==============================================================================
-Description: Nur Homepage-spezifische Styles. Wiederverwendbare Komponenten
-             wurden nach _components.css verschoben.
+Description: Komplette Homepage-Styles mit integrierten Animationen aus 
+             _animation-hero-home.css. Simulator-Button komplett repariert.
 Dependencies: _variables.css, _core.css, _components.css
-Last Update: 2025-09-01 (Community Section repariert)
+Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
 ==============================================================================
 */
 
 /*
 ==============================================================================
-1. HERO SECTION (FINALE STRUKTUR)
+1. CANVAS SETUP (AUS _animation-hero-home.css INTEGRIERT)
+==============================================================================
+*/
+.luvex-hero #homepage-hero-canvas {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 0 !important;
+}
+
+.luvex-hero .luvex-hero__container {
+    position: relative;
+    z-index: 2;
+}
+
+/*
+==============================================================================
+2. HERO SECTION (FINALE STRUKTUR)
 ==============================================================================
 */
 
-/* --- 1.1 Hero Section Homepage-Specifics --- */
+/* --- 2.1 Hero Section Homepage-Specifics --- */
 .home .luvex-hero__cta-container {
     display: flex;
     flex-direction: column;
@@ -26,7 +45,7 @@ Last Update: 2025-09-01 (Community Section repariert)
     width: 100%;
 }
 
-/* --- 1.2 Hero Container & Content --- */
+/* --- 2.2 Hero Container & Content --- */
 .home .luvex-hero__container {
     max-width: 100%;
     width: 100%;
@@ -43,7 +62,7 @@ Last Update: 2025-09-01 (Community Section repariert)
     padding-top: 2rem;
 }
 
-/* --- 1.3 Hero Text Elements (Finale Struktur) --- */
+/* --- 2.3 Hero Text Elements (Finale Struktur) --- */
 .home .luvex-hero__title {
     max-width: 1200px;
     font-size: 3.5rem;
@@ -78,18 +97,19 @@ Last Update: 2025-09-01 (Community Section repariert)
 
 /*
 ==============================================================================
-1.4 ANIMIERTER HERO-BUTTON (REPARIERT mit höchster Spezifität)
+3. SIMULATOR BUTTON (KOMPLETT REPARIERT MIT ALLEN EFFEKTEN)
 ==============================================================================
 */
-/* --- BASE SIMULATOR BUTTON --- */
+
+/* --- 3.1 BASE SIMULATOR BUTTON --- */
 .luvex-simulator-cta {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: var(--space-xs);
     padding: 16px 32px;
-    background: transparent;
-    color: var(--luvex-white);
+    background: transparent !important;
+    color: var(--luvex-white) !important;
     border: 2px solid var(--luvex-bright-cyan);
     border-radius: var(--radius-full);
     text-decoration: none;
@@ -97,6 +117,8 @@ Last Update: 2025-09-01 (Community Section repariert)
     font-size: var(--text-base);
     position: relative;
     overflow: hidden;
+    z-index: 2;
+    cursor: none; /* Custom cursor im Hero */
     transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.4s ease;
 }
 
@@ -107,14 +129,39 @@ Last Update: 2025-09-01 (Community Section repariert)
     box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
 }
 
-/* --- ANIMIERTER SIMULATOR BUTTON --- */
+/* --- 3.2 ANIMIERTE VERSION MIT ENERGY PULSE --- */
 .luvex-simulator-cta--animated {
-    /* Erbt alle Basis-Styles, fügt Animation hinzu */
-    animation: pulse-purple-glow 2.5s infinite ease-in-out;
+    animation: pulse-purple-glow 2.5s infinite ease-in-out !important;
+}
+
+.luvex-simulator-cta--animated::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, 
+        rgba(138, 43, 226, 0.4) 0%, 
+        rgba(75, 0, 130, 0.6) 30%, 
+        transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: energy-pulse 2s ease-out infinite;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Text und Icons im Vordergrund */
+.luvex-simulator-cta--animated span,
+.luvex-simulator-cta--animated i {
+    position: relative;
+    z-index: 3;
+    color: var(--luvex-white) !important;
 }
 
 .luvex-simulator-cta--animated:hover {
-    /* GRADIENT HINTERGRUND beim Hover */
+    /* GRADIENT HINTERGRUND */
     background: linear-gradient(45deg,
         var(--luvex-bright-cyan),
         #8a2be2,
@@ -125,46 +172,26 @@ Last Update: 2025-09-01 (Community Section repariert)
     background-size: 400% 400% !important;
     
     color: var(--luvex-white) !important;
+    border-color: rgba(109, 213, 237, 0.8) !important;
 
-    /* BEIDE ANIMATIONEN GLEICHZEITIG */
+    /* ALLE DREI ANIMATIONEN GLEICHZEITIG */
     animation: 
         pulse-purple-glow 2.5s infinite ease-in-out, 
         gradient-shift-smooth 3s infinite ease-in-out !important;
 
-    /* VERSTÄRKTE HOVER EFFEKTE */
+    /* HOVER EFFEKTE */
     transform: translateY(-2px) scale(1.05) !important;
-    border-color: rgba(109, 213, 237, 0.8) !important;
     box-shadow: 
         0 8px 25px rgba(109, 213, 237, 0.4),
         0 0 20px rgba(138, 43, 226, 0.3) !important;
 }
 
-/* --- KEYFRAMES BEIBEHALTEN --- */
-@keyframes pulse-purple-glow {
-    0%, 100% { 
-        box-shadow: 
-            0 4px 15px rgba(109, 213, 237, 0.3),
-            0 0 10px rgba(138, 43, 226, 0.2);
-        border-color: rgba(109, 213, 237, 0.8);
-    }
-    50% { 
-        box-shadow: 
-            0 6px 20px rgba(109, 213, 237, 0.5),
-            0 0 20px rgba(138, 43, 226, 0.4);
-        border-color: rgba(138, 43, 226, 0.6);
-    }
+/* Energy Pulse pausiert beim Hover */
+.luvex-simulator-cta--animated:hover::before {
+    animation-play-state: paused;
 }
 
-@keyframes gradient-shift-smooth {
-    0% { background-position: 0% 50%; }
-    25% { background-position: 100% 50%; }
-    50% { background-position: 100% 100%; }
-    75% { background-position: 0% 100%; }
-    100% { background-position: 0% 50%; }
-}
-
-
-/* Sekundärer Button - normale Styles */
+/* --- 3.3 SEKUNDÄRER BUTTON --- */
 .home .luvex-hero__cta-secondary {
     display: inline-flex;
     align-items: center;
@@ -190,7 +217,57 @@ Last Update: 2025-09-01 (Community Section repariert)
 
 /*
 ==============================================================================
-2. UV SIMULATOR SHOWCASE (OPTIMIERT)
+4. KEYFRAMES (ALLE ANIMATIONEN)
+==============================================================================
+*/
+
+/* Pulse Animation für Border/Box-Shadow */
+@keyframes pulse-purple-glow {
+    0%, 100% { 
+        box-shadow: 
+            0 4px 15px rgba(109, 213, 237, 0.3),
+            0 0 10px rgba(138, 43, 226, 0.2);
+        border-color: rgba(109, 213, 237, 0.8);
+    }
+    50% { 
+        box-shadow: 
+            0 6px 20px rgba(109, 213, 237, 0.5),
+            0 0 20px rgba(138, 43, 226, 0.4);
+        border-color: rgba(138, 43, 226, 0.6);
+    }
+}
+
+/* Gradient Movement */
+@keyframes gradient-shift-smooth {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 100% 50%; }
+    50% { background-position: 100% 100%; }
+    75% { background-position: 0% 100%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Energy Pulse Effect (aus _animation-hero-home.css) */
+@keyframes energy-pulse {
+    0% { 
+        width: 0; 
+        height: 0; 
+        opacity: 0.8; 
+    }
+    50% { 
+        width: 400px;
+        height: 400px;
+        opacity: 0.4; 
+    }
+    100% { 
+        width: 450px;
+        height: 450px;
+        opacity: 0; 
+    }
+}
+
+/*
+==============================================================================
+5. UV SIMULATOR SHOWCASE (OPTIMIERT)
 ==============================================================================
 */
 
@@ -224,9 +301,35 @@ Last Update: 2025-09-01 (Community Section repariert)
     max-width: 900px;
 }
 
+/* Simulator-CTA Button (anderer Button in der Showcase-Sektion) */
+.simulator-cta { 
+    margin-top: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    border: 2px solid var(--luvex-bright-cyan);
+    color: var(--luvex-white);
+}
+
+.simulator-cta:hover {
+    background-color: var(--luvex-bright-cyan);
+    border-color: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(109, 213, 237, 0.3);
+}
+
 /*
 ==============================================================================
-3. GLOBAL UV EXPERT COMMUNITY SECTION (REPARIERT MIT TITEL-FIX)
+6. GLOBAL UV EXPERT COMMUNITY SECTION (REPARIERT MIT TITEL-FIX)
 ==============================================================================
 */
 .homepage-community-section {
@@ -301,7 +404,7 @@ Last Update: 2025-09-01 (Community Section repariert)
 
 /*
 ==============================================================================
-4. EVIDENCE-BASED EXPERTISE SECTION (REPARIERT)
+7. EVIDENCE-BASED EXPERTISE SECTION (REPARIERT)
 ==============================================================================
 */
 
@@ -410,7 +513,7 @@ Last Update: 2025-09-01 (Community Section repariert)
 
 /*
 ==============================================================================
-5. RESPONSIVE DESIGN
+8. RESPONSIVE DESIGN
 ==============================================================================
 */
 
@@ -471,7 +574,7 @@ Last Update: 2025-09-01 (Community Section repariert)
     }
     
     /* Button-Animation auch auf Mobile */
-    .home .luvex-hero__cta-container .luvex-hero__cta.luvex-cta--animated {
+    .luvex-simulator-cta--animated {
         padding: 14px 28px;
         font-size: var(--text-sm);
     }
@@ -491,7 +594,7 @@ Last Update: 2025-09-01 (Community Section repariert)
 
 /*
 ==============================================================================
-6. HOMEPAGE-SPECIFIC HIGH-PERFORMANCE CSS CURSOR
+9. HOMEPAGE-SPECIFIC HIGH-PERFORMANCE CSS CURSOR
 ==============================================================================
 */
 

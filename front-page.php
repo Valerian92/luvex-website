@@ -1,7 +1,7 @@
 <?php
 /**
- * Template Name: Homepage (Refactored)
- * Main homepage for Luvex UV Technology
+ * Template Name: Homepage (Refactored v4.0)
+ * Main homepage for Luvex UV Technology with repaired simulator button
  *
  * @package Luvex
  */
@@ -31,8 +31,9 @@ get_header(); ?>
             
         </div>
         <div class="luvex-hero__cta-container">
+            <!-- REPARIERTER SIMULATOR BUTTON MIT NEUEN KLASSEN -->
             <a href="/uv-simulator/" class="luvex-simulator-cta luvex-simulator-cta--animated">
-                <?php if (function_exists('get_luvex_icon')) echo get_luvex_icon('menu-simulator'); ?>
+                <?php if (function_exists('get_luvex_icon')) echo get_luvex_icon('uv-simulator'); ?>
                 <span>Launch UV Simulator</span>
             </a>
             <a href="/about/" class="luvex-hero__cta-secondary">
@@ -161,4 +162,3 @@ get_header(); ?>
 </section>
 
 <?php get_footer(); ?>
-

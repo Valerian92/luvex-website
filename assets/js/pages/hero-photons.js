@@ -1,11 +1,13 @@
 /**
  * LUVEX Theme - Homepage Hero Photon Animation & CSS Cursor Trigger
  *
- * VERSION 6: Korrigiert den Hover-Effekt, sodass die Partikel-Pause
- * nur noch für den Haupt-CTA gilt und nicht mehr die CSS-Animationen stört.
+ * VERSION 7: REPARIERTE SELEKTOREN für neue Button-Klassen
+ * - Photonen fliegen zum neuen .luvex-simulator-cta Button
+ * - Pause-Effekt funktioniert mit .luvex-simulator-cta--animated
+ * - Alle vier Probleme behoben
  */
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🌟 Hero Effects Script loading (v6)...');
+    console.log('🌟 Hero Effects Script loading (v7 - REPAIRED SELECTORS)...');
 
     const canvas = document.getElementById('homepage-hero-canvas');
     const heroSection = document.querySelector('.luvex-hero');
@@ -39,7 +41,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     let targetButtonPosition = { x: null, y: null };
-    const targetButton = document.querySelector('.luvex-hero .simulator-cta');
+    
+    // FIX 1: REPARIERTER SELECTOR - Photonen fliegen zum neuen Button
+    const targetButton = document.querySelector('.luvex-simulator-cta');
+    console.log('🎯 Target Button gefunden:', targetButton);
 
     const maxParticles = 300;
     const spawnRate = 5;
@@ -51,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const heroRect = heroSection.getBoundingClientRect();
             targetButtonPosition.x = rect.left + rect.width / 2 - heroRect.left;
             targetButtonPosition.y = rect.top + rect.height / 2 - heroRect.top;
+            console.log('🎯 Button Position:', targetButtonPosition);
         }
     }
 
@@ -146,18 +152,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     /**
-     * KORRIGIERT: Fügt die Event-Listener für den Pause-Effekt NUR noch
-     * für den animierten Haupt-Button hinzu, um Konflikte zu vermeiden.
+     * FIX 2: REPARIERTE HOVER-PAUSE LISTENERS für neue Button-Klasse
+     * Photonen pausieren beim Hover über den animierten Simulator-Button
      */
     function addHoverPauseListeners() {
-        const animatedButton = document.querySelector('.luvex-hero__cta.luvex-cta--animated');
+        const animatedButton = document.querySelector('.luvex-simulator-cta--animated');
+        console.log('🎮 Animated Button gefunden:', animatedButton);
+        
         if (animatedButton) {
             animatedButton.addEventListener('mouseenter', () => {
+                console.log('🎮 Button Hover: Photonen PAUSIERT');
                 particleMouse.isPaused = true;
             });
             animatedButton.addEventListener('mouseleave', () => {
+                console.log('🎮 Button Hover Ende: Photonen AKTIV');
                 particleMouse.isPaused = false;
             });
+        } else {
+            console.warn('⚠️ Animierter Button nicht gefunden! Selector: .luvex-simulator-cta--animated');
         }
     }
 
