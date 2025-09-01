@@ -91,7 +91,7 @@ function luvex_enqueue_assets() {
     $page_styles_map = [
         'standard-styles-luvex' => ['css/_page-standard-styles-luvex.css'],
         'about' => ['css/_page-about.css'],
-        'project-design' => ['css/_page-project-desin.css'],
+        'project-design' => ['css/_page-project-design.css'],
         'contact' => ['css/_page-contact.css'],
         'uv-technology' => ['css/_page-uv-technology.css'],
         'mercury-uv-lamps' => ['css/_page-mercury-uv-lamps.css'],

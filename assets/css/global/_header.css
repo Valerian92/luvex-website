@@ -467,6 +467,16 @@ Last Update: 2025-09-01 (Finale Korrekturen)
     color: var(--luvex-bright-cyan);
 }
 
+/* NEU: Icon Hover-Effekt für alle Untermenü-Ebenen */
+.main-navigation .sub-menu li > a i {
+    transition: transform 0.3s ease;
+}
+
+.main-navigation .sub-menu li:hover > a i {
+    transform: scale(1.15);
+}
+
+
 /* ==========================================================================
    8. HEADER CTA, USER SYSTEM & LANGUAGE SWITCHER (WIEDERHERGESTELLT)
    ========================================================================== */
@@ -907,7 +917,6 @@ Last Update: 2025-09-01 (Finale Korrekturen)
     border-radius: var(--radius-md);
     z-index: 9999;
 }
-
 
 
 
