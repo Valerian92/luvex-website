@@ -253,7 +253,7 @@ Last Update: 2025-09-01 (Finale Korrekturen)
 .main-navigation > ul > li.menu-item-has-children:hover > a::after {
     color: var(--luvex-bright-cyan);
     /* KORRIGIERT: Winkel für eine Drehung nach "links-unten" */
-    transform: translateX(-50%) rotate(225deg); 
+    transform: translateX(-50%) rotate(-45deg); 
 }
 
 /* Alte Pfeil-Logik ausblenden */
@@ -320,6 +320,12 @@ Last Update: 2025-09-01 (Finale Korrekturen)
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+}
+
+/* KORRIGIERT: Z-Index anheben, um Überblendung zu verhindern */
+.main-navigation > ul > li > .sub-menu > li:hover {
+    position: relative;
+    z-index: 10;
 }
 
 .main-navigation > ul > li > .sub-menu > li {
@@ -895,4 +901,5 @@ Last Update: 2025-09-01 (Finale Korrekturen)
     border-radius: var(--radius-md);
     z-index: 9999;
 }
+
 
