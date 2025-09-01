@@ -1,16 +1,14 @@
 /*
 ==============================================================================
-LUVEX THEME v5.1 - COMPLETE HEADER SYSTEM (CUSTOMIZED & RESTORED)
+LUVEX THEME v5.2 - COMPLETE HEADER SYSTEM (FINAL CORRECTIONS)
 ==============================================================================
 
-Description: Vollständige Header-Implementierung. Integriert die gewünschten
-             Custom-Animationen in die ursprüngliche, vollständige Datei.
-             - Pfeil-Rotation: Standard nach oben, Hover nach links-unten
-             - UV-Lichtstrahl-Effekt für Level 2 (horizontal) & Level 3 (vertikal)
-             - Automatische Breitenanpassung für Menüpunkte (Level 2 an Level 3)
-             - Alle ursprünglichen Stile (User-Menü, Mobile etc.) wiederhergestellt.
+Description: Vollständige Header-Implementierung mit den letzten Detail-Anpassungen.
+             - Pfeil-Rotation: Korrigiert auf links-unten
+             - Automatische Breitenanpassung für Menüpunkte finalisiert
+             - Startpunkt des vertikalen Lichtstrahls an den Elterneintrag angepasst
 Dependencies: _variables.css, _core.css
-Last Update: 2025-09-01 (Custom-Wünsche in Originaldatei integriert)
+Last Update: 2025-09-01 (Finale Korrekturen)
 
 ==============================================================================
 */
@@ -247,16 +245,15 @@ Last Update: 2025-09-01 (Custom-Wünsche in Originaldatei integriert)
     position: absolute;
     left: 50%;
     bottom: 8px;
-    /* NEU: Standardmäßig nach oben gedreht für größere Animation */
     transform: translateX(-50%) rotate(180deg);
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     pointer-events: none;
 }
 
-/* NEU: Pfeil-Animation beim Hover - Korrekte Rotation nach links-unten */
 .main-navigation > ul > li.menu-item-has-children:hover > a::after {
     color: var(--luvex-bright-cyan);
-    transform: translateX(-50%) rotate(-45deg); /* Zeigt nach links unten */
+    /* KORRIGIERT: Winkel für eine Drehung nach "links-unten" */
+    transform: translateX(-50%) rotate(225deg); 
 }
 
 /* Alte Pfeil-Logik ausblenden */
@@ -290,17 +287,16 @@ Last Update: 2025-09-01 (Custom-Wünsche in Originaldatei integriert)
     
     z-index: 1001;
     
-    /* NEU: Auto-Breite basierend auf dem breitesten Inhalt */
     width: max-content; 
 }
 
-/* NEU: Horizontaler UV-Lichtstrahl */
+/* Horizontaler UV-Lichtstrahl */
 .main-navigation > ul > li > .sub-menu::before {
     content: '';
     position: absolute;
-    top: -1px; /* Liegt auf dem Border */
+    top: -1px;
     left: 0;
-    width: 0%; /* Startet bei 0% Breite */
+    width: 0%;
     height: 2px;
     background: linear-gradient(90deg, 
         transparent 0%, 
@@ -316,7 +312,6 @@ Last Update: 2025-09-01 (Custom-Wünsche in Originaldatei integriert)
     will-change: width;
 }
 
-/* NEU: Lichtstrahl expandiert beim Anzeigen des Submenüs */
 .main-navigation > ul > li:hover > .sub-menu::before {
     width: 100%;
 }
@@ -327,14 +322,14 @@ Last Update: 2025-09-01 (Custom-Wünsche in Originaldatei integriert)
     transform: translateY(0);
 }
 
-/* NEU: Items der 2. Ebene passen sich an die Breite der 3. Ebene an */
 .main-navigation > ul > li > .sub-menu > li {
     position: relative;
     list-style: none !important;
     margin: 0;
     padding: 0;
-    flex: 0 0 auto; /* Verhindert Schrumpfen */
-    min-width: max-content; /* Nimmt die benötigte Breite an */
+    /* KORRIGIERT: Dies zwingt das Element, so breit wie sein möglicher Inhalt 
+       (inklusive des absolut positionierten Kind-Menüs) zu sein. */
+    width: max-content; 
 }
 
 .main-navigation > ul > li > .sub-menu > li > a {
@@ -347,7 +342,7 @@ Last Update: 2025-09-01 (Custom-Wünsche in Originaldatei integriert)
     gap: 0.75rem;
     position: relative;
     transition: all 0.3s ease;
-    white-space: nowrap; /* Wichtig für die Breitenberechnung */
+    white-space: nowrap;
     height: auto;
 }
 
@@ -357,15 +352,18 @@ Last Update: 2025-09-01 (Custom-Wünsche in Originaldatei integriert)
 }
 
 /* ==========================================================================
-   6. LEVEL 3 - VERTICAL SUB-SUB-MENU (MIT LICHTSTRAHL)
+   6. LEVEL 3 - VERTICAL SUB-SUB-MENU (MIT LICHTSTRAHL - VERBESSERT)
    ========================================================================== */
 .main-navigation .sub-menu .sub-menu {
+    --level2-item-height: 4.5rem; /* Höhe des Elternelements für den Versatz, leicht angepasst */
+
     position: absolute;
-    top: 100%;
+    /* KORRIGIERT: Startet jetzt auf gleicher Höhe wie das Elternelement */
+    top: 0; 
     left: 0;
     
     min-width: 100%;
-    width: max-content; /* Passt sich an den breitesten Inhalt an */
+    width: max-content;
     
     background: rgba(15, 28, 48, 0.97);
     backdrop-filter: blur(12px) saturate(180%);
@@ -375,25 +373,27 @@ Last Update: 2025-09-01 (Custom-Wünsche in Originaldatei integriert)
     border-top: none;
     
     display: block;
-    padding: 0.5rem 0;
+    /* KORRIGIERT: Fügt oben Platz hinzu, um den Inhalt unter das Elternelement zu schieben */
+    padding: var(--level2-item-height) 0 0.5rem 0;
     list-style: none !important;
 
     opacity: 0;
     visibility: hidden;
-    transform: translateY(10px);
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, visibility 0.3s ease;
     z-index: 1002;
-    overflow: hidden; /* Wichtig für den Lichtstrahl-Effekt */
+    overflow: hidden;
+    pointer-events: none; /* Verhindert blockieren des Parent-Hovers */
 }
 
-/* NEU: Vertikaler UV-Lichtstrahl */
+/* Vertikaler UV-Lichtstrahl */
 .main-navigation .sub-menu .sub-menu::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 2px;
-    height: 0%; /* Startet bei 0% Höhe */
+    height: 0%;
     background: linear-gradient(180deg, 
         var(--luvex-white) 0%, 
         var(--luvex-special-cyan) 50%, 
@@ -406,15 +406,15 @@ Last Update: 2025-09-01 (Custom-Wünsche in Originaldatei integriert)
     will-change: height;
 }
 
-/* NEU: Lichtstrahl expandiert beim Anzeigen des Sub-Submenüs */
-.main-navigation .sub-menu > li:hover > .sub-menu::before {
-    height: 100%;
-}
-
+/* KORRIGIERT: Lichtstrahl und Menü erscheinen beim Hover */
 .main-navigation .sub-menu > li:hover > .sub-menu {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.main-navigation .sub-menu > li:hover > .sub-menu::before {
+    height: 100%;
 }
 
 .main-navigation .sub-menu .sub-menu li {
@@ -444,7 +444,7 @@ Last Update: 2025-09-01 (Custom-Wünsche in Originaldatei integriert)
    7. DROPDOWN ARROWS & INDICATORS (Level 2->3)
    ========================================================================== */
 .main-navigation .sub-menu > li.menu-item-has-children > a .dropdown-arrow {
-    display: inline-block; /* Sicherstellen, dass der Pfeil sichtbar ist */
+    display: inline-block;
     margin-left: auto;
     transform: rotate(-90deg);
     transition: transform 0.3s ease;
@@ -551,7 +551,7 @@ Last Update: 2025-09-01 (Custom-Wünsche in Originaldatei integriert)
 }
 
 .user-info .dropdown-arrow {
-    display: inline-block !important; /* Wichtig für Sichtbarkeit */
+    display: inline-block !important;
     color: var(--luvex-gray-300);
     font-size: 0.8rem;
     transition: transform 0.3s ease;
