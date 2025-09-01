@@ -112,7 +112,7 @@ a:hover { color: var(--luvex-bright-cyan); }
 
 /*
 ==============================================================================
-3. LAYOUT SYSTEM
+3. LAYOUT SYSTEM (REPARIERT)
 ==============================================================================
 */
 
@@ -122,11 +122,33 @@ a:hover { color: var(--luvex-bright-cyan); }
     max-width: var(--container-max-width);
     margin: 0 auto;
     padding: 0 2rem;
+    /* FIX: Flexbox für zentrierte Buttons */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Buttons und Elemente zentrieren */
+}
+
+/* FIX: Spezielle Container-Varianten */
+.container--text-content {
+    align-items: flex-start; /* Text linksbündig */
+}
+
+.container--text-content p,
+.container--text-content .description {
+    text-align: justify; /* Blocksatz für Beschreibungen */
+    hyphens: auto;
+    max-width: 100%;
 }
 
 .container--narrow { max-width: 1200px; }
 .container--medium { max-width: 1400px; }
 .container--wide { max-width: 1800px; }
+
+/* FIX: Grid-Container sollen nicht flex sein */
+.container.grid,
+.container .grid {
+    display: grid;
+}
 
 /* --- 3.2 Section Defaults --- */
 .section {
@@ -137,7 +159,6 @@ a:hover { color: var(--luvex-bright-cyan); }
 
 .section--small { padding: 4rem 0; }
 .section--large { padding: 8rem 0; }
-
 /* --- 3.3 Section Backgrounds --- */
 .section--turquoise-light {
     background: linear-gradient(180deg, rgba(109, 213, 237, 0.08) 0%, rgba(248, 250, 252, 0) 100%);
