@@ -1,11 +1,11 @@
 /**
  * LUVEX Theme - Homepage Hero Photon Animation & CSS Cursor Trigger
  *
- * VERSION 5: Re-implements the particle pause effect on button hover
- * and includes the 3-second idle timer.
+ * VERSION 6: Korrigiert den Hover-Effekt, sodass die Partikel-Pause
+ * nur noch für den Haupt-CTA gilt und nicht mehr die CSS-Animationen stört.
  */
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🌟 Hero Effects Script loading (v5)...');
+    console.log('🌟 Hero Effects Script loading (v6)...');
 
     const canvas = document.getElementById('homepage-hero-canvas');
     const heroSection = document.querySelector('.luvex-hero');
@@ -146,18 +146,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     /**
-     * KORRIGIERT: Fügt die Event-Listener für den Pause-Effekt hinzu.
+     * KORRIGIERT: Fügt die Event-Listener für den Pause-Effekt NUR noch
+     * für den animierten Haupt-Button hinzu, um Konflikte zu vermeiden.
      */
     function addHoverPauseListeners() {
-        const interactiveElements = document.querySelectorAll('.luvex-hero__cta-container a');
-        interactiveElements.forEach(elem => {
-            elem.addEventListener('mouseenter', () => {
+        const animatedButton = document.querySelector('.luvex-hero__cta.luvex-cta--animated');
+        if (animatedButton) {
+            animatedButton.addEventListener('mouseenter', () => {
                 particleMouse.isPaused = true;
             });
-            elem.addEventListener('mouseleave', () => {
+            animatedButton.addEventListener('mouseleave', () => {
                 particleMouse.isPaused = false;
             });
-        });
+        }
     }
 
     function setupPhotonAnimation() {
@@ -211,4 +212,3 @@ document.addEventListener('DOMContentLoaded', function() {
         document.addEventListener('mousemove', initialCheck);
     }
 });
-
