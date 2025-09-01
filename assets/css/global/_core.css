@@ -113,7 +113,7 @@ p,
 .section-description,
 [class*="description"]:not(.luvex-hero__description) {
     font-size: var(--text-lg); 
-    color: var(--luvex-gray-700); 
+    color: var(--luvex-white); 
     margin: 0 0 var(--space-md) 0;
     text-align: justify;
     hyphens: auto;

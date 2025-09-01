@@ -345,31 +345,38 @@ function luvex_add_context_classes($classes) {
     return $classes;
 }
 
-// 11. ADMIN MENU ITEM FILTER (NEU)
+// 11. ADMIN MENU ITEM FILTER (AKTUALISIERT & VERBESSERT)
 add_filter('wp_nav_menu_objects', 'luvex_filter_admin_menu_items', 10, 2);
 function luvex_filter_admin_menu_items($sorted_menu_items, $args) {
-    // Nur auf das Hauptmenü anwenden
-    if ($args->theme_location != 'primary') {
+    // Nur auf das Hauptmenü anwenden und Admins alles anzeigen lassen.
+    if ($args->theme_location != 'primary' || current_user_can('manage_options')) {
         return $sorted_menu_items;
     }
 
-    // Wenn der Benutzer Admin ist, alle Menüpunkte anzeigen.
-    if (current_user_can('manage_options')) {
-        return $sorted_menu_items;
-    }
-    
-    // Liste der Slugs von Seiten, die nur für Admins sichtbar sein sollen.
+    // HIER DIE SLUGS DER ADMIN-SEITEN EINTRAGEN
+    // Den Slug findest du in der WordPress-Seitenbearbeitung unter "URL".
     $admin_only_slugs = [
-        'standard-styles-luvex', // Der Slug der "Standard Styles" Seite
+        'standard-styles-luvex', // Bitte prüfe, ob dieser Slug korrekt ist!
+        // 'slug-fuer-entwuerfe', // Hier kannst du weitere Slugs hinzufügen
     ];
-
-    foreach ($sorted_menu_items as $key => $menu_item) {
-        // Der 'post_name' enthält den Slug der Seite, auf die der Menüpunkt verweist.
-        if (isset($menu_item->post_name) && in_array($menu_item->post_name, $admin_only_slugs)) {
-            // Wenn der Slug in unserer Admin-Liste ist, entfernen wir den Menüpunkt.
-            unset($sorted_menu_items[$key]);
+    
+    $ids_to_hide = [];
+    
+    // Finde alle Menüpunkte, die versteckt werden sollen (Eltern und deren Kinder)
+    foreach ($sorted_menu_items as $item) {
+        // Wenn der Menüpunkt selbst eine Admin-Seite ist ODER sein Elternelement bereits versteckt wird
+        if (isset($item->post_name) && in_array($item->post_name, $admin_only_slugs) || in_array($item->menu_item_parent, $ids_to_hide)) {
+            $ids_to_hide[] = $item->ID;
         }
     }
-
+    
+    // Entferne die markierten Menüpunkte aus dem Menü
+    if (!empty($ids_to_hide)) {
+        $sorted_menu_items = array_filter($sorted_menu_items, function($item) use ($ids_to_hide) {
+            return !in_array($item->ID, $ids_to_hide);
+        });
+    }
+    
     return $sorted_menu_items;
 }
+
