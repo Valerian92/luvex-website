@@ -285,7 +285,7 @@ Last Update: 2025-09-01 - Canvas-Layout und Menü-Icons repariert
 /* --- 2.6 Outline Button --- */
 .btn--outline {
     background-color: transparent;
-    border: 2px solid var(--luvex-bright-cyan);
+    border: 2px solid var(--luvex-vibrant-blue);
     color: var(--luvex-dark-blue);
     padding: 12px 24px;
     border-radius: var(--radius-full);
@@ -299,11 +299,11 @@ Last Update: 2025-09-01 - Canvas-Layout und Menü-Icons repariert
 }
 
 .btn--outline:hover {
-    background-color: var(--luvex-bright-cyan);
-    border-color: var(--luvex-bright-cyan);
+    background-color: var(--luvex-vibrant-blue);
+    border-color: var(--luvex-vibrant-blue);
     color: var(--luvex-white);
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
 }
 
 /*
@@ -1211,4 +1211,3 @@ input[type="tel"]:focus {
         width: 100%;
     }
 }
-

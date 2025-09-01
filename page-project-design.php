@@ -4,7 +4,7 @@
  * Streamlined booking page focused on calendar integration
  * UPDATED: Integrated the new 'Tech-Style' Accordion component for FAQs.
  * @package Luvex
- * @since 3.4.0
+ * @since 3.5.0
  */
 
 get_header(); ?>
@@ -203,3 +203,4 @@ get_header(); ?>
 </div>
 
 <?php get_footer(); ?>
+

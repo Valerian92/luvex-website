@@ -1,13 +1,21 @@
 /*
 ==============================================================================
-LUVEX THEME v2.7 - BOOKING PAGE (Optimized Calendar & FAQ)
+LUVEX THEME v2.8 - BOOKING PAGE (Layout & Calendar Fix)
 ==============================================================================
-Description: Styles for the booking page with a new, optimized hero section.
-Last Update: 2025-09-01 (Calendar & FAQ Section Updated)
+Description: Styles for the booking page. Fixed Hero layout and improved
+             calendar section contrast.
+Last Update: 2025-09-01
 ==============================================================================
 */
 
 /* --- 1. Optimized Hero Section --- */
+
+/* REPAIR: Override base hero styles to allow for grid layout */
+.booking-hero {
+    display: block !important; /* Force block display to allow grid child to work */
+    padding-top: calc(80px + var(--space-lg)); /* Restore top padding */
+    padding-bottom: var(--space-lg);
+}
 
 /* Canvas für Animation */
 #hero-animation-canvas {
@@ -16,17 +24,12 @@ Last Update: 2025-09-01 (Calendar & FAQ Section Updated)
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Animation im Hintergrund */
+    z-index: 1;
 }
 
-.luvex-hero .luvex-hero__container {
-    position: relative;
-    z-index: 2; /* Inhalt vor die Animation legen */
-}
-
-
-/* Container and Layout */
 .booking-hero .luvex-hero__container {
+    position: relative;
+    z-index: 2; 
     max-width: 1200px;
     width: 100%;
     text-align: left;
@@ -115,11 +118,11 @@ Last Update: 2025-09-01 (Calendar & FAQ Section Updated)
 }
 
 /* ==============================================================================
-2. Calendar Section (OPTIMIZED)
+2. Calendar Section (IMPROVED CONTRAST)
 ==============================================================================
 */
 .booking-calendar { 
-    background: linear-gradient(180deg, var(--luvex-white) 0%, #F8FAFC 100%);
+    background: var(--luvex-dark-blue-dark);
 }
 
 .booking-calendar__header { 
@@ -130,38 +133,30 @@ Last Update: 2025-09-01 (Calendar & FAQ Section Updated)
 .booking-calendar__title { 
     font-size: clamp(2rem, 4vw, 2.5rem); 
     font-weight: 600; 
-    color: var(--luvex-dark-blue); 
+    color: var(--luvex-white); 
     margin-bottom: 0.5rem; 
 }
 
 .booking-calendar__subtitle { 
-    color: var(--luvex-gray-700); 
-    font-weight: 500; 
+    color: var(--luvex-gray-300); 
+    font-weight: 400; 
     max-width: 550px; 
     margin: 0 auto; 
 }
 
 .google-calendar-wrapper--optimized { 
-    border-radius: var(--radius-xl, 24px); 
+    border-radius: var(--radius-lg, 12px); 
     overflow: hidden; 
-    box-shadow: 0 0 15px rgba(109, 213, 237, 0.3), var(--shadow-lg); 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 0 20px rgba(109, 213, 237, 0.3);
     margin: 0 auto; 
     max-width: 1000px; 
-    border: 2px solid transparent;
-    background: linear-gradient(var(--luvex-white), var(--luvex-white)) padding-box,
-                linear-gradient(145deg, var(--luvex-bright-cyan), var(--luvex-vibrant-blue)) border-box;
-    transition: var(--transition-normal);
-}
-
-.google-calendar-wrapper--optimized:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 25px rgba(109, 213, 237, 0.5), var(--shadow-lg); 
+    border: 1px solid var(--luvex-dark-blue-light);
 }
 
 .google-calendar-iframe { 
     display: block; 
     width: 100%; 
-    height: 950px; /* INCREASED HEIGHT to prevent scrolling */
+    height: 950px;
     border: none; 
 }
 
@@ -226,7 +221,7 @@ Last Update: 2025-09-01 (Calendar & FAQ Section Updated)
 }
 
 /* ==============================================================================
-5. FAQ SECTION STYLES (ESTABLISHED)
+5. FAQ SECTION STYLES
 ==============================================================================
 */
 .booking-faq {
@@ -300,6 +295,7 @@ Last Update: 2025-09-01 (Calendar & FAQ Section Updated)
         grid-template-columns: 1fr; 
     }
     .google-calendar-iframe {
-        height: 800px; /* Adjust height for smaller screens if needed */
+        height: 800px;
     }
 }
+

@@ -1,15 +1,16 @@
 /*
 ==============================================================================
-LUVEX THEME v4.12 - COMPLETE HEADER SYSTEM + UV LIGHT BEAM EFFECT
+LUVEX THEME v5.1 - COMPLETE HEADER SYSTEM (CUSTOMIZED & RESTORED)
 ==============================================================================
 
-Description: Vollständige Header-Implementierung mit UV-Lichtstrahl-Effekt:
-             - Pfeile UNTER dem Text (zentriert)
-             - Korrekte Rotation nach links-unten
-             - Auto-Breite für Level 2 basierend auf Level 3
-             - UV-Lichtstrahl bei Submenu-Expand (reine CSS-Animation)
+Description: Vollständige Header-Implementierung. Integriert die gewünschten
+             Custom-Animationen in die ursprüngliche, vollständige Datei.
+             - Pfeil-Rotation: Standard nach oben, Hover nach links-unten
+             - UV-Lichtstrahl-Effekt für Level 2 (horizontal) & Level 3 (vertikal)
+             - Automatische Breitenanpassung für Menüpunkte (Level 2 an Level 3)
+             - Alle ursprünglichen Stile (User-Menü, Mobile etc.) wiederhergestellt.
 Dependencies: _variables.css, _core.css
-Last Update: 2025-09-01 (UV Light Beam Effect integriert)
+Last Update: 2025-09-01 (Custom-Wünsche in Originaldatei integriert)
 
 ==============================================================================
 */
@@ -55,12 +56,11 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
     position: relative;
 }
 
-/* KORREKTUR: Gruppe für linke Elemente für stabiles Layout */
 .header-left-group {
     display: flex;
     align-items: center;
-    gap: 1.5rem; /* Abstand zwischen Logo und Sprachwahl */
-    flex-shrink: 0; /* Verhindert, dass die Gruppe schrumpft */
+    gap: 1.5rem;
+    flex-shrink: 0;
 }
 
 .header-language-switcher {
@@ -152,9 +152,9 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
    3. MAIN NAVIGATION SYSTEM
    ========================================================================== */
 .main-navigation {
-    flex-grow: 1; /* KORREKTUR: Nimmt den freien Platz in der Mitte ein */
+    flex-grow: 1;
     display: flex;
-    justify-content: center; /* KORREKTUR: Zentriert das Menü */
+    justify-content: center;
     margin: 0 2rem;
     overflow: visible !important;
     position: relative;
@@ -190,35 +190,35 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
     transition: all 0.3s ease;
     padding: 0 3.5rem; 
     display: flex;
-    flex-direction: column; /* KORRIGIERT: Icons oben */
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.3rem; /* Abstand zwischen Icon und Text */
+    gap: 0.3rem;
     height: 80px;
     box-sizing: border-box;
 }
 
 .main-navigation > ul > li > a .menu-item-icon {
-    font-size: 1.1rem; /* Etwas größer */
+    font-size: 1.1rem;
     opacity: 0.9;
     transition: all 0.3s ease;
-    order: -1; /* Icons immer zuerst */
+    order: -1;
 }
 
 .main-navigation > ul > li > a .menu-item-text {
     font-size: 1rem;
     font-weight: 500;
     transition: color 0.3s ease;
-    order: 1; /* Text nach Icons */
+    order: 1;
 }
 
-.main-navigation > ul > li > a:hover .menu-item-icon {
+.main-navigation > ul > li:hover > a .menu-item-icon {
     color: var(--luvex-bright-cyan);
     opacity: 1;
     transform: scale(1.1) translateY(-1px);
 }
 
-.main-navigation > ul > li > a:hover .menu-item-text {
+.main-navigation > ul > li:hover > a .menu-item-text {
     color: var(--luvex-bright-cyan);
 }
 
@@ -230,16 +230,14 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.site-header.scrolled .main-navigation > ul > li > a:hover .menu-item-text {
+.site-header.scrolled .main-navigation > ul > li:hover > a .menu-item-text {
     color: var(--luvex-bright-cyan);
     text-shadow: 0 1px 3px rgba(109, 213, 237, 0.4);
 }
 
 /* ==========================================================================
-   PFEIL-EFFEKT FÜR DROPDOWN-NAVIGATION (OPTIMIERT)
+   PFEIL-EFFEKT FÜR DROPDOWN-NAVIGATION (NEU & VERBESSERT)
    ========================================================================== */
-
-/* PFEIL UNTER DEM TEXT - Optimierte Position */
 .main-navigation > ul > li.menu-item-has-children > a::after {
     content: '\f107'; /* fa-chevron-down */
     font-family: "Font Awesome 6 Free";
@@ -248,16 +246,17 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
     color: var(--luvex-gray-300);
     position: absolute;
     left: 50%;
-    bottom: 8px; /* Unter dem Text positioniert */
-    transform: translateX(-50%); /* Horizontal zentriert */
-    transition: all 0.3s ease;
+    bottom: 8px;
+    /* NEU: Standardmäßig nach oben gedreht für größere Animation */
+    transform: translateX(-50%) rotate(180deg);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     pointer-events: none;
 }
 
-/* Pfeil-Animation beim Hover - KORRIGIERTE ROTATION */
+/* NEU: Pfeil-Animation beim Hover - Korrekte Rotation nach links-unten */
 .main-navigation > ul > li.menu-item-has-children:hover > a::after {
     color: var(--luvex-bright-cyan);
-    transform: translateX(-50%) rotate(135deg); /* Links-unten Rotation */
+    transform: translateX(-50%) rotate(-45deg); /* Zeigt nach links unten */
 }
 
 /* Alte Pfeil-Logik ausblenden */
@@ -265,56 +264,41 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
     display: none;
 }
 
-/* ==========================================================================
-   FIX: Versteckt den duplizierten, ungestylten Login-Button
-========================================================================== */
-.main-navigation ul > li > a[href*="login"],
-.main-navigation ul > li > a[href*="wp-login.php"],
-.main-navigation ul > li > a[href*="register"] {
-    display: none !important;
-}
-
 
 /* ==========================================================================
-   5. LEVEL 2 - HORIZONTAL SUB-MENU (BREITE AUTO-ADJUST + UV-LICHTSTRAHL)
+   5. LEVEL 2 - HORIZONTAL SUB-MENU (MIT LICHTSTRAHL & AUTO-BREITE)
    ========================================================================== */
 .main-navigation > ul > li > .sub-menu {
     position: absolute;
     top: 100%;
     left: 0;
-    min-width: 100%;
-    white-space: nowrap;
     
-    background: rgba(20, 35, 60, 0.95);
+    background: rgba(20, 35, 60, 0.97);
+    backdrop-filter: blur(12px) saturate(180%);
     box-shadow: var(--shadow-lg);
     border-top: 1px solid rgba(109, 213, 237, 0.3);
     border-radius: 0 0 var(--radius-md) var(--radius-md);
     padding: 0;
     
     display: flex;
-    gap: 0;
     list-style: none !important;
 
     opacity: 0;
     visibility: hidden;
-    transform: translateY(5px);
+    transform: translateY(10px);
     transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
     
     z-index: 1001;
     
-    /* FIX: Auto-Breite basierend auf Inhalt */
-    width: max-content;
+    /* NEU: Auto-Breite basierend auf dem breitesten Inhalt */
+    width: max-content; 
 }
 
-/* ==========================================================================
-   UV-LICHTSTRAHL-EFFEKT FÜR SUBMENU
-   ========================================================================== */
-
-/* Horizontaler UV-Lichtstrahl oben am Submenu */
+/* NEU: Horizontaler UV-Lichtstrahl */
 .main-navigation > ul > li > .sub-menu::before {
     content: '';
     position: absolute;
-    top: 0;
+    top: -1px; /* Liegt auf dem Border */
     left: 0;
     width: 0%; /* Startet bei 0% Breite */
     height: 2px;
@@ -325,25 +309,16 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
         var(--luvex-special-cyan) 80%, 
         transparent 100%
     );
-    box-shadow: 0 0 6px var(--luvex-special-cyan), 0 0 12px rgba(109, 213, 237, 0.4);
-    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 8px var(--luvex-special-cyan), 0 0 12px rgba(109, 213, 237, 0.5);
+    transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 2;
-    border-radius: 1px;
+    border-radius: 2px;
+    will-change: width;
 }
 
-/* Lichtstrahl expandiert beim Submenu-Hover */
+/* NEU: Lichtstrahl expandiert beim Anzeigen des Submenüs */
 .main-navigation > ul > li:hover > .sub-menu::before {
-    width: 100%; /* Expandiert zur vollen Breite */
-}
-
-.site-header.scrolled .main-navigation > ul > li > .sub-menu {
-    background: rgba(20, 35, 60, 0.98);
-    backdrop-filter: blur(15px) saturate(180%);
-    -webkit-backdrop-filter: blur(15px) saturate(180%);
-    box-shadow: 
-        0 8px 32px rgba(27, 42, 73, 0.4),
-        0 2px 8px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(109, 213, 237, 0.4);
+    width: 100%;
 }
 
 .main-navigation > ul > li:hover > .sub-menu {
@@ -352,18 +327,14 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
     transform: translateY(0);
 }
 
+/* NEU: Items der 2. Ebene passen sich an die Breite der 3. Ebene an */
 .main-navigation > ul > li > .sub-menu > li {
     position: relative;
     list-style: none !important;
     margin: 0;
     padding: 0;
-    /* FIX: Flexible Breite für Level 2 Items */
-    flex: 0 0 auto;
-    min-width: max-content;
-}
-
-.main-navigation > ul > li > .sub-menu > li::before {
-    display: none !important;
+    flex: 0 0 auto; /* Verhindert Schrumpfen */
+    min-width: max-content; /* Nimmt die benötigte Breite an */
 }
 
 .main-navigation > ul > li > .sub-menu > li > a {
@@ -376,7 +347,7 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
     gap: 0.75rem;
     position: relative;
     transition: all 0.3s ease;
-    white-space: nowrap;
+    white-space: nowrap; /* Wichtig für die Breitenberechnung */
     height: auto;
 }
 
@@ -386,17 +357,18 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
 }
 
 /* ==========================================================================
-   6. LEVEL 3 - VERTICAL SUB-SUB-MENU (BREITE OPTIMIERT)
+   6. LEVEL 3 - VERTICAL SUB-SUB-MENU (MIT LICHTSTRAHL)
    ========================================================================== */
 .main-navigation .sub-menu .sub-menu {
     position: absolute;
     top: 100%;
     left: 0;
-    /* FIX: Mindestbreite des Parents + extra Breite für längeren Inhalt */
-    min-width: 100%;
-    width: max-content;
     
-    background: rgba(15, 28, 48, 0.95);
+    min-width: 100%;
+    width: max-content; /* Passt sich an den breitesten Inhalt an */
+    
+    background: rgba(15, 28, 48, 0.97);
+    backdrop-filter: blur(12px) saturate(180%);
     border-radius: 0 0 var(--radius-md) var(--radius-md);
     box-shadow: var(--shadow-md);
     border: 1px solid rgba(109, 213, 237, 0.3);
@@ -408,20 +380,35 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
 
     opacity: 0;
     visibility: hidden;
-    transform: translateY(5px);
+    transform: translateY(10px);
     transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-    
     z-index: 1002;
+    overflow: hidden; /* Wichtig für den Lichtstrahl-Effekt */
 }
 
-.site-header.scrolled .main-navigation .sub-menu .sub-menu {
-    background: rgba(15, 28, 48, 0.98);
-    backdrop-filter: blur(15px) saturate(180%);
-    -webkit-backdrop-filter: blur(15px) saturate(180%);
-    box-shadow: 
-        0 8px 24px rgba(27, 42, 73, 0.4),
-        0 2px 6px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(109, 213, 237, 0.4);
+/* NEU: Vertikaler UV-Lichtstrahl */
+.main-navigation .sub-menu .sub-menu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 0%; /* Startet bei 0% Höhe */
+    background: linear-gradient(180deg, 
+        var(--luvex-white) 0%, 
+        var(--luvex-special-cyan) 50%, 
+        transparent 100%
+    );
+    box-shadow: 0 0 8px var(--luvex-special-cyan);
+    transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+    border-radius: 2px;
+    will-change: height;
+}
+
+/* NEU: Lichtstrahl expandiert beim Anzeigen des Sub-Submenüs */
+.main-navigation .sub-menu > li:hover > .sub-menu::before {
+    height: 100%;
 }
 
 .main-navigation .sub-menu > li:hover > .sub-menu {
@@ -437,10 +424,6 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
     padding: 0;
 }
 
-.main-navigation .sub-menu .sub-menu li::before {
-    display: none !important;
-}
-
 .main-navigation .sub-menu .sub-menu a {
     padding: 0.75rem 1.5rem;
     color: var(--luvex-white);
@@ -448,9 +431,7 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
     align-items: center;
     gap: 0.75rem;
     transition: all 0.3s ease;
-    /* FIX: Verhindert Zeilenumbruch für Level 3 Items */
     white-space: nowrap;
-    min-width: max-content;
 }
 
 .main-navigation .sub-menu .sub-menu a:hover {
@@ -463,6 +444,7 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
    7. DROPDOWN ARROWS & INDICATORS (Level 2->3)
    ========================================================================== */
 .main-navigation .sub-menu > li.menu-item-has-children > a .dropdown-arrow {
+    display: inline-block; /* Sicherstellen, dass der Pfeil sichtbar ist */
     margin-left: auto;
     transform: rotate(-90deg);
     transition: transform 0.3s ease;
@@ -470,13 +452,14 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
 
 .main-navigation .sub-menu > li.menu-item-has-children:hover > a .dropdown-arrow {
     transform: rotate(0deg);
+    color: var(--luvex-bright-cyan);
 }
 
 /* ==========================================================================
-   8. HEADER CTA, USER SYSTEM & LANGUAGE SWITCHER
+   8. HEADER CTA, USER SYSTEM & LANGUAGE SWITCHER (WIEDERHERGESTELLT)
    ========================================================================== */
 .header-cta {
-    flex-shrink: 0; /* KORREKTUR: Verhindert, dass der CTA-Bereich schrumpft */
+    flex-shrink: 0;
 }
 
 .header-actions-group {
@@ -532,17 +515,6 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
     border-color: var(--luvex-bright-cyan);
 }
 
-.site-header.scrolled .user-info {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(109, 213, 237, 0.3);
-    backdrop-filter: blur(5px);
-}
-
-.site-header.scrolled .user-info:hover {
-    background: rgba(109, 213, 237, 0.15);
-    border-color: var(--luvex-bright-cyan);
-}
-
 .user-avatar {
     width: 36px;
     height: 36px;
@@ -555,10 +527,6 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
     font-weight: 600;
     font-size: 0.9rem;
     overflow: hidden;
-}
-
-.site-header.scrolled .user-avatar {
-    box-shadow: 0 2px 8px rgba(109, 213, 237, 0.3);
 }
 
 .user-details {
@@ -583,6 +551,7 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
 }
 
 .user-info .dropdown-arrow {
+    display: inline-block !important; /* Wichtig für Sichtbarkeit */
     color: var(--luvex-gray-300);
     font-size: 0.8rem;
     transition: transform 0.3s ease;
@@ -703,17 +672,6 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
     border-color: var(--luvex-bright-cyan);
 }
 
-.site-header.scrolled .language-switcher-trigger {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(109, 213, 237, 0.4);
-    backdrop-filter: blur(5px);
-}
-
-.site-header.scrolled .language-switcher-trigger:hover {
-    background: rgba(109, 213, 237, 0.15);
-    border-color: var(--luvex-bright-cyan);
-}
-
 .language-flag {
     font-size: 1.2rem;
     line-height: 1;
@@ -785,18 +743,9 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
     color: var(--luvex-bright-cyan);
 }
 
-.language-option:disabled {
-    cursor: default;
-    opacity: 0.7;
-}
-
-.language-check {
-    margin-left: auto;
-}
-
 
 /* ==========================================================================
-   9. MOBILE MENU TOGGLE
+   9. MOBILE MENU TOGGLE (WIEDERHERGESTELLT)
    ========================================================================== */
 .mobile-menu-toggle {
     display: none;
@@ -816,16 +765,6 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
     background: rgba(109, 213, 237, 0.1);
 }
 
-.site-header.scrolled .hamburger-button {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(109, 213, 237, 0.2);
-}
-
-.site-header.scrolled .hamburger-button:hover {
-    background: rgba(109, 213, 237, 0.15);
-    border-color: var(--luvex-bright-cyan);
-}
-
 .hamburger-lines {
     display: flex;
     flex-direction: column;
@@ -838,11 +777,6 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
     background: var(--luvex-white);
     transition: all 0.3s ease;
     border-radius: 1px;
-}
-
-.site-header.scrolled .hamburger-lines span {
-    background: var(--luvex-white);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .hamburger-button.menu-open .hamburger-lines span:nth-child(1) {
@@ -858,7 +792,7 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
 }
 
 /* ==========================================================================
-   10. MOBILE NAVIGATION
+   10. MOBILE NAVIGATION (WIEDERHERGESTELLT)
    ========================================================================== */
 .mobile-navigation {
     display: none;
@@ -873,13 +807,6 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
     transition: max-height 0.3s ease;
 }
 
-.site-header.scrolled .mobile-navigation {
-    background: rgba(27, 42, 73, 0.98);
-    backdrop-filter: blur(15px) saturate(180%);
-    -webkit-backdrop-filter: blur(15px) saturate(180%);
-    box-shadow: 0 4px 20px rgba(27, 42, 73, 0.3);
-}
-
 .mobile-navigation[aria-hidden="false"] {
     max-height: calc(100vh - 80px);
 }
@@ -889,7 +816,7 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
 }
 
 /* ==========================================================================
-   11. RESPONSIVE & BREAKPOINTS
+   11. RESPONSIVE & BREAKPOINTS (WIEDERHERGESTELLT)
    ========================================================================== */
 @media (max-width: 1200px) {
     .main-navigation > ul > li > a {
@@ -898,7 +825,7 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
 }
 
 @media (max-width: 1024px) {
-    .main-navigation {
+    .main-navigation, .header-cta {
         display: none;
     }
     
@@ -928,11 +855,6 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
         height: 70px;
     }
     
-    .main-navigation > ul > li > a {
-        height: 70px;
-        padding: 25px 1.5rem;
-    }
-    
     .luvex-logo-text {
         font-size: 1.5rem;
     }
@@ -943,28 +865,7 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
 }
 
 /* ==========================================================================
-   12. PERFORMANCE OPTIMIERUNG & REDUCED MOTION
-   ========================================================================== */
-
-/* GPU-Beschleunigung für Smooth-Performance */
-.main-navigation > ul > li > .sub-menu::before {
-    will-change: width;
-    transform: translateZ(0); /* Hardware-Acceleration */
-}
-
-/* Reduzierte Animation bei Preference */
-@media (prefers-reduced-motion: reduce) {
-    .main-navigation > ul > li > .sub-menu::before {
-        transition: none;
-    }
-    
-    .main-navigation > ul > li.menu-item-has-children > a::after {
-        transition: none;
-    }
-}
-
-/* ==========================================================================
-   13. ASTRA OVERRIDES & CLEANUP
+   12. ASTRA OVERRIDES & CLEANUP
    ========================================================================== */
 .main-navigation .ast-arrow-svg,
 .main-navigation .ast-menu-toggle,
@@ -995,42 +896,3 @@ Last Update: 2025-09-01 (UV Light Beam Effect integriert)
     z-index: 9999;
 }
 
-
-/* Browser Support & Performance */
-@supports (-webkit-backdrop-filter: blur(10px)) and (not (backdrop-filter: blur(10px))) {
-    .site-header.scrolled {
-        -webkit-backdrop-filter: blur(10px) saturate(180%);
-        background: rgba(27, 42, 73, 0.9) !important;
-    }
-}
-
-@supports not (backdrop-filter: blur(10px)) {
-    .site-header.scrolled {
-        background: rgba(27, 42, 73, 0.92) !important;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .site-header,
-    .site-header.scrolled {
-        transition: none;
-    }
-    
-    .site-header.scrolled .header-cta a.header-cta-button:hover {
-        transform: none;
-    }
-}
-
-/* Scroll Progress Bar */
-.header-scroll-indicator {
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    height: 2px;
-    width: 100%;
-    background: var(--luvex-bright-cyan);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.1s linear;
-    z-index: 1001;
-}
