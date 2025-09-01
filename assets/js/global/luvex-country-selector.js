@@ -1,152 +1,140 @@
 /**
- * LUVEX Interactive Country Selector with Phone Input Sync
+ * LUVEX Form-Ready Country Selector & Phone Sync
  *
- * Description: Steuert eine Länderauswahl, die mit einem Telefon-Eingabefeld
- * synchronisiert ist. Wählt ein Land bei Eingabe der Vorwahl
- * und füllt die Vorwahl bei Auswahl eines Landes aus.
- * Version: 2.0
+ * Description: Steuert eine für Formulare optimierte, durchsuchbare Länderauswahl,
+ * die mit separaten Telefon-Vorwahl- und Nummernfeldern synchronisiert ist.
+ * Version: 3.0
  */
 document.addEventListener('DOMContentLoaded', function() {
-    // Finde alle kombinierten Länderauswahl-Gruppen
-    const internationalPhoneGroups = document.querySelectorAll('.form-group-phone-international');
+    const selectorElement = document.getElementById('luvex-country-selector');
+    if (!selectorElement) return;
 
-    internationalPhoneGroups.forEach(group => {
-        const selector = group.querySelector('.luvex-country-selector');
-        const phoneInput = group.querySelector('.phone-input');
-        
-        // Stellt sicher, dass alle notwendigen Elemente vorhanden sind
-        if (!selector || !phoneInput) {
+    const countryInput = selectorElement.querySelector('.country-selector-input');
+    const dropdown = selectorElement.querySelector('.selector-dropdown');
+    const searchInput = selectorElement.querySelector('.country-search');
+    const optionsList = selectorElement.querySelector('.country-list-options');
+    const options = optionsList.querySelectorAll('li');
+    const nativeSelect = selectorElement.querySelector('.native-select');
+    const flagDisplay = selectorElement.querySelector('.selected-country-flag');
+    
+    const dialCodeInput = document.getElementById('phone-input-dial-code');
+    const mobileInput = document.getElementById('phone-input-mobile');
+
+    let userModifiedDialCode = false;
+
+    // Lese alle Länderdaten einmalig aus dem DOM für schnellen Zugriff
+    const countryData = Array.from(options).map(option => ({
+        code: option.dataset.countryCode,
+        dialCode: option.dataset.dialCode,
+        name: option.querySelector('.name').textContent,
+        flag: option.querySelector('.flag').textContent,
+        element: option
+    }));
+
+    function openDropdown() {
+        selectorElement.classList.add('open');
+        searchInput.value = '';
+        filterOptions('');
+        searchInput.focus();
+    }
+    
+    function closeDropdown() {
+        selectorElement.classList.remove('open');
+    }
+
+    function filterOptions(searchTerm) {
+        const term = searchTerm.toLowerCase();
+        options.forEach(option => {
+            const name = option.querySelector('.name').textContent.toLowerCase();
+            const dialCode = option.querySelector('.dial-code').textContent.toLowerCase();
+            const isVisible = name.includes(term) || dialCode.includes(term);
+            option.classList.toggle('hidden', !isVisible);
+        });
+    }
+
+    function updateCountrySelection(country, source = 'user') {
+        if (!country) {
+            countryInput.value = '';
+            flagDisplay.textContent = '';
+            nativeSelect.value = '';
             return;
         }
 
-        const trigger = selector.querySelector('.selector-trigger');
-        const dropdown = selector.querySelector('.selector-dropdown');
-        const searchInput = selector.querySelector('.country-search');
-        const optionsList = selector.querySelector('.country-list-options');
-        const options = optionsList.querySelectorAll('li');
-        const nativeSelect = selector.querySelector('.native-select');
-        const selectedDisplay = trigger.querySelector('.selected-country');
-
-        // Lese alle Länderdaten einmalig aus dem DOM für schnellen Zugriff
-        const countryData = Array.from(options).map(option => ({
-            code: option.dataset.countryCode,
-            dialCode: option.dataset.dialCode,
-            name: option.querySelector('.name').textContent,
-            flag: option.querySelector('.flag').textContent,
-            element: option
-        }));
-
-        // Funktion zum Öffnen/Schließen des Dropdowns
-        function toggleDropdown(event) {
-            event.stopPropagation();
-            selector.classList.toggle('open');
-            if (selector.classList.contains('open')) {
-                searchInput.focus();
-            }
-        }
-        
-        function closeDropdown() {
-            selector.classList.remove('open');
+        countryInput.value = country.name;
+        flagDisplay.textContent = country.flag;
+        if (nativeSelect.value !== country.code) {
+            nativeSelect.value = country.code;
+            nativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
         }
 
-        // Funktion, um den Selector basierend auf einem Ländercode zu aktualisieren
-        function updateSelectorDisplay(countryCode) {
-            const country = countryData.find(c => c.code === countryCode);
-            if (!country) return;
-
-            // Aktualisiere die Anzeige im Trigger-Button
-            selectedDisplay.querySelector('.flag').textContent = country.flag;
-            selectedDisplay.querySelector('.name').textContent = country.name;
-
-            // Aktualisiere das native Select-Feld
-            if (nativeSelect.value !== country.code) {
-                nativeSelect.value = country.code;
-                nativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
-            }
+        // Update dial code only if not manually changed by user or if selected via country list
+        if (!userModifiedDialCode || source === 'country_selection') {
+            dialCodeInput.value = country.dialCode;
+            userModifiedDialCode = false; // Reset flag after a country selection
         }
+    }
 
-        // Funktion, die eine Auswahl durch den Nutzer verarbeitet
-        function handleOptionSelection(option) {
-            const countryCode = option.dataset.countryCode;
-            const dialCode = option.dataset.dialCode;
+    // --- EVENT LISTENERS ---
 
-            updateSelectorDisplay(countryCode);
-
-            // Ersetze oder setze die Vorwahl im Telefon-Eingabefeld
-            const currentPhoneValue = phoneInput.value;
-            let newPhoneValue = dialCode + ' ';
-
-            // Finde die alte Vorwahl und ersetze sie, falls vorhanden
-            const oldDialCode = countryData.find(c => currentPhoneValue.startsWith(c.dialCode + ' '));
-            if (oldDialCode) {
-                const numberPart = currentPhoneValue.substring(oldDialCode.dialCode.length).trim();
-                newPhoneValue = dialCode + ' ' + numberPart;
-            }
-            
-            phoneInput.value = newPhoneValue;
-            phoneInput.focus();
+    // Open dropdown when clicking the main country input
+    countryInput.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (selectorElement.classList.contains('open')) {
             closeDropdown();
+        } else {
+            openDropdown();
         }
+    });
+    
+    // Prevent typing in the main input, it's just a trigger
+    countryInput.addEventListener('keydown', (e) => e.preventDefault());
 
-        // --- Event Listener ---
+    // Filter list on search input
+    searchInput.addEventListener('input', () => filterOptions(searchInput.value));
 
-        trigger.addEventListener('click', toggleDropdown);
-
-        options.forEach(option => {
-            option.addEventListener('click', () => handleOptionSelection(option));
-            option.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    handleOptionSelection(option);
-                }
-            });
-        });
-        
-        // Event Listener für die Live-Suche
-        searchInput.addEventListener('input', () => {
-            const searchTerm = searchInput.value.toLowerCase();
-            options.forEach(option => {
-                const name = option.querySelector('.name').textContent.toLowerCase();
-                const dialCode = option.querySelector('.dial-code').textContent.toLowerCase();
-                if (name.includes(searchTerm) || dialCode.includes(searchTerm)) {
-                    option.classList.remove('hidden');
-                } else {
-                    option.classList.add('hidden');
-                }
-            });
-        });
-
-        // Event Listener für das Telefon-Eingabefeld
-        phoneInput.addEventListener('input', () => {
-            const inputValue = phoneInput.value;
-            
-            // Finde die längste passende Vorwahl
-            let bestMatch = null;
-            for (const country of countryData) {
-                if (inputValue.startsWith(country.dialCode)) {
-                    if (!bestMatch || country.dialCode.length > bestMatch.dialCode.length) {
-                        bestMatch = country;
-                    }
-                }
-            }
-            
-            if (bestMatch) {
-                updateSelectorDisplay(bestMatch.code);
-            }
-        });
-
-        // Schließe das Dropdown, wenn außerhalb geklickt wird
-        document.addEventListener('click', (e) => {
-            if (!selector.contains(e.target)) {
-                closeDropdown();
-            }
-        });
-        
-        // Schließe das Dropdown mit der Escape-Taste
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && selector.classList.contains('open')) {
-                closeDropdown();
-            }
+    // Handle country selection from the list
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            const countryCode = option.dataset.countryCode;
+            const selectedCountry = countryData.find(c => c.code === countryCode);
+            updateCountrySelection(selectedCountry, 'country_selection');
+            closeDropdown();
+            mobileInput.focus();
         });
     });
+
+    // Update country based on dial code input
+    dialCodeInput.addEventListener('input', () => {
+        userModifiedDialCode = true; // Mark as user-edited
+        const inputValue = dialCodeInput.value;
+        
+        let bestMatch = null;
+        if (inputValue.length > 1) {
+             for (const country of countryData) {
+                if (inputValue === country.dialCode) { // Find exact match first
+                    bestMatch = country;
+                    break;
+                }
+                if (country.dialCode.startsWith(inputValue)) { // Find partial match
+                     if (!bestMatch) bestMatch = country;
+                }
+            }
+        }
+        updateCountrySelection(bestMatch, 'dial_code_input');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!selectorElement.contains(e.target)) {
+            closeDropdown();
+        }
+    });
+
+    // Close with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && selectorElement.classList.contains('open')) {
+            closeDropdown();
+        }
+    });
 });
+

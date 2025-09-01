@@ -2,7 +2,7 @@
 /**
  * LUVEX Theme Functions - COMPLETE WITH PRIORITY SYSTEM
  * Description: Komplette Theme-Setup-, Navigations- und Asset-Lade-Logik mit CSS Priority Loading.
- * VERSION: 4.0 - CSS Priority System implementiert
+ * VERSION: 4.1 - Country selector script enabled for register page.
  * @package Luvex
  */
 
@@ -175,7 +175,7 @@ function luvex_enqueue_assets() {
         $enqueue_script('luvex-hero-safety-animation', 'pages/hero-safety-animation.js');
     }
 
-    // JavaScript für den interaktiven Country Selector laden
+    // *** MODIFIED HERE: Script now loads on register page as well ***
     if (is_page('standard-styles-luvex') || is_page('register') || is_page('profile')) {
         $enqueue_script('luvex-country-selector', 'luvex-country-selector.js', []);
     }

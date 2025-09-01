@@ -4,7 +4,7 @@
  * Streamlined booking page focused on calendar integration
  * UPDATED: Re-integrated Hero Layout and added Canvas Animation Script.
  * @package Luvex
- * @since 3.6.0
+ * @since 3.7.0
  */
 
 get_header(); ?>

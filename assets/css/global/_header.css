@@ -252,8 +252,8 @@ Last Update: 2025-09-01 (Finale Korrekturen)
 
 .main-navigation > ul > li.menu-item-has-children:hover > a::after {
     color: var(--luvex-bright-cyan);
-    /* KORRIGIERT: Winkel für eine Drehung nach "links-unten" */
-    transform: translateX(-50%) rotate(-45deg); 
+    /* KORRIGIERT: Winkel für eine Drehung nach "links-unten" (final) */
+    transform: translateX(-50%) rotate(135deg); 
 }
 
 /* Alte Pfeil-Logik ausblenden */
@@ -350,11 +350,17 @@ Last Update: 2025-09-01 (Finale Korrekturen)
     transition: all 0.3s ease;
     white-space: nowrap;
     height: auto;
+    position: relative; /* Für z-index Stapelkontext */
 }
 
 .main-navigation > ul > li > .sub-menu > li > a:hover {
     color: var(--luvex-bright-cyan);
     background: rgba(109, 213, 237, 0.1);
+}
+
+.main-navigation > ul > li > .sub-menu > li:hover > a {
+    /* KORRIGIERT: Hebt den Link über das aufklappende Menü */
+    z-index: 1003; 
 }
 
 /* ==========================================================================
@@ -901,5 +907,7 @@ Last Update: 2025-09-01 (Finale Korrekturen)
     border-radius: var(--radius-md);
     z-index: 9999;
 }
+
+
 
 

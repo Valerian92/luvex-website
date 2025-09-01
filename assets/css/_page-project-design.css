@@ -1,14 +1,14 @@
 /*
 ==============================================================================
-LUVEX THEME v2.9 - BOOKING PAGE (Layout & Animation Final Fix)
+LUVEX THEME v3.0 - BOOKING PAGE (Final Layout Fix)
 ==============================================================================
 Description: Styles for the booking page. Fully restored Hero layout and 
              improved calendar section contrast.
-Last Update: 2025-09-01
+Last Update: 2025-09-02
 ==============================================================================
 */
 
-/* --- 1. Optimized Hero Section --- */
+/* --- 1. Hero Section --- */
 
 /* Canvas für Animation */
 #hero-animation-canvas {
@@ -20,17 +20,21 @@ Last Update: 2025-09-01
     z-index: 1; /* Animation im Hintergrund */
 }
 
-.luvex-hero .luvex-hero__container {
-    position: relative;
-    z-index: 2; /* Inhalt vor die Animation legen */
+/* FINAL FIX: Restore flex properties to correctly center the grid container */
+.booking-hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-
-/* Container and Layout */
+/* FINAL FIX: Allow the container to be a block for its grid child */
 .booking-hero .luvex-hero__container {
+    position: relative;
+    z-index: 2;
     max-width: 1200px;
     width: 100%;
     text-align: left;
+    display: block; /* Override default flex column */
 }
 
 .booking-hero__grid {
@@ -116,7 +120,7 @@ Last Update: 2025-09-01
 }
 
 /* ==============================================================================
-2. Calendar Section (IMPROVED CONTRAST)
+2. Calendar Section
 ==============================================================================
 */
 .booking-calendar { 
@@ -287,7 +291,6 @@ Last Update: 2025-09-01
         justify-content: center;
     }
 }
-
 
 @media (max-width: 768px) {
     .benefits-grid { 
