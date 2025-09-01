@@ -5,6 +5,13 @@
  * Aktualisiert, um die neue Icon-Bibliothek dynamisch anzuzeigen.
  */
 
+// SECURITY CHECK: Nur für Administratoren zugänglich.
+if (!current_user_can('manage_options')) {
+    // Wenn der Benutzer kein Admin ist, auf die Startseite umleiten.
+    wp_redirect(home_url());
+    exit;
+}
+
 get_header(); 
 ?>
 

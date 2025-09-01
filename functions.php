@@ -190,20 +190,53 @@ function luvex_enqueue_assets() {
     }
 }
 
-// 5. NAV WALKER KLASSE (Unverändert)
+// 5. NAV WALKER KLASSE (AKTUALISIERT FÜR BESSERE ICON-ERKENNUNG)
 class Luvex_Nav_Walker extends Walker_Nav_Menu {
     public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
         $indent = ($depth) ? str_repeat("\t", $depth) : '';
         $classes = empty($item->classes) ? array() : (array) $item->classes;
         $classes[] = 'menu-item-' . $item->ID;
-        $icon_key = '';
-        foreach($classes as $class){
-            if(strpos($class, 'icon-menu-') === 0){
-                $icon_key = str_replace('icon-menu-', '', $class);
-                break;
+        
+        // ====================================================================
+        // START: Verbesserte Logik zum Finden von Icons
+        // ====================================================================
+        $icon_html = '';
+        if (function_exists('get_luvex_icon_library')) {
+            $icon_library = get_luvex_icon_library();
+            $menu_icons = isset($icon_library['Menu Icons']) ? $icon_library['Menu Icons'] : [];
+            $icon_key = '';
+
+            // Finde die erste CSS-Klasse, die einem Schlüssel in der Icon-Bibliothek entspricht.
+            // Damit können Sie einfach 'menu-uv-technology' als Klasse eingeben.
+            foreach ($classes as $class) {
+                if (array_key_exists(trim($class), $menu_icons)) {
+                    $icon_key = trim($class);
+                    break;
+                }
+            }
+            
+            // Fallback für die alte Methode mit dem Präfix 'icon-menu-'
+            if (empty($icon_key)) {
+                 foreach($classes as $class){
+                    if(strpos($class, 'icon-menu-') === 0){
+                        $potential_key = str_replace('icon-menu-', '', $class);
+                        if (array_key_exists($potential_key, $menu_icons)) {
+                            $icon_key = $potential_key;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // Wenn ein gültiger Schlüssel gefunden wurde, hole das Icon-HTML.
+            if (!empty($icon_key)) {
+                $icon_html = get_luvex_icon($icon_key);
             }
         }
-        $icon_html = function_exists('get_luvex_icon') ? get_luvex_icon($icon_key) : '';
+        // ====================================================================
+        // END: Verbesserte Logik zum Finden von Icons
+        // ====================================================================
+
         $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
         $class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
         $id = apply_filters('nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args);
@@ -216,12 +249,18 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
         $item_output = isset($args->before) ? $args->before : '';
         $item_output .= '<a' . $attributes . '>';
         $title = apply_filters('the_title', $item->title, $item->ID);
+        
+        // Logik für die Platzierung von Text und Icon basierend auf der Menütiefe
         if ($depth === 0 && !empty($icon_html)) {
+            // Für Top-Level-Items: Text oben, Icon unten
             $item_output .= '<span class="menu-item-text">' . $title . '</span>';
+            // Fügt die Klasse 'menu-item-icon' für das Styling hinzu
             $item_output .= str_replace('<i class="', '<i class="menu-item-icon ', $icon_html);
         } else {
+            // Für Sub-Menu-Items: Icon links, Text rechts
             $item_output .= $icon_html . '<span class="menu-item-text">' . $title . '</span>';
         }
+        
         if (in_array('menu-item-has-children', $classes)) {
             $item_output .= ' <i class="fa-solid fa-chevron-down dropdown-arrow"></i>';
         }
@@ -306,3 +345,31 @@ function luvex_add_context_classes($classes) {
     return $classes;
 }
 
+// 11. ADMIN MENU ITEM FILTER (NEU)
+add_filter('wp_nav_menu_objects', 'luvex_filter_admin_menu_items', 10, 2);
+function luvex_filter_admin_menu_items($sorted_menu_items, $args) {
+    // Nur auf das Hauptmenü anwenden
+    if ($args->theme_location != 'primary') {
+        return $sorted_menu_items;
+    }
+
+    // Wenn der Benutzer Admin ist, alle Menüpunkte anzeigen.
+    if (current_user_can('manage_options')) {
+        return $sorted_menu_items;
+    }
+    
+    // Liste der Slugs von Seiten, die nur für Admins sichtbar sein sollen.
+    $admin_only_slugs = [
+        'standard-styles-luvex', // Der Slug der "Standard Styles" Seite
+    ];
+
+    foreach ($sorted_menu_items as $key => $menu_item) {
+        // Der 'post_name' enthält den Slug der Seite, auf die der Menüpunkt verweist.
+        if (isset($menu_item->post_name) && in_array($menu_item->post_name, $admin_only_slugs)) {
+            // Wenn der Slug in unserer Admin-Liste ist, entfernen wir den Menüpunkt.
+            unset($sorted_menu_items[$key]);
+        }
+    }
+
+    return $sorted_menu_items;
+}
