@@ -1,13 +1,14 @@
 /*
 ==============================================================================
-LUVEX THEME v4.10 - COMPLETE HEADER SYSTEM + NAVIGATION ARROWS
+LUVEX THEME v4.11 - COMPLETE HEADER SYSTEM + OPTIMIZED NAVIGATION ARROWS
 ==============================================================================
 
-Description: Vollständige Header-Implementierung mit 3-Level Navigation,
-             Logo-System, User-Dropdown, Mobile Menu, Scroll Effects und
-             Pfeil-Animationen für Dropdowns.
+Description: Vollständige Header-Implementierung mit optimierten Pfeil-Effekten:
+             - Pfeile UNTER dem Text (zentriert)
+             - Korrekte Rotation nach links-unten
+             - Auto-Breite für Level 2 basierend auf Level 3
 Dependencies: _variables.css, _core.css
-Last Update: 2025-09-01 (Navigation Arrows + Icons above text)
+Last Update: 2025-09-01 (Pfeil-Position + Dropdown-Breite optimiert)
 
 ==============================================================================
 */
@@ -175,7 +176,7 @@ Last Update: 2025-09-01 (Navigation Arrows + Icons above text)
 }
 
 /* ==========================================================================
-   4. LEVEL 1 - HAUPTMENÜ ITEMS (ICONS OBEN + PFEIL-EFFEKT)
+   4. LEVEL 1 - HAUPTMENÜ ITEMS (ICONS OBEN + PFEIL UNTER TEXT)
    ========================================================================== */
 .main-navigation > ul > li {
     position: relative;
@@ -234,28 +235,28 @@ Last Update: 2025-09-01 (Navigation Arrows + Icons above text)
 }
 
 /* ==========================================================================
-   PFEIL-EFFEKT FÜR DROPDOWN-NAVIGATION
+   PFEIL-EFFEKT FÜR DROPDOWN-NAVIGATION (OPTIMIERT)
    ========================================================================== */
 
-/* PFEIL FÜR DROPDOWN - Neu hinzugefügt */
+/* PFEIL UNTER DEM TEXT - Optimierte Position */
 .main-navigation > ul > li.menu-item-has-children > a::after {
     content: '\f107'; /* fa-chevron-down */
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: var(--luvex-gray-300);
     position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
+    left: 50%;
+    bottom: 8px; /* Unter dem Text positioniert */
+    transform: translateX(-50%); /* Horizontal zentriert */
     transition: all 0.3s ease;
     pointer-events: none;
 }
 
-/* Pfeil-Animation beim Hover */
+/* Pfeil-Animation beim Hover - KORRIGIERTE ROTATION */
 .main-navigation > ul > li.menu-item-has-children:hover > a::after {
     color: var(--luvex-bright-cyan);
-    transform: translateY(-50%) rotate(-135deg); /* Nach unten-links */
+    transform: translateX(-50%) rotate(135deg); /* Links-unten Rotation */
 }
 
 /* Alte Pfeil-Logik ausblenden */
@@ -274,7 +275,7 @@ Last Update: 2025-09-01 (Navigation Arrows + Icons above text)
 
 
 /* ==========================================================================
-   5. LEVEL 2 - HORIZONTAL SUB-MENU (ALTE LOGIK BEIBEHALTEN)
+   5. LEVEL 2 - HORIZONTAL SUB-MENU (BREITE AUTO-ADJUST)
    ========================================================================== */
 .main-navigation > ul > li > .sub-menu {
     position: absolute;
@@ -299,6 +300,9 @@ Last Update: 2025-09-01 (Navigation Arrows + Icons above text)
     transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
     
     z-index: 1001;
+    
+    /* FIX: Auto-Breite basierend auf Inhalt */
+    width: max-content;
 }
 
 .site-header.scrolled .main-navigation > ul > li > .sub-menu {
@@ -322,6 +326,9 @@ Last Update: 2025-09-01 (Navigation Arrows + Icons above text)
     list-style: none !important;
     margin: 0;
     padding: 0;
+    /* FIX: Flexible Breite für Level 2 Items */
+    flex: 0 0 auto;
+    min-width: max-content;
 }
 
 .main-navigation > ul > li > .sub-menu > li::before {
@@ -348,12 +355,13 @@ Last Update: 2025-09-01 (Navigation Arrows + Icons above text)
 }
 
 /* ==========================================================================
-   6. LEVEL 3 - VERTICAL SUB-SUB-MENU
+   6. LEVEL 3 - VERTICAL SUB-SUB-MENU (BREITE OPTIMIERT)
    ========================================================================== */
 .main-navigation .sub-menu .sub-menu {
     position: absolute;
     top: 100%;
     left: 0;
+    /* FIX: Mindestbreite des Parents + extra Breite für längeren Inhalt */
     min-width: 100%;
     width: max-content;
     
@@ -409,6 +417,9 @@ Last Update: 2025-09-01 (Navigation Arrows + Icons above text)
     align-items: center;
     gap: 0.75rem;
     transition: all 0.3s ease;
+    /* FIX: Verhindert Zeilenumbruch für Level 3 Items */
+    white-space: nowrap;
+    min-width: max-content;
 }
 
 .main-navigation .sub-menu .sub-menu a:hover {
@@ -418,7 +429,7 @@ Last Update: 2025-09-01 (Navigation Arrows + Icons above text)
 }
 
 /* ==========================================================================
-   7. DROPDOWN ARROWS & INDICATORS
+   7. DROPDOWN ARROWS & INDICATORS (Level 2->3)
    ========================================================================== */
 .main-navigation .sub-menu > li.menu-item-has-children > a .dropdown-arrow {
     margin-left: auto;
