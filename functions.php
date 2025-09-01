@@ -2,7 +2,7 @@
 /**
  * LUVEX Theme Functions - FINAL MERGED VERSION
  * Description: Komplette Theme-Setup-, Navigations- und Asset-Lade-Logik.
- * VERSION: 3.3.0 - Alle neuen Komponenten (Accordion, Animationen) und Core-Style-Updates integriert.
+ * VERSION: 3.4.1 - Admin menu filter corrected.
  * @package Luvex
  */
 
@@ -69,7 +69,6 @@ function luvex_enqueue_assets() {
 
     // Globale und Basis-Styles
     $enqueue_style_helper('luvex-main', 'css/main.css');
-    // NEU: Globale Accordion-Komponente laden
     $enqueue_style_helper('luvex-accordion-component', 'global/_component-accordion.css', ['luvex-main']);
     
     // Seitenspezifische Styles
@@ -82,7 +81,7 @@ function luvex_enqueue_assets() {
         'mercury-uv-lamps' => ['css/_page-mercury-uv-lamps.css'],
         'led-uv-systems' => ['css/_page-led-uv-systems.css'],
         'uv-solutions' => ['css/_page-uv-solutions.css'],
-        'uv-safety-equipment' => ['css/_page-uv-safety-equipment.css'], // Animation-CSS nicht mehr nötig, da in components
+        'uv-safety-equipment' => ['css/_page-uv-safety-equipment.css'],
         'uv-testing-equipment' => ['css/_page-uv-testing-equipment.css'],
         'uv-tunnel' => ['css/_page-uv-tunnel.css'],
         'uv-c-disinfection' => ['css/_page-uv-c-disinfection.css'],
@@ -135,7 +134,6 @@ function luvex_enqueue_assets() {
         'luvex-scroll-animations' => 'global/scroll-animations.js',
         'luvex-scroll-to-top'     => 'global/scroll-to-top.js',
         'luvex-footer-light'      => 'global/footer-light-effect.js',
-        // NEU: Accordion-Skript statt altem FAQ-Skript
         'luvex-interactive-accordion' => 'global/interactive-accordion.js',
     ];
     
@@ -154,9 +152,14 @@ function luvex_enqueue_assets() {
         $enqueue_script('luvex-hero-photons', 'pages/hero-photons.js');
     }
     
-    // NEU: Animation für Safety-Seite laden
     if (is_page('uv-safety-equipment')) {
         $enqueue_script('luvex-hero-safety-animation', 'pages/hero-safety-animation.js');
+    }
+
+    // JavaScript für den interaktiven Country Selector laden, wenn die Standard-Styles-Seite angezeigt wird.
+    // Du solltest dies auch für Seiten aktivieren, auf denen die Komponente verwendet wird, z.B. 'register' oder 'profile'
+    if (is_page('standard-styles-luvex') || is_page('register') || is_page('profile')) {
+        $enqueue_script('luvex-country-selector', 'luvex-country-selector.js', []);
     }
 
     $page_script_map = [
@@ -197,17 +200,12 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
         $classes = empty($item->classes) ? array() : (array) $item->classes;
         $classes[] = 'menu-item-' . $item->ID;
         
-        // ====================================================================
-        // START: Verbesserte Logik zum Finden von Icons
-        // ====================================================================
         $icon_html = '';
         if (function_exists('get_luvex_icon_library')) {
             $icon_library = get_luvex_icon_library();
             $menu_icons = isset($icon_library['Menu Icons']) ? $icon_library['Menu Icons'] : [];
             $icon_key = '';
 
-            // Finde die erste CSS-Klasse, die einem Schlüssel in der Icon-Bibliothek entspricht.
-            // Damit können Sie einfach 'menu-uv-technology' als Klasse eingeben.
             foreach ($classes as $class) {
                 if (array_key_exists(trim($class), $menu_icons)) {
                     $icon_key = trim($class);
@@ -215,7 +213,6 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
                 }
             }
             
-            // Fallback für die alte Methode mit dem Präfix 'icon-menu-'
             if (empty($icon_key)) {
                  foreach($classes as $class){
                     if(strpos($class, 'icon-menu-') === 0){
@@ -228,14 +225,10 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
                 }
             }
 
-            // Wenn ein gültiger Schlüssel gefunden wurde, hole das Icon-HTML.
             if (!empty($icon_key)) {
                 $icon_html = get_luvex_icon($icon_key);
             }
         }
-        // ====================================================================
-        // END: Verbesserte Logik zum Finden von Icons
-        // ====================================================================
 
         $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
         $class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
@@ -250,14 +243,10 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
         $item_output .= '<a' . $attributes . '>';
         $title = apply_filters('the_title', $item->title, $item->ID);
         
-        // Logik für die Platzierung von Text und Icon basierend auf der Menütiefe
         if ($depth === 0 && !empty($icon_html)) {
-            // Für Top-Level-Items: Text oben, Icon unten
             $item_output .= '<span class="menu-item-text">' . $title . '</span>';
-            // Fügt die Klasse 'menu-item-icon' für das Styling hinzu
             $item_output .= str_replace('<i class="', '<i class="menu-item-icon ', $icon_html);
         } else {
-            // Für Sub-Menu-Items: Icon links, Text rechts
             $item_output .= $icon_html . '<span class="menu-item-text">' . $title . '</span>';
         }
         
@@ -270,7 +259,7 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
     }
 }
 
-// 6. AVATAR FUNKTION (Unverändert)
+// 6. AVATAR FUNKTION
 if (!function_exists('luvex_get_user_avatar')) {
     function luvex_get_user_avatar($user_id = null) {
         if (function_exists('LuvexUserSystem::get_user_avatar')) {
@@ -292,7 +281,7 @@ if (!function_exists('luvex_get_user_avatar')) {
     }
 }
 
-// 7. SYSTEM-DATEIEN LADEN (Unverändert)
+// 7. SYSTEM-DATEIEN LADEN
 $luvex_includes_path = get_stylesheet_directory() . '/includes/';
 $luvex_includes_files = [ '_luvex_ajax.php', '_user_system.php', '_luvex-helpers.php' ];
 foreach ($luvex_includes_files as $file) {
@@ -300,7 +289,7 @@ foreach ($luvex_includes_files as $file) {
     if (file_exists($full_path)) { require_once $full_path; }
 }
 
-// 8. reCAPTCHA FUNKTION (Unverändert)
+// 8. reCAPTCHA FUNKTION
 function luvex_verify_recaptcha($response) {
     if (empty($response) || !defined('LUVEX_RECAPTCHA_SECRET_KEY')) { return false; }
     $result = wp_remote_post('https://www.google.com/recaptcha/api/siteverify', [
@@ -311,7 +300,7 @@ function luvex_verify_recaptcha($response) {
     return isset($data['success']) && $data['success'] === true;
 }
 
-// 9. DEBUGGING FÜR ENTWICKLUNG (Unverändert)
+// 9. DEBUGGING FÜR ENTWICKLUNG
 if (defined('WP_DEBUG') && WP_DEBUG) {
     add_action('wp_footer', function() {
         if (!current_user_can('manage_options') || !class_exists('LuvexAjaxManager')) return;
@@ -333,7 +322,7 @@ if (defined('WP_DEBUG') && WP_DEBUG) {
     });
 }
 
-// 10. ZUSÄTZLICHE HELPER FÜR CSS-STRUKTUR (Unverändert)
+// 10. ZUSÄTZLICHE HELPER FÜR CSS-STRUKTUR
 add_filter('body_class', 'luvex_add_context_classes');
 function luvex_add_context_classes($classes) {
     if (is_page(['profile', 'contact', 'about']) || is_front_page()) {
@@ -348,29 +337,27 @@ function luvex_add_context_classes($classes) {
 // 11. ADMIN MENU ITEM FILTER (AKTUALISIERT & VERBESSERT)
 add_filter('wp_nav_menu_objects', 'luvex_filter_admin_menu_items', 10, 2);
 function luvex_filter_admin_menu_items($sorted_menu_items, $args) {
-    // Nur auf das Hauptmenü anwenden und Admins alles anzeigen lassen.
+    // Nur auf das Hauptmenü ('primary') anwenden. Admins sehen immer alles.
     if ($args->theme_location != 'primary' || current_user_can('manage_options')) {
         return $sorted_menu_items;
     }
 
-    // HIER DIE SLUGS DER ADMIN-SEITEN EINTRAGEN
-    // Den Slug findest du in der WordPress-Seitenbearbeitung unter "URL".
+    // WICHTIG: Der exakte "Slug" der Seite, die versteckt werden soll.
+    // Abgeleitet von der URL: https://www.luvex.tech/standard-styles-luvex/
     $admin_only_slugs = [
-        'standard-styles-luvex', // Bitte prüfe, ob dieser Slug korrekt ist!
-        // 'slug-fuer-entwuerfe', // Hier kannst du weitere Slugs hinzufügen
+        'standard-styles-luvex', 
     ];
     
     $ids_to_hide = [];
     
-    // Finde alle Menüpunkte, die versteckt werden sollen (Eltern und deren Kinder)
+    // Finde alle Menüpunkte, die versteckt werden sollen (und deren eventuelle Unterpunkte)
     foreach ($sorted_menu_items as $item) {
-        // Wenn der Menüpunkt selbst eine Admin-Seite ist ODER sein Elternelement bereits versteckt wird
         if (isset($item->post_name) && in_array($item->post_name, $admin_only_slugs) || in_array($item->menu_item_parent, $ids_to_hide)) {
             $ids_to_hide[] = $item->ID;
         }
     }
     
-    // Entferne die markierten Menüpunkte aus dem Menü
+    // Filtere die markierten Menüpunkte aus dem Array, bevor das Menü gerendert wird.
     if (!empty($ids_to_hide)) {
         $sorted_menu_items = array_filter($sorted_menu_items, function($item) use ($ids_to_hide) {
             return !in_array($item->ID, $ids_to_hide);

@@ -81,8 +81,65 @@ Last Update: 2025-09-01 (Community Section repariert)
 1.4 ANIMIERTER HERO-BUTTON (REPARIERT mit höchster Spezifität)
 ==============================================================================
 */
+/* --- BASE SIMULATOR BUTTON --- */
+.luvex-simulator-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    padding: 16px 32px;
+    background: transparent;
+    color: var(--luvex-white);
+    border: 2px solid var(--luvex-bright-cyan);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: var(--text-base);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.4s ease;
+}
 
-/* Animationen definieren */
+.luvex-simulator-cta:hover {
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
+}
+
+/* --- ANIMIERTER SIMULATOR BUTTON --- */
+.luvex-simulator-cta--animated {
+    /* Erbt alle Basis-Styles, fügt Animation hinzu */
+    animation: pulse-purple-glow 2.5s infinite ease-in-out;
+}
+
+.luvex-simulator-cta--animated:hover {
+    /* GRADIENT HINTERGRUND beim Hover */
+    background: linear-gradient(45deg,
+        var(--luvex-bright-cyan),
+        #8a2be2,
+        var(--luvex-vibrant-blue),
+        #8a2be2,
+        var(--luvex-bright-cyan)
+    ) !important;
+    background-size: 400% 400% !important;
+    
+    color: var(--luvex-white) !important;
+
+    /* BEIDE ANIMATIONEN GLEICHZEITIG */
+    animation: 
+        pulse-purple-glow 2.5s infinite ease-in-out, 
+        gradient-shift-smooth 3s infinite ease-in-out !important;
+
+    /* VERSTÄRKTE HOVER EFFEKTE */
+    transform: translateY(-2px) scale(1.05) !important;
+    border-color: rgba(109, 213, 237, 0.8) !important;
+    box-shadow: 
+        0 8px 25px rgba(109, 213, 237, 0.4),
+        0 0 20px rgba(138, 43, 226, 0.3) !important;
+}
+
+/* --- KEYFRAMES BEIBEHALTEN --- */
 @keyframes pulse-purple-glow {
     0%, 100% { 
         box-shadow: 
@@ -99,81 +156,13 @@ Last Update: 2025-09-01 (Community Section repariert)
 }
 
 @keyframes gradient-shift-smooth {
-    0% { 
-        background-position: 0% 50%; 
-        background: linear-gradient(45deg, #6dd5ed, #8a2be2, #007BFF, #8a2be2, #6dd5ed);
-    }
-    25% { 
-        background-position: 100% 50%; 
-        background: linear-gradient(135deg, #8a2be2, #007BFF, #6dd5ed, #007BFF, #8a2be2);
-    }
-    50% { 
-        background-position: 100% 100%; 
-        background: linear-gradient(225deg, #007BFF, #6dd5ed, #8a2be2, #6dd5ed, #007BFF);
-    }
-    75% { 
-        background-position: 0% 100%; 
-        background: linear-gradient(315deg, #6dd5ed, #8a2be2, #007BFF, #8a2be2, #6dd5ed);
-    }
-    100% { 
-        background-position: 0% 50%; 
-        background: linear-gradient(45deg, #6dd5ed, #8a2be2, #007BFF, #8a2be2, #6dd5ed);
-    }
+    0% { background-position: 0% 50%; }
+    25% { background-position: 100% 50%; }
+    50% { background-position: 100% 100%; }
+    75% { background-position: 0% 100%; }
+    100% { background-position: 0% 50%; }
 }
 
-/* HÖCHSTE SPEZIFITÄT: Überschreibt alle anderen Button-Styles */
-.home .luvex-hero__cta-container .luvex-hero__cta.luvex-cta--animated {
-    position: relative !important;
-    overflow: hidden !important;
-    
-    /* WICHTIG: Überschreibt _components.css */
-    background: transparent !important;
-    color: var(--luvex-white) !important;
-    border: 2px solid var(--luvex-bright-cyan) !important;
-    
-    /* Basis-Styles beibehalten */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-xs);
-    padding: 16px 32px;
-    border-radius: var(--radius-full);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: var(--text-base);
-    
-    /* ZUERST DIE KONKURRIERENDE TRANSITION DEAKTIVIEREN */
-    transition: none !important;
-
-    /* DANN DIE EIGENE ANIMATION DEFINIEREN */
-    animation: pulse-purple-glow 2.5s infinite ease-in-out;
-}
-
-.home .luvex-hero__cta-container .luvex-hero__cta.luvex-cta--animated:hover {
-    /* LILA GRADIENT-HINTERGRUND beim Hover */
-    background: linear-gradient(45deg,
-        var(--luvex-bright-cyan),
-        #8a2be2, /* blueviolet */
-        var(--luvex-vibrant-blue),
-        #8a2be2,
-        var(--luvex-bright-cyan)
-    ) !important;
-    background-size: 400% 400% !important;
-    
-    color: var(--luvex-white) !important;
-
-    /* ZWEI ANIMATIONEN GLEICHZEITIG - JETZT ALS SHORTHAND, UM ÜBERSCHREIBUNGEN ZU VERHINDERN */
-    animation: 
-        pulse-purple-glow 2.5s infinite ease-in-out, 
-        gradient-shift-smooth 3s infinite ease-in-out !important;
-
-    /* Zusätzliche visuelle Effekte */
-    transform: translateY(-2px) scale(1.05) !important;
-    border-color: rgba(109, 213, 237, 0.8) !important;
-    box-shadow: 
-        0 8px 25px rgba(109, 213, 237, 0.4),
-        0 0 20px rgba(138, 43, 226, 0.3) !important;
-}
 
 /* Sekundärer Button - normale Styles */
 .home .luvex-hero__cta-secondary {
@@ -233,32 +222,6 @@ Last Update: 2025-09-01 (Community Section repariert)
 .uv-simulator-showcase .feature-grid {
     margin: 3rem auto;
     max-width: 900px;
-}
-
-/* Simulator-CTA Button */
-.simulator-cta { 
-    margin-top: 2rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-xs);
-    padding: 1rem 2.5rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: var(--radius-full);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    background-color: transparent;
-    border: 2px solid var(--luvex-bright-cyan);
-    color: var(--luvex-white);
-}
-
-.simulator-cta:hover {
-    background-color: var(--luvex-bright-cyan);
-    border-color: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(109, 213, 237, 0.3);
 }
 
 /*

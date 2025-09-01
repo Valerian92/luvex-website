@@ -2,7 +2,7 @@
 /**
  * Template Name: Standard Styles
  * Description: Eine Seite zur Anzeige aller globalen Standard-Styles und UI-Komponenten.
- * Version: 2.0 - Zeigt Farben, Icons und die neue, umfassende Länderliste.
+ * Version: 3.0 - Integriert den neuen interaktiven Country Selector.
  */
 
 // SECURITY CHECK: Nur für Administratoren zugänglich.
@@ -45,11 +45,66 @@ $luvex_colors = [
 
     <div class="container">
 
+        <!-- LUVEX Country Selector Section -->
+        <section class="style-section country-selector-component-section">
+            <h2 class="section-title">Interactive Country Selector</h2>
+            <p class="section-subtitle">Eine moderne und durchsuchbare Länderauswahl-Komponente für Formulare. Voll funktionsfähig und bereit zur Integration.</p>
+            
+            <div class="component-preview-wrapper">
+                <?php if (function_exists('luvex_get_country_data')): ?>
+                    <?php 
+                        $countries = luvex_get_country_data();
+                        $default_country_code = 'DE'; // Standardauswahl Deutschland
+                        $default_country = $countries[$default_country_code] ?? reset($countries);
+                    ?>
+                    <div id="luvex-country-selector" class="luvex-country-selector">
+                        <!-- Dies ist der Button, der das Dropdown öffnet -->
+                        <button type="button" class="selector-trigger">
+                            <span class="selected-country">
+                                <span class="flag"><?php echo esc_html($default_country['flag']); ?></span>
+                                <span class="name"><?php echo esc_html($default_country['name']); ?></span>
+                                <span class="dial-code"><?php echo esc_html($default_country['dial_code']); ?></span>
+                            </span>
+                            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                        </button>
+
+                        <!-- Dies ist das Dropdown-Panel -->
+                        <div class="selector-dropdown">
+                            <div class="search-container">
+                                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                                <input type="text" class="country-search" placeholder="Search for a country...">
+                            </div>
+                            <ul class="country-list-options">
+                                <?php foreach ($countries as $code => $data): ?>
+                                    <li data-country-code="<?php echo esc_attr($code); ?>" tabindex="0">
+                                        <span class="flag"><?php echo esc_html($data['flag']); ?></span>
+                                        <span class="name"><?php echo esc_html($data['name']); ?></span>
+                                        <span class="dial-code"><?php echo esc_html($data['dial_code']); ?></span>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+
+                        <!-- Verstecktes natives Select-Feld für die Formular-Übermittlung -->
+                        <select name="country_code" class="native-select" style="display: none;">
+                            <?php foreach ($countries as $code => $data): ?>
+                                <option value="<?php echo esc_attr($code); ?>" <?php selected($code, $default_country_code); ?>>
+                                    <?php echo esc_html($data['name']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                <?php else: ?>
+                    <p><em>Länder-Komponente konnte nicht geladen werden, da die Funktion <code>luvex_get_country_data</code> fehlt.</em></p>
+                <?php endif; ?>
+            </div>
+        </section>
+
+
         <!-- LUVEX Color Palette Section -->
         <section class="style-section color-palette-section">
             <h2 class="section-title">Color Palette</h2>
             <p class="section-subtitle">Die zentralen Farbvariablen, definiert in <code>_variables.css</code>.</p>
-            
             <div class="color-categories-container">
                 <?php foreach ($luvex_colors as $category_name => $colors): ?>
                     <div class="color-category">
@@ -74,7 +129,6 @@ $luvex_colors = [
         <section class="style-section icon-library-section">
             <h2 class="section-title">LUVEX Icon Library</h2>
             <p class="section-subtitle">Die zentrale Bibliothek für alle Icons. Wird dynamisch aus <code>_luvex-helpers.php</code> geladen.</p>
-            
             <?php if (function_exists('get_luvex_icon_library')): ?>
                 <?php 
                     $icon_library = get_luvex_icon_library(); 
@@ -112,35 +166,10 @@ $luvex_colors = [
             <?php endif; ?>
         </section>
 
-        <!-- LUVEX Country List Section -->
-        <section class="style-section country-list-section">
-            <h2 class="section-title">Country Library</h2>
-            <p class="section-subtitle">Zentrale Länderliste für Formulare mit ISO-Code und Telefonvorwahl. Wird dynamisch aus <code>_luvex-helpers.php</code> geladen.</p>
-            
-            <?php if (function_exists('luvex_get_country_data')): ?>
-                <?php $countries = luvex_get_country_data(); ?>
-                <div class="country-list">
-                    <?php foreach ($countries as $code => $data): ?>
-                        <div class="country-item">
-                            <div class="country-flag"><?php echo esc_html($data['flag']); ?></div>
-                            <div class="country-details">
-                                <span class="country-name"><?php echo esc_html($data['name']); ?></span>
-                                <div class="country-codes">
-                                    <code class="country-code" title="ISO 3166-1 alpha-2"><?php echo esc_html($code); ?></code>
-                                    <code class="country-dial-code" title="International dial code"><?php echo esc_html($data['dial_code']); ?></code>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            <?php else: ?>
-                <p><em>Länderliste konnte nicht geladen werden.</em></p>
-            <?php endif; ?>
-        </section>
-
     </div>
 </main>
 
 <?php
 get_footer();
 ?>
+

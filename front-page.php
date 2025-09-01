@@ -31,12 +31,12 @@ get_header(); ?>
             
         </div>
         <div class="luvex-hero__cta-container">
-            <a href="/uv-simulator/" class="luvex-hero__cta luvex-cta-primary simulator-cta luvex-cta--animated">
-                <?php if (function_exists('get_luvex_icon')) echo get_luvex_icon('simulator'); ?>
+            <a href="/uv-simulator/" class="luvex-simulator-cta luvex-simulator-cta--animated">
+                <?php if (function_exists('get_luvex_icon')) echo get_luvex_icon('menu-simulator'); ?>
                 <span>Launch UV Simulator</span>
             </a>
             <a href="/about/" class="luvex-hero__cta-secondary">
-                <?php if (function_exists('get_luvex_icon')) echo get_luvex_icon('uv-technology'); ?>
+                <?php if (function_exists('get_luvex_icon')) echo get_luvex_icon('menu-uv-technology'); ?>
                 <span>Explore UV Science</span>
             </a>
         </div>
