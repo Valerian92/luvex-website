@@ -119,3 +119,140 @@ LUVEX THEME - STANDARD STYLES PAGE (v2)
     border: 1px solid var(--luvex-gray-200);
     align-self: flex-start;
 }
+
+/*
+==============================================================================
+STYLING FÜR NEUE DESIGN SYSTEM SEKTIONEN (COLOR & COUNTRY)
+==============================================================================
+*/
+
+/* --- Color Palette Styles --- */
+.color-categories-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+}
+
+.color-category-title {
+    font-size: 1.5rem;
+    color: var(--luvex-dark-blue);
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--luvex-gray-200);
+}
+
+.color-swatch-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.color-swatch-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--luvex-white);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--luvex-gray-200);
+    transition: all 0.3s ease;
+}
+
+.color-swatch-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--luvex-bright-cyan);
+}
+
+.color-preview {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+    border: 1px solid var(--luvex-gray-200);
+}
+
+.color-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.color-var {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--luvex-dark-blue);
+}
+
+.color-hex {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: var(--luvex-gray-700);
+    background: var(--luvex-gray-100);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--luvex-gray-200);
+    align-self: flex-start;
+}
+
+/* --- Country List Styles --- */
+.country-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.country-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--luvex-white);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--luvex-gray-200);
+    transition: all 0.3s ease;
+}
+
+.country-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--luvex-bright-cyan);
+}
+
+.country-flag {
+    font-size: 2.5rem; /* Emojis sind Schriftzeichen, daher font-size */
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.country-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex-grow: 1;
+}
+
+.country-name {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--luvex-dark-blue);
+}
+
+.country-codes {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.country-code,
+.country-dial-code {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: var(--luvex-gray-700);
+    background: var(--luvex-gray-100);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--luvex-gray-200);
+    align-self: flex-start;
+}
