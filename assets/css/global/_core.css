@@ -6,7 +6,7 @@ Description: Enthält alle globalen Basis-Stile, das Layout-System (Container,
              Grid, Sections) und wiederverwendbare Utility-Klassen.
              + WORDPRESS ADMIN BAR & ASTRA HEADER FIXES
 Dependencies: _variables.css
-Last Update: 2025-08-24 (Header-Probleme behoben)
+Last Update: 2025-09-01 (Header-Probleme behoben + Typography Standards)
 ==============================================================================
 */
 
@@ -98,7 +98,7 @@ body.admin-bar .site-header.fixed-header {
 
 /*
 ==============================================================================
-2. TYPOGRAPHY HIERARCHY
+2. TYPOGRAPHY HIERARCHY (ERWEITERT UM BLOCKSATZ-STANDARDS)
 ==============================================================================
 */
 
@@ -106,13 +106,37 @@ h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 600; line-height: 1.1; ma
 h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 600; line-height: 1.2; margin: 0 0 var(--space-md) 0; letter-spacing: -0.01em; }
 h3 { font-size: var(--text-2xl); font-weight: 600; margin: 0 0 var(--space-sm) 0; }
 h4 { font-size: var(--text-xl); font-weight: 600; margin: 0 0 var(--space-sm) 0; }
-p { font-size: var(--text-lg); color: var(--luvex-gray-700); margin: 0 0 var(--space-md) 0; }
+
+/* STANDARD: Beschreibungen im Blocksatz */
+p, 
+.description,
+.section-description,
+[class*="description"]:not(.luvex-hero__description) {
+    font-size: var(--text-lg); 
+    color: var(--luvex-gray-700); 
+    margin: 0 0 var(--space-md) 0;
+    text-align: justify;
+    hyphens: auto;
+    line-height: 1.7;
+}
+
+/* AUSNAHMEN: Keine Blocksatz */
+.luvex-hero p,
+.luvex-hero .description,
+.card p,
+.card .description,
+button p,
+.btn p {
+    text-align: left;
+    hyphens: none;
+}
+
 a { color: var(--luvex-vibrant-blue); text-decoration: none; transition: var(--transition-normal); }
 a:hover { color: var(--luvex-bright-cyan); }
 
 /*
 ==============================================================================
-3. LAYOUT SYSTEM (REPARIERT)
+3. LAYOUT SYSTEM (VEREINFACHT)
 ==============================================================================
 */
 
@@ -122,33 +146,11 @@ a:hover { color: var(--luvex-bright-cyan); }
     max-width: var(--container-max-width);
     margin: 0 auto;
     padding: 0 2rem;
-    /* FIX: Flexbox für zentrierte Buttons */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Buttons und Elemente zentrieren */
-}
-
-/* FIX: Spezielle Container-Varianten */
-.container--text-content {
-    align-items: flex-start; /* Text linksbündig */
-}
-
-.container--text-content p,
-.container--text-content .description {
-    text-align: justify; /* Blocksatz für Beschreibungen */
-    hyphens: auto;
-    max-width: 100%;
 }
 
 .container--narrow { max-width: 1200px; }
 .container--medium { max-width: 1400px; }
 .container--wide { max-width: 1800px; }
-
-/* FIX: Grid-Container sollen nicht flex sein */
-.container.grid,
-.container .grid {
-    display: grid;
-}
 
 /* --- 3.2 Section Defaults --- */
 .section {
@@ -159,6 +161,7 @@ a:hover { color: var(--luvex-bright-cyan); }
 
 .section--small { padding: 4rem 0; }
 .section--large { padding: 8rem 0; }
+
 /* --- 3.3 Section Backgrounds --- */
 .section--turquoise-light {
     background: linear-gradient(180deg, rgba(109, 213, 237, 0.08) 0%, rgba(248, 250, 252, 0) 100%);
@@ -282,6 +285,7 @@ body.ast-separate-container .site-content {
     white-space: nowrap;
     display: inline;
 }
+
 /*
 ==============================================================================
 7. RESPONSIVE LAYOUT FIXES
@@ -319,4 +323,22 @@ body.ast-separate-container .site-content {
     .section {
         padding: 3rem 0;
     }
+}
+
+/*
+==============================================================================
+8. BUTTON CONTAINER STANDARDS (NEU)
+==============================================================================
+*/
+
+/* STANDARD: Button-Container zentriert */
+.cta-actions,
+[class*="actions"],
+[class*="cta-container"] {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 2rem 0;
 }

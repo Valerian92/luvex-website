@@ -5,7 +5,7 @@ LUVEX THEME v3.4 - HOMEPAGE (BEREINIGT & SPEZIFISCH)
 Description: Nur Homepage-spezifische Styles. Wiederverwendbare Komponenten
              wurden nach _components.css verschoben.
 Dependencies: _variables.css, _core.css, _components.css
-Last Update: 2025-08-31 (Button-Animation repariert)
+Last Update: 2025-09-01 (Community Section repariert)
 ==============================================================================
 */
 
@@ -263,7 +263,7 @@ Last Update: 2025-08-31 (Button-Animation repariert)
 
 /*
 ==============================================================================
-3. GLOBAL UV EXPERT COMMUNITY SECTION (LAYOUT REPARIERT)
+3. GLOBAL UV EXPERT COMMUNITY SECTION (REPARIERT MIT TITEL-FIX)
 ==============================================================================
 */
 .homepage-community-section {
@@ -280,67 +280,61 @@ Last Update: 2025-08-31 (Button-Animation repariert)
     max-width: 1600px;
     margin: 0 auto;
     padding: 0 2rem;
-    position: relative; /* FIX: Für Z-Index Kontrolle */
+    position: relative;
 }
 
 .homepage-community-content {
     padding-right: 2rem;
-    z-index: 2; /* FIX: Content über Globe */
+    z-index: 2;
     position: relative;
-    /* FIX: Container für Buttons zentrieren */
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Text linksbündig */
+    align-items: center; /* FIX: Alles zentriert */
+    text-align: center; /* FIX: Text zentriert */
 }
 
-/* Titel zentrieren */
 .homepage-community-title {
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     margin-bottom: 2.5rem;
-    text-align: center; /* Fix: zentriert */
+    text-align: center; /* FIX: Titel zentriert */
+    width: 100%;
 }
 
-/* FIX: Spezifischerer Selektor + Blocksatz */
-.homepage-community-section .homepage-community-description {
+.homepage-community-description {
     font-size: 1.2rem;
     color: var(--luvex-gray-300);
     max-width: 650px;
     line-height: 1.7;
-    text-align: justify; /* Blocksatz für den Text */
+    text-align: justify; /* Blocksatz für Beschreibungstext */
     margin-bottom: 2.5rem;
     hyphens: auto;
     word-break: normal;
-    margin-right: 0;
 }
 
-/* Buttons zentrieren */
 .homepage-community-actions {
     display: flex;
     gap: 1.5rem;
     margin-bottom: 2rem;
-    justify-content: center; /* Fix: zentriert */
+    justify-content: center; /* FIX: Buttons zentriert */
     width: 100%;
 }
 
-/* FIX: Globe als Hintergrund-Element */
 .homepage-community-visual {
     position: relative;
     width: 100%;
     height: 600px;
-    z-index: 1; /* Globe im Hintergrund */
-}
-
-/* Globe-Position - Section 3 */
-.homepage-community-globe-wrapper {
-    position: absolute;
-    top: 50%;
-    left: 65%; /* Fix: weiter rechts */
-    width: 100vw; /* Fix: Vollbreite */
-    height: 100vh; /* Fix: Vollhöhe */
-    transform: translate(-35%, -50%); /* Fix: angepasst */
     z-index: 1;
 }
 
+.homepage-community-globe-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 65%; /* FIX: Position angepasst */
+    width: 100vw; /* FIX: Vollbreite */
+    height: 100vh; /* FIX: Vollhöhe */
+    transform: translate(-35%, -50%); /* FIX: angepasst */
+    z-index: 1;
+}
 
 /*
 ==============================================================================
@@ -451,7 +445,6 @@ Last Update: 2025-08-31 (Button-Animation repariert)
     text-align: left;
 }
 
-
 /*
 ==============================================================================
 5. RESPONSIVE DESIGN
@@ -555,90 +548,4 @@ Last Update: 2025-08-31 (Button-Animation repariert)
 .homepage-cursor-active button:active,
 .homepage-cursor-active [role="button"]:active {
     cursor: var(--cursor-pointer) 20 20, auto;
-}
-
-
-
-/*
-==============================================================================
-1.4 ANIMIERTER HERO-BUTTON (REPARIERT mit höchster Spezifität)
-==============================================================================
-*/
-
-/* Animationen definieren */
-@keyframes pulse-purple-glow {
-    0%, 100% { 
-        box-shadow: 
-            0 4px 15px rgba(109, 213, 237, 0.3),
-            0 0 10px rgba(138, 43, 226, 0.2);
-        border-color: rgba(109, 213, 237, 0.8);
-    }
-    50% { 
-        box-shadow: 
-            0 6px 20px rgba(109, 213, 237, 0.5),
-            0 0 20px rgba(138, 43, 226, 0.4);
-        border-color: rgba(138, 43, 226, 0.6);
-    }
-}
-
-@keyframes gradient-shift-smooth {
-    0% { background-position: 0% 50%; }
-    25% { background-position: 100% 50%; }
-    50% { background-position: 100% 100%; }
-    75% { background-position: 0% 100%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* HÖCHSTE SPEZIFITÄT: Überschreibt alle anderen Button-Styles */
-.home .luvex-hero__cta-container .luvex-hero__cta.luvex-cta--animated {
-    position: relative !important;
-    overflow: hidden !important;
-    
-    /* WICHTIG: Überschreibt _components.css */
-    background: transparent !important;
-    color: var(--luvex-white) !important;
-    border: 2px solid var(--luvex-bright-cyan) !important;
-    
-    /* Basis-Styles beibehalten */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-xs);
-    padding: 16px 32px;
-    border-radius: var(--radius-full);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: var(--text-base);
-    
-    /* ZUERST DIE KONKURRIERENDE TRANSITION DEAKTIVIEREN */
-    transition: none !important;
-
-    /* DANN DIE EIGENE ANIMATION DEFINIEREN */
-    animation: pulse-purple-glow 2.5s infinite ease-in-out;
-}
-
-.home .luvex-hero__cta-container .luvex-hero__cta.luvex-cta--animated:hover {
-    /* GRADIENT-HINTERGRUND beim Hover - FIXED VERSION */
-    background: linear-gradient(45deg,
-        var(--luvex-bright-cyan) 0%,
-        #8a2be2 25%, 
-        var(--luvex-vibrant-blue) 50%,
-        #8a2be2 75%,
-        var(--luvex-bright-cyan) 100%
-    ) !important;
-    background-size: 400% 400% !important;
-    
-    color: var(--luvex-white) !important;
-
-    /* BEIDE ANIMATIONEN GLEICHZEITIG - FIXED */
-    animation: 
-        pulse-purple-glow 2.5s infinite ease-in-out, 
-        gradient-shift-smooth 3s infinite linear !important;
-
-    /* Zusätzliche visuelle Effekte */
-    transform: translateY(-2px) scale(1.05) !important;
-    border-color: rgba(109, 213, 237, 0.8) !important;
-    box-shadow: 
-        0 8px 25px rgba(109, 213, 237, 0.4),
-        0 0 20px rgba(138, 43, 226, 0.3) !important;
 }
