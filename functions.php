@@ -91,7 +91,7 @@ function luvex_enqueue_assets() {
     $page_styles_map = [
         'standard-styles-luvex' => ['css/_page-standard-styles-luvex.css'],
         'about' => ['css/_page-about.css'],
-        'start-uv-project' => ['css/_page-start-uv-project.css'],
+        'project-design' => ['css/_page-project-desin.css'],
         'contact' => ['css/_page-contact.css'],
         'uv-technology' => ['css/_page-uv-technology.css'],
         'mercury-uv-lamps' => ['css/_page-mercury-uv-lamps.css'],
@@ -194,7 +194,7 @@ function luvex_enqueue_assets() {
         'led-uv-systems' => ['luvex-uv-led-hero' => 'pages/hero-uv-led.js'],
         'mercury-uv-lamps' => ['luvex-mercury-lamps-hero' => 'pages/hero-mercury-lamps.js'],
         'uv-technology' => ['luvex-hero-spectrum' => 'pages/hero-spectrum.js'],
-        'start-uv-project' => ['luvex-consultation-hero-animation' => 'pages/hero-consultation-animation.js'],
+        'project-design' => ['luvex-consultation-hero-animation' => 'pages/hero-consultation-animation.js'],
         'uv-solutions' => ['luvex-hero-solutions-animation' => 'pages/hero-solutions-animation.js'],
     ];
 

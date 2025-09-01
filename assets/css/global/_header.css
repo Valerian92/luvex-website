@@ -1,14 +1,15 @@
 /*
 ==============================================================================
-LUVEX THEME v4.11 - COMPLETE HEADER SYSTEM + OPTIMIZED NAVIGATION ARROWS
+LUVEX THEME v4.12 - COMPLETE HEADER SYSTEM + UV LIGHT BEAM EFFECT
 ==============================================================================
 
-Description: Vollständige Header-Implementierung mit optimierten Pfeil-Effekten:
+Description: Vollständige Header-Implementierung mit UV-Lichtstrahl-Effekt:
              - Pfeile UNTER dem Text (zentriert)
              - Korrekte Rotation nach links-unten
              - Auto-Breite für Level 2 basierend auf Level 3
+             - UV-Lichtstrahl bei Submenu-Expand (reine CSS-Animation)
 Dependencies: _variables.css, _core.css
-Last Update: 2025-09-01 (Pfeil-Position + Dropdown-Breite optimiert)
+Last Update: 2025-09-01 (UV Light Beam Effect integriert)
 
 ==============================================================================
 */
@@ -275,7 +276,7 @@ Last Update: 2025-09-01 (Pfeil-Position + Dropdown-Breite optimiert)
 
 
 /* ==========================================================================
-   5. LEVEL 2 - HORIZONTAL SUB-MENU (BREITE AUTO-ADJUST)
+   5. LEVEL 2 - HORIZONTAL SUB-MENU (BREITE AUTO-ADJUST + UV-LICHTSTRAHL)
    ========================================================================== */
 .main-navigation > ul > li > .sub-menu {
     position: absolute;
@@ -303,6 +304,36 @@ Last Update: 2025-09-01 (Pfeil-Position + Dropdown-Breite optimiert)
     
     /* FIX: Auto-Breite basierend auf Inhalt */
     width: max-content;
+}
+
+/* ==========================================================================
+   UV-LICHTSTRAHL-EFFEKT FÜR SUBMENU
+   ========================================================================== */
+
+/* Horizontaler UV-Lichtstrahl oben am Submenu */
+.main-navigation > ul > li > .sub-menu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%; /* Startet bei 0% Breite */
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        var(--luvex-special-cyan) 20%, 
+        var(--luvex-white) 50%, 
+        var(--luvex-special-cyan) 80%, 
+        transparent 100%
+    );
+    box-shadow: 0 0 6px var(--luvex-special-cyan), 0 0 12px rgba(109, 213, 237, 0.4);
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+    border-radius: 1px;
+}
+
+/* Lichtstrahl expandiert beim Submenu-Hover */
+.main-navigation > ul > li:hover > .sub-menu::before {
+    width: 100%; /* Expandiert zur vollen Breite */
 }
 
 .site-header.scrolled .main-navigation > ul > li > .sub-menu {
@@ -912,7 +943,28 @@ Last Update: 2025-09-01 (Pfeil-Position + Dropdown-Breite optimiert)
 }
 
 /* ==========================================================================
-   12. ASTRA OVERRIDES & CLEANUP
+   12. PERFORMANCE OPTIMIERUNG & REDUCED MOTION
+   ========================================================================== */
+
+/* GPU-Beschleunigung für Smooth-Performance */
+.main-navigation > ul > li > .sub-menu::before {
+    will-change: width;
+    transform: translateZ(0); /* Hardware-Acceleration */
+}
+
+/* Reduzierte Animation bei Preference */
+@media (prefers-reduced-motion: reduce) {
+    .main-navigation > ul > li > .sub-menu::before {
+        transition: none;
+    }
+    
+    .main-navigation > ul > li.menu-item-has-children > a::after {
+        transition: none;
+    }
+}
+
+/* ==========================================================================
+   13. ASTRA OVERRIDES & CLEANUP
    ========================================================================== */
 .main-navigation .ast-arrow-svg,
 .main-navigation .ast-menu-toggle,
