@@ -48,7 +48,7 @@ INTERACTIVE COUNTRY SELECTOR STYLES
 ==============================================================================
 */
 .component-preview-wrapper {
-    max-width: 400px;
+    max-width: 500px; /* Breite angepasst für neues Layout */
     margin: 2rem auto;
     background: var(--luvex-dark-blue);
     padding: 2rem;
@@ -56,10 +56,31 @@ INTERACTIVE COUNTRY SELECTOR STYLES
     box-shadow: var(--shadow-lg);
 }
 
+/* NEU: Wrapper für Selector und Telefonfeld */
+.form-group-phone-international {
+    display: flex;
+    align-items: center;
+    gap: 0; /* Kein Abstand zwischen den Elementen */
+}
+
 .luvex-country-selector {
     position: relative;
-    width: 100%;
+    width: 45%; /* Feste Breite für den Selector */
     font-family: inherit;
+    flex-shrink: 0;
+}
+
+/* NEU: Styles für das Telefon-Eingabefeld */
+.phone-input {
+    flex-grow: 1;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: none; /* Linker Rand wird entfernt für nahtlosen Übergang */
+}
+
+.phone-input:focus {
+    position: relative; /* Stellt sicher, dass der Fokus-Schatten über dem Selector liegt */
+    z-index: 2;
 }
 
 .luvex-country-selector .selector-trigger {
@@ -71,7 +92,8 @@ INTERACTIVE COUNTRY SELECTOR STYLES
     height: 56px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(109, 213, 237, 0.3);
-    border-radius: var(--radius-md);
+    /* NEU: Nur linke Ecken abrunden */
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
     color: var(--luvex-white);
     cursor: pointer;
     transition: var(--transition-normal);
@@ -83,6 +105,8 @@ INTERACTIVE COUNTRY SELECTOR STYLES
     border-color: var(--luvex-bright-cyan);
     background: rgba(255, 255, 255, 0.08);
     box-shadow: 0 0 0 2px rgba(109, 213, 237, 0.5);
+    position: relative; /* Stellt sicher, dass der Fokus-Schatten über dem Input liegt */
+    z-index: 2;
 }
 
 .luvex-country-selector .selected-country {
@@ -101,6 +125,11 @@ INTERACTIVE COUNTRY SELECTOR STYLES
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+/* Dial-Code aus dem Trigger entfernen, da er jetzt im Input steht */
+.luvex-country-selector .selector-trigger .dial-code {
+    display: none;
 }
 
 .luvex-country-selector .dial-code {
@@ -124,7 +153,8 @@ INTERACTIVE COUNTRY SELECTOR STYLES
     position: absolute;
     top: calc(100% + 8px);
     left: 0;
-    width: 100%;
+    width: 300px; /* Feste Breite für das Dropdown */
+    max-width: calc(100vw - 4rem);
     background: var(--luvex-dark-blue-medium);
     border: 1px solid var(--luvex-bright-cyan);
     border-radius: var(--radius-md);
@@ -359,4 +389,3 @@ INTERACTIVE COUNTRY SELECTOR STYLES
     border: 1px solid var(--luvex-gray-200);
     align-self: flex-start;
 }
-

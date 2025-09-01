@@ -2,7 +2,7 @@
 /**
  * Template Name: Standard Styles
  * Description: Eine Seite zur Anzeige aller globalen Standard-Styles und UI-Komponenten.
- * Version: 3.0 - Integriert den neuen interaktiven Country Selector.
+ * Version: 3.1 - Erweitert um das kombinierte Country-Selector- und Phone-Input-Element.
  */
 
 // SECURITY CHECK: Nur für Administratoren zugänglich.
@@ -48,7 +48,7 @@ $luvex_colors = [
         <!-- LUVEX Country Selector Section -->
         <section class="style-section country-selector-component-section">
             <h2 class="section-title">Interactive Country Selector</h2>
-            <p class="section-subtitle">Eine moderne und durchsuchbare Länderauswahl-Komponente für Formulare. Voll funktionsfähig und bereit zur Integration.</p>
+            <p class="section-subtitle">Eine moderne und durchsuchbare Länderauswahl, die direkt mit einem Telefon-Eingabefeld verbunden ist. Geben Sie eine Vorwahl ein oder wählen Sie ein Land aus.</p>
             
             <div class="component-preview-wrapper">
                 <?php if (function_exists('luvex_get_country_data')): ?>
@@ -57,43 +57,50 @@ $luvex_colors = [
                         $default_country_code = 'DE'; // Standardauswahl Deutschland
                         $default_country = $countries[$default_country_code] ?? reset($countries);
                     ?>
-                    <div id="luvex-country-selector" class="luvex-country-selector">
-                        <!-- Dies ist der Button, der das Dropdown öffnet -->
-                        <button type="button" class="selector-trigger">
-                            <span class="selected-country">
-                                <span class="flag"><?php echo esc_html($default_country['flag']); ?></span>
-                                <span class="name"><?php echo esc_html($default_country['name']); ?></span>
-                                <span class="dial-code"><?php echo esc_html($default_country['dial_code']); ?></span>
-                            </span>
-                            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
-                        </button>
+                    
+                    <!-- NEU: Wrapper für Selector und Telefon-Input -->
+                    <div class="form-group-phone-international">
+                        <div id="luvex-country-selector" class="luvex-country-selector">
+                            <!-- Dies ist der Button, der das Dropdown öffnet -->
+                            <button type="button" class="selector-trigger">
+                                <span class="selected-country">
+                                    <span class="flag"><?php echo esc_html($default_country['flag']); ?></span>
+                                    <span class="name"><?php echo esc_html($default_country['name']); ?></span>
+                                </span>
+                                <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                            </button>
 
-                        <!-- Dies ist das Dropdown-Panel -->
-                        <div class="selector-dropdown">
-                            <div class="search-container">
-                                <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                                <input type="text" class="country-search" placeholder="Search for a country...">
+                            <!-- Dies ist das Dropdown-Panel -->
+                            <div class="selector-dropdown">
+                                <div class="search-container">
+                                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                                    <input type="text" class="country-search" placeholder="Search for a country...">
+                                </div>
+                                <ul class="country-list-options">
+                                    <?php foreach ($countries as $code => $data): ?>
+                                        <li data-country-code="<?php echo esc_attr($code); ?>" data-dial-code="<?php echo esc_attr($data['dial_code']); ?>" tabindex="0">
+                                            <span class="flag"><?php echo esc_html($data['flag']); ?></span>
+                                            <span class="name"><?php echo esc_html($data['name']); ?></span>
+                                            <span class="dial-code"><?php echo esc_html($data['dial_code']); ?></span>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
                             </div>
-                            <ul class="country-list-options">
-                                <?php foreach ($countries as $code => $data): ?>
-                                    <li data-country-code="<?php echo esc_attr($code); ?>" tabindex="0">
-                                        <span class="flag"><?php echo esc_html($data['flag']); ?></span>
-                                        <span class="name"><?php echo esc_html($data['name']); ?></span>
-                                        <span class="dial-code"><?php echo esc_html($data['dial_code']); ?></span>
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
 
-                        <!-- Verstecktes natives Select-Feld für die Formular-Übermittlung -->
-                        <select name="country_code" class="native-select" style="display: none;">
-                            <?php foreach ($countries as $code => $data): ?>
-                                <option value="<?php echo esc_attr($code); ?>" <?php selected($code, $default_country_code); ?>>
-                                    <?php echo esc_html($data['name']); ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
+                            <!-- Verstecktes natives Select-Feld für die Formular-Übermittlung -->
+                            <select name="country_code" class="native-select" style="display: none;">
+                                <?php foreach ($countries as $code => $data): ?>
+                                    <option value="<?php echo esc_attr($code); ?>" <?php selected($code, $default_country_code); ?>>
+                                        <?php echo esc_html($data['name']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        
+                        <!-- NEU: Telefon-Eingabefeld -->
+                        <input type="tel" id="phone-input" class="luvex-input phone-input" value="<?php echo esc_html($default_country['dial_code']); ?> " placeholder="Ihre Telefonnummer">
                     </div>
+
                 <?php else: ?>
                     <p><em>Länder-Komponente konnte nicht geladen werden, da die Funktion <code>luvex_get_country_data</code> fehlt.</em></p>
                 <?php endif; ?>
@@ -172,4 +179,3 @@ $luvex_colors = [
 <?php
 get_footer();
 ?>
-
