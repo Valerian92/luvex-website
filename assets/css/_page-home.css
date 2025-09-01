@@ -263,7 +263,7 @@ Last Update: 2025-08-31 (Button-Animation repariert)
 
 /*
 ==============================================================================
-3. GLOBAL UV EXPERT COMMUNITY SECTION
+3. GLOBAL UV EXPERT COMMUNITY SECTION (REPARIERT)
 ==============================================================================
 */
 .homepage-community-section {
@@ -291,13 +291,18 @@ Last Update: 2025-08-31 (Button-Animation repariert)
     margin-bottom: 2.5rem;
 }
 
-.homepage-community-description {
+/* --- FIX: Spezifischerer Selektor, um andere Styles zu überschreiben --- */
+.homepage-community-section .homepage-community-description {
     font-size: 1.2rem;
     color: var(--luvex-gray-300);
     max-width: 650px;
     line-height: 1.7;
     text-align: justify; /* Blocksatz für den Text */
     margin-bottom: 2.5rem;
+    /* Entfernt die konkurrierenden Stile */
+    hyphens: auto;
+    word-break: normal;
+    margin-right: 0;
 }
 
 .homepage-community-actions {

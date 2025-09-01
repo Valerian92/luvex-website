@@ -32,7 +32,7 @@ get_header(); ?>
         </div>
         <div class="luvex-hero__cta-container">
             <a href="/uv-simulator/" class="luvex-hero__cta luvex-cta-primary simulator-cta luvex-cta--animated">
-                <?php if (function_exists('get_luvex_icon')) echo get_luvex_icon('uv-simulator'); ?>
+                <?php if (function_exists('get_luvex_icon')) echo get_luvex_icon('simulator'); ?>
                 <span>Launch UV Simulator</span>
             </a>
             <a href="/about/" class="luvex-hero__cta-secondary">
@@ -161,3 +161,4 @@ get_header(); ?>
 </section>
 
 <?php get_footer(); ?>
+

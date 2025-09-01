@@ -1,11 +1,11 @@
 /*
 ==============================================================================
-LUVEX THEME v3.2 - UI COMPONENTS (Komplett mit Animationen)
+LUVEX THEME v3.3 - UI COMPONENTS (Layout-Reparatur)
 ==============================================================================
 Description: Enthält alle wiederverwendbaren UI-Komponenten, universelle
-             Form-Elemente UND alle Animationen (gemerged aus _animations.css)
+             Form-Elemente UND alle Animationen.
 Dependencies: _variables.css, _core.css
-Last Update: 2025-08-31 - Animations integriert
+Last Update: 2025-09-01 - Canvas-Layout und Menü-Icons repariert
 ==============================================================================
 */
 
@@ -28,6 +28,18 @@ Last Update: 2025-08-31 - Animations integriert
     justify-content: center;
     text-align: center;
 }
+
+/* --- FIX: Canvas-Elemente IMMER in den Hintergrund zwingen --- */
+.luvex-hero > canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none; /* Verhindert, dass das Canvas Klicks blockiert */
+}
+
 
 /* --- Hintergrund-Grid --- */
 .luvex-hero::before {
@@ -87,6 +99,20 @@ Last Update: 2025-08-31 - Animations integriert
     line-height: 1.6;
     opacity: 0.9;
 }
+
+/*
+==============================================================================
+1.5 FIX: MENÜ-ICONS SICHTBAR MACHEN
+==============================================================================
+*/
+.main-navigation .menu-item-icon {
+    display: inline-block !important;
+    opacity: 1 !important;
+    vertical-align: middle;
+    margin-left: 8px;
+    font-size: 0.9em;
+}
+
 
 /*
 ==============================================================================
@@ -1184,3 +1210,4 @@ input[type="tel"]:focus {
         width: 100%;
     }
 }
+

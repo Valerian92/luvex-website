@@ -2,9 +2,10 @@
 /**
  * LUVEX Theme Helper Functions
  * Enthält die zentrale Icon-Bibliothek für Menüs und UI-Komponenten.
+ * Wiederhergestellt basierend auf der originalen Git-Konfiguration.
  *
  * @package Luvex
- * @since 4.0.0
+ * @since 4.6.0
  */
 
 if (!defined('ABSPATH')) {
@@ -13,29 +14,22 @@ if (!defined('ABSPATH')) {
 
 /**
  * Gibt die gesamte LUVEX Icon-Bibliothek zurück, strukturiert nach Kategorien.
- *
- * @return array Die Icon-Bibliothek.
  */
 if (!function_exists('get_luvex_icon_library')) {
     function get_luvex_icon_library() {
         return [
             // ========================================================================
-            // FINALE MENU ICONS
+            // MENU ICONS
             // ========================================================================
             'Menu Icons' => [
-                // Hauptmenü (Level 1)
                 'menu-uv-technology' => ['label' => 'UV Technology', 'class' => 'fa-solid fa-atom'],
                 'menu-uv-solutions'  => ['label' => 'UV Solutions', 'class' => 'fa-solid fa-sitemap'],
                 'menu-start-project' => ['label' => 'Start Your UV Project', 'class' => 'fa-solid fa-rocket'],
                 'menu-about-luvex'   => ['label' => 'About LUVEX', 'class' => 'fa-solid fa-globe'],
-                
-                // UV Technology Untermenü
                 'menu-led-systems'   => ['label' => 'LED UV Systems', 'class' => 'fa-solid fa-arrows-to-dot'],
                 'menu-uv-curing'     => ['label' => 'UV Curing', 'class' => 'fa-solid fa-layer-group'],
                 'menu-uvc-disinfection' => ['label' => 'UV-C Disinfection', 'class' => 'fa-solid fa-shield-virus'],
                 'menu-mercury-lamps' => ['label' => 'Mercury UV Lamps', 'class' => 'fa-solid fa-wave-square'],
-
-                // UV Solutions Untermenü
                 'menu-custom-concepts' => ['label' => 'Custom Concepts', 'class' => 'fa-solid fa-sitemap'], 
                 'menu-tunnel-systems'  => ['label' => 'UV-Tunnel-Systems', 'class' => 'fa-solid fa-arrow-down-up-across-line'],
                 'menu-curing-systems'  => ['label' => 'Curing Systems', 'class' => 'fa-solid fa-layer-group'], 
@@ -43,20 +37,18 @@ if (!function_exists('get_luvex_icon_library')) {
                 'menu-safety-equipment' => ['label' => 'Safety Equipment', 'class' => 'fa-solid fa-user-shield'],
                 'menu-testing-tools'    => ['label' => 'Testing Tools', 'class' => 'fa-solid fa-gauge-high'],
                 'menu-replacement-lamps' => ['label' => 'Replacement Lamps', 'class' => 'fa-solid fa-wand-magic-sparkles'],
-
-                // Knowledge Seiten (Final)
                 'menu-measurement-knowledge' => ['label' => 'UV-Measurement-Knowledge', 'class' => 'fa-solid fa-gauge-high'],
                 'menu-safety-knowledge' => ['label' => 'UV-Safety-Knowledge', 'class' => 'fa-solid fa-user-shield'],
                 'menu-regulatories'     => ['label' => 'UV-Regulatories', 'class' => 'fa-solid fa-balance-scale'],
-                
-                // Weitere
                 'menu-simulator' => ['label' => 'UV Simulator', 'class' => 'fa-solid fa-cubes'],
                 'menu-news'      => ['label' => 'All UV News', 'class' => 'fa-solid fa-newspaper'],
                 'menu-contact'   => ['label' => 'Contact', 'class' => 'fa-solid fa-headset'],
             ],
 
+            // ========================================================================
+            // ICONS FÜR "YOUR INTERESTS" IM REGISTRIERUNGS-MODAL
+            // ========================================================================
             'Category Titles' => [
-                'category-industries'   => ['label' => 'Industries', 'class' => 'fa-solid fa-industry'],
                 'category-technology'   => ['label' => 'Technology', 'class' => 'fa-solid fa-atom'],
                 'category-uv-solutions' => ['label' => 'UV Solutions', 'class' => 'fa-solid fa-toolbox'],
                 'category-luvex-services' => ['label' => 'LUVEX Services', 'class' => 'fa-solid fa-globe'],
@@ -88,10 +80,7 @@ if (!function_exists('get_luvex_icon_library')) {
 }
 
 /**
- * Gibt den HTML-Code für ein einzelnes, vordefiniertes LUVEX Icon zurück.
- *
- * @param string $name Der Name des Icons (z.B. 'uv-curing').
- * @return string Den vollständigen <i>-Tag oder einen leeren String.
+ * Gibt den HTML-Code für ein Icon zurück.
  */
 if (!function_exists('get_luvex_icon')) {
     function get_luvex_icon($name) {
@@ -101,34 +90,42 @@ if (!function_exists('get_luvex_icon')) {
                 return '<i class="' . esc_attr($category[$name]['class']) . '"></i>';
             }
         }
-        return ''; // Fallback
+        return '';
     }
 }
 
 /**
- * Gibt die detaillierte Liste der Industrien zurück.
+ * Gibt die detaillierte Liste der Industrien zurück (wiederhergestellt aus Git).
  */
 if (!function_exists('luvex_get_industries')) {
     function luvex_get_industries() {
         return [
-            'Adhesive & Bonding' => 'fa-puzzle-piece',
-            'Automotive' => 'fa-car-side',
-            'Electronics' => 'fa-microchip',
-            'Medical & Laboratory' => 'fa-vials',
-            'Printing & Graphics' => 'fa-print',
-            'Wood & Furniture' => 'fa-chair',
-            'Water Purification' => 'fa-tint',
-            'Air & Surface Disinfection' => 'fa-wind',
-            'Food & Beverage' => 'fa-utensils',
-            'Plastics & Polymers' => 'fa-shapes',
-            'Scientific Research' => 'fa-flask',
-            'Other' => 'fa-ellipsis-h'
+            // Originale Liste aus dem Git Diff
+            'Electronics'           => 'fa-solid fa-microchip',
+            'Pharmaceutical'        => 'fa-solid fa-pills',
+            'Automotive'            => 'fa-solid fa-car',
+            'Mechanical Engineering'=> 'fa-solid fa-gears',
+            'Greenhouse'            => 'fa-solid fa-seedling',
+            'Food Processing'       => 'fa-solid fa-apple-whole',
+            'Optics'                => 'fa-solid fa-eye',
+            'Beverage & Bottling'   => 'fa-solid fa-bottle-water',
+            'Packaging'             => 'fa-solid fa-box-open',
+            'Hotel'                 => 'fa-solid fa-building-user',
+            'Meat & Poultry'        => 'fa-solid fa-drumstick-bite',
+            'Dairy'                 => 'fa-solid fa-cheese',
+            'Animal Husbandry'      => 'fa-solid fa-cow',
+            'Cooling Houses'        => 'fa-solid fa-temperature-low',
+            'Laboratories'          => 'fa-solid fa-microscope',
+            // Dein Wunsch
+            'Plastics & Polymers'   => 'fa-solid fa-shapes',
+            // Fallback
+            'Other'                 => 'fa-solid fa-ellipsis',
         ];
     }
 }
 
 /**
- * Gibt die strukturierte Liste der Interessen zurück (basierend auf der Icon-Bibliothek).
+ * Gibt die strukturierte Liste der Interessen zurück.
  */
 if (!function_exists('luvex_get_interests')) {
     function luvex_get_interests() {
