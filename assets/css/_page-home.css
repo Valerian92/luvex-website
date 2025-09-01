@@ -293,9 +293,11 @@ Last Update: 2025-08-31 (Button-Animation repariert)
     align-items: flex-start; /* Text linksbündig */
 }
 
+/* Titel zentrieren */
 .homepage-community-title {
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     margin-bottom: 2.5rem;
+    text-align: center; /* Fix: zentriert */
 }
 
 /* FIX: Spezifischerer Selektor + Blocksatz */
@@ -311,12 +313,12 @@ Last Update: 2025-08-31 (Button-Animation repariert)
     margin-right: 0;
 }
 
-/* FIX: Button-Container zentrieren */
+/* Buttons zentrieren */
 .homepage-community-actions {
     display: flex;
     gap: 1.5rem;
     margin-bottom: 2rem;
-    justify-content: flex-start; /* Buttons linksbündig zum Text */
+    justify-content: center; /* Fix: zentriert */
     width: 100%;
 }
 
@@ -328,15 +330,17 @@ Last Update: 2025-08-31 (Button-Animation repariert)
     z-index: 1; /* Globe im Hintergrund */
 }
 
+/* Globe-Position - Section 3 */
 .homepage-community-globe-wrapper {
     position: absolute;
     top: 50%;
-    left: 50%;
-    width: 1200px;
-    height: 1200px;
-    transform: translate(-50%, -50%);
-    z-index: 1; /* Globe definitiv im Hintergrund */
+    left: 65%; /* Fix: weiter rechts */
+    width: 100vw; /* Fix: Vollbreite */
+    height: 100vh; /* Fix: Vollhöhe */
+    transform: translate(-35%, -50%); /* Fix: angepasst */
+    z-index: 1;
 }
+
 
 /*
 ==============================================================================
