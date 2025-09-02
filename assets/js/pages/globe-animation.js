@@ -1,29 +1,29 @@
-console.log('🌍 Globe Animation Script lädt...');
+// console.log('🌍 Globe Animation Script lädt...');
 document.addEventListener('DOMContentLoaded', () => {
-     console.log('🔍 Globe: DOM Content Loaded');
+    // console.log('🔍 Globe: DOM Content Loaded');
     const container = document.getElementById('globe-container');
     if (!container) {
         console.error('❌ Globe Container nicht gefunden!');
         return;
     }
-    console.log('✅ Globe Container gefunden');
-    console.log('📐 Container Größe:', container.clientWidth, 'x', container.clientHeight);
+    // console.log('✅ Globe Container gefunden');
+    // console.log('📐 Container Größe:', container.clientWidth, 'x', container.clientHeight);
 
     // Scene Setup
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ 
-    antialias: true, 
-    alpha: true,
-    preserveDrawingBuffer: true,
-    powerPreference: "high-performance"
-});
+        antialias: true, 
+        alpha: true,
+        preserveDrawingBuffer: true,
+        powerPreference: "high-performance"
+    });
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
     // Main Globe
-   const globeGeometry = new THREE.SphereGeometry(6.6, 64, 64); // 6 → 6.6
+    const globeGeometry = new THREE.SphereGeometry(6.6, 64, 64); // 6 → 6.6
     const globeMaterial = new THREE.MeshLambertMaterial({
         color: new THREE.Color('#1B2A49')
     });
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const wireGlobe = new THREE.Mesh(wireGeometry, wireMaterial);
 
     // Feineres Gitter durch Erhöhung der Segmente
-   const fineGeometry = new THREE.SphereGeometry(6.61, 128, 64); // 6.01 → 6.61
+    const fineGeometry = new THREE.SphereGeometry(6.61, 128, 64); // 6.01 → 6.61
     const fineMaterial = new THREE.MeshBasicMaterial({
         color: '#6dd5ed',
         wireframe: true,
@@ -70,10 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < count; i++) {
             const theta = 2 * Math.PI * i / goldenRatio;
             const phi = Math.acos(1 - 2 * (i + 0.5) / count);
-
             const lat = 90 - (phi * 180 / Math.PI);
             const lon = ((theta * 180 / Math.PI) % 360) - 180;
-
             points.push({ lat, lon, id: i });
         }
         return points;
@@ -90,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Create Points
     const uvPoints = generatePoints(40);
-    console.log('🔴 UV Points generiert:', uvPoints.length, 'Punkte');
+    // console.log('🔴 UV Points generiert:', uvPoints.length, 'Punkte');
     const pointGroup = new THREE.Group();
 
     uvPoints.forEach(point => {
@@ -105,15 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         const pointMesh = new THREE.Mesh(pointGeometry, pointMaterial);
         pointMesh.position.copy(position);
-        // Debug: Erste 3 Punkte detailliert loggen
-if (pointGroup.children.length < 6) {
-    console.log('🔍 Punkt #' + pointGroup.children.length + ':', {
-        position: position.clone(),
-        radius: 0.05,
-        opacity: 0.9,
-        color: '#6dd5ed'
-    });
-}
         pointGroup.add(pointMesh);
 
         // Pulse ring
@@ -129,18 +118,11 @@ if (pointGroup.children.length < 6) {
         ring.lookAt(new THREE.Vector3(0, 0, 0));
         ring.userData = { pulseSpeed: 0.5 + Math.random() * 1.5 };
         pointGroup.add(ring);
-        // Debug: Ring-Details
-if (pointGroup.children.length < 12) {
-    console.log('🔍 Ring #' + Math.floor(pointGroup.children.length/2) + ':', {
-        ringSize: '0.08-0.12',
-        opacity: 0.5
-    });
-}
     });
 
     scene.add(pointGroup);
-    console.log('✅ Point Group zur Scene hinzugefügt');
-console.log('📊 Point Group Kinder:', pointGroup.children.length);
+    // console.log('✅ Point Group zur Scene hinzugefügt');
+    // console.log('📊 Point Group Kinder:', pointGroup.children.length);
 
     // Create Connections
     const connectionGroup = new THREE.Group();
@@ -183,9 +165,8 @@ console.log('📊 Point Group Kinder:', pointGroup.children.length);
             endIdx = Math.floor(Math.random() * uvPoints.length);
         }
 
-        const startPos = latLonToVector3(uvPoints[startIdx].lat, uvPoints[startIdx].lon, 6.65); // 6.05 → 6.65
-        const endPos = latLonToVector3(uvPoints[endIdx].lat, uvPoints[endIdx].lon, 6.65); // 6.05 → 6.65
-
+        const startPos = latLonToVector3(uvPoints[startIdx].lat, uvPoints[startIdx].lon, 6.65);
+        const endPos = latLonToVector3(uvPoints[endIdx].lat, uvPoints[endIdx].lon, 6.65);
 
         const midPoint = new THREE.Vector3().addVectors(startPos, endPos).multiplyScalar(0.5);
         const distance = startPos.distanceTo(endPos);
@@ -224,7 +205,6 @@ console.log('📊 Point Group Kinder:', pointGroup.children.length);
     const rotationGroup = new THREE.Group();
     rotationGroup.add(globe, wireGlobe, fineGlobe, pointGroup, connectionGroup);
     scene.add(rotationGroup);
-
 
     // Animation loop
     const clock = new THREE.Clock();

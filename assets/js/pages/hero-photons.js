@@ -1,16 +1,24 @@
 /**
  * LUVEX Theme - Homepage Hero Photon Animation & CSS Cursor Trigger
  *
- * VERSION 9: KLASSENBASIERTE BUTTON-ANIMATION (Final Fix)
+ * VERSION 10: DEFINITIVER FIX FÜR HINTERGRUND-OVERRIDE
+ * - Fügt einen JS-Befehl hinzu, um den von Astra erzwungenen Hero-Hintergrund zu entfernen.
  * - Photonen fliegen zum .luvex-simulator-cta Button
  * - Pause-Effekt funktioniert mit .luvex-simulator-cta--animated
  * - Button-Hover per Klassen-Toggle (.hover-active)
- * - Special Cursor erhalten
- * - Console Logs entfernt
  */
 document.addEventListener('DOMContentLoaded', function() {
-    const canvas = document.getElementById('homepage-hero-canvas');
     const heroSection = document.querySelector('.luvex-hero');
+    const canvas = document.getElementById('homepage-hero-canvas');
+
+    // ========================================================================
+    // ZENTRALER FIX: Astra's inline-style überschreiben, der den Canvas verdeckt.
+    // Dies stellt sicher, dass der Hintergrund transparent ist, egal was das Theme tut.
+    // ========================================================================
+    if (heroSection) {
+        heroSection.style.setProperty('background', 'transparent', 'important');
+    }
+
     if (!canvas || !heroSection) return;
 
     const ctx = canvas.getContext('2d');

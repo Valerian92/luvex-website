@@ -1,6 +1,6 @@
 /*
 ==============================================================================
-LUVEX THEME - STANDARD STYLES PAGE (v3.6 - Cleaned Up)
+LUVEX THEME - STANDARD STLES PAGE (v3.6 - Cleaned Up)
 ==============================================================================
 */
 
@@ -56,8 +56,23 @@ VORSCHAU-WRAPPER FÜR DIE STANDARD-STYLES SEITE
     gap: 1.5rem;
 }
 
-/* HINWEIS: Die eigentlichen Styling-Regeln für die Länderauswahl
-   befinden sich jetzt in /assets/css/global/_modals.css */
+/*
+==============================================================================
+FIX FÜR FLAGGEN & ICONS
+==============================================================================
+*/
+/* FIX: Erzwingt die korrekte Schriftart für Flaggen, um globale Konflikte zu überschreiben. */
+.standard-styles-page .selected-country-flag,
+.standard-styles-page .phone-dial-code-flag,
+.standard-styles-page .country-list-options .flag {
+    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif !important;
+    font-weight: 400 !important;
+}
+
+/* FIX: Stellt sicher, dass Font Awesome Solid Icons ihr korrektes Gewicht behalten. */
+.standard-styles-page .fa-solid, .standard-styles-page .fas {
+    font-weight: 900 !important;
+}
 
 
 /* --- (Restored) Icon Library Styles --- */

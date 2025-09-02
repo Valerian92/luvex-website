@@ -1,22 +1,13 @@
 /*
 ==============================================================================
-LUVEX THEME v4.4 - HOMEPAGE (FINALER FIX MIT HERO-OVERRIDE)
+LUVEX THEME v4.5 - HOMEPAGE (BEREINIGT NACH JS-FIX)
 ==============================================================================
-Description: Überschreibt den von WP/Astra injizierten Hero-Hintergrund.
+Description: Die JS-Datei hero-photons.js kümmert sich nun um den Hero-
+             Hintergrund. Diese Datei enthält nur noch die Button-Styles.
 Dependencies: _variables.css, _core.css, _components.css
-Last Update: 2025-09-02 (Button-Animation endgültig repariert)
+Last Update: 2025-09-02 (Button-Animation finalisiert)
 ==============================================================================
 */
-
-/* ==============================================================================
-ZENTRALER FIX: Dieser Block entfernt den von WordPress/Astra erzwungenen
-Hintergrund der Hero-Sektion, damit die Canvas-Animation und die
-Button-Effekte sichtbar werden.
-==============================================================================
-*/
-body.home .luvex-hero {
-    background: none !important;
-}
 
 /*
 ==============================================================================
@@ -103,7 +94,7 @@ body.home .luvex-hero {
 
 /*
 ==============================================================================
-3. SIMULATOR BUTTON - Stile bleiben robust
+3. SIMULATOR BUTTON - Robuste Stile mit hoher Spezifität
 ==============================================================================
 */
 
@@ -613,5 +604,4 @@ body.home .luvex-simulator-cta i {
         margin: 2.5rem 0;
     }
 }
-
 
