@@ -2,7 +2,7 @@
 /**
  * LUVEX Theme Helper Functions
  * Enthält die zentrale Icon-Bibliothek und wiederverwendbare Datenfunktionen.
- * VERSION: 4.8.0 - Project-Talk-Icon und neue UI-Icon-Kategorie hinzugefügt.
+ * VERSION: 4.9.0 - Added Partner Program & Standard Styles Icons.
  *
  * @package Luvex
  * @since 4.7.0
@@ -52,7 +52,9 @@ if (!function_exists('get_luvex_icon_library')) {
                 'menu-simulator' => ['label' => 'UV Simulator', 'class' => 'fa-solid fa-cubes'],
                 'menu-news'      => ['label' => 'All UV News', 'class' => 'fa-solid fa-newspaper'],
                 'menu-contact'   => ['label' => 'Contact', 'class' => 'fa-solid fa-headset'],
-                'menu-project-talk' => ['label' => 'Project Talk', 'class' => 'fa-solid fa-calendar-days'], // NEU
+                'menu-project-talk' => ['label' => 'Project Talk', 'class' => 'fa-solid fa-calendar-days'],
+                'menu-partner-program' => ['label' => 'Partner Program', 'class' => 'fa-solid fa-handshake-angle'], // NEU
+                'menu-standard-styles' => ['label' => 'Standard Styles', 'class' => 'fa-solid fa-swatchbook'],   // NEU
             ],
 
             // ========================================================================
@@ -300,4 +302,3 @@ if (!function_exists('luvex_get_country_data')) {
         ];
     }
 }
-
