@@ -1,7 +1,8 @@
 /**
- * LUVEX STYLING CHECKER v1.1
- * Automatische Analyse von Layout, Typografie, Kontrasten und mehr.
+ * LUVEX STYLING CHECKER v1.2
+ * Umfassende automatische Analyse von Layout, Typografie, Kontrasten und mehr.
  * Integriert sich in das bestehende LuvexDebug-System.
+ * v1.2: Detaillierte Analyse-Funktionen wiederhergestellt.
  */
 window.LuvexStylingChecker = {
 
@@ -24,7 +25,7 @@ window.LuvexStylingChecker = {
             }
         },
         buttons: {
-            classes: ['.luvex-cta-primary', '.luvex-cta-secondary', '.luvex-hero__cta', '.btn--primary', '.cta-button'],
+            classes: ['.luvex-cta-primary', '.luvex-cta-secondary', '.luvex-hero__cta', '.btn--primary', '.cta-button', '.luvex-form-submit'],
             optimalSpacing: { horizontal: 24, vertical: 32 }
         },
         contrast: { normalText: 4.5, largeText: 3.0 }
@@ -152,9 +153,79 @@ window.LuvexStylingChecker = {
         return { issues };
     },
     
-    analyzeTypography() { return { issues: [] }; }, // Placeholder
-    analyzeSpacing() { return { issues: [] }; }, // Placeholder
-    analyzeButtons() { return { issues: [] }; }, // Placeholder
+    analyzeTypography() {
+        const issues = [];
+        const textElements = document.querySelectorAll('p, .description, h1, h2, h3, h4, h5, h6, .luvex-hero__description, .section-description');
+        textElements.forEach(el => {
+            const text = el.textContent.trim();
+            const wordCount = text.split(/\s+/).length;
+            const styles = getComputedStyle(el);
+            const textAlign = styles.textAlign;
+            const container = el.closest('.container, .section, .luvex-hero__container');
+            const containerWidth = container ? container.offsetWidth : window.innerWidth;
+            const widthRatio = (el.offsetWidth / containerWidth * 100).toFixed(1);
+            
+            let recommendedAlign = null;
+            if (this.standards.typography.textAlign.descriptionClass.test(el.className) && wordCount > this.standards.typography.textAlign.longTextMinWords) {
+                recommendedAlign = 'justify';
+            } else if (wordCount <= this.standards.typography.textAlign.shortTextMaxWords && el.tagName.match(/^H[1-6]$/)) {
+                recommendedAlign = 'center';
+            } else if (wordCount > this.standards.typography.textAlign.longTextMinWords && widthRatio > 60) {
+                recommendedAlign = 'justify';
+            }
+            
+            if (recommendedAlign && textAlign !== recommendedAlign) {
+                issues.push({
+                    element: el, type: 'text-alignment', current: textAlign, recommended: recommendedAlign,
+                    reasoning: this.getAlignmentReasoning(wordCount, widthRatio, el.tagName)
+                });
+            }
+        });
+        return { issues, total: textElements.length };
+    },
+
+    analyzeSpacing() {
+        const issues = [];
+        const elements = document.querySelectorAll('section, .container, .luvex-hero, .value-card, .knowledge-card, .feature-item');
+        elements.forEach(el => {
+            const styles = getComputedStyle(el);
+            const checkSpacing = (type, value, side) => {
+                if (value > 0) {
+                    const closest = this.findClosestSpacingValue(value);
+                    const deviation = Math.abs(value - closest.value);
+                    if (deviation > 8 && deviation / closest.value > 0.2) {
+                        issues.push({
+                            element: el, type: 'non-standard-spacing', property: `${type}-${side}`,
+                            current: `${value}px`, recommended: `var(--space-${closest.name})`, deviation: `${deviation.toFixed(1)}px`
+                        });
+                    }
+                }
+            };
+            ['top', 'bottom', 'left', 'right'].forEach(side => {
+                checkSpacing('margin', parseFloat(styles[`margin${side.charAt(0).toUpperCase() + side.slice(1)}`]), side);
+                checkSpacing('padding', parseFloat(styles[`padding${side.charAt(0).toUpperCase() + side.slice(1)}`]), side);
+            });
+        });
+        return { issues, total: elements.length };
+    },
+
+    analyzeButtons() {
+        const issues = [];
+        const buttonContainers = document.querySelectorAll('.cta-actions, .luvex-hero__cta-container, [class*="actions"], [class*="cta-container"]');
+        buttonContainers.forEach(container => {
+            const buttons = container.querySelectorAll(this.standards.buttons.classes.join(','));
+            if (buttons.length > 1) {
+                for (let i = 0; i < buttons.length - 1; i++) {
+                    const gap = this.calculateElementGap(buttons[i], buttons[i+1]);
+                    if (Math.abs(gap - this.standards.buttons.optimalSpacing.horizontal) > 8) {
+                        issues.push({ element: container, type: 'button-spacing', currentGap: `${gap}px`, recommendedGap: `${this.standards.buttons.optimalSpacing.horizontal}px`, recommendation: 'Verwende gap: 1.5rem' });
+                    }
+                }
+            }
+        });
+        return { issues, total: buttonContainers.length };
+    },
+
     analyzeLayoutProportions() { return { issues: [] }; }, // Placeholder
 
     // =======================================================================
@@ -202,11 +273,34 @@ window.LuvexStylingChecker = {
             'Verwende hellere Textfarbe (z.B. var(--luvex-white))';
     },
 
+    findClosestSpacingValue(pixels) {
+        return Object.entries(this.standards.spacing).reduce((closest, [name, value]) => {
+            const diff = Math.abs(pixels - value);
+            return diff < closest.diff ? { name, value, diff } : closest;
+        }, { name: 'md', value: 32, diff: Infinity });
+    },
+
+    calculateElementGap(el1, el2) {
+        const rect1 = el1.getBoundingClientRect();
+        const rect2 = el2.getBoundingClientRect();
+        if (rect1.right < rect2.left) return rect2.left - rect1.right; // Horizontal
+        if (rect1.bottom < rect2.top) return rect2.top - rect1.bottom; // Vertical
+        return 0;
+    },
+    
+    getAlignmentReasoning(wordCount, widthRatio, tagName) {
+        if (wordCount <= this.standards.typography.textAlign.shortTextMaxWords) return `Kurzer Text (${wordCount} Wörter) sollte zentriert sein.`;
+        if (wordCount > this.standards.typography.textAlign.longTextMinWords) return `Langer Text (${wordCount} Wörter) sollte Blocksatz sein.`;
+        if (parseFloat(widthRatio) > 60) return `Breiter Text (${widthRatio}% Container) sollte Blocksatz sein.`;
+        if (tagName.match(/^H[1-6]$/)) return `Überschriften sollten zentriert sein.`;
+        return 'Allgemeine Empfehlung.';
+    },
+
     // =======================================================================
     // REPORT & AKTIONEN
     // =======================================================================
     generateReport(results) {
-        const totalIssues = Object.values(results).reduce((sum, cat) => sum + cat.issues.length, 0);
+        const totalIssues = Object.values(results).reduce((sum, cat) => sum + (cat.issues ? cat.issues.length : 0), 0);
         const criticalIssues = this.getCriticalIssues(results);
 
         console.log(`\n📊 === LUVEX STYLING CHECKER REPORT ===\n`);
@@ -223,6 +317,11 @@ window.LuvexStylingChecker = {
                     console.log(`${i + 1}. ${issue.type}:`, issue.elements || issue.element);
                     if (issue.recommendation) console.log(`   Empfehlung: ${issue.recommendation}`);
                     if (issue.severity) console.log(`   Priorität: ${this.getSeverityIcon(issue.severity)} ${issue.severity.toUpperCase()}`);
+                    // Add more details for restored functions
+                    if (issue.current) console.log(`   Aktuell: ${issue.current} → Empfohlen: ${issue.recommended}`);
+                    if (issue.reasoning) console.log(`   Begründung: ${issue.reasoning}`);
+                    if (issue.currentGap) console.log(`   Abstand: ${issue.currentGap} → ${issue.recommendedGap}`);
+
                 });
                 console.groupEnd();
             }
@@ -253,8 +352,41 @@ window.LuvexStylingChecker = {
         console.log(`\n🎯 LUVEX STYLING PRIORITY SCORE: ${score}`);
     },
     
-    generateActionPlan() { console.log("Action Plan generieren..."); /* To be implemented */ },
-    generateCSSSuggestions() { console.log("CSS-Vorschläge generieren..."); /* To be implemented */ }
+    generateCSSSelector(element) {
+        if (element.id) return `#${element.id}`;
+        if (element.className) {
+            const classes = typeof element.className === 'string' ? element.className.split(' ').filter(c => c && !c.includes('animated')) : [];
+            if(classes.length > 0) return `.${classes[0]}`;
+        }
+        return element.tagName.toLowerCase();
+    },
+
+    generateCSSSuggestions() {
+        const results = this.analyzeCurrentPage();
+        const suggestions = [];
+        
+        results.typography?.issues.forEach(issue => {
+            if (issue.type === 'text-alignment') suggestions.push(`${this.generateCSSSelector(issue.element)} { text-align: ${issue.recommended}; }`);
+        });
+        
+        results.spacing?.issues.forEach(issue => {
+            suggestions.push(`${this.generateCSSSelector(issue.element)} { ${issue.property}: ${issue.recommended}; }`);
+        });
+        
+        results.buttons?.issues.forEach(issue => {
+            if (issue.type === 'button-spacing') suggestions.push(`${this.generateCSSSelector(issue.element)} { gap: 1.5rem; }`);
+        });
+
+        console.group('🛠️ CSS-Fix-Vorschläge');
+        if (suggestions.length > 0) {
+            suggestions.forEach((s, i) => console.log(`${i + 1}. ${s}`));
+        } else {
+            console.log("Keine automatischen CSS-Fixes für die gefundenen Probleme verfügbar.");
+        }
+        console.groupEnd();
+    },
+
+    generateActionPlan() { console.log("Action Plan generieren..."); /* To be implemented */ }
 };
 
 // Integration ins bestehende Debug-System
