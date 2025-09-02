@@ -3,7 +3,11 @@
  *
  * Description: Steuert eine für Formulare optimierte, durchsuchbare Länderauswahl,
  * die mit separaten Telefon-Vorwahl- und Nummernfeldern synchronisiert ist.
- * Version: 5.0 (Stable & Refined)
+ * Version: 5.1 (Optimierte Synchronisierung)
+ *
+ * @version 5.1
+ * @author B. Gemini
+ * @last_update 2025-09-02
  */
 document.addEventListener('DOMContentLoaded', function() {
     const selectorElement = document.getElementById('luvex-country-selector');
@@ -123,7 +127,15 @@ document.addEventListener('DOMContentLoaded', function() {
     dialCodeInput.addEventListener('input', () => {
         userModifiedDialCode = true;
         const country = findCountryByDialCode(dialCodeInput.value);
-        updateUI(country, 'dial_code_input');
+
+        // =================================================================
+        // OPTIMIERUNG: Länderauswahl nur aktualisieren, wenn sie leer ist.
+        // Das verhindert, dass eine explizite Auswahl des Benutzers
+        // überschrieben wird, wenn er eine abweichende Telefonnummer eingibt.
+        // =================================================================
+        if (!countryInput.value.trim()) {
+            updateUI(country, 'dial_code_input');
+        }
     });
 
     document.addEventListener('click', (e) => {
@@ -147,4 +159,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
-
