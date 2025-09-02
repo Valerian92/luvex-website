@@ -1,9 +1,9 @@
 /*
 ==============================================================================
-LUVEX THEME - MODAL STYLES (v6.0 - Final Polish: Spacing & Flag Font Fix)
+LUVEX THEME - MODAL STLES (v6.0 - Complete & Final)
 ==============================================================================
-Description: Final styles with corrected industry grid spacing and a font-family
-             fix to ensure flag emojis are always visible.
+Description: The complete and corrected final version of the modal styles,
+             including all z-index fixes and responsive queries.
 Last Update: 2025-09-02
 ==============================================================================
 */
@@ -132,6 +132,35 @@ Last Update: 2025-09-02
     flex-direction: column;
     gap: 1.5rem;
 }
+
+.luvex-form-section-title {
+    color: var(--luvex-white);
+    font-size: var(--text-lg, 18px);
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-bottom: 1px solid rgba(109, 213, 237, 0.2);
+    padding-bottom: 0.75rem;
+    justify-content: center; /* Center-align title by default */
+}
+
+.luvex-form-section-title i {
+    color: var(--luvex-bright-cyan);
+}
+
+.password-wrapper { position: relative; }
+.toggle-password { 
+    position: absolute; 
+    top: 50%; 
+    right: 1rem; 
+    transform: translateY(-50%); 
+    color: var(--luvex-gray-300); 
+    cursor: pointer;
+    z-index: 3; /* FIX: Bring icon to the front */
+}
+.form-description { color: var(--luvex-gray-300); text-align: center; margin-bottom: 1rem; }
 .back-to-login-link {
     display: flex;
     align-items: center;
@@ -157,36 +186,75 @@ Last Update: 2025-09-02
     text-decoration: none;
 }
 
+
 /*
 ==============================================================================
-5. LOGIN & REGISTER LAYOUTS
+5. UNIVERSAL FORM COMPONENTS
 ==============================================================================
 */
 
-/* --- 5.1 Final Login Form (Centered) --- */
-.login-content-wrapper {
+/* --- 5.1 Universal Input Styles --- */
+.luvex-input,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+    width: 100%;
+    height: 56px;
+    padding: 0 1rem;
+    font-size: var(--text-base);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(109, 213, 237, 0.3);
+    border-radius: var(--radius-md);
+    color: var(--luvex-white);
+    transition: var(--transition-normal);
+    position: relative; /* Establish stacking context */
+    z-index: 1; /* Keep input behind icons */
+}
+
+.luvex-input::placeholder,
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="tel"]::placeholder {
+    color: var(--luvex-gray-300);
+    opacity: 0.7;
+}
+
+.luvex-input:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus {
+    border-color: var(--luvex-bright-cyan);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 2px rgba(109, 213, 237, 0.5);
+    outline: none;
+}
+
+
+/*
+==============================================================================
+6. LOGIN & REGISTER LAYOUTS
+==============================================================================
+*/
+
+/* --- 6.1 Final Login Form --- */
+#login-form-container .login-fields-wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 1.5rem; /* Abstand zwischen Titel, Feldern und Optionen */
-    width: 100%;
-}
-.login-fields-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem; /* Abstand zwischen E-Mail und Passwort */
-    width: 100%;
+    gap: 1rem; /* Abstand zwischen den Feldern */
     max-width: 400px;
+    width: 100%;
     margin: 0 auto;
 }
-
-#luvex-login-form .luvex-form-submit {
+#login-form-container .luvex-form-submit {
     max-width: 400px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-
-/* --- 5.2 Reset Password Form --- */
+/* --- 6.2 Reset Password Form --- */
 #forgot-password-form-container .luvex-form-section {
     display: flex;
     flex-direction: column;
@@ -197,7 +265,7 @@ Last Update: 2025-09-02
     max-width: 450px;
 }
 
-/* --- 5.3 Register Form Grid --- */
+/* --- 6.3 Register Form Grid --- */
 #register-form-container .luvex-form-grid-2 {
     margin-top: 1.5rem; /* Abstand nach "Account Details" Titel */
 }
@@ -224,14 +292,12 @@ Last Update: 2025-09-02
 
 /*
 ==============================================================================
-6. INDUSTRIE & INTERESSEN GRIDS
+7. INDUSTRIE & INTERESSEN GRIDS
 ==============================================================================
 */
-/* FIX: Korrekter Abstand zwischen Titel und Kacheln */
-.luvex-form-section > .selection-grid {
-    margin-top: 1.5rem;
+#industry-grid-container {
+    margin-top: 1.5rem; /* Abstand nach der Trennlinie */
 }
-
 .selection-grid.industry-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; max-height: 90px; overflow: hidden; transition: max-height 0.5s ease-in-out; }
 .selection-grid.industry-grid.expanded { max-height: 500px; }
 .industry-grid .selection-checkbox-content { padding: 0.5rem 0.25rem; gap: 0.25rem; }
@@ -256,12 +322,12 @@ Last Update: 2025-09-02
 
 /*
 ==============================================================================
-7. FOOTER, BUTTONS & FEEDBACK
+8. FOOTER, BUTTONS & FEEDBACK
 ==============================================================================
 */
 .recaptcha-wrapper { display: flex; justify-content: center; padding: 0.5rem; border-radius: var(--radius-md); }
 
-/* --- 7.1 Final Login Options Buttons --- */
+/* --- 8.1 Final Login Options Buttons --- */
 .login-options-wrapper {
     display: flex;
     justify-content: space-between;
@@ -340,14 +406,14 @@ Last Update: 2025-09-02
 }
 
 
-/* --- 7.3 Register Footer --- */
+/* --- 8.2 Register Footer --- */
 .auth-form-footer-register { display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem; align-items: center; }
 .auth-form-footer-register .luvex-checkbox { align-items: flex-start; max-width: 450px; text-align: center; }
 .auth-form-footer-register .luvex-checkbox__text { font-size: 0.85rem; line-height: 1.5; }
 .auth-form-footer-register .luvex-checkbox__text a { color: var(--luvex-bright-cyan); text-decoration: none; }
 .auth-form-footer-register .luvex-checkbox__text a:hover { text-decoration: underline; }
 
-/* --- 7.4 Submit Button --- */
+/* --- 8.3 Submit Button --- */
 .luvex-form-submit { position: relative; width: 100%; padding: 1rem; font-size: 1rem; font-weight: 700; color: var(--luvex-dark-blue); background: var(--luvex-bright-cyan); border: none; border-radius: var(--radius-md, 8px); cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(109, 213, 237, 0.2); }
 .luvex-form-submit:hover:not(:disabled) { background: var(--luvex-special-cyan); box-shadow: 0 6px 20px rgba(109, 213, 237, 0.3); transform: translateY(-2px); }
 .luvex-form-submit:disabled { background: var(--luvex-gray-400); cursor: not-allowed; opacity: 0.7; }
@@ -356,37 +422,36 @@ Last Update: 2025-09-02
 .luvex-form-submit.loading .btn-loader { visibility: visible; opacity: 1; }
 @keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
 
-/* --- 7.5 Feedback Message --- */
+/* --- 8.4 Feedback Message --- */
 #auth-feedback { padding: 1rem; border-radius: var(--radius-md); text-align: center; font-weight: 500; display: none; margin-top: 1rem; }
 #auth-feedback.success { background-color: rgba(22, 163, 74, 0.2); color: #4ade80; border: 1px solid #22c55e; }
 #auth-feedback.error { background-color: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; }
 
 /*
 ==============================================================================
-8. LÄNDERAUSWAHL & GLOBAL 'COMPLETED' STYLES
+9. LÄNDERAUSWAHL & GLOBAL 'COMPLETED' STYLES
 ==============================================================================
 */
 .luvex-form-group { width: 100%; text-align: left; }
 .luvex-form-label { display: block; font-size: 0.875rem; font-weight: 500; color: var(--luvex-gray-300); margin-bottom: 0.5rem; }
 .luvex-country-selector { position: relative; width: 100%; }
 .selector-input-wrapper { position: relative; display: flex; align-items: center; cursor: pointer; }
-.country-selector-input { padding-left: 3.25rem !important; cursor: pointer !important; position: relative; z-index: 1; }
+.country-selector-input { padding-left: 3.25rem !important; cursor: pointer !important; }
 
-/* FIX: Eigene Font-Family & Font-Weight für Flaggen, um Emoji-Darstellung zu erzwingen */
-.selected-country-flag,
-.phone-dial-code-flag,
-.country-list-options .flag {
-    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif !important;
-    font-weight: 400 !important; /* Normal weight, überschreibt Font Awesome's 900er Gewicht */
+.selected-country-flag { 
+    position: absolute; 
+    left: 1rem; 
+    font-size: 1.5rem; 
+    pointer-events: none; 
+    line-height: 1; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    height: 100%; 
+    z-index: 2; /* FIX: Bring flag to the front */
 }
 
-/* FIX: Stellt sicher, dass Font Awesome Solid Icons ihr korrektes Gewicht behalten, um die Darstellung zu garantieren. */
-#authModal .fa-solid, #authModal .fas {
-    font-weight: 900 !important;
-}
-
-.selected-country-flag { position: absolute; left: 1rem; font-size: 1.5rem; pointer-events: none; line-height: 1; display: flex; align-items: center; justify-content: center; height: 100%; z-index: 2; }
-.luvex-country-selector .dropdown-arrow { position: absolute; right: 1rem; color: var(--luvex-bright-cyan); pointer-events: none; transition: transform 0.3s ease; }
+.luvex-country-selector .dropdown-arrow { position: absolute; right: 1rem; color: var(--luvex-bright-cyan); pointer-events: none; transition: transform 0.3s ease; z-index: 2; }
 .luvex-country-selector.open .dropdown-arrow { transform: rotate(180deg); }
 .luvex-country-selector .selector-dropdown { position: absolute; top: calc(100% + 8px); left: 0; width: 100%; background: var(--luvex-dark-blue-medium); border: 1px solid var(--luvex-bright-cyan); border-radius: var(--radius-md); z-index: 1000; overflow: hidden; box-shadow: var(--shadow-lg); opacity: 0; transform: translateY(10px); visibility: hidden; transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s; }
 .luvex-country-selector.open .selector-dropdown { opacity: 1; transform: translateY(0); visibility: visible; }
@@ -405,9 +470,17 @@ Last Update: 2025-09-02
 .luvex-country-selector .country-list-options .name { font-weight: 500; color: var(--luvex-white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .luvex-country-selector .country-list-options .dial-code { color: var(--luvex-gray-300); font-size: 0.9em; margin-left: auto; }
 .phone-input-group { display: flex; align-items: center; gap: 0.5rem; }
-.phone-dial-code-wrapper { position: relative; flex: 0 0 120px; }
-.phone-dial-code-flag { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); font-size: 1.5rem; pointer-events: none; z-index: 2; }
-.phone-dial-code { padding-left: 3.25rem !important; text-align: left; position: relative; z-index: 1; }
+.phone-dial-code-wrapper { position: relative; flex: 0 0 120px; } /* Increased width */
+.phone-dial-code-flag { 
+    position: absolute; 
+    left: 0.75rem; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    font-size: 1.5rem; 
+    pointer-events: none;
+    z-index: 2; /* FIX: Bring flag to the front */
+}
+.phone-dial-code { padding-left: 3.25rem !important; text-align: left; }
 .phone-mobile-number { flex: 1 1 auto; }
 
 /* Globaler .completed Stil für alle luvex-inputs */
@@ -420,7 +493,56 @@ Last Update: 2025-09-02
 
 /*
 ==============================================================================
-9. RESPONSIVE DESIGN
+10. FIX FÜR FLAGGEN & ICONS 
+==============================================================================
+*/
+/*
+  PROBLEM: Eine globale CSS-Regel überschreibt die Schriftart für alle 
+  Elemente, was die Emoji-Flaggen und Font-Awesome-Icons unsichtbar macht.
+
+  LÖSUNG: Wir verwenden spezifische Regeln mit !important, um sicherzustellen,
+  dass unsere Stile für Flaggen und Icons immer Vorrang haben.
+*/
+
+/* 1. Flaggen (Emojis) */
+#authModal .flag,
+#authModal .selected-country-flag,
+#authModal .phone-dial-code-flag {
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+}
+
+/* 2. Icons (Font Awesome) */
+#authModal .fa-solid,
+#authModal .fas,
+#authModal .fa-regular,
+#authModal .far,
+#authModal .fa-brands,
+#authModal .fab {
+    font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands", sans-serif !important;
+    font-style: normal !important;
+}
+
+#authModal .fa-solid,
+#authModal .fas {
+    font-weight: 900 !important;
+}
+
+#authModal .fa-regular,
+#authModal .far {
+    font-weight: 400 !important;
+}
+
+#authModal .fa-brands,
+#authModal .fab {
+    font-weight: 400 !important;
+}
+
+
+/*
+==============================================================================
+11. RESPONSIVE DESIGN
 ==============================================================================
 */
 @media (max-width: 992px) {
@@ -428,6 +550,7 @@ Last Update: 2025-09-02
     .luvex-form-grid-2, .login-header-grid { grid-template-columns: 1fr; }
     .selection-grid.industry-grid { grid-template-columns: repeat(4, 1fr); }
     .interests-structured-grid { grid-template-columns: 1fr; }
+    .login-option-title { justify-content: flex-start; }
 }
 
 @media (max-width: 768px) {
@@ -437,9 +560,6 @@ Last Update: 2025-09-02
     .auth-modal-header { padding: 1.5rem 1.5rem 1rem; }
     .auth-scrollable-content { padding: 0.5rem 1.5rem 1.5rem 1.5rem; }
     .selection-grid.industry-grid { grid-template-columns: repeat(3, 1fr); }
-    .login-options-wrapper { flex-direction: column; gap: 0.75rem; align-items: stretch; }
+    .login-options-wrapper { flex-direction: column; }
 }
-
-
-
 
