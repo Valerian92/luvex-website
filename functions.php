@@ -2,7 +2,7 @@
 /**
  * LUVEX Theme Functions - COMPLETE WITH PRIORITY SYSTEM
  * Description: Komplette Theme-Setup-, Navigations- und Asset-Lade-Logik mit CSS Priority Loading.
- * VERSION: 4.1 - Country selector script enabled for register page.
+ * VERSION: 4.2 - Made country selector script global for modal integration.
  * @package Luvex
  */
 
@@ -154,7 +154,7 @@ function luvex_enqueue_assets() {
         'luvex-scroll-to-top'     => 'global/scroll-to-top.js',
         'luvex-footer-light'      => 'global/footer-light-effect.js',
         'luvex-interactive-accordion' => 'global/interactive-accordion.js',
-        'luvex-country-selector' => 'global/luvex-country-selector.js',
+        'luvex-country-selector' => 'global/luvex-country-selector.js', // KORREKTUR: Jetzt global geladen
     ];
     
     if (is_user_logged_in() && current_user_can('manage_options')) {
@@ -175,8 +175,6 @@ function luvex_enqueue_assets() {
     if (is_page('uv-safety-equipment')) {
         $enqueue_script('luvex-hero-safety-animation', 'pages/hero-safety-animation.js');
     }
-
-
 
     $page_script_map = [
         'contact' => ['luvex-contact-hero' => 'pages/contact-hero-animation.js'],
