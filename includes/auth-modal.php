@@ -1,9 +1,10 @@
 <?php
 /**
- * Auth-Modal-Template (v4.8 - Final UI Refinements)
+ * Auth-Modal-Template (v4.9 - Final Login UI & 'Other' Field Style)
  * - Lädt die korrekten Länderdaten.
  * - Verschiebt die "Other" Industrie Option für bessere UX.
- * - Enthält das Länderauswahl-Modul.
+ * - Optimiertes Login-Formular-Layout.
+ * - Fügt 'completed'-Stil-Logik für "Other" Feld hinzu.
  */
 
 if (!defined('ABSPATH')) exit;
@@ -31,7 +32,7 @@ $default_country_code = 'DE';
                     <form id="luvex-login-form" class="auth-form" method="post">
                         <div class="luvex-form-section">
                              <h4 class="luvex-form-section-title"><i class="fa-solid fa-right-to-bracket"></i> Sign In to Your Account</h4>
-                             <div class="luvex-form-column">
+                             <div class="luvex-form-grid-2 login-grid">
                                  <input type="email" name="user_login" class="luvex-input" placeholder="Email Address" required>
                                  <div class="password-wrapper">
                                      <input type="password" name="user_password" class="luvex-input" placeholder="Password" required>
@@ -39,7 +40,7 @@ $default_country_code = 'DE';
                                  </div>
                              </div>
                         </div>
-                         <div class="auth-form-footer">
+                         <div class="auth-form-footer login-footer">
                              <label class="luvex-checkbox">
                                  <input type="checkbox" name="remember_me" value="forever">
                                  <span class="luvex-checkbox__indicator"><i class="fa-solid fa-check"></i></span>
@@ -258,15 +259,26 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (industryOtherCheckbox && industryOtherText) {
-        // Logik für das Ein- und Ausblenden des Textfeldes, wenn "Other" geklickt wird
+        // Logic for showing/hiding the text field when "Other" is clicked
         industryOtherCheckbox.addEventListener('change', function() {
             industryOtherText.style.display = this.checked ? 'block' : 'none';
             if (this.checked) {
                  industryOtherText.focus();
             }
         });
-        // Initialer Zustand des Textfeldes basierend auf der Checkbox
         industryOtherText.style.display = industryOtherCheckbox.checked ? 'block' : 'none';
+
+        // NEW: Logic for the 'completed' style on the "Other" text field
+        industryOtherText.addEventListener('focus', function() {
+            this.classList.remove('completed');
+        });
+        industryOtherText.addEventListener('blur', function() {
+            if (this.value.trim() !== '') {
+                this.classList.add('completed');
+            } else {
+                this.classList.remove('completed');
+            }
+        });
     }
 
     document.querySelectorAll('.toggle-password').forEach(toggle => {
