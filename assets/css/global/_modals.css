@@ -1,11 +1,10 @@
 /*
 ==============================================================================
-LUVEX THEME - MODAL STYLES (v5.2 - Final Polished UI & Logic)
+LUVEX THEME - MODAL STYLES (v5.3 - Final Perfection)
 ==============================================================================
-Description: Final, polished version of the auth modal styles, featuring a
-             sophisticated two-column login form and a modern UI for all
-             form elements.
-Last Update: 2025-09-02 - Implemented final login layout and fixed global styles.
+Description: The final, polished version of the auth modal styles, with a
+             perfectly balanced login form and fully functional global styles.
+Last Update: 2025-09-02 - Final login layout and global style logic perfected.
 ==============================================================================
 */
 
@@ -162,7 +161,7 @@ Last Update: 2025-09-02 - Implemented final login layout and fixed global styles
 ==============================================================================
 */
 
-/* --- 5.1 NEU: Login Form Main Grid --- */
+/* --- 5.1 Final Login Form Grid --- */
 .login-main-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -180,9 +179,8 @@ Last Update: 2025-09-02 - Implemented final login layout and fixed global styles
 .login-column-right {
     display: flex;
     flex-direction: column;
-    align-items: flex-end; /* Richtet Elemente rechtsbündig aus */
+    align-items: flex-start; /* Richtet Elemente linksbündig aus */
     gap: 1.5rem; /* Abstand zwischen den Optionen */
-    padding-top: 4.1rem; /* Vertikale Ausrichtung an den Input-Feldern */
 }
 
 
@@ -241,37 +239,30 @@ Last Update: 2025-09-02 - Implemented final login layout and fixed global styles
 */
 .recaptcha-wrapper { display: flex; justify-content: center; padding: 0.5rem; border-radius: var(--radius-md); }
 
-/* --- 7.1 NEU: Login Options Buttons --- */
-.login-option-button {
-    display: inline-flex; /* Wichtig für korrekte Breite */
-    width: fit-content; /* Korrigiert Klick-Bereich */
+/* --- 7.1 Final Login Options --- */
+.login-option-title {
+    color: var(--luvex-white);
+    font-size: var(--text-lg, 18px);
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(109, 213, 237, 0.2); /* Neuer Rand */
-    border-radius: var(--radius-md);
-    color: var(--luvex-gray-300);
-    text-decoration: none;
-    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(109, 213, 237, 0.2);
+    padding-bottom: 0.75rem;
     cursor: pointer;
+    background: none;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
-.login-option-button:hover {
-    border-color: var(--luvex-bright-cyan);
-    color: var(--luvex-white);
-    background: rgba(109, 213, 237, 0.1);
-}
-.login-option-button i {
-    color: var(--luvex-bright-cyan);
-    width: 20px;
-    text-align: center;
-}
+.login-option-title i { color: var(--luvex-bright-cyan); }
+.login-option-title:hover { color: var(--luvex-bright-cyan); }
 
-/* --- 7.2 NEU: Remember Me Toggle --- */
+/* --- 7.2 Final Remember Me Toggle --- */
 .remember-me-toggle {
     cursor: pointer;
-    display: inline-flex; /* Wichtig für korrekte Breite */
-    width: fit-content; /* Korrigiert Klick-Bereich */
+    display: inline-flex;
+    width: fit-content;
     align-items: center;
 }
 .remember-me-toggle input { display: none; }
@@ -383,7 +374,7 @@ Last Update: 2025-09-02 - Implemented final login layout and fixed global styles
     .luvex-form-grid-2, .login-main-grid { grid-template-columns: 1fr; }
     .selection-grid.industry-grid { grid-template-columns: repeat(4, 1fr); }
     .interests-structured-grid { grid-template-columns: 1fr; }
-    .login-column-right { padding-top: 1rem; flex-direction: row-reverse; justify-content: space-between; align-items: center; }
+    .login-column-right { padding-top: 1rem; flex-direction: column; align-items: flex-start; }
 }
 
 @media (max-width: 768px) {

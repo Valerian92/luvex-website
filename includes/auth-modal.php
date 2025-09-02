@@ -1,9 +1,10 @@
 <?php
 /**
- * Auth-Modal-Template (v5.2 - Final Polished UI & Logic)
- * - Implements the final sophisticated two-column layout for the login form.
- * - Fixes and enables the global 'completed' state script for all input fields.
- * - Polishes alignment, spacing, and styling for all login options.
+ * Auth-Modal-Template (v5.3 - Final Perfection)
+ * - Implements the final, polished UI for the login form.
+ * - 'Forgot Password' is now styled as a clickable title for perfect symmetry.
+ * - 'Remember Me' is now correctly left-aligned.
+ * - Global 'completed' state script is fixed and fully functional.
  */
 
 if (!defined('ABSPATH')) exit;
@@ -41,7 +42,7 @@ $default_country_code = 'DE';
                             </div>
                             <!-- Right Column: Options -->
                             <div class="login-column-right">
-                                 <a href="#" class="login-option-button" onclick="showAuthForm('forgot-password')">
+                                <a href="#" class="login-option-title" onclick="showAuthForm('forgot-password')">
                                     <i class="fa-solid fa-key"></i>
                                     <span>Forgot Password?</span>
                                 </a>
@@ -288,17 +289,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Global "Completed" Style Logic for ALL Inputs ---
     const allInputs = document.querySelectorAll('#authModal .luvex-input');
+    
+    const checkCompletion = (element) => {
+        if (element.value && element.value.trim() !== '') {
+            element.classList.add('completed');
+        } else {
+            element.classList.remove('completed');
+        }
+    };
+
     allInputs.forEach(input => {
-        const checkCompletion = (element) => {
-            if (element.value.trim() !== '') {
-                element.classList.add('completed');
-            } else {
-                element.classList.remove('completed');
-            }
-        };
         input.addEventListener('focus', function() { this.classList.remove('completed'); });
         input.addEventListener('blur', function() { checkCompletion(this); });
-        if(document.activeElement !== input) { checkCompletion(input); }
+        
+        // Use a small timeout to let browser autofill complete before checking
+        setTimeout(() => {
+            if (document.activeElement !== input) {
+                checkCompletion(input);
+            }
+        }, 100);
     });
 });
 </script>
