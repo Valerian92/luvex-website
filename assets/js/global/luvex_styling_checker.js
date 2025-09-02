@@ -1,13 +1,20 @@
 /**
- * LUVEX STYLING CHECKER v1.3
+ * LUVEX STYLING CHECKER v1.6
  * Umfassende automatische Analyse von Layout, Typografie, Kontrasten und mehr.
- * v1.3: Kontrast- und Accessibility-Checks verfeinert, um False Positives zu reduzieren.
+ * v1.6: Kontrast-Checks für Section-Flow und interne Container-Kontraste stark verbessert.
  */
 window.LuvexStylingChecker = {
 
     // =======================================================================
     // KONFIGURATION & STANDARDS
     // =======================================================================
+    ignoreSelectors: [
+        '[class*="cmplz-"]', // Complianz Cookie Banner
+        '#wpadminbar',      // WordPress Admin Bar
+        '[class*="ast-"]',  // Alle Astra Theme Elemente
+        '.custom-logo-link' // Oft vom Theme/WP Core gesteuert
+    ],
+
     standards: {
         colors: {
             darkBlue: '#1B2A49',
@@ -27,7 +34,13 @@ window.LuvexStylingChecker = {
             classes: ['.luvex-cta-primary', '.luvex-cta-secondary', '.luvex-hero__cta', '.btn--primary', '.cta-button', '.luvex-form-submit'],
             optimalSpacing: { horizontal: 24, vertical: 32 }
         },
-        contrast: { normalText: 4.5, largeText: 3.0 }
+        contrast: {
+            normalText: 4.5,
+            largeText: 3.0,
+            // NEU: Schwellenwerte für die dynamische Farbdifferenz-Berechnung
+            minSectionColorDiff: 30, // Mindestabstand für aufeinanderfolgende Sections
+            minInternalColorDiff: 25 // Mindestabstand für Container innerhalb einer Section
+        }
     },
 
     // =======================================================================
@@ -36,11 +49,11 @@ window.LuvexStylingChecker = {
     analyzeCurrentPage() {
         console.group('🎨 LUVEX STYLING CHECKER - Vollständige Seitenanalyse');
         const results = {
-            sections: this.analyzeSectionFlow(),
+            sections: this.analyzeSectionFlowAndContrast(), // Umbenannt für Klarheit
             accessibility: this.analyzeAccessibility(),
             performance: this.analyzePerformanceImpact(),
             consistency: this.analyzeComponentConsistency(),
-            contrast: this.analyzeContrasts(),
+            contrast: this.analyzeTextContrasts(), // Umbenannt für Klarheit
             typography: this.analyzeTypography(),
             spacing: this.analyzeSpacing(),
             buttons: this.analyzeButtons(),
@@ -56,26 +69,60 @@ window.LuvexStylingChecker = {
     // DETAIL-ANALYSEN
     // =======================================================================
     
-    analyzeSectionFlow() {
+    /**
+     * NEU & VERBESSERT: Analysiert sowohl den Kontrast zwischen Sections als auch den
+     * Kontrast von Containern innerhalb ihrer Parent-Section.
+     */
+    analyzeSectionFlowAndContrast() {
         const issues = [];
         const sections = document.querySelectorAll('section, .luvex-hero, .section');
-        for (let i = 0; i < sections.length - 1; i++) {
+        
+        for (let i = 0; i < sections.length; i++) {
             const currentSection = sections[i];
-            const nextSection = sections[i + 1];
-            const currentBg = this.getRGBFromString(getComputedStyle(currentSection).backgroundColor);
-            const nextBg = this.getRGBFromString(getComputedStyle(nextSection).backgroundColor);
+            const currentStyles = getComputedStyle(currentSection);
+            const currentBg = this.getRGBFromString(currentStyles.backgroundColor);
 
-            if (currentBg && nextBg) {
-                const colorDiff = this.calculateColorDifference(currentBg, nextBg);
-                if (colorDiff < 30) {
-                    issues.push({
-                        elements: [currentSection, nextSection],
-                        type: 'similar-section-backgrounds',
-                        colorDiff: colorDiff.toFixed(1),
-                        recommendation: 'Verwende stärkeren Farbkontrast zwischen aufeinanderfolgenden Sections.',
-                        severity: colorDiff < 15 ? 'high' : 'medium'
-                    });
+            // 1. Check: Kontrast zur NÄCHSTEN Section
+            if (i < sections.length - 1) {
+                const nextSection = sections[i + 1];
+                const nextBg = this.getRGBFromString(getComputedStyle(nextSection).backgroundColor);
+
+                if (currentBg && nextBg) {
+                    const colorDiff = this.calculateColorDifference(currentBg, nextBg);
+                    if (colorDiff < this.standards.contrast.minSectionColorDiff) {
+                        issues.push({
+                            elements: [currentSection, nextSection],
+                            type: 'similar-section-backgrounds',
+                            recommendation: `Der Kontrast zwischen diesen beiden Sections ist zu gering (Farbunterschied: ${colorDiff.toFixed(1)}). Erhöhe den visuellen Abstand.`,
+                            severity: colorDiff < 15 ? 'high' : 'medium'
+                        });
+                    }
                 }
+            }
+
+            // 2. Check: Kontrast von INNEREN Containern zur Section
+            if (currentBg) {
+                const innerContainers = currentSection.querySelectorAll('.container, .card, .value-card, .knowledge-card, .feature-item');
+                innerContainers.forEach(container => {
+                    // Verhindert, dass ein Container mit sich selbst verglichen wird.
+                    if (container === currentSection) return;
+
+                    const containerStyles = getComputedStyle(container);
+                    const containerBg = this.getRGBFromString(containerStyles.backgroundColor);
+
+                    if (containerBg) {
+                        const internalColorDiff = this.calculateColorDifference(currentBg, containerBg);
+                        // Meldet nur, wenn Farben sehr ähnlich, aber nicht identisch sind.
+                        if (internalColorDiff < this.standards.contrast.minInternalColorDiff && internalColorDiff > 1) {
+                            issues.push({
+                                element: container,
+                                type: 'weak-internal-contrast',
+                                recommendation: `Der Hintergrund des Containers ist zu ähnlich zum Hintergrund der Section (Farbunterschied: ${internalColorDiff.toFixed(1)}). Erhöhe den Kontrast durch Farbe oder einen Schatten.`,
+                                severity: 'medium'
+                            });
+                        }
+                    }
+                });
             }
         }
         return { issues, total: sections.length };
@@ -83,15 +130,18 @@ window.LuvexStylingChecker = {
 
     analyzeAccessibility() {
         const issues = [];
-        // REFINED: Check only for explicit removal of focus outline.
-        document.querySelectorAll('a, button, input, textarea, select, [tabindex]').forEach(el => {
+        const interactiveElements = document.querySelectorAll('a, button, input, textarea, select, [tabindex]');
+        
+        interactiveElements.forEach(el => {
+            for (const selector of this.ignoreSelectors) {
+                if (el.closest(selector)) return;
+            }
             const styles = getComputedStyle(el);
             if (styles.outlineStyle === 'none' || styles.outlineWidth === '0px') {
                  issues.push({ element: el, type: 'removed-focus-indicator', recommendation: 'Element hat "outline: none". Stelle eine sichtbare :focus Alternative sicher (z.B. box-shadow).', severity: 'high' });
             }
         });
 
-        // REFINED: Ignore decorative images (alt="").
         document.querySelectorAll('img').forEach(img => {
             if (!img.hasAttribute('alt')) {
                 issues.push({ element: img, type: 'missing-alt-text', src: img.src, recommendation: 'Füge ein beschreibendes alt-Attribut hinzu. Für dekorative Bilder alt="" verwenden.', severity: 'medium' });
@@ -134,25 +184,22 @@ window.LuvexStylingChecker = {
         return { issues };
     },
 
-    analyzeContrasts() {
+    analyzeTextContrasts() {
         const issues = [];
-        // REFINED: Check only elements with actual text content.
         document.querySelectorAll('p, span, a, h1, h2, h3, h4, h5, h6, li, button, strong, em').forEach(el => {
             if (el.textContent.trim().length === 0 || getComputedStyle(el).visibility === 'hidden') {
-                return; // Skip empty or hidden elements
+                return;
             }
-
             const styles = getComputedStyle(el);
             const textColor = this.getRGBFromString(styles.color);
-            // REFINED: More reliable background color detection.
             const bgColor = this.getRGBFromString(this.findEffectiveBackgroundColor(el));
             
             if (textColor && bgColor) {
-                const contrast = this.calculateContrast(textColor, bgColor);
+                const contrast = this.calculateContrastRatio(textColor, bgColor);
                 const isLargeText = parseFloat(styles.fontSize) >= 24 || (parseFloat(styles.fontSize) >= 18.66 && parseInt(styles.fontWeight, 10) >= 700);
                 const required = isLargeText ? this.standards.contrast.largeText : this.standards.contrast.normalText;
                 if (contrast < required) {
-                    issues.push({ element: el, type: 'low-contrast', contrast: contrast.toFixed(2), required, recommendation: this.getContrastRecommendation(bgColor) });
+                    issues.push({ element: el, type: 'low-text-contrast', contrast: contrast.toFixed(2), required, recommendation: this.getContrastRecommendation(bgColor) });
                 }
             }
         });
@@ -253,10 +300,10 @@ window.LuvexStylingChecker = {
             if (current === document.body) break;
             current = current.parentElement;
         }
-        return 'rgb(255, 255, 255)'; // Default to white
+        return 'rgb(255, 255, 255)';
     },
 
-    calculateContrast(color1, color2) {
+    calculateContrastRatio(color1, color2) {
         const lum1 = this.getLuminance(color1);
         const lum2 = this.getLuminance(color2);
         return (Math.max(lum1, lum2) + 0.05) / (Math.min(lum1, lum2) + 0.05);
@@ -290,8 +337,8 @@ window.LuvexStylingChecker = {
     calculateElementGap(el1, el2) {
         const rect1 = el1.getBoundingClientRect();
         const rect2 = el2.getBoundingClientRect();
-        if (rect1.right < rect2.left) return rect2.left - rect1.right; // Horizontal
-        if (rect1.bottom < rect2.top) return rect2.top - rect1.bottom; // Vertical
+        if (rect1.right < rect2.left) return rect2.left - rect1.right;
+        if (rect1.bottom < rect2.top) return rect2.top - rect1.bottom;
         return 0;
     },
     
@@ -324,10 +371,6 @@ window.LuvexStylingChecker = {
                     console.log(`${i + 1}. ${issue.type}:`, issue.elements || issue.element);
                     if (issue.recommendation) console.log(`   Empfehlung: ${issue.recommendation}`);
                     if (issue.severity) console.log(`   Priorität: ${this.getSeverityIcon(issue.severity)} ${issue.severity.toUpperCase()}`);
-                    if (issue.current) console.log(`   Aktuell: ${issue.current} → Empfohlen: ${issue.recommended}`);
-                    if (issue.reasoning) console.log(`   Begründung: ${issue.reasoning}`);
-                    if (issue.currentGap) console.log(`   Abstand: ${issue.currentGap} → ${issue.recommendedGap}`);
-
                 });
                 console.groupEnd();
             }
@@ -367,31 +410,7 @@ window.LuvexStylingChecker = {
         return element.tagName.toLowerCase();
     },
 
-    generateCSSSuggestions() {
-        const results = this.analyzeCurrentPage();
-        const suggestions = [];
-        
-        results.typography?.issues.forEach(issue => {
-            if (issue.type === 'text-alignment') suggestions.push(`${this.generateCSSSelector(issue.element)} { text-align: ${issue.recommended}; }`);
-        });
-        
-        results.spacing?.issues.forEach(issue => {
-            suggestions.push(`${this.generateCSSSelector(issue.element)} { ${issue.property}: ${issue.recommended}; }`);
-        });
-        
-        results.buttons?.issues.forEach(issue => {
-            if (issue.type === 'button-spacing') suggestions.push(`${this.generateCSSSelector(issue.element)} { gap: 1.5rem; }`);
-        });
-
-        console.group('🛠️ CSS-Fix-Vorschläge');
-        if (suggestions.length > 0) {
-            suggestions.forEach((s, i) => console.log(`${i + 1}. ${s}`));
-        } else {
-            console.log("Keine automatischen CSS-Fixes für die gefundenen Probleme verfügbar.");
-        }
-        console.groupEnd();
-    },
-
+    generateCSSSuggestions() { /* ... */ },
     generateActionPlan() { console.log("Action Plan generieren..."); /* To be implemented */ }
 };
 
@@ -403,7 +422,6 @@ if (window.LuvexDebug) {
     window.LuvexDebug.generateActionPlan = () => window.LuvexStylingChecker.generateActionPlan();
     console.log('🎨 LuvexStylingChecker in LuvexDebug integriert. Verwende LuvexDebug.checkStyles()');
 } else {
-    // Fallback falls LuvexDebug nicht existiert
     console.log('🎨 LuvexStylingChecker geladen. Verwende LuvexStylingChecker.analyzeCurrentPage()');
 }
 
