@@ -1,6 +1,6 @@
 /*
 ==============================================================================
-LUVEX THEME - MODAL STYLES (v5.6 - Final Polishing)
+LUVEX THEME - MODAL STYLES (v5.7 - Final Perfection)
 ==============================================================================
 Description: The absolute final, polished version of the auth modal styles,
              with a perfectly balanced and intuitive login form layout.
@@ -166,7 +166,7 @@ Last Update: 2025-09-02 - Final login layout and register form spacing perfected
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
-    align-items: center; /* Vertikal zentrieren */
+    align-items: baseline; /* Perfekte Ausrichtung für Texte */
 }
 .login-header-grid .luvex-form-section-title,
 .login-header-grid .login-option-title {
@@ -177,11 +177,11 @@ Last Update: 2025-09-02 - Final login layout and register form spacing perfected
     display: flex;
     flex-direction: column;
     gap: 1rem; /* Abstand zwischen den Feldern */
-    max-width: 450px;
+    max-width: 400px;
     margin: 0 auto;
 }
 #luvex-login-form .luvex-form-submit {
-    max-width: 450px;
+    max-width: 400px;
     margin: 0 auto;
 }
 
@@ -224,8 +224,8 @@ Last Update: 2025-09-02 - Final login layout and register form spacing perfected
 ==============================================================================
 */
 #industry-grid-container {
-    padding-top: 0.5rem; /* Abstand für Hover-Effekt */
-    margin-top: -0.5rem; /* Visuellen Abstand ausgleichen */
+    padding-top: 1rem; /* Mehr Abstand für Hover-Effekt */
+    margin-top: -1rem; /* Visuellen Abstand ausgleichen */
 }
 .selection-grid.industry-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; max-height: 90px; overflow: hidden; transition: max-height 0.5s ease-in-out; }
 .selection-grid.industry-grid.expanded { max-height: 500px; }
