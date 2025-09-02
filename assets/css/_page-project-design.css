@@ -1,9 +1,9 @@
 /*
 ==============================================================================
-LUVEX THEME v3.2 - BOOKING PAGE (Modernized Calendar)
+LUVEX THEME v3.3 - BOOKING PAGE (Harmonized Design)
 ==============================================================================
-Description: Styles for the booking page. Modernized the calendar section
-             with a gradient border and subtle background enhancements.
+Description: Styles for the booking page. Created a seamless, branded
+             transition from the dark hero to the calendar section.
 Last Update: 2025-09-02
 ==============================================================================
 */
@@ -17,34 +17,31 @@ Last Update: 2025-09-02
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Animation im Hintergrund */
+    z-index: 1;
 }
 
-/* FINAL FIX: Restore flex properties to correctly center the grid container */
 .booking-hero {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* FINAL FIX: Allow the container to be a block for its grid child */
 .booking-hero .luvex-hero__container {
     position: relative;
     z-index: 2;
     max-width: 1200px;
     width: 100%;
     text-align: left;
-    display: block; /* Override default flex column */
+    display: block;
 }
 
 .booking-hero__grid {
     display: grid;
-    grid-template-columns: 1fr; /* Mobile-first: single column */
+    grid-template-columns: 1fr;
     gap: 3rem;
     align-items: center;
 }
 
-/* Text Content Styling (Left Column) */
 .booking-hero__text-content .luvex-hero__title,
 .booking-hero__text-content .luvex-hero__subtitle,
 .booking-hero__text-content .luvex-hero__description {
@@ -68,7 +65,6 @@ Last Update: 2025-09-02
     line-height: 1.7;
 }
 
-/* CTA Button */
 .booking-hero__cta-container {
     margin-top: 2rem;
     margin-bottom: 2rem;
@@ -81,7 +77,6 @@ Last Update: 2025-09-02
     gap: 0.75rem;
 }
 
-/* Social Proof Section */
 .hero-social-proof {
     margin-top: 2.5rem;
     opacity: 0.8;
@@ -93,7 +88,6 @@ Last Update: 2025-09-02
     margin: 0;
 }
 
-/* Image Content Styling (Right Column) */
 .booking-hero__image-content {
     display: flex;
     justify-content: center;
@@ -120,11 +114,11 @@ Last Update: 2025-09-02
 }
 
 /* ==============================================================================
-2. Calendar Section (MODERNIZED DESIGN)
+2. Calendar Section (HARMONIZED DARK DESIGN)
 ==============================================================================
 */
 .booking-calendar { 
-    background: linear-gradient(180deg, rgba(109, 213, 237, 0.04) 0%, var(--luvex-white) 60%); 
+    background: linear-gradient(180deg, var(--luvex-dark-blue-dark) 0%, var(--luvex-dark-blue) 100%);
 }
 
 .booking-calendar__header { 
@@ -135,25 +129,33 @@ Last Update: 2025-09-02
 .booking-calendar__title { 
     font-size: clamp(2rem, 4vw, 2.5rem); 
     font-weight: 600; 
-    color: var(--luvex-dark-blue); 
+    color: var(--luvex-white); 
     margin-bottom: 0.5rem; 
 }
 
 .booking-calendar__subtitle { 
-    color: var(--luvex-gray-700); 
+    color: var(--luvex-gray-300); 
     font-weight: 400; 
     max-width: 550px; 
     margin: 0 auto; 
 }
 
+/* Wrapper with gradient border */
 .google-calendar-wrapper--optimized { 
     border-radius: var(--radius-lg, 12px); 
     overflow: hidden; 
-    box-shadow: 0 15px 40px rgba(27, 42, 73, 0.08), 0 5px 15px rgba(27, 42, 73, 0.06);
     margin: 0 auto; 
     max-width: 1000px; 
-    padding: 3px; /* Creates space for the gradient border */
+    padding: 2px; /* Space for the gradient border */
     background: linear-gradient(135deg, var(--luvex-special-cyan), var(--luvex-vibrant-blue));
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2), 0 0 25px rgba(34, 211, 238, 0.2);
+}
+
+/* Inner container for the iframe to create the dark background */
+.google-calendar-inner {
+    background-color: var(--luvex-dark-blue-medium);
+    border-radius: 10px; /* Slightly smaller than the outer wrapper */
+    padding: 1.5rem; /* Inner spacing */
 }
 
 .google-calendar-iframe { 
@@ -161,13 +163,13 @@ Last Update: 2025-09-02
     width: 100%; 
     height: 1100px;
     border: none; 
-    border-radius: 9px; /* Must be slightly smaller than the wrapper's radius */
+    border-radius: 6px; 
 }
 
 /* --- 3. Seamless Background Wrapper --- */
 .content-wrapper-bg {
-    background-color: #F8FAFC;
-    padding: 0.1px 0; /* Prevents margin collapse */
+    background-color: var(--luvex-dark-blue); /* Continue dark theme */
+    padding: 0.1px 0;
 }
 
 /* --- 4. Benefits Section --- */
@@ -183,18 +185,18 @@ Last Update: 2025-09-02
 }
 
 .benefit-card { 
-    background: var(--luvex-white); 
+    background: var(--luvex-dark-blue-light); 
     border-radius: var(--radius-lg); 
-    border: 1px solid #e2e8f0; 
+    border: 1px solid rgba(109, 213, 237, 0.1); 
     padding: 2rem; 
     display: flex; 
     align-items: flex-start; 
     gap: 1.5rem; 
-    transition: box-shadow 0.3s ease, transform 0.3s ease; 
+    transition: background-color 0.3s ease, transform 0.3s ease; 
 }
 
 .benefit-card:hover { 
-    box-shadow: var(--shadow-md); 
+    background-color: var(--luvex-dark-blue-medium);
     transform: translateY(-4px);
 }
 
@@ -202,8 +204,8 @@ Last Update: 2025-09-02
     flex-shrink: 0; 
     width: 50px; 
     height: 50px; 
-    background: linear-gradient(135deg, #e7f1ff, #f0f8ff); 
-    color: var(--luvex-vibrant-blue); 
+    background: var(--luvex-dark-blue-dark); 
+    color: var(--luvex-bright-cyan); 
     border-radius: 10px; 
     display: flex; 
     align-items: center; 
@@ -214,12 +216,12 @@ Last Update: 2025-09-02
 .benefit-card__title { 
     font-size: 1.25rem; 
     font-weight: 600; 
-    color: var(--luvex-dark-blue); 
+    color: var(--luvex-white); 
     margin-bottom: 0.5rem; 
 }
 
 .benefit-card__description { 
-    color: var(--luvex-gray-700); 
+    color: var(--luvex-gray-300); 
     line-height: 1.6; 
     margin: 0; 
 }
@@ -242,7 +244,7 @@ Last Update: 2025-09-02
 /* --- 6. Alternative Contact Section --- */
 .booking-alternative { 
     text-align: center; 
-    background: var(--luvex-white); 
+    background: var(--luvex-dark-blue); 
 }
 
 .booking-alternative__content { 
@@ -252,12 +254,12 @@ Last Update: 2025-09-02
 
 .booking-alternative__title { 
     font-size: 1.8rem; 
-    color: var(--luvex-dark-blue); 
+    color: var(--luvex-white); 
     margin-bottom: 0.5rem; 
 }
 
 .booking-alternative__description { 
-    color: var(--luvex-gray-700); 
+    color: var(--luvex-gray-300); 
     margin-bottom: 2rem; 
 }
 
@@ -267,17 +269,29 @@ Last Update: 2025-09-02
     gap: 1rem; 
 }
 
+.booking-alternative .btn--outline {
+    border-color: rgba(109, 213, 237, 0.5);
+    color: var(--luvex-bright-cyan);
+}
+
+.booking-alternative .btn--outline:hover {
+    background-color: var(--luvex-bright-cyan);
+    border-color: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+}
+
+
 /* --- 7. Responsive Overrides --- */
 @media (min-width: 992px) {
     .booking-hero__grid {
-        grid-template-columns: 1.1fr 1fr; /* Text content gets slightly more space */
+        grid-template-columns: 1.1fr 1fr;
         gap: 4rem;
     }
 }
 
 @media (max-width: 991px) {
     .booking-hero__image-content {
-       order: -1; /* Move image to the top on mobile */
+       order: -1;
        margin-bottom: 2rem;
     }
     .booking-hero__text-content .luvex-hero__title,
@@ -300,6 +314,9 @@ Last Update: 2025-09-02
     }
     .google-calendar-iframe {
         height: 800px;
+    }
+    .google-calendar-inner {
+        padding: 0.5rem;
     }
 }
 
