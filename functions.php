@@ -196,6 +196,7 @@ function luvex_enqueue_assets() {
         'uv-technology' => ['luvex-hero-spectrum' => 'pages/hero-spectrum.js'],
         'project-design' => ['luvex-consultation-hero-animation' => 'pages/hero-consultation-animation.js'],
         'uv-solutions' => ['luvex-hero-solutions-animation' => 'pages/hero-solutions-animation.js'],
+        'standard-styles-luvex' => ['luvex-country-selector-field' => 'pages/luvex-country-selector.js'],
     ];
 
     foreach ($page_script_map as $slug => $scripts) {
