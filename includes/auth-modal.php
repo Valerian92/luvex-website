@@ -1,6 +1,6 @@
 <?php
 /**
- * Auth-Modal-Template (v4.6 - Integrated Country Selector)
+ * Auth-Modal-Template (v4.7 - Correct Country Data Source)
  * - Lädt die originalen, strukturierten Interessen-Daten.
  * - Stellt sicher, dass das reCAPTCHA korrekt eingebunden wird.
  * - Nutzt die originalen Industrie-Definitionen.
@@ -12,10 +12,11 @@ if (!defined('ABSPATH')) exit;
 // Hole alle notwendigen Konfigurationen und Daten
 $recaptcha_site_key = defined('LUVEX_RECAPTCHA_SITE_KEY') ? LUVEX_RECAPTCHA_SITE_KEY : '';
 
-// Lade Industrien, Interessen und Länder aus den Helper-Funktionen
+// Lade Industrien und Interessen
 $industries = function_exists('luvex_get_industries') ? luvex_get_industries() : [];
 $interests_structured = function_exists('luvex_get_interests') ? luvex_get_interests() : [];
-// WICHTIG: Wir nutzen jetzt die detailreicheren Länderdaten
+
+// KORREKTUR: Wir nutzen jetzt die detailreichen Länderdaten für das neue Modul
 $countries = function_exists('luvex_get_country_data') ? luvex_get_country_data() : [];
 $default_country_code = 'DE'; // Standardauswahl
 ?>
@@ -93,10 +94,10 @@ $default_country_code = 'DE'; // Standardauswahl
                                     
                                     <!-- START: NEUES LÄNDERAUSWAHL-MODUL -->
                                     <div class="luvex-form-group">
-                                        <label for="country-selector-input" class="luvex-form-label" style="color: var(--luvex-gray-300);">Country / Region</label>
-                                        <div id="luvex-country-selector" class="luvex-country-selector">
+                                        <label for="country-selector-input-modal" class="luvex-form-label" style="color: var(--luvex-gray-300);">Country / Region</label>
+                                        <div id="luvex-country-selector-modal" class="luvex-country-selector">
                                             <div class="selector-input-wrapper">
-                                                <input type="text" id="country-selector-input" class="luvex-input country-selector-input" placeholder="Select your country..." readonly>
+                                                <input type="text" id="country-selector-input-modal" class="luvex-input country-selector-input" placeholder="Select your country..." readonly>
                                                 <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
                                                 <span class="selected-country-flag"></span>
                                             </div>
@@ -107,33 +108,33 @@ $default_country_code = 'DE'; // Standardauswahl
                                                     <input type="text" class="country-search" placeholder="Search...">
                                                 </div>
                                                 <ul class="country-list-options">
-                                                    <?php foreach ($countries as $code => $data): ?>
+                                                    <?php if (!empty($countries)): foreach ($countries as $code => $data): ?>
                                                         <li data-country-code="<?php echo esc_attr($code); ?>" data-dial-code="<?php echo esc_attr($data['dial_code']); ?>" tabindex="0">
                                                             <span class="flag"><?php echo esc_html($data['flag']); ?></span>
                                                             <span class="name"><?php echo esc_html($data['name']); ?></span>
                                                             <span class="dial-code"><?php echo esc_html($data['dial_code']); ?></span>
                                                         </li>
-                                                    <?php endforeach; ?>
+                                                    <?php endforeach; endif; ?>
                                                 </ul>
                                             </div>
                                             <select name="country_code" class="native-select" style="display: none;">
                                                  <option value="" disabled>Please select</option>
-                                                <?php foreach ($countries as $code => $data): ?>
+                                                <?php if (!empty($countries)): foreach ($countries as $code => $data): ?>
                                                     <option value="<?php echo esc_attr($code); ?>" <?php selected($code, $default_country_code); ?>>
                                                         <?php echo esc_html($data['name']); ?>
                                                     </option>
-                                                <?php endforeach; ?>
+                                                <?php endforeach; endif; ?>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="luvex-form-group">
-                                        <label for="phone-input-mobile" class="luvex-form-label" style="color: var(--luvex-gray-300);">Mobile Number</label>
+                                        <label for="phone-input-mobile-modal" class="luvex-form-label" style="color: var(--luvex-gray-300);">Mobile Number</label>
                                         <div class="phone-input-group">
                                             <div class="phone-dial-code-wrapper">
                                                 <span class="phone-dial-code-flag"></span>
-                                                <input type="text" id="phone-input-dial-code" class="luvex-input phone-dial-code" placeholder="+1">
+                                                <input type="text" id="phone-input-dial-code-modal" class="luvex-input phone-dial-code" placeholder="+1">
                                             </div>
-                                            <input type="tel" id="phone-input-mobile" class="luvex-input phone-mobile-number" placeholder="123 456789" name="phone">
+                                            <input type="tel" id="phone-input-mobile-modal" class="luvex-input phone-mobile-number" placeholder="123 456789" name="phone">
                                         </div>
                                     </div>
                                     <!-- END: NEUES LÄNDERAUSWAHL-MODUL -->

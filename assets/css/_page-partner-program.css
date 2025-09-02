@@ -1,242 +1,318 @@
 /*
 ==============================================================================
-LUVEX THEME v3.1 - PARTNER PROGRAM PAGE
+LUVEX THEME v3.3 - PARTNER PROGRAM PAGE STYLES
 ==============================================================================
-Description: Styles specific to the new Partner Program page.
+Description: Styles specific to the Partner Program page layout and components.
+Dependencies: _core.css, _components.css
 Last Update: 2025-09-02
 ==============================================================================
 */
 
 /*
 ==============================================================================
-1. APPLICATION PROCESS SECTION
+1. HERO SECTION
 ==============================================================================
 */
-.application-process {
-    background: var(--luvex-white);
+.luvex-hero--partner {
+    min-height: 70vh;
 }
 
-.process-steps-container {
-    position: relative;
-    max-width: 700px;
-    margin: 4rem auto 0;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-}
-
-/* The connecting line */
-.process-steps-container::before {
-    content: '';
+#hero-partner-canvas {
     position: absolute;
-    top: 20px;
-    bottom: 20px;
-    left: 24px;
-    width: 2px;
-    background-color: var(--luvex-gray-200);
-    transform: translateX(-50%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.luvex-hero--partner .luvex-hero__container {
+    max-width: 850px; /* Slightly wider for the text */
+}
+
+/*
+==============================================================================
+2. SHARED & SECTION STYLES
+==============================================================================
+*/
+.section--dark {
+    background: var(--luvex-dark-blue);
+    color: var(--luvex-white);
+}
+
+.section--dark .section__title,
+.section--dark .section__subtitle {
+    color: var(--luvex-white);
+}
+
+.section--dark .section__subtitle {
+    color: var(--luvex-gray-300);
+}
+
+.section--light-gray {
+    background-color: var(--luvex-gray-100);
+}
+
+.section--turquoise {
+    background: linear-gradient(135deg, var(--luvex-cyan-dark) 0%, #14b8a6 100%);
+    color: var(--luvex-white);
+}
+
+.section--turquoise .section__title,
+.section--turquoise .section__subtitle {
+    color: var(--luvex-white);
+}
+
+.section--turquoise .section__subtitle {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.section__title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--luvex-dark-blue);
+}
+
+.section__subtitle {
+    font-size: var(--text-lg);
+    color: var(--luvex-gray-700);
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    line-height: 1.7;
+}
+
+/*
+==============================================================================
+3. PARTNER CARD COMPONENT
+==============================================================================
+*/
+.partner-card {
+    background: var(--luvex-white);
+    padding: 2.5rem 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--luvex-gray-200);
+    transition: all var(--transition-normal);
+    text-align: center;
+}
+
+.partner-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--luvex-bright-cyan);
+}
+
+.partner-card__icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--luvex-vibrant-blue), var(--luvex-special-cyan));
+    color: var(--luvex-white);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 1.75rem;
+}
+
+.partner-card__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--luvex-dark-blue);
+}
+
+.partner-card__content {
+    color: var(--luvex-gray-700);
+    line-height: 1.6;
+    font-size: var(--text-base);
+    margin: 0;
+}
+
+/* Light variant for dark backgrounds */
+.partner-card--light {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: none;
+}
+
+.partner-card--light:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--luvex-bright-cyan);
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+}
+
+.partner-card--light .partner-card__icon {
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+}
+
+.partner-card--light .partner-card__title {
+    color: var(--luvex-white);
+}
+
+.partner-card--light .partner-card__content {
+    color: var(--luvex-gray-200);
+}
+
+
+/*
+==============================================================================
+4. CHECKLIST COMPONENT
+==============================================================================
+*/
+.checklist {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: center;
+    padding: 1.25rem;
+    background: var(--luvex-white);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--luvex-gray-200);
+    gap: 1rem;
+}
+
+.checklist-icon {
+    width: 28px;
+    height: 28px;
+    background: var(--luvex-vibrant-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--luvex-white);
+    font-size: 0.9rem;
+}
+
+.checklist-text {
+    color: var(--luvex-gray-900);
+    font-size: var(--text-base);
+}
+
+.checklist-text strong {
+    font-weight: 600;
+    color: var(--luvex-dark-blue);
+}
+
+/*
+==============================================================================
+5. PROCESS GRID
+==============================================================================
+*/
+.process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+    position: relative;
 }
 
 .process-step {
-    display: flex;
-    align-items: flex-start;
-    gap: 2rem;
-    position: relative;
-}
-
-.process-step__number {
-    flex-shrink: 0;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: var(--luvex-dark-blue);
-    color: var(--luvex-white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    font-weight: 700;
-    border: 4px solid var(--luvex-white);
-    box-shadow: 0 0 0 2px var(--luvex-dark-blue);
-    z-index: 2;
-}
-
-.process-step__content {
-    padding-top: 0.5rem;
-}
-
-.process-step__title {
-    font-size: 1.5rem;
-    color: var(--luvex-dark-blue);
-    margin: 0 0 0.5rem 0;
-}
-
-.process-step__content p {
-    color: var(--luvex-gray-700);
-    line-height: 1.7;
-    margin: 0;
-}
-
-
-/*
-==============================================================================
-2. FAQ SECTION
-==============================================================================
-*/
-.faq-list {
-    margin-top: 4rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.faq-item {
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--luvex-gray-200);
-}
-
-.faq-item:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-}
-
-.faq-item__question {
-    font-size: 1.25rem;
-    color: var(--luvex-dark-blue);
-    margin: 0 0 1rem 0;
-    font-weight: 600;
-}
-
-.faq-item__answer {
-    color: var(--luvex-gray-700);
-    line-height: 1.7;
-    margin: 0;
-}
-
-/*
-==============================================================================
-3. PAGE-SPECIFIC ADJUSTMENTS (About & Contact pages)
-==============================================================================
-*/
-
-/* --- About Page: Contact Info Box --- */
-.contact-info-section {
-    padding: 6rem 0;
-    background: var(--luvex-gray-100);
-}
-
-.contact-info-box {
-    background: var(--luvex-white);
-    border-radius: var(--radius-xl);
-    padding: 3rem 4rem;
     text-align: center;
-    box-shadow: var(--shadow-lg);
-    border: 1px solid var(--luvex-gray-200);
+    position: relative;
+    padding: 2rem 1.5rem;
 }
 
-.contact-info-box__title {
-    font-size: 2.5rem;
-    color: var(--luvex-dark-blue);
-    margin-bottom: 2.5rem;
+/* Connector lines for desktop */
+@media (min-width: 992px) {
+    .process-step:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: -1rem;
+        top: 35px; /* Align with the center of the number */
+        transform: translateX(50%);
+        width: calc(100% - 70px); /* Adjust based on step width and gap */
+        height: 2px;
+        background: linear-gradient(90deg, var(--luvex-gray-200) 50%, transparent 50%);
+        background-size: 16px 2px;
+        z-index: -1;
+    }
 }
 
-.contact-info-box__details {
+
+.process-number {
+    width: 70px;
+    height: 70px;
+    background: var(--luvex-white);
+    border: 2px solid var(--luvex-gray-200);
+    border-radius: 50%;
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    gap: 4rem;
-    flex-wrap: wrap;
-}
-
-.contact-info-box .detail-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    text-align: left;
-}
-
-.contact-info-box .detail-item i {
-    font-size: 1.75rem;
+    margin: 0 auto 1.5rem;
     color: var(--luvex-vibrant-blue);
-    width: 30px;
+    font-weight: 700;
+    font-size: 2rem;
+    transition: all var(--transition-normal);
 }
 
-.contact-info-box .detail-item strong {
-    display: block;
-    color: var(--luvex-dark-blue);
+.process-step:hover .process-number {
+    border-color: var(--luvex-vibrant-blue);
+    color: var(--luvex-white);
+    background: var(--luvex-vibrant-blue);
+    transform: scale(1.1);
+}
+
+.process-title {
+    font-size: 1.25rem;
     font-weight: 600;
-    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    color: var(--luvex-dark-blue);
 }
 
-.contact-info-box .detail-item span,
-.contact-info-box .detail-item a {
+.process-description {
     color: var(--luvex-gray-700);
-    text-decoration: none;
-    transition: color 0.3s ease;
+    font-size: 0.95rem;
+    line-height: 1.6;
 }
 
-.contact-info-box .detail-item a:hover {
-    color: var(--luvex-vibrant-blue);
+/*
+==============================================================================
+6. CTA SECTION
+==============================================================================
+*/
+.cta-section {
+    text-align: center;
+    padding: 2rem 0;
 }
 
-
-/* --- Contact Page: Cross-Link Box --- */
-.cross-link-section {
-    padding: 0;
+.cta-section .section__subtitle {
+    margin-bottom: 2rem;
 }
-.cross-link-box {
-    background: linear-gradient(135deg, var(--luvex-dark-blue), var(--luvex-dark-blue-medium));
+
+/* Using core .cta-actions class */
+.cta-actions .btn--outline {
+    border-color: rgba(255, 255, 255, 0.4);
     color: var(--luvex-white);
-    border-radius: var(--radius-xl);
-    padding: 3rem 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    border: 1px solid rgba(109, 213, 237, 0.2);
-}
-.cross-link-box__icon i {
-    font-size: 3rem;
-    color: var(--luvex-bright-cyan);
-}
-.cross-link-box__title {
-    color: var(--luvex-white);
-    margin: 0 0 0.5rem 0;
-    font-size: 1.75rem;
-}
-.cross-link-box__description {
-    color: var(--luvex-gray-300);
-    margin: 0;
-    max-width: 500px;
-}
-.cross-link-box__action .btn {
-    flex-shrink: 0;
 }
 
-/* --- Contact Page: Centered Form Layout --- */
-.contact-form-v2__layout--centered {
-    max-width: 750px;
-    margin: 0 auto;
-}
-.contact-form-v2__layout--centered .contact-form-v2__form-container {
-     background: var(--luvex-dark-blue);
-     border-radius: var(--radius-xl);
-     border: 1px solid rgba(109, 213, 237, 0.2);
+.cta-actions .btn--outline:hover {
+    background: var(--luvex-white);
+    color: var(--luvex-dark-blue);
+    border-color: var(--luvex-white);
 }
 
-/* Responsive */
+/*
+==============================================================================
+7. RESPONSIVE ADJUSTMENTS
+==============================================================================
+*/
 @media (max-width: 768px) {
-    .cross-link-box {
-        flex-direction: column;
-        text-align: center;
-        padding: 2.5rem 2rem;
+    .checklist {
+        grid-template-columns: 1fr;
     }
-    .contact-info-box {
-        padding: 2.5rem 2rem;
-    }
-     .contact-info-box__details {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 2rem;
+    
+    .process-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 }

@@ -2,7 +2,7 @@
 /**
  * LUVEX Theme Functions - COMPLETE WITH PRIORITY SYSTEM
  * Description: Komplette Theme-Setup-, Navigations- und Asset-Lade-Logik mit CSS Priority Loading.
- * VERSION: 4.2 - Made country selector script global for modal integration.
+ * VERSION: 4.3 - Removed redundant country selector script.
  * @package Luvex
  */
 
@@ -114,24 +114,21 @@ function luvex_enqueue_assets() {
         if (is_page($slug)) {
             foreach ($files as $file) {
                 $handle = 'luvex-page-' . $slug . '-' . sanitize_title($file);
-                // FIXED: Page-specific styles depend on ALL global styles and load LAST
                 $enqueue_style_helper($handle, $file, ['luvex-responsive']);
             }
         }
     }
     
-    // Homepage gets special treatment
     if (is_front_page() || is_home()) {
         $enqueue_style_helper('luvex-page-home', 'css/_page-home.css', ['luvex-responsive']);
     }
 
-    // News styles
     if (is_post_type_archive('uv_news') || is_singular('uv_news')) {
         $enqueue_style_helper('luvex-news-styles', 'css/_news.css', ['luvex-responsive']);
     }
 
     // ========================================================================
-    // JAVASCRIPT LADEN (UNVERÄNDERT)
+    // JAVASCRIPT LADEN
     // ========================================================================
     
     $js_base_uri = get_stylesheet_directory_uri() . '/assets/js/';
@@ -154,7 +151,6 @@ function luvex_enqueue_assets() {
         'luvex-scroll-to-top'     => 'global/scroll-to-top.js',
         'luvex-footer-light'      => 'global/footer-light-effect.js',
         'luvex-interactive-accordion' => 'global/interactive-accordion.js',
-        'luvex-country-selector' => 'global/luvex-country-selector.js', // KORREKTUR: Jetzt global geladen
     ];
     
     if (is_user_logged_in() && current_user_can('manage_options')) {
@@ -258,11 +254,9 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
         $title = apply_filters('the_title', $item->title, $item->ID);
         
         if ($depth === 0 && !empty($icon_html)) {
-            // Level 0: Icons oben, Text unten (vertikal)
             $item_output .= str_replace('<i class="', '<i class="menu-item-icon ', $icon_html);
             $item_output .= '<span class="menu-item-text">' . $title . '</span>';
         } else {
-            // Level 1+: Icons links, Text rechts (horizontal)
             $item_output .= $icon_html . '<span class="menu-item-text">' . $title . '</span>';
         }
         
@@ -354,26 +348,22 @@ function luvex_add_context_classes($classes) {
 // 11. ADMIN MENU ITEM FILTER (AKTUALISIERT & VERBESSERT)
 add_filter('wp_nav_menu_objects', 'luvex_filter_admin_menu_items', 10, 2);
 function luvex_filter_admin_menu_items($sorted_menu_items, $args) {
-    // Nur auf das Hauptmenü ('primary') anwenden. Admins sehen immer alles.
     if ($args->theme_location != 'primary' || current_user_can('manage_options')) {
         return $sorted_menu_items;
     }
 
-    // WICHTIG: Der exakte "Slug" der Seite, die versteckt werden soll.
     $admin_only_slugs = [
         'standard-styles-luvex', 
     ];
     
     $ids_to_hide = [];
     
-    // Finde alle Menüpunkte, die versteckt werden sollen
     foreach ($sorted_menu_items as $item) {
         if (isset($item->post_name) && in_array($item->post_name, $admin_only_slugs) || in_array($item->menu_item_parent, $ids_to_hide)) {
             $ids_to_hide[] = $item->ID;
         }
     }
     
-    // Filtere die markierten Menüpunkte aus dem Array
     if (!empty($ids_to_hide)) {
         $sorted_menu_items = array_filter($sorted_menu_items, function($item) use ($ids_to_hide) {
             return !in_array($item->ID, $ids_to_hide);
