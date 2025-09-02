@@ -49,10 +49,10 @@ document.addEventListener('DOMContentLoaded', function() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 scrollToTopBtn.classList.add('animate-border-flag');
-                console.log('Deutschland-Flaggen-Animation aktiviert');
+                //console.log('Deutschland-Flaggen-Animation aktiviert');
             } else {
                 scrollToTopBtn.classList.remove('animate-border-flag');
-                console.log('Deutschland-Flaggen-Animation deaktiviert');
+                //console.log('Deutschland-Flaggen-Animation deaktiviert');
             }
         });
     };
@@ -63,5 +63,5 @@ document.addEventListener('DOMContentLoaded', function() {
     // Position regelmäßig überprüfen (falls andere Scripts den Button verschieben)
     setInterval(ensureCorrectPosition, 5000);
 
-    console.log('Scroll-to-Top mit Deutschland-Flaggen-Animation und Positions-Fix initialisiert');
+    //console.log('Scroll-to-Top mit Deutschland-Flaggen-Animation und Positions-Fix initialisiert');
 });
