@@ -1,11 +1,11 @@
 /*
 ==============================================================================
-LUVEX THEME - MODAL STYLES (v4.0.0 - Komplettüberarbeitung)
+LUVEX THEME - MODAL STYLES (v4.1.0 - Country Selector Integrated)
 ==============================================================================
 Description: Neu strukturiertes und optimiertes Stylesheet für alle Modals.
              Fokus auf modernes Layout (Flexbox, Grid), Responsivität und
              eine saubere User Experience für das Auth-Modal.
-Last Update: 2025-09-01
+Last Update: 2025-09-02
 ==============================================================================
 */
 
@@ -444,4 +444,188 @@ Last Update: 2025-09-01
         gap: 1rem;
     }
     .forgot-password-link { align-self: flex-end; }
+}
+
+/*
+==============================================================================
+9. INTEGRATED COUNTRY SELECTOR STYLES
+==============================================================================
+*/
+#authModal .luvex-form-group {
+    width: 100%;
+    text-align: left;
+}
+
+#authModal .luvex-form-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--luvex-gray-300);
+    margin-bottom: 0.5rem;
+}
+
+#authModal .luvex-country-selector {
+    position: relative;
+    width: 100%;
+}
+
+#authModal .selector-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#authModal .country-selector-input {
+    padding-left: 3.25rem !important;
+    cursor: pointer !important;
+}
+
+#authModal .selected-country-flag {
+    position: absolute;
+    left: 1rem;
+    font-size: 1.5rem;
+    pointer-events: none;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+#authModal .luvex-country-selector .dropdown-arrow {
+    position: absolute;
+    right: 1rem;
+    color: var(--luvex-bright-cyan);
+    pointer-events: none;
+    transition: transform 0.3s ease;
+}
+
+#authModal .luvex-country-selector.open .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+#authModal .luvex-country-selector .selector-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 100%;
+    background: var(--luvex-dark-blue-medium);
+    border: 1px solid var(--luvex-bright-cyan);
+    border-radius: var(--radius-md);
+    z-index: 1000;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    transform: translateY(10px);
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+#authModal .luvex-country-selector.open .selector-dropdown {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+}
+
+#authModal .luvex-country-selector .search-container {
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(109, 213, 237, 0.3);
+    position: relative;
+}
+
+#authModal .luvex-country-selector .search-icon {
+    position: absolute;
+    top: 50%;
+    left: 1.5rem;
+    transform: translateY(-50%);
+    color: var(--luvex-gray-300);
+}
+
+#authModal .luvex-country-selector .country-search {
+    width: 100%;
+    height: 40px;
+    padding: 0 1rem 0 2.5rem;
+    background: var(--luvex-dark-blue-dark);
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    color: var(--luvex-white);
+    outline: none;
+}
+
+#authModal .luvex-country-selector .country-search:focus {
+    border-color: var(--luvex-special-cyan);
+}
+
+#authModal .luvex-country-selector .country-list-options {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+#authModal .luvex-country-selector .country-list-options::-webkit-scrollbar { width: 6px; }
+#authModal .luvex-country-selector .country-list-options::-webkit-scrollbar-track { background: var(--luvex-dark-blue-dark); }
+#authModal .luvex-country-selector .country-list-options::-webkit-scrollbar-thumb { background: var(--luvex-cyan-dark); border-radius: 3px; }
+
+#authModal .luvex-country-selector .country-list-options li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    outline: none;
+}
+#authModal .luvex-country-selector .country-list-options li:hover,
+#authModal .luvex-country-selector .country-list-options li:focus {
+    background-color: var(--luvex-dark-blue-light);
+}
+#authModal .luvex-country-selector .country-list-options li.hidden {
+    display: none;
+}
+#authModal .luvex-country-selector .country-list-options .flag { font-size: 1.5rem; flex-shrink: 0; }
+#authModal .luvex-country-selector .country-list-options .name { font-weight: 500; color: var(--luvex-white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+#authModal .luvex-country-selector .country-list-options .dial-code { color: var(--luvex-gray-300); font-size: 0.9em; margin-left: auto; }
+
+#authModal .phone-input-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#authModal .phone-dial-code-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 0 0 120px;
+}
+
+#authModal .phone-dial-code-flag {
+    position: absolute;
+    left: 1rem;
+    font-size: 1.5rem;
+    pointer-events: none;
+    line-height: 1;
+}
+
+#authModal .phone-dial-code {
+    border-radius: var(--radius-md);
+    text-align: center;
+    padding-left: 3.25rem !important;
+    width: 100%;
+}
+
+#authModal .phone-mobile-number {
+    flex: 1 1 auto;
+    border-radius: var(--radius-md);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+#authModal .phone-mobile-number.completed {
+    background: var(--luvex-dark-blue-medium) !important;
+    color: var(--luvex-bright-cyan) !important;
+    border-color: var(--luvex-bright-cyan) !important;
 }

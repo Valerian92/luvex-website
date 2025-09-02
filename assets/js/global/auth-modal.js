@@ -1,25 +1,24 @@
 /**
- * LUVEX THEME - AUTH MODAL LOGIC (v1.1 - Robust)
+ * LUVEX THEME - AUTH MODAL LOGIC (v1.2 - Integrated Country Selector)
  *
- * Sucht nach dem Trigger-Button anhand seiner ID und fügt einen Event Listener hinzu.
- * Dies ist die saubere, moderne Methode, die Timing-Probleme vermeidet.
+ * Steuert das Auth-Modal, die Tabs und initialisiert die Länderauswahl,
+ * sobald das Registrierungsformular sichtbar wird.
  */
 document.addEventListener('DOMContentLoaded', function() {
 
     const authModal = document.getElementById('authModal');
-    const authTrigger = document.getElementById('auth-modal-trigger'); // Button zum Öffnen
+    const authTrigger = document.getElementById('auth-modal-trigger');
 
-    // Beenden, wenn die notwendigen Elemente nicht auf der Seite sind
     if (!authModal || !authTrigger) {
         return;
     }
 
     const modalContent = authModal.querySelector('.modal-content');
     const feedbackContainer = document.getElementById('auth-feedback');
+    let countrySelectorInitialized = false;
 
     /**
      * Öffnet das Modal.
-     * @param {string} initialForm - 'login' oder 'register'.
      */
     const openAuthModal = function(initialForm = 'login') {
         document.body.style.overflow = 'hidden';
@@ -37,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     /**
      * Wechselt zwischen den Formularen (Tabs).
-     * @param {string} formType - 'login', 'register' oder 'forgot-password'.
      */
     const showAuthForm = function(formType) {
         const forms = modalContent.querySelectorAll('.auth-form-container');
@@ -57,30 +55,203 @@ document.addEventListener('DOMContentLoaded', function() {
             feedbackContainer.innerHTML = '';
             feedbackContainer.style.display = 'none';
         }
+        
+        // Initialisiere den Country Selector, wenn der Register-Tab aktiv wird
+        if (formType === 'register' && !countrySelectorInitialized) {
+            initializeCountrySelector();
+            countrySelectorInitialized = true;
+        }
     };
     
     // Globale Funktion für die Tab-Buttons im Modal-HTML
     window.showAuthForm = showAuthForm;
 
-    // --- EVENT LISTENERS ---
+    /**
+     * Initialisiert die komplette Logik für die Länderauswahl.
+     */
+    const initializeCountrySelector = function() {
+        const selectorElement = document.getElementById('luvex-country-selector');
+        if (!selectorElement) return;
 
-    // 1. Klick auf den Haupt-Button im Header
+        // --- DOM Element Selection ---
+        const countryInput = selectorElement.querySelector('.country-selector-input');
+        const dropdown = selectorElement.querySelector('.selector-dropdown');
+        const searchInput = selectorElement.querySelector('.country-search');
+        const optionsList = selectorElement.querySelector('.country-list-options');
+        const options = optionsList.querySelectorAll('li');
+        const nativeSelect = selectorElement.querySelector('.native-select');
+        const flagDisplay = selectorElement.querySelector('.selected-country-flag');
+        
+        const dialCodeInput = document.getElementById('phone-input-dial-code');
+        const mobileInput = document.getElementById('phone-input-mobile');
+        const dialCodeFlag = document.querySelector('.phone-dial-code-flag');
+
+        if (!countryInput || !dropdown || !searchInput || !optionsList || !nativeSelect || !flagDisplay || !dialCodeInput || !mobileInput || !dialCodeFlag) {
+            console.error('LUVEX Country Selector: A required element is missing inside the modal.');
+            return;
+        }
+
+        let userModifiedDialCode = false;
+
+        const countryData = Array.from(options).map(option => ({
+            code: option.dataset.countryCode,
+            dialCode: option.dataset.dialCode,
+            name: option.querySelector('.name').textContent,
+            flag: option.querySelector('.flag').textContent
+        }));
+
+        const toggleDropdown = (forceState) => {
+            const isOpen = selectorElement.classList.contains('open');
+            const action = forceState !== undefined ? forceState : (isOpen ? 'close' : 'open');
+            
+            if (action === 'open' && !isOpen) {
+                selectorElement.classList.add('open');
+                searchInput.value = '';
+                filterOptions('');
+                searchInput.focus();
+            } else if (action === 'close' && isOpen) {
+                selectorElement.classList.remove('open');
+            }
+        };
+
+        const filterOptions = (searchTerm) => {
+            const term = searchTerm.toLowerCase().trim();
+            options.forEach(option => {
+                const name = option.querySelector('.name').textContent.toLowerCase();
+                const dial = option.querySelector('.dial-code').textContent;
+                const isVisible = name.includes(term) || dial.includes(term);
+                option.classList.toggle('hidden', !isVisible);
+            });
+        };
+
+        const updateUI = (country, source = 'system') => {
+            if (!country) {
+                countryInput.value = '';
+                flagDisplay.textContent = ' ';
+                nativeSelect.value = '';
+                if (source !== 'dial_code_input' && !userModifiedDialCode) {
+                     dialCodeInput.value = '';
+                     dialCodeFlag.textContent = ' ';
+                }
+                return;
+            }
+
+            countryInput.value = country.name;
+            flagDisplay.textContent = country.flag;
+            if (nativeSelect.value !== country.code) {
+                nativeSelect.value = country.code;
+                nativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+
+            if (!userModifiedDialCode) {
+                dialCodeInput.value = country.dialCode;
+                dialCodeFlag.textContent = country.flag;
+            }
+        };
+        
+        const findCountryByDialCode = (dialCode) => {
+            const cleanDialCode = dialCode.trim();
+            if (!cleanDialCode) return null;
+            let bestMatch = null;
+            for (const country of countryData) {
+                if (cleanDialCode.startsWith(country.dialCode)) {
+                    if (!bestMatch || country.dialCode.length > bestMatch.dialCode.length) {
+                        bestMatch = country;
+                    }
+                }
+            }
+            return bestMatch;
+        };
+
+        // --- Event Listeners ---
+        selectorElement.querySelector('.selector-input-wrapper').addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleDropdown();
+        });
+        
+        searchInput.addEventListener('input', () => filterOptions(searchInput.value));
+
+        optionsList.addEventListener('click', (e) => {
+            const option = e.target.closest('li');
+            if (option) {
+                const countryCode = option.dataset.countryCode;
+                const selectedCountry = countryData.find(c => c.code === countryCode);
+                updateUI(selectedCountry, 'country_selection');
+                toggleDropdown('close');
+                mobileInput.focus();
+            }
+        });
+
+        dialCodeInput.addEventListener('input', () => {
+            userModifiedDialCode = true;
+            const country = findCountryByDialCode(dialCodeInput.value);
+            if (country) {
+                dialCodeFlag.textContent = country.flag;
+            } else {
+                dialCodeFlag.textContent = ' ';
+            }
+            if (!countryInput.value.trim()) {
+                if (country) {
+                    countryInput.value = country.name;
+                    flagDisplay.textContent = country.flag;
+                    if (nativeSelect.value !== country.code) {
+                        nativeSelect.value = country.code;
+                        nativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+                } else {
+                     countryInput.value = '';
+                     flagDisplay.textContent = ' ';
+                     nativeSelect.value = '';
+                }
+            }
+        });
+        
+        mobileInput.addEventListener('blur', () => {
+            if (mobileInput.value.trim() !== '') {
+                mobileInput.classList.add('completed');
+            } else {
+                mobileInput.classList.remove('completed');
+            }
+        });
+         mobileInput.addEventListener('focus', () => {
+            mobileInput.classList.remove('completed');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!selectorElement.contains(e.target)) {
+                toggleDropdown('close');
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && selectorElement.classList.contains('open')) {
+                toggleDropdown('close');
+            }
+        });
+
+        const initialCountryCode = nativeSelect.value;
+        if(initialCountryCode) {
+            const initialCountry = countryData.find(c => c.code === initialCountryCode);
+            if (initialCountry) {
+                updateUI(initialCountry, 'initial');
+            }
+        }
+    };
+
+    // --- MAIN EVENT LISTENERS for MODAL ---
     authTrigger.addEventListener('click', () => {
         openAuthModal('login');
     });
 
-    // 2. Klick auf den Hintergrund zum Schließen
     authModal.addEventListener('click', (event) => {
         if (event.target === authModal) {
             closeAuthModal();
         }
     });
 
-    // 3. Escape-Taste zum Schließen
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape' && authModal.classList.contains('active')) {
             closeAuthModal();
         }
     });
 });
-
