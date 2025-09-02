@@ -1,10 +1,10 @@
 /*
 ==============================================================================
-LUVEX THEME - MODAL STYLES (v5.5 - Final Perfection)
+LUVEX THEME - MODAL STYLES (v5.6 - Final Polishing)
 ==============================================================================
 Description: The absolute final, polished version of the auth modal styles,
              with a perfectly balanced and intuitive login form layout.
-Last Update: 2025-09-02 - Final login layout and industry spacing perfected.
+Last Update: 2025-09-02 - Final login layout and register form spacing perfected.
 ==============================================================================
 */
 
@@ -168,10 +168,10 @@ Last Update: 2025-09-02 - Final login layout and industry spacing perfected.
     gap: 2rem;
     align-items: center; /* Vertikal zentrieren */
 }
-.login-header-grid .luvex-form-section-title {
+.login-header-grid .luvex-form-section-title,
+.login-header-grid .login-option-title {
     margin-bottom: 0;
-    white-space: nowrap; /* Verhindert Umbruch */
-    border-bottom: 1px solid rgba(109, 213, 237, 0.2);
+    white-space: nowrap;
 }
 .login-fields-wrapper {
     display: flex;
@@ -197,18 +197,19 @@ Last Update: 2025-09-02 - Final login layout and industry spacing perfected.
 }
 
 /* --- 5.3 Register Form Grid --- */
+#register-form-container .luvex-form-grid-2 {
+    margin-top: 1.5rem; /* Abstand nach "Account Details" Titel */
+}
 .luvex-form-grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem 2rem;
 }
-
 .luvex-form-column {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
-
 .luvex-form-column h5 {
     font-size: 0.9rem;
     color: var(--luvex-gray-300);
