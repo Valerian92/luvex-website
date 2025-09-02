@@ -1,0 +1,242 @@
+/*
+==============================================================================
+LUVEX THEME v3.1 - PARTNER PROGRAM PAGE
+==============================================================================
+Description: Styles specific to the new Partner Program page.
+Last Update: 2025-09-02
+==============================================================================
+*/
+
+/*
+==============================================================================
+1. APPLICATION PROCESS SECTION
+==============================================================================
+*/
+.application-process {
+    background: var(--luvex-white);
+}
+
+.process-steps-container {
+    position: relative;
+    max-width: 700px;
+    margin: 4rem auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+/* The connecting line */
+.process-steps-container::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    bottom: 20px;
+    left: 24px;
+    width: 2px;
+    background-color: var(--luvex-gray-200);
+    transform: translateX(-50%);
+}
+
+.process-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    position: relative;
+}
+
+.process-step__number {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--luvex-dark-blue);
+    color: var(--luvex-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border: 4px solid var(--luvex-white);
+    box-shadow: 0 0 0 2px var(--luvex-dark-blue);
+    z-index: 2;
+}
+
+.process-step__content {
+    padding-top: 0.5rem;
+}
+
+.process-step__title {
+    font-size: 1.5rem;
+    color: var(--luvex-dark-blue);
+    margin: 0 0 0.5rem 0;
+}
+
+.process-step__content p {
+    color: var(--luvex-gray-700);
+    line-height: 1.7;
+    margin: 0;
+}
+
+
+/*
+==============================================================================
+2. FAQ SECTION
+==============================================================================
+*/
+.faq-list {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.faq-item {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--luvex-gray-200);
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.faq-item__question {
+    font-size: 1.25rem;
+    color: var(--luvex-dark-blue);
+    margin: 0 0 1rem 0;
+    font-weight: 600;
+}
+
+.faq-item__answer {
+    color: var(--luvex-gray-700);
+    line-height: 1.7;
+    margin: 0;
+}
+
+/*
+==============================================================================
+3. PAGE-SPECIFIC ADJUSTMENTS (About & Contact pages)
+==============================================================================
+*/
+
+/* --- About Page: Contact Info Box --- */
+.contact-info-section {
+    padding: 6rem 0;
+    background: var(--luvex-gray-100);
+}
+
+.contact-info-box {
+    background: var(--luvex-white);
+    border-radius: var(--radius-xl);
+    padding: 3rem 4rem;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--luvex-gray-200);
+}
+
+.contact-info-box__title {
+    font-size: 2.5rem;
+    color: var(--luvex-dark-blue);
+    margin-bottom: 2.5rem;
+}
+
+.contact-info-box__details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+}
+
+.contact-info-box .detail-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-align: left;
+}
+
+.contact-info-box .detail-item i {
+    font-size: 1.75rem;
+    color: var(--luvex-vibrant-blue);
+    width: 30px;
+}
+
+.contact-info-box .detail-item strong {
+    display: block;
+    color: var(--luvex-dark-blue);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.contact-info-box .detail-item span,
+.contact-info-box .detail-item a {
+    color: var(--luvex-gray-700);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-info-box .detail-item a:hover {
+    color: var(--luvex-vibrant-blue);
+}
+
+
+/* --- Contact Page: Cross-Link Box --- */
+.cross-link-section {
+    padding: 0;
+}
+.cross-link-box {
+    background: linear-gradient(135deg, var(--luvex-dark-blue), var(--luvex-dark-blue-medium));
+    color: var(--luvex-white);
+    border-radius: var(--radius-xl);
+    padding: 3rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    border: 1px solid rgba(109, 213, 237, 0.2);
+}
+.cross-link-box__icon i {
+    font-size: 3rem;
+    color: var(--luvex-bright-cyan);
+}
+.cross-link-box__title {
+    color: var(--luvex-white);
+    margin: 0 0 0.5rem 0;
+    font-size: 1.75rem;
+}
+.cross-link-box__description {
+    color: var(--luvex-gray-300);
+    margin: 0;
+    max-width: 500px;
+}
+.cross-link-box__action .btn {
+    flex-shrink: 0;
+}
+
+/* --- Contact Page: Centered Form Layout --- */
+.contact-form-v2__layout--centered {
+    max-width: 750px;
+    margin: 0 auto;
+}
+.contact-form-v2__layout--centered .contact-form-v2__form-container {
+     background: var(--luvex-dark-blue);
+     border-radius: var(--radius-xl);
+     border: 1px solid rgba(109, 213, 237, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cross-link-box {
+        flex-direction: column;
+        text-align: center;
+        padding: 2.5rem 2rem;
+    }
+    .contact-info-box {
+        padding: 2.5rem 2rem;
+    }
+     .contact-info-box__details {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2rem;
+    }
+}

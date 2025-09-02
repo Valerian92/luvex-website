@@ -1,8 +1,8 @@
 <?php
 /**
- * Contact Page Template - Consolidated
+ * Contact Page Template - Overhauled according to content distribution plan
  * @package Luvex
- * @since 2.9.0
+ * @since 3.1.0
  */
 
 get_header(); ?>
@@ -10,10 +10,9 @@ get_header(); ?>
 <!-- The custom cursor element for the animation -->
 <div class="custom-cursor"></div>
 
+<!-- 1. HERO SECTION (Unchanged) -->
 <section class="luvex-hero contact-hero-v2">
-    <!-- Canvas for the interactive animation -->
     <canvas id="contact-hero-animation-canvas"></canvas>
-    
     <div class="luvex-hero__container">
         <h1 class="luvex-hero__title">
             Let's Start a <span class="text-highlight">Conversation</span>
@@ -27,7 +26,7 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- Core Competencies Section (from UV Consulting) -->
+<!-- 2. CORE COMPETENCIES SECTION (Unchanged) -->
 <section class="section section--turquoise-light">
     <div class="container container--wide">
         <div class="text-center mb-3">
@@ -54,15 +53,16 @@ get_header(); ?>
     </div>
 </section>
 
+<!-- 3. CONTACT METHODS SECTION (UPDATED LINK) -->
 <section class="contact-methods section">
     <div class="container container--medium">
         <div class="grid grid-3">
             <div class="card card--highlight has-shine-effect">
                 <div class="card__icon"><i class="fa-solid fa-calendar-days"></i></div>
-                <h3 class="card__title">Schedule Free Consultation</h3>
-                <p class="card__content">Get 30 minutes of expert UV technology guidance - completely free, no sales pressure.</p>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="btn btn--primary" style="margin-top: auto;">
-                    <span>Start Your UV Project</span><i class="fa-solid fa-arrow-right"></i>
+                <h3 class="card__title">Schedule Project Talk</h3>
+                <p class="card__content">Get dedicated time with an expert for detailed project planning and analysis. No sales pressure.</p>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'project-talk' ) ) ); ?>" class="btn btn--primary" style="margin-top: auto;">
+                    <span>Go to Project Talk</span><i class="fa-solid fa-arrow-right"></i>
                 </a>
             </div>
             <div class="card has-shine-effect">
@@ -81,76 +81,35 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- Team Section (from Booking) -->
-<section class="team-section section section--turquoise-light">
-    <div class="container container--wide">
-        <div class="team-section__header">
-            <h2 class="team-section__title">Meet Your UV Experts</h2>
-            <p class="team-section__description">Learn more about the specialists who will guide you.</p>
-        </div>
-        <div class="team-section__grid">
-            
-            <div class="expert-card">
-                <div class="expert-card__photo">
-                    <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Bewerbungsbild_Valerian-Huber.jpg" alt="Valerian Huber">
-                </div>
-                <div class="expert-card__content">
-                    <h3>Valerian Huber</h3>
-                    <p class="expert-card__role">CEO & UV Technology Lead</p>
-                    <p class="expert-card__bio">With a deep focus on UV-C systems, LEDs, and process validation, Valerian brings clarity and precision into every UV application, empowering clients with actionable knowledge.</p>
-                </div>
+<!-- 4. NEW CROSS-LINK BOX SECTION -->
+<section class="section cross-link-section">
+    <div class="container container--narrow">
+        <div class="cross-link-box">
+            <div class="cross-link-box__icon">
+                <i class="fa-solid fa-bullseye-pointer"></i>
             </div>
-
-            <div class="expert-card">
-                <div class="expert-card__photo">
-                    <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Matthias.jpg" alt="Matthias Slapka">
-                </div>
-                <div class="expert-card__content">
-                    <h3>Matthias Slapka</h3>
-                    <p class="expert-card__role">Automation & Integration Expert</p>
-                    <p class="expert-card__bio">As a specialist for system integration and E-PLAN documentation, Matthias ensures that every solution is not just effective, but also flawlessly integrated and reliably documented for long-term success.</p>
-                </div>
+            <div class="cross-link-box__content">
+                <h3 class="cross-link-box__title">Ready to Start a Specific Project?</h3>
+                <p class="cross-link-box__description">For detailed project planning and expert consultation, our Project Talk is the most direct path to a solution.</p>
             </div>
-
+            <div class="cross-link-box__action">
+                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'project-talk' ) ) ); ?>" class="btn btn--primary">
+                    <span>Go to Project Talk</span><i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
         </div>
     </div>
 </section>
 
+<!-- 5. CONTACT FORM SECTION (UPDATED & CLEANED) -->
 <section class="contact-form-section-v2 section" id="contact-form-v2">
-    <div class="container">
-        <div class="contact-form-v2__layout">
-            
-            <div class="contact-form-v2__info">
-                <h2 class="contact-form-v2__title">Get in Touch</h2>
-                <p class="contact-form-v2__description">
-                    We're here to help and answer any question you might have. We look forward to hearing from you.
-                </p>
-                <div class="contact-form-v2__details">
-                    <div class="detail-item">
-                        <i class="fa-solid fa-envelope"></i>
-                        <div>
-                            <strong>Email Us</strong>
-                            <a href="mailto:support@luvex.tech">support@luvex.tech</a>
-                        </div>
-                    </div>
-                    <div class="detail-item">
-                        <i class="fa-solid fa-phone"></i>
-                        <div>
-                            <strong>Call Us</strong>
-                            <span>+49 0174 3122674</span>
-                        </div>
-                    </div>
-                    <div class="detail-item">
-                        <i class="fa-solid fa-map-marker-alt"></i>
-                        <div>
-                            <strong>Our Location</strong>
-                            <span>Großkarolinenfeld, Germany</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+    <div class="container container--narrow">
+        <div class="contact-form-v2__layout--centered">
             <div class="contact-form-v2__form-container">
+                <div class="text-center" style="margin-bottom: 2.5rem;">
+                     <h2 class="contact-form-v2__title">Send Us a Message</h2>
+                     <p class="contact-form-v2__description" style="max-width: 500px; margin: 0 auto;">We're here to help and answer any question you might have. We look forward to hearing from you.</p>
+                </div>
                 <form action="#" method="POST" id="luvex-contact-form">
                     <div class="form-grid form-grid--2-cols">
                         <div class="floating-label-input floating-label-input--dark">
@@ -165,9 +124,11 @@ get_header(); ?>
                     <div class="floating-label-input floating-label-input--dark">
                         <select id="contact-subject" name="contact-subject" required>
                             <option value="" disabled selected></option>
-                            <option value="uv-consulting">UV Consulting</option>
+                            <option value="project-consultation">Project Consultation → Consider Project Talk instead</option>
+                            <option value="uv-curing">UV Curing</option>
                             <option value="uv-c-disinfection">UV-C Disinfection</option>
                             <option value="uv-led-systems">UV LED Systems</option>
+                            <option value="partner-inquiry">Partner Program Inquiry</option>
                             <option value="general-inquiry">General Inquiry</option>
                         </select>
                         <label for="contact-subject">Regarding</label>
@@ -190,11 +151,11 @@ get_header(); ?>
                     <button type="submit" class="luvex-cta-primary form-submit" style="width: 100%; margin-top: 1rem;">Send Message</button>
                 </form>
             </div>
-
         </div>
     </div>
 </section>
 
+<!-- 6. WHAT HAPPENS NEXT SECTION (Unchanged) -->
 <section class="what-to-expect-section section">
     <div class="container container--wide">
         <div class="text-center">
