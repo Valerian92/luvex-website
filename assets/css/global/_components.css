@@ -5,7 +5,7 @@ LUVEX THEME v3.3 - UI COMPONENTS (Layout-Reparatur)
 Description: Enthält alle wiederverwendbaren UI-Komponenten, universelle
              Form-Elemente UND alle Animationen.
 Dependencies: _variables.css, _core.css
-Last Update: 2025-09-02 - Scroll-to-Top Animation zu Moving Stripe geändert
+Last Update: 2025-09-02 - Scroll-to-Top Animation zu subtilem Rand-Effekt geändert
 ==============================================================================
 */
 
@@ -1147,28 +1147,29 @@ input[type="tel"]:focus {
     z-index: 2;
 }
 
-/* --- 8.2 Scroll-to-Top Button KORRIGIERT --- */
+/* --- 8.2 Scroll-to-Top Button NEUE VERSION --- */
 #scrollToTopBtn {
     display: none;
     position: fixed;
     bottom: 30px;
     right: 30px;
-    left: auto;
-    top: auto;
     z-index: 9999;
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background-color: #1B2A49; /* Luvex Dunkelblau */
-    color: #6dd5ed; /* Cyan für Icon */
-    border: 4px solid transparent;
+    background-color: var(--luvex-dark-blue);
+    color: var(--luvex-bright-cyan);
+    border: none;
     font-size: 1.4rem;
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(27, 42, 73, 0.2);
-    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
     opacity: 0;
     transform: translateY(10px);
     margin: 0;
+    /* Für die Pseudo-Elemente */
+    position: relative;
+    overflow: hidden;
 }
 
 #scrollToTopBtn.visible {
@@ -1180,41 +1181,66 @@ input[type="tel"]:focus {
 }
 
 #scrollToTopBtn:hover {
-    background-color: #007BFF; /* Dunkelblau beim Hover */
-    color: #6dd5ed;
     transform: scale(1.1);
 }
 
-/* NEUE Keyframes für den Moving Stripe Effekt */
+/* Der Pfeil (Icon) */
+#scrollToTopBtn i {
+    position: relative;
+    z-index: 3; /* Liegt über allem */
+    transition: color 0.5s ease;
+}
+
+/* Animierter Hintergrund - Standardmäßig unsichtbar */
+#scrollToTopBtn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 1; /* Unter der Maske */
+    background: linear-gradient(to top, #000000, #DD0000, #FFCC00, #000000, #DD0000, #FFCC00);
+    background-size: 100% 200%;
+    animation: moving-stripe-border 2s linear infinite;
+    opacity: 0; /* Unsichtbar */
+    transition: opacity 0.5s ease-in-out; /* Für den Fade-in Effekt */
+}
+
+/* Dunkelblaue Maske, die den Rand-Effekt erzeugt */
+#scrollToTopBtn::after {
+    content: '';
+    position: absolute;
+    /* 4px Einzug, um einen 4px Rand zu erzeugen */
+    top: 4px; left: 4px; right: 4px; bottom: 4px;
+    z-index: 2; /* Über der Animation */
+    background-color: var(--luvex-dark-blue);
+    border-radius: 50%;
+}
+
+
+/* Keyframes für den Moving Stripe Effekt */
 @keyframes moving-stripe-border {
     100% {
         background-position: 0% 200%;
     }
 }
 
-/* NEUE Animation für den Scroll-to-Top Button */
-#scrollToTopBtn.animate-border-flag {
-    /* * Technik: Wir legen zwei Hintergründe übereinander.
-     * 1. Der untere Hintergrund ist der Deutschland-Farbverlauf.
-     * 2. Der obere Hintergrund ist die solide Button-Farbe.
-     * Durch background-clip wird der obere Hintergrund nur innen gezeichnet,
-     * sodass der untere Farbverlauf am Rand (border) sichtbar wird.
-    */
-    background-image:
-        linear-gradient(to top, #000000, #DD0000, #FFCC00, #000000, #DD0000, #FFCC00),
-        linear-gradient(var(--luvex-dark-blue), var(--luvex-dark-blue));
-    
-    background-size: 100% 200%;
-    
-    background-origin: border-box;
-    background-clip: border-box, padding-box;
+/* Wenn die Animation durch JS aktiviert wird... */
+#scrollToTopBtn.animate-border-flag::before {
+    opacity: 1; /* ...wird der animierte Hintergrund sichtbar (Fade-in). */
+}
 
+/* ...und der Pfeil wird ebenfalls animiert. */
+#scrollToTopBtn.animate-border-flag i {
+    color: transparent; /* Macht die Schriftfarbe durchsichtig */
+    background: linear-gradient(to top, #FFCC00, #DD0000, #000000, #FFCC00, #DD0000, #000000);
+    background-size: 100% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
     animation: moving-stripe-border 2s linear infinite;
 }
 
-#scrollToTopBtn.animate-border-flag:hover {
-    animation-play-state: paused;
-    transform: scale(1.15);
+#scrollToTopBtn.animate-border-flag:hover::before,
+#scrollToTopBtn.animate-border-flag:hover i {
+    animation-play-state: paused; /* Pausiert beide Animationen bei Hover */
 }
 
 
