@@ -120,8 +120,8 @@ Last Update: 2025-09-02 - Scroll-to-Top Animation zu subtilem Rand-Effekt geänd
 ==============================================================================
 */
 
-/* --- 2.1 Primary Hero CTA Button --- */
-.luvex-hero__cta {
+/* --- 2.1 Primary Hero CTA Button --- KORRIGIERT MIT :not() --- */
+.luvex-hero__cta:not(.luvex-simulator-cta) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -136,12 +136,13 @@ Last Update: 2025-09-02 - Scroll-to-Top Animation zu subtilem Rand-Effekt geänd
     font-size: var(--text-base);
 }
 
-.luvex-hero__cta:hover {
+.luvex-hero__cta:not(.luvex-simulator-cta):hover {
     background: var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
 }
+
 
 /* --- 2.2 Secondary Hero CTA Button --- */
 .luvex-hero__cta-secondary {
@@ -1274,4 +1275,3 @@ input[type="tel"]:focus {
         width: 100%;
     }
 }
-
