@@ -182,13 +182,13 @@ get_header(); ?>
 <!-- 6. FAQ SECTION -->
 <section class="section section--light-gray">
     <div class="container container--narrow">
-        <div class="text-center">
+       <div class="text-center">
             <h2 class="section__title">Common Questions</h2>
         </div>
         
         <?php 
         // Use the existing accordion component for FAQs
-        get_template_part('template-parts/components/component-accordion-partner-faq'); 
+        get_template_part('template-parts/component-accordion-partner-faq'); 
         ?>
 
     </div>

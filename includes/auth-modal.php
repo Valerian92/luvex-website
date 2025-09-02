@@ -1,10 +1,9 @@
 <?php
 /**
- * Auth-Modal-Template (v4.9 - Final Login UI & 'Other' Field Style)
- * - Lädt die korrekten Länderdaten.
- * - Verschiebt die "Other" Industrie Option für bessere UX.
- * - Optimiertes Login-Formular-Layout.
- * - Fügt 'completed'-Stil-Logik für "Other" Feld hinzu.
+ * Auth-Modal-Template (v5.0 - Perfected Login UI & Final Touches)
+ * - Implements a sophisticated two-column layout for the login form.
+ * - Replaces the 'Remember Me' checkbox with a modern toggle button.
+ * - All previous functionalities and styles are retained.
  */
 
 if (!defined('ABSPATH')) exit;
@@ -30,23 +29,31 @@ $default_country_code = 'DE';
                 <!-- Login Form -->
                 <div id="login-form-container" class="auth-form-container">
                     <form id="luvex-login-form" class="auth-form" method="post">
-                        <div class="luvex-form-section">
-                             <h4 class="luvex-form-section-title"><i class="fa-solid fa-right-to-bracket"></i> Sign In to Your Account</h4>
-                             <div class="luvex-form-grid-2 login-grid">
-                                 <input type="email" name="user_login" class="luvex-input" placeholder="Email Address" required>
-                                 <div class="password-wrapper">
-                                     <input type="password" name="user_password" class="luvex-input" placeholder="Password" required>
-                                     <i class="fa-regular fa-eye-slash toggle-password"></i>
-                                 </div>
-                             </div>
-                        </div>
-                         <div class="auth-form-footer login-footer">
-                             <label class="luvex-checkbox">
-                                 <input type="checkbox" name="remember_me" value="forever">
-                                 <span class="luvex-checkbox__indicator"><i class="fa-solid fa-check"></i></span>
-                                 <span class="luvex-checkbox__text">Remember Me</span>
-                             </label>
-                             <a href="#" class="forgot-password-link" onclick="showAuthForm('forgot-password')">Forgot Password?</a>
+                        <div class="login-main-grid">
+                            <!-- Left Column: Sign In -->
+                            <div class="login-column">
+                                <h4 class="luvex-form-section-title"><i class="fa-solid fa-right-to-bracket"></i> Sign In to Your Account</h4>
+                                <input type="email" name="user_login" class="luvex-input" placeholder="Email Address" required>
+                                <div class="password-wrapper">
+                                    <input type="password" name="user_password" class="luvex-input" placeholder="Password" required>
+                                    <i class="fa-regular fa-eye-slash toggle-password"></i>
+                                </div>
+                            </div>
+                            <!-- Right Column: Options -->
+                            <div class="login-column">
+                                <h4 class="luvex-form-section-title"><i class="fa-solid fa-circle-question"></i> Account Options</h4>
+                                <a href="#" class="login-option-button" onclick="showAuthForm('forgot-password')">
+                                    <i class="fa-solid fa-key"></i>
+                                    <span>Forgot Password?</span>
+                                </a>
+                                <label class="remember-me-toggle">
+                                    <input type="checkbox" name="remember_me" value="forever">
+                                    <div class="toggle-button">
+                                        <div class="toggle-indicator"><i class="fa-solid fa-check"></i></div>
+                                        <span>Remember Me</span>
+                                    </div>
+                                </label>
+                            </div>
                         </div>
                         <div class="recaptcha-wrapper">
                             <?php if (!empty($recaptcha_site_key)): ?>
@@ -259,7 +266,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (industryOtherCheckbox && industryOtherText) {
-        // Logic for showing/hiding the text field when "Other" is clicked
         industryOtherCheckbox.addEventListener('change', function() {
             industryOtherText.style.display = this.checked ? 'block' : 'none';
             if (this.checked) {
@@ -268,7 +274,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         industryOtherText.style.display = industryOtherCheckbox.checked ? 'block' : 'none';
 
-        // NEW: Logic for the 'completed' style on the "Other" text field
         industryOtherText.addEventListener('focus', function() {
             this.classList.remove('completed');
         });
