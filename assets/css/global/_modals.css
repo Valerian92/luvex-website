@@ -1,11 +1,11 @@
 /*
 ==============================================================================
-LUVEX THEME - MODAL STYLES (v4.1.0 - Country Selector Integrated)
+LUVEX THEME - MODAL STYLES (v4.1.0 - Interest Grid Layout)
 ==============================================================================
 Description: Neu strukturiertes und optimiertes Stylesheet für alle Modals.
              Fokus auf modernes Layout (Flexbox, Grid), Responsivität und
              eine saubere User Experience für das Auth-Modal.
-Last Update: 2025-09-02
+Last Update: 2025-09-02 - Added 3-column layout for interests.
 ==============================================================================
 */
 
@@ -206,9 +206,11 @@ Last Update: 2025-09-02
 
 /*
 ==============================================================================
-6. 4-SPALTEN-GRID FÜR INDUSTRIE & INTERESSEN
+6. INDUSTRIE & INTERESSEN GRIDS
 ==============================================================================
 */
+
+/* --- 6.1 Industrie Grid (4 Spalten) --- */
 .selection-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -225,6 +227,33 @@ Last Update: 2025-09-02
     max-height: 500px; /* Genug Platz für alle Elemente */
 }
 
+/* --- 6.2 NEU: Interessen Grid (3 Spalten) --- */
+.interests-structured-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem; /* Breiterer Abstand zwischen den Hauptkategorien */
+}
+
+.interest-category-title {
+    font-size: var(--text-base); /* Größere Schrift für die Titel */
+    font-weight: 600;
+    color: var(--luvex-white);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(109, 213, 237, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.selection-grid-interest-items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 Spalten für die Items in jeder Kategorie */
+    gap: 0.75rem; /* Abstand zwischen den Items */
+}
+
+
+/* --- 6.3 Gemeinsames Styling für Checkbox-Elemente --- */
 .selection-checkbox input[type="checkbox"] {
     display: none; /* Verstecke die Standard-Checkbox */
 }
@@ -402,14 +431,173 @@ Last Update: 2025-09-02
 
 /*
 ==============================================================================
-8. RESPONSIVE DESIGN
+8. LÄNDERAUSWAHL-STYLING (Hierher verschoben)
+==============================================================================
+*/
+.luvex-form-group {
+    width: 100%;
+    text-align: left;
+}
+.luvex-form-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--luvex-gray-300);
+    margin-bottom: 0.5rem;
+}
+.luvex-country-selector {
+    position: relative;
+    width: 100%;
+}
+.selector-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.country-selector-input {
+    padding-left: 3.25rem !important;
+    cursor: pointer !important;
+}
+.selected-country-flag {
+    position: absolute;
+    left: 1rem;
+    font-size: 1.5rem;
+    pointer-events: none;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.luvex-country-selector .dropdown-arrow {
+    position: absolute;
+    right: 1rem;
+    color: var(--luvex-bright-cyan);
+    pointer-events: none;
+    transition: transform 0.3s ease;
+}
+.luvex-country-selector.open .dropdown-arrow {
+    transform: rotate(180deg);
+}
+.luvex-country-selector .selector-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 100%;
+    background: var(--luvex-dark-blue-medium);
+    border: 1px solid var(--luvex-bright-cyan);
+    border-radius: var(--radius-md);
+    z-index: 1000;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    transform: translateY(10px);
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+.luvex-country-selector.open .selector-dropdown {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+}
+.luvex-country-selector .search-container {
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(109, 213, 237, 0.3);
+    position: relative;
+}
+.luvex-country-selector .search-icon {
+    position: absolute;
+    top: 50%;
+    left: 1.5rem;
+    transform: translateY(-50%);
+    color: var(--luvex-gray-300);
+}
+.luvex-country-selector .country-search {
+    width: 100%;
+    height: 40px;
+    padding: 0 1rem 0 2.5rem;
+    background: var(--luvex-dark-blue-dark);
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    color: var(--luvex-white);
+    outline: none;
+}
+.luvex-country-selector .country-search:focus {
+    border-color: var(--luvex-special-cyan);
+}
+.luvex-country-selector .country-list-options {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem;
+    max-height: 250px;
+    overflow-y: auto;
+}
+.luvex-country-selector .country-list-options::-webkit-scrollbar { width: 6px; }
+.luvex-country-selector .country-list-options::-webkit-scrollbar-track { background: var(--luvex-dark-blue-dark); }
+.luvex-country-selector .country-list-options::-webkit-scrollbar-thumb { background: var(--luvex-cyan-dark); border-radius: 3px; }
+.luvex-country-selector .country-list-options li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    outline: none;
+}
+.luvex-country-selector .country-list-options li:hover,
+.luvex-country-selector .country-list-options li:focus {
+    background-color: var(--luvex-dark-blue-light);
+}
+.luvex-country-selector .country-list-options li.hidden {
+    display: none;
+}
+.luvex-country-selector .country-list-options .flag { font-size: 1.5rem; flex-shrink: 0; }
+.luvex-country-selector .country-list-options .name { font-weight: 500; color: var(--luvex-white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.luvex-country-selector .country-list-options .dial-code { color: var(--luvex-gray-300); font-size: 0.9em; margin-left: auto; }
+.phone-input-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.phone-dial-code-wrapper {
+    position: relative;
+    flex: 0 0 100px;
+}
+.phone-dial-code-flag {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    pointer-events: none;
+}
+.phone-dial-code {
+    padding-left: 3.25rem !important;
+    text-align: left;
+}
+.phone-mobile-number {
+    flex: 1 1 auto;
+}
+.phone-mobile-number.completed {
+    background: var(--luvex-dark-blue-dark) !important;
+    color: var(--luvex-bright-cyan) !important;
+    border-color: var(--luvex-cyan-dark) !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/*
+==============================================================================
+9. RESPONSIVE DESIGN
 ==============================================================================
 */
 @media (max-width: 992px) {
     #authModal .modal-content { max-width: 600px; }
     .luvex-form-grid-2 { grid-template-columns: 1fr; }
     .selection-grid { grid-template-columns: repeat(3, 1fr); }
-    .selection-grid.industry-grid { max-height: 175px; } /* Höhe für 2 Reihen bei 3 Spalten */
+    .selection-grid.industry-grid { max-height: 175px; } 
+    .interests-structured-grid { grid-template-columns: 1fr; } /* Interessen auf Tablets untereinander */
 }
 
 @media (max-width: 768px) {
@@ -436,7 +624,7 @@ Last Update: 2025-09-02
     .auth-scrollable-content { padding: 0.5rem 1.5rem 1.5rem 1.5rem; }
 
     .selection-grid { grid-template-columns: repeat(2, 1fr); }
-    .selection-grid.industry-grid { max-height: 250px; } /* Höhe für 2 Reihen bei 2 Spalten */
+    .selection-grid.industry-grid { max-height: 250px; } 
 
     .auth-form-footer {
         flex-direction: column;
@@ -446,186 +634,3 @@ Last Update: 2025-09-02
     .forgot-password-link { align-self: flex-end; }
 }
 
-/*
-==============================================================================
-9. INTEGRATED COUNTRY SELECTOR STYLES
-==============================================================================
-*/
-#authModal .luvex-form-group {
-    width: 100%;
-    text-align: left;
-}
-
-#authModal .luvex-form-label {
-    display: block;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--luvex-gray-300);
-    margin-bottom: 0.5rem;
-}
-
-#authModal .luvex-country-selector {
-    position: relative;
-    width: 100%;
-}
-
-#authModal .selector-input-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
-#authModal .country-selector-input {
-    padding-left: 3.25rem !important;
-    cursor: pointer !important;
-}
-
-#authModal .selected-country-flag {
-    position: absolute;
-    left: 1rem;
-    font-size: 1.5rem;
-    pointer-events: none;
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
-
-#authModal .luvex-country-selector .dropdown-arrow {
-    position: absolute;
-    right: 1rem;
-    color: var(--luvex-bright-cyan);
-    pointer-events: none;
-    transition: transform 0.3s ease;
-}
-
-#authModal .luvex-country-selector.open .dropdown-arrow {
-    transform: rotate(180deg);
-}
-
-#authModal .luvex-country-selector .selector-dropdown {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 0;
-    width: 100%;
-    background: var(--luvex-dark-blue-medium);
-    border: 1px solid var(--luvex-bright-cyan);
-    border-radius: var(--radius-md);
-    z-index: 1000;
-    overflow: hidden;
-    box-shadow: var(--shadow-lg);
-    opacity: 0;
-    transform: translateY(10px);
-    visibility: hidden;
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-}
-
-#authModal .luvex-country-selector.open .selector-dropdown {
-    opacity: 1;
-    transform: translateY(0);
-    visibility: visible;
-}
-
-#authModal .luvex-country-selector .search-container {
-    padding: 0.75rem;
-    border-bottom: 1px solid rgba(109, 213, 237, 0.3);
-    position: relative;
-}
-
-#authModal .luvex-country-selector .search-icon {
-    position: absolute;
-    top: 50%;
-    left: 1.5rem;
-    transform: translateY(-50%);
-    color: var(--luvex-gray-300);
-}
-
-#authModal .luvex-country-selector .country-search {
-    width: 100%;
-    height: 40px;
-    padding: 0 1rem 0 2.5rem;
-    background: var(--luvex-dark-blue-dark);
-    border: 1px solid transparent;
-    border-radius: var(--radius-sm);
-    color: var(--luvex-white);
-    outline: none;
-}
-
-#authModal .luvex-country-selector .country-search:focus {
-    border-color: var(--luvex-special-cyan);
-}
-
-#authModal .luvex-country-selector .country-list-options {
-    list-style: none;
-    margin: 0;
-    padding: 0.5rem;
-    max-height: 250px;
-    overflow-y: auto;
-}
-
-#authModal .luvex-country-selector .country-list-options::-webkit-scrollbar { width: 6px; }
-#authModal .luvex-country-selector .country-list-options::-webkit-scrollbar-track { background: var(--luvex-dark-blue-dark); }
-#authModal .luvex-country-selector .country-list-options::-webkit-scrollbar-thumb { background: var(--luvex-cyan-dark); border-radius: 3px; }
-
-#authModal .luvex-country-selector .country-list-options li {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    outline: none;
-}
-#authModal .luvex-country-selector .country-list-options li:hover,
-#authModal .luvex-country-selector .country-list-options li:focus {
-    background-color: var(--luvex-dark-blue-light);
-}
-#authModal .luvex-country-selector .country-list-options li.hidden {
-    display: none;
-}
-#authModal .luvex-country-selector .country-list-options .flag { font-size: 1.5rem; flex-shrink: 0; }
-#authModal .luvex-country-selector .country-list-options .name { font-weight: 500; color: var(--luvex-white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
-#authModal .luvex-country-selector .country-list-options .dial-code { color: var(--luvex-gray-300); font-size: 0.9em; margin-left: auto; }
-
-#authModal .phone-input-group {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-#authModal .phone-dial-code-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    flex: 0 0 120px;
-}
-
-#authModal .phone-dial-code-flag {
-    position: absolute;
-    left: 1rem;
-    font-size: 1.5rem;
-    pointer-events: none;
-    line-height: 1;
-}
-
-#authModal .phone-dial-code {
-    border-radius: var(--radius-md);
-    text-align: center;
-    padding-left: 3.25rem !important;
-    width: 100%;
-}
-
-#authModal .phone-mobile-number {
-    flex: 1 1 auto;
-    border-radius: var(--radius-md);
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-#authModal .phone-mobile-number.completed {
-    background: var(--luvex-dark-blue-medium) !important;
-    color: var(--luvex-bright-cyan) !important;
-    border-color: var(--luvex-bright-cyan) !important;
-}

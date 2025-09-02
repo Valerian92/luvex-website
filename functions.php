@@ -2,7 +2,7 @@
 /**
  * LUVEX Theme Functions - COMPLETE WITH PRIORITY SYSTEM
  * Description: Komplette Theme-Setup-, Navigations- und Asset-Lade-Logik mit CSS Priority Loading.
- * VERSION: 4.4 - Added Partner Program assets and Accordion Helper.
+ * VERSION: 4.5 - Simplified template part path for accordion.
  * @package Luvex
  */
 
@@ -108,7 +108,7 @@ function luvex_enqueue_assets() {
         'profile' => ['css/_page-profile.css'],
         'curing-systems' => ['css/_page-curing-systems.css'],
         'uvc-hygiene-solutions' => ['css/_page-uvc-hygiene-solutions.css'],
-        'partner-program' => ['css/_page-partner-program.css'], // NEU HINZUGEFÜGT
+        'partner-program' => ['css/_page-partner-program.css'],
     ];
 
     foreach ($page_styles_map as $slug => $files) {
@@ -189,7 +189,7 @@ function luvex_enqueue_assets() {
         'uv-technology' => ['luvex-hero-spectrum' => 'pages/hero-spectrum.js'],
         'project-design' => ['luvex-consultation-hero-animation' => 'pages/hero-consultation-animation.js'],
         'uv-solutions' => ['luvex-hero-solutions-animation' => 'pages/hero-solutions-animation.js'],
-        'partner-program' => ['luvex-hero-partner-animation' => 'pages/hero-partner-animation.js'], // NEU HINZUGEFÜGT
+        'partner-program' => ['luvex-hero-partner-animation' => 'pages/hero-partner-animation.js'],
     ];
 
     foreach ($page_script_map as $slug => $scripts) {
@@ -318,7 +318,8 @@ if (!function_exists('luvex_get_accordion_component')) {
             'faqs' => $faq_items,
             'first_active' => $first_item_active
         ]);
-        get_template_part('template-parts/components/component-accordion-general');
+        // PFAD ANGEPASST
+        get_template_part('template-parts/component-accordion-general');
         // Clean up the query var
         set_query_var('accordion_data', null);
     }
