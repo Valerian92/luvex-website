@@ -1,9 +1,9 @@
 /*
 ==============================================================================
-LUVEX THEME v3.0 - BOOKING PAGE (Final Layout Fix)
+LUVEX THEME v3.1 - BOOKING PAGE (Calendar Contrast Fix)
 ==============================================================================
-Description: Styles for the booking page. Fully restored Hero layout and 
-             improved calendar section contrast.
+Description: Styles for the booking page. Restored light background for the
+             calendar section to improve contrast with the dark iframe.
 Last Update: 2025-09-02
 ==============================================================================
 */
@@ -120,11 +120,11 @@ Last Update: 2025-09-02
 }
 
 /* ==============================================================================
-2. Calendar Section
+2. Calendar Section (CONTRAST FIX)
 ==============================================================================
 */
 .booking-calendar { 
-    background: var(--luvex-dark-blue-dark);
+    background: var(--luvex-white); 
 }
 
 .booking-calendar__header { 
@@ -135,12 +135,12 @@ Last Update: 2025-09-02
 .booking-calendar__title { 
     font-size: clamp(2rem, 4vw, 2.5rem); 
     font-weight: 600; 
-    color: var(--luvex-white); 
+    color: var(--luvex-dark-blue); 
     margin-bottom: 0.5rem; 
 }
 
 .booking-calendar__subtitle { 
-    color: var(--luvex-gray-300); 
+    color: var(--luvex-gray-700); 
     font-weight: 400; 
     max-width: 550px; 
     margin: 0 auto; 
@@ -149,16 +149,16 @@ Last Update: 2025-09-02
 .google-calendar-wrapper--optimized { 
     border-radius: var(--radius-lg, 12px); 
     overflow: hidden; 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 0 20px rgba(109, 213, 237, 0.3);
+    box-shadow: 0 10px 30px rgba(27, 42, 73, 0.08), 0 4px 10px rgba(27, 42, 73, 0.05);
     margin: 0 auto; 
     max-width: 1000px; 
-    border: 1px solid var(--luvex-dark-blue-light);
+    border: 1px solid var(--luvex-gray-200);
 }
 
 .google-calendar-iframe { 
     display: block; 
     width: 100%; 
-    height: 950px;
+    height: 1100px;
     border: none; 
 }
 
