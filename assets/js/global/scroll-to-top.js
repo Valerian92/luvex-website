@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-    // Wir zielen auf den gesamten Footer-Container, um die Animation auszulösen.
     const footerElement = document.getElementById('colophon');
 
     // Sicherheitsabfrage, falls Elemente nicht gefunden werden.
@@ -26,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // --- NEUE LOGIK 3: Animation auslösen, wenn der Footer sichtbar wird ---
+    // --- NEUE LOGIK 3: Deutschland-Flaggen-Animation auslösen, wenn der Footer sichtbar wird ---
     
     // Konfiguration für den Observer: Löst aus, wenn der Footer unten in den Viewport kommt.
     const observerOptions = {
@@ -40,11 +39,21 @@ document.addEventListener('DOMContentLoaded', function() {
         entries.forEach(entry => {
             // Wenn der Footer in die Trigger-Zone eintritt...
             if (entry.isIntersecting) {
-                // ...fügen wir die Animationsklasse hinzu.
+                // Deutschland-Flaggen-Animation aktivieren
                 scrollToTopBtn.classList.add('animate-border-flag');
+                
+                // Optional: Verschiedene Animationsstile je nach Präferenz
+                // scrollToTopBtn.classList.add('animate-border-flag-pulse'); // Mit Pulse-Effekt
+                // scrollToTopBtn.classList.add('animate-border-flag-soft'); // Sanftere Version
+                
+                console.log('Deutschland-Flaggen-Animation aktiviert');
             } else {
-                // ...ansonsten entfernen wir sie wieder.
+                // Alle Flaggen-Animationen entfernen
                 scrollToTopBtn.classList.remove('animate-border-flag');
+                scrollToTopBtn.classList.remove('animate-border-flag-pulse');
+                scrollToTopBtn.classList.remove('animate-border-flag-soft');
+                
+                console.log('Deutschland-Flaggen-Animation deaktiviert');
             }
         });
     };
@@ -52,4 +61,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Erstellen und Starten des Observers.
     const observer = new IntersectionObserver(intersectionCallback, observerOptions);
     observer.observe(footerElement);
+    
+    // Debug-Information (nur in Entwicklungsumgebung)
+    if (typeof console !== 'undefined' && console.log) {
+        console.log('Scroll-to-Top mit Deutschland-Flaggen-Animation initialisiert');
+        console.log('Footer-Element gefunden:', footerElement);
+        console.log('Button-Element gefunden:', scrollToTopBtn);
+    }
 });

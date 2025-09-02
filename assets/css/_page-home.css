@@ -101,66 +101,67 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
 ==============================================================================
 */
 
-/* --- 3.1 BASE SIMULATOR BUTTON --- */
-.luvex-simulator-cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-xs);
-    padding: 16px 32px;
+/* --- 3.1 BASE SIMULATOR BUTTON (höhere Spezifität) --- */
+.luvex-simulator-cta,
+.luvex-hero .luvex-simulator-cta {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: var(--space-xs) !important;
+    padding: 16px 32px !important;
     background: transparent !important;
     color: var(--luvex-white) !important;
-    border: 2px solid var(--luvex-bright-cyan);
-    border-radius: var(--radius-full);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: var(--text-base);
-    position: relative;
-    overflow: hidden;
-    z-index: 2;
-    cursor: none; /* Custom cursor im Hero */
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.4s ease;
-}
-
-.luvex-simulator-cta:hover {
-    background: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
+    border: 2px solid var(--luvex-bright-cyan) !important;
+    border-radius: var(--radius-full) !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    font-size: var(--text-base) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    z-index: 2 !important;
+    cursor: pointer !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.4s ease, color 0.3s ease !important;
 }
 
 /* --- 3.2 ANIMIERTE VERSION MIT ENERGY PULSE --- */
-.luvex-simulator-cta--animated {
+.luvex-simulator-cta--animated,
+.luvex-hero .luvex-simulator-cta--animated {
     animation: pulse-purple-glow 2.5s infinite ease-in-out !important;
 }
 
 .luvex-simulator-cta--animated::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
+    content: '' !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 0 !important;
+    height: 0 !important;
     background: radial-gradient(circle, 
         rgba(138, 43, 226, 0.4) 0%, 
         rgba(75, 0, 130, 0.6) 30%, 
-        transparent 70%);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    animation: energy-pulse 2s ease-out infinite;
-    z-index: -1;
-    pointer-events: none;
+        transparent 70%) !important;
+    border-radius: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    animation: energy-pulse 2s ease-out infinite !important;
+    z-index: -1 !important;
+    pointer-events: none !important;
 }
 
 /* Text und Icons im Vordergrund */
 .luvex-simulator-cta--animated span,
-.luvex-simulator-cta--animated i {
-    position: relative;
-    z-index: 3;
-    color: var(--luvex-white) !important;
+.luvex-simulator-cta--animated i,
+.luvex-simulator-cta span,
+.luvex-simulator-cta i {
+    position: relative !important;
+    z-index: 3 !important;
+    color: inherit !important;
 }
 
-.luvex-simulator-cta--animated:hover {
+/* --- 3.3 HOVER STATE (mit höchster Spezifität) --- */
+.luvex-simulator-cta:hover,
+.luvex-hero .luvex-simulator-cta:hover,
+.luvex-simulator-cta--animated:hover,
+.luvex-hero .luvex-simulator-cta--animated:hover {
     /* GRADIENT HINTERGRUND */
     background: linear-gradient(45deg,
         var(--luvex-bright-cyan),
@@ -188,10 +189,10 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
 
 /* Energy Pulse pausiert beim Hover */
 .luvex-simulator-cta--animated:hover::before {
-    animation-play-state: paused;
+    animation-play-state: paused !important;
 }
 
-/* --- 3.3 SEKUNDÄRER BUTTON --- */
+/* --- 3.4 SEKUNDÄRER BUTTON --- */
 .home .luvex-hero__cta-secondary {
     display: inline-flex;
     align-items: center;
@@ -355,14 +356,14 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center; /* FIX: Alles zentriert */
-    text-align: center; /* FIX: Text zentriert */
+    align-items: center;
+    text-align: center;
 }
 
 .homepage-community-title {
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     margin-bottom: 2.5rem;
-    text-align: center; /* FIX: Titel zentriert */
+    text-align: center;
     width: 100%;
 }
 
@@ -371,7 +372,7 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
     color: var(--luvex-gray-300);
     max-width: 650px;
     line-height: 1.7;
-    text-align: justify; /* Blocksatz für Beschreibungstext */
+    text-align: justify;
     margin-bottom: 2.5rem;
     hyphens: auto;
     word-break: normal;
@@ -381,7 +382,7 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
     display: flex;
     gap: 1.5rem;
     margin-bottom: 2rem;
-    justify-content: center; /* FIX: Buttons zentriert */
+    justify-content: center;
     width: 100%;
 }
 
@@ -395,10 +396,10 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
 .homepage-community-globe-wrapper {
     position: absolute;
     top: 50%;
-    left: 65%; /* FIX: Position angepasst */
-    width: 100vw; /* FIX: Vollbreite */
-    height: 100vh; /* FIX: Vollhöhe */
-    transform: translate(-35%, -50%); /* FIX: angepasst */
+    left: 65%;
+    width: 100vw;
+    height: 100vh;
+    transform: translate(-35%, -50%);
     z-index: 1;
 }
 
@@ -419,8 +420,8 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
 .evidence-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    align-items: center; /* Vertikal zentrieren */
-    gap: 4rem; /* Angepasster Abstand */
+    align-items: center;
+    gap: 4rem;
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -428,7 +429,7 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
 .evidence-content {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Text linksbündig */
+    align-items: flex-start;
     text-align: left;
 }
 
@@ -439,7 +440,7 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
 
 .evidence-description { 
     font-size: var(--text-lg); 
-    margin-bottom: 2.5rem; /* Angepasster Abstand */
+    margin-bottom: 2.5rem;
     max-width: 550px; 
 }
 
@@ -448,7 +449,7 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 450px; /* Höhe für Positionierung */
+    min-height: 450px;
 }
 
 /* Das Haupt-Styling für die Team-Mitglied-Karte */
@@ -457,7 +458,7 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
     background-color: var(--luvex-white);
     border-radius: var(--radius-xl);
     padding: 2.5rem;
-    padding-top: 80px; /* Platz für das überlappende Bild schaffen */
+    padding-top: 80px;
     box-shadow: var(--shadow-lg);
     border: 1px solid var(--luvex-gray-200);
     width: 100%;
@@ -468,7 +469,7 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
 /* Das runde, überlappende Bild */
 .team-member__photo {
     position: absolute;
-    top: -60px; /* Bild nach oben verschieben, um zu überlappen */
+    top: -60px;
     left: 50%;
     transform: translateX(-50%);
     width: 120px;
@@ -520,16 +521,16 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
 @media (max-width: 1024px) {
     .evidence-grid {
         grid-template-columns: 1fr;
-        gap: 8rem; /* Mehr Abstand auf Mobilgeräten für den Überlappungseffekt */
+        gap: 8rem;
         text-align: center;
     }
     
     .evidence-visual {
-        order: -1; /* Bild nach oben */
+        order: -1;
     }
     
     .evidence-content {
-        align-items: center; /* Inhalt zentrieren */
+        align-items: center;
         text-align: center;
     }
 

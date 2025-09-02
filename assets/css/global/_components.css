@@ -5,7 +5,7 @@ LUVEX THEME v3.3 - UI COMPONENTS (Layout-Reparatur)
 Description: Enthält alle wiederverwendbaren UI-Komponenten, universelle
              Form-Elemente UND alle Animationen.
 Dependencies: _variables.css, _core.css
-Last Update: 2025-09-01 - Canvas-Layout und Menü-Icons repariert
+Last Update: 2025-09-01 - Canvas-Layout und Menü-Icons repariert + Deutschland-Flaggen-Animation
 ==============================================================================
 */
 
@@ -285,7 +285,7 @@ Last Update: 2025-09-01 - Canvas-Layout und Menü-Icons repariert
 /* --- 2.6 Outline Button --- */
 .btn--outline {
     background-color: transparent;
-    border: 2px solid var(--luvex-vibrant-blue);
+    border: 2px solid var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
     padding: 12px 24px;
     border-radius: var(--radius-full);
@@ -299,11 +299,11 @@ Last Update: 2025-09-01 - Canvas-Layout und Menü-Icons repariert
 }
 
 .btn--outline:hover {
-    background-color: var(--luvex-vibrant-blue);
-    border-color: var(--luvex-vibrant-blue);
+    background-color: var(--luvex-bright-cyan);
+    border-color: var(--luvex-bright-cyan);
     color: var(--luvex-white);
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
 }
 
 /*
@@ -1147,7 +1147,7 @@ input[type="tel"]:focus {
     z-index: 2;
 }
 
-/* --- 8.2 Scroll-to-Top Button --- */
+/* --- 8.2 Scroll-to-Top Button MIT DEUTSCHLAND-FLAGGEN-ANIMATION --- */
 #scrollToTopBtn {
     display: none;
     position: fixed;
@@ -1156,16 +1156,18 @@ input[type="tel"]:focus {
     z-index: 999;
     background-color: var(--luvex-vibrant-blue);
     color: white;
-    border: none;
+    border: 4px solid transparent; /* Wichtig für die Flaggen-Animation */
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 1.2rem;
+    width: 60px; /* Etwas größer für bessere Sichtbarkeit */
+    height: 60px;
+    font-size: 1.4rem;
     cursor: pointer;
     box-shadow: var(--shadow-md);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
     opacity: 0;
     transform: translateY(10px);
+    overflow: hidden;
+    position: relative;
 }
 
 #scrollToTopBtn.visible {
@@ -1179,6 +1181,121 @@ input[type="tel"]:focus {
 #scrollToTopBtn:hover {
     background-color: var(--luvex-bright-cyan);
     color: var(--luvex-dark-blue);
+    transform: scale(1.1);
+}
+
+/* --- DEUTSCHLAND-FLAGGEN-ANIMATION --- */
+#scrollToTopBtn.animate-border-flag {
+    animation: german-flag-border 1.5s infinite ease-in-out;
+}
+
+/* Keyframes für Deutschland-Flagge (Schwarz-Rot-Gold) */
+@keyframes german-flag-border {
+    0% {
+        border-color: #000000; /* Schwarz */
+        box-shadow: 
+            0 0 0 2px #000000,
+            0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+    33.33% {
+        border-color: #DD0000; /* Rot */
+        box-shadow: 
+            0 0 0 2px #DD0000,
+            0 4px 15px rgba(221, 0, 0, 0.3);
+    }
+    66.66% {
+        border-color: #FFCC00; /* Gold/Gelb */
+        box-shadow: 
+            0 0 0 2px #FFCC00,
+            0 4px 15px rgba(255, 204, 0, 0.3);
+    }
+    100% {
+        border-color: #000000; /* Zurück zu Schwarz */
+        box-shadow: 
+            0 0 0 2px #000000,
+            0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Alternative: Flaggen-Animation mit Pulseffekt */
+#scrollToTopBtn.animate-border-flag-pulse {
+    animation: german-flag-border-pulse 2s infinite ease-in-out;
+}
+
+@keyframes german-flag-border-pulse {
+    0% {
+        border-color: #000000;
+        box-shadow: 
+            0 0 0 2px #000000,
+            0 0 15px rgba(0, 0, 0, 0.4),
+            0 4px 15px rgba(0, 0, 0, 0.3);
+        transform: scale(1);
+    }
+    16.66% {
+        border-color: #000000;
+        transform: scale(1.05);
+    }
+    33.33% {
+        border-color: #DD0000;
+        box-shadow: 
+            0 0 0 2px #DD0000,
+            0 0 15px rgba(221, 0, 0, 0.4),
+            0 4px 15px rgba(221, 0, 0, 0.3);
+        transform: scale(1);
+    }
+    50% {
+        border-color: #DD0000;
+        transform: scale(1.05);
+    }
+    66.66% {
+        border-color: #FFCC00;
+        box-shadow: 
+            0 0 0 2px #FFCC00,
+            0 0 15px rgba(255, 204, 0, 0.4),
+            0 4px 15px rgba(255, 204, 0, 0.3);
+        transform: scale(1);
+    }
+    83.33% {
+        border-color: #FFCC00;
+        transform: scale(1.05);
+    }
+    100% {
+        border-color: #000000;
+        transform: scale(1);
+    }
+}
+
+/* Hover-State während Flaggen-Animation */
+#scrollToTopBtn.animate-border-flag:hover,
+#scrollToTopBtn.animate-border-flag-pulse:hover {
+    animation-play-state: paused; /* Animation pausieren beim Hover */
+    background-color: var(--luvex-bright-cyan) !important;
+    color: var(--luvex-dark-blue) !important;
+    transform: scale(1.15) !important;
+}
+
+/* Sanftere Variante mit weniger intensiven Farben */
+@keyframes german-flag-border-soft {
+    0% {
+        border-color: rgba(0, 0, 0, 0.7);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    33.33% {
+        border-color: rgba(221, 0, 0, 0.7);
+        box-shadow: 0 0 10px rgba(221, 0, 0, 0.2);
+    }
+    66.66% {
+        border-color: rgba(255, 204, 0, 0.7);
+        box-shadow: 0 0 10px rgba(255, 204, 0, 0.2);
+    }
+    100% {
+        border-color: rgba(0, 0, 0, 0.7);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+}
+
+#scrollToTopBtn.animate-border-flag-soft {
+    animation: german-flag-border-soft 1.8s infinite ease-in-out;
 }
 
 /*
