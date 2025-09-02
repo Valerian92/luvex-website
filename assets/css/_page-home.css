@@ -1,12 +1,22 @@
 /*
 ==============================================================================
-LUVEX THEME v4.2 - HOMEPAGE (BUTTON-ANIMATION FINALER FIX)
+LUVEX THEME v4.4 - HOMEPAGE (FINALER FIX MIT HERO-OVERRIDE)
 ==============================================================================
-Description: Komplette Homepage-Styles mit funktionierenden Button-Animationen
+Description: Überschreibt den von WP/Astra injizierten Hero-Hintergrund.
 Dependencies: _variables.css, _core.css, _components.css
-Last Update: 2025-09-02 (Button-Animation mit isolation:isolate repariert)
+Last Update: 2025-09-02 (Button-Animation endgültig repariert)
 ==============================================================================
 */
+
+/* ==============================================================================
+ZENTRALER FIX: Dieser Block entfernt den von WordPress/Astra erzwungenen
+Hintergrund der Hero-Sektion, damit die Canvas-Animation und die
+Button-Effekte sichtbar werden.
+==============================================================================
+*/
+body.home .luvex-hero {
+    background: none !important;
+}
 
 /*
 ==============================================================================
@@ -93,19 +103,18 @@ Last Update: 2025-09-02 (Button-Animation mit isolation:isolate repariert)
 
 /*
 ==============================================================================
-3. SIMULATOR BUTTON - KORRIGIERTE VERSION V2 (Mit Isolation)
+3. SIMULATOR BUTTON - Stile bleiben robust
 ==============================================================================
 */
 
-/* Base Button Styles - Wichtig: isolation: isolate; & background: transparent; */
-.home .luvex-simulator-cta,
-.home .luvex-hero .luvex-simulator-cta {
+/* Base Button Styles */
+body.home .luvex-simulator-cta {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     gap: var(--space-xs) !important;
     padding: 16px 32px !important;
-    background: transparent !important; /* MUSS transparent sein, damit die Effekte dahinter sichtbar werden */
+    background: transparent !important;
     color: var(--luvex-white) !important;
     border: 2px solid var(--luvex-bright-cyan) !important;
     border-radius: var(--radius-full) !important;
@@ -114,18 +123,18 @@ Last Update: 2025-09-02 (Button-Animation mit isolation:isolate repariert)
     font-size: var(--text-base) !important;
     position: relative !important;
     overflow: hidden !important;
-    isolation: isolate !important; /* NEU: Erstellt einen neuen Stacking Context und löst das z-index Problem endgültig */
+    isolation: isolate !important;
     cursor: var(--cursor-pointer, pointer) !important;
     transition: all 0.3s ease !important;
 }
 
 /* Animierte Version mit Rahmen-Puls */
-.home .luvex-simulator-cta--animated {
+body.home .luvex-simulator-cta--animated {
     animation: luvex-border-pulse 2.5s infinite ease-in-out !important;
 }
 
-/* Lila Energie-Puls (::before) - Ebene -1 im neuen Stacking Context */
-.home .luvex-simulator-cta--animated::before {
+/* Lila Energie-Puls (::before) */
+body.home .luvex-simulator-cta--animated::before {
     content: '' !important;
     position: absolute !important;
     top: 50% !important;
@@ -139,12 +148,12 @@ Last Update: 2025-09-02 (Button-Animation mit isolation:isolate repariert)
     border-radius: 50% !important;
     transform: translate(-50%, -50%) !important;
     animation: luvex-energy-pulse 2s ease-out infinite !important;
-    z-index: -1 !important; /* Dank 'isolation' ist -1 jetzt sicher und bezieht sich nur auf den Button */
+    z-index: -1 !important;
     pointer-events: none !important;
 }
 
-/* Hover-Farbverlauf (::after) - Ebenfalls Ebene -1 */
-.home .luvex-simulator-cta::after {
+/* Hover-Farbverlauf (::after) */
+body.home .luvex-simulator-cta::after {
     content: '' !important;
     position: absolute !important;
     top: 0 !important;
@@ -160,30 +169,29 @@ Last Update: 2025-09-02 (Button-Animation mit isolation:isolate repariert)
     ) !important;
     background-size: 400% 400% !important;
     border-radius: var(--radius-full) !important;
-    z-index: -1 !important; /* Liegt auf derselben Ebene wie der Puls */
+    z-index: -1 !important;
     opacity: 0 !important;
     transition: opacity 0.4s ease !important;
     animation: luvex-gradient-flow 3s infinite ease-in-out !important;
-    animation-play-state: paused; /* Animation läuft erst bei Hover los */
+    animation-play-state: paused;
 }
 
 
-/* Hover State - Gesteuert durch JS-Klasse .hover-active */
-.home .luvex-simulator-cta.hover-active {
+/* Hover State */
+body.home .luvex-simulator-cta.hover-active {
     transform: translateY(-2px) scale(1.05) !important;
     box-shadow: 0 8px 25px rgba(109, 213, 237, 0.4), 0 0 20px rgba(138, 43, 226, 0.3) !important;
     border-color: rgba(109, 213, 237, 0.8) !important;
 }
 
-.home .luvex-simulator-cta.hover-active::after {
-    opacity: 1 !important; /* Macht den Farbverlauf sichtbar */
-    animation-play-state: running; /* Startet die Farbverlauf-Animation */
+body.home .luvex-simulator-cta.hover-active::after {
+    opacity: 1 !important;
+    animation-play-state: running;
 }
 
-/* Text und Icon IMMER im Vordergrund */
-.home .luvex-simulator-cta span,
-.home .luvex-simulator-cta i {
-    /* Z-index ist nicht mehr nötig, da die Pseudo-Elemente durch 'isolation' sicher hinter ihnen liegen */
+/* Text und Icon */
+body.home .luvex-simulator-cta span,
+body.home .luvex-simulator-cta i {
     color: inherit !important;
 }
 
@@ -485,7 +493,7 @@ Last Update: 2025-09-02 (Button-Animation mit isolation:isolate repariert)
 }
 
 .team-member__content h3 {
-    font-size: var(--text-2xl);
+    font-size: var(--text-xl);
     color: var(--luvex-dark-blue);
     margin: 0 0 0.5rem 0;
 }
@@ -605,4 +613,5 @@ Last Update: 2025-09-02 (Button-Animation mit isolation:isolate repariert)
         margin: 2.5rem 0;
     }
 }
+
 
