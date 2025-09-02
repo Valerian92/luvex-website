@@ -1,9 +1,9 @@
 <?php
 /**
- * Auth-Modal-Template (v5.0 - Perfected Login UI & Final Touches)
+ * Auth-Modal-Template (v5.1 - Final Polished UI)
  * - Implements a sophisticated two-column layout for the login form.
  * - Replaces the 'Remember Me' checkbox with a modern toggle button.
- * - All previous functionalities and styles are retained.
+ * - Adds a global 'completed' state script for all input fields.
  */
 
 if (!defined('ABSPATH')) exit;
@@ -31,7 +31,7 @@ $default_country_code = 'DE';
                     <form id="luvex-login-form" class="auth-form" method="post">
                         <div class="login-main-grid">
                             <!-- Left Column: Sign In -->
-                            <div class="login-column">
+                            <div class="login-column-left">
                                 <h4 class="luvex-form-section-title"><i class="fa-solid fa-right-to-bracket"></i> Sign In to Your Account</h4>
                                 <input type="email" name="user_login" class="luvex-input" placeholder="Email Address" required>
                                 <div class="password-wrapper">
@@ -40,12 +40,7 @@ $default_country_code = 'DE';
                                 </div>
                             </div>
                             <!-- Right Column: Options -->
-                            <div class="login-column">
-                                <h4 class="luvex-form-section-title"><i class="fa-solid fa-circle-question"></i> Account Options</h4>
-                                <a href="#" class="login-option-button" onclick="showAuthForm('forgot-password')">
-                                    <i class="fa-solid fa-key"></i>
-                                    <span>Forgot Password?</span>
-                                </a>
+                            <div class="login-column-right">
                                 <label class="remember-me-toggle">
                                     <input type="checkbox" name="remember_me" value="forever">
                                     <div class="toggle-button">
@@ -53,6 +48,10 @@ $default_country_code = 'DE';
                                         <span>Remember Me</span>
                                     </div>
                                 </label>
+                                <a href="#" class="login-option-button" onclick="showAuthForm('forgot-password')">
+                                    <i class="fa-solid fa-key"></i>
+                                    <span>Forgot Password?</span>
+                                </a>
                             </div>
                         </div>
                         <div class="recaptcha-wrapper">
@@ -249,6 +248,7 @@ $default_country_code = 'DE';
 <!-- Local JS for Modal Interactions -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // --- General Interaction Logic ---
     const industryGrid = document.getElementById('industry-grid-container');
     const industryToggleBtn = document.getElementById('industry-toggle-btn');
     const otherIndustryContainer = document.querySelector('.other-industry-container');
@@ -259,7 +259,6 @@ document.addEventListener('DOMContentLoaded', function() {
         industryToggleBtn.addEventListener('click', function() {
             const isExpanded = industryGrid.classList.toggle('expanded');
             otherIndustryContainer.classList.toggle('visible', isExpanded);
-            
             this.querySelector('.btn-text').textContent = isExpanded ? 'Show Less' : 'Show More Industries';
             this.querySelector('i').style.transform = isExpanded ? 'rotate(180deg)' : 'rotate(0deg)';
         });
@@ -268,22 +267,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (industryOtherCheckbox && industryOtherText) {
         industryOtherCheckbox.addEventListener('change', function() {
             industryOtherText.style.display = this.checked ? 'block' : 'none';
-            if (this.checked) {
-                 industryOtherText.focus();
-            }
+            if (this.checked) industryOtherText.focus();
         });
         industryOtherText.style.display = industryOtherCheckbox.checked ? 'block' : 'none';
-
-        industryOtherText.addEventListener('focus', function() {
-            this.classList.remove('completed');
-        });
-        industryOtherText.addEventListener('blur', function() {
-            if (this.value.trim() !== '') {
-                this.classList.add('completed');
-            } else {
-                this.classList.remove('completed');
-            }
-        });
     }
 
     document.querySelectorAll('.toggle-password').forEach(toggle => {
@@ -293,6 +279,30 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.toggle('fa-eye-slash');
             this.classList.toggle('fa-eye');
         });
+    });
+
+    // --- NEU: Global "Completed" Style Logic for ALL Inputs ---
+    const allInputs = document.querySelectorAll('#authModal .luvex-input');
+    allInputs.forEach(input => {
+        // Function to check and apply style
+        const checkCompletion = (element) => {
+            if (element.value.trim() !== '') {
+                element.classList.add('completed');
+            } else {
+                element.classList.remove('completed');
+            }
+        };
+
+        // Add event listeners
+        input.addEventListener('focus', function() {
+            this.classList.remove('completed');
+        });
+        input.addEventListener('blur', function() {
+            checkCompletion(this);
+        });
+        
+        // Initial check for pre-filled fields (e.g., by browser)
+        checkCompletion(input);
     });
 });
 </script>
