@@ -163,6 +163,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+
+    // Button Hover Animation (JS-Controlled)
+function setupButtonHoverAnimation() {
+    const btn = document.querySelector('.luvex-simulator-cta--animated');
+    if (!btn) return;
+    
+    btn.addEventListener('mouseenter', () => {
+        btn.style.setProperty('--hover-opacity', '1');
+        btn.style.transform = 'translateY(-2px) scale(1.05)';
+        btn.style.boxShadow = '0 8px 25px rgba(109, 213, 237, 0.4), 0 0 20px rgba(138, 43, 226, 0.3)';
+    });
+    
+    btn.addEventListener('mouseleave', () => {
+        btn.style.setProperty('--hover-opacity', '0');
+        btn.style.transform = '';
+        btn.style.boxShadow = '';
+    });
+}
+
+// Nach setupPhotonAnimation() aufrufen
+setupButtonHoverAnimation();
+
     function setupPhotonAnimation() {
         if (animationFrameId) cancelAnimationFrame(animationFrameId);
         resizeCanvas();

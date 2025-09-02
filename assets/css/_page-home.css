@@ -158,7 +158,7 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
     color: inherit !important;
 }
 
-/* --- 3.3 GRADIENT HOVER FÜR TRANSITION (NEU) --- */
+/* --- 3.3 CSS Variables für JS-Kontrolle --- */
 .luvex-simulator-cta::after {
     content: '' !important;
     position: absolute !important;
@@ -175,33 +175,15 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
     ) !important;
     background-size: 400% 400% !important;
     z-index: -1 !important;
-    opacity: 0 !important;
+    opacity: var(--hover-opacity, 0) !important;
     transition: opacity 0.4s ease !important;
     animation: gradient-shift-smooth 3s infinite ease-in-out !important;
     border-radius: var(--radius-full) !important;
 }
 
-
-/* --- 3.4 HOVER STATE (mit höchster Spezifität) --- */
-/* REPARATUR: Hover-Effekt nutzt jetzt das ::after-Element für eine sanfte Transition */
-.luvex-simulator-cta:hover,
-.luvex-hero .luvex-simulator-cta:hover,
-.luvex-simulator-cta--animated:hover,
-.luvex-hero .luvex-simulator-cta--animated:hover {
-    color: var(--luvex-white) !important;
-    border-color: rgba(109, 213, 237, 0.8) !important;
-
-    /* HOVER EFFEKTE */
-    transform: translateY(-2px) scale(1.05) !important;
-    box-shadow: 
-        0 8px 25px rgba(109, 213, 237, 0.4),
-        0 0 20px rgba(138, 43, 226, 0.3) !important;
-}
-
-/* Fade-In für den Gradienten */
-.luvex-simulator-cta:hover::after,
-.luvex-hero .luvex-simulator-cta:hover::after {
-    opacity: 1 !important;
+/* Transition für Transform wird per JS gesteuert */
+.luvex-simulator-cta {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease !important;
 }
 
 
