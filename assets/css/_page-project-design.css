@@ -1,17 +1,15 @@
 /*
 ==============================================================================
-LUVEX THEME v3.4 - BOOKING PAGE (Final Design)
+LUVEX THEME v3.5 - BOOKING PAGE (Final Refinement)
 ==============================================================================
-Description: Final, refined design for the booking page. Replaced the plain
-             dark background with a subtle grid pattern and optimized
-             the calendar container for a more premium look.
+Description: Complete overhaul for a bright, professional, and harmonious
+             look. This version transitions from the dark hero to a
+             consistent light theme, solving all contrast and color issues.
 Last Update: 2025-09-02
 ==============================================================================
 */
 
-/* --- 1. Hero Section --- */
-
-/* Canvas für Animation */
+/* --- 1. Hero Section (No Changes) --- */
 #hero-animation-canvas {
     position: absolute;
     top: 0;
@@ -20,13 +18,11 @@ Last Update: 2025-09-02
     height: 100%;
     z-index: 1;
 }
-
 .booking-hero {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 .booking-hero .luvex-hero__container {
     position: relative;
     z-index: 2;
@@ -35,14 +31,12 @@ Last Update: 2025-09-02
     text-align: left;
     display: block;
 }
-
 .booking-hero__grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 3rem;
     align-items: center;
 }
-
 .booking-hero__text-content .luvex-hero__title,
 .booking-hero__text-content .luvex-hero__subtitle,
 .booking-hero__text-content .luvex-hero__description {
@@ -50,294 +44,200 @@ Last Update: 2025-09-02
     margin-left: 0;
     margin-right: 0;
 }
-
-.booking-hero .luvex-hero__title {
-    color: var(--luvex-white);
-}
-
-.booking-hero .luvex-hero__subtitle {
-    color: var(--luvex-gray-300);
-    max-width: 550px;
-}
-
-.booking-hero .luvex-hero__description {
-    color: var(--luvex-gray-300);
-    max-width: 550px;
-    line-height: 1.7;
-}
-
-.booking-hero__cta-container {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    justify-content: flex-start;
-}
-
-.hero-scroll-button {
-    padding: 1rem 2.5rem;
-    font-size: 1.1rem;
-    gap: 0.75rem;
-}
-
-.hero-social-proof {
-    margin-top: 2.5rem;
-    opacity: 0.8;
-}
-
-.hero-social-proof p {
-    color: var(--luvex-gray-300);
-    font-size: var(--text-sm, 0.875rem);
-    margin: 0;
-}
-
-.booking-hero__image-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.expert-image-wrapper {
-    position: relative;
-    max-width: 400px;
-    width: 100%;
-}
-
-.booking-hero__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    max-height: 480px;
-    border-radius: var(--radius-xl);
-    border: 2px solid rgba(109, 213, 237, 0.4);
-    box-shadow: var(--shadow-lg);
-    position: relative;
-    z-index: 2;
-}
+.booking-hero .luvex-hero__title { color: var(--luvex-white); }
+.booking-hero .luvex-hero__subtitle { color: var(--luvex-gray-300); max-width: 550px; }
+.booking-hero .luvex-hero__description { color: var(--luvex-gray-300); max-width: 550px; line-height: 1.7; }
+.booking-hero__cta-container { margin-top: 2rem; margin-bottom: 2rem; justify-content: flex-start; }
+.hero-scroll-button { padding: 1rem 2.5rem; font-size: 1.1rem; gap: 0.75rem; }
+.hero-social-proof { margin-top: 2.5rem; opacity: 0.8; }
+.hero-social-proof p { color: var(--luvex-gray-300); font-size: var(--text-sm, 0.875rem); margin: 0; }
+.booking-hero__image-content { display: flex; justify-content: center; align-items: center; position: relative; }
+.expert-image-wrapper { position: relative; max-width: 400px; width: 100%; }
+.booking-hero__image { width: 100%; height: 100%; object-fit: cover; max-height: 480px; border-radius: var(--radius-xl); border: 2px solid rgba(109, 213, 237, 0.4); box-shadow: var(--shadow-lg); position: relative; z-index: 2; }
 
 /* ==============================================================================
-2. Calendar Section (REFINED DARK DESIGN)
+2. Calendar Section (REFINED LIGHT & AIRY DESIGN)
 ==============================================================================
 */
 .booking-calendar { 
-    background-color: var(--luvex-dark-blue-dark);
-    position: relative;
-    overflow: hidden;
+    background: linear-gradient(180deg, var(--luvex-white) 0%, var(--luvex-gray-100) 100%);
 }
-
-.booking-calendar::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-        linear-gradient(rgba(21, 31, 53, 0.8), rgba(21, 31, 53, 0.8)),
-        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0 10 L10 0 M-10 20 L20 -10 M90 20 L120 -10" stroke="%236dd5ed" stroke-width="0.5" stroke-opacity="0.1"/></svg>');
-    background-size: 50px 50px;
-    z-index: 1;
-}
-
 .booking-calendar__header { 
     text-align: center; 
     margin-bottom: 3rem; 
-    position: relative;
-    z-index: 2;
 }
-
 .booking-calendar__title { 
-    font-size: clamp(2rem, 4vw, 2.5rem); 
-    font-weight: 600; 
-    color: var(--luvex-white); 
-    margin-bottom: 0.5rem; 
+    color: var(--luvex-dark-blue); 
 }
-
 .booking-calendar__subtitle { 
-    color: var(--luvex-gray-300); 
-    font-weight: 400; 
-    max-width: 550px; 
-    margin: 0 auto; 
+    color: var(--luvex-gray-700); 
 }
-
-/* Wrapper with gradient border */
 .google-calendar-wrapper--optimized { 
-    border-radius: var(--radius-lg, 12px); 
+    border-radius: var(--radius-xl); 
     overflow: hidden; 
     margin: 0 auto; 
     max-width: 1000px; 
-    padding: 2px; /* Space for the gradient border */
-    background: linear-gradient(135deg, var(--luvex-special-cyan), var(--luvex-vibrant-blue));
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3), 0 0 25px rgba(34, 211, 238, 0.2);
-    position: relative;
-    z-index: 2;
+    border: 1px solid var(--luvex-gray-200);
+    box-shadow: var(--shadow-lg); 
 }
-
-/* Inner container for the iframe to create the dark background */
-.google-calendar-inner {
-    background-color: var(--luvex-dark-blue-dark);
-    border-radius: 10px; /* Slightly smaller than the outer wrapper */
-    padding: 1.5rem; /* Inner spacing */
-}
-
 .google-calendar-iframe { 
     display: block; 
     width: 100%; 
     height: 1100px;
     border: none; 
-    border-radius: 6px; 
 }
 
 /* --- 3. Seamless Background Wrapper --- */
 .content-wrapper-bg {
-    background-color: var(--luvex-dark-blue); /* Continue dark theme */
+    background-color: var(--luvex-gray-100);
     padding: 0.1px 0;
 }
 
-/* --- 4. Benefits Section --- */
+/* ==============================================================================
+4. Universal Section Header & Benefits Section
+==============================================================================
+*/
+.section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 4rem auto;
+}
+.section-header__title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--luvex-dark-blue);
+    margin-bottom: 1rem;
+}
+.section-header__subtitle {
+    font-size: var(--text-lg);
+    color: var(--luvex-gray-700);
+    line-height: 1.7;
+}
 .booking-benefits {
     padding-top: 8rem;
-    padding-bottom: 4rem;
+    padding-bottom: 8rem;
 }
-
 .benefits-grid { 
     display: grid; 
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
     gap: 2rem; 
 }
-
 .benefit-card { 
-    background: var(--luvex-dark-blue-light); 
+    background: var(--luvex-white); 
     border-radius: var(--radius-lg); 
-    border: 1px solid rgba(109, 213, 237, 0.1); 
-    padding: 2rem; 
+    border: 1px solid var(--luvex-gray-200); 
+    padding: 2.5rem 2rem; 
     display: flex; 
-    align-items: flex-start; 
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     gap: 1.5rem; 
-    transition: background-color 0.3s ease, transform 0.3s ease; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
-
 .benefit-card:hover { 
-    background-color: var(--luvex-dark-blue-medium);
-    transform: translateY(-4px);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
 }
-
 .benefit-card__icon { 
     flex-shrink: 0; 
-    width: 50px; 
-    height: 50px; 
-    background: var(--luvex-dark-blue-dark); 
-    color: var(--luvex-bright-cyan); 
-    border-radius: 10px; 
+    width: 60px; 
+    height: 60px; 
+    background: linear-gradient(135deg, var(--luvex-vibrant-blue), var(--luvex-special-cyan)); 
+    color: var(--luvex-white); 
+    border-radius: 12px; 
     display: flex; 
     align-items: center; 
     justify-content: center; 
-    font-size: 1.8rem; 
+    font-size: 2rem; 
+    box-shadow: 0 4px 15px rgba(34, 211, 238, 0.2);
 }
-
 .benefit-card__title { 
     font-size: 1.25rem; 
     font-weight: 600; 
-    color: var(--luvex-white); 
+    color: var(--luvex-dark-blue); 
+    margin-top: 0;
     margin-bottom: 0.5rem; 
 }
-
 .benefit-card__description { 
-    color: var(--luvex-gray-300); 
+    color: var(--luvex-gray-700); 
     line-height: 1.6; 
     margin: 0; 
 }
 
 /* ==============================================================================
-5. FAQ SECTION STYLES
+5. FAQ SECTION STYLES (LIGHT THEME)
 ==============================================================================
 */
 .booking-faq {
-    background-color: var(--luvex-dark-blue-dark);
+    background-color: var(--luvex-gray-100);
 }
-
-.booking-faq__title {
-    text-align: center;
-    color: var(--luvex-white);
-    font-size: clamp(2rem, 4vw, 2.5rem);
+.booking-faq .section-header {
     margin-bottom: 3rem;
+}
+/* Accordion Overrides for Light Theme */
+.booking-faq .accordion--tech .accordion-item {
+    background-color: var(--luvex-white);
+    border: 1px solid var(--luvex-gray-200);
+}
+.booking-faq .accordion--tech .accordion-item::before {
+    display: none; /* Gradient border not needed on light theme */
+}
+.booking-faq .accordion--tech .accordion-item.active {
+    border-color: var(--luvex-vibrant-blue);
+}
+.booking-faq .accordion--tech .accordion-header h4 {
+    color: var(--luvex-dark-blue);
+}
+.booking-faq .accordion--tech .accordion-item.active .accordion-header h4 {
+    color: var(--luvex-vibrant-blue);
+}
+.booking-faq .accordion--tech .accordion-icon {
+    color: var(--luvex-vibrant-blue);
+}
+.booking-faq .accordion--tech .accordion-body {
+    color: var(--luvex-gray-700);
+}
+.booking-faq .accordion--tech .accordion-item:hover {
+    border-color: var(--luvex-bright-cyan);
+    box-shadow: var(--shadow-md);
 }
 
 /* --- 6. Alternative Contact Section --- */
 .booking-alternative { 
     text-align: center; 
-    background: var(--luvex-dark-blue); 
+    background: var(--luvex-white); 
 }
-
-.booking-alternative__content { 
-    max-width: 600px; 
-    margin: 0 auto; 
-}
-
 .booking-alternative__title { 
-    font-size: 1.8rem; 
-    color: var(--luvex-white); 
-    margin-bottom: 0.5rem; 
+    color: var(--luvex-dark-blue); 
 }
-
 .booking-alternative__description { 
-    color: var(--luvex-gray-300); 
-    margin-bottom: 2rem; 
+    color: var(--luvex-gray-700); 
 }
-
-.booking-alternative__actions { 
-    display: flex; 
-    justify-content: center; 
-    gap: 1rem; 
-}
-
 .booking-alternative .btn--outline {
-    border-color: rgba(109, 213, 237, 0.5);
-    color: var(--luvex-bright-cyan);
+    border-color: var(--luvex-vibrant-blue);
+    color: var(--luvex-vibrant-blue);
 }
-
 .booking-alternative .btn--outline:hover {
-    background-color: var(--luvex-bright-cyan);
-    border-color: var(--luvex-bright-cyan);
-    color: var(--luvex-dark-blue);
+    background-color: var(--luvex-vibrant-blue);
+    border-color: var(--luvex-vibrant-blue);
+    color: var(--luvex-white);
 }
-
 
 /* --- 7. Responsive Overrides --- */
 @media (min-width: 992px) {
-    .booking-hero__grid {
-        grid-template-columns: 1.1fr 1fr;
-        gap: 4rem;
-    }
+    .booking-hero__grid { grid-template-columns: 1.1fr 1fr; gap: 4rem; }
 }
-
 @media (max-width: 991px) {
-    .booking-hero__image-content {
-       order: -1;
-       margin-bottom: 2rem;
-    }
+    .booking-hero__image-content { order: -1; margin-bottom: 2rem; }
     .booking-hero__text-content .luvex-hero__title,
     .booking-hero__text-content .luvex-hero__subtitle,
     .booking-hero__text-content .luvex-hero__description,
-    .hero-social-proof {
-        text-align: center;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .booking-hero__cta-container {
-        justify-content: center;
-    }
+    .hero-social-proof { text-align: center; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .booking-hero__cta-container { justify-content: center; }
+}
+@media (max-width: 768px) {
+    .benefits-grid { grid-template-columns: 1fr; }
+    .google-calendar-iframe { height: 950px; }
 }
 
-@media (max-width: 768px) {
-    .benefits-grid { 
-        grid-template-columns: 1fr; 
-    }
-    .google-calendar-iframe {
-        height: 800px;
-    }
-    .google-calendar-inner {
-        padding: 0.5rem;
-    }
-}
 
