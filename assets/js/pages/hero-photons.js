@@ -1,18 +1,17 @@
 /**
  * LUVEX Theme - Homepage Hero Photon Animation & CSS Cursor Trigger
  *
- * VERSION 8: DIREKTE CSS-MANIPULATION für Button-Animation
+ * VERSION 9: KLASSENBASIERTE BUTTON-ANIMATION (Final Fix)
  * - Photonen fliegen zum .luvex-simulator-cta Button
  * - Pause-Effekt funktioniert mit .luvex-simulator-cta--animated
- * - Button-Hover per direkter CSS-Manipulation (löst Spezifitätsprobleme)
- * - Special Cursor bleibt erhalten
+ * - Button-Hover per Klassen-Toggle (.hover-active)
+ * - Special Cursor erhalten
+ * - Console Logs entfernt
  */
 document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.getElementById('homepage-hero-canvas');
     const heroSection = document.querySelector('.luvex-hero');
-    if (!canvas || !heroSection) {
-        return;
-    }
+    if (!canvas || !heroSection) return;
 
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -26,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
         isIdle: false
     };
 
-    // Idle-Timer Logic
     let idleTimer;
     const IDLE_TIMEOUT = 3000;
 
@@ -40,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let targetButtonPosition = { x: null, y: null };
     const targetButton = document.querySelector('.luvex-simulator-cta');
-
     const maxParticles = 300;
     const spawnRate = 5;
     const particleColor = 'rgba(109, 213, 237, ';
@@ -142,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     /**
-     * Photonen-Pause Listeners für Button-Hover
+     * Photonen pausieren beim Button-Hover
      */
     function addHoverPauseListeners() {
         const animatedButton = document.querySelector('.luvex-simulator-cta--animated');
@@ -158,46 +155,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     /**
-     * NEUE LÖSUNG: Button Hover Animation per direkter CSS-Manipulation
+     * FINAL LÖSUNG: Klassenbasierte Button-Animation
      */
     function setupButtonHoverAnimation() {
         const btn = document.querySelector('.luvex-simulator-cta--animated');
         if (!btn) return;
         
-        // Erstelle Style-Element für dynamische CSS-Regeln
-        const hoverStyleSheet = document.createElement('style');
-        hoverStyleSheet.id = 'button-hover-styles';
-        document.head.appendChild(hoverStyleSheet);
-        
         btn.addEventListener('mouseenter', () => {
-            hoverStyleSheet.textContent = `
-                .luvex-simulator-cta--animated::after { 
-                    opacity: 1 !important; 
-                    z-index: 0 !important;
-                }
-                .luvex-simulator-cta--animated {
-                    background: transparent !important;
-                    cursor: var(--cursor-pointer) 20 20, pointer !important;
-                    transform: translateY(-2px) scale(1.05) !important;
-                    box-shadow: 0 8px 25px rgba(109, 213, 237, 0.4), 0 0 20px rgba(138, 43, 226, 0.3) !important;
-                    border-color: rgba(109, 213, 237, 0.8) !important;
-                }
-            `;
+            btn.classList.add('hover-active');
         });
         
         btn.addEventListener('mouseleave', () => {
-            hoverStyleSheet.textContent = `
-                .luvex-simulator-cta--animated::after { 
-                    opacity: 0 !important; 
-                    z-index: -1 !important;
-                }
-                .luvex-simulator-cta--animated {
-                    background: rgba(27, 42, 73, 0.5) !important;
-                    transform: none !important;
-                    box-shadow: none !important;
-                    border-color: var(--luvex-bright-cyan) !important;
-                }
-            `;
+            btn.classList.remove('hover-active');
         });
     }
 
@@ -210,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
             animate();
             resetIdleTimer();
             addHoverPauseListeners();
-            setupButtonHoverAnimation(); // Button-Animation Setup
+            setupButtonHoverAnimation();
         }
     }
 
@@ -230,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', setupPhotonAnimation);
     setupPhotonAnimation();
 
-    // --- CSS Cursor Trigger Logic ---
+    // CSS Cursor Trigger Logic
     if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
     const header = document.querySelector('.site-header');
     const triggerAreas = [heroSection, header].filter(Boolean);

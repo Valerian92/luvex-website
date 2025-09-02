@@ -1150,39 +1150,39 @@ input[type="tel"]:focus {
 /* --- 8.2 Scroll-to-Top Button KORRIGIERT --- */
 #scrollToTopBtn {
     display: none;
-    position: fixed !important;
-    bottom: 30px !important;
-    right: 30px !important;
-    left: auto !important;
-    top: auto !important;
-    z-index: 9999 !important;
-    width: 60px !important;
-    height: 60px !important;
-    border-radius: 50% !important;
-    background-color: #1B2A49 !important; /* Luvex Dunkelblau */
-    color: #6dd5ed !important; /* Cyan für Icon */
-    border: 4px solid transparent !important;
-    font-size: 1.4rem !important;
-    cursor: pointer !important;
-    box-shadow: 0 4px 15px rgba(27, 42, 73, 0.2) !important;
-    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease !important;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    left: auto;
+    top: auto;
+    z-index: 9999;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #1B2A49; /* Luvex Dunkelblau */
+    color: #6dd5ed; /* Cyan für Icon */
+    border: 4px solid transparent;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(27, 42, 73, 0.2);
+    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
     opacity: 0;
     transform: translateY(10px);
-    margin: 0 !important;
+    margin: 0;
 }
 
 #scrollToTopBtn.visible {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    opacity: 1 !important;
-    transform: translateY(0) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 #scrollToTopBtn:hover {
-    background-color: #007BFF !important; /* Dunkelblau beim Hover */
-    color: #6dd5ed !important;
-    transform: scale(1.1) !important;
+    background-color: #007BFF; /* Dunkelblau beim Hover */
+    color: #6dd5ed;
+    transform: scale(1.1);
 }
 
 /* Deutschland-Flaggen-Animation Keyframes */
@@ -1214,14 +1214,14 @@ input[type="tel"]:focus {
 }
 
 #scrollToTopBtn.animate-border-flag {
-    animation: german-flag-border 1.5s infinite ease-in-out !important;
+    animation: german-flag-border 1.5s infinite ease-in-out;
 }
 
 #scrollToTopBtn.animate-border-flag:hover {
-    animation-play-state: paused !important;
-    background-color: #007BFF !important;
-    color: #6dd5ed !important;
-    transform: scale(1.15) !important;
+    animation-play-state: paused;
+    background-color: #007BFF;
+    color: #6dd5ed;
+    transform: scale(1.15);
 }
 
 /*
@@ -1254,3 +1254,4 @@ input[type="tel"]:focus {
         width: 100%;
     }
 }
+

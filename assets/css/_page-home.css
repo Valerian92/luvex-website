@@ -1,17 +1,16 @@
 /*
 ==============================================================================
-LUVEX THEME v4.0 - HOMEPAGE (KOMPLETT MIT INTEGRIERTEN ANIMATIONEN)
+LUVEX THEME v4.0 - HOMEPAGE (BUTTON-ANIMATION KOMPLETT REPARIERT)
 ==============================================================================
-Description: Komplette Homepage-Styles mit integrierten Animationen aus 
-             _animation-hero-home.css. Simulator-Button komplett repariert.
+Description: Komplette Homepage-Styles mit funktionierenden Button-Animationen
 Dependencies: _variables.css, _core.css, _components.css
-Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
+Last Update: 2025-09-02 (Button-Animation vollständig repariert)
 ==============================================================================
 */
 
 /*
 ==============================================================================
-1. CANVAS SETUP (AUS _animation-hero-home.css INTEGRIERT)
+1. CANVAS SETUP
 ==============================================================================
 */
 .luvex-hero #homepage-hero-canvas {
@@ -30,11 +29,10 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
 
 /*
 ==============================================================================
-2. HERO SECTION (FINALE STRUKTUR)
+2. HERO SECTION
 ==============================================================================
 */
 
-/* --- 2.1 Hero Section Homepage-Specifics --- */
 .home .luvex-hero__cta-container {
     display: flex;
     flex-direction: column;
@@ -45,7 +43,6 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
     width: 100%;
 }
 
-/* --- 2.2 Hero Container & Content --- */
 .home .luvex-hero__container {
     max-width: 100%;
     width: 100%;
@@ -62,7 +59,6 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
     padding-top: 2rem;
 }
 
-/* --- 2.3 Hero Text Elements (Finale Struktur) --- */
 .home .luvex-hero__title {
     max-width: 1200px;
     font-size: 3.5rem;
@@ -97,20 +93,19 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
 
 /*
 ==============================================================================
-3. SIMULATOR BUTTON (KOMPLETT REPARIERT MIT ALLEN EFFEKTEN)
+3. SIMULATOR BUTTON - HOMEPAGE-SPEZIFISCH (ÜBERSCHREIBT COMPONENTS)
 ==============================================================================
 */
 
-/* --- 3.1 BASE SIMULATOR BUTTON (höhere Spezifität) --- */
-/* REPARATUR: Hintergrund leicht abgedunkelt, damit der Pulse sichtbar wird. Transition für Background entfernt. */
-.luvex-simulator-cta,
-.luvex-hero .luvex-simulator-cta {
+/* Base Button Styles - Override Components */
+.home .luvex-simulator-cta,
+.home .luvex-hero .luvex-simulator-cta {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     gap: var(--space-xs) !important;
     padding: 16px 32px !important;
-    background: rgba(27, 42, 73, 0.5) !important; /* HINTERGRUND FÜR KONTRAST */
+    background: rgba(27, 42, 73, 0.5) !important;
     color: var(--luvex-white) !important;
     border: 2px solid var(--luvex-bright-cyan) !important;
     border-radius: var(--radius-full) !important;
@@ -120,17 +115,17 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
     position: relative !important;
     overflow: hidden !important;
     z-index: 2 !important;
-    cursor: pointer !important;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease !important;
+    cursor: var(--cursor-pointer, pointer) !important;
+    transition: all 0.3s ease !important;
 }
 
-/* --- 3.2 ANIMIERTE VERSION MIT ENERGY PULSE --- */
-.luvex-simulator-cta--animated,
-.luvex-hero .luvex-simulator-cta--animated {
-    animation: pulse-purple-glow 2.5s infinite ease-in-out !important;
+/* Animated Version mit Pulse - Homepage Override */
+.home .luvex-simulator-cta--animated {
+    animation: luvex-border-pulse 2.5s infinite ease-in-out !important;
 }
 
-.luvex-simulator-cta--animated::before {
+/* Purple Energy Pulse Background - Homepage Override */
+.home .luvex-simulator-cta--animated::before {
     content: '' !important;
     position: absolute !important;
     top: 50% !important;
@@ -143,23 +138,13 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
         transparent 70%) !important;
     border-radius: 50% !important;
     transform: translate(-50%, -50%) !important;
-    animation: energy-pulse 2s ease-out infinite !important;
+    animation: luvex-energy-pulse 2s ease-out infinite !important;
     z-index: -1 !important;
     pointer-events: none !important;
 }
 
-/* Text und Icons im Vordergrund */
-.luvex-simulator-cta--animated span,
-.luvex-simulator-cta--animated i,
-.luvex-simulator-cta span,
-.luvex-simulator-cta i {
-    position: relative !important;
-    z-index: 3 !important;
-    color: inherit !important;
-}
-
-/* --- 3.3 CSS Variables für JS-Kontrolle --- */
-.luvex-simulator-cta::after {
+/* Gradient Overlay für Hover - Homepage Override */
+.home .luvex-simulator-cta::after {
     content: '' !important;
     position: absolute !important;
     top: 0 !important;
@@ -174,20 +159,35 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
         var(--luvex-bright-cyan)
     ) !important;
     background-size: 400% 400% !important;
-    z-index: -1 !important;
-    opacity: var(--hover-opacity, 0) !important;
-    transition: opacity 0.4s ease !important;
-    animation: gradient-shift-smooth 3s infinite ease-in-out !important;
     border-radius: var(--radius-full) !important;
+    z-index: -1 !important;
+    opacity: 0 !important;
+    transition: opacity 0.4s ease, z-index 0.1s ease !important;
+    animation: luvex-gradient-flow 3s infinite ease-in-out !important;
 }
 
-/* Transition für Transform wird per JS gesteuert */
-.luvex-simulator-cta {
-    transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease !important;
+/* Hover State - JS wird diese Klasse hinzufügen - Homepage Override */
+.home .luvex-simulator-cta.hover-active {
+    background: transparent !important;
+    transform: translateY(-2px) scale(1.05) !important;
+    box-shadow: 0 8px 25px rgba(109, 213, 237, 0.4), 0 0 20px rgba(138, 43, 226, 0.3) !important;
+    border-color: rgba(109, 213, 237, 0.8) !important;
 }
 
+.home .luvex-simulator-cta.hover-active::after {
+    opacity: 1 !important;
+    z-index: 0 !important;
+}
 
-/* --- 3.5 SEKUNDÄRER BUTTON --- */
+/* Text/Icons im Vordergrund - Homepage Override */
+.home .luvex-simulator-cta span,
+.home .luvex-simulator-cta i {
+    position: relative !important;
+    z-index: 3 !important;
+    color: inherit !important;
+}
+
+/* Secondary Button */
 .home .luvex-hero__cta-secondary {
     display: inline-flex;
     align-items: center;
@@ -213,12 +213,12 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
 
 /*
 ==============================================================================
-4. KEYFRAMES (ALLE ANIMATIONEN)
+4. KEYFRAMES - EINDEUTIGE NAMEN
 ==============================================================================
 */
 
-/* Pulse Animation für Border/Box-Shadow */
-@keyframes pulse-purple-glow {
+/* Border Pulse für Button */
+@keyframes luvex-border-pulse {
     0%, 100% { 
         box-shadow: 
             0 4px 15px rgba(109, 213, 237, 0.3),
@@ -233,8 +233,8 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
     }
 }
 
-/* Gradient Movement */
-@keyframes gradient-shift-smooth {
+/* Gradient Flow für Hover */
+@keyframes luvex-gradient-flow {
     0% { background-position: 0% 50%; }
     25% { background-position: 100% 50%; }
     50% { background-position: 100% 100%; }
@@ -242,8 +242,8 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
     100% { background-position: 0% 50%; }
 }
 
-/* Energy Pulse Effect (aus _animation-hero-home.css) */
-@keyframes energy-pulse {
+/* Purple Energy Pulse */
+@keyframes luvex-energy-pulse {
     0% { 
         width: 0; 
         height: 0; 
@@ -263,7 +263,7 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
 
 /*
 ==============================================================================
-5. UV SIMULATOR SHOWCASE (OPTIMIERT)
+5. UV SIMULATOR SHOWCASE
 ==============================================================================
 */
 
@@ -297,7 +297,6 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
     max-width: 900px;
 }
 
-/* Simulator-CTA Button (anderer Button in der Showcase-Sektion) */
 .simulator-cta { 
     margin-top: 2rem;
     display: inline-flex;
@@ -325,7 +324,7 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
 
 /*
 ==============================================================================
-6. GLOBAL UV EXPERT COMMUNITY SECTION (REPARIERT MIT TITEL-FIX)
+6. COMMUNITY SECTION
 ==============================================================================
 */
 .homepage-community-section {
@@ -400,7 +399,7 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
 
 /*
 ==============================================================================
-7. EVIDENCE-BASED EXPERTISE SECTION (REPARIERT)
+7. EVIDENCE SECTION
 ==============================================================================
 */
 
@@ -447,7 +446,6 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
     min-height: 450px;
 }
 
-/* Das Haupt-Styling für die Team-Mitglied-Karte */
 .team-member.team-member--light {
     position: relative;
     background-color: var(--luvex-white);
@@ -461,7 +459,6 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
     text-align: center;
 }
 
-/* Das runde, überlappende Bild */
 .team-member__photo {
     position: absolute;
     top: -60px;
@@ -509,7 +506,28 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
 
 /*
 ==============================================================================
-8. RESPONSIVE DESIGN
+8. CUSTOM CURSOR
+==============================================================================
+*/
+
+:root {
+    --cursor-default: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="15.5" fill="none" stroke="%236dd5ed" stroke-width="1"/><circle cx="16" cy="16" r="2" fill="%236dd5ed"/></svg>');
+    --cursor-pointer: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" fill="none" stroke="%236dd5ed" stroke-width="2"/><circle cx="20" cy="20" r="3" fill="%236dd5ed"/></svg>');
+}
+
+.homepage-cursor-active {
+    cursor: var(--cursor-default) 16 16, auto;
+}
+
+.homepage-cursor-active a,
+.homepage-cursor-active button,
+.homepage-cursor-active [role="button"] {
+    cursor: var(--cursor-pointer) 20 20, auto;
+}
+
+/*
+==============================================================================
+9. RESPONSIVE
 ==============================================================================
 */
 
@@ -558,7 +576,6 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
         transform: translate(-50%, -50%);
     }
     
-    /* Hero Responsive */
     .home .luvex-hero__title {
         max-width: 90%;
         font-size: 2.5rem;
@@ -569,7 +586,6 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
         margin: 3rem 0;
     }
     
-    /* Button-Animation auch auf Mobile */
     .luvex-simulator-cta--animated {
         padding: 14px 28px;
         font-size: var(--text-sm);
@@ -587,28 +603,3 @@ Last Update: 2025-09-01 (Vollständige Integration & Reparatur)
         margin: 2.5rem 0;
     }
 }
-
-/*
-==============================================================================
-9. HOMEPAGE-SPECIFIC HIGH-PERFORMANCE CSS CURSOR
-==============================================================================
-*/
-
-:root {
-    --cursor-default: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="15.5" fill="none" stroke="%236dd5ed" stroke-width="1"/><circle cx="16" cy="16" r="2" fill="%236dd5ed"/></svg>');
-    --cursor-pointer: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" fill="none" stroke="%236dd5ed" stroke-width="2"/><circle cx="20" cy="20" r="3" fill="%236dd5ed"/></svg>');
-}
-
-.homepage-cursor-active {
-    cursor: var(--cursor-default) 16 16, auto;
-}
-
-.homepage-cursor-active a,
-.homepage-cursor-active button,
-.homepage-cursor-active [role="button"],
-.homepage-cursor-active a:active,
-.homepage-cursor-active button:active,
-.homepage-cursor-active [role="button"]:active {
-    cursor: var(--cursor-pointer) 20 20, auto;
-}
-
