@@ -1,10 +1,11 @@
 /**
  * LUVEX Theme - Homepage Hero Photon Animation & CSS Cursor Trigger
  *
- * VERSION 7: REPARIERTE SELEKTOREN für neue Button-Klassen
- * - Photonen fliegen zum neuen .luvex-simulator-cta Button
+ * VERSION 8: DIREKTE CSS-MANIPULATION für Button-Animation
+ * - Photonen fliegen zum .luvex-simulator-cta Button
  * - Pause-Effekt funktioniert mit .luvex-simulator-cta--animated
- * - Alle vier Probleme behoben
+ * - Button-Hover per direkter CSS-Manipulation (löst Spezifitätsprobleme)
+ * - Special Cursor bleibt erhalten
  */
 document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.getElementById('homepage-hero-canvas');
@@ -21,13 +22,13 @@ document.addEventListener('DOMContentLoaded', function() {
         x: null,
         y: null,
         isHoveringCanvas: false,
-        isPaused: false, // For pausing on button hover
-        isIdle: false // For 3-second inactivity
+        isPaused: false,
+        isIdle: false
     };
 
     // Idle-Timer Logic
     let idleTimer;
-    const IDLE_TIMEOUT = 3000; // 3 seconds
+    const IDLE_TIMEOUT = 3000;
 
     function resetIdleTimer() {
         particleMouse.isIdle = false;
@@ -38,8 +39,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     let targetButtonPosition = { x: null, y: null };
-    
-    // FIX 1: REPARIERTER SELECTOR - Photonen fliegen zum neuen Button
     const targetButton = document.querySelector('.luvex-simulator-cta');
 
     const maxParticles = 300;
@@ -74,13 +73,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         update() {
-            // If paused, do nothing but keep the particle alive
             if (particleMouse.isPaused) return true;
 
             this.trail.push({ x: this.x, y: this.y, life: this.life });
             if (this.trail.length > this.maxTrailLength) this.trail.shift();
 
-            // Target depends on idle state
             let targetX = (particleMouse.isHoveringCanvas && !particleMouse.isIdle && particleMouse.x != null) ? particleMouse.x : targetButtonPosition.x;
             let targetY = (particleMouse.isHoveringCanvas && !particleMouse.isIdle && particleMouse.y != null) ? particleMouse.y : targetButtonPosition.y;
 
@@ -100,7 +97,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         draw() {
             if (!ctx) return;
-            // Draw trail
             for (let i = 0; i < this.trail.length; i++) {
                 const point = this.trail[i];
                 const alpha = (i / this.trail.length) * point.life * 0.3;
@@ -109,7 +105,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 ctx.arc(point.x, point.y, this.size * (i / this.trail.length) * 0.5, 0, Math.PI * 2);
                 ctx.fill();
             }
-            // Draw particle
             ctx.fillStyle = particleColor + this.life + ')';
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -147,8 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     /**
-     * FIX 2: REPARIERTE HOVER-PAUSE LISTENERS für neue Button-Klasse
-     * Photonen pausieren beim Hover über den animierten Simulator-Button
+     * Photonen-Pause Listeners für Button-Hover
      */
     function addHoverPauseListeners() {
         const animatedButton = document.querySelector('.luvex-simulator-cta--animated');
@@ -163,27 +157,49 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-
-    // Button Hover Animation (JS-Controlled)
-function setupButtonHoverAnimation() {
-    const btn = document.querySelector('.luvex-simulator-cta--animated');
-    if (!btn) return;
-    
-    btn.addEventListener('mouseenter', () => {
-        btn.style.setProperty('--hover-opacity', '1');
-        btn.style.transform = 'translateY(-2px) scale(1.05)';
-        btn.style.boxShadow = '0 8px 25px rgba(109, 213, 237, 0.4), 0 0 20px rgba(138, 43, 226, 0.3)';
-    });
-    
-    btn.addEventListener('mouseleave', () => {
-        btn.style.setProperty('--hover-opacity', '0');
-        btn.style.transform = '';
-        btn.style.boxShadow = '';
-    });
-}
-
-// Nach setupPhotonAnimation() aufrufen
-setupButtonHoverAnimation();
+    /**
+     * NEUE LÖSUNG: Button Hover Animation per direkter CSS-Manipulation
+     */
+    function setupButtonHoverAnimation() {
+        const btn = document.querySelector('.luvex-simulator-cta--animated');
+        if (!btn) return;
+        
+        // Erstelle Style-Element für dynamische CSS-Regeln
+        const hoverStyleSheet = document.createElement('style');
+        hoverStyleSheet.id = 'button-hover-styles';
+        document.head.appendChild(hoverStyleSheet);
+        
+        btn.addEventListener('mouseenter', () => {
+            hoverStyleSheet.textContent = `
+                .luvex-simulator-cta--animated::after { 
+                    opacity: 1 !important; 
+                    z-index: 0 !important;
+                }
+                .luvex-simulator-cta--animated {
+                    background: transparent !important;
+                    cursor: var(--cursor-pointer) 20 20, pointer !important;
+                    transform: translateY(-2px) scale(1.05) !important;
+                    box-shadow: 0 8px 25px rgba(109, 213, 237, 0.4), 0 0 20px rgba(138, 43, 226, 0.3) !important;
+                    border-color: rgba(109, 213, 237, 0.8) !important;
+                }
+            `;
+        });
+        
+        btn.addEventListener('mouseleave', () => {
+            hoverStyleSheet.textContent = `
+                .luvex-simulator-cta--animated::after { 
+                    opacity: 0 !important; 
+                    z-index: -1 !important;
+                }
+                .luvex-simulator-cta--animated {
+                    background: rgba(27, 42, 73, 0.5) !important;
+                    transform: none !important;
+                    box-shadow: none !important;
+                    border-color: var(--luvex-bright-cyan) !important;
+                }
+            `;
+        });
+    }
 
     function setupPhotonAnimation() {
         if (animationFrameId) cancelAnimationFrame(animationFrameId);
@@ -193,7 +209,8 @@ setupButtonHoverAnimation();
             particles = [];
             animate();
             resetIdleTimer();
-            addHoverPauseListeners(); // Stellt sicher, dass die Listener aktiv sind.
+            addHoverPauseListeners();
+            setupButtonHoverAnimation(); // Button-Animation Setup
         }
     }
 
@@ -212,7 +229,6 @@ setupButtonHoverAnimation();
 
     window.addEventListener('resize', setupPhotonAnimation);
     setupPhotonAnimation();
-
 
     // --- CSS Cursor Trigger Logic ---
     if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;

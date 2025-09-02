@@ -1,18 +1,21 @@
 /*
 ==============================================================================
-LUVEX THEME v3.5 - ABOUT PAGE (Professional Designer Overhaul)
+LUVEX THEME v3.6 - ABOUT PAGE (Final Designer Polish)
 ==============================================================================
-Description: Implemented custom cursor, refined color contrasts, and polished
-             all sections for a high-end, cohesive look.
+Description: Fully restored Hero animation styles, implemented a robust custom 
+             cursor, refined all section contrasts and layouts for a premium, 
+             cohesive finish.
 Last Update: 2025-09-02
 ==============================================================================
 */
 
 /*
 ==============================================================================
-1. CUSTOM CURSOR & HERO STYLES
+1. HERO SECTION & CUSTOM CURSOR (FULLY RESTORED & INTEGRATED)
 ==============================================================================
 */
+
+/* --- 1.1 Custom Cursor --- */
 .custom-about-cursor {
     position: fixed;
     width: 60px;
@@ -22,7 +25,7 @@ Last Update: 2025-09-02
     pointer-events: none;
     transform: translate(-50%, -50%);
     z-index: 10000;
-    transition: opacity 0.3s ease, transform 0.2s ease, background 0.3s ease, width 0.3s ease, height 0.3s ease;
+    transition: opacity 0.3s ease, background 0.3s ease;
     opacity: 0;
 }
 
@@ -36,21 +39,114 @@ body.custom-cursor-active {
 body.custom-cursor-active .custom-about-cursor {
     opacity: 1;
 }
-/* Hide default cursor only when the custom one is active */
 body.custom-cursor-active .about-hero,
 body.custom-cursor-active .site-header {
     cursor: none;
 }
 
+/* --- 1.2 Hero Section (Original styles restored) --- */
+.about-hero {
+    background: var(--luvex-dark-blue);
+    position: relative;
+    overflow: hidden;
+    min-height: 750px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--luvex-white);
+    padding: 8rem 2rem 6rem;
+}
+
+.about-spotlight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.6;
+    transition: background 0.2s ease;
+}
+
+.about-parallax-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform 0.3s ease-out;
+}
+
+.about-parallax-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.about-layer-grid {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="about-grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(109, 213, 237, 0.08)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23about-grid)"/></svg>');
+    opacity: 0.4;
+}
+
+.about-elements-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto; /* This is crucial for the animation JS */
+}
+
+.about-sci-element {
+    position: absolute !important;
+    padding: 0.5rem 0.8rem;
+    background: rgba(109, 213, 237, 0.05);
+    border: 1px solid rgba(109, 213, 237, 0.15);
+    border-radius: var(--radius-md);
+    color: var(--luvex-white);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: default;
+    backdrop-filter: blur(5px);
+    z-index: 3;
+    opacity: 0.4; 
+    transform: scale(1);
+}
+
+.about-sci-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.about-sci-formula {
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    background: rgba(109, 213, 237, 0.08);
+    border-color: rgba(109, 213, 237, 0.2);
+}
+
+.about-hero__content {
+    position: relative;
+    z-index: 5;
+    max-width: 800px;
+}
+
 
 /*
 ==============================================================================
-2. OUR STORY SECTION (DESIGN REFINED WITH CONTRAST)
+2. OUR STORY SECTION (REFINED WITH CONTRAST)
 ==============================================================================
 */
 
 .our-story-v3 {
-    background: linear-gradient(180deg, var(--luvex-white) 0%, #f7f9fc 100%);
+    background: var(--luvex-gray-100); /* Using a defined variable for consistency */
     padding: 8rem 0; 
 }
 
@@ -161,12 +257,12 @@ body.custom-cursor-active .site-header {
 
 /*
 ==============================================================================
-3. TEAM SECTION (HIGH-END POLISH)
+3. TEAM SECTION (FINAL POLISH & ALIGNMENT FIX)
 ==============================================================================
 */
 
 .team-section-v2 {
-    background: var(--luvex-white);
+    background: var(--luvex-gray-100);
     padding: 8rem 0; 
 }
 
@@ -176,6 +272,7 @@ body.custom-cursor-active .site-header {
 
 .team-section-v2 .section__subtitle {
     color: var(--luvex-gray-700);
+    text-align: center; /* Explicitly center subtitle text */
 }
 
 .team-section-v2__grid {
@@ -255,13 +352,13 @@ body.custom-cursor-active .site-header {
 
 /*
 ==============================================================================
-4. CORE VALUES (REFINED)
+4. CORE VALUES (REFINED LAYOUT)
 ==============================================================================
 */
 
 .core-values-v2 {
     background: var(--luvex-dark-blue);
-    padding: 8rem 0 4rem 0; /* Reduced bottom padding */
+    padding: 8rem 0; /* Restored consistent padding */
     position: relative;
     overflow: hidden;
 }
@@ -289,11 +386,12 @@ body.custom-cursor-active .site-header {
 
 .core-values-v2 .section__subtitle {
     color: var(--luvex-gray-300);
+    text-align: center;
 }
 
 .core-values-v2__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); /* Made cards wider */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjusted width slightly */
     gap: 2.5rem;
     margin-top: 4rem;
 }
@@ -333,12 +431,12 @@ body.custom-cursor-active .site-header {
 
 /*
 ==============================================================================
-5. CROSS-LINK SECTION (POLISHED LAYOUT)
+5. CROSS-LINK SECTION (FINAL LAYOUT)
 ==============================================================================
 */
 .about-crosslinks-section {
     padding: 8rem 0;
-    background-color: var(--luvex-gray-100);
+    background-color: var(--luvex-white);
 }
 
 .crosslink-grid {
@@ -346,11 +444,12 @@ body.custom-cursor-active .site-header {
     grid-template-columns: 1fr 1fr;
     gap: 2.5rem;
     margin-top: 4rem;
+    align-items: stretch; /* Ensures cards have same height */
 }
 
 .crosslink-card {
-    display: flex; /* Changed to flex */
-    flex-direction: column; /* Column layout */
+    display: flex; 
+    flex-direction: column; 
     background: var(--luvex-white);
     padding: 2.5rem;
     border-radius: var(--radius-xl);
@@ -385,7 +484,7 @@ body.custom-cursor-active .site-header {
 .crosslink-card__desc {
     color: var(--luvex-gray-700);
     line-height: 1.7;
-    margin: 0 0 1.5rem 0; /* Consistent margin */
+    margin: 0 0 1.5rem 0; 
 }
 
 .crosslink-card__cta {
@@ -395,7 +494,7 @@ body.custom-cursor-active .site-header {
     align-items: center;
     gap: 0.5rem;
     transition: var(--transition-fast);
-    margin-top: auto; /* Aligns to bottom */
+    margin-top: auto; 
 }
 
 .crosslink-card:hover .crosslink-card__cta {

@@ -1,8 +1,8 @@
 <?php
 /**
- * About Page Template - Overhauled according to content distribution plan V3 (Team section re-integrated)
+ * About Page Template - Final Professional Overhaul
  * @package Luvex
- * @since 3.3.0
+ * @since 3.6.0
  */
 
 get_header(); ?>
@@ -10,12 +10,12 @@ get_header(); ?>
 <!-- Custom Cursor for Hero Section -->
 <div class="custom-about-cursor"></div>
 
-<!-- 1. HERO SECTION (Unchanged HTML, cursor handled by CSS/JS) -->
+<!-- 1. HERO SECTION (HTML Unchanged, CSS restored and fixed) -->
 <section class="luvex-hero about-hero">
     <div class="about-spotlight"></div>
     <div class="about-parallax-container">
         <div class="about-parallax-layer about-layer-grid"></div>
-        <div class.="about-parallax-layer about-layer-elements">
+        <div class="about-parallax-layer about-layer-elements">
             <div class="about-elements-container">
                 <div class="about-sci-element about-sci-text" style="top: 18%; left: 12%;" data-depth="0.3">Knowledge</div>
                 <div class="about-sci-element about-sci-text" style="top: 75%; left: 18%;" data-depth="0.8">Independence</div>
@@ -45,7 +45,7 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- 2. OUR STORY SECTION (Unchanged) -->
+<!-- 2. OUR STORY SECTION (Refined Background) -->
 <section class="section our-story-v3">
     <div class="container container--narrow">
         <div class="our-story-v3__content">
@@ -82,7 +82,7 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- 3. TEAM SECTION (RE-INTEGRATED) -->
+<!-- 3. TEAM SECTION (Styling and alignment fixed) -->
 <section class="section team-section-v2">
     <div class="container container--wide">
         <div class="text-center">
@@ -150,7 +150,7 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- 4. CORE VALUES SECTION (NEW DARK DESIGN) -->
+<!-- 4. CORE VALUES SECTION (Layout fixed) -->
 <section class="section core-values-v2">
     <div class="container container--narrow">
         <div class="text-center">
@@ -188,7 +188,7 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- 5. CROSS-LINK SECTION -->
+<!-- 5. CROSS-LINK SECTION (Layout fixed) -->
 <section class="section about-crosslinks-section">
     <div class="container container--narrow">
          <div class="text-center">
