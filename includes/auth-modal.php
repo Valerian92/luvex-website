@@ -1,9 +1,9 @@
 <?php
 /**
- * Auth-Modal-Template (v5.1 - Final Polished UI)
- * - Implements a sophisticated two-column layout for the login form.
- * - Replaces the 'Remember Me' checkbox with a modern toggle button.
- * - Adds a global 'completed' state script for all input fields.
+ * Auth-Modal-Template (v5.2 - Final Polished UI & Logic)
+ * - Implements the final sophisticated two-column layout for the login form.
+ * - Fixes and enables the global 'completed' state script for all input fields.
+ * - Polishes alignment, spacing, and styling for all login options.
  */
 
 if (!defined('ABSPATH')) exit;
@@ -41,6 +41,10 @@ $default_country_code = 'DE';
                             </div>
                             <!-- Right Column: Options -->
                             <div class="login-column-right">
+                                 <a href="#" class="login-option-button" onclick="showAuthForm('forgot-password')">
+                                    <i class="fa-solid fa-key"></i>
+                                    <span>Forgot Password?</span>
+                                </a>
                                 <label class="remember-me-toggle">
                                     <input type="checkbox" name="remember_me" value="forever">
                                     <div class="toggle-button">
@@ -48,10 +52,6 @@ $default_country_code = 'DE';
                                         <span>Remember Me</span>
                                     </div>
                                 </label>
-                                <a href="#" class="login-option-button" onclick="showAuthForm('forgot-password')">
-                                    <i class="fa-solid fa-key"></i>
-                                    <span>Forgot Password?</span>
-                                </a>
                             </div>
                         </div>
                         <div class="recaptcha-wrapper">
@@ -253,7 +253,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const industryToggleBtn = document.getElementById('industry-toggle-btn');
     const otherIndustryContainer = document.querySelector('.other-industry-container');
     const industryOtherCheckbox = document.getElementById('industry_other_checkbox');
-    const industryOtherText = document.getElementById('industry_other_text');
     
     if (industryToggleBtn && industryGrid && otherIndustryContainer) {
         industryToggleBtn.addEventListener('click', function() {
@@ -264,12 +263,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    if (industryOtherCheckbox && industryOtherText) {
+    if (industryOtherCheckbox) {
         industryOtherCheckbox.addEventListener('change', function() {
-            industryOtherText.style.display = this.checked ? 'block' : 'none';
-            if (this.checked) industryOtherText.focus();
+            const industryOtherText = document.getElementById('industry_other_text');
+            if (industryOtherText) {
+                industryOtherText.style.display = this.checked ? 'block' : 'none';
+                if (this.checked) industryOtherText.focus();
+            }
         });
-        industryOtherText.style.display = industryOtherCheckbox.checked ? 'block' : 'none';
+        const industryOtherTextOnLoad = document.getElementById('industry_other_text');
+        if (industryOtherTextOnLoad) {
+            industryOtherTextOnLoad.style.display = industryOtherCheckbox.checked ? 'block' : 'none';
+        }
     }
 
     document.querySelectorAll('.toggle-password').forEach(toggle => {
@@ -281,10 +286,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // --- NEU: Global "Completed" Style Logic for ALL Inputs ---
+    // --- Global "Completed" Style Logic for ALL Inputs ---
     const allInputs = document.querySelectorAll('#authModal .luvex-input');
     allInputs.forEach(input => {
-        // Function to check and apply style
         const checkCompletion = (element) => {
             if (element.value.trim() !== '') {
                 element.classList.add('completed');
@@ -292,17 +296,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 element.classList.remove('completed');
             }
         };
-
-        // Add event listeners
-        input.addEventListener('focus', function() {
-            this.classList.remove('completed');
-        });
-        input.addEventListener('blur', function() {
-            checkCompletion(this);
-        });
-        
-        // Initial check for pre-filled fields (e.g., by browser)
-        checkCompletion(input);
+        input.addEventListener('focus', function() { this.classList.remove('completed'); });
+        input.addEventListener('blur', function() { checkCompletion(this); });
+        if(document.activeElement !== input) { checkCompletion(input); }
     });
 });
 </script>

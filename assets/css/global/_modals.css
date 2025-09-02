@@ -1,11 +1,11 @@
 /*
 ==============================================================================
-LUVEX THEME - MODAL STYLES (v5.1 - Final Polished UI)
+LUVEX THEME - MODAL STYLES (v5.2 - Final Polished UI & Logic)
 ==============================================================================
 Description: Final, polished version of the auth modal styles, featuring a
              sophisticated two-column login form and a modern UI for all
              form elements.
-Last Update: 2025-09-02 - Implemented final login layout and global input styles.
+Last Update: 2025-09-02 - Implemented final login layout and fixed global styles.
 ==============================================================================
 */
 
@@ -174,17 +174,15 @@ Last Update: 2025-09-02 - Implemented final login layout and global input styles
 .login-column-left {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem; /* Abstand zwischen Email und Passwort */
 }
 
 .login-column-right {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 1rem;
-    height: 100%;
-    padding-top: 4.1rem; /* Aligns with the top of the first input field */
+    align-items: flex-end; /* Richtet Elemente rechtsbündig aus */
+    gap: 1.5rem; /* Abstand zwischen den Optionen */
+    padding-top: 4.1rem; /* Vertikale Ausrichtung an den Input-Feldern */
 }
 
 
@@ -245,41 +243,48 @@ Last Update: 2025-09-02 - Implemented final login layout and global input styles
 
 /* --- 7.1 NEU: Login Options Buttons --- */
 .login-option-button {
-    display: flex;
+    display: inline-flex; /* Wichtig für korrekte Breite */
+    width: fit-content; /* Korrigiert Klick-Bereich */
     align-items: center;
     gap: 0.75rem;
     padding: 0.75rem 1rem;
-    background: transparent;
-    border: 1px solid transparent;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(109, 213, 237, 0.2); /* Neuer Rand */
     border-radius: var(--radius-md);
     color: var(--luvex-gray-300);
     text-decoration: none;
     transition: all 0.3s ease;
     cursor: pointer;
-    justify-content: flex-end;
 }
-.login-option-button:hover { color: var(--luvex-bright-cyan); }
-.login-option-button i { color: var(--luvex-bright-cyan); width: 20px; text-align: center; }
+.login-option-button:hover {
+    border-color: var(--luvex-bright-cyan);
+    color: var(--luvex-white);
+    background: rgba(109, 213, 237, 0.1);
+}
+.login-option-button i {
+    color: var(--luvex-bright-cyan);
+    width: 20px;
+    text-align: center;
+}
 
 /* --- 7.2 NEU: Remember Me Toggle --- */
 .remember-me-toggle {
     cursor: pointer;
-    display: flex;
+    display: inline-flex; /* Wichtig für korrekte Breite */
+    width: fit-content; /* Korrigiert Klick-Bereich */
     align-items: center;
-    justify-content: flex-end;
-    gap: 0.75rem;
 }
 .remember-me-toggle input { display: none; }
 .remember-me-toggle .toggle-button {
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    padding: 0.5rem;
+    padding: 0.75rem 1rem;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(109, 213, 237, 0.2);
-    border-radius: var(--radius-full);
+    border-radius: var(--radius-md);
     color: var(--luvex-gray-300);
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 500;
     transition: all 0.3s ease;
 }
@@ -291,6 +296,7 @@ Last Update: 2025-09-02 - Implemented final login layout and global input styles
     width: 20px;
     height: 20px;
     background: var(--luvex-dark-blue-dark);
+    border: 1px solid rgba(109, 213, 237, 0.3);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -298,8 +304,8 @@ Last Update: 2025-09-02 - Implemented final login layout and global input styles
     transition: all 0.3s ease;
 }
 .remember-me-toggle .toggle-indicator i { font-size: 0.7rem; color: var(--luvex-bright-cyan); opacity: 0; transform: scale(0.5) rotate(-45deg); transition: all 0.3s ease; }
-.remember-me-toggle input:checked + .toggle-button { background: var(--luvex-bright-cyan); color: var(--luvex-dark-blue); }
-.remember-me-toggle input:checked + .toggle-button .toggle-indicator { background: var(--luvex-dark-blue); }
+.remember-me-toggle input:checked + .toggle-button { background: var(--luvex-bright-cyan); color: var(--luvex-dark-blue); font-weight: 600; }
+.remember-me-toggle input:checked + .toggle-button .toggle-indicator { background: var(--luvex-dark-blue); border-color: var(--luvex-dark-blue); }
 .remember-me-toggle input:checked + .toggle-button .toggle-indicator i { opacity: 1; transform: scale(1) rotate(0); }
 
 
@@ -359,7 +365,7 @@ Last Update: 2025-09-02 - Implemented final login layout and global input styles
 .phone-dial-code { padding-left: 3.25rem !important; text-align: left; }
 .phone-mobile-number { flex: 1 1 auto; }
 
-/* NEU: Globaler .completed Stil für alle luvex-inputs */
+/* Globaler .completed Stil für alle luvex-inputs */
 .luvex-input.completed {
     background: var(--luvex-dark-blue-dark) !important;
     color: var(--luvex-bright-cyan) !important;
@@ -377,7 +383,7 @@ Last Update: 2025-09-02 - Implemented final login layout and global input styles
     .luvex-form-grid-2, .login-main-grid { grid-template-columns: 1fr; }
     .selection-grid.industry-grid { grid-template-columns: repeat(4, 1fr); }
     .interests-structured-grid { grid-template-columns: 1fr; }
-    .login-column-right { padding-top: 1rem; flex-direction: row; justify-content: space-between; align-items: center; }
+    .login-column-right { padding-top: 1rem; flex-direction: row-reverse; justify-content: space-between; align-items: center; }
 }
 
 @media (max-width: 768px) {
