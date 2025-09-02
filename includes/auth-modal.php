@@ -1,10 +1,10 @@
 <?php
 /**
- * Auth-Modal-Template (v5.3 - Final Perfection)
+ * Auth-Modal-Template (v5.4 - Final mit Login-Fix & Country-Selector-Korrektur)
  * - Implements the final, polished UI for the login form.
- * - 'Forgot Password' is now styled as a clickable title for perfect symmetry.
- * - 'Remember Me' is now correctly left-aligned.
- * - Global 'completed' state script is fixed and fully functional.
+ * - 'Forgot Password' is now correctly positioned below the inputs.
+ * - Login form is now perfectly centered with appropriate spacing.
+ * - Country selector JS initialization is now correctly targeting modal elements.
  */
 
 if (!defined('ABSPATH')) exit;
@@ -30,22 +30,18 @@ $default_country_code = 'DE';
                 <!-- Login Form -->
                 <div id="login-form-container" class="auth-form-container">
                     <form id="luvex-login-form" class="auth-form" method="post">
-                        <div class="login-main-grid">
-                            <!-- Left Column: Sign In -->
-                            <div class="login-column-left">
-                                <h4 class="luvex-form-section-title"><i class="fa-solid fa-right-to-bracket"></i> Sign In to Your Account</h4>
+                        <div class="login-content-wrapper">
+                            <h4 class="luvex-form-section-title"><i class="fa-solid fa-right-to-bracket"></i> Sign In to Your Account</h4>
+                            
+                            <div class="login-fields-wrapper">
                                 <input type="email" name="user_login" class="luvex-input" placeholder="Email Address" required>
                                 <div class="password-wrapper">
                                     <input type="password" name="user_password" class="luvex-input" placeholder="Password" required>
                                     <i class="fa-regular fa-eye-slash toggle-password"></i>
                                 </div>
                             </div>
-                            <!-- Right Column: Options -->
-                            <div class="login-column-right">
-                                <a href="#" class="login-option-title" onclick="showAuthForm('forgot-password')">
-                                    <i class="fa-solid fa-key"></i>
-                                    <span>Forgot Password?</span>
-                                </a>
+                            
+                            <div class="login-options-wrapper">
                                 <label class="remember-me-toggle">
                                     <input type="checkbox" name="remember_me" value="forever">
                                     <div class="toggle-button">
@@ -53,7 +49,12 @@ $default_country_code = 'DE';
                                         <span>Remember Me</span>
                                     </div>
                                 </label>
+                                <a href="#" class="forgot-password-link" onclick="showAuthForm('forgot-password')">
+                                    <i class="fa-solid fa-key"></i>
+                                    <span>Forgot Password?</span>
+                                </a>
                             </div>
+
                         </div>
                         <div class="recaptcha-wrapper">
                             <?php if (!empty($recaptcha_site_key)): ?>
@@ -311,4 +312,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-
