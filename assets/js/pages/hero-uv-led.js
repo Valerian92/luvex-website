@@ -53,7 +53,7 @@ class UVLEDConvergence {
 
         this.config = {
             ledCount: 250,
-            intensity: 0.7,
+            intensity: 0.3,
             speed: 1.0,
             mouseFollow: true,
             beamWidth: 1.5,

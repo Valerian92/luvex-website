@@ -1,6 +1,6 @@
 /*
 ==============================================================================
-LUVEX THEME - MODAL STYLES (v5.3 - Final Perfection)
+LUVEX THEME - MODAL STYLES (v5.4 - Final Perfection)
 ==============================================================================
 Description: The final, polished version of the auth modal styles, with a
              perfectly balanced login form and fully functional global styles.
@@ -130,14 +130,14 @@ Last Update: 2025-09-02 - Final login layout and global style logic perfected.
 .auth-form {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem; /* Reduzierter Abstand */
 }
 
 .luvex-form-section-title {
     color: var(--luvex-white);
     font-size: var(--text-lg, 18px);
     font-weight: 600;
-    margin-bottom: 1.25rem;
+    margin: 0;
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -151,8 +151,8 @@ Last Update: 2025-09-02 - Final login layout and global style logic perfected.
 
 .password-wrapper { position: relative; }
 .toggle-password { position: absolute; top: 50%; right: 1rem; transform: translateY(-50%); color: var(--luvex-gray-300); cursor: pointer; }
-.form-description { color: var(--luvex-gray-300); text-align: center; margin: -1rem 0 0.5rem 0; }
-.back-to-login-link { color: var(--luvex-bright-cyan); text-decoration: none; text-align: center; margin-top: 1rem; font-weight: 500; }
+.form-description { color: var(--luvex-gray-300); text-align: center; margin-bottom: 1rem; }
+.back-to-login-link { color: var(--luvex-bright-cyan); text-decoration: none; text-align: center; margin-top: 1rem; font-weight: 500; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; }
 .back-to-login-link:hover { text-decoration: underline; }
 
 /*
@@ -161,30 +161,40 @@ Last Update: 2025-09-02 - Final login layout and global style logic perfected.
 ==============================================================================
 */
 
-/* --- 5.1 Final Login Form Grid --- */
-.login-main-grid {
+/* --- 5.1 Final Login Form --- */
+.login-header-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
     align-items: start;
-    padding-bottom: 1rem;
 }
-
-.login-column-left {
+.login-header-grid .luvex-form-section-title {
+    margin-bottom: 0;
+}
+.login-fields-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; /* Abstand zwischen Email und Passwort */
+    gap: 1.5rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+#luvex-login-form .luvex-form-submit {
+    max-width: 400px;
+    margin: 0 auto;
 }
 
-.login-column-right {
+/* --- 5.2 Reset Password Form --- */
+#forgot-password-form-container .luvex-form-section {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Richtet Elemente linksbündig aus */
-    gap: 1.5rem; /* Abstand zwischen den Optionen */
+    align-items: center;
+}
+#forgot-password-form-container .luvex-form-column {
+    width: 100%;
+    max-width: 400px;
 }
 
-
-/* --- 5.2 Register Form Grid --- */
+/* --- 5.3 Register Form Grid --- */
 .luvex-form-grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -244,9 +254,10 @@ Last Update: 2025-09-02 - Final login layout and global style logic perfected.
     color: var(--luvex-white);
     font-size: var(--text-lg, 18px);
     font-weight: 600;
-    margin-bottom: 1.25rem;
-    display: inline-flex;
+    margin: 0;
+    display: flex;
     align-items: center;
+    justify-content: flex-end; /* Align right */
     gap: 0.75rem;
     border-bottom: 1px solid rgba(109, 213, 237, 0.2);
     padding-bottom: 0.75rem;
@@ -257,6 +268,7 @@ Last Update: 2025-09-02 - Final login layout and global style logic perfected.
 }
 .login-option-title i { color: var(--luvex-bright-cyan); }
 .login-option-title:hover { color: var(--luvex-bright-cyan); }
+.login-option-title span { text-align: right; }
 
 /* --- 7.2 Final Remember Me Toggle --- */
 .remember-me-toggle {
@@ -264,6 +276,7 @@ Last Update: 2025-09-02 - Final login layout and global style logic perfected.
     display: inline-flex;
     width: fit-content;
     align-items: center;
+    align-self: flex-start; /* Align to the left of the centered block */
 }
 .remember-me-toggle input { display: none; }
 .remember-me-toggle .toggle-button {
@@ -371,10 +384,10 @@ Last Update: 2025-09-02 - Final login layout and global style logic perfected.
 */
 @media (max-width: 992px) {
     #authModal .modal-content { max-width: 600px; }
-    .luvex-form-grid-2, .login-main-grid { grid-template-columns: 1fr; }
+    .luvex-form-grid-2, .login-header-grid { grid-template-columns: 1fr; }
     .selection-grid.industry-grid { grid-template-columns: repeat(4, 1fr); }
     .interests-structured-grid { grid-template-columns: 1fr; }
-    .login-column-right { padding-top: 1rem; flex-direction: column; align-items: flex-start; }
+    .login-option-title { justify-content: flex-start; }
 }
 
 @media (max-width: 768px) {

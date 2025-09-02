@@ -238,7 +238,7 @@ $default_country_code = 'DE';
                             <span class="btn-text">Send Reset Link</span>
                             <span class="btn-loader"></span>
                         </button>
-                        <a href="#" class="back-to-login-link" onclick="showAuthForm('login')"><i class="fa-solid fa-arrow-left"></i> Back to Login</a>
+                        <a href="#" class="back-to-login-link" onclick="showAuthForm('login')"><i class="fa-solid fa-right-to-bracket"></i> Back to Login</a>
                      </form>
                 </div>
             </div>
