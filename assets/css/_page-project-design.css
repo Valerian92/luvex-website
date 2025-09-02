@@ -1,10 +1,10 @@
 /*
 ==============================================================================
-LUVEX THEME v3.6 - BOOKING PAGE (Harmonious Redesign)
+LUVEX THEME v3.7 - BOOKING PAGE (Final Harmonious Redesign)
 ==============================================================================
-Description: A complete redesign implementing a balanced light/dark theme
-             approach. This ensures perfect contrast, readability, and a
-             dynamic, professional user experience.
+Description: Final redesign based on user feedback. Reverted Calendar and
+             FAQ sections to a consistent, high-contrast dark theme,
+             restoring the preferred "tech-style" for the accordion.
 Last Update: 2025-09-02
 ==============================================================================
 */
@@ -13,21 +13,21 @@ Last Update: 2025-09-02
 #hero-animation-canvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1}.booking-hero{display:flex;align-items:center;justify-content:center}.booking-hero .luvex-hero__container{position:relative;z-index:2;max-width:1200px;width:100%;text-align:left;display:block}.booking-hero__grid{display:grid;grid-template-columns:1fr;gap:3rem;align-items:center}.booking-hero__text-content .luvex-hero__title,.booking-hero__text-content .luvex-hero__subtitle,.booking-hero__text-content .luvex-hero__description{text-align:left;margin-left:0;margin-right:0}.booking-hero .luvex-hero__title{color:var(--luvex-white)}.booking-hero .luvex-hero__subtitle{color:var(--luvex-gray-300);max-width:550px}.booking-hero .luvex-hero__description{color:var(--luvex-gray-300);max-width:550px;line-height:1.7}.booking-hero__cta-container{margin-top:2rem;margin-bottom:2rem;justify-content:flex-start}.hero-scroll-button{padding:1rem 2.5rem;font-size:1.1rem;gap:.75rem}.hero-social-proof{margin-top:2.5rem;opacity:.8}.hero-social-proof p{color:var(--luvex-gray-300);font-size:var(--text-sm,.875rem);margin:0}.booking-hero__image-content{display:flex;justify-content:center;align-items:center;position:relative}.expert-image-wrapper{position:relative;max-width:400px;width:100%}.booking-hero__image{width:100%;height:100%;object-fit:cover;max-height:480px;border-radius:var(--radius-xl);border:2px solid rgba(109,213,237,.4);box-shadow:var(--shadow-lg);position:relative;z-index:2}
 
 /* ==============================================================================
-2. Calendar Section (LIGHT THEME)
+2. Calendar Section (DARK THEME)
 ==============================================================================
 */
 .booking-calendar { 
-    background: var(--luvex-gray-100);
+    background: var(--luvex-dark-blue);
 }
 .booking-calendar__header { 
     text-align: center; 
     margin-bottom: 3rem; 
 }
 .booking-calendar__title { 
-    color: var(--luvex-dark-blue); 
+    color: var(--luvex-white); 
 }
 .booking-calendar__subtitle { 
-    color: var(--luvex-gray-700); 
+    color: var(--luvex-gray-300); 
     max-width: 600px;
 }
 .google-calendar-wrapper--optimized { 
@@ -35,7 +35,7 @@ Last Update: 2025-09-02
     overflow: hidden; 
     margin: 0 auto; 
     max-width: 1000px; 
-    border: 1px solid var(--luvex-gray-200);
+    border: 1px solid rgba(109, 213, 237, 0.1);
     box-shadow: var(--shadow-lg); 
 }
 .google-calendar-iframe { 
@@ -121,46 +121,20 @@ Last Update: 2025-09-02
 }
 
 /* ==============================================================================
-4. FAQ SECTION STYLES (LIGHT THEME)
+4. FAQ SECTION STYLES (DARK THEME - RESTORED)
 ==============================================================================
 */
 .booking-faq {
-    background-color: var(--luvex-gray-100);
+    background-color: var(--luvex-dark-blue-dark);
 }
 .booking-faq .section-header__title {
-    color: var(--luvex-dark-blue);
+    color: var(--luvex-white);
 }
 .booking-faq .section-header__subtitle {
-    color: var(--luvex-gray-700);
+    color: var(--luvex-gray-300);
 }
-.booking-faq .accordion--tech .accordion-item {
-    background-color: var(--luvex-white);
-    border: 1px solid var(--luvex-gray-200);
-}
-.booking-faq .accordion--tech .accordion-item::before {
-    display: none;
-}
-.booking-faq .accordion--tech .accordion-item.active {
-    border-color: var(--luvex-vibrant-blue);
-    box-shadow: var(--shadow-md);
-}
-.booking-faq .accordion--tech .accordion-header h4 {
-    color: var(--luvex-dark-blue);
-}
-.booking-faq .accordion--tech .accordion-item.active .accordion-header h4 {
-    color: var(--luvex-vibrant-blue);
-}
-.booking-faq .accordion--tech .accordion-icon {
-    color: var(--luvex-vibrant-blue);
-}
-.booking-faq .accordion--tech .accordion-body {
-    color: var(--luvex-gray-700);
-}
-.booking-faq .accordion--tech .accordion-item:hover {
-    border-color: var(--luvex-bright-cyan);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-}
+/* The original .accordion--tech styles will now apply correctly on the dark background */
+
 
 /* ==============================================================================
 5. Alternative Contact Section (DARK THEME)
