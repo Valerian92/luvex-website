@@ -1,8 +1,8 @@
 <?php
 /**
- * About Page Template - Overhauled according to content distribution plan
+ * About Page Template - Overhauled according to content distribution plan V3 (Team section re-integrated)
  * @package Luvex
- * @since 3.1.0
+ * @since 3.3.0
  */
 
 get_header(); ?>
@@ -43,7 +43,7 @@ get_header(); ?>
 </section>
 
 <!-- 2. OUR STORY SECTION (Unchanged) -->
-<section class="section our-story-v3 section--light-gray">
+<section class="section our-story-v3">
     <div class="container container--narrow">
         <div class="our-story-v3__content">
             <h2 class="section__title">Building the Future of UV Technology - Together</h2>
@@ -79,8 +79,76 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- 3. CORE VALUES SECTION (Unchanged) -->
-<section class="section core-values-v2 section--light-gray">
+<!-- 3. TEAM SECTION (RE-INTEGRATED) -->
+<section class="section team-section-v2">
+    <div class="container container--wide">
+        <div class="text-center">
+            <h2 class="section__title">Meet Your UV Technology Partners</h2>
+            <p class="section__subtitle">
+                A dedicated team of engineers and specialists with real-world experience and a genuine passion for solving UV challenges.
+            </p>
+        </div>
+        
+        <div class="team-section-v2__grid">
+            <!-- Team Member 1: Valerian -->
+            <div class="team-card-v2 has-shine-effect">
+                <div class="team-card-v2__photo">
+                    <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Bewerbungsbild_Valerian-Huber.jpg" alt="Valerian Huber - UV Technology Specialist & Founder" />
+                </div>
+                <div class="team-card-v2__content">
+                    <h3 class="team-card-v2__name">Valerian Huber</h3>
+                    <p class="team-card-v2__role">Lead UV Process Engineer & Founder</p>
+                    <div class="team-card-v2__tags">
+                        <span>Mechanical Engineering</span>
+                        <span>UV Manufacturing</span>
+                    </div>
+                    <p class="team-card-v2__quote">
+                        "My goal is to bridge the gap between manufacturer and customer with honest, practical guidance."
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Team Member 2: Matthias -->
+            <div class="team-card-v2 has-shine-effect">
+                <div class="team-card-v2__photo">
+                    <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Matthias.jpg" alt="Matthias Slapka - Automation Technology Specialist & CO-Founder" />
+                </div>
+                <div class="team-card-v2__content">
+                    <h3 class="team-card-v2__name">Matthias Slapka</h3>
+                    <p class="team-card-v2__role">Automation & Systems Expert</p>
+                    <div class="team-card-v2__tags">
+                        <span>Electrical Engineering</span>
+                        <span>Automation</span>
+                    </div>
+                    <p class="team-card-v2__quote">
+                        "Great UV technology only works when it integrates perfectly with your existing processes."
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Team Member 3: Claire -->
+            <div class="team-card-v2 has-shine-effect">
+                <div class="team-card-v2__photo">
+                    <img src="https://www.luvex.tech/wp-content/uploads/2025/08/Claire_Bewerbung.jpg" alt="Claire Chen - Asia-Pacific Liaison & Strategic Partnerships" />
+                </div>
+                <div class="team-card-v2__content">
+                    <h3 class="team-card-v2__name">Claire Chen</h3>
+                    <p class="team-card-v2__role">Asia-Pacific Partnerships</p>
+                    <div class="team-card-v2__tags">
+                        <span>International Business</span>
+                        <span>Market Development</span>
+                    </div>
+                    <p class="team-card-v2__quote">
+                        "My role is ensuring global expertise meets local innovation needs across every region."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 4. CORE VALUES SECTION (NEW DARK DESIGN) -->
+<section class="section core-values-v2">
     <div class="container container--narrow">
         <div class="text-center">
             <h2 class="section__title">Our Guiding Principles</h2>
@@ -117,40 +185,34 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- 4. NEW CONTACT INFORMATION SECTION -->
-<section class="section contact-info-section">
+<!-- 5. CROSS-LINK SECTION -->
+<section class="section about-crosslinks-section">
     <div class="container container--narrow">
-        <div class="contact-info-box">
-             <h2 class="contact-info-box__title">Contact Our Team</h2>
-             <div class="contact-info-box__details">
-                <div class="detail-item">
-                    <i class="fa-solid fa-envelope"></i>
-                    <div>
-                        <strong>Email Us</strong>
-                        <a href="mailto:support@luvex.tech">support@luvex.tech</a>
-                    </div>
-                </div>
-                <div class="detail-item">
-                    <i class="fa-solid fa-phone"></i>
-                    <div>
-                        <strong>Call Us</strong>
-                        <span>+49 0174 3122674</span>
-                    </div>
-                </div>
-                <div class="detail-item">
-                    <i class="fa-solid fa-map-marker-alt"></i>
-                    <div>
-                        <strong>Our Location</strong>
-                        <span>Großkarolinenfeld, Germany</span>
-                    </div>
-                </div>
-            </div>
+         <div class="text-center">
+            <h2 class="section__title">What's Next?</h2>
+            <p class="section__subtitle">
+                Our story is just the beginning. Discover how you can connect with us or become part of our mission.
+            </p>
+        </div>
+        <div class="crosslink-grid">
+            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>" class="crosslink-card">
+                <div class="crosslink-card__icon"><i class="fa-solid fa-comments"></i></div>
+                <h3 class="crosslink-card__title">General Inquiry</h3>
+                <p class="crosslink-card__desc">Have a question? Our team is ready to help. Get in touch with us directly.</p>
+                <span class="crosslink-card__cta">Contact Us <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'partner-program' ) ) ); ?>" class="crosslink-card">
+                 <div class="crosslink-card__icon"><i class="fa-solid fa-handshake"></i></div>
+                <h3 class="crosslink-card__title">Become a Partner</h3>
+                <p class="crosslink-card__desc">Are you a manufacturer of high-quality UV technology? Learn about our partnership program.</p>
+                <span class="crosslink-card__cta">Learn More <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
         </div>
     </div>
 </section>
 
 
-<!-- 5. CTA SECTION (UPDATED LINKS) -->
+<!-- 6. CTA SECTION (UPDATED LINKS) -->
 <section class="section cta-section-v2">
     <div class="container container--narrow">
         <div class="cta-v2__content">
@@ -173,3 +235,4 @@ get_header(); ?>
 </section>
 
 <?php get_footer(); ?>
+
