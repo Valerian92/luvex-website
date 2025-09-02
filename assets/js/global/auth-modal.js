@@ -1,9 +1,9 @@
 /**
- * LUVEX THEME - AUTH MODAL LOGIC (v1.4 - Scoped Flag Selector)
+ * LUVEX THEME - AUTH MODAL LOGIC (v1.3 - Scoped Selectors Fix)
  *
  * Steuert das Auth-Modal, die Tabs und initialisiert die Länderauswahl.
- * KORREKTUR: Der Selektor für die Flagge der Telefonvorwahl ist jetzt
- * auf das Registrierungsformular beschränkt, um Konflikte zu vermeiden.
+ * FIX: Alle DOM-Selektoren sind jetzt auf das Modal beschränkt, um Konflikte
+ * mit anderen Instanzen des Country Selectors zu vermeiden.
  */
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -56,29 +56,32 @@ document.addEventListener('DOMContentLoaded', function() {
             feedbackContainer.innerHTML = '';
             feedbackContainer.style.display = 'none';
         }
-        
+
         // Initialisiere den Country Selector, wenn der Register-Tab aktiv wird
         if (formType === 'register' && !countrySelectorInitialized) {
-            initializeCountrySelector();
+            initializeCountrySelectorForModal();
             countrySelectorInitialized = true;
         }
     };
-    
+
     // Globale Funktion für die Tab-Buttons im Modal-HTML
     window.showAuthForm = showAuthForm;
 
     /**
-     * Initialisiert die komplette Logik für die Länderauswahl.
+     * Initialisiert die komplette Logik für die Länderauswahl IM MODAL.
      */
-    const initializeCountrySelector = function() {
-        const selectorElement = document.getElementById('luvex-country-selector-modal');
-        if (!selectorElement) {
-            console.error('LUVEX Country Selector: Container im Modal nicht gefunden.');
+    const initializeCountrySelectorForModal = function() {
+        // Alle Suchen auf den Register-Formular-Container beschränken
+        const registerForm = document.getElementById('register-form-container');
+        if (!registerForm) {
+            console.error('LUVEX Auth Modal: Register form container not found.');
             return;
         }
 
-        // --- DOM Element Selection ---
-        const registerForm = document.getElementById('register-form-container');
+        const selectorElement = registerForm.querySelector('#luvex-country-selector-modal');
+        if (!selectorElement) return;
+
+        // --- DOM Element Selection (Scoped to Modal) ---
         const countryInput = selectorElement.querySelector('.country-selector-input');
         const dropdown = selectorElement.querySelector('.selector-dropdown');
         const searchInput = selectorElement.querySelector('.country-search');
@@ -86,14 +89,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const options = optionsList.querySelectorAll('li');
         const nativeSelect = selectorElement.querySelector('.native-select');
         const flagDisplay = selectorElement.querySelector('.selected-country-flag');
-        
-        const dialCodeInput = document.getElementById('phone-input-dial-code-modal');
-        const mobileInput = document.getElementById('phone-input-mobile-modal');
-        // FIX: Selektor auf das Registrierungsformular beschränkt.
+
+        // Diese Elemente sind außerhalb von selectorElement, aber innerhalb von registerForm
+        const dialCodeInput = registerForm.querySelector('#phone-input-dial-code-modal');
+        const mobileInput = registerForm.querySelector('#phone-input-mobile-modal');
         const dialCodeFlag = registerForm.querySelector('.phone-dial-code-flag');
 
         if (!countryInput || !dropdown || !searchInput || !optionsList || !nativeSelect || !flagDisplay || !dialCodeInput || !mobileInput || !dialCodeFlag) {
-            console.error('LUVEX Country Selector: Ein erforderliches Element fehlt im Modal. Bitte HTML-Struktur prüfen.');
+            console.error('LUVEX Country Selector (Modal): A required element is missing.');
             return;
         }
 
@@ -109,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const toggleDropdown = (forceState) => {
             const isOpen = selectorElement.classList.contains('open');
             const action = forceState !== undefined ? forceState : (isOpen ? 'close' : 'open');
-            
+
             if (action === 'open' && !isOpen) {
                 selectorElement.classList.add('open');
                 searchInput.value = '';
@@ -154,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 dialCodeFlag.textContent = country.flag;
             }
         };
-        
+
         const findCountryByDialCode = (dialCode) => {
             const cleanDialCode = dialCode.trim();
             if (!cleanDialCode) return null;
@@ -174,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.stopPropagation();
             toggleDropdown();
         });
-        
+
         searchInput.addEventListener('input', () => filterOptions(searchInput.value));
 
         optionsList.addEventListener('click', (e) => {
@@ -182,6 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (option) {
                 const countryCode = option.dataset.countryCode;
                 const selectedCountry = countryData.find(c => c.code === countryCode);
+                userModifiedDialCode = false; // Reset on new country selection
                 updateUI(selectedCountry, 'country_selection');
                 toggleDropdown('close');
                 mobileInput.focus();
@@ -210,17 +214,6 @@ document.addEventListener('DOMContentLoaded', function() {
                      nativeSelect.value = '';
                 }
             }
-        });
-        
-        mobileInput.addEventListener('blur', () => {
-            if (mobileInput.value.trim() !== '') {
-                mobileInput.classList.add('completed');
-            } else {
-                mobileInput.classList.remove('completed');
-            }
-        });
-         mobileInput.addEventListener('focus', () => {
-            mobileInput.classList.remove('completed');
         });
 
         document.addEventListener('click', (e) => {

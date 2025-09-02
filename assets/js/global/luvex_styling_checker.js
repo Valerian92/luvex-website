@@ -1,8 +1,7 @@
 /**
- * LUVEX STYLING CHECKER v1.2
+ * LUVEX STYLING CHECKER v1.3
  * Umfassende automatische Analyse von Layout, Typografie, Kontrasten und mehr.
- * Integriert sich in das bestehende LuvexDebug-System.
- * v1.2: Detaillierte Analyse-Funktionen wiederhergestellt.
+ * v1.3: Kontrast- und Accessibility-Checks verfeinert, um False Positives zu reduzieren.
  */
 window.LuvexStylingChecker = {
 
@@ -84,17 +83,18 @@ window.LuvexStylingChecker = {
 
     analyzeAccessibility() {
         const issues = [];
-        const interactiveElements = document.querySelectorAll('button, a, input, select, textarea, [tabindex]');
-        interactiveElements.forEach(el => {
-            const focusStyles = getComputedStyle(el);
-            if ((focusStyles.outlineStyle === 'none' || parseFloat(focusStyles.outlineWidth) === 0) && focusStyles.boxShadow === 'none') {
-                 issues.push({ element: el, type: 'missing-focus-indicator', recommendation: 'Füge sichtbaren Focus-Indikator hinzu (box-shadow oder outline).', severity: 'high' });
+        // REFINED: Check only for explicit removal of focus outline.
+        document.querySelectorAll('a, button, input, textarea, select, [tabindex]').forEach(el => {
+            const styles = getComputedStyle(el);
+            if (styles.outlineStyle === 'none' || styles.outlineWidth === '0px') {
+                 issues.push({ element: el, type: 'removed-focus-indicator', recommendation: 'Element hat "outline: none". Stelle eine sichtbare :focus Alternative sicher (z.B. box-shadow).', severity: 'high' });
             }
         });
 
+        // REFINED: Ignore decorative images (alt="").
         document.querySelectorAll('img').forEach(img => {
-            if (!img.alt || img.alt.trim() === '') {
-                issues.push({ element: img, type: 'missing-alt-text', src: img.src, recommendation: 'Füge beschreibenden Alt-Text hinzu.', severity: 'medium' });
+            if (!img.hasAttribute('alt')) {
+                issues.push({ element: img, type: 'missing-alt-text', src: img.src, recommendation: 'Füge ein beschreibendes alt-Attribut hinzu. Für dekorative Bilder alt="" verwenden.', severity: 'medium' });
             }
         });
 
@@ -136,10 +136,16 @@ window.LuvexStylingChecker = {
 
     analyzeContrasts() {
         const issues = [];
-        document.querySelectorAll('p, span, a, h1, h2, h3, h4, h5, h6, li, button').forEach(el => {
+        // REFINED: Check only elements with actual text content.
+        document.querySelectorAll('p, span, a, h1, h2, h3, h4, h5, h6, li, button, strong, em').forEach(el => {
+            if (el.textContent.trim().length === 0 || getComputedStyle(el).visibility === 'hidden') {
+                return; // Skip empty or hidden elements
+            }
+
             const styles = getComputedStyle(el);
             const textColor = this.getRGBFromString(styles.color);
-            const bgColor = this.getRGBFromString(this.findParentBackgroundColor(el));
+            // REFINED: More reliable background color detection.
+            const bgColor = this.getRGBFromString(this.findEffectiveBackgroundColor(el));
             
             if (textColor && bgColor) {
                 const contrast = this.calculateContrast(textColor, bgColor);
@@ -237,13 +243,14 @@ window.LuvexStylingChecker = {
         return match ? { r: parseInt(match[1]), g: parseInt(match[2]), b: parseInt(match[3]) } : null;
     },
     
-    findParentBackgroundColor(el) {
+    findEffectiveBackgroundColor(el) {
         let current = el;
-        while (current.parentElement) {
-            const bgColor = getComputedStyle(current.parentElement).backgroundColor;
+        while (current) {
+            const bgColor = getComputedStyle(current).backgroundColor;
             if (bgColor && bgColor !== 'transparent' && !bgColor.startsWith('rgba(0, 0, 0, 0)')) {
                 return bgColor;
             }
+            if (current === document.body) break;
             current = current.parentElement;
         }
         return 'rgb(255, 255, 255)'; // Default to white
@@ -317,7 +324,6 @@ window.LuvexStylingChecker = {
                     console.log(`${i + 1}. ${issue.type}:`, issue.elements || issue.element);
                     if (issue.recommendation) console.log(`   Empfehlung: ${issue.recommendation}`);
                     if (issue.severity) console.log(`   Priorität: ${this.getSeverityIcon(issue.severity)} ${issue.severity.toUpperCase()}`);
-                    // Add more details for restored functions
                     if (issue.current) console.log(`   Aktuell: ${issue.current} → Empfohlen: ${issue.recommended}`);
                     if (issue.reasoning) console.log(`   Begründung: ${issue.reasoning}`);
                     if (issue.currentGap) console.log(`   Abstand: ${issue.currentGap} → ${issue.recommendedGap}`);
