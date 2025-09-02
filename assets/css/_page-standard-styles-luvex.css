@@ -1,6 +1,6 @@
 /*
 ==============================================================================
-LUVEX THEME - STANDARD STYLES PAGE (v3.5 - Increased Specificity)
+LUVEX THEME - STANDARD STYLES PAGE (v3.5 - Input Completion Effect)
 ==============================================================================
 */
 
@@ -38,7 +38,7 @@ LUVEX THEME - STANDARD STYLES PAGE (v3.5 - Increased Specificity)
 
 /*
 ==============================================================================
-FORM-READY COUNTRY SELECTOR STYLES (v2.3 - Increased Specificity)
+FORM-READY COUNTRY SELECTOR STYLES (v2.3 - Final)
 ==============================================================================
 */
 .component-preview-wrapper {
@@ -83,7 +83,7 @@ FORM-READY COUNTRY SELECTOR STYLES (v2.3 - Increased Specificity)
 }
 
 .country-selector-input {
-    padding-left: 3.25rem !important; /* More space for the flag */
+    padding-left: 3.25rem !important;
     cursor: pointer !important;
 }
 
@@ -197,37 +197,67 @@ FORM-READY COUNTRY SELECTOR STYLES (v2.3 - Increased Specificity)
 .luvex-country-selector .country-list-options .name { font-weight: 500; color: var(--luvex-white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 .luvex-country-selector .country-list-options .dial-code { color: var(--luvex-gray-300); font-size: 0.9em; margin-left: auto; }
 
-/* Phone Input Specifics - Increased Specificity */
-.luvex-form-group .phone-input-group {
+/* Phone Input Specifics */
+.phone-input-group {
     display: flex;
     align-items: center;
-    gap: 0.5rem; /* Fügt die Lücke zwischen den Feldern hinzu */
+    gap: 0.5rem; /* Creates the space between the fields */
 }
 
-.phone-input-group .phone-dial-code-wrapper {
+.phone-dial-code-wrapper {
     position: relative;
-    flex: 0 0 120px; /* Breite leicht angepasst für besseres Aussehen */
+    display: flex;
+    align-items: center;
+    flex: 0 0 120px;
 }
 
-.phone-dial-code-wrapper .phone-dial-code-flag {
+.phone-dial-code-flag {
     position: absolute;
     left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
     font-size: 1.5rem;
     pointer-events: none;
     line-height: 1;
 }
 
-.phone-dial-code-wrapper .phone-dial-code {
+.phone-dial-code {
     border-radius: var(--radius-md);
-    padding-left: 3.25rem !important; /* Platz für die Flagge */
-    text-align: left; /* Text linksbündig für konsistentes Aussehen */
+    text-align: center;
+    padding-left: 3.25rem !important; /* Space for the flag */
+    width: 100%;
 }
 
-.phone-input-group .phone-mobile-number {
+.phone-mobile-number {
     flex: 1 1 auto;
     border-radius: var(--radius-md);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Add transition */
+}
+
+.phone-mobile-number:focus,
+.phone-dial-code:focus {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* --- NEU: FIX FÜR BROWSER INPUT STYLES --- */
+.component-preview-wrapper .luvex-input:focus {
+    background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.component-preview-wrapper .luvex-input:-webkit-autofill,
+.component-preview-wrapper .luvex-input:-webkit-autofill:hover,
+.component-preview-wrapper .luvex-input:-webkit-autofill:focus,
+.component-preview-wrapper .luvex-input:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--luvex-white) !important;
+    -webkit-box-shadow: 0 0 0px 1000px var(--luvex-dark-blue-medium) inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* --- NEU: STIL FÜR AUSGEFÜLLTES, NICHT-FOKUSSIERTES FELD --- */
+.phone-mobile-number.completed {
+    background: var(--luvex-dark-blue-medium) !important;
+    color: var(--luvex-bright-cyan) !important;
+    border-color: var(--luvex-bright-cyan) !important;
 }
 
 

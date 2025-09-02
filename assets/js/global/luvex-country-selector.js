@@ -3,7 +3,7 @@
  *
  * Description: Steuert eine für Formulare optimierte, durchsuchbare Länderauswahl,
  * die mit separaten Telefon-Vorwahl- und Nummernfeldern synchronisiert ist.
- * Version: 5.5 (Final Logic)
+ * Version: 5.6 (Completion Effect Added)
  */
 document.addEventListener('DOMContentLoaded', function() {
     const selectorElement = document.getElementById('luvex-country-selector');
@@ -151,6 +151,20 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+    // --- NEU: Event Listener für den "completed" Effekt ---
+    mobileInput.addEventListener('blur', () => {
+        if (mobileInput.value.trim() !== '') {
+            mobileInput.classList.add('completed');
+        } else {
+            mobileInput.classList.remove('completed');
+        }
+    });
+     // Remove completed style on focus
+     mobileInput.addEventListener('focus', () => {
+        mobileInput.classList.remove('completed');
+    });
+
 
     document.addEventListener('click', (e) => {
         if (!selectorElement.contains(e.target)) {
