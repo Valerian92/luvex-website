@@ -374,6 +374,7 @@ function luvex_add_context_classes($classes) {
 // 12. ADMIN MENU ITEM FILTER (AKTUALISIERT & VERBESSERT)
 add_filter('wp_nav_menu_objects', 'luvex_filter_admin_menu_items', 10, 2);
 function luvex_filter_admin_menu_items($sorted_menu_items, $args) {
+    // Diese Bedingung ist korrekt: Admins sehen alles im Hauptmenü.
     if ($args->theme_location != 'primary' || current_user_can('manage_options')) {
         return $sorted_menu_items;
     }
@@ -384,8 +385,14 @@ function luvex_filter_admin_menu_items($sorted_menu_items, $args) {
     
     $ids_to_hide = [];
     
+    // KORRIGIERTE LOGIK:
+    // Wir durchlaufen alle Menüpunkte und prüfen den Slug der verlinkten Seite.
     foreach ($sorted_menu_items as $item) {
-        if (isset($item->post_name) && in_array($item->post_name, $admin_only_slugs) || in_array($item->menu_item_parent, $ids_to_hide)) {
+        // Holt den "Slug" (den echten Seitennamen) der Seite, auf die der Menüpunkt verlinkt.
+        $slug = ($item->object === 'page') ? get_post_field('post_name', $item->object_id) : '';
+
+        // Prüft, ob der Slug in unserer Admin-Liste ist ODER ob es ein Kind-Element eines bereits zu verbergenden Punktes ist.
+        if ((!empty($slug) && in_array($slug, $admin_only_slugs)) || in_array($item->menu_item_parent, $ids_to_hide)) {
             $ids_to_hide[] = $item->ID;
         }
     }
@@ -398,4 +405,3 @@ function luvex_filter_admin_menu_items($sorted_menu_items, $args) {
     
     return $sorted_menu_items;
 }
-
