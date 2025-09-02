@@ -2,13 +2,26 @@ document.addEventListener('DOMContentLoaded', function() {
     const scrollToTopBtn = document.getElementById('scrollToTopBtn');
     const footerElement = document.getElementById('colophon');
 
-    // Sicherheitsabfrage, falls Elemente nicht gefunden werden.
     if (!scrollToTopBtn || !footerElement) {
         console.error('Scroll-to-top button or footer element not found.');
         return;
     }
 
-    // --- LOGIK 1: Button ein- und ausblenden beim Scrollen (Bestehend) ---
+    // Sicherstellen, dass der Button korrekt positioniert ist
+    function ensureCorrectPosition() {
+        scrollToTopBtn.style.position = 'fixed';
+        scrollToTopBtn.style.bottom = '30px';
+        scrollToTopBtn.style.right = '30px';
+        scrollToTopBtn.style.left = 'auto';
+        scrollToTopBtn.style.top = 'auto';
+        scrollToTopBtn.style.margin = '0';
+        scrollToTopBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+    }
+
+    // Initial korrekte Position setzen
+    ensureCorrectPosition();
+
+    // Button ein- und ausblenden beim Scrollen
     window.addEventListener('scroll', function() {
         if (window.scrollY > 300) {
             scrollToTopBtn.classList.add('visible');
@@ -17,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // --- LOGIK 2: Nach oben scrollen bei Klick (Bestehend) ---
+    // Nach oben scrollen bei Klick
     scrollToTopBtn.addEventListener('click', function() {
         window.scrollTo({
             top: 0,
@@ -25,47 +38,30 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // --- NEUE LOGIK 3: Deutschland-Flaggen-Animation auslösen, wenn der Footer sichtbar wird ---
-    
-    // Konfiguration für den Observer: Löst aus, wenn der Footer unten in den Viewport kommt.
+    // Deutschland-Flaggen-Animation bei Footer-Sichtbarkeit
     const observerOptions = {
-        root: null, // Beobachtet den Viewport
-        rootMargin: '0px 0px -50px 0px', // Trigger-Zone 50px über dem unteren Rand
-        threshold: 0.01 // Löst schon bei minimaler Sichtbarkeit aus
+        root: null,
+        rootMargin: '0px 0px -50px 0px',
+        threshold: 0.01
     };
 
-    // Callback-Funktion, die aufgerufen wird, wenn sich die Sichtbarkeit ändert.
     const intersectionCallback = (entries) => {
         entries.forEach(entry => {
-            // Wenn der Footer in die Trigger-Zone eintritt...
             if (entry.isIntersecting) {
-                // Deutschland-Flaggen-Animation aktivieren
                 scrollToTopBtn.classList.add('animate-border-flag');
-                
-                // Optional: Verschiedene Animationsstile je nach Präferenz
-                // scrollToTopBtn.classList.add('animate-border-flag-pulse'); // Mit Pulse-Effekt
-                // scrollToTopBtn.classList.add('animate-border-flag-soft'); // Sanftere Version
-                
                 console.log('Deutschland-Flaggen-Animation aktiviert');
             } else {
-                // Alle Flaggen-Animationen entfernen
                 scrollToTopBtn.classList.remove('animate-border-flag');
-                scrollToTopBtn.classList.remove('animate-border-flag-pulse');
-                scrollToTopBtn.classList.remove('animate-border-flag-soft');
-                
                 console.log('Deutschland-Flaggen-Animation deaktiviert');
             }
         });
     };
 
-    // Erstellen und Starten des Observers.
     const observer = new IntersectionObserver(intersectionCallback, observerOptions);
     observer.observe(footerElement);
-    
-    // Debug-Information (nur in Entwicklungsumgebung)
-    if (typeof console !== 'undefined' && console.log) {
-        console.log('Scroll-to-Top mit Deutschland-Flaggen-Animation initialisiert');
-        console.log('Footer-Element gefunden:', footerElement);
-        console.log('Button-Element gefunden:', scrollToTopBtn);
-    }
+
+    // Position regelmäßig überprüfen (falls andere Scripts den Button verschieben)
+    setInterval(ensureCorrectPosition, 5000);
+
+    console.log('Scroll-to-Top mit Deutschland-Flaggen-Animation und Positions-Fix initialisiert');
 });

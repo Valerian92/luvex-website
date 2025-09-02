@@ -217,7 +217,7 @@ function luvex_footer_legal_fallback() {
 ?>
 
 <button id="scrollToTopBtn" title="Nach oben scrollen">
-    <i class="fa-solid fa-arrow-up"></i>
+    <i class="fas fa-chevron-up"></i>
 </button>
 
 <?php 
