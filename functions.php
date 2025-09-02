@@ -2,7 +2,7 @@
 /**
  * LUVEX Theme Functions - COMPLETE WITH PRIORITY SYSTEM
  * Description: Komplette Theme-Setup-, Navigations- und Asset-Lade-Logik mit CSS Priority Loading.
- * VERSION: 4.5 - Simplified template part path for accordion.
+ * VERSION: 4.6 - Added styling checker script for admins.
  * @package Luvex
  */
 
@@ -154,8 +154,11 @@ function luvex_enqueue_assets() {
         'luvex-interactive-accordion' => 'global/interactive-accordion.js',
     ];
     
+    // Admin-only Scripts
     if (is_user_logged_in() && current_user_can('manage_options')) {
         $global_scripts['luvex-debug'] = 'global/debug-scripts.js';
+        // NEU: Lade das Styling Checker Skript nur für Admins
+        $global_scripts['luvex-styling-checker'] = 'global/luvex_styling_checker.js';
     }
     
     foreach($global_scripts as $handle => $path) {
