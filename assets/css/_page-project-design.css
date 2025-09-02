@@ -1,66 +1,23 @@
 /*
 ==============================================================================
-LUVEX THEME v3.5 - BOOKING PAGE (Final Refinement)
+LUVEX THEME v3.6 - BOOKING PAGE (Harmonious Redesign)
 ==============================================================================
-Description: Complete overhaul for a bright, professional, and harmonious
-             look. This version transitions from the dark hero to a
-             consistent light theme, solving all contrast and color issues.
+Description: A complete redesign implementing a balanced light/dark theme
+             approach. This ensures perfect contrast, readability, and a
+             dynamic, professional user experience.
 Last Update: 2025-09-02
 ==============================================================================
 */
 
 /* --- 1. Hero Section (No Changes) --- */
-#hero-animation-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-.booking-hero {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.booking-hero .luvex-hero__container {
-    position: relative;
-    z-index: 2;
-    max-width: 1200px;
-    width: 100%;
-    text-align: left;
-    display: block;
-}
-.booking-hero__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    align-items: center;
-}
-.booking-hero__text-content .luvex-hero__title,
-.booking-hero__text-content .luvex-hero__subtitle,
-.booking-hero__text-content .luvex-hero__description {
-    text-align: left;
-    margin-left: 0;
-    margin-right: 0;
-}
-.booking-hero .luvex-hero__title { color: var(--luvex-white); }
-.booking-hero .luvex-hero__subtitle { color: var(--luvex-gray-300); max-width: 550px; }
-.booking-hero .luvex-hero__description { color: var(--luvex-gray-300); max-width: 550px; line-height: 1.7; }
-.booking-hero__cta-container { margin-top: 2rem; margin-bottom: 2rem; justify-content: flex-start; }
-.hero-scroll-button { padding: 1rem 2.5rem; font-size: 1.1rem; gap: 0.75rem; }
-.hero-social-proof { margin-top: 2.5rem; opacity: 0.8; }
-.hero-social-proof p { color: var(--luvex-gray-300); font-size: var(--text-sm, 0.875rem); margin: 0; }
-.booking-hero__image-content { display: flex; justify-content: center; align-items: center; position: relative; }
-.expert-image-wrapper { position: relative; max-width: 400px; width: 100%; }
-.booking-hero__image { width: 100%; height: 100%; object-fit: cover; max-height: 480px; border-radius: var(--radius-xl); border: 2px solid rgba(109, 213, 237, 0.4); box-shadow: var(--shadow-lg); position: relative; z-index: 2; }
+#hero-animation-canvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1}.booking-hero{display:flex;align-items:center;justify-content:center}.booking-hero .luvex-hero__container{position:relative;z-index:2;max-width:1200px;width:100%;text-align:left;display:block}.booking-hero__grid{display:grid;grid-template-columns:1fr;gap:3rem;align-items:center}.booking-hero__text-content .luvex-hero__title,.booking-hero__text-content .luvex-hero__subtitle,.booking-hero__text-content .luvex-hero__description{text-align:left;margin-left:0;margin-right:0}.booking-hero .luvex-hero__title{color:var(--luvex-white)}.booking-hero .luvex-hero__subtitle{color:var(--luvex-gray-300);max-width:550px}.booking-hero .luvex-hero__description{color:var(--luvex-gray-300);max-width:550px;line-height:1.7}.booking-hero__cta-container{margin-top:2rem;margin-bottom:2rem;justify-content:flex-start}.hero-scroll-button{padding:1rem 2.5rem;font-size:1.1rem;gap:.75rem}.hero-social-proof{margin-top:2.5rem;opacity:.8}.hero-social-proof p{color:var(--luvex-gray-300);font-size:var(--text-sm,.875rem);margin:0}.booking-hero__image-content{display:flex;justify-content:center;align-items:center;position:relative}.expert-image-wrapper{position:relative;max-width:400px;width:100%}.booking-hero__image{width:100%;height:100%;object-fit:cover;max-height:480px;border-radius:var(--radius-xl);border:2px solid rgba(109,213,237,.4);box-shadow:var(--shadow-lg);position:relative;z-index:2}
 
 /* ==============================================================================
-2. Calendar Section (REFINED LIGHT & AIRY DESIGN)
+2. Calendar Section (LIGHT THEME)
 ==============================================================================
 */
 .booking-calendar { 
-    background: linear-gradient(180deg, var(--luvex-white) 0%, var(--luvex-gray-100) 100%);
+    background: var(--luvex-gray-100);
 }
 .booking-calendar__header { 
     text-align: center; 
@@ -71,6 +28,7 @@ Last Update: 2025-09-02
 }
 .booking-calendar__subtitle { 
     color: var(--luvex-gray-700); 
+    max-width: 600px;
 }
 .google-calendar-wrapper--optimized { 
     border-radius: var(--radius-xl); 
@@ -87,14 +45,8 @@ Last Update: 2025-09-02
     border: none; 
 }
 
-/* --- 3. Seamless Background Wrapper --- */
-.content-wrapper-bg {
-    background-color: var(--luvex-gray-100);
-    padding: 0.1px 0;
-}
-
 /* ==============================================================================
-4. Universal Section Header & Benefits Section
+3. Universal Section Header & Benefits Section (DARK THEME)
 ==============================================================================
 */
 .section-header {
@@ -105,17 +57,21 @@ Last Update: 2025-09-02
 .section-header__title {
     font-size: clamp(2rem, 4vw, 2.5rem);
     font-weight: 600;
-    color: var(--luvex-dark-blue);
     margin-bottom: 1rem;
 }
 .section-header__subtitle {
     font-size: var(--text-lg);
-    color: var(--luvex-gray-700);
     line-height: 1.7;
 }
+
 .booking-benefits {
+    background-color: var(--luvex-dark-blue);
     padding-top: 8rem;
     padding-bottom: 8rem;
+}
+.booking-benefits .section-header__title,
+.booking-benefits .section-header__subtitle {
+    color: var(--luvex-white);
 }
 .benefits-grid { 
     display: grid; 
@@ -123,20 +79,20 @@ Last Update: 2025-09-02
     gap: 2rem; 
 }
 .benefit-card { 
-    background: var(--luvex-white); 
+    background: var(--luvex-dark-blue-light); 
     border-radius: var(--radius-lg); 
-    border: 1px solid var(--luvex-gray-200); 
+    border: 1px solid rgba(109, 213, 237, 0.1); 
     padding: 2.5rem 2rem; 
     display: flex; 
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: 1.5rem; 
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    transition: transform 0.3s ease, background-color 0.3s ease; 
 }
 .benefit-card:hover { 
     transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
+    background-color: var(--luvex-dark-blue-medium);
 }
 .benefit-card__icon { 
     flex-shrink: 0; 
@@ -154,36 +110,39 @@ Last Update: 2025-09-02
 .benefit-card__title { 
     font-size: 1.25rem; 
     font-weight: 600; 
-    color: var(--luvex-dark-blue); 
+    color: var(--luvex-white); 
     margin-top: 0;
     margin-bottom: 0.5rem; 
 }
 .benefit-card__description { 
-    color: var(--luvex-gray-700); 
+    color: var(--luvex-gray-300); 
     line-height: 1.6; 
     margin: 0; 
 }
 
 /* ==============================================================================
-5. FAQ SECTION STYLES (LIGHT THEME)
+4. FAQ SECTION STYLES (LIGHT THEME)
 ==============================================================================
 */
 .booking-faq {
     background-color: var(--luvex-gray-100);
 }
-.booking-faq .section-header {
-    margin-bottom: 3rem;
+.booking-faq .section-header__title {
+    color: var(--luvex-dark-blue);
 }
-/* Accordion Overrides for Light Theme */
+.booking-faq .section-header__subtitle {
+    color: var(--luvex-gray-700);
+}
 .booking-faq .accordion--tech .accordion-item {
     background-color: var(--luvex-white);
     border: 1px solid var(--luvex-gray-200);
 }
 .booking-faq .accordion--tech .accordion-item::before {
-    display: none; /* Gradient border not needed on light theme */
+    display: none;
 }
 .booking-faq .accordion--tech .accordion-item.active {
     border-color: var(--luvex-vibrant-blue);
+    box-shadow: var(--shadow-md);
 }
 .booking-faq .accordion--tech .accordion-header h4 {
     color: var(--luvex-dark-blue);
@@ -199,34 +158,36 @@ Last Update: 2025-09-02
 }
 .booking-faq .accordion--tech .accordion-item:hover {
     border-color: var(--luvex-bright-cyan);
+    transform: translateY(-4px);
     box-shadow: var(--shadow-md);
 }
 
-/* --- 6. Alternative Contact Section --- */
+/* ==============================================================================
+5. Alternative Contact Section (DARK THEME)
+==============================================================================
+*/
 .booking-alternative { 
     text-align: center; 
-    background: var(--luvex-white); 
+    background: var(--luvex-dark-blue-dark); 
 }
 .booking-alternative__title { 
-    color: var(--luvex-dark-blue); 
+    color: var(--luvex-white); 
 }
 .booking-alternative__description { 
-    color: var(--luvex-gray-700); 
+    color: var(--luvex-gray-300); 
 }
 .booking-alternative .btn--outline {
-    border-color: var(--luvex-vibrant-blue);
-    color: var(--luvex-vibrant-blue);
+    border-color: rgba(109, 213, 237, 0.5);
+    color: var(--luvex-bright-cyan);
 }
 .booking-alternative .btn--outline:hover {
-    background-color: var(--luvex-vibrant-blue);
-    border-color: var(--luvex-vibrant-blue);
-    color: var(--luvex-white);
+    background-color: var(--luvex-bright-cyan);
+    border-color: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
 }
 
-/* --- 7. Responsive Overrides --- */
-@media (min-width: 992px) {
-    .booking-hero__grid { grid-template-columns: 1.1fr 1fr; gap: 4rem; }
-}
+/* --- 6. Responsive Overrides --- */
+@media (min-width: 992px) { .booking-hero__grid { grid-template-columns: 1.1fr 1fr; gap: 4rem; } }
 @media (max-width: 991px) {
     .booking-hero__image-content { order: -1; margin-bottom: 2rem; }
     .booking-hero__text-content .luvex-hero__title,
@@ -239,5 +200,4 @@ Last Update: 2025-09-02
     .benefits-grid { grid-template-columns: 1fr; }
     .google-calendar-iframe { height: 950px; }
 }
-
 

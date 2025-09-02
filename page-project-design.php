@@ -4,7 +4,7 @@
  * Streamlined booking page focused on calendar integration
  * UPDATED: Integrated the new 'Tech-Style' Accordion component for FAQs.
  * @package Luvex
- * @since 3.4.0
+ * @since 3.5.0
  */
 
 get_header(); ?>
@@ -69,43 +69,42 @@ get_header(); ?>
         </div>
     </section>
 
-    <!-- CONTENT WRAPPER -->
-    <div class="content-wrapper-bg">
-        <!-- WHAT YOU'LL GET SECTION -->
-       <section class="booking-benefits section">
-            <div class="container container--wide">
-                 <div class="section-header">
-                    <h2 class="section-header__title">What You'll Get in Your Consultation</h2>
-                    <p class="section-header__subtitle">
-                        A complimentary 30-minute session to provide you with clarity, a concrete action plan, and expert insights without any obligations.
-                    </p>
+    
+    <!-- WHAT YOU'LL GET SECTION -->
+    <section class="booking-benefits section">
+        <div class="container container--wide">
+             <div class="section-header">
+                <h2 class="section-header__title">What You'll Get in Your Consultation</h2>
+                <p class="section-header__subtitle">
+                    A complimentary 30-minute session to provide you with clarity, a concrete action plan, and expert insights without any obligations.
+                </p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-card__icon"><i class="fa-solid fa-lightbulb"></i></div>
+                    <div class="benefit-card__content">
+                        <h3 class="benefit-card__title">Expert Analysis</h3>
+                        <p class="benefit-card__description">Professional assessment of your current UV setup and identification of optimization opportunities.</p>
+                    </div>
                 </div>
-                <div class="benefits-grid">
-                    <div class="benefit-card">
-                        <div class="benefit-card__icon"><i class="fa-solid fa-lightbulb"></i></div>
-                        <div class="benefit-card__content">
-                            <h3 class="benefit-card__title">Expert Analysis</h3>
-                            <p class="benefit-card__description">Professional assessment of your current UV setup and identification of optimization opportunities.</p>
-                        </div>
+                <div class="benefit-card">
+                    <div class="benefit-card__icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <div class="benefit-card__content">
+                        <h3 class="benefit-card__title">Custom Roadmap</h3>
+                        <p class="benefit-card__description">Practical next steps tailored to your specific goals, timeline, and budget constraints.</p>
                     </div>
-                    <div class="benefit-card">
-                        <div class="benefit-card__icon"><i class="fa-solid fa-chart-line"></i></div>
-                        <div class="benefit-card__content">
-                            <h3 class="benefit-card__title">Custom Roadmap</h3>
-                            <p class="benefit-card__description">Practical next steps tailored to your specific goals, timeline, and budget constraints.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-card">
-                        <div class="benefit-card__icon"><i class="fa-solid fa-handshake"></i></div>
-                        <div class="benefit-card__content">
-                            <h3 class="benefit-card__title">Independent Advice</h3>
-                            <p class="benefit-card__description">Honest recommendations without vendor bias – we're not selling equipment, just expertise.</p>
-                        </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-card__icon"><i class="fa-solid fa-handshake"></i></div>
+                    <div class="benefit-card__content">
+                        <h3 class="benefit-card__title">Independent Advice</h3>
+                        <p class="benefit-card__description">Honest recommendations without vendor bias – we're not selling equipment, just expertise.</p>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
+    
 
     <!-- FAQ SECTION -->
     <section class="booking-faq section">
@@ -195,5 +194,4 @@ get_header(); ?>
 </div>
 
 <?php get_footer(); ?>
-
 
