@@ -7,12 +7,15 @@
 
 get_header(); ?>
 
-<!-- 1. HERO SECTION (Unchanged) -->
+<!-- Custom Cursor for Hero Section -->
+<div class="custom-about-cursor"></div>
+
+<!-- 1. HERO SECTION (Unchanged HTML, cursor handled by CSS/JS) -->
 <section class="luvex-hero about-hero">
     <div class="about-spotlight"></div>
     <div class="about-parallax-container">
         <div class="about-parallax-layer about-layer-grid"></div>
-        <div class="about-parallax-layer about-layer-elements">
+        <div class.="about-parallax-layer about-layer-elements">
             <div class="about-elements-container">
                 <div class="about-sci-element about-sci-text" style="top: 18%; left: 12%;" data-depth="0.3">Knowledge</div>
                 <div class="about-sci-element about-sci-text" style="top: 75%; left: 18%;" data-depth="0.8">Independence</div>
@@ -197,14 +200,18 @@ get_header(); ?>
         <div class="crosslink-grid">
             <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>" class="crosslink-card">
                 <div class="crosslink-card__icon"><i class="fa-solid fa-comments"></i></div>
-                <h3 class="crosslink-card__title">General Inquiry</h3>
-                <p class="crosslink-card__desc">Have a question? Our team is ready to help. Get in touch with us directly.</p>
+                <div class="crosslink-card__content">
+                    <h3 class="crosslink-card__title">General Inquiry</h3>
+                    <p class="crosslink-card__desc">Have a question? Our team is ready to help. Get in touch with us directly.</p>
+                </div>
                 <span class="crosslink-card__cta">Contact Us <i class="fa-solid fa-arrow-right"></i></span>
             </a>
             <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'partner-program' ) ) ); ?>" class="crosslink-card">
                  <div class="crosslink-card__icon"><i class="fa-solid fa-handshake"></i></div>
-                <h3 class="crosslink-card__title">Become a Partner</h3>
-                <p class="crosslink-card__desc">Are you a manufacturer of high-quality UV technology? Learn about our partnership program.</p>
+                 <div class="crosslink-card__content">
+                    <h3 class="crosslink-card__title">Become a Partner</h3>
+                    <p class="crosslink-card__desc">Are you a manufacturer of high-quality UV technology? Learn about our partnership program.</p>
+                 </div>
                 <span class="crosslink-card__cta">Learn More <i class="fa-solid fa-arrow-right"></i></span>
             </a>
         </div>
@@ -233,6 +240,46 @@ get_header(); ?>
         </div>
     </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const hero = document.querySelector('.about-hero');
+    const header = document.querySelector('.site-header');
+    const customCursor = document.querySelector('.custom-about-cursor');
+
+    if (hero && customCursor && header) {
+        const handleMouseMove = (e) => {
+            customCursor.style.left = e.clientX + 'px';
+            customCursor.style.top = e.clientY + 'px';
+        };
+
+        const handleMouseEnter = (e) => {
+             if (e.target.closest('.about-hero') || e.target.closest('.site-header')) {
+                document.body.classList.add('custom-cursor-active');
+                if(e.target.closest('.site-header')) {
+                    customCursor.classList.add('header-hover');
+                }
+             }
+        };
+        
+        const handleMouseLeave = (e) => {
+            if (!e.relatedTarget || (!e.relatedTarget.closest('.about-hero') && !e.relatedTarget.closest('.site-header'))) {
+                document.body.classList.remove('custom-cursor-active');
+            }
+             if (!e.relatedTarget || !e.relatedTarget.closest('.site-header')) {
+                customCursor.classList.remove('header-hover');
+            }
+        };
+
+        document.addEventListener('mousemove', handleMouseMove);
+        hero.addEventListener('mouseenter', handleMouseEnter);
+        hero.addEventListener('mouseleave', handleMouseLeave);
+        header.addEventListener('mouseenter', handleMouseEnter);
+        header.addEventListener('mouseleave', handleMouseLeave);
+    }
+});
+</script>
+
 
 <?php get_footer(); ?>
 
