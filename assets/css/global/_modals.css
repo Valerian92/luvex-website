@@ -1,10 +1,10 @@
 /*
 ==============================================================================
-LUVEX THEME - MODAL STYLES (v5.4 - Final Perfection)
+LUVEX THEME - MODAL STYLES (v5.5 - Final Perfection)
 ==============================================================================
-Description: The final, polished version of the auth modal styles, with a
-             perfectly balanced login form and fully functional global styles.
-Last Update: 2025-09-02 - Final login layout and global style logic perfected.
+Description: The absolute final, polished version of the auth modal styles,
+             with a perfectly balanced and intuitive login form layout.
+Last Update: 2025-09-02 - Final login layout and industry spacing perfected.
 ==============================================================================
 */
 
@@ -130,7 +130,7 @@ Last Update: 2025-09-02 - Final login layout and global style logic perfected.
 .auth-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; /* Reduzierter Abstand */
+    gap: 1.5rem;
 }
 
 .luvex-form-section-title {
@@ -166,20 +166,22 @@ Last Update: 2025-09-02 - Final login layout and global style logic perfected.
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
-    align-items: start;
+    align-items: center; /* Vertikal zentrieren */
 }
 .login-header-grid .luvex-form-section-title {
     margin-bottom: 0;
+    white-space: nowrap; /* Verhindert Umbruch */
+    border-bottom: 1px solid rgba(109, 213, 237, 0.2);
 }
 .login-fields-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    max-width: 400px;
+    gap: 1rem; /* Abstand zwischen den Feldern */
+    max-width: 450px;
     margin: 0 auto;
 }
 #luvex-login-form .luvex-form-submit {
-    max-width: 400px;
+    max-width: 450px;
     margin: 0 auto;
 }
 
@@ -191,7 +193,7 @@ Last Update: 2025-09-02 - Final login layout and global style logic perfected.
 }
 #forgot-password-form-container .luvex-form-column {
     width: 100%;
-    max-width: 400px;
+    max-width: 450px;
 }
 
 /* --- 5.3 Register Form Grid --- */
@@ -220,6 +222,10 @@ Last Update: 2025-09-02 - Final login layout and global style logic perfected.
 6. INDUSTRIE & INTERESSEN GRIDS
 ==============================================================================
 */
+#industry-grid-container {
+    padding-top: 0.5rem; /* Abstand für Hover-Effekt */
+    margin-top: -0.5rem; /* Visuellen Abstand ausgleichen */
+}
 .selection-grid.industry-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; max-height: 90px; overflow: hidden; transition: max-height 0.5s ease-in-out; }
 .selection-grid.industry-grid.expanded { max-height: 500px; }
 .industry-grid .selection-checkbox-content { padding: 0.5rem 0.25rem; gap: 0.25rem; }
@@ -276,7 +282,7 @@ Last Update: 2025-09-02 - Final login layout and global style logic perfected.
     display: inline-flex;
     width: fit-content;
     align-items: center;
-    align-self: flex-start; /* Align to the left of the centered block */
+    align-self: center; /* Mittig im Wrapper */
 }
 .remember-me-toggle input { display: none; }
 .remember-me-toggle .toggle-button {
