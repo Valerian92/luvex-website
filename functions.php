@@ -2,7 +2,7 @@
 /**
  * LUVEX Theme Functions - COMPLETE WITH PRIORITY SYSTEM
  * Description: Komplette Theme-Setup-, Navigations- und Asset-Lade-Logik mit CSS Priority Loading.
- * VERSION: 4.3 - Removed redundant country selector script.
+ * VERSION: 4.4 - Added Partner Program assets and Accordion Helper.
  * @package Luvex
  */
 
@@ -108,6 +108,7 @@ function luvex_enqueue_assets() {
         'profile' => ['css/_page-profile.css'],
         'curing-systems' => ['css/_page-curing-systems.css'],
         'uvc-hygiene-solutions' => ['css/_page-uvc-hygiene-solutions.css'],
+        'partner-program' => ['css/_page-partner-program.css'], // NEU HINZUGEFÜGT
     ];
 
     foreach ($page_styles_map as $slug => $files) {
@@ -188,6 +189,7 @@ function luvex_enqueue_assets() {
         'uv-technology' => ['luvex-hero-spectrum' => 'pages/hero-spectrum.js'],
         'project-design' => ['luvex-consultation-hero-animation' => 'pages/hero-consultation-animation.js'],
         'uv-solutions' => ['luvex-hero-solutions-animation' => 'pages/hero-solutions-animation.js'],
+        'partner-program' => ['luvex-hero-partner-animation' => 'pages/hero-partner-animation.js'], // NEU HINZUGEFÜGT
     ];
 
     foreach ($page_script_map as $slug => $scripts) {
@@ -299,7 +301,30 @@ foreach ($luvex_includes_files as $file) {
     if (file_exists($full_path)) { require_once $full_path; }
 }
 
-// 8. reCAPTCHA FUNKTION
+// 8. ACCORDION HELPER FUNCTION (NEU)
+if (!function_exists('luvex_get_accordion_component')) {
+    /**
+     * Loads the accordion component with a specific set of data.
+     *
+     * @param array $faq_items An array of question/answer pairs.
+     * @param bool $first_item_active Whether the first item should be open by default.
+     */
+    function luvex_get_accordion_component($faq_items = [], $first_item_active = true) {
+        if (empty($faq_items)) {
+            return;
+        }
+        // Make the data available to the template file
+        set_query_var('accordion_data', [
+            'faqs' => $faq_items,
+            'first_active' => $first_item_active
+        ]);
+        get_template_part('template-parts/components/component-accordion-general');
+        // Clean up the query var
+        set_query_var('accordion_data', null);
+    }
+}
+
+// 9. reCAPTCHA FUNKTION
 function luvex_verify_recaptcha($response) {
     if (empty($response) || !defined('LUVEX_RECAPTCHA_SECRET_KEY')) { return false; }
     $result = wp_remote_post('https://www.google.com/recaptcha/api/siteverify', [
@@ -310,7 +335,7 @@ function luvex_verify_recaptcha($response) {
     return isset($data['success']) && $data['success'] === true;
 }
 
-// 9. DEBUGGING FÜR ENTWICKLUNG
+// 10. DEBUGGING FÜR ENTWICKLUNG
 if (defined('WP_DEBUG') && WP_DEBUG) {
     add_action('wp_footer', function() {
         if (!current_user_can('manage_options') || !class_exists('LuvexAjaxManager')) return;
@@ -333,7 +358,7 @@ if (defined('WP_DEBUG') && WP_DEBUG) {
     });
 }
 
-// 10. ZUSÄTZLICHE HELPER FÜR CSS-STRUKTUR
+// 11. ZUSÄTZLICHE HELPER FÜR CSS-STRUKTUR
 add_filter('body_class', 'luvex_add_context_classes');
 function luvex_add_context_classes($classes) {
     if (is_page(['profile', 'contact', 'about']) || is_front_page()) {
@@ -345,7 +370,7 @@ function luvex_add_context_classes($classes) {
     return $classes;
 }
 
-// 11. ADMIN MENU ITEM FILTER (AKTUALISIERT & VERBESSERT)
+// 12. ADMIN MENU ITEM FILTER (AKTUALISIERT & VERBESSERT)
 add_filter('wp_nav_menu_objects', 'luvex_filter_admin_menu_items', 10, 2);
 function luvex_filter_admin_menu_items($sorted_menu_items, $args) {
     if ($args->theme_location != 'primary' || current_user_can('manage_options')) {
