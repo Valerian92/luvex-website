@@ -1,9 +1,9 @@
 /**
- * LUVEX THEME - AUTH MODAL LOGIC (v1.3 - Country Selector ID Fix)
+ * LUVEX THEME - AUTH MODAL LOGIC (v1.4 - Scoped Flag Selector)
  *
- * Steuert das Auth-Modal, die Tabs und initialisiert die Länderauswahl,
- * sobald das Registrierungsformular sichtbar wird.
- * KORREKTUR: Greift jetzt auf die korrekten, eindeutigen IDs im Modal zu.
+ * Steuert das Auth-Modal, die Tabs und initialisiert die Länderauswahl.
+ * KORREKTUR: Der Selektor für die Flagge der Telefonvorwahl ist jetzt
+ * auf das Registrierungsformular beschränkt, um Konflikte zu vermeiden.
  */
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -71,7 +71,6 @@ document.addEventListener('DOMContentLoaded', function() {
      * Initialisiert die komplette Logik für die Länderauswahl.
      */
     const initializeCountrySelector = function() {
-        // FIX: Greife auf den Selector innerhalb des Modals zu.
         const selectorElement = document.getElementById('luvex-country-selector-modal');
         if (!selectorElement) {
             console.error('LUVEX Country Selector: Container im Modal nicht gefunden.');
@@ -79,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // --- DOM Element Selection ---
+        const registerForm = document.getElementById('register-form-container');
         const countryInput = selectorElement.querySelector('.country-selector-input');
         const dropdown = selectorElement.querySelector('.selector-dropdown');
         const searchInput = selectorElement.querySelector('.country-search');
@@ -87,10 +87,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const nativeSelect = selectorElement.querySelector('.native-select');
         const flagDisplay = selectorElement.querySelector('.selected-country-flag');
         
-        // FIX: Korrekte IDs für Modal-Felder verwenden.
         const dialCodeInput = document.getElementById('phone-input-dial-code-modal');
         const mobileInput = document.getElementById('phone-input-mobile-modal');
-        const dialCodeFlag = document.querySelector('.phone-dial-code-flag');
+        // FIX: Selektor auf das Registrierungsformular beschränkt.
+        const dialCodeFlag = registerForm.querySelector('.phone-dial-code-flag');
 
         if (!countryInput || !dropdown || !searchInput || !optionsList || !nativeSelect || !flagDisplay || !dialCodeInput || !mobileInput || !dialCodeFlag) {
             console.error('LUVEX Country Selector: Ein erforderliches Element fehlt im Modal. Bitte HTML-Struktur prüfen.');
@@ -261,3 +261,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+

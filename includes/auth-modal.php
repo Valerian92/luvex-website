@@ -1,10 +1,9 @@
 <?php
 /**
- * Auth-Modal-Template (v5.4 - Final mit Login-Fix & Country-Selector-Korrektur)
- * - Implements the final, polished UI for the login form.
- * - 'Forgot Password' is now correctly positioned below the inputs.
- * - Login form is now perfectly centered with appropriate spacing.
- * - Country selector JS initialization is now correctly targeting modal elements.
+ * Auth-Modal-Template (v5.5 - UI Polish & Flag Fixes)
+ * - Restored special button styles for "Remember Me" and "Forgot Password".
+ * - Adjusted HTML for new button styles.
+ * - All other logic remains, including corrected JS targets from previous version.
  */
 
 if (!defined('ABSPATH')) exit;
@@ -49,9 +48,11 @@ $default_country_code = 'DE';
                                         <span>Remember Me</span>
                                     </div>
                                 </label>
-                                <a href="#" class="forgot-password-link" onclick="showAuthForm('forgot-password')">
-                                    <i class="fa-solid fa-key"></i>
-                                    <span>Forgot Password?</span>
+                                <a href="#" class="forgot-password-button" onclick="showAuthForm('forgot-password')">
+                                    <div class="button-content">
+                                         <i class="fa-solid fa-key"></i>
+                                         <span>Forgot Password?</span>
+                                    </div>
                                 </a>
                             </div>
 
@@ -312,3 +313,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+

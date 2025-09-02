@@ -1,9 +1,10 @@
 /*
 ==============================================================================
-LUVEX THEME - MODAL STYLES (v5.8 - Login Form Centered)
+LUVEX THEME - MODAL STYLES (v5.9 - UI Polish & Flag Fixes)
 ==============================================================================
-Description: Final, polished version with a perfectly centered login form.
-Last Update: 2025-09-02 - Login form layout refactored for perfect centering.
+Description: Final styles with restored login buttons, z-index fix for flags,
+             and wider dial code input.
+Last Update: 2025-09-02
 ==============================================================================
 */
 
@@ -177,26 +178,7 @@ Last Update: 2025-09-02 - Login form layout refactored for perfect centering.
     max-width: 400px;
     margin: 0 auto;
 }
-.login-options-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-}
-.forgot-password-link {
-    color: var(--luvex-gray-300);
-    text-decoration: none;
-    font-size: 0.9rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: color 0.3s ease;
-}
-.forgot-password-link:hover {
-    color: var(--luvex-bright-cyan);
-}
+
 #luvex-login-form .luvex-form-submit {
     max-width: 400px;
     margin: 0 auto;
@@ -277,64 +259,83 @@ Last Update: 2025-09-02 - Login form layout refactored for perfect centering.
 */
 .recaptcha-wrapper { display: flex; justify-content: center; padding: 0.5rem; border-radius: var(--radius-md); }
 
-/* --- 7.1 Final Login Options --- */
-.login-option-title {
-    color: var(--luvex-white);
-    font-size: var(--text-lg, 18px);
-    font-weight: 600;
-    margin: 0;
+/* --- 7.1 Final Login Options Buttons --- */
+.login-options-wrapper {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: flex-end; /* Align right */
-    gap: 0.75rem;
-    border-bottom: 1px solid rgba(109, 213, 237, 0.2);
-    padding-bottom: 0.75rem;
-    cursor: pointer;
-    background: none;
-    text-decoration: none;
-    transition: color 0.3s ease;
+    width: 100%;
+    max-width: 400px;
+    margin: 0.5rem auto 0;
+    gap: 1rem;
 }
-.login-option-title i { color: var(--luvex-bright-cyan); }
-.login-option-title:hover { color: var(--luvex-bright-cyan); }
-.login-option-title span { text-align: right; }
 
-/* --- 7.2 Final Remember Me Toggle --- */
-.remember-me-toggle {
+.remember-me-toggle,
+.forgot-password-button {
     cursor: pointer;
     display: inline-flex;
-    width: fit-content;
     align-items: center;
+    text-decoration: none;
+    flex: 1; /* Allow buttons to grow and share space */
 }
+
 .remember-me-toggle input { display: none; }
-.remember-me-toggle .toggle-button {
+
+.toggle-button,
+.button-content {
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    padding: 0.5rem 0; /* Weniger Padding für subtileres Design */
-    background: transparent;
-    border: none;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(109, 213, 237, 0.2);
+    border-radius: var(--radius-md);
     color: var(--luvex-gray-300);
     font-size: 0.9rem;
     font-weight: 500;
     transition: all 0.3s ease;
+    width: 100%;
+    justify-content: center;
 }
-.remember-me-toggle:hover .toggle-button {
+
+.remember-me-toggle:hover .toggle-button,
+.forgot-password-button:hover .button-content {
+    border-color: var(--luvex-bright-cyan);
     color: var(--luvex-white);
 }
+
 .remember-me-toggle .toggle-indicator {
     width: 20px;
     height: 20px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--luvex-dark-blue-dark);
     border: 1px solid rgba(109, 213, 237, 0.3);
     border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+    flex-shrink: 0;
 }
-.remember-me-toggle .toggle-indicator i { font-size: 0.7rem; color: var(--luvex-dark-blue); opacity: 0; transform: scale(0.5); transition: all 0.3s ease; }
-.remember-me-toggle input:checked + .toggle-button .toggle-indicator { background: var(--luvex-bright-cyan); border-color: var(--luvex-bright-cyan); }
-.remember-me-toggle input:checked + .toggle-button .toggle-indicator i { opacity: 1; transform: scale(1); }
+
+.remember-me-toggle .toggle-indicator i {
+    font-size: 0.7rem;
+    color: var(--luvex-dark-blue);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.3s ease;
+}
+
+.remember-me-toggle input:checked + .toggle-button {
+    font-weight: 600;
+}
+.remember-me-toggle input:checked + .toggle-button .toggle-indicator {
+    background: var(--luvex-bright-cyan);
+    border-color: var(--luvex-bright-cyan);
+}
+.remember-me-toggle input:checked + .toggle-button .toggle-indicator i {
+    opacity: 1;
+    transform: scale(1);
+}
 
 
 /* --- 7.3 Register Footer --- */
@@ -367,8 +368,8 @@ Last Update: 2025-09-02 - Login form layout refactored for perfect centering.
 .luvex-form-label { display: block; font-size: 0.875rem; font-weight: 500; color: var(--luvex-gray-300); margin-bottom: 0.5rem; }
 .luvex-country-selector { position: relative; width: 100%; }
 .selector-input-wrapper { position: relative; display: flex; align-items: center; cursor: pointer; }
-.country-selector-input { padding-left: 3.25rem !important; cursor: pointer !important; }
-.selected-country-flag { position: absolute; left: 1rem; font-size: 1.5rem; pointer-events: none; line-height: 1; display: flex; align-items: center; justify-content: center; height: 100%; }
+.country-selector-input { padding-left: 3.25rem !important; cursor: pointer !important; position: relative; z-index: 1; }
+.selected-country-flag { position: absolute; left: 1rem; font-size: 1.5rem; pointer-events: none; line-height: 1; display: flex; align-items: center; justify-content: center; height: 100%; z-index: 2; }
 .luvex-country-selector .dropdown-arrow { position: absolute; right: 1rem; color: var(--luvex-bright-cyan); pointer-events: none; transition: transform 0.3s ease; }
 .luvex-country-selector.open .dropdown-arrow { transform: rotate(180deg); }
 .luvex-country-selector .selector-dropdown { position: absolute; top: calc(100% + 8px); left: 0; width: 100%; background: var(--luvex-dark-blue-medium); border: 1px solid var(--luvex-bright-cyan); border-radius: var(--radius-md); z-index: 1000; overflow: hidden; box-shadow: var(--shadow-lg); opacity: 0; transform: translateY(10px); visibility: hidden; transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s; }
@@ -388,9 +389,9 @@ Last Update: 2025-09-02 - Login form layout refactored for perfect centering.
 .luvex-country-selector .country-list-options .name { font-weight: 500; color: var(--luvex-white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .luvex-country-selector .country-list-options .dial-code { color: var(--luvex-gray-300); font-size: 0.9em; margin-left: auto; }
 .phone-input-group { display: flex; align-items: center; gap: 0.5rem; }
-.phone-dial-code-wrapper { position: relative; flex: 0 0 100px; }
-.phone-dial-code-flag { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); font-size: 1.5rem; pointer-events: none; }
-.phone-dial-code { padding-left: 3.25rem !important; text-align: left; }
+.phone-dial-code-wrapper { position: relative; flex: 0 0 120px; }
+.phone-dial-code-flag { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); font-size: 1.5rem; pointer-events: none; z-index: 2; }
+.phone-dial-code { padding-left: 3.25rem !important; text-align: left; position: relative; z-index: 1; }
 .phone-mobile-number { flex: 1 1 auto; }
 
 /* Globaler .completed Stil für alle luvex-inputs */
@@ -411,7 +412,6 @@ Last Update: 2025-09-02 - Login form layout refactored for perfect centering.
     .luvex-form-grid-2, .login-header-grid { grid-template-columns: 1fr; }
     .selection-grid.industry-grid { grid-template-columns: repeat(4, 1fr); }
     .interests-structured-grid { grid-template-columns: 1fr; }
-    .login-option-title { justify-content: flex-start; }
 }
 
 @media (max-width: 768px) {
@@ -421,4 +421,6 @@ Last Update: 2025-09-02 - Login form layout refactored for perfect centering.
     .auth-modal-header { padding: 1.5rem 1.5rem 1rem; }
     .auth-scrollable-content { padding: 0.5rem 1.5rem 1.5rem 1.5rem; }
     .selection-grid.industry-grid { grid-template-columns: repeat(3, 1fr); }
+    .login-options-wrapper { flex-direction: column; gap: 0.75rem; align-items: stretch; }
 }
+
