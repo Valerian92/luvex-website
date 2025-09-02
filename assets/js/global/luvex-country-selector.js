@@ -3,9 +3,9 @@
  *
  * Description: Steuert eine für Formulare optimierte, durchsuchbare Länderauswahl,
  * die mit separaten Telefon-Vorwahl- und Nummernfeldern synchronisiert ist.
- * Version: 5.1 (Optimierte Synchronisierung)
+ * Version: 5.3 (Added Flag to Dial Code)
  *
- * @version 5.1
+ * @version 5.3
  * @author B. Gemini
  * @last_update 2025-09-02
  */
@@ -24,8 +24,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const dialCodeInput = document.getElementById('phone-input-dial-code');
     const mobileInput = document.getElementById('phone-input-mobile');
+    const dialCodeFlag = document.querySelector('.phone-dial-code-flag'); // NEU: Flagge im Vorwahlfeld
 
-    if (!countryInput || !dropdown || !searchInput || !optionsList || !nativeSelect || !flagDisplay || !dialCodeInput || !mobileInput) {
+    if (!countryInput || !dropdown || !searchInput || !optionsList || !nativeSelect || !flagDisplay || !dialCodeInput || !mobileInput || !dialCodeFlag) {
         console.error('LUVEX Country Selector: A required element is missing.');
         return;
     }
@@ -69,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!country) {
             countryInput.value = '';
             flagDisplay.textContent = ' ';
+            dialCodeFlag.textContent = ' '; // NEU: Flagge leeren
             nativeSelect.value = '';
             if (source !== 'dial_code_input') {
                  dialCodeInput.value = '';
@@ -78,6 +80,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         countryInput.value = country.name;
         flagDisplay.textContent = country.flag;
+        dialCodeFlag.textContent = country.flag; // NEU: Flagge setzen
+        
         if (nativeSelect.value !== country.code) {
             nativeSelect.value = country.code;
             nativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
@@ -117,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (option) {
             const countryCode = option.dataset.countryCode;
             const selectedCountry = countryData.find(c => c.code === countryCode);
-            userModifiedDialCode = false; // Explicit selection resets user modification
+            userModifiedDialCode = false; 
             updateUI(selectedCountry, 'country_selection');
             toggleDropdown('close');
             mobileInput.focus();
@@ -127,12 +131,14 @@ document.addEventListener('DOMContentLoaded', function() {
     dialCodeInput.addEventListener('input', () => {
         userModifiedDialCode = true;
         const country = findCountryByDialCode(dialCodeInput.value);
+        
+        // Update country flag in dial code input instantly
+        if (country) {
+            dialCodeFlag.textContent = country.flag;
+        } else {
+            dialCodeFlag.textContent = ' ';
+        }
 
-        // =================================================================
-        // OPTIMIERUNG: Länderauswahl nur aktualisieren, wenn sie leer ist.
-        // Das verhindert, dass eine explizite Auswahl des Benutzers
-        // überschrieben wird, wenn er eine abweichende Telefonnummer eingibt.
-        // =================================================================
         if (!countryInput.value.trim()) {
             updateUI(country, 'dial_code_input');
         }
@@ -159,3 +165,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
