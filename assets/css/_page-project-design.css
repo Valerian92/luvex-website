@@ -1,9 +1,10 @@
 /*
 ==============================================================================
-LUVEX THEME v3.3 - BOOKING PAGE (Harmonized Design)
+LUVEX THEME v3.4 - BOOKING PAGE (Final Design)
 ==============================================================================
-Description: Styles for the booking page. Created a seamless, branded
-             transition from the dark hero to the calendar section.
+Description: Final, refined design for the booking page. Replaced the plain
+             dark background with a subtle starfield animation and optimized
+             the calendar container for a more premium look.
 Last Update: 2025-09-02
 ==============================================================================
 */
@@ -114,16 +115,41 @@ Last Update: 2025-09-02
 }
 
 /* ==============================================================================
-2. Calendar Section (HARMONIZED DARK DESIGN)
+2. Calendar Section (REFINED DARK DESIGN)
 ==============================================================================
 */
-.booking-calendar { 
-    background: linear-gradient(180deg, var(--luvex-dark-blue-dark) 0%, var(--luvex-dark-blue) 100%);
+@keyframes move-stars {
+    from { background-position: 0 0; }
+    to { background-position: -10000px 5000px; }
 }
+
+.booking-calendar { 
+    background-color: var(--luvex-dark-blue-dark);
+    position: relative;
+    overflow: hidden;
+}
+
+.booking-calendar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><circle fill="%23FFF" cx="200" cy="200" r="1.5"/><circle fill="%23FFF" cx="600" cy="600" r="1"/><circle fill="%23FFF" cx="400" cy="500" r="1"/><circle fill="%23FFF" cx="100" cy="700" r="1.2"/><circle fill="%23FFF" cx="750" cy="150" r="0.8"/></svg>');
+    background-repeat: repeat;
+    animation: move-stars 150s linear infinite;
+    opacity: 0.1;
+}
+
 
 .booking-calendar__header { 
     text-align: center; 
     margin-bottom: 3rem; 
+    position: relative;
+    z-index: 2;
 }
 
 .booking-calendar__title { 
@@ -148,12 +174,14 @@ Last Update: 2025-09-02
     max-width: 1000px; 
     padding: 2px; /* Space for the gradient border */
     background: linear-gradient(135deg, var(--luvex-special-cyan), var(--luvex-vibrant-blue));
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2), 0 0 25px rgba(34, 211, 238, 0.2);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3), 0 0 25px rgba(34, 211, 238, 0.2);
+    position: relative;
+    z-index: 2;
 }
 
 /* Inner container for the iframe to create the dark background */
 .google-calendar-inner {
-    background-color: var(--luvex-dark-blue-medium);
+    background-color: var(--luvex-dark-blue-dark);
     border-radius: 10px; /* Slightly smaller than the outer wrapper */
     padding: 1.5rem; /* Inner spacing */
 }
