@@ -1,6 +1,6 @@
 /*
 ==============================================================================
-LUVEX THEME - STANDARD STYLES PAGE (v3.3 - Restored & Refined)
+LUVEX THEME - STANDARD STYLES PAGE (v3.5 - Increased Specificity)
 ==============================================================================
 */
 
@@ -38,7 +38,7 @@ LUVEX THEME - STANDARD STYLES PAGE (v3.3 - Restored & Refined)
 
 /*
 ==============================================================================
-FORM-READY COUNTRY SELECTOR STYLES (v2.1 - Refined)
+FORM-READY COUNTRY SELECTOR STYLES (v2.3 - Increased Specificity)
 ==============================================================================
 */
 .component-preview-wrapper {
@@ -197,37 +197,39 @@ FORM-READY COUNTRY SELECTOR STYLES (v2.1 - Refined)
 .luvex-country-selector .country-list-options .name { font-weight: 500; color: var(--luvex-white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 .luvex-country-selector .country-list-options .dial-code { color: var(--luvex-gray-300); font-size: 0.9em; margin-left: auto; }
 
-/* Phone Input Specifics */
-.phone-input-group {
+/* Phone Input Specifics - Increased Specificity */
+.luvex-form-group .phone-input-group {
     display: flex;
     align-items: center;
-    gap: 0;
+    gap: 0.5rem; /* Fügt die Lücke zwischen den Feldern hinzu */
 }
 
-.phone-dial-code {
-    flex: 0 0 90px; 
-    border-right: none;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    text-align: center;
-    padding-left: 0.5rem !important;
-    padding-right: 0.5rem !important;
+.phone-input-group .phone-dial-code-wrapper {
+    position: relative;
+    flex: 0 0 120px; /* Breite leicht angepasst für besseres Aussehen */
 }
 
-.phone-mobile-number {
+.phone-dial-code-wrapper .phone-dial-code-flag {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    pointer-events: none;
+    line-height: 1;
+}
+
+.phone-dial-code-wrapper .phone-dial-code {
+    border-radius: var(--radius-md);
+    padding-left: 3.25rem !important; /* Platz für die Flagge */
+    text-align: left; /* Text linksbündig für konsistentes Aussehen */
+}
+
+.phone-input-group .phone-mobile-number {
     flex: 1 1 auto;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    border-radius: var(--radius-md);
 }
 
-.phone-mobile-number:focus {
-    position: relative;
-    z-index: 2;
-}
-.phone-dial-code:focus {
-    position: relative;
-    z-index: 2;
-}
 
 /* --- (Restored) Icon Library Styles --- */
 .icon-categories-container {
