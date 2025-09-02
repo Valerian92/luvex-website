@@ -1,6 +1,6 @@
 /*
 ==============================================================================
-LUVEX THEME v4.0 - HOMEPAGE (BUTTON-ANIMATION KOMPLETT REPARIERT)
+LUVEX THEME v4.1 - HOMEPAGE (BUTTON-ANIMATION KOMPLETT REPARIERT)
 ==============================================================================
 Description: Komplette Homepage-Styles mit funktionierenden Button-Animationen
 Dependencies: _variables.css, _core.css, _components.css
@@ -38,7 +38,7 @@ Last Update: 2025-09-02 (Button-Animation vollständig repariert)
     flex-direction: column;
     align-items: center;
     gap: 2.5rem;
-    margin-top: 3.5rem; 
+    margin-top: 3.5rem;
     padding-top: 0;
     width: 100%;
 }
@@ -72,11 +72,11 @@ Last Update: 2025-09-02 (Button-Animation vollständig repariert)
 .home .luvex-hero__description {
     max-width: 800px;
     font-size: 1.25rem;
-    color: var(--luvex-white); 
+    color: var(--luvex-white);
     text-align: center;
     line-height: 1.6;
     letter-spacing: 0.05em;
-    margin: 4rem 0; 
+    margin: 4rem 0;
 }
 
 .home .luvex-hero__description .bullet {
@@ -86,18 +86,18 @@ Last Update: 2025-09-02 (Button-Animation vollständig repariert)
 
 .home .luvex-hero__title .text-highlight {
     color: #67e8f9;
-    text-shadow: 
+    text-shadow:
         0 0 8px rgba(107, 205, 255, 0.5),
         0 0 20px rgba(107, 205, 255, 0.3);
 }
 
 /*
 ==============================================================================
-3. SIMULATOR BUTTON - HOMEPAGE-SPEZIFISCH (ÜBERSCHREIBT COMPONENTS)
+3. SIMULATOR BUTTON - KORRIGIERTE VERSION
 ==============================================================================
 */
 
-/* Base Button Styles - Override Components */
+/* Base Button Styles - Wichtigste Änderung: Hintergrund ist transparent */
 .home .luvex-simulator-cta,
 .home .luvex-hero .luvex-simulator-cta {
     display: inline-flex !important;
@@ -105,7 +105,7 @@ Last Update: 2025-09-02 (Button-Animation vollständig repariert)
     justify-content: center !important;
     gap: var(--space-xs) !important;
     padding: 16px 32px !important;
-    background: rgba(27, 42, 73, 0.5) !important;
+    background: transparent !important; /* KORRIGIERT: Kein eigener Hintergrund, damit der Puls sichtbar ist */
     color: var(--luvex-white) !important;
     border: 2px solid var(--luvex-bright-cyan) !important;
     border-radius: var(--radius-full) !important;
@@ -114,17 +114,17 @@ Last Update: 2025-09-02 (Button-Animation vollständig repariert)
     font-size: var(--text-base) !important;
     position: relative !important;
     overflow: hidden !important;
-    z-index: 2 !important;
+    z-index: 1 !important; /* Stacking Context für Pseudo-Elemente */
     cursor: var(--cursor-pointer, pointer) !important;
     transition: all 0.3s ease !important;
 }
 
-/* Animated Version mit Pulse - Homepage Override */
+/* Animierte Version mit Rahmen-Puls */
 .home .luvex-simulator-cta--animated {
     animation: luvex-border-pulse 2.5s infinite ease-in-out !important;
 }
 
-/* Purple Energy Pulse Background - Homepage Override */
+/* Lila Energie-Puls (::before) - Jetzt auf z-index: -1 */
 .home .luvex-simulator-cta--animated::before {
     content: '' !important;
     position: absolute !important;
@@ -132,18 +132,18 @@ Last Update: 2025-09-02 (Button-Animation vollständig repariert)
     left: 50% !important;
     width: 0 !important;
     height: 0 !important;
-    background: radial-gradient(circle, 
-        rgba(138, 43, 226, 0.4) 0%, 
-        rgba(75, 0, 130, 0.6) 30%, 
+    background: radial-gradient(circle,
+        rgba(138, 43, 226, 0.4) 0%,
+        rgba(75, 0, 130, 0.6) 30%,
         transparent 70%) !important;
     border-radius: 50% !important;
     transform: translate(-50%, -50%) !important;
     animation: luvex-energy-pulse 2s ease-out infinite !important;
-    z-index: -1 !important;
+    z-index: -1 !important; /* KORRIGIERT: Liegt jetzt hinter dem Text, aber sichtbar durch transparenten Button-BG */
     pointer-events: none !important;
 }
 
-/* Gradient Overlay für Hover - Homepage Override */
+/* Hover-Farbverlauf (::after) - Startet unsichtbar auf gleicher Ebene wie Puls */
 .home .luvex-simulator-cta::after {
     content: '' !important;
     position: absolute !important;
@@ -160,34 +160,35 @@ Last Update: 2025-09-02 (Button-Animation vollständig repariert)
     ) !important;
     background-size: 400% 400% !important;
     border-radius: var(--radius-full) !important;
-    z-index: -1 !important;
+    z-index: -1 !important; /* KORRIGIERT: Liegt auf derselben Ebene wie der Puls */
     opacity: 0 !important;
-    transition: opacity 0.4s ease, z-index 0.1s ease !important;
+    transition: opacity 0.4s ease !important;
     animation: luvex-gradient-flow 3s infinite ease-in-out !important;
+    animation-play-state: paused; /* Animation läuft erst bei Hover los */
 }
 
-/* Hover State - JS wird diese Klasse hinzufügen - Homepage Override */
+
+/* Hover State - Gesteuert durch JS-Klasse .hover-active */
 .home .luvex-simulator-cta.hover-active {
-    background: transparent !important;
     transform: translateY(-2px) scale(1.05) !important;
     box-shadow: 0 8px 25px rgba(109, 213, 237, 0.4), 0 0 20px rgba(138, 43, 226, 0.3) !important;
     border-color: rgba(109, 213, 237, 0.8) !important;
 }
 
 .home .luvex-simulator-cta.hover-active::after {
-    opacity: 1 !important;
-    z-index: 0 !important;
+    opacity: 1 !important; /* Macht den Farbverlauf sichtbar */
+    animation-play-state: running; /* Startet die Farbverlauf-Animation */
 }
 
-/* Text/Icons im Vordergrund - Homepage Override */
+/* Text und Icon IMMER im Vordergrund */
 .home .luvex-simulator-cta span,
 .home .luvex-simulator-cta i {
     position: relative !important;
-    z-index: 3 !important;
+    z-index: 2 !important; /* Höchste Ebene, damit Text immer lesbar ist */
     color: inherit !important;
 }
 
-/* Secondary Button */
+/* Secondary Button bleibt unverändert */
 .home .luvex-hero__cta-secondary {
     display: inline-flex;
     align-items: center;
@@ -213,20 +214,20 @@ Last Update: 2025-09-02 (Button-Animation vollständig repariert)
 
 /*
 ==============================================================================
-4. KEYFRAMES - EINDEUTIGE NAMEN
+4. KEYFRAMES - EINDEUTIGE NAMEN (Unverändert)
 ==============================================================================
 */
 
 /* Border Pulse für Button */
 @keyframes luvex-border-pulse {
-    0%, 100% { 
-        box-shadow: 
+    0%, 100% {
+        box-shadow:
             0 4px 15px rgba(109, 213, 237, 0.3),
             0 0 10px rgba(138, 43, 226, 0.2);
         border-color: rgba(109, 213, 237, 0.8);
     }
-    50% { 
-        box-shadow: 
+    50% {
+        box-shadow:
             0 6px 20px rgba(109, 213, 237, 0.5),
             0 0 20px rgba(138, 43, 226, 0.4);
         border-color: rgba(138, 43, 226, 0.6);
@@ -244,22 +245,23 @@ Last Update: 2025-09-02 (Button-Animation vollständig repariert)
 
 /* Purple Energy Pulse */
 @keyframes luvex-energy-pulse {
-    0% { 
-        width: 0; 
-        height: 0; 
-        opacity: 0.8; 
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.8;
     }
-    50% { 
+    50% {
         width: 400px;
         height: 400px;
-        opacity: 0.4; 
+        opacity: 0.4;
     }
-    100% { 
+    100% {
         width: 450px;
         height: 450px;
-        opacity: 0; 
+        opacity: 0;
     }
 }
+
 
 /*
 ==============================================================================
@@ -267,29 +269,29 @@ Last Update: 2025-09-02 (Button-Animation vollständig repariert)
 ==============================================================================
 */
 
-.uv-simulator-showcase { 
-    background: linear-gradient(135deg, var(--luvex-dark-blue), var(--luvex-accent-blue)); 
-    border-radius: var(--radius-xl); 
-    padding: 4rem 3rem; 
-    position: relative; 
-    overflow: hidden; 
-    text-align: center; 
-    color: var(--luvex-white); 
+.uv-simulator-showcase {
+    background: linear-gradient(135deg, var(--luvex-dark-blue), var(--luvex-accent-blue));
+    border-radius: var(--radius-xl);
+    padding: 4rem 3rem;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    color: var(--luvex-white);
 }
 
-.simulator-content h3 { 
-    color: var(--luvex-white); 
-    font-size: 2.5rem; 
-    margin-bottom: 1.5rem; 
+.simulator-content h3 {
+    color: var(--luvex-white);
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
 }
 
-.simulator-description { 
+.simulator-description {
     color: var(--luvex-gray-300);
-    font-size: 1.2rem; 
-    margin-bottom: 3rem; 
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
     max-width: 800px;
-    margin-left: auto; 
-    margin-right: auto; 
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .uv-simulator-showcase .feature-grid {
@@ -297,7 +299,7 @@ Last Update: 2025-09-02 (Button-Animation vollständig repariert)
     max-width: 900px;
 }
 
-.simulator-cta { 
+.simulator-cta {
     margin-top: 2rem;
     display: inline-flex;
     align-items: center;
@@ -427,15 +429,15 @@ Last Update: 2025-09-02 (Button-Animation vollständig repariert)
     text-align: left;
 }
 
-.evidence-title { 
-    font-size: clamp(2.2rem, 4vw, 3rem); 
+.evidence-title {
+    font-size: clamp(2.2rem, 4vw, 3rem);
     margin-bottom: 2rem;
 }
 
-.evidence-description { 
-    font-size: var(--text-lg); 
+.evidence-description {
+    font-size: var(--text-lg);
     margin-bottom: 2.5rem;
-    max-width: 550px; 
+    max-width: 550px;
 }
 
 .evidence-visual {
@@ -537,11 +539,11 @@ Last Update: 2025-09-02 (Button-Animation vollständig repariert)
         gap: 8rem;
         text-align: center;
     }
-    
+
     .evidence-visual {
         order: -1;
     }
-    
+
     .evidence-content {
         align-items: center;
         text-align: center;
@@ -566,16 +568,16 @@ Last Update: 2025-09-02 (Button-Animation vollständig repariert)
 }
 
 @media (max-width: 768px) {
-    .evidence-section { 
-        padding-top: 6rem; 
+    .evidence-section {
+        padding-top: 6rem;
     }
-    
+
     .homepage-community-globe-wrapper {
         width: 100vw;
         height: 150%;
         transform: translate(-50%, -50%);
     }
-    
+
     .home .luvex-hero__title {
         max-width: 90%;
         font-size: 2.5rem;
@@ -585,7 +587,7 @@ Last Update: 2025-09-02 (Button-Animation vollständig repariert)
         font-size: 1.125rem;
         margin: 3rem 0;
     }
-    
+
     .luvex-simulator-cta--animated {
         padding: 14px 28px;
         font-size: var(--text-sm);
