@@ -177,7 +177,7 @@ function luvex_enqueue_assets() {
 
     // *** MODIFIED HERE: Script now loads on register page as well ***
     if (is_page('standard-styles-luvex') || is_page('register') || is_page('profile')) {
-        $enqueue_script('luvex-country-selector', 'luvex-country-selector.js', []);
+        $enqueue_script('luvex-country-selector', 'global/luvex-country-selector.js', []);
     }
 
     $page_script_map = [
