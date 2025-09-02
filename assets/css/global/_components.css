@@ -5,7 +5,7 @@ LUVEX THEME v3.3 - UI COMPONENTS (Layout-Reparatur)
 Description: Enthält alle wiederverwendbaren UI-Komponenten, universelle
              Form-Elemente UND alle Animationen.
 Dependencies: _variables.css, _core.css
-Last Update: 2025-09-01 - Canvas-Layout und Menü-Icons repariert + Deutschland-Flaggen-Animation
+Last Update: 2025-09-02 - Scroll-to-Top Animation zu Moving Stripe geändert
 ==============================================================================
 */
 
@@ -1185,44 +1185,38 @@ input[type="tel"]:focus {
     transform: scale(1.1);
 }
 
-/* Deutschland-Flaggen-Animation Keyframes */
-@keyframes german-flag-border {
-    0% {
-        border-color: #000000;
-        box-shadow: 
-            0 0 0 2px #000000,
-            0 4px 15px rgba(0, 0, 0, 0.3);
-    }
-    33.33% {
-        border-color: #DD0000;
-        box-shadow: 
-            0 0 0 2px #DD0000,
-            0 4px 15px rgba(221, 0, 0, 0.3);
-    }
-    66.66% {
-        border-color: #FFCC00;
-        box-shadow: 
-            0 0 0 2px #FFCC00,
-            0 4px 15px rgba(255, 204, 0, 0.3);
-    }
+/* NEUE Keyframes für den Moving Stripe Effekt */
+@keyframes moving-stripe-border {
     100% {
-        border-color: #000000;
-        box-shadow: 
-            0 0 0 2px #000000,
-            0 4px 15px rgba(0, 0, 0, 0.3);
+        background-position: 0% 200%;
     }
 }
 
+/* NEUE Animation für den Scroll-to-Top Button */
 #scrollToTopBtn.animate-border-flag {
-    animation: german-flag-border 1.5s infinite ease-in-out;
+    /* * Technik: Wir legen zwei Hintergründe übereinander.
+     * 1. Der untere Hintergrund ist der Deutschland-Farbverlauf.
+     * 2. Der obere Hintergrund ist die solide Button-Farbe.
+     * Durch background-clip wird der obere Hintergrund nur innen gezeichnet,
+     * sodass der untere Farbverlauf am Rand (border) sichtbar wird.
+    */
+    background-image:
+        linear-gradient(to top, #000000, #DD0000, #FFCC00, #000000, #DD0000, #FFCC00),
+        linear-gradient(var(--luvex-dark-blue), var(--luvex-dark-blue));
+    
+    background-size: 100% 200%;
+    
+    background-origin: border-box;
+    background-clip: border-box, padding-box;
+
+    animation: moving-stripe-border 2s linear infinite;
 }
 
 #scrollToTopBtn.animate-border-flag:hover {
     animation-play-state: paused;
-    background-color: #007BFF;
-    color: #6dd5ed;
     transform: scale(1.15);
 }
+
 
 /*
 ==============================================================================
