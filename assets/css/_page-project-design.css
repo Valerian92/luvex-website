@@ -3,7 +3,7 @@
 LUVEX THEME v3.4 - BOOKING PAGE (Final Design)
 ==============================================================================
 Description: Final, refined design for the booking page. Replaced the plain
-             dark background with a subtle starfield animation and optimized
+             dark background with a subtle grid pattern and optimized
              the calendar container for a more premium look.
 Last Update: 2025-09-02
 ==============================================================================
@@ -118,11 +118,6 @@ Last Update: 2025-09-02
 2. Calendar Section (REFINED DARK DESIGN)
 ==============================================================================
 */
-@keyframes move-stars {
-    from { background-position: 0 0; }
-    to { background-position: -10000px 5000px; }
-}
-
 .booking-calendar { 
     background-color: var(--luvex-dark-blue-dark);
     position: relative;
@@ -134,16 +129,14 @@ Last Update: 2025-09-02
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
     width: 100%;
     height: 100%;
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><circle fill="%23FFF" cx="200" cy="200" r="1.5"/><circle fill="%23FFF" cx="600" cy="600" r="1"/><circle fill="%23FFF" cx="400" cy="500" r="1"/><circle fill="%23FFF" cx="100" cy="700" r="1.2"/><circle fill="%23FFF" cx="750" cy="150" r="0.8"/></svg>');
-    background-repeat: repeat;
-    animation: move-stars 150s linear infinite;
-    opacity: 0.1;
+    background-image: 
+        linear-gradient(rgba(21, 31, 53, 0.8), rgba(21, 31, 53, 0.8)),
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0 10 L10 0 M-10 20 L20 -10 M90 20 L120 -10" stroke="%236dd5ed" stroke-width="0.5" stroke-opacity="0.1"/></svg>');
+    background-size: 50px 50px;
+    z-index: 1;
 }
-
 
 .booking-calendar__header { 
     text-align: center; 
