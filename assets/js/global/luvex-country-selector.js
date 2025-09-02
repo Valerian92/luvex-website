@@ -3,14 +3,11 @@
  *
  * Description: Steuert eine für Formulare optimierte, durchsuchbare Länderauswahl,
  * die mit separaten Telefon-Vorwahl- und Nummernfeldern synchronisiert ist.
- * Version: 4.0 (Robust & Functional)
+ * Version: 5.0 (Stable & Refined)
  */
 document.addEventListener('DOMContentLoaded', function() {
     const selectorElement = document.getElementById('luvex-country-selector');
-    // Exit if the component is not on the page
-    if (!selectorElement) {
-        return;
-    }
+    if (!selectorElement) return;
 
     // --- DOM Element Selection ---
     const countryInput = selectorElement.querySelector('.country-selector-input');
@@ -24,9 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const dialCodeInput = document.getElementById('phone-input-dial-code');
     const mobileInput = document.getElementById('phone-input-mobile');
 
-    // Exit if any critical element is missing
     if (!countryInput || !dropdown || !searchInput || !optionsList || !nativeSelect || !flagDisplay || !dialCodeInput || !mobileInput) {
-        console.error('LUVEX Country Selector: A required element is missing from the DOM.');
+        console.error('LUVEX Country Selector: A required element is missing.');
         return;
     }
 
@@ -43,24 +39,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Core Functions ---
     const toggleDropdown = (forceState) => {
         const isOpen = selectorElement.classList.contains('open');
-        if (forceState === 'open' && !isOpen) {
+        const action = forceState !== undefined ? forceState : (isOpen ? 'close' : 'open');
+        
+        if (action === 'open' && !isOpen) {
             selectorElement.classList.add('open');
             searchInput.value = '';
             filterOptions('');
             searchInput.focus();
-        } else if (forceState === 'close' && isOpen) {
+        } else if (action === 'close' && isOpen) {
             selectorElement.classList.remove('open');
-        } else if (forceState === undefined) {
-             isOpen ? toggleDropdown('close') : toggleDropdown('open');
         }
     };
 
     const filterOptions = (searchTerm) => {
-        const term = searchTerm.toLowerCase();
+        const term = searchTerm.toLowerCase().trim();
         options.forEach(option => {
             const name = option.querySelector('.name').textContent.toLowerCase();
-            const dialCode = option.querySelector('.dial-code').textContent;
-            const isVisible = name.includes(term) || dialCode.includes(term);
+            const dial = option.querySelector('.dial-code').textContent;
+            const isVisible = name.includes(term) || dial.includes(term);
             option.classList.toggle('hidden', !isVisible);
         });
     };
@@ -68,9 +64,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const updateUI = (country, source = 'system') => {
         if (!country) {
             countryInput.value = '';
-            flagDisplay.textContent = '';
+            flagDisplay.textContent = ' ';
             nativeSelect.value = '';
-            // Don't clear dial code if user is typing it
             if (source !== 'dial_code_input') {
                  dialCodeInput.value = '';
             }
@@ -86,27 +81,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!userModifiedDialCode || source === 'country_selection') {
             dialCodeInput.value = country.dialCode;
-            userModifiedDialCode = false;
+            userModifiedDialCode = false; // Reset after a country is explicitly selected
         }
     };
     
     const findCountryByDialCode = (dialCode) => {
-        if (!dialCode || dialCode.length < 2) return null;
-        // Prioritize exact matches
-        const exactMatch = countryData.find(c => c.dialCode === dialCode);
-        if(exactMatch) return exactMatch;
-        // Find longest partial match (e.g., +1-268 vs +1)
+        const cleanDialCode = dialCode.trim();
+        if (!cleanDialCode) return null;
+        
         let bestMatch = null;
         for (const country of countryData) {
-            if (dialCode.startsWith(country.dialCode)) {
-                 if (!bestMatch || country.dialCode.length > bestMatch.dialCode.length) {
+            if (cleanDialCode.startsWith(country.dialCode)) {
+                if (!bestMatch || country.dialCode.length > bestMatch.dialCode.length) {
                     bestMatch = country;
                 }
             }
         }
         return bestMatch;
     };
-
 
     // --- Event Listeners ---
     selectorElement.querySelector('.selector-input-wrapper').addEventListener('click', (e) => {
@@ -121,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (option) {
             const countryCode = option.dataset.countryCode;
             const selectedCountry = countryData.find(c => c.code === countryCode);
+            userModifiedDialCode = false; // Explicit selection resets user modification
             updateUI(selectedCountry, 'country_selection');
             toggleDropdown('close');
             mobileInput.focus();
@@ -145,10 +138,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // --- Initial State ---
-    const defaultCountry = countryData.find(c => c.code === 'DE');
-    if (defaultCountry) {
-        updateUI(defaultCountry);
+    // --- Initial State from PHP ---
+    const initialCountryCode = nativeSelect.value;
+    if(initialCountryCode) {
+        const initialCountry = countryData.find(c => c.code === initialCountryCode);
+        if (initialCountry) {
+            updateUI(initialCountry, 'initial');
+        }
     }
 });
 

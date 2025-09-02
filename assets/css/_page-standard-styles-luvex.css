@@ -1,6 +1,6 @@
 /*
 ==============================================================================
-LUVEX THEME - STANDARD STLES PAGE (v3.3 - Restored)
+LUVEX THEME - STANDARD STYLES PAGE (v3.3 - Restored & Refined)
 ==============================================================================
 */
 
@@ -38,7 +38,7 @@ LUVEX THEME - STANDARD STLES PAGE (v3.3 - Restored)
 
 /*
 ==============================================================================
-FORM-READY COUNTRY SELECTOR STYLES (v2.0)
+FORM-READY COUNTRY SELECTOR STYLES (v2.1 - Refined)
 ==============================================================================
 */
 .component-preview-wrapper {
@@ -79,10 +79,11 @@ FORM-READY COUNTRY SELECTOR STYLES (v2.0)
     position: relative;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .country-selector-input {
-    padding-left: 3rem !important; /* Space for the flag */
+    padding-left: 3.25rem !important; /* More space for the flag */
     cursor: pointer !important;
 }
 
@@ -90,8 +91,12 @@ FORM-READY COUNTRY SELECTOR STYLES (v2.0)
     position: absolute;
     left: 1rem;
     font-size: 1.5rem;
-    pointer-events: none; /* Allows clicks to go through to the input */
+    pointer-events: none;
     line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 .luvex-country-selector .dropdown-arrow {
@@ -188,8 +193,8 @@ FORM-READY COUNTRY SELECTOR STYLES (v2.0)
 .luvex-country-selector .country-list-options li.hidden {
     display: none;
 }
-.luvex-country-selector .country-list-options .flag { font-size: 1.5rem; }
-.luvex-country-selector .country-list-options .name { font-weight: 500; color: var(--luvex-white); }
+.luvex-country-selector .country-list-options .flag { font-size: 1.5rem; flex-shrink: 0; }
+.luvex-country-selector .country-list-options .name { font-weight: 500; color: var(--luvex-white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 .luvex-country-selector .country-list-options .dial-code { color: var(--luvex-gray-300); font-size: 0.9em; margin-left: auto; }
 
 /* Phone Input Specifics */
@@ -200,10 +205,13 @@ FORM-READY COUNTRY SELECTOR STYLES (v2.0)
 }
 
 .phone-dial-code {
-    flex: 0 0 90px; /* Feste Breite für die Vorwahl */
+    flex: 0 0 90px; 
     border-right: none;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    text-align: center;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
 }
 
 .phone-mobile-number {
@@ -214,7 +222,11 @@ FORM-READY COUNTRY SELECTOR STYLES (v2.0)
 
 .phone-mobile-number:focus {
     position: relative;
-    z-index: 2; /* Hebt den Fokus-Schatten über das Nachbarfeld */
+    z-index: 2;
+}
+.phone-dial-code:focus {
+    position: relative;
+    z-index: 2;
 }
 
 /* --- (Restored) Icon Library Styles --- */

@@ -2,7 +2,7 @@
 /**
  * Template Name: Standard Styles
  * Description: Eine Seite zur Anzeige aller globalen Standard-Styles und UI-Komponenten.
- * Version: 3.3 - Vollständige Seite mit dem neuen, formular-freundlichen Country Selector wiederhergestellt.
+ * Version: 3.4 - Added readonly to country input and default selection.
  */
 
 if (!current_user_can('manage_options')) {
@@ -52,6 +52,7 @@ $luvex_colors = [
                 <?php if (function_exists('luvex_get_country_data')): ?>
                     <?php 
                         $countries = luvex_get_country_data();
+                        $default_country_code = 'DE'; 
                     ?>
                     
                     <div class="luvex-form-container">
@@ -81,9 +82,9 @@ $luvex_colors = [
                                     </ul>
                                 </div>
                                 <select name="country_code" class="native-select" style="display: none;">
-                                     <option value="" selected disabled>Please select</option>
+                                     <option value="" disabled>Please select</option>
                                     <?php foreach ($countries as $code => $data): ?>
-                                        <option value="<?php echo esc_attr($code); ?>">
+                                        <option value="<?php echo esc_attr($code); ?>" <?php selected($code, $default_country_code); ?>>
                                             <?php echo esc_html($data['name']); ?>
                                         </option>
                                     <?php endforeach; ?>
@@ -96,7 +97,7 @@ $luvex_colors = [
                             <label for="phone-input-mobile" class="luvex-form-label">Mobile Number</label>
                             <div class="phone-input-group">
                                 <input type="text" id="phone-input-dial-code" class="luvex-input phone-dial-code" placeholder="+1">
-                                <input type="tel" id="phone-input-mobile" class="luvex-input phone-mobile-number" placeholder="555 123456">
+                                <input type="tel" id="phone-input-mobile" class="luvex-input phone-mobile-number" placeholder="123 456789">
                             </div>
                         </div>
                     </div>
@@ -178,4 +179,5 @@ $luvex_colors = [
 <?php
 get_footer();
 ?>
+
 

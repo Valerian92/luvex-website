@@ -80,7 +80,7 @@ if (!function_exists('get_luvex_icon_library')) {
                 'strip-analyzer'   => ['label' => 'UV Strip Analyzer', 'class' => 'fa-solid fa-chart-simple'],
                 'partnership'      => ['label' => 'Partnership', 'class' => 'fa-solid fa-handshake-angle'],
             ],
-
+            
             // ========================================================================
             // NEU: UNKATEGORISIERTE / ALLGEMEINE UI ICONS
             // ========================================================================
@@ -300,3 +300,4 @@ if (!function_exists('luvex_get_country_data')) {
         ];
     }
 }
+
