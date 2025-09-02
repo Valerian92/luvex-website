@@ -1,24 +1,18 @@
 <?php
 /**
- * Auth-Modal-Template (v4.7 - Correct Country Data Source)
- * - Lädt die originalen, strukturierten Interessen-Daten.
- * - Stellt sicher, dass das reCAPTCHA korrekt eingebunden wird.
- * - Nutzt die originalen Industrie-Definitionen.
- * - Enthält das neue Länderauswahl-Modul.
+ * Auth-Modal-Template (v4.8 - Final UI Refinements)
+ * - Lädt die korrekten Länderdaten.
+ * - Verschiebt die "Other" Industrie Option für bessere UX.
+ * - Enthält das Länderauswahl-Modul.
  */
 
 if (!defined('ABSPATH')) exit;
 
-// Hole alle notwendigen Konfigurationen und Daten
 $recaptcha_site_key = defined('LUVEX_RECAPTCHA_SITE_KEY') ? LUVEX_RECAPTCHA_SITE_KEY : '';
-
-// Lade Industrien und Interessen
 $industries = function_exists('luvex_get_industries') ? luvex_get_industries() : [];
 $interests_structured = function_exists('luvex_get_interests') ? luvex_get_interests() : [];
-
-// KORREKTUR: Wir nutzen jetzt die detailreichen Länderdaten für das neue Modul
 $countries = function_exists('luvex_get_country_data') ? luvex_get_country_data() : [];
-$default_country_code = 'DE'; // Standardauswahl
+$default_country_code = 'DE';
 ?>
 <div id="authModal" class="modal-overlay">
     <div class="modal-content">
@@ -92,7 +86,6 @@ $default_country_code = 'DE'; // Standardauswahl
                                     <h5>Optional</h5>
                                     <input type="text" name="company" placeholder="Company Name" class="luvex-input">
                                     
-                                    <!-- START: NEUES LÄNDERAUSWAHL-MODUL -->
                                     <div class="luvex-form-group">
                                         <label for="country-selector-input-modal" class="luvex-form-label" style="color: var(--luvex-gray-300);">Country / Region</label>
                                         <div id="luvex-country-selector-modal" class="luvex-country-selector">
@@ -101,7 +94,6 @@ $default_country_code = 'DE'; // Standardauswahl
                                                 <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
                                                 <span class="selected-country-flag"></span>
                                             </div>
-
                                             <div class="selector-dropdown">
                                                 <div class="search-container">
                                                     <i class="fa-solid fa-magnifying-glass search-icon"></i>
@@ -137,7 +129,6 @@ $default_country_code = 'DE'; // Standardauswahl
                                             <input type="tel" id="phone-input-mobile-modal" class="luvex-input phone-mobile-number" placeholder="123 456789" name="phone">
                                         </div>
                                     </div>
-                                    <!-- END: NEUES LÄNDERAUSWAHL-MODUL -->
                                 </div>
                             </div>
                         </div>
@@ -170,7 +161,7 @@ $default_country_code = 'DE'; // Standardauswahl
                                         <span>Other</span>
                                     </div>
                                 </label>
-                                <input type="text" name="industry_other_text" id="industry_other_text" class="luvex-input" placeholder="Please specify..." style="display:none;">
+                                <input type="text" name="industry_other_text" id="industry_other_text" class="luvex-input" placeholder="Please specify...">
                             </div>
                         </div>
                         
@@ -252,23 +243,30 @@ $default_country_code = 'DE'; // Standardauswahl
 document.addEventListener('DOMContentLoaded', function() {
     const industryGrid = document.getElementById('industry-grid-container');
     const industryToggleBtn = document.getElementById('industry-toggle-btn');
+    const otherIndustryContainer = document.querySelector('.other-industry-container');
     const industryOtherCheckbox = document.getElementById('industry_other_checkbox');
     const industryOtherText = document.getElementById('industry_other_text');
     
-    if (industryToggleBtn && industryGrid) {
+    if (industryToggleBtn && industryGrid && otherIndustryContainer) {
         industryToggleBtn.addEventListener('click', function() {
-            industryGrid.classList.toggle('expanded');
-            const isExpanded = industryGrid.classList.contains('expanded');
+            const isExpanded = industryGrid.classList.toggle('expanded');
+            otherIndustryContainer.classList.toggle('visible', isExpanded);
+            
             this.querySelector('.btn-text').textContent = isExpanded ? 'Show Less' : 'Show More Industries';
             this.querySelector('i').style.transform = isExpanded ? 'rotate(180deg)' : 'rotate(0deg)';
         });
     }
 
     if (industryOtherCheckbox && industryOtherText) {
+        // Logik für das Ein- und Ausblenden des Textfeldes, wenn "Other" geklickt wird
         industryOtherCheckbox.addEventListener('change', function() {
             industryOtherText.style.display = this.checked ? 'block' : 'none';
-            if (this.checked) industryOtherText.focus();
+            if (this.checked) {
+                 industryOtherText.focus();
+            }
         });
+        // Initialer Zustand des Textfeldes basierend auf der Checkbox
+        industryOtherText.style.display = industryOtherCheckbox.checked ? 'block' : 'none';
     }
 
     document.querySelectorAll('.toggle-password').forEach(toggle => {

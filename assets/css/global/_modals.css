@@ -1,11 +1,11 @@
 /*
 ==============================================================================
-LUVEX THEME - MODAL STYLES (v4.1.0 - Interest Grid Layout)
+LUVEX THEME - MODAL STYLES (v4.2.0 - Final UI Refinements)
 ==============================================================================
 Description: Neu strukturiertes und optimiertes Stylesheet für alle Modals.
              Fokus auf modernes Layout (Flexbox, Grid), Responsivität und
              eine saubere User Experience für das Auth-Modal.
-Last Update: 2025-09-02 - Added 3-column layout for interests.
+Last Update: 2025-09-02 - Final layout refinements for Industry & Interests.
 ==============================================================================
 */
 
@@ -132,7 +132,7 @@ Last Update: 2025-09-02 - Added 3-column layout for interests.
 .auth-form {
     display: flex;
     flex-direction: column;
-    gap: 2rem; /* Mehr Abstand zwischen den Sektionen */
+    gap: 2rem;
 }
 
 .luvex-form-section-title {
@@ -187,13 +187,13 @@ Last Update: 2025-09-02 - Added 3-column layout for interests.
 .luvex-form-grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5rem 2rem; /* Zeilen- und Spaltenabstand */
+    gap: 1.5rem 2rem;
 }
 
 .luvex-form-column {
     display: flex;
     flex-direction: column;
-    gap: 1rem; /* Abstand zwischen den Feldern in einer Spalte */
+    gap: 1rem;
 }
 
 .luvex-form-column h5 {
@@ -210,32 +210,44 @@ Last Update: 2025-09-02 - Added 3-column layout for interests.
 ==============================================================================
 */
 
-/* --- 6.1 Industrie Grid (4 Spalten) --- */
-.selection-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.75rem;
-}
-
+/* --- 6.1 Industrie Grid (5 Spalten & kleiner) --- */
 .selection-grid.industry-grid {
-    max-height: 125px; /* Höhe für 2 Reihen */
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 Spalten */
+    gap: 0.5rem; /* Weniger Abstand */
+    max-height: 90px; /* Höhe für 2 Reihen, angepasst */
     overflow: hidden;
     transition: max-height 0.5s ease-in-out;
 }
 
 .selection-grid.industry-grid.expanded {
-    max-height: 500px; /* Genug Platz für alle Elemente */
+    max-height: 500px;
 }
 
-/* --- 6.2 NEU: Interessen Grid (3 Spalten) --- */
+.industry-grid .selection-checkbox-content {
+    padding: 0.5rem 0.25rem; /* Kleinere Kacheln */
+    gap: 0.25rem;
+}
+
+.industry-grid .selection-checkbox-content i {
+    font-size: 1.3rem; /* Kleinere Icons */
+}
+
+.industry-grid .selection-checkbox-content span {
+    font-size: 0.7rem; /* Kleinere Schrift */
+    line-height: 1.2;
+}
+
+
+/* --- 6.2 Interessen Grid (3 Spalten) --- */
 .interests-structured-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem; /* Breiterer Abstand zwischen den Hauptkategorien */
+    gap: 2rem;
 }
 
 .interest-category-title {
-    font-size: var(--text-base); /* Größere Schrift für die Titel */
+    font-size: var(--text-base);
     font-weight: 600;
     color: var(--luvex-white);
     margin-bottom: 1.25rem;
@@ -243,19 +255,20 @@ Last Update: 2025-09-02 - Added 3-column layout for interests.
     border-bottom: 1px solid rgba(109, 213, 237, 0.2);
     display: flex;
     align-items: center;
+    justify-content: center; /* Überschrift zentriert */
     gap: 0.75rem;
 }
 
 .selection-grid-interest-items {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 Spalten für die Items in jeder Kategorie */
-    gap: 0.75rem; /* Abstand zwischen den Items */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
 }
 
 
 /* --- 6.3 Gemeinsames Styling für Checkbox-Elemente --- */
 .selection-checkbox input[type="checkbox"] {
-    display: none; /* Verstecke die Standard-Checkbox */
+    display: none;
 }
 
 .selection-checkbox-content {
@@ -271,7 +284,7 @@ Last Update: 2025-09-02 - Added 3-column layout for interests.
     border-radius: var(--radius-md, 8px);
     cursor: pointer;
     transition: all 0.3s ease;
-    height: 100%; /* Wichtig für gleiche Höhe */
+    height: 100%;
 }
 
 .selection-checkbox-content i {
@@ -324,7 +337,17 @@ Last Update: 2025-09-02 - Added 3-column layout for interests.
     font-weight: 600;
 }
 #industry-toggle-btn i { transition: transform 0.3s ease; }
-.other-industry-container { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
+
+.other-industry-container {
+    display: none; /* Standardmäßig versteckt */
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.other-industry-container.visible {
+    display: flex; /* Sichtbar, wenn "Show More" geklickt wurde */
+    margin-top: 1rem;
+}
+
 
 /*
 ==============================================================================
@@ -339,8 +362,19 @@ Last Update: 2025-09-02 - Added 3-column layout for interests.
 }
 
 .auth-form-footer { display: flex; justify-content: space-between; align-items: center; }
-.auth-form-footer-register { display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem; }
-.auth-form-footer-register .luvex-checkbox { align-items: flex-start; }
+
+.auth-form-footer-register {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    align-items: center; /* Zentriert den gesamten Block */
+}
+.auth-form-footer-register .luvex-checkbox {
+    align-items: flex-start;
+    max-width: 450px; /* Verhindert, dass der Text zu breit wird */
+    text-align: center; /* Zentriert den Text selbst */
+}
 .auth-form-footer-register .luvex-checkbox__text { font-size: 0.85rem; line-height: 1.5; }
 .auth-form-footer-register .luvex-checkbox__text a { color: var(--luvex-bright-cyan); text-decoration: none; }
 .auth-form-footer-register .luvex-checkbox__text a:hover { text-decoration: underline; }
@@ -413,7 +447,7 @@ Last Update: 2025-09-02 - Added 3-column layout for interests.
     border-radius: var(--radius-md);
     text-align: center;
     font-weight: 500;
-    display: none; /* Wird per JS gesteuert */
+    display: none;
     margin-top: 1rem;
 }
 
@@ -431,161 +465,39 @@ Last Update: 2025-09-02 - Added 3-column layout for interests.
 
 /*
 ==============================================================================
-8. LÄNDERAUSWAHL-STYLING (Hierher verschoben)
+8. LÄNDERAUSWAHL-STYLING
 ==============================================================================
 */
-.luvex-form-group {
-    width: 100%;
-    text-align: left;
-}
-.luvex-form-label {
-    display: block;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--luvex-gray-300);
-    margin-bottom: 0.5rem;
-}
-.luvex-country-selector {
-    position: relative;
-    width: 100%;
-}
-.selector-input-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-.country-selector-input {
-    padding-left: 3.25rem !important;
-    cursor: pointer !important;
-}
-.selected-country-flag {
-    position: absolute;
-    left: 1rem;
-    font-size: 1.5rem;
-    pointer-events: none;
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
-.luvex-country-selector .dropdown-arrow {
-    position: absolute;
-    right: 1rem;
-    color: var(--luvex-bright-cyan);
-    pointer-events: none;
-    transition: transform 0.3s ease;
-}
-.luvex-country-selector.open .dropdown-arrow {
-    transform: rotate(180deg);
-}
-.luvex-country-selector .selector-dropdown {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 0;
-    width: 100%;
-    background: var(--luvex-dark-blue-medium);
-    border: 1px solid var(--luvex-bright-cyan);
-    border-radius: var(--radius-md);
-    z-index: 1000;
-    overflow: hidden;
-    box-shadow: var(--shadow-lg);
-    opacity: 0;
-    transform: translateY(10px);
-    visibility: hidden;
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-}
-.luvex-country-selector.open .selector-dropdown {
-    opacity: 1;
-    transform: translateY(0);
-    visibility: visible;
-}
-.luvex-country-selector .search-container {
-    padding: 0.75rem;
-    border-bottom: 1px solid rgba(109, 213, 237, 0.3);
-    position: relative;
-}
-.luvex-country-selector .search-icon {
-    position: absolute;
-    top: 50%;
-    left: 1.5rem;
-    transform: translateY(-50%);
-    color: var(--luvex-gray-300);
-}
-.luvex-country-selector .country-search {
-    width: 100%;
-    height: 40px;
-    padding: 0 1rem 0 2.5rem;
-    background: var(--luvex-dark-blue-dark);
-    border: 1px solid transparent;
-    border-radius: var(--radius-sm);
-    color: var(--luvex-white);
-    outline: none;
-}
-.luvex-country-selector .country-search:focus {
-    border-color: var(--luvex-special-cyan);
-}
-.luvex-country-selector .country-list-options {
-    list-style: none;
-    margin: 0;
-    padding: 0.5rem;
-    max-height: 250px;
-    overflow-y: auto;
-}
+.luvex-form-group { width: 100%; text-align: left; }
+.luvex-form-label { display: block; font-size: 0.875rem; font-weight: 500; color: var(--luvex-gray-300); margin-bottom: 0.5rem; }
+.luvex-country-selector { position: relative; width: 100%; }
+.selector-input-wrapper { position: relative; display: flex; align-items: center; cursor: pointer; }
+.country-selector-input { padding-left: 3.25rem !important; cursor: pointer !important; }
+.selected-country-flag { position: absolute; left: 1rem; font-size: 1.5rem; pointer-events: none; line-height: 1; display: flex; align-items: center; justify-content: center; height: 100%; }
+.luvex-country-selector .dropdown-arrow { position: absolute; right: 1rem; color: var(--luvex-bright-cyan); pointer-events: none; transition: transform 0.3s ease; }
+.luvex-country-selector.open .dropdown-arrow { transform: rotate(180deg); }
+.luvex-country-selector .selector-dropdown { position: absolute; top: calc(100% + 8px); left: 0; width: 100%; background: var(--luvex-dark-blue-medium); border: 1px solid var(--luvex-bright-cyan); border-radius: var(--radius-md); z-index: 1000; overflow: hidden; box-shadow: var(--shadow-lg); opacity: 0; transform: translateY(10px); visibility: hidden; transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s; }
+.luvex-country-selector.open .selector-dropdown { opacity: 1; transform: translateY(0); visibility: visible; }
+.luvex-country-selector .search-container { padding: 0.75rem; border-bottom: 1px solid rgba(109, 213, 237, 0.3); position: relative; }
+.luvex-country-selector .search-icon { position: absolute; top: 50%; left: 1.5rem; transform: translateY(-50%); color: var(--luvex-gray-300); }
+.luvex-country-selector .country-search { width: 100%; height: 40px; padding: 0 1rem 0 2.5rem; background: var(--luvex-dark-blue-dark); border: 1px solid transparent; border-radius: var(--radius-sm); color: var(--luvex-white); outline: none; }
+.luvex-country-selector .country-search:focus { border-color: var(--luvex-special-cyan); }
+.luvex-country-selector .country-list-options { list-style: none; margin: 0; padding: 0.5rem; max-height: 250px; overflow-y: auto; }
 .luvex-country-selector .country-list-options::-webkit-scrollbar { width: 6px; }
 .luvex-country-selector .country-list-options::-webkit-scrollbar-track { background: var(--luvex-dark-blue-dark); }
 .luvex-country-selector .country-list-options::-webkit-scrollbar-thumb { background: var(--luvex-cyan-dark); border-radius: 3px; }
-.luvex-country-selector .country-list-options li {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    outline: none;
-}
-.luvex-country-selector .country-list-options li:hover,
-.luvex-country-selector .country-list-options li:focus {
-    background-color: var(--luvex-dark-blue-light);
-}
-.luvex-country-selector .country-list-options li.hidden {
-    display: none;
-}
+.luvex-country-selector .country-list-options li { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border-radius: var(--radius-sm); cursor: pointer; transition: background-color 0.2s ease; outline: none; }
+.luvex-country-selector .country-list-options li:hover, .luvex-country-selector .country-list-options li:focus { background-color: var(--luvex-dark-blue-light); }
+.luvex-country-selector .country-list-options li.hidden { display: none; }
 .luvex-country-selector .country-list-options .flag { font-size: 1.5rem; flex-shrink: 0; }
-.luvex-country-selector .country-list-options .name { font-weight: 500; color: var(--luvex-white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.luvex-country-selector .country-list-options .name { font-weight: 500; color: var(--luvex-white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .luvex-country-selector .country-list-options .dial-code { color: var(--luvex-gray-300); font-size: 0.9em; margin-left: auto; }
-.phone-input-group {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-.phone-dial-code-wrapper {
-    position: relative;
-    flex: 0 0 100px;
-}
-.phone-dial-code-flag {
-    position: absolute;
-    left: 0.75rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.5rem;
-    pointer-events: none;
-}
-.phone-dial-code {
-    padding-left: 3.25rem !important;
-    text-align: left;
-}
-.phone-mobile-number {
-    flex: 1 1 auto;
-}
-.phone-mobile-number.completed {
-    background: var(--luvex-dark-blue-dark) !important;
-    color: var(--luvex-bright-cyan) !important;
-    border-color: var(--luvex-cyan-dark) !important;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
+.phone-input-group { display: flex; align-items: center; gap: 0.5rem; }
+.phone-dial-code-wrapper { position: relative; flex: 0 0 100px; }
+.phone-dial-code-flag { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); font-size: 1.5rem; pointer-events: none; }
+.phone-dial-code { padding-left: 3.25rem !important; text-align: left; }
+.phone-mobile-number { flex: 1 1 auto; }
+.phone-mobile-number.completed { background: var(--luvex-dark-blue-dark) !important; color: var(--luvex-bright-cyan) !important; border-color: var(--luvex-cyan-dark) !important; transition: background-color 0.3s ease, color 0.3s ease; }
 
 /*
 ==============================================================================
@@ -595,42 +507,18 @@ Last Update: 2025-09-02 - Added 3-column layout for interests.
 @media (max-width: 992px) {
     #authModal .modal-content { max-width: 600px; }
     .luvex-form-grid-2 { grid-template-columns: 1fr; }
-    .selection-grid { grid-template-columns: repeat(3, 1fr); }
-    .selection-grid.industry-grid { max-height: 175px; } 
-    .interests-structured-grid { grid-template-columns: 1fr; } /* Interessen auf Tablets untereinander */
+    .selection-grid.industry-grid { grid-template-columns: repeat(4, 1fr); } /* 4 Spalten auf Tablets */
+    .interests-structured-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 768px) {
-    .modal-overlay {
-        padding: 0;
-        align-items: flex-end; /* Modal kommt von unten */
-    }
-
-    #authModal .modal-content {
-        width: 100vw;
-        height: 95vh;
-        max-height: 95vh;
-        margin: 0;
-        border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-        transform: translateY(100%);
-        transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-
-    .modal-overlay.active #authModal .modal-content {
-        transform: translateY(0);
-    }
-
+    .modal-overlay { padding: 0; align-items: flex-end; }
+    #authModal .modal-content { width: 100vw; height: 95vh; max-height: 95vh; margin: 0; border-radius: var(--radius-xl) var(--radius-xl) 0 0; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+    .modal-overlay.active #authModal .modal-content { transform: translateY(0); }
     .auth-modal-header { padding: 1.5rem 1.5rem 1rem; }
     .auth-scrollable-content { padding: 0.5rem 1.5rem 1.5rem 1.5rem; }
-
-    .selection-grid { grid-template-columns: repeat(2, 1fr); }
-    .selection-grid.industry-grid { max-height: 250px; } 
-
-    .auth-form-footer {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-    }
+    .selection-grid.industry-grid { grid-template-columns: repeat(3, 1fr); } /* 3 Spalten auf Handys */
+    .auth-form-footer { flex-direction: column; align-items: flex-start; gap: 1rem; }
     .forgot-password-link { align-self: flex-end; }
 }
 
