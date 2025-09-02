@@ -154,6 +154,7 @@ function luvex_enqueue_assets() {
         'luvex-scroll-to-top'     => 'global/scroll-to-top.js',
         'luvex-footer-light'      => 'global/footer-light-effect.js',
         'luvex-interactive-accordion' => 'global/interactive-accordion.js',
+        'luvex-country-selector' => 'global/luvex-country-selector.js',
     ];
     
     if (is_user_logged_in() && current_user_can('manage_options')) {
@@ -175,10 +176,7 @@ function luvex_enqueue_assets() {
         $enqueue_script('luvex-hero-safety-animation', 'pages/hero-safety-animation.js');
     }
 
-    // *** MODIFIED HERE: Script now loads on register page as well ***
-    if (is_page('standard-styles-luvex') || is_page('register') || is_page('profile')) {
-        $enqueue_script('luvex-country-selector', 'global/luvex-country-selector.js', []);
-    }
+
 
     $page_script_map = [
         'contact' => ['luvex-contact-hero' => 'pages/contact-hero-animation.js'],
