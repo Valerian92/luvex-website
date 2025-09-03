@@ -1,19 +1,95 @@
 <?php
 /**
- * Auth-Modal-Template (v5.5 - UI Polish & Flag Fixes)
- * - Restored special button styles for "Remember Me" and "Forgot Password".
- * - Adjusted HTML for new button styles.
- * - All other logic remains, including corrected JS targets from previous version.
+ * Auth-Modal-Template (v5.6 - Fixes & UI Improvements)
+ * - Added inline CSS to fix flag visibility, login form layout, and industry tile clipping.
+ * - Restructured Login form HTML as requested.
+ * - All other logic remains unchanged.
  */
 
 if (!defined('ABSPATH')) exit;
 
+// Data retrieval remains the same
 $recaptcha_site_key = defined('LUVEX_RECAPTCHA_SITE_KEY') ? LUVEX_RECAPTCHA_SITE_KEY : '';
 $industries = function_exists('luvex_get_industries') ? luvex_get_industries() : [];
 $interests_structured = function_exists('luvex_get_interests') ? luvex_get_interests() : [];
 $countries = function_exists('luvex_get_country_data') ? luvex_get_country_data() : [];
 $default_country_code = 'DE';
 ?>
+
+<style>
+    /* --- LUVEX AUTH MODAL FIXES & IMPROVEMENTS --- */
+
+    /* * FIX 1: Country & Phone Flag Visibility 
+     * Problem: The '.completed' class on inputs adds a background that covers the flag emojis.
+     * Solution: Force the flag spans to a higher stacking context (z-index) and add padding to the inputs
+     * so text does not flow under the flags.
+    */
+    .selector-input-wrapper,
+    .phone-dial-code-wrapper {
+        position: relative;
+    }
+
+    .selector-input-wrapper .selected-country-flag,
+    .phone-dial-code-wrapper .phone-dial-code-flag {
+        position: absolute;
+        top: 50%;
+        left: 15px;
+        transform: translateY(-50%);
+        z-index: 2; /* Ensures the flag is above the input's background */
+        font-size: 1.4em;
+        pointer-events: none; /* Allows clicks to go through to the input field */
+        color: #fff; /* Ensures emoji is rendered correctly */
+    }
+
+    /* Add padding to inputs to make space for the flag */
+    .luvex-input.country-selector-input,
+    .luvex-input.phone-dial-code {
+        padding-left: 50px !important;
+    }
+
+    /* * FIX 2: Login Form Styling Adjustments
+    */
+    /* a) Underline width for "Sign In" title */
+    #login-form-container .luvex-form-section-title {
+        display: inline-block; /* Makes the element's width fit its content */
+        width: auto;
+        padding-right: 10px; /* Adds a bit of space for the underline to extend */
+    }
+
+    /* b) Space below title */
+    #login-form-container .login-content-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 25px; /* Creates space between title, fields, and options */
+    }
+
+    /* c) Center "Remember Me" toggle */
+    #login-form-container .login-options-wrapper {
+        justify-content: center;
+        width: 100%;
+    }
+    /* Hide the old forgot password button in this flex container */
+    #login-form-container .login-options-wrapper .forgot-password-button {
+        display: none;
+    }
+
+    /* New container for "Forgot Password?" link below the login button */
+    .auth-form-footer {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    /* * FIX 3: Register Form "Industry" Tile Clipping
+     * Problem: Tiles in the top row are cut off during their hover animation.
+     * Solution: Add padding to the top of the grid container to give the tiles
+     * space to move into, and set overflow to visible.
+    */
+    #industry-grid-container {
+        padding-top: 10px;
+        overflow: visible;
+    }
+</style>
+
 <div id="authModal" class="modal-overlay">
     <div class="modal-content">
         <div class="auth-modal-header">
@@ -26,7 +102,7 @@ $default_country_code = 'DE';
 
         <div class="auth-scrollable-content">
             <div id="auth-tab-content-wrapper">
-                <!-- Login Form -->
+                <!-- Login Form (Struktur angepasst) -->
                 <div id="login-form-container" class="auth-form-container">
                     <form id="luvex-login-form" class="auth-form" method="post">
                         <div class="login-content-wrapper">
@@ -40,6 +116,7 @@ $default_country_code = 'DE';
                                 </div>
                             </div>
                             
+                            <!-- "Remember Me" ist jetzt zentriert, "Forgot Password" wurde entfernt -->
                             <div class="login-options-wrapper">
                                 <label class="remember-me-toggle">
                                     <input type="checkbox" name="remember_me" value="forever">
@@ -48,15 +125,9 @@ $default_country_code = 'DE';
                                         <span>Remember Me</span>
                                     </div>
                                 </label>
-                                <a href="#" class="forgot-password-button" onclick="showAuthForm('forgot-password')">
-                                    <div class="button-content">
-                                         <i class="fa-solid fa-key"></i>
-                                         <span>Forgot Password?</span>
-                                    </div>
-                                </a>
                             </div>
-
                         </div>
+
                         <div class="recaptcha-wrapper">
                             <?php if (!empty($recaptcha_site_key)): ?>
                                 <div class="g-recaptcha" data-sitekey="<?php echo esc_attr($recaptcha_site_key); ?>"></div>
@@ -64,14 +135,25 @@ $default_country_code = 'DE';
                                 <p class="recaptcha-notice">reCAPTCHA not configured.</p>
                             <?php endif; ?>
                         </div>
+
                         <button type="submit" id="login-submit-btn" class="luvex-form-submit">
                             <span class="btn-text">Login</span>
                             <span class="btn-loader"></span>
                         </button>
+                        
+                        <!-- "Forgot Password?" wurde hierhin verschoben -->
+                        <div class="auth-form-footer">
+                            <a href="#" class="forgot-password-button" onclick="showAuthForm('forgot-password')">
+                                <div class="button-content">
+                                     <i class="fa-solid fa-key"></i>
+                                     <span>Forgot Password?</span>
+                                </div>
+                            </a>
+                        </div>
                     </form>
                 </div>
 
-                <!-- Register Form -->
+                <!-- Register Form (Keine HTML-Änderungen hier) -->
                 <div id="register-form-container" class="auth-form-container" style="display:none;">
                     <form id="luvex-register-form" class="auth-form" method="post">
                         <!-- Account Details -->
@@ -248,7 +330,7 @@ $default_country_code = 'DE';
     </div>
 </div>
 
-<!-- Local JS for Modal Interactions -->
+<!-- Local JS for Modal Interactions (unverändert) -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // --- General Interaction Logic ---
@@ -313,4 +395,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-
