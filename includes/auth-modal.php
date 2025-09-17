@@ -1,8 +1,8 @@
 <?php
 /**
- * Auth-Modal-Template (v5.6 - Fixes & UI Improvements)
- * - Added inline CSS to fix flag visibility, login form layout, and industry tile clipping.
- * - Restructured Login form HTML as requested.
+ * Auth-Modal-Template (v5.7 - Major Fixes)
+ * - Added comprehensive CSS to fix login form width, industry grid toggle, and centered placeholders.
+ * - Re-applied and strengthened the flag visibility fix.
  * - All other logic remains unchanged.
  */
 
@@ -17,76 +17,88 @@ $default_country_code = 'DE';
 ?>
 
 <style>
-    /* --- LUVEX AUTH MODAL FIXES & IMPROVEMENTS --- */
+    /* --- LUVEX AUTH MODAL FIXES & IMPROVEMENTS (v2) --- */
 
-    /* * FIX 1: Country & Phone Flag Visibility 
-     * Problem: The '.completed' class on inputs adds a background that covers the flag emojis.
-     * Solution: Force the flag spans to a higher stacking context (z-index) and add padding to the inputs
-     * so text does not flow under the flags.
+    /* * FIX 1: Login & Forgot Password Form Layout
+     * Constrains the width of the forms for a more compact appearance and centers them.
     */
-    .selector-input-wrapper,
-    .phone-dial-code-wrapper {
-        position: relative;
+    #luvex-login-form .login-content-wrapper,
+    #luvex-login-form .recaptcha-wrapper,
+    #luvex-login-form .luvex-form-submit,
+    #luvex-login-form .auth-form-footer,
+    #luvex-forgot-password-form .luvex-form-section,
+    #luvex-forgot-password-form .luvex-form-submit {
+        max-width: 420px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    .selector-input-wrapper .selected-country-flag,
-    .phone-dial-code-wrapper .phone-dial-code-flag {
-        position: absolute;
-        top: 50%;
-        left: 15px;
-        transform: translateY(-50%);
-        z-index: 2; /* Ensures the flag is above the input's background */
-        font-size: 1.4em;
-        pointer-events: none; /* Allows clicks to go through to the input field */
-        color: #fff; /* Ensures emoji is rendered correctly */
+    /* Centers the placeholder text specifically in the reset password form */
+    #luvex-forgot-password-form input[name="user_email_reset"]::placeholder {
+        text-align: center;
     }
 
-    /* Add padding to inputs to make space for the flag */
-    .luvex-input.country-selector-input,
-    .luvex-input.phone-dial-code {
-        padding-left: 50px !important;
-    }
-
-    /* * FIX 2: Login Form Styling Adjustments
-    */
-    /* a) Underline width for "Sign In" title */
+    /* Original underline fix from previous version */
     #login-form-container .luvex-form-section-title {
-        display: inline-block; /* Makes the element's width fit its content */
+        display: inline-block;
         width: auto;
-        padding-right: 10px; /* Adds a bit of space for the underline to extend */
+        padding-right: 10px;
+        margin-bottom: 25px; /* Creates space to fields */
     }
 
-    /* b) Space below title */
-    #login-form-container .login-content-wrapper {
-        display: flex;
-        flex-direction: column;
-        gap: 25px; /* Creates space between title, fields, and options */
-    }
-
-    /* c) Center "Remember Me" toggle */
+    /* Original layout fixes from previous version */
     #login-form-container .login-options-wrapper {
         justify-content: center;
         width: 100%;
     }
-    /* Hide the old forgot password button in this flex container */
     #login-form-container .login-options-wrapper .forgot-password-button {
         display: none;
     }
-
-    /* New container for "Forgot Password?" link below the login button */
     .auth-form-footer {
         text-align: center;
         margin-top: 20px;
     }
 
-    /* * FIX 3: Register Form "Industry" Tile Clipping
-     * Problem: Tiles in the top row are cut off during their hover animation.
-     * Solution: Add padding to the top of the grid container to give the tiles
-     * space to move into, and set overflow to visible.
+
+    /* * FIX 2: Country & Phone Flag Visibility (Strengthened)
+     * The '.completed' class background was covering the flag. This ensures the flag
+     * is on a higher layer (z-index) and gives it space with padding.
+    */
+    #register-form-container .selector-input-wrapper,
+    #register-form-container .phone-dial-code-wrapper {
+        position: relative;
+    }
+
+    #register-form-container .selected-country-flag,
+    #register-form-container .phone-dial-code-flag {
+        position: absolute;
+        top: 50%;
+        left: 15px;
+        transform: translateY(-50%);
+        z-index: 2; /* Crucial: Places flag above input background */
+        font-size: 1.4em;
+        pointer-events: none;
+    }
+
+    #register-form-container .luvex-input.country-selector-input,
+    #register-form-container .luvex-input.phone-dial-code {
+        padding-left: 50px !important; /* Makes room for the flag */
+    }
+
+
+    /* * FIX 3: "Your Industry" Grid Toggle Functionality
+     * Hides overflowing industry tiles by default and reveals them when 'expanded' class is added by JS.
     */
     #industry-grid-container {
-        padding-top: 10px;
-        overflow: visible;
+        max-height: 130px; /* Adjust to perfectly fit 2 rows */
+        overflow: hidden;
+        transition: max-height 0.4s ease-out;
+        padding-top: 10px; /* Keeps fix for hover clipping */
+    }
+
+    #industry-grid-container.expanded {
+        max-height: 500px; /* Large enough to show all items */
+        overflow: visible; /* Keeps fix for hover clipping */
     }
 </style>
 
@@ -102,7 +114,7 @@ $default_country_code = 'DE';
 
         <div class="auth-scrollable-content">
             <div id="auth-tab-content-wrapper">
-                <!-- Login Form (Struktur angepasst) -->
+                <!-- Login Form (Struktur unverändert, nur CSS) -->
                 <div id="login-form-container" class="auth-form-container">
                     <form id="luvex-login-form" class="auth-form" method="post">
                         <div class="login-content-wrapper">
@@ -116,7 +128,6 @@ $default_country_code = 'DE';
                                 </div>
                             </div>
                             
-                            <!-- "Remember Me" ist jetzt zentriert, "Forgot Password" wurde entfernt -->
                             <div class="login-options-wrapper">
                                 <label class="remember-me-toggle">
                                     <input type="checkbox" name="remember_me" value="forever">
@@ -141,7 +152,6 @@ $default_country_code = 'DE';
                             <span class="btn-loader"></span>
                         </button>
                         
-                        <!-- "Forgot Password?" wurde hierhin verschoben -->
                         <div class="auth-form-footer">
                             <a href="#" class="forgot-password-button" onclick="showAuthForm('forgot-password')">
                                 <div class="button-content">
@@ -153,7 +163,7 @@ $default_country_code = 'DE';
                     </form>
                 </div>
 
-                <!-- Register Form (Keine HTML-Änderungen hier) -->
+                <!-- Register Form -->
                 <div id="register-form-container" class="auth-form-container" style="display:none;">
                     <form id="luvex-register-form" class="auth-form" method="post">
                         <!-- Account Details -->
@@ -395,3 +405,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
