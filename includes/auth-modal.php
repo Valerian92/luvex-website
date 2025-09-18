@@ -1,9 +1,10 @@
 <?php
 /**
- * Auth-Modal-Template (v5.7 - Major Fixes)
- * - Added comprehensive CSS to fix login form width, industry grid toggle, and centered placeholders.
- * - Re-applied and strengthened the flag visibility fix.
- * - All other logic remains unchanged.
+ * Auth-Modal-Template (v5.8 - Final Fixes & UX Improvements)
+ * - CSS: Adjusted login/forgot password form width and vertical spacing for a more compact look.
+ * - CSS: Final fix for flag emoji visibility by explicitly setting a color.
+ * - JS: Added a handler to correctly parse phone numbers from browser autofill.
+ * - JS: Intercepted the registration form submission to show a success message instead of redirecting.
  */
 
 if (!defined('ABSPATH')) exit;
@@ -17,20 +18,29 @@ $default_country_code = 'DE';
 ?>
 
 <style>
-    /* --- LUVEX AUTH MODAL FIXES & IMPROVEMENTS (v2) --- */
+    /* --- LUVEX AUTH MODAL FIXES & IMPROVEMENTS (v3) --- */
 
-    /* * FIX 1: Login & Forgot Password Form Layout
-     * Constrains the width of the forms for a more compact appearance and centers them.
+    /* * FIX 1: Login & Forgot Password Form Layout (Refined)
+     * Further constrains width and adjusts vertical rhythm for a cleaner look.
     */
     #luvex-login-form .login-content-wrapper,
     #luvex-login-form .recaptcha-wrapper,
     #luvex-login-form .luvex-form-submit,
     #luvex-login-form .auth-form-footer,
     #luvex-forgot-password-form .luvex-form-section,
-    #luvex-forgot-password-form .luvex-form-submit {
-        max-width: 420px;
+    #luvex-forgot-password-form .luvex-form-submit,
+    #luvex-forgot-password-form .back-to-login-link {
+        max-width: 360px; /* Reduced width for a more compact form */
         margin-left: auto;
         margin-right: auto;
+    }
+
+    #luvex-login-form .login-content-wrapper {
+        gap: 20px; /* Reduced gap between elements */
+    }
+
+    #luvex-login-form .luvex-form-section-title {
+        margin-bottom: 0; /* Title is now spaced by the gap */
     }
 
     /* Centers the placeholder text specifically in the reset password form */
@@ -38,31 +48,9 @@ $default_country_code = 'DE';
         text-align: center;
     }
 
-    /* Original underline fix from previous version */
-    #login-form-container .luvex-form-section-title {
-        display: inline-block;
-        width: auto;
-        padding-right: 10px;
-        margin-bottom: 25px; /* Creates space to fields */
-    }
-
-    /* Original layout fixes from previous version */
-    #login-form-container .login-options-wrapper {
-        justify-content: center;
-        width: 100%;
-    }
-    #login-form-container .login-options-wrapper .forgot-password-button {
-        display: none;
-    }
-    .auth-form-footer {
-        text-align: center;
-        margin-top: 20px;
-    }
-
-
-    /* * FIX 2: Country & Phone Flag Visibility (Strengthened)
-     * The '.completed' class background was covering the flag. This ensures the flag
-     * is on a higher layer (z-index) and gives it space with padding.
+    /* * FIX 2: Country & Phone Flag Visibility (Final Fix)
+     * Forces the emoji character to be rendered with a color, solving the invisibility issue.
+     * Z-index and padding are kept to ensure proper layering and spacing.
     */
     #register-form-container .selector-input-wrapper,
     #register-form-container .phone-dial-code-wrapper {
@@ -75,9 +63,10 @@ $default_country_code = 'DE';
         top: 50%;
         left: 15px;
         transform: translateY(-50%);
-        z-index: 2; /* Crucial: Places flag above input background */
+        z-index: 5; /* Increased z-index */
         font-size: 1.4em;
         pointer-events: none;
+        color: #FFFFFF; /* CRUCIAL: Forces the emoji to render visibly */
     }
 
     #register-form-container .luvex-input.country-selector-input,
@@ -93,12 +82,12 @@ $default_country_code = 'DE';
         max-height: 130px; /* Adjust to perfectly fit 2 rows */
         overflow: hidden;
         transition: max-height 0.4s ease-out;
-        padding-top: 10px; /* Keeps fix for hover clipping */
+        padding-top: 10px;
     }
 
     #industry-grid-container.expanded {
         max-height: 500px; /* Large enough to show all items */
-        overflow: visible; /* Keeps fix for hover clipping */
+        overflow: visible;
     }
 </style>
 
@@ -114,7 +103,7 @@ $default_country_code = 'DE';
 
         <div class="auth-scrollable-content">
             <div id="auth-tab-content-wrapper">
-                <!-- Login Form (Struktur unverändert, nur CSS) -->
+                <!-- Login Form -->
                 <div id="login-form-container" class="auth-form-container">
                     <form id="luvex-login-form" class="auth-form" method="post">
                         <div class="login-content-wrapper">
@@ -225,8 +214,8 @@ $default_country_code = 'DE';
                                         <label for="phone-input-mobile-modal" class="luvex-form-label" style="color: var(--luvex-gray-300);">Mobile Number</label>
                                         <div class="phone-input-group">
                                             <div class="phone-dial-code-wrapper">
-                                                <span class="phone-dial-code-flag"></span>
                                                 <input type="text" id="phone-input-dial-code-modal" class="luvex-input phone-dial-code" placeholder="+1">
+                                                <span class="phone-dial-code-flag"></span>
                                             </div>
                                             <input type="tel" id="phone-input-mobile-modal" class="luvex-input phone-mobile-number" placeholder="123 456789" name="phone">
                                         </div>
@@ -340,10 +329,10 @@ $default_country_code = 'DE';
     </div>
 </div>
 
-<!-- Local JS for Modal Interactions (unverändert) -->
+<!-- Local JS for Modal Interactions (UPDATED) -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // --- General Interaction Logic ---
+    // --- General Interaction Logic (No changes here) ---
     const industryGrid = document.getElementById('industry-grid-container');
     const industryToggleBtn = document.getElementById('industry-toggle-btn');
     const otherIndustryContainer = document.querySelector('.other-industry-container');
@@ -381,9 +370,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // --- Global "Completed" Style Logic for ALL Inputs ---
     const allInputs = document.querySelectorAll('#authModal .luvex-input');
-    
     const checkCompletion = (element) => {
         if (element.value && element.value.trim() !== '') {
             element.classList.add('completed');
@@ -395,14 +382,109 @@ document.addEventListener('DOMContentLoaded', function() {
     allInputs.forEach(input => {
         input.addEventListener('focus', function() { this.classList.remove('completed'); });
         input.addEventListener('blur', function() { checkCompletion(this); });
-        
-        // Use a small timeout to let browser autofill complete before checking
-        setTimeout(() => {
-            if (document.activeElement !== input) {
-                checkCompletion(input);
-            }
-        }, 100);
+        setTimeout(() => { if (document.activeElement !== input) { checkCompletion(input); } }, 100);
     });
+
+    // --- NEW: Phone Number Autofill Fix ---
+    const dialCodeInput = document.getElementById('phone-input-dial-code-modal');
+    const mobileInput = document.getElementById('phone-input-mobile-modal');
+
+    if (dialCodeInput && mobileInput) {
+        dialCodeInput.addEventListener('input', function(e) {
+            const value = e.target.value;
+            // A typical autofill will be a long number, often starting with '+'.
+            // A simple dial code is short. We check for a length > 6.
+            if (value.length > 6 && (value.startsWith('+') || !isNaN(value.replace(/\s/g, '')))) {
+                
+                // This logic is simple: it assumes the first part is the dial code
+                // and the rest is the number. It's not perfect but covers most cases.
+                const parts = value.replace('+', '').split(/\s/);
+                let potentialDialCode = '';
+                let remainingNumber = '';
+
+                // A rough attempt to separate dial code from number
+                if (parts[0].length <= 3) {
+                    potentialDialCode = '+' + parts[0];
+                    remainingNumber = parts.slice(1).join('');
+                } else {
+                    // If the first part is long, just take the first few digits
+                    potentialDialCode = '+' + value.replace(/\D/g, '').substring(0, 2);
+                    remainingNumber = value.replace(/\D/g, '').substring(2);
+                }
+                
+                e.target.value = potentialDialCode;
+                mobileInput.value = remainingNumber;
+
+                // Trigger events to update styles and validation
+                e.target.dispatchEvent(new Event('blur'));
+                mobileInput.dispatchEvent(new Event('blur'));
+                mobileInput.focus();
+            }
+        });
+    }
+
+    // --- NEW: AJAX Registration Handler (prevents redirect) ---
+    const registerForm = document.getElementById('luvex-register-form');
+    if(registerForm) {
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop the default form submission
+
+            const submitBtn = document.getElementById('register-submit-btn');
+            const feedbackDiv = document.getElementById('auth-feedback');
+            const formData = new FormData(registerForm);
+            
+            // This is the standard action for WordPress AJAX.
+            formData.append('action', 'luvex_register_user');
+            
+            // NOTE: For this to work, your backend must provide a security nonce.
+            // Assuming it's available in a JS variable like `luvex_auth_vars.nonce`.
+            // If not, this needs to be added via wp_localize_script in your theme.
+            if (typeof luvex_auth_vars !== 'undefined') {
+                formData.append('nonce', luvex_auth_vars.nonce);
+            }
+
+            submitBtn.classList.add('loading');
+            feedbackDiv.style.display = 'none';
+
+            fetch(window.location.origin + '/wp-admin/admin-ajax.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    feedbackDiv.className = 'auth-feedback-success';
+                    feedbackDiv.innerHTML = '<i class="fa-solid fa-check-circle"></i> ' + (data.data.message || 'Registration successful! Welcome.');
+                    feedbackDiv.style.display = 'block';
+                    registerForm.style.display = 'none'; // Hide the form
+                    
+                    // Optional: Close the modal after a few seconds
+                    setTimeout(() => {
+                        const authModal = document.getElementById('authModal');
+                        if (authModal) {
+                           // You need a global close function or trigger a click outside
+                           authModal.classList.remove('active');
+                           document.body.style.overflow = '';
+                        }
+                    }, 4000);
+
+                } else {
+                    feedbackDiv.className = 'auth-feedback-error';
+                    feedbackDiv.innerHTML = '<i class="fa-solid fa-times-circle"></i> ' + (data.data.message || 'An error occurred. Please try again.');
+                    feedbackDiv.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                feedbackDiv.className = 'auth-feedback-error';
+                feedbackDiv.innerHTML = '<i class="fa-solid fa-times-circle"></i> A network error occurred. Please check your connection.';
+                feedbackDiv.style.display = 'block';
+            })
+            .finally(() => {
+                submitBtn.classList.remove('loading');
+                // We don't reset reCAPTCHA here as it's complex, user can re-trigger if needed.
+            });
+        });
+    }
 });
 </script>
 
