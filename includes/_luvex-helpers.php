@@ -2,7 +2,7 @@
 /**
  * LUVEX Theme Helper Functions
  * Enthält die zentrale Icon-Bibliothek und wiederverwendbare Datenfunktionen.
- * VERSION: 4.9.0 - Added Partner Program & Standard Styles Icons.
+ * VERSION: 4.9.2 - Unified and renamed Conventional Lamps icon.
  *
  * @package Luvex
  * @since 4.7.0
@@ -38,7 +38,7 @@ if (!function_exists('get_luvex_icon_library')) {
                 'menu-led-systems'   => ['label' => 'LED UV Systems', 'class' => 'fa-solid fa-arrows-to-dot'],
                 'menu-uv-curing'     => ['label' => 'UV Curing', 'class' => 'fa-solid fa-layer-group'],
                 'menu-uvc-disinfection' => ['label' => 'UV-C Disinfection', 'class' => 'fa-solid fa-shield-virus'],
-                'menu-mercury-lamps' => ['label' => 'Mercury UV Lamps', 'class' => 'fa-solid fa-wave-square'],
+                'menu-mercury-lamps' => ['label' => 'Conventional Lamps', 'class' => 'fa-solid fa-sun'], // CHANGED
                 'menu-custom-concepts' => ['label' => 'Custom Concepts', 'class' => 'fa-solid fa-puzzle-piece'],
                 'menu-tunnel-systems'  => ['label' => 'UV-Tunnel-Systems', 'class' => 'fa-solid fa-arrow-down-up-across-line'],
                 'menu-curing-systems'  => ['label' => 'Curing Systems', 'class' => 'fa-solid fa-layer-group'], 
@@ -53,8 +53,8 @@ if (!function_exists('get_luvex_icon_library')) {
                 'menu-news'      => ['label' => 'All UV News', 'class' => 'fa-solid fa-newspaper'],
                 'menu-contact'   => ['label' => 'Contact', 'class' => 'fa-solid fa-headset'],
                 'menu-project-talk' => ['label' => 'Project Talk', 'class' => 'fa-solid fa-calendar-days'],
-                'menu-partner-program' => ['label' => 'Partner Program', 'class' => 'fa-solid fa-handshake-angle'], // NEU
-                'menu-standard-styles' => ['label' => 'Standard Styles', 'class' => 'fa-solid fa-swatchbook'],   // NEU
+                'menu-partner-program' => ['label' => 'Partner Program', 'class' => 'fa-solid fa-handshake-angle'],
+                'menu-standard-styles' => ['label' => 'Standard Styles', 'class' => 'fa-solid fa-swatchbook'],
             ],
 
             // ========================================================================
@@ -64,7 +64,7 @@ if (!function_exists('get_luvex_icon_library')) {
                 'uv-curing'        => ['label' => 'UV Curing', 'class' => 'fa-solid fa-layer-group'],
                 'uvc-disinfection' => ['label' => 'UVC Disinfection', 'class' => 'fa-solid fa-shield-virus'],
                 'uv-led-systems'   => ['label' => 'UV LED Systems', 'class' => 'fa-solid fa-arrows-to-dot'],
-                'uv-mercury-lamps' => ['label' => 'UV Mercury Lamps', 'class' => 'fa-solid fa-wave-square'],
+                'uv-mercury-lamps' => ['label' => 'Conventional Lamps', 'class' => 'fa-solid fa-sun'], // CHANGED
             ],
             'UV Solutions' => [
                 'custom-solution'  => ['label' => 'Custom Solution', 'class' => 'fa-solid fa-puzzle-piece'],
@@ -84,7 +84,7 @@ if (!function_exists('get_luvex_icon_library')) {
             ],
             
             // ========================================================================
-            // NEU: UNKATEGORISIERTE / ALLGEMEINE UI ICONS
+            // UNKATEGORISIERTE / ALLGEMEINE UI ICONS
             // ========================================================================
             'Uncategorized / UI Icons' => [
                 'ui-check'          => ['label' => 'Checkmark / Success', 'class' => 'fa-solid fa-check-circle'],
@@ -302,3 +302,4 @@ if (!function_exists('luvex_get_country_data')) {
         ];
     }
 }
+
