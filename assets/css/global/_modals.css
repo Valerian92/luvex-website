@@ -1,0 +1,565 @@
+/*
+==============================================================================
+LUVEX THEME - MODAL STLES (v6.0 - Complete & Final)
+==============================================================================
+Description: The complete and corrected final version of the modal styles,
+             including all z-index fixes and responsive queries.
+Last Update: 2025-09-02
+==============================================================================
+*/
+
+/*
+==============================================================================
+1. MODAL-BASIS & OVERLAY
+==============================================================================
+*/
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s 0.3s;
+    padding: 1rem;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease;
+}
+
+/*
+==============================================================================
+2. AUTH MODAL - LAYOUT & CONTAINER
+==============================================================================
+*/
+#authModal .modal-content {
+    background: var(--luvex-dark-blue);
+    border-radius: var(--radius-xl, 16px);
+    border: 1px solid rgba(109, 213, 237, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 880px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    color: var(--luvex-white);
+    transform: scale(0.95) translateY(10px);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal-overlay.active #authModal .modal-content {
+    transform: scale(1) translateY(0);
+}
+
+/*
+==============================================================================
+3. AUTH MODAL - HEADER, TABS & SCROLLING
+==============================================================================
+*/
+.auth-modal-header {
+    padding: 1.5rem 2rem 1rem 2rem;
+    flex-shrink: 0;
+    background: var(--luvex-dark-blue);
+    z-index: 10;
+    transition: box-shadow 0.3s ease;
+}
+
+.auth-modal-header.scrolled {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.auth-tabs {
+    display: flex;
+    background-color: rgba(109, 213, 237, 0.05);
+    border-radius: var(--radius-full, 99px);
+    padding: 6px;
+    margin-bottom: 1.5rem;
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    background: transparent;
+    border: none;
+    color: var(--luvex-gray-300);
+    font-size: var(--text-base, 16px);
+    font-weight: 600;
+    border-radius: var(--radius-full, 99px);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.auth-tab:hover {
+    background: rgba(109, 213, 237, 0.1);
+    color: var(--luvex-white);
+}
+
+.auth-tab.active {
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    box-shadow: 0 2px 8px rgba(109, 213, 237, 0.3);
+}
+
+.auth-scrollable-content {
+    overflow-y: auto;
+    padding: 1rem 2rem 2rem 2rem;
+}
+
+.auth-scrollable-content::-webkit-scrollbar { width: 8px; }
+.auth-scrollable-content::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); border-radius: 10px; }
+.auth-scrollable-content::-webkit-scrollbar-thumb { background: var(--luvex-bright-cyan); border-radius: 10px; border: 2px solid var(--luvex-dark-blue); }
+.auth-scrollable-content::-webkit-scrollbar-thumb:hover { background: var(--luvex-special-cyan); }
+
+
+/*
+==============================================================================
+4. FORMULAR-STYLING (ALLGEMEIN)
+==============================================================================
+*/
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.luvex-form-section-title {
+    color: var(--luvex-white);
+    font-size: var(--text-lg, 18px);
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-bottom: 1px solid rgba(109, 213, 237, 0.2);
+    padding-bottom: 0.75rem;
+    justify-content: center; /* Center-align title by default */
+}
+
+.luvex-form-section-title i {
+    color: var(--luvex-bright-cyan);
+}
+
+.password-wrapper { position: relative; }
+.toggle-password { 
+    position: absolute; 
+    top: 50%; 
+    right: 1rem; 
+    transform: translateY(-50%); 
+    color: var(--luvex-gray-300); 
+    cursor: pointer;
+    z-index: 3; /* FIX: Bring icon to the front */
+}
+.form-description { color: var(--luvex-gray-300); text-align: center; margin-bottom: 1rem; }
+.back-to-login-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(109, 213, 237, 0.2);
+    border-radius: var(--radius-md);
+    color: var(--luvex-gray-300);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 450px;
+    margin: 1.5rem auto 0;
+    text-decoration: none;
+}
+
+.back-to-login-link:hover {
+    border-color: var(--luvex-bright-cyan);
+    color: var(--luvex-white);
+    text-decoration: none;
+}
+
+
+/*
+==============================================================================
+5. UNIVERSAL FORM COMPONENTS
+==============================================================================
+*/
+
+/* --- 5.1 Universal Input Styles --- */
+.luvex-input,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+    width: 100%;
+    height: 56px;
+    padding: 0 1rem;
+    font-size: var(--text-base);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(109, 213, 237, 0.3);
+    border-radius: var(--radius-md);
+    color: var(--luvex-white);
+    transition: var(--transition-normal);
+    position: relative; /* Establish stacking context */
+    z-index: 1; /* Keep input behind icons */
+}
+
+.luvex-input::placeholder,
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="tel"]::placeholder {
+    color: var(--luvex-gray-300);
+    opacity: 0.7;
+}
+
+.luvex-input:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus {
+    border-color: var(--luvex-bright-cyan);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 2px rgba(109, 213, 237, 0.5);
+    outline: none;
+}
+
+
+/*
+==============================================================================
+6. LOGIN & REGISTER LAYOUTS
+==============================================================================
+*/
+
+/* --- 6.1 Final Login Form --- */
+#login-form-container .login-fields-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Abstand zwischen den Feldern */
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+}
+#login-form-container .luvex-form-submit {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- 6.2 Reset Password Form --- */
+#forgot-password-form-container .luvex-form-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#forgot-password-form-container .luvex-form-column {
+    width: 100%;
+    max-width: 450px;
+}
+
+/* --- 6.3 Register Form Grid --- */
+#register-form-container .luvex-form-grid-2 {
+    margin-top: 1.5rem; /* Abstand nach "Account Details" Titel */
+}
+#register-form-container .luvex-form-section-title {
+    justify-content: flex-start; /* Titel im Register-Formular linksbündig */
+}
+.luvex-form-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem 2rem;
+}
+.luvex-form-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.luvex-form-column h5 {
+    font-size: 0.9rem;
+    color: var(--luvex-gray-300);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 0.5rem 0;
+}
+
+/*
+==============================================================================
+7. INDUSTRIE & INTERESSEN GRIDS
+==============================================================================
+*/
+#industry-grid-container {
+    margin-top: 1.5rem; /* Abstand nach der Trennlinie */
+}
+.selection-grid.industry-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; max-height: 90px; overflow: hidden; transition: max-height 0.5s ease-in-out; }
+.selection-grid.industry-grid.expanded { max-height: 500px; }
+.industry-grid .selection-checkbox-content { padding: 0.5rem 0.25rem; gap: 0.25rem; }
+.industry-grid .selection-checkbox-content i { font-size: 1.3rem; }
+.industry-grid .selection-checkbox-content span { font-size: 0.7rem; line-height: 1.2; }
+.interests-structured-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.interest-category-title { font-size: var(--text-base); font-weight: 600; color: var(--luvex-white); margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(109, 213, 237, 0.2); display: flex; align-items: center; justify-content: center; gap: 0.75rem; }
+.selection-grid-interest-items { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+.selection-checkbox input[type="checkbox"] { display: none; }
+.selection-checkbox-content { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem 0.5rem; text-align: center; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(109, 213, 237, 0.2); border-radius: var(--radius-md, 8px); cursor: pointer; transition: all 0.3s ease; height: 100%; }
+.selection-checkbox-content i { font-size: 1.75rem; color: var(--luvex-bright-cyan); transition: transform 0.3s ease; }
+.selection-checkbox-content span { font-size: 0.8rem; font-weight: 500; color: var(--luvex-gray-300); line-height: 1.3; }
+.selection-checkbox input[type="checkbox"]:hover + .selection-checkbox-content { border-color: var(--luvex-bright-cyan); transform: translateY(-3px); }
+.selection-checkbox input[type="checkbox"]:checked + .selection-checkbox-content { background: var(--luvex-bright-cyan); border-color: var(--luvex-bright-cyan); transform: translateY(-3px); box-shadow: 0 4px 15px rgba(109, 213, 237, 0.25); }
+.selection-checkbox input[type="checkbox"]:checked + .selection-checkbox-content i,
+.selection-checkbox input[type="checkbox"]:checked + .selection-checkbox-content span { color: var(--luvex-dark-blue); }
+.selection-checkbox input[type="checkbox"]:checked + .selection-checkbox-content i { transform: scale(1.1); }
+#industry-toggle-btn { display: flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; margin: 1rem auto 0; padding: 0.75rem; background: rgba(109, 213, 237, 0.1); border: none; color: var(--luvex-bright-cyan); border-radius: var(--radius-md); cursor: pointer; font-weight: 600; }
+#industry-toggle-btn i { transition: transform 0.3s ease; }
+.other-industry-container { display: none; flex-direction: column; gap: 0.75rem; }
+.other-industry-container.visible { display: flex; margin-top: 1rem; }
+
+/*
+==============================================================================
+8. FOOTER, BUTTONS & FEEDBACK
+==============================================================================
+*/
+.recaptcha-wrapper { display: flex; justify-content: center; padding: 0.5rem; border-radius: var(--radius-md); }
+
+/* --- 8.1 Final Login Options Buttons --- */
+.login-options-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 0.5rem auto 0;
+    gap: 1rem;
+}
+
+.remember-me-toggle,
+.forgot-password-button {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    flex: 1; /* Allow buttons to grow and share space */
+}
+
+.remember-me-toggle input { display: none; }
+
+.toggle-button,
+.button-content {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(109, 213, 237, 0.2);
+    border-radius: var(--radius-md);
+    color: var(--luvex-gray-300);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    width: 100%;
+    justify-content: center;
+}
+
+.remember-me-toggle:hover .toggle-button,
+.forgot-password-button:hover .button-content {
+    border-color: var(--luvex-bright-cyan);
+    color: var(--luvex-white);
+}
+
+.remember-me-toggle .toggle-indicator {
+    width: 20px;
+    height: 20px;
+    background: var(--luvex-dark-blue-dark);
+    border: 1px solid rgba(109, 213, 237, 0.3);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.remember-me-toggle .toggle-indicator i {
+    font-size: 0.7rem;
+    color: var(--luvex-dark-blue);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.3s ease;
+}
+
+.remember-me-toggle input:checked + .toggle-button {
+    font-weight: 600;
+}
+.remember-me-toggle input:checked + .toggle-button .toggle-indicator {
+    background: var(--luvex-bright-cyan);
+    border-color: var(--luvex-bright-cyan);
+}
+.remember-me-toggle input:checked + .toggle-button .toggle-indicator i {
+    opacity: 1;
+    transform: scale(1);
+}
+
+
+/* --- 8.2 Register Footer --- */
+.auth-form-footer-register { display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem; align-items: center; }
+.auth-form-footer-register .luvex-checkbox { align-items: flex-start; max-width: 450px; text-align: center; }
+.auth-form-footer-register .luvex-checkbox__text { font-size: 0.85rem; line-height: 1.5; }
+.auth-form-footer-register .luvex-checkbox__text a { color: var(--luvex-bright-cyan); text-decoration: none; }
+.auth-form-footer-register .luvex-checkbox__text a:hover { text-decoration: underline; }
+
+/* --- 8.3 Submit Button --- */
+.luvex-form-submit { position: relative; width: 100%; padding: 1rem; font-size: 1rem; font-weight: 700; color: var(--luvex-dark-blue); background: var(--luvex-bright-cyan); border: none; border-radius: var(--radius-md, 8px); cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(109, 213, 237, 0.2); }
+.luvex-form-submit:hover:not(:disabled) { background: var(--luvex-special-cyan); box-shadow: 0 6px 20px rgba(109, 213, 237, 0.3); transform: translateY(-2px); }
+.luvex-form-submit:disabled { background: var(--luvex-gray-400); cursor: not-allowed; opacity: 0.7; }
+.luvex-form-submit.loading .btn-text { visibility: hidden; opacity: 0; }
+.luvex-form-submit .btn-loader { visibility: hidden; opacity: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 24px; height: 24px; border: 3px solid rgba(15, 23, 42, 0.3); border-top-color: var(--luvex-dark-blue); border-radius: 50%; animation: spin 0.8s linear infinite; transition: opacity 0.3s, visibility 0.3s; }
+.luvex-form-submit.loading .btn-loader { visibility: visible; opacity: 1; }
+@keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+/* --- 8.4 Feedback Message --- */
+#auth-feedback { padding: 1rem; border-radius: var(--radius-md); text-align: center; font-weight: 500; display: none; margin-top: 1rem; }
+#auth-feedback.success { background-color: rgba(22, 163, 74, 0.2); color: #4ade80; border: 1px solid #22c55e; }
+#auth-feedback.error { background-color: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; }
+
+/*
+==============================================================================
+9. LÄNDERAUSWAHL & GLOBAL 'COMPLETED' STYLES
+==============================================================================
+*/
+.luvex-form-group { width: 100%; text-align: left; }
+.luvex-form-label { display: block; font-size: 0.875rem; font-weight: 500; color: var(--luvex-gray-300); margin-bottom: 0.5rem; }
+.luvex-country-selector { position: relative; width: 100%; }
+.selector-input-wrapper { position: relative; display: flex; align-items: center; cursor: pointer; }
+.country-selector-input { padding-left: 3.25rem !important; cursor: pointer !important; }
+
+.selected-country-flag { 
+    position: absolute; 
+    left: 1rem; 
+    font-size: 1.5rem; 
+    pointer-events: none; 
+    line-height: 1; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    height: 100%; 
+    z-index: 2; /* FIX: Bring flag to the front */
+}
+
+.luvex-country-selector .dropdown-arrow { position: absolute; right: 1rem; color: var(--luvex-bright-cyan); pointer-events: none; transition: transform 0.3s ease; z-index: 2; }
+.luvex-country-selector.open .dropdown-arrow { transform: rotate(180deg); }
+.luvex-country-selector .selector-dropdown { position: absolute; top: calc(100% + 8px); left: 0; width: 100%; background: var(--luvex-dark-blue-medium); border: 1px solid var(--luvex-bright-cyan); border-radius: var(--radius-md); z-index: 1000; overflow: hidden; box-shadow: var(--shadow-lg); opacity: 0; transform: translateY(10px); visibility: hidden; transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s; }
+.luvex-country-selector.open .selector-dropdown { opacity: 1; transform: translateY(0); visibility: visible; }
+.luvex-country-selector .search-container { padding: 0.75rem; border-bottom: 1px solid rgba(109, 213, 237, 0.3); position: relative; }
+.luvex-country-selector .search-icon { position: absolute; top: 50%; left: 1.5rem; transform: translateY(-50%); color: var(--luvex-gray-300); }
+.luvex-country-selector .country-search { width: 100%; height: 40px; padding: 0 1rem 0 2.5rem; background: var(--luvex-dark-blue-dark); border: 1px solid transparent; border-radius: var(--radius-sm); color: var(--luvex-white); outline: none; }
+.luvex-country-selector .country-search:focus { border-color: var(--luvex-special-cyan); }
+.luvex-country-selector .country-list-options { list-style: none; margin: 0; padding: 0.5rem; max-height: 250px; overflow-y: auto; }
+.luvex-country-selector .country-list-options::-webkit-scrollbar { width: 6px; }
+.luvex-country-selector .country-list-options::-webkit-scrollbar-track { background: var(--luvex-dark-blue-dark); }
+.luvex-country-selector .country-list-options::-webkit-scrollbar-thumb { background: var(--luvex-cyan-dark); border-radius: 3px; }
+.luvex-country-selector .country-list-options li { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border-radius: var(--radius-sm); cursor: pointer; transition: background-color 0.2s ease; outline: none; }
+.luvex-country-selector .country-list-options li:hover, .luvex-country-selector .country-list-options li:focus { background-color: var(--luvex-dark-blue-light); }
+.luvex-country-selector .country-list-options li.hidden { display: none; }
+.luvex-country-selector .country-list-options .flag { font-size: 1.5rem; flex-shrink: 0; }
+.luvex-country-selector .country-list-options .name { font-weight: 500; color: var(--luvex-white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.luvex-country-selector .country-list-options .dial-code { color: var(--luvex-gray-300); font-size: 0.9em; margin-left: auto; }
+.phone-input-group { display: flex; align-items: center; gap: 0.5rem; }
+.phone-dial-code-wrapper { position: relative; flex: 0 0 120px; } /* Increased width */
+.phone-dial-code-flag { 
+    position: absolute; 
+    left: 0.75rem; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    font-size: 1.5rem; 
+    pointer-events: none;
+    z-index: 2; /* FIX: Bring flag to the front */
+}
+.phone-dial-code { padding-left: 3.25rem !important; text-align: left; }
+.phone-mobile-number { flex: 1 1 auto; }
+
+/* Globaler .completed Stil für alle luvex-inputs */
+.luvex-input.completed {
+    background: var(--luvex-dark-blue-dark) !important;
+    color: var(--luvex-bright-cyan) !important;
+    border-color: var(--luvex-cyan-dark) !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/*
+==============================================================================
+10. FIX FÜR FLAGGEN & ICONS 
+==============================================================================
+*/
+/*
+  PROBLEM: Eine globale CSS-Regel überschreibt die Schriftart für alle 
+  Elemente, was die Emoji-Flaggen und Font-Awesome-Icons unsichtbar macht.
+
+  LÖSUNG: Wir verwenden spezifische Regeln mit !important, um sicherzustellen,
+  dass unsere Stile für Flaggen und Icons immer Vorrang haben.
+*/
+
+/* 1. Flaggen (Emojis) */
+#authModal .flag,
+#authModal .selected-country-flag,
+#authModal .phone-dial-code-flag {
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+}
+
+/* 2. Icons (Font Awesome) */
+#authModal .fa-solid,
+#authModal .fas,
+#authModal .fa-regular,
+#authModal .far,
+#authModal .fa-brands,
+#authModal .fab {
+    font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands", sans-serif !important;
+    font-style: normal !important;
+}
+
+#authModal .fa-solid,
+#authModal .fas {
+    font-weight: 900 !important;
+}
+
+#authModal .fa-regular,
+#authModal .far {
+    font-weight: 400 !important;
+}
+
+#authModal .fa-brands,
+#authModal .fab {
+    font-weight: 400 !important;
+}
+
+
+/*
+==============================================================================
+11. RESPONSIVE DESIGN
+==============================================================================
+*/
+@media (max-width: 992px) {
+    #authModal .modal-content { max-width: 600px; }
+    .luvex-form-grid-2, .login-header-grid { grid-template-columns: 1fr; }
+    .selection-grid.industry-grid { grid-template-columns: repeat(4, 1fr); }
+    .interests-structured-grid { grid-template-columns: 1fr; }
+    .login-option-title { justify-content: flex-start; }
+}
+
+@media (max-width: 768px) {
+    .modal-overlay { padding: 0; align-items: flex-end; }
+    #authModal .modal-content { width: 100vw; height: 95vh; max-height: 95vh; margin: 0; border-radius: var(--radius-xl) var(--radius-xl) 0 0; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+    .modal-overlay.active #authModal .modal-content { transform: translateY(0); }
+    .auth-modal-header { padding: 1.5rem 1.5rem 1rem; }
+    .auth-scrollable-content { padding: 0.5rem 1.5rem 1.5rem 1.5rem; }
+    .selection-grid.industry-grid { grid-template-columns: repeat(3, 1fr); }
+    .login-options-wrapper { flex-direction: column; }
+}
+

@@ -1,0 +1,394 @@
+/*
+==============================================================================
+PAGE: UV CURING - LAYOUT & SECTIONS (LAYOUT-FIX)
+==============================================================================
+Datei: _page-uv-curing.css
+Beschreibung: Bereinigtes Layout für die UV Curing Seite. 
+              TEXT-AUSRICHTUNG OBEN KORRIGIERT!
+==============================================================================
+*/
+
+/*
+==============================================================================
+1. HERO SECTION - STANDARD LAYOUT
+==============================================================================
+*/
+
+.hero-curing {
+    position: relative;
+}
+
+.hero-curing #curing-hero-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-curing .luvex-hero__container {
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.hero-curing .luvex-hero__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+}
+
+.hero-curing .luvex-hero__title {
+    margin-bottom: 0;
+}
+
+.hero-curing .luvex-hero__subtitle {
+    margin-bottom: 0;
+    max-width: 750px;
+}
+
+.hero-curing .luvex-hero__description {
+    margin-bottom: 1rem;
+    max-width: 700px;
+}
+
+.hero-curing .luvex-hero__cta-container {
+    pointer-events: auto;
+    margin-top: 1rem;
+}
+
+/*
+==============================================================================
+2. SCIENCE GALLERY SECTION - LAYOUT FIXES
+==============================================================================
+*/
+
+.curing-science-section {
+    background-color: #f8fafc;
+    padding: 4rem 2rem;
+    position: relative;
+}
+
+.section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem auto;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    color: var(--luvex-dark-blue);
+    margin-bottom: 1rem;
+}
+
+.section-header p {
+    font-size: 1.2rem;
+    color: var(--luvex-gray-700);
+}
+
+.showcase-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    background-color: var(--luvex-white);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    min-height: 600px;
+    align-items: stretch;
+}
+
+.animation-panel {
+    background: linear-gradient(135deg, var(--luvex-dark-blue) 0%, #2D4A7C 100%);
+    border-radius: 12px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+.navigation-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    position: relative;
+    z-index: 10;
+}
+
+.navigation-arrows {
+    display: flex;
+    gap: 1rem;
+}
+
+.step-indicators {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.animation-display {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 400px;
+}
+
+#curing-animation-visual {
+    width: 380px;
+    height: 380px;
+    position: relative;
+    overflow: visible;
+}
+
+.control-panel {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 2rem;
+}
+
+.step-content {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+}
+
+.step-content.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.step-content.exiting {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition-duration: 0.4s;
+}
+
+.step-content h3 { 
+    font-size: 1.8rem; 
+    color: var(--luvex-dark-blue); 
+    margin: 0 0 1rem 0; 
+}
+
+.step-content p { 
+    font-size: 1.1rem; 
+    color: var(--luvex-gray-700); 
+    line-height: 1.7; 
+    margin: 0 0 1.5rem 0; 
+}
+
+.benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.benefits-list li {
+    padding: 0.5rem 0;
+    color: var(--luvex-gray-700);
+    font-size: 1rem;
+}
+
+.benefits-list strong {
+    color: var(--luvex-dark-blue);
+}
+
+.final-cta {
+    margin-top: 1.5rem;
+}
+
+.final-cta a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-normal);
+}
+
+.final-cta a:hover {
+    background: var(--luvex-vibrant-blue);
+    color: var(--luvex-white);
+    transform: translateY(-2px);
+}
+
+.nav-arrow {
+    width: 40px; height: 40px; border: 2px solid var(--luvex-bright-cyan);
+    background: rgba(109, 213, 237, 0.1); border-radius: 50%; color: var(--luvex-bright-cyan);
+    font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease;
+    display: flex; align-items: center; justify-content: center;
+}
+.nav-arrow:hover { 
+    background: var(--luvex-bright-cyan); 
+    color: var(--luvex-dark-blue); 
+    transform: scale(1.1); 
+}
+
+.step-indicator {
+    width: 35px; height: 35px; border-radius: 50%; background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3); color: rgba(255, 255, 255, 0.8);
+    cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem;
+    display: flex; align-items: center; justify-content: center;
+}
+.step-indicator.active { 
+    background: var(--luvex-bright-cyan); 
+    border-color: var(--luvex-bright-cyan); 
+    color: var(--luvex-dark-blue); 
+    transform: scale(1.1); 
+}
+.step-indicator.completed { 
+    background: rgba(109, 213, 237, 0.3); 
+    border-color: var(--luvex-bright-cyan); 
+}
+
+/*
+==============================================================================
+3. CORE ADVANTAGES SECTION
+==============================================================================
+*/
+.core-advantages-section .value-card__icon i {
+    font-size: 2.5rem;
+    color: var(--luvex-vibrant-blue);
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.core-advantages-section .value-card:hover .value-card__icon i {
+    color: var(--luvex-bright-cyan);
+    transform: scale(1.1);
+}
+
+/*
+==============================================================================
+4. RESPONSIVE DESIGN
+==============================================================================
+*/
+
+@media (max-width: 992px) {
+    .showcase-container {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+    .animation-panel {
+        min-height: 450px;
+    }
+    .control-panel {
+        text-align: center;
+        padding: 1rem;
+    }
+    #curing-animation-visual {
+        width: 320px;
+        height: 320px;
+    }
+}
+
+@media (max-width: 768px) {
+    .curing-science-section {
+        padding: 2rem 1rem;
+    }
+    .showcase-container {
+        padding: 1.5rem;
+    }
+    #curing-animation-visual {
+        width: 280px;
+        height: 280px;
+    }
+    .step-content h3 {
+        font-size: 1.5rem;
+    }
+    .step-content p {
+        font-size: 1rem;
+    }
+}
+
+/*
+==============================================================================
+5. CUSTOM CURSOR STYLES (NEU)
+==============================================================================
+*/
+
+/* Initiales Ausblenden des Standard-Cursors in den Zielbereichen. */
+.hero-curing,
+.site-header:not(.scrolled) {
+    cursor: none;
+}
+
+.hero-curing a,
+.hero-curing button,
+.site-header:not(.scrolled) a,
+.site-header:not(.scrolled) button {
+    cursor: none;
+}
+
+/* Haupt-Container für den Custom Cursor. */
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 99999;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    will-change: transform;
+}
+
+/* Der äußere Ring des Cursors. */
+.custom-cursor__ring {
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--luvex-bright-cyan);
+    border-radius: 50%;
+    transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Zustand: Aktiv (sichtbar im Hero oder Header) */
+.custom-cursor.is-active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Zustand: Hover über einem interaktiven Element (Standard) */
+.custom-cursor.is-hovering .custom-cursor__ring {
+    transform: scale(1.8);
+    background-color: rgba(109, 213, 237, 0.2);
+    border-color: transparent;
+}
+
+/* Zustand: Spezieller Hover-Effekt für den Header */
+.custom-cursor.is-header-hover .custom-cursor__ring {
+    transform: scale(2.2);
+    border-width: 1px;
+    background-color: rgba(109, 213, 237, 0.1);
+    border-color: var(--luvex-bright-cyan);
+}
+
+/* Zustand: Klick wird ausgeführt */
+.custom-cursor.is-clicking .custom-cursor__ring {
+    transform: scale(1.5);
+    background-color: rgba(109, 213, 237, 0.4);
+}

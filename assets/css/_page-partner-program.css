@@ -1,0 +1,318 @@
+/*
+==============================================================================
+LUVEX THEME v3.3 - PARTNER PROGRAM PAGE STYLES
+==============================================================================
+Description: Styles specific to the Partner Program page layout and components.
+Dependencies: _core.css, _components.css
+Last Update: 2025-09-02
+==============================================================================
+*/
+
+/*
+==============================================================================
+1. HERO SECTION
+==============================================================================
+*/
+.luvex-hero--partner {
+    min-height: 70vh;
+}
+
+#hero-partner-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.luvex-hero--partner .luvex-hero__container {
+    max-width: 850px; /* Slightly wider for the text */
+}
+
+/*
+==============================================================================
+2. SHARED & SECTION STYLES
+==============================================================================
+*/
+.section--dark {
+    background: var(--luvex-dark-blue);
+    color: var(--luvex-white);
+}
+
+.section--dark .section__title,
+.section--dark .section__subtitle {
+    color: var(--luvex-white);
+}
+
+.section--dark .section__subtitle {
+    color: var(--luvex-gray-300);
+}
+
+.section--light-gray {
+    background-color: var(--luvex-gray-100);
+}
+
+.section--turquoise {
+    background: linear-gradient(135deg, var(--luvex-cyan-dark) 0%, #14b8a6 100%);
+    color: var(--luvex-white);
+}
+
+.section--turquoise .section__title,
+.section--turquoise .section__subtitle {
+    color: var(--luvex-white);
+}
+
+.section--turquoise .section__subtitle {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.section__title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--luvex-dark-blue);
+}
+
+.section__subtitle {
+    font-size: var(--text-lg);
+    color: var(--luvex-gray-700);
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    line-height: 1.7;
+}
+
+/*
+==============================================================================
+3. PARTNER CARD COMPONENT
+==============================================================================
+*/
+.partner-card {
+    background: var(--luvex-white);
+    padding: 2.5rem 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--luvex-gray-200);
+    transition: all var(--transition-normal);
+    text-align: center;
+}
+
+.partner-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--luvex-bright-cyan);
+}
+
+.partner-card__icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--luvex-vibrant-blue), var(--luvex-special-cyan));
+    color: var(--luvex-white);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 1.75rem;
+}
+
+.partner-card__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--luvex-dark-blue);
+}
+
+.partner-card__content {
+    color: var(--luvex-gray-700);
+    line-height: 1.6;
+    font-size: var(--text-base);
+    margin: 0;
+}
+
+/* Light variant for dark backgrounds */
+.partner-card--light {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: none;
+}
+
+.partner-card--light:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--luvex-bright-cyan);
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+}
+
+.partner-card--light .partner-card__icon {
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+}
+
+.partner-card--light .partner-card__title {
+    color: var(--luvex-white);
+}
+
+.partner-card--light .partner-card__content {
+    color: var(--luvex-gray-200);
+}
+
+
+/*
+==============================================================================
+4. CHECKLIST COMPONENT
+==============================================================================
+*/
+.checklist {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: center;
+    padding: 1.25rem;
+    background: var(--luvex-white);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--luvex-gray-200);
+    gap: 1rem;
+}
+
+.checklist-icon {
+    width: 28px;
+    height: 28px;
+    background: var(--luvex-vibrant-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--luvex-white);
+    font-size: 0.9rem;
+}
+
+.checklist-text {
+    color: var(--luvex-gray-900);
+    font-size: var(--text-base);
+}
+
+.checklist-text strong {
+    font-weight: 600;
+    color: var(--luvex-dark-blue);
+}
+
+/*
+==============================================================================
+5. PROCESS GRID
+==============================================================================
+*/
+.process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+    position: relative;
+}
+
+.process-step {
+    text-align: center;
+    position: relative;
+    padding: 2rem 1.5rem;
+}
+
+/* Connector lines for desktop */
+@media (min-width: 992px) {
+    .process-step:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: -1rem;
+        top: 35px; /* Align with the center of the number */
+        transform: translateX(50%);
+        width: calc(100% - 70px); /* Adjust based on step width and gap */
+        height: 2px;
+        background: linear-gradient(90deg, var(--luvex-gray-200) 50%, transparent 50%);
+        background-size: 16px 2px;
+        z-index: -1;
+    }
+}
+
+
+.process-number {
+    width: 70px;
+    height: 70px;
+    background: var(--luvex-white);
+    border: 2px solid var(--luvex-gray-200);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: var(--luvex-vibrant-blue);
+    font-weight: 700;
+    font-size: 2rem;
+    transition: all var(--transition-normal);
+}
+
+.process-step:hover .process-number {
+    border-color: var(--luvex-vibrant-blue);
+    color: var(--luvex-white);
+    background: var(--luvex-vibrant-blue);
+    transform: scale(1.1);
+}
+
+.process-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--luvex-dark-blue);
+}
+
+.process-description {
+    color: var(--luvex-gray-700);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/*
+==============================================================================
+6. CTA SECTION
+==============================================================================
+*/
+.cta-section {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.cta-section .section__subtitle {
+    margin-bottom: 2rem;
+}
+
+/* Using core .cta-actions class */
+.cta-actions .btn--outline {
+    border-color: rgba(255, 255, 255, 0.4);
+    color: var(--luvex-white);
+}
+
+.cta-actions .btn--outline:hover {
+    background: var(--luvex-white);
+    color: var(--luvex-dark-blue);
+    border-color: var(--luvex-white);
+}
+
+/*
+==============================================================================
+7. RESPONSIVE ADJUSTMENTS
+==============================================================================
+*/
+@media (max-width: 768px) {
+    .checklist {
+        grid-template-columns: 1fr;
+    }
+    
+    .process-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}

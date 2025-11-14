@@ -1,0 +1,28 @@
+/*
+==============================================================================
+LUVEX THEME - PAGE-SPECIFIC STYLES: REGISTER
+==============================================================================
+Description: Enthält nur Styles, die spezifisch für die Seite /register sind.
+             Baut auf _auth.css für die Formular-Basis-Styles auf.
+Last Update: 2025-08-26
+==============================================================================
+*/
+
+/* --- Layout & Container --- */
+.auth-page-wrapper {
+    background-color: var(--luvex-gray-100);
+    padding: var(--space-xl) 0;
+}
+
+/* --- Formular-spezifische Anpassungen --- */
+.auth-form-container {
+    max-width: 800px; /* Breiteres Formular für Zwei-Spalten-Layout */
+    padding: 3rem;
+}
+
+/* --- Responsivität --- */
+@media (max-width: 768px) {
+    .auth-form-container {
+        padding: 2rem 1.5rem;
+    }
+}

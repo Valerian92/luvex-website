@@ -1,0 +1,40 @@
+/*
+==============================================================================
+LUVEX THEME v3.1 - MAIN CSS (CLEAN ARCHITECTURE)
+==============================================================================
+
+Main CSS file that imports only GLOBAL styles from the /global/ subfolder.
+Page-specific styles are loaded conditionally via functions.php
+
+Last Update: 2025-08-24
+==============================================================================
+*/
+
+/* 1. DESIGN TOKENS (Variables first!) */
+@import 'global/_variables.css';
+
+/* 2. CORE STYLES */
+@import 'global/_core.css';
+
+/* 3. UI COMPONENTS (GLOBAL - Available on all pages) */
+@import 'global/_components.css';
+@import 'global/_modals.css';
+/*@import 'global/_cursor-effects.css'; */
+
+/* 4. LAYOUT COMPONENTS (HEADER/FOOTER) */
+@import 'global/_header.css';
+@import 'global/_footer.css';
+
+/* 5. RESPONSIVE (GLOBAL) */
+@import 'global/_responsive.css';
+
+/* 6. GLOBAL CONTENT TYPES & TEMPLATES */
+@import 'global/_404.css';
+@import 'global/_legal.css';
+/*@import 'global/_resources.css'; */
+
+/*
+==============================================================================
+PAGE-SPECIFIC & ANIMATION CSS are loaded via functions.php
+==============================================================================
+*/

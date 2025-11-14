@@ -1,0 +1,554 @@
+/*
+==============================================================================
+LUVEX THEME v3.6 - ABOUT PAGE (Final Designer Polish)
+==============================================================================
+Description: Fully restored Hero animation styles, implemented a robust custom 
+             cursor, refined all section contrasts and layouts for a premium, 
+             cohesive finish.
+Last Update: 2025-09-02
+==============================================================================
+*/
+
+/*
+==============================================================================
+1. HERO SECTION & CUSTOM CURSOR (FULLY RESTORED & INTEGRATED)
+==============================================================================
+*/
+
+/* --- 1.1 Custom Cursor --- */
+.custom-about-cursor {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, rgba(109, 213, 237, 0.4) 0%, rgba(109, 213, 237, 0) 60%);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    transition: opacity 0.3s ease, background 0.3s ease;
+    opacity: 0;
+}
+
+.custom-about-cursor.header-hover {
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 60%);
+}
+
+body.custom-cursor-active {
+    cursor: none;
+}
+body.custom-cursor-active .custom-about-cursor {
+    opacity: 1;
+}
+body.custom-cursor-active .about-hero,
+body.custom-cursor-active .site-header {
+    cursor: none;
+}
+
+/* --- 1.2 Hero Section (Original styles restored) --- */
+.about-hero {
+    background: var(--luvex-dark-blue);
+    position: relative;
+    overflow: hidden;
+    min-height: 750px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--luvex-white);
+    padding: 8rem 2rem 6rem;
+}
+
+.about-spotlight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.6;
+    transition: background 0.2s ease;
+}
+
+.about-parallax-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform 0.3s ease-out;
+}
+
+.about-parallax-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.about-layer-grid {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="about-grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(109, 213, 237, 0.08)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23about-grid)"/></svg>');
+    opacity: 0.4;
+}
+
+.about-elements-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto; /* This is crucial for the animation JS */
+}
+
+.about-sci-element {
+    position: absolute !important;
+    padding: 0.5rem 0.8rem;
+    background: rgba(109, 213, 237, 0.05);
+    border: 1px solid rgba(109, 213, 237, 0.15);
+    border-radius: var(--radius-md);
+    color: var(--luvex-white);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: default;
+    backdrop-filter: blur(5px);
+    z-index: 3;
+    opacity: 0.4; 
+    transform: scale(1);
+}
+
+.about-sci-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.about-sci-formula {
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    background: rgba(109, 213, 237, 0.08);
+    border-color: rgba(109, 213, 237, 0.2);
+}
+
+.about-hero__content {
+    position: relative;
+    z-index: 5;
+    max-width: 800px;
+}
+
+
+/*
+==============================================================================
+2. OUR STORY SECTION (REFINED WITH CONTRAST)
+==============================================================================
+*/
+
+.our-story-v3 {
+    background: var(--luvex-gray-100); /* Using a defined variable for consistency */
+    padding: 8rem 0; 
+}
+
+.our-story-v3__content {
+    max-width: 960px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.our-story-v3 .section__title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.our-story-v3 .section__intro {
+    font-size: 1.25rem;
+    color: var(--luvex-gray-700);
+    line-height: 1.7;
+    margin-bottom: 4rem;
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.story-block {
+    background: var(--luvex-white);
+    padding: 2.5rem 3rem;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--luvex-gray-200);
+    margin-bottom: 2.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.story-block__title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--luvex-dark-blue);
+    margin: 0 0 1.5rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--luvex-gray-200);
+}
+
+.story-block p {
+    color: var(--luvex-gray-700);
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.story-differentiators {
+    margin: 4rem 0;
+    text-align: center;
+    background: none;
+    padding: 0;
+    border: none;
+}
+
+.story-differentiators .story-block__title {
+    border-bottom: none;
+    margin-bottom: 2.5rem;
+}
+
+.differentiators-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+    text-align: left;
+}
+
+.differentiators-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    background: var(--luvex-white);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--luvex-gray-200);
+    transition: var(--transition-normal);
+}
+
+.differentiators-list li:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--luvex-bright-cyan);
+}
+
+.differentiators-list i {
+    font-size: 2rem;
+    color: var(--luvex-vibrant-blue);
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+    width: 30px;
+    text-align: center;
+}
+
+.differentiators-list span {
+    color: var(--luvex-gray-700);
+    line-height: 1.6;
+}
+
+.differentiators-list strong {
+    color: var(--luvex-dark-blue);
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+/*
+==============================================================================
+3. TEAM SECTION (FINAL POLISH & ALIGNMENT FIX)
+==============================================================================
+*/
+
+.team-section-v2 {
+    background: var(--luvex-gray-100);
+    padding: 8rem 0; 
+}
+
+.team-section-v2 .section__title {
+    color: var(--luvex-dark-blue);
+}
+
+.team-section-v2 .section__subtitle {
+    color: var(--luvex-gray-700);
+    text-align: center; /* Explicitly center subtitle text */
+}
+
+.team-section-v2__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 3rem;
+    margin-top: 4rem;
+}
+
+.team-card-v2 {
+    background: var(--luvex-white);
+    border: 1px solid var(--luvex-gray-200);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    text-align: center;
+    transition: var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden !important;
+    isolation: isolate;
+}
+
+.team-card-v2:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--luvex-bright-cyan);
+}
+
+.team-card-v2__photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 1.5rem auto;
+    border: 4px solid var(--luvex-bright-cyan);
+    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
+}
+
+.team-card-v2__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.team-card-v2__name { font-size: 1.5rem; font-weight: 600; color: var(--luvex-dark-blue); margin: 0 0 0.5rem 0; }
+.team-card-v2__role { color: var(--luvex-vibrant-blue); font-weight: 600; margin: 0 0 1.5rem 0; font-size: 1rem; }
+.team-card-v2__tags { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; }
+.team-card-v2__tags span { 
+    background: rgba(0, 123, 255, 0.08);
+    color: var(--luvex-vibrant-blue);
+    padding: 0.35rem 0.85rem; 
+    border-radius: var(--radius-full); 
+    font-size: 0.85rem; 
+    font-weight: 500;
+}
+.team-card-v2__quote { 
+    font-style: italic; 
+    color: var(--luvex-gray-700); 
+    line-height: 1.6; 
+    margin: 0; 
+    padding-top: 1.5rem; 
+    border-top: 1px solid var(--luvex-gray-200);
+    position: relative;
+}
+.team-card-v2__quote::before {
+    content: '“';
+    font-family: Georgia, serif;
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3rem;
+    color: var(--luvex-bright-cyan);
+    opacity: 0.5;
+}
+
+
+/*
+==============================================================================
+4. CORE VALUES (REFINED LAYOUT)
+==============================================================================
+*/
+
+.core-values-v2 {
+    background: var(--luvex-dark-blue);
+    padding: 8rem 0; /* Restored consistent padding */
+    position: relative;
+    overflow: hidden;
+}
+
+.core-values-v2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="core-values-grid" width="70" height="70" patternUnits="userSpaceOnUse"><path d="M 70 0 L 0 0 0 70" fill="none" stroke="rgba(109, 213, 237, 0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23core-values-grid)"/></svg>');
+    opacity: 0.5;
+    z-index: 1;
+}
+
+.core-values-v2 .container {
+    position: relative;
+    z-index: 2;
+}
+
+.core-values-v2 .section__title {
+    color: var(--luvex-white);
+}
+
+.core-values-v2 .section__subtitle {
+    color: var(--luvex-gray-300);
+    text-align: center;
+}
+
+.core-values-v2__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjusted width slightly */
+    gap: 2.5rem;
+    margin-top: 4rem;
+}
+
+.core-values-v2 .card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(109, 213, 237, 0.15);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    text-align: center;
+    transition: var(--transition-normal);
+}
+
+.core-values-v2 .card:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: var(--luvex-bright-cyan);
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+}
+
+.core-values-v2 .card__icon {
+    font-size: 2.5rem;
+    color: var(--luvex-bright-cyan);
+    margin-bottom: 1.5rem;
+}
+
+.core-values-v2 .card__title {
+    color: var(--luvex-white);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.core-values-v2 .card__content {
+    color: var(--luvex-gray-300);
+    line-height: 1.7;
+}
+
+/*
+==============================================================================
+5. CROSS-LINK SECTION (FINAL LAYOUT)
+==============================================================================
+*/
+.about-crosslinks-section {
+    padding: 8rem 0;
+    background-color: var(--luvex-white);
+}
+
+.crosslink-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    margin-top: 4rem;
+    align-items: stretch; /* Ensures cards have same height */
+}
+
+.crosslink-card {
+    display: flex; 
+    flex-direction: column; 
+    background: var(--luvex-white);
+    padding: 2.5rem;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--luvex-gray-200);
+    text-decoration: none;
+    transition: var(--transition-normal);
+    box-shadow: var(--shadow-md);
+}
+
+.crosslink-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--luvex-vibrant-blue);
+}
+
+.crosslink-card__icon {
+    font-size: 2.5rem;
+    color: var(--luvex-vibrant-blue);
+    margin-bottom: 1.5rem;
+}
+
+.crosslink-card__content {
+    flex-grow: 1; /* Pushes CTA to the bottom */
+}
+
+.crosslink-card__title {
+    font-size: 1.75rem;
+    color: var(--luvex-dark-blue);
+    margin: 0 0 1rem 0;
+}
+
+.crosslink-card__desc {
+    color: var(--luvex-gray-700);
+    line-height: 1.7;
+    margin: 0 0 1.5rem 0; 
+}
+
+.crosslink-card__cta {
+    font-weight: 600;
+    color: var(--luvex-vibrant-blue);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition-fast);
+    margin-top: auto; 
+}
+
+.crosslink-card:hover .crosslink-card__cta {
+    gap: 1rem;
+}
+.crosslink-card:hover .crosslink-card__cta i {
+    transform: translateX(4px);
+}
+.crosslink-card__cta i {
+    transition: transform 0.2s ease-out;
+}
+
+
+/*
+==============================================================================
+6. CTA & RESPONSIVE
+==============================================================================
+*/
+
+.cta-section-v2 {
+    background: linear-gradient(135deg, var(--luvex-dark-blue) 0%, var(--luvex-accent-blue) 100%);
+    color: var(--luvex-white);
+    padding: 8rem 0;
+    text-align: center;
+}
+
+.cta-v2__content { max-width: 700px; margin: 0 auto; }
+.cta-v2__title { font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 600; margin-bottom: 1.5rem; color: var(--luvex-white); }
+.cta-v2__description { font-size: var(--text-lg); color: rgba(255, 255, 255, 0.9); margin-bottom: 3rem; line-height: 1.6; }
+.cta-v2__buttons { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+
+@media (max-width: 768px) {
+    .about-hero {
+        min-height: 600px;
+        padding: 6rem 1.5rem 4rem;
+    }
+    .about-parallax-container {
+        display: none;
+    }
+
+    .our-story-v3 .section__intro { font-size: 1.1rem; }
+    .differentiators-list { grid-template-columns: 1fr; }
+    .story-block { padding: 2rem; }
+    .crosslink-grid { grid-template-columns: 1fr; }
+    .core-values-v2__grid { grid-template-columns: 1fr; }
+
+    .cta-v2__buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    .cta-v2__buttons .luvex-cta-primary,
+    .cta-v2__buttons .luvex-cta-secondary {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+

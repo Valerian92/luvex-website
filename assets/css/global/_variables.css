@@ -1,0 +1,156 @@
+/*
+==============================================================================
+LUVEX THEME v3.0 - DESIGN TOKENS (VARIABLES)
+==============================================================================
+Description: Zentrale Definition aller Design-Variablen (Farben, Abstände,
+             Typografie, Effekte etc.) für die gesamte Website.
+Last Update: 2025-08-21
+==============================================================================
+*/
+
+:root {
+    /*
+    ==========================================================================
+    1. LUVEX BRAND COLORS
+    ==========================================================================
+    */
+    --luvex-dark-blue: #1B2A49;
+    --luvex-vibrant-blue: #007BFF;
+    --luvex-bright-cyan: #6dd5ed;
+    --luvex-cyan-dark: #0891b2; /* ← NEU: Dunkles Cyan für gute Lesbarkeit */
+    --luvex-special-cyan: #22d3ee; /* Helleres Cyan für Glow-Effekte */
+
+    /* Dark Blue Variations (für Hintergründe) */
+    --luvex-dark-blue-light: #2A3B5C;
+    --luvex-dark-blue-medium: #1F2F47;
+    --luvex-dark-blue-dark: #151F35;
+
+    /*
+    ==========================================================================
+    2. NEUTRAL & SYSTEM COLORS
+    ==========================================================================
+    */
+    --luvex-white: #ffffff;
+    --luvex-gray-100: #f8f9fa;
+    --luvex-gray-200: #e9ecef;
+    --luvex-gray-300: #dee2e6;
+    --luvex-gray-500: #6c757d; /* ← HINZUFÜGEN */
+    --luvex-gray-700: #495057;
+    --luvex-gray-900: #212529;
+    --luvex-accent-blue: #0066cc;
+
+    /*
+    ==========================================================================
+    3. SPACING SCALE (Abstände)
+    ==========================================================================
+    */
+    --space-xs: 0.5rem;    /* 8px */
+    --space-sm: 1rem;      /* 16px */
+    --space-md: 2rem;      /* 32px */
+    --space-lg: 4rem;      /* 64px */
+    --space-xl: 6rem;      /* 96px */
+
+    /*
+    ==========================================================================
+    4. TYPOGRAPHY SCALE (Schriftgrößen)
+    ==========================================================================
+    */
+    --text-xs: 0.75rem;    /* 12px */
+    --text-sm: 0.875rem;   /* 14px */
+    --text-base: 1rem;     /* 16px */
+    --text-lg: 1.125rem;   /* 18px */
+    --text-xl: 1.25rem;    /* 20px */
+    --text-2xl: 1.5rem;    /* 24px */
+    --text-3xl: 2rem;      /* 32px */
+    --text-4xl: 2.5rem;    /* 40px */
+
+    /*
+    ==========================================================================
+    5. LAYOUT & GRID
+    ==========================================================================
+    */
+    --container-max-width: 1600px; /* Standardbreite für .container */
+    --gap-default: var(--space-md);
+    --gap-large: var(--space-lg);
+
+    /*
+    ==========================================================================
+    6. EFFECTS & TRANSITIONS
+    ==========================================================================
+    */
+    /* Shadows */
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+
+    /* Glow Effect */
+    --luvex-glow-shadow: 0 0 8px rgba(34, 211, 238, 0.5), 0 0 20px rgba(34, 211, 238, 0.3);
+
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+
+    /*
+    ==========================================================================
+    7. BORDERS & RADII
+    ==========================================================================
+    */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 50px;
+}
+
+
+
+
+
+/*
+==============================================================================
+LUVEX THEME v3.1 - DESIGN TOKENS (VARIABLES)
+==============================================================================
+Description: Zentrale Definition aller Design-Variablen.
+Last Update: 2025-08-29
+==============================================================================
+*/
+
+
+
+/*
+==============================================================================
+8. LUVEX ICON DICTIONARY (Font Awesome 6 - Solid)
+==============================================================================
+Description: Eine zentrale Referenz für konsistente Ikonographie.
+             CSS-Klasse: <i class="fa-solid fa-[icon-name]"></i>
+==============================================================================
+*/
+
+/* --- TECHNOLOGY --- */
+/* .fa-layer-group      -> UV Curing / Surfaces */
+/* .fa-shield-virus     -> UVC Disinfection */
+/* .fa-lightbulb         -> UV LED Systems */
+/* .fa-flask-vial        -> UV Mercury Lamps */
+
+/* --- UV SOLUTIONS --- */
+/* .fa-industry         -> UV Systems (General) */
+/* .fa-user-shield       -> UV Safety */
+/* .fa-person-shelter    -> UV Tunnel */
+/* .fa-ruler-combined    -> UV Measurement */
+
+/* --- LUVEX SERVICES --- */
+/* .fa-cubes             -> UV Simulator */
+/* .fa-headset           -> Project Support */
+/* .fa-newspaper         -> UV News */
+/* .fa-envelope-open-text-> UV Newsletter */
+/* .fa-chart-simple      -> UV Strip Analyzer */
+/* .fa-gears             -> Customized Solution */
+
+/* --- GENERAL UI --- */
+/* .fa-user-circle      -> User / Login */
+/* .fa-shield-halved     -> Security */
+/* .fa-globe             -> Language */
+/* .fa-save              -> Save Changes */
+/* .fa-key               -> Password / Key */
+/* .fa-pencil            -> Edit */

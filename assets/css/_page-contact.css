@@ -1,0 +1,156 @@
+/*
+==============================================================================
+LUVEX THEME v2.9.3 - CONTACT PAGE (Final Polish)
+==============================================================================
+*/
+
+/* --- 1. Modern Hero Section with Interactive Canvas --- */
+.contact-hero-v2 {
+    /* Hide default cursor ONLY when hovering over the hero section */
+    cursor: none;
+    min-height: 650px;
+    height: 75vh;
+    max-height: 800px;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#contact-hero-animation-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.contact-hero-v2 .luvex-hero__container { 
+    max-width: 800px; 
+    position: relative;
+    z-index: 2;
+}
+
+.contact-hero-v2 .luvex-hero__subtitle { 
+    color: var(--luvex-gray-300); 
+    font-size: 1.5rem; 
+    margin-bottom: 1.5rem; 
+}
+
+.contact-hero-v2 .luvex-hero__description { 
+    color: var(--luvex-gray-400); 
+    font-size: 1.1rem; 
+}
+
+/* --- Custom Cursor Styling --- */
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #6dd5ed;
+    border-radius: 50%;
+    pointer-events: none;
+    /* This transform centers the cursor div on its own axis */
+    transform: translate(-50%, -50%); 
+    transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, opacity 0.3s ease;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Start hidden, made visible by JS on hero hover */
+    opacity: 0; 
+}
+
+.custom-cursor::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background-color: #6dd5ed;
+    border-radius: 50%;
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+/* --- Cursor Hover Effect --- */
+.contact-hero-v2:has(a:hover, button:hover, .btn:hover) .custom-cursor {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(109, 213, 237, 0.2);
+}
+
+.contact-hero-v2:has(a:hover, button:hover, .btn:hover) .custom-cursor::after {
+     transform: scale(0.5);
+}
+
+/* --- 2. Modern Contact Form Section (unverändert) --- */
+.contact-form-section-v2 {
+    background: var(--luvex-white);
+}
+.contact-form-v2__layout {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    align-items: center;
+    gap: 4rem;
+    background: var(--luvex-dark-blue);
+    color: var(--luvex-white);
+    border-radius: var(--radius-xl);
+    padding: 4rem;
+    border: 1px solid rgba(109, 213, 237, 0.2);
+}
+.contact-form-v2__title { font-size: 2.5rem; color: var(--luvex-white); margin-bottom: 1rem; }
+.contact-form-v2__description { font-size: 1.1rem; color: var(--luvex-gray-300); line-height: 1.7; margin-bottom: 2.5rem; }
+.contact-form-v2__details { display: flex; flex-direction: column; gap: 1.5rem; border-top: 1px solid rgba(109, 213, 237, 0.2); padding-top: 2rem; }
+.contact-form-v2__details .detail-item { display: flex; align-items: center; gap: 1rem; }
+.contact-form-v2__details .detail-item i { font-size: 1.5rem; color: var(--luvex-bright-cyan); width: 24px; text-align: center; }
+.contact-form-v2__details .detail-item strong { display: block; color: var(--luvex-white); font-weight: 600; }
+.contact-form-v2__details .detail-item span,
+.contact-form-v2__details .detail-item a { 
+    color: var(--luvex-gray-300); 
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.contact-form-v2__details .detail-item a:hover {
+    color: var(--luvex-bright-cyan);
+}
+.contact-form-v2__form-container { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 2.5rem; border-radius: var(--radius-lg); }
+.contact-form-v2__form-container .floating-label-input input,
+.contact-form-v2__form-container .floating-label-input textarea,
+.contact-form-v2__form-container .floating-label-input select {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--luvex-gray-700);
+    color: var(--luvex-white);
+}
+.contact-form-v2__form-container .floating-label-input label {
+    color: var(--luvex-gray-300);
+}
+
+/* --- 3. "What to Expect" Section (unverändert) --- */
+.what-to-expect-section { padding: 6rem 0; }
+.what-to-expect-section .container--wide { padding-left: 3rem; padding-right: 3rem; }
+.what-to-expect-section .section__title { color: var(--luvex-dark-blue); }
+.what-to-expect-section .section__subtitle { font-size: var(--text-lg); color: var(--luvex-gray-700); margin: 0 auto 3rem auto; max-width: 600px; line-height: 1.7; }
+.expect-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; margin-top: 3rem; }
+.expect-step-card { text-align: center; padding: 3rem 2.5rem; background: var(--luvex-white); border-radius: var(--radius-lg); border: 1px solid var(--luvex-gray-200); box-shadow: var(--shadow-sm); transition: var(--transition-normal); display: flex; flex-direction: column; }
+.expect-step-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--luvex-bright-cyan); }
+.expect-step__icon { width: 60px; height: 60px; background: var(--luvex-dark-blue); color: var(--luvex-white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; margin: 0 auto 1.5rem auto; border: 4px solid var(--luvex-white); box-shadow: 0 0 0 4px var(--luvex-dark-blue); flex-shrink: 0; }
+.expect-step__title { font-size: 1.25rem; color: var(--luvex-dark-blue); margin-bottom: 0.5rem; }
+.expect-step__description { color: var(--luvex-gray-700); line-height: 1.6; margin: 0; flex-grow: 1; }
+
+/* --- Responsive Adjustments (unverändert) --- */
+@media (max-width: 992px) {
+    .contact-form-v2__layout { grid-template-columns: 1fr; gap: 3rem; padding: 3rem; }
+}
+@media (max-width: 768px) {
+    .contact-hero-v2 { 
+        min-height: 550px; 
+        height: auto; 
+    }
+    .contact-form-v2__layout { padding: 2rem 1.5rem; }
+    .contact-form-v2__form-container { padding: 2rem; }
+    .what-to-expect-section .container--wide { padding-left: 1.5rem; padding-right: 1.5rem; }
+}

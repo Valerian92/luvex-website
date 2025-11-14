@@ -1,0 +1,51 @@
+/*
+==============================================================================
+LUVEX THEME - PAGE-SPECIFIC STYLES: LOGIN
+==============================================================================
+Description: Enthält nur Styles, die spezifisch für die Seite /login sind.
+             Baut auf _auth.css für die Formular-Basis-Styles auf.
+Last Update: 2025-08-26
+==============================================================================
+*/
+
+/* --- Layout & Container --- */
+.auth-page-wrapper {
+    background-color: var(--luvex-gray-100);
+    padding: var(--space-xl) 0;
+}
+
+/* --- Formular-spezifische Anpassungen --- */
+.auth-form-container {
+    max-width: 500px; /* Schmaleres Formular für Login */
+    padding: 3rem;
+}
+
+.auth-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.auth-link {
+    color: var(--luvex-bright-cyan);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition: var(--transition-normal);
+}
+.auth-link:hover {
+    color: var(--luvex-white);
+}
+
+
+/* --- Responsivität --- */
+@media (max-width: 768px) {
+    .auth-form-container {
+        padding: 2rem 1.5rem;
+    }
+    .auth-options {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+}

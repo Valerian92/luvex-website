@@ -1,0 +1,164 @@
+/*
+==============================================================================
+LUVEX THEME - ANIMATION: HOMEPAGE GLOBE (KOMPAKT & OPTIMIERT)
+==============================================================================
+Description: Enthält alle Styles für die interaktive Globus-Sektion auf der
+             Homepage. OPTIMIERT: Reduzierte Höhe, abgeschnittener Globe.
+Dependencies: Wird auf der Homepage via functions.php geladen.
+Last Update: 2025-08-24 (Kompakt-Update)
+==============================================================================
+*/
+
+.homepage-community-section.section {
+    overflow: hidden; /* Globe wird abgeschnitten */
+}
+
+.homepage-community-section {
+    position: relative;
+    background-color: var(--luvex-dark-blue);
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(109, 213, 237, 0.08)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+    /* VERGRÖSSERT: Mehr Padding oben und unten */
+    padding: 6rem 0; /* ERHÖHT: Von 4rem auf 6rem */
+}
+
+.homepage-community-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    /* ENTFERNT: padding: 0 var(--space-lg); */
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 2rem; 
+    padding-right: 4rem; 
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    position: relative;
+    z-index: 2;
+    min-height: 400px;
+}
+
+.homepage-community-content {
+    flex: 1;
+    min-width: 50%;
+    z-index: 3;
+}
+
+.homepage-community-visual {
+    flex: 1.3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* REDUZIERT: Von 700px auf 350px */
+    min-height: 350px;
+    position: relative;
+    /* ENTFERNT: overflow: hidden - Globe soll an Section-Rändern abgeschnitten werden */
+}
+
+.homepage-community-globe-wrapper {
+    /* ANGEPASST: Globe kleiner skalieren und weiter rechts */
+    width: 100vw; /* REDUZIERT: Von 120vw auf 100vw */
+    height: 100vh; /* Canvas-Höhe = Vollbildhöhe, mindestens Section-Höhe */
+    min-height: 450px; /* Mindestens so hoch wie Section + Padding */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-5%, -50%); /* WEITER RECHTS: Von -20% auf -5% */
+    z-index: 1;
+    margin-left: calc(-50vw + 50%); /* ANGEPASST: Neue Zentrierungslogik */
+}
+
+.homepage-community-title { 
+    color: var(--luvex-white); 
+    font-size: clamp(2.4rem, 4.5vw, 3.2rem); 
+    line-height: 1.2; 
+    margin-bottom: 1.5rem;
+    text-align: center; /* NEU: Titel zentriert */
+}
+
+.homepage-community-description {
+    font-size: 1.25rem;
+    color: var(--luvex-gray-300);
+    max-width: 650px; /* Vergrößert von 600px */
+    line-height: 1.7;
+    margin: 0;
+    text-align: left; /* Entferne justify */
+    hyphens: none;
+    word-break: keep-all;
+    margin-right: 3rem;
+}
+
+.homepage-community-actions { 
+    display: flex; 
+    gap: 3.5rem; /* Größerer Abstand zwischen Buttons */
+    flex-wrap: wrap; 
+    justify-content: center; /* Buttons zentriert */
+    margin: 3rem 0 3rem 0; /* VERGRÖSSERT: Mehr Abstand oben UND unten */
+}
+
+/* UV-Thematik: Subtile Effekte */
+.homepage-community-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(34, 211, 238, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Responsive Anpassungen für die Globe Section */
+@media (max-width: 1024px) {
+    .homepage-community-container {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 2rem; /* REDUZIERT: Von 3rem */
+        min-height: 300px; /* REDUZIERT */
+    }
+
+    .homepage-community-content {
+        margin-bottom: 2rem; /* REDUZIERT: Von 3rem */
+    }
+
+    .homepage-community-visual {
+        min-height: 250px; /* REDUZIERT: Von 500px */
+        width: 100%;
+    }
+
+    .homepage-community-globe-wrapper {
+        width: 90vw; /* KLEINER: Von 110vw auf 90vw für Tablet */
+        height: 80vh; /* Canvas-Höhe */
+        min-height: 350px; /* MINDESTHÖHE für Tablet */
+        transform: translate(-25%, -50%); /* WEITER RECHTS: Von -40% auf -25% */
+    }
+
+    .homepage-community-actions {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .homepage-community-section {
+        padding: 5rem 0; /* ANGEPASST: Auch Mobile etwas mehr Padding */
+    }
+
+    .homepage-community-container {
+        min-height: 280px; /* REDUZIERT */
+    }
+
+    .homepage-community-visual {
+        min-height: 200px; /* REDUZIERT */
+    }
+
+    .homepage-community-globe-wrapper {
+        width: 100vw; /* KLEINER: Von 120vw auf 100vw für Mobile */
+        height: 60vh; /* MOBILE: Canvas-Höhe */
+        min-height: 300px; /* MINDESTHÖHE für Mobile */
+        transform: translate(-20%, -50%); /* WEITER RECHTS: Von -35% auf -20% */
+    }
+
+    .homepage-community-description {
+        font-size: 1.125rem; /* Mobile-Anpassung */
+    }
+}

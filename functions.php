@@ -1,45 +1,250 @@
 <?php
 /**
- * LUVEX Theme Functions and Definitions
- *
+ * LUVEX Theme Functions - COMPLETE WITH PRIORITY SYSTEM
+ * Description: Komplette Theme-Setup-, Navigations- und Asset-Lade-Logik mit CSS Priority Loading.
+ * VERSION: 4.6 - Added styling checker script for admins.
  * @package Luvex
- * @since 2.2.3
  */
 
-// === ASTRA THEME DEAKTIVIERUNG UND LUVEX ÜBERNAHME ===
+if (!defined('ABSPATH')) {
+    exit; // Prevent direct access
+}
 
+// 1. ASTRA THEME DEAKTIVIERUNG
 add_action('after_setup_theme', 'luvex_disable_astra_components', 30);
 function luvex_disable_astra_components() {
     remove_all_actions('astra_header');
-    remove_all_actions('astra_footer');
-    remove_all_actions('astra_primary_navigation');
     remove_all_actions('astra_masthead_content');
 }
 
+// 2. Admin Bar Fix
+add_action('get_header', 'luvex_remove_admin_bar_bump');
+function luvex_remove_admin_bar_bump() {
+    if (is_admin_bar_showing()) {
+        remove_action('wp_head', '_admin_bar_bump_cb');
+    }
+}
+
+// 3. Theme Setup
 add_action('after_setup_theme', 'luvex_theme_setup');
 function luvex_theme_setup() {
     register_nav_menus(array(
         'primary' => __('Primary Navigation', 'luvex'),
-        'footer-services' => __('Footer Services Menu', 'luvex'),
-        'footer-technologies' => __('Footer Technologies Menu', 'luvex'),
-        'footer-resources' => __('Footer Resources Menu', 'luvex'),
-        'footer-company' => __('Footer Company Menu', 'luvex'),
+        'footer-menu-1-luvex' => __('Footer Menu 1 Solutions', 'luvex'),
+        'footer-menu-2-luvex' => __('Footer Menu 2 Knowledge-Technology', 'luvex'),
+        'footer-menu-3-luvex' => __('Footer Menu 3 Support', 'luvex'),
+        'footer-menu-4-luvex' => __('Footer Menu 4 Company-Community', 'luvex'),
         'footer-legal' => __('Footer Legal Menu', 'luvex')
     ));
-
+    
     add_theme_support('post-thumbnails');
-    add_theme_support('custom-logo');
-    add_theme_support('html5', array('search-form', 'comment-form', 'comment-list'));
+    set_post_thumbnail_size(150, 150, true);
+    
+    add_theme_support('custom-logo', array(
+        'height'      => 100,
+        'width'       => 400,
+        'flex-height' => true,
+        'flex-width'  => true,
+    ));
     add_theme_support('title-tag');
 }
 
-// === PROFESSIONAL NAVIGATION WALKER ===
+// 4. CSS & JAVASCRIPT LADEN (PRIORITY SYSTEM IMPLEMENTIERT)
+add_action('wp_enqueue_scripts', 'luvex_enqueue_assets', 999);
+function luvex_enqueue_assets() {
+    // ========================================================================
+    // CSS LADEN - FIXED PRIORITY SYSTEM (Base -> Specific -> Page)
+    // ========================================================================
 
+    wp_dequeue_style('astra-theme-css');
+    wp_deregister_style('astra-theme-css');
+
+    $enqueue_style_helper = function($handle, $path_inside_assets, $dependencies = []) {
+        $full_path = get_stylesheet_directory() . '/assets/' . $path_inside_assets;
+        $uri = get_stylesheet_directory_uri() . '/assets/' . $path_inside_assets;
+        if (file_exists($full_path)) {
+            wp_enqueue_style($handle, $uri, $dependencies, filemtime($full_path));
+        }
+    };
+
+    // LEVEL 1: Base Variables & Core (Laden zuerst - Priority 10)
+    $enqueue_style_helper('luvex-variables', 'css/global/_variables.css', []);
+    $enqueue_style_helper('luvex-core', 'css/global/_core.css', ['luvex-variables']);
+
+    // LEVEL 2: Global Components (Priority 20) 
+    $enqueue_style_helper('luvex-components', 'css/global/_components.css', ['luvex-core']);
+    $enqueue_style_helper('luvex-modals', 'css/global/_modals.css', ['luvex-components']);
+
+    // LEVEL 3: Layout Components (Priority 30)
+    $enqueue_style_helper('luvex-header', 'css/global/_header.css', ['luvex-components']);
+    $enqueue_style_helper('luvex-footer', 'css/global/_footer.css', ['luvex-components']);
+
+    // LEVEL 4: Global Content & Responsive (Priority 40)
+    $enqueue_style_helper('luvex-responsive', 'css/global/_responsive.css', ['luvex-header', 'luvex-footer']);
+    $enqueue_style_helper('luvex-404', 'css/global/_404.css', ['luvex-components']);
+    $enqueue_style_helper('luvex-legal', 'css/global/_legal.css', ['luvex-components']);
+
+    // Additional global components
+    $enqueue_style_helper('luvex-accordion-component', 'css/global/_component-accordion.css', ['luvex-components']);
+    
+    // LEVEL 5: Page-Specific Styles (Priority 50) - DIESE ÜBERSCHREIBEN GLOBALS
+    $page_styles_map = [
+        'standard-styles-luvex' => ['css/_page-standard-styles-luvex.css'],
+        'about' => ['css/_page-about.css'],
+        'project-design' => ['css/_page-project-design.css'],
+        'contact' => ['css/_page-contact.css'],
+        'uv-technology' => ['css/_page-uv-technology.css'],
+        'mercury-uv-lamps' => ['css/_page-mercury-uv-lamps.css'],
+        'led-uv-systems' => ['css/_page-led-uv-systems.css'],
+        'uv-solutions' => ['css/_page-uv-solutions.css'],
+        'uv-safety-equipment' => ['css/_page-uv-safety-equipment.css'],
+        'uv-testing-equipment' => ['css/_page-uv-testing-equipment.css'],
+        'uv-tunnel' => ['css/_page-uv-tunnel.css'],
+        'uv-c-disinfection' => ['css/_page-uv-c-disinfection.css'],
+        'uv-curing' => ['css/_page-uv-curing.css'],
+        'register' => ['css/_page-register.css'],
+        'login' => ['css/_page-login.css'],
+        'forgot-password' => ['css/_page-forgot-password.css'],
+        'profile' => ['css/_page-profile.css'],
+        'curing-systems' => ['css/_page-curing-systems.css'],
+        'uvc-hygiene-solutions' => ['css/_page-uvc-hygiene-solutions.css'],
+        'partner-program' => ['css/_page-partner-program.css'],
+    ];
+
+    foreach ($page_styles_map as $slug => $files) {
+        if (is_page($slug)) {
+            foreach ($files as $file) {
+                $handle = 'luvex-page-' . $slug . '-' . sanitize_title($file);
+                $enqueue_style_helper($handle, $file, ['luvex-responsive']);
+            }
+        }
+    }
+    
+    if (is_front_page() || is_home()) {
+        $enqueue_style_helper('luvex-page-home', 'css/_page-home.css', ['luvex-responsive']);
+    }
+
+    if (is_post_type_archive('uv_news') || is_singular('uv_news')) {
+        $enqueue_style_helper('luvex-news-styles', 'css/_news.css', ['luvex-responsive']);
+    }
+
+    // ========================================================================
+    // JAVASCRIPT LADEN
+    // ========================================================================
+    
+    $js_base_uri = get_stylesheet_directory_uri() . '/assets/js/';
+    $js_base_path = get_stylesheet_directory() . '/assets/js/';
+    $dependencies = array('jquery');
+
+    $enqueue_script = function($handle, $path_inside_js_folder, $deps = null) use ($js_base_uri, $js_base_path, $dependencies) {
+        $full_path = $js_base_path . $path_inside_js_folder;
+        if (file_exists($full_path)) {
+            wp_enqueue_script($handle, $js_base_uri . $path_inside_js_folder, $deps ?? $dependencies, filemtime($full_path), true);
+        }
+    };
+
+    // Globale Scripts
+    $global_scripts = [
+        'luvex-auth-modal'        => 'global/auth-modal.js',
+        'luvex-header-effects'    => 'global/luvex-header-effects.js',
+        'luvex-profile-menu'      => 'global/profile-menu.js',
+        'luvex-scroll-animations' => 'global/scroll-animations.js',
+        'luvex-scroll-to-top'     => 'global/scroll-to-top.js',
+        'luvex-footer-light'      => 'global/footer-light-effect.js',
+        'luvex-interactive-accordion' => 'global/interactive-accordion.js',
+    ];
+    
+    // Admin-only Scripts
+    if (is_user_logged_in() && current_user_can('manage_options')) {
+        $global_scripts['luvex-debug'] = 'global/debug-scripts.js';
+        // NEU: Lade das Styling Checker Skript nur für Admins
+        $global_scripts['luvex-styling-checker'] = 'global/luvex_styling_checker.js';
+    }
+    
+    foreach($global_scripts as $handle => $path) {
+        $enqueue_script($handle, $path);
+    }
+
+    // Seitenspezifische Scripts
+    if (is_front_page() || is_home()) {
+        wp_enqueue_script( 'three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', [], null, true );
+        $enqueue_script('luvex-globe-animation', 'pages/globe-animation.js', ['three-js']);
+        $enqueue_script('luvex-hero-photons', 'pages/hero-photons.js');
+    }
+    
+    if (is_page('uv-safety-equipment')) {
+        $enqueue_script('luvex-hero-safety-animation', 'pages/hero-safety-animation.js');
+    }
+
+    $page_script_map = [
+        'contact' => ['luvex-contact-hero' => 'pages/contact-hero-animation.js'],
+        'about' => ['luvex-about-hero' => 'pages/hero-about-interactive.js'],
+        'uv-curing' => [
+            'luvex-curing-hero' => 'pages/hero-curing-interactive.js',
+            'luvex-curing-gallery' => 'pages/uv-curing-science-gallery.js',
+        ],
+        'uv-c-disinfection' => [
+            'luvex-disinfection-hero' => 'pages/hero-disinfection.js',
+            'luvex-disinfection-gallery' => 'pages/uvc-science-gallery.js',
+        ],
+        'led-uv-systems' => ['luvex-uv-led-hero' => 'pages/hero-uv-led.js'],
+        'mercury-uv-lamps' => ['luvex-mercury-lamps-hero' => 'pages/hero-mercury-lamps.js'],
+        'uv-technology' => ['luvex-hero-spectrum' => 'pages/hero-spectrum.js'],
+        'project-design' => ['luvex-consultation-hero-animation' => 'pages/hero-consultation-animation.js'],
+        'uv-solutions' => ['luvex-hero-solutions-animation' => 'pages/hero-solutions-animation.js'],
+        'partner-program' => ['luvex-hero-partner-animation' => 'pages/hero-partner-animation.js'],
+    ];
+
+    foreach ($page_script_map as $slug => $scripts) {
+        if (is_page($slug)) {
+            foreach($scripts as $handle => $path) {
+                $enqueue_script($handle, $path);
+            }
+        }
+    }
+    
+    if (is_post_type_archive('uv_news') || is_singular('uv_news')) {
+        $enqueue_script('luvex-hero-news-animation', 'pages/hero-news-network.js');
+    }
+}
+
+// 5. NAV WALKER KLASSE (AKTUALISIERT FÜR BESSERE ICON-ERKENNUNG)
 class Luvex_Nav_Walker extends Walker_Nav_Menu {
     public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
         $indent = ($depth) ? str_repeat("\t", $depth) : '';
         $classes = empty($item->classes) ? array() : (array) $item->classes;
         $classes[] = 'menu-item-' . $item->ID;
+        
+        $icon_html = '';
+        if (function_exists('get_luvex_icon_library')) {
+            $icon_library = get_luvex_icon_library();
+            $menu_icons = isset($icon_library['Menu Icons']) ? $icon_library['Menu Icons'] : [];
+            $icon_key = '';
+
+            foreach ($classes as $class) {
+                if (array_key_exists(trim($class), $menu_icons)) {
+                    $icon_key = trim($class);
+                    break;
+                }
+            }
+            
+            if (empty($icon_key)) {
+                 foreach($classes as $class){
+                    if(strpos($class, 'icon-menu-') === 0){
+                        $potential_key = str_replace('icon-menu-', '', $class);
+                        if (array_key_exists($potential_key, $menu_icons)) {
+                            $icon_key = $potential_key;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (!empty($icon_key)) {
+                $icon_html = get_luvex_icon($icon_key);
+            }
+        }
+
         $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
         $class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
         $id = apply_filters('nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args);
@@ -51,8 +256,16 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
         $attributes .= ! empty($item->url)        ? ' href="'   . esc_attr($item->url        ) .'"' : '';
         $item_output = isset($args->before) ? $args->before : '';
         $item_output .= '<a' . $attributes . '>';
-        $item_output .= (isset($args->link_before) ? $args->link_before : '') . apply_filters('the_title', $item->title, $item->ID) . (isset($args->link_after) ? $args->link_after : '');
-        if (in_array('menu-item-has-children', $classes)) {
+        $title = apply_filters('the_title', $item->title, $item->ID);
+        
+        if ($depth === 0 && !empty($icon_html)) {
+            $item_output .= str_replace('<i class="', '<i class="menu-item-icon ', $icon_html);
+            $item_output .= '<span class="menu-item-text">' . $title . '</span>';
+        } else {
+            $item_output .= $icon_html . '<span class="menu-item-text">' . $title . '</span>';
+        }
+        
+        if (in_array('menu-item-has-children', $classes) && $depth > 0) {
             $item_output .= ' <i class="fa-solid fa-chevron-down dropdown-arrow"></i>';
         }
         $item_output .= '</a>';
@@ -61,103 +274,137 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
     }
 }
 
-// === CSS & JAVASCRIPT LADEN (MIT CACHE BUSTING) ===
-
-add_action('wp_enqueue_scripts', 'luvex_enqueue_assets', 999);
-function luvex_enqueue_assets() {
-    wp_dequeue_style('astra-theme-css');
-
-    // CSS-Dateien
-    $main_css_path = get_stylesheet_directory() . '/assets/css/main.css';
-    $main_css_version = file_exists($main_css_path) ? filemtime($main_css_path) : '1.0.0';
-    wp_enqueue_style('luvex-main', get_stylesheet_directory_uri() . '/assets/css/main.css', array(), $main_css_version);
-
-    $animations_css_path = get_stylesheet_directory() . '/assets/css/_animations.css';
-    if (file_exists($animations_css_path)) {
-        $animations_css_version = filemtime($animations_css_path);
-        wp_enqueue_style('luvex-animations', get_stylesheet_directory_uri() . '/assets/css/_animations.css', array('luvex-main'), $animations_css_version);
-    }
-
-    // Standard JS-Dateien
-    $dependencies = array('jquery');
-    $scripts_to_enqueue = [
-        'luvex-modal' => '/assets/js/modal.js',
-        'luvex-mobile-menu' => '/assets/js/mobile-menu.js',
-        'luvex-footer-light' => '/assets/js/footer-light-effect.js',
-        'luvex-scroll-to-top' => '/assets/js/scroll-to-top.js'
-    ];
-    foreach ($scripts_to_enqueue as $handle => $path) {
-        $full_path = get_stylesheet_directory() . $path;
-        $version = file_exists($full_path) ? filemtime($full_path) : '1.0.0';
-        wp_enqueue_script($handle, get_stylesheet_directory_uri() . $path, $dependencies, $version, true);
-    }
-    
-    // Bedingtes Laden der Hero-Animationen
-    if (is_front_page() || is_home()) {
-        // Lade Photonen-Animation für die Homepage
-        $photons_js_path = get_stylesheet_directory() . '/assets/js/hero-photons.js';
-        if (file_exists($photons_js_path)) {
-            $photons_js_version = filemtime($photons_js_path);
-            wp_enqueue_script('luvex-hero-photons', get_stylesheet_directory_uri() . '/assets/js/hero-photons.js', array(), $photons_js_version, true);
+// 6. AVATAR FUNKTION
+if (!function_exists('luvex_get_user_avatar')) {
+    function luvex_get_user_avatar($user_id = null) {
+        if (function_exists('LuvexUserSystem::get_user_avatar')) {
+            return LuvexUserSystem::get_user_avatar($user_id);
         }
-        // Lade Three.js für die Globus-Animation
-        wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), null, true);
-        $globe_js_path = get_stylesheet_directory() . '/assets/js/globe-animation.js';
-        $globe_js_version = file_exists($globe_js_path) ? filemtime($globe_js_path) : '1.0.0';
-        wp_enqueue_script('luvex-globe', get_stylesheet_directory_uri() . '/assets/js/globe-animation.js', array('three-js'), $globe_js_version, true);
-
-    } 
-    elseif ( is_page('uv-curing') ) {
-        // Lade interaktive Partikel-Animation für die UV Curing Seite
-        $curing_js_path = get_stylesheet_directory() . '/assets/js/hero-curing-interactive.js';
-        if (file_exists($curing_js_path)) {
-            $curing_js_version = filemtime($curing_js_path);
-            wp_enqueue_script('luvex-hero-curing', get_stylesheet_directory_uri() . '/assets/js/hero-curing-interactive.js', array(), $curing_js_version, true);
+        if (!$user_id) $user_id = get_current_user_id();
+        if (0 === $user_id) return '';
+        $avatar_url = get_user_meta($user_id, 'luvex_avatar_url', true);
+        if ($avatar_url) {
+            return '<img src="' . esc_url($avatar_url) . '" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;" alt="User Avatar">';
+        } else {
+            $user = get_userdata($user_id);
+            if (!$user) return '?';
+            $first_name = $user->first_name ?: $user->display_name;
+            $last_name = $user->last_name ?: '';
+            $initials = strtoupper(substr($first_name, 0, 1) . substr($last_name, 0, 1));
+            return $initials ?: '?';
         }
-    } 
-    elseif ( is_page('uv-consulting') ) { 
-        /* ==============================================================================
-        FIX: Kommentar an die korrekte Position *innerhalb* des Code-Blocks verschoben,
-             um den fatalen PHP-Fehler zu beheben.
-        ==============================================================================
-        */
-        // Lade Hexagon-Animation für die UV Consulting Seite
-        $hexagon_js_path = get_stylesheet_directory() . '/assets/js/hero-hexagon.js';
-        if (file_exists($hexagon_js_path)) {
-            $hexagon_js_version = filemtime($hexagon_js_path);
-            wp_enqueue_script('luvex-hero-hexagon', get_stylesheet_directory_uri() . '/assets/js/hero-hexagon.js', array(), $hexagon_js_version, true);
-        }
-    } 
-    elseif ( is_page('uv-c-disinfection') ) { 
-        $disinfection_js_path = get_stylesheet_directory() . '/assets/js/hero-disinfection.js';
-        if (file_exists($disinfection_js_path)) {
-            $disinfection_js_version = filemtime($disinfection_js_path);
-            wp_enqueue_script('luvex-hero-disinfection', get_stylesheet_directory_uri() . '/assets/js/hero-disinfection.js', array(), $disinfection_js_version, true);
-        }
-    } elseif ( is_page('uv-knowledge') ) {
-        $spectrum_js_path = get_stylesheet_directory() . '/assets/js/hero-spectrum.js';
-        if (file_exists($spectrum_js_path)) {
-            $spectrum_js_version = filemtime($spectrum_js_path);
-            wp_enqueue_script('luvex-hero-spectrum', get_stylesheet_directory_uri() . '/assets/js/hero-spectrum.js', array(), $spectrum_js_version, true);
-        }
-    }
-
-    // Lade Scroll-Animationen auf allen Seiten
-    $scroll_animations_js_path = get_stylesheet_directory() . '/assets/js/scroll-animations.js';
-    if(file_exists($scroll_animations_js_path)) {
-        $scroll_animations_js_version = filemtime($scroll_animations_js_path);
-        wp_enqueue_script('luvex-scroll-animations', get_stylesheet_directory_uri() . '/assets/js/scroll-animations.js', array(), $scroll_animations_js_version, true);
     }
 }
 
-// UV-News werden eigener Blog-Typ
-register_post_type('uv_news', [
-    'public' => true,
-    'show_in_rest' => true,
-    'labels' => ['name' => 'UV News'],
-    'rewrite' => ['slug' => 'uv-news'],
-    'supports' => ['title', 'editor', 'excerpt', 'thumbnail']
-]);
+// 7. SYSTEM-DATEIEN LADEN
+$luvex_includes_path = get_stylesheet_directory() . '/includes/';
+$luvex_includes_files = [ '_luvex_ajax.php', '_user_system.php', '_luvex-helpers.php' ];
+foreach ($luvex_includes_files as $file) {
+    $full_path = $luvex_includes_path . $file;
+    if (file_exists($full_path)) { require_once $full_path; }
+}
 
+// 8. ACCORDION HELPER FUNCTION (NEU)
+if (!function_exists('luvex_get_accordion_component')) {
+    /**
+     * Loads the accordion component with a specific set of data.
+     *
+     * @param array $faq_items An array of question/answer pairs.
+     * @param bool $first_item_active Whether the first item should be open by default.
+     */
+    function luvex_get_accordion_component($faq_items = [], $first_item_active = true) {
+        if (empty($faq_items)) {
+            return;
+        }
+        // Make the data available to the template file
+        set_query_var('accordion_data', [
+            'faqs' => $faq_items,
+            'first_active' => $first_item_active
+        ]);
+        // PFAD ANGEPASST
+        get_template_part('template-parts/component-accordion-general');
+        // Clean up the query var
+        set_query_var('accordion_data', null);
+    }
+}
 
-?>
+// 9. reCAPTCHA FUNKTION
+function luvex_verify_recaptcha($response) {
+    if (empty($response) || !defined('LUVEX_RECAPTCHA_SECRET_KEY')) { return false; }
+    $result = wp_remote_post('https://www.google.com/recaptcha/api/siteverify', [
+        'body' => [ 'secret' => LUVEX_RECAPTCHA_SECRET_KEY, 'response' => $response, 'remoteip' => $_SERVER['REMOTE_ADDR'] ]
+    ]);
+    if (is_wp_error($result)) { error_log('reCAPTCHA API Error: ' . $result->get_error_message()); return false; }
+    $data = json_decode(wp_remote_retrieve_body($result), true);
+    return isset($data['success']) && $data['success'] === true;
+}
+
+// 10. DEBUGGING FÜR ENTWICKLUNG
+if (defined('WP_DEBUG') && WP_DEBUG) {
+    add_action('wp_footer', function() {
+        if (!current_user_can('manage_options') || !class_exists('LuvexAjaxManager')) return;
+        $status = LuvexAjaxManager::get_system_status();
+        if (!$status) return;
+        ?>
+        <div style="position: fixed; bottom: 20px; left: 20px; background: #000; color: #00ff00; padding: 10px; font-family: monospace; font-size: 11px; z-index: 9999; max-width: 300px; border-radius: 5px; opacity: 0.8;">
+            <div style="font-weight: bold; margin-bottom: 5px;">🔧 LUVEX AJAX System Status</div>
+            <div>Nonce: <?php echo esc_html($status['nonce_name']); ?></div>
+            <div>Handlers: <?php echo count($status['registered_handlers']); ?></div>
+            <div>Dependencies:</div>
+            <?php foreach ($status['dependencies'] as $dep => $loaded): ?>
+                <div style="margin-left: 10px; color: <?php echo $loaded ? '#00ff00' : '#ff4444'; ?>">
+                    <?php echo $loaded ? '✓' : '✗'; ?> <?php echo esc_html($dep); ?>
+                </div>
+            <?php endforeach; ?>
+            <div style="margin-top: 5px; font-size: 10px; color: #888;">CSS Priority System: Active</div>
+        </div>
+        <?php
+    });
+}
+
+// 11. ZUSÄTZLICHE HELPER FÜR CSS-STRUKTUR
+add_filter('body_class', 'luvex_add_context_classes');
+function luvex_add_context_classes($classes) {
+    if (is_page(['profile', 'contact', 'about']) || is_front_page()) {
+        $classes[] = 'luvex-light-context';
+    }
+    if (is_page('profile')) {
+        $classes[] = 'luvex-profile-page';
+    }
+    return $classes;
+}
+
+// 12. ADMIN MENU ITEM FILTER (AKTUALISIERT & VERBESSERT)
+add_filter('wp_nav_menu_objects', 'luvex_filter_admin_menu_items', 10, 2);
+function luvex_filter_admin_menu_items($sorted_menu_items, $args) {
+    // Diese Bedingung ist korrekt: Admins sehen alles im Hauptmenü.
+    if ($args->theme_location != 'primary' || current_user_can('manage_options')) {
+        return $sorted_menu_items;
+    }
+
+    $admin_only_slugs = [
+        'standard-styles-luvex', 
+    ];
+    
+    $ids_to_hide = [];
+    
+    // KORRIGIERTE LOGIK:
+    // Wir durchlaufen alle Menüpunkte und prüfen den Slug der verlinkten Seite.
+    foreach ($sorted_menu_items as $item) {
+        // Holt den "Slug" (den echten Seitennamen) der Seite, auf die der Menüpunkt verlinkt.
+        $slug = ($item->object === 'page') ? get_post_field('post_name', $item->object_id) : '';
+
+        // Prüft, ob der Slug in unserer Admin-Liste ist ODER ob es ein Kind-Element eines bereits zu verbergenden Punktes ist.
+        if ((!empty($slug) && in_array($slug, $admin_only_slugs)) || in_array($item->menu_item_parent, $ids_to_hide)) {
+            $ids_to_hide[] = $item->ID;
+        }
+    }
+    
+    if (!empty($ids_to_hide)) {
+        $sorted_menu_items = array_filter($sorted_menu_items, function($item) use ($ids_to_hide) {
+            return !in_array($item->ID, $ids_to_hide);
+        });
+    }
+    
+    return $sorted_menu_items;
+}

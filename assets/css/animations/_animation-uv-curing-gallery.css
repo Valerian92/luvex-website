@@ -1,0 +1,1018 @@
+/*
+==============================================================================
+LUVEX THEME - UV CURING ANIMATIONS (ERWEITERT & VERBESSERT)
+==============================================================================
+Beschreibung: Verbesserte UV Curing Animationen basierend auf Feedback
+Integration: Diese Styles in die bestehende _animations.css einfügen
+==============================================================================
+*/
+
+/*
+==============================================================================
+STEP 1: MASSIVE APPLICATION (VERGRÖSSERT)
+==============================================================================
+*/
+
+.visual-step-1 .massive-application-system {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.visual-step-1 .target-object-large {
+    width: 300px; /* Vergrößert von 280px */
+    height: 70px; /* Vergrößert von 60px */
+    position: relative;
+    margin-bottom: 50px; /* Mehr Platz */
+}
+
+.visual-step-1 .object-surface {
+    width: 100%;
+    height: 50px; /* Vergrößert */
+    background: linear-gradient(135deg, #6b7280, #4a5568);
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.visual-step-1 .object-label {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    color: #6dd5ed;
+    font-weight: 600;
+}
+
+.visual-step-1 .mega-dosing-robot {
+    position: absolute;
+    top: -140px; /* Höher positioniert */
+    left: 60px;
+    animation: mega-dosing-movement 6s ease-in-out infinite;
+}
+
+.visual-step-1 .robot-base {
+    width: 35px; /* Vergrößert */
+    height: 25px; /* Vergrößert */
+    background: #9ca3af;
+    border-radius: 4px;
+    position: relative;
+}
+
+.visual-step-1 .robot-arm-extended {
+    width: 10px; /* Vergrößert */
+    height: 90px; /* Vergrößert */
+    background: linear-gradient(180deg, #9ca3af, #6b7280);
+    border-radius: 4px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.visual-step-1 .dosing-nozzle-large {
+    width: 25px; /* Vergrößert */
+    height: 25px; /* Vergrößert */
+    background: #374151;
+    border-radius: 50%;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 5px;
+}
+
+.visual-step-1 .nozzle-tip {
+    width: 8px; /* Vergrößert */
+    height: 8px; /* Vergrößert */
+    background: #111827;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.visual-step-1 .liquid-stream {
+    width: 4px; /* Vergrößert */
+    height: 50px; /* Vergrößert */
+    background: linear-gradient(180deg, #6dd5ed, rgba(109, 213, 237, 0.3));
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: liquid-flow 6s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+@keyframes mega-dosing-movement {
+    0%, 100% { left: 60px; }
+    50% { left: 200px; } /* Größere Bewegung */
+}
+
+@keyframes liquid-flow {
+    0%, 20% { opacity: 0; height: 0; }
+    30%, 70% { opacity: 1; height: 50px; }
+    80%, 100% { opacity: 0; height: 0; }
+}
+
+.visual-step-1 .uv-reactive-coating-massive {
+    position: absolute;
+    bottom: 70px; /* Angepasst */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px; /* Vergrößert */
+    height: 20px; /* Vergrößert */
+}
+
+.visual-step-1 .coating-layer-main {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #6dd5ed, #4fb3d9);
+    border-radius: 4px;
+    animation: coating-application 6s ease-in-out infinite;
+    position: relative;
+    box-shadow: 0 0 15px rgba(109, 213, 237, 0.5);
+}
+
+@keyframes coating-application {
+    0% { width: 0; opacity: 0.5; }
+    30%, 100% { width: 100%; opacity: 1; }
+}
+
+/*
+==============================================================================
+STEP 2: INTENSIVE UV IRRADIATION (UV-SCHICHT RICHTIG POSITIONIERT)
+==============================================================================
+*/
+
+.visual-step-2 .intensive-uv-system {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.visual-step-2 .massive-uv-source {
+    width: 320px; /* Vergrößert */
+    height: 45px; /* Vergrößert */
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.visual-step-2 .uv-lamp-housing {
+    width: 100%;
+    height: 35px; /* Vergrößert */
+    background: linear-gradient(135deg, #374151, #111827);
+    border-radius: 18px;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.visual-step-2 .uv-lamp-core {
+    width: 90%;
+    height: 25px; /* Vergrößert */
+    background: linear-gradient(90deg, #8b5cf6, #a855f7, #8b5cf6);
+    border-radius: 12px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: intense-uv-pulse 2s ease-in-out infinite;
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.8);
+}
+
+@keyframes intense-uv-pulse {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 30px rgba(139, 92, 246, 0.8);
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.05);
+        box-shadow: 0 0 50px rgba(139, 92, 246, 1);
+    }
+}
+
+.visual-step-2 .massive-uv-beam-array {
+    position: relative;
+    width: 300px; /* Vergrößert */
+    height: 140px; /* Vergrößert */
+    margin: 20px 0;
+}
+
+.visual-step-2 .uv-beam-intense {
+    position: absolute;
+    width: 8px; /* Vergrößert */
+    height: 140px;
+    animation: intense-beam-pulse 2.5s ease-in-out infinite;
+}
+
+.visual-step-2 .beam-core {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(139, 92, 246, 0.9), rgba(139, 92, 246, 0.2));
+    border-radius: 4px;
+    position: relative;
+}
+
+/* Mehr Beams für intensive Bestrahlung */
+.visual-step-2 .beam-1 { left: 5%; animation-delay: 0s; }
+.visual-step-2 .beam-2 { left: 12%; animation-delay: 0.2s; }
+.visual-step-2 .beam-3 { left: 19%; animation-delay: 0.4s; }
+.visual-step-2 .beam-4 { left: 26%; animation-delay: 0.6s; }
+.visual-step-2 .beam-5 { left: 33%; animation-delay: 0.8s; }
+.visual-step-2 .beam-6 { left: 40%; animation-delay: 1s; }
+.visual-step-2 .beam-7 { left: 47%; animation-delay: 1.2s; }
+.visual-step-2 .beam-8 { left: 54%; animation-delay: 1.4s; }
+.visual-step-2 .beam-9 { left: 61%; animation-delay: 1.6s; }
+.visual-step-2 .beam-10 { left: 68%; animation-delay: 1.8s; }
+.visual-step-2 .beam-11 { left: 75%; animation-delay: 2s; }
+.visual-step-2 .beam-12 { left: 82%; animation-delay: 2.2s; }
+.visual-step-2 .beam-13 { left: 89%; animation-delay: 2.4s; }
+.visual-step-2 .beam-14 { left: 96%; animation-delay: 2.6s; }
+
+@keyframes intense-beam-pulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.1); }
+}
+
+/* FIX: UV-Substrat RICHTIG auf dem grauen Objekt positioniert */
+.visual-step-2 .target-substrate {
+    width: 320px; /* Vergrößert */
+    height: 35px; /* Vergrößert */
+    position: relative;
+    margin: 20px 0;
+}
+
+.visual-step-2 .substrate-base {
+    width: 100%;
+    height: 25px; /* Vergrößert */
+    background: linear-gradient(135deg, #6b7280, #4a5568);
+    border-radius: 6px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.visual-step-2 .uv-coating-layer {
+    position: absolute;
+    top: -8px; /* RICHTIG AUF DEM SUBSTRAT */
+    left: 0;
+    width: 100%;
+    height: 12px; /* Vergrößert */
+    background: linear-gradient(45deg, #6dd5ed, #4fb3d9);
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(109, 213, 237, 0.6);
+    animation: coating-irradiation 3s ease-in-out infinite;
+}
+
+@keyframes coating-irradiation {
+    0%, 100% { box-shadow: 0 0 20px rgba(109, 213, 237, 0.6); }
+    50% { box-shadow: 0 0 40px rgba(109, 213, 237, 1); }
+}
+
+/*
+==============================================================================
+STEP 3: TRIPLE WAVELENGTH PENETRATION (3 LAMPEN, 3 CONTAINER, MEHR PUNKTE)
+==============================================================================
+*/
+
+.visual-step-3 .triple-wavelength-system {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.visual-step-3 .uv-lamp-array {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.visual-step-3 .uv-lamp-365,
+.visual-step-3 .uv-lamp-385,
+.visual-step-3 .uv-lamp-405 {
+    width: 110px; /* Vergrößert */
+    height: 70px; /* Vergrößert */
+    position: relative;
+}
+
+.visual-step-3 .lamp-housing {
+    width: 90px; /* Vergrößert */
+    height: 30px; /* Vergrößert */
+    border-radius: 15px;
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: lamp-intensity-pulse 3s ease-in-out infinite;
+}
+
+.visual-step-3 .wavelength-365 { 
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.7);
+}
+.visual-step-3 .wavelength-385 { 
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    box-shadow: 0 0 25px rgba(99, 102, 241, 0.7);
+    animation-delay: 1s;
+}
+.visual-step-3 .wavelength-405 { 
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.7);
+    animation-delay: 2s;
+}
+
+@keyframes lamp-intensity-pulse {
+    0%, 100% { transform: scale(1); filter: brightness(1); }
+    50% { transform: scale(1.05); filter: brightness(1.2); }
+}
+
+.visual-step-3 .wavelength-label {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem; /* Vergrößert */
+    color: #6dd5ed;
+    font-weight: 700;
+}
+
+.visual-step-3 .penetration-container-array {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px; /* Mehr Abstand */
+}
+
+.visual-step-3 .container-365,
+.visual-step-3 .container-385,
+.visual-step-3 .container-405 {
+    width: 100px; /* Vergrößert */
+    height: 200px; /* Vergrößert */
+    position: relative;
+}
+
+.visual-step-3 .container-frame {
+    width: 100%;
+    height: 100%;
+    border: 3px solid rgba(109, 213, 237, 0.5); /* Verstärkt */
+    border-radius: 10px;
+    background: rgba(109, 213, 237, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.visual-step-3 .depth-label {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    color: #6dd5ed;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.visual-step-3 .penetration-beam {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px; /* Vergrößert */
+    animation: beam-penetration-deep 4s ease-in-out infinite;
+}
+
+.visual-step-3 .beam-365-deep {
+    height: 70px; /* Angepasst */
+    background: linear-gradient(180deg, rgba(139, 92, 246, 0.9), rgba(139, 92, 246, 0.2));
+    animation-delay: 0.5s;
+}
+
+.visual-step-3 .beam-385-deep {
+    height: 130px; /* Angepasst */
+    background: linear-gradient(180deg, rgba(99, 102, 241, 0.8), rgba(99, 102, 241, 0.2));
+    animation-delay: 1.5s;
+}
+
+.visual-step-3 .beam-405-deep {
+    height: 180px; /* Angepasst */
+    background: linear-gradient(180deg, rgba(59, 130, 246, 0.7), rgba(59, 130, 246, 0.2));
+    animation-delay: 2.5s;
+}
+
+@keyframes beam-penetration-deep {
+    0%, 20% { opacity: 0; transform: translateX(-50%) scaleY(0); }
+    30%, 70% { opacity: 1; transform: translateX(-50%) scaleY(1); }
+    80%, 100% { opacity: 0; transform: translateX(-50%) scaleY(0); }
+}
+
+.visual-step-3 .coating-layers {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    right: 10px;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.visual-step-3 .layer {
+    height: 30%;
+    position: relative;
+    border-radius: 6px;
+    border: 2px solid rgba(109, 213, 237, 0.3);
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    gap: 6px; /* Mehr Platz für mehr Punkte */
+    padding: 4px;
+}
+
+.visual-step-3 .surface-layer {
+    background: rgba(109, 213, 237, 0.25);
+}
+
+.visual-step-3 .mid-layer {
+    background: rgba(109, 213, 237, 0.15);
+}
+
+.visual-step-3 .deep-layer {
+    background: rgba(109, 213, 237, 0.08);
+}
+
+.visual-step-3 .photoinitiator-active {
+    width: 8px; /* Vergrößert */
+    height: 8px; /* Vergrößert */
+    position: relative;
+    animation: initiator-deep-activation 4s ease-in-out infinite;
+}
+
+.visual-step-3 .molecule-activated {
+    width: 100%;
+    height: 100%;
+    background: #fbbf24;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 8px rgba(251, 191, 36, 0.6);
+}
+
+/* MEHR GELBE PUNKTE - Verschiedene Aktivierungs-Delays */
+.visual-step-3 .pi-365-1 { animation-delay: 0.8s; }
+.visual-step-3 .pi-365-2 { animation-delay: 1s; }
+.visual-step-3 .pi-365-3 { animation-delay: 1.2s; }
+.visual-step-3 .pi-365-4 { animation-delay: 1.4s; }
+.visual-step-3 .pi-365-5 { animation-delay: 1.6s; }
+.visual-step-3 .pi-365-6 { animation-delay: 1.8s; }
+
+.visual-step-3 .pi-385-1 { animation-delay: 2s; }
+.visual-step-3 .pi-385-2 { animation-delay: 2.2s; }
+.visual-step-3 .pi-385-3 { animation-delay: 2.4s; }
+.visual-step-3 .pi-385-4 { animation-delay: 2.6s; }
+.visual-step-3 .pi-385-mid-1 { animation-delay: 2.8s; }
+.visual-step-3 .pi-385-mid-2 { animation-delay: 3s; }
+.visual-step-3 .pi-385-mid-3 { animation-delay: 3.2s; }
+.visual-step-3 .pi-385-mid-4 { animation-delay: 3.4s; }
+
+.visual-step-3 .pi-405-1 { animation-delay: 3.6s; }
+.visual-step-3 .pi-405-2 { animation-delay: 3.8s; }
+.visual-step-3 .pi-405-3 { animation-delay: 4s; }
+.visual-step-3 .pi-405-4 { animation-delay: 4.2s; }
+.visual-step-3 .pi-405-mid-1 { animation-delay: 4.4s; }
+.visual-step-3 .pi-405-mid-2 { animation-delay: 4.6s; }
+.visual-step-3 .pi-405-deep-1 { animation-delay: 4.8s; }
+.visual-step-3 .pi-405-deep-2 { animation-delay: 5s; }
+.visual-step-3 .pi-405-deep-3 { animation-delay: 5.2s; }
+.visual-step-3 .pi-405-deep-4 { animation-delay: 5.4s; }
+
+@keyframes initiator-deep-activation {
+    0%, 20% { 
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    30%, 70% { 
+        transform: scale(1.5); /* Verstärkt */
+        opacity: 1;
+    }
+    80%, 100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+}
+
+/*
+==============================================================================
+STEP 4: KRISTALLGITTER-VERNETZUNG (AUSBREITEND WIE REALITÄT)
+==============================================================================
+*/
+
+.visual-step-4 .crystal-network-formation {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+}
+
+.visual-step-4 .nucleation-sites {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.visual-step-4 .nucleation-site {
+    position: absolute;
+    width: 25px; /* Vergrößert */
+    height: 25px; /* Vergrößert */
+    animation: nucleation-activation 8s ease-in-out infinite;
+}
+
+.visual-step-4 .nucleus-core {
+    width: 15px; /* Vergrößert */
+    height: 15px; /* Vergrößert */
+    background: radial-gradient(circle, #ef4444, #dc2626);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: nucleus-pulse 3s ease-in-out infinite;
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.8);
+}
+
+/* Verschiedene Nukleations-Positionen für realistisches Kristallwachstum */
+.visual-step-4 .site-1 { top: 25%; left: 30%; animation-delay: 0.5s; }
+.visual-step-4 .site-2 { top: 35%; left: 65%; animation-delay: 1.2s; }
+.visual-step-4 .site-3 { top: 55%; left: 45%; animation-delay: 2s; }
+.visual-step-4 .site-4 { top: 70%; left: 75%; animation-delay: 2.8s; }
+.visual-step-4 .site-5 { top: 65%; left: 25%; animation-delay: 3.5s; }
+.visual-step-4 .site-6 { top: 40%; left: 85%; animation-delay: 4.2s; }
+.visual-step-4 .site-7 { top: 80%; left: 50%; animation-delay: 5s; }
+.visual-step-4 .site-8 { top: 20%; left: 80%; animation-delay: 5.8s; }
+
+@keyframes nucleation-activation {
+    0%, 20% { opacity: 0; transform: scale(0); }
+    30%, 80% { opacity: 1; transform: scale(1); }
+    90%, 100% { opacity: 0.7; transform: scale(1); }
+}
+
+@keyframes nucleus-pulse {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 25px rgba(239, 68, 68, 0.8);
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.4);
+        box-shadow: 0 0 35px rgba(239, 68, 68, 1);
+    }
+}
+
+.visual-step-4 .crystal-lattice-network {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.visual-step-4 .lattice-connection {
+    position: absolute;
+    height: 3px; /* Vergrößert */
+    background: linear-gradient(90deg, 
+        rgba(239, 68, 68, 0.8) 0%, 
+        rgba(245, 158, 11, 0.9) 50%, 
+        rgba(239, 68, 68, 0.8) 100%);
+    border-radius: 2px;
+    animation: connection-growth 1.5s ease-out forwards;
+    transform-origin: left center;
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+/* Kristallgitter-Verbindungen die sich ausbreiten */
+.visual-step-4 .connection-1 { top: 25%; left: 32%; width: 80px; transform: rotate(15deg); animation-delay: 6s; }
+.visual-step-4 .connection-2 { top: 28%; left: 38%; width: 60px; transform: rotate(-30deg); animation-delay: 6.2s; }
+.visual-step-4 .connection-3 { top: 37%; left: 52%; width: 70px; transform: rotate(45deg); animation-delay: 6.4s; }
+.visual-step-4 .connection-4 { top: 42%; left: 67%; width: 50px; transform: rotate(-15deg); animation-delay: 6.6s; }
+.visual-step-4 .connection-5 { top: 55%; left: 30%; width: 85px; transform: rotate(25deg); animation-delay: 6.8s; }
+.visual-step-4 .connection-6 { top: 58%; left: 47%; width: 65px; transform: rotate(-40deg); animation-delay: 7s; }
+.visual-step-4 .connection-7 { top: 67%; left: 27%; width: 90px; transform: rotate(35deg); animation-delay: 7.2s; }
+.visual-step-4 .connection-8 { top: 72%; left: 52%; width: 75px; transform: rotate(-20deg); animation-delay: 7.4s; }
+.visual-step-4 .connection-9 { top: 22%; left: 75%; width: 55px; transform: rotate(60deg); animation-delay: 7.6s; }
+.visual-step-4 .connection-10 { top: 45%; left: 80%; width: 40px; transform: rotate(-60deg); animation-delay: 7.8s; }
+
+@keyframes connection-growth {
+    0% { opacity: 0; transform: scaleX(0) rotate(var(--rotation, 0deg)); }
+    100% { opacity: 0.9; transform: scaleX(1) rotate(var(--rotation, 0deg)); }
+}
+
+.visual-step-4 .crosslink-nodes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.visual-step-4 .crosslink-node {
+    position: absolute;
+    width: 10px; /* Vergrößert */
+    height: 10px; /* Vergrößert */
+    background: radial-gradient(circle, #f59e0b, #d97706);
+    border-radius: 50%;
+    animation: node-formation 0.8s ease-out forwards;
+    opacity: 0;
+    transform: scale(0);
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.7);
+}
+
+/* Knoten erscheinen entlang der Verbindungslinien */
+.visual-step-4 .node-1 { top: 27%; left: 45%; animation-delay: 8s; }
+.visual-step-4 .node-2 { top: 40%; left: 60%; animation-delay: 8.2s; }
+.visual-step-4 .node-3 { top: 57%; left: 40%; animation-delay: 8.4s; }
+.visual-step-4 .node-4 { top: 70%; left: 65%; animation-delay: 8.6s; }
+.visual-step-4 .node-5 { top: 30%; left: 75%; animation-delay: 8.8s; }
+.visual-step-4 .node-6 { top: 75%; left: 45%; animation-delay: 9s; }
+.visual-step-4 .node-7 { top: 50%; left: 70%; animation-delay: 9.2s; }
+.visual-step-4 .node-8 { top: 35%; left: 55%; animation-delay: 9.4s; }
+
+@keyframes node-formation {
+    0% { 
+        opacity: 0;
+        transform: scale(0);
+    }
+    80% { 
+        opacity: 1;
+        transform: scale(1.3);
+    }
+    100% { 
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/*
+==============================================================================
+STEP 5: POST-CURE DEVELOPMENT (TACKINESS + UHR)
+==============================================================================
+*/
+
+.visual-step-5 .postcure-development {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.visual-step-5 .clock-container {
+    position: absolute;
+    left: 50px;
+    top: 80px;
+    width: 60px; /* Vergrößert */
+    height: 60px; /* Vergrößert */
+}
+
+.visual-step-5 .clock-indicator {
+    width: 60px;
+    height: 60px;
+    border: 4px solid #6dd5ed; /* Verstärkt */
+    border-radius: 50%;
+    background: rgba(109, 213, 237, 0.1);
+    position: relative;
+}
+
+.visual-step-5 .clock-hand {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 3px; /* Vergrößert */
+    height: 20px; /* Vergrößert */
+    background: #6dd5ed;
+    transform-origin: bottom center;
+    transform: translate(-50%, -100%) rotate(0deg);
+    animation: clock-rotation 8s linear infinite; /* Längere Animation */
+}
+
+.visual-step-5 .clock-numbers {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.visual-step-5 .clock-12 {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    color: #6dd5ed;
+    font-weight: 700;
+}
+
+.visual-step-5 .clock-6 {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    color: #6dd5ed;
+    font-weight: 700;
+}
+
+@keyframes clock-rotation {
+    0% { transform: translate(-50%, -100%) rotate(0deg); }
+    100% { transform: translate(-50%, -100%) rotate(1440deg); } /* 4 volle Umdrehungen */
+}
+
+.visual-step-5 .property-development-panel {
+    position: absolute;
+    right: 30px;
+    top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Mehr Abstand */
+}
+
+.visual-step-5 .property-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.visual-step-5 .property-label {
+    font-size: 0.7rem;
+    color: #6dd5ed;
+    width: 70px; /* Breitere Labels */
+    text-align: right;
+    font-weight: 600;
+}
+
+.visual-step-5 .property-bar {
+    width: 100px; /* Breitere Balken */
+    height: 12px; /* Höhere Balken */
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+}
+
+.visual-step-5 .property-fill {
+    height: 100%;
+    border-radius: 6px;
+    animation: property-development 8s ease-out infinite;
+    width: 0;
+}
+
+.visual-step-5 .hardness-fill {
+    background: linear-gradient(90deg, #ef4444, #dc2626);
+    animation-delay: 1.5s;
+}
+
+.visual-step-5 .tackiness-fill {
+    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+    animation-delay: 3s;
+}
+
+.visual-step-5 .adhesion-fill {
+    background: linear-gradient(90deg, #f59e0b, #d97706);
+    animation-delay: 4.5s;
+}
+
+@keyframes property-development {
+    0%, 20% { width: 0%; }
+    40% { width: 60%; }
+    70% { width: 85%; }
+    100% { width: 90%; } /* Nicht komplett gefüllt */
+}
+
+.visual-step-5 .time-indicator {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.visual-step-5 .time-scale {
+    font-size: 0.6rem;
+    color: #6dd5ed;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.visual-step-5 .time-progression {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.visual-step-5 .time-point {
+    width: 8px;
+    height: 8px;
+    background: rgba(109, 213, 237, 0.3);
+    border-radius: 50%;
+    animation: time-point-activate 8s ease-in-out infinite;
+}
+
+.visual-step-5 .time-point:nth-child(1) { animation-delay: 1s; }
+.visual-step-5 .time-point:nth-child(2) { animation-delay: 3s; }
+.visual-step-5 .time-point:nth-child(3) { animation-delay: 5s; }
+.visual-step-5 .time-point:nth-child(4) { animation-delay: 7s; }
+
+@keyframes time-point-activate {
+    0%, 10% { background: rgba(109, 213, 237, 0.3); transform: scale(1); }
+    20%, 90% { background: #6dd5ed; transform: scale(1.3); }
+    100% { background: #6dd5ed; transform: scale(1); }
+}
+
+/*
+==============================================================================
+STEP 6: FINAL BENEFITS (UV MITTIG, GLEICHMÄSSIGE VERTEILUNG)
+==============================================================================
+*/
+
+.visual-step-6 .benefits-showcase {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.visual-step-6 .central-uv {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* PERFEKT MITTIG */
+    width: 80px; /* Vergrößert */
+    height: 80px; /* Vergrößert */
+    background: linear-gradient(45deg, #10b981, #047857);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem; /* Vergrößert */
+    font-weight: 700;
+    animation: central-uv-pulse 4s ease-in-out infinite;
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+    z-index: 10;
+}
+
+@keyframes central-uv-pulse {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.1);
+        box-shadow: 0 0 40px rgba(16, 185, 129, 0.8);
+    }
+}
+
+.visual-step-6 .benefit-orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px; /* Größerer Orbit */
+    height: 280px; /* Größerer Orbit */
+}
+
+.visual-step-6 .benefit-item {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    animation: benefit-appear 1s ease-out forwards;
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+/* GLEICHMÄSSIGE VERTEILUNG UM DEN KREIS */
+.visual-step-6 .benefit-speed {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Oben mittig */
+    animation-delay: 0.5s;
+}
+
+.visual-step-6 .benefit-eco {
+    top: 50%;
+    right: 0;
+    transform: translate(50%, -50%); /* Rechts mittig */
+    animation-delay: 1s;
+}
+
+.visual-step-6 .benefit-properties {
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%); /* Unten mittig */
+    animation-delay: 1.5s;
+}
+
+.visual-step-6 .benefit-energy {
+    top: 50%;
+    left: 0;
+    transform: translate(-50%, -50%); /* Links mittig */
+    animation-delay: 2s;
+}
+
+.visual-step-6 .benefit-icon {
+    width: 45px; /* Vergrößert */
+    height: 45px; /* Vergrößert */
+    background: linear-gradient(45deg, #6dd5ed, #4fb3d9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem; /* Vergrößert */
+    margin-bottom: 10px;
+    animation: benefit-icon-bounce 3s ease-in-out infinite;
+    box-shadow: 0 4px 15px rgba(109, 213, 237, 0.3);
+}
+
+@keyframes benefit-icon-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.visual-step-6 .benefit-label {
+    font-size: 0.75rem; /* Vergrößert */
+    color: #6dd5ed;
+    font-weight: 700;
+    max-width: 80px; /* Breitere Labels */
+    line-height: 1.3;
+    background: rgba(109, 213, 237, 0.1);
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: 1px solid rgba(109, 213, 237, 0.3);
+}
+
+@keyframes benefit-appear {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translate(var(--transform-x, 0), var(--transform-y, 0));
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translate(var(--transform-x, 0), var(--transform-y, 0));
+    }
+}
+
+/* Transform-Variablen für verschiedene Positionen */
+.visual-step-6 .benefit-speed { --transform-x: -50%; --transform-y: -50%; }
+.visual-step-6 .benefit-eco { --transform-x: 50%; --transform-y: -50%; }
+.visual-step-6 .benefit-properties { --transform-x: -50%; --transform-y: 50%; }
+.visual-step-6 .benefit-energy { --transform-x: -50%; --transform-y: -50%; }
+
+/*
+==============================================================================
+RESPONSIVE ANPASSUNGEN
+==============================================================================
+*/
+
+@media (max-width: 768px) {
+    #curing-animation-visual {
+        width: 280px;
+        height: 280px;
+    }
+    
+    /* Step-spezifische Anpassungen */
+    .visual-step-1 .target-object-large,
+    .visual-step-2 .target-substrate,
+    .visual-step-6 .benefit-orbit {
+        width: 240px;
+    }
+    
+    .visual-step-5 .property-bar {
+        width: 80px;
+    }
+    
+    .visual-step-6 .central-uv {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+}

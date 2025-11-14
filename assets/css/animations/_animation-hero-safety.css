@@ -1,0 +1,89 @@
+/**
+ * LUVEX THEME - ANIMATION: Safety Equipment Hero
+ *
+ * Description: Enthält alle Stile für den neuen, animierten Hero auf der
+ * UV Safety Equipment Seite.
+ *
+ * @package Luvex
+ */
+
+/* 1. Hero Haupt-Container */
+.hero-animated-safety {
+    position: relative;
+    overflow: hidden;
+    height: 100vh; /* Nimmt die volle Bildschirmhöhe ein */
+    background: linear-gradient(to top, #1a2a4a 0%, #0c1424 70%);
+    color: var(--luvex-white);
+}
+
+/* 2. Canvas für die Animation im Hintergrund */
+#hero-canvas-final {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+/* 3. Inhalts-Overlay */
+.hero-animated-safety .overlay-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 1rem 12vh; /* Responsive Padding */
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    pointer-events: none; /* Lässt Klicks zum Canvas durch */
+}
+
+/* 4. Textelemente und Buttons im Hero */
+.hero-animated-safety .title-cyan {
+    color: var(--luvex-bright-cyan);
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-animated-safety .luvex-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
+    background: transparent;
+    color: var(--luvex-bright-cyan);
+    border: 2px solid var(--luvex-bright-cyan);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: var(--text-base);
+    transition: var(--transition-normal);
+    pointer-events: auto; /* Buttons klickbar machen */
+}
+
+.hero-animated-safety .luvex-cta:hover {
+    background: var(--luvex-bright-cyan);
+    color: var(--luvex-dark-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 20px rgba(109, 213, 237, 0.3);
+}
+
+.hero-animated-safety .key-point {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: var(--luvex-gray-300);
+    opacity: 0.9;
+}
+
+.hero-animated-safety .key-point svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--luvex-bright-cyan);
+}

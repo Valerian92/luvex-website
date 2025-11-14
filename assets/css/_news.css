@@ -1,78 +1,132 @@
 /*
 ==============================================================================
-LUVEX THEME - UV News Styling
+LUVEX THEME - UV News Styling (Final Layout Correction)
 ==============================================================================
 Description: Styles for the UV News archive and single post pages.
 Dependencies: _variables.css (for color variables)
-Last Update: 2025-08-01
+Last Update: 2025-08-24
 ==============================================================================
 */
 
 /* --- 1.0 News Archive: Hero & Filter --- */
 
-.news-hero-section {
-    position: relative;
-    background-color: var(--luvex-dark-blue);
-    overflow: hidden;
-    color: white;
+/*
+==============================================================================
+FINALES HERO LAYOUT: KORRIGIERTE STRUKTUR
+==============================================================================
+*/
+
+.luvex-hero--split-compact {
+    min-height: auto;
+    padding: calc(80px + 5rem) 1.5rem 4rem 1.5rem;
+    display: flex;
+    align-items: center;
+    position: relative; /* Wichtig für die Positionierung des Canvas */
+    overflow: hidden; /* Verhindert, dass die Animation überläuft */
 }
 
-.news-hero-section::before {
-    content: '';
+/* NEU: Styling für das Canvas-Element */
+.luvex-hero--split-compact #hero-canvas {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="footer-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(109, 213, 237, 0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23footer-grid)"/></svg>');
-    opacity: 0.7;
-    z-index: 1;
+    z-index: 1; /* Liegt im Hintergrund */
 }
 
-.news-hero-content {
-    position: relative;
-    z-index: 2;
-    padding: 5rem 1.5rem;
-    max-width: 1200px;
+.luvex-hero--split-compact .luvex-hero__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    gap: 2rem;
+    max-width: 1250px;
     margin: 0 auto;
+    width: 100%;
+    position: relative; /* Stellt sicher, dass der Inhalt über dem Canvas liegt */
+    z-index: 2;
 }
 
-.news-hero-content .title {
-    font-size: 2.75rem;
-    font-weight: 800;
-    margin-bottom: 0.75rem;
-    letter-spacing: -0.025em;
+.luvex-hero--split-compact .luvex-hero__content {
+    flex-grow: 1;
 }
 
-.news-hero-content .subtitle {
-    font-size: 1.5rem;
-    color: var(--luvex-cyan);
-    max-width: 48rem; /* 768px */
+/*
+ * Spezifische Regeln für die Textelemente im News-Hero.
+*/
+.luvex-hero--split-compact .luvex-hero__title {
+    text-align: left;
+    margin: 0 0 1rem 0;
+    font-size: clamp(2.2rem, 4vw, 3rem);
 }
+
+.luvex-hero--split-compact .luvex-hero__description {
+    text-align: left;
+}
+
+
+.luvex-hero--split-compact .luvex-hero__cta-container {
+    flex-shrink: 0;
+    margin-top: 0;
+    gap: 1rem;
+    transform: translateY(2.5rem); 
+}
+
+@media (max-width: 768px) {
+    .luvex-hero--split-compact {
+        padding: calc(80px + 3rem) 1.5rem 3rem 1.5rem;
+    }
+
+    .luvex-hero--split-compact .luvex-hero__container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2.5rem;
+    }
+
+    .luvex-hero--split-compact .luvex-hero__cta-container {
+        flex-direction: row;
+        width: 100%;
+        transform: none;
+    }
+}
+
+
+/*
+==============================================================================
+FILTER & GRID CONTAINER ALIGNMENT
+==============================================================================
+*/
 
 .news-filter-section {
     background-color: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(8px);
     position: sticky;
-    top: 0;
+    top: 80px;
     z-index: 30;
     border-bottom: 1px solid #e5e7eb;
+    padding: 0 1.5rem;
+}
+
+body.admin-bar .news-filter-section {
+    top: 112px;
 }
 
 .news-filter-container {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     gap: 1.5rem;
-    padding: 1.25rem 1.5rem;
-    max-width: 1200px;
+    padding: 1.25rem 0;
+    max-width: 1250px;
     margin: 0 auto;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
     .news-filter-container {
-        flex-direction: row;
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
 
@@ -106,18 +160,13 @@ Last Update: 2025-08-01
 
 .news-search-form {
     position: relative;
-    width: 100%;
-}
-
-@media (min-width: 768px) {
-    .news-search-form {
-        width: auto;
-    }
+    width: auto;
+    flex-shrink: 0;
 }
 
 .news-search-input {
     width: 100%;
-    min-width: 256px;
+    min-width: 280px;
     padding: 0.5rem 1rem 0.5rem 2.5rem;
     border: 1px solid #d1d5db;
     border-radius: 9999px;
@@ -146,7 +195,7 @@ Last Update: 2025-08-01
 }
 
 .news-grid-container {
-    max-width: 1200px;
+    max-width: 1250px;
     margin: 0 auto;
 }
 

@@ -1,212 +1,183 @@
 <?php
 /**
- * Contact Page Template
- * Professional B2B contact form with CTA integration
- * 
+ * Contact Page Template - Overhauled according to content distribution plan
  * @package Luvex
- * @since 2.0.0
+ * @since 3.1.0
  */
 
 get_header(); ?>
 
-<!-- Contact Hero Section -->
-<section class="luvex-hero">
+<!-- The custom cursor element for the animation -->
+<div class="custom-cursor"></div>
+
+<!-- 1. HERO SECTION (Unchanged) -->
+<section class="luvex-hero contact-hero-v2">
+    <canvas id="contact-hero-animation-canvas"></canvas>
     <div class="luvex-hero__container">
         <h1 class="luvex-hero__title">
-            Get in Touch with <span class="text-highlight">LUVEX</span>
+            Let's Start a <span class="text-highlight">Conversation</span>
         </h1>
         <h2 class="luvex-hero__subtitle">
-            Professional UV technology support when you need it
+            Your partner for professional UV technology support.
         </h2>
         <p class="luvex-hero__description">
-            Our experts are here to help with honest, practical advice tailored to your specific challenges.
+            Whether you have a specific question or a complex challenge, our experts are ready to provide honest, practical advice tailored to your needs.
         </p>
     </div>
 </section>
 
-<!-- Contact Methods Section -->
-<section class="contact-methods">
-    <div class="container container--medium">
-        <div class="contact-methods__grid">
-            
-            <!-- Primary CTA: Book Consultation -->
-            <div class="contact-method contact-method--primary">
-                <div class="contact-method__icon">
-                    <i class="fa-solid fa-calendar-days"></i>
-                </div>
-                <h3 class="contact-method__title">Schedule Free Consultation</h3>
-                <p class="contact-method__description">
-                    Get 30 minutes of expert UV technology guidance - completely free, no sales pressure.
-                </p>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="contact-method__cta">
-                    <span>Book Now</span>
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
+<!-- 2. CORE COMPETENCIES SECTION (Unchanged) -->
+<section class="section section--turquoise-light">
+    <div class="container container--wide">
+        <div class="text-center mb-3">
+            <h2 class="section__title">Our Expertise</h2>
+            <p class="section__subtitle">We provide end-to-end expertise for your UV applications, ensuring efficiency, safety, and compliance.</p>
+        </div>
+        <div class="grid-3">
+            <div class="value-card">
+                <div class="value-card__icon"><i class="fa-solid fa-flask-vial"></i></div>
+                <h3 class="value-card__title">System & Process Analysis</h3>
+                <p class="value-card__description">We evaluate your existing UV systems and processes to identify bottlenecks and opportunities for improvement.</p>
             </div>
-            
-            <!-- Email Contact -->
-            <div class="contact-method">
-                <div class="contact-method__icon">
-                    <i class="fa-solid fa-envelope"></i>
-                </div>
-                <h3 class="contact-method__title">Email Us Directly</h3>
-                <p class="contact-method__description">
-                    Send detailed questions or documentation for review.
-                </p>
-                <a href="mailto:support@luvex.tech" class="contact-method__link">
-                    support@luvex.tech
-                </a>
+            <div class="value-card">
+                <div class="value-card__icon"><i class="fa-solid fa-chart-line"></i></div>
+                <h3 class="value-card__title">Performance Optimization</h3>
+                <p class="value-card__description">We fine-tune your UV applications for maximum efficiency, dose delivery, and energy savings.</p>
             </div>
-            
-            <!-- Message Form -->
-            <div class="contact-method">
-                <div class="contact-method__icon">
-                    <i class="fa-solid fa-message"></i>
-                </div>
-                <h3 class="contact-method__title">Send Message</h3>
-                <p class="contact-method__description">
-                    Quick questions or specific requests via our contact form below.
-                </p>
-                <a href="#contact-form" class="contact-method__link">
-                    Use Contact Form
-                </a>
+            <div class="value-card">
+                <div class="value-card__icon"><i class="fa-solid fa-clipboard-check"></i></div>
+                <h3 class="value-card__title">Validation & Compliance</h3>
+                <p class="value-card__description">We ensure your systems meet industry standards and regulatory requirements (e.g., DVGW, ÖNORM).</p>
             </div>
-            
         </div>
     </div>
 </section>
 
-<!-- Contact Form Section -->
-<section class="contact-form-section" id="contact-form">
-    <div class="container container--narrow">
-        <div class="contact-form-layout">
-            
-            <div class="contact-form-intro">
-                <h2 class="contact-form-intro__title">Send Us a Message</h2>
-                <p class="contact-form-intro__description">
-                    Have specific questions about UV technology or need guidance on a project? Send us the details and we'll get back to you within 24 hours.
-                </p>
+<!-- 3. CONTACT METHODS SECTION (UPDATED LINK) -->
+<section class="contact-methods section">
+    <div class="container container--medium">
+        <div class="grid grid-3">
+            <div class="card card--highlight has-shine-effect">
+                <div class="card__icon"><i class="fa-solid fa-calendar-days"></i></div>
+                <h3 class="card__title">Schedule Project Talk</h3>
+                <p class="card__content">Get dedicated time with an expert for detailed project planning and analysis. No sales pressure.</p>
+                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'project-talk' ) ) ); ?>" class="btn btn--primary" style="margin-top: auto;">
+                    <span>Go to Project Talk</span><i class="fa-solid fa-arrow-right"></i>
+                </a>
             </div>
-            
-            <div class="contact-form-container">
-                <form class="luvex-contact-form" method="post" action="">
-                    <?php wp_nonce_field('luvex_contact_form'); ?>
-                    
+            <div class="card has-shine-effect">
+                <div class="card__icon"><i class="fa-solid fa-envelope"></i></div>
+                <h3 class="card__title">Email Us Directly</h3>
+                <p class="card__content">Send detailed questions or documentation for our experts to review.</p>
+                <a href="mailto:support@luvex.tech" class="btn btn--outline" style="margin-top: auto;">support@luvex.tech</a>
+            </div>
+            <div class="card has-shine-effect">
+                <div class="card__icon"><i class="fa-solid fa-message"></i></div>
+                <h3 class="card__title">Send a Quick Message</h3>
+                <p class="card__content">Use our contact form below for specific requests or quick questions.</p>
+                <a href="#contact-form-v2" class="btn btn--outline" style="margin-top: auto;">Use Contact Form</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 4. NEW CROSS-LINK BOX SECTION -->
+<section class="section cross-link-section">
+    <div class="container container--narrow">
+        <div class="cross-link-box">
+            <div class="cross-link-box__icon">
+                <i class="fa-solid fa-bullseye-pointer"></i>
+            </div>
+            <div class="cross-link-box__content">
+                <h3 class="cross-link-box__title">Ready to Start a Specific Project?</h3>
+                <p class="cross-link-box__description">For detailed project planning and expert consultation, our Project Talk is the most direct path to a solution.</p>
+            </div>
+            <div class="cross-link-box__action">
+                 <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'project-talk' ) ) ); ?>" class="btn btn--primary">
+                    <span>Go to Project Talk</span><i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 5. CONTACT FORM SECTION (UPDATED & CLEANED) -->
+<section class="contact-form-section-v2 section" id="contact-form-v2">
+    <div class="container container--narrow">
+        <div class="contact-form-v2__layout--centered">
+            <div class="contact-form-v2__form-container">
+                <div class="text-center" style="margin-bottom: 2.5rem;">
+                     <h2 class="contact-form-v2__title">Send Us a Message</h2>
+                     <p class="contact-form-v2__description" style="max-width: 500px; margin: 0 auto;">We're here to help and answer any question you might have. We look forward to hearing from you.</p>
+                </div>
+                <form action="#" method="POST" id="luvex-contact-form">
                     <div class="form-grid form-grid--2-cols">
-                        <div class="floating-label-input">
-                            <input type="text" name="first_name" id="first_name" placeholder=" " required>
-                            <label for="first_name">First Name *</label>
+                        <div class="floating-label-input floating-label-input--dark">
+                            <input type="text" id="contact-name" name="contact-name" placeholder=" " required>
+                            <label for="contact-name">Full Name</label>
                         </div>
-                        
-                        <div class="floating-label-input">
-                            <input type="text" name="last_name" id="last_name" placeholder=" " required>
-                            <label for="last_name">Last Name *</label>
+                        <div class="floating-label-input floating-label-input--dark">
+                            <input type="email" id="contact-email" name="contact-email" placeholder=" " required>
+                            <label for="contact-email">Email Address</label>
                         </div>
                     </div>
-                    
-                    <div class="form-grid form-grid--2-cols">
-                        <div class="floating-label-input">
-                            <input type="email" name="email" id="email" placeholder=" " required>
-                            <label for="email">Email Address *</label>
-                        </div>
-                        
-                        <div class="floating-label-input">
-                            <input type="text" name="company" id="company" placeholder=" ">
-                            <label for="company">Company</label>
-                        </div>
-                    </div>
-                    
-                    <div class="floating-label-input">
-                        <select name="inquiry_type" id="inquiry_type" required>
-                            <option value="">Select inquiry type</option>
-                            <option value="general">General UV Technology Question</option>
-                            <option value="system-design">System Design & Planning</option>
-                            <option value="process-optimization">Process Optimization</option>
-                            <option value="technology-selection">Technology Selection</option>
-                            <option value="training">Training & Education</option>
-                            <option value="partnership">Partnership Inquiry</option>
-                            <option value="other">Other</option>
+                    <div class="floating-label-input floating-label-input--dark">
+                        <select id="contact-subject" name="contact-subject" required>
+                            <option value="" disabled selected></option>
+                            <option value="project-consultation">Project Consultation → Consider Project Talk instead</option>
+                            <option value="uv-curing">UV Curing</option>
+                            <option value="uv-c-disinfection">UV-C Disinfection</option>
+                            <option value="uv-led-systems">UV LED Systems</option>
+                            <option value="partner-inquiry">Partner Program Inquiry</option>
+                            <option value="general-inquiry">General Inquiry</option>
                         </select>
-                        <label for="inquiry_type">What can we help you with? *</label>
+                        <label for="contact-subject">Regarding</label>
+                    </div>
+                    <div class="floating-label-input floating-label-input--dark">
+                        <textarea id="contact-message" name="contact-message" placeholder=" " rows="5" required></textarea>
+                        <label for="contact-message">Your Message</label>
                     </div>
                     
-                    <div class="floating-label-input">
-                        <textarea name="message" id="message" placeholder=" " rows="6" required></textarea>
-                        <label for="message">Tell us about your UV technology challenge or question *</label>
-                    </div>
-                    
-                    <div class="form-consent">
-                        <label class="form-checkbox">
-                            <input type="checkbox" name="consent" required>
+                    <div class="form-checkbox">
+                        <input type="checkbox" id="privacy-policy" name="privacy-policy" required>
+                        <label for="privacy-policy" class="form-checkbox__label">
                             <span class="form-checkbox__indicator">
-                                <i class="fa-solid fa-check"></i>
+                                 <i class="fa-solid fa-check"></i>
                             </span>
-                            <span class="form-checkbox__text">
-                                I agree to LUVEX contacting me about this inquiry. We respect your privacy and will never share your information.
-                            </span>
+                            <span class="form-checkbox__text">I agree to the <a href="/privacy-policy" target="_blank">Privacy Policy</a>.</span>
                         </label>
                     </div>
-                    
-                    <button type="submit" name="luvex_contact_submit" class="form-submit form-submit--accent">
-                        <span>Send Message</span>
-                        <i class="fa-solid fa-paper-plane"></i>
-                    </button>
-                    
+
+                    <button type="submit" class="luvex-cta-primary form-submit" style="width: 100%; margin-top: 1rem;">Send Message</button>
                 </form>
             </div>
-            
         </div>
     </div>
 </section>
 
-<!-- Contact Info Section -->
-<section class="contact-info">
-    <div class="container container--medium">
-        <div class="contact-info__content">
-            <h2 class="contact-info__title">Response Time & Support</h2>
-            <div class="contact-info__grid">
-                
-                <div class="contact-info__item">
-                    <div class="contact-info__icon">
-                        <i class="fa-solid fa-clock"></i>
-                    </div>
-                    <h3>Response Time</h3>
-                    <p>We typically respond to all inquiries within 24 hours during business days.</p>
-                </div>
-                
-                <div class="contact-info__item">
-                    <div class="contact-info__icon">
-                        <i class="fa-solid fa-globe"></i>
-                    </div>
-                    <h3>Global Support</h3>
-                    <p>Supporting UV projects across Europe, Americas, and Asia-Pacific regions.</p>
-                </div>
-                
-                <div class="contact-info__item">
-                    <div class="contact-info__icon">
-                        <i class="fa-solid fa-shield-alt"></i>
-                    </div>
-                    <h3>Confidentiality</h3>
-                    <p>All project details and technical discussions are treated with strict confidentiality.</p>
-                </div>
-                
+<!-- 6. WHAT HAPPENS NEXT SECTION (Unchanged) -->
+<section class="what-to-expect-section section">
+    <div class="container container--wide">
+        <div class="text-center">
+            <h2 class="section__title">What Happens Next?</h2>
+            <p class="section__subtitle">We believe in clear communication from the very first step.</p>
+        </div>
+        <div class="expect-grid">
+            <div class="expect-step-card">
+                <div class="expect-step__icon">1</div>
+                <h3 class="expect-step__title">Prompt Response</h3>
+                <p class="expect-step__description">We'll review your message and get back to you within one business day.</p>
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- Still Prefer Direct Contact CTA -->
-<section class="contact-alternative-cta">
-    <div class="container">
-        <div class="contact-alternative-cta__content">
-            <h2 class="contact-alternative-cta__title">Still Prefer a Direct Conversation?</h2>
-            <p class="contact-alternative-cta__description">
-                Sometimes it's easier to discuss UV technology challenges in person. Schedule a free consultation call with our experts.
-            </p>
-            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="contact-alternative-cta__button">
-                <i class="fa-solid fa-video"></i>
-                <span>Schedule Free Call</span>
-            </a>
+            <div class="expect-step-card">
+                <div class="expect-step__icon">2</div>
+                <h3 class="expect-step__title">Personal Consultation</h3>
+                <p class="expect-step__description">If needed, we'll schedule a no-obligation call to discuss your challenge in detail.</p>
+            </div>
+            <div class="expect-step-card">
+                <div class="expect-step__icon">3</div>
+                <h3 class="expect-step__title">Solution-Oriented Plan</h3>
+                <p class="expect-step__description">You'll receive clear, actionable recommendations tailored to your goals.</p>
+            </div>
         </div>
     </div>
 </section>

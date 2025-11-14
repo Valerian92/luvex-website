@@ -1,151 +1,165 @@
 <?php
 /**
- * Profile Page Template
- * 
+ * Template Name: User Profile
+ *
  * @package Luvex
- * @since 2.0.0
+ * @since 3.0.0
  */
 
-// Redirect if not logged in
+// Redirect user to login page if not logged in
 if (!is_user_logged_in()) {
-    wp_redirect(home_url('/login/'));
+    wp_redirect(home_url('/login')); // Or open the modal: home_url('/?login=true')
     exit;
 }
 
+get_header();
+
 $current_user = wp_get_current_user();
+?>
 
-get_header(); ?>
+<main id="main" class="site-main">
+    <div class="profile-dashboard">
+        <div class="container">
 
-<<section class="luvex-hero">
-    <div class="luvex-hero__container">
-        <h1 class="luvex-hero__title">
-            Welcome, <span class="text-highlight"><?php echo esc_html($current_user->first_name ?: $current_user->display_name); ?></span>
-        </h1>
-        <p class="luvex-hero__description">
-            Manage your LUVEX account, simulator settings, and community preferences.
-        </p>
-    </div>
-</section>
-
-<section class="profile-dashboard">
-    <div class="container container--narrow">
-        <div class="profile-layout">
-            
-            <!-- Profile Navigation -->
-            <nav class="profile-nav">
-                <ul class="profile-nav__list">
-                    <li class="profile-nav__item profile-nav__item--active">
-                        <a href="#profile-info" class="profile-nav__link">
-                            <i class="fa-solid fa-user"></i>
-                            Profile Info
-                        </a>
-                    </li>
-                    <li class="profile-nav__item">
-                        <a href="#simulator-settings" class="profile-nav__link">
-                            <i class="fa-solid fa-cog"></i>
-                            Simulator Settings
-                        </a>
-                    </li>
-                    <li class="profile-nav__item">
-                        <a href="#community-preferences" class="profile-nav__link">
-                            <i class="fa-solid fa-users"></i>
-                            Community
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            
-            <!-- Profile Content -->
-            <div class="profile-content">
-                
-                <!-- Profile Info Section -->
-                <div id="profile-info" class="profile-section profile-section--active">
-                    <div class="profile-section__header">
-                        <h2>Profile Information</h2>
-                        <p>Update your personal information and account details.</p>
+            <div class="profile-quick-actions">
+                 <div class="profile-section__header">
+                    <div class="header-content">
+                        <h2>Welcome, <?php echo esc_html($current_user->first_name); ?>!</h2>
+                        <p>This is your personal dashboard. Manage your profile and settings here.</p>
                     </div>
-                    
-                    <form class="luvex-profile-form" method="post" action="">
-                        <?php wp_nonce_field('luvex_profile_update'); ?>
-                        
-                        <div class="form-grid form-grid--2-cols">
-                            <div class="floating-label-input">
-                                <input type="text" name="first_name" id="first_name" placeholder=" " 
-                                       value="<?php echo esc_attr($current_user->first_name); ?>">
-                                <label for="first_name">First Name</label>
-                            </div>
-                            
-                            <div class="floating-label-input">
-                                <input type="text" name="last_name" id="last_name" placeholder=" "
-                                       value="<?php echo esc_attr($current_user->last_name); ?>">
-                                <label for="last_name">Last Name</label>
-                            </div>
-                        </div>
-                        
-                        <div class="floating-label-input">
-                            <input type="email" name="user_email" id="user_email" placeholder=" "
-                                   value="<?php echo esc_attr($current_user->user_email); ?>" required>
-                            <label for="user_email">Email Address</label>
-                        </div>
-                        
-                        <div class="floating-label-input">
-                            <input type="text" name="company" id="company" placeholder=" "
-                                   value="<?php echo esc_attr(get_user_meta($current_user->ID, 'company', true)); ?>">
-                            <label for="company">Company</label>
-                        </div>
-                        
-                        <div class="floating-label-input">
-                            <select name="interest_area" id="interest_area">
-                                <?php $current_interest = get_user_meta($current_user->ID, 'interest_area', true); ?>
-                                <option value="">Select your primary interest</option>
-                                <option value="water-treatment" <?php selected($current_interest, 'water-treatment'); ?>>Water Treatment</option>
-                                <option value="air-purification" <?php selected($current_interest, 'air-purification'); ?>>Air Purification</option>
-                                <option value="uv-curing" <?php selected($current_interest, 'uv-curing'); ?>>UV Curing</option>
-                                <option value="led-uv" <?php selected($current_interest, 'led-uv'); ?>>LED UV Systems</option>
-                                <option value="mercury-uv" <?php selected($current_interest, 'mercury-uv'); ?>>Mercury UV Lamps</option>
-                                <option value="research" <?php selected($current_interest, 'research'); ?>>Research & Development</option>
-                                <option value="consulting" <?php selected($current_interest, 'consulting'); ?>>UV Consulting</option>
-                                <option value="other" <?php selected($current_interest, 'other'); ?>>Other</option>
-                            </select>
-                            <label for="interest_area">Primary UV Interest</label>
-                        </div>
-                        
-                        <button type="submit" name="luvex_profile_update_submit" class="form-submit form-submit--primary">
-                            <span>Update Profile</span>
-                            <i class="fa-solid fa-save"></i>
-                        </button>
-                        
-                    </form>
-                </div>
-                
-                <!-- Quick Actions -->
-                <div class="profile-quick-actions">
-                    <h3>Quick Actions</h3>
-                    <div class="quick-actions-grid">
-                        <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'uv-simulator' ) ) ); ?>" class="quick-action-card">
-                            <i class="fa-solid fa-cube"></i>
-                            <h4>UV Simulator</h4>
-                            <p>Access advanced features</p>
-                        </a>
-                        
-                        <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'booking' ) ) ); ?>" class="quick-action-card">
-                            <i class="fa-solid fa-calendar"></i>
-                            <h4>Book Consultation</h4>
-                            <p>Schedule expert session</p>
-                        </a>
-                        
-                        <a href="<?php echo wp_logout_url(home_url()); ?>" class="quick-action-card quick-action-card--secondary">
-                            <i class="fa-solid fa-sign-out-alt"></i>
-                            <h4>Sign Out</h4>
-                            <p>Log out of your account</p>
-                        </a>
+                    <div class="header-avatar" data-modal="avatarModal">
+                        <?php echo luvex_get_user_avatar(); ?>
+                        <div class="avatar-plus"><i class="fa-solid fa-pencil"></i></div>
                     </div>
                 </div>
-                
             </div>
-            
+
+            <div class="profile-layout">
+                <aside class="profile-sidebar">
+                    <nav class="profile-nav">
+                        <h3 class="profile-nav__title">Navigation</h3>
+                        <ul class="profile-nav__list">
+                            <li class="profile-nav__item profile-nav__item--active" data-target="profile-details">
+                                <a href="#" class="profile-nav__link">
+                                    <i class="fa-solid fa-user-circle"></i>
+                                    <span>Profile Details</span>
+                                </a>
+                            </li>
+                            <li class="profile-nav__item" data-target="security">
+                                <a href="#" class="profile-nav__link">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                    <span>Security</span>
+                                </a>
+                            </li>
+                            <li class="profile-nav__item" data-target="language-settings">
+                                <a href="#" class="profile-nav__link">
+                                    <i class="fa-solid fa-globe"></i>
+                                    <span>Language</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </aside>
+
+                <div class="profile-content">
+                    <!-- Profile Details Section -->
+                    <section id="profile-details" class="profile-section profile-section--active">
+                        <div class="profile-section__header">
+                            <div class="header-content">
+                                <h2>Profile Details</h2>
+                                <p>Update your personal information.</p>
+                            </div>
+                        </div>
+                        <form class="profile-form">
+                            <div class="form-grid--2-cols">
+                                <div class="floating-label-input">
+                                    <input type="text" id="first_name" name="first_name" value="<?php echo esc_attr($current_user->first_name); ?>" placeholder=" ">
+                                    <label for="first_name">First Name</label>
+                                </div>
+                                <div class="floating-label-input">
+                                    <input type="text" id="last_name" name="last_name" value="<?php echo esc_attr($current_user->last_name); ?>" placeholder=" ">
+                                    <label for="last_name">Last Name</label>
+                                </div>
+                            </div>
+                             <div class="floating-label-input">
+                                <input type="email" id="email" name="email" value="<?php echo esc_attr($current_user->user_email); ?>" placeholder=" " disabled>
+                                <label for="email">Email Address (cannot be changed)</label>
+                            </div>
+                            <button type="submit" class="btn--primary form-submit">
+                                <i class="fa-solid fa-save"></i>
+                                <span>Save Changes</span>
+                            </button>
+                        </form>
+                    </section>
+
+                    <!-- Security Section -->
+                    <section id="security" class="profile-section">
+                         <div class="profile-section__header">
+                            <div class="header-content">
+                                <h2>Security</h2>
+                                <p>Change your password.</p>
+                            </div>
+                        </div>
+                         <form class="profile-form">
+                            <div class="floating-label-input">
+                                <input type="password" id="current_password" name="current_password" placeholder=" ">
+                                <label for="current_password">Current Password</label>
+                            </div>
+                            <div class="form-grid--2-cols">
+                                <div class="floating-label-input">
+                                    <input type="password" id="new_password" name="new_password" placeholder=" ">
+                                    <label for="new_password">New Password</label>
+                                </div>
+                                <div class="floating-label-input">
+                                    <input type="password" id="confirm_new_password" name="confirm_new_password" placeholder=" ">
+                                    <label for="confirm_new_password">Confirm New Password</label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn--primary form-submit">
+                                <i class="fa-solid fa-key"></i>
+                                <span>Update Password</span>
+                            </button>
+                        </form>
+                    </section>
+
+                    <!-- Language Section -->
+                    <section id="language-settings" class="profile-section">
+                        <div class="profile-section__header">
+                             <div class="header-content">
+                                <h2>Language & Region</h2>
+                                <p>Set your preferred language for the website.</p>
+                            </div>
+                        </div>
+                        <p>Your language settings are managed via the language switcher in the website header.</p>
+                    </section>
+                </div>
+            </div>
         </div>
     </div>
-</section>
+
+    <!-- Simple JS for tab switching -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.profile-nav__item');
+            const sections = document.querySelectorAll('.profile-section');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    // Update active class for nav items
+                    navItems.forEach(i => i.classList.remove('profile-nav__item--active'));
+                    this.classList.add('profile-nav__item--active');
+
+                    // Show the target section
+                    const targetId = this.dataset.target;
+                    sections.forEach(section => {
+                        section.classList.toggle('profile-section--active', section.id === targetId);
+                    });
+                });
+            });
+        });
+    </script>
+</main>
 
 <?php get_footer(); ?>

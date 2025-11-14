@@ -1,85 +1,66 @@
 <?php
 /**
- * Login Page Template
- * 
+ * Template Name: Login Page (Modal Trigger)
+ * Description: Zeigt den Hero-Bereich und öffnet das Login-Modal automatisch.
  * @package Luvex
- * @since 2.0.0
+ * @since 2.2.0
+ * Last Update: 2025-08-28 23:25
  */
 
 get_header(); ?>
 
-<section class="luvex-hero">
-    <div class="luvex-hero__container">
-        <h1 class="luvex-hero__title">
-            Welcome Back to <span class="text-highlight">LUVEX</span>
-        </h1>
-        <p class="luvex-hero__description">
-            Access your UV simulator settings, saved projects, and community features.
-        </p>
+<!-- Enhanced Hero Section -->
+<section class="luvex-hero luvex-hero--auth luvex-hero--login">
+    <div class="hero-particles">
+        <div class="particle particle-1"></div>
+        <div class="particle particle-2"></div>
+        <div class="particle particle-3"></div>
+        <div class="particle particle-4"></div>
     </div>
-</section>
-
-<section class="auth-form-section">
-    <div class="container--narrow">
-        <div class="auth-form-container">
-            
-            <?php if (isset($_GET['registered'])) : ?>
-                <div class="auth-success-message">
-                    <i class="fa-solid fa-check-circle"></i>
-                    <p>Registration successful! Please log in with your credentials.</p>
-                </div>
-            <?php endif; ?>
-
-            <?php if (isset($_GET['error'])) : ?>
-                <div class="auth-error-message">
-                    <i class="fa-solid fa-exclamation-triangle"></i>
-                    <p>Login failed. Please check your credentials and try again.</p>
-                </div>
-            <?php endif; ?>
-
-            <form class="luvex-auth-form" method="post" action="">
-                <?php wp_nonce_field('luvex_login_form'); ?>
-                
-                <div class="floating-label-input floating-label-input--dark">
-                    <input type="email" name="user_email" id="user_email" placeholder=" " required>
-                    <label for="user_email">Email Address</label>
-                </div>
-                
-                <div class="floating-label-input floating-label-input--dark">
-                    <input type="password" name="user_password" id="user_password" placeholder=" " required>
-                    <label for="user_password">Password</label>
-                </div>
-                
-                <div class="auth-options">
-                    <label class="form-checkbox">
-                        <input type="checkbox" name="remember_me">
-                        <span class="form-checkbox__indicator">
-                            <i class="fa-solid fa-check"></i>
-                        </span>
-                        <span class="form-checkbox__text">Keep me logged in</span>
-                    </label>
-                    
-                    <a href="<?php echo wp_lostpassword_url(); ?>" class="auth-link">
-                        Forgot password?
-                    </a>
-                </div>
-                
-                <button type="submit" name="luvex_login_submit" class="form-submit form-submit--accent">
-                    <span>Sign In</span>
-                    <i class="fa-solid fa-arrow-right"></i>
-                </button>
-                
-            </form>
-            
-            <div class="auth-alternative">
-                <p>Don't have an account yet?</p>
-                <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'register' ) ) ); ?>" class="auth-cta-link">
-                    Create Your LUVEX Account
-                </a>
+    
+    <div class="luvex-hero__container">
+        <div class="hero-badge hero-badge--welcome">
+            <i class="fa-solid fa-home"></i>
+            <span>Welcome Back</span>
+        </div>
+        <h1 class="luvex-hero__title">
+            Sign In to <span class="text-highlight">LUVEX</span>
+        </h1>
+        <p class="luvex-hero__subtitle">
+            Continue your UV journey
+        </p>
+        <p class="luvex-hero__description">
+            Access your UV simulator settings, saved projects, measurement history, and connect with your professional network.
+        </p>
+        
+        <!-- Quick Access Features -->
+        <div class="hero-quick-features">
+            <div class="quick-feature">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Your Dashboard</span>
             </div>
-            
+            <div class="quick-feature">
+                <i class="fa-solid fa-bookmark"></i>
+                <span>Saved Projects</span>
+            </div>
+            <div class="quick-feature">
+                <i class="fa-solid fa-bell"></i>
+                <span>Notifications</span>
+            </div>
         </div>
     </div>
 </section>
 
+<!--
+    Das Modal selbst wird über die footer.php geladen.
+    Dieses Template öffnet das Modal nur automatisch bei Seitenaufruf.
+-->
+
 <?php get_footer(); ?>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Öffne das Modal direkt nach dem Laden der Seite, da dies die Login-Seite ist
+        window.openAuthModal('login');
+    });
+</script>

@@ -4,6 +4,7 @@
  *
  * @package Luvex
  * @since 1.7.0
+ * Last Update: 2025-08-31 - Re-added Auth Modal include
  */
 ?>
 
@@ -11,12 +12,13 @@
 	</div><!-- #primary -->
 </div><!-- #content -->
 
+<!-- HINWEIS: Die ID 'colophon' wird vom neuen JavaScript verwendet, um die Animation zu triggern. -->
 <footer id="colophon" class="site-footer modern-footer">
 	<div class="footer-container">
 
 		<!-- Footer Content Grid -->
 		<div class="footer-content-grid">
-			
+
 			<!-- Company Info -->
 			<div class="footer-section footer-company">
 				<div class="footer-logo">
@@ -28,29 +30,35 @@
 						</div>
 					<?php endif; ?>
 				</div>
+				
 				<p class="footer-tagline">
-					<strong>Precision through Light. Excellence through Engineering.</strong><br>
-					Independent UV technology experts advancing global knowledge and delivering cutting-edge solutions.
+					<strong>Precision through Light.<br>Excellence through Engineering.</strong>
 				</p>
+				
+				<!-- Social Links NACH Tagline -->
 				<div class="footer-social">
 					<a href="#" aria-label="LinkedIn" class="social-link">
 						<i class="fab fa-linkedin"></i>
 					</a>
 					<a href="/booking/" aria-label="Book Consultation" class="social-link">
-    					<i class="fa-solid fa-calendar-days"></i>
+						<i class="fa-solid fa-calendar-days"></i>
 					</a>
 					<a href="mailto:support@luvex.tech" aria-label="Email" class="social-link">
 						<i class="fas fa-envelope"></i>
 					</a>
 				</div>
+				
+				<p class="footer-description">
+					Independent UV technology experts<br>delivering cutting-edge solutions.
+				</p>
 			</div>
 
 			<!-- Services Menu -->
 			<div class="footer-section">
-				<h4 class="footer-section-title">Services</h4>
+				<h4 class="footer-section-title">Solutions</h4>
 				<?php
 				wp_nav_menu(array(
-					'theme_location' => 'footer-services',
+					'theme_location' => 'footer-menu-1-luvex',
 					'menu_class'     => 'footer-menu',
 					'container'      => false,
 					'depth'          => 1,
@@ -61,10 +69,10 @@
 
 			<!-- Technologies Menu -->
 			<div class="footer-section">
-				<h4 class="footer-section-title">Technologies</h4>
+				<h4 class="footer-section-title">Knowledge Center</h4>
 				<?php
 				wp_nav_menu(array(
-					'theme_location' => 'footer-technologies',
+					'theme_location' => 'footer-menu-2-luvex',
 					'menu_class'     => 'footer-menu',
 					'container'      => false,
 					'depth'          => 1,
@@ -75,10 +83,10 @@
 
 			<!-- Resources Menu -->
 			<div class="footer-section">
-				<h4 class="footer-section-title">Resources</h4>
+				<h4 class="footer-section-title">Support</h4>
 				<?php
 				wp_nav_menu(array(
-					'theme_location' => 'footer-resources',
+					'theme_location' => 'footer-menu-3-luvex',
 					'menu_class'     => 'footer-menu',
 					'container'      => false,
 					'depth'          => 1,
@@ -89,10 +97,10 @@
 
 			<!-- Company Menu -->
 			<div class="footer-section">
-				<h4 class="footer-section-title">Company</h4>
+				<h4 class="footer-section-title">Community</h4>
 				<?php
 				wp_nav_menu(array(
-					'theme_location' => 'footer-company',
+					'theme_location' => 'footer-menu-4-luvex',
 					'menu_class'     => 'footer-menu',
 					'container'      => false,
 					'depth'          => 1,
@@ -140,7 +148,7 @@
 function luvex_footer_services_fallback() {
 	if (current_user_can('edit_theme_options')) {
 		echo '<ul class="footer-menu">';
-		echo '<li><a href="' . admin_url('nav-menus.php') . '" style="color: red;">Services Menü einrichten →</a></li>';
+		echo '<li><a href="' . admin_url('nav-menus.php') . '" style="color: red;">LUVEX-Menü 1 einrichten →</a></li>';
 		echo '</ul>';
 	} else {
 		echo '<ul class="footer-menu">';
@@ -154,7 +162,7 @@ function luvex_footer_services_fallback() {
 function luvex_footer_technologies_fallback() {
 	if (current_user_can('edit_theme_options')) {
 		echo '<ul class="footer-menu">';
-		echo '<li><a href="' . admin_url('nav-menus.php') . '" style="color: red;">Technologies Menü einrichten →</a></li>';
+		echo '<li><a href="' . admin_url('nav-menus.php') . '" style="color: red;">LUVEX-Menü 2 einrichten →</a></li>';
 		echo '</ul>';
 	} else {
 		echo '<ul class="footer-menu">';
@@ -168,7 +176,7 @@ function luvex_footer_technologies_fallback() {
 function luvex_footer_resources_fallback() {
 	if (current_user_can('edit_theme_options')) {
 		echo '<ul class="footer-menu">';
-		echo '<li><a href="' . admin_url('nav-menus.php') . '" style="color: red;">Resources Menü einrichten →</a></li>';
+		echo '<li><a href="' . admin_url('nav-menus.php') . '" style="color: red;">LUVEX-Menü 3 einrichten →</a></li>';
 		echo '</ul>';
 	} else {
 		echo '<ul class="footer-menu">';
@@ -182,7 +190,7 @@ function luvex_footer_resources_fallback() {
 function luvex_footer_company_fallback() {
 	if (current_user_can('edit_theme_options')) {
 		echo '<ul class="footer-menu">';
-		echo '<li><a href="' . admin_url('nav-menus.php') . '" style="color: red;">Company Menü einrichten →</a></li>';
+		echo '<li><a href="' . admin_url('nav-menus.php') . '" style="color: red;">LUVEX-Menü 4 einrichten →</a></li>';
 		echo '</ul>';
 	} else {
 		echo '<ul class="footer-menu">';
@@ -209,10 +217,14 @@ function luvex_footer_legal_fallback() {
 ?>
 
 <button id="scrollToTopBtn" title="Nach oben scrollen">
-    <i class="fa-solid fa-arrow-up"></i>
+    <i class="fas fa-chevron-up"></i>
 </button>
 
-
+<?php 
+// KORREKTUR: Das Auth-Modal wird hier wieder als Template eingebunden.
+// Es bleibt standardmäßig verborgen und wird bei Bedarf per JavaScript sichtbar gemacht.
+get_template_part('includes/auth-modal');
+?>
 
 <?php wp_footer(); ?>
 
