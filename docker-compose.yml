@@ -84,9 +84,6 @@ services:
     restart: unless-stopped
     depends_on:
       - wordpress
-    ports:
-      - "${NGINX_HTTP_PORT:-8080}:80"
-      - "${NGINX_HTTPS_PORT:-8443}:443"
     volumes:
       - ./nginx/luvex.conf:/etc/nginx/conf.d/default.conf:ro
       - wordpress_data:/var/www/html:ro
@@ -97,6 +94,15 @@ services:
       - /var/www/certbot:/var/www/certbot:ro
     networks:
       - luvex-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.luvex.rule=Host(`luvex.tech`) || Host(`www.luvex.tech`)"
+      - "traefik.http.routers.luvex.entrypoints=websecure"
+      - "traefik.http.routers.luvex.tls=true"
+      - "traefik.http.routers.luvex.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.luvex.service=luvex"
+      - "traefik.http.services.luvex.loadbalancer.server.port=80"
+      - "traefik.http.routers.luvex.middlewares=compression@file"
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/nginx-health"]
       interval: 30s
