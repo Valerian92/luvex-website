@@ -24,7 +24,12 @@ services:
       - mysql_data:/var/lib/mysql
       - ./backups:/backups
     networks:
-      - luvex-network
+      luvex-network:
+        # Internal WordPress network
+      db-shared:
+        # Shared network for external app access
+        aliases:
+          - wp-db
     command:
       - '--default-authentication-plugin=mysql_native_password'
       - '--character-set-server=utf8mb4'
@@ -123,9 +128,12 @@ volumes:
     driver: local
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# DOCKER NETWORK - Isolated from other applications (e.g., Lunaria)
+# DOCKER NETWORKS
 # ═══════════════════════════════════════════════════════════════════════════════
 networks:
   luvex-network:
-    driver: bridge
+    external: true
     name: luvex-network
+  db-shared:
+    external: true
+    name: db-shared
