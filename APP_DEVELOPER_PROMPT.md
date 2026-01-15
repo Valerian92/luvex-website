@@ -1,13 +1,44 @@
-# 🚀 Prompt für App Developer Agent - Studenten-Verwaltungs-App
+# 🚀 Prompt für App Developer Agent - UV Simulation App
 
 > **Status:** WordPress DevOps Setup ✅ ABGESCHLOSSEN
 > **Nächster Schritt:** App Development mit WordPress-Login-Integration
 
 ---
 
+## 🔴 LIVE PRODUCTION DEPLOYMENT - KRITISCHER HINWEIS
+
+**⚠️ ACHTUNG: Diese App wird DIREKT auf PRODUCTION deployed!**
+
+```
+═══════════════════════════════════════════════════════════════════════════════
+🔴 LIVE PRODUCTION ENVIRONMENT
+═══════════════════════════════════════════════════════════════════════════════
+
+Domain:             https://uv.luvex.tech
+Environment:        PRODUCTION (LIVE - kein Staging!)
+Database:           Produktions-WordPress-Datenbank (luvex_production)
+User Impact:        Fehler sind SOFORT für echte Benutzer sichtbar
+
+KRITISCHE ANFORDERUNGEN:
+✅ Sorgfältiges Testing vor Deployment
+✅ Health Check Endpoint /health implementieren
+✅ Production-grade Error Handling
+✅ Logging für Debugging aktiviert
+✅ Debug-Modus DEAKTIVIERT (NODE_ENV=production)
+✅ Keine console.log() oder Debug-Outputs
+✅ Graceful Shutdown implementiert
+✅ Database Connection Pool mit Error Handling
+
+═══════════════════════════════════════════════════════════════════════════════
+```
+
+**Keine zweite Chance - Quality First! 🎯**
+
+---
+
 ## 📋 Executive Summary
 
-Du bist der **App Developer Agent** und entwickelst eine **Studenten-Verwaltungs-App** mit Login-Integration gegen die WordPress-Datenbank.
+Du bist der **App Developer Agent** und entwickelst die **UV Simulation App** mit Login-Integration gegen die WordPress-Datenbank.
 
 **Was bereits erledigt ist:**
 - ✅ WordPress-Datenbank läuft in Docker (MySQL 8.0)
@@ -16,10 +47,10 @@ Du bist der **App Developer Agent** und entwickelst eine **Studenten-Verwaltungs
 - ✅ Traefik-Netzwerk `luvex-network` für Routing bereit
 
 **Deine Aufgabe:**
-- 🎯 Studenten-App mit Docker-Container entwickeln
+- 🎯 UV Simulation App mit Docker-Container entwickeln
 - 🎯 WordPress-Login-Integration implementieren
 - 🎯 Traefik-Routing für externen Zugriff konfigurieren
-- 🎯 Production-ready deployment vorbereiten
+- 🎯 **Production-ready deployment** (LIVE Environment!)
 
 ---
 
@@ -63,7 +94,8 @@ DB_PASSWORD=SecurePassword123!
 # Application Settings
 APP_ENV=production
 APP_PORT=3000
-APP_DOMAIN=students.luvex.tech  # Beispiel-Subdomain
+APP_DOMAIN=uv.luvex.tech  # LIVE Production Domain!
+NODE_ENV=production       # CRITICAL: Must be production!
 ```
 
 ---
@@ -540,7 +572,7 @@ app.post('/api/logout', (req, res) => {
 
 const PORT = process.env.APP_PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Student app listening on port ${PORT}`);
+    console.log(`UV Simulation App listening on port ${PORT}`);
 });
 ```
 
@@ -548,9 +580,9 @@ app.listen(PORT, '0.0.0.0', () => {
 
 ```json
 {
-  "name": "luvex-student-app",
+  "name": "uv-simulation-app",
   "version": "1.0.0",
-  "description": "Student management app with WordPress integration",
+  "description": "UV Simulation App with WordPress integration",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -593,21 +625,22 @@ CMD ["npm", "start"]
 
 ## 🐳 Docker Compose Konfiguration
 
-### Vollständige docker-compose.yml für Student App
+### Vollständige docker-compose.yml für UV Simulation App
 
 ```yaml
 version: '3.8'
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# STUDENT MANAGEMENT APP - WordPress Integration
+# UV SIMULATION APP - WordPress Integration
+# 🔴 LIVE PRODUCTION DEPLOYMENT
 # ═══════════════════════════════════════════════════════════════════════════════
 
 services:
-  student-app:
+  uv-simulation-app:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: student-app
+    container_name: uv-simulation-app
     restart: unless-stopped
 
     # Environment variables
@@ -619,26 +652,27 @@ services:
       DB_USER: external_app
       DB_PASSWORD: ${DB_PASSWORD:-SecurePassword123!}
 
-      # Application settings
+      # Application settings (PRODUCTION!)
       APP_ENV: production
       APP_PORT: 3000
       NODE_ENV: production
+      APP_DOMAIN: uv.luvex.tech
 
     # Networks - WICHTIG!
     networks:
       - db-shared        # Für Datenbank-Zugriff
       - luvex-network    # Für Traefik-Routing
 
-    # Traefik Labels für externen Zugriff
+    # Traefik Labels für externen Zugriff (PRODUCTION!)
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.student-app.rule=Host(`students.luvex.tech`)"
-      - "traefik.http.routers.student-app.entrypoints=websecure"
-      - "traefik.http.routers.student-app.tls=true"
-      - "traefik.http.routers.student-app.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.student-app.service=student-app"
-      - "traefik.http.services.student-app.loadbalancer.server.port=3000"
-      - "traefik.http.routers.student-app.middlewares=compression@file"
+      - "traefik.http.routers.uv-simulation.rule=Host(`uv.luvex.tech`)"
+      - "traefik.http.routers.uv-simulation.entrypoints=websecure"
+      - "traefik.http.routers.uv-simulation.tls=true"
+      - "traefik.http.routers.uv-simulation.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.uv-simulation.service=uv-simulation"
+      - "traefik.http.services.uv-simulation.loadbalancer.server.port=3000"
+      - "traefik.http.routers.uv-simulation.middlewares=compression@file"
 
     # Health check
     healthcheck:
@@ -674,24 +708,26 @@ volumes:
     driver: local
 ```
 
-### Environment Variables (.env für Student App)
+### Environment Variables (.env für UV Simulation App)
 
 ```env
 # ═══════════════════════════════════════════════════════════════════════════════
-# STUDENT APP - Environment Configuration
+# UV SIMULATION APP - Environment Configuration
+# 🔴 LIVE PRODUCTION DEPLOYMENT
 # ═══════════════════════════════════════════════════════════════════════════════
 
-# Database Connection (WordPress)
+# Database Connection (WordPress Production DB)
 DB_HOST=wp-db
 DB_PORT=3306
 DB_NAME=luvex_production
 DB_USER=external_app
 DB_PASSWORD=SecurePassword123!
 
-# Application Settings
+# Application Settings (PRODUCTION!)
 APP_ENV=production
 APP_PORT=3000
-APP_DOMAIN=students.luvex.tech
+APP_DOMAIN=uv.luvex.tech
+NODE_ENV=production
 
 # Session Secret (Generate with: openssl rand -hex 32)
 SESSION_SECRET=CHANGE_THIS_TO_RANDOM_STRING
@@ -701,7 +737,7 @@ LOG_LEVEL=info
 LOG_FILE=/app/logs/app.log
 
 # CORS (if needed)
-CORS_ORIGIN=https://luvex.tech,https://www.luvex.tech
+CORS_ORIGIN=https://luvex.tech,https://www.luvex.tech,https://uv.luvex.tech
 ```
 
 ---
@@ -741,7 +777,7 @@ app.get('/health', async (req, res) => {
 
 ```bash
 # Build Image
-docker build -t student-app:dev .
+docker build -t uv-simulation-app:dev .
 
 # Test mit db-shared Netzwerk
 docker run --rm \
@@ -750,8 +786,9 @@ docker run --rm \
   -e DB_USER=external_app \
   -e DB_PASSWORD=SecurePassword123! \
   -e DB_NAME=luvex_production \
+  -e NODE_ENV=production \
   -p 3000:3000 \
-  student-app:dev
+  uv-simulation-app:dev
 
 # Login testen
 curl -X POST http://localhost:3000/api/login \
@@ -759,34 +796,34 @@ curl -X POST http://localhost:3000/api/login \
   -d '{"username":"admin","password":"your-password"}'
 ```
 
-### 2. Production Deployment
+### 2. Production Deployment 🔴 LIVE!
 
 ```bash
 # Auf Production Server (srv1117211)
-cd /opt/apps/student-app
+cd /opt/apps/uv-simulation-app
 
 # Repository klonen
-git clone https://github.com/YOUR_ORG/student-app.git .
+git clone https://github.com/Valerian92/uv-simulation-app.git .
 
 # .env konfigurieren
 cp .env.example .env
 nano .env  # Passwörter eintragen
 
-# Container starten
+# Container starten (PRODUCTION!)
 docker-compose up -d
 
 # Logs prüfen
-docker-compose logs -f student-app
+docker-compose logs -f uv-simulation-app
 
-# Health check
-curl https://students.luvex.tech/health
+# Health check (IMPORTANT!)
+curl https://uv.luvex.tech/health
 ```
 
 ### 3. Traefik SSL Auto-Renewal
 
-Traefik generiert automatisch Let's Encrypt Zertifikate für `students.luvex.tech`, wenn:
+Traefik generiert automatisch Let's Encrypt Zertifikate für `uv.luvex.tech`, wenn:
 
-1. **DNS A-Record** existiert: `students.luvex.tech` → Server-IP
+1. **DNS A-Record** existiert: `uv.luvex.tech` → Server-IP
 2. **Traefik Labels** korrekt gesetzt (siehe docker-compose.yml)
 3. **Port 80/443** erreichbar vom Internet
 
@@ -864,11 +901,12 @@ res.json({
 ## ✅ Checkliste für App Developer
 
 ### Setup & Konfiguration
-- [ ] Repository für Student-App erstellt
+- [ ] Repository `Valerian92/uv-simulation-app` erstellt
 - [ ] Dockerfile geschrieben
 - [ ] docker-compose.yml mit db-shared + luvex-network konfiguriert
 - [ ] .env Datei mit DB-Credentials erstellt
-- [ ] Health-Check Endpoint implementiert
+- [ ] Health-Check Endpoint `/health` implementiert
+- [ ] **NODE_ENV=production** gesetzt ⚠️ PFLICHT!
 
 ### Authentifizierung
 - [ ] WordPress PHPass Library integriert
@@ -889,19 +927,24 @@ res.json({
 - [ ] Secrets in .env (nicht hardcoded!)
 - [ ] SQL Injection Protection (Prepared Statements)
 
-### Deployment
-- [ ] Traefik Labels konfiguriert
-- [ ] DNS A-Record für students.luvex.tech erstellt
+### Deployment 🔴 PRODUCTION!
+- [ ] Traefik Labels mit `uv.luvex.tech` konfiguriert
+- [ ] DNS A-Record für `uv.luvex.tech` erstellt/verifiziert
 - [ ] SSL-Zertifikat via Traefik Let's Encrypt
-- [ ] Production Build getestet
+- [ ] Production Build getestet (NODE_ENV=production)
 - [ ] Logs & Monitoring eingerichtet
+- [ ] Debug-Outputs entfernt (keine console.log in production)
+- [ ] Error Handling implementiert
+- [ ] Graceful Shutdown implementiert
 - [ ] **Infrastructure Feedback Report erstellt** ⚠️ PFLICHT!
 
-### Testing
-- [ ] Login mit WordPress-User erfolgreich
+### Testing 🔴 PRODUCTION!
+- [ ] Login mit WordPress-User erfolgreich getestet
 - [ ] External DB-Zugriff via wp-db funktioniert
-- [ ] Health-Check Endpoint antwortet
-- [ ] HTTPS-Redirect funktioniert
+- [ ] Health-Check Endpoint `/health` antwortet
+- [ ] `https://uv.luvex.tech/health` returns 200 OK
+- [ ] HTTPS-Redirect funktioniert (HTTP → HTTPS)
+- [ ] Keine Fehler in Production Logs
 - [ ] Performance-Test durchgeführt
 
 ---
@@ -910,15 +953,16 @@ res.json({
 
 Die Integration ist erfolgreich, wenn:
 
-1. ✅ Student-App läuft als Docker-Container
+1. ✅ UV Simulation App läuft als Docker-Container
 2. ✅ Login mit WordPress-Credentials funktioniert
 3. ✅ Passwort-Hashing (PHPass) korrekt verifiziert
-4. ✅ App ist extern erreichbar über `https://students.luvex.tech`
+4. ✅ App ist extern erreichbar über `https://uv.luvex.tech`
 5. ✅ SSL-Zertifikat von Let's Encrypt aktiv
 6. ✅ Keine Schreib-Zugriffe auf WordPress-DB (Read-Only!)
-7. ✅ Health-Check gibt "healthy" zurück
-8. ✅ Logs zeigen keine Fehler
-9. ✅ **Infrastructure Feedback Report erstellt und committed** ⚠️ PFLICHT!
+7. ✅ Health-Check gibt "healthy" zurück (`/health` returns 200)
+8. ✅ Logs zeigen keine kritischen Fehler
+9. ✅ NODE_ENV=production gesetzt (keine Debug-Outputs)
+10. ✅ **Infrastructure Feedback Report erstellt und committed** ⚠️ PFLICHT!
 
 ---
 
@@ -926,29 +970,31 @@ Die Integration ist erfolgreich, wenn:
 
 ### ⚠️ WICHTIG: Am Ende deiner Arbeit MUSS dieser Report erstellt werden!
 
-Nach erfolgreicher Implementierung und Deployment der Student-App **MUSST** du einen **Infrastructure Feedback Report** erstellen. Dieser Report wird vom Infrastructure Architect benötigt, um die App in die zentralen Management-Scripts (`master-deploy.sh`, `backend-logs.sh`, etc.) zu integrieren.
+Nach erfolgreicher Implementierung und Deployment der UV Simulation App **MUSST** du einen **Infrastructure Feedback Report** erstellen. Dieser Report wird vom Infrastructure Architect benötigt, um die App in die zentralen Management-Scripts (`master-deploy.sh`, `backend-logs.sh`, etc.) zu integrieren.
 
 ### Report-Format (Copy & Paste bereit)
 
 ```
 ═══════════════════════════════════════════════════════════════════════════════
-INFRASTRUCTURE FEEDBACK REPORT - STUDENT MANAGEMENT APP
+INFRASTRUCTURE FEEDBACK REPORT - UV SIMULATION APP
 ═══════════════════════════════════════════════════════════════════════════════
 
 ## Deployment Info
 
-Repository:       Valerian92/student-management-app
-VPS Path:         /opt/apps/student-management-app
+Repository:       Valerian92/uv-simulation-app
+VPS Path:         /opt/apps/uv-simulation-app
 Branch:           main
-Container Name:   student-app
+Container Name:   uv-simulation-app
+Environment:      🔴 PRODUCTION (LIVE!)
 
 ## Public Access
 
-Domain:           https://students.luvex.tech
-Health Check:     /health (oder /api/health)
+Domain:           https://uv.luvex.tech
+Health Check:     /health
+Full Health URL:  https://uv.luvex.tech/health
 HTTP Status:      200 = healthy, 503 = unhealthy
 
-## Networks
+## Networks (FIXED - Do Not Change!)
 
 Traefik:          luvex-network ✓
 Database:         db-shared ✓
@@ -956,38 +1002,42 @@ Database:         db-shared ✓
 ## Environment Variables
 
 DB_HOST:          wp-db
+DB_PORT:          3306
 DB_NAME:          luvex_production
 DB_USER:          external_app
 DB_PASSWORD:      [CONFIGURED IN .env]
+NODE_ENV:         production
 
 ## Logs Location
 
-Application:      docker logs student-app
+Application:      docker logs uv-simulation-app
 Access Logs:      /app/logs/access.log (if configured)
 Error Logs:       /app/logs/error.log (if configured)
 
 ## For Scripts Integration
 
-Display Name:     Student Management App
-Service Name:     student-app
-Docker Compose:   /opt/apps/student-management-app/docker-compose.yml
+Display Name:     UV Simulation App
+Service Name:     uv-simulation-app
+Service Type:     Web App with WordPress Login Integration
+Docker Compose:   /opt/apps/uv-simulation-app/docker-compose.yml
 
 ═══════════════════════════════════════════════════════════════════════════════
 ```
 
-### Anpassungen vornehmen
+### ⚠️ Für UV Simulation App: Werte sind FIXIERT!
 
-**Ersetze folgende Platzhalter:**
+**Diese Werte sind bereits korrekt und MÜSSEN verwendet werden:**
 
-| Platzhalter | Beispiel | Hinweis |
+| Parameter | Wert | Status |
 |------------|----------|---------|
-| `Valerian92/student-management-app` | Dein GitHub Repository | Vollständiger Repo-Pfad |
-| `/opt/apps/student-management-app` | Pfad auf dem Server | Wo die App deployed ist |
-| `main` | Branch-Name | Production Branch |
-| `student-app` | Container-Name | Wie in docker-compose.yml |
-| `https://students.luvex.tech` | Deine Domain | Über Traefik erreichbar |
-| `/health` | Health-Check Pfad | Dein Endpoint |
-| `Student Management App` | Display Name | Für Management-UI |
+| Repository | `Valerian92/uv-simulation-app` | ✅ FIXIERT |
+| VPS Path | `/opt/apps/uv-simulation-app` | ✅ FIXIERT |
+| Branch | `main` | ✅ FIXIERT |
+| Container Name | `uv-simulation-app` | ✅ FIXIERT |
+| Domain | `https://uv.luvex.tech` | ✅ FIXIERT |
+| Health Check | `/health` | ✅ FIXIERT |
+| Display Name | `UV Simulation App` | ✅ FIXIERT |
+| Environment | `PRODUCTION (LIVE!)` | 🔴 CRITICAL!
 
 ### Warum ist dieser Report wichtig?
 
@@ -995,11 +1045,11 @@ Der Infrastructure Architect nutzt diese Informationen für:
 
 1. **master-deploy.sh** - Zentrales Deployment-Script
    - Fügt deine App zur Liste hinzu
-   - Ermöglicht `./master-deploy.sh student-app`
+   - Ermöglicht `./master-deploy.sh uv-simulation-app`
 
 2. **backend-logs.sh** - Zentrales Logging
    - Integriert deine Logs
-   - Ermöglicht `./backend-logs.sh student-app`
+   - Ermöglicht `./backend-logs.sh uv-simulation-app`
 
 3. **health-check.sh** - Monitoring
    - Überwacht Health-Endpoint
@@ -1009,40 +1059,23 @@ Der Infrastructure Architect nutzt diese Informationen für:
    - Komplette Service-Übersicht
    - Dependency-Graph
 
-### Beispiel für verschiedene App-Typen
+### Exakter Report für UV Simulation App
 
-#### Beispiel 1: Python Flask App
-
-```
-Display Name:     Student Management App
-Service Name:     student-app
-Container Name:   student-app
-Domain:           https://students.luvex.tech
-Health Check:     /api/health
-Repository:       Valerian92/student-flask-app
-```
-
-#### Beispiel 2: Node.js Express App
+**Verwende EXAKT diese Werte (Copy & Paste!):**
 
 ```
-Display Name:     Student Portal
-Service Name:     student-portal
-Container Name:   student-portal
-Domain:           https://portal.luvex.tech
+Display Name:     UV Simulation App
+Service Name:     uv-simulation-app
+Container Name:   uv-simulation-app
+Domain:           https://uv.luvex.tech
 Health Check:     /health
-Repository:       Valerian92/student-portal
+Repository:       Valerian92/uv-simulation-app
+VPS Path:         /opt/apps/uv-simulation-app
+Branch:           main
+Environment:      PRODUCTION (LIVE!)
 ```
 
-#### Beispiel 3: PHP Laravel App
-
-```
-Display Name:     Student Admin
-Service Name:     student-admin
-Container Name:   student-admin
-Domain:           https://admin.students.luvex.tech
-Health Check:     /api/status
-Repository:       Valerian92/student-admin-laravel
-```
+**⚠️ WICHTIG:** Keine Abweichungen erlaubt - diese Werte sind FEST definiert!
 
 ### Wo soll der Report erstellt werden?
 
@@ -1063,22 +1096,25 @@ Füge einen Abschnitt `## Infrastructure Details` hinzu.
 Füge den Report in den Git Commit-Body ein:
 
 ```bash
-git commit -m "feat: Student app deployment complete" -m "
+git commit -m "feat: UV Simulation App deployment complete" -m "
 [INFRASTRUCTURE REPORT]
-Repository: Valerian92/student-app
-Domain: https://students.luvex.tech
+Repository: Valerian92/uv-simulation-app
+Domain: https://uv.luvex.tech
+Environment: PRODUCTION (LIVE!)
 ..."
 ```
 
-### Checkliste vor Report-Erstellung
+### Checkliste vor Report-Erstellung 🔴 PRODUCTION!
 
 Stelle sicher, dass folgendes funktioniert:
 
 - [ ] Container läuft ohne Fehler (`docker ps`)
-- [ ] Health-Check Endpoint antwortet (`curl https://students.luvex.tech/health`)
-- [ ] Domain ist über HTTPS erreichbar
+- [ ] Health-Check Endpoint antwortet (`curl https://uv.luvex.tech/health`)
+- [ ] Domain ist über HTTPS erreichbar (`https://uv.luvex.tech`)
 - [ ] SSL-Zertifikat ist gültig (Let's Encrypt)
 - [ ] Login mit WordPress-User funktioniert
+- [ ] **NODE_ENV=production** gesetzt (CRITICAL!)
+- [ ] Keine Debug-Outputs in Logs
 - [ ] Logs zeigen keine kritischen Fehler
 - [ ] .env Datei ist konfiguriert (nicht im Git!)
 - [ ] README.md enthält Setup-Anleitung
@@ -1090,12 +1126,16 @@ Stelle sicher, dass folgendes funktioniert:
 ### Hilfreiche Commands
 
 ```bash
-# Container-Logs
-docker-compose logs -f student-app
+# Container-Logs (PRODUCTION!)
+docker-compose logs -f uv-simulation-app
 
 # Database-Verbindung testen
-docker exec -it student-app sh
+docker exec -it uv-simulation-app sh
 nc -zv wp-db 3306
+
+# Health Check testen
+curl https://uv.luvex.tech/health
+curl -I https://uv.luvex.tech
 
 # Traefik-Logs
 docker logs traefik
@@ -1103,6 +1143,10 @@ docker logs traefik
 # Netzwerk-Inspektion
 docker network inspect db-shared
 docker network inspect luvex-network
+
+# Production Logs (Error-Suche)
+docker logs uv-simulation-app --tail 100 | grep -i error
+docker logs uv-simulation-app --follow
 ```
 
 ### Häufige Probleme
@@ -1111,9 +1155,9 @@ Siehe: `STUDENT_APP_INTEGRATION.md` → Troubleshooting Section
 
 ---
 
-## 🚀 Let's Build!
+## 🚀 Let's Build! 🔴 LIVE PRODUCTION!
 
-Du hast jetzt alle Informationen, um die Student-App zu entwickeln!
+Du hast jetzt alle Informationen, um die **UV Simulation App** zu entwickeln!
 
 **Nächste Schritte:**
 
@@ -1121,15 +1165,19 @@ Du hast jetzt alle Informationen, um die Student-App zu entwickeln!
 2. Erstelle Dockerfile und docker-compose.yml
 3. Implementiere Login-Logik mit PHPass
 4. Teste lokal mit db-shared Netzwerk
-5. Deploy auf Production Server
-6. Konfiguriere Traefik-Routing
-7. **Erstelle Infrastructure Feedback Report** ⚠️ NICHT VERGESSEN!
+5. **⚠️ Sorgfältiges Testing** (PRODUCTION Deployment!)
+6. Deploy auf Production Server (`/opt/apps/uv-simulation-app`)
+7. Konfiguriere Traefik-Routing (`uv.luvex.tech`)
+8. Health Check `/health` verifizieren
+9. **Erstelle Infrastructure Feedback Report** ⚠️ PFLICHT!
 
-**Viel Erfolg! 🎉**
+**🔴 ACHTUNG: Production Deployment - Quality First! 🎯**
 
 ---
 
-**Version:** 1.0
+**Version:** 2.0 (UV Simulation App - Production)
 **Erstellt:** 2026-01-15
+**Aktualisiert:** 2026-01-15 (Production Ready)
 **Author:** WordPress DevOps Agent
 **Next Agent:** App Developer Agent
+**Target:** `https://uv.luvex.tech` (LIVE PRODUCTION!)
