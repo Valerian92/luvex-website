@@ -119,13 +119,9 @@ services:
 # ═══════════════════════════════════════════════════════════════════════════════
 volumes:
   mysql_data:
-    driver: local
   wordpress_data:
-    driver: local
   wordpress_uploads:
-    driver: local
   wordpress_plugins:
-    driver: local
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # DOCKER NETWORKS
