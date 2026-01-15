@@ -895,6 +895,7 @@ res.json({
 - [ ] SSL-Zertifikat via Traefik Let's Encrypt
 - [ ] Production Build getestet
 - [ ] Logs & Monitoring eingerichtet
+- [ ] **Infrastructure Feedback Report erstellt** ⚠️ PFLICHT!
 
 ### Testing
 - [ ] Login mit WordPress-User erfolgreich
@@ -917,6 +918,170 @@ Die Integration ist erfolgreich, wenn:
 6. ✅ Keine Schreib-Zugriffe auf WordPress-DB (Read-Only!)
 7. ✅ Health-Check gibt "healthy" zurück
 8. ✅ Logs zeigen keine Fehler
+9. ✅ **Infrastructure Feedback Report erstellt und committed** ⚠️ PFLICHT!
+
+---
+
+## 📋 PFLICHT: Infrastructure Feedback Report
+
+### ⚠️ WICHTIG: Am Ende deiner Arbeit MUSS dieser Report erstellt werden!
+
+Nach erfolgreicher Implementierung und Deployment der Student-App **MUSST** du einen **Infrastructure Feedback Report** erstellen. Dieser Report wird vom Infrastructure Architect benötigt, um die App in die zentralen Management-Scripts (`master-deploy.sh`, `backend-logs.sh`, etc.) zu integrieren.
+
+### Report-Format (Copy & Paste bereit)
+
+```
+═══════════════════════════════════════════════════════════════════════════════
+INFRASTRUCTURE FEEDBACK REPORT - STUDENT MANAGEMENT APP
+═══════════════════════════════════════════════════════════════════════════════
+
+## Deployment Info
+
+Repository:       Valerian92/student-management-app
+VPS Path:         /opt/apps/student-management-app
+Branch:           main
+Container Name:   student-app
+
+## Public Access
+
+Domain:           https://students.luvex.tech
+Health Check:     /health (oder /api/health)
+HTTP Status:      200 = healthy, 503 = unhealthy
+
+## Networks
+
+Traefik:          luvex-network ✓
+Database:         db-shared ✓
+
+## Environment Variables
+
+DB_HOST:          wp-db
+DB_NAME:          luvex_production
+DB_USER:          external_app
+DB_PASSWORD:      [CONFIGURED IN .env]
+
+## Logs Location
+
+Application:      docker logs student-app
+Access Logs:      /app/logs/access.log (if configured)
+Error Logs:       /app/logs/error.log (if configured)
+
+## For Scripts Integration
+
+Display Name:     Student Management App
+Service Name:     student-app
+Docker Compose:   /opt/apps/student-management-app/docker-compose.yml
+
+═══════════════════════════════════════════════════════════════════════════════
+```
+
+### Anpassungen vornehmen
+
+**Ersetze folgende Platzhalter:**
+
+| Platzhalter | Beispiel | Hinweis |
+|------------|----------|---------|
+| `Valerian92/student-management-app` | Dein GitHub Repository | Vollständiger Repo-Pfad |
+| `/opt/apps/student-management-app` | Pfad auf dem Server | Wo die App deployed ist |
+| `main` | Branch-Name | Production Branch |
+| `student-app` | Container-Name | Wie in docker-compose.yml |
+| `https://students.luvex.tech` | Deine Domain | Über Traefik erreichbar |
+| `/health` | Health-Check Pfad | Dein Endpoint |
+| `Student Management App` | Display Name | Für Management-UI |
+
+### Warum ist dieser Report wichtig?
+
+Der Infrastructure Architect nutzt diese Informationen für:
+
+1. **master-deploy.sh** - Zentrales Deployment-Script
+   - Fügt deine App zur Liste hinzu
+   - Ermöglicht `./master-deploy.sh student-app`
+
+2. **backend-logs.sh** - Zentrales Logging
+   - Integriert deine Logs
+   - Ermöglicht `./backend-logs.sh student-app`
+
+3. **health-check.sh** - Monitoring
+   - Überwacht Health-Endpoint
+   - Alerts bei Problemen
+
+4. **Dokumentation** - Infrastructure Overview
+   - Komplette Service-Übersicht
+   - Dependency-Graph
+
+### Beispiel für verschiedene App-Typen
+
+#### Beispiel 1: Python Flask App
+
+```
+Display Name:     Student Management App
+Service Name:     student-app
+Container Name:   student-app
+Domain:           https://students.luvex.tech
+Health Check:     /api/health
+Repository:       Valerian92/student-flask-app
+```
+
+#### Beispiel 2: Node.js Express App
+
+```
+Display Name:     Student Portal
+Service Name:     student-portal
+Container Name:   student-portal
+Domain:           https://portal.luvex.tech
+Health Check:     /health
+Repository:       Valerian92/student-portal
+```
+
+#### Beispiel 3: PHP Laravel App
+
+```
+Display Name:     Student Admin
+Service Name:     student-admin
+Container Name:   student-admin
+Domain:           https://admin.students.luvex.tech
+Health Check:     /api/status
+Repository:       Valerian92/student-admin-laravel
+```
+
+### Wo soll der Report erstellt werden?
+
+**Option 1: In einem Markdown-File (Empfohlen)**
+
+Erstelle eine Datei im Root deines Repositories:
+
+```bash
+touch INFRASTRUCTURE_REPORT.md
+```
+
+**Option 2: Am Ende deiner README.md**
+
+Füge einen Abschnitt `## Infrastructure Details` hinzu.
+
+**Option 3: Als Kommentar im finalen Commit**
+
+Füge den Report in den Git Commit-Body ein:
+
+```bash
+git commit -m "feat: Student app deployment complete" -m "
+[INFRASTRUCTURE REPORT]
+Repository: Valerian92/student-app
+Domain: https://students.luvex.tech
+..."
+```
+
+### Checkliste vor Report-Erstellung
+
+Stelle sicher, dass folgendes funktioniert:
+
+- [ ] Container läuft ohne Fehler (`docker ps`)
+- [ ] Health-Check Endpoint antwortet (`curl https://students.luvex.tech/health`)
+- [ ] Domain ist über HTTPS erreichbar
+- [ ] SSL-Zertifikat ist gültig (Let's Encrypt)
+- [ ] Login mit WordPress-User funktioniert
+- [ ] Logs zeigen keine kritischen Fehler
+- [ ] .env Datei ist konfiguriert (nicht im Git!)
+- [ ] README.md enthält Setup-Anleitung
 
 ---
 
@@ -958,6 +1123,7 @@ Du hast jetzt alle Informationen, um die Student-App zu entwickeln!
 4. Teste lokal mit db-shared Netzwerk
 5. Deploy auf Production Server
 6. Konfiguriere Traefik-Routing
+7. **Erstelle Infrastructure Feedback Report** ⚠️ NICHT VERGESSEN!
 
 **Viel Erfolg! 🎉**
 
