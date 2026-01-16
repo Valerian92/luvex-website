@@ -155,21 +155,152 @@ docker volume inspect luvex-website_wordpress_data
 
 ## Environment Variables
 
-All environment variables are stored in `.env` file:
+### Setup Process
+
+All environment variables are stored in a `.env` file in the deployment directory.
+
+**Initial Setup:**
+```bash
+cd /opt/apps/luvex-website
+
+# Copy example file to .env
+cp .env.example .env
+
+# Edit with secure values
+nano .env
+
+# Set restrictive permissions
+chmod 600 .env
+chown $USER:$USER .env
+```
+
+### Required Variables
 
 ```env
 # MySQL Configuration
-MYSQL_ROOT_PASSWORD=<secure-root-password>
-MYSQL_DATABASE=luvex_production
-MYSQL_USER=wordpress
-MYSQL_PASSWORD=<secure-user-password>
+MYSQL_ROOT_PASSWORD=<secure-root-password>    # 32+ characters, unique
+MYSQL_DATABASE=luvex_production               # Database name (must match backup)
+MYSQL_USER=wordpress                          # Database user
+MYSQL_PASSWORD=<secure-user-password>         # 32+ characters, unique, different from root
 
 # WordPress Configuration
-WP_TABLE_PREFIX=wp_
-WP_DEBUG=false
+WP_TABLE_PREFIX=wp_                           # Table prefix (default: wp_)
+WP_DEBUG=false                                # Debug mode (false for production)
 ```
 
-**Security Note:** `.env` file is gitignored and must be created manually on deployment server.
+### Password Generation
+
+Generate secure passwords using one of these methods:
+
+```bash
+# Method 1: OpenSSL (recommended)
+openssl rand -base64 32
+
+# Method 2: pwgen (if installed)
+pwgen -s 32 1
+
+# Method 3: /dev/urandom
+tr -dc 'A-Za-z0-9!@#$%^&*_+=' < /dev/urandom | head -c 32; echo
+
+# Method 4: Python
+python3 -c "import secrets; print(secrets.token_urlsafe(32))"
+```
+
+**Password Requirements:**
+- Minimum 32 characters
+- Mix of uppercase, lowercase, numbers, special characters
+- Different passwords for `MYSQL_ROOT_PASSWORD` and `MYSQL_PASSWORD`
+- Never reuse passwords from other services
+- Store in password manager
+
+### Security Best Practices
+
+1. **File Permissions:**
+   ```bash
+   # .env must be readable only by owner
+   chmod 600 .env
+
+   # Verify permissions
+   ls -l .env
+   # Should show: -rw------- (600)
+   ```
+
+2. **Version Control:**
+   - `.env` is in `.gitignore` and must NEVER be committed
+   - Only commit `.env.example` with placeholder values
+   - Verify: `git status` should not show `.env`
+
+3. **Backup:**
+   ```bash
+   # Backup .env to secure location
+   cp .env /secure/backup/location/.env.$(date +%Y%m%d)
+
+   # Encrypt backups containing credentials
+   gpg --symmetric --cipher-algo AES256 .env
+   ```
+
+4. **Access Control:**
+   - Limit who has access to deployment server
+   - Use SSH keys for authentication
+   - Disable root SSH login
+   - Audit access logs regularly
+
+5. **Password Rotation:**
+   - Rotate passwords every 90 days
+   - Update .env and restart containers
+   - Update wp-config.php if needed
+
+### Deployment Checklist
+
+Before deploying:
+
+- [ ] `.env.example` copied to `.env`
+- [ ] All passwords generated (32+ characters)
+- [ ] `MYSQL_DATABASE` matches backup database name
+- [ ] File permissions set to 600
+- [ ] `.env` NOT in version control
+- [ ] `.env` backed up to secure location
+- [ ] Passwords stored in password manager
+
+### Environment Variable Loading
+
+Docker Compose automatically loads `.env` from the deployment directory:
+
+```bash
+cd /opt/apps/luvex-website
+docker-compose up -d
+# Automatically reads .env file
+```
+
+**Troubleshooting:**
+```bash
+# Verify .env is being read
+docker-compose config | grep -A 5 "environment:"
+
+# Check current environment variables in container
+docker exec luvex-mysql env | grep MYSQL
+docker exec luvex-wordpress env | grep WORDPRESS
+```
+
+### Updating Environment Variables
+
+If you need to change environment variables:
+
+```bash
+# 1. Update .env file
+nano .env
+
+# 2. Recreate containers (required for changes to take effect)
+docker-compose up -d --force-recreate
+
+# 3. Verify new values
+docker exec luvex-mysql env | grep MYSQL_PASSWORD
+```
+
+**Note:** Changing database credentials requires updating `wp-config.php`:
+```bash
+docker exec luvex-wordpress wp config set DB_PASSWORD 'new_password'
+```
 
 ---
 
