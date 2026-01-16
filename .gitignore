@@ -28,6 +28,8 @@ wp-admin/
 wp-includes/
 wp-content/uploads/
 wp-content/plugins/
+# Exception: Our custom error logger plugin
+!wp-content/plugins/luvex-error-logger/
 wp-config.php
 .htaccess
 
@@ -40,6 +42,8 @@ docker-compose.override.yml
 # Logs
 # ───────────────────────────────────────────────────────────────────────────────
 *.log
+# Exception: Allow error logs for Claude Code debugging
+!error-logs/*.log
 logs/
 nginx/logs/
 

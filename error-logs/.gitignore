@@ -1,0 +1,7 @@
+# Keep the directory but ignore all files by default
+*
+
+# EXCEPT: Allow .log files (our error logs)
+!.gitignore
+!*.log
+!*.json
