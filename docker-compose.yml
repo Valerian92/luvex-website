@@ -72,6 +72,8 @@ services:
       # Uploads & Plugins (persistent)
       - wordpress_uploads:/var/www/html/wp-content/uploads
       - wordpress_plugins:/var/www/html/wp-content/plugins
+      # Error Logger Plugin (for Claude Code debugging)
+      - ./wp-content/plugins/luvex-error-logger:/var/www/html/wp-content/plugins/luvex-error-logger:ro
     networks:
       - luvex-network
     healthcheck:
