@@ -274,29 +274,7 @@ class Luvex_Nav_Walker extends Walker_Nav_Menu {
     }
 }
 
-// 6. AVATAR FUNKTION
-if (!function_exists('luvex_get_user_avatar')) {
-    function luvex_get_user_avatar($user_id = null) {
-        if (function_exists('LuvexUserSystem::get_user_avatar')) {
-            return LuvexUserSystem::get_user_avatar($user_id);
-        }
-        if (!$user_id) $user_id = get_current_user_id();
-        if (0 === $user_id) return '';
-        $avatar_url = get_user_meta($user_id, 'luvex_avatar_url', true);
-        if ($avatar_url) {
-            return '<img src="' . esc_url($avatar_url) . '" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;" alt="User Avatar">';
-        } else {
-            $user = get_userdata($user_id);
-            if (!$user) return '?';
-            $first_name = $user->first_name ?: $user->display_name;
-            $last_name = $user->last_name ?: '';
-            $initials = strtoupper(substr($first_name, 0, 1) . substr($last_name, 0, 1));
-            return $initials ?: '?';
-        }
-    }
-}
-
-// 7. SYSTEM-DATEIEN LADEN
+// 6. SYSTEM-DATEIEN LADEN
 $luvex_includes_path = get_stylesheet_directory() . '/includes/';
 $luvex_includes_files = [ '_luvex_ajax.php', '_user_system.php', '_luvex-helpers.php' ];
 foreach ($luvex_includes_files as $file) {
@@ -304,7 +282,7 @@ foreach ($luvex_includes_files as $file) {
     if (file_exists($full_path)) { require_once $full_path; }
 }
 
-// 8. ACCORDION HELPER FUNCTION (NEU)
+// 7. ACCORDION HELPER FUNCTION (NEU)
 if (!function_exists('luvex_get_accordion_component')) {
     /**
      * Loads the accordion component with a specific set of data.
@@ -328,7 +306,7 @@ if (!function_exists('luvex_get_accordion_component')) {
     }
 }
 
-// 9. reCAPTCHA FUNKTION
+// 8. reCAPTCHA FUNKTION
 function luvex_verify_recaptcha($response) {
     if (empty($response) || !defined('LUVEX_RECAPTCHA_SECRET_KEY')) { return false; }
     $result = wp_remote_post('https://www.google.com/recaptcha/api/siteverify', [
@@ -339,7 +317,7 @@ function luvex_verify_recaptcha($response) {
     return isset($data['success']) && $data['success'] === true;
 }
 
-// 10. DEBUGGING FÜR ENTWICKLUNG
+// 9. DEBUGGING FÜR ENTWICKLUNG
 if (defined('WP_DEBUG') && WP_DEBUG) {
     add_action('wp_footer', function() {
         if (!current_user_can('manage_options') || !class_exists('LuvexAjaxManager')) return;
