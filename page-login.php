@@ -57,10 +57,3 @@ get_header(); ?>
 -->
 
 <?php get_footer(); ?>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Öffne das Modal direkt nach dem Laden der Seite, da dies die Login-Seite ist
-        window.openAuthModal('login');
-    });
-</script>

@@ -96,7 +96,7 @@ get_header(); ?>
             <!-- Team Member 1: Valerian -->
             <div class="team-card-v2 has-shine-effect">
                 <div class="team-card-v2__photo">
-                    <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Bewerbungsbild_Valerian-Huber.jpg" alt="Valerian Huber - UV Technology Specialist & Founder" />
+                    <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Bewerbungsbild_Valerian-Huber.jpg" alt="Valerian Huber - UV Technology Specialist & Founder" loading="lazy" />
                 </div>
                 <div class="team-card-v2__content">
                     <h3 class="team-card-v2__name">Valerian Huber</h3>
@@ -114,7 +114,7 @@ get_header(); ?>
             <!-- Team Member 2: Matthias -->
             <div class="team-card-v2 has-shine-effect">
                 <div class="team-card-v2__photo">
-                    <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Matthias.jpg" alt="Matthias Slapka - Automation Technology Specialist & CO-Founder" />
+                    <img src="https://www.luvex.tech/wp-content/uploads/2025/07/Matthias.jpg" alt="Matthias Slapka - Automation Technology Specialist & CO-Founder" loading="lazy" />
                 </div>
                 <div class="team-card-v2__content">
                     <h3 class="team-card-v2__name">Matthias Slapka</h3>
@@ -132,7 +132,7 @@ get_header(); ?>
             <!-- Team Member 3: Claire -->
             <div class="team-card-v2 has-shine-effect">
                 <div class="team-card-v2__photo">
-                    <img src="https://www.luvex.tech/wp-content/uploads/2025/08/Claire_Bewerbung.jpg" alt="Claire Chen - Asia-Pacific Liaison & Strategic Partnerships" />
+                    <img src="https://www.luvex.tech/wp-content/uploads/2025/08/Claire_Bewerbung.jpg" alt="Claire Chen - Asia-Pacific Liaison & Strategic Partnerships" loading="lazy" />
                 </div>
                 <div class="team-card-v2__content">
                     <h3 class="team-card-v2__name">Claire Chen</h3>
@@ -240,46 +240,6 @@ get_header(); ?>
         </div>
     </div>
 </section>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const hero = document.querySelector('.about-hero');
-    const header = document.querySelector('.site-header');
-    const customCursor = document.querySelector('.custom-about-cursor');
-
-    if (hero && customCursor && header) {
-        const handleMouseMove = (e) => {
-            customCursor.style.left = e.clientX + 'px';
-            customCursor.style.top = e.clientY + 'px';
-        };
-
-        const handleMouseEnter = (e) => {
-             if (e.target.closest('.about-hero') || e.target.closest('.site-header')) {
-                document.body.classList.add('custom-cursor-active');
-                if(e.target.closest('.site-header')) {
-                    customCursor.classList.add('header-hover');
-                }
-             }
-        };
-        
-        const handleMouseLeave = (e) => {
-            if (!e.relatedTarget || (!e.relatedTarget.closest('.about-hero') && !e.relatedTarget.closest('.site-header'))) {
-                document.body.classList.remove('custom-cursor-active');
-            }
-             if (!e.relatedTarget || !e.relatedTarget.closest('.site-header')) {
-                customCursor.classList.remove('header-hover');
-            }
-        };
-
-        document.addEventListener('mousemove', handleMouseMove);
-        hero.addEventListener('mouseenter', handleMouseEnter);
-        hero.addEventListener('mouseleave', handleMouseLeave);
-        header.addEventListener('mouseenter', handleMouseEnter);
-        header.addEventListener('mouseleave', handleMouseLeave);
-    }
-});
-</script>
-
 
 <?php get_footer(); ?>
 

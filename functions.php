@@ -102,8 +102,8 @@ function luvex_enqueue_assets() {
         'uv-tunnel' => ['css/_page-uv-tunnel.css'],
         'uv-c-disinfection' => ['css/_page-uv-c-disinfection.css'],
         'uv-curing' => ['css/_page-uv-curing.css'],
-        'register' => ['css/_page-register.css'],
-        'login' => ['css/_page-login.css'],
+        'register' => ['css/_page-auth.css'],
+        'login' => ['css/_page-auth.css'],
         'forgot-password' => ['css/_page-forgot-password.css'],
         'profile' => ['css/_page-profile.css'],
         'curing-systems' => ['css/_page-curing-systems.css'],
@@ -152,6 +152,7 @@ function luvex_enqueue_assets() {
         'luvex-scroll-to-top'     => 'global/scroll-to-top.js',
         'luvex-footer-light'      => 'global/footer-light-effect.js',
         'luvex-interactive-accordion' => 'global/interactive-accordion.js',
+        'luvex-page-triggers'     => 'global/page-triggers.js',
     ];
     
     // Admin-only Scripts
