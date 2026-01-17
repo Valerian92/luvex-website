@@ -224,79 +224,14 @@
 
 
 /**
- * NEU: LUVEX THEME - CUSTOM CURSOR LOGIC
- *
- * Description: Steuert das Verhalten des benutzerdefinierten Cursors für diese Seite.
+ * Custom Cursor (uses central LuvexCursor)
  */
 document.addEventListener('DOMContentLoaded', () => {
-    // Sicherstellen, dass der Code nur einmal ausgeführt wird.
-    if (document.querySelector('.custom-cursor')) {
-        return;
+    if (typeof LuvexCursor !== 'undefined') {
+        new LuvexCursor({
+            className: 'curing-cursor',
+            activeAreas: ['.hero-curing', '.site-header'],
+            showRing: true
+        });
     }
-
-    // --- 1. SETUP ---
-    const cursor = document.createElement('div');
-    cursor.className = 'custom-cursor';
-    cursor.innerHTML = '<div class="custom-cursor__ring"></div>';
-    document.body.appendChild(cursor);
-
-    // Position des Cursors
-    let cursorX = 0;
-    let cursorY = 0;
-
-    // Zielposition (folgt der Maus)
-    let targetX = 0;
-    let targetY = 0;
-    
-    // --- 2. MAUSBEWEGUNG VERFOLGEN ---
-    window.addEventListener('mousemove', (e) => {
-        targetX = e.clientX;
-        targetY = e.clientY;
-
-        const activeArea = e.target.closest('.hero-curing, .site-header:not(.scrolled)');
-        const isInteractive = e.target.closest('a, button');
-
-        if (activeArea) {
-            cursor.classList.add('is-active');
-
-            if (isInteractive) {
-                cursor.classList.add('is-hovering');
-                if (e.target.closest('.site-header')) {
-                    cursor.classList.add('is-header-hover');
-                } else {
-                    cursor.classList.remove('is-header-hover');
-                }
-            } else {
-                cursor.classList.remove('is-hovering', 'is-header-hover');
-            }
-        } else {
-            cursor.classList.remove('is-active', 'is-hovering', 'is-header-hover');
-        }
-    });
-
-    // --- 3. Klick-Effekte ---
-    document.addEventListener('mousedown', (e) => {
-        if (cursor.classList.contains('is-hovering')) {
-            cursor.classList.add('is-clicking');
-        }
-    });
-
-    document.addEventListener('mouseup', () => {
-        cursor.classList.remove('is-clicking');
-    });
-    
-    // --- 4. ANIMATIONSSCHLEIFE FÜR FLÜSSIGE BEWEGUNG ---
-    const animateCursor = () => {
-        cursorX += (targetX - cursorX) * 0.2;
-        cursorY += (targetY - cursorY) * 0.2;
-        
-        // Setzt die Position des Cursors. Wichtig: Der translate-Wert muss die Hälfte der Cursor-Größe sein, um ihn zu zentrieren.
-        // Da wir das aber schon im CSS mit transform: translate(-50%, -50%) machen, setzen wir hier nur die x/y Koordinaten.
-        cursor.style.left = `${cursorX}px`;
-        cursor.style.top = `${cursorY}px`;
-        
-        requestAnimationFrame(animateCursor);
-    };
-    
-    animateCursor();
 });

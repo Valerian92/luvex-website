@@ -166,60 +166,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // --- Custom Cursor Logic ---
-    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
-
-    if (!document.querySelector('.mercury-cursor')) {
-        const cursor = document.createElement('div');
-        cursor.className = 'mercury-cursor';
-        cursor.innerHTML = '<div class="mercury-cursor__dot"></div>';
-        document.body.appendChild(cursor);
-
-        let cursorX = -100, cursorY = -100;
-        let targetX = 0, targetY = 0;
-
-        window.addEventListener('mousemove', (e) => {
-            targetX = e.clientX;
-            targetY = e.clientY;
-
-            const activeArea = e.target.closest('.mercury-hero, .site-header:not(.scrolled)');
-            const isInteractive = e.target.closest('a, button');
-
-            if (activeArea) {
-                cursor.classList.add('is-active');
-                if (isInteractive) {
-                    cursor.classList.add('is-hovering');
-                    if (e.target.closest('.site-header')) {
-                        cursor.classList.add('is-header-hover');
-                    } else {
-                        cursor.classList.remove('is-header-hover');
-                    }
-                } else {
-                    cursor.classList.remove('is-hovering', 'is-header-hover');
-                }
-            } else {
-                cursor.classList.remove('is-active', 'is-hovering', 'is-header-hover');
-            }
+    // --- Custom Cursor (uses central LuvexCursor) ---
+    if (typeof LuvexCursor !== 'undefined') {
+        new LuvexCursor({
+            className: 'mercury-cursor',
+            activeAreas: ['.mercury-hero', '.site-header'],
+            showDot: true
         });
-
-        document.addEventListener('mousedown', (e) => {
-            if (cursor.classList.contains('is-hovering')) {
-                cursor.classList.add('is-clicking');
-            }
-        });
-
-        document.addEventListener('mouseup', () => {
-            cursor.classList.remove('is-clicking');
-        });
-
-        const animateCursor = () => {
-            cursorX += (targetX - cursorX) * 0.2;
-            cursorY += (targetY - cursorY) * 0.2;
-            cursor.style.left = `${cursorX}px`;
-            cursor.style.top = `${cursorY}px`;
-            requestAnimationFrame(animateCursor);
-        };
-        animateCursor();
     }
 });
 

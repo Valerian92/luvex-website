@@ -143,6 +143,16 @@ function luvex_enqueue_assets() {
         }
     };
 
+    // Component Scripts (Basis-Utilities, werden zuerst geladen)
+    $component_scripts = [
+        'luvex-animation-helpers' => 'components/animation-helpers.js',
+        'luvex-custom-cursor'     => 'components/custom-cursor.js',
+    ];
+
+    foreach($component_scripts as $handle => $path) {
+        $enqueue_script($handle, $path, []); // Keine Dependencies
+    }
+
     // Globale Scripts
     $global_scripts = [
         'luvex-auth-modal'        => 'global/auth-modal.js',
