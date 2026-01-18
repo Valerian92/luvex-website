@@ -1,6 +1,6 @@
 # LUVEX Error Logger
 
-Professional error logging plugin for WordPress that captures both frontend and backend errors with git commit tracking.
+Professional error logging plugin for WordPress that captures both frontend and backend errors with git commit tracking and **automatic GitHub sync**.
 
 ## Features
 
@@ -15,6 +15,12 @@ Professional error logging plugin for WordPress that captures both frontend and 
 - PHP exceptions
 - Fatal errors
 - WordPress core errors
+
+### GitHub Auto-Sync (NEW in v1.1)
+- Automatically pushes error logs to GitHub every 5 minutes
+- Claude Code can read logs directly from the repo
+- Only syncs when there are new errors (smart diffing)
+- No Git installation required on server
 
 ### Context Information
 Each error log includes:
@@ -50,12 +56,38 @@ Logs are stored in `/error-logs/YYYY-MM-DD.log` in JSON format:
 
 1. **Activate Plugin** in WordPress Admin → Plugins
 2. **Errors are automatically logged** to `/error-logs/`
-3. **Read logs** with: `cat error-logs/2026-01-16.log`
+3. **Read logs** with: `cat error-logs/2026-01-18.log`
 4. **Logs auto-rotate** after 30 days
 
 ## Installation
 
 Plugin is automatically deployed with the WordPress installation.
+
+## GitHub Sync Configuration
+
+Add these constants to your `wp-config.php` on the server:
+
+```php
+// GitHub Personal Access Token (needs 'repo' scope)
+define('GITHUB_ERROR_LOG_TOKEN', 'ghp_your_token_here');
+
+// Repository in format 'owner/repo-name'
+define('GITHUB_ERROR_LOG_REPO', 'your-org/luvex-website');
+
+// Branch to push to (default: main)
+define('GITHUB_ERROR_LOG_BRANCH', 'main');
+```
+
+### Getting a GitHub Token
+1. Go to GitHub → Settings → Developer Settings → Personal Access Tokens
+2. Generate new token (classic)
+3. Select `repo` scope
+4. Copy token to wp-config.php
+
+### How it works
+- Logs are synced every 5 minutes via WP Cron
+- Only syncs when there are new errors (compares MD5 hash)
+- Creates commits like: `chore: Auto-sync error logs 2026-01-18 14:30`
 
 ## Git Integration
 
@@ -73,8 +105,9 @@ The plugin automatically detects the current git commit hash from `.git/HEAD` an
 
 ## For Claude Code
 
-Error logs are committed to git, allowing Claude to:
-- Read errors directly with Read tool
-- Correlate errors with code changes
+Error logs are automatically synced to GitHub, allowing Claude to:
+- Read errors directly with `git pull` or Read tool
+- Correlate errors with code changes via git commit hash
 - Debug issues without manual copy-paste
 - Track error patterns over time
+- Proactively fix bugs by monitoring the error-logs folder

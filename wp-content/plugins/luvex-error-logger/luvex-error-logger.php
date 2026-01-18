@@ -2,8 +2,8 @@
 /**
  * Plugin Name: LUVEX Error Logger
  * Plugin URI: https://luvex.tech
- * Description: Comprehensive error logging system for frontend and backend errors with git commit tracking
- * Version: 1.0.0
+ * Description: Comprehensive error logging system for frontend and backend errors with git commit tracking and GitHub sync
+ * Version: 1.1.0
  * Author: LUVEX Team
  * Author URI: https://luvex.tech
  * License: MIT
@@ -13,10 +13,18 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
+// GitHub Config - Set these in wp-config.php:
+// define('GITHUB_ERROR_LOG_TOKEN', 'ghp_your_token_here');
+// define('GITHUB_ERROR_LOG_REPO', 'owner/repo-name');  // e.g. 'lunaria/luvex-website'
+// define('GITHUB_ERROR_LOG_BRANCH', 'main');
+
 class LuvexErrorLogger {
 
     private $log_dir;
     private $git_commit_hash;
+    private $github_token;
+    private $github_repo;
+    private $github_branch;
 
     public function __construct() {
         // Log directory in repository root
@@ -25,6 +33,11 @@ class LuvexErrorLogger {
         // Get current git commit hash
         $this->git_commit_hash = $this->get_git_commit();
 
+        // GitHub API config
+        $this->github_token = defined('GITHUB_ERROR_LOG_TOKEN') ? GITHUB_ERROR_LOG_TOKEN : '';
+        $this->github_repo = defined('GITHUB_ERROR_LOG_REPO') ? GITHUB_ERROR_LOG_REPO : '';
+        $this->github_branch = defined('GITHUB_ERROR_LOG_BRANCH') ? GITHUB_ERROR_LOG_BRANCH : 'main';
+
         // Initialize
         add_action('init', array($this, 'init'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_error_tracker'));
@@ -32,10 +45,25 @@ class LuvexErrorLogger {
         add_action('wp_ajax_log_js_error', array($this, 'handle_js_error'));
         add_action('wp_ajax_nopriv_log_js_error', array($this, 'handle_js_error'));
 
+        // GitHub sync cron
+        add_action('luvex_sync_errors_to_github', array($this, 'sync_to_github'));
+        add_filter('cron_schedules', array($this, 'add_cron_interval'));
+
         // PHP Error Handler
         set_error_handler(array($this, 'handle_php_error'));
         set_exception_handler(array($this, 'handle_php_exception'));
         register_shutdown_function(array($this, 'handle_fatal_error'));
+    }
+
+    /**
+     * Add custom cron interval (every 5 minutes)
+     */
+    public function add_cron_interval($schedules) {
+        $schedules['every_five_minutes'] = array(
+            'interval' => 300, // 5 minutes
+            'display'  => 'Every 5 Minutes'
+        );
+        return $schedules;
     }
 
     public function init() {
@@ -48,6 +76,11 @@ class LuvexErrorLogger {
         $gitignore_path = $this->log_dir . '/.gitignore';
         if (!file_exists($gitignore_path)) {
             file_put_contents($gitignore_path, "# Allow error logs\n!*.log\n!*.json\n");
+        }
+
+        // Schedule GitHub sync if token is configured
+        if ($this->github_token && !wp_next_scheduled('luvex_sync_errors_to_github')) {
+            wp_schedule_event(time(), 'every_five_minutes', 'luvex_sync_errors_to_github');
         }
 
         // Clean old logs (older than 30 days)
@@ -273,7 +306,126 @@ class LuvexErrorLogger {
             }
         }
     }
+
+    /**
+     * Sync error logs to GitHub repository
+     */
+    public function sync_to_github() {
+        // Check if GitHub is configured
+        if (empty($this->github_token) || empty($this->github_repo)) {
+            return;
+        }
+
+        // Get today's log file
+        $date = date('Y-m-d');
+        $log_file = $this->log_dir . '/' . $date . '.log';
+
+        if (!file_exists($log_file)) {
+            return; // No logs today
+        }
+
+        $content = file_get_contents($log_file);
+        $file_path = 'error-logs/' . $date . '.log';
+
+        // Check if we already synced this version
+        $hash_file = $this->log_dir . '/.last_sync_' . $date;
+        $current_hash = md5($content);
+
+        if (file_exists($hash_file) && file_get_contents($hash_file) === $current_hash) {
+            return; // No changes since last sync
+        }
+
+        // Get current file SHA from GitHub (needed for updates)
+        $sha = $this->get_github_file_sha($file_path);
+
+        // Push to GitHub
+        $result = $this->push_to_github($file_path, $content, $sha);
+
+        if ($result) {
+            // Save hash to prevent duplicate syncs
+            file_put_contents($hash_file, $current_hash);
+        }
+    }
+
+    /**
+     * Get SHA of existing file on GitHub
+     */
+    private function get_github_file_sha($file_path) {
+        $url = sprintf(
+            'https://api.github.com/repos/%s/contents/%s?ref=%s',
+            $this->github_repo,
+            $file_path,
+            $this->github_branch
+        );
+
+        $response = wp_remote_get($url, array(
+            'headers' => array(
+                'Authorization' => 'Bearer ' . $this->github_token,
+                'Accept' => 'application/vnd.github.v3+json',
+                'User-Agent' => 'LUVEX-Error-Logger/1.1'
+            )
+        ));
+
+        if (is_wp_error($response)) {
+            return null;
+        }
+
+        $body = json_decode(wp_remote_retrieve_body($response), true);
+        return $body['sha'] ?? null;
+    }
+
+    /**
+     * Push file to GitHub via API
+     */
+    private function push_to_github($file_path, $content, $sha = null) {
+        $url = sprintf(
+            'https://api.github.com/repos/%s/contents/%s',
+            $this->github_repo,
+            $file_path
+        );
+
+        $data = array(
+            'message' => 'chore: Auto-sync error logs ' . date('Y-m-d H:i'),
+            'content' => base64_encode($content),
+            'branch' => $this->github_branch
+        );
+
+        // If file exists, include SHA for update
+        if ($sha) {
+            $data['sha'] = $sha;
+        }
+
+        $response = wp_remote_request($url, array(
+            'method' => 'PUT',
+            'headers' => array(
+                'Authorization' => 'Bearer ' . $this->github_token,
+                'Accept' => 'application/vnd.github.v3+json',
+                'Content-Type' => 'application/json',
+                'User-Agent' => 'LUVEX-Error-Logger/1.1'
+            ),
+            'body' => json_encode($data)
+        ));
+
+        if (is_wp_error($response)) {
+            error_log('LUVEX Error Logger: GitHub sync failed - ' . $response->get_error_message());
+            return false;
+        }
+
+        $code = wp_remote_retrieve_response_code($response);
+
+        if ($code === 200 || $code === 201) {
+            return true;
+        }
+
+        error_log('LUVEX Error Logger: GitHub sync failed - HTTP ' . $code);
+        return false;
+    }
 }
 
 // Initialize plugin
 new LuvexErrorLogger();
+
+// Cleanup on deactivation
+register_deactivation_hook(__FILE__, function() {
+    wp_clear_scheduled_hook('luvex_sync_errors_to_github');
+});
