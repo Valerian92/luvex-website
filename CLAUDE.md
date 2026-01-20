@@ -173,17 +173,20 @@ docker exec mysql mysqldump -u root -p luvex > backup.sql
 
 ---
 
-## TODO: Layout-Check Tool integrieren
+## Layout-Check (Playwright MCP)
 
-> **Referenz:** `D:/LUVEX/Dev/LAYOUT_CHECK_TEMPLATE.md`
+> **Update 2026-01-20:** Puppeteer ersetzt durch Playwright MCP - keine Installation nötig!
 
-Puppeteer-basiertes Tool für automatische Layout-Analyse. Ermöglicht Claude Layout-Probleme zu erkennen ohne manuelles Browser-Testing.
+Claude hat direkten Zugriff auf Browser-Automation:
 
-```bash
-# Nach Integration:
-npm run layout-check        # Production
-npm run layout-check:local  # Dev
 ```
+mcp__playwright__browser_navigate       → URL öffnen
+mcp__playwright__browser_snapshot       → Layout-Struktur analysieren
+mcp__playwright__browser_resize         → Viewport ändern (Mobile/Tablet/Desktop)
+mcp__playwright__browser_take_screenshot → Screenshot speichern
+```
+
+**Referenz:** `D:/LUVEX/Dev/LAYOUT_CHECK_TEMPLATE.md`
 
 ---
 
