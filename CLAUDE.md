@@ -173,4 +173,18 @@ docker exec mysql mysqldump -u root -p luvex > backup.sql
 
 ---
 
-**Letzte Aktualisierung:** 2026-01-19
+## TODO: Layout-Check Tool integrieren
+
+> **Referenz:** `D:/LUVEX/Dev/LAYOUT_CHECK_TEMPLATE.md`
+
+Puppeteer-basiertes Tool für automatische Layout-Analyse. Ermöglicht Claude Layout-Probleme zu erkennen ohne manuelles Browser-Testing.
+
+```bash
+# Nach Integration:
+npm run layout-check        # Production
+npm run layout-check:local  # Dev
+```
+
+---
+
+**Letzte Aktualisierung:** 2026-01-20
